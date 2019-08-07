@@ -1716,7 +1716,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'ધોરણ દ્વારા બ્રાઉઝ કરો',
   'subject-dropdown.placeholder': 'વિષયો)',
   'subject-dropdown.prompt': 'વિષય પસંદ કરો',

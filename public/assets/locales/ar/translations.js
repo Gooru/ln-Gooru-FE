@@ -1677,7 +1677,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'تصفح حسب المعيار',
   'subject-dropdown.placeholder': 'الموضوع (المواضيع)',
   'subject-dropdown.prompt': 'اختر موضوعاً',

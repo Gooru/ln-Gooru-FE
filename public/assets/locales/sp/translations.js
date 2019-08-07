@@ -1756,7 +1756,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'Navegar por Estándar',
   'subject-dropdown.placeholder': 'asignaturas)',
   'subject-dropdown.prompt': 'Seleccione un tema',

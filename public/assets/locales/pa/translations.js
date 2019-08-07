@@ -1723,7 +1723,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'ਮਿਆਰੀ ਦੁਆਰਾ ਝਲਕ',
   'subject-dropdown.placeholder': 'ਵਿਸ਼ਾ',
   'subject-dropdown.prompt': 'ਇੱਕ ਵਿਸ਼ਾ ਚੁਣੋ',

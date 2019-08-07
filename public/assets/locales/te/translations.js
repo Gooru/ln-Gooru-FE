@@ -1726,7 +1726,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'ప్రామాణిక ద్వారా బ్రౌజ్ చేయండి',
   'subject-dropdown.placeholder': 'విషయం (లు)',
   'subject-dropdown.prompt': 'ఒక విషయం ఎంచుకోండి',

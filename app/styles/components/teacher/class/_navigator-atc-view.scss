@@ -1,6 +1,7 @@
 .navigator-atc-view {
   svg.navigator-atc-chart {
     background-color: #202e32;
+
     .y.axis {
       .tick {
         line {
@@ -17,6 +18,7 @@
         stroke-width: 2px;
         fill: none;
       }
+
       .tick:nth-child(-n + 4) {
         text {
           display: none;
@@ -34,6 +36,7 @@
 
     .node-point {
       z-index: 999;
+
       .student-profile {
         clip-path: circle(50% at 50% 50%);
         -webkit-clip-path: circle(50% at 50% 50%);
@@ -46,6 +49,7 @@
       font-size: 13px;
       font-weight: bold;
       text-transform: uppercase;
+      letter-spacing: normal;
     }
   }
 
@@ -54,6 +58,7 @@
     height: 32px;
     position: absolute;
     z-index: 999;
+
     .student-performance-container {
       border-radius: 50%;
       width: 32px;
@@ -61,6 +66,7 @@
       display: grid;
       justify-content: center;
       align-items: center;
+
       .student-thumbnail-container {
         display: block;
         width: 24px;
@@ -85,6 +91,7 @@
     background-color: $white;
     border-radius: 5px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+
     .header-container {
       display: grid;
       grid-template-columns: 75px auto;
@@ -93,6 +100,7 @@
       align-items: end;
       height: 75px;
       align-items: center;
+
       .dp-container {
         border-radius: 50%;
         height: 68px;
@@ -100,12 +108,14 @@
         display: grid;
         align-items: center;
         justify-content: center;
+
         img {
           width: 60px;
           height: 60px;
           border-radius: 50%;
         }
       }
+
       .student-info {
         .student-name {
           font-size: 20px;
@@ -113,14 +123,17 @@
           color: #37424b;
           text-transform: capitalize;
         }
+
         .grade-info {
           span {
             font-size: 15px;
             color: #37424b;
           }
+
           .title-container {
             font-weight: bold;
           }
+
           .grade-level {
             padding-left: 8px;
           }
@@ -131,39 +144,48 @@
         font-size: 13px;
         font-weight: bold;
         justify-self: right;
+
         .mastered {
           color: #006eb5;
         }
+
         .inprogress {
           color: #1aa9eb;
         }
+
         .not-started {
           color: #979797;
           font-weight: bold;
         }
       }
     }
+
     .body-container {
       display: grid;
       row-gap: 5px;
+
       .info-container {
         display: grid;
         grid-template-columns: 105px auto auto;
         align-items: center;
       }
+
       .progress-container {
         padding-left: 105px;
         color: #37424b;
         font-size: 13px;
         font-weight: bold;
       }
+
       .performance-container {
         cursor: pointer;
+
         .performance-bar-container {
           width: 160px;
           background-color: rgba(191, 191, 191, 0.5);
           height: 10px;
           border-radius: 10px;
+
           .performance-bar {
             height: inherit;
             display: block;
@@ -171,50 +193,63 @@
             border-bottom-left-radius: 10px;
           }
         }
+
         .performance-percentage {
           font-size: 15px;
           font-weight: bold;
           justify-self: right;
         }
       }
+
       .competencies-container {
         cursor: pointer;
+
         .competency-count-container {
           width: 126px;
           height: 24px;
           display: flex;
+
           .count-box {
             height: inherit;
             display: block;
           }
+
           .mastered-count {
             background-color: #0076ba;
           }
+
           .inprogress-count {
             background-color: #00b1e5;
           }
+
           .not-started-count {
             background-color: #e7e8e9;
           }
         }
+
         .competency-count {
           justify-self: right;
+
           span {
             font-size: 12px;
             font-weight: bold;
             color: #33424b;
           }
+
           .mastered {
             color: #0076ba;
           }
+
           .inprogress {
             color: #00b1e5;
           }
+
           .not-started {
             color: #35424b;
           }
         }
       }
+
       .title-container {
         font-size: 15px;
         font-weight: bold;
@@ -234,6 +269,7 @@
       left: 0;
       background-color: rgba(44, 66, 74, 0.4);
       position: fixed;
+
       .tooltip-container {
         bottom: 0;
         position: absolute;

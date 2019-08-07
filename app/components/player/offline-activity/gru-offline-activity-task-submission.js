@@ -40,7 +40,6 @@ export default Ember.Component.extend({
     'task.submissionText',
     function() {
       const component = this;
-      //const pendingUrlSubmissions = component.get('pendingUrlSubmissions');
       const pendingUploadSubmissions = component.get('savedUploadSubmissions');
       const freeeFormText = component.get('task.submissionText');
       const isFreeFormTextEntered = freeeFormText
