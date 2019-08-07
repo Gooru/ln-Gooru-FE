@@ -1,11 +1,6 @@
 import Ember from 'ember';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
-import {
-  SCREEN_SIZES,
-  PLAYER_EVENT_SOURCE
-} from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
+import { SCREEN_SIZES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -75,6 +70,15 @@ export default Ember.Component.extend({
       return this.parseTimelineData();
     }
   ),
+
+  /**
+   * @property {Boolean} isShowProficiencyProgressBar
+   * Property to show student proficiency progress bar only if it has a class
+   */
+  isShowProficiencyProgressBar: Ember.computed('class', function() {
+    const component = this;
+    return component.get('class') && component.get('class.id');
+  }),
 
   didInsertElement() {
     let component = this;
@@ -276,7 +280,8 @@ export default Ember.Component.extend({
       unitId: activity.get('unitId'),
       lessonId: activity.get('lessonId'),
       collectionId: activity.get('id'),
-      sessionId: collectionType === 'assessment' ? activity.get('sessionId') : null,
+      sessionId:
+        collectionType === 'assessment' ? activity.get('sessionId') : null,
       type: collectionType,
       isStudent: true,
       isTeacher: false,
