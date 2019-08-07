@@ -13,7 +13,7 @@
         {{/each}}
       </div>
     </div>
-    {{#if (eq selectedMenuName 'catalog') }}
+    {{#if (or (eq selectedMenuName 'catalog') (eq selectedMenuName 'myContent'))}}
       <div class="search-right-menu">
         <div class="search-input-container">
           {{input type="text"
