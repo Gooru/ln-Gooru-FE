@@ -37,6 +37,7 @@ window.i18ln = {
   'errors.after': '{{description}} {{அடுத்து}',
   'errors.wrongDateFormat':
     '{{description}} {{format}} இன் வடிவத்தில் இருக்க வேண்டும்',
+  'rubric-details': 'Rubric Details',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',

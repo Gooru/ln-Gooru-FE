@@ -71,6 +71,7 @@ window.i18ln = {
   'common.name': 'ନାମ',
   'common.day': 'day',
   'common.week': 'week',
+  'rubric-details': 'Rubric Details',
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':

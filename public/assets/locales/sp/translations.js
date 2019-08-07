@@ -73,6 +73,7 @@ window.i18ln = {
     'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
+  'rubric-details': 'Rubric Details',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':

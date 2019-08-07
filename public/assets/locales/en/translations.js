@@ -547,6 +547,7 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'Mastery',
   'common.menu': 'Menu',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'More Details',
   'common.move': 'Move',
   'common.myContent': 'My Content',

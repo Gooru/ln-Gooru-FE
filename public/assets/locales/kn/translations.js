@@ -83,6 +83,7 @@ window.i18ln = {
   'common.offline-activity': 'ಆಫ್‌ಲೈನ್ ಚಟುವಟಿಕೆ',
   'common.frq': 'ಎಫ್ ಆರ್ ಕ್ಯೂ ',
   'common.schedule': 'ವೇಳಾಪಟ್ಟಿ',
+  'rubric-details': 'Rubric Details',
   'common.responses': 'ಪ್ರತಿಕ್ರಿಯೆಗಳು',
   'ca.student.no-content':
     'ಶಿಕ್ಷಕರು  ಈ ದಿನಕ್ಕೆ ಯಾವುದೇ ಚಟುವಟಿಕೆಗಳನ್ನು ನಿಯೋಜಿಸಿಲ್ಲ',

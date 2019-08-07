@@ -81,6 +81,7 @@ window.i18ln = {
     'No class activities scheduled for the selected period',
   'common.filter-by': 'ইয়াৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে',
   'common.more': 'আৰু ',
+  'rubric-details': 'Rubric Details',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
