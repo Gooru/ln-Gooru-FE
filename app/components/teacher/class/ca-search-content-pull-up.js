@@ -8,9 +8,7 @@ import {
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 export default Ember.Component.extend(ConfigurationMixin, {
@@ -274,9 +272,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
   isClassPreferenceMapped: Ember.computed('classPreference', function() {
     let component = this;
     let classPreference = component.get('classPreference');
-    return classPreference ?
-      classPreference.subject && classPreference.framework :
-      false;
+    return classPreference
+      ? classPreference.subject && classPreference.framework
+      : false;
   }),
 
   /**
@@ -587,22 +585,25 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   openPullUp() {
     let component = this;
-    component.$().animate({
-      top: '10%'
-    },
-    400
+    component.$().animate(
+      {
+        top: '10%'
+      },
+      400
     );
   },
 
   closePullUp() {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    });
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
+    );
   },
 
   handleSearchBar() {
@@ -627,26 +628,22 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.set('page', 0);
     component.set('isMoreDataExists', false);
     component.set('isShow', false);
-    Ember.RSVP
-      .hash({
-        searchResults: component.getSearchService()
-      })
-      .then(({
-        searchResults
-      }) => {
-        if (!component.isDestroyed) {
-          component.set('isLoading', false);
-          component.set('searchResults', searchResults);
-          component.$('.search-list-container').scrollTop(0);
-          if (
-            searchResults &&
-            searchResults.length === component.get('defaultSearchPageSize') &&
-            component.get('isShowMoreEnabled')
-          ) {
-            component.set('isMoreDataExists', true);
-          }
+    Ember.RSVP.hash({
+      searchResults: component.getSearchService()
+    }).then(({ searchResults }) => {
+      if (!component.isDestroyed) {
+        component.set('isLoading', false);
+        component.set('searchResults', searchResults);
+        component.$('.search-list-container').scrollTop(0);
+        if (
+          searchResults &&
+          searchResults.length === component.get('defaultSearchPageSize') &&
+          component.get('isShowMoreEnabled')
+        ) {
+          component.set('isMoreDataExists', true);
         }
-      });
+      }
+    });
   },
 
   loadMoreData() {
@@ -654,35 +651,35 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.set('isLoading', true);
     let page = component.get('page') + 1;
     component.set('page', page);
-    Ember.RSVP
-      .hash({
-        searchResults: component.getSearchService()
-      })
-      .then(({
-        searchResults
-      }) => {
-        if (!component.isDestroyed) {
-          component.set('isLoading', false);
-          let searchResult = component.get('searchResults');
-          component.set('searchResults', searchResult.concat(searchResults));
-          if (
-            searchResults &&
-            searchResults.length === component.get('defaultSearchPageSize')
-          ) {
-            component.set('isMoreDataExists', true);
-          }
+    Ember.RSVP.hash({
+      searchResults: component.getSearchService()
+    }).then(({ searchResults }) => {
+      if (!component.isDestroyed) {
+        component.set('isLoading', false);
+        let searchResult = component.get('searchResults');
+        component.set('searchResults', searchResult.concat(searchResults));
+        if (
+          searchResults &&
+          searchResults.length === component.get('defaultSearchPageSize')
+        ) {
+          component.set('isMoreDataExists', true);
         }
-      });
+      }
+    });
   },
 
   getSearchService() {
     let component = this;
     let searchService = null;
     let label = component.get('selectedMenuItem.label');
-    if (label === 'common.myContent') {
-      searchService = component.getMyContentByType();
-    } else if (label === 'common.gooru-catalog') {
+    if (
+      label === 'common.gooru-catalog' ||
+      component.get('selectedFilters').length > 0 ||
+      component.getSearchTerm()
+    ) {
       searchService = component.getSearchServiceByType();
+    } else if (label === 'common.myContent') {
+      searchService = component.getMyContentByType();
     }
     return searchService;
   },
@@ -745,6 +742,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
       filters.scopeKey = 'my-content';
       filters['flt.publishStatus'] = 'published,unpublished';
     } else {
+      filters.scopeKey = 'open-all';
       filters['flt.publishStatus'] = 'published';
     }
     let subject = component.get('course.subject');
