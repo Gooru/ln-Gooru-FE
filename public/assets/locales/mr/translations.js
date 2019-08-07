@@ -2575,8 +2575,7 @@ window.i18ln = {
   'self-report.your-score': 'तुमचे गुण',
   'self-report.time_spent': 'एकूण लागलेला वेळ',
   'self-report.update-error': 'तुमचे गुण अपडेट करताना अडचण येत आहे',
-  'self-report.validation-error': 'वैध
-गुण प्रविष्ट करा',
+  'self-report.validation-error': 'वैधगुण प्रविष्ट करा',
   'self-report.enter-score': 'आपले गुण येथे प्रविष्ट करा',
   'self-report.enter-timeSpent': 'तुम्हाला लागलेला एकूण वेळ प्रविष्ट करा',
   'self-report.validation-error-time': 'वैध वेळ प्रविष्ट करा',
