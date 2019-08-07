@@ -59,6 +59,7 @@ window.i18ln = {
   'errors.url': '{{description}} वैध url असणे आवश्यक आहे',
   'common.relevance': 'समर्पकता',
   'common.engagement': 'प्रतिबद्धता',
+  'rubric-details': 'Rubric Details',
   'common.efficacy': 'परिणामकारकता',
   'common.grid': 'चौकटी',
   'common.list': 'यादी',

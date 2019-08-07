@@ -65,6 +65,7 @@ window.i18ln = {
   'self-grade.not-required': 'Student self-grading not required',
   'common.name': 'নাম',
   'common.user': 'ব্যবহারকারী',
+  'rubric-details': 'Rubric Details',
   'common.sub-filter': 'Sub-Filter',
   'common.day': 'day',
   'common.week': 'week',

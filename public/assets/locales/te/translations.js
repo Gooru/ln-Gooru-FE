@@ -51,6 +51,7 @@ window.i18ln = {
   'errors.email': '{{వివరణ}} చెల్లుబాటు అయ్యే ఇమెయిల్ చిరునామా అయి ఉండాలి',
   'errors.phone': '{{వివరణ}} చెల్లుబాటు అయ్యే ఫోన్ నంబర్ అయి ఉండాలి',
   'errors.url': '{{వివరణ}} చెల్లుబాటు అయ్యే url అయి ఉండాలి',
+  'rubric-details': 'Rubric Details',
   'common.no-users-to-grade-oa':
     'There are no users to grade for this Offline Activity.',
   'common.relevance': 'ఔచిత్యం',

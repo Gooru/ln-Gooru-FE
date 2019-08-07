@@ -62,6 +62,7 @@ window.i18ln = {
   'common.offline-activity': 'offline activity',
   'common.first': 'ਪਹਿਲਾ',
   'common.day': 'day',
+  'rubric-details': 'Rubric Details',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',

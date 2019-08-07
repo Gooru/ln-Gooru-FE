@@ -189,7 +189,7 @@ export default Ember.Component.extend({
       let totalRubricPoints = this.get('totalRubricPoints');
       let totalUserRubricPoints = this.get('totalUserRubricPoints');
       if (totalUserRubricPoints > 0) {
-        score = Math.floor(totalUserRubricPoints / totalRubricPoints * 100);
+        score = Math.floor((totalUserRubricPoints / totalRubricPoints) * 100);
       }
       return score;
     }
@@ -210,7 +210,7 @@ export default Ember.Component.extend({
         ? component.get('teacherRubric.studentScore')
         : component.get('studentRubric.studentScore');
       if (studentScore > 0) {
-        score = Math.floor(studentScore / gradeMaxScore * 100);
+        score = Math.floor((studentScore / gradeMaxScore) * 100);
       }
       return score;
     }
@@ -228,7 +228,7 @@ export default Ember.Component.extend({
       let gradeMaxScore = selfGrade.get('maxScore');
       let studentScore = selfGrade.get('studentScore');
       if (studentScore > 0) {
-        score = Math.floor(studentScore / gradeMaxScore * 100);
+        score = Math.floor((studentScore / gradeMaxScore) * 100);
       }
     }
     return score;
@@ -309,15 +309,15 @@ export default Ember.Component.extend({
     /**
      * Action get triggered when rubric attachment preview got close
      */
-    filePreviewClose() {
-      this.$('.rubric-file-preview-container').fadeOut('slow');
+    filePreviewClose(user) {
+      this.$(`.rubric-file-preview-container.${user}`).fadeOut('slow');
     },
 
     /**
      * Action get triggered when rubric attachment preview got open
      */
-    filePreviewOpen() {
-      this.$('.rubric-file-preview-container')
+    filePreviewOpen(user) {
+      this.$(`.rubric-file-preview-container.${user}`)
         .css('visibility', 'visible')
         .hide()
         .fadeIn('slow');
@@ -347,9 +347,12 @@ export default Ember.Component.extend({
    * Function to triggered once when the component element is after rendered
    */
   didRender() {
-    let component = this;
+    const component = this;
     component.handleRubricTooltip();
     component.handleAppContainerScroll();
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -366,12 +369,9 @@ export default Ember.Component.extend({
 
   initialize() {
     let component = this;
-    return Ember.RSVP
-      .hash({
-        users: component.get('isTeacher')
-          ? component.getGradingStudentList()
-          : []
-      })
+    return Ember.RSVP.hash({
+      users: component.get('isTeacher') ? component.getGradingStudentList() : []
+    })
       .then(({ users }) => {
         if (!component.isDestroyed) {
           let studentId = component.get('studentId');
@@ -576,7 +576,9 @@ export default Ember.Component.extend({
     }
     let maxScore = isTeacher
       ? component.get('content.maxScore')
-      : userGrade ? userGrade.get('maxScore') : null;
+      : userGrade
+        ? userGrade.get('maxScore')
+        : null;
     userGrade.set('maxScore', maxScore);
     let categoriesScore = Ember.A([]);
     userGrade.set('classId', context.get('classId'));
@@ -718,13 +720,15 @@ export default Ember.Component.extend({
 
   closePullUp() {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    });
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
+    );
   },
 
   /**
@@ -852,16 +856,14 @@ export default Ember.Component.extend({
     } else {
       requestParam.source = 'dca';
     }
-    return Ember.RSVP
-      .hash({
-        studentIds: component
-          .get('rubricService')
-          .getOaGradingStudents(contentId, requestParam)
-      })
-      .then(({ studentIds }) => {
-        return component
-          .get('profileService')
-          .readMultipleProfiles(studentIds.students);
-      });
+    return Ember.RSVP.hash({
+      studentIds: component
+        .get('rubricService')
+        .getOaGradingStudents(contentId, requestParam)
+    }).then(({ studentIds }) => {
+      return component
+        .get('profileService')
+        .readMultipleProfiles(studentIds.students);
+    });
   }
 });

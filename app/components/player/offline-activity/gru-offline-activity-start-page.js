@@ -9,8 +9,36 @@ export default Ember.Component.extend({
   classNames: ['offline-activity-player', 'gru-offline-activity-start-page'],
 
   // -------------------------------------------------------------------------
+  // Events
+  /**
+   * Function to triggered once when the component element is after rendered
+   */
+  didRender() {
+    const component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
+  },
+
+  // -------------------------------------------------------------------------
   // Actions
   actions: {
+    /**
+     * Action get triggered when rubric attachment preview got close
+     */
+    filePreviewClose(user) {
+      this.$(`.rubric-file-preview-container.${user}`).fadeOut('slow');
+    },
+
+    /**
+     * Action get triggered when rubric attachment preview got open
+     */
+    filePreviewOpen(user) {
+      this.$(`.rubric-file-preview-container.${user}`)
+        .css('visibility', 'visible')
+        .hide()
+        .fadeIn('slow');
+    },
     //Action triggered when click on start player
     onStartPlayer() {
       const component = this;
@@ -66,58 +94,54 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * @property {Array} activityTeacherRubrics
+   * @property {Array} activityTeacherRubric
    * Property for list of teacher rubrics
    */
-  activityTeacherRubrics: Ember.computed('offlineActivity.rubrics', function() {
+  activityTeacherRubric: Ember.computed('offlineActivity.rubrics', function() {
     const component = this;
     const oaRubrics = component.get('offlineActivity.rubric');
-    return oaRubrics.filterBy('gradeType', ROLES.TEACHER);
+    return oaRubrics.findBy('gradeType', ROLES.TEACHER);
   }),
 
   /**
    * @property {Array} teacherRubricCategories
    * Property for list of teacher rubric categories
    */
-  teacherRubricCategories: Ember.computed('activityTeacherRubrics', function() {
+  teacherRubricCategories: Ember.computed('activityTeacherRubric', function() {
     const component = this;
-    let activityTeacherRubrics = component.get('activityTeacherRubrics');
+    let activityTeacherRubric = component.get('activityTeacherRubric');
     let oaRubricTeacherCategories = Ember.A([]);
-    activityTeacherRubrics.map(teacherRubric => {
-      let categories = teacherRubric.get('categories') || Ember.A([]);
-      oaRubricTeacherCategories = component.parseRubricCategories(
-        oaRubricTeacherCategories,
-        categories
-      );
-    });
+    let categories = activityTeacherRubric.get('categories') || Ember.A([]);
+    oaRubricTeacherCategories = component.parseRubricCategories(
+      oaRubricTeacherCategories,
+      categories
+    );
     return oaRubricTeacherCategories;
   }),
 
   /**
-   * @property {Array} activityStudentRubrics
+   * @property {Array} activityStudentRubric
    * Property for list of student rubrics
    */
-  activityStudentRubrics: Ember.computed('offlineActivity.rubrics', function() {
+  activityStudentRubric: Ember.computed('offlineActivity.rubrics', function() {
     const component = this;
     const oaRubrics = component.get('offlineActivity.rubric');
-    return oaRubrics.filterBy('gradeType', ROLES.STUDENT);
+    return oaRubrics.findBy('gradeType', ROLES.STUDENT);
   }),
 
   /**
    * @property {Array} studentRubricCategories
    * Property for list of student rubric categories
    */
-  studentRubricCategories: Ember.computed('activityStudentRubrics', function() {
+  studentRubricCategories: Ember.computed('activityStudentRubric', function() {
     const component = this;
-    let activityStudentRubrics = component.get('activityStudentRubrics');
+    let activityStudentRubric = component.get('activityStudentRubric');
     let oaRubricStudentCategories = Ember.A([]);
-    activityStudentRubrics.map(studentRubric => {
-      let categories = studentRubric.get('categories') || Ember.A([]);
-      oaRubricStudentCategories = component.parseRubricCategories(
-        oaRubricStudentCategories,
-        categories
-      );
-    });
+    let categories = activityStudentRubric.get('categories') || Ember.A([]);
+    oaRubricStudentCategories = component.parseRubricCategories(
+      oaRubricStudentCategories,
+      categories
+    );
     return oaRubricStudentCategories;
   }),
 
