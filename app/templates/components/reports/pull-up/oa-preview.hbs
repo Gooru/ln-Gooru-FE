@@ -153,7 +153,7 @@
             </div>
             <div class="rubric-container">
               <div class="grader-label">{{t 'common.student'}} {{t 'common.rubric'}}
-                {{#if (and studentRubric.uploaded studentRubric.url)}}
+                {{#if studentRubric.url}}
                   <span class="rubric-attachment" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'student' bubbles=false}}>{{gru-icon name="attachment"}}</span>
                 {{/if}}
               </div>
@@ -192,7 +192,7 @@
             </div>
             <div class="rubric-container">
               <div class="grader-label">{{t 'common.teacher'}} {{t 'common.rubric'}}
-                {{#if (and teacherRubric.uploaded teacherRubric.url)}}
+                {{#if teacherRubric.url}}
                   <span class="rubric-attachment" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'teacher'  bubbles=false}}>{{gru-icon name="attachment"}}</span>
                 {{/if}}
               </div>
@@ -228,7 +228,7 @@
   </div>
 </div>
 
-{{#if (and teacherRubric.uploaded teacherRubric.url)}}
+{{#if teacherRubric.url}}
   <div class="rubric-file-preview-container teacher">
     <div class="backdrop"></div>
     <div class="rubric-file-preview">
@@ -240,8 +240,7 @@
   </div>
 {{/if}}
 
-
-{{#if (and studentRubric.uploaded studentRubric.url)}}
+{{#if studentRubric.url}}
   <div class="rubric-file-preview-container student">
     <div class="backdrop"></div>
     <div class="rubric-file-preview">
