@@ -7,6 +7,21 @@ export default Ember.Component.extend({
   classNames: ['oa-study-player', 'gru-offline-activity-page'],
 
   // -------------------------------------------------------------------------
+  // Dependencies
+  oaAnalyticsService: Ember.inject.service(
+    'api-sdk/offline-activity/oa-analytics'
+  ),
+
+  session: Ember.inject.service('session'),
+
+  // -------------------------------------------------------------------------
+  // Events
+  didInsertElement() {
+    const component = this;
+    component.loadOfflineActivitySubmissions();
+  },
+
+  // -------------------------------------------------------------------------
   // Actions
   actions: {
     //Action triggered when click on start button
@@ -45,7 +60,16 @@ export default Ember.Component.extend({
    * @property {Boolean} isShowLandingPage
    * Property to show/hide OA start page
    */
-  isShowLandingPage: true,
+  isShowLandingPage: Ember.computed('offlineActivitySubmissions', function() {
+    const component = this;
+    const offlineActivitySubmissions = component.get(
+      'offlineActivitySubmissions'
+    );
+    const oaTaskSubmissions = offlineActivitySubmissions
+      ? offlineActivitySubmissions.tasks.objectAt(0)
+      : null;
+    return !(oaTaskSubmissions && oaTaskSubmissions.taskId);
+  }),
 
   /**
    * @property {Object} mapLocationContext
@@ -75,5 +99,51 @@ export default Ember.Component.extend({
    * @property {UUID} lessonId
    * Property for active item's lesson ID
    */
-  lessonId: Ember.computed.alias('mapLocationContext.lessonId')
+  lessonId: Ember.computed.alias('mapLocationContext.lessonId'),
+
+  /**
+   * @property {Object} offlineActivitySubmissions
+   * Property for selected offline activity submissions
+   */
+  offlineActivitySubmissions: null,
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function loadOfflineActivitySubmissions
+   * Method to load selected offline activity submissions
+   */
+  loadOfflineActivitySubmissions() {
+    const component = this;
+    component.set('isLoading', true);
+    Ember.RSVP.hash({
+      offlineActivitySubmissions: component.fetchTasksSubmissions()
+    }).then(({ offlineActivitySubmissions }) => {
+      component.set('offlineActivitySubmissions', offlineActivitySubmissions);
+      component.set('isLoading', false);
+    });
+  },
+
+  /**
+   * @function fetchTasksSubmissions
+   * Method to fetch student submitted oa task data
+   */
+  fetchTasksSubmissions() {
+    const component = this;
+    const classId = component.get('classId');
+    const oaId = component.get('offlineActivity.id');
+    const userId = component.get('session.userId');
+    const courseId = component.get('courseId');
+    const unitId = component.get('unitId');
+    const lessonId = component.get('lessonId');
+    const dataParam = {
+      courseId,
+      unitId,
+      lessonId
+    };
+    return component
+      .get('oaAnalyticsService')
+      .getSubmissionsToGrade(classId, oaId, userId, dataParam);
+  }
 });
