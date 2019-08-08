@@ -223,12 +223,19 @@ export default Ember.Component.extend({
       const isInCompleteTaskAvailable = activityTasks.filter(
         task => !task.isAddedMandatorySubmission
       );
+      const hasUnsavedTasks = activityTasks.filter(
+        task => task.files.length > 0
+      );
       const isUnSubmittedTaskAvailable = activityTasks.filter(
         task => !task.isTaskSubmitted
       );
-      return !(
+      let enableCompletionButton = !(
         isInCompleteTaskAvailable.length || isUnSubmittedTaskAvailable.length
       );
+      if (hasUnsavedTasks.length > 0 && enableCompletionButton) {
+        component.loadTaskSubmissionData();
+      }
+      return enableCompletionButton;
     }
   ),
 
