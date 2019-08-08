@@ -96,7 +96,7 @@
             <div class="student-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#student">
               <span>
                 {{t 'common.student'}}
-                {{#if (and studentRubric.uploaded studentRubric.url)}}
+                {{#if studentRubric.url}}
                   <span class="rubric-attachment" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'student' bubbles=false}}>{{gru-icon name="attachment"}}</span>
                 {{/if}}
               </span>
@@ -128,7 +128,7 @@
             <div class="teacher-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#teacher">
               <span>
                 {{t 'common.teacher'}}
-                {{#if (and teacherRubric.uploaded teacherRubric.url)}}
+                {{#if teacherRubric.url}}
                   <span class="rubric-attachment" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'teacher'  bubbles=false}}>{{gru-icon name="attachment"}}</span>
                 {{/if}}
               </span>
@@ -190,7 +190,7 @@
   </div>
 </div>
 
-{{#if (and teacherRubric.uploaded teacherRubric.url)}}
+{{#if teacherRubric.url}}
   <div class="rubric-file-preview-container teacher">
     <div class="backdrop"></div>
     <div class="rubric-file-preview">
@@ -203,7 +203,7 @@
 {{/if}}
 
 
-{{#if (and studentRubric.uploaded studentRubric.url)}}
+{{#if studentRubric.url}}
   <div class="rubric-file-preview-container student">
     <div class="backdrop"></div>
     <div class="rubric-file-preview">

@@ -43,7 +43,7 @@
       <div class="student-rubrics-container">
         <div class="student-label label-container" {{action "onToggleRubricContainer" 'student'}}>
           <span class="label-type">{{t 'common.self'}} {{t 'grading-player.grading'}}
-            {{#if (and activityStudentRubric.uploaded activityStudentRubric.url)}}
+            {{#if activityStudentRubric.url}}
               <span class="rubric-attachment" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'student' bubbles=false}}>{{gru-icon name="attachment"}}</span>
             {{/if}}
           </span>
@@ -71,7 +71,7 @@
       <div class="teacher-rubrics-container">
         <div class="teacher-label label-container" {{action "onToggleRubricContainer" 'teacher'}}>
           <span class="label-type">{{t 'common.teacher'}} {{t 'grading-player.grading'}}
-            {{#if (and activityTeacherRubric.uploaded activityTeacherRubric.url)}}
+            {{#if activityTeacherRubric.url}}
               <span class="rubric-attachment" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'teacher'  bubbles=false}}>{{gru-icon name="attachment"}}</span>
             {{/if}}
           </span>
@@ -104,7 +104,7 @@
   </div>
 </div>
 
-{{#if (and activityTeacherRubric.uploaded activityTeacherRubric.url)}}
+{{#if activityTeacherRubric.url}}
   <div class="rubric-file-preview-container teacher">
     <div class="backdrop"></div>
     <div class="rubric-file-preview">
@@ -117,7 +117,7 @@
 {{/if}}
 
 
-{{#if (and activityStudentRubric.uploaded activityStudentRubric.url)}}
+{{#if activityStudentRubric.url}}
   <div class="rubric-file-preview-container student">
     <div class="backdrop"></div>
     <div class="rubric-file-preview">
