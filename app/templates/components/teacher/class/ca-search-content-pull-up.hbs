@@ -13,7 +13,7 @@
         {{/each}}
       </div>
     </div>
-    {{#if (or (eq selectedMenuName 'catalog') (eq selectedMenuName 'myContent'))}}
+    {{#if (or (eq selectedMenuName 'catalog') (eq selectedMenuName 'tenantLibrary') (eq selectedMenuName 'myContent'))}}
       <div class="search-right-menu">
         <div class="search-input-container">
           {{input type="text"
@@ -24,7 +24,7 @@
           <div class="filter-items">
             {{#each filters as |selectedFilter index|}}
               <div class="filter-item">
-                <span class="name ellipsis" data-toggle="tooltip" title= {{selectedFilter.name}}>{{selectedFilter.name}}</span>
+                <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
                 <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
               </div>
             {{/each}}
@@ -34,7 +34,7 @@
             <div class="more-filters hidden">
               {{#each moreFilters as |moreFilter|}}
                 <div class="filter-item">
-                  <span class="name ellipsis" data-toggle="tooltip" title= {{moreFilter.name}}>{{moreFilter.name}}</span>
+                  <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
                   <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
                 </div>
               {{/each}}
@@ -63,47 +63,70 @@
       }}
     </div>
   {{else}}
-    <div class="search-content-type-filter">
-      <div class="filter-content-types">
-        {{#each filterContentType as |contentType|}}
-          <div class="filter-item {{contentType.format}} {{if (eq contentType.format activeContentType) 'active' }}" {{action 'onSelectFilterBy' contentType.format}}>
-            <i></i>
-            <span>{{t contentType.label}}</span>
-          </div>
-        {{/each}}
-        {{#if isClassPreferenceMapped}}
-          <span class="create-offline-activity" title="{{t 'teacher-landing.class.class-activities-tab.create-external-collection'}}" data-toggle="tooltip" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
-        {{/if}}
-      </div>
-      {{#if showFilter}}
-        {{search.search-by-filter
+    {{#unless showTenantLibraries}}
+      <div class="search-content-type-filter">
+        <div class="filter-content-types">
+          {{#each filterContentType as |contentType|}}
+            <div class="filter-item {{contentType.format}} {{if (eq contentType.format activeContentType) 'active' }}" {{action 'onSelectFilterBy' contentType.format}}>
+              <i></i>
+              <span>{{t contentType.label}}</span>
+            </div>
+          {{/each}}
+          {{#if isClassPreferenceMapped}}
+            <span class="create-offline-activity" title="{{t 'teacher-landing.class.class-activities-tab.create-external-collection'}}" data-toggle="tooltip" {{action "onClickCreateOfflineActivity"}}>{{gru-icon name="add"}}</span>
+          {{/if}}
+        </div>
+        {{#if showFilter}}
+          {{search.search-by-filter
           isShow=isShow
           onFilterApply="doSearch"
           hideAppScroll=false
           unCheckedItem=unCheckedItem
           preference=class.preference
           selectedFilters=selectedFilters}}
+        {{/if}}
+      </div>
+      {{#if selectedTenantLibrary}}
+        <div class="selected-tenant-library">
+          <div class="back" {{action 'goBackToTenantLibraries'}}>
+            {{gru-icon name="arrow_back"}}
+          </div>
+          <img class="image" src="{{selectedTenantLibrary.image}}" />
+          <div class="library-name">{{selectedTenantLibrary.name}}</div>
+        </div>
       {{/if}}
-    </div>
-    <div class="search-list-container {{if isShowListView 'list-view' 'grid-view'}}">
-      {{#if (gt searchResults.length 0)}}
-        <div class="search-list">
-          {{#each searchResultSet as |result|}}
-            {{cards.dca-search-collection-card
+      <div class="search-list-container {{if selectedTenantLibrary 'show-tenant-library'}} {{if isShowListView 'list-view' 'grid-view'}}">
+        {{#if (gt searchResults.length 0)}}
+          <div class="search-list">
+            {{#each searchResultSet as |result|}}
+              {{cards.dca-search-collection-card
               onPreviewContent="onPreviewContent"
               onScheduleContentToDCA='onScheduleContentToDCA'
               collection=result contentType=activeContentType
               onAddContentToDCA="onAddContentToDCA"
               addedScheduleContentToDCA='addedScheduleContentToDCA'
               classId=classId}}
+            {{/each}}
+          </div>
+        {{else}}
+          {{#unless isLoading}}
+            {{cards.no-suggest-result-found isFromSearch=true}}
+          {{/unless}}
+        {{/if}}
+      </div>
+    {{else}}
+      <div class="tenant-libraries">
+        <div class="libraries-container">
+          {{#each libraries as |library|}}
+            {{library.gru-partner-library-card onSelectLibrary='onSelectLibrary' content=library}}
+          {{else}}
+            <div class="loading-spinner">
+              {{three-bounce-spinner}}
+            </div>
           {{/each}}
         </div>
-      {{else}}
-        {{#unless isLoading}}
-          {{cards.no-suggest-result-found isFromSearch=true}}
-        {{/unless}}
-      {{/if}}
-    </div>
+      </div>
+    {{/unless}}
   {{/if}}
 
 </div>

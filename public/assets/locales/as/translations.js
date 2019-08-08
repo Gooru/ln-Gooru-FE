@@ -85,6 +85,7 @@ window.i18ln = {
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
+  'common.tenantLibrary': 'Tenant Library',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',

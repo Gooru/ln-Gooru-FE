@@ -36,6 +36,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
   profileService: Ember.inject.service('api-sdk/profile'),
 
   /**
+   * @type {libraryService} Library service object
+   */
+  libraryService: Ember.inject.service('api-sdk/library'),
+
+  /**
    * Session object of logged in user
    * @type {Object}
    */
@@ -158,6 +163,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
     );
     menuItems.pushObject(
       this.createMenuItem('myContent', 'common.myContent', false)
+    );
+    menuItems.pushObject(
+      this.createMenuItem('tenantLibrary', 'common.tenantLibrary', false)
     );
     if (courseId) {
       menuItems.pushObject(
@@ -299,6 +307,18 @@ export default Ember.Component.extend(ConfigurationMixin, {
   // actions
 
   actions: {
+    goBackToTenantLibraries() {
+      let component = this;
+      component.set('showTenantLibraries', true);
+      component.set('selectedTenantLibrary', null);
+    },
+
+    onSelectLibrary(library) {
+      let component = this;
+      component.set('selectedTenantLibrary', library);
+      component.set('showTenantLibraries', false);
+      component.loadData();
+    },
     /**
      * Action triggered when the user click on close
      */
@@ -547,7 +567,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.loadData();
     component.openPullUp();
     component.handleSearchBar();
-    component.handleShowMoreData();
     component.closeCADatePickerOnScroll();
     component.set('selectedFilters', Ember.A([])); //initialize
   },
@@ -555,6 +574,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
   didRender() {
     let component = this;
     component.initializePopover();
+    component.handleShowMoreData();
   },
   //--------------------------------------------------------------------------
   // Methods
@@ -680,6 +700,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
       searchService = component.getSearchServiceByType();
     } else if (label === 'common.myContent') {
       searchService = component.getMyContentByType();
+    } else if (
+      label === 'common.tenantLibrary' &&
+      !component.get('showTenantLibraries')
+    ) {
+      searchService = component.getLibraryServiceByType();
     }
     return searchService;
   },
@@ -728,6 +753,37 @@ export default Ember.Component.extend(ConfigurationMixin, {
     return searchText;
   },
 
+  /**
+   * Method is used to get library service
+   */
+  getLibraryServiceByType() {
+    const component = this;
+    const libraryId = component.get('selectedTenantLibrary.id');
+    const activeContentType = component.get('activeContentType');
+    const pagination = {
+      offset: component.get('page') * component.get('defaultSearchPageSize'),
+      pageSize: component.get('defaultPageSize')
+    };
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      return component
+        .get('libraryService')
+        .fetchLibraryContent(libraryId, activeContentType, pagination)
+        .then(
+          result => {
+            let content;
+            if (result) {
+              let libraryContent = result.libraryContent;
+              content = libraryContent[Object.keys(libraryContent)[0]];
+            }
+            resolve(content);
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
+  },
+
   getSearchParams() {
     let component = this;
     let params = {
@@ -740,6 +796,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
     let label = component.get('selectedMenuItem.label');
     if (label === 'common.myContent') {
       filters.scopeKey = 'my-content';
+      filters['flt.publishStatus'] = 'published,unpublished';
+    } else if (label === 'common.tenantLibrary') {
+      filters.scopeKey = 'open-library';
+      filters.scopeTargetNames = component.get(
+        'selectedTenantLibrary.shortName'
+      );
       filters['flt.publishStatus'] = 'published,unpublished';
     } else {
       filters.scopeKey = 'open-all';
@@ -864,6 +926,18 @@ export default Ember.Component.extend(ConfigurationMixin, {
     });
   },
 
+  loadTenantLibraries() {
+    const component = this;
+    component.set('isLoading', true);
+    component
+      .get('libraryService')
+      .fetchLibraries()
+      .then(libraries => {
+        component.set('libraries', libraries);
+        component.set('isLoading', false);
+      });
+  },
+
   resetMenuItems() {
     let menuItems = this.get('menuItems');
     menuItems.forEach(item => {
@@ -905,6 +979,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
         item.set('selected', true);
       }
     });
+    const showTenantLibraries = selectedItem.get('key') === 'tenantLibrary';
+    if (showTenantLibraries) {
+      component.loadTenantLibraries();
+    }
+    component.set('showTenantLibraries', showTenantLibraries);
     if (!skipToggle) {
       component.toggleProperty('isMenuEnabled');
     }

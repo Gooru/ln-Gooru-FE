@@ -67,6 +67,7 @@ window.i18ln = {
     'There are no users to grade for this Offline Activity.',
   'common.list': 'ତାଲିକା',
   'common.first': 'ପ୍ରଥମ',
+  'common.tenantLibrary': 'Tenant Library',
   'common.last': 'ଶେଷ',
   'common.name': 'ନାମ',
   'common.day': 'day',

@@ -74,6 +74,7 @@ window.i18ln = {
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
   'common.sub-filter': 'Sub-Filter',
+  'common.tenantLibrary': 'Tenant Library',
   'common.for': 'for',
   'self-grade.not-required': 'Student self-grading not required',
   'common.more': 'more',

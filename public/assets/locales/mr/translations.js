@@ -59,6 +59,7 @@ window.i18ln = {
   'errors.url': '{{description}} वैध url असणे आवश्यक आहे',
   'common.relevance': 'समर्पकता',
   'common.engagement': 'प्रतिबद्धता',
+  'common.tenantLibrary': 'Tenant Library',
   'rubric-details': 'Rubric Details',
   'common.efficacy': 'परिणामकारकता',
   'common.grid': 'चौकटी',
@@ -351,15 +352,15 @@ window.i18ln = {
   'common.enter-url': 'URL(लिंक) भरा',
   'common.enrolled-students': 'वर्गातील विद्यार्थी',
   'common.errors.join-class-code': 'कृपया वर्ग संकेतांक भरा.',
-  'common.errors.answer-has-no-image': 'कृपया गुण भरलेल्या परिपत्राचा फोटो अपलोड करा.',
+  'common.errors.answer-has-no-image':
+    'कृपया गुण भरलेल्या परिपत्राचा फोटो अपलोड करा.',
   'common.errors.add-username': 'कृपया युजरनेम भरा',
   'common.errors.add-course-title': 'कृपया अभ्यासक्रमाला शीर्षक द्या.',
   'common.errors.add-question-answer-text':
     'कृपया उत्तर निवड मजकूर प्रविष्ट करा.',
   'common.errors.add-question-description': 'कृपया प्रश्नाचा मजकूर भरा.',
   'common.errors.add-question-title': 'कृपया प्रश्नाला शीर्षक द्या.',
-  'common.errors.assessment-title-presence':
-    'कृपया मूल्यमापनाला शीर्षक द्या.',
+  'common.errors.assessment-title-presence': 'कृपया मूल्यमापनाला शीर्षक द्या.',
   'common.errors.can-not-join-class':
     'वर्गात सामील होण्यासाठी काही अडचण येत आहे. कृपया थोड्यावेळाने पुन्हा प्रयत्न करा.',
   'common.errors.assessment-not-added-to':
@@ -395,8 +396,7 @@ window.i18ln = {
   'common.errors.highlight-text-wrong-format': 'प्रश्नांचा चुकीचा फॉर्मेट.',
   'common.errors.hotspot-text-max-choices':
     'आपण उत्तर निवडींची मर्यादा गाठली आहे.',
-  'common.errors.file-max-size':
-    'फाईल्स 5MB पेक्षा लहान असणे गरजेचे आहे',
+  'common.errors.file-max-size': 'फाईल्स 5MB पेक्षा लहान असणे गरजेचे आहे',
   'common.errors.file-upload-missing':
     'खालीलपैकी कोणत्याही  एका एक्सटेन्शनची फाईल निवडा: {{extensions}}',
   'common.errors.getting-next-resource':
@@ -430,8 +430,7 @@ window.i18ln = {
   'common.errors.resource-description-length':
     'वर्णन 500 शब्दांपेक्षा मोठे असू शकत नाही.',
   'common.errors.resource-invalid-url': 'अवैध URL',
-  'common.errors.resource-missing-title':
-    'कृपया संसाधनाला एक शीर्षक द्या.',
+  'common.errors.resource-missing-title': 'कृपया संसाधनाला एक शीर्षक द्या.',
   'common.errors.resource-missing-type': 'कृपया संसाधन प्रकार निवडा.',
   'common.errors.resource-missing-url': 'कृपया वैध URL प्रविष्ट करा.',
   'common.errors.resource-not-added-to-collection':
@@ -472,7 +471,8 @@ window.i18ln = {
     'घटक दाखवण्यात काही अडचण येत आहे. कृपया थोड्यावेळाने पुन्हा प्रयत्न करा.',
   'common.errors.unit-title-required': 'कृपया घटकाला शीर्षक द्या.',
   'common.errors.user-email-presence': 'एक वैध ईमेल आय डी भरा.',
-  'common.errors.username-length': 'युजरनेम ४ ते २५४ अक्षरांदरम्यान असणे आवश्यक आहे',
+  'common.errors.username-length':
+    'युजरनेम ४ ते २५४ अक्षरांदरम्यान असणे आवश्यक आहे',
   'common.errors.forgot-password-gmail':
     'कृपया Google साइनइन वापरा. आम्ही आपला पासवर्ड रीसेट करू शकत नाही.',
   'common.errors.no-studymaterial':
@@ -959,8 +959,7 @@ window.i18ln = {
   'content.assessments.edit.best-practices':
     '<p>मुल्यांकन म्हणजे मूल्यांकन केलेल्या अशा प्रश्नांचा संच जो तुम्ही आणि तुमचे विद्यार्थी  आकलनावर आणि कामगिरीवर लक्ष ठेवण्यासाठी वापरू शकाल.</p><p>आपल्या मूल्यांकना मध्ये विविध प्रश्नांचे प्रकार वापरा  (SBAC वर आधारित प्रश्नांसारखे प्रश्न) ज्यांच्या द्वारा विद्यार्थी त्यांना होणारे आकलन विविध प्रकारे प्रदर्शित करू शकतील. इयत्ता, लघु इयत्ता आणि वेबच्या गहन ज्ञानात प्रत्येक प्रश्न टॅग करण्याची आम्ही शिफारस करतो.</p>',
   'content.classes.create.title': 'वर्ग तयार करा',
-  'content.classes.create.content':
-    'जिथे मुले अभ्यासात रमतात.',
+  'content.classes.create.content': 'जिथे मुले अभ्यासात रमतात.',
   'content.classes.create.class-name-input': 'आपल्या वर्गाला नाव द्या',
   'content.classes.create.condition-prompt':
     'विद्यार्थी आपल्या वर्गात कसे सहभागी होतील?',
@@ -1244,8 +1243,7 @@ window.i18ln = {
   'teacher-landing.dca-create-info':
     'खालील आयकॉन्सवर क्लिक करून वर्गातील उपक्रम तयार करण्यासाठी आवश्यक आशय गुरु संग्रहालयात शोधा. तुम्ही अभ्यासक्रम या टॅबवर क्लिक करून तुमच्या अभ्यासक्रमातील आशयही उपक्रमासाठी वापरू शकता.',
   'teacher-landing.schedule-for-later': 'नियोजित करा',
-  'teacher-landing.teach-this-activity-later':
-    'नंतर DCA येथे हा उपक्रम शिकवा',
+  'teacher-landing.teach-this-activity-later': 'नंतर DCA येथे हा उपक्रम शिकवा',
   'teacher-landing.schedule-dca-instruction-1':
     'हा उपक्रम शिकवण्यासाठी पुढील तारीख निवडा.',
   'teacher-landing.schedule-dca-instruction-2':
@@ -1274,9 +1272,9 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.assigned-course':
     'नियुक्त अभ्यासक्रम',
   'teacher-landing.class.class-management-tab.archive': 'संग्रह',
-  'teacher-landing.class.class-management-tab.archive-class':
-    'वर्ग संग्रहण',
-  'teacher-landing.class.class-management-tab.archive-classroom': 'संग्रहित वर्ग',
+  'teacher-landing.class.class-management-tab.archive-class': 'वर्ग संग्रहण',
+  'teacher-landing.class.class-management-tab.archive-classroom':
+    'संग्रहित वर्ग',
   'teacher-landing.class.class-management-tab.attend-class-with-code':
     'संकेतांक वापरून वर्गात सामील व्हा',
   'teacher-landing.class.class-management-tab.class-information': 'वर्ग माहिती',
@@ -1314,8 +1312,7 @@ window.i18ln = {
   'teacher-landing.class.students-tab.performance': 'कामगिरी',
   'teacher-landing.class.students-tab.proficiency': 'प्रभुत्व',
   'teacher-landing.class.students-tab.location': 'स्थान',
-  'teacher-landing.class.students-tab.currently-studying':
-    'सध्या अभ्यासत आहे',
+  'teacher-landing.class.students-tab.currently-studying': 'सध्या अभ्यासत आहे',
   'teacher-landing.class.students-tab.student-id': 'विद्यार्थी ओळखपत्र',
   'teacher-landing.class.students-tab.remove': 'काढा',
   'teacher-landing.class.students-tab.mastered': 'प्रभुत्व मिळवले आहे',

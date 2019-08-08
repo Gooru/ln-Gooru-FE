@@ -55,6 +55,7 @@ window.i18ln = {
   'common.relevance': 'સુસંગતતા',
   'common.engagement': 'સગાઈ',
   'common.efficacy': 'અસરકારકતા',
+  'common.tenantLibrary': 'Tenant Library',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',

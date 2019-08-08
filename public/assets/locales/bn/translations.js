@@ -73,6 +73,7 @@ window.i18ln = {
   'common.content-name': 'কন্টেন্ট নাম',
   'common.lastName': 'নামের শেষাংশ',
   'common.firstName': 'নামের প্রথম অংশ',
+  'common.tenantLibrary': 'Tenant Library',
   'common.filter-by': 'দ্বারা ফিল্টার',
   'common.more': 'অধিক',
   'reroute.suggestion': 'reroute suggestion',
