@@ -511,7 +511,10 @@
                 grid-column-start: 1;
                 grid-column-end: 1;
 
-                .collection-standards,
+                .collection-standards {
+                  padding: 0 15px 8px 15px;
+                }
+
                 .collection-user-info {
                   display: none;
                 }
