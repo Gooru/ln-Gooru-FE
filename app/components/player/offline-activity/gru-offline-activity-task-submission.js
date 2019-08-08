@@ -218,9 +218,8 @@ export default Ember.Component.extend({
     'studentTaskUploadSubmission',
     function() {
       const component = this;
-      const uploadedFilesCount = component
-        .get('task.files')
-        .filter(f => f.isUploaded).length;
+
+      const uploadedFilesCount = component.get('task.files.length');
       const mandatoryUploads = component.get('mandatoryUploads');
       const studentTaskUploadSubmission = component.get(
         'studentTaskUploadSubmission.length'

@@ -37,7 +37,6 @@
     <div class="task-description">
       {{safe-html task.description}}
     </div>
-
     {{#if showToggle}}
       <div class="task-toggle" {{action "onToggleTask"}}>
         {{#if isTaskExpanded}}
@@ -89,14 +88,12 @@
               {{#each listOfFilesUploads as |file index|}}
                 <div class="task-file-upload">
                   {{#file-picker dropzone=false errors=fileUploadErrors fileLoaded="onUploadFile" readAs="readAsFile" removePreview=file.isRemovePreview onRemoveFile=removeFile}}
-
                     {{!-- A DIV is used instead of a BUTTON because the button's click default behaviour
                     may cause unwanted side-effects if this component is placed in a modal
                      (i.e. clicking on this button will cause the modal to close) --}}
                     <div class="file-upload-box">
                       {{gru-icon name="add"}}
                     </div>
-
                   {{/file-picker}}
                   {{#if file.isFileAvailable}}
                     <div class="file-upload-actions">
@@ -116,7 +113,7 @@
             <div class="task-url-upload {{if taskUrl.isSubmittedUrl 'preview-url'}}">
               {{#if taskUrl.isSubmittedUrl}}
                 <span class="url-label">URL {{plus-one index}}: </span>
-                <a class="url-link" href="{{taskUrl.value}}" target="_blank">{{taskUrl.value}}</a>
+                <a class="url-link" href="//{{taskUrl.value}}" target="_blank">{{taskUrl.value}}</a>
               {{else if (not isReadOnly)}}
                 <span class="url-label">URL {{plus-one index}}: </span>
                 <span class="url-value">{{input type="text" value=taskUrl.value}}</span>

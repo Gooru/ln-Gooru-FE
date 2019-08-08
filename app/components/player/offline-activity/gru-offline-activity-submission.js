@@ -223,12 +223,19 @@ export default Ember.Component.extend({
       const isInCompleteTaskAvailable = activityTasks.filter(
         task => !task.isAddedMandatorySubmission
       );
+      const hasUnsavedTasks = activityTasks.filter(
+        task => task.files.length > 0
+      );
       const isUnSubmittedTaskAvailable = activityTasks.filter(
         task => !task.isTaskSubmitted
       );
-      return !(
+      let enableCompletionButton = !(
         isInCompleteTaskAvailable.length || isUnSubmittedTaskAvailable.length
       );
+      if (hasUnsavedTasks.length > 0 && enableCompletionButton) {
+        component.loadTaskSubmissionData();
+      }
+      return enableCompletionButton;
     }
   ),
 
@@ -295,67 +302,64 @@ export default Ember.Component.extend({
   loadTaskSubmissionData() {
     const component = this;
     component.set('isLoading', true);
-    return Ember.RSVP
-      .hash({
-        tasksSubmissions: !component.get('isPreview')
-          ? component.fetchTasksSubmissions()
-          : null
-      })
-      .then(({ tasksSubmissions }) => {
-        if (!component.isDestroyed) {
-          let activityTasks = component.get('offlineActivity.tasks');
-          if (tasksSubmissions) {
-            let studentTasksSubmissions = tasksSubmissions.get('tasks');
-            let oaRubrics = tasksSubmissions.get('oaRubrics');
-            let submittedTimespentInMillisec = oaRubrics
-              ? oaRubrics.get('studentGrades.timeSpent')
-              : 0;
-            studentTasksSubmissions.map(taskSubmission => {
-              let activityTask = activityTasks.findBy(
-                'id',
-                taskSubmission.get('taskId')
-              );
+    component.set('activityTasks', null);
+    return Ember.RSVP.hash({
+      tasksSubmissions: !component.get('isPreview')
+        ? component.fetchTasksSubmissions()
+        : null
+    }).then(({ tasksSubmissions }) => {
+      if (!component.isDestroyed) {
+        let activityTasks = component.get('offlineActivity.tasks');
+        if (tasksSubmissions) {
+          let studentTasksSubmissions = tasksSubmissions.get('tasks');
+          let oaRubrics = tasksSubmissions.get('oaRubrics');
+          let submittedTimespentInMillisec = oaRubrics
+            ? oaRubrics.get('studentGrades.timeSpent')
+            : 0;
+          studentTasksSubmissions.map(taskSubmission => {
+            let activityTask = activityTasks.findBy(
+              'id',
+              taskSubmission.get('taskId')
+            );
 
-              if (activityTask) {
-                let activityTaskSubmissions = taskSubmission.get('submissions');
-                activityTask.set(
-                  'studentTaskSubmissions',
-                  activityTaskSubmissions
+            if (activityTask) {
+              let activityTaskSubmissions = taskSubmission.get('submissions');
+              activityTask.set(
+                'studentTaskSubmissions',
+                activityTaskSubmissions
+              );
+              if (activityTaskSubmissions.length) {
+                let taskSubmissionText = activityTaskSubmissions.findBy(
+                  'submissionType',
+                  'free-form-text'
                 );
-                if (activityTaskSubmissions.length) {
-                  let taskSubmissionText = activityTaskSubmissions.findBy(
-                    'submissionType',
-                    'free-form-text'
-                  );
-                  activityTask.set(
-                    'submissionText',
-                    taskSubmissionText
-                      ? taskSubmissionText.get('submissionInfo')
-                      : null
-                  );
-                }
+                activityTask.set(
+                  'submissionText',
+                  taskSubmissionText
+                    ? taskSubmissionText.get('submissionInfo')
+                    : null
+                );
               }
-            });
-            if (submittedTimespentInMillisec) {
-              component.set(
-                'timespentInMilliSecCopy',
-                submittedTimespentInMillisec
-              );
-              component.formatMillisecondsToHourMinute(
-                formatTimeInMilliSec(submittedTimespentInMillisec)
-              );
             }
-            if (tasksSubmissions.get('oaRubrics.studentGrades')) {
-              let studentGrades = tasksSubmissions.get(
-                'oaRubrics.studentGrades'
-              );
-              component.set('isSelfGradingDone', !!studentGrades.get('grader'));
-            }
+          });
+          if (submittedTimespentInMillisec) {
+            component.set(
+              'timespentInMilliSecCopy',
+              submittedTimespentInMillisec
+            );
+            component.formatMillisecondsToHourMinute(
+              formatTimeInMilliSec(submittedTimespentInMillisec)
+            );
           }
-          component.set('activityTasks', activityTasks);
-          component.set('isLoading', false);
+          if (tasksSubmissions.get('oaRubrics.studentGrades')) {
+            let studentGrades = tasksSubmissions.get('oaRubrics.studentGrades');
+            component.set('isSelfGradingDone', !!studentGrades.get('grader'));
+          }
         }
-      });
+        component.set('activityTasks', activityTasks);
+        component.set('isLoading', false);
+      }
+    });
   },
 
   /**
