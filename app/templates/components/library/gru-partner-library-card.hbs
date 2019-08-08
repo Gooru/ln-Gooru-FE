@@ -1,11 +1,11 @@
-<div class="panel panel-default">
+<div class="panel panel-default" {{action 'selectLibrary'}}>
   <div class="panel-heading">
-    <div class="title-section" {{action 'selectLibrary'}}>
+    <div class="title-section">
       {{truncate text=content.name maxLength=40}}
     </div>
   </div>
   <div class="panel-body">
-    <div class="image" {{action 'selectLibrary'}}>
+    <div class="image">
       <img class="img-responsive" src="{{content.image}}">
     </div>
     <div class="description">
