@@ -2,15 +2,15 @@
   .question-container {
     .question-header-container {
       display: grid;
-      grid-template-columns: auto 1fr auto;
+      grid-template-columns: auto 1fr auto auto;
       justify-content: left;
       align-items: center;
       background-color: $white;
       border-bottom: 1px solid #d6d6d6;
-      height: 56px;
       padding-left: 15px;
       column-gap: 15px;
       cursor: pointer;
+      padding: 8px 0;
 
       .question-icon {
         width: 24px;
@@ -28,31 +28,15 @@
 
       .question-accordion {
         justify-self: right;
-      }
-
-      &.scored {
-        background-color: #9ad5f2;
-      }
-    }
-    .toggle-container {
-      background-color: $white;
-      padding: 0 15px 15px 15px;
-      .question-info-container {
-        .question-preview-card {
-          .question-preview-container {
-            border: none;
-            padding: 0;
-            .question-title-container {
-              display: none;
-            }
-          }
-        }
+        grid-column-start: 4;
       }
 
       .question-score-container {
         display: grid;
         justify-content: left;
         align-items: center;
+        grid-column-start: 3;
+        grid-row-start: 1;
 
         .boolean-score-box {
           width: 120px;
@@ -141,6 +125,36 @@
         }
       }
 
+      &.scored {
+        background-color: #9ad5f2;
+      }
+
+      @media screen and (max-width: $screen-md) {
+        padding-bottom: 10px;
+        .question-score-container {
+          grid-column-start: 1;
+          grid-row-start: 2;
+          &.multi-score {
+            grid-column-end: 4;
+          }
+        }
+      }
+    }
+    .toggle-container {
+      background-color: $white;
+      padding: 0 15px 15px 15px;
+      .question-info-container {
+        .question-preview-card {
+          .question-preview-container {
+            border: none;
+            padding: 0;
+            .question-title-container {
+              display: none;
+            }
+          }
+        }
+      }
+
       &.expanded-view {
         display: block;
         margin-bottom: 15px;
@@ -153,8 +167,8 @@
 
     &.expanded {
       .question-header-container {
+        grid-template-columns: 30px 1fr auto auto;
         border: none;
-        height: 56px;
         .question-icon {
           display: block;
         }
