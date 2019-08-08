@@ -302,10 +302,10 @@ export default Ember.Component.extend({
   loadTaskSubmissionData() {
     const component = this;
     component.set('isLoading', true);
-    component.set('activityTasks', null);
     return Ember.RSVP.hash({
       tasksSubmissions: !component.get('isPreview')
-        ? component.fetchTasksSubmissions()
+        ? component.get('offlineActivitySubmissions') ||
+          component.fetchTasksSubmissions()
         : null
     }).then(({ tasksSubmissions }) => {
       if (!component.isDestroyed) {

@@ -55,6 +55,7 @@ window.i18ln = {
   'common.relevance': 'સુસંગતતા',
   'common.engagement': 'સગાઈ',
   'common.efficacy': 'અસરકારકતા',
+  'common.tenantLibrary': 'Tenant Library',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
@@ -63,6 +64,7 @@ window.i18ln = {
   'common.list': 'યાદી',
   'common.first': 'પ્રથમ',
   'common.last': 'છેલ્લા',
+  'rubric-details': 'Rubric Details',
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':

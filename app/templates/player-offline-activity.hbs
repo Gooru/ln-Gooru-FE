@@ -23,7 +23,14 @@
         classId = classId
         caContentId = caContentId
         isPreview = isPreview
-        isTeacher = isTeacher}}
+        isTeacher = isTeacher
+        offlineActivitySubmissions = offlineActivitySubmissions}}
     {{/if}}
   </div>
 </div>
+
+{{#if isLoading}}
+  <div class="loading-progress-spinner">
+    {{three-bounce-spinner}}
+  </div>
+{{/if}}

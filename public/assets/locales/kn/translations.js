@@ -56,6 +56,7 @@ window.i18ln = {
   'errors.url': '{{description}} ಒಂದು ಮಾನ್ಯವಾದ url ಆಗಿರಬೇಕು',
   'common.relevance': 'ಪ್ರಸ್ತುತತೆ',
   'common.engagement': 'ನಿಶ್ಚಿತಾರ್ಥ',
+  'common.tenantLibrary': 'Tenant Library',
   'common.efficacy': 'ಪರಿಣಾಮಕಾರಿತ್ವ',
   'common.grid': 'ಗ್ರಿಡ್ ',
   'common.list': 'ಪಟ್ಟಿ ',
@@ -83,6 +84,7 @@ window.i18ln = {
   'common.offline-activity': 'ಆಫ್‌ಲೈನ್ ಚಟುವಟಿಕೆ',
   'common.frq': 'ಎಫ್ ಆರ್ ಕ್ಯೂ ',
   'common.schedule': 'ವೇಳಾಪಟ್ಟಿ',
+  'rubric-details': 'Rubric Details',
   'common.responses': 'ಪ್ರತಿಕ್ರಿಯೆಗಳು',
   'ca.student.no-content':
     'ಶಿಕ್ಷಕರು  ಈ ದಿನಕ್ಕೆ ಯಾವುದೇ ಚಟುವಟಿಕೆಗಳನ್ನು ನಿಯೋಜಿಸಿಲ್ಲ',

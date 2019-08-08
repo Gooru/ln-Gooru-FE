@@ -23,6 +23,43 @@
     background-color: #000;
   }
 
+  .rubric-file-preview-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 5%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    visibility: hidden;
+
+    .rubric-file-preview {
+      max-width: 768px;
+      height: 80vh;
+      margin: 0 auto;
+      background: #fff;
+      text-align: center;
+      margin-top: 80px;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        padding: 20px 20px 70px;
+      }
+
+      .rubric-file-preview-close {
+        height: 20px;
+
+        .close {
+          margin-right: 20px;
+          font-size: 24px;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+
   .oa-preview-container {
     height: 100%;
     background: #f1f3f7;
@@ -466,7 +503,16 @@
             .grader-label {
               color: #3e5e67;
               font-weight: bold;
-              line-height: 1.2;
+              display: flex;
+              align-items: flex-end;
+
+              .rubric-attachment {
+                color: #03a9f4;
+                cursor: pointer;
+                margin-left: 10px;
+                display: flex;
+                align-items: flex-end;
+              }
             }
 
             .grade-tag {

@@ -37,6 +37,7 @@ window.i18ln = {
   'errors.after': '{{description}} {{அடுத்து}',
   'errors.wrongDateFormat':
     '{{description}} {{format}} இன் வடிவத்தில் இருக்க வேண்டும்',
+  'rubric-details': 'Rubric Details',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
@@ -55,6 +56,7 @@ window.i18ln = {
     'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
   'common.dialog-close': 'Do you want to close ?',
   're-upload': 'Re-Upload',
+  'common.tenantLibrary': 'Tenant Library',
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
   'i2d.mobile-upload-failed': 'There was a error',

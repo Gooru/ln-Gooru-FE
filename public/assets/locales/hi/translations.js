@@ -56,6 +56,7 @@ window.i18ln = {
   'errors.url': '{{description}} एक वैध यूआरएल होना चाहिए',
   'common.relevance': 'प्रासंगिकता',
   'common.engagement': 'अनुबंध',
+  'common.tenantLibrary': 'Tenant Library',
   'common.efficacy': 'प्रभावोत्पादकता',
   'common.grid': 'ग्रिड',
   'reroute.suggestion': 'reroute suggestion',
@@ -82,6 +83,7 @@ window.i18ln = {
   'search-help-message': 'लागू करने के लिए फ़िल्टर चुनें',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
+  'rubric-details': 'Rubric Details',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
   'i2d.conversion-progress':

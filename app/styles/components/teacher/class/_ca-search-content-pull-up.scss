@@ -101,7 +101,8 @@
           box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.1);
           visibility: hidden;
           opacity: 0;
-          transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+          transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s,
+            z-index 0s linear 0.01s;
 
           p {
             padding: 0;
@@ -237,6 +238,55 @@
       }
     }
 
+    .tenant-libraries {
+      max-height: calc(90vh - 50px);
+      display: flex;
+      width: 100%;
+      overflow-y: auto;
+      margin: auto;
+      background-color: #f1f3f7;
+
+      .libraries-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin: auto;
+        grid-gap: 10px;
+
+        .loading-spinner {
+          left: 0;
+        }
+      }
+    }
+
+    .selected-tenant-library {
+      display: grid;
+      grid-template-columns: 42px max-content 1fr;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+      margin-bottom: 1px;
+      height: 45px;
+
+      .back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .library-name {
+        font-weight: bold;
+        font-size: 14px;
+        padding-left: 5px;
+      }
+
+      img {
+        width: 35px;
+        height: 35px;
+        border-radius: 50px;
+      }
+    }
+
     .search-content-type-filter {
       height: auto;
       background-color: #ffffff;
@@ -333,13 +383,17 @@
 
     .search-list-container {
       max-height: calc(90vh - 100px);
-      height: calc(90vh - 100px);
+      height: 100%;
       overflow-y: auto;
       height: 100%;
       width: 100%;
       padding-top: 30px;
       padding-bottom: 30px;
       background: #f1f3f7;
+
+      &.show-tenant-library {
+        max-height: calc(90vh - 145px);
+      }
 
       .search-list {
         display: grid;
@@ -434,7 +488,11 @@
                     $line-height: 1.5;
                     $lines-to-show: 1;
                     font-weight: normal;
-                    @include ellipsis($font-size: 15px, $line-height: $line-height, $lines-to-show: $lines-to-show);
+                    @include ellipsis(
+                      $font-size: 15px,
+                      $line-height: $line-height,
+                      $lines-to-show: $lines-to-show
+                    );
                   }
                 }
 
@@ -453,7 +511,10 @@
                 grid-column-start: 1;
                 grid-column-end: 1;
 
-                .collection-standards,
+                .collection-standards {
+                  padding: 0 15px 8px 15px;
+                }
+
                 .collection-user-info {
                   display: none;
                 }
@@ -464,7 +525,11 @@
                   $lines-to-show: 4;
                   $line-height: 1.5;
                   margin-left: 15px;
-                  @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
+                  @include ellipsis(
+                    $font-size: $font-size,
+                    $line-height: $line-height,
+                    $lines-to-show: $lines-to-show
+                  );
                   margin-bottom: 5px;
                 }
               }
