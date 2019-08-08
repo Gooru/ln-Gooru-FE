@@ -1,67 +1,73 @@
 .class {
-	.content {
-		.teacher-class-search-content-pull-up {
-			width: 100%;
+  .content {
+    .teacher-class-search-content-pull-up {
+      width: 100%;
 
-			.search-container {
-				width: 100%;
-				@media screen and (max-width: $screen-sm - 1) {
-					.search-header {
-						grid-template-columns: 20px 100px 1fr;
+      .search-container {
+        width: 100%;
+        @media screen and (max-width: $screen-sm - 1) {
+          .tenant-libraries {
+            .libraries-container {
+              grid-template-columns: repeat(1, 1fr);
+            }
+          }
 
-						.search-filter-container {
-							width: 90px;
-							margin-left: 10px;
-						}
+          .search-header {
+            grid-template-columns: 20px 100px 1fr;
 
-						.search-pullup-close {
-							i {
-								margin-left: 0;
-							}
-						}
+            .search-filter-container {
+              width: 90px;
+              margin-left: 10px;
+            }
 
-						.search-right-menu {
-							.search-input-container {
-								grid-template-columns: auto 90px auto;
+            .search-pullup-close {
+              i {
+                margin-left: 0;
+              }
+            }
 
-								#search-content {
-									width: 100%;
-								}
-							}
-						}
-					}
+            .search-right-menu {
+              .search-input-container {
+                grid-template-columns: auto 90px auto;
 
-					.search-content-type-filter {
-						.search-by-filter {
-							.search-panel {
-								.search-content {
-									padding: 5px;
+                #search-content {
+                  width: 100%;
+                }
+              }
+            }
+          }
 
-									.bottom-panel-container,
-									.top-panel-container {
-										width: 100vw;
-										flex-direction: column;
+          .search-content-type-filter {
+            .search-by-filter {
+              .search-panel {
+                .search-content {
+                  padding: 5px;
 
-										.filter-container {
-											width: 100%;
-										}
+                  .bottom-panel-container,
+                  .top-panel-container {
+                    width: 100vw;
+                    flex-direction: column;
 
-										.gru-taxonomy-picker {
-											.browse-selector {
-												.taxonomy {
-													.gru-browser-selector-container {
-														grid-template-columns: none;
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+                    .filter-container {
+                      width: 100%;
+                    }
+
+                    .gru-taxonomy-picker {
+                      .browse-selector {
+                        .taxonomy {
+                          .gru-browser-selector-container {
+                            grid-template-columns: none;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
