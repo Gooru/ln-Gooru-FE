@@ -82,6 +82,7 @@ export default Ember.Component.extend({
       let fileType = inferUploadType(file.name, OA_TASK_SUBMISSION_TYPES);
       file.fileType = fileType ? fileType.value : 'others';
       file.icon = OA_TASK_SUBMISSION_TYPES.findBy('value', file.fileType).icon;
+      component.set('task.isTaskSubmitted', false);
     },
 
     //Action triggered when click on save
