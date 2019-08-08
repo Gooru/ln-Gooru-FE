@@ -983,6 +983,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
     if (showTenantLibraries) {
       component.loadTenantLibraries();
     }
+    component.set('selectedTenantLibrary', null);
     component.set('showTenantLibraries', showTenantLibraries);
     if (!skipToggle) {
       component.toggleProperty('isMenuEnabled');
