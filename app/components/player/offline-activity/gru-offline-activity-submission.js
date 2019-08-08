@@ -217,6 +217,7 @@ export default Ember.Component.extend({
   isEnableCompletionButton: Ember.computed(
     'activityTasks.@each.isAddedMandatorySubmission',
     'activityTasks.@each.isTaskSubmitted',
+    'activityTasks',
     function() {
       const component = this;
       const activityTasks = component.get('activityTasks') || Ember.A([]);
@@ -224,7 +225,7 @@ export default Ember.Component.extend({
         task => !task.isAddedMandatorySubmission
       );
       const hasUnsavedTasks = activityTasks.filter(
-        task => task.files.length > 0
+        task => task.files && task.files.length > 0
       );
       const isUnSubmittedTaskAvailable = activityTasks.filter(
         task => !task.isTaskSubmitted
