@@ -95,7 +95,7 @@
           <div class="library-name">{{selectedTenantLibrary.name}}</div>
         </div>
       {{/if}}
-      <div class="search-list-container {{if isShowListView 'list-view' 'grid-view'}}">
+      <div class="search-list-container {{if selectedTenantLibrary 'show-tenant-library'}} {{if isShowListView 'list-view' 'grid-view'}}">
         {{#if (gt searchResults.length 0)}}
           <div class="search-list">
             {{#each searchResultSet as |result|}}
@@ -119,6 +119,10 @@
         <div class="libraries-container">
           {{#each libraries as |library|}}
             {{library.gru-partner-library-card onSelectLibrary='onSelectLibrary' content=library}}
+          {{else}}
+            <div class="loading-spinner">
+              {{three-bounce-spinner}}
+            </div>
           {{/each}}
         </div>
       </div>

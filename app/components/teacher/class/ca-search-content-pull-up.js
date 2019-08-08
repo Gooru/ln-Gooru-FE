@@ -310,6 +310,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
     goBackToTenantLibraries() {
       let component = this;
       component.set('showTenantLibraries', true);
+      component.set('selectedTenantLibrary', null);
     },
 
     onSelectLibrary(library) {
