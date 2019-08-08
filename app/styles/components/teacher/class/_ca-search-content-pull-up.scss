@@ -455,6 +455,15 @@
   }
   @media screen and (max-width: 992px) {
     .search-container {
+      .search-header {
+        .search-filter-container {
+          .search-filter-container-list {
+            p {
+              padding: 10px;
+            }
+          }
+        }
+      }
       .search-list-container {
         padding: 0;
 
@@ -510,9 +519,86 @@
                 padding: 0;
                 grid-column-start: 1;
                 grid-column-end: 1;
+                display: grid;
 
                 .collection-standards {
-                  padding: 0 15px 8px 15px;
+                  grid-row-start: 1;
+                  display: grid;
+                  align-items: center;
+                  padding-left: 8px;
+
+                  .gru-taxonomy-tag-list {
+                    .gru-taxonomy-tag {
+                      min-width: 90px;
+                      max-width: 100px;
+                      height: 23px;
+                      border-radius: 12px;
+                      background-color: #2d2d2d;
+
+                      .standard-tag {
+                        text-align: center;
+                        padding: 0;
+
+                        .tag-label {
+                          font-size: 14px;
+                          font-weight: bold;
+                          color: $white;
+                          line-height: 21px;
+                        }
+
+                        .tag-caption {
+                          display: none;
+                        }
+                      }
+                    }
+
+                    .non-visible-tags {
+                      width: 81px;
+                      height: 23px;
+                      border-radius: 12px;
+                      background-color: #2d2d2d;
+                      color: $white;
+                      padding: 0;
+
+                      span {
+                        font-weight: bold;
+                        font-size: 14px;
+                        margin-left: 10px;
+                      }
+                    }
+
+                    .popover {
+                      .popover-content {
+                        .gru-taxonomy-tag {
+                          min-width: 90px;
+                          max-width: 100px;
+                          height: 23px;
+                          border-radius: 12px;
+                          background-color: #2d2d2d;
+
+                          .standard-tag {
+                            text-align: center;
+                            padding: 0;
+                            width: max-content;
+
+                            .tag-label {
+                              font-size: 14px;
+                              font-weight: bold;
+                              color: $white;
+                              line-height: 21px;
+                            }
+
+                            .tag-caption {
+                              display: none;
+                            }
+                          }
+                        }
+                        .description-tag {
+                          display: none;
+                        }
+                      }
+                    }
+                  }
                 }
 
                 .collection-user-info {
@@ -520,6 +606,7 @@
                 }
 
                 .collection-description {
+                  height: auto;
                   margin-left: 30px;
                   $font-size: 12px;
                   $lines-to-show: 4;
@@ -536,6 +623,7 @@
 
               .card-panel-footer {
                 width: 30px;
+                position: relative;
 
                 .buttons-container {
                   display: grid;
@@ -544,6 +632,8 @@
                   grid-template-columns: auto;
                   align-items: center;
                   justify-content: center;
+                  position: absolute;
+                  bottom: 0;
 
                   .play-btn {
                     display: none;
