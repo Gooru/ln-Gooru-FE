@@ -23,6 +23,11 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
   courseService: Ember.inject.service('api-sdk/course'),
 
   /**
+   * @property {ProfileService} Profile service API SDK
+   */
+  profileService: Ember.inject.service('api-sdk/profile'),
+
+  /**
    * @property {MediaService} Media service API SDK
    */
   mediaService: Ember.inject.service('api-sdk/media'),
@@ -48,6 +53,48 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
   // Actions
 
   actions: {
+    /**
+     * Toggle section when user click on add icon
+     */
+    onToggleAddCollaborator() {
+      let component = this;
+      component.$('.sub-sec-coteach .add-collaborator-panel').slideToggle();
+    },
+
+    /**
+     * Triggered from a co-teacher card of class mgt
+     */
+    removeCoteacher: function(collaborator) {
+      const component = this;
+      let courseCollaborators = component.get('collaborators');
+      courseCollaborators = courseCollaborators.removeObject(collaborator);
+      let courseCollaboratorIds = courseCollaborators.map(
+        collaborator => collaborator.id
+      );
+      component
+        .updateCollaboratorsForCourse(courseCollaboratorIds)
+        .then(function() {
+          component.set('collaborators', courseCollaborators);
+        });
+    },
+
+    /**
+     * Action triggered when add list of users as co-teacher
+     */
+    onAddCollaborators(selectedCollaborators = Ember.A([])) {
+      const component = this;
+      const collaborators = component.get('collaborators') || Ember.A([]);
+      let courseCollaborators = collaborators.concat(selectedCollaborators);
+      let courseCollaboratorIds = courseCollaborators.map(collaborator =>
+        collaborator.get('id')
+      );
+      component
+        .updateCollaboratorsForCourse(courseCollaboratorIds)
+        .then(function() {
+          component.set('collaborators', courseCollaborators);
+        });
+      component.send('onToggleAddCollaborator');
+    },
     /**
      * Course Edit page back button logic for send to previous page state
      */
@@ -205,10 +252,13 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Events
   init() {
-    this._super(...arguments);
-    this.setMainSubject();
+    const component = this;
+    component._super(...arguments);
+    component.setMainSubject();
+    if (component.get('collaborators')) {
+      component.readCollaboratorsProfile();
+    }
   },
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -218,6 +268,12 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
    * @property {Course}
    */
   course: null,
+
+  /**
+   * @property {Array} collaborators
+   * Property for list of class collaborators
+   */
+  collaborators: Ember.computed.alias('course.collaborator'),
 
   /**
    * Copy of the course model used for editing.
@@ -251,5 +307,27 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
     } else {
       component.get('course').set('mainSubject', null);
     }
+  },
+
+  /**
+   * @function updateCollaborators
+   * Method to update collaborator list
+   */
+  updateCollaboratorsForCourse(collaborators) {
+    const component = this;
+    const courseService = component.get('courseService');
+    const courseId = component.get('course.id');
+    collaborators = collaborators.length ? collaborators : null;
+    return courseService.updateCollaborators(courseId, collaborators);
+  },
+
+  readCollaboratorsProfile() {
+    const component = this;
+    component
+      .get('profileService')
+      .readMultipleProfiles(component.get('collaborators'))
+      .then(collaboratorProfiles => {
+        component.set('collaborators', collaboratorProfiles);
+      });
   }
 });

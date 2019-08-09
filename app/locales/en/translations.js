@@ -2668,7 +2668,10 @@ window.i18ln = {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs',
-  'class.add-teachers': 'Add teachers',
+  'common.collaborators': 'Collaborators',
+  'common.no-collaborators':
+    'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
+  'class.add-teachers': 'Enter the email of other teachers',
   'class.add-co-teachers': 'Add Co-teachers',
   'common.gained': 'Gained',
   'badges-earned': 'Badges Earned',
