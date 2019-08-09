@@ -186,7 +186,6 @@ export default Ember.Object.extend({
    * @returns {Question}
    */
   normalizeReadQuestion: function(questionData, index) {
-    console.log('normalizeReadQuestion', questionData); //eslint-disable-line
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const format = QuestionModel.normalizeQuestionType(
