@@ -2722,7 +2722,7 @@ window.i18ln = {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'पूरा होने के अपेक्षीत समय',
   'oa.info.hrs': 'घंटे',
-  'class.add-teachers': 'शिक्षकों को जोड़ें',
+  'class.add-teachers': 'Enter the email of other teachers',
   'class.add-co-teachers': 'सह-शिक्षकों को जोड़ें',
   'common.gained': 'प्राप्त की',
   'badges-earned': 'बैज अर्जित किया',

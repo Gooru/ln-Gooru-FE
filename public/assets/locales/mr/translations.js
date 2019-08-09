@@ -2723,7 +2723,7 @@ window.i18ln = {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'पूर्ण होण्यासाठी अपेक्षित वेळ',
   'oa.info.hrs': 'तास',
-  'class.add-teachers': 'शिक्षक जोडा',
+  'class.add-teachers': 'Enter the email of other teachers',
   'class.add-co-teachers': 'सह-शिक्षक जोडा',
   'common.gained': 'मिळवले',
   'badges-earned': 'बॅज्ड कमावले',

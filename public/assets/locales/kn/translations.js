@@ -2758,7 +2758,7 @@ window.i18ln = {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'ಪೂರ್ಣಗೊಳ್ಳುವ ನಿರೀಕ್ಷಿತ ಸಮಯ',
   'oa.info.hrs': ' ಗಂಟೆಗಳು',
-  'class.add-teachers': 'ಶಿಕ್ಷಕರನ್ನು ಸೇರಿಸಿ',
+  'class.add-teachers': 'Enter the email of other teachers',
   'class.add-co-teachers': 'ಸಹ ಶಿಕ್ಷಕರನ್ನು ಸೇರಿಸಿ',
   'common.gained': 'ಗಳಿಸಿದೆ',
   'badges-earned': 'ಬ್ಯಾಡ್ಜ್ ಗಳಿಕೆ',
