@@ -134,6 +134,14 @@
         .question-score-container {
           grid-column-start: 1;
           grid-row-start: 2;
+          padding-left: 30px;
+
+          .boolean-score-box {
+            width: 70px;
+            height: 38px;
+            font-size: 14px;
+            line-height: 38px;
+          }
           &.multi-score {
             grid-column-end: 4;
           }

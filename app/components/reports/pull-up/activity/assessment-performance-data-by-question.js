@@ -76,7 +76,6 @@ export default Ember.Component.extend({
           component.resetQuestionScores();
         }
         component.scrollToFirstQuestion();
-        component.toggleQuestionVisibility();
       }
       component.set('activeStudentTemp', student);
     },
@@ -112,7 +111,6 @@ export default Ember.Component.extend({
     onAcceptWarning() {
       const component = this;
       component.resetQuestionScores();
-      component.toggleQuestionVisibility();
       component.scrollToFirstQuestion();
       component.set('activeStudent', component.get('activeStudentTemp'));
       component.set('isShowWarningMessage', false);
@@ -143,7 +141,6 @@ export default Ember.Component.extend({
       const component = this;
       if (component.get('isAssessment')) {
         component.resetQuestionScores();
-        component.toggleQuestionVisibility();
         component.scrollToFirstQuestion();
       } else {
         component.set('activeStudent.score', null);
@@ -186,7 +183,6 @@ export default Ember.Component.extend({
     onClearQuestionScores() {
       const component = this;
       component.resetQuestionScores();
-      component.toggleQuestionVisibility();
       component.scrollToFirstQuestion();
     },
 
@@ -467,7 +463,6 @@ export default Ember.Component.extend({
         component.get('activeStudent')
       );
       component.resetQuestionScores();
-      component.toggleQuestionVisibility();
       component.activateNextStudent();
       component.scrollToFirstQuestion();
       if (component.get('isOverwriteScore')) {
@@ -523,7 +518,6 @@ export default Ember.Component.extend({
           );
           component.set('questions', filteredQuestions);
           component.resetQuestionScores();
-          component.toggleQuestionVisibility();
         }
       });
   },
