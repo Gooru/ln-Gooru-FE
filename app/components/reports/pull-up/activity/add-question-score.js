@@ -19,7 +19,6 @@ export default Ember.Component.extend({
       const component = this;
       component.set('question.score', questionScore);
       component.set('question.isScored', true);
-      component.sendAction('onToggleQuestion', component.get('seq') + 1);
     },
 
     //Action triggered when toggle question
