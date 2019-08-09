@@ -3,7 +3,11 @@ import BuilderMixin from 'gooru-web/mixins/content/builder';
 import { CONTENT_TYPES, RUBRIC_OFF_OPTIONS } from 'gooru-web/config/config';
 import ModalMixin from 'gooru-web/mixins/modal';
 import FillInTheBlank from 'gooru-web/utils/question/fill-in-the-blank';
-import { replaceMathExpression, removeHtmlTags } from 'gooru-web/utils/utils';
+import {
+  replaceMathExpression,
+  removeHtmlTags,
+  generateUUID
+} from 'gooru-web/utils/utils';
 import Rubric from 'gooru-web/models/rubric/rubric';
 
 /**
@@ -402,6 +406,10 @@ export default Ember.Component.extend(BuilderMixin, ModalMixin, {
 
   placement: 'top',
 
+  exemplarKey: function() {
+    return `exemplar-key-${generateUUID()}`;
+  }.property(),
+
   // -------------------------------------------------------------------------
   // Events
   template: Ember.computed('key', function() {
@@ -650,17 +658,17 @@ export default Ember.Component.extend(BuilderMixin, ModalMixin, {
           promiseArray = editedQuestion
             .get('answers')
             .map(component.getAnswerSaveImagePromise.bind(component));
-          answersPromise = Ember.RSVP.Promise
-            .all(promiseArray)
-            .then(function(values) {
-              for (var i = 0; i < editedQuestion.get('answers').length; i++) {
-                editedQuestion.get('answers')[i].set('text', values[i]);
-              }
-              answersForValidate = editedQuestion.get('answers');
-              return Ember.RSVP.Promise.all(
-                answersForValidate.map(component.getAnswerValidatePromise)
-              );
-            });
+          answersPromise = Ember.RSVP.Promise.all(promiseArray).then(function(
+            values
+          ) {
+            for (var i = 0; i < editedQuestion.get('answers').length; i++) {
+              editedQuestion.get('answers')[i].set('text', values[i]);
+            }
+            answersForValidate = editedQuestion.get('answers');
+            return Ember.RSVP.Promise.all(
+              answersForValidate.map(component.getAnswerValidatePromise)
+            );
+          });
         } else {
           promiseArray = answersForValidate.map(
             component.getAnswerValidatePromise

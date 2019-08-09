@@ -1,12 +1,10 @@
 <div class="panel panel-default {{if isPanelExpanded 'expanded' 'collapsed'}}">
   <div class="panel-heading">
-
     {{#if isSorting}}
       <span class="drag-icon">
         {{gru-icon name="drag_handle"}}
       </span>
     {{/if}}
-
     <h3>{{plus-one index}}</h3>
     {{#if isEditingInline}}
       <div class="edit-title">
@@ -28,7 +26,6 @@
         </div>
       </a>
     {{/if}}
-
     <div class="detail {{if isPanelExpanded 'hidden' 'visible'}} collapsed">
       {{#if model.standards.length}}
         {{#each visibleStandardsList as |standard|}}
@@ -40,25 +37,24 @@
       {{else}}
         <span class="out-of-scope">{{t "common.add-standard"}}</span>
       {{/if}}
-
       <div class="actions">
         <button class="btn add-item no-bgd out-of-scope" title="{{t 'common.add'}}" {{action 'add'}}>{{gru-icon name="add"}}</button>
         {{#unless (eq model.format 'question')}}
-        <button class="btn narration no-bgd" title="{{t 'common.edit-narration'}}" {{action 'editNarration' model}}>{{gru-icon name="mode_comment"}}</button>
+          <button class="btn narration no-bgd" title="{{t 'common.edit-narration'}}" {{action 'editNarration' model}}>{{gru-icon name="mode_comment"}}</button>
         {{/unless}}
-          <div class="item-actions">
-            <button title="{{t 'common.delete'}}" class="btn no-bgd delete-item" {{action 'deleteItem' model}} data-toggle="tooltip" data-placement="auto" data-trigger="hover">{{gru-icon name="delete"}}</button>
-            <button title="{{t 'common.copy-to'}}" class="btn no-bgd copy-to" {{action 'copyTo' model}} data-toggle="tooltip" data-placement="auto">{{gru-icon name="call_split"}}</button>
-            <button title="{{t 'common.move'}}" class="btn no-bgd move-item out-of-scope" {{action 'move' model}} data-toggle="tooltip" data-placement="auto">{{gru-icon name="subdirectory_arrow_right"}}</button>
-            <button title="{{t 'common.copy'}}" class="btn no-bgd copy-item" {{action 'copy' model}} data-toggle="tooltip" data-placement="auto">{{gru-icon name="content_copy"}}</button>
-            <button class="btn edit-item no-bgd" title="{{t 'common.edit'}}" {{action 'editInline'}} data-toggle="tooltip" data-placement="auto">{{gru-icon name="edit"}}</button>
-          </div>
+        <div class="item-actions">
+          <button title="{{t 'common.delete'}}" class="btn no-bgd delete-item" {{action 'deleteItem' model}} data-toggle="tooltip" data-placement="auto" data-trigger="hover">{{gru-icon name="delete"}}</button>
+          <button title="{{t 'common.copy-to'}}" class="btn no-bgd copy-to" {{action 'copyTo' model}} data-toggle="tooltip" data-placement="auto">{{gru-icon name="call_split"}}</button>
+          <button title="{{t 'common.move'}}" class="btn no-bgd move-item out-of-scope" {{action 'move' model}} data-toggle="tooltip" data-placement="auto">{{gru-icon name="subdirectory_arrow_right"}}</button>
+          <button title="{{t 'common.copy'}}" class="btn no-bgd copy-item" {{action 'copy' model}} data-toggle="tooltip" data-placement="auto">{{gru-icon name="content_copy"}}</button>
+          <button class="btn edit-item no-bgd" title="{{t 'common.edit'}}" {{action 'editInline'}} data-toggle="tooltip" data-placement="auto">{{gru-icon name="edit"}}</button>
+        </div>
       </div>
     </div>
     <div class="detail {{if isPanelExpanded 'visible' 'hidden'}} expanded">
       <div class="actions">
         {{#unless isEditingInline}}
-          <button class="btn narration no-bgd" title="{{t 'common.edit-narration'}} "{{action 'cancel'}}>{{gru-icon name="mode_comment"}}</button>
+          <button class="btn narration no-bgd" title="{{t 'common.edit-narration'}} " {{action 'cancel'}}>{{gru-icon name="mode_comment"}}</button>
         {{/unless}}
         <div class="item-actions no-border">
           {{#if isEditingInline}}
@@ -70,7 +66,6 @@
       </div>
     </div>
   </div>
-
   <div class="panel-body">
     {{#if isEditingInline}}
       {{#if (eq model.format 'question')}}
@@ -83,7 +78,7 @@
           {{#if showImagePicker}}
             {{content.gru-image isEditing=true srcImage=model.thumbnail editImage=tempModel.thumbnail}}
           {{else}}
-              <button class="add-image btn btn-sm btn-primary" {{action "toggleImagePicker"}}>{{t "common.add-question-image"}}</button>
+            <button class="add-image btn btn-sm btn-primary" {{action "toggleImagePicker"}}>{{t "common.add-question-image"}}</button>
           {{/if}}
         </div>
         {{#if model.isOpenEnded}}
@@ -112,7 +107,7 @@
                   <div class="associated-rubric">
                     <div class="image">
                       {{#if tempModel.rubric.thumbnail}}
-                        <img class="img-responsive" src="{{tempModel.rubric.thumbnail}}"/>
+                        <img class="img-responsive" src="{{tempModel.rubric.thumbnail}}" />
                       {{else}}
                         <i class="rubric-icon"></i>
                       {{/if}}
@@ -189,6 +184,10 @@
               </div>
             {{/if}}
             {{component (question-config model.type 'component.builder_answer') answers=tempModel.answers editMode=true showAdvancedEditor=showAdvancedEditor}}
+          </div>
+          <div class='exemplar-answer'>
+            <h3>{{t "oa.references.exemplar"}}</h3>
+            {{gru-rich-text-editor content=tempModel.hintExplanationDetail model=tempModel valuePath='exemplar' uuid=exemplarKey }}
           </div>
           {{gru-notify onLoad="focusQuestionTextEditor"}}
         {{/unless}}
