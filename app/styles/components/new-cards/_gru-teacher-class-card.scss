@@ -169,7 +169,7 @@
 
       .card-action-container {
         display: grid;
-        grid-template-columns: 50px 100px 100px 50px;
+        grid-template-columns: 50px 50px 100px 100px;
         justify-items: center;
         height: 50px;
         box-shadow: 1px 0 4px 0 rgba(0, 0, 0, 0.5);
@@ -320,6 +320,7 @@
           padding-top: 13px;
           width: 50px;
           text-align: center;
+          border-right: 1px solid #aaa;
 
           i {
             color: $dark-600;

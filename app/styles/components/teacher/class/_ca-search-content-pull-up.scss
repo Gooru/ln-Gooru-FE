@@ -477,15 +477,23 @@
               width: 100%;
               height: 100%;
               display: grid;
-              grid-template-columns: auto 30px;
+              grid-template-columns: 60px auto 30px;
               column-gap: 5px;
+              min-height: 60px;
 
+              .md-collection-thumbnail {
+                width: 60px;
+                height: 60px;
+                grid-column: 1;
+                grid-row: 1;
+              }
               .card-panel-header {
                 background-image: unset !important;
                 width: 100%;
                 height: 100%;
-                grid-column-start: 1;
-                grid-column-end: 3;
+                grid-row: 1;
+                grid-column: 2;
+                row-gap: 5px;
 
                 .info {
                   position: relative;
@@ -504,22 +512,6 @@
                     );
                   }
                 }
-
-                &:after {
-                  display: none;
-                }
-              }
-
-              .content-count-container {
-                display: none;
-              }
-
-              .collection-info-container {
-                height: auto;
-                padding: 0;
-                grid-column-start: 1;
-                grid-column-end: 1;
-                display: grid;
 
                 .collection-standards {
                   grid-row-start: 1;
@@ -601,6 +593,22 @@
                   }
                 }
 
+                &:after {
+                  display: none;
+                }
+              }
+
+              .content-count-container {
+                display: none;
+              }
+
+              .collection-info-container {
+                height: auto;
+                padding: 0;
+                grid-column-start: 1;
+                grid-column-end: 3;
+                display: grid;
+
                 .collection-user-info {
                   display: none;
                 }
@@ -619,11 +627,17 @@
                   );
                   margin-bottom: 5px;
                 }
+
+                //hide collection standards inside info section
+                .collection-standards {
+                  display: none;
+                }
               }
 
               .card-panel-footer {
                 width: 30px;
                 position: relative;
+                grid-column: 3;
 
                 .buttons-container {
                   display: grid;
