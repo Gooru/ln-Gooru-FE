@@ -2697,5 +2697,7 @@ window.i18ln = {
   'oa-player.mark-complete': 'Mark Complete',
   'no.content.assoc.fw': 'Currently no content associated with this framework.',
   'report.offline-activity-report.note':
-    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.'
+    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
+  'teacher-landing.class.student-locator': 'Student Locator',
+  'teacher-landing.class.learning-journey': 'Learning Journey'
 };

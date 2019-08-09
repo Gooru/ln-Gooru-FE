@@ -1,8 +1,18 @@
 <div class="card-panel-container">
+  {{#if isMediumScreen}}
+    <img src="{{collection.thumbnailUrl}}" class="md-collection-thumbnail" />
+  {{/if}}
   <div class="card-panel-header" style="background-image: url({{collection.thumbnailUrl}})">
     <div class="info">
       <div class="title">{{collection.title}}</div>
     </div>
+    {{#if isMediumScreen}}
+      <div class="collection-standards">
+        {{#if tags.length}}
+          {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1  showDescription=true tagPopoverDefaultPosition='top'}}
+        {{/if}}
+      </div>
+    {{/if}}
   </div>
   <div class="content-count-container">
     {{#if (eq contentType 'collection') }}
