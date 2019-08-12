@@ -8,9 +8,7 @@ import {
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 export default Ember.Component.extend(ConfigurationMixin, {
@@ -36,6 +34,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
    * @type {ProfileService} Profile service object
    */
   profileService: Ember.inject.service('api-sdk/profile'),
+
+  /**
+   * @type {libraryService} Library service object
+   */
+  libraryService: Ember.inject.service('api-sdk/library'),
 
   /**
    * Session object of logged in user
@@ -161,6 +164,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
     menuItems.pushObject(
       this.createMenuItem('myContent', 'common.myContent', false)
     );
+    menuItems.pushObject(
+      this.createMenuItem('tenantLibrary', 'common.tenantLibrary', false)
+    );
     if (courseId) {
       menuItems.pushObject(
         this.createMenuItem('courseMap', 'common.course-map', false)
@@ -274,9 +280,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
   isClassPreferenceMapped: Ember.computed('classPreference', function() {
     let component = this;
     let classPreference = component.get('classPreference');
-    return classPreference ?
-      classPreference.subject && classPreference.framework :
-      false;
+    return classPreference
+      ? classPreference.subject && classPreference.framework
+      : false;
   }),
 
   /**
@@ -301,6 +307,18 @@ export default Ember.Component.extend(ConfigurationMixin, {
   // actions
 
   actions: {
+    goBackToTenantLibraries() {
+      let component = this;
+      component.set('showTenantLibraries', true);
+      component.set('selectedTenantLibrary', null);
+    },
+
+    onSelectLibrary(library) {
+      let component = this;
+      component.set('selectedTenantLibrary', library);
+      component.set('showTenantLibraries', false);
+      component.loadData();
+    },
     /**
      * Action triggered when the user click on close
      */
@@ -549,7 +567,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.loadData();
     component.openPullUp();
     component.handleSearchBar();
-    component.handleShowMoreData();
     component.closeCADatePickerOnScroll();
     component.set('selectedFilters', Ember.A([])); //initialize
   },
@@ -557,6 +574,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
   didRender() {
     let component = this;
     component.initializePopover();
+    component.handleShowMoreData();
   },
   //--------------------------------------------------------------------------
   // Methods
@@ -587,22 +605,25 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   openPullUp() {
     let component = this;
-    component.$().animate({
-      top: '10%'
-    },
-    400
+    component.$().animate(
+      {
+        top: '10%'
+      },
+      400
     );
   },
 
   closePullUp() {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    });
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+      }
+    );
   },
 
   handleSearchBar() {
@@ -627,26 +648,22 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.set('page', 0);
     component.set('isMoreDataExists', false);
     component.set('isShow', false);
-    Ember.RSVP
-      .hash({
-        searchResults: component.getSearchService()
-      })
-      .then(({
-        searchResults
-      }) => {
-        if (!component.isDestroyed) {
-          component.set('isLoading', false);
-          component.set('searchResults', searchResults);
-          component.$('.search-list-container').scrollTop(0);
-          if (
-            searchResults &&
-            searchResults.length === component.get('defaultSearchPageSize') &&
-            component.get('isShowMoreEnabled')
-          ) {
-            component.set('isMoreDataExists', true);
-          }
+    Ember.RSVP.hash({
+      searchResults: component.getSearchService()
+    }).then(({ searchResults }) => {
+      if (!component.isDestroyed) {
+        component.set('isLoading', false);
+        component.set('searchResults', searchResults);
+        component.$('.search-list-container').scrollTop(0);
+        if (
+          searchResults &&
+          searchResults.length === component.get('defaultSearchPageSize') &&
+          component.get('isShowMoreEnabled')
+        ) {
+          component.set('isMoreDataExists', true);
         }
-      });
+      }
+    });
   },
 
   loadMoreData() {
@@ -654,35 +671,40 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.set('isLoading', true);
     let page = component.get('page') + 1;
     component.set('page', page);
-    Ember.RSVP
-      .hash({
-        searchResults: component.getSearchService()
-      })
-      .then(({
-        searchResults
-      }) => {
-        if (!component.isDestroyed) {
-          component.set('isLoading', false);
-          let searchResult = component.get('searchResults');
-          component.set('searchResults', searchResult.concat(searchResults));
-          if (
-            searchResults &&
-            searchResults.length === component.get('defaultSearchPageSize')
-          ) {
-            component.set('isMoreDataExists', true);
-          }
+    Ember.RSVP.hash({
+      searchResults: component.getSearchService()
+    }).then(({ searchResults }) => {
+      if (!component.isDestroyed) {
+        component.set('isLoading', false);
+        let searchResult = component.get('searchResults');
+        component.set('searchResults', searchResult.concat(searchResults));
+        if (
+          searchResults &&
+          searchResults.length === component.get('defaultSearchPageSize')
+        ) {
+          component.set('isMoreDataExists', true);
         }
-      });
+      }
+    });
   },
 
   getSearchService() {
     let component = this;
     let searchService = null;
     let label = component.get('selectedMenuItem.label');
-    if (label === 'common.myContent') {
-      searchService = component.getMyContentByType();
-    } else if (label === 'common.gooru-catalog') {
+    if (
+      label === 'common.gooru-catalog' ||
+      component.get('selectedFilters').length > 0 ||
+      component.getSearchTerm()
+    ) {
       searchService = component.getSearchServiceByType();
+    } else if (label === 'common.myContent') {
+      searchService = component.getMyContentByType();
+    } else if (
+      label === 'common.tenantLibrary' &&
+      !component.get('showTenantLibraries')
+    ) {
+      searchService = component.getLibraryServiceByType();
     }
     return searchService;
   },
@@ -731,6 +753,37 @@ export default Ember.Component.extend(ConfigurationMixin, {
     return searchText;
   },
 
+  /**
+   * Method is used to get library service
+   */
+  getLibraryServiceByType() {
+    const component = this;
+    const libraryId = component.get('selectedTenantLibrary.id');
+    const activeContentType = component.get('activeContentType');
+    const pagination = {
+      offset: component.get('page') * component.get('defaultSearchPageSize'),
+      pageSize: component.get('defaultPageSize')
+    };
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      return component
+        .get('libraryService')
+        .fetchLibraryContent(libraryId, activeContentType, pagination)
+        .then(
+          result => {
+            let content;
+            if (result) {
+              let libraryContent = result.libraryContent;
+              content = libraryContent[Object.keys(libraryContent)[0]];
+            }
+            resolve(content);
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
+  },
+
   getSearchParams() {
     let component = this;
     let params = {
@@ -744,7 +797,14 @@ export default Ember.Component.extend(ConfigurationMixin, {
     if (label === 'common.myContent') {
       filters.scopeKey = 'my-content';
       filters['flt.publishStatus'] = 'published,unpublished';
+    } else if (label === 'common.tenantLibrary') {
+      filters.scopeKey = 'open-library';
+      filters.scopeTargetNames = component.get(
+        'selectedTenantLibrary.shortName'
+      );
+      filters['flt.publishStatus'] = 'published,unpublished';
     } else {
+      filters.scopeKey = 'open-all';
       filters['flt.publishStatus'] = 'published';
     }
     let subject = component.get('course.subject');
@@ -866,6 +926,18 @@ export default Ember.Component.extend(ConfigurationMixin, {
     });
   },
 
+  loadTenantLibraries() {
+    const component = this;
+    component.set('isLoading', true);
+    component
+      .get('libraryService')
+      .fetchLibraries()
+      .then(libraries => {
+        component.set('libraries', libraries);
+        component.set('isLoading', false);
+      });
+  },
+
   resetMenuItems() {
     let menuItems = this.get('menuItems');
     menuItems.forEach(item => {
@@ -907,6 +979,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
         item.set('selected', true);
       }
     });
+    const showTenantLibraries = selectedItem.get('key') === 'tenantLibrary';
+    if (showTenantLibraries) {
+      component.loadTenantLibraries();
+    }
+    component.set('selectedTenantLibrary', null);
+    component.set('showTenantLibraries', showTenantLibraries);
     if (!skipToggle) {
       component.toggleProperty('isMenuEnabled');
     }

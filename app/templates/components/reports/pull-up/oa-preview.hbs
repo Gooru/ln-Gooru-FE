@@ -152,7 +152,11 @@
             <div class="rubric-icon-container">
             </div>
             <div class="rubric-container">
-              <div class="grader-label">{{t 'common.student'}} {{t 'common.rubric'}}</div>
+              <div class="grader-label">{{t 'common.student'}} {{t 'common.rubric'}}
+                {{#if studentRubric.url}}
+                  <span class="rubric-attachment" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'student' bubbles=false}}>{{gru-icon name="attachment"}}</span>
+                {{/if}}
+              </div>
               <div class="grade-tag">{{t 'common.self-graded'}}</div>
             </div>
             {{#if (and studentRubric.score  isReportView  studentRubric.maxScore) }}
@@ -187,7 +191,11 @@
             <div class="rubric-icon-container">
             </div>
             <div class="rubric-container">
-              <div class="grader-label">{{t 'common.teacher'}} {{t 'common.rubric'}}</div>
+              <div class="grader-label">{{t 'common.teacher'}} {{t 'common.rubric'}}
+                {{#if teacherRubric.url}}
+                  <span class="rubric-attachment" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'teacher'  bubbles=false}}>{{gru-icon name="attachment"}}</span>
+                {{/if}}
+              </div>
               <div class="grade-tag">{{t 'common.teacher'}}-{{t 'class.info.grade'}}</div>
             </div>
             {{#if (and teacherRubric.score isReportView  teacherRubric.maxScore) }}
@@ -219,3 +227,27 @@
     </div>
   </div>
 </div>
+
+{{#if teacherRubric.url}}
+  <div class="rubric-file-preview-container teacher">
+    <div class="backdrop"></div>
+    <div class="rubric-file-preview">
+      <div class="rubric-file-preview-close" {{action 'filePreviewClose' 'teacher'}}>
+        {{gru-icon name="close"}}
+      </div>
+      <iframe src="{{teacherRubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+{{/if}}
+
+{{#if studentRubric.url}}
+  <div class="rubric-file-preview-container student">
+    <div class="backdrop"></div>
+    <div class="rubric-file-preview">
+      <div class="rubric-file-preview-close" {{action 'filePreviewClose' 'student'}}>
+        {{gru-icon name="close"}}
+      </div>
+      <iframe src="{{studentRubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+{{/if}}

@@ -60,6 +60,7 @@ window.i18ln = {
   'common.efficacy': 'Efficacy',
   'common.grid': 'Grid',
   'common.list': 'List',
+  'common.tenantLibrary': 'Tenant Library',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
@@ -73,6 +74,7 @@ window.i18ln = {
     'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
+  'rubric-details': 'Rubric Details',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':
@@ -1756,7 +1758,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'Navegar por Estándar',
   'subject-dropdown.placeholder': 'asignaturas)',
   'subject-dropdown.prompt': 'Seleccione un tema',
@@ -2744,7 +2746,10 @@ window.i18ln = {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs',
-  'class.add-teachers': 'Add teachers',
+  'class.add-teachers': 'Enter the email of other teachers',
+  'common.collaborators': 'Collaborators',
+  'common.no-collaborators':
+    'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'class.add-co-teachers': 'Add Co-teachers',
   'common.gained': 'Gained',
   'badges-earned': 'Badges Earned',
@@ -2761,5 +2766,7 @@ window.i18ln = {
   'oa-player.mark-complete': 'Mark Complete',
   'no.content.assoc.fw': 'Currently no content associated with this framework.',
   'report.offline-activity-report.note':
-    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.'
+    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
+  'teacher-landing.class.student-locator': 'Student Locator',
+  'teacher-landing.class.learning-journey': 'Learning Journey'
 };

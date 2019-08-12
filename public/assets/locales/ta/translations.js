@@ -37,6 +37,7 @@ window.i18ln = {
   'errors.after': '{{description}} {{அடுத்து}',
   'errors.wrongDateFormat':
     '{{description}} {{format}} இன் வடிவத்தில் இருக்க வேண்டும்',
+  'rubric-details': 'Rubric Details',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
@@ -55,6 +56,7 @@ window.i18ln = {
     'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
   'common.dialog-close': 'Do you want to close ?',
   're-upload': 'Re-Upload',
+  'common.tenantLibrary': 'Tenant Library',
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
   'i2d.mobile-upload-failed': 'There was a error',
@@ -1773,7 +1775,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'தரமான உலாவ',
   'subject-dropdown.placeholder': 'பாடம் (ங்கள்)',
   'subject-dropdown.prompt': 'ஒரு பொருளைத் தேர்ந்தெடுக்கவும்',
@@ -2770,7 +2772,10 @@ window.i18ln = {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs',
-  'class.add-teachers': 'Add teachers',
+  'class.add-teachers': 'Enter the email of other teachers',
+  'common.collaborators': 'Collaborators',
+  'common.no-collaborators':
+    'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'class.add-co-teachers': 'Add Co-teachers',
   'common.gained': 'Gained',
   'badges-earned': 'Badges Earned',
@@ -2787,5 +2792,7 @@ window.i18ln = {
   'oa-player.mark-complete': 'Mark Complete',
   'no.content.assoc.fw': 'Currently no content associated with this framework.',
   'report.offline-activity-report.note':
-    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.'
+    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
+  'teacher-landing.class.student-locator': 'Student Locator',
+  'teacher-landing.class.learning-journey': 'Learning Journey'
 };

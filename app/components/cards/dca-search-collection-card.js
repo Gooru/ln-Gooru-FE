@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -66,6 +67,14 @@ export default Ember.Component.extend({
    * @type {String}
    */
   classId: null,
+
+  /**
+   * @property {Boolean} isMediumScreen
+   * Property to check whether loading card in medium screen or not
+   */
+  isMediumScreen: Ember.computed(function() {
+    return SCREEN_SIZES.MEDIUM >= screen.width;
+  }),
 
   // -------------------------------------------------------------------------
   // Actions

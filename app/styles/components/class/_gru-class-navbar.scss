@@ -245,20 +245,20 @@
           grid-template-columns: 59px 145px 145px 145px 145px 1fr 59px 59px 59px;
 
           &.nav-menu-class-activities {
-            grid-template-columns: 59px 145px 170px 145px 145px 1fr 59px 59px 59px;
+            grid-template-columns: 59px 145px 145px 170px 145px 1fr 59px 59px 59px;
           }
 
           &.nav-menu-course-map {
-            grid-template-columns: 59px 145px 145px 170px 145px 1fr 59px 59px 59px;
+            grid-template-columns: 59px 145px 145px 145px 170px 1fr 59px 59px 59px;
           }
         }
 
         &.nav-menu-class-activities {
-          grid-template-columns: 59px 145px 170px 145px 145px 1fr 59px 59px;
+          grid-template-columns: 59px 145px 145px 170px 145px 1fr 59px 59px;
         }
 
         &.nav-menu-course-map {
-          grid-template-columns: 59px 145px 145px 170px 145px 1fr 59px 59px;
+          grid-template-columns: 59px 145px 145px 145px 170px 1fr 59px 59px;
         }
 
         .atc,
@@ -351,6 +351,7 @@
         }
 
         &.vactive {
+          width: 170px;
           .performance-score {
             display: block;
             font-size: 18px;
@@ -398,6 +399,7 @@
       }
 
       .course-map {
+        width: 170px;
         border-right: 1px solid $gray-80;
         height: 51px;
 

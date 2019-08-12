@@ -280,6 +280,22 @@ export default Ember.Service.extend(StoreMixin, {
   },
 
   /**
+   * Update co-teacher for course
+   * @param courseId
+   * @param collaboratorIds the teacher ids
+   * @returns {Promise}
+   */
+  updateCollaborators(courseId, collaboratorIds) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('adapter')
+        .updateCollaborators(courseId, collaboratorIds)
+        .then(resolve, reject);
+    });
+  },
+
+  /**
    * Returns the lessons for the course milestone.
    * @param {string} courseId
    * @param {string} milestoneId

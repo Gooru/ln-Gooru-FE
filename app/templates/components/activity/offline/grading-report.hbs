@@ -70,9 +70,6 @@
           {{else}}
             <span class="oa-grade-info-title">
               Rubric
-              {{#if (and rubric.uploaded rubric.url)}}
-                <span class="rubric-attachment" {{action 'filePreviewOpen'}}>{{gru-icon name="attachment"}}</span>
-              {{/if}}
             </span>
             <span class="oa-grade-info-desc">{{t 'common.answer-this-activity'}}</span>
           {{/unless}}
@@ -97,7 +94,12 @@
         <div class="panel-group" id="rubric-panel">
           <div class="panel panel-default student-rubric-section">
             <div class="student-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#student">
-              <span>{{t 'common.student'}}</span>
+              <span>
+                {{t 'common.student'}}
+                {{#if studentRubric.url}}
+                  <span class="rubric-attachment" data-placement="right" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'student' bubbles=false}}>{{gru-icon name="attachment"}}</span>
+                {{/if}}
+              </span>
               <div class="icons">
                 {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
                 {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
@@ -124,7 +126,12 @@
           </div>
           <div class="panel panel-default teacher-rubric-section">
             <div class="teacher-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#teacher">
-              <span>{{t 'common.teacher'}}</span>
+              <span>
+                {{t 'common.teacher'}}
+                {{#if teacherRubric.url}}
+                  <span class="rubric-attachment" data-placement="right" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'teacher'  bubbles=false}}>{{gru-icon name="attachment"}}</span>
+                {{/if}}
+              </span>
               <div class="icons">
                 {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
                 {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
@@ -183,15 +190,27 @@
   </div>
 </div>
 
-
-{{#if (and rubric.uploaded rubric.url)}}
-  <div class="rubric-file-preview-container">
+{{#if teacherRubric.url}}
+  <div class="rubric-file-preview-container teacher">
     <div class="backdrop"></div>
     <div class="rubric-file-preview">
-      <div class="rubric-file-preview-close" {{action 'filePreviewClose'}}>
+      <div class="rubric-file-preview-close" {{action 'filePreviewClose' 'teacher'}}>
         {{gru-icon name="close"}}
       </div>
-      <iframe src="{{rubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+      <iframe src="{{teacherRubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+{{/if}}
+
+
+{{#if studentRubric.url}}
+  <div class="rubric-file-preview-container student">
+    <div class="backdrop"></div>
+    <div class="rubric-file-preview">
+      <div class="rubric-file-preview-close" {{action 'filePreviewClose' 'student'}}>
+        {{gru-icon name="close"}}
+      </div>
+      <iframe src="{{studentRubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
 {{/if}}

@@ -3,9 +3,16 @@ import { ROLES } from 'gooru-web/config/config';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
-  // Dependencies
-
+  // Attributes
   queryParams: ['caContentId', 'classId', 'role', 'isPreview'],
+
+  // -------------------------------------------------------------------------
+  // Dependencies
+  oaAnalyticsService: Ember.inject.service(
+    'api-sdk/offline-activity/oa-analytics'
+  ),
+
+  session: Ember.inject.service('session'),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -57,7 +64,16 @@ export default Ember.Controller.extend({
   /**
    * @property {Boolean} isShowStartPlayer
    */
-  isShowStartPlayer: true,
+  isShowStartPlayer: Ember.computed('offlineActivitySubmissions', function() {
+    const controller = this;
+    const offlineActivitySubmissions = controller.get(
+      'offlineActivitySubmissions'
+    );
+    const oaTaskSubmissions = offlineActivitySubmissions
+      ? offlineActivitySubmissions.tasks.objectAt(0)
+      : null;
+    return !(oaTaskSubmissions && oaTaskSubmissions.taskId);
+  }),
 
   /**
    * @property {Object} offlineActivity
@@ -72,5 +88,47 @@ export default Ember.Controller.extend({
   /**
    * @property {Boolean} isTeacher
    */
-  isTeacher: Ember.computed.equal('role', ROLES.TEACHER)
+  isTeacher: Ember.computed.equal('role', ROLES.TEACHER),
+
+  /**
+   * @property {Object} offlineActivitySubmissions
+   * Property for selected offline activity submissions
+   */
+  offlineActivitySubmissions: null,
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function loadOfflineActivitySubmissions
+   * Method to load offline activity submissions
+   */
+  loadOfflineActivitySubmissions() {
+    const controller = this;
+    controller.set('isLoading', true);
+    Ember.RSVP.hash({
+      offlineActivitySubmissions: !(
+        controller.get('isPreview') && controller.get('isTeacher')
+      )
+        ? controller.fetchTasksSubmissions()
+        : null
+    }).then(({ offlineActivitySubmissions }) => {
+      controller.set('offlineActivitySubmissions', offlineActivitySubmissions);
+      controller.set('isLoading', false);
+    });
+  },
+
+  /**
+   * @function fetchTasksSubmissions
+   * Method to fetch student submitted oa task data
+   */
+  fetchTasksSubmissions() {
+    const component = this;
+    const classId = component.get('classId');
+    const oaId = component.get('caContentId');
+    const userId = component.get('session.userId');
+    return component
+      .get('oaAnalyticsService')
+      .getSubmissionsToGrade(classId, oaId, userId);
+  }
 });

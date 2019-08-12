@@ -25,6 +25,7 @@
     {{#gru-scroll to="#information" class="selected" offset='article > header'}}{{t "common.information"}}{{/gru-scroll}}
     {{#gru-scroll to="#builder" offset='article > header'}}{{t "common.builder"}}{{/gru-scroll}}
     {{#gru-scroll to="#settings" offset='article > header'}}{{t "common.settings"}}{{/gru-scroll}}
+    {{#gru-scroll to="#collaborators" offset='article > header'}}{{t "common.add-collaborator"}}{{/gru-scroll}}
   </nav>
 
 </header>
@@ -53,16 +54,16 @@
           </label>
         </div>
         <div class="description">
-            <label>
-                <span>{{t "content.courses.edit.information.description"}}</span>
-              {{#if isEditing}}
-                {{validation/gru-textarea rawTextareaValue=tempCourse.description model=tempCourse valuePath='description' maxLength=500 rows=2 didValidate=didValidate}}
-              {{else}}
-                {{#if course.description}}
+          <label>
+            <span>{{t "content.courses.edit.information.description"}}</span>
+            {{#if isEditing}}
+              {{validation/gru-textarea rawTextareaValue=tempCourse.description model=tempCourse valuePath='description' maxLength=500 rows=2 didValidate=didValidate}}
+            {{else}}
+              {{#if course.description}}
                 {{textarea class="text-description" value=course.description class="form-control" rows=2 readonly=true}}
-                {{/if}}
               {{/if}}
-            </label>
+            {{/if}}
+          </label>
         </div>
 
         {{taxonomy/gru-taxonomy-selector
@@ -92,7 +93,6 @@
     </div>
   </div>
 </section>
-
 <section id="builder">
   {{content/courses/edit/gru-accordion-course
   model=course
@@ -101,5 +101,33 @@
   onLocationChange='setLocation'
   }}
 </section>
-
 {{content/gru-settings-edit id="settings" action='publishToProfile' model=course}}
+<section id="collaborators">
+  <div class="header">
+    <h2>{{t "common.add-collaborator"}}</h2>
+    <div class="actions">
+      <button class="btn btn-primary add-collaborator" {{action 'onToggleAddCollaborator'}}>{{gru-icon name="add"}}</button>
+    </div>
+  </div>
+  <div class="content panel">
+    <div class='sub-sec-coteach'>
+      <div class="add-collaborator-panel">
+        {{teacher.class.gru-add-collaborator
+          onAddCollaborators = "onAddCollaborators"
+          onToggleAddCollaborator = "onToggleAddCollaborator"}}
+      </div>
+      {{#if collaborators}}
+        <div class='sub-sec-head'>{{t 'common.collaborators'}}</div>
+        {{#each collaborators as |coteacher|}}
+          <div class='sub-sec-row'>
+            <div class='teacher-icon' style="background-image: url({{coteacher.avatarUrl}})"></div>
+            <div class='co-teacher-label'> {{coteacher.lastName}} {{coteacher.firstName}}</div>
+            <div class='delete-co-teacher' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
+          </div>
+        {{/each}}
+      {{else}}
+        <div class="no-collaborators">{{t 'common.no-collaborators'}}</div>
+      {{/if}}
+    </div>
+  </div>
+</section>

@@ -207,6 +207,30 @@ export default Ember.Object.extend({
   },
 
   /**
+   * Update co-teacher for course
+   * @param courseId
+   * @param collaboratorIds the teacher ids
+   * @returns {Promise}
+   */
+  updateCollaborators(courseId, collaboratorIds) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${courseId}/collaborators`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({
+        collaborator: collaboratorIds
+      })
+    };
+
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
    * Returns the milestones for the course.
    * @param {string} courseId
    * @param {string} fwCode

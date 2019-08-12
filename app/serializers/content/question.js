@@ -72,6 +72,15 @@ export default Ember.Object.extend({
     )
       ? questionModel.get('depthOfknowledge')
       : [];
+
+    let exemplar = questionModel.get('hintExplanationDetail');
+    if (exemplar && exemplar !== '') {
+      serializedQuestion.hint_explanation_detail = {};
+      serializedQuestion.hint_explanation_detail.exemplar = exemplar;
+    } else {
+      serializedQuestion.hint_explanation_detail = null;
+    }
+
     return serializedQuestion;
   },
 
@@ -125,6 +134,13 @@ export default Ember.Object.extend({
     )
       ? questionModel.get('depthOfknowledge')
       : [];
+    let exemplar = questionModel.get('hintExplanationDetail');
+    if (exemplar && exemplar !== '') {
+      serializedQuestion.hint_explanation_detail = {};
+      serializedQuestion.hint_explanation_detail.exemplar = exemplar;
+    } else {
+      serializedQuestion.hint_explanation_detail = null;
+    }
     return serializedQuestion;
   },
 
@@ -215,7 +231,11 @@ export default Ember.Object.extend({
         unitId: questionData.unit_id,
         lessonId: questionData.lesson_id,
         collectionId: questionData.collection_id,
-        maxScore: questionData.max_score || 1
+        maxScore: questionData.max_score || 1,
+        hintExplanationDetail: questionData.hint_explanation_detail
+          ? questionData.hint_explanation_detail.exemplar
+          : null
+        //hintExplanationDetail: 'mexxppxp'
       }
     );
 

@@ -13,6 +13,13 @@
         </a>
       </div>
 
+      <div class="students tab">
+        <a {{action 'selectItem' 'students'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.student-locator' }}">
+          {{gru-icon name='school'}}
+          <span class="add-info">{{t 'teacher-landing.class.student-locator' }}</span>
+        </a>
+      </div>
+
       <div class="class-activities tab grade-range-{{grade-range performanceSummaryForDCA.performance.scoreInPercentage}} {{if (eq selectedMenuItem 'class-activities') 'vactive'}}">
         <a {{action 'selectItem' 'class-activities'}} class="dca" title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
           <span class="dca-pin"></span>
@@ -22,18 +29,13 @@
       </div>
 
       <div class="course-map tab grade-range-{{grade-range class.performanceSummary.score}} {{if (eq selectedMenuItem 'course-map') 'vactive'}}">
-        <a {{action 'selectItem' 'course-map'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
+        <a {{action 'selectItem' 'course-map'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.learning-journey'}}">
           {{gru-icon name='sort'}}
-          <span class="add-info">{{t 'teacher-landing.class.course-map'}}</span>
+          <span class="add-info">{{t 'teacher-landing.class.learning-journey'}}</span>
           <span class="performance-score {{if (not hasCMStarted) 'not-started'}}" {{action 'onOpenCourseReport'}}>{{if hasCMStarted (concat class.performanceSummary.score '%') '--' }}</span>
         </a>
       </div>
-      <div class="students tab">
-        <a {{action 'selectItem' 'students'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.student-proficiency' }}">
-          {{gru-icon name='school'}}
-          <span class="add-info">{{t 'teacher-landing.class.student-proficiency' }}</span>
-        </a>
-      </div>
+
     {{/unless}}
     {{#if navTitle}}
       <div class="studyplayer-title">
