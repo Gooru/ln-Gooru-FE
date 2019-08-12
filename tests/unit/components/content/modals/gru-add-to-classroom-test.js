@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { moduleForComponent, test } from 'ember-qunit';
+import { test, moduleForComponent } from 'ember-qunit';
 import Collection from 'gooru-web/models/content/collection';
 import Course from 'gooru-web/models/content/course';
 
@@ -7,7 +7,8 @@ moduleForComponent(
   'content/modals/gru-add-to-classroom',
   'Unit | Component | content/modals/ gru add to classroom',
   {
-    integration: false
+    integration: false,
+    needs: ['service:api-sdk/class-activity', 'service:api-sdk/class']
   }
 );
 

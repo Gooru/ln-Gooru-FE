@@ -37,7 +37,7 @@
           {{t 'enter-resource-timespent'}}
         </div>
         <div class="timespent-selector">
-          {{cards.gru-timepicker-card hour=maxHour minute=maxMinute}}
+          {{cards/gru-timepicker-card hour=maxHour minute=maxMinute}}
         </div>
         <div class="timespent-action-container">
           <div class="next-action {{unless isValidTimeSpent 'disable-event'}}" {{action "onSaveTimeSpent"}}>
@@ -61,7 +61,7 @@
           {{t 'enter-collection-timespent'}}
         </div>
         <div class="timespent-selector">
-          {{cards.gru-timepicker-card hour=maxHour minute=maxMinute}}
+          {{cards/gru-timepicker-card hour=maxHour minute=maxMinute}}
         </div>
         <div class="timespent-action-container">
           <div class="next-action {{unless isValidTimeSpent 'disable-event'}}" {{action "onSubmitExternalCollectionTimeSpent"}}>

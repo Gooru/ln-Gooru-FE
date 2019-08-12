@@ -37,6 +37,7 @@ moduleForComponent(
       this.i18n = this.container.lookup('service:i18n');
       this.i18n.set('locale', 'en');
       this.register('service:api-sdk/taxonomy', taxonomyServiceStub);
+      this.register('service:popover', Ember.Service.extend({}));
       this.inject.service('api-sdk/taxonomy');
 
       registerQuizzesServices(this);

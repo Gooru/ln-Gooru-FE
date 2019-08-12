@@ -1,7 +1,8 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Pretender from 'pretender';
 
-moduleFor('adapter:user-session', 'Unit | Adapter | user-session', {
+moduleForComponent('adapter:user-session', 'Unit | Adapter | user-session', {
   beforeEach: function(assert) {
     this.pretender = new Pretender();
     this.pretender.unhandledRequest = function(verb, path) {

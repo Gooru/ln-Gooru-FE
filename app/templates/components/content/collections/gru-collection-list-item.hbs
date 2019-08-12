@@ -10,7 +10,7 @@
       <div class="edit-title">
         <i class="{{model.format}}-icon"></i>
         <div class="input">
-          {{validation.gru-input model=tempModel valuePath='title' maxLength=50}}
+          {{validation/gru-input model=tempModel valuePath='title' maxLength=50}}
         </div>
       </div>
     {{else}}
@@ -76,7 +76,7 @@
           </div>
           {{gru-rich-text-editor content=tempModel.text model=tempModel valuePath='description'}}
           {{#if showImagePicker}}
-            {{content.gru-image isEditing=true srcImage=model.thumbnail editImage=tempModel.thumbnail}}
+            {{content/gru-image isEditing=true srcImage=model.thumbnail editImage=tempModel.thumbnail}}
           {{else}}
             <button class="add-image btn btn-sm btn-primary" {{action "toggleImagePicker"}}>{{t "common.add-question-image"}}</button>
           {{/if}}
@@ -147,11 +147,11 @@
                   <div class="scoring-settings">
                     <div class="setting maximum-points">
                       <span class="title">{{t 'content.questions.edit.builder.feedback-grading.maximum-points'}}</span>
-                      {{validation.gru-select options=maximumOptions search="true" optionSelected=tempModel.rubric.maxScore onOptionSelect="onMaxScoreChange"}}
+                      {{validation/gru-select options=maximumOptions search="true" optionSelected=tempModel.rubric.maxScore onOptionSelect="onMaxScoreChange"}}
                     </div>
                     <div class="setting increment">
                       <span class="title">{{t 'content.questions.edit.builder.feedback-grading.increment'}}</span>
-                      {{validation.gru-select options=incrementOptions search="true" optionSelected=tempModel.rubric.increment onOptionSelect="onIncrementChange"}}
+                      {{validation/gru-select options=incrementOptions search="true" optionSelected=tempModel.rubric.increment onOptionSelect="onIncrementChange"}}
                     </div>
                   </div>
                 {{/if}}
@@ -195,7 +195,7 @@
         <div class="narration">
           <label>
             <span>{{t "common.narration"}}</span>
-            {{validation.gru-textarea rawTextareaValue=tempModel.narration model=tempModel valuePath='narration' maxLength=500 rows=2}}
+            {{validation/gru-textarea rawTextareaValue=tempModel.narration model=tempModel valuePath='narration' maxLength=500 rows=2}}
           </label>
         </div>
       {{/if}}
@@ -210,7 +210,7 @@
       <div class="narration">
         <label>
           <span>{{t "common.narration"}}</span>
-          {{validation.gru-textarea rawTextareaValue=tempModel.narration model=tempModel valuePath='narration' maxLength=500 rows=2}}
+          {{validation/gru-textarea rawTextareaValue=tempModel.narration model=tempModel valuePath='narration' maxLength=500 rows=2}}
         </label>
       </div>
     {{/if}}

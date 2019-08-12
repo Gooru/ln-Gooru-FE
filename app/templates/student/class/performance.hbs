@@ -12,7 +12,7 @@
         </div>
  <div class="topPadding">
    <div class="navigation {{if showCourseMenu 'visible' 'hidden'}}">
-     {{student.gru-performance-course-filter
+     {{student/gru-performance-course-filter
      selectedCourse=course
      showCourse=false
      filterCriteria=filterCriteria
@@ -30,7 +30,7 @@
             </button>
             <p class="out-of-scope">{{t 'student-landing.my-performance.primary-text'}}</p>
         </div>
-      {{student.class.analytics.gru-performance-table
+      {{student/class/analytics/gru-performance-table
       contentTitle=contentTitle
       metrics=metrics
       assessments=collections

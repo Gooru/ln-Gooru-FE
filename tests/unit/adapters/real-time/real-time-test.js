@@ -1,7 +1,8 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Pretender from 'pretender';
 
-moduleFor(
+moduleForComponent(
   'adapter:real-time/real-time',
   'Unit | Adapter | real-time/real-time',
   {

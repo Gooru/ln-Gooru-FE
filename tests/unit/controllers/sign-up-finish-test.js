@@ -1,8 +1,15 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Profile from 'gooru-web/models/profile/profile';
 
-moduleFor('controller:sign-up-finish', 'Unit | Controller | sign up finish');
+moduleForComponent(
+  'controller:sign-up-finish',
+  'Unit | Controller | sign up finish',
+  {
+    needs: ['controller:application']
+  }
+);
 
 test('countrySelect action', function(assert) {
   let controller = this.subject({

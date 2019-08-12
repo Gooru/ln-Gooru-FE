@@ -1,7 +1,8 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('validator:email', 'Unit | Validator | email', {
-  needs: ['validator:messages']
+moduleForComponent('validator:email', 'Unit | Validator | email', {
+  needs: ['validator:messages', 'service:i18n']
 });
 
 test('it works', function(assert) {

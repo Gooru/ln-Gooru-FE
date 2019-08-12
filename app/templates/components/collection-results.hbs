@@ -4,7 +4,7 @@
             <div class="results ">
                 {{#if collectionResults}}
                   {{#each collectionResults as |collection|}}
-                    {{new-cards.gru-standard-card
+                    {{new-cards/gru-standard-card
                       content=collection
                       cardSize="md"
                       isCollection=true
@@ -25,7 +25,7 @@
 </div>
 
 {{#if isShowContentPreview}}
-  {{reports.pull-up.gru-collection-preview
+  {{reports/pull-up/gru-collection-preview
     showPullUp=isShowContentPreview
     previewContentId=previewContent.id
     previewContentType=previewContentType

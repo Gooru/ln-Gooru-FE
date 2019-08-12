@@ -6,7 +6,7 @@
       {{else}}
         <h3>{{t "common.lesson"}} {{totalItems}}</h3>
       {{/if}}
-      {{validation.gru-input model=tempLesson valuePath='title' class="title" maxLength=50 didValidate=didValidate}}
+      {{validation/gru-input model=tempLesson valuePath='title' class="title" maxLength=50 didValidate=didValidate}}
       <div class="actions">
         <button class="cancel btn btn-info" {{action 'cancelEdit'}}>{{t "common.cancel"}}</button>
         <button class="save btn btn-success" {{action 'saveLesson'}}>{{t "common.save"}}</button>
@@ -71,7 +71,7 @@
   <div class="panel-body">
     <ol class="accordion-lesson sortable" role="tablist" aria-multiselectable="true">
       {{#each items as |item index|}}
-        {{content.courses.edit.gru-accordion-lesson-item
+        {{content/courses/edit/gru-accordion-lesson-item
           model=item
           course=course
           index=index

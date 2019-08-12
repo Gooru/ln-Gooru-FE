@@ -28,14 +28,14 @@
     <div class="charts">
       {{#if isCourse}}
         <div class="performance">
-          {{charts.gru-bubble-chart
+          {{charts/gru-bubble-chart
             content=percentageToShow
             color=(grade-color performance.scoreInPercentage)
           }}
           <span>{{t 'student-landing.class.performance'}}</span>
         </div>
         <div class="completed">
-          {{charts.gru-radial-chart
+          {{charts/gru-radial-chart
             value=performance.completedCount
             minValue=0
             maxValue=performance.totalCount
@@ -44,7 +44,7 @@
         </div>
       {{else if isAssessment}}
         <div class="assessment-performance">
-          {{charts.gru-bubble-chart
+          {{charts/gru-bubble-chart
             content=percentageToShow
             color=(grade-color performance.scoreInPercentage)
           }}
@@ -52,7 +52,7 @@
         </div>
       {{else}}
         <div class="time-spent">
-          {{charts.gru-bubble-chart content=(format-time performance.timeSpent) color=timeSpentColor}}
+          {{charts/gru-bubble-chart content=(format-time performance.timeSpent) color=timeSpentColor}}
           <span>{{t 'student-landing.course.total-time-spent'}}</span>
         </div>
       {{/if}}

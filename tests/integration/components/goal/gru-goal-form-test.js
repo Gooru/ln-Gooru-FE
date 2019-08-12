@@ -29,7 +29,7 @@ var mockGoal = Ember.Object.create({
 test('Create Goal Form Layout', function(assert) {
   this.set('goal', mockGoal);
 
-  this.render(hbs`{{goal.gru-goal-form goal=goal}}`);
+  this.render(hbs`{{goal/gru-goal-form goal=goal}}`);
 
   var $component = this.$(); //component dom element
 
@@ -75,7 +75,7 @@ test('Create Goal Form Layout', function(assert) {
 test('Update Goal Form Layout', function(assert) {
   this.set('goal', mockGoal);
 
-  this.render(hbs`{{goal.gru-goal-form goal=goal isEditView=true}}`);
+  this.render(hbs`{{goal/gru-goal-form goal=goal isEditView=true}}`);
 
   var $component = this.$(); //component dom element
 
@@ -126,7 +126,7 @@ test('Goal Form - Create goal', function(assert) {
     assert.ok(true, 'Create Goal action called');
   });
 
-  this.render(hbs`{{goal.gru-goal-form goal=goal onCreate='createGoal'}}`);
+  this.render(hbs`{{goal/gru-goal-form goal=goal onCreate='createGoal'}}`);
   var $component = this.$(); //component dom element
 
   const $goalFormContainer = $component.find('.gru-goal-form');
@@ -145,7 +145,7 @@ test('Goal Form - Update goal', function(assert) {
   });
 
   this.render(
-    hbs`{{goal.gru-goal-form goal=goal isEditView=true onUpdate='update'}}`
+    hbs`{{goal/gru-goal-form goal=goal isEditView=true onUpdate='update'}}`
   );
   var $component = this.$(); //component dom element
 
@@ -187,7 +187,7 @@ test('Goal Form - Edit values and cancel edition', function(assert) {
   });
 
   this.render(
-    hbs`{{goal.gru-goal-form goal=goal isEditView=true onUpdate='update' onCancelEdit='cancelEditGoal'}}`
+    hbs`{{goal/gru-goal-form goal=goal isEditView=true onUpdate='update' onCancelEdit='cancelEditGoal'}}`
   );
   var $component = this.$(); //component dom element
 

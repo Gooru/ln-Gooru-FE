@@ -1,9 +1,14 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('validator:email-exists', 'Unit | Validator | email-exists', {
-  needs: ['validator:messages']
-});
+moduleForComponent(
+  'validator:email-exists',
+  'Unit | Validator | email-exists',
+  {
+    needs: ['validator:messages', 'service:i18n', 'service:api-sdk/profile']
+  }
+);
 
 test('Email is used in an account', function(assert) {
   assert.expect(2);

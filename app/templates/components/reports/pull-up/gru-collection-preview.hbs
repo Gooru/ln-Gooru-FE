@@ -33,7 +33,7 @@
       </div>
       {{#if taxonomyTags.length}}
         <div class="taxonomy-container">
-          {{taxonomy.gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=2 isInCard=true}}
+          {{taxonomy/gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=2 isInCard=true}}
         </div>
       {{/if}}
     </div>
@@ -54,9 +54,9 @@
       {{else}}
         {{#each previewContent.children as |content seq|}}
           {{#if (or (eq previewContentType 'assessment') (eq content.content_format 'question'))}}
-            {{cards.question-preview-card question=content isShowCorrectAnswer=isShowCorrectAnswer contentSeq=(plus-one seq)}}
+            {{cards/question-preview-card question=content isShowCorrectAnswer=isShowCorrectAnswer contentSeq=(plus-one seq)}}
           {{else}}
-            {{cards.resource-preview-card resource=content contentSeq=(plus-one seq)}}
+            {{cards/resource-preview-card resource=content contentSeq=(plus-one seq)}}
           {{/if}}
         {{/each}}
       {{/if}}

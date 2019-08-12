@@ -1,11 +1,17 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Ember from 'ember';
 
-moduleFor(
+moduleForComponent(
   'controller:teacher/class/class-management',
   'Unit | Controller | teacher/class/class-management',
   {
-    integration: true
+    integration: true,
+    beforeEach: function() {
+      this.register('controller:teacher.class', Ember.Service.extend({}));
+      this.register('service:api-sdk/taxonomy', Ember.Service.extend({}));
+      this.inject.service('api-sdk/taxonomy');
+    }
   }
 );
 

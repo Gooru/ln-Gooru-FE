@@ -1,9 +1,10 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
 var performanceService = Ember.Object.create({
   findClassPerformanceSummaryByClassIds: () => {
-    return Ember.RSVP.resolve([]);
+    return Ember.Test.resolve([]);
   }
 });
 
@@ -39,7 +40,13 @@ var applicationController = Ember.Object.create({
     getItem: () => null
   })
 });
-moduleFor('controller:teacher-home', 'Unit | Controller | teacher-home', {});
+moduleForComponent(
+  'controller:teacher-home',
+  'Unit | Controller | teacher-home',
+  {
+    needs: ['controller:application', 'controller:teacher/class']
+  }
+);
 test('Sort Archived Classes by Date', function(assert) {
   Ember.run(() => {
     let controller = this.subject({

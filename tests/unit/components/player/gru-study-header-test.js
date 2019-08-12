@@ -5,7 +5,15 @@ moduleForComponent(
   'player/gru-study-header',
   'Unit | Component | player/gru study header',
   {
-    integration: false
+    integration: false,
+    needs: [
+      'service:configuration',
+      'service:api-sdk/performance',
+      'service:session',
+      'service:api-sdk/learner',
+      'service:api-sdk/competency',
+      'service:api-sdk/class'
+    ]
   }
 );
 

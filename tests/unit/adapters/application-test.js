@@ -1,13 +1,10 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor(
-  'adapter:application',
-  'Unit | Adapter | application',
-  {
-    // Specify the other units that are required for this test.
-    // needs: ['serializer:foo']
-  }
-);
+moduleForComponent('adapter:application', 'Unit | Adapter | application', {
+  // Specify the other units that are required for this test.
+  // needs: ['serializer:foo']
+});
 
 // Replace this with your real tests.
 test('it exists', function(assert) {

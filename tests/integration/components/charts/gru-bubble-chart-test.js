@@ -17,7 +17,7 @@ test('Bubble Chart Layout', function(assert) {
   const color = '#00e100';
   this.set('color', color);
 
-  this.render(hbs`{{charts.gru-bubble-chart content=content color=color}}`);
+  this.render(hbs`{{charts/gru-bubble-chart content=content color=color}}`);
 
   const $component = this.$(); //component dom element
   const $completionBubbleChart = $component.find('.gru-bubble-chart');

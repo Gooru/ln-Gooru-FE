@@ -1,12 +1,13 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import {
   ASSESSMENT_SHOW_VALUES,
   ASSESSMENT_SUB_TYPES
 } from 'gooru-web/config/config';
 import AssessmentModel from 'gooru-web/models/content/assessment';
 
-moduleFor(
+moduleForComponent(
   'serializer:content/assessment',
   'Unit | Serializer | content/assessment'
 );
@@ -324,9 +325,7 @@ test('serializeReorderAssessment', function(assert) {
   assert.equal(data.order[0].sequence_id, 1, 'Wrong sequence id');
 });
 
-test('normalizeReadAssessment - if visible_on_profile is undefined', function(
-  assert
-) {
+test('normalizeReadAssessment - if visible_on_profile is undefined', function(assert) {
   const serializer = this.subject();
   serializer.set(
     'session',
@@ -348,9 +347,7 @@ test('normalizeReadAssessment - if visible_on_profile is undefined', function(
   );
 });
 
-test('normalizeReadAssessment - if it is not visible on profile', function(
-  assert
-) {
+test('normalizeReadAssessment - if it is not visible on profile', function(assert) {
   const serializer = this.subject();
   serializer.set(
     'session',

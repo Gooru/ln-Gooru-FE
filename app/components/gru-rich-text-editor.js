@@ -268,7 +268,7 @@ export default Ember.Component.extend({
     var contentEditor = removeHtmlTags(this.get('content'));
     let questionType = this.get('model.type');
     if ($.trim(contentEditor) === '') {
-      this.set('content', contentEditor);
+      //this.set('content', contentEditor); //ember deprecation
       return true;
     } else if (
       !validateSquareBracket(contentEditor) &&

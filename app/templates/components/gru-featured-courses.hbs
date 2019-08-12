@@ -22,7 +22,7 @@
 
         <div class="course-container">
           {{#each content.courses as |course index|}}
-            {{cards.gru-course-card course=course isEyeVisible=false onRemixCourse="onRemixCourse"}}
+            {{cards/gru-course-card course=course isEyeVisible=false onRemixCourse="onRemixCourse"}}
           {{/each}}
         </div>
       </div>

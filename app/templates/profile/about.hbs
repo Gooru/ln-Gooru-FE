@@ -8,7 +8,6 @@
     {{/if}}
   </h4>
   <div class="about-container row">
-
     <div class='change-password-cocoon-container'>
       {{#gru-pull-up showPullUp=showChangePassFlag}}
         <div class='change-password-cocoon'>
@@ -30,26 +29,26 @@
                     <label for="oldPassword">
                       <span>{{t "change-password.current-password-label"}}</span>
                     </label>
-                    {{validation.gru-input model=cprofile id='oldPassword' valuePath='oldPassword' type='password'  maxLength=254 didValidate=didValidate  }}
+                    {{validation/gru-input model=cprofile id='oldPassword' valuePath='oldPassword' type='password'  maxLength=254 didValidate=didValidate  }}
                   </div>
                   <div class="form-group password">
                     <label for="newPassword">
                       <span>{{t "reset-password.new-password"}}</span>
                     </label>
-                    {{validation.gru-input model=cprofile id='newPassword' valuePath='newPassword' type='password' didValidate=didValidate isRequired=true  maxLength=254 }}
+                    {{validation/gru-input model=cprofile id='newPassword' valuePath='newPassword' type='password' didValidate=didValidate isRequired=true  maxLength=254 }}
                   </div>
                   <div class="form-group password-confirm">
                     <label for="confirmPassword">
                       <span>{{t "reset-password.new-password-confirm"}}</span>
                     </label>
-                    {{validation.gru-input model=cprofile id='confirmPassword' valuePath='confirmPassword' type='password' didValidate=didValidate isRequired=true  maxLength=254}}
+                    {{validation/gru-input model=cprofile id='confirmPassword' valuePath='confirmPassword' type='password' didValidate=didValidate isRequired=true  maxLength=254}}
                   </div>
                 </div>
               </div>
               <div class="panel-heading">
                 <div class="modal-footer">
                   <div class="panel-title">
-                    <div class="submit-button form-group {{!-- text-center --}}">
+                    <div class="submit-button form-group ">
                       <button type="submit" class="btn btn-success submit">{{t "common.submit"}}
                       </button>
                     </div>
@@ -61,7 +60,6 @@
         </div>
       {{/gru-pull-up }}
     </div>
-
     <div class="personal-info col-md-6 col-xs-12">
       <div class="sub-title">
         {{t "common.personal-information"}}
@@ -91,7 +89,6 @@
                 <div class="image-container"><img class="img-responsive" src="{{profile.avatarUrl}}" /></div>
               </div>
             </div>
-
             {{#if (and isMyProfile (eq profile.loginType 'credential')) }}
               <div class="row">
                 <div class="col-xs-12 col-sm-6">
@@ -103,7 +100,6 @@
                 </div>
               </div>
             {{/if}}
-
             <div class="row">
               <div class="col-xs-12 col-sm-12">
                 <h6>{{t "common.biography"}}</h6>

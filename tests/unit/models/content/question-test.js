@@ -1,11 +1,16 @@
 import Answer from 'gooru-web/models/content/answer';
 import { QUESTION_TYPES } from 'gooru-web/config/question';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('model:content/question', 'Unit | Model | content/question', {
-  unit: true,
-  needs: ['validator:presence', 'validator:presence-html']
-});
+moduleForComponent(
+  'model:content/question',
+  'Unit | Model | content/question',
+  {
+    unit: true,
+    needs: ['validator:presence', 'validator:presence-html']
+  }
+);
 
 test('fibText having correct answer', function(assert) {
   var model = this.subject({
@@ -80,9 +85,7 @@ test('updateLegacyFIBText with no text', function(assert) {
   assert.equal(model.get('text'), null, 'Should have no text still');
 });
 
-test('updateLegacyFIBText with text not following the legacy format', function(
-  assert
-) {
+test('updateLegacyFIBText with text not following the legacy format', function(assert) {
   var model = this.subject({
     questionType: QUESTION_TYPES.fib,
     text: 'The car is [red] and [blue]'
@@ -93,9 +96,7 @@ test('updateLegacyFIBText with text not following the legacy format', function(
   assert.equal(model.get('text'), 'The car is [red] and [blue]', 'Wrong text');
 });
 
-test('updateLegacyFIBText with text following the legacy format, but no answer', function(
-  assert
-) {
+test('updateLegacyFIBText with text following the legacy format, but no answer', function(assert) {
   var model = this.subject({
     questionType: QUESTION_TYPES.fib,
     text: 'The car is _______ and _______ and _______'
@@ -110,9 +111,7 @@ test('updateLegacyFIBText with text following the legacy format, but no answer',
   );
 });
 
-test('updateLegacyFIBText with text following the legacy format and answers', function(
-  assert
-) {
+test('updateLegacyFIBText with text following the legacy format and answers', function(assert) {
   var model = this.subject({
     questionType: QUESTION_TYPES.fib,
     text: 'The car is _______ and _______ and _______',

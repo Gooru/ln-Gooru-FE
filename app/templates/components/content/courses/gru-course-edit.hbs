@@ -39,7 +39,7 @@
   </div>
   <div class="content">
 
-    {{content.gru-image isEditing=isEditing srcImage=course.thumbnailUrl editImage=tempCourse.thumbnailUrl}}
+    {{content/gru-image isEditing=isEditing srcImage=course.thumbnailUrl editImage=tempCourse.thumbnailUrl}}
 
     <div class="panel panel-default">
       <div class="panel-body">
@@ -47,7 +47,7 @@
           <label>
             <span class="required">{{t "content.courses.edit.information.course-title"}}</span>
             {{#if isEditing}}
-              {{validation.gru-input model=tempCourse valuePath='title' maxLength=50 didValidate=didValidate}}
+              {{validation/gru-input model=tempCourse valuePath='title' maxLength=50 didValidate=didValidate}}
             {{else}}
               <b>{{course.title}}</b>
             {{/if}}
@@ -57,7 +57,7 @@
           <label>
             <span>{{t "content.courses.edit.information.description"}}</span>
             {{#if isEditing}}
-              {{validation.gru-textarea rawTextareaValue=tempCourse.description model=tempCourse valuePath='description' maxLength=500 rows=2 didValidate=didValidate}}
+              {{validation/gru-textarea rawTextareaValue=tempCourse.description model=tempCourse valuePath='description' maxLength=500 rows=2 didValidate=didValidate}}
             {{else}}
               {{#if course.description}}
                 {{textarea class="text-description" value=course.description class="form-control" rows=2 readonly=true}}
@@ -66,7 +66,7 @@
           </label>
         </div>
 
-        {{taxonomy.gru-taxonomy-selector
+        {{taxonomy/gru-taxonomy-selector
           isEditing=isEditing
           onSubjectSelected="selectSubject"
           onTaxonomySelected="selectTaxonomy"
@@ -75,13 +75,13 @@
           showCourses=true
         }}
 
-        {{content.gru-audience isEditing=isEditing srcSelectedAudiences=course.audience editSelectedAudiences=tempCourse.audience}}
+        {{content/gru-audience isEditing=isEditing srcSelectedAudiences=course.audience editSelectedAudiences=tempCourse.audience}}
 
         <div class="use-case">
           <label>
             <span>{{t "common.use-case"}}</span>
             {{#if isEditing}}
-              {{validation.gru-textarea rawTextareaValue=tempCourse.useCase model=tempCourse valuePath='useCase' maxLength=500 rows=2 didValidate=didValidate}}
+              {{validation/gru-textarea rawTextareaValue=tempCourse.useCase model=tempCourse valuePath='useCase' maxLength=500 rows=2 didValidate=didValidate}}
             {{else}}
               {{#if course.useCase}}
                 {{textarea class="text-useCase" value=course.useCase class="form-control" rows=2 readonly=true}}
@@ -94,14 +94,14 @@
   </div>
 </section>
 <section id="builder">
-  {{content.courses.edit.gru-accordion-course
+  {{content/courses/edit/gru-accordion-course
   model=course
   items=course.children
   selectedLessonId=selectedLessonId
   onLocationChange='setLocation'
   }}
 </section>
-{{content.gru-settings-edit id="settings" action='publishToProfile' model=course}}
+{{content/gru-settings-edit id="settings" action='publishToProfile' model=course}}
 <section id="collaborators">
   <div class="header">
     <h2>{{t "common.add-collaborator"}}</h2>

@@ -37,11 +37,6 @@ export default Ember.Component.extend(AccordionMixin, {
   unitService: Ember.inject.service('api-sdk/unit'),
 
   /**
-   * @requires service:api-sdk/course-location
-   */
-  courseLocationService: Ember.inject.service('api-sdk/course-location'),
-
-  /**
    * @requires service:api-sdk/performance
    */
   performanceService: Ember.inject.service('api-sdk/performance'),

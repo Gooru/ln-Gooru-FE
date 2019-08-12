@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import T from 'gooru-web/tests/helpers/assert';
@@ -5,14 +6,41 @@ import wait from 'ember-test-helpers/wait';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
 import Bookmark from 'gooru-web/models/content/bookmark';
 
-moduleForComponent('new-cards/gru-bookmark-card',
+const courseMock = Ember.Object.create({
+  id: '0101',
+  title: 'Course 1',
+  children: [
+    Ember.Object.create({
+      id: '0102',
+      title: 'Unit 1',
+      children: [
+        Ember.Object.create({
+          id: '0103',
+          title: 'Lesson 1'
+        })
+      ]
+    })
+  ]
+});
+
+const courseServiceStub = Ember.Service.extend({
+  fetchById(courseId) {
+    if (courseId) {
+      return Ember.RSVP.resolve(courseMock);
+    } else {
+      return Ember.RSVP.reject('Fetch failed');
+    }
+  }
+});
+moduleForComponent(
+  'new-cards/gru-bookmark-card',
   'Integration | Component | new cards/gru bookmark card',
   {
     integration: true,
     beforeEach: function() {
       this.container.lookup('service:i18n').set('locale', 'en');
       this.inject.service('i18n');
-      this.inject.service('api-sdk/course');
+      this.register('service:api-sdk/course', courseServiceStub);
     }
   }
 );
@@ -50,7 +78,6 @@ test('Bookmark Card Layout', function(assert) {
 });
 
 test('unBookmark Click', function(assert) {
-
   let bookmarkData = Bookmark.create({
     id: 'aaa-bbb',
     contentId: '123',

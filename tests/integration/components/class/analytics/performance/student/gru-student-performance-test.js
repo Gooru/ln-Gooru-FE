@@ -49,7 +49,7 @@ test('Test for student performance', function(assert) {
   this.set('classObj', classObj);
   this.set('performances', performances);
 
-  this.render(hbs`{{class.analytics.performance.student.gru-student-performance
+  this.render(hbs`{{class/analytics/performance/student/gru-student-performance
         performances=performances
         classObj=classObj
         userId=userId}}`);

@@ -1,6 +1,10 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('serializer:lookup/lookup', 'Unit | Serializer | lookup/lookup');
+moduleForComponent(
+  'serializer:lookup/lookup',
+  'Unit | Serializer | lookup/lookup'
+);
 
 test('normalizeReadAudiences', function(assert) {
   const serializer = this.subject();

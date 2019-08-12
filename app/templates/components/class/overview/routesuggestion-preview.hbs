@@ -18,7 +18,7 @@
       <div class="detail-sep"></div>
       <div class="compet-container taxonomy gru-taxonomy-tag-list pull-left hidden">
         {{#each taxonomyList as |taxonomyTag|}}
-          {{taxonomy.gru-taxonomy-tag model=taxonomyTag }}
+          {{taxonomy/gru-taxonomy-tag model=taxonomyTag }}
         {{/each}}
       </div>
       <div class="route0suggestionHero pull-right hidden">
@@ -29,10 +29,10 @@
 
       <div class="preview-content">
         <div class="proficiency-chart">
-          {{class.overview.route-suggestion-proficiency-matrix route0=route0 class=class course=course}}
+          {{class/overview/route-suggestion-proficiency-matrix route0=route0 class=class course=course}}
         </div>
         <div class="suggestion-accordion">
-          {{class.overview.course-suggestions model=route0 index=index routeSuggestAction=routeSuggestAction}}
+          {{class/overview/course-suggestions model=route0 index=index routeSuggestAction=routeSuggestAction}}
         </div>
       </div>
       <div style="clear:both"></div>
