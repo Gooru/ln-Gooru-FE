@@ -203,10 +203,12 @@
           </label>
         </div>
       {{/if}}
-      <div class='exemplar-answer'>
-        <h3>{{t "oa.references.exemplar"}}</h3>
-        {{gru-rich-text-editor content=tempModel.hintExplanationDetail model=tempModel valuePath='exemplar' }}
-      </div>
+      {{#if model.isFIB}}
+        <div class='exemplar-answer'>
+          <h3>{{t "oa.references.exemplar"}}</h3>
+          {{gru-rich-text-editor content=tempModel.hintExplanationDetail model=tempModel valuePath='exemplar' }}
+        </div>
+      {{/if}}
       <div class="actions">
         <div class="item-actions no-border">
           <button class="cancel btn btn-info" {{action 'cancel'}}>{{t "common.cancel"}}</button>
