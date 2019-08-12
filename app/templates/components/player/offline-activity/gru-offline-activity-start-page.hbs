@@ -39,10 +39,14 @@
         {{t 'no-task-available'}}
       {{/each}}
     </div>
-    {{#if activityStudentRubrics}}
+    {{#if activityStudentRubric}}
       <div class="student-rubrics-container">
         <div class="student-label label-container" {{action "onToggleRubricContainer" 'student'}}>
-          <span class="label-type">{{t 'common.self'}} {{t 'grading-player.grading'}}</span>
+          <span class="label-type">{{t 'common.self'}} {{t 'grading-player.grading'}}
+            {{#if activityStudentRubric.url}}
+              <span class="rubric-attachment" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'student' bubbles=false}}>{{gru-icon name="attachment"}}</span>
+            {{/if}}
+          </span>
           <span class="toggle-icon">
             {{gru-icon name=(if isStudentCategoriesExpanded 'expand_less' 'expand_more')}}
           </span>
@@ -63,17 +67,21 @@
       </div>
     {{/if}}
 
-    {{#if activityTeacherRubrics}}
+    {{#if activityTeacherRubric}}
       <div class="teacher-rubrics-container">
         <div class="teacher-label label-container" {{action "onToggleRubricContainer" 'teacher'}}>
-          <span class="label-type">{{t 'common.teacher'}} {{t 'grading-player.grading'}}</span>
+          <span class="label-type">{{t 'common.teacher'}} {{t 'grading-player.grading'}}
+            {{#if activityTeacherRubric.url}}
+              <span class="rubric-attachment" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'teacher'  bubbles=false}}>{{gru-icon name="attachment"}}</span>
+            {{/if}}
+          </span>
           <span class="toggle-icon">
             {{gru-icon name=(if isTeacherCategoriesExpanded 'expand_less' 'expand_more')}}
           </span>
         </div>
         <div class="teacher categories-container">
           {{validation/gru-textarea
-            model=activityTeacherRubrics
+            model=activityTeacherRubric
             valuePath='comment'
             maxLength=500
             rows=1
@@ -95,3 +103,28 @@
     </div>
   </div>
 </div>
+
+{{#if activityTeacherRubric.url}}
+  <div class="rubric-file-preview-container teacher">
+    <div class="backdrop"></div>
+    <div class="rubric-file-preview">
+      <div class="rubric-file-preview-close" {{action 'filePreviewClose' 'teacher'}}>
+        {{gru-icon name="close"}}
+      </div>
+      <iframe src="{{activityTeacherRubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+{{/if}}
+
+
+{{#if activityStudentRubric.url}}
+  <div class="rubric-file-preview-container student">
+    <div class="backdrop"></div>
+    <div class="rubric-file-preview">
+      <div class="rubric-file-preview-close" {{action 'filePreviewClose' 'student'}}>
+        {{gru-icon name="close"}}
+      </div>
+      <iframe src="{{activityStudentRubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+{{/if}}

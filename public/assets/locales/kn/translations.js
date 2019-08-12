@@ -56,6 +56,7 @@ window.i18ln = {
   'errors.url': '{{description}} ಒಂದು ಮಾನ್ಯವಾದ url ಆಗಿರಬೇಕು',
   'common.relevance': 'ಪ್ರಸ್ತುತತೆ',
   'common.engagement': 'ನಿಶ್ಚಿತಾರ್ಥ',
+  'common.tenantLibrary': 'Tenant Library',
   'common.efficacy': 'ಪರಿಣಾಮಕಾರಿತ್ವ',
   'common.grid': 'ಗ್ರಿಡ್ ',
   'common.list': 'ಪಟ್ಟಿ ',
@@ -83,6 +84,7 @@ window.i18ln = {
   'common.offline-activity': 'ಆಫ್‌ಲೈನ್ ಚಟುವಟಿಕೆ',
   'common.frq': 'ಎಫ್ ಆರ್ ಕ್ಯೂ ',
   'common.schedule': 'ವೇಳಾಪಟ್ಟಿ',
+  'rubric-details': 'Rubric Details',
   'common.responses': 'ಪ್ರತಿಕ್ರಿಯೆಗಳು',
   'ca.student.no-content':
     'ಶಿಕ್ಷಕರು  ಈ ದಿನಕ್ಕೆ ಯಾವುದೇ ಚಟುವಟಿಕೆಗಳನ್ನು ನಿಯೋಜಿಸಿಲ್ಲ',
@@ -1769,7 +1771,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'ಪ್ರಮಾಣಿತ ಮೂಲಕ ಬ್ರೌಸ್ ಮಾಡಿ',
   'subject-dropdown.placeholder': 'ವಿಷಯ (ಗಳು) ',
   'subject-dropdown.prompt': 'ವಿಷಯ ಆಯ್ಕೆಮಾಡಿ',
@@ -2756,7 +2758,7 @@ window.i18ln = {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'ಪೂರ್ಣಗೊಳ್ಳುವ ನಿರೀಕ್ಷಿತ ಸಮಯ',
   'oa.info.hrs': ' ಗಂಟೆಗಳು',
-  'class.add-teachers': 'ಶಿಕ್ಷಕರನ್ನು ಸೇರಿಸಿ',
+  'class.add-teachers': 'Enter the email of other teachers',
   'class.add-co-teachers': 'ಸಹ ಶಿಕ್ಷಕರನ್ನು ಸೇರಿಸಿ',
   'common.gained': 'ಗಳಿಸಿದೆ',
   'badges-earned': 'ಬ್ಯಾಡ್ಜ್ ಗಳಿಕೆ',
@@ -2773,5 +2775,7 @@ window.i18ln = {
   'oa-player.mark-complete': 'Mark Complete',
   'no.content.assoc.fw': 'Currently no content associated with this framework.',
   'report.offline-activity-report.note':
-    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.'
+    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
+  'teacher-landing.class.student-locator': 'Student Locator',
+  'teacher-landing.class.learning-journey': 'Learning Journey'
 };

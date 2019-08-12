@@ -65,6 +65,7 @@ window.i18ln = {
   'self-grade.not-required': 'Student self-grading not required',
   'common.name': 'নাম',
   'common.user': 'ব্যবহারকারী',
+  'rubric-details': 'Rubric Details',
   'common.sub-filter': 'Sub-Filter',
   'common.day': 'day',
   'common.week': 'week',
@@ -72,6 +73,7 @@ window.i18ln = {
   'common.content-name': 'কন্টেন্ট নাম',
   'common.lastName': 'নামের শেষাংশ',
   'common.firstName': 'নামের প্রথম অংশ',
+  'common.tenantLibrary': 'Tenant Library',
   'common.filter-by': 'দ্বারা ফিল্টার',
   'common.more': 'অধিক',
   'reroute.suggestion': 'reroute suggestion',
@@ -1708,7 +1710,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'মান দ্বারা ব্রাউজ করুন',
   'subject-dropdown.placeholder': 'বিষয় (গুলি)',
   'subject-dropdown.prompt': 'একটি বিষয় নির্বাচন করুন',
@@ -2678,7 +2680,10 @@ window.i18ln = {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs',
-  'class.add-teachers': 'Add teachers',
+  'class.add-teachers': 'Enter the email of other teachers',
+  'common.collaborators': 'Collaborators',
+  'common.no-collaborators':
+    'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'class.add-co-teachers': 'Add Co-teachers',
   'common.gained': 'Gained',
   'badges-earned': 'Badges Earned',
@@ -2695,5 +2700,7 @@ window.i18ln = {
   'oa-player.mark-complete': 'Mark Complete',
   'no.content.assoc.fw': 'Currently no content associated with this framework.',
   'report.offline-activity-report.note':
-    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.'
+    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
+  'teacher-landing.class.student-locator': 'Student Locator',
+  'teacher-landing.class.learning-journey': 'Learning Journey'
 };

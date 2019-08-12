@@ -153,7 +153,7 @@ moduleForComponent(
 );
 
 test('it has header and main sections', function(assert) {
-  assert.expect(10);
+  assert.expect(11);
   var course = Course.create(Ember.getOwner(this).ownerInjection(), {
     title: 'Course Title',
     subject: 'CCSS.K12.Math',
@@ -179,13 +179,13 @@ test('it has header and main sections', function(assert) {
   assert.ok($header.find('> nav').length, 'Header navigation');
   assert.equal(
     $header.find('> nav > a').length,
-    3,
+    4,
     'Number of header navigation links'
   );
 
   assert.equal(
     $container.find('> section').length,
-    3,
+    4,
     'Number of edit sections'
   );
   assert.ok(
@@ -194,6 +194,10 @@ test('it has header and main sections', function(assert) {
   );
   assert.ok($container.find('> section#builder').length, 'Builder section');
   assert.ok($container.find('> section#settings').length, 'Settings section');
+  assert.ok(
+    $container.find('> section#collaborators').length,
+    'Collaborators section'
+  );
 });
 
 test('Layout of the information section', function(assert) {

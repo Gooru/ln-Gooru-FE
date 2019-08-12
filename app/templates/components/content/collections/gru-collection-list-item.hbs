@@ -185,6 +185,10 @@
             {{/if}}
             {{component (question-config model.type 'component.builder_answer') answers=tempModel.answers editMode=true showAdvancedEditor=showAdvancedEditor}}
           </div>
+          <div class='exemplar-answer'>
+            <h3>{{t "oa.references.exemplar"}}</h3>
+            {{gru-rich-text-editor content=tempModel.hintExplanationDetail model=tempModel valuePath='exemplar' uuid=exemplarKey }}
+          </div>
           {{gru-notify onLoad="focusQuestionTextEditor"}}
         {{/unless}}
       {{else}}

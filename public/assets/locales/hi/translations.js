@@ -56,6 +56,7 @@ window.i18ln = {
   'errors.url': '{{description}} एक वैध यूआरएल होना चाहिए',
   'common.relevance': 'प्रासंगिकता',
   'common.engagement': 'अनुबंध',
+  'common.tenantLibrary': 'Tenant Library',
   'common.efficacy': 'प्रभावोत्पादकता',
   'common.grid': 'ग्रिड',
   'reroute.suggestion': 'reroute suggestion',
@@ -82,6 +83,7 @@ window.i18ln = {
   'search-help-message': 'लागू करने के लिए फ़िल्टर चुनें',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
+  'rubric-details': 'Rubric Details',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
   'i2d.conversion-progress':
@@ -303,7 +305,8 @@ window.i18ln = {
   'common.currently-studying': 'अभी अध्ययन कर रहा है',
   'common.date': 'दिनांक ',
   'common.delete': 'हटाएं',
-  'common.delete-instructions.links-inaccessible': 'सभी शेयर लिंक पहुच मे नही होंगे',
+  'common.delete-instructions.links-inaccessible':
+    'सभी शेयर लिंक पहुच मे नही होंगे',
   'common.delete-instructions.content-inaccessible':
     'सभी विषयवस्तु इसके साथ जुड़े हुए कक्षा खण्डों  के लिए पहुच मे नही होगी',
   'common.depth-of-knowledge': 'ज्ञान की गहराई',
@@ -1337,7 +1340,8 @@ window.i18ln = {
   'teacher-landing.class.atc-view.progress-to-destination':
     'गंतव्य के लिए प्रगति',
   'teacher-landing.class.class-activities': 'कक्षा की दैनिक गतिविधियां',
-  'teacher-landing.class.class-activities.input-timespent': 'मूल्यांकन काई लिये निर्धारित समय दर्ज करें',
+  'teacher-landing.class.class-activities.input-timespent':
+    'मूल्यांकन काई लिये निर्धारित समय दर्ज करें',
   'teacher-landing.class.class-activities.warning-message':
     'आपने {{studentName}} के लिए {{questionCount}} प्रश्नों के लिए डेटा दर्ज नहीं किया है। किसी अन्य छात्र का चयन करने से <छात्र का नाम> का डेटा समाप्त हो जाएगा। क्या आप जारी रखना चाहते हैं?',
   'teacher-landing.class.class-activities.info-message':
@@ -1739,7 +1743,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '1 1',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hiline',
+  'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'मानक के क्रम में ब्राउज़ करें',
   'subject-dropdown.placeholder': 'विषय (यों)',
   'subject-dropdown.prompt': 'एक विषय चुनिए',
@@ -2718,7 +2722,7 @@ window.i18ln = {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'पूरा होने के अपेक्षीत समय',
   'oa.info.hrs': 'घंटे',
-  'class.add-teachers': 'शिक्षकों को जोड़ें',
+  'class.add-teachers': 'Enter the email of other teachers',
   'class.add-co-teachers': 'सह-शिक्षकों को जोड़ें',
   'common.gained': 'प्राप्त की',
   'badges-earned': 'बैज अर्जित किया',
@@ -2742,5 +2746,7 @@ window.i18ln = {
   'domain-code.NO': 'संख्याओं पर संक्रियाए',
   'no.content.assoc.fw': 'Currently no content associated with this framework.',
   'report.offline-activity-report.note':
-    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.'
+    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
+  'teacher-landing.class.student-locator': 'Student Locator',
+  'teacher-landing.class.learning-journey': 'Learning Journey'
 };

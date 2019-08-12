@@ -38,7 +38,6 @@
     {{#if isAssessment}}
       {{#if (or isCaptureQuestionScore isOverwriteScore)}}
         <div class="question-list-container">
-          {{isScoreSubmittedForAllQuestion}}
           {{#each questions as |question seq|}}
             {{reports/pull-up/activity/add-question-score
               question = question

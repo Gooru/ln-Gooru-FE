@@ -18,6 +18,12 @@ export default Ember.Component.extend({
     component.inputTypeHandler();
   },
 
+  init() {
+    const component = this;
+    component._super(...arguments);
+    component.set('users', Ember.A([]));
+  },
+
   // -------------------------------------------------------------------------
   // Events
   actions: {
@@ -122,30 +128,28 @@ export default Ember.Component.extend({
     const component = this;
     let users = component.get('users');
     let userData = users.findBy('email', userEmail) || Ember.Object.create({});
-    return Ember.RSVP
-      .hash({
-        userDetails: component.fetchMatchingUserProfiles(userEmail)
-      })
-      .then(
-        ({ userDetails }) => {
-          if (userDetails.get('role') === ROLES.TEACHER) {
-            userData.set('id', userDetails.get('id'));
-            userData.set('firstName', userDetails.get('firstName'));
-            userData.set('lastName', userDetails.get('lastName'));
-            userData.set('fullName', userDetails.get('fullName'));
-            userData.set('avatarUrl', userDetails.get('avatarUrl'));
-            userData.set('email', userEmail);
-            users.pushObject(userData);
-            component.set('inValidEmail', false);
-            component.set('userEmail', null);
-          } else {
-            component.set('inValidEmail', true);
-          }
-        },
-        function() {
+    return Ember.RSVP.hash({
+      userDetails: component.fetchMatchingUserProfiles(userEmail)
+    }).then(
+      ({ userDetails }) => {
+        if (userDetails.get('role') === ROLES.TEACHER) {
+          userData.set('id', userDetails.get('id'));
+          userData.set('firstName', userDetails.get('firstName'));
+          userData.set('lastName', userDetails.get('lastName'));
+          userData.set('fullName', userDetails.get('fullName'));
+          userData.set('avatarUrl', userDetails.get('avatarUrl'));
+          userData.set('email', userEmail);
+          users.pushObject(userData);
+          component.set('inValidEmail', false);
+          component.set('userEmail', null);
+        } else {
           component.set('inValidEmail', true);
         }
-      );
+      },
+      function() {
+        component.set('inValidEmail', true);
+      }
+    );
   },
 
   /**
