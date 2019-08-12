@@ -149,6 +149,13 @@ const Question = Ember.Object.extend(Validations, {
    */
   answers: Ember.A([]),
 
+  hintExplanationDetail: '',
+
+  /**
+   * @property {string}
+   */
+  exemplar: Ember.computed.alias('hintExplanationDetail'),
+
   /**
    * @property {String} category - Category the course belongs to
    */

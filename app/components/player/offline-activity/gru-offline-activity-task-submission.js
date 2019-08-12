@@ -36,24 +36,29 @@ export default Ember.Component.extend({
   observePendingItems: Ember.observer(
     'pendingUrlSubmissions',
     'pendingUploadSubmissions',
+    'savedUploadSubmissions',
     'task.submissionText',
     function() {
       const component = this;
-      const pendingUrlSubmissions = component.get('pendingUrlSubmissions');
-      const pendingUploadSubmissions = component.get(
-        'pendingUploadSubmissions'
-      );
+      const pendingUploadSubmissions = component.get('savedUploadSubmissions');
       const freeeFormText = component.get('task.submissionText');
       const isFreeFormTextEntered = freeeFormText
         ? freeeFormText.length
         : false;
+
+      const mandatoryUploads = component.get('mandatoryUploads');
+      let hasAddedMandatorySubmission = false;
+      if (mandatoryUploads > 0) {
+        if (pendingUploadSubmissions <= 0) {
+          hasAddedMandatorySubmission = true;
+        }
+      } else if (isFreeFormTextEntered || pendingUploadSubmissions <= 0) {
+        hasAddedMandatorySubmission = true;
+      }
+
       component.set(
         'task.isAddedMandatorySubmission',
-        !!(
-          pendingUploadSubmissions <= 0 &&
-          pendingUrlSubmissions <= 0 &&
-          isFreeFormTextEntered
-        )
+        hasAddedMandatorySubmission
       );
     }
   ),
@@ -77,6 +82,7 @@ export default Ember.Component.extend({
       let fileType = inferUploadType(file.name, OA_TASK_SUBMISSION_TYPES);
       file.fileType = fileType ? fileType.value : 'others';
       file.icon = OA_TASK_SUBMISSION_TYPES.findBy('value', file.fileType).icon;
+      component.set('task.isTaskSubmitted', false);
     },
 
     //Action triggered when click on save
@@ -204,6 +210,27 @@ export default Ember.Component.extend({
   ),
 
   /**
+   * @property {Number} savedUploadSubmissions
+   * Property for number of upload submissions pending
+   */
+  savedUploadSubmissions: Ember.computed(
+    'task.files.[]',
+    'mandatoryUploads',
+    'studentTaskUploadSubmission',
+    function() {
+      const component = this;
+
+      const uploadedFilesCount = component.get('task.files.length');
+      const mandatoryUploads = component.get('mandatoryUploads');
+      const studentTaskUploadSubmission = component.get(
+        'studentTaskUploadSubmission.length'
+      );
+      return mandatoryUploads > studentTaskUploadSubmission
+        ? mandatoryUploads - (uploadedFilesCount + studentTaskUploadSubmission)
+        : 0;
+    }
+  ),
+  /**
    * @property {Array} oaTaskRemoteSubmissions
    * Property to capture student added url submissions
    */
@@ -298,16 +325,17 @@ export default Ember.Component.extend({
     'isValidTimespent',
     function() {
       const component = this;
-      let addedUrls = component.get('task.ulrs')
+      let addedUrls = component.get('task.urls')
         ? component
           .get('task.urls')
           .filter(url => !url.get('isSubmittedUrl') && url.get('value'))
-        : false;
+          .length
+        : 0;
       let addedFiles = component.get('task.files')
         ? component.get('task.files').length
         : false;
       let addedAnswerText = component.get('task.submissionText');
-      return addedUrls || addedFiles || addedAnswerText;
+      return addedUrls > 0 || addedFiles > 0 || addedAnswerText;
     }
   ),
 
@@ -440,19 +468,17 @@ export default Ember.Component.extend({
   uploadFileIntoS3(fileObject) {
     const component = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      return Ember.RSVP
-        .hash({
-          fileLocation: component
-            .get('mediaService')
-            .uploadContentFile(fileObject)
-        })
-        .then(({ fileLocation }) => {
-          let cdnUrls = component.get('session.cdnUrls');
-          let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
-          fileObject.UUIDFileName = UUIDFileName;
-          fileObject.isUploaded = true;
-          return resolve(fileObject);
-        }, reject);
+      return Ember.RSVP.hash({
+        fileLocation: component
+          .get('mediaService')
+          .uploadContentFile(fileObject)
+      }).then(({ fileLocation }) => {
+        let cdnUrls = component.get('session.cdnUrls');
+        let UUIDFileName = cleanFilename(fileLocation, cdnUrls);
+        fileObject.UUIDFileName = UUIDFileName;
+        fileObject.isUploaded = true;
+        return resolve(fileObject);
+      }, reject);
     });
   },
 

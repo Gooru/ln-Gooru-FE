@@ -25,11 +25,31 @@ export default Ember.Component.extend({
 
   didRender() {
     let component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   // -------------------------------------------------------------------------
   // Actions
+
+  actions: {
+    selectLibrary() {
+      const component = this;
+      let library = component.get('content');
+      if (!component.get('onSelectLibrary')) {
+        let queryParams = {
+          libraryId: library.get('id'),
+          type: 'library'
+        };
+        component.get('router').transitionTo('library-search', {
+          queryParams
+        });
+      } else {
+        component.sendAction('onSelectLibrary', library);
+      }
+    }
+  },
 
   // -------------------------------------------------------------------------
   // Events

@@ -1,13 +1,13 @@
+.account-settings .app-container,
 .content_assessments_edit .app-container,
 .content_collections_edit .app-container,
 .content_courses_edit .app-container,
 .content_courses_play .app-container,
-.content_questions_play .app-container,
 .content_questions_edit .app-container,
+.content_questions_play .app-container,
 .content_resources_edit .app-container,
 .content_resources_play .app-container,
-.content_rubric_edit .app-container,
-.account-settings .app-container {
+.content_rubric_edit .app-container {
   padding-left: 0;
   padding-right: 0;
 
@@ -16,6 +16,8 @@
   }
 }
 
+.content.rubric.preview,
+.controller.account-settings,
 .controller.content.assessments.edit,
 .controller.content.collections.edit,
 .controller.content.courses.edit,
@@ -23,10 +25,9 @@
 .controller.content.questions.edit,
 .controller.content.questions.play,
 .controller.content.resources.edit,
-.controller.content.resources.play,
-.controller.account-settings,
-.content.rubric.preview {
+.controller.content.resources.play {
   $aside-padding: 25px;
+
   .gru-image {
     &.picker-error {
       margin-bottom: 70px;
@@ -61,7 +62,6 @@
       }
     }
   }
-
   @include flexbox();
 
   > article {
@@ -96,7 +96,6 @@
       .actions {
         margin-top: 15px;
         text-align: center;
-
         /**
          * Required to prevent actions menu breaking up nav layout in phones,
          * it's below sm breakpoint so it must not be a problem
@@ -128,7 +127,6 @@
           padding: 5px;
           margin-right: 5px;
           border-bottom: 3px solid $dark-400;
-
           @media (min-width: $screen-sm-min) {
             padding: 5px 10px;
             margin-right: 20px;
@@ -140,11 +138,14 @@
           }
         }
       }
+
       .back-to {
         color: $white;
         font-size: $font-size-large;
+
         div {
           margin-left: -12px;
+
           i {
             vertical-align: text-top;
           }
@@ -182,6 +183,7 @@
             border-right: 1px solid $gray-light;
             line-height: 2.2;
           }
+
           .actions {
             display: inline-block;
             padding-left: 20px;
@@ -198,8 +200,8 @@
       .panel {
         margin-bottom: 0;
 
-        .panel-heading,
-        .panel-body {
+        .panel-body,
+        .panel-heading {
           padding-left: 25px;
           padding-right: 25px;
         }
@@ -269,8 +271,8 @@
     }
   }
 
-  #information,
   #accountInformation,
+  #information,
   #privateInformation {
     > .header {
       .actions {
@@ -295,30 +297,37 @@
 
           > div {
             margin-top: 10px;
+
             &:first-child {
               margin: 0;
             }
 
             > label {
               margin: 0;
-              input,
-              b {
+
+              b,
+              input {
                 display: block;
               }
+
               input {
                 outline: 0;
               }
+
               b {
                 font-size: $font-size-large;
                 font-weight: normal;
               }
+
               .form-group {
                 margin-bottom: 5px;
               }
+
               textarea {
                 line-height: $font-size-large;
               }
             }
+
             > label > span,
             > span.label {
               color: $gray;
@@ -335,9 +344,11 @@
               cursor: auto;
             }
           }
+
           .learning-objectives {
             label {
               width: 100%;
+
               textarea {
                 width: 100%;
                 outline: none;
@@ -366,6 +377,7 @@
           margin-top: 15px;
         }
       }
+
       .panel-body {
         .setting {
           margin-top: 10px;
@@ -388,17 +400,126 @@
   }
 }
 
+.content.rubric,
+.content.rubric.preview,
 .controller.content.assessments.edit,
 .controller.content.collections.edit,
 .controller.content.courses.edit,
-.controller.content.courses.play,
-.content.rubric,
-.content.rubric.preview {
+.controller.content.courses.play {
   #information .title > label {
     display: block;
-
     @media (min-width: $screen-lg) {
       max-width: 500px;
+    }
+  }
+
+  #collaborators {
+    .header {
+      display: flex;
+      justify-content: space-between;
+
+      .actions {
+        .add-collaborator {
+          font-size: 24px;
+          line-height: 1;
+          padding: 5px 7px;
+        }
+      }
+    }
+
+    .content.panel {
+      .sub-sec-coteach {
+        padding: 20px 25px;
+
+        .add-collaborator-panel {
+          display: none;
+
+          .gru-add-collaborator {
+            .add-collaborator-container {
+              width: 100%;
+              margin: 0;
+              padding: 0;
+            }
+          }
+        }
+
+        .sub-sec-head {
+          height: 14px;
+          font-size: 12px;
+          font-weight: bold;
+          line-height: normal;
+          text-transform: uppercase;
+          margin-bottom: 12px;
+          margin-top: 12px;
+        }
+
+        .no-collaborators {
+          font-size: 16px;
+        }
+
+        .sub-sec-row {
+          border-top: 1px solid $sep-border-color;
+          display: flex;
+          align-items: center;
+          padding-top: 5px;
+          padding-bottom: 5px;
+
+          .teacher-icon {
+            display: inline;
+            width: 30px;
+            height: 30px;
+            background-size: contain;
+            border-radius: 50%;
+          }
+
+          .co-teacher-label,
+          .teacher-label {
+            width: 97px;
+            height: 15px;
+            font-family: Lato;
+            font-size: 15px;
+            line-height: 1;
+            display: inline;
+            flex: 1;
+            margin-left: 10px;
+            text-transform: capitalize;
+          }
+
+          .delete-co-teacher {
+            width: 14px;
+            height: 18px;
+            opacity: 0.3;
+            display: inline;
+            cursor: pointer;
+            margin-right: 15px;
+          }
+          /*  .row-add-another-teacher { */
+          /* This may be floating  */
+          .add-co-teacher-icon {
+            @extend .teacher-icon;
+            box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
+            background-color: $gray-harder;
+            cursor: pointer;
+            color: $dark-400;
+            margin: 0;
+
+            > i {
+              padding: 3px;
+            }
+          }
+
+          .add-co-teacher-label {
+            width: 126px;
+            height: 15px;
+            font-family: Lato;
+            font-size: 15px;
+            font-style: italic;
+            line-height: 1;
+            margin-left: 10px;
+            flex: 1;
+          }
+        }
+      }
     }
   }
 }

@@ -11,11 +11,9 @@
       {{offlineActivity.learningObjectives}}
     </div>
   </div>
-
   <div class="oa-references-container">
-    {{player.offline-activity.gru-offline-activity-references offlineActivity = offlineActivity}}
+    {{player/offline-activity/gru-offline-activity-references offlineActivity = offlineActivity}}
   </div>
-
   <div class="offline-activity-timespent">
     <div class="timespent-info-container" {{action "onToggleTimespent"}}>
       <div class="icon-container">
@@ -42,10 +40,9 @@
       </div>
     </div>
   </div>
-
   <div class="task-submissions-container">
     {{#each activityTasks as |task|}}
-      {{player.offline-activity.gru-offline-activity-task-submission
+      {{player/offline-activity/gru-offline-activity-task-submission
         task=task
         caContentId=caContentId
         showSubmissions=true
@@ -59,24 +56,20 @@
         contentSource = contentSource}}
     {{/each}}
   </div>
-
   <div class="complete-submission-container {{unless isEnableCompletionButton 'disable-event'}}">
     <div class="complete-submit-btn" {{action "onShowCompletionConfirmation"}}>{{t 'oa-player.mark-complete'}}</div>
   </div>
-
   {{#if isEnableSelfGrading}}
     <div class="self-grading-button-container">
       <div class="self-grade-btn" {{action "onTriggerSelfGrade"}}>{{concat (t 'common.self') (t 'class.info.grade')}}</div>
     </div>
   {{/if}}
 </div>
-
 {{#if isLoading}}
   <div class="loading-spinner">
     {{three-bounce-spinner}}
   </div>
 {{/if}}
-
 {{#if isShowCompletionConfirmation}}
   <div class="confirmation-popup-overlay">
     <div class="completion-confirmation-popup">
@@ -94,9 +87,8 @@
     </div>
   </div>
 {{/if}}
-
 {{#if isShowOaSelfGrading}}
-  {{activity.offline.grading-report
+  {{activity/offline/grading-report
     showPullUp=isShowOaSelfGrading
     context=selfGradeItemContext
     itemsToGrade=itemsToGrade

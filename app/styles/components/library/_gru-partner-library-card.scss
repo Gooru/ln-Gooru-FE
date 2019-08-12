@@ -20,13 +20,19 @@
         height: 47px;
         text-align: center;
         margin: auto;
+        cursor: pointer;
 
         .title {
           color: $picton-blue;
           font-weight: 300;
           width: 270px;
           padding-bottom: 3px;
-          @include ellipsis($font-size: 16px, $line-height: 0.94, $lines-to-show: 2, $excerpt-bg: $white);
+          @include ellipsis(
+            $font-size: 16px,
+            $line-height: 0.94,
+            $lines-to-show: 2,
+            $excerpt-bg: $white
+          );
         }
       }
       @include flexbox;
@@ -52,7 +58,12 @@
         margin-bottom: 10px;
 
         p {
-          @include ellipsis($font-size: 13px, $line-height: 1.16, $lines-to-show: 4, $excerpt-bg: $white);
+          @include ellipsis(
+            $font-size: 13px,
+            $line-height: 1.16,
+            $lines-to-show: 4,
+            $excerpt-bg: $white
+          );
         }
       }
 
@@ -61,6 +72,7 @@
         height: 163px;
         object-fit: contain;
         margin-left: 54px;
+        cursor: pointer;
         margin-bottom: 15px;
       }
     }
