@@ -190,8 +190,16 @@
       <div class="panel-body">
         {{#if isBuilderEditing}}
           {{component (question-config question.type 'component.builder_answer') answers=tempQuestion.answers editMode=true showAdvancedEditor=showAdvancedEditor}} {{gru-notify onLoad="focusQuestionTextEditor"}}
+          <div class='exemplar-answer'>
+            <h3>{{t "oa.references.exemplar"}}</h3>
+            {{gru-rich-text-editor content=tempQuestion.hintExplanationDetail model=tempQuestion valuePath='exemplar' }}
+          </div>
         {{else}}
           {{component (question-config question.type 'component.builder_answer') answers=question.answers}}
+          <div class='exemplar-answer'>
+            <h3 class='border-bottom'>{{t "oa.references.exemplar"}}</h3>
+            <p class='exemplar-readonly'>{{safe-html (if question.hintExplanationDetail question.hintExplanationDetail '--')}}</p>
+          </div>
         {{/if}}
       </div>
       {{#if isBuilderEditing}}
