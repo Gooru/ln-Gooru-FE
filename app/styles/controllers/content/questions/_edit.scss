@@ -99,6 +99,12 @@
         textarea {
           line-height: 1;
         }
+        .exemplar-answer {
+          .exemplar-readonly {
+            border: 1px solid $gray-lighter;
+            padding: 10px;
+          }
+        }
       }
 
       &.question-text {
