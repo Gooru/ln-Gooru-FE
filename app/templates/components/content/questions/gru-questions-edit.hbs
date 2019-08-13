@@ -78,6 +78,17 @@
             </div>
           </div>
         </div>
+        {{#if isBuilderEditing}}
+          <div class='exemplar-answer'>
+            <h3>{{t "oa.references.exemplar"}}</h3>
+            {{gru-rich-text-editor content=tempQuestion.hintExplanationDetail model=tempQuestion valuePath='exemplar' }}
+          </div>
+        {{else}}
+          <div class='exemplar-answer'>
+            <h3 class='border-bottom'>{{t "oa.references.exemplar"}}</h3>
+            <p class='exemplar-readonly'>{{safe-html (if question.hintExplanationDetail question.hintExplanationDetail '--')}}</p>
+          </div>
+        {{/if}}
         <div class="feedback-grading">
           <div class="border-bottom">
             <h3>{{t 'content.questions.edit.builder.feedback-grading.title'}}</h3>
