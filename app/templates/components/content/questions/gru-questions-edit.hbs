@@ -27,7 +27,6 @@
     {{#gru-scroll to="#settings" offset='article > header' }}{{t "common.settings"}}{{/gru-scroll}}
   </nav>
 </header>
-
 <section id="builder">
   <div class="header">
     <h2>{{t "common.builder"}} - {{t (concat 'common.question-type.' question.type)}}</h2>
@@ -163,7 +162,6 @@
       {{/if}}
     </div>
   </div>
-
   {{#unless (or question.isOpenEnded question.isFIB)}}
     <div class="panel panel-default question-answer">
       <div class="panel-heading">
@@ -192,8 +190,16 @@
       <div class="panel-body">
         {{#if isBuilderEditing}}
           {{component (question-config question.type 'component.builder_answer') answers=tempQuestion.answers editMode=true showAdvancedEditor=showAdvancedEditor}} {{gru-notify onLoad="focusQuestionTextEditor"}}
+          <div class='exemplar-answer'>
+            <h3>{{t "oa.references.exemplar"}}</h3>
+            {{gru-rich-text-editor content=tempQuestion.hintExplanationDetail model=tempQuestion valuePath='exemplar' }}
+          </div>
         {{else}}
           {{component (question-config question.type 'component.builder_answer') answers=question.answers}}
+          <div class='exemplar-answer'>
+            <h3 class='border-bottom'>{{t "oa.references.exemplar"}}</h3>
+            <p class='exemplar-readonly'>{{safe-html (if question.hintExplanationDetail question.hintExplanationDetail '--')}}</p>
+          </div>
         {{/if}}
       </div>
       {{#if isBuilderEditing}}
@@ -213,7 +219,6 @@
     </div>
   {{/if}}
 </section>
-
 <section id="information">
   <div class="header">
     <h2>{{t "common.information"}}</h2> {{partial 'content/partials/information-actions'}}
@@ -257,7 +262,7 @@
                       </ul>
                   </div>
               {{else}} --}}
-                  <div class="btn-empty btn btn-sm">{{t (concat 'common.question-type.' question.type) }}</div>
+              <div class="btn-empty btn btn-sm">{{t (concat 'common.question-type.' question.type) }}</div>
               {{!--  {{/if}} --}}
             </label>
           </div>
@@ -279,7 +284,7 @@
               <span>{{t standardLabelKey}}</span>
             </label>
             {{#if isEditing}}
-              <button type="button" class="btn btn-primary" {{action 'openTaxonomyModal'}} disabled= {{standardDisabled}}>
+              <button type="button" class="btn btn-primary" {{action 'openTaxonomyModal'}} disabled={{standardDisabled}}>
                 {{gru-icon name="open_in_new"}} {{t "common.select"}}
               </button>
               <div class="tags">
@@ -301,5 +306,4 @@
     </div>
   </div>
 </section>
-
 {{content.gru-settings-edit id="settings" action='publishToProfile' model=question}}
