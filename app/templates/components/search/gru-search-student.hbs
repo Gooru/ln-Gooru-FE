@@ -1,0 +1,66 @@
+<div class="student-search-container">
+  <div class="header-container">
+    <div class="search-type-selector-container">
+      <div class="active-search-criteria" {{action "onToggleSearchCriteria"}}>
+        <span class="search-by">{{t 'search-by'}}</span>
+        <span class="search-type">
+          {{activeCriteria.label}}
+          {{gru-icon name=(if isSearchCriteriaExpanded 'keyboard_arrow_up' 'keyboard_arrow_down')}}
+        </span>
+      </div>
+      <div class="search-type-list-container">
+        {{#each searchCriterias as |searchCriteria|}}
+          <div class="search-type {{if searchCriteria.isActive 'active-criteria'}}" {{action "onSelectSearchCriteria" searchCriteria}}>
+            {{searchCriteria.label}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="search-student-input-container">
+      {{input
+        type="text"
+        placeholder=(concat (t 'common.search') ' ' (t 'common.students'))
+        class="search-student"
+        value=searchTerm}}
+        {{gru-icon name="search"}}
+    </div>
+    <div class="apply-settings-container {{unless isEnableAdd 'disable-event'}}" {{action "onAddStudents"}}>
+      {{t 'common.add'}}
+    </div>
+  </div>
+  {{#if filteredStudents.length}}
+    <div class="body-container">
+      <div class="filtered-students-list-container">
+        <div class="students-list-header-container">
+          <div class="student-name student-info-header">
+            {{t 'common.students'}}
+          </div>
+          <div class="student-email student-info-header">
+            {{t 'sign-up.email'}}
+          </div>
+          <div class="student-username student-info-header">
+            {{t 'sign-up.username'}}
+          </div>
+          <div class="student-id student-info-header">
+            {{t 'teacher-landing.class.class-management-tab.student-id'}}
+          </div>
+        </div>
+        <div class="filtered-students-container">
+          {{#each filteredStudents as |student|}}
+            <div class="student-info-row">
+              <div class="student-thumbnail {{if student.isSelected 'selected-student'}}" style="background-image: url({{student.avatarUrl}});"  {{action "onSelectStudent" student}}>
+                {{#if student.isSelected}}
+                  {{gru-icon name="done_all" class="tick-icon"}}
+                {{/if}}
+              </div>
+              <div class="student-name student-info-column ellipsis" {{action "onSelectStudent" student}}>{{student.fullName}}</div>
+              <div class="student-email student-info-column ellipsis">{{student.email}}</div>
+              <div class="student-username student-info-column ellipsis">{{student.username}}</div>
+              <div class="student-id student-info-column ellipsis">{{student.studentId}}</div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  {{/if}}
+</div>

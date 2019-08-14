@@ -141,6 +141,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
         studentId: payload.roster_global_userid,
         schoolDistrictId: payload.school_district_id,
         schoolDistrict: payload.school_district,
+        schoolId: payload.school_id || null,
         aboutMe: payload.about,
         avatarUrl: thumbnailUrl,
         rosterId: payload.roster_id,

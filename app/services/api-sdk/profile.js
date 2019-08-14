@@ -720,6 +720,33 @@ export default Ember.Service.extend({
   },
 
   /**
+   * @function searchUserProfiles
+   * @param {Object} searchCriteria
+   * @return {Promise}
+   * Method to search users by given pattern
+   */
+  searchUserProfiles(searchCriteria) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('profileAdapter')
+        .searchUserProfiles(searchCriteria)
+        .then(
+          function(userProfiles) {
+            resolve(
+              service
+                .get('profileSerializer')
+                .normalizeReadMultipleProfiles(userProfiles)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
    * Creates a new empty user model
    * @returns {User}
    */

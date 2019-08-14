@@ -254,7 +254,17 @@
         </div>
       </div>
       <div class='student-sec-cont'>
-        <div class='student-settings-label'> {{t 'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head'}}</div>
+        <div class="student-sec-label-container">
+          <div class='student-settings-label'> {{t 'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head'}}</div>
+          <div class="toggle-add-student" {{action "onToggleAddStudent"}}>
+            {{gru-icon name="add_circle_outline"}} <span>{{t 'class.info.add-students'}}</span>
+          </div>
+        </div>
+        <div class="add-students-sec">
+          {{search/gru-search-student
+            onAddStudents = "onAddStudents"
+            classMembers = sortedMembers}}
+        </div>
         {{#if (gt sortedMembers.length 0)}}
           <div class="student-settings-sec">
             {{#if isPremiumClass }}

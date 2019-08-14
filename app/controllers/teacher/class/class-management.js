@@ -247,7 +247,6 @@ export default Ember.Controller.extend(ModalMixin, {
         },
         callback: {
           success: function() {
-            controller.get('classMembers').removeObject(student);
             controller.get('sortedMembers').removeObject(student);
           }
         }
@@ -419,6 +418,23 @@ export default Ember.Controller.extend(ModalMixin, {
     //Action triggered when toggle collaborator panel
     onToggleAddCollaborator() {
       $('.sub-sec-coteach .add-collaborator-panel').slideToggle();
+    },
+
+    //Action triggered when click add student button
+    onToggleAddStudent() {
+      $('.student-sec-cont .add-students-sec').slideToggle();
+    },
+
+    //Action triggered when hit Add button to add students into the class
+    onAddStudents(students) {
+      const controller = this;
+      const studentIds = students.map(student => {
+        return student.get('id');
+      });
+      controller.addStudentsToClass(studentIds).then(function() {
+        controller.reloadClassMembers();
+      });
+      controller.actions.onToggleAddStudent();
     }
   },
 
@@ -539,15 +555,13 @@ export default Ember.Controller.extend(ModalMixin, {
         filters.fw_code = fwkCode;
       }
 
-      return Ember.RSVP
-        .hash({
-          taxonomyGrades: Ember.RSVP.resolve(
-            taxonomyService.fetchGradesBySubject(filters)
-          )
-        })
-        .then(({ taxonomyGrades }) => {
-          controller.set('subjectTaxonomyGrades', taxonomyGrades);
-        });
+      return Ember.RSVP.hash({
+        taxonomyGrades: Ember.RSVP.resolve(
+          taxonomyService.fetchGradesBySubject(filters)
+        )
+      }).then(({ taxonomyGrades }) => {
+        controller.set('subjectTaxonomyGrades', taxonomyGrades);
+      });
     }
   },
 
@@ -738,5 +752,42 @@ export default Ember.Controller.extend(ModalMixin, {
     const classId = controller.get('class.id');
     collaborators = collaborators.length ? collaborators : null;
     return classService.removeCoTeacherFromClass(classId, collaborators);
+  },
+
+  /**
+   * @function addStudentsToClass
+   * @param {Array} studentIds
+   * @return {Promise}
+   * Method to add list of student ids into a class
+   */
+  addStudentsToClass(studentIds) {
+    const controller = this;
+    const classId = controller.get('class.id');
+    const dataParam = Ember.Object.create({
+      students: studentIds
+    });
+    return controller
+      .get('classService')
+      .addStudentsToClass(classId, dataParam);
+  },
+
+  /**
+   * @function reloadClassMembers
+   * Method to reload class members
+   */
+  reloadClassMembers() {
+    const controller = this;
+    const classId = controller.get('class.id');
+    controller
+      .get('classService')
+      .readClassMembers(classId)
+      .then(function(classMembers) {
+        controller.set('class.members', classMembers.get('members'));
+        controller.set(
+          'class.memberGradeBounds',
+          classMembers.get('memberGradeBounds')
+        );
+        controller.updateBoundValuesToStudent();
+      });
   }
 });

@@ -615,5 +615,21 @@ export default Ember.Service.extend({
         .updateProfileBaseline(classid)
         .then(resolve, reject);
     });
+  },
+
+  /**
+   * @function addStudentsToClass
+   * @param {UUID} classId
+   * @param {Object} dataParam
+   * Method to add students into a class
+   */
+  addStudentsToClass(classId, dataParam) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .addStudentsToClass(classId, dataParam)
+        .then(resolve, reject);
+    });
   }
 });
