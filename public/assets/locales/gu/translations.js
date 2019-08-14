@@ -145,6 +145,7 @@ window.i18ln = {
   'offline-activities.no-active-content':
     'There are no projects or other offline activities that the students are currently working on',
   'common.a-rubric': 'રુબ્રિક',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'બધું પૂરું થયું',
   'common.a-assessment': 'મૂલ્યાંકન',
   'common.about': 'લગભગ',

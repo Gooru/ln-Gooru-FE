@@ -155,6 +155,7 @@ window.i18ln = {
   'common.accept': 'സ്വീകരിക്കൂ',
   'common.ignore': 'അവഗണിക്കുക',
   'common.add': 'ചേർക്കുക',
+  'common.a-offline-activity': 'a offline activity',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
   'common.plan-an-activities-msg':

@@ -150,6 +150,7 @@ window.i18ln = {
   'common.a-question': 'ଏକ ପ୍ରଶ୍ନ',
   'common.a-resource': 'ଏକ ଉତ୍ସ',
   'common.a-rubric': 'ଏକ ଶୀର୍ଷକ',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'ସମସ୍ତ ସଂପୂର୍ଣ୍ଣ',
   'common.a-assessment': 'ଏକ ମୂଲ୍ୟାଙ୍କନ',
   'common.about': 'ବିଷୟରେ',

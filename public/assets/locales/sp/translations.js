@@ -134,6 +134,7 @@ window.i18ln = {
   'common.a-question': 'una pregunta',
   'common.a-resource': 'un recurso',
   'common.a-rubric': 'Una rúbrica',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'Todo completado',
   'common.a-assessment': 'Una evaluación',
   'common.about': 'Acerca de',

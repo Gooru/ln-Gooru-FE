@@ -156,6 +156,7 @@ window.i18ln = {
   'oa.student.no-completed-content':
     'There are no offline activities that are completed yet',
   'common.add': 'கூட்டு',
+  'common.a-offline-activity': 'a offline activity',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
   'common.plan-an-activities-msg':

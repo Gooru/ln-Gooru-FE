@@ -130,6 +130,7 @@ window.i18ln = {
   'common.a-question': 'एक प्रश्न',
   'common.a-resource': 'एक संसाधन',
   'common.a-rubric': 'एक रुब्रिक',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'सब पूरा हो गया',
   'common.a-assessment': 'एक मूल्यांकन',
   'common.about': 'के बारे में',

@@ -151,6 +151,7 @@ window.i18ln = {
     'There are no projects or other offline activities that have been completed yet',
   'offline-activities.no-active-content':
     'There are no projects or other offline activities that the students are currently working on',
+  'common.a-offline-activity': 'a offline activity',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
   'common.plan-an-activities-msg':

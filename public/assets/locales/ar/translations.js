@@ -135,6 +135,7 @@ window.i18ln = {
   'common.a-question': 'سؤال',
   'common.a-resource': 'مصدر',
   'common.a-rubric': 'سلم تقييم',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'تم إنجاز الكل',
   'common.a-assessment': 'تقييم',
   'common.about': 'حول',
