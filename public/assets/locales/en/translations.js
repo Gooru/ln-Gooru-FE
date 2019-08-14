@@ -71,6 +71,8 @@ window.i18ln = {
   'common.by-question': 'question-by-question',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'There was an error when trying to convert the image. Please resubmit the image',
   'file-picker-placeholder': 'Choose a file or drag it here',

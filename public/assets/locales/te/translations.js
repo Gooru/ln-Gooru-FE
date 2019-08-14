@@ -72,6 +72,8 @@ window.i18ln = {
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
     'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':

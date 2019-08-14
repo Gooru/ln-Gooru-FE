@@ -7,7 +7,9 @@
     <div class="preview-title {{previewContentType}}-preview">
       {{t (concat 'common.' previewContentType)}} {{t 'common.preview'}}
     </div>
-
+    {{#if showAssessmentCode}}
+      <div class="assessment-code">{{assessmentCode}}</div>
+    {{/if}}
     {{#unless (or (not playContent) isExternalContent)}}
       <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
         {{gru-icon name="play_arrow"}}

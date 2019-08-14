@@ -94,6 +94,8 @@ window.i18ln = {
   'common.by-question': 'question-by-question',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':
