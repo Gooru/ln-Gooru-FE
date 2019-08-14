@@ -55,6 +55,7 @@
             <ul class="dropdown-menu dropdown-menu-right">
               <li><a href="#" {{action "fromMyCollections"}}>{{t "common.from-my-collections"}}</a></li>
               <li><a href="#" {{action "fromMyAssessments"}}>{{t "common.from-my-assessments"}}</a></li>
+              <li><a href="#" {{action "fromMyActivities"}}>From My Activities</a></li>
               <li><a href="#" {{action "showModal" "content.modals.gru-collection-new" newCollectionModel}}>{{t "common.new-collection"}}</a></li>
               <li><a href="#" {{action "showModal" "content.modals.gru-assessment-new" newCollectionModel}}>{{t "common.new-assessment"}}</a></li>
               <li>
@@ -94,6 +95,7 @@
     <div>
       <button class="btn btn-success add-prefix" {{action "fromMyCollections"}}>{{t "common.from-my-collections"}}</button>
       <button class="btn btn-success add-prefix" {{action "fromMyAssessments"}}>{{t "common.from-my-assessments"}}</button>
+      <button class="btn btn-success add-prefix" {{action "fromMyActivities"}}> From My Activities </button>
       <button class="btn btn-success add-prefix" {{action "showModal" "content.modals.gru-collection-new" newCollectionModel}}>{{t "common.new-collection"}}</button>
       <button class="btn btn-success add-prefix" {{action "showModal" "content.modals.gru-assessment-new" newCollectionModel}}>{{t "common.new-assessment"}}</button>
       {{!--  <button class="btn btn-success add-prefix" {{action "showModal" "content.modals.gru-activity-new" newCollectionModel}}>{{t "student-landing.my-performance.activity"}}</button>
