@@ -212,7 +212,6 @@
         {{/if}}
       {{/if}}
       {{#if (eq activeContentType 'offline-activity')}}
-
         {{#if (or (eq type 'library') (eq type 'gooru-catalog'))}}
           {{new-cards/gru-offline-activity-card
           offlineActivity=content
@@ -242,9 +241,15 @@
             <p>{{{t "common.no-search-result" contentType=activeContentType}}}</p>
           {{else}}
             <p>{{{t "common.add-content-prompt" type=(t (concat "common.a-" activeContentType))}}}</p>
-            <button class="btn btn-success" {{action "showModal" (concat "content.modals.gru-" activeContentType "-new")}}>
-              {{t "common.add"}} {{t (concat "common." activeContentType)}}
-            </button>
+            {{#if (eq activeContentType 'offline-activity') }}
+              {{#link-to 'content.activity.edit' offlineActivityModel  class="btn btn-success"}}
+                {{t "common.add"}} {{t (concat "common." activeContentType)}}
+              {{/link-to}}
+            {{else}}
+              <button class="btn btn-success" {{action "showModal" (concat "content.modals.gru-" activeContentType "-new")}}>
+                {{t "common.add"}} {{t (concat "common." activeContentType)}}
+              </button>
+            {{/if}}
           {{/if}}
         {{else}}
           {{#if isSearch}}
@@ -266,7 +271,6 @@
     isRemixableContent=isRemixableContent
   }}
 {{/if}}
-
 {{#if isShowOfflineActivityPreview}}
   {{reports/pull-up/oa-preview
     showPullUp=isShowOfflineActivityPreview
