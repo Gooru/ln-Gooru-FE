@@ -141,6 +141,7 @@ window.i18ln = {
   'common.plan-activities': 'ಯೋಜಿತ ಚಟುವಟಿಕೆಗಳು ',
   'common.plan-an-activities-msg': 'ನಿಮ್ಮ ಚಟುವಟಿಕೆಗಳನ್ನು ಯೋಜಿಸಿ',
   'common.Reschedule': 'ಮರುಹೊಂದಿಸಿ',
+  'common.a-offline-activity': 'a offline activity',
   'common.no-unschedule-items':
     'ನೀವು ವೇಳಾಪಟ್ಟಿ ಅಗತ್ಯವಿರುವ ಯಾವುದೇ ಚಟುವಟಿಕೆಗಳನ್ನು ಹೊಂದಿಲ್ಲ',
   'common.repeat-activity': 'ಚಟುವಟಿಕೆಯನ್ನು ಪುನರಾವರ್ತಿಸಿ',

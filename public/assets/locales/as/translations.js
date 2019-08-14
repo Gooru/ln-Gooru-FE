@@ -144,6 +144,7 @@ window.i18ln = {
   'common.a-question': 'এটা প্ৰশ্ন',
   'common.a-resource': 'এটা সম্পদ',
   'common.a-rubric': 'এটা ৰুব্ৰিক',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'সকলো সম্পূৰ্ণ হৈছে',
   'common.a-assessment': 'এটা মূল্যায়ন',
   'common.about': 'ইয়াৰ বিষয়ে',
