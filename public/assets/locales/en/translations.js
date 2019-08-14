@@ -1474,6 +1474,11 @@ window.i18ln = {
   'gru-add-to.add-collection-to-lesson': 'Add from my collections',
   'gru-add-to.add-collection-to-lesson-lead':
     'Select a collection to add to this lesson.',
+  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.OA-info':
+    'The activities listed here <b>do not</b> belong to another lesson or course',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'Select a activity to add to this lesson.',
   'gru-add-to.add-to-collection': 'Add to collection',
   'gru-add-to.add-to-collection-lead':
     'Choose a collection you want to add {{contentTitle}} to',
