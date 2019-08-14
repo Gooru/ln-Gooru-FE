@@ -19,6 +19,12 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.inputHandler();
+    component.resetProperties();
+  },
+
+  willDestroyElement() {
+    const component = this;
+    component.resetProperties();
   },
 
   // -------------------------------------------------------------------------
@@ -61,12 +67,14 @@ export default Ember.Component.extend({
     //Action triggered when select a search criteria
     onSelectSearchCriteria(searchCriteria) {
       const component = this;
-      const searchCriterias = component.get('searchCriterias');
-      searchCriterias.filter(searchCriteria => {
-        searchCriteria.set('isActive', false);
-      });
-      searchCriteria.set('isActive', true);
-      component.actions.onToggleSearchCriteria(component);
+      if (component.get('activeCriteria.type') !== searchCriteria.get('type')) {
+        const searchCriterias = component.get('searchCriterias');
+        searchCriterias.filter(searchCriteria => {
+          searchCriteria.set('isActive', false);
+        });
+        searchCriteria.set('isActive', true);
+        component.actions.onToggleSearchCriteria(component);
+      }
     }
   },
 
@@ -137,6 +145,17 @@ export default Ember.Component.extend({
    */
   isSearchCriteriaExpanded: false,
 
+  /**
+   * @property {Boolean} isNoStudentsFound
+   * Property to check whether students found or not
+   */
+  isNoStudentsFound: false,
+
+  /**
+   * @property {Boolean} isLoading
+   */
+  isLoading: false,
+
   // -------------------------------------------------------------------------
   // Methods
   /**
@@ -154,6 +173,7 @@ export default Ember.Component.extend({
           event.keyCode === KEY_CODES.ENTER &&
           searchTerm.length >= 3
         ) {
+          component.set('filteredStudents', Ember.A([]));
           component.loadStudents();
         }
       });
@@ -165,22 +185,25 @@ export default Ember.Component.extend({
    */
   loadStudents() {
     const component = this;
+    component.set('isLoading', true);
+    component.set('isNoStudentsFound', false);
     component
       .fetchStudentProfiles()
       .then(function(userProfiles) {
         const studentProfiles = userProfiles.filter(user => {
           return user.get('role') === ROLES.STUDENT;
         });
-        component.set('filteredStudents', Ember.A([]));
         const classMembers = component.get('classMembers');
         studentProfiles.map(student => {
           if (!classMembers.findBy('id', student.get('id'))) {
             component.get('filteredStudents').pushObject(student);
           }
         });
+        component.set('isLoading', false);
       })
       .catch(function() {
-        //TODO need to handle the way when there is no student matched
+        component.set('isNoStudentsFound', true);
+        component.set('isLoading', false);
       });
   },
 
