@@ -2,10 +2,12 @@
   <div class="header-container">
     <div class="search-type-selector-container">
       <div class="active-search-criteria" {{action "onToggleSearchCriteria"}}>
-        <span class="search-by">{{t 'search-by'}}</span>
+        <span class="search-by">
+          {{t 'search-by'}}
+          {{gru-icon name=(if isSearchCriteriaExpanded 'arrow_drop_up' 'arrow_drop_down')}}
+        </span>
         <span class="search-type">
           {{activeCriteria.label}}
-          {{gru-icon name=(if isSearchCriteriaExpanded 'keyboard_arrow_up' 'keyboard_arrow_down')}}
         </span>
       </div>
       <div class="search-type-list-container">
@@ -61,6 +63,16 @@
           {{/each}}
         </div>
       </div>
+    </div>
+  {{/if}}
+  {{#if isLoading}}
+    <div class="loading-spinner">
+      {{three-bounce-spinner}}
+    </div>
+  {{/if}}
+  {{#if isNoStudentsFound}}
+    <div class="no-students-found">
+      No Students Found
     </div>
   {{/if}}
 </div>
