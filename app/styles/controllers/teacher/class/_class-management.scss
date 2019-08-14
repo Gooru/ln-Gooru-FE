@@ -699,6 +699,42 @@
     }
 
     .student-sec-cont {
+      .student-sec-label-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        height: 40px;
+        align-items: center;
+        margin-left: 15px;
+        column-gap: 15px;
+
+        .student-settings-label {
+          @extend .white-font-label;
+          text-transform: uppercase;
+        }
+
+        .toggle-add-student {
+          display: grid;
+          grid-template-columns: auto auto;
+          justify-content: left;
+          column-gap: 5px;
+          align-items: center;
+          height: inherit;
+          cursor: pointer;
+          justify-self: right;
+          i.add_circle_outline,
+          span {
+            font-size: 20px;
+            color: $white;
+          }
+          span {
+            font-size: 14px;
+          }
+        }
+      }
+
+      .add-students-sec {
+        display: none;
+      }
       .no-students-message {
         color: whitesmoke;
         font-size: 14px;
@@ -706,10 +742,8 @@
         line-height: 1.54;
       }
 
-      .student-settings-label {
-        @extend .white-font-label;
-        text-transform: uppercase;
-        margin: 15px;
+      .add-students-sec {
+        margin-bottom: 15px;
       }
 
       .student-settings-sec {
