@@ -196,6 +196,35 @@ export default PlayerAccordionLesson.extend(ModalMixin, {
         });
     },
 
+    /* Show activity modal selectable
+     */
+    fromMyActivities: function() {
+      var component = this;
+      const params = {
+        filterBy: 'notInCourse'
+      };
+      component
+        .get('profileService')
+        .readOfflineActivities(component.get('session.userId'), params)
+        .then(function(activities) {
+          component.send(
+            'showModal',
+            'content.modals.gru-add-to-lesson',
+            {
+              collections: activities,
+              content: component.get('lesson'),
+              courseId: component.get('course.id'),
+              unitId: component.get('unitId'),
+              isCollection: false,
+              isOA: true,
+              onAdd: component.get('onAddItem').bind(component)
+            },
+            null,
+            'add-to'
+          );
+        });
+    },
+
     sortLessonItems: function() {
       this.loadData();
       this.actions.sortItems.call(this);
