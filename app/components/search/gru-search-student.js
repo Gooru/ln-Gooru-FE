@@ -12,6 +12,8 @@ export default Ember.Component.extend({
 
   classService: Ember.inject.service('api-sdk/class'),
 
+  i18n: Ember.inject.service(),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
@@ -106,15 +108,16 @@ export default Ember.Component.extend({
    * Property for list of student search criterias
    */
   searchCriterias: Ember.computed(function() {
+    const component = this;
     return Ember.A([
       Ember.Object.create({
         type: 'email',
-        label: 'Email',
+        label: component.get('i18n').t('sign-up.email'),
         isActive: true
       }),
       Ember.Object.create({
         type: 'username',
-        label: 'Username',
+        label: component.get('i18n').t('sign-up.username'),
         isActive: false
       })
     ]);

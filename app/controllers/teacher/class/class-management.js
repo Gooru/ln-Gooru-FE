@@ -433,7 +433,6 @@ export default Ember.Controller.extend(ModalMixin, {
       });
       controller.addStudentsToClass(studentIds).then(function() {
         controller.reloadClassMembers();
-        // controller.fetchClassMemberBounds();
       });
       controller.actions.onToggleAddStudent();
     }
