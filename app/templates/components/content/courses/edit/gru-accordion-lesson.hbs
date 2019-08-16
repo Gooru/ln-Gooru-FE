@@ -59,7 +59,7 @@
               <li><a href="#" {{action "showModal" "content.modals.gru-collection-new" newCollectionModel}}>{{t "common.new-collection"}}</a></li>
               <li><a href="#" {{action "showModal" "content.modals.gru-assessment-new" newCollectionModel}}>{{t "common.new-assessment"}}</a></li>
               <li>
-                {{#link-to 'content.activity.edit' newCollectionModel  }}
+                {{#link-to 'content.activity.edit' null newCollectionModel }}
                   {{t "student-landing.my-performance.activity"}}
                 {{/link-to}}
               </li>
@@ -100,7 +100,7 @@
       <button class="btn btn-success add-prefix" {{action "showModal" "content.modals.gru-assessment-new" newCollectionModel}}>{{t "common.new-assessment"}}</button>
       {{!--  <button class="btn btn-success add-prefix" {{action "showModal" "content.modals.gru-activity-new" newCollectionModel}}>{{t "student-landing.my-performance.activity"}}</button>
       --}}
-      {{#link-to 'content.activity.edit' newCollectionModel class="btn btn-success add-prefix" }}
+      {{#link-to 'content.activity.edit' null newCollectionModel class="btn btn-success add-prefix" }}
         {{t "student-landing.my-performance.activity"}}
       {{/link-to}}
     </div>
