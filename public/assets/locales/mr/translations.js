@@ -85,6 +85,8 @@ window.i18ln = {
   'common.take-photo': 'फोटो काढा',
   'common.upload-image': 'फोटो अपलोड करा',
   'common.by-question': 'question-by-question',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'फोटो अपलोड होत आहेत. कृपया थोड्यावेळाने पुन्हा तपासून बघा.',
   'i2d.conversion-error':

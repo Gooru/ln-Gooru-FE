@@ -111,6 +111,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
     if (component.get('isAsessmentAddData') && component.get('allowI2D')) {
       component.searchImageUpload();
     }
+    component.set('uploadedFiles', Ember.A());
   },
   // -------------------------------------------------------------------------
   //Methods

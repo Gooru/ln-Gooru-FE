@@ -92,6 +92,8 @@ window.i18ln = {
   'common.by-question': 'question-by-question',
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.mobile-upload-failed': 'There was a error',
   'i2d.upload-failed':
     'There was an error while uploading this image. Re-upload?',
