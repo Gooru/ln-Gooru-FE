@@ -24,16 +24,18 @@
         <div class="active-student">
           <div class="student-thumbnail pull-left" style="background-image: url({{activeStudent.avatarUrl}})"></div>
           <div class="student-name pull-left">{{activeStudent.fullName}}</div>
-          <div class="ms-rescope-content-preview">
-            <div class="show-completed-course hidden-xs">
-              {{t 'class.overview.course-map.rescope-toggle'}}
+          {{#if isPremiumClass}}
+            <div class="ms-rescope-content-preview">
+              <div class="show-completed-course hidden-xs">
+                {{t 'class.overview.course-map.rescope-toggle'}}
+              </div>
+              <div class="show-completed-course-btn">
+                {{gru-toggle-button
+                  isChecked=showAllRescopedContent
+                  onToggleButton="onToggleRescope" }}
+              </div>
             </div>
-            <div class="show-completed-course-btn">
-              {{gru-toggle-button
-                isChecked=showAllRescopedContent
-                onToggleButton="onToggleRescope" }}
-            </div>
-          </div>
+          {{/if}}
           <div class="student-close pull-right" {{action "onSelectAll"}}>
             {{gru-icon name="clear"}}
           </div>
