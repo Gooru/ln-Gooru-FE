@@ -121,6 +121,14 @@ export default Ember.Component.extend({
             editor.focus();
           }
           if (component.get('content')) {
+            if (
+              editor &&
+              editor.composer &&
+              editor.composer.element &&
+              editor.composer.selection
+            ) {
+              editor.composer.selection.selectNode(editor.composer.element);
+            }
             editor.composer.commands.exec(
               'insertHTML',
               component.get('content')
