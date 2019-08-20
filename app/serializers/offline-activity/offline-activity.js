@@ -407,6 +407,34 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Normalizes a activity for library content
+   * @param {*} data
+   * @return {Object}
+   *
+   */
+  normalizeActivityForLibrary(activity) {
+    let serializer = this;
+    const basePath = serializer.get('session.cdnUrls.content');
+    const appRootPath = serializer.get('appRootPath');
+    const thumbnailUrl = activity.thumbnail
+      ? basePath + activity.thumbnail
+      : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+    const metadata = activity.metadata || {};
+    return Ember.Object.create({
+      id: activity.id,
+      title: activity.title,
+      courseId: activity.course_id,
+      ownerId: activity.owner_id,
+      standards: serializer
+        .get('taxonomySerializer')
+        .normalizeTaxonomyObject(activity.taxonomy),
+      taskCount: activity.task_count,
+      metadata,
+      thumbnailUrl
+    });
+  },
+
+  /**
    * Normalizes a submission grade
    * @param {*} response
    * @return {Object}
