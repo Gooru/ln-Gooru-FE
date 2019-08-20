@@ -1324,6 +1324,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'ବିଦ୍ୟାର୍ଥୀମାନେ',
   'teacher-landing.class.class-management-tab.student-name': 'ବିଦ୍ୟାର୍ଥୀ ନାମ',
   'teacher-landing.class.class-management-tab.student-id': 'ବିଦ୍ୟାର୍ଥୀ ଆଇଡି',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'ଶିକ୍ଷକମାନେ',
   'teacher-landing.class.class-management-tab.view-report': 'ରିପୋର୍ଟ ଦେଖନ୍ତୁ',
   'teacher-landing.class.class-management-tab.course-null':

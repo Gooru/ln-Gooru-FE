@@ -24,7 +24,9 @@
         placeholder=(concat (t 'common.search') ' ' (t 'common.students'))
         class="search-student"
         value=searchTerm}}
-        {{gru-icon name="search"}}
+        <span class="search-icon {{if (lt searchTerm.length 3) 'disable-event'}}" {{action "onSearchStudents"}}>
+          {{gru-icon name="search" }}
+        </span>
     </div>
     <div class="apply-settings-container {{unless isEnableAdd 'disable-event'}}" {{action "onAddStudents"}}>
       {{t 'common.add'}}
@@ -33,18 +35,21 @@
   {{#if filteredStudents.length}}
     <div class="body-container">
       <div class="filtered-students-list-container">
-        <div class="students-list-header-container">
+        <div class="students-list-header-container {{if (gt filteredStudents.length 7) 'dummy-scroll'}}">
           <div class="student-name student-info-header">
             {{t 'common.students'}}
+          </div>
+          <div class="student-id student-info-header">
+            {{t 'teacher-landing.class.class-management-tab.student-id'}}
           </div>
           <div class="student-email student-info-header">
             {{t 'sign-up.email'}}
           </div>
+          <div class="student-reference-id student-info-header">
+            {{t 'teacher-landing.class.class-management-tab.reference-id'}}
+          </div>
           <div class="student-username student-info-header">
             {{t 'sign-up.username'}}
-          </div>
-          <div class="student-id student-info-header">
-            {{t 'teacher-landing.class.class-management-tab.student-id'}}
           </div>
         </div>
         <div class="filtered-students-container">
@@ -56,9 +61,10 @@
                 {{/if}}
               </div>
               <div class="student-name student-info-column ellipsis" {{action "onSelectStudent" student}}>{{student.fullName}}</div>
-              <div class="student-email student-info-column ellipsis">{{student.email}}</div>
-              <div class="student-username student-info-column ellipsis">{{student.username}}</div>
               <div class="student-id student-info-column ellipsis">{{student.studentId}}</div>
+              <div class="student-email student-info-column ellipsis">{{student.email}}</div>
+              <div class="student-reference-id student-info-column ellipsis">{{student.referenceId}}</div>
+              <div class="student-username student-info-column ellipsis">{{student.username}}</div>
             </div>
           {{/each}}
         </div>

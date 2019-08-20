@@ -1290,6 +1290,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'ਵਿਦਿਆਰਥੀ',
   'teacher-landing.class.class-management-tab.student-name': 'ਵਿਦਿਆਰਥੀ ਦਾ ਨਾਮ',
   'teacher-landing.class.class-management-tab.student-id': 'ਵਿਦਿਆਰਥੀ ਆਈਡੀ',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'ਅਧਿਆਪਕ',
   'teacher-landing.class.class-management-tab.view-report': 'ਰਿਪੋਰਟ ਵੇਖੋ',
   'teacher-landing.class.class-management-tab.course-null':

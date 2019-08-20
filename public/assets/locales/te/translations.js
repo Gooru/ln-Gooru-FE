@@ -1288,6 +1288,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'విద్యార్థులు',
   'teacher-landing.class.class-management-tab.student-name': 'విద్యార్థి పేరు',
   'teacher-landing.class.class-management-tab.student-id': 'విద్యార్థి ఐడి',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'ఉపాధ్యాయులు',
   'teacher-landing.class.class-management-tab.view-report':
     'నివేదికను వీక్షించండి',

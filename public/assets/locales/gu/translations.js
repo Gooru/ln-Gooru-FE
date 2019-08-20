@@ -1284,6 +1284,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.student-name':
     'વિદ્યાર્થીનું નામ',
   'teacher-landing.class.class-management-tab.student-id': 'વિદ્યાર્થી આઈડી',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'શિક્ષકો',
   'teacher-landing.class.class-management-tab.view-report': 'અહેવાલ જુઓ',
   'teacher-landing.class.class-management-tab.course-null':

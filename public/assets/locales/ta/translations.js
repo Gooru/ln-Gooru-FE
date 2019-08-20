@@ -1317,6 +1317,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'மாணவர்கள்',
   'teacher-landing.class.class-management-tab.student-name': 'மாணவன் பெயர்',
   'teacher-landing.class.class-management-tab.student-id': 'மாணவர் அடையாளம்',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'ஆசிரியர்கள்',
   'teacher-landing.class.class-management-tab.view-report': 'அறிக்கை காண்க',
   'teacher-landing.class.class-management-tab.course-null':

@@ -77,10 +77,13 @@
             font-size: 12px;
           }
         }
-        i.search {
+        .search-icon {
+          width: 24px;
+          display: block;
           position: absolute;
           right: 0;
           top: 14px;
+          cursor: pointer;
         }
       }
       .apply-settings-container {
@@ -103,7 +106,7 @@
 
         .students-list-header-container {
           display: grid;
-          grid-template-columns: 30px repeat(4, 1fr);
+          grid-template-columns: 30px repeat(5, 1fr);
           padding: 0 15px;
           height: 40px;
           align-items: center;
@@ -127,6 +130,10 @@
             grid-column-end: 3;
             padding-left: 0;
           }
+
+          &.dummy-scroll {
+            margin-right: 8px;
+          }
         }
         .filtered-students-container {
           max-height: 279px;
@@ -145,7 +152,7 @@
 
           .student-info-row {
             display: grid;
-            grid-template-columns: 30px repeat(4, 1fr);
+            grid-template-columns: 30px repeat(5, 1fr);
             padding: 0 15px;
             border-bottom: 1px solid #d7d7d7;
             height: 40px;
