@@ -138,14 +138,10 @@
               </div>
             </div>
             <div class="teacher-grading-panel panel-collapse collapse {{if isTeacher 'in'}}" id="teacher">
-              {{#if (and (not teacherRubric.scoring) content.maxScore)}}
+              {{#if (and teacherRubric (not teacherRubric.scoring) content.maxScore)}}
                 <div class="oa-grade-rubric-grading {{if (not isTeacher) 'disable-event'}}">
-                  <!-- Render child element only after the property is loaded/defined -->
-                  <!-- Otherwise it will throws backtracking re-render issue  -->
-                  {{#unless (eq teacherRubric.studentScore undefined)}}
                     {{validation/gru-input-number model=teacherRubric  valuePath='studentScore' min=0 max=content.maxScore}}
                     <span class="score">{{content.maxScore}}</span>
-                  {{/unless}}
                 </div>
               {{else}}
                 {{rubric/rubric-category-grades isReadOnly=(if isTeacher false true) categories=teacherRubricCategories}}

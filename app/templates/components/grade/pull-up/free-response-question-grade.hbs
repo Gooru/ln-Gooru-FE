@@ -113,14 +113,10 @@
         {{/if}}
       </div>
       <div class="frq-grade-right-panel-body">
-        {{#if rubric.scoring}}
+        {{#if (and userGrade rubric.scoring)}}
           <div class="frq-grade-rubric-grading">
-            <!-- Render child element only after the property is loaded/defined -->
-            <!-- Otherwise it will throws backtracking re-render issue  -->
-            {{#unless (eq userGrade.studentScore undefined)}}
-              {{validation/gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
-              <span class="score">{{rubric.maxScore}}</span>
-            {{/unless}}
+            {{validation/gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
+            <span class="score">{{rubric.maxScore}}</span>
           </div>
         {{else}}
           <div class="frq-grade-rubric-categories">
