@@ -12,8 +12,7 @@
             <div class="textContainer">
                 {{#if isEditing}}
                     <div class='referenceText'>
-                        {{gru-rich-text-editor content=model.reference model=model valuePath='reference'}}
-                        {{!-- {{validation/gru-input model=model valuePath='reference' maxLength=50 didValidate=didValidate}} --}}
+                        {{gru-rich-text-editor content=model.reference model=model valuePath='reference' uuid=referenceUUID}}
                     </div>
                 {{else}}
                     <div class='referenceTextLabel'>
@@ -86,7 +85,8 @@
             <div class="textContainer">
                 {{#if isExemplarEditing}}
                     <div class='referenceText exemplarText'>
-                        {{gru-rich-text-editor content=model.exemplar model=model valuePath='exemplar'}}
+                        {{log exemplarUUID}}
+                        {{gru-rich-text-editor content=model.exemplar model=model valuePath='exemplar' uuid=exemplarUUID }}
                         {{!-- {{validation/gru-input model=model valuePath='exemplar' maxLength=50 didValidate=didValidate}} --}}
                     </div>
                 {{else}}
