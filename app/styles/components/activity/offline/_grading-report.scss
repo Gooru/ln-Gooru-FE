@@ -507,8 +507,14 @@
                     input {
                       text-align: center;
                       font-size: 30px;
-                      color: #fff;
+                      color: $white;
                       padding-left: 15px;
+                      width: 200px;
+                      background-color: transparent;
+                      &:focus,
+                      &:active {
+                        border: none;
+                      }
                     }
                   }
                 }
