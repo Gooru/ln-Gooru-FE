@@ -247,6 +247,13 @@ export default PlayerAccordionLesson.extend(ModalMixin, {
       } else {
         this.actions.finishSort.call(this);
       }
+    },
+
+    newActivity: function(newCollectionModel) {
+      this.get('router').transitionTo(
+        'content.activity.edit',
+        newCollectionModel
+      );
     }
   },
 
