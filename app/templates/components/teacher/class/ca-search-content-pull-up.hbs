@@ -118,7 +118,7 @@
       <div class="tenant-libraries">
         <div class="libraries-container">
           {{#each libraries as |library|}}
-            {{library.gru-partner-library-card onSelectLibrary='onSelectLibrary' content=library}}
+            {{library/gru-partner-library-card onSelectLibrary='onSelectLibrary' content=library}}
           {{else}}
             <div class="loading-spinner">
               {{three-bounce-spinner}}
