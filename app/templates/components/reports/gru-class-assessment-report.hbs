@@ -1,4 +1,4 @@
-{{ reports.class-assessment.gru-summary
+{{ reports/class-assessment/gru-summary
   assessment=assessment
   students=students
   reportData=reportData
@@ -8,7 +8,7 @@
 
   {{gru-view-layout-picker onViewLayoutChange='changeView'}}
 
-  {{ reports.class-assessment.gru-table-view
+  {{ reports/class-assessment/gru-table-view
     assessment=assessment
     students=students
     reportData=reportData
@@ -16,7 +16,7 @@
     onSelectStudent=(action 'viewAssessmentReport')
     anonymous=anonymous}}
 
-  {{ reports.class-assessment.gru-student-view
+  {{ reports/class-assessment/gru-student-view
     assessment=assessment
     anonymous=anonymous
     students=students

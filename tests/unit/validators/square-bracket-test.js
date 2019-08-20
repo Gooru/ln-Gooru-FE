@@ -1,9 +1,14 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import { validateSquareBracket } from 'gooru-web/utils/utils';
 
-moduleFor('validator:square-bracket', 'Unit | Validator | square-bracket', {
-  needs: ['validator:messages']
-});
+moduleForComponent(
+  'validator:square-bracket',
+  'Unit | Validator | square-bracket',
+  {
+    needs: ['validator:messages', 'service:i18n']
+  }
+);
 
 test('Text is invalid', function(assert) {
   assert.notOk(

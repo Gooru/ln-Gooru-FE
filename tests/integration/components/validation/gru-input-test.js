@@ -19,7 +19,7 @@ test('Layout and clear functionality', function(assert) {
     })
   );
   this.render(
-    hbs`{{validation.gru-input model=model valuePath='term' hasClearButton=true inputId='any-id' isRequired=true}}`
+    hbs`{{validation/gru-input model=model valuePath='term' hasClearButton=true inputId='any-id' isRequired=true}}`
   ); // render the component
   var $component = this.$(); // component dom element
   var $input = $component.find('input[type=text]');
@@ -70,7 +70,7 @@ test('Testing events and observer', function(assert) {
     })
   );
   this.render(
-    hbs`{{validation.gru-input model=model valuePath='value' hasClearButton=true}}`
+    hbs`{{validation/gru-input model=model valuePath='value' hasClearButton=true}}`
   ); // render the component
   var $component = this.$();
   var $input = $component.find('input[type=text]');

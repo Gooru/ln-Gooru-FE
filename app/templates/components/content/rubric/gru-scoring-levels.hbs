@@ -13,7 +13,7 @@
         <div class="level-list">
           {{#each scoringLevels as |level index|}}
             <div class="name-input {{index}}">
-              {{validation.gru-input model=level valuePath='name' maxLength=50  placeholder=(if (lt index 5)(t  (concat 'gru-rubric-creation.gru-category.gru-scoring-levels.' index)))}}
+              {{validation/gru-input model=level valuePath='name' maxLength=50  placeholder=(if (lt index 5)(t  (concat 'gru-rubric-creation.gru-category.gru-scoring-levels.' index)))}}
               <span class="name-error">
                 {{t 'gru-rubric-creation.gru-category.gru-scoring-levels.name-error'}}
               </span>
@@ -37,7 +37,7 @@
         <div>
           {{#if showScore}}
             <div class="score-input {{index}}">
-              {{validation.gru-input-number model=level valuePath='score' min=0 max=200  didValidate=didValidate placeholder=(if (lt index 5) (concat (t 'common.example') (sub 4 index)))}}
+              {{validation/gru-input-number model=level valuePath='score' min=0 max=200  didValidate=didValidate placeholder=(if (lt index 5) (concat (t 'common.example') (sub 4 index)))}}
               <span class="score-error">
                 {{t 'gru-rubric-creation.gru-category.gru-scoring-levels.score-error'}}
               </span>

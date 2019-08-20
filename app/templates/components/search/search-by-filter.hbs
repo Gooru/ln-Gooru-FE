@@ -13,7 +13,7 @@
         <div class="standard-container collapse in" id="standard">
           <span class="sub-title">{{t 'common.category'}}</span>
           <div class="category-standards">
-            {{taxonomy.gru-taxonomy-selector
+            {{taxonomy/gru-taxonomy-selector
                 isEditing=true
                 onSubjectSelected="selectSubject"
                 onCategorySelected="selectCategory"
@@ -23,7 +23,7 @@
                 onlySubjectsWithStandards=true
               }}
             {{#if selectedCourse}}
-              {{taxonomy.gru-taxonomy-picker
+              {{taxonomy/gru-taxonomy-picker
                   browseSelectorText=browseSelectorText
                   onSave=(action 'updateSelectedTags')
                   onSearchPath=(action 'loadTaxonomyData')

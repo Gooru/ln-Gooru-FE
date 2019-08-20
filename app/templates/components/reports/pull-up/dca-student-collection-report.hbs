@@ -74,7 +74,7 @@
   <div>
 
     {{#if assessmentResult}}
-      {{reports.gru-assessment-report
+      {{reports/gru-assessment-report
      areAnswersHidden=areAnswersHidden
      isAnswerKeyHidden=isAnswerKeyHidden
      assessmentResult=assessmentResult
@@ -99,7 +99,7 @@
 
 
 {{#if showOpenEndedPullup}}
-  {{reports.pull-up.open-ended-report-pull-up collectionTitle=assessmentResult.collection.title showPullUp=showOpenEndedPullup context=freeResponseContextParams}}
+  {{reports/pull-up/open-ended-report-pull-up collectionTitle=assessmentResult.collection.title showPullUp=showOpenEndedPullup context=freeResponseContextParams}}
 {{/if}}
 
 {{#if isLoading}}

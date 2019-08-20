@@ -1,11 +1,12 @@
 import Ember from 'ember';
-import { moduleForComponent, test } from 'ember-qunit';
+import { test, moduleForComponent } from 'ember-qunit';
 
 moduleForComponent(
   'class/gru-class-navigation',
   'Unit | Component | class/gru class navigation',
   {
-    integration: false
+    integration: false,
+    needs: ['service:session', 'service:configuration']
   }
 );
 

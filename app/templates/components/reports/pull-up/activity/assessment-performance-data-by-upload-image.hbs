@@ -89,8 +89,8 @@
       </div>
     {{/unless}}
   </div>
-  <div class="right-panel {{if showToggle 'show-toggle'}}">
-    {{#if showToggle}}
+  <div class="right-panel {{if selectedFiles 'show-toggle'}}">
+    {{#if selectedFiles}}
       <div class="toggle-btns">
         <button type="button" class="btn-primary {{unless showScoreReview 'active'}}" {{action 'showImagePreview'}}>
           {{t 'resource.image'}} {{t 'common.preview'}}

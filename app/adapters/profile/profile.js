@@ -508,6 +508,30 @@ export default Ember.Object.extend({
     };
     return Ember.$.ajax(url, options);
   },
+
+  /**
+   * @function searchUserProfiles
+   * @param {Object} searchCriteria
+   * @return {Promise}
+   * Method to do partial search like fetching users based on partial matching user context
+   */
+  searchUserProfiles(searchCriteria) {
+    const adapter = this;
+    const namespace = adapter.get('namespaceV2');
+    const url = `${namespace}/search`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: {
+        partial: true
+      }
+    };
+    options.data = Object.assign(options.data, searchCriteria);
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

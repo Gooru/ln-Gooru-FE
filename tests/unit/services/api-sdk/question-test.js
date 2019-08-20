@@ -7,7 +7,13 @@ import Rubric from 'gooru-web/models/rubric/rubric';
 moduleForService(
   'service:api-sdk/question',
   'Unit | Service | api-sdk/question',
-  {}
+  {
+    needs: [
+      'service:api-sdk/assessment',
+      'service:api-sdk/rubric',
+      'service:api-sdk/collection'
+    ]
+  }
 );
 
 test('createQuestion', function(assert) {
@@ -420,9 +426,7 @@ test('notifyQuizzesCollectionChange with assessment', function(assert) {
   });
 });
 
-test('updateQuestion - OE - Rubric OFF - Scoring ON - From Rubric OFF', function(
-  assert
-) {
+test('updateQuestion - OE - Rubric OFF - Scoring ON - From Rubric OFF', function(assert) {
   const service = this.subject();
   const expectedQuestionId = 'question-id';
   const expectedQuestionModel = QuestionModel.create({
@@ -485,9 +489,7 @@ test('updateQuestion - OE - Rubric OFF - Scoring ON - From Rubric OFF', function
     });
 });
 
-test('updateQuestion - OE - Rubric OFF - Scoring ON - From Rubric ON', function(
-  assert
-) {
+test('updateQuestion - OE - Rubric OFF - Scoring ON - From Rubric ON', function(assert) {
   const service = this.subject();
   const expectedQuestionId = 'question-id';
   const expectedQuestionModel = QuestionModel.create({
@@ -557,9 +559,7 @@ test('updateQuestion - OE - Rubric OFF - Scoring ON - From Rubric ON', function(
     });
 });
 
-test('updateQuestion - OE - Rubric OFF - Scoring OFF - From Rubric OFF', function(
-  assert
-) {
+test('updateQuestion - OE - Rubric OFF - Scoring OFF - From Rubric OFF', function(assert) {
   const service = this.subject();
   const expectedQuestionId = 'question-id';
   const expectedQuestionModel = QuestionModel.create({
@@ -622,9 +622,7 @@ test('updateQuestion - OE - Rubric OFF - Scoring OFF - From Rubric OFF', functio
     });
 });
 
-test('updateQuestion - OE - Rubric OFF - Scoring OFF - From Rubric ON', function(
-  assert
-) {
+test('updateQuestion - OE - Rubric OFF - Scoring OFF - From Rubric ON', function(assert) {
   const service = this.subject();
   const expectedQuestionId = 'question-id';
   const expectedQuestionModel = QuestionModel.create({

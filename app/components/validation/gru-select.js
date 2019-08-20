@@ -40,11 +40,15 @@ export default Ember.Component.extend({
         component.sendAction('onOptionSelect', optionSelected);
       });
       // Change value shown in UI when model changes
-      component.addObserver('optionSelected', function() {
-        if (component.get('optionSelected') !== selectpicker.val()) {
-          selectpicker.selectpicker('val', component.get('optionSelected'));
-        }
-      });
+      if (!component.isDestroyed) {
+        component.addObserver('optionSelected', function() {
+          console.log('optionSelected', 'in observer'); //eslint-disable-line
+
+          if (component.get('optionSelected') !== selectpicker.val()) {
+            selectpicker.selectpicker('val', component.get('optionSelected'));
+          }
+        });
+      }
     });
   },
 

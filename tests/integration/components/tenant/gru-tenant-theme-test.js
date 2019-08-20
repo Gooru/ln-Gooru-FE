@@ -43,7 +43,7 @@ test('Layout', function(assert) {
     })
   );
 
-  this.render(hbs`{{tenant.gru-tenant-theme tenant=tenant}}`);
+  this.render(hbs`{{tenant/gru-tenant-theme tenant=tenant}}`);
 
   var $component = this.$(); //component dom element
 

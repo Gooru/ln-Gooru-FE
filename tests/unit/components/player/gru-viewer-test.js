@@ -6,7 +6,8 @@ moduleForComponent(
   'player/gru-viewer',
   'Unit | Component | player/gru viewer',
   {
-    integration: false
+    integration: false,
+    needs: ['service:configuration']
   }
 );
 
@@ -104,9 +105,7 @@ test('resourceComponentSelected for youtube resource type', function(assert) {
   );
 });
 
-test('buttonTextKey when is not the last resource, no showing feedback', function(
-  assert
-) {
+test('buttonTextKey when is not the last resource, no showing feedback', function(assert) {
   assert.expect(1);
 
   var component = this.subject({
@@ -129,9 +128,7 @@ test('buttonTextKey when is not the last resource, no showing feedback', functio
   );
 });
 
-test('buttonTextKey when is the last resource and assessment, no showing feedback', function(
-  assert
-) {
+test('buttonTextKey when is the last resource and assessment, no showing feedback', function(assert) {
   assert.expect(1);
 
   var component = this.subject({
@@ -155,9 +152,7 @@ test('buttonTextKey when is the last resource and assessment, no showing feedbac
   );
 });
 
-test('buttonTextKey when is the last resource and collection, no showing feedback', function(
-  assert
-) {
+test('buttonTextKey when is the last resource and collection, no showing feedback', function(assert) {
   assert.expect(1);
 
   var component = this.subject({
@@ -181,9 +176,7 @@ test('buttonTextKey when is the last resource and collection, no showing feedbac
   );
 });
 
-test('buttonTextKey when is student and showing feedback and answer submitted and is last result', function(
-  assert
-) {
+test('buttonTextKey when is student and showing feedback and answer submitted and is last result', function(assert) {
   assert.expect(1);
 
   var component = this.subject({
@@ -210,9 +203,7 @@ test('buttonTextKey when is student and showing feedback and answer submitted an
   );
 });
 
-test('buttonTextKey when is student and showing feedback and answer submitted and is not last result', function(
-  assert
-) {
+test('buttonTextKey when is student and showing feedback and answer submitted and is not last result', function(assert) {
   assert.expect(1);
 
   var component = this.subject({
@@ -239,9 +230,7 @@ test('buttonTextKey when is student and showing feedback and answer submitted an
   );
 });
 
-test('buttonTextKey when is student and showing feedback and answer is not submitted', function(
-  assert
-) {
+test('buttonTextKey when is student and showing feedback and answer is not submitted', function(assert) {
   assert.expect(1);
 
   var component = this.subject({
@@ -296,9 +285,7 @@ test('showFeedback using show question feedback setting', function(assert) {
   assert.ok(component.get('showFeedback'), 'Should be true');
 });
 
-test('showFeedback using showQuestionFeedback when collection setting is true', function(
-  assert
-) {
+test('showFeedback using showQuestionFeedback when collection setting is true', function(assert) {
   assert.expect(1);
 
   var component = this.subject({

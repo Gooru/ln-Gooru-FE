@@ -1,4 +1,5 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { test, moduleForComponent } from 'ember-qunit';
+
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import { ASSESSMENT_SHOW_VALUES } from 'gooru-web/config/config';
@@ -10,6 +11,7 @@ moduleForComponent(
     integration: true,
     beforeEach: function() {
       this.inject.service('i18n');
+      this.register('service:popover', Ember.Service.extend({}));
     }
   }
 );
@@ -93,9 +95,7 @@ test('Layout of settings component for assessment', function(assert) {
   //assert.ok($settingsComponent.find('.panel-body .setting.request-to i.public + span').length, "Public label");
 });
 
-test('External action gets called on visibility switch change', function(
-  assert
-) {
+test('External action gets called on visibility switch change', function(assert) {
   assert.expect(3);
   this.on('externalAction', function() {
     assert.ok(true);
@@ -114,9 +114,7 @@ test('External action gets called on visibility switch change', function(
   assert.notOk($toggle.hasClass('off'), 'Toggle on after clicked');
 });
 
-test('External action gets called on backwards switch change', function(
-  assert
-) {
+test('External action gets called on backwards switch change', function(assert) {
   assert.expect(4);
   this.on('externalAction', function() {
     assert.ok(true);
@@ -144,9 +142,7 @@ test('External action gets called on backwards switch change', function(
   );
 });
 
-test('External action gets called on answer key switch change', function(
-  assert
-) {
+test('External action gets called on answer key switch change', function(assert) {
   assert.expect(4);
   this.on('externalAction', function() {
     assert.ok(true);

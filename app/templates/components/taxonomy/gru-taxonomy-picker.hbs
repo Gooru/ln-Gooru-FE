@@ -7,7 +7,7 @@
       <ul>
         {{#each shortcutTags as |tag|}}
           <li>
-            {{taxonomy.gru-taxonomy-tag model=tag onSelect=(action 'openShortcut') }}
+            {{taxonomy/gru-taxonomy-tag model=tag onSelect=(action 'openShortcut') }}
           </li>
         {{/each}}
       </ul>
@@ -19,7 +19,7 @@
     {{#if (and isCompatiableMode selectedTags.length)}}
       <span class="close-picker" {{action "saveSelectedTags" selectedTags}}>{{gru-icon name="clear"}}</span>
     {{/if}}
-    {{taxonomy.gru-browse-selector
+    {{taxonomy/gru-browse-selector
     data=browseItems
     headers=panelHeaders
     selectedPath=selectedPath
@@ -36,7 +36,7 @@
     {{#if selectedTextKey}}
       <span>{{t selectedTextKey count=selectedTags.length}}</span>
     {{/if}}
-    {{taxonomy.gru-taxonomy-tag-list tags=selectedTags onRemove=(action 'uncheckItem')}}
+    {{taxonomy/gru-taxonomy-tag-list tags=selectedTags onRemove=(action 'uncheckItem')}}
   </div>
 
   {{#unless isCompatiableMode}}

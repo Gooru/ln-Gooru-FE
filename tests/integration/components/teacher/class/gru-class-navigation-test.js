@@ -31,7 +31,7 @@ test('Class Navigation', function(assert) {
   this.set('class', classMock);
 
   this.render(
-    hbs`{{teacher.class.gru-class-navigation class=class selectedMenuItem='course-map'}}`
+    hbs`{{teacher/class/gru-class-navigation class=class selectedMenuItem='course-map'}}`
   );
 
   var $component = this.$(); //component dom element
@@ -78,7 +78,7 @@ test('Layout when a menu Item is selected', function(assert) {
   });
 
   this.render(
-    hbs`{{teacher.class.gru-class-navigation onItemSelected='itemSelected'}}`
+    hbs`{{teacher/class/gru-class-navigation onItemSelected='itemSelected'}}`
   );
   var $navigation = this.$(); //component dom element
 

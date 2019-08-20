@@ -5,6 +5,7 @@ import QuestionResult from 'gooru-web/models/result/question';
 import Assessment from 'gooru-web/models/content/assessment';
 import T from 'gooru-web/tests/helpers/assert';
 import { ASSESSMENT_SHOW_VALUES } from 'gooru-web/config/config';
+import wait from 'ember-test-helpers/wait';
 
 moduleForComponent(
   'player/gru-question-viewer',
@@ -83,9 +84,7 @@ test('Layout', function(assert) {
   );
 });
 
-test('Submit button should become enabled and call action on submit', function(
-  assert
-) {
+test('Submit button should become enabled and call action on submit', function(assert) {
   assert.expect(5);
 
   const question = Ember.Object.create({
@@ -134,9 +133,7 @@ test('Submit button should become enabled and call action on submit', function(
   $answerPanel.find('.actions button.save').click();
 });
 
-test('Multiple Answer - Submit button should become enabled by clicking 1 radio button when user answer if provided', function(
-  assert
-) {
+test('Multiple Answer - Submit button should become enabled by clicking 1 radio button when user answer if provided', function(assert) {
   assert.expect(6);
 
   let question = Ember.Object.create({
@@ -174,15 +171,16 @@ test('Multiple Answer - Submit button should become enabled by clicking 1 radio 
     hasAnswers: true
   });
 
-  const userAnswer = [
-    { id: '1', selection: true },
-    { id: '2', selection: false },
-    { id: '3', selection: false }
-  ];
+  // const userAnswer = [
+  //   { id: '1', selection: true },
+  //   { id: '2', selection: false },
+  //   { id: '3', selection: false }
+  // ];
+  // Instead of supplying user answer click thru user answers and assert
   this.set('question', question);
 
   const questionResult = QuestionResult.create({
-    userAnswer: userAnswer,
+    userAnswer: null,
     question: question
   });
 
@@ -205,16 +203,22 @@ test('Multiple Answer - Submit button should become enabled by clicking 1 radio 
     6,
     'Missing answer choices radio inputs'
   );
+  $answerPanel.find('.answer-choices tbody tr:eq(0) input:eq(0)').click(); //clicking answer choice
+
   assert.equal(
     $component.find('.answer-choices tbody tr:eq(0) input:checked').val(),
     'yes|1',
     'Wrong selection for answer 1'
   );
+
+  $answerPanel.find('.answer-choices tbody tr:eq(1) input:eq(1)').click(); //clicking answer choice
   assert.equal(
     $component.find('.answer-choices tbody tr:eq(1) input:checked').val(),
     'no|2',
     'Wrong selection for answer 1'
   );
+
+  $answerPanel.find('.answer-choices tbody tr:eq(2) input:eq(1)').click(); //clicking answer choice
   assert.equal(
     $component.find('.answer-choices tbody tr:eq(2) input:checked').val(),
     'no|3',
@@ -223,15 +227,15 @@ test('Multiple Answer - Submit button should become enabled by clicking 1 radio 
 
   $answerPanel.find('.answer-choices tbody tr:eq(2) input:eq(0)').click(); //clicking yes at last answer choice
 
-  assert.ok(
-    !$answerPanel.find('.actions button.save').attr('disabled'),
-    'Button should not be disabled'
-  );
+  return wait().then(function() {
+    assert.ok(
+      !$answerPanel.find('.actions button.save').attr('disabled'),
+      'Button should not be disabled'
+    );
+  });
 });
 
-test('Clicking on the "Hints" button should display a certain number of hints and then become disabled', function(
-  assert
-) {
+test('Clicking on the "Hints" button should display a certain number of hints and then become disabled', function(assert) {
   const question = Ember.Object.create({
     id: 10,
     order: 2,
@@ -275,7 +279,10 @@ test('Clicking on the "Hints" button should display a certain number of hints an
     'Hint should be displayed'
   );
   assert.equal(
-    $infoSection.find('.hints li:first-child').text().trim(),
+    $infoSection
+      .find('.hints li:first-child')
+      .text()
+      .trim(),
     'Hints text 1',
     'Hint\'s content is incorrect'
   );
@@ -291,7 +298,10 @@ test('Clicking on the "Hints" button should display a certain number of hints an
     'Hints should be displayed'
   );
   assert.equal(
-    $infoSection.find('.hints li:last-child').text().trim(),
+    $infoSection
+      .find('.hints li:last-child')
+      .text()
+      .trim(),
     'Hints text 2',
     'Hint\'s content is incorrect'
   );
@@ -301,9 +311,7 @@ test('Clicking on the "Hints" button should display a certain number of hints an
   );
 });
 
-test('Clicking on the "Explanation" button should display an explanation and then it should become disabled', function(
-  assert
-) {
+test('Clicking on the "Explanation" button should display an explanation and then it should become disabled', function(assert) {
   const question = Ember.Object.create({
     id: 11,
     order: 2,
@@ -518,9 +526,7 @@ test('Show feedback layout, using showQuestionFeedback', function(assert) {
   $answerPanel.find('.actions button.save').click();
 });
 
-test('Show feedback when submitted layout, using collection setting', function(
-  assert
-) {
+test('Show feedback when submitted layout, using collection setting', function(assert) {
   assert.expect(2);
 
   const question = Ember.Object.create({
@@ -559,9 +565,7 @@ test('Show feedback when submitted layout, using collection setting', function(
   assert.ok($answerPanel.find('.feedback').length, 'Feedback should be shown');
 });
 
-test('Show feedback when submitted layout, using showQuestionFeedback setting', function(
-  assert
-) {
+test('Show feedback when submitted layout, using showQuestionFeedback setting', function(assert) {
   assert.expect(2);
 
   const question = Ember.Object.create({

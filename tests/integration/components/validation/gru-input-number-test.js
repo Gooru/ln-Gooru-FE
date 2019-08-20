@@ -40,7 +40,7 @@ test('number input invalid', function(assert) {
     })
   );
   this.render(
-    hbs`{{validation.gru-input-number model=model valuePath='minScore' min=1 max=100 step=1}}`
+    hbs`{{validation/gru-input-number model=model valuePath='minScore' min=1 max=100 step=1}}`
   ); // render the component
   var $component = this.$(); // component dom element
   var $input = $component.find('input[type=number]');
@@ -88,7 +88,7 @@ test('number input range', function(assert) {
     })
   );
   this.render(
-    hbs`{{validation.gru-input-number model=model valuePath='minScore' min=1 max=9 step=1}}`
+    hbs`{{validation/gru-input-number model=model valuePath='minScore' min=1 max=9 step=1}}`
   ); // render the component
   var $component = this.$(); // component dom element
   var $input = $component.find('input[type=number]');
@@ -154,7 +154,7 @@ test('Accept float numbers with increment of 0.5', function(assert) {
     })
   );
   this.render(
-    hbs`{{validation.gru-input-number model=model valuePath='minScore' min=0 max=10 step='0.5'}}`
+    hbs`{{validation/gru-input-number model=model valuePath='minScore' min=0 max=10 step='0.5'}}`
   ); // render the component
   var $component = this.$(); // component dom element
   var $input = $component.find('input[type=number]');
@@ -207,7 +207,7 @@ test('Not allow float numbers with increment of 1', function(assert) {
     })
   );
   this.render(
-    hbs`{{validation.gru-input-number model=model valuePath='minScore' min=0 max=10 step='1'}}`
+    hbs`{{validation/gru-input-number model=model valuePath='minScore' min=0 max=10 step='1'}}`
   );
   var $component = this.$();
   var $input = $component.find('input[type=number]');

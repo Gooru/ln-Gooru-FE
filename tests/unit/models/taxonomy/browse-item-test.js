@@ -1,10 +1,15 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import BrowseItem from 'gooru-web/models/taxonomy/browse-item';
 import TaxonomyItem from 'gooru-web/models/taxonomy/taxonomy-item';
 
-moduleFor('model:taxonomy/browse-item', 'Unit | Model | taxonomy/browse-item', {
-  unit: true
-});
+moduleForComponent(
+  'model:taxonomy/browse-item',
+  'Unit | Model | taxonomy/browse-item',
+  {
+    unit: true
+  }
+);
 
 test('createFromTaxonomyItem -copy up to one level', function(assert) {
   var children = [

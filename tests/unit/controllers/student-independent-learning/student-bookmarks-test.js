@@ -1,10 +1,12 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor(
+moduleForComponent(
   'controller:student-independent-learning/student-bookmarks',
-  'Unit | Controller | student independent learning/student bookmarks', {
-  // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  'Unit | Controller | student independent learning/student bookmarks',
+  {
+    // Specify the other units that are required for this test.
+    needs: ['service:api-sdk/bookmark']
   }
 );
 

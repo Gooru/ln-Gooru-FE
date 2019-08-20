@@ -1,11 +1,12 @@
 import Ember from 'ember';
-import { moduleForComponent, test } from 'ember-qunit';
+import { test, moduleForComponent } from 'ember-qunit';
 
 moduleForComponent(
   'content/modals/gru-add-rubric-to-question',
   'Unit | Component | content/modals/ gru add rubric to question',
   {
-    integration: false
+    integration: false,
+    needs: ['service:api-sdk/rubric', 'service:api-sdk/question']
   }
 );
 

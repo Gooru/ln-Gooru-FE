@@ -122,9 +122,7 @@ test('Select question type', function(assert) {
   );
 });
 
-test('show spinner button component while the server response, after clicking on the add to button', function(
-  assert
-) {
+test('show spinner button component while the server response, after clicking on the add to button', function(assert) {
   this.set('router', {
     transitionTo(route, resourceId, queryParams) {
       return {
@@ -155,6 +153,7 @@ test('show spinner button component while the server response, after clicking on
   const $component = this.$('.gru-question-new');
 
   $component.find('.add').click();
+  this.set('isLoading', true);
 
   return wait().then(function() {
     assert.ok(

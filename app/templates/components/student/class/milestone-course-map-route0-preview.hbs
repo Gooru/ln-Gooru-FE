@@ -15,14 +15,14 @@
     <div class="route0-preview-chart-course-map-container">
       {{#if showChart}}
         <div class="route0-preview-chart">
-          {{class.overview.route-suggestion-proficiency-matrix
+          {{class/overview/route-suggestion-proficiency-matrix
           route0=route0
           class=class
           course=course}}
         </div>
       {{/if}}
       <div class="route0-preview-course-map">
-        {{student.class.milestone-course-map-route0
+        {{student/class/milestone-course-map-route0
           showPerformance=false
           route0=route0
           locateLastPlayedItem=false

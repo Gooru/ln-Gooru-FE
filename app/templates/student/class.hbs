@@ -56,7 +56,7 @@
         </div>
         <div class="taxonomy-standards">
           {{#if course.tags.length}}
-            {{taxonomy.gru-taxonomy-tag-list tags=course.tags tagsVisible=1 isInCard=true hasTooltips=false}}
+            {{taxonomy/gru-taxonomy-tag-list tags=course.tags tagsVisible=1 isInCard=true hasTooltips=false}}
           {{/if}}
         </div>
         <div class="class-code">
@@ -70,7 +70,7 @@
     </div>
   </div>
   {{#if class}}
-      {{student.class.gru-study-navbar
+      {{student/class/gru-study-navbar
         destination=destination
         performanceSummary=class.performanceSummary
         navTitle=class.title
@@ -83,7 +83,7 @@
         openCourseReport='openCourseReport'
         onOpenCAReport='onOpenCAReport'}}
   {{else}}
-  {{student.class.gru-class-navigation
+  {{student/class/gru-class-navigation
     class=class
     onItemSelected="selectMenuItem"
     onCollapseExpandClicked="toggleHeader"
@@ -94,25 +94,25 @@
   </div>
 </div>
 {{#if showCourseReport}}
-  {{reports.pull-up.student-course-report onClosePullUp="onClosePullUp" context=studentCourseReportContext showPullUp=showCourseReport}}
+  {{reports/pull-up/student-course-report onClosePullUp="onClosePullUp" context=studentCourseReportContext showPullUp=showCourseReport}}
 {{/if}}
 
 {{#if isShowClassActivityReport}}
-  {{#reports.pull-up.student-activity-report showPullUp=isShowClassActivityReport title=(t 'teacher-landing.class.offline-class-report.class-activity-report')}}
-    {{reports.pull-up.activity.class-summary-report
+  {{#reports/pull-up/student-activity-report showPullUp=isShowClassActivityReport title=(t 'teacher-landing.class.offline-class-report.class-activity-report')}}
+    {{reports/pull-up/activity/class-summary-report
       classSummary = class.performanceSummaryForDCA
       showPullUp=isShowClassActivityReport
     }}
-  {{/reports.pull-up.student-activity-report}}
+  {{/reports/pull-up/student-activity-report}}
 {{/if}}
 
 {{#if isShowMilestoneReport}}
-  {{#reports.pull-up.milestone.milestone-report
+  {{#reports/pull-up/milestone/milestone-report
     showPullUp = isShowMilestoneReport
     title = course.title
   }}
-    {{reports.pull-up.milestone.student-milestone-performance-report
+    {{reports/pull-up/milestone/student-milestone-performance-report
       class = class
     }}
-  {{/reports.pull-up.milestone.milestone-report}}
+  {{/reports/pull-up/milestone/milestone-report}}
 {{/if}}

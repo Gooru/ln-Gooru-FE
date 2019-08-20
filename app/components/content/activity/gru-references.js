@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { getOASubType } from 'gooru-web/utils/utils';
+import { getOASubType, generateUUID } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['gru-references'],
@@ -44,7 +44,13 @@ export default Ember.Component.extend({
   isExemplarEditing: false,
 
   oaId: null,
+  exemplarUUID: Ember.computed(function() {
+    return `exemplar${generateUUID()}`;
+  }).property(),
 
+  referenceUUID: Ember.computed(function() {
+    return `reference${generateUUID()}`;
+  }).property(),
   // -------------------------------------------------------------------------
   // Events
   init() {

@@ -1,10 +1,15 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import GradeCategoryScore from 'gooru-web/models/rubric/grade-category-score';
 
-moduleFor('model:rubric/rubric-grade', 'Unit | Model | rubric/rubric-grade', {
-  needs: ['validator:presence'],
-  unit: true
-});
+moduleForComponent(
+  'model:rubric/rubric-grade',
+  'Unit | Model | rubric/rubric-grade',
+  {
+    needs: ['validator:presence'],
+    unit: true
+  }
+);
 
 test('scores', function(assert) {
   var model = this.subject({

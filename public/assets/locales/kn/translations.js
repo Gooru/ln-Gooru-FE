@@ -108,6 +108,8 @@ window.i18ln = {
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':
@@ -141,6 +143,7 @@ window.i18ln = {
   'common.plan-activities': 'ಯೋಜಿತ ಚಟುವಟಿಕೆಗಳು ',
   'common.plan-an-activities-msg': 'ನಿಮ್ಮ ಚಟುವಟಿಕೆಗಳನ್ನು ಯೋಜಿಸಿ',
   'common.Reschedule': 'ಮರುಹೊಂದಿಸಿ',
+  'common.a-offline-activity': 'a offline activity',
   'common.no-unschedule-items':
     'ನೀವು ವೇಳಾಪಟ್ಟಿ ಅಗತ್ಯವಿರುವ ಯಾವುದೇ ಚಟುವಟಿಕೆಗಳನ್ನು ಹೊಂದಿಲ್ಲ',
   'common.repeat-activity': 'ಚಟುವಟಿಕೆಯನ್ನು ಪುನರಾವರ್ತಿಸಿ',
@@ -1315,6 +1318,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.student-name':
     'ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು',
   'teacher-landing.class.class-management-tab.student-id': 'ವಿದ್ಯಾರ್ಥಿಯ ಐಡಿ',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'ಶಿಕ್ಷಕರು',
   'teacher-landing.class.class-management-tab.view-report': 'ವೀಕ್ಷಣೆ ವರದಿ',
   'teacher-landing.class.class-management-tab.course-null':
@@ -2777,5 +2781,6 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };

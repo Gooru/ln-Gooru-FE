@@ -1,6 +1,7 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor(
+moduleForComponent(
   'route:student/performance',
   'Unit | Route | student/performance',
   {

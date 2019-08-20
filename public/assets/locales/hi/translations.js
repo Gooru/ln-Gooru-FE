@@ -86,6 +86,8 @@ window.i18ln = {
   'rubric-details': 'Rubric Details',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':
@@ -130,6 +132,7 @@ window.i18ln = {
   'common.a-question': 'एक प्रश्न',
   'common.a-resource': 'एक संसाधन',
   'common.a-rubric': 'एक रुब्रिक',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'सब पूरा हो गया',
   'common.a-assessment': 'एक मूल्यांकन',
   'common.about': 'के बारे में',
@@ -1298,6 +1301,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'छात्र',
   'teacher-landing.class.class-management-tab.student-name': 'छात्र का नाम',
   'teacher-landing.class.class-management-tab.student-id': 'छात्र की आईडी',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'शिक्षक ',
   'teacher-landing.class.class-management-tab.view-report': 'रिपोर्ट देखें',
   'teacher-landing.class.class-management-tab.course-null':
@@ -2748,5 +2752,6 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };

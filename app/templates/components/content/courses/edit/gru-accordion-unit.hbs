@@ -8,7 +8,7 @@
         <h3>{{t "common.unit"}} {{totalItems}}</h3>
       {{/if}}
 
-      {{validation.gru-input model=tempUnit valuePath='title' class="title" maxLength=50 didValidate=didValidate}}
+      {{validation/gru-input model=tempUnit valuePath='title' class="title" maxLength=50 didValidate=didValidate}}
 
       <div class="actions">
         <button class="cancel btn btn-info"  {{action 'cancelEdit'}}>{{t "common.cancel"}}</button>
@@ -40,7 +40,7 @@
                 <span class="legend">{{t 'common.select-a-framework'}}</span>
               {{/unless}}
           </div>
-          {{taxonomy.gru-taxonomy-tag-list tags=selectedTags onRemove=(action 'removeTag')}}
+          {{taxonomy/gru-taxonomy-tag-list tags=selectedTags onRemove=(action 'removeTag')}}
         </div>
       </div>
     </div>
@@ -110,7 +110,7 @@
   <div class="panel-body">
     <ol class="accordion-unit sortable" role="tablist" aria-multiselectable="true">
       {{#each items as |item index|}}
-        {{content.courses.edit.gru-accordion-lesson
+        {{content/courses/edit/gru-accordion-lesson
           course=course
           unitId=unit.id
           model=item

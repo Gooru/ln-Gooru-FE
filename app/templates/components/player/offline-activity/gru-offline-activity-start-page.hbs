@@ -3,7 +3,7 @@
     <div class="project-thumbnail-container">
       <div class="project-standards">
         {{#if oaTaxonomies.length}}
-          {{taxonomy.gru-taxonomy-tag-list tags=oaTaxonomies tagsVisible=1 isInCard=true}}
+          {{taxonomy/gru-taxonomy-tag-list tags=oaTaxonomies tagsVisible=1 isInCard=true}}
         {{/if}}
       </div>
       <div class="project-etc">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="project-references-container">
-      {{player.offline-activity.gru-offline-activity-references
+      {{player/offline-activity/gru-offline-activity-references
         offlineActivity = offlineActivity
       }}
     </div>
@@ -32,7 +32,7 @@
   <div class="task-rubric-container">
     <div class="tasks-container">
       {{#each activityTasks as |task|}}
-        {{player.offline-activity.gru-offline-activity-task-submission
+        {{player/offline-activity/gru-offline-activity-task-submission
           task=task
         }}
       {{else}}
@@ -52,7 +52,7 @@
           </span>
         </div>
         <div class="student categories-container">
-          {{validation.gru-textarea
+          {{validation/gru-textarea
             model=studentRubricCategories
             valuePath='comment'
             maxLength=500
@@ -60,7 +60,7 @@
             placeholder='General Comments Only'
             disabled="disabled"
           }}
-          {{rubric.rubric-category-grades
+          {{rubric/rubric-category-grades
             categories=studentRubricCategories
             isReadOnly=true}}
         </div>
@@ -80,14 +80,14 @@
           </span>
         </div>
         <div class="teacher categories-container">
-          {{validation.gru-textarea
+          {{validation/gru-textarea
             model=activityTeacherRubric
             valuePath='comment'
             maxLength=500
             rows=1
             placeholder='General Comments Only'
           }}
-          {{rubric.rubric-category-grades
+          {{rubric/rubric-category-grades
             categories=teacherRubricCategories
             isReadOnly=true}}
         </div>

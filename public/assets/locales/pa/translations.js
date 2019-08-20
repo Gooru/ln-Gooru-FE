@@ -74,6 +74,8 @@ window.i18ln = {
   'reroute.suggestion.desc':
     'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.by-question': 'question-by-question',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':
@@ -137,6 +139,7 @@ window.i18ln = {
   'common.a-question': 'ਇੱਕ ਸਵਾਲ',
   'common.a-resource': 'ਇੱਕ ਸਰੋਤ',
   'common.a-rubric': 'ਇੱਕ ਚਰਬੀਕਾਰ',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'ਸਭ ਨੂੰ ਪੂਰਾ ਕੀਤਾ',
   'common.a-assessment': 'ਇੱਕ ਮੁਲਾਂਕਣ',
   'common.answer-this-activity':
@@ -1287,6 +1290,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'ਵਿਦਿਆਰਥੀ',
   'teacher-landing.class.class-management-tab.student-name': 'ਵਿਦਿਆਰਥੀ ਦਾ ਨਾਮ',
   'teacher-landing.class.class-management-tab.student-id': 'ਵਿਦਿਆਰਥੀ ਆਈਡੀ',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'ਅਧਿਆਪਕ',
   'teacher-landing.class.class-management-tab.view-report': 'ਰਿਪੋਰਟ ਵੇਖੋ',
   'teacher-landing.class.class-management-tab.course-null':
@@ -2717,5 +2721,6 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };

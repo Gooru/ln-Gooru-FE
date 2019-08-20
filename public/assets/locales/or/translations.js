@@ -93,6 +93,8 @@ window.i18ln = {
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':
@@ -150,6 +152,7 @@ window.i18ln = {
   'common.a-question': 'ଏକ ପ୍ରଶ୍ନ',
   'common.a-resource': 'ଏକ ଉତ୍ସ',
   'common.a-rubric': 'ଏକ ଶୀର୍ଷକ',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'ସମସ୍ତ ସଂପୂର୍ଣ୍ଣ',
   'common.a-assessment': 'ଏକ ମୂଲ୍ୟାଙ୍କନ',
   'common.about': 'ବିଷୟରେ',
@@ -1321,6 +1324,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'ବିଦ୍ୟାର୍ଥୀମାନେ',
   'teacher-landing.class.class-management-tab.student-name': 'ବିଦ୍ୟାର୍ଥୀ ନାମ',
   'teacher-landing.class.class-management-tab.student-id': 'ବିଦ୍ୟାର୍ଥୀ ଆଇଡି',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'ଶିକ୍ଷକମାନେ',
   'teacher-landing.class.class-management-tab.view-report': 'ରିପୋର୍ଟ ଦେଖନ୍ତୁ',
   'teacher-landing.class.class-management-tab.course-null':
@@ -2786,5 +2790,6 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };

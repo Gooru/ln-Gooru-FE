@@ -55,7 +55,7 @@ test('Layout', function(assert) {
   this.set('classActivity', classActivity);
 
   this.render(
-    hbs`{{class.gru-student-class-activity-panel isToday=true isOfflineActivity=false classActivity=classActivity}}`
+    hbs`{{class/gru-student-class-activity-panel isToday=true isOfflineActivity=false classActivity=classActivity}}`
   );
 
   var $component = this.$(); //component dom element
@@ -115,7 +115,7 @@ test('Layout - collection', function(assert) {
   this.set('classActivity', classActivity);
 
   this.render(
-    hbs`{{class.gru-student-class-activity-panel classActivity=classActivity}}`
+    hbs`{{class/gru-student-class-activity-panel classActivity=classActivity}}`
   );
 
   var $component = this.$(); //component dom element

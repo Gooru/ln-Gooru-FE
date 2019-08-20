@@ -53,9 +53,9 @@
           </div>
           <div class="lesson-report-chart">
             {{#if (eq filterByCollectionType 'assessment')}}
-              {{charts.report-bar-chart useTimeSpentScore=false studentChartReportData=assessmentStudentReportData onClickChart="onClickChart"}}
+              {{charts/report-bar-chart useTimeSpentScore=false studentChartReportData=assessmentStudentReportData onClickChart="onClickChart"}}
             {{else}}
-              {{charts.report-bar-chart useTimeSpentScore=true studentChartReportData=collectionStudentReportData onClickChart="onClickChart"}}
+              {{charts/report-bar-chart useTimeSpentScore=true studentChartReportData=collectionStudentReportData onClickChart="onClickChart"}}
             {{/if}}
           </div>
         </div>
@@ -91,7 +91,7 @@
 
       <div class="report-view-container">
         {{#if (eq filterByCollectionType 'assessment')}}
-          {{reports.pull-up.lesson-report-listview
+          {{reports/pull-up/lesson-report-listview
           sortByFirstnameEnabled=sortByFirstnameEnabled
           sortByLastnameEnabled=sortByLastnameEnabled
           sortByScoreEnabled=sortByScoreEnabled
@@ -109,7 +109,7 @@
           isShowMilestoneReport = isShowMilestoneReport
         }}
         {{else}}
-          {{reports.pull-up.lesson-report-listview
+          {{reports/pull-up/lesson-report-listview
           sortByFirstnameEnabled=sortByFirstnameEnabled
           sortByLastnameEnabled=sortByLastnameEnabled
           sortByTimeSpentEnabled=sortByTimeSpentEnabled
@@ -138,5 +138,5 @@
 {{/if}}
 
 {{#if showStudentLessonReport}}
-  {{reports.pull-up.student-lesson-report context=studentLessonReportContext onClosePullUp="onClosePullUp" showPullUp=showStudentLessonReport}}
+  {{reports/pull-up/student-lesson-report context=studentLessonReportContext onClosePullUp="onClosePullUp" showPullUp=showStudentLessonReport}}
 {{/if}}

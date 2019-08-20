@@ -52,7 +52,7 @@
       {{/if}}
       <div class="tasks-section">
         {{#each activityTasks as |task index|}}
-          {{player.offline-activity.gru-offline-activity-task-submission
+          {{player/offline-activity/gru-offline-activity-task-submission
             task=task
             showSubmissions=true
             isReadOnly=true
@@ -109,12 +109,12 @@
               {{#unless studentRubric.scoring}}
                 <div class="no-self-grade">{{t 'self-grade.not-required'}}</div>
               {{else}}
-                {{rubric.rubric-category-grades
+                {{rubric/rubric-category-grades
                   isReadOnly=isTeacher
                   categories=studentRubricCategories}}
               {{/unless}}
               <div class="oa-grade-general-comment-container {{if isTeacher 'disable-event'}}">
-                {{validation.gru-textarea
+                {{validation/gru-textarea
                   model=(if studentRubric.comment studentRubric studentRubric)
                   valuePath='comment'
                   maxLength=500
@@ -140,14 +140,14 @@
             <div class="teacher-grading-panel panel-collapse collapse {{if isTeacher 'in'}}" id="teacher">
               {{#if (and (not teacherRubric.scoring) content.maxScore)}}
                 <div class="oa-grade-rubric-grading {{if (not isTeacher) 'disable-event'}}">
-                  {{validation.gru-input-number model=(if teacherRubric.studentScore teacherRubric teacherRubric)  valuePath='studentScore' min=0 max=content.maxScore}}
+                  {{validation/gru-input-number model=(if teacherRubric.studentScore teacherRubric teacherRubric)  valuePath='studentScore' min=0 max=content.maxScore}}
                   <span class="score">{{content.maxScore}}</span>
                 </div>
               {{else}}
-                {{rubric.rubric-category-grades isReadOnly=(if isTeacher false true) categories=teacherRubricCategories}}
+                {{rubric/rubric-category-grades isReadOnly=(if isTeacher false true) categories=teacherRubricCategories}}
               {{/if}}
               <div class="oa-grade-general-comment-container {{if (not isTeacher) 'disable-event'}}">
-                {{validation.gru-textarea
+                {{validation/gru-textarea
                   model=(if teacherRubric.comment teacherRubric teacherRubric)
                   valuePath='comment'
                   maxLength=500

@@ -4,7 +4,7 @@
       <span> {{profile.firstName}} {{profile.lastName}}</span>
     </div>
 
-    {{reports.assessment.gru-summary
+    {{reports/assessment/gru-summary
   assessmentResult=assessmentResult
   areQuestionLinksHidden=areAnswersHidden
   onSelectAttempt='selectAttempt'
@@ -21,7 +21,7 @@
 
   {{#if tags.length}}
     <div class="standard-tags">
-      {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=4  showDescription=true }}
+      {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=4  showDescription=true }}
     </div>
   {{/if}}
 
@@ -31,7 +31,7 @@
     </div>
   {{else}}
     {{#if orderedQuestions.length}}
-      {{reports.assessment.gru-questions
+      {{reports/assessment/gru-questions
       isAnswerKeyHidden=isAnswerKeyHidden
       results=orderedQuestions
       showReactionBar=showReactionBar
@@ -44,7 +44,7 @@
     }}
     {{/if}}
     {{#if orderedOpenEndedQuestions.length}}
-      {{reports.assessment.gru-questions
+      {{reports/assessment/gru-questions
       isAnswerKeyHidden=isAnswerKeyHidden
       results=orderedOpenEndedQuestions
       viewMode='open-ended'
@@ -54,7 +54,7 @@
     }}
     {{/if}}
     {{#if orderedResources.length}}
-      {{reports.assessment.gru-resources
+      {{reports/assessment/gru-resources
       results=orderedResources
       showReactionBar=showReactionBar}}
     {{/if}}

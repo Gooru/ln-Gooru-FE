@@ -1,4 +1,4 @@
-{{player.gru-study-header
+{{player/gru-study-header
   classId=classId
   collection=collection
   courseId=course.id
@@ -11,7 +11,7 @@
     <div class="player">
       <div class="qz-main" role="main">
         {{#if isDone}}
-          {{player.gru-player-done classId=classId}}
+          {{player/gru-player-done classId=classId}}
         {{else}}
           {{partial 'partials/qz-resource-player'}}
         {{/if}}

@@ -1,6 +1,6 @@
 <div class="student-milestone-summary-report-container">
   <div class="student-report-header-container">
-    {{charts.score-fill-gauge-chart
+    {{charts/score-fill-gauge-chart
       scoreInPercentage = activeMilestone.performance.scoreInPercentage
       timeSpent = activeMilestone.performance.timeSpent
       timeSpentPos = 50
@@ -18,7 +18,7 @@
   <div class="student-report-body-container">
     <div class="milestone-lessons-container {{if isMilestoneNotStarted 'milestone-not-started'}}">
       {{#each milestoneLessons as |milestoneLesson|}}
-        {{reports.pull-up.milestone.student-milestone-lesson-performance-accordion
+        {{reports/pull-up/milestone/student-milestone-lesson-performance-accordion
           lesson = milestoneLesson
           classId = classId
           courseId = courseId

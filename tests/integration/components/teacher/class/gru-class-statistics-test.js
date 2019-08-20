@@ -29,7 +29,7 @@ test('Layout with performance summary', function(assert) {
   });
 
   this.set('class', classMock);
-  this.render(hbs`{{teacher.class.gru-class-statistics class=class}}`);
+  this.render(hbs`{{teacher/class/gru-class-statistics class=class}}`);
   const $statistics = this.$(); //component dom element
 
   const $titleContainer = $statistics.find('.title-statistics');
@@ -47,17 +47,26 @@ test('Layout with performance summary', function(assert) {
   T.exists(assert, $timeSpentContainer, 'Missing class time spent container');
 
   assert.equal(
-    $performanceContainer.find('span').text().trim(),
+    $performanceContainer
+      .find('span')
+      .text()
+      .trim(),
     '90%',
     'Performance incorrect'
   );
   assert.equal(
-    $completionContainer.find('span').text().trim(),
+    $completionContainer
+      .find('span')
+      .text()
+      .trim(),
     '3%',
     'Completion incorrect'
   );
   assert.equal(
-    $timeSpentContainer.find('span').text().trim(),
+    $timeSpentContainer
+      .find('span')
+      .text()
+      .trim(),
     '5m 49s',
     'Time Spent incorrect'
   );
@@ -72,7 +81,7 @@ test('Layout without performance summary', function(assert) {
   });
 
   this.set('class', classMock);
-  this.render(hbs`{{teacher.class.gru-class-statistics class=class}}`);
+  this.render(hbs`{{teacher/class/gru-class-statistics class=class}}`);
   const $statistics = this.$(); //component dom element
 
   const $titleContainer = $statistics.find('.title-statistics');
@@ -90,17 +99,26 @@ test('Layout without performance summary', function(assert) {
   T.exists(assert, $timeSpentContainer, 'Missing class time spent container');
 
   assert.equal(
-    $performanceContainer.find('span').text().trim(),
+    $performanceContainer
+      .find('span')
+      .text()
+      .trim(),
     '--',
     'Performance should not be visible'
   );
   assert.equal(
-    $completionContainer.find('span').text().trim(),
+    $completionContainer
+      .find('span')
+      .text()
+      .trim(),
     '--',
     'Completion should not be visible'
   );
   assert.equal(
-    $timeSpentContainer.find('span').text().trim(),
+    $timeSpentContainer
+      .find('span')
+      .text()
+      .trim(),
     '--',
     'Time Spent should not be visible'
   );

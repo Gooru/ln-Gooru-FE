@@ -99,7 +99,9 @@ export default Ember.Component.extend({
         .map(function(knowledge) {
           return knowledge.get('checked') === true ? knowledge.get('id') : null;
         });
-      this.set('editSelectedKnowledge', selectedKnowledge);
+      if (selectedKnowledge && selectedKnowledge.length > 0) {
+        this.set('editSelectedKnowledge', selectedKnowledge);
+      }
     }
   ),
 

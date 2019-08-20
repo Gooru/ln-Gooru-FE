@@ -24,16 +24,18 @@
         <div class="active-student">
           <div class="student-thumbnail pull-left" style="background-image: url({{activeStudent.avatarUrl}})"></div>
           <div class="student-name pull-left">{{activeStudent.fullName}}</div>
-          <div class="ms-rescope-content-preview">
-            <div class="show-completed-course hidden-xs">
-              {{t 'class.overview.course-map.rescope-toggle'}}
+          {{#if isPremiumClass}}
+            <div class="ms-rescope-content-preview">
+              <div class="show-completed-course hidden-xs">
+                {{t 'class.overview.course-map.rescope-toggle'}}
+              </div>
+              <div class="show-completed-course-btn">
+                {{gru-toggle-button
+                  isChecked=showAllRescopedContent
+                  onToggleButton="onToggleRescope" }}
+              </div>
             </div>
-            <div class="show-completed-course-btn">
-              {{gru-toggle-button
-                isChecked=showAllRescopedContent
-                onToggleButton="onToggleRescope" }}
-            </div>
-          </div>
+          {{/if}}
           <div class="student-close pull-right" {{action "onSelectAll"}}>
             {{gru-icon name="clear"}}
           </div>
@@ -102,11 +104,11 @@
             {{#if isStudentCourseMap}}
               {{#if (and isPremiumClass isAccepted)}}
                 {{#unless (and class.milestoneViewApplicable isMilestoneView)}}
-                  {{class.overview.routesuggestion-coursemap
+                  {{class/overview/routesuggestion-coursemap
                   isEnablePlayer=false
                   route0=route0Contents }}
                 {{else}}
-                  {{student.class.milestone-course-map-route0
+                  {{student/class/milestone-course-map-route0
                    class=class
                    studentId=activeStudent.id
                    locateLastPlayedItem=false
@@ -116,7 +118,7 @@
               <div class="student-coursemap">
                 {{#unless (and class.milestoneViewApplicable isMilestoneView)}}
                   {{#each units as |unit index|}}
-                    {{class.learner.gru-learner-accordion-unit
+                    {{class/learner/gru-learner-accordion-unit
                     currentClass=class
                     studentId=activeStudent.id
                     currentCourse=course
@@ -137,7 +139,7 @@
                     </li>
                   {{/each}}
                 {{else}}
-                  {{student.class.milestone-course-map
+                  {{student/class/milestone-course-map
                   class=class
                   studentId=activeStudent.id
                   allowToPlay=false
@@ -156,7 +158,7 @@
             {{else}}
               <div class="teacher-coursemap">
                 {{#unless (and class.milestoneViewApplicable isMilestoneView)}}
-                  {{class.overview.gru-accordion-course
+                  {{class/overview/gru-accordion-course
                 currentClass=class
                 currentCourse=course
                 classMembers=classMembers
@@ -177,7 +179,7 @@
                 showLocationReport= tab
               }}
                 {{else}}
-                  {{teacher.class.milestone-course-map
+                  {{teacher/class/milestone-course-map
                     class=class
                     gradeSubject=gradeSubject
                     onPreviewContent='onPreviewContent'
@@ -232,17 +234,17 @@
   <div class="no-content">This classroom does not have a related course and it has no content</div>
 {{/if}}
 {{#if showStudentUnitReport}}
-  {{reports.pull-up.student-unit-report onClosePullUp="onClosePullUp" context=studentUnitReportContext showPullUp=showStudentUnitReport}}
+  {{reports/pull-up/student-unit-report onClosePullUp="onClosePullUp" context=studentUnitReportContext showPullUp=showStudentUnitReport}}
 {{/if}}
 {{#if showStudentLessonReport}}
-  {{reports.pull-up.student-lesson-report onClosePullUp="onClosePullUp" context=studentLessonReportContext showPullUp=showStudentLessonReport}}
+  {{reports/pull-up/student-lesson-report onClosePullUp="onClosePullUp" context=studentLessonReportContext showPullUp=showStudentLessonReport}}
 {{/if}}
 {{#if isShowStudentReport}}
-  {{class.gru-report-panel showPullUp=isShowStudentReport onClosePullUp="onClosePullUp" reportData=studentReportContextData model=studentReportContextData.lesson isStudent=false onClosePullUp="onClosePullUp"}}
+  {{class/gru-report-panel showPullUp=isShowStudentReport onClosePullUp="onClosePullUp" reportData=studentReportContextData model=studentReportContextData.lesson isStudent=false onClosePullUp="onClosePullUp"}}
 {{/if}}
 {{#if isShowStudentExternalAssessmentReport}}
   {{
-    reports.pull-up.student-external-assessment-report
+    reports/pull-up/student-external-assessment-report
     reportData=studentReportContextData
     showPullUp=isShowStudentExternalAssessmentReport
     isStudent=studentReportContextData.isStudent
@@ -251,10 +253,10 @@
   }}
 {{/if}}
 {{#if showCourseReport}}
-  {{reports.pull-up.student-course-report onClosePullUp="onClosePullUp=" context=studentCourseReportContext showPullUp=showCourseReport}}
+  {{reports/pull-up/student-course-report onClosePullUp="onClosePullUp=" context=studentCourseReportContext showPullUp=showCourseReport}}
 {{/if}}
 {{#if isShowContentPreview}}
-  {{reports.pull-up.gru-collection-preview
+  {{reports/pull-up/gru-collection-preview
     showPullUp=isShowContentPreview
     previewContentId=previewContent.id
     previewContentType=previewContentType
@@ -263,19 +265,19 @@
 {{/if}}
 
 {{#if isShowStudentMilestoneReport}}
-  {{#reports.pull-up.milestone.milestone-report
+  {{#reports/pull-up/milestone/milestone-report
     showPullUp = isShowStudentMilestoneReport
     title = course.title
   }}
-    {{reports.pull-up.milestone.student-milestone-performance-report
+    {{reports/pull-up/milestone/student-milestone-performance-report
       class = studentClassData
       userId = activeStudent.id
     }}
-  {{/reports.pull-up.milestone.milestone-report}}
+  {{/reports/pull-up/milestone/milestone-report}}
 {{/if}}
 
 {{#if showFRQuestionGrade}}
-  {{grade.pull-up.free-response-question-grade
+  {{grade/pull-up/free-response-question-grade
     isDCAContext=false
     showPullUp=showFRQuestionGrade
     context=itemToGradeContextData
@@ -283,7 +285,7 @@
 {{/if}}
 
 {{#if isShowOfflineActivityPreview}}
-  {{reports.pull-up.oa-preview
+  {{reports/pull-up/oa-preview
     showPullUp=isShowOfflineActivityPreview
     oaId=previewContent.id
     classId=classId

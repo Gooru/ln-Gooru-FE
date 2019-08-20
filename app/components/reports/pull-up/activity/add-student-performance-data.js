@@ -59,6 +59,18 @@ export default Ember.Component.extend(ConfigurationMixin, {
   activityId: Ember.computed.alias('activityData.id'),
 
   /**
+   * It maintains the class id.
+   * @prop {String}
+   */
+  classId: Ember.computed.alias('class.id'),
+
+  /**
+   * It maintains the class code.
+   * @prop {String}
+   */
+  classCode: Ember.computed.alias('class.code'),
+
+  /**
    * It maintains the uploaded files.
    * @prop {Array}
    */
@@ -99,6 +111,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
     if (component.get('isAsessmentAddData') && component.get('allowI2D')) {
       component.searchImageUpload();
     }
+    component.set('uploadedFiles', Ember.A());
   },
   // -------------------------------------------------------------------------
   //Methods

@@ -72,6 +72,8 @@ window.i18ln = {
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
     'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':
@@ -151,6 +153,7 @@ window.i18ln = {
     'There are no projects or other offline activities that have been completed yet',
   'offline-activities.no-active-content':
     'There are no projects or other offline activities that the students are currently working on',
+  'common.a-offline-activity': 'a offline activity',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
   'common.plan-an-activities-msg':
@@ -1285,6 +1288,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'విద్యార్థులు',
   'teacher-landing.class.class-management-tab.student-name': 'విద్యార్థి పేరు',
   'teacher-landing.class.class-management-tab.student-id': 'విద్యార్థి ఐడి',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'ఉపాధ్యాయులు',
   'teacher-landing.class.class-management-tab.view-report':
     'నివేదికను వీక్షించండి',
@@ -2730,5 +2734,6 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };

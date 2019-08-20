@@ -80,7 +80,7 @@
           {{#each studentPerformance.domainCompetencies as |domainCompetencies|}}
             <div class="tab-container">
               <div class="performance-chart-container">
-                {{charts.student-domain-performance domainSeq=domainCompetencies.domainSeq studentSeq=studentSeq competencies=domainCompetencies.competencies}}
+                {{charts/student-domain-performance domainSeq=domainCompetencies.domainSeq studentSeq=studentSeq competencies=domainCompetencies.competencies}}
               </div>
               <div class="competency-count-container"><span class="mastered">{{domainCompetencies.mastered}}</span>/<span class="in-progress">{{domainCompetencies.in-progress}}</span>/<span class="not-started">{{domainCompetencies.not-started}}</span></div>
             </div>
