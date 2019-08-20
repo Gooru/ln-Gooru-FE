@@ -43,6 +43,8 @@
 
       .duration-hours-input {
         text-align: center;
+        border: 1px solid #ccc;
+        border-bottom: 0;
       }
     }
   }
@@ -289,6 +291,8 @@
           .max-score-input {
             width: 65px;
             text-align: center;
+            border: 1px solid #ccc;
+            border-bottom: 0;
           }
         }
       }
