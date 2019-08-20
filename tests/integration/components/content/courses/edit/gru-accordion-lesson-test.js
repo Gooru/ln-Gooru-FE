@@ -478,7 +478,7 @@ test('it renders the lesson correctly, if the lesson has no collections/assessme
 
   const $addActions = $component.find('.view .panel-body > div');
   assert.ok($addActions.length, 'Add actions container');
-  assert.equal($addActions.find('button').length, 5, 'Number of add buttons');
+  assert.equal($addActions.find('button').length, 6, 'Number of add buttons');
 });
 
 test('it expands/collapses the lesson -view mode', function(assert) {
