@@ -113,7 +113,7 @@
         {{/if}}
       </div>
       <div class="frq-grade-right-panel-body">
-        {{#if rubric.scoring}}
+        {{#if (and userGrade rubric.scoring)}}
           <div class="frq-grade-rubric-grading">
             {{validation/gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
             <span class="score">{{rubric.maxScore}}</span>

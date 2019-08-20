@@ -293,8 +293,9 @@
   }}
 {{/if}}
 
+
 {{#if isShowOaGrading}}
-  {{activity.offline.grading-report
+  {{activity/offline/grading-report
     showPullUp=isShowOaGrading
     context=itemToGradeContextData
     itemsToGrade=itemsToGradeList
@@ -305,7 +306,7 @@
 {{/if}}
 
 {{#if isShowStudentOfflineActivityReport}}
-  {{reports.pull-up.oa-preview
+  {{reports/pull-up/oa-preview
     showPullUp=isShowStudentOfflineActivityReport
     oaId=studentReportContextData.collection.id
     isReportView=true
