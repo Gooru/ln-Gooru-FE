@@ -145,6 +145,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
         aboutMe: payload.about,
         avatarUrl: thumbnailUrl,
         rosterId: payload.roster_id,
+        referenceId: payload.reference_id || null,
         followers: payload.followers,
         followings: payload.followings,
         isFollowing: !!payload.isFollowing,

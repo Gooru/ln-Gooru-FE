@@ -1316,6 +1316,7 @@ window.i18ln = {
     'വിദ്യാർഥിയുടെ പേര്',
   'teacher-landing.class.class-management-tab.student-id':
     'വിദ്യാർത്ഥിയുടെ ഐഡി',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'അധ്യാപകർ',
   'teacher-landing.class.class-management-tab.view-report':
     'റിപ്പോർട്ട് കാണുക',

@@ -1250,6 +1250,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'الطلاب',
   'teacher-landing.class.class-management-tab.student-name': 'اسم الطالب',
   'teacher-landing.class.class-management-tab.student-id': 'هوية الطالب',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'المعلمون',
   'teacher-landing.class.class-management-tab.view-report': 'عرض التقرير',
   'teacher-landing.class.class-management-tab.course-null':

@@ -75,6 +75,13 @@ export default Ember.Component.extend({
         searchCriteria.set('isActive', true);
         component.actions.onToggleSearchCriteria(component);
       }
+    },
+
+    //Action triggered when click search icon
+    onSearchStudents() {
+      const component = this;
+      component.set('filteredStudents', Ember.A([]));
+      component.loadStudents();
     }
   },
 
@@ -190,16 +197,22 @@ export default Ember.Component.extend({
     component
       .fetchStudentProfiles()
       .then(function(userProfiles) {
-        const studentProfiles = userProfiles.filter(user => {
-          return user.get('role') === ROLES.STUDENT;
-        });
-        const classMembers = component.get('classMembers');
-        studentProfiles.map(student => {
-          if (!classMembers.findBy('id', student.get('id'))) {
-            component.get('filteredStudents').pushObject(student);
-          }
-        });
-        component.set('isLoading', false);
+        if (!component.isDestroyed) {
+          const studentProfiles = userProfiles.filter(user => {
+            return user.get('role') === ROLES.STUDENT;
+          });
+          const classMembers = component.get('classMembers');
+          studentProfiles.map(student => {
+            if (!classMembers.findBy('id', student.get('id'))) {
+              component.get('filteredStudents').pushObject(student);
+            }
+          });
+          component.set(
+            'filteredStudents',
+            component.get('filteredStudents').sortBy('lastName')
+          );
+          component.set('isLoading', false);
+        }
       })
       .catch(function() {
         component.set('isNoStudentsFound', true);

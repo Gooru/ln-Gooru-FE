@@ -1254,6 +1254,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'Students',
   'teacher-landing.class.class-management-tab.student-name': 'Student Name',
   'teacher-landing.class.class-management-tab.student-id': 'Student ID',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'Teachers',
   'teacher-landing.class.class-management-tab.view-report': 'View Report',
   'teacher-landing.class.class-management-tab.course-null':

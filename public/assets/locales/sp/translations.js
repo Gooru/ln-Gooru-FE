@@ -1316,6 +1316,7 @@ window.i18ln = {
     'Nombre del estudiante',
   'teacher-landing.class.class-management-tab.student-id':
     'Identificación del Estudiante',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'Maestros',
   'teacher-landing.class.class-management-tab.view-report': 'Vista del informe',
   'teacher-landing.class.class-management-tab.course-null':
