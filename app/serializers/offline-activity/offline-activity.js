@@ -418,7 +418,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const appRootPath = serializer.get('appRootPath');
     const thumbnailUrl = activity.thumbnail
       ? basePath + activity.thumbnail
-      : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+      : appRootPath + DEFAULT_IMAGES.OFFLINE_ACTIVITY;
     const metadata = activity.metadata || {};
     return Ember.Object.create({
       id: activity.id,
