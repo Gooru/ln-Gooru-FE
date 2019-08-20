@@ -96,9 +96,8 @@
       <button class="btn btn-success add-prefix" {{action "showModal" "content.modals.gru-assessment-new" newCollectionModel}}>{{t "common.new-assessment"}}</button>
       {{!--  <button class="btn btn-success add-prefix" {{action "showModal" "content.modals.gru-activity-new" newCollectionModel}}>{{t "student-landing.my-performance.activity"}}</button>
       --}}
-      {{#link-to 'content.activity.edit'  newCollectionModel class="btn btn-success add-prefix" }}
-        {{t "student-landing.my-performance.activity"}}
-      {{/link-to}}
+      <button class="btn btn-success add-prefix" {{action "newActivity" newCollectionModel }}>
+        {{t "student-landing.my-performance.activity"}}</button>
     </div>
   </div>
 </div>
