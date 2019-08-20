@@ -92,6 +92,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       resourceCount: libraryPayload.resource_count,
       questionCount: libraryPayload.question_count,
       rubricCount: libraryPayload.rubric_count,
+      offlineActivityCount: libraryPayload.offline_activity_count,
       sequence: libraryPayload.sequence_id,
       shortName: libraryPayload.short_name
     });
@@ -160,7 +161,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
         normalizer: contentData =>
           serializer
             .get('offlineActivitySerializer')
-            .serializeActivity(contentData),
+            .normalizeActivityForLibrary(contentData),
         type: 'offline_activities'
       }
     };
@@ -176,7 +177,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
         ownerDetails: owner
       });
     }
-
     return LibraryContentModel.create({
       library: serializer.normalizeLibrary(payload.library),
       libraryContent

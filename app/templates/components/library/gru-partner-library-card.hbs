@@ -36,6 +36,9 @@
       {{#if hasRubrics}}
         <span class="item total-rubrics"><i data-placement="auto" data-toggle="tooltip" title="{{t "common.rubric"}}" class="icon"></i><span>{{content.rubricCount}}</span></span>
       {{/if}}
+      {{#if hasOfflineActivity}}
+        <span class="item total-oa"><i data-placement="auto" data-toggle="tooltip" title="{{t "common.offline-activity"}}" class="icon"></i><span>{{content.offlineActivityCount}}</span></span>
+      {{/if}}
     </div>
   </div>
 </div>

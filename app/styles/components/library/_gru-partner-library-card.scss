@@ -113,6 +113,13 @@
           }
         }
 
+        .total-oa {
+          i {
+            background-size: contain;
+            background: url("gooru/images/offline.svg") no-repeat;
+          }
+        }
+
         .total-collections {
           i {
             background: url("gooru/images/add_collection.svg") no-repeat;
