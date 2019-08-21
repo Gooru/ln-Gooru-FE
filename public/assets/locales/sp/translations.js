@@ -71,7 +71,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
   'rubric-details': 'Rubric Details',
@@ -756,6 +756,8 @@ window.i18ln = {
   'common.show-more-results': 'Mostrar más resultados',
   'common.show-results': 'Mostrar resultados',
   'common.signUp': 'Regístrate',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'Ordenar alfabéticamente',
   'common.sortAverage': 'Ordenar por Promedio',
   'common.sort-most-recently': 'Ordenar por Actualizaciones más recientes',

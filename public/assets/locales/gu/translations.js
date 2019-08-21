@@ -68,7 +68,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.for': 'for',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',
@@ -740,6 +740,8 @@ window.i18ln = {
   'common.show-more-results': 'વધુ પરિણામો બતાવો',
   'common.show-results': 'પરિણામો બતાવો',
   'common.signUp': 'સાઇન અપ કરો',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'મૂળાક્ષરોમાં સૉર્ટ કરો',
   'common.sortAverage': 'સરેરાશ દ્વારા સૉર્ટ કરો',
   'common.sort-most-recently': 'તાજેતરમાં સુધારાશે દ્વારા સૉર્ટ કરો',

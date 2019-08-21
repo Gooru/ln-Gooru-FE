@@ -65,7 +65,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'i2d.upload-failed':
     'There was an error while uploading this image. Re-upload?',
   'errors.wrongLength':
@@ -761,6 +761,8 @@ window.i18ln = {
   'common.show-more-results': 'மேலும் முடிவுகளைக் காண்பி',
   'common.show-results': 'முடிவுகளை காட்டு',
   'common.signUp': 'பதிவு செய்க',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'அகர வரிசைப்படி வரிசைப்படுத்து',
   'common.sortAverage': 'சராசரியாக வரிசைப்படுத்து',
   'common.sort-most-recently': 'சமீபத்தில் புதுப்பிக்கப்பட்டது',

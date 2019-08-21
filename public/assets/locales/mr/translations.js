@@ -70,7 +70,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.user': 'वापरणारी व्यक्ती',
   'common.content-name': 'आशयाचे नाव',
   'common.lastName': 'आडनाव',
@@ -756,6 +756,8 @@ window.i18ln = {
   'common.show-more-results': 'अधिक परिणाम दर्शवा',
   'common.show-results': 'परिणाम दाखवा',
   'common.signUp': 'साइन अप करा',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'वर्णानुक्रमानुसार क्रमवारी लावा',
   'common.sortAverage': 'सरासरीनुसार क्रमवारी लावा',
   'common.sort-most-recently': 'सर्वात नवीनतम अपडेट झाल्यानुसार क्रमवारी लावा',

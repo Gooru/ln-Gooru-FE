@@ -68,7 +68,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.month': 'month',
   'common.no-content-for-week':
     'No class activities scheduled for the selected period',
@@ -753,6 +753,8 @@ window.i18ln = {
   'common.show-more-results': 'കൂടുതൽ ഫലങ്ങൾ കാണിക്കുക',
   'common.show-results': 'ഫലങ്ങൾ കാണിക്കുക',
   'common.signUp': 'സൈൻ അപ്പ് ചെയ്യുക',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'അക്ഷരമാലാ ക്രമത്തിൽ',
   'common.sortAverage': 'ശരാശരി അനുസരിച്ച്',
   'common.sort-most-recently': 'അടുത്തിടെ അപ്ഡേറ്റുചെയ്തത് അടുക്കുക',
