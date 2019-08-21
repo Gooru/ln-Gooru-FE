@@ -1,40 +1,40 @@
 {{#if (eq editType 'upload')}}
-    <div class="border-bottom">
-        <h3>{{t "oa.references.uploads"}}</h3>
-    </div>
-    <div class='upload-list-container'>
-        {{#each parsedReference as | refItem|}}
-            <div class="text-center">
-                <div class="uploaded-item">
-                    {{#file-picker
-                        accept=refItem.mimeType
-                        preview=false
-                        dropzone=false
-                        fileLoaded=(action 'selectFile')
-                        readAs="readAsFile"
-                        errors=filePickerErrors
-                        onRemoveFile=(action 'resetFileSelection')
-                        extraParams=refItem.subType
-                        }}
-                        <div class="btn no-bgd add-item">{{gru-icon name="add_circle"}}</div>
-                    {{/file-picker}}
-                    <span class="image">
-                        <i class="{{refItem.subType}}-icon"></i>
-                    </span>
-                    <span class="countItem">
-                        {{refItem.count}}
-                    </span>
-                    {{#if (gt refItem.count 0)}}
-                        <button class="remove-uploaded btn no-bgd remove-item hidden" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
-                    {{/if}}
-                </div>
-                <span class="text-capitalize">
-                    {{refItem.subType}}
-                </span>
-            </div>
-        {{/each}}
-    </div>
+  <div class="border-bottom">
+    <h3>{{t "oa.references.uploads"}}</h3>
+  </div>
+  <div class='upload-list-container'>
+    {{#each parsedReference as | refItem|}}
+      <div class="text-center">
+        <div class="uploaded-item">
+          {{#file-picker
+             accept=refItem.mimeType
+             preview=false
+             dropzone=false
+             fileLoaded=(action 'selectFile')
+             readAs="readAsFile"
+             errors=filePickerErrors
+             onRemoveFile=(action 'resetFileSelection')
+             extraParams=refItem.subType
+          }}
+            <div class="btn no-bgd add-item">{{gru-icon name="add_circle"}}</div>
+          {{/file-picker}}
+          <span class="image">
+            <i class="{{refItem.subType}}-icon"></i>
+          </span>
+          <span class="countItem">
+            {{refItem.count}}
+          </span>
+          {{#if (gt refItem.count 0)}}
+            <button class="remove-uploaded btn no-bgd remove-item hidden" {{action 'deleteReference' refItem.refData }}>{{gru-icon name="remove_circle"}}</button>
+          {{/if}}
+        </div>
+        <span class="text-capitalize">
+          {{refItem.subType}}
+        </span>
+      </div>
+    {{/each}}
+  </div>
 {{else}}
-    {{validation/gru-input placeholder='https://example.org' rawInputValue=model.location model=model valuePath='location' class='addUrl col-md-10' maxLength=1000 didValidate=didValidate}}
-    <button class="btn add-item no-bgd" {{action 'updateURLRef'}}>{{gru-icon name="add_circle"}}</button>
+  {{validation/gru-input placeholder='https://example.org' model=model valuePath='location' class='addUrl col-md-10' maxLength=1000 didValidate=didValidate}}
+  <button class="btn add-item no-bgd" {{action 'updateURLRef'}}>{{gru-icon name="add_circle"}}</button>
 {{/if}}
