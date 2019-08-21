@@ -64,7 +64,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
@@ -731,6 +731,8 @@ window.i18ln = {
   'common.show-more-results': 'أظهر المزيد من النتائج',
   'common.show-results': 'أظهر النتائج',
   'common.signUp': 'إنشاء حساب',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'فرز حسب الترتيب أبجدي',
   'common.sortAverage': 'فرز حسب المعدل',
   'common.sort-most-recently': 'فرز حسب آخر تحديث',

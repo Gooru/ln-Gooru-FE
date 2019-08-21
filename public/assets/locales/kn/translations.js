@@ -64,7 +64,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.last': 'ಕೊನೆಯ',
   'common.name': 'ಹೆಸರು',
   'common.user': 'ಬಳಕೆದಾರ ',
@@ -763,6 +763,8 @@ window.i18ln = {
   'common.show-more-results': 'ಹೆಚ್ಚಿನ ಫಲಿತಾಂಶಗಳನ್ನು ತೋರಿಸಿ',
   'common.show-results': 'ಫಲಿತಾಂಶಗಳನ್ನು ತೋರಿಸು',
   'common.signUp': 'ಸೈನ್ ಅಪ್ ಮಾಡಿ',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'ವರ್ಣಮಾಲೆಯ ಪ್ರಕಾರ',
   'common.sortAverage': 'ಸರಾಸರಿ ಪ್ರಕಾರ',
   'common.sort-most-recently': 'ಇತ್ತೀಚೆಗೆ ನವೀಕರಿಸಿದ ಪ್ರಕಾರ',

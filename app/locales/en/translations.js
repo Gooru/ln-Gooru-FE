@@ -705,6 +705,8 @@ window.i18ln = {
   'common.show-more-results': 'Show More Results',
   'common.show-results': 'Show Results',
   'common.signUp': 'Sign Up',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'Sort Alphabetically',
   'common.sortAverage': 'Sort by Average',
   'common.sort-most-recently': 'Sort by Most Recently Updated',

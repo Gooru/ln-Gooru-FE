@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -139,5 +140,16 @@ export default Ember.Component.extend({
       });
       return TaxonomyTag.getTaxonomyTags(standards);
     }
+  }),
+
+  /**
+   * @property {String} suggestedContentType
+   * Property for suggested content type
+   */
+  suggestedContentType: Ember.computed('suggestedContent.type', function() {
+    const suggestedContent = this.get('suggestedContent');
+    return suggestedContent
+      ? suggestedContent.get('type')
+      : CONTENT_TYPES.COLLECTION;
   })
 });

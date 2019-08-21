@@ -7,7 +7,7 @@
   </div>
   <div class="suggestion-details">
     <div class="title">{{t 'reroute.suggestion.title'}}</div>
-    <div class="description">{{ t 'reroute.suggestion.desc'}}</div>
+    <div class="description">{{ t 'reroute.suggestion.desc' suggestionType = (t (concat 'common.signature-' suggestedContentType))}}</div>
     <div class="taxonomy">
       {{#if tags.length}}
         {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
@@ -21,7 +21,7 @@
     </div>
     <div class="suggestion-info-panel">
       <div class="icons">
-        <i class="collection"></i>
+        <i class="{{suggestedContentType}}"></i>
         <span class="suggestion">
           {{gru-icon name="explore"}}
         </span>

@@ -288,7 +288,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.course-map': 'Course Map',
   'common.course': 'Course',
   'common.course-title': 'Course Title',
@@ -745,6 +745,8 @@ window.i18ln = {
   'common.show-more-results': 'Show More Results',
   'common.show-results': 'Show Results',
   'common.signUp': 'Sign Up',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'Sort Alphabetically',
   'common.sortAverage': 'Sort by Average',
   'common.sort-most-recently': 'Sort by Most Recently Updated',

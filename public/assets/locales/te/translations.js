@@ -71,7 +71,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'i2d.new-upload-msg':
     'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
@@ -741,6 +741,8 @@ window.i18ln = {
   'common.show-more-results': 'మరిన్ని ఫలితాలను చూపించు',
   'common.show-results': 'ఫలితాలను చూపించు',
   'common.signUp': 'చేరడం',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'అక్షర క్రమంలో',
   'common.sortAverage': 'సగటు ద్వారా క్రమబద్ధీకరించు',
   'common.sort-most-recently': 'ఇటీవలే నవీకరించబడింది ద్వారా క్రమం',

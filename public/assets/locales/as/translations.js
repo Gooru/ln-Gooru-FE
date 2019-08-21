@@ -62,7 +62,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.name': 'নাম',
   'common.user': 'ব্যৱহাৰকাৰী',
   'common.content-name': 'বিষয়বস্তুৰ নাম',
@@ -763,6 +763,8 @@ window.i18ln = {
   'common.show-more-results': 'আৰু ফলাফল দেখুৱাওক',
   'common.show-results': 'ফলাফল দেখুৱাওক',
   'common.signUp': 'চাইন আপ',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'বৰ্ণানুক্ৰমে শ্ৰেণীবিভাজন কৰক',
   'common.sortAverage': 'মাধ্যৰ ওপৰত ভিত্তি কৰি শ্ৰেণীবিভাজন কৰক',
   'common.sort-most-recently': 'শেহতীয়াকৈ আপডেট কৰাৰ ভিত্তিত শ্ৰেণীবিভাজন কৰক',

@@ -76,7 +76,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.month': 'month',
   'common.no-content-for-week':
     'No class activities scheduled for the selected period',
@@ -766,6 +766,8 @@ window.i18ln = {
   'common.show-more-results': 'ଅଧିକ ଫଳାଫଳ ଦେଖାନ୍ତୁ',
   'common.show-results': 'ଫଳାଫଳ ଗୁଡ଼ିକ ଦେଖାନ୍ତୁ',
   'common.signUp': 'ସାଇନ୍ ଅପ୍',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'ଅକ୍ଷରକ୍ରମରେ ସଜାନ୍ତୁ',
   'common.sortAverage': 'ହାରାହାରି ଭାବେ ସଜାନ୍ତୁ',
   'common.sort-most-recently': 'ସଦ୍ୟତମ ଭାବେ ଅଦ୍ୟତିତ ଦ୍ୱାରା ସଜାନ୍ତୁ',
