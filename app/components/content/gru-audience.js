@@ -117,7 +117,9 @@ export default Ember.Component.extend({
         .map(function(audience) {
           return audience.get('checked') === true ? audience.get('id') : null;
         });
-      this.set('editSelectedAudiences', selectedAudiences);
+      if (selectedAudiences && selectedAudiences.length > 0) {
+        this.set('editSelectedAudiences', selectedAudiences);
+      }
     }
   ),
 
