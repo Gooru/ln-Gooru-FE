@@ -258,7 +258,8 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
     if (component.get('collaborators')) {
       component.readCollaboratorsProfile();
     }
-    //component.set('tempCourse.audience', Ember.A([]));
+    component.set('tempCourse', {});
+    component.set('tempCourse.audience', Ember.A([]));
   },
   // -------------------------------------------------------------------------
   // Properties
