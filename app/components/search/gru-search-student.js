@@ -22,6 +22,11 @@ export default Ember.Component.extend({
     component.resetProperties();
   },
 
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
   willDestroyElement() {
     const component = this;
     component.resetProperties();
