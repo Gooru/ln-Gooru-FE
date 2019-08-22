@@ -423,61 +423,56 @@ export default Ember.Component.extend({
     let courseId = component.get('courseId');
     let fwCode = component.get('fwCode');
 
-    Ember.RSVP
-      .hash({
-        milestoneLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
-          classId,
-          courseId,
-          milestoneId,
-          CONTENT_TYPES.ASSESSMENT,
-          undefined,
-          fwCode
-        )
-      })
-      .then(({ milestoneLessonsPerformance }) => {
-        if (!component.isDestroyed) {
-          lessons.forEach((lesson, index) => {
-            let lessonPerformance = milestoneLessonsPerformance.filterBy(
-              'lessonId',
-              lesson.get('lesson_id')
-            );
-            lesson.set('sequence', index + 1);
-            lesson.set(
-              'performance',
-              Ember.Object.create({
-                scoreInPercentage: null,
-                score: null,
-                timeSpent: null,
-                hasStarted: false
-              })
-            );
-            lesson.set('sequence', index + 1);
+    Ember.RSVP.hash({
+      milestoneLessonsPerformance: performanceService.getLessonsPerformanceByMilestoneId(
+        classId,
+        courseId,
+        milestoneId,
+        CONTENT_TYPES.ASSESSMENT,
+        undefined,
+        fwCode
+      )
+    }).then(({ milestoneLessonsPerformance }) => {
+      if (!component.isDestroyed) {
+        lessons.forEach((lesson, index) => {
+          let lessonPerformance = milestoneLessonsPerformance.filterBy(
+            'lessonId',
+            lesson.get('lesson_id')
+          );
+          lesson.set('sequence', index + 1);
+          lesson.set(
+            'performance',
+            Ember.Object.create({
+              scoreInPercentage: null,
+              score: null,
+              timeSpent: null,
+              hasStarted: false
+            })
+          );
+          lesson.set('sequence', index + 1);
 
-            if (lessonPerformance.length) {
-              let numberOfSubmissions = component.findNumberOfStudentsByItem(
-                lessonPerformance,
-                'lessonId',
-                lesson.get('lesson_id'),
-                'userUid'
-              );
-              lesson.set('numberOfSubmissions', numberOfSubmissions);
-              let lessonAggregatedScore = aggregateMilestonePerformanceScore(
-                lessonPerformance
-              );
-              let lessonAggregatedTimeSpent = aggregateMilestonePerformanceTimeSpent(
-                lessonPerformance
-              );
-              lesson.set(
-                'performance.scoreInPercentage',
-                lessonAggregatedScore
-              );
-              lesson.set('performance.score', lessonAggregatedScore);
-              lesson.set('performance.timeSpent', lessonAggregatedTimeSpent);
-              lesson.set('performance.hasStarted', lessonAggregatedScore >= 0);
-            }
-          });
-        }
-      });
+          if (lessonPerformance.length) {
+            let numberOfSubmissions = component.findNumberOfStudentsByItem(
+              lessonPerformance,
+              'lessonId',
+              lesson.get('lesson_id'),
+              'userUid'
+            );
+            lesson.set('numberOfSubmissions', numberOfSubmissions);
+            let lessonAggregatedScore = aggregateMilestonePerformanceScore(
+              lessonPerformance
+            );
+            let lessonAggregatedTimeSpent = aggregateMilestonePerformanceTimeSpent(
+              lessonPerformance
+            );
+            lesson.set('performance.scoreInPercentage', lessonAggregatedScore);
+            lesson.set('performance.score', lessonAggregatedScore);
+            lesson.set('performance.timeSpent', lessonAggregatedTimeSpent);
+            lesson.set('performance.hasStarted', lessonAggregatedScore >= 0);
+          }
+        });
+      }
+    });
   },
 
   setMilestoneLessonPerformanceData(
@@ -511,79 +506,77 @@ export default Ember.Component.extend({
     let lessonId = lesson.get('lesson_id');
     let performanceService = component.get('performanceService');
 
-    Ember.RSVP
-      .hash({
-        performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
-          classId,
-          courseId,
-          unitId,
-          lessonId,
-          CONTENT_TYPES.ASSESSMENT,
-          undefined
-        ),
-        performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
-          classId,
-          courseId,
-          unitId,
-          lessonId,
-          CONTENT_TYPES.COLLECTION,
-          undefined
-        )
-      })
-      .then(({ performanceAssessment, performanceCollection }) => {
-        let collectionsPerformance = performanceAssessment.concat(
-          performanceCollection
+    Ember.RSVP.hash({
+      performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
+        classId,
+        courseId,
+        unitId,
+        lessonId,
+        CONTENT_TYPES.ASSESSMENT,
+        undefined
+      ),
+      performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
+        classId,
+        courseId,
+        unitId,
+        lessonId,
+        CONTENT_TYPES.COLLECTION,
+        undefined
+      )
+    }).then(({ performanceAssessment, performanceCollection }) => {
+      let collectionsPerformance = performanceAssessment.concat(
+        performanceCollection
+      );
+      collections.forEach((collection, index) => {
+        let collectionPerformances = collectionsPerformance.filterBy(
+          'collectionId',
+          collection.get('id')
         );
-        collections.forEach((collection, index) => {
-          let collectionPerformances = collectionsPerformance.filterBy(
+        collection.set(
+          'performance',
+          Ember.Object.create({
+            scoreInPercentage: null,
+            score: null,
+            timeSpent: null,
+            hasStarted: false
+          })
+        );
+        let isAssessment =
+          collection.get('format') === CONTENT_TYPES.ASSESSMENT ||
+          collection.get('format') === CONTENT_TYPES.EXTERNAL_ASSESSMENT;
+        let isOfflineActivity =
+          collection.get('format') === CONTENT_TYPES.OFFLINE_ACTIVITY;
+        collection.set('isAssessment', isAssessment);
+        collection.set('isOfflineActivity', isOfflineActivity);
+        collection.set('sequence', index + 1);
+        if (collectionPerformances.length) {
+          let numberOfSubmissions = component.findNumberOfStudentsByItem(
+            collectionPerformances,
             'collectionId',
-            collection.get('id')
+            collection.get('id'),
+            'userUid'
+          );
+          collection.set('numberOfSubmissions', numberOfSubmissions);
+          let collectionAggregatedScore =
+            isAssessment || isOfflineActivity
+              ? aggregateMilestonePerformanceScore(collectionPerformances)
+              : null;
+          let collectionAggregatedTimeSpent = aggregateMilestonePerformanceTimeSpent(
+            collectionPerformances
           );
           collection.set(
-            'performance',
-            Ember.Object.create({
-              scoreInPercentage: null,
-              score: null,
-              timeSpent: null,
-              hasStarted: false
-            })
+            'performance.scoreInPercentage',
+            collectionAggregatedScore
           );
-          let isAssessment =
-            collection.get('format') === CONTENT_TYPES.ASSESSMENT ||
-            collection.get('format') === CONTENT_TYPES.EXTERNAL_ASSESSMENT;
-          let isOfflineActivity =
-            collection.get('format') === CONTENT_TYPES.OFFLINE_ACTIVITY;
-          collection.set('isAssessment', isAssessment);
-          collection.set('isOfflineActivity', isOfflineActivity);
-          collection.set('sequence', index + 1);
-          if (collectionPerformances.length) {
-            let numberOfSubmissions = component.findNumberOfStudentsByItem(
-              collectionPerformances,
-              'collectionId',
-              collection.get('id'),
-              'userUid'
-            );
-            collection.set('numberOfSubmissions', numberOfSubmissions);
-            let collectionAggregatedScore =
-              isAssessment || isOfflineActivity
-                ? aggregateMilestonePerformanceScore(collectionPerformances)
-                : null;
-            let collectionAggregatedTimeSpent = aggregateMilestonePerformanceTimeSpent(
-              collectionPerformances
-            );
-            collection.set(
-              'performance.scoreInPercentage',
-              collectionAggregatedScore
-            );
-            collection.set('performance.score', collectionAggregatedScore);
-            collection.set(
-              'performance.timeSpent',
-              collectionAggregatedTimeSpent
-            );
-            collection.set('performance.hasStarted', true);
-          }
-        });
+          collection.set('performance.score', collectionAggregatedScore);
+          collection.set(
+            'performance.timeSpent',
+            collectionAggregatedTimeSpent
+          );
+          collection.set('performance.hasStarted', true);
+        }
       });
+    });
   },
 
   setMilestoneCollectionPerformanceData(
@@ -670,30 +663,34 @@ export default Ember.Component.extend({
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
     let courseId = component.get('courseId');
-
     let selectedLessonIndex = lessons.indexOf(selectedLesson);
     let prevLesson = lessons.objectAt(selectedLessonIndex + 1);
     let nextLesson = lessons.objectAt(selectedLessonIndex - 1);
+    let componentEle = component.$(element);
     if (selectedLesson.get('isActive')) {
-      component.$(element).slideUp(400, function() {
-        selectedLesson.set('isActive', false);
-        if (nextLesson) {
-          nextLesson.set('isNextActive', false);
-        }
-        if (prevLesson) {
-          prevLesson.set('isPrevActive', false);
-        }
-      });
+      if (componentEle) {
+        componentEle.slideUp(400, function() {
+          selectedLesson.set('isActive', false);
+          if (nextLesson) {
+            nextLesson.set('isNextActive', false);
+          }
+          if (prevLesson) {
+            prevLesson.set('isPrevActive', false);
+          }
+        });
+      }
     } else {
-      component.$(element).slideDown(400, function() {
-        selectedLesson.set('isActive', true);
-        if (nextLesson) {
-          nextLesson.set('isNextActive', true);
-        }
-        if (prevLesson) {
-          prevLesson.set('isPrevActive', true);
-        }
-      });
+      if (componentEle) {
+        componentEle.slideDown(400, function() {
+          selectedLesson.set('isActive', true);
+          if (nextLesson) {
+            nextLesson.set('isNextActive', true);
+          }
+          if (prevLesson) {
+            prevLesson.set('isPrevActive', true);
+          }
+        });
+      }
     }
     if (!selectedLesson.get('hasCollectionFetched')) {
       component
