@@ -82,6 +82,9 @@ export default AddToModal.extend({
     var editRoute = this.get('isCollection')
       ? 'content.collections.edit'
       : 'content.assessments.edit';
+    if (this.get('isOA')) {
+      editRoute = 'content.activity.edit';
+    }
     var contentEditUrl = this.get('router').generate(
       editRoute,
       this.get('selectedCollection.id')
