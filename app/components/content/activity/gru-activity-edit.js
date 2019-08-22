@@ -184,6 +184,11 @@ export default CollectionEdit.extend({
 
               let tempOaCollection = this.get('tempCollection');
 
+              var standards = tempOaCollection.get('standards');
+              if (!standards || (standards && standards.length === 0)) {
+                return;
+              }
+
               let imageIdPromise = new Ember.RSVP.resolve(
                 tempOaCollection.get('thumbnailUrl')
               );
