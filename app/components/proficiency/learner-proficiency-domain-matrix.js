@@ -493,9 +493,6 @@ export default Ember.Component.extend({
         component.set('isExpandChartEnabled', true);
       }
       component.set('chartData', chartData);
-      if (component.get('isPlayerProficiency')) {
-        component.highlightStudentMasteredCompetency(chartData);
-      }
     }
     component.onToggleBaseline();
   },
