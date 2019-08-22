@@ -20,7 +20,7 @@
   {{#if (and isShowOfflineActivityPreview tempCollection.id)}}
     <button class="btn btn-default preview" {{action 'showOAReportPopup'}}>{{t "common.preview"}}</button>
     {{#if (and tempCollection.id isShowOfflineActivityPreviewPopup)}}
-      {{reports.pull-up.oa-preview
+      {{reports/pull-up/oa-preview
       showPullUp=isShowOfflineActivityPreviewPopup
       oaId=tempCollection.id
       isReportView=false

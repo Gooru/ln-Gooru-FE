@@ -147,6 +147,13 @@
               background-repeat: no-repeat;
               background-image: url("/assets/gooru/images/collection-orange.svg");
             }
+            &.assessment {
+              width: 30px;
+              height: 30px;
+              background-size: 100%;
+              background-repeat: no-repeat;
+              background-image: url("/assets/gooru/images/assessment-orange.svg");
+            }
           }
         }
       }

@@ -79,7 +79,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.for': 'for',
   'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
@@ -94,6 +94,8 @@ window.i18ln = {
   'common.by-question': 'question-by-question',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':
@@ -149,6 +151,7 @@ window.i18ln = {
     'Currently there are no offline activities assigned to you that are active',
   'oa.student.no-completed-content':
     'There are no offline activities that are completed yet',
+  'common.a-offline-activity': 'a offline activity',
   'common.plan-an-activities-msg':
     'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'পুনরায় সঞ্চালনের জন্য নির্ধারণ',
@@ -732,6 +735,8 @@ window.i18ln = {
   'common.show-more-results': 'আরো ফলাফল প্রদর্শন',
   'common.show-results': 'ফলাফল প্রদর্শন করো',
   'common.signUp': 'নিবন্ধন করুন',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'বর্ণানুক্রমিকভাবে বাছাই করুন',
   'common.sortAverage': 'গড় দ্বারা সাজান',
   'common.sort-most-recently': 'সবচেয়ে সাম্প্রতিক আপডেট দ্বারা সাজান',
@@ -1269,6 +1274,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'ছাত্র',
   'teacher-landing.class.class-management-tab.student-name': 'শিক্ষার্থীর নাম',
   'teacher-landing.class.class-management-tab.student-id': 'শিক্ষার্থী আইডি',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'শিক্ষক',
   'teacher-landing.class.class-management-tab.view-report': 'দেখুন রিপোর্ট',
   'teacher-landing.class.class-management-tab.course-null':
@@ -2702,5 +2708,6 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };

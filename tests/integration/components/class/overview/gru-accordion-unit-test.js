@@ -181,10 +181,6 @@ moduleForComponent(
       this.inject.service('api-sdk/lesson', { as: 'lessonService' });
 
       this.register('service:api-sdk/course-location', courseLocationStub);
-      this.inject.service('api-sdk/course-location', {
-        as: 'courseLocationService'
-      });
-
       this.register('service:api-sdk/performance', performanceServiceStub);
       this.inject.service('api-sdk/performance', { as: 'performanceService' });
 

@@ -23,7 +23,7 @@
                       <p><span class="required">{{t 'common.role'}}</span></p>
                       <div class="roles">
                         {{
-                          validation.gru-radio
+                          validation/gru-radio
                           model=profile
                           groupValue=currentRole
                           valuePath='teacher'
@@ -31,7 +31,7 @@
                           translationPath="common.teacher"
                         }}
                         {{
-                          validation.gru-radio
+                          validation/gru-radio
                           model=profile
                           groupValue=currentRole
                           valuePath='student'
@@ -39,7 +39,7 @@
                           translationPath="common.student"
                         }}
                         {{
-                          validation.gru-radio
+                          validation/gru-radio
                           model=profile
                           groupValue=currentRole
                           valuePath='other'
@@ -58,14 +58,14 @@
                     <div class="form-group">
                       <label>
                         <span class="required">{{t "common.country"}}</span>
-                        {{validation.gru-select options=countries title=(t "common.select") search="true" onOptionSelect="countrySelect" showMessage=showCountryErrorMessage errorMessage=(t "sign-up.error-country-message")}}
+                        {{validation/gru-select options=countries title=(t "common.select") search="true" onOptionSelect="countrySelect" showMessage=showCountryErrorMessage errorMessage=(t "sign-up.error-country-message")}}
                       </label>
                     </div>
                     {{#if showStates}}
                       <div class="form-group">
                         <label>
                           <span class="required">{{t "sign-up.state"}}</span>
-                          {{validation.gru-select options=states title=(t "common.select") search="true" onOptionSelect="stateSelect" showMessage=showStateErrorMessage errorMessage=(t "sign-up.error-state-message")}}
+                          {{validation/gru-select options=states title=(t "common.select") search="true" onOptionSelect="stateSelect" showMessage=showStateErrorMessage errorMessage=(t "sign-up.error-state-message")}}
                         </label>
                       </div>
                     {{/if}}
@@ -73,7 +73,7 @@
                       <div class="form-group">
                         <label>
                           <span>{{t "sign-up.district"}}</span>
-                          {{validation.gru-select options=districts title=(t "common.select") search="true" onOptionSelect="districtSelect"}}
+                          {{validation/gru-select options=districts title=(t "common.select") search="true" onOptionSelect="districtSelect"}}
                         </label>
                       </div>
                       <div class="form-group">

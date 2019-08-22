@@ -42,13 +42,12 @@ export default Ember.Controller.extend(StudentLearnerProficiency, {
       controller
         .get('quizzesAttemptService')
         .getAttemptIds(contextId, profileId)
-        .then(
-          attemptIds =>
-            !attemptIds || !attemptIds.length
-              ? {}
-              : this.get('quizzesAttemptService').getAttemptData(
-                attemptIds[attemptIds.length - 1]
-              )
+        .then(attemptIds =>
+          !attemptIds || !attemptIds.length
+            ? {}
+            : this.get('quizzesAttemptService').getAttemptData(
+              attemptIds[attemptIds.length - 1]
+            )
         )
         .then(attemptData =>
           Ember.RSVP.hash({
@@ -182,7 +181,7 @@ export default Ember.Controller.extend(StudentLearnerProficiency, {
   suggestedContent: Ember.computed('mapLocation', function() {
     let controller = this;
     let suggestions = controller.get('mapLocation.suggestions');
-    return suggestions ? suggestions[0] : null;
+    return suggestions && suggestions[0] ? suggestions[0] : null;
   }),
 
   /**

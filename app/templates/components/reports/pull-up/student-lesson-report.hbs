@@ -116,12 +116,12 @@
 {{/if}}
 
 {{#if showCollectionReport}}
-  {{class.gru-report-panel showPullUp=showCollectionReport  reportData=studentCollectionReportContext model=studentCollectionReportContext.lesson isStudent=studentCollectionReportContext.isStudent onClosePullUp="onClosePullUp"}}
+  {{class/gru-report-panel showPullUp=showCollectionReport  reportData=studentCollectionReportContext model=studentCollectionReportContext.lesson isStudent=studentCollectionReportContext.isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowStudentExternalAssessmentReport}}
   {{
-    reports.pull-up.student-external-assessment-report
+    reports/pull-up/student-external-assessment-report
     showPullUp=isShowStudentExternalAssessmentReport
     reportData=studentCollectionReportContext
     showPullUp=isShowStudentExternalAssessmentReport

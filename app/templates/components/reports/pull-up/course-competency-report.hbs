@@ -25,7 +25,7 @@
                 {{#each dataSet.studentCompetencies as |studentCompetency index|}}
                   <div class="student-competency">
                     <div class="competency-chart">
-                      {{charts.domain-competency-chart domainSeq=dataSet.domainData.domainSeq studentSeq=index competencies=studentCompetency.competencies}}
+                      {{charts/domain-competency-chart domainSeq=dataSet.domainData.domainSeq studentSeq=index competencies=studentCompetency.competencies}}
                     </div>
                     <div class="student-thumbnail" title="{{studentCompetency.fullName}}" data-toggle="tooltip" style="background-image: url({{studentCompetency.thumbnail}})">
                     </div>

@@ -13,7 +13,7 @@
   <div class="panel-body">
     <ol class="panel-group" role="tablist" aria-multiselectable="true">
       {{#each model.lessons as |lesson index|}}
-        {{class.overview.lesson-suggestions class=class course=course
+        {{class/overview/lesson-suggestions class=class course=course
                 unit=model model=lesson
                 userLocationInRoute0=userLocationInRoute0
                 currentResource=currentResource
@@ -22,7 +22,6 @@
                 onSelectResource=(action 'selectResource')
                 onSelectLesson=(action 'updateLesson')
                 onSelectItem="onSelectItem"
-
                 isPlayer=isPlayer onStudyNow=(action 'studyNow')
                 }}
       {{/each}}

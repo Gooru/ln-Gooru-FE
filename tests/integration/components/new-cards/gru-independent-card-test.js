@@ -5,6 +5,33 @@ import T from 'gooru-web/tests/helpers/assert';
 import Location from 'gooru-web/models/learner/location';
 import Performance from 'gooru-web/models/learner/performance';
 
+const courseMock = Ember.Object.create({
+  id: '0101',
+  title: 'Course 1',
+  children: [
+    Ember.Object.create({
+      id: '0102',
+      title: 'Unit 1',
+      children: [
+        Ember.Object.create({
+          id: '0103',
+          title: 'Lesson 1'
+        })
+      ]
+    })
+  ]
+});
+
+const courseServiceStub = Ember.Service.extend({
+  fetchById(courseId) {
+    if (courseId) {
+      return Ember.RSVP.resolve(courseMock);
+    } else {
+      return Ember.RSVP.reject('Fetch failed');
+    }
+  }
+});
+
 moduleForComponent(
   'new-cards/gru-independent-card',
   'Integration | Component | new cards/gru independent card',
@@ -13,6 +40,7 @@ moduleForComponent(
     beforeEach: function() {
       this.container.lookup('service:i18n').set('locale', 'en');
       this.inject.service('i18n');
+      this.register('service:api-sdk/course', courseServiceStub);
     }
   }
 );
@@ -101,7 +129,6 @@ test('Collection Card Layout', function(assert) {
   this.render(
     hbs`{{new-cards/gru-independent-card location=location performance=performance}}`
   );
-
   const $component = this.$(); //component dom element
   const $card = $component.find('.new-gru-independent-card');
   const $panel = $card.find('.panel');

@@ -54,7 +54,7 @@
   </div>
   {{#if (eq selectedMenuName 'courseMap')}}
     <div class="ca-course-map-container">
-      {{teacher.class.ca-course-map
+      {{teacher/class/ca-course-map
         onAddContentToDCA="onAddContentToDCA"
         onScheduleContentToDCA="onScheduleContentToDCA"
         classId=classId
@@ -77,7 +77,7 @@
           {{/if}}
         </div>
         {{#if showFilter}}
-          {{search.search-by-filter
+          {{search/search-by-filter
           isShow=isShow
           onFilterApply="doSearch"
           hideAppScroll=false
@@ -99,7 +99,7 @@
         {{#if (gt searchResults.length 0)}}
           <div class="search-list">
             {{#each searchResultSet as |result|}}
-              {{cards.dca-search-collection-card
+              {{cards/dca-search-collection-card
               onPreviewContent="onPreviewContent"
               onScheduleContentToDCA='onScheduleContentToDCA'
               collection=result contentType=activeContentType
@@ -110,7 +110,7 @@
           </div>
         {{else}}
           {{#unless isLoading}}
-            {{cards.no-suggest-result-found isFromSearch=true}}
+            {{cards/no-suggest-result-found isFromSearch=true}}
           {{/unless}}
         {{/if}}
       </div>
@@ -118,7 +118,7 @@
       <div class="tenant-libraries">
         <div class="libraries-container">
           {{#each libraries as |library|}}
-            {{library.gru-partner-library-card onSelectLibrary='onSelectLibrary' content=library}}
+            {{library/gru-partner-library-card onSelectLibrary='onSelectLibrary' content=library}}
           {{else}}
             <div class="loading-spinner">
               {{three-bounce-spinner}}
@@ -128,14 +128,12 @@
       </div>
     {{/unless}}
   {{/if}}
-
 </div>
 {{#if isLoading}}
   <div class="loading-spinner">
     {{three-bounce-spinner}}
   </div>
 {{/if}}
-
 <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
   {{ca-daterange-datepicker
       closeDatePicker='onCloseDatePicker'
@@ -144,9 +142,8 @@
       endDate=endDate
       allowTwoDateRangePicker=allowTwoDateRangePicker}}
 </div>
-
 {{#if isShowCreateOfflineActivity}}
-  {{activity.gru-new-offline-activity
+  {{activity/gru-new-offline-activity
     isShowPullUp=isShowCreateOfflineActivity
     classPreference=classPreference
     classId=classId

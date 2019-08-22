@@ -17,21 +17,6 @@
         {{gru-icon name="arrow_right"}}
       </a>
     </div>
-    {{#if showReUpload}}
-      <div class="re-upload-container">
-        {{#file-picker
-        accept=mimeType
-        preview=false
-        dropzone=false
-        fileLoaded=(action 'prepareForReUpload')
-        readAs="readAsFile"
-      }}
-          <button type="button" class="re-upload-btn" {{action 'onReUpload'}}>
-            <span>{{gru-icon name="replay"}}</span>
-          </button>
-        {{/file-picker}}
-      </div>
-    {{/if}}
   {{else}}
     {{#unless isLoading}}
       {{#if showStudentScore}}
@@ -63,6 +48,8 @@
         <div class="message">
           {{#if (or (eq activeContent.uploadStatus -1) (eq activeContent.uploadStatus 3))}}
             {{t 'i2d.conversion-error'}}
+          {{else if (not activeContent.uploadStatus)}}
+              {{t 'i2d.new-upload-msg'}}
           {{else}}
             {{t 'i2d.conversion-progress'}}
           {{/if}}
@@ -74,6 +61,21 @@
       </div>
     {{/unless}}
   {{/unless}}
+  {{#if showReUpload}}
+    <div class="re-upload-container">
+      {{#file-picker
+      accept=mimeType
+      preview=false
+      dropzone=false
+      fileLoaded=(action 'prepareForReUpload')
+      readAs="readAsFile"
+    }}
+        <button type="button" class="re-upload-btn" {{action 'onReUpload'}}>
+          <span>{{gru-icon name="replay"}}</span>
+        </button>
+      {{/file-picker}}
+    </div>
+  {{/if}}
   <div class="footer-container {{if showScoreReview 'score-review'}}">
     <div class="preview-slides">
       {{#each previewContents as |image index|}}

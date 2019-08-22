@@ -45,6 +45,8 @@ window.i18ln = {
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':
@@ -63,7 +65,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'i2d.upload-failed':
     'There was an error while uploading this image. Re-upload?',
   'errors.wrongLength':
@@ -156,6 +158,7 @@ window.i18ln = {
   'oa.student.no-completed-content':
     'There are no offline activities that are completed yet',
   'common.add': 'கூட்டு',
+  'common.a-offline-activity': 'a offline activity',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
   'common.plan-an-activities-msg':
@@ -758,6 +761,8 @@ window.i18ln = {
   'common.show-more-results': 'மேலும் முடிவுகளைக் காண்பி',
   'common.show-results': 'முடிவுகளை காட்டு',
   'common.signUp': 'பதிவு செய்க',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'அகர வரிசைப்படி வரிசைப்படுத்து',
   'common.sortAverage': 'சராசரியாக வரிசைப்படுத்து',
   'common.sort-most-recently': 'சமீபத்தில் புதுப்பிக்கப்பட்டது',
@@ -1314,6 +1319,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'மாணவர்கள்',
   'teacher-landing.class.class-management-tab.student-name': 'மாணவன் பெயர்',
   'teacher-landing.class.class-management-tab.student-id': 'மாணவர் அடையாளம்',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'ஆசிரியர்கள்',
   'teacher-landing.class.class-management-tab.view-report': 'அறிக்கை காண்க',
   'teacher-landing.class.class-management-tab.course-null':
@@ -2794,5 +2800,6 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };

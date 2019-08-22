@@ -258,6 +258,8 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
     if (component.get('collaborators')) {
       component.readCollaboratorsProfile();
     }
+    component.set('tempCourse', {});
+    component.set('tempCourse.audience', Ember.A([]));
   },
   // -------------------------------------------------------------------------
   // Properties
@@ -279,12 +281,19 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
    * Copy of the course model used for editing.
    * @property {Course}
    */
-  tempCourse: null,
+  tempCourse: {},
 
   /**
    * @property {string} action name when the location is changed
    */
   onLocationChange: null,
+
+  /**
+   * @property {dummy} this handles undefined parent property setting ember upgrade fix
+   */
+  tempCourseAudience: Ember.observer('tempCourse.audience', function() {
+    Ember.Logger.log('audience', this.get('tempCourse.audience'));
+  }),
 
   /**
    * @property {string} selected lesson id

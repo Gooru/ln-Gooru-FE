@@ -45,6 +45,8 @@ export default Ember.Component.extend({
 
   isExpandedChild: false,
 
+  description: Ember.computed.alias('model.description'),
+
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['content', 'gru-tasks-edit'],

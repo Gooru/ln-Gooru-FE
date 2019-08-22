@@ -70,7 +70,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.user': 'वापरणारी व्यक्ती',
   'common.content-name': 'आशयाचे नाव',
   'common.lastName': 'आडनाव',
@@ -85,6 +85,8 @@ window.i18ln = {
   'common.take-photo': 'फोटो काढा',
   'common.upload-image': 'फोटो अपलोड करा',
   'common.by-question': 'question-by-question',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'फोटो अपलोड होत आहेत. कृपया थोड्यावेळाने पुन्हा तपासून बघा.',
   'i2d.conversion-error':
@@ -134,6 +136,7 @@ window.i18ln = {
   'common.a-question': 'प्रश्न',
   'common.a-resource': 'संसाधन',
   'common.a-rubric': 'निकष',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'सर्व पूर्ण झाले',
   'common.a-assessment': 'मूल्यमापन',
   'common.about': 'याबद्दल',
@@ -753,6 +756,8 @@ window.i18ln = {
   'common.show-more-results': 'अधिक परिणाम दर्शवा',
   'common.show-results': 'परिणाम दाखवा',
   'common.signUp': 'साइन अप करा',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'वर्णानुक्रमानुसार क्रमवारी लावा',
   'common.sortAverage': 'सरासरीनुसार क्रमवारी लावा',
   'common.sort-most-recently': 'सर्वात नवीनतम अपडेट झाल्यानुसार क्रमवारी लावा',
@@ -1299,6 +1304,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'मुले',
   'teacher-landing.class.class-management-tab.student-name': 'मुलाचे नाव',
   'teacher-landing.class.class-management-tab.student-id': 'विद्यार्थी ओळखपत्र',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'शिक्षक',
   'teacher-landing.class.class-management-tab.view-report': 'अहवाल पहा',
   'teacher-landing.class.class-management-tab.course-null':
@@ -2749,5 +2755,6 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };

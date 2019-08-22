@@ -1,11 +1,22 @@
 import Ember from 'ember';
 import { moduleFor, test, skip } from 'ember-qunit';
+
 import MapContext from 'gooru-web/models/map/map-context';
 import { ASSESSMENT_SUB_TYPES } from 'gooru-web/config/config';
 
+const sessionServiceStub = Ember.Service.extend({
+  userId: '12345'
+});
 moduleFor(
   'serializer:map/navigate-map',
-  'Unit | Serializer | map/navigate-map'
+  'Unit | Serializer | map/navigate-map',
+  {
+    needs: ['service:configuration'],
+    beforeEach: function() {
+      this.register('service:session', sessionServiceStub);
+      this.inject.service('session');
+    }
+  }
 );
 
 test('serializeMapContext', function(assert) {

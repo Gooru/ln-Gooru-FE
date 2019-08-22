@@ -1,7 +1,8 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Error from 'gooru-web/models/error';
 
-moduleFor('serializer:error/error', 'Unit | Serializer | error/error');
+moduleForComponent('serializer:error/error', 'Unit | Serializer | error/error');
 
 test('serializeError', function(assert) {
   const serializer = this.subject();

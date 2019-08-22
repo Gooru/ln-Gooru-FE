@@ -1,4 +1,6 @@
-.content .controller.teacher.class.class-activities {
+.teacher_class_class-activities
+  .content
+  .controller.teacher.class.class-activities {
   position: inherit;
   @media only screen and (max-width: $screen-767) {
     .ca-panel {
@@ -7,8 +9,23 @@
       .left-panel,
       .right-panel {
         width: 100%;
+        border-right: 0;
 
         .schedule-container {
+          .ca-schedule-items-header {
+            .ca-add-content {
+              display: grid;
+              grid-template-columns: max-content auto;
+
+              .ca-date-section {
+                grid-column-start: 2;
+                grid-row-start: 2;
+                padding-left: 10px;
+                justify-self: end;
+              }
+            }
+          }
+
           .ca-schedule-section {
             .dca-content-list-container {
               min-height: 48px;
@@ -219,7 +236,11 @@
 
                               &.active {
                                 background-color: #d2e3fc;
-                                background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
+                                background-image: -webkit-linear-gradient(
+                                  top,
+                                  #d2e3fc,
+                                  #d2e3fc
+                                );
                                 border-radius: 50%;
                                 display: flex;
                                 margin: auto;
@@ -234,7 +255,11 @@
 
                               &.today {
                                 background-color: #3486f7;
-                                background-image: -webkit-linear-gradient(top, #3486f7, #3486f7);
+                                background-image: -webkit-linear-gradient(
+                                  top,
+                                  #3486f7,
+                                  #3486f7
+                                );
                                 border-radius: 50%;
                                 display: flex;
                                 margin: auto;

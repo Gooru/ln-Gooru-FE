@@ -15,7 +15,7 @@
             </div>
           </div>
           <div class="card-body">
-            {{charts.proficiency-view domainDataSet=studentDomainPerformance.domainCompetencies studentSeq=studentSeq maxNumberOfCompetencies=maxNumberOfCompetencies}}
+            {{charts/proficiency-view domainDataSet=studentDomainPerformance.domainCompetencies studentSeq=studentSeq maxNumberOfCompetencies=maxNumberOfCompetencies}}
           </div>
         </div>
       {{/each}}
@@ -26,7 +26,7 @@
 {{#if isShowProficiencyPullup}}
   {{#gru-pull-up pullUpType="proficiency-pullup" showPullUp=isShowProficiencyPullup onClosePullUp="onClosePullUp" as |pull-up|}}
     {{#if pull-up.isShowHeader}}
-      {{proficiency.learner-proficiency-pull-up
+      {{proficiency/learner-proficiency-pull-up
          student=activeStudent
          subjectBucket=subjectBucket
          class=class
@@ -38,8 +38,8 @@
 {{/if}}
 
 {{#if isShowCompetencyContentReport}}
-  {{#reports.pull-up.competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
+  {{#reports/pull-up/competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
     onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
-    {{reports.pull-up.competency-content-report competency=selectedCompetency userId=activeStudent.id learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
-  {{/reports.pull-up.competency-report}}
+    {{reports/pull-up/competency-content-report competency=selectedCompetency userId=activeStudent.id learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
+  {{/reports/pull-up/competency-report}}
 {{/if}}

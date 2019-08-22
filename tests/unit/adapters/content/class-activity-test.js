@@ -1,12 +1,11 @@
 import Ember from 'ember';
-import {
-  test
-} from 'ember-qunit';
+import { test } from 'ember-qunit';
 import moduleForAdapter from 'gooru-web/tests/helpers/module-for-adapter';
 
 moduleForAdapter(
   'adapter:content/class-activity',
-  'Unit | Adapter | content/class-activity', {
+  'Unit | Adapter | content/class-activity',
+  {
     // needs: []
   }
 );

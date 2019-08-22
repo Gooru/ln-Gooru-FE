@@ -1,6 +1,10 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('serializer:user-session', 'Unit | Serializer | user-session');
+moduleForComponent(
+  'serializer:user-session',
+  'Unit | Serializer | user-session'
+);
 
 test('serializeSessionAssessments', function(assert) {
   const serializer = this.subject();

@@ -68,7 +68,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.month': 'month',
   'common.no-content-for-week':
     'No class activities scheduled for the selected period',
@@ -93,6 +93,8 @@ window.i18ln = {
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':
@@ -155,6 +157,7 @@ window.i18ln = {
   'common.accept': 'സ്വീകരിക്കൂ',
   'common.ignore': 'അവഗണിക്കുക',
   'common.add': 'ചേർക്കുക',
+  'common.a-offline-activity': 'a offline activity',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
   'common.plan-an-activities-msg':
@@ -750,6 +753,8 @@ window.i18ln = {
   'common.show-more-results': 'കൂടുതൽ ഫലങ്ങൾ കാണിക്കുക',
   'common.show-results': 'ഫലങ്ങൾ കാണിക്കുക',
   'common.signUp': 'സൈൻ അപ്പ് ചെയ്യുക',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'അക്ഷരമാലാ ക്രമത്തിൽ',
   'common.sortAverage': 'ശരാശരി അനുസരിച്ച്',
   'common.sort-most-recently': 'അടുത്തിടെ അപ്ഡേറ്റുചെയ്തത് അടുക്കുക',
@@ -1313,6 +1318,7 @@ window.i18ln = {
     'വിദ്യാർഥിയുടെ പേര്',
   'teacher-landing.class.class-management-tab.student-id':
     'വിദ്യാർത്ഥിയുടെ ഐഡി',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'അധ്യാപകർ',
   'teacher-landing.class.class-management-tab.view-report':
     'റിപ്പോർട്ട് കാണുക',
@@ -2785,5 +2791,6 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };

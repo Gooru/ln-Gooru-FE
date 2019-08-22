@@ -6170,9 +6170,9 @@ quick-temp@^0.1.0, quick-temp@^0.1.2, quick-temp@^0.1.3, quick-temp@^0.1.5:
     rimraf "^2.5.4"
     underscore.string "~3.3.4"
 
-"quizzes-addon@file:./quizzes-addon-4.1.0.tgz":
-  version "4.1.0"
-  resolved "./quizzes-addon-4.1.0.tgz#911fe4640597a05cb03b8982a96891f4d9075d5f"
+quizzes-addon@./quizzes-addon-4.7.20-beta.tgz:
+  version "4.7.19"
+  resolved "./quizzes-addon-4.7.20-beta.tgz#6b7be716a03bfa6f8cf1d2c5815990a5c6666044"
   dependencies:
     broccoli-static-compiler "^0.2.2"
     ember-cli-babel "^5.1.7"

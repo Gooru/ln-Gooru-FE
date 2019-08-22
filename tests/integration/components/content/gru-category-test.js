@@ -16,7 +16,7 @@ moduleForComponent(
 test('Layout - read only', function(assert) {
   this.set('srcCategory', TAXONOMY_CATEGORIES[0].value);
   this.render(hbs`
-    {{content.gru-category isEditing=false srcCategory=srcCategory}}
+    {{content/gru-category isEditing=false srcCategory=srcCategory}}
   `);
 
   const $component = this.$('.content.gru-category');
@@ -39,7 +39,7 @@ test('Layout - edit', function(assert) {
   this.set('srcCategory', TAXONOMY_CATEGORIES[0].value);
   this.set('editCategory', TAXONOMY_CATEGORIES[0].value);
   this.render(hbs`
-    {{content.gru-category isEditing=true srcCategory=srcCategory editCategory=editCategory}}
+    {{content/gru-category isEditing=true srcCategory=srcCategory editCategory=editCategory}}
   `);
 
   const $component = this.$('.content.gru-category');

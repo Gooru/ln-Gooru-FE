@@ -140,16 +140,19 @@ export default Ember.Object.extend(ConfigurationMixin, {
         ? ASSESSMENT_SUB_TYPES.SIGNATURE_COLLECTION
         : ASSESSMENT_SUB_TYPES.SIGNATURE_ASSESSMENT;
     let pathType = subType ? 'system' : null;
-
+    let thumbnail = data.thumbnail
+      ? basePath + data.thumbnail
+      : appRootPath +
+        (data.format === CONTENT_TYPES.ASSESSMENT
+          ? DEFAULT_IMAGES.ASSESSMENT
+          : DEFAULT_IMAGES.COLLECTION);
     return MapSuggestion.create(Ember.getOwner(this).ownerInjection(), {
       id: data.id,
       title: data.title,
       type: data.format,
       questionCount: data.questionCount,
       resourceCount: data.resourceCount,
-      thumbnail: data.thumbnail
-        ? basePath + data.thumbnail
-        : appRootPath + DEFAULT_IMAGES.COLLECTION,
+      thumbnail,
       resourceFormat: ResourceModel.normalizeResourceFormat(data.subformat),
       subType,
       pathType: pathType,

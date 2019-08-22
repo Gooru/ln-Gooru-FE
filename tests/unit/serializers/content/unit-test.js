@@ -1,9 +1,13 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Ember from 'ember';
 import Lesson from 'gooru-web/models/content/lesson';
 import Unit from 'gooru-web/models/content/unit';
 
-moduleFor('serializer:content/unit', 'Unit | Serializer | content/unit');
+moduleForComponent(
+  'serializer:content/unit',
+  'Unit | Serializer | content/unit'
+);
 
 test('serializeCreateUnit', function(assert) {
   const serializer = this.subject();

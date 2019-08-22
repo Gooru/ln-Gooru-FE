@@ -6,7 +6,7 @@
       {{else}}
         <h3>{{t "common.lesson"}} {{totalItems}}</h3>
       {{/if}}
-      {{validation.gru-input model=tempLesson valuePath='title' class="title" maxLength=50 didValidate=didValidate}}
+      {{validation/gru-input model=tempLesson valuePath='title' class="title" maxLength=50 didValidate=didValidate}}
       <div class="actions">
         <button class="cancel btn btn-info" {{action 'cancelEdit'}}>{{t "common.cancel"}}</button>
         <button class="save btn btn-success" {{action 'saveLesson'}}>{{t "common.save"}}</button>
@@ -55,8 +55,10 @@
             <ul class="dropdown-menu dropdown-menu-right">
               <li><a href="#" {{action "fromMyCollections"}}>{{t "common.from-my-collections"}}</a></li>
               <li><a href="#" {{action "fromMyAssessments"}}>{{t "common.from-my-assessments"}}</a></li>
+              <li><a href="#" {{action "fromMyActivities"}}>From My Activities</a></li>
               <li><a href="#" {{action "showModal" "content.modals.gru-collection-new" newCollectionModel}}>{{t "common.new-collection"}}</a></li>
               <li><a href="#" {{action "showModal" "content.modals.gru-assessment-new" newCollectionModel}}>{{t "common.new-assessment"}}</a></li>
+              <li><a href="#" {{action "newActivity" newCollectionModel }}> {{t "student-landing.my-performance.activity"}}</a></li>
             </ul>
           </div>
           <button class="btn sort-items" {{action 'sortLessonItems'}} title="{{t 'common.swap'}}">{{gru-icon name="swap_vert"}}</button>
@@ -71,7 +73,7 @@
   <div class="panel-body">
     <ol class="accordion-lesson sortable" role="tablist" aria-multiselectable="true">
       {{#each items as |item index|}}
-        {{content.courses.edit.gru-accordion-lesson-item
+        {{content/courses/edit/gru-accordion-lesson-item
           model=item
           course=course
           index=index
@@ -89,13 +91,13 @@
     <div>
       <button class="btn btn-success add-prefix" {{action "fromMyCollections"}}>{{t "common.from-my-collections"}}</button>
       <button class="btn btn-success add-prefix" {{action "fromMyAssessments"}}>{{t "common.from-my-assessments"}}</button>
+      <button class="btn btn-success add-prefix" {{action "fromMyActivities"}}> From My Activities </button>
       <button class="btn btn-success add-prefix" {{action "showModal" "content.modals.gru-collection-new" newCollectionModel}}>{{t "common.new-collection"}}</button>
       <button class="btn btn-success add-prefix" {{action "showModal" "content.modals.gru-assessment-new" newCollectionModel}}>{{t "common.new-assessment"}}</button>
       {{!--  <button class="btn btn-success add-prefix" {{action "showModal" "content.modals.gru-activity-new" newCollectionModel}}>{{t "student-landing.my-performance.activity"}}</button>
       --}}
-      {{#link-to 'content.activity.edit' newCollectionModel class="btn btn-success add-prefix" }}
-        {{t "student-landing.my-performance.activity"}}
-      {{/link-to}}
+      <button class="btn btn-success add-prefix" {{action "newActivity" newCollectionModel }}>
+        {{t "student-landing.my-performance.activity"}}</button>
     </div>
   </div>
 </div>

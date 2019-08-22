@@ -8,7 +8,13 @@ moduleForComponent(
   'new-cards/gru-collection-card',
   'Unit | Component | new-cards/gru collection card',
   {
-    integration: false
+    integration: false,
+    needs: [
+      'service:session',
+      'service:api-sdk/assessment',
+      'service:api-sdk/collection',
+      'service:api-sdk/course'
+    ]
   }
 );
 

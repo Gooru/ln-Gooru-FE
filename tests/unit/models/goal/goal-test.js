@@ -1,7 +1,8 @@
 import { GOAL_STATUS } from 'gooru-web/config/config';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
-moduleFor('model:goal/goal', 'Unit | Model | goal/goal', {
+moduleForComponent('model:goal/goal', 'Unit | Model | goal/goal', {
   unit: true
 });
 

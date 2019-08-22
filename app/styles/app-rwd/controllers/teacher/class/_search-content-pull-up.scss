@@ -38,6 +38,15 @@
           }
 
           .search-content-type-filter {
+            .filter-content-types {
+              padding-left: 0;
+
+              .filter-item {
+                margin-left: 0;
+                margin-right: 0;
+              }
+            }
+
             .search-by-filter {
               .search-panel {
                 .search-content {

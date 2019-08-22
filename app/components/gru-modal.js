@@ -23,9 +23,16 @@ export default Ember.Component.extend(ModalMixin, {
   // Events
 
   didInsertElement: function() {
-    var self = this;
-
+    let self = this;
     // Add event listener
+    this.$().on('show.bs.modal', event => {
+      Ember.run.later(function() {
+        $(event.target)
+          .find('input:first')
+          .focus();
+      }, 300);
+    });
+
     this.$().on('hidden.bs.modal', function() {
       // Force the ember run loop to run right away
       Ember.run(function() {
@@ -42,6 +49,7 @@ export default Ember.Component.extend(ModalMixin, {
 
   willDestroyElement: function() {
     this.$().off('hidden.bs.modal');
+    this.$().off('show.bs.modal');
   },
 
   // -------------------------------------------------------------------------

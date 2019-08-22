@@ -40,18 +40,19 @@ export default Ember.Component.extend({
     var component = this;
     component._super(...arguments);
 
-    component.get('lookupService').readAudiences().then(function(audiences) {
-      if (!component.isDestroyed) {
-        component.set('audiences', audiences);
-        component.set(
-          'editAudiences',
-          component.getOptionsArray(
+    component
+      .get('lookupService')
+      .readAudiences()
+      .then(function(audiences) {
+        if (!component.isDestroyed) {
+          component.set('audiences', audiences);
+          let editedOptions = component.getOptionsArray(
             audiences,
             component.get('srcSelectedAudiences')
-          )
-        );
-      }
-    });
+          );
+          component.set('editAudiences', editedOptions);
+        }
+      });
   },
 
   /**
@@ -116,7 +117,6 @@ export default Ember.Component.extend({
         .map(function(audience) {
           return audience.get('checked') === true ? audience.get('id') : null;
         });
-
       this.set('editSelectedAudiences', selectedAudiences);
     }
   ),

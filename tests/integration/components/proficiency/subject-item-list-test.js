@@ -25,7 +25,7 @@ test('Subject Item List Layout', function(assert) {
   ]);
   this.set('taxonomySubjects', taxonomySubjects);
   this.render(
-    hbs`{{proficiency.subject-item-list taxonomySubjects=taxonomySubjects}}`
+    hbs`{{proficiency/subject-item-list taxonomySubjects=taxonomySubjects}}`
   );
   T.exists(assert, $component.find('.list-item'), 'Missing subject list item');
 });

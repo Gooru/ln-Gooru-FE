@@ -253,9 +253,7 @@ test('it can edit an existing lesson', function(assert) {
   assert.equal(lesson.get('isEditing'), false, 'Lesson is no longer editable');
 });
 
-test('it shows an error message if it fails to create a new lesson', function(
-  assert
-) {
+test('it shows an error message if it fails to create a new lesson', function(assert) {
   assert.expect(2);
 
   const context = this;
@@ -365,9 +363,7 @@ test('it renders a form when editing an existing lesson', function(assert) {
   );
 });
 
-test('it triggers an external event when clicking cancel on a new unsaved lesson', function(
-  assert
-) {
+test('it triggers an external event when clicking cancel on a new unsaved lesson', function(assert) {
   assert.expect(1);
 
   const lesson = BuilderItem.create({
@@ -392,9 +388,7 @@ test('it triggers an external event when clicking cancel on a new unsaved lesson
   $component.find('.edit .actions button.cancel').click();
 });
 
-test('it renders the lesson correctly, if the lesson has no collections/assessments -view mode', function(
-  assert
-) {
+test('it renders the lesson correctly, if the lesson has no collections/assessments -view mode', function(assert) {
   const lesson = BuilderItem.create({
     data: Lesson.create(Ember.getOwner(this).ownerInjection(), {
       id: '123',
@@ -450,7 +444,7 @@ test('it renders the lesson correctly, if the lesson has no collections/assessme
   assert.ok($addDropdown.hasClass('open'), 'Add dropdown is open');
   assert.equal(
     $addDropdown.find('.dropdown-menu li').length,
-    4,
+    6,
     'Dropdown options'
   );
 
@@ -484,7 +478,7 @@ test('it renders the lesson correctly, if the lesson has no collections/assessme
 
   const $addActions = $component.find('.view .panel-body > div');
   assert.ok($addActions.length, 'Add actions container');
-  assert.equal($addActions.find('button').length, 4, 'Number of add buttons');
+  assert.equal($addActions.find('button').length, 6, 'Number of add buttons');
 });
 
 test('it expands/collapses the lesson -view mode', function(assert) {
@@ -541,9 +535,7 @@ test('it expands/collapses the lesson -view mode', function(assert) {
   );
 });
 
-test('it loads lesson items and renders them after clicking on the lesson name', function(
-  assert
-) {
+test('it loads lesson items and renders them after clicking on the lesson name', function(assert) {
   const lesson = BuilderItem.create({
     data: Lesson.create(Ember.getOwner(this).ownerInjection(), {
       id: '123',

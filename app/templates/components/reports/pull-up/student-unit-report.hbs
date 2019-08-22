@@ -56,7 +56,7 @@
       </div>
       {{#if tags.length}}
         <div class="report-standard-tags">
-          {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=4  showDescription=true }}
+          {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=4  showDescription=true }}
         </div>
       {{/if}}
     </div>
@@ -104,5 +104,5 @@
 {{/if}}
 
 {{#if showLessonReport}}
-  {{reports.pull-up.student-lesson-report context=studentLessonReportContext showPullUp=showLessonReport onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/student-lesson-report context=studentLessonReportContext showPullUp=showLessonReport onClosePullUp="onClosePullUp"}}
 {{/if}}

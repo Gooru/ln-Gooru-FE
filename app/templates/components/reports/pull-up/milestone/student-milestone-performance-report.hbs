@@ -1,6 +1,6 @@
 <div class="student-milestones-performance-container">
   <div class="header-container">
-    {{charts.score-fill-gauge-chart
+    {{charts/score-fill-gauge-chart
       scoreInPercentage = courseScoreInPercentage
     }}
   </div>
@@ -28,11 +28,11 @@
 </div>
 
 {{#if isShowMilestoneReport}}
-  {{#reports.pull-up.milestone.milestone-report
+  {{#reports/pull-up/milestone/milestone-report
     showPullUp = isShowMilestoneReport
     title = (concat gradeSubject.title ' - ' selectedMilestone.grade_name)
   }}
-    {{reports.pull-up.milestone.student-milestone-summary-report
+    {{reports/pull-up/milestone/student-milestone-summary-report
       activeMilestone = selectedMilestone
       class = class
       milestones = milestones
@@ -40,5 +40,5 @@
       userId = userId
       gradeSubject = gradeSubject
     }}
-  {{/reports.pull-up.milestone.milestone-report}}
+  {{/reports/pull-up/milestone/milestone-report}}
 {{/if}}

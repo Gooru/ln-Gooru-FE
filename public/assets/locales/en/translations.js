@@ -71,6 +71,8 @@ window.i18ln = {
   'common.by-question': 'question-by-question',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'There was an error when trying to convert the image. Please resubmit the image',
   'file-picker-placeholder': 'Choose a file or drag it here',
@@ -126,6 +128,7 @@ window.i18ln = {
   'common.a-question': 'a question',
   'common.a-resource': 'a resource',
   'common.a-rubric': 'a rubric',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'All Completed',
   'common.a-assessment': 'an assessment',
   'common.about': 'About',
@@ -285,7 +288,7 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.course-map': 'Course Map',
   'common.course': 'Course',
   'common.course-title': 'Course Title',
@@ -742,6 +745,8 @@ window.i18ln = {
   'common.show-more-results': 'Show More Results',
   'common.show-results': 'Show Results',
   'common.signUp': 'Sign Up',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'Sort Alphabetically',
   'common.sortAverage': 'Sort by Average',
   'common.sort-most-recently': 'Sort by Most Recently Updated',
@@ -1291,6 +1296,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'Students',
   'teacher-landing.class.class-management-tab.student-name': 'Student Name',
   'teacher-landing.class.class-management-tab.student-id': 'Student ID',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'Teachers',
   'teacher-landing.class.class-management-tab.view-report': 'View Report',
   'teacher-landing.class.class-management-tab.course-null':
@@ -1473,6 +1479,11 @@ window.i18ln = {
   'gru-add-to.add-collection-to-lesson': 'Add from my collections',
   'gru-add-to.add-collection-to-lesson-lead':
     'Select a collection to add to this lesson.',
+  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.OA-info':
+    'The activities listed here <b>do not</b> belong to another lesson or course',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'Select a activity to add to this lesson.',
   'gru-add-to.add-to-collection': 'Add to collection',
   'gru-add-to.add-to-collection-lead':
     'Choose a collection you want to add {{contentTitle}} to',
@@ -2728,6 +2739,7 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };
 //export default window.i18ln;

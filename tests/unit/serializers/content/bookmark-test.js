@@ -1,7 +1,8 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import BookmarkModel from 'gooru-web/models/content/bookmark';
 
-moduleFor(
+moduleForComponent(
   'serializer:content/bookmark',
   'Unit | Serializer | content/bookmark'
 );

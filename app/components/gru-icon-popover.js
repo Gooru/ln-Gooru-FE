@@ -5,8 +5,6 @@ export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
 
-  contentService: Ember.inject.service('popover'),
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['gru-icon-popover', 'material-icons'],
@@ -73,8 +71,8 @@ export default Ember.Component.extend({
   // Events
 
   /**
-  * Overwrites didInsertElement hook to add clipboard and popover functionality
-  */
+   * Overwrites didInsertElement hook to add clipboard and popover functionality
+   */
 
   didInsertElement: function() {
     var component = this;

@@ -71,10 +71,12 @@ window.i18ln = {
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>Signature Collections</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
   'rubric-details': 'Rubric Details',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.conversion-error':
@@ -134,6 +136,7 @@ window.i18ln = {
   'common.a-question': 'una pregunta',
   'common.a-resource': 'un recurso',
   'common.a-rubric': 'Una rúbrica',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'Todo completado',
   'common.a-assessment': 'Una evaluación',
   'common.about': 'Acerca de',
@@ -753,6 +756,8 @@ window.i18ln = {
   'common.show-more-results': 'Mostrar más resultados',
   'common.show-results': 'Mostrar resultados',
   'common.signUp': 'Regístrate',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'Ordenar alfabéticamente',
   'common.sortAverage': 'Ordenar por Promedio',
   'common.sort-most-recently': 'Ordenar por Actualizaciones más recientes',
@@ -1313,6 +1318,7 @@ window.i18ln = {
     'Nombre del estudiante',
   'teacher-landing.class.class-management-tab.student-id':
     'Identificación del Estudiante',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'Maestros',
   'teacher-landing.class.class-management-tab.view-report': 'Vista del informe',
   'teacher-landing.class.class-management-tab.course-null':
@@ -2768,5 +2774,6 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };

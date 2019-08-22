@@ -82,6 +82,9 @@ export default AddToModal.extend({
     var editRoute = this.get('isCollection')
       ? 'content.collections.edit'
       : 'content.assessments.edit';
+    if (this.get('isOA')) {
+      editRoute = 'content.activity.edit';
+    }
     var contentEditUrl = this.get('router').generate(
       editRoute,
       this.get('selectedCollection.id')
@@ -107,6 +110,10 @@ export default AddToModal.extend({
     var message = this.get('isCollection')
       ? 'common.errors.collection-not-added-to'
       : 'common.errors.assessment-not-added-to';
+
+    if (this.get('isOA')) {
+      message = 'common.errors.collection-not-added-to'; //ToDo: Add to translations
+    }
     var collectionType = this.get('i18n').t(
       `common.${this.get('collectionType').toLowerCase()}`
     );
@@ -119,7 +126,17 @@ export default AddToModal.extend({
 
   showMoreResults: function() {
     const component = this;
-    if (component.get('isCollection')) {
+    if (component.get('isOA')) {
+      const pagination = component.get('pagination');
+      pagination.page = pagination.page + 1;
+
+      component
+        .get('profileService')
+        .readOfflineActivities(component.get('session.userId'), pagination)
+        .then(function(collections) {
+          component.get('collections').pushObjects(collections.toArray());
+        });
+    } else if (component.get('isCollection')) {
       const pagination = component.get('pagination');
       pagination.page = pagination.page + 1;
 
@@ -146,7 +163,17 @@ export default AddToModal.extend({
     const pagination = component.get('pagination');
     pagination.page = 0;
     pagination.searchText = keyword;
-    if (component.get('isCollection')) {
+    if (component.get('isOA')) {
+      const pagination = component.get('pagination');
+      pagination.page = pagination.page + 1;
+
+      component
+        .get('profileService')
+        .readOfflineActivities(component.get('session.userId'), pagination)
+        .then(function(collections) {
+          component.get('collections').pushObjects(collections.toArray());
+        });
+    } else if (component.get('isCollection')) {
       component
         .get('profileService')
         .readCollections(component.get('session.userId'), pagination)
@@ -169,6 +196,8 @@ export default AddToModal.extend({
    * @type {Boolean} if it is showing collections
    */
   isCollection: Ember.computed.alias('model.isCollection'),
+
+  isOA: Ember.computed.alias('model.isOA'),
 
   /**
    * @type {Function} callback when the add is finished

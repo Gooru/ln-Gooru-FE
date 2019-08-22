@@ -121,6 +121,14 @@ export default Ember.Component.extend({
             editor.focus();
           }
           if (component.get('content')) {
+            if (
+              editor &&
+              editor.composer &&
+              editor.composer.element &&
+              editor.composer.selection
+            ) {
+              editor.composer.selection.selectNode(editor.composer.element);
+            }
             editor.composer.commands.exec(
               'insertHTML',
               component.get('content')
@@ -268,7 +276,7 @@ export default Ember.Component.extend({
     var contentEditor = removeHtmlTags(this.get('content'));
     let questionType = this.get('model.type');
     if ($.trim(contentEditor) === '') {
-      this.set('content', contentEditor);
+      //this.set('content', contentEditor); //ember deprecation
       return true;
     } else if (
       !validateSquareBracket(contentEditor) &&

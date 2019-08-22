@@ -39,15 +39,13 @@ moduleForComponent(
   }
 );
 
-test('Depth of knowledge layout, no knowledge selected - read only', function(
-  assert
-) {
+test('Depth of knowledge layout, no knowledge selected - read only', function(assert) {
   var selectedKnowledge = [];
 
   this.set('selectedKnowledge', selectedKnowledge);
 
   this.render(hbs`
-    {{content.gru-depth-of-knowledge isEditing=false srcSelectedKnowledge=selectedKnowledge}}
+    {{content/gru-depth-of-knowledge isEditing=false srcSelectedKnowledge=selectedKnowledge}}
   `);
 
   const $component = this.$('.content.gru-depth-of-knowledge');
@@ -64,15 +62,13 @@ test('Depth of knowledge layout, no knowledge selected - read only', function(
   );
 });
 
-test('Depth of knowledge layout, knowledge selected - read only', function(
-  assert
-) {
+test('Depth of knowledge layout, knowledge selected - read only', function(assert) {
   var selectedKnowledge = [4];
 
   this.set('selectedKnowledge', selectedKnowledge);
 
   this.render(hbs`
-    {{content.gru-depth-of-knowledge isEditing=false srcSelectedKnowledge=selectedKnowledge}}
+    {{content/gru-depth-of-knowledge isEditing=false srcSelectedKnowledge=selectedKnowledge}}
   `);
 
   const $component = this.$('.content.gru-depth-of-knowledge');
@@ -90,7 +86,7 @@ test('Depth of knowledge layout - edit', function(assert) {
   this.set('selectedKnowledge', selectedKnowledge);
 
   this.render(hbs`
-    {{content.gru-depth-of-knowledge isEditing=true srcSelectedKnowledge=initialKnowledge editSelectedKnowledge=selectedKnowledge}}
+    {{content/gru-depth-of-knowledge isEditing=true srcSelectedKnowledge=initialKnowledge editSelectedKnowledge=selectedKnowledge}}
   `);
 
   const $component = this.$('.content.gru-depth-of-knowledge');
@@ -111,9 +107,7 @@ test('Depth of knowledge layout - edit', function(assert) {
   });
 });
 
-test('Depth of knowledge edit, add knowledge -returning to edit mode will discard any changes', function(
-  assert
-) {
+test('Depth of knowledge edit, add knowledge -returning to edit mode will discard any changes', function(assert) {
   var initialKnowledge = [1];
   var selectedKnowledge = [1];
 
@@ -122,7 +116,7 @@ test('Depth of knowledge edit, add knowledge -returning to edit mode will discar
   this.set('isEditing', true);
 
   this.render(hbs`
-    {{content.gru-depth-of-knowledge isEditing=isEditing srcSelectedKnowledge=initialKnowledge editSelectedKnowledge=selectedKnowledge}}
+    {{content/gru-depth-of-knowledge isEditing=isEditing srcSelectedKnowledge=initialKnowledge editSelectedKnowledge=selectedKnowledge}}
   `);
 
   const $component = this.$('.content.gru-depth-of-knowledge');

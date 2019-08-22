@@ -61,7 +61,7 @@ test('Test for performance summary on valid unit values', function(assert) {
   this.set('performance', performance);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-performance-summary performance=performance}}`
+    hbs`{{class/analytics/performance/gru-performance-summary performance=performance}}`
   );
 
   const $component = this.$(); //component dom element
@@ -86,9 +86,7 @@ test('Test for performance summary on valid unit values', function(assert) {
   assert.equal(T.text($attemptSummary), '2', 'Wrong attempts text');
 });
 
-test('Test show no score for performance summary on valid unit values', function(
-  assert
-) {
+test('Test show no score for performance summary on valid unit values', function(assert) {
   const performance = Ember.Object.create({
     title: 'Quiz :: Indian History',
     type: 'unit',
@@ -107,7 +105,7 @@ test('Test show no score for performance summary on valid unit values', function
   this.set('performance', performance);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-performance-summary performance=performance showScore=false}}`
+    hbs`{{class/analytics/performance/gru-performance-summary performance=performance showScore=false}}`
   );
 
   const $component = this.$(); //component dom element
@@ -129,9 +127,7 @@ test('Test show no score for performance summary on valid unit values', function
   assert.equal(T.text($attemptSummary), '2', 'Wrong attempts text');
 });
 
-test('Test show collection icon for collection performance summary', function(
-  assert
-) {
+test('Test show collection icon for collection performance summary', function(assert) {
   const performance = Ember.Object.create({
     title: 'Quiz :: Indian History',
     type: 'unit',
@@ -151,7 +147,7 @@ test('Test show collection icon for collection performance summary', function(
   this.set('performance', performance);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-performance-summary performance=performance showScore=false}}`
+    hbs`{{class/analytics/performance/gru-performance-summary performance=performance showScore=false}}`
   );
 
   const $component = this.$(); //component dom element
@@ -193,7 +189,7 @@ test('Test for performance summary on invalid unit values', function(assert) {
   this.set('performance', performance);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-performance-summary performance=performance selectedOption='scores'}}`
+    hbs`{{class/analytics/performance/gru-performance-summary performance=performance selectedOption='scores'}}`
   );
 
   const $component = this.$(); //component dom element
@@ -231,7 +227,7 @@ test('Test for performance summary on selected reaction', function(assert) {
   this.set('performance', performance);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-performance-summary performance=performance selectedOption='reaction'}}`
+    hbs`{{class/analytics/performance/gru-performance-summary performance=performance selectedOption='reaction'}}`
   );
 
   const $component = this.$(); //component dom element
@@ -253,7 +249,7 @@ test('Test for no more attempts on assessment', function(assert) {
   this.set('collection', collection);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-performance-summary performance=collection noMoreAttempts=true}}`
+    hbs`{{class/analytics/performance/gru-performance-summary performance=collection noMoreAttempts=true}}`
   );
 
   const $component = this.$(); //component dom element
@@ -275,9 +271,7 @@ test('Test for no more attempts on assessment', function(assert) {
   });
 });
 
-test('Test non visible completed assessment when content visibility is not provided', function(
-  assert
-) {
+test('Test non visible completed assessment when content visibility is not provided', function(assert) {
   const collection = Ember.Object.create({
     title: 'Assessment',
     id: 'd4521a45-dcd1-4540-bba1-64af8fd2d6ec',
@@ -290,7 +284,7 @@ test('Test non visible completed assessment when content visibility is not provi
   this.set('collection', collection);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-performance-summary performance=collection noMoreAttempts=false}}`
+    hbs`{{class/analytics/performance/gru-performance-summary performance=collection noMoreAttempts=false}}`
   );
 
   const $component = this.$(); //component dom element
@@ -313,9 +307,7 @@ test('Test non visible completed assessment when content visibility is not provi
   });
 });
 
-test('Test non visible not-started assessment when content visibility is not provided', function(
-  assert
-) {
+test('Test non visible not-started assessment when content visibility is not provided', function(assert) {
   const collection = Ember.Object.create({
     title: 'Assessment',
     id: 'd4521a45-dcd1-4540-bba1-64af8fd2d6ec',
@@ -328,7 +320,7 @@ test('Test non visible not-started assessment when content visibility is not pro
   this.set('collection', collection);
 
   this.render(
-    hbs`{{class.analytics.performance.gru-performance-summary performance=collection noMoreAttempts=false}}`
+    hbs`{{class/analytics/performance/gru-performance-summary performance=collection noMoreAttempts=false}}`
   );
 
   const $component = this.$(); //component dom element
@@ -346,9 +338,7 @@ test('Test non visible not-started assessment when content visibility is not pro
   });
 });
 
-test('Test non visible completed assessment when content visibility is provided', function(
-  assert
-) {
+test('Test non visible completed assessment when content visibility is provided', function(assert) {
   const collection = Ember.Object.create({
     title: 'Assessment',
     id: 'd4521a45-dcd1-4540-bba1-64af8fd2d6ec',
@@ -367,7 +357,7 @@ test('Test non visible completed assessment when content visibility is provided'
   this.set('collection', collection);
   this.set('contentVisibility', contentVisibility);
 
-  this.render(hbs`{{class.analytics.performance.gru-performance-summary 
+  this.render(hbs`{{class/analytics/performance/gru-performance-summary
       performance=collection noMoreAttempts=false contentVisibility=contentVisibility}}`);
 
   const $component = this.$(); //component dom element
@@ -390,9 +380,7 @@ test('Test non visible completed assessment when content visibility is provided'
   });
 });
 
-test('Test non visible not-started assessment when content visibility is provided', function(
-  assert
-) {
+test('Test non visible not-started assessment when content visibility is provided', function(assert) {
   const collection = Ember.Object.create({
     title: 'Assessment',
     id: 'd4521a45-dcd1-4540-bba1-64af8fd2d6ec',
@@ -411,7 +399,7 @@ test('Test non visible not-started assessment when content visibility is provide
   this.set('collection', collection);
   this.set('contentVisibility', contentVisibility);
 
-  this.render(hbs`{{class.analytics.performance.gru-performance-summary 
+  this.render(hbs`{{class/analytics/performance/gru-performance-summary
     performance=collection noMoreAttempts=false contentVisibility=contentVisibility}}`);
 
   const $component = this.$(); //component dom element
@@ -448,7 +436,7 @@ test('Test visible completed assessment', function(assert) {
   this.set('collection', collection);
   this.set('contentVisibility', contentVisibility);
 
-  this.render(hbs`{{class.analytics.performance.gru-performance-summary 
+  this.render(hbs`{{class/analytics/performance/gru-performance-summary
       performance=collection noMoreAttempts=false contentVisibility=contentVisibility}}`);
 
   const $component = this.$(); //component dom element
@@ -493,7 +481,7 @@ test('Test visible not-started assessment', function(assert) {
   this.set('collection', collection);
   this.set('contentVisibility', contentVisibility);
 
-  this.render(hbs`{{class.analytics.performance.gru-performance-summary 
+  this.render(hbs`{{class/analytics/performance/gru-performance-summary
     performance=collection noMoreAttempts=false contentVisibility=contentVisibility}}`);
 
   const $component = this.$(); //component dom element

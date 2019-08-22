@@ -113,9 +113,9 @@
         {{/if}}
       </div>
       <div class="frq-grade-right-panel-body">
-        {{#if rubric.scoring}}
+        {{#if (and userGrade rubric.scoring)}}
           <div class="frq-grade-rubric-grading">
-            {{validation.gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
+            {{validation/gru-input-number model=userGrade  valuePath='studentScore' min=0 max=rubric.maxScore step=rubric.increment }}
             <span class="score">{{rubric.maxScore}}</span>
           </div>
         {{else}}
@@ -150,7 +150,7 @@
                   </div>
                 </div>
                 <div class="frq-grade-comment-section">
-                  {{validation.gru-textarea
+                  {{validation/gru-textarea
                     model=category
                     valuePath='comment'
                     maxLength=500
@@ -163,7 +163,7 @@
           </div>
         {{/if}}
         <div class="frq-grade-general-comment-container">
-          {{validation.gru-textarea
+          {{validation/gru-textarea
             model=userGrade
             valuePath='comment'
             maxLength=500

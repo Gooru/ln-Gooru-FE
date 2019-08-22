@@ -7,7 +7,7 @@ export default gruTwoTierHeaderTable.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['-1'],
+  classNames: [-1],
   /**
    * @requires service:i18n
    */
@@ -22,8 +22,10 @@ export default gruTwoTierHeaderTable.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-    this.classNames[1] = 'gru-two-tier-header-table-1';
-    this.setSortedData();
+    const component = this;
+    let classNames = ['gru-two-tier-header-table-1'];
+    component.set('classNames', classNames);
+    component.setSortedData();
   },
   resourceCount: 1,
 
@@ -42,11 +44,16 @@ export default gruTwoTierHeaderTable.extend({
       ? this.get('configurationService.configuration.appRootPath')
       : '/';
     let imageUrl = appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+
     this.get('sortedData').map(data => {
-      data.avatarUrl =
+      Ember.set(
+        data,
+        'avatarUrl',
         data.avatarUrl && data.avatarUrl !== 'undefined'
           ? data.avatarUrl
-          : imageUrl;
+          : imageUrl,
+        true
+      );
     });
   },
 

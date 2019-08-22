@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 
 var applicationController = Ember.Object.create({
   profile: Ember.Object.create({ id: 'profile-id' }),
@@ -19,10 +20,12 @@ var applicationController = Ember.Object.create({
   },
   getLocalStorage: () => ({ getItem: () => null })
 });
-moduleFor(
+moduleForComponent(
   'controller:student-independent-learning',
   'Unit | Controller | student-independent-learning',
-  {}
+  {
+    needs: ['controller:application']
+  }
 );
 
 test('profile', function(assert) {

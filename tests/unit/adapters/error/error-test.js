@@ -1,7 +1,8 @@
-import { moduleFor, test } from 'ember-qunit';
+import moduleForComponent from 'gooru-web/tests/helpers/module-for-component';
+import { test } from 'ember-qunit';
 import Pretender from 'pretender';
 
-moduleFor('adapter:error/error', 'Unit | Adapter | error', {
+moduleForComponent('adapter:error/error', 'Unit | Adapter | error', {
   // Specify the other units that are required for this test.
   // needs: ['serializer:foo']
   beforeEach: function() {

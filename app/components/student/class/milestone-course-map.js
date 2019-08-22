@@ -766,26 +766,31 @@ export default Ember.Component.extend({
     let selectedLessonIndex = lessons.indexOf(selectedLesson);
     let prevLesson = lessons.objectAt(selectedLessonIndex + 1);
     let nextLesson = lessons.objectAt(selectedLessonIndex - 1);
+    let componentEle = component.$(element);
     if (selectedLesson.get('isActive')) {
-      component.$(element).slideUp(400, function() {
-        selectedLesson.set('isActive', false);
-        if (nextLesson) {
-          nextLesson.set('isNextActive', false);
-        }
-        if (prevLesson) {
-          prevLesson.set('isPrevActive', false);
-        }
-      });
+      if (componentEle) {
+        componentEle.slideUp(400, function() {
+          selectedLesson.set('isActive', false);
+          if (nextLesson) {
+            nextLesson.set('isNextActive', false);
+          }
+          if (prevLesson) {
+            prevLesson.set('isPrevActive', false);
+          }
+        });
+      }
     } else {
-      component.$(element).slideDown(400, function() {
-        selectedLesson.set('isActive', true);
-        if (nextLesson) {
-          nextLesson.set('isNextActive', true);
-        }
-        if (prevLesson) {
-          prevLesson.set('isPrevActive', true);
-        }
-      });
+      if (componentEle) {
+        componentEle.slideDown(400, function() {
+          selectedLesson.set('isActive', true);
+          if (nextLesson) {
+            nextLesson.set('isNextActive', true);
+          }
+          if (prevLesson) {
+            prevLesson.set('isPrevActive', true);
+          }
+        });
+      }
     }
     if (!selectedLesson.get('hasCollectionFetched')) {
       let userId = component.get('isTeacher')

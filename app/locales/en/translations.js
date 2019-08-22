@@ -705,6 +705,8 @@ window.i18ln = {
   'common.show-more-results': 'Show More Results',
   'common.show-results': 'Show Results',
   'common.signUp': 'Sign Up',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'Sort Alphabetically',
   'common.sortAverage': 'Sort by Average',
   'common.sort-most-recently': 'Sort by Most Recently Updated',
@@ -1254,6 +1256,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'Students',
   'teacher-landing.class.class-management-tab.student-name': 'Student Name',
   'teacher-landing.class.class-management-tab.student-id': 'Student ID',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'Teachers',
   'teacher-landing.class.class-management-tab.view-report': 'View Report',
   'teacher-landing.class.class-management-tab.course-null':
@@ -2689,6 +2692,7 @@ window.i18ln = {
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey'
+  'teacher-landing.class.learning-journey': 'Learning Journey',
+  'search-by': 'Search By'
 };
 export default window.i18ln;

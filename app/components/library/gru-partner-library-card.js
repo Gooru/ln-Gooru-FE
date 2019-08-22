@@ -92,6 +92,11 @@ export default Ember.Component.extend({
    */
   hasRubrics: Ember.computed.gt('content.rubricCount', 0),
 
+  /**
+   * @property {boolean} Indicates if library has 1 or more oA
+   */
+  hasOfflineActivity: Ember.computed.gt('content.offlineActivityCount', 0),
+
   redirectUrl: Ember.computed(function() {
     let shortName = this.get('content.shortName');
     let libraryUrl = `library/${shortName}`;

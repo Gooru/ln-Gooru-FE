@@ -476,5 +476,24 @@ export default Ember.Object.extend({
       data: JSON.stringify({})
     };
     return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * @function addStudentsToClass
+   * @param {UUID} classId
+   * @param {Object} dataParam
+   * Method to add students into a class
+   */
+  addStudentsToClass(classId, dataParam) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/${classId}/students`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(dataParam)
+    };
+    return Ember.$.ajax(url, options);
   }
 });
