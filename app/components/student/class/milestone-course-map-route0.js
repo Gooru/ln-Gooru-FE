@@ -322,17 +322,20 @@ export default Ember.Component.extend({
     let element = `#milestone-lesson-${unitId}-${lessonId}-${lessonIndex}`;
     let showPerformance = component.get('showPerformance');
     let locateLastPlayedItem = component.get('locateLastPlayedItem');
-
+    let componentEle = component.$(element);
     if (selectedLesson.get('isActive')) {
-      component.$(element).slideUp(400, function() {
-        selectedLesson.set('isActive', false);
-      });
+      if (componentEle) {
+        componentEle.slideUp(400, function() {
+          selectedLesson.set('isActive', false);
+        });
+      }
     } else {
-      component.$(element).slideDown(400, function() {
-        selectedLesson.set('isActive', true);
-      });
+      if (componentEle) {
+        componentEle.slideDown(400, function() {
+          selectedLesson.set('isActive', true);
+        });
+      }
     }
-
     let collections = selectedLesson.get('collections');
     if (!selectedLesson.get('hasCollectionFetched')) {
       selectedLesson.set('hasCollectionFetched', true);
