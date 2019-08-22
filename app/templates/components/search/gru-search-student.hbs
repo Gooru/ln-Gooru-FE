@@ -39,17 +39,15 @@
           <div class="student-name student-info-header">
             {{t 'common.students'}}
           </div>
+          <div class="student-username student-info-header">
+            {{t 'sign-up.username'}}/{{t 'sign-up.email'}}
+          </div>
           <div class="student-id student-info-header">
             {{t 'teacher-landing.class.class-management-tab.student-id'}}
           </div>
-          <div class="student-email student-info-header">
-            {{t 'sign-up.email'}}
-          </div>
+
           <div class="student-reference-id student-info-header">
             {{t 'teacher-landing.class.class-management-tab.reference-id'}}
-          </div>
-          <div class="student-username student-info-header">
-            {{t 'sign-up.username'}}
           </div>
         </div>
         <div class="filtered-students-container">
@@ -60,11 +58,17 @@
                   {{gru-icon name="done_all" class="tick-icon"}}
                 {{/if}}
               </div>
-              <div class="student-name student-info-column ellipsis" {{action "onSelectStudent" student}}>{{student.fullName}}</div>
-              <div class="student-id student-info-column ellipsis">{{student.studentId}}</div>
-              <div class="student-email student-info-column ellipsis">{{student.email}}</div>
-              <div class="student-reference-id student-info-column ellipsis">{{student.referenceId}}</div>
-              <div class="student-username student-info-column ellipsis">{{student.username}}</div>
+              <div class="student-name student-info-column ellipsis"  data-toggle="tooltip" title="{{student.fullName}}" {{action "onSelectStudent" student}}>{{student.fullName}}</div>
+              <div class="student-username student-info-column">
+                <span class="stu-username ellipsis" data-toggle="tooltip" title="{{student.username}}">
+                  {{student.username}}
+                </span>
+                <span class="stu-email ellipsis" data-toggle="tooltip" title="{{student.email}}">
+                  {{student.email}}
+                </span>
+              </div>
+              <div class="student-id student-info-column ellipsis" data-toggle="tooltip" title="{{student.studentId}}">{{student.studentId}}</div>
+              <div class="student-reference-id student-info-column ellipsis" data-toggle="tooltip" title="{{student.referenceId}}">{{student.referenceId}}</div>
             </div>
           {{/each}}
         </div>
