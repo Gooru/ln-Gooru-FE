@@ -528,13 +528,20 @@ export default StudentCollection.extend({
     const contextId = controller.get('contextId');
     const profileId = controller.get('session.userData.gooruUId');
     const context = this.get('mapLocation.context');
+
     let queryParams = {
       classId: context.get('classId'),
       courseId: context.get('courseId'),
       contextId,
       role: ROLES.STUDENT,
       source: controller.get('source'),
-      assessmentId: controller.get('collection.id')
+      assessmentId: controller.get('collection.id'),
+      collectionId: controller.get('collection.id'),
+      milestoneId: context.get('milestoneId'),
+      unitId: context.get('unitId'),
+      lessonId: context.get('lessonId'),
+      pathId: context.get('pathId') || 0,
+      pathType: context.get('pathType') || null
     };
     controller.updateStudentMasteredCompetencies();
     controller.transitionToRoute('student-learner-proficiency', profileId, {
