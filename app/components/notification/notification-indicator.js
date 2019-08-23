@@ -123,7 +123,7 @@ export default Ember.Component.extend({
               itemType: '',
               subtype: null,
               pathId: 0,
-              minScore: 0,
+              minScore: null,
               collectionSource: 'course_map',
               isStudyPlayer: true,
               milestoneId: null,
