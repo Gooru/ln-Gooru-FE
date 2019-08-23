@@ -111,22 +111,22 @@ export default Ember.Component.extend({
             exactparams: 'courseId',
             queryPType: 'hybrid',
             queryparams: {
-              courseId: 0,
-              classId: 0,
-              unitId: 0,
-              lessonId: 0,
-              collectionId: 0,
+              courseId: null,
+              classId: null,
+              unitId: null,
+              lessonId: null,
+              collectionId: null,
               role: ROLES.STUDENT,
               source: PLAYER_EVENT_SOURCE.COURSE_MAP,
               type: null,
-              itemId: 0,
+              itemId: null,
               itemType: '',
               subtype: null,
               pathId: 0,
               minScore: 0,
               collectionSource: 'course_map',
               isStudyPlayer: true,
-              milestoneId: 0,
+              milestoneId: null,
               pathType: '',
               isNotification: true
             }
@@ -148,11 +148,11 @@ export default Ember.Component.extend({
             exactparams: 'classId',
             setlocation: true,
             queryparams: {
-              classId: 0,
-              unitId: 0,
-              lessonId: 0,
-              collectionId: 0,
-              milestoneId: 0,
+              classId: null,
+              unitId: null,
+              lessonId: null,
+              collectionId: null,
+              milestoneId: null,
               tab: 'assesmentreport',
               location:
                 'unitId+lessonId+collectionId+milestoneId+currentItemType',
@@ -176,11 +176,11 @@ export default Ember.Component.extend({
             exactparams: 'classId',
             setlocation: true,
             queryparams: {
-              classId: 0,
-              unitId: 0,
-              lessonId: 0,
-              collectionId: 0,
-              milestoneId: 0,
+              classId: null,
+              unitId: null,
+              lessonId: null,
+              collectionId: null,
+              milestoneId: null,
               tab: 'none',
               location:
                 'unitId+lessonId+collectionId+milestoneId+currentItemType'
@@ -203,11 +203,11 @@ export default Ember.Component.extend({
             exactparams: 'classId',
             setlocation: true,
             queryparams: {
-              classId: 0,
-              unitId: 0,
-              lessonId: 0,
-              collectionId: 0,
-              milestoneId: 0,
+              classId: null,
+              unitId: null,
+              lessonId: null,
+              collectionId: null,
+              milestoneId: null,
               tab: 'assesmentreport',
               location:
                 'unitId+lessonId+collectionId+milestoneId+currentItemType'
@@ -229,11 +229,11 @@ export default Ember.Component.extend({
             exactparams: 'classId',
             setlocation: true,
             queryparams: {
-              classId: 0,
-              unitId: 0,
-              lessonId: 0,
-              collectionId: 0,
-              milestoneId: 0,
+              classId: null,
+              unitId: null,
+              lessonId: null,
+              collectionId: null,
+              milestoneId: null,
               location:
                 'unitId+lessonId+collectionId+milestoneId+currentItemType'
             }
