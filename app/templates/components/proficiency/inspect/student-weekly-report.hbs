@@ -20,25 +20,25 @@
       <div class="competencies-label">
         <div class="label-text">{{t 'common.competencies'}}</div>
         <div class="sub-header">
-          <div class="gained-header">{{t 'common.gained'}}</div>
-          <div class="inprogress-header">{{t 'profile.proficiency.in-progress'}}</div>
+          <div class="header-data gained-header">{{t 'common.gained'}}</div>
+          <div class="header-data inprogress-header">{{t 'profile.proficiency.in-progress'}}</div>
         </div>
       </div>
       <div class="timespent-label">
         <div class="label-text">{{t 'gru-data-picker.time-spent'}}</div>
         <div class="sub-header">
-          <div class="collection-header">{{t 'common.collections'}}</div>
-          <div class="assessment-header">{{t 'common.assessments'}}</div>
-          <div class="total-header">{{t 'reports.gru-table-view.totals'}}</div>
+          <div class="header-data collection-header">{{t 'common.collections'}}</div>
+          <div class="header-data assessment-header">{{t 'common.assessments'}}</div>
+          <div class="header-data total-header">{{t 'reports.gru-table-view.totals'}}</div>
         </div>
       </div>
-      <div class="badge-earned-label label-text">
+      <div class="header-data badge-earned-label label-text">
         {{t 'badges-earned'}}
       </div>
-      <div class="average-score-label label-text">
+      <div class="header-data average-score-label label-text">
         {{t 'common.averageScore'}}
       </div>
-      <div class="suggestion-taken-label label-text">
+      <div class="header-data suggestion-taken-label label-text">
         {{t 'suggestion-taken'}}
       </div>
     </div>
@@ -50,29 +50,36 @@
       <div class="body-left">
         {{#each studentsSummaryReportData as |reportData|}}
           <div class="student-info-container {{if (or reportData.weeklyReportData.masteredCompetenciesCount reportData.weeklyReportData.inprogressCompetenciesCount) 'data-available'}} {{if reportData.active 'active-student'}}" {{action "onSelectStudent" reportData}}>
-            <div class="student-thumbnail" style="background-image: url({{reportData.student.thumbnailUrl}});"></div>
-            <div class="student-name">{{reportData.student.fullName}}</div>
+            <div class="student-thumbnail" style="background-image: url({{reportData.student.thumbnailUrl}});">
+              <div class="active-student-data">
+                {{gru-icon name="clear"}}
+              </div>
+            </div>
+            <div class="student-name">
+              <span class="ellipsis">{{reportData.student.lastName}}</span>
+              <span class="ellipsis">{{reportData.student.firstName}}</span>
+            </div>
           </div>
         {{/each}}
       </div>
       <div class="body-right">
         {{#each studentsSummaryReportData as |reportData|}}
           <div class="student-summary-container">
-            <div class="gained-competencies {{if reportData.active 'active-student'}}">
+            <div class="column-data gained-competencies {{if reportData.active 'active-student'}}">
               {{#if reportData.weeklyReportData.masteredCompetenciesCount}}
                 <span class="competency-status-5 competency-status"></span> <span class="competency-count">{{reportData.weeklyReportData.masteredCompetenciesCount}}</span>
               {{else}}
                 --
               {{/if}}
             </div>
-            <div class="inprogress-competencies {{if reportData.active 'active-student'}}">
+            <div class="column-data inprogress-competencies {{if reportData.active 'active-student'}}">
               {{#if reportData.weeklyReportData.inprogressCompetenciesCount}}
                 <span class="competency-status-1 competency-status"></span> <span class="competency-count">{{reportData.weeklyReportData.inprogressCompetenciesCount}}</span>
               {{else}}
                 --
               {{/if}}
             </div>
-            <div class="collection-timespent">
+            <div class="column-data collection-timespent">
               <span class="time-spent">
                 {{#if reportData.weeklyReportData.collectionTimespent}}
                   {{format-time reportData.weeklyReportData.collectionTimespent}}
@@ -81,7 +88,7 @@
                 {{/if}}
               </span>
             </div>
-            <div class="assessment-timespent">
+            <div class="column-data assessment-timespent">
               <span class="time-spent">
                 {{#if reportData.weeklyReportData.assessmentTimespent}}
                   {{format-time reportData.weeklyReportData.assessmentTimespent}}
@@ -90,7 +97,7 @@
                 {{/if}}
               </span>
             </div>
-            <div class="total-timespent">
+            <div class="column-data total-timespent">
               <span class="time-spent">
                 {{#if reportData.weeklyReportData.totalTimespent}}
                   {{format-time reportData.weeklyReportData.totalTimespent}}
@@ -99,21 +106,21 @@
                 {{/if}}
               </span>
             </div>
-            <div class="badge-earned">
+            <div class="column-data badge-earned">
               {{#if reportData.weeklyReportData.badgeEarned}}
                 <span class="badge"><span class="badge-count">{{reportData.weeklyReportData.badgeEarned}}</span></span>
               {{else}}
                 --
               {{/if}}
             </div>
-            <div class="average-score">
+            <div class="column-data average-score">
               {{#unless reportData.weeklyReportData.isNotStarted}}
                 <span class="score score-range-{{grade-range reportData.weeklyReportData.averageScore}}">{{reportData.weeklyReportData.averageScore}}</span>
               {{else}}
                 --
               {{/unless}}
             </div>
-            <div class="suggestion-taken">
+            <div class="column-data suggestion-taken">
               {{#if reportData.weeklyReportData.suggestionTaken}}
                 <span class="suggestion-count">{{reportData.weeklyReportData.suggestionTaken}}</span>
               {{else}}
@@ -121,7 +128,7 @@
               {{/if}}
             </div>
             {{#if reportData.active}}
-              <div class="active-student-data" {{action "onRemoveActiveStudentData"}}>
+              <div class="active-student-data hidden-xs" {{action "onRemoveActiveStudentData"}}>
                 {{gru-icon name="clear"}}
               </div>
             {{/if}}
@@ -131,7 +138,7 @@
       {{#if isShowStudentCompetencies}}
         <div class="student-competencies-container">
           {{#each studentDomainCompetencies as |domainCompetencies|}}
-            <div class="domain-name">{{locale-translation (t (concat 'domain-code.' domainCompetencies.domainCode)) domainCompetencies.domainName}}</div>
+            <div class="domain-name ellipsis">{{locale-translation (t (concat 'domain-code.' domainCompetencies.domainCode)) domainCompetencies.domainName}}</div>
             <div class="competencies">
               {{#each domainCompetencies.competencies as |competency|}}
                 <div class="student-competency">
