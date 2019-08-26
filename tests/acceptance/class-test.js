@@ -1,4 +1,4 @@
-import { skip } from 'qunit';
+import { test } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import T from 'gooru-web/tests/helpers/assert';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | class', {
   }
 });
 
-skip('Layout', function(assert) {
+test('Layout', function(assert) {
   visit('/class/class-10');
 
   andThen(function() {
@@ -32,7 +32,7 @@ skip('Layout', function(assert) {
   });
 });
 
-skip('When info page is selected', function(assert) {
+test('When info page is selected', function(assert) {
   visit('/class/class-10');
 
   andThen(function() {
@@ -48,7 +48,7 @@ skip('When info page is selected', function(assert) {
   });
 });
 
-skip('When overview page is selected', function(assert) {
+test('When overview page is selected', function(assert) {
   visit('/class/class-10');
 
   andThen(function() {
@@ -67,7 +67,7 @@ skip('When overview page is selected', function(assert) {
   });
 });
 
-skip('When data analytics page is selected as student', function(assert) {
+test('When data analytics page is selected as student', function(assert) {
   visit('/class/class-10');
 
   andThen(function() {

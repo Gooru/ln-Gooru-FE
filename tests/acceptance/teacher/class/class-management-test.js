@@ -1,4 +1,4 @@
-import { skip } from 'qunit';
+import { test } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import { KEY_CODES } from 'gooru-web/config/config';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | teacher/class/class-management', {
   }
 });
 
-skip('Layout', function(assert) {
+test('Layout', function(assert) {
   visit('/teacher/class/class-for-pochita-as-teacher/class-management');
   andThen(function() {
     assert.equal(
@@ -24,54 +24,56 @@ skip('Layout', function(assert) {
     );
 
     const $container = find(
-      '.teacher.class .controller.teacher.class.class-management'
+      '.teacher.class .controller.teacher.class.class-settings'
     );
     assert.ok($container.length, 'Missing class management tab container');
 
     assert.ok(
-      $container.find('.class-information').length,
+      $container.find('.class-layout').length,
       'Missing class information'
     );
     assert.ok(
-      $container.find('.course-information').length,
+      $container.find('.course-settings-layout').length,
       'Missing course information'
     );
 
-    const $classInformation = $container.find('.class-information');
+    const $classInformation = $container.find('.class-layout');
 
     assert.ok(
-      $classInformation.find('.class-name span').length,
+      $classInformation.find(
+        '.class-sec-cont .class-settings-sec .class-head-row-wrap .sec-head-class-name .class-title'
+      ).length,
       'Missing class information title'
     );
-
     assert.ok(
-      $classInformation.find('.class-name .edit-text span').length,
-      'Missing class title to edit'
-    );
-    assert.ok(
-      $classInformation.find('.class-name .edit-text i').length,
+      $classInformation.find(
+        '.class-sec-cont .class-settings-sec .class-head-row-wrap .sec-head-class-name .edit-icon i'
+      ).length,
       'Missing class title edit icon'
     );
 
-    const $courseInformation = $container.find('.course-information');
+    const $courseInformation = $container.find('.course-settings-layout');
 
     assert.ok(
-      $courseInformation.find('.assessment-min-score span').length,
+      $courseInformation.find('.course-sec-cont .course-settings-label').length,
       'Missing course information title'
     );
 
     assert.ok(
-      $courseInformation.find('.assessment-min-score .edit-text span').length,
-      'Missing assessment min score to edit'
+      $courseInformation.find(
+        '.course-sec-cont .course-settings-sec .sub-sec-row.subject'
+      ).length,
+      'Missing subject title'
     );
     assert.ok(
-      $courseInformation.find('.assessment-min-score .edit-text i').length,
-      'Missing assessment min score edit icon'
+      $courseInformation.find(
+        '.course-sec-cont .course-settings-sec .sub-sec-row.framework'
+      ).length,
+      'Missing framework title'
     );
   });
 });
-
-skip('If a blank name is saved it is not updated', function(assert) {
+test('Remove class', function(assert) {
   visit('/teacher/class/class-for-pochita-as-teacher/class-management');
 
   andThen(function() {
@@ -81,48 +83,14 @@ skip('If a blank name is saved it is not updated', function(assert) {
     );
 
     const $container = find(
-      '.teacher.class .controller.teacher.class.class-management'
+      '.teacher.class .controller.teacher.class.class-settings'
     );
-    assert.ok($container.length, 'Missing class management tab container');
-
-    const $classInformation = $container.find('.class-information');
-    const $editNameIcon = $classInformation.find(
-      '.class-name .edit-text .edit-icon'
+    const $deleteLayout = $container.find(
+      '.sec-col-layout .sec-rows-layout.left-panel'
     );
-
-    click($editNameIcon);
-
-    return wait().then(function() {
-      const $titleInput = $classInformation.find(
-        '.class-name .edit-text .gru-input.title input'
-      );
-      $titleInput.val('');
-      $titleInput.blur();
-      return wait().then(function() {
-        assert.ok(
-          $classInformation.find('.class-name .edit-text .class-title'),
-          'Class Title should be present'
-        );
-      });
-    });
-  });
-});
-
-skip('Remove class', function(assert) {
-  visit('/teacher/class/class-for-pochita-as-teacher/class-management');
-
-  andThen(function() {
-    assert.equal(
-      currentURL(),
-      '/teacher/class/class-for-pochita-as-teacher/class-management'
+    const $removeButton = $deleteLayout.find(
+      '.class-layout-btn .btn-panel .class-btn.delete-btn'
     );
-
-    const $container = find(
-      '.teacher.class .controller.teacher.class.class-management'
-    );
-    const $courseInformation = $container.find('.course-information');
-
-    const $removeButton = $courseInformation.find('.actions .delete-btn');
     click($removeButton);
     andThen(function() {
       var $deleteContentModal = find('.gru-modal .gru-delete-class');
@@ -142,7 +110,6 @@ skip('Remove class', function(assert) {
             andThen(function() {
               var $deleteButton = $deleteContentModal.find('button.delete');
               click($deleteButton);
-
               andThen(function() {
                 assert.equal(currentURL(), '/teacher-home');
               });
@@ -154,7 +121,7 @@ skip('Remove class', function(assert) {
   });
 });
 
-skip('Archive Class', function(assert) {
+test('Archive Class', function(assert) {
   visit('/teacher/class/class-for-pochita-as-teacher/class-management');
 
   andThen(function() {
@@ -164,10 +131,14 @@ skip('Archive Class', function(assert) {
     );
 
     const $container = find(
-      '.teacher.class .controller.teacher.class.class-management'
+      '.teacher.class .controller.teacher.class.class-settings'
     );
-    const $courseInformation = $container.find('.course-information');
-    const $archiveButton = $courseInformation.find('.actions .archive-btn');
+    const $archiveLayout = $container.find(
+      '.sec-col-layout .sec-rows-layout.left-panel'
+    );
+    const $archiveButton = $archiveLayout.find(
+      '.class-layout-btn .btn-panel .class-btn.archive-btn'
+    );
     click($archiveButton);
     andThen(function() {
       const $archiveModal = find('.gru-modal .gru-archive-class');

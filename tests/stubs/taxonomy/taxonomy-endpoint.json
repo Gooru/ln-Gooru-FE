@@ -1,5 +1,4 @@
-[
-  {
+[{
     "description": "Fetch Taxonomy Subjects for K-12",
     "request": {
       "url": "^/api/nucleus/v1/taxonomy/subjects",
@@ -24,8 +23,7 @@
     "description": "Fetch Taxonomy Classifications",
     "request": {
       "url": "^/api/nucleus/v2/taxonomy/classifications",
-      "query": {
-      },
+      "query": {},
       "method": "GET",
       "headers": {
         "authorization": "Token (.+)"
@@ -122,6 +120,67 @@
       },
       "body": "File not found!",
       "file": "taxonomy-codes-200-response.json"
+    }
+  },
+  {
+    "description": "Get taxonomy subject based on class subject code",
+    "request": {
+      "url": "^/api/nucleus/v1/taxonomy/subjects/(.+)",
+      "method": "GET",
+      "headers": {
+        "Authorization": "Token (.+)"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "File not found!",
+      "file": "taxonomy-subjects-200-response.json"
+    }
+  },
+  {
+    "description": "Get taxonomy subjects based on subject code",
+    "request": {
+      "url": "^/api/nucleus/v1/taxonomy/frameworks/subjects$",
+      "method": "GET",
+      "query": {
+        "subject": "K12.MA"
+      },
+      "headers": {
+        "Authorization": "Token (.+)"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "File not found!",
+      "file": "taxonomy-subjects-by-code-200-response.json"
+    }
+  },
+  {
+    "description": "Get taxonomy grades based on subject code",
+    "request": {
+      "url": "^/api/ds/users/v2/tx/grades$",
+      "method": "GET",
+      "query": {
+        "subject": "K12.MA",
+        "fw_code": "CCSS"
+      },
+      "headers": {
+        "Authorization": "Token (.+)"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "File not found!",
+      "file": "taxonomy-grades-by-code-200-response.json"
     }
   }
 ]
