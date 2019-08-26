@@ -284,6 +284,13 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Properties
 
+  init: function() {
+    this._super(...arguments);
+
+    this.set('tempCollection', {});
+    this.set('tempCollection.audience', Ember.A([]));
+  },
+
   /**
    * Collection model as instantiated by the route. This is the model used when not editing
    * or after any collection changes have been saved.
