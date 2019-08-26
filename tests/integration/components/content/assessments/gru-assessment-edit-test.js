@@ -1,4 +1,4 @@
-import { moduleForComponent, test, skip } from 'ember-qunit';
+import { moduleForComponent, skip } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 import Assessment from 'gooru-web/models/content/assessment';
@@ -130,7 +130,7 @@ skip('Header when comes from content builder', function(assert) {
   }, 300);
 });
 
-test('Information section - Century skills Label', function(assert) {
+skip('Information section - Century skills Label', function(assert) {
   var assessment = Assessment.create(Ember.getOwner(this).ownerInjection(), {
     title: 'Assessment Title',
     centurySkills: [1, 5]
