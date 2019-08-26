@@ -4,6 +4,8 @@ import ModalMixin from 'gooru-web/mixins/modal';
 import { CONTENT_TYPES, EDUCATION_CATEGORY } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
+import Collection from 'gooru-web/models/content/collection';
+
 import {
   getCategoryCodeFromSubjectId,
   getSubjectId,
@@ -283,6 +285,23 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
   },
   // -------------------------------------------------------------------------
   // Properties
+
+  init: function() {
+    this._super(...arguments);
+    var collection = this.get('tempCollection');
+    if (!collection) {
+      collection = Collection.create(Ember.getOwner(this).ownerInjection(), {
+        title: null,
+        audience: []
+      });
+    } else {
+      if (collection && !collection.audience) {
+        this.set('tempCollection', 'audience', Ember.A([]));
+        this.set('tempCollection', 'centurySkills', Ember.A([]));
+      }
+    }
+    this.set('tempCollection', collection);
+  },
 
   /**
    * Collection model as instantiated by the route. This is the model used when not editing

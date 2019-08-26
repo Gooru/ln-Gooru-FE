@@ -17,6 +17,7 @@ import {
   getSubjectId,
   getGutCodeFromSubjectId
 } from 'gooru-web/utils/taxonomy';
+import Question from 'gooru-web/models/content/question';
 export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
@@ -361,7 +362,19 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
         });
         questionForEditing.set('rubric', rubric);
       }
+      let audience = questionForEditing.audience || Ember.A([]);
+      this.set('questionForEditing', 'audience', audience);
       this.set('tempQuestion', questionForEditing);
+    } else {
+      let tempQ = this.get('tempQuestion');
+      if (!tempQ) {
+        var question = Question.create(
+          Ember.getOwner(this).ownerInjection(),
+          {}
+        );
+        this.set('tempQuestion', question);
+        this.set('tempQuestion.audience', Ember.A([]));
+      }
     }
   },
 

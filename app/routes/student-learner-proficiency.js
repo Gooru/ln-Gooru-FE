@@ -17,7 +17,13 @@ export default Ember.Route.extend({
     contextId: {
       refreshModel: true
     },
-    source: null
+    source: null,
+    unitId: null,
+    lessonId: null,
+    pathId: null,
+    pathType: null,
+    milestoneId: null,
+    collectionId: null
   },
   // -------------------------------------------------------------------------
   // Dependencies
@@ -61,26 +67,22 @@ export default Ember.Route.extend({
     const classId = params.classId;
     const courseId = params.courseId;
     const contextId = params.contextId || null;
-    return Ember.RSVP
-      .hash({
-        profilePromise: route.get('profileService').readUserProfile(studentId),
-        classPromise: route.get('classService').readClassInfo(classId),
-        coursePromise: route.get('courseService').fetchById(courseId),
-        taxonomyCategories: route.get('taxonomyService').getCategories(),
-        mapLocation: contextId
-          ? route.get('navigateMapService').getStoredNext()
-          : null
-      })
-      .then(function(hash) {
-        return Ember.Object.create({
-          profile: hash.profilePromise,
-          categories: hash.taxonomyCategories,
-          class: hash.classPromise,
-          course: hash.coursePromise,
-          mapLocation: hash.mapLocation,
-          contextId
-        });
+    return Ember.RSVP.hash({
+      profilePromise: route.get('profileService').readUserProfile(studentId),
+      classPromise: route.get('classService').readClassInfo(classId),
+      coursePromise: route.get('courseService').fetchById(courseId),
+      taxonomyCategories: route.get('taxonomyService').getCategories(),
+      mapLocation: route.get('navigateMapService').getMapLocation(params)
+    }).then(function(hash) {
+      return Ember.Object.create({
+        profile: hash.profilePromise,
+        categories: hash.taxonomyCategories,
+        class: hash.classPromise,
+        course: hash.coursePromise,
+        mapLocation: hash.mapLocation,
+        contextId
       });
+    });
   },
 
   setupController(controller, model) {

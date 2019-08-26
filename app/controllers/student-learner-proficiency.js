@@ -136,6 +136,48 @@ export default Ember.Controller.extend(StudentLearnerProficiency, {
   role: null,
 
   /**
+   * @property {UUID} unitId
+   * Unit ID available in query param
+   */
+  unitId: null,
+
+  /**
+   * @property {UUID} lessonId
+   * Lesson ID available in query param
+   */
+  lessonId: null,
+
+  /**
+   * @property {UUID} milestoneId
+   * Milestone ID available in query param
+   */
+  milestoneId: null,
+
+  /**
+   * @property {Number} pathId
+   * Path Id available in query param
+   */
+  pathId: 0,
+
+  /**
+   * @property {String} pathType
+   * Path type available in query param
+   */
+  pathType: null,
+
+  /**
+   * @property {UUID} unitId
+   * Unit ID available in query param
+   */
+  collectionType: null,
+
+  /**
+   * @property {UUID} unitId
+   * Unit ID available in query param
+   */
+  collectionId: null,
+
+  /**
    * @property {boolean}
    */
   hasSignatureCollectionSuggestions: Ember.computed.alias(

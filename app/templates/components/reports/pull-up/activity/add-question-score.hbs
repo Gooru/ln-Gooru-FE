@@ -34,7 +34,7 @@
   </div>
   <div class="toggle-container {{if question.active 'expanded-view' 'collapsed-view'}}">
     <div class="question-info-container">
-      {{cards.question-preview-card question=question isShowCorrectAnswer=true contentSeq=(plus-one seq)}}
+      {{cards/question-preview-card question=question isShowCorrectAnswer=true contentSeq=(plus-one seq)}}
     </div>
   </div>
 </div>

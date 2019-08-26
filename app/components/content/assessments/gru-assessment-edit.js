@@ -249,6 +249,9 @@ export default CollectionEdit.extend({
 
   init: function() {
     this._super(...arguments);
-    this.set('tempCollection', this.get('collection').copy());
+    let collection = this.get('collection').copy();
+    // let audience = collection.audience || Ember.A([]);
+    // this.set(collection, 'audience', audience);
+    this.set('tempCollection', collection);
   }
 });
