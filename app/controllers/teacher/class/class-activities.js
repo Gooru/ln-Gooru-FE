@@ -160,10 +160,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         'previewContentType',
         content.get('format') || content.get('collectionType')
       );
-      const assessmentCode = `${controller.get(
-        'class.code'
-      )}${classActivity.get('id')}`;
-      controller.set('assessmentCode', assessmentCode);
+      if (classActivity) {
+        const assessmentCode = `${controller.get(
+          'class.code'
+        )}${classActivity.get('id')}`;
+        controller.set('assessmentCode', assessmentCode);
+      }
       controller.set('previewCa', classActivity);
       controller.set('previewContent', content);
       if (controller.get('previewContentType') === 'offline-activity') {
