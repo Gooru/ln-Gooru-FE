@@ -1,5 +1,4 @@
-[
-  {
+[{
     "description": "Get Countries",
     "request": {
       "url": "^/api/nucleus/v1/lookups/countries$",
@@ -69,6 +68,24 @@
       },
       "body": "File not found!",
       "file": "audience-200-response.json"
+    }
+  },
+  {
+    "description": "Get language list",
+    "request": {
+      "url": "^/api/nucleus/v1/lookups/languages$",
+      "method": "GET",
+      "headers": {
+        "Authorization": "Token (.+)"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "File not found!",
+      "file": "language-200-response.json"
     }
   },
   {
