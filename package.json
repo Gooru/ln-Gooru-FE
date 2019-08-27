@@ -71,8 +71,7 @@
     "grunt-svgstore": "^1.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.1",
-    "prettier": "^1.5.3",
-    "portfinder": "1.0.21"
+    "prettier": "^1.5.3"
   },
   "dependencies": {
     "broccoli-sass": "^0.7.0",
