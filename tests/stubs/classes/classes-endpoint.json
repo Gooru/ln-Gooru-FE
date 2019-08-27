@@ -1,5 +1,4 @@
-[
-  {
+[{
     "description": "Create a class",
     "request": {
       "url": "^/api/nucleus/v1/classes$",
@@ -216,7 +215,7 @@
   {
     "description": "Delete member",
     "request": {
-      "url": "/api/nucleus/v1/classes/(.+)/members/(.+)",
+      "url": "^/api/nucleus/v1/classes/(.+)/members/(.+)",
       "method": "DELETE",
       "headers": {
         "authorization": "Token (.+)"
@@ -247,5 +246,3 @@
     }
   }
 ]
-
-

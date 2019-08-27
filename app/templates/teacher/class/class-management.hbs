@@ -114,10 +114,10 @@
       </div>
       <div class="class-layout-btn">
         <div class="btn-panel">
-          <div class='class-btn' {{action 'deleteClass'}}>
+          <div class='class-btn delete-btn' {{action 'deleteClass'}}>
             {{t 'class.info.delete'}} {{gru-icon name='delete'}}
           </div>
-          <div class='class-btn' {{action 'archiveClass'}}>
+          <div class='class-btn archive-btn' {{action 'archiveClass'}}>
             {{t 'teacher-landing.class.class-management-tab.archive-classroom'}} {{gru-icon name="archive"}}
           </div>
         </div>
@@ -148,21 +148,18 @@
                 </div>
               </div>
               {{!-- sub, fwk, grade level --}}
-              <div class='sub-sec-row'>
+              <div class='sub-sec-row subject'>
                 <div class='field-dropdown-caps-label'> {{t
       'teacher-landing.class.class-settings.class-settings-sec.subject'}}</div>
-                <div class='gradelevel-info'>
-                </div>
                 <div class='student-field field-drop-down '>
                   <span class='subject-label'>
                     {{gradeSubjectFWK.title}}
                   </span>
                 </div>
               </div>
-              <div class='sub-sec-row'>
+              <div class='sub-sec-row framework'>
                 <div class='field-dropdown-caps-label'> {{t
                     'teacher-landing.class.class-settings.class-settings-sec.framework'}}</div>
-                <div class='gradelevel-info'></div>
                 <div class="field-drop-down">
                   {{gru-dropdown
                     itemKey='code'
