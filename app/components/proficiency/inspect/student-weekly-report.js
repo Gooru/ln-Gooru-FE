@@ -19,6 +19,13 @@ export default Ember.Component.extend({
     component.loadSummaryReportData();
   },
 
+  didRender() {
+    const component = this;
+    component
+      .$('.body-container .body-right')
+      .on('scroll', component.scrollEventHandler);
+  },
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -46,10 +53,14 @@ export default Ember.Component.extend({
     //Action triggered when select a student
     onSelectStudent(reportData) {
       const component = this;
-      component.parseStudentCompetencies(reportData);
-      component.resetActiveStudentData();
-      reportData.set('active', true);
-      component.set('isShowStudentCompetencies', true);
+      if (reportData.get('active')) {
+        component.resetActiveStudentData();
+      } else {
+        component.parseStudentCompetencies(reportData);
+        component.resetActiveStudentData();
+        reportData.set('active', true);
+        component.set('isShowStudentCompetencies', true);
+      }
     },
 
     //Action triggered when remove a student
@@ -134,15 +145,13 @@ export default Ember.Component.extend({
   loadSummaryReportData(isWeekly = true) {
     const component = this;
     component.set('isLoading', true);
-    return Ember.RSVP
-      .hash({
-        summaryReportData: isWeekly
-          ? component.fetchStudentsWeeklySummaryReport()
-          : component.fetchStudentsClassSummaryReport()
-      })
-      .then(({ summaryReportData }) => {
-        component.parseStudentsWeeklySummaryReportData(summaryReportData);
-      });
+    return Ember.RSVP.hash({
+      summaryReportData: isWeekly
+        ? component.fetchStudentsWeeklySummaryReport()
+        : component.fetchStudentsClassSummaryReport()
+    }).then(({ summaryReportData }) => {
+      component.parseStudentsWeeklySummaryReportData(summaryReportData);
+    });
   },
 
   /**
@@ -312,5 +321,17 @@ export default Ember.Component.extend({
     const component = this;
     const classId = component.get('classId');
     return component.get('reportService').fetchStudentsSummaryReport(classId);
+  },
+
+  /**
+   * @function scrollEventHandler
+   * Method to handle scrolling event for respective container
+   */
+  scrollEventHandler() {
+    const scrollingElementContainer = this;
+    const targetElementContainer = Ember.$(
+      '.student-weekly-report .header-container .header-right'
+    );
+    targetElementContainer.scrollLeft(scrollingElementContainer.scrollLeft);
   }
 });
