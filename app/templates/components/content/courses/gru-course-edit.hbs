@@ -9,7 +9,6 @@
       {{/if}}
     </div>
   </a>
-
   <h1>{{t "common.edit-course"}}</h1>
   <div class="actions">
     <button class="btn btn-default btn-icon" title="{{t 'common.delete'}}" {{action "deleteCourse"}}>{{gru-icon name="delete"}}</button>
@@ -20,27 +19,20 @@
     <button class="btn btn-default out-of-scope">{{t "content.courses.edit.assign-to-class"}}</button>
     {{#link-to 'content.courses.play' course.id class="btn btn-default preview" tagName="button"}}{{t "common.preview"}}{{/link-to}}
   </div>
-
   <nav>
     {{#gru-scroll to="#information" class="selected" offset='article > header'}}{{t "common.information"}}{{/gru-scroll}}
     {{#gru-scroll to="#builder" offset='article > header'}}{{t "common.builder"}}{{/gru-scroll}}
     {{#gru-scroll to="#settings" offset='article > header'}}{{t "common.settings"}}{{/gru-scroll}}
     {{#gru-scroll to="#collaborators" offset='article > header'}}{{t "common.add-collaborator"}}{{/gru-scroll}}
   </nav>
-
 </header>
-
 <section id="information">
   <div class="header">
     <h2>{{t "common.information"}}</h2>
-
     {{partial 'content/partials/information-actions'}}
-
   </div>
   <div class="content">
-
     {{content/gru-image isEditing=isEditing srcImage=course.thumbnailUrl editImage=tempCourse.thumbnailUrl}}
-
     <div class="panel panel-default">
       <div class="panel-body">
         <div class="title">
@@ -65,7 +57,6 @@
             {{/if}}
           </label>
         </div>
-
         {{taxonomy/gru-taxonomy-selector
           isEditing=isEditing
           onSubjectSelected="selectSubject"
@@ -74,9 +65,7 @@
           selectedTaxonomy=(if isEditing tempCourse.taxonomy course.taxonomy)
           showCourses=true
         }}
-
         {{content/gru-audience isEditing=isEditing srcSelectedAudiences=course.audience editSelectedAudiences=tempCourse.audience}}
-
         <div class="use-case">
           <label>
             <span>{{t "common.use-case"}}</span>
@@ -106,7 +95,7 @@
   <div class="header">
     <h2>{{t "common.add-collaborator"}}</h2>
     <div class="actions">
-      <button class="btn btn-primary add-collaborator" {{action 'onToggleAddCollaborator'}}>{{gru-icon name="add"}}</button>
+      <button class="btn btn-primary add-collaborator {{if (not-eq selfId course.creatorId) 'disable-event disable-color' }} " {{action 'onToggleAddCollaborator'}}>{{gru-icon name="add"}}</button>
     </div>
   </div>
   <div class="content panel">
@@ -121,8 +110,12 @@
         {{#each collaborators as |coteacher|}}
           <div class='sub-sec-row'>
             <div class='teacher-icon' style="background-image: url({{coteacher.avatarUrl}})"></div>
-            <div class='co-teacher-label'> {{coteacher.lastName}} {{coteacher.firstName}}</div>
-            <div class='delete-co-teacher' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
+            <div class='co-teacher-label'> {{coteacher.lastName}} {{coteacher.firstName}}
+              {{#if (eq coteacher.id course.creatorId)}}
+                (Content Owner)
+              {{/if}}
+            </div>
+            <div class="delete-co-teacher {{if (not-eq selfId course.creatorId) 'disable-event disable-color' }}" {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
           </div>
         {{/each}}
       {{else}}

@@ -49,6 +49,8 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
 
   tagName: 'article',
 
+  selfId: Ember.computed.alias('session.userId'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -332,6 +334,11 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
 
   readCollaboratorsProfile() {
     const component = this;
+
+    let collaborators = component.get('collaborators');
+    if (component.get('selfId') === component.get('course.creatorId')) {
+      collaborators.push(component.get('selfId'));
+    }
     component
       .get('profileService')
       .readMultipleProfiles(component.get('collaborators'))
