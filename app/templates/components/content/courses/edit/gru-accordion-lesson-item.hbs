@@ -23,13 +23,13 @@
         </div>
       </a>
     {{else}}
-      <div class="title pointer" {{action 'edit' model}}>
+      <a class="title pointer" {{action 'edit' model}} href="#">
         <img class="img-rounded" src="{{model.thumbnailUrl}}" />
         <div>
           <strong>{{model.title}}</strong>
           <span>{{model.collectionType}}</span>
         </div>
-      </div>
+      </a>
     {{/if}}
     <div class="detail">
       {{#if model.isCollection}}
