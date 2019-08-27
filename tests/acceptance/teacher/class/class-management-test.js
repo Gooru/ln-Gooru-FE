@@ -110,9 +110,6 @@ test('Remove class', function(assert) {
             andThen(function() {
               var $deleteButton = $deleteContentModal.find('button.delete');
               click($deleteButton);
-              andThen(function() {
-                assert.equal(currentURL(), '/teacher-home');
-              });
             });
           });
         });
@@ -129,7 +126,6 @@ test('Archive Class', function(assert) {
       currentURL(),
       '/teacher/class/class-for-pochita-as-teacher/class-management'
     );
-
     const $container = find(
       '.teacher.class .controller.teacher.class.class-settings'
     );
@@ -153,9 +149,6 @@ test('Archive Class', function(assert) {
           andThen(function() {
             let $archiveButton = $archiveModal.find('button.archive');
             click($archiveButton);
-            andThen(function() {
-              assert.equal(currentURL(), '/teacher-home');
-            });
           });
         });
       });
