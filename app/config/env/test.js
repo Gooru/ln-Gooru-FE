@@ -10,10 +10,10 @@ export default {
   },
 
   realTime: {
-    webServiceUrl: 'http://localhost:7357',
-    webServiceUri: 'http://localhost:7357/',
-    webSocketUrl: 'http://localhost:7357',
-    webSocketUri: '/ws/quizzes-realtime'
+    webServiceUrl: 'https://localhost:7357',
+    webServiceUri: '/nucleus/realtime',
+    webSocketUrl: 'https://localhost:7357',
+    webSocketUri: '/ws/realtime'
   },
 
   teams: {
@@ -47,10 +47,10 @@ export default {
     },
 
     realTime: {
-      webServiceUrl: 'http://localhost:7357',
-      webServiceUri: '/',
-      webSocketUrl: 'http://localhost:7357',
-      webSocketUri: '/ws/quizzes-realtime'
+      webServiceUrl: 'https://localhost:7357',
+      webServiceUri: '/nucleus/realtime',
+      webSocketUrl: 'realtimeURL',
+      webSocketUri: '/realtimeURI'
     }
   },
 
