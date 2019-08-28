@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import AddToModal from 'gooru-web/components/content/modals/gru-add-to';
-import { DEFAULT_PAGE_SIZE } from 'gooru-web/config/config';
+import { DEFAULT_PAGE_SIZE, CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default AddToModal.extend({
   // -------------------------------------------------------------------------
@@ -148,7 +148,7 @@ export default AddToModal.extend({
         .get('profileService')
         .readCollections(component.get('session.userId'), pagination)
         .then(function(collections) {
-          component.get('collections').pushObjects(collections.toArray());
+          component.get('collections').pushObjects(collections);
         });
     } else {
       const pagination = this.get('paginationAssessments');
@@ -158,9 +158,26 @@ export default AddToModal.extend({
         .get('profileService')
         .readAssessments(component.get('session.userId'), pagination)
         .then(function(assessments) {
-          component.get('assessments').pushObjects(assessments.toArray());
+          component.get('assessments').pushObjects(assessments);
         });
     }
+  },
+
+  /**
+   * @function excludeExternalContents
+   * @param {Array} contents
+   * @return {Array} filteredContents
+   * Method to filter out external contents from the collections/assessments
+   */
+  excludeExternalContents(contents = Ember.A([])) {
+    const component = this;
+    let actualContentType = component.get('showCollections')
+      ? CONTENT_TYPES.COLLECTION
+      : CONTENT_TYPES.ASSESSMENT;
+    let filteredContents = contents.filter(content => {
+      return content.get('format') === actualContentType;
+    });
+    return filteredContents;
   },
 
   // -------------------------------------------------------------------------
@@ -197,13 +214,20 @@ export default AddToModal.extend({
   }),
 
   /**
-    * @type {List} collections/assessments to be rendered
-    */
-  collectionsList: Ember.computed('showCollections', function() {
-    return this.get('showCollections')
-      ? this.get('collections')
-      : this.get('assessments');
-  }),
+   * @type {List} collections/assessments to be rendered
+   */
+  collectionsList: Ember.computed(
+    'showCollections',
+    'assessments.[]',
+    'collections.[]',
+    function() {
+      const component = this;
+      let allContents = component.get('showCollections')
+        ? component.get('collections')
+        : component.get('assessments');
+      return component.excludeExternalContents(allContents);
+    }
+  ),
   /**
    * @property {boolean} showMoreResultsButton
    */
@@ -213,13 +237,13 @@ export default AddToModal.extend({
     function() {
       return this.get('showCollections')
         ? this.get('collections.length') &&
-          this.get('collections.length') %
-            this.get('paginationCollections.pageSize') ===
-            0
+            this.get('collections.length') %
+              this.get('paginationCollections.pageSize') ===
+              0
         : this.get('assessments.length') &&
-          this.get('assessments.length') %
-            this.get('paginationAssessments.pageSize') ===
-            0;
+            this.get('assessments.length') %
+              this.get('paginationAssessments.pageSize') ===
+              0;
     }
   ),
   /**
