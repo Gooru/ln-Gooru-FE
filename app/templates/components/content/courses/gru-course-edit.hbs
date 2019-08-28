@@ -112,7 +112,9 @@
             <div class='teacher-icon' style="background-image: url({{coteacher.avatarUrl}})"></div>
             <div class='co-teacher-label'> {{coteacher.lastName}} {{coteacher.firstName}}
               {{#if (eq coteacher.id course.creatorId)}}
-                (Content Owner)
+                <span class='font-bold'>
+                  ( {{t 'common.content-owner'}} )
+                </span>
               {{/if}}
             </div>
             <div class="delete-co-teacher {{if (not-eq selfId course.creatorId) 'disable-event disable-color' }}" {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
