@@ -290,7 +290,7 @@ export function generateUUID() {
   var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(
     c
   ) {
-    var r = ((d + Math.random() * 16) % 16) | 0;
+    var r = (d + Math.random() * 16) % 16 | 0;
     d = Math.floor(d / 16);
     return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
   });
@@ -687,7 +687,9 @@ function assessmentFileData(
     const prefixHeader =
       level === 'course'
         ? `U${index + 1} `
-        : level === 'unit' ? `L${index + 1} ` : `A${index + 1} `;
+        : level === 'unit'
+          ? `L${index + 1} `
+          : `A${index + 1} `;
     const scoreHeader = `${prefixHeader}${headerItem.get('title')} score`;
     const timeHeader = `${prefixHeader}${headerItem.get('title')} time`;
     dataHeaders.push(scoreHeader);
@@ -1191,4 +1193,36 @@ export function appLocales() {
       te: 'తెలుగు'
     }
   ]);
+}
+
+//TODO Need to improve this method to perform multiple levels of cloning
+/**
+ * @function getObjectCopy
+ * @param {Object} originalObject
+ * @return {Ember.Object} clonedObject
+ * Method to perform object copy
+ */
+export function getObjectCopy(originalObject) {
+  let clonedObject = Ember.Object.create();
+  let objectKeys = Object.keys(originalObject);
+  objectKeys.map(key => {
+    clonedObject.set(`${key}`, originalObject[key]);
+  });
+  return clonedObject;
+}
+
+/**
+ * @function getObjectsDeepCopy
+ * @param {Array} objectElements
+ * @return {Ember.Array} clonedObjectElements
+ * Method to perform deep copy of list of objects
+ */
+export function getObjectsDeepCopy(objectElements) {
+  let clonedObjectElements = Ember.A([]);
+  if (Ember.isArray(objectElements)) {
+    objectElements.map(originalObject => {
+      clonedObjectElements.pushObject(getObjectCopy(originalObject));
+    });
+  }
+  return clonedObjectElements;
 }
