@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
 export default Ember.Route.extend({
   // -------------------------------------------------------------------------
@@ -167,38 +168,36 @@ export default Ember.Route.extend({
         classMembers
       )
     );
-    return Ember.RSVP
-      .hash({
-        unitPerformances: unitPerformancePromise
-      })
-      .then(function(hash) {
-        let classPerformance = hash.unitPerformances;
-        units.map(unit => {
-          let unitId = unit.id;
-          let score = classPerformance.calculateAverageScoreByItem(unitId);
-          let timeSpent = classPerformance.calculateAverageTimeSpentByItem(
-            unitId
-          );
-          let completionDone = classPerformance.calculateSumCompletionDoneByItem(
-            unitId
-          );
-          let completionTotal = classPerformance.calculateSumCompletionTotalByItem(
-            unitId
-          );
-          let numberOfStudents = classPerformance.findNumberOfStudentsByItem(
-            unitId
-          );
-          let performance = {
-            score,
-            timeSpent,
-            completionDone,
-            completionTotal,
-            numberOfStudents
-          };
-          unit.set('performance', performance);
-        });
-        return units;
+    return Ember.RSVP.hash({
+      unitPerformances: unitPerformancePromise
+    }).then(function(hash) {
+      let classPerformance = hash.unitPerformances;
+      units.map(unit => {
+        let unitId = unit.id;
+        let score = classPerformance.calculateAverageScoreByItem(unitId);
+        let timeSpent = classPerformance.calculateAverageTimeSpentByItem(
+          unitId
+        );
+        let completionDone = classPerformance.calculateSumCompletionDoneByItem(
+          unitId
+        );
+        let completionTotal = classPerformance.calculateSumCompletionTotalByItem(
+          unitId
+        );
+        let numberOfStudents = classPerformance.findNumberOfStudentsByItem(
+          unitId
+        );
+        let performance = {
+          score,
+          timeSpent,
+          completionDone,
+          completionTotal,
+          numberOfStudents
+        };
+        unit.set('performance', performance);
       });
+      return units;
+    });
   },
   /**
    * Set all controller properties from the model
@@ -214,6 +213,8 @@ export default Ember.Route.extend({
     controller.set('isStudentCourseMap', false);
     controller.set('gradeSubject', model.gradeSubject);
     controller.set('classController.gradeSubject', model.gradeSubject);
+    controller.set('teacherMilestones', getObjectsDeepCopy(model.milestones));
+    controller.set('studentMilestones', getObjectsDeepCopy(model.milestones));
     controller.set('milestones', model.milestones);
     controller.loadItemsToGrade();
     controller.init();
