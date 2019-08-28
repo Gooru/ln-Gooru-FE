@@ -265,7 +265,15 @@ export default Ember.Component.extend({
   /**
    * @property {Number} questionTimespent
    */
-  questionTimespent: 0,
+  questionTimespent: Ember.computed(
+    'activityData.collection.performance',
+    function() {
+      return (
+        this.get('activityData.collection.performance.timeSpent') /
+        this.get('questions.length')
+      );
+    }
+  ),
 
   /**
    * @property {String} studentSearchPattern
@@ -395,6 +403,12 @@ export default Ember.Component.extend({
    * @property {Boolean} isMobileView
    */
   isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+  /**
+   * Checking activity data are want to updated or add
+   * @property {Boolean} isUpdateData
+   */
+  isUpdateData: Ember.computed.alias('activityData.isUpdatePerformance'),
 
   // -------------------------------------------------------------------------
   // Functions

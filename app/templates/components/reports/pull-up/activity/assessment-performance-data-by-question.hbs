@@ -36,7 +36,7 @@
   </div>
   <div class="right-container">
     {{#if isAssessment}}
-      {{#if (or isCaptureQuestionScore isOverwriteScore)}}
+      {{#if (or isCaptureQuestionScore isUpdateData)}}
         <div class="question-list-container">
           {{#each questions as |question seq|}}
             {{reports/pull-up/activity/add-question-score
