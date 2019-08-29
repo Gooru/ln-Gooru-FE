@@ -269,8 +269,9 @@ export default Ember.Component.extend({
     'activityData.collection.performance',
     function() {
       return (
-        this.get('activityData.collection.performance.timeSpent') /
-        this.get('questions.length')
+        (this.get('activityData.collection.performance')
+          ? this.get('activityData.collection.performance.timeSpent')
+          : 0) / this.get('questions.length')
       );
     }
   ),
