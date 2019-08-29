@@ -748,7 +748,6 @@
 
       .student-settings-sec {
         @extend .sec-panel;
-        padding-left: 10px;
 
         .apply-setting {
           display: grid;
@@ -784,6 +783,17 @@
             &:last-child {
               border-right: none;
               max-width: 80px;
+            }
+          }
+
+          tr {
+            td.student-info {
+              .student-name {
+                text-transform: capitalize;
+              }
+            }
+            &.end-no-boundary-sec {
+              border-bottom: 2px solid #323232;
             }
           }
 
