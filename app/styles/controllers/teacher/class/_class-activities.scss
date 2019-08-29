@@ -402,7 +402,10 @@
                   margin: 0 10px;
                   grid-gap: 10px;
                   justify-content: space-evenly;
-
+                  .ca-calendar-tabs-mobile {
+                    padding: 5px;
+                    display: none;
+                  }
                   .title {
                     text-align: center;
                     text-transform: uppercase;

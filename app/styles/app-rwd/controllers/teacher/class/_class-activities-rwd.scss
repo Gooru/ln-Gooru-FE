@@ -14,12 +14,7 @@
         .schedule-container {
           .ca-schedule-items-header {
             .ca-add-content {
-              display: grid;
-              grid-template-columns: max-content auto;
-
               .ca-date-section {
-                grid-column-start: 2;
-                grid-row-start: 2;
                 padding-left: 10px;
                 justify-self: end;
               }
@@ -282,6 +277,16 @@
             }
           }
         }
+      }
+    }
+  }
+  @media only screen and (max-width: $screen-xs) {
+    .ca-calendar-tabs {
+      .title {
+        display: none !important;
+      }
+      .ca-calendar-tabs-mobile {
+        display: block !important;
       }
     }
   }

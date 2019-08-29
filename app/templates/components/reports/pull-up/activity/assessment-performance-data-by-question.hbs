@@ -7,6 +7,7 @@
             {{gru-icon name="clear"}}
           </span>
         {{/if}}
+        {{#if (or isCaptureQuestionScore (not isMobileView))}}
         {{input
           class="search-student-input"
           type="text"
@@ -14,11 +15,12 @@
           value=studentSearchPattern
           placeholder=(concat (t 'common.search') ' ' (t 'common.student'))
           }}
-        <span class="search-icon">{{gru-icon name="search"}}</span>
+           <span class="search-icon">{{gru-icon name="search"}}</span>
+        {{/if}}
       </div>
       <div class="student-list-container">
         {{#each studentsList as |student|}}
-          <div class="student-details {{if (eq activeStudent.id student.id) 'active-student'}}">
+          <div class="student-details {{if (eq activeStudent.id student.id) 'active-student'}} {{ if (not isCaptureQuestionScore) 'after-time-input'}} {{ if (and isMobileView (not isCaptureQuestionScore)) 'after-time-input-mobile'}}">
             <div class="student-info-container" {{action "onSelectStudent" student}}>
               <div class="student-thumbnail" style="background-image: url({{student.avatarUrl}})"></div>
               <div class="student-name">{{student.fullName}}</div>
