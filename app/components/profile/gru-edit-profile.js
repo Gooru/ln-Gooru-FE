@@ -54,6 +54,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
       const component = this;
       let profile = this.get('profile');
       let editedProfile = this.get('tempProfile');
+      let userName = editedProfile.get('username');
       var role = component.get('tempProfile.role');
       var countrySelected = component.get('countrySelected');
       var stateSelected = component.get('stateSelected');
@@ -65,10 +66,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
       var showCountryErrorMessage = false;
       var showStateErrorMessage = false;
       var showDistrictErrorMessage = false;
+      let usernameError = false;
       var isValid = true;
 
       component.set('otherSchoolDistrict', otherSchoolDistrict);
-
+      if (!userName && !profile.get('username')) {
+        usernameError = component.get('i18n').t('common.errors.add-username')
+          .string;
+        isValid = false;
+      }
       if (!role) {
         showRoleErrorMessage = true;
         isValid = false;
@@ -99,7 +105,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
       component.set('showCountryErrorMessage', showCountryErrorMessage);
       component.set('showStateErrorMessage', showStateErrorMessage);
       component.set('showDistrictErrorMessage', showDistrictErrorMessage);
-
+      component.set('usernameError', usernameError);
       if (isValid) {
         editedProfile.validate().then(function({ validations }) {
           if (validations.get('isValid')) {
@@ -374,7 +380,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
       .then(function() {
         let session = component.get('session');
         if (!profile.get('avatarUrl')) {
-          profile.set('avatarUrl', component.get('appRootPath')+DEFAULT_IMAGES.USER_PROFILE);
+          profile.set(
+            'avatarUrl',
+            component.get('appRootPath') + DEFAULT_IMAGES.USER_PROFILE
+          );
         }
         session.set('userData.avatarUrl', profile.get('avatarUrl'));
         session.set('userData.isNew', false);
