@@ -44,8 +44,12 @@ export default Ember.Component.extend({
           reportPeriod.get('value') === 'current-week' ? 0 : 1
         );
       }
+      if (reportPeriod.get('type') === 'custom') {
+        component.onRangePickerReport(event);
+      } else {
+        component.loadSummaryReportData(isWeeklyReport);
+      }
       component.set('activeReportPeriod', reportPeriod);
-      component.loadSummaryReportData(isWeeklyReport);
       component.resetActiveStudentData();
       component.actions.onToggleReportPeriod(component);
     },
@@ -66,6 +70,24 @@ export default Ember.Component.extend({
     //Action triggered when remove a student
     onRemoveActiveStudentData() {
       this.resetActiveStudentData();
+    },
+
+    /**
+     * Action triggered when the user click on close
+     */
+    onCloseDatePicker() {
+      let component = this;
+      component.sendAction('closeDatePicker');
+    },
+
+    onRangeDatepicker(startDate, endDate) {
+      let components = this;
+      components.set('startDate', moment(startDate).format('YYYY-MM-DD'));
+      components.set('endDate', moment(endDate).format('YYYY-MM-DD'));
+      let datepickerEle = components.$('.ca-rangepicker-container');
+      components.loadSummaryReportData(true);
+      datepickerEle.removeClass('active');
+      datepickerEle.hide();
     }
   },
 
@@ -78,6 +100,8 @@ export default Ember.Component.extend({
    * Default 0 => Current Week
    */
   activeWeek: 0,
+
+  allowTwoDateRangePicker: true,
 
   /**
    * @property {UUID} classId
@@ -131,6 +155,11 @@ export default Ember.Component.extend({
         text: component.get('i18n').t('beginning-till-now'),
         value: 'till-now',
         type: 'complete'
+      }),
+      Ember.Object.create({
+        text: 'Custom',
+        value: 'custom-range',
+        type: 'custom'
       })
     ]);
   }),
@@ -333,5 +362,17 @@ export default Ember.Component.extend({
       '.student-weekly-report .header-container .header-right'
     );
     targetElementContainer.scrollLeft(scrollingElementContainer.scrollLeft);
+  },
+  onRangePickerReport(event) {
+    let component = this;
+    let datepickerEle = component.$('.ca-rangepicker-container');
+    let selectedContentEle = component.$(event.target);
+    if (!selectedContentEle.hasClass('active')) {
+      selectedContentEle.addClass('active');
+      datepickerEle.show();
+    } else {
+      selectedContentEle.removeClass('active');
+      datepickerEle.hide();
+    }
   }
 });
