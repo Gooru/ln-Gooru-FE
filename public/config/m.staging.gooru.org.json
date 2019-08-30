@@ -44,5 +44,7 @@
   "languageSetting": {
     "defaultLang": "en",
     "showDropMenu": true
-  }
+  },
+
+  "marketingSiteUrl": "/about"
 }

@@ -40,7 +40,7 @@ module.exports = function(environment) {
       //Add anything you want as default values
     },
 
-    marketingSiteUrl: '/welcome',
+    marketingSiteUrl: '/about',
     supportSiteUrl: 'http://support.gooru.org',
     toolkitSiteUrl: '/about/toolkit',
     termsConditionsUrl: '/about/terms-and-conditions'
