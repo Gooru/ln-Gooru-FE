@@ -282,8 +282,9 @@
                 <th class="hidden-xs">{{t 'teacher-landing.class.class-settings.student-id'}}</th>
                 <th><span class="hidden-xs">{{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}</span></th>
               </tr>
-              {{#each sortedMembers as |student|}}
-                <tr>
+
+              {{#each classStudents as |student index|}}
+                <tr class="{{if (eq (plus-one index) studentsWithoutGradeBoundaries.length) 'end-no-boundary-sec'}}">
                   <td class="student-info">
                     <div class="student-info-container">
                       <div class='student-icon-col hidden-xs'>

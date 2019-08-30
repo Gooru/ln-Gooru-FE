@@ -14,14 +14,16 @@ const profileServiceStub = Ember.Service.extend({
       } else {
         resolve(
           Ember.A([
-            {
+            Ember.Object.create({
               id: 'some-id',
-              title: 'some-title'
-            },
-            {
+              title: 'some-title',
+              format: 'collection'
+            }),
+            Ember.Object.create({
               id: 'some-id-2',
-              title: 'some-title-2'
-            }
+              title: 'some-title-2',
+              format: 'collection'
+            })
           ])
         );
       }
@@ -53,11 +55,13 @@ test('Layout', function(assert) {
     collections: Ember.A([
       CollectionModel.create(Ember.getOwner(this).ownerInjection(), {
         id: 'some-id',
-        title: 'some-title'
+        title: 'some-title',
+        format: 'collection'
       }),
       CollectionModel.create(Ember.getOwner(this).ownerInjection(), {
         id: 'some-id-2',
-        title: 'some-title-2'
+        title: 'some-title-2',
+        format: 'collection'
       })
     ]),
     content: ResourceModel.create(Ember.getOwner(this).ownerInjection(), {
@@ -98,7 +102,8 @@ test('Show more result', function(assert) {
     collections.pushObject(
       CollectionModel.create(Ember.getOwner(this).ownerInjection(), {
         id: 'some-id',
-        title: 'some-title'
+        title: 'some-title',
+        format: 'collection'
       })
     );
   }

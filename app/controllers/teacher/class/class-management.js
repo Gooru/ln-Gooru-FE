@@ -501,9 +501,66 @@ export default Ember.Controller.extend(ModalMixin, {
    * @param {[Student]} sortedMembers - Class members sorted
    */
   sortedMembers: Ember.computed('class.members.[]', function() {
-    return this.get('class.members').sortBy('firstName');
+    return this.get('class.members');
   }),
 
+  /**
+   * @property {Array} studentsWithoutGradeBoundaries
+   * Property for list of students who haven't set class boundaries
+   */
+  studentsWithoutGradeBoundaries: Ember.computed(
+    'sortedMembers',
+    'sortedMembers.@each.gradeLowerBound',
+    function() {
+      const component = this;
+      const sortedMembers = component.get('sortedMembers');
+      return sortedMembers
+        .filter(student => {
+          return !(
+            student.get('gradeLowerBound') && student.get('gradeUpperBound')
+          );
+        })
+        .sortBy('lastName');
+    }
+  ),
+
+  /**
+   * @property {Array} studentsWithGradeBoundaries
+   * Property for list of students who have set class boundaries
+   */
+  studentsWithGradeBoundaries: Ember.computed(
+    'sortedMembers',
+    'sortedMembers.@each.gradeLowerBound',
+    function() {
+      const component = this;
+      const sortedMembers = component.get('sortedMembers');
+      return sortedMembers
+        .filter(student => {
+          return (
+            student.get('gradeLowerBound') && student.get('gradeUpperBound')
+          );
+        })
+        .sortBy('lastName');
+    }
+  ),
+
+  /**
+   * @property {Array} classStudents
+   * Property for list of active students in the class
+   */
+  classStudents: Ember.computed(
+    'studentsWithoutGradeBoundaries.@each',
+    'studentsWithGradeBoundaries.@each',
+    function() {
+      return this.get('studentsWithoutGradeBoundaries').concat(
+        this.get('studentsWithGradeBoundaries')
+      );
+    }
+  ),
+
+  /**
+   * @property {Object} memberGradeBounds
+   */
   memberGradeBounds: Ember.computed.alias('class.memberGradeBounds'),
 
   /**

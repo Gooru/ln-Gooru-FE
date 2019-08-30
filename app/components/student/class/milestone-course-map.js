@@ -5,6 +5,7 @@ import {
   CONTENT_TYPES
 } from 'gooru-web/config/config';
 import CurrentLocationSerializer from 'gooru-web/serializers/analytics/current-location';
+import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -188,6 +189,20 @@ export default Ember.Component.extend({
    * @type {String}
    */
   userId: null,
+
+  /**
+   * @property {Object} classMilestones
+   * Property for list of all milestones aligned to the class
+   */
+  classMilestones: null,
+
+  /**
+   * @property {Array} milestones
+   * Property for list of all milestones aligned to the class/student class boundary
+   */
+  milestones: Ember.computed(function() {
+    return getObjectsDeepCopy(this.get('classMilestones')) || Ember.A([]);
+  }),
 
   // -------------------------------------------------------------------------
   // Actions

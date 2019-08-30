@@ -109,15 +109,6 @@
         }
 
         .class-activities {
-          order: 5;
-          border-top: 1px solid #ccc;
-
-          &.vactive {
-            grid-column: 2 / 4;
-          }
-        }
-
-        .course-map {
           order: 6;
           border-top: 1px solid #ccc;
 
@@ -126,13 +117,22 @@
           }
         }
 
-        .students {
+        .course-map {
           order: 7;
+          border-top: 1px solid #ccc;
+
+          &.vactive {
+            grid-column: 4 / 6;
+          }
+        }
+
+        .students {
+          order: 5;
           border-top: 1px solid #ccc;
           border-right: unset;
 
           &.vactive {
-            grid-column: 4 / 6;
+            grid-column: 2 / 4;
           }
         }
 
