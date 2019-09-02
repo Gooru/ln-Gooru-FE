@@ -1,0 +1,33 @@
+<div class="student-datepicker-container">
+    <div class="backdrop-panel" {{action 'close'}}></div>
+    <div class="student-datepicker-body">
+        <div class="student-daterange-picker">
+            <div class="datepicker-left">
+                <div class="datepicker-start-date">{{t 'goals.manage.start-date-label'}} :
+                    {{#if startDate}}
+                    {{format-date startDate 'YYYY-MM-DD'}}
+                    {{/if}}
+                </div>
+                {{bootstrap-datepicker-inline
+                    todayHighlight=true
+                    changeDate="changeStartDate" 
+                    endDate = "today"
+                    value=startDate}}
+            </div>
+            <div class="datepicker-right">
+                <div class="datepicker-end-date">{{t 'goals.manage.end-date-label'}} :
+                    {{#if endDate}}
+                    {{format-date endDate 'YYYY-MM-DD'}}
+                    {{/if}}
+                </div>
+                {{bootstrap-datepicker-inline 
+                    todayHighlight=true
+                    startDate = startDate
+                    endDate = "today"
+                    changeDate="changeEndDate" 
+                    value=endDate}}
+            </div>
+        </div>
+            <button class="btn btn-primary" {{ action 'onSubmit'}}>{{t 'common.submit'}}</button>
+    </div>
+</div>

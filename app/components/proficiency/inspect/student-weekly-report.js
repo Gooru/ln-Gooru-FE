@@ -80,7 +80,7 @@ export default Ember.Component.extend({
       component.sendAction('closeDatePicker');
     },
 
-    onRangeDatepicker(startDate, endDate) {
+    onChangeDateForStudent(startDate, endDate) {
       let components = this;
       components.set('startDate', moment(startDate).format('YYYY-MM-DD'));
       components.set('endDate', moment(endDate).format('YYYY-MM-DD'));
@@ -88,6 +88,9 @@ export default Ember.Component.extend({
       components.loadSummaryReportData(true);
       datepickerEle.removeClass('active');
       datepickerEle.hide();
+    },
+    onCloseDatepicker() {
+      this.$('.ca-rangepicker-container').hide();
     }
   },
 

@@ -548,13 +548,11 @@
     }
   }
   .ca-rangepicker-container {
-    background: #fff;
     position: absolute;
     z-index: 10;
-    width: inherit;
     box-shadow: 0 13px 16px 0 rgba(0, 0, 0, 0.13);
     top: 50px;
-    width: auto;
+    width: 100%;
     display: none;
   }
 }
