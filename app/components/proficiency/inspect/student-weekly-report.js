@@ -48,9 +48,9 @@ export default Ember.Component.extend({
         component.onRangePickerReport(event);
       } else {
         component.loadSummaryReportData(isWeeklyReport);
+        component.resetActiveStudentData();
       }
       component.set('activeReportPeriod', reportPeriod);
-      component.resetActiveStudentData();
       component.actions.onToggleReportPeriod(component);
     },
 
@@ -78,17 +78,18 @@ export default Ember.Component.extend({
 
     onChangeDateForStudent(startDate, endDate) {
       let components = this;
-      components.set('startDate', moment(startDate).format('YYYY-MM-DD'));
-      components.set('endDate', moment(endDate).format('YYYY-MM-DD'));
+      components.set('rangeStartDate', moment(startDate).format('YYYY-MM-DD'));
+      components.set('rangeEndDate', moment(endDate).format('YYYY-MM-DD'));
       components.loadSummaryReportData(false);
+      components.resetActiveStudentData();
     },
 
     /**
      * Close range date picker
      */
 
-    onCloseDatepicker() {
-      this.$('.ca-rangepicker-container').hide();
+    onCloseDatePicker() {
+      this.$('.student-rangepicker-container').hide();
     }
   },
 
@@ -101,6 +102,21 @@ export default Ember.Component.extend({
    * Default 0 => Current Week
    */
   activeWeek: 0,
+
+  /**
+   * Set custom range start date
+   */
+  rangeStartDate: 0,
+
+  /**
+   * Set custom range end date
+   */
+  rangeEndDate: 0,
+
+  /**
+   * Enable range date picker
+   */
+  allowTwoDateRangePicker: true,
 
   /**
    * @property {UUID} classId
@@ -348,8 +364,8 @@ export default Ember.Component.extend({
   fetchStudentsClassSummaryReport() {
     const component = this;
     const classId = component.get('classId');
-    const startDate = component.get('startDate');
-    const endDate = component.get('endDate');
+    const startDate = component.get('rangeStartDate');
+    const endDate = component.get('rangeEndDate');
     const dataParam = {
       fromDate: startDate,
       toDate: endDate
@@ -378,7 +394,7 @@ export default Ember.Component.extend({
    */
   onRangePickerReport(event) {
     let component = this;
-    let datepickerEle = component.$('.ca-rangepicker-container');
+    let datepickerEle = component.$('.student-rangepicker-container');
     let selectedContentEle = component.$(event.target);
     if (!selectedContentEle.hasClass('active')) {
       selectedContentEle.addClass('active');

@@ -1,10 +1,6 @@
 import Ember from 'ember';
-import {
-  SCREEN_SIZES
-} from 'gooru-web/config/config';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -59,16 +55,22 @@ export default Ember.Component.extend({
   selectedTabIndex: 0,
 
   /**
+   * Set previous date not editable
+   */
+  editPreviousDate: true,
+
+  /**
    * @property {Boolean} isMobileView
    * Property to handle is mobile view
    */
   isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
-
   isValid: Ember.computed('allowTwoDateRangePicker', 'endDate', function() {
     let component = this;
-    return (component.get('allowTwoDateRangePicker') && component.get('endDate')) ||
-      (!component.get('allowTwoDateRangePicker') && component.get('startDate'));
+    return (
+      (component.get('allowTwoDateRangePicker') && component.get('endDate')) ||
+      (!component.get('allowTwoDateRangePicker') && component.get('startDate'))
+    );
   }),
 
   // -------------------------------------------------------------------------

@@ -211,6 +211,7 @@ export default Ember.Component.extend({
     let datepickerEle = component.$('#ca-datepicker');
     let defaultParams = {
       maxViewMode: 0,
+      endDate: this.get('userStartDateAsToday') ? null : 'today',
       format: 'yyyy-mm-dd',
       todayHighlight: true
     };

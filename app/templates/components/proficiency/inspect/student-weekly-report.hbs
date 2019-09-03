@@ -158,10 +158,14 @@
       {{/if}}
     </div>
   {{/if}}
-  <div class="ca-rangepicker-container">
-{{stu-datepicker
-    onChangeDateForStudent ='onChangeDateForStudent'
-    onClose='onCloseDatepicker'
-}}
+  <div class="student-rangepicker-container">
+
+ {{ca-daterange-datepicker
+      closeDatePicker='onCloseDatePicker'
+      onScheduleForDate='onChangeDateForStudent'
+      editPreviousDate=false
+      endDate=rangeEndDate
+      allowTwoDateRangePicker=allowTwoDateRangePicker}}
+
 </div>
 </div>
