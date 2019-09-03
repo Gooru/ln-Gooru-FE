@@ -73,7 +73,7 @@ export default Ember.Component.extend({
     },
 
     /**
-     * Action triggered when the user click on close
+     * Select from date and to date while submit
      */
 
     onChangeDateForStudent(startDate, endDate) {
@@ -82,6 +82,11 @@ export default Ember.Component.extend({
       components.set('endDate', moment(endDate).format('YYYY-MM-DD'));
       components.loadSummaryReportData(false);
     },
+
+    /**
+     * Close range date picker
+     */
+
     onCloseDatepicker() {
       this.$('.ca-rangepicker-container').hide();
     }
@@ -367,6 +372,10 @@ export default Ember.Component.extend({
     );
     targetElementContainer.scrollLeft(scrollingElementContainer.scrollLeft);
   },
+
+  /**
+   * Show range date picker while click dropdown custom option
+   */
   onRangePickerReport(event) {
     let component = this;
     let datepickerEle = component.$('.ca-rangepicker-container');
