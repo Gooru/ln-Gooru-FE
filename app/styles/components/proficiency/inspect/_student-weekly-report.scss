@@ -9,8 +9,18 @@
     .report-period-selector {
       display: grid;
       justify-content: right;
+      grid-template-columns: auto auto;
+      align-items: center;
       position: relative;
       padding-right: 15px;
+      @media screen and (max-width: 370px) {
+        .custom-range-shower {
+          display: none;
+        }
+      }
+      .custom-range-shower {
+        padding: 0 10px;
+      }
       .active-period {
         height: 50px;
         line-height: 50px;
@@ -554,5 +564,20 @@
     top: 50px;
     width: 100%;
     display: none;
+    .ca-daterange-picker {
+      background-color: transparent;
+      .ca-datepicker-body {
+        right: 0;
+        left: auto;
+        top: 60%;
+      }
+      @media screen and (max-width: 768px) {
+        .ca-datepicker-body {
+          right: auto;
+          left: 50%;
+          top: 50%;
+        }
+      }
+    }
   }
 }

@@ -37,6 +37,9 @@ export default Ember.Component.extend({
     //Action triggered when select a reprot period
     onSelectReportPeriod(reportPeriod) {
       const component = this;
+      component.set('rangeStartDate', null);
+      component.set('rangeEndDate', null);
+      component.set('activeReportPeriod', null);
       let isWeeklyReport = reportPeriod.get('value') !== 'till-now';
       if (reportPeriod.get('type') === 'weekly') {
         component.set(
@@ -106,17 +109,12 @@ export default Ember.Component.extend({
   /**
    * Set custom range start date
    */
-  rangeStartDate: 0,
+  rangeStartDate: null,
 
   /**
    * Set custom range end date
    */
-  rangeEndDate: 0,
-
-  /**
-   * Enable range date picker
-   */
-  allowTwoDateRangePicker: true,
+  rangeEndDate: null,
 
   /**
    * @property {UUID} classId

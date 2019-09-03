@@ -57,7 +57,7 @@ export default Ember.Component.extend({
   /**
    * Set previous date not editable
    */
-  editPreviousDate: true,
+  isNotEditPreviousDate: true,
 
   /**
    * @property {Boolean} isMobileView

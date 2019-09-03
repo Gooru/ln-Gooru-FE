@@ -2727,7 +2727,7 @@ window.i18ln = {
   'suggestion-taken': 'Suggestions Taken',
   'this-week': 'This Week',
   'previous-week': 'Previous Week',
-  'custom-range': 'Custom',
+  'custom-range': 'Custom Date Range',
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
