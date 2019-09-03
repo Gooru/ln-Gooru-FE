@@ -2682,6 +2682,7 @@ window.i18ln = {
   'this-week': 'This Week',
   'previous-week': 'Previous Week',
   'beginning-till-now': 'Beginning Till Now',
+  'custom-range': 'Custom',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
   'report.class-weekly-report': 'Class Progress Report',

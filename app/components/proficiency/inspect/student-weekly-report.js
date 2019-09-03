@@ -85,7 +85,7 @@ export default Ember.Component.extend({
       components.set('startDate', moment(startDate).format('YYYY-MM-DD'));
       components.set('endDate', moment(endDate).format('YYYY-MM-DD'));
       let datepickerEle = components.$('.ca-rangepicker-container');
-      components.loadSummaryReportData(true);
+      components.loadSummaryReportData(false);
       datepickerEle.removeClass('active');
       datepickerEle.hide();
     },
@@ -160,7 +160,7 @@ export default Ember.Component.extend({
         type: 'complete'
       }),
       Ember.Object.create({
-        text: 'Custom',
+        text: component.get('i18n').t('custom-range'),
         value: 'custom-range',
         type: 'custom'
       })
@@ -352,7 +352,17 @@ export default Ember.Component.extend({
   fetchStudentsClassSummaryReport() {
     const component = this;
     const classId = component.get('classId');
-    return component.get('reportService').fetchStudentsSummaryReport(classId);
+    const startDate = component.get('startDate');
+    const endDate = component.get('endDate');
+    const dataParam = {
+      fromDate: startDate,
+      toDate: endDate
+    };
+    const customParam =
+      component.get('activeReportPeriod.type') === 'custom' ? dataParam : null;
+    return component
+      .get('reportService')
+      .fetchStudentsSummaryReport(classId, customParam);
   },
 
   /**
