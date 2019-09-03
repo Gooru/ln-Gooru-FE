@@ -75,19 +75,12 @@ export default Ember.Component.extend({
     /**
      * Action triggered when the user click on close
      */
-    onCloseDatePicker() {
-      let component = this;
-      component.sendAction('closeDatePicker');
-    },
 
     onChangeDateForStudent(startDate, endDate) {
       let components = this;
       components.set('startDate', moment(startDate).format('YYYY-MM-DD'));
       components.set('endDate', moment(endDate).format('YYYY-MM-DD'));
-      let datepickerEle = components.$('.ca-rangepicker-container');
       components.loadSummaryReportData(false);
-      datepickerEle.removeClass('active');
-      datepickerEle.hide();
     },
     onCloseDatepicker() {
       this.$('.ca-rangepicker-container').hide();
@@ -103,8 +96,6 @@ export default Ember.Component.extend({
    * Default 0 => Current Week
    */
   activeWeek: 0,
-
-  allowTwoDateRangePicker: true,
 
   /**
    * @property {UUID} classId
