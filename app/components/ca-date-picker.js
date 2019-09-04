@@ -150,7 +150,7 @@ export default Ember.Component.extend({
   /**
    * Enable previous date visible and disable future date in range date picker
    */
-  enablePreviousDate: false,
+  disableFutureDate: false,
 
   /**
    * It will decide whether today button need to show or not.
@@ -216,7 +216,7 @@ export default Ember.Component.extend({
     let datepickerEle = component.$('#ca-datepicker');
     let defaultParams = {
       maxViewMode: 0,
-      endDate: this.get('enablePreviousDate') ? null : 'today',
+      endDate: this.get('disableFutureDate') ? null : 'today',
       format: 'yyyy-mm-dd',
       todayHighlight: true
     };

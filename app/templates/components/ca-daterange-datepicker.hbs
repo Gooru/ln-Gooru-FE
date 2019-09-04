@@ -29,26 +29,26 @@
   <div class="calendar">
     <div class="start-date-picker {{if (eq selectedTabIndex 0) 'selected'}}">
       {{ca-date-picker
-     userStartDateAsToday=enableFutureDate
+     userStartDateAsToday=userStartDateAsToday
      onSelectDate='onScheduleStartDate'
      showMonths=(if allowTwoDateRangePicker  false true)
      onSelectMonth='onScheduleForMonth'
-     enablePreviousDate=enableFutureDate
+     disableFutureDate=disableFutureDate
      forFirstDateOfMonth=forFirstDateOfMonth
    }}
     </div>
     <div class="end-date-picker {{unless allowTwoDateRangePicker 'hidden'}} {{if (eq selectedTabIndex 1) 'selected'}}">
       {{ca-date-picker
-      userStartDateAsToday=enableFutureDate
+      userStartDateAsToday=userStartDateAsToday
       onSelectDate='onScheduleEndDate'
       startDate=startDate
       showMonths=false
-      enablePreviousDate=enableFutureDate
+      disableFutureDate=disableFutureDate
       validateEndDate=true
     }}
     </div>
   </div>
-  {{#if enableScheduleMoth}}
+  {{#if enableScheduleMonth}}
   <div class="month-picker {{unless allowTwoDateRangePicker 'hidden'}}">
     {{ca-month-picker onSelectMonth='onScheduleForMonth' currentMonth=forFirstDateOfMonth}}
   </div>

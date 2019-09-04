@@ -57,9 +57,17 @@ export default Ember.Component.extend({
   /**
    * Enable future date as editable
    */
-  enableFutureDate: true,
+  userStartDateAsToday: true,
 
-  enableScheduleMoth: Ember.computed.alias('enableFutureDate'),
+  /**
+   * Enablr scheduled month
+   */
+  enableScheduleMonth: true,
+
+  /**
+   * Disable future Date
+   */
+  disableFutureDate: true,
 
   /**
    * @property {Boolean} isMobileView
