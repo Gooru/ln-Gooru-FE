@@ -283,10 +283,10 @@
   @media only screen and (max-width: $screen-xs) {
     .ca-calendar-tabs {
       .title {
-        display: none !important;
+        display: none;
       }
       .ca-calendar-tabs-mobile {
-        display: block !important;
+        display: block;
       }
     }
   }

@@ -406,6 +406,11 @@
                     padding: 5px;
                     display: none;
                   }
+                  @media screen and (max-width: $screen-xs) {
+                    .ca-calendar-tabs-mobile {
+                      display: block;
+                    }
+                  }
                   .title {
                     text-align: center;
                     text-transform: uppercase;
