@@ -1114,7 +1114,6 @@ export default Ember.Component.extend({
     let component = this;
     component.clearChart();
     component.set('isShowMatrixChart', false);
-    component.set('taxonomyGrades', []);
   },
 
   clearChart() {
