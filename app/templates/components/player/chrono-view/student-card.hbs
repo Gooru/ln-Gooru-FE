@@ -34,10 +34,12 @@
         {{/if}}
       </div>
       <div class="collections">
-        {{#each collection.children as |resource|}}
+        {{#each (if isOfflineActivity collection.tasks collection.children ) as |resource|}}
           <div class="resource">
             {{#if (eq type 'assessment')}}
               <i class="question-img"></i>
+            {{else if (eq type 'offline-activity')}}
+              <i class="task-img"></i>
             {{else}}
               <i class="resource-img {{resource.format}}"></i>
             {{/if}}
@@ -45,6 +47,8 @@
               <p class="title ellipsis">{{resource.title}}</p>
               {{#if (eq type "assessment")}}
                 <span class="type">{{t (concat "common.question-type." resource.type)}}</span>
+              {{else if isOfflineActivity}}
+                <span class="type ellipsis">{{resource.description}}</span>
               {{else}}
                 <span class="type">{{t (concat "common.resource-format." resource.format)}}</span>
               {{/if}}

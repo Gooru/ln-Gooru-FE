@@ -22,7 +22,13 @@
         }}
       </div>
       <div class="comment-action">
-        <div class="submit-comment" {{action 'saveGrade'}}>Submit</div>
+        <div class="submit-comment" {{action 'saveGrade'}}>
+          {{#if isStudentGradingDone}}
+            {{t 'goals.manage.update'}}
+          {{else}}
+            {{t 'common.submit'}}
+          {{/if}}
+        </div>
       </div>
     </div>
   {{/if}}

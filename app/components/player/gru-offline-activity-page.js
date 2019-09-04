@@ -60,16 +60,19 @@ export default Ember.Component.extend({
    * @property {Boolean} isShowLandingPage
    * Property to show/hide OA start page
    */
-  isShowLandingPage: Ember.computed('offlineActivitySubmissions', function() {
-    const component = this;
-    const offlineActivitySubmissions = component.get(
-      'offlineActivitySubmissions'
-    );
-    const oaTaskSubmissions = offlineActivitySubmissions
-      ? offlineActivitySubmissions.tasks.objectAt(0)
-      : null;
-    return !(oaTaskSubmissions && oaTaskSubmissions.taskId);
-  }),
+  isShowLandingPage: Ember.computed(
+    'offlineActivitySubmissions.tasks',
+    function() {
+      const component = this;
+      const offlineActivitySubmissions = component.get(
+        'offlineActivitySubmissions'
+      );
+      const oaTaskSubmissions = offlineActivitySubmissions
+        ? offlineActivitySubmissions.tasks.objectAt(0)
+        : null;
+      return !(oaTaskSubmissions && oaTaskSubmissions.taskId);
+    }
+  ),
 
   /**
    * @property {Object} mapLocationContext

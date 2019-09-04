@@ -73,6 +73,18 @@
         border: 1px solid $gray;
         border-radius: 5px;
       }
+
+      .gru-offline-activity-submission {
+        .offline-activity-submission-container.grading-enabled {
+          @media screen and (min-width: $screen-md - 1) {
+            max-height: calc(100vh - 125px);
+            > .left-panel,
+            > .right-panel {
+              max-height: calc(100vh - 125px);
+            }
+          }
+        }
+      }
     }
   }
 

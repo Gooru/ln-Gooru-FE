@@ -59,6 +59,15 @@
         opacity: 0.8;
       }
 
+      .icon-offline-activity {
+        width: 20%;
+        background-image: url("gooru/images/offline.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 37%;
+        opacity: 0.8;
+      }
+
       .title {
         display: flex;
         align-items: center;
@@ -147,6 +156,14 @@
           background-size: 40%;
           width: 20%;
           opacity: 0.5;
+        }
+
+        .task-img {
+          background: url("gooru/images/text-resource-dark.svg");
+          @extend %image-container;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: 40%;
         }
 
         .resource-img {

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -30,6 +31,10 @@ export default Ember.Component.extend({
    */
   collectionService: Ember.inject.service('api-sdk/collection'),
 
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
+
   /**
    * @property {String} color - Hex color value for the default bgd color of the bar chart
    */
@@ -57,6 +62,11 @@ export default Ember.Component.extend({
    */
   loading: true,
 
+  isOfflineActivity: Ember.computed.equal(
+    'type',
+    CONTENT_TYPES.OFFLINE_ACTIVITY
+  ),
+
   init() {
     this._super(...arguments);
     this.getStundentCollectionReport();
@@ -81,6 +91,12 @@ export default Ember.Component.extend({
       collectionPromise = component
         .get('assessmentService')
         .readExternalAssessment(activity.get('collectionId'));
+    } else if (
+      activity.get('collectionType') === CONTENT_TYPES.OFFLINE_ACTIVITY
+    ) {
+      collectionPromise = component
+        .get('offlineActivityService')
+        .readActivity(activity.get('collectionId'));
     } else {
       collectionPromise = component
         .get('collectionService')
