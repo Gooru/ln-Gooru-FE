@@ -72,8 +72,7 @@ export default Ember.Component.extend({
     },
 
     //Action triggered when click on self grade
-    onTriggerSelfGrade() {
-      const component = this;
+    onTriggerSelfGrade(component = this) {
       const classId = component.get('classId');
       const content = component.get('offlineActivity');
       const contentSource = component.get('contentSource');
@@ -282,10 +281,56 @@ export default Ember.Component.extend({
     'Teacher'
   ),
 
+  /**
+   * @property {Boolean} isCourseMapGrading
+   * Property to determine whether it's a course map grading or CA
+   */
   isCourseMapGrading: Ember.computed.equal(
     'contentSource',
     PLAYER_EVENT_SOURCE.COURSE_MAP
   ),
+
+  /**
+   * @property {Boolean} isShowOaSelfGrading
+   * Property to show/hide OA grading container
+   */
+  isShowOaSelfGrading: Ember.computed(
+    'activityTasks',
+    'isOaCompleted',
+    function() {
+      const component = this;
+      return (
+        component.get('activityTasks.length') && component.get('isOaCompleted')
+      );
+    }
+  ),
+
+  /**
+   * @property {Object} selfGradeItemContext
+   * Property for OA's grading context
+   */
+  selfGradeItemContext: Ember.computed(function() {
+    const component = this;
+    const classId = component.get('classId');
+    const content = component.get('offlineActivity');
+    const contentSource = component.get('contentSource');
+    const contentType = CONTENT_TYPES.OFFLINE_ACTIVITY;
+    return Ember.Object.create({
+      classId,
+      content,
+      contentType,
+      contentSource,
+      dcaContentId: component.get('caContentId')
+    });
+  }),
+
+  /**
+   * @property {Array} itemsToGrade
+   * Property for list of items needs to be graded
+   */
+  itemsToGrade: Ember.computed('selfGradeItemContext', function() {
+    return Ember.A([this.get('selfGradeItemContext')]);
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -350,6 +395,7 @@ export default Ember.Component.extend({
             let studentGrades = tasksSubmissions.get('oaRubrics.studentGrades');
             component.set('isSelfGradingDone', !!studentGrades.get('grader'));
           }
+          component.set('offlineActivitySubmissions', tasksSubmissions);
         }
         component.set('activityTasks', activityTasks);
         component.set('isLoading', false);

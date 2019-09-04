@@ -2693,6 +2693,9 @@ window.i18ln = {
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
-  'search-by': 'Search By'
+  'search-by': 'Search By',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };
 export default window.i18ln;
