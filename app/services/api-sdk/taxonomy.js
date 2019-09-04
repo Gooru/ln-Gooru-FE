@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
 import TaxonomyAdapter from 'gooru-web/adapters/taxonomy/taxonomy';
-
 /**
  * API-SDK Service for the Taxonomies back-end endpoints
  *
@@ -67,6 +66,25 @@ export default Ember.Service.extend({
               service
                 .get('taxonomySerializer')
                 .normalizeTaxonomySubjects(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  fetchCrossWalkFWC(frameworkCode, subjectCode) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('taxonomyAdapter')
+        .fetchCrossWalkFWC(frameworkCode, subjectCode)
+        .then(
+          function(response) {
+            resolve(
+              service.get('taxonomySerializer').normalizeFWCMatrixs(response)
             );
           },
           function(error) {

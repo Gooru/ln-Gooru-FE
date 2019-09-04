@@ -45,9 +45,20 @@
   }
 
   .actions {
-    grid-template-columns: auto max-content;
+    grid-template-columns: auto max-content max-content;
     display: grid;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    align-items: center;
+
+    .fwc-panel {
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+
+      .fwc-toggle {
+        margin-top: 5px;
+      }
+    }
 
     .toggle-chart {
       width: max-content;
@@ -165,6 +176,20 @@
             grid-template-columns: auto;
             align-items: end;
             @extend %scroll-style;
+
+            &.show-competency {
+              #render-proficiency-matrix {
+                svg {
+                  #cell-container {
+                    rect {
+                      &.no-framework {
+                        fill: #535e67;
+                      }
+                    }
+                  }
+                }
+              }
+            }
 
             #popover {
               width: 234px;

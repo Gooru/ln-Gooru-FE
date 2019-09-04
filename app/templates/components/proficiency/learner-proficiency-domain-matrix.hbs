@@ -7,6 +7,14 @@
   {{#if (and (gt taxonomyGrades.length 0) isShowMatrixChart)}}
     {{proficiency/grade-selector classGrade=classGrade taxonomyGrades=taxonomyGrades onToggleBaseline="onToggleBaseline" onSelectGrade="onSelectGrade" activeGrade=activeGrade}}
   {{/if}}
+  <div class="fwc-panel">
+    Show Framework competencies
+    {{gru-toggle-button
+      class="fwc-toggle"
+      isChecked=showFWCompetency
+      onToggleButton="onToggleToShowFWC"
+    }}
+  </div>
   {{#if showExpandedButton}}
     <div class="toggle-chart" {{action "onToggleChart"}}>
       {{#if isExpandChartEnabled}}
@@ -21,7 +29,7 @@
   <div class="matrix-chart">
     <div class="chart-container {{if (lte taxonomyGrades.length 0) 'no-grade'}}">
       <div class="domain-chart-container">
-        <div class="scrollable-chart">
+        <div class="scrollable-chart {{if showFWCompetency 'show-competency'}}">
           <div id="render-proficiency-matrix">
             <div class="selected-competency background{{blockAttribute.status}}" style="width:{{blockAttribute.width}}px; height:{{blockAttribute.height}}px; top:{{blockAttribute.top}}px; left:{{blockAttribute.left}}px">
             </div>
@@ -30,7 +38,8 @@
         <div class="domain-sequence-container">
           <div class="domain-sequence" style="width:{{width}}px">
             {{#each taxonomyDomains as |taxonomyDomain index |}}
-              <li class="domain-counts" title="{{locale-translation (t (concat 'domain-code.' taxonomyDomain.domainCode)) taxonomyDomain.domainName}}" data-placement="auto right" {{action "onDomainSelect" taxonomyDomain}} onmouseover={{action "domainFocusIn" taxonomyDomain}} onmouseout={{action 'domainFocusOut'}} data-toggle="tooltip" style="width:{{cellWidth}}px">
+              <li class="domain-counts" title="{{locale-translation (t (concat 'domain-code.' taxonomyDomain.domainCode)) taxonomyDomain.domainName}}" data-placement="auto right" {{action "onDomainSelect" taxonomyDomain}}
+                onmouseover={{action "domainFocusIn" taxonomyDomain}} onmouseout={{action 'domainFocusOut'}} data-toggle="tooltip" style="width:{{cellWidth}}px">
                 {{taxonomyDomain.domainSeq}}
               </li>
             {{/each}}
