@@ -55,9 +55,11 @@ export default Ember.Component.extend({
   selectedTabIndex: 0,
 
   /**
-   * Set previous date not editable
+   * Enable future date as editable
    */
-  isNotEditPreviousDate: true,
+  enableFutureDate: true,
+
+  enableScheduleMoth: Ember.computed.alias('enableFutureDate'),
 
   /**
    * @property {Boolean} isMobileView
