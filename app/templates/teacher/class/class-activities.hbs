@@ -16,6 +16,11 @@
               <div class="title {{if isMonthly 'active'}}" {{action 'selectCalendarView' 'monthly'}}>{{t 'common.month'}}</div>
               <div class="title {{if isWeekly 'active'}}" {{action 'selectCalendarView' 'weekly'}}>{{t 'common.week'}}</div>
               <div class="title {{if isDaily 'active'}}" {{action 'selectCalendarView' 'daily'}}>{{t 'common.day'}}</div>
+              <select class="ca-calendar-tabs-mobile" onChange={{action 'selectCalendarView' value="target.value"}}>
+                <option value="monthly" selected="{{ if isMonthly 'selected'}}">{{t 'common.month'}}</option>
+                <option value="weekly" selected="{{ if isWeekly 'selected'}}">{{t 'common.week'}}</option>
+                <option value="daily" selected="{{ if isDaily 'selected'}}">{{t 'common.day'}}</option>
+              </select>
             </div>
             <div class="ca-date-section">
               <div class="date-picker-action" {{action 'toggleDatePicker'}}>

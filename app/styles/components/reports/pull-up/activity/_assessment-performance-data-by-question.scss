@@ -169,6 +169,21 @@
                 font-weight: 800;
               }
             }
+            &.after-time-input-mobile {
+              background-color: transparent;
+              .student-info-container {
+                display: none;
+              }
+              .student-name {
+                font-weight: 400;
+              }
+            }
+            &.after-time-input {
+              background-color: transparent;
+              .student-name {
+                font-weight: 400;
+              }
+            }
           }
         }
       }

@@ -309,7 +309,9 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isCaptureQuestionScore
    */
-  isCaptureQuestionScore: false,
+  isCaptureQuestionScore: Ember.computed.alias(
+    'activityData.isUpdatePerformance'
+  ),
 
   /**
    * @property {String} timeZone
