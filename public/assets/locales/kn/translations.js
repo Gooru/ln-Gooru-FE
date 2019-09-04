@@ -2771,6 +2771,7 @@ window.i18ln = {
   'suggestion-taken': 'ಸಲಹೆಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಲಾಗಿದೆ',
   'this-week': 'ಈ ವಾರ',
   'previous-week': 'ಹಿಂದಿನ ವಾರ',
+  'custom-range': 'ಕಸ್ಟಮ್',
   'beginning-till-now': 'ಈಗ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ',
   'report.class-proficiency-report': 'ವರ್ಗ ಪ್ರಾವೀಣ್ಯತೆಯ ವರದಿ',
   'report.domain-proficiency-report': 'ಡೊಮೇನ್ ಸಾಮರ್ಥ್ಯ ವರದಿ',

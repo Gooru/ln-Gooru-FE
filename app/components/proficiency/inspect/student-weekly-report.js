@@ -37,6 +37,9 @@ export default Ember.Component.extend({
     //Action triggered when select a reprot period
     onSelectReportPeriod(reportPeriod) {
       const component = this;
+      component.set('rangeStartDate', null);
+      component.set('rangeEndDate', null);
+      component.set('activeReportPeriod', null);
       let isWeeklyReport = reportPeriod.get('value') !== 'till-now';
       if (reportPeriod.get('type') === 'weekly') {
         component.set(
@@ -44,9 +47,13 @@ export default Ember.Component.extend({
           reportPeriod.get('value') === 'current-week' ? 0 : 1
         );
       }
+      if (reportPeriod.get('type') === 'custom') {
+        component.onRangePickerReport(event);
+      } else {
+        component.loadSummaryReportData(isWeeklyReport);
+        component.resetActiveStudentData();
+      }
       component.set('activeReportPeriod', reportPeriod);
-      component.loadSummaryReportData(isWeeklyReport);
-      component.resetActiveStudentData();
       component.actions.onToggleReportPeriod(component);
     },
 
@@ -66,6 +73,26 @@ export default Ember.Component.extend({
     //Action triggered when remove a student
     onRemoveActiveStudentData() {
       this.resetActiveStudentData();
+    },
+
+    /**
+     * Select from date and to date while submit
+     */
+
+    onChangeDateForStudent(startDate, endDate) {
+      let components = this;
+      components.set('rangeStartDate', moment(startDate).format('YYYY-MM-DD'));
+      components.set('rangeEndDate', moment(endDate).format('YYYY-MM-DD'));
+      components.loadSummaryReportData(false);
+      components.resetActiveStudentData();
+    },
+
+    /**
+     * Close range date picker
+     */
+
+    onCloseDatePicker() {
+      this.$('.student-rangepicker-container').hide();
     }
   },
 
@@ -78,6 +105,16 @@ export default Ember.Component.extend({
    * Default 0 => Current Week
    */
   activeWeek: 0,
+
+  /**
+   * Set custom range start date
+   */
+  rangeStartDate: null,
+
+  /**
+   * Set custom range end date
+   */
+  rangeEndDate: null,
 
   /**
    * @property {UUID} classId
@@ -131,6 +168,11 @@ export default Ember.Component.extend({
         text: component.get('i18n').t('beginning-till-now'),
         value: 'till-now',
         type: 'complete'
+      }),
+      Ember.Object.create({
+        text: component.get('i18n').t('custom-range'),
+        value: 'custom-range',
+        type: 'custom'
       })
     ]);
   }),
@@ -320,7 +362,17 @@ export default Ember.Component.extend({
   fetchStudentsClassSummaryReport() {
     const component = this;
     const classId = component.get('classId');
-    return component.get('reportService').fetchStudentsSummaryReport(classId);
+    const startDate = component.get('rangeStartDate');
+    const endDate = component.get('rangeEndDate');
+    const dataParam = {
+      fromDate: startDate,
+      toDate: endDate
+    };
+    const customParam =
+      component.get('activeReportPeriod.type') === 'custom' ? dataParam : null;
+    return component
+      .get('reportService')
+      .fetchStudentsSummaryReport(classId, customParam);
   },
 
   /**
@@ -333,5 +385,21 @@ export default Ember.Component.extend({
       '.student-weekly-report .header-container .header-right'
     );
     targetElementContainer.scrollLeft(scrollingElementContainer.scrollLeft);
+  },
+
+  /**
+   * Show range date picker while click dropdown custom option
+   */
+  onRangePickerReport(event) {
+    let component = this;
+    let datepickerEle = component.$('.student-rangepicker-container');
+    let selectedContentEle = component.$(event.target);
+    if (!selectedContentEle.hasClass('active')) {
+      selectedContentEle.addClass('active');
+      datepickerEle.show();
+    } else {
+      selectedContentEle.removeClass('active');
+      datepickerEle.hide();
+    }
   }
 });

@@ -2735,6 +2735,7 @@ window.i18ln = {
   'suggestion-taken': 'सुझाव लिया गया',
   'this-week': 'इस सप्ताह',
   'previous-week': 'पिछला सप्ताह',
+  'custom-range': 'रिवाज',
   'beginning-till-now': 'अब तक की शुरुआत',
   'report.class-proficiency-report': 'कक्षा प्रवीणता का रिपोर्ट',
   'report.domain-proficiency-report': 'डोमेन की योग्यता रिपोर्ट',

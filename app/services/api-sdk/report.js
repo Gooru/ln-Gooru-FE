@@ -33,12 +33,12 @@ export default Ember.Service.extend({
    * @function fetchStudentsSummaryReport
    * Method to fetch students summary report data
    */
-  fetchStudentsSummaryReport(classId) {
+  fetchStudentsSummaryReport(classId, params) {
     const service = this;
     const adapter = service.get('adapter');
     const serializer = service.get('serializer');
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      adapter.fetchStudentsSummaryReport(classId).then(
+      adapter.fetchStudentsSummaryReport(classId, params).then(
         function(reportData) {
           resolve(serializer.normalizeStudentsSummaryReport(reportData));
         },

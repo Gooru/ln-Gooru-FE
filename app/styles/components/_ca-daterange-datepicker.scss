@@ -7,7 +7,7 @@
   right: 0;
   bottom: 0;
   cursor: pointer;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   overflow-y: auto;
 
   .backdrop {
@@ -32,7 +32,7 @@
     height: auto;
     left: 50%;
     top: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 
     .header-section {
       display: none;

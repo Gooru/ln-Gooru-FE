@@ -31,14 +31,15 @@ export default Ember.Object.extend({
    * @function fetchStudentsSummaryReport
    * Method to fetch students summary report
    */
-  fetchStudentsSummaryReport(classId) {
+  fetchStudentsSummaryReport(classId, data) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}class/${classId}/student/summary`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
-      headers: adapter.defineHeaders()
+      headers: adapter.defineHeaders(),
+      data
     };
     return Ember.$.ajax(url, options);
   },
