@@ -10,26 +10,30 @@
 }}
 <div class="player-container  {{type}}">
   <div class="player">
-    {{#if isOfflineActivity}}
-      {{player/gru-offline-activity-page
-        offlineActivity = collection
-        source = source
-        mapLocation = mapLocation
-        isStudyPlayer = true
-      }}
-    {{else if isAsssessment}}
-      {{player/gru-external-assessment-page
-      assessment=collection
-      mapLocation=mapLocation
-      source=source
-      isNewPlayer=isNewPlayer
-      dataParams=dataParams}}
+    {{#if isLoading}}
+      {{three-bounce-spinner}}
     {{else}}
-      {{player/gru-external-collection-page
-      assessment=collection
-      mapLocation=mapLocation
-      source=source
-      isNewPlayer=isNewPlayer}}
+      {{#if isOfflineActivity}}
+        {{player/gru-offline-activity-page
+          offlineActivity = collection
+          source = source
+          mapLocation = mapLocation
+          isStudyPlayer = true
+        }}
+      {{else if isAsssessment}}
+        {{player/gru-external-assessment-page
+        assessment=collection
+        mapLocation=mapLocation
+        source=source
+        isNewPlayer=isNewPlayer
+        dataParams=dataParams}}
+      {{else}}
+        {{player/gru-external-collection-page
+        assessment=collection
+        mapLocation=mapLocation
+        source=source
+        isNewPlayer=isNewPlayer}}
+      {{/if}}
     {{/if}}
   </div>
   <div class="footer">

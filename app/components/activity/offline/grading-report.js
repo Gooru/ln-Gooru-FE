@@ -278,6 +278,23 @@ export default Ember.Component.extend({
     }
   ),
 
+  /**
+   * @property {Boolean} isStudentGradingDone
+   * Property to determine whether the student graded
+   */
+  isStudentGradingDone: Ember.computed(
+    'offlineActivitySubmissions.oaRubrics',
+    function() {
+      const component = this;
+      const offlineActivitySubmissions = component.get(
+        'offlineActivitySubmissions'
+      );
+      return offlineActivitySubmissions
+        ? !!offlineActivitySubmissions.get('oaRubrics.studentGrades')
+        : false;
+    }
+  ),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -657,6 +674,7 @@ export default Ember.Component.extend({
         currentStudent.set('isGraded', true);
         component.slideToNextUser();
       });
+    component.set('isStudentGradingDone', true);
   },
 
   /**
