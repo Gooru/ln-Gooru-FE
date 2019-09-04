@@ -140,56 +140,11 @@
         opacity: 0.5;
       }
     }
-  }
-  @media screen and (max-width: $screen-sm) {
-    padding: 8px;
-  }
 
-  &.player-preview,
-  &.oa-completed {
-    .offline-activity-submission-container {
-      .offline-activity-timespent {
-        .timespent-container {
-          pointer-events: none;
-          .save-timespent-action {
-            display: none;
-          }
-        }
-      }
-      .task-submissions-container {
-        .gru-offline-activity-task-submission {
-          .task-submission-container {
-            .task-details-container {
-              pointer-events: none;
-              .save-task-submission {
-                display: none;
-              }
-            }
-          }
-        }
-      }
-
-      .complete-submission-container {
-        display: none;
-      }
-    }
-  }
-
-  .confirmation-popup-overlay {
-    position: fixed;
-    right: 0;
-    left: 0;
-    top: 0;
-    height: 100%;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8);
     .completion-confirmation-popup {
-      position: absolute;
       background-color: $white;
       max-width: 500px;
-      left: calc(100vw / 2 - 250px);
       margin: auto;
-      top: calc(100vh / 2 - 60px);
       display: grid;
       padding: 15px;
       row-gap: 8px;
@@ -222,6 +177,49 @@
       @media screen and (max-width: $screen-sm) {
         left: unset;
         width: 100%;
+      }
+    }
+  }
+  @media screen and (max-width: $screen-sm) {
+    padding: 8px;
+  }
+
+  &.player-preview,
+  &.oa-completed {
+    .offline-activity-submission-container {
+      .offline-activity-timespent {
+        .timespent-container {
+          pointer-events: none;
+          .save-timespent-action {
+            display: none;
+          }
+        }
+      }
+      .task-submissions-container {
+        .gru-offline-activity-task-submission {
+          .task-submission-container {
+            .task-details-container {
+              pointer-events: none;
+              .save-task-submission {
+                display: none;
+              }
+            }
+          }
+        }
+
+        &.grading-enabled {
+          display: grid;
+          grid-template-columns: auto auto;
+          column-gap: 15px;
+
+          @media screen and (max-width: $screen-md) {
+            grid-template-columns: auto;
+          }
+        }
+      }
+
+      .complete-submission-container {
+        display: none;
       }
     }
   }

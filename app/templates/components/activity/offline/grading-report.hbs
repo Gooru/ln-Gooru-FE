@@ -9,6 +9,24 @@
       {{gru-icon name="close"}}
     </div>
   </div>
+
+  {{#if (and (not studentRubric.scoring) isInlineGrading)}}
+    <div class="self-comment-container {{if isTeacherGradingDone 'teacher-graded'}}">
+      <div class="comment-label">{{t 'oa.self-grading.comment-label'}}</div>
+      <div class="comment-input">
+        {{validation/gru-textarea
+          model=studentRubric
+          valuePath='comment'
+          maxLength=500
+          placeholder=(t 'common.your-thoughts')
+        }}
+      </div>
+      <div class="comment-action">
+        <div class="submit-comment" {{action 'saveGrade'}}>Submit</div>
+      </div>
+    </div>
+  {{/if}}
+
   <div class="oa-grading-section">
     <div class="left-panel">
       {{#if isTeacher}}
@@ -50,17 +68,19 @@
           {{/if}}
         </div>
       {{/if}}
-      <div class="tasks-section">
-        {{#each activityTasks as |task index|}}
-          {{player/offline-activity/gru-offline-activity-task-submission
-            task=task
-            showSubmissions=true
-            isReadOnly=true
-            caContentId=context.dcaContentId
-            classId=context.classId
-          }}
-        {{/each}}
-      </div>
+      {{#unless isInlineGrading}}
+        <div class="tasks-section">
+          {{#each activityTasks as |task index|}}
+            {{player/offline-activity/gru-offline-activity-task-submission
+              task=task
+              showSubmissions=true
+              isReadOnly=true
+              caContentId=context.dcaContentId
+              classId=context.classId
+            }}
+          {{/each}}
+        </div>
+      {{/unless}}
     </div>
     <div class="right-panel">
       <div class="oa-grade-right-panel-header">
@@ -92,38 +112,40 @@
       </div>
       <div class="oa-grade-right-panel-body">
         <div class="panel-group" id="rubric-panel">
-          <div class="panel panel-default student-rubric-section">
-            <div class="student-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#student">
-              <span>
-                {{t 'common.student'}}
-                {{#if studentRubric.url}}
-                  <span class="rubric-attachment" data-placement="right" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'student' bubbles=false}}>{{gru-icon name="attachment"}}</span>
-                {{/if}}
-              </span>
-              <div class="icons">
-                {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-                {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+          {{#if (or studentRubric.scoring isTeacher)}}
+            <div class="panel panel-default student-rubric-section">
+              <div class="student-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#student">
+                <span>
+                  {{t 'common.student'}}
+                  {{#if studentRubric.url}}
+                    <span class="rubric-attachment" data-placement="right" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'student' bubbles=false}}>{{gru-icon name="attachment"}}</span>
+                  {{/if}}
+                </span>
+                <div class="icons">
+                  {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                  {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
+                </div>
+              </div>
+              <div class="student-grading-panel panel-collapse collapse {{if (not isTeacher) 'in'}}" id="student">
+                {{#unless studentRubric.scoring}}
+                  <div class="no-self-grade">{{t 'self-grade.not-required'}}</div>
+                {{else}}
+                  {{rubric/rubric-category-grades
+                    isReadOnly=(if (or isTeacher isTeacherGradingDone) true false)
+                    categories=studentRubricCategories}}
+                {{/unless}}
+                <div class="oa-grade-general-comment-container {{if (or isTeacher isTeacherGradingDone) 'disable-event'}}">
+                  {{validation/gru-textarea
+                    model=(if studentRubric.comment studentRubric studentRubric)
+                    valuePath='comment'
+                    maxLength=500
+                    rows=1
+                    placeholder='General Comments Only'
+                  }}
+                </div>
               </div>
             </div>
-            <div class="student-grading-panel panel-collapse collapse {{if (not isTeacher) 'in'}}" id="student">
-              {{#unless studentRubric.scoring}}
-                <div class="no-self-grade">{{t 'self-grade.not-required'}}</div>
-              {{else}}
-                {{rubric/rubric-category-grades
-                  isReadOnly=isTeacher
-                  categories=studentRubricCategories}}
-              {{/unless}}
-              <div class="oa-grade-general-comment-container {{if isTeacher 'disable-event'}}">
-                {{validation/gru-textarea
-                  model=(if studentRubric.comment studentRubric studentRubric)
-                  valuePath='comment'
-                  maxLength=500
-                  rows=1
-                  placeholder='General Comments Only'
-                }}
-              </div>
-            </div>
-          </div>
+          {{/if}}
           <div class="panel panel-default teacher-rubric-section">
             <div class="teacher-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#teacher">
               <span>
@@ -158,9 +180,11 @@
             </div>
           </div>
         </div>
-        <div class="oa-grade-action-btns">
-          <button type="button" class="btn confirm btn-primary btn-lg" {{action 'saveGrade'}}>{{t 'common.submit'}}</button>
-        </div>
+        {{#if (and (not isTeacherGradingDone) (or studentRubric.scoring isTeacher))}}
+          <div class="oa-grade-action-btns">
+            <button type="button" class="btn confirm btn-primary btn-lg" {{action 'saveGrade'}}>{{t 'common.submit'}}</button>
+          </div>
+        {{/if}}
       </div>
     </div>
   </div>

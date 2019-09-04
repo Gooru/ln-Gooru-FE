@@ -2776,5 +2776,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };
