@@ -31,8 +31,10 @@
       {{ca-date-picker
      userStartDateAsToday=userStartDateAsToday
      onSelectDate='onScheduleStartDate'
+     courseStartDate=courseStartDate
      showMonths=(if allowTwoDateRangePicker  false true)
      onSelectMonth='onScheduleForMonth'
+     forChangeStartDateNavMonth=forChangeStartDateNavMonth
      disableFutureDate=disableFutureDate
      forFirstDateOfMonth=forFirstDateOfMonth
    }}
@@ -42,6 +44,7 @@
       userStartDateAsToday=userStartDateAsToday
       onSelectDate='onScheduleEndDate'
       startDate=startDate
+      courseStartDate=courseStartDate
       showMonths=false
       disableFutureDate=disableFutureDate
       validateEndDate=true
