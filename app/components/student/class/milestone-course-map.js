@@ -369,35 +369,49 @@ export default Ember.Component.extend({
     if (fwkCode) {
       filters.fw_code = fwkCode;
     }
-
+    let classId = component.get('classId');
+    let courseId = component.get('courseId');
+    let fwCode = component.get('fwCode');
+    let userUid = component.get('userId');
     Ember.RSVP.hash({
+      milestoneHasContent: component
+        .get('courseService')
+        .getCourseMilestones(courseId, fwCode, classId, userUid),
       rescopedContents: component.getRescopedContents(),
       grades: taxonomyService.fetchGradesBySubject(filters),
       competencySummary: component.get('isStudent')
         ? component.fetchStudentCompetencySummary()
         : null
-    }).then(({ rescopedContents, grades, competencySummary }) => {
-      if (!component.isDestroyed) {
-        component.set('competencySummary', competencySummary);
-        let milestones = component.get('milestones');
-        let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
-          grades,
-          milestones
-        );
-        component.set('rescopedContents', rescopedContents);
-        component.set('milestones', milestoneData);
-        if (showPerformance) {
-          component.fetchMilestonePerformance();
+    }).then(
+      ({
+        milestoneHasContent,
+        rescopedContents,
+        grades,
+        competencySummary
+      }) => {
+        if (!component.isDestroyed) {
+          component.set('competencySummary', competencySummary);
+          let milestones = component.get('milestones');
+          let milestoneData = component.renderMilestonesBasedOnStudentGradeRange(
+            grades,
+            milestones,
+            milestoneHasContent
+          );
+          component.set('rescopedContents', rescopedContents);
+          component.set('milestones', milestoneData);
+          if (showPerformance) {
+            component.fetchMilestonePerformance();
+          }
+          let customLocationPresent = component.get('location');
+          if (customLocationPresent) {
+            component.navigateLocation();
+          } else if (locateLastPlayedItem) {
+            component.identifyUserLocationAndLocate();
+          }
+          component.set('isLoading', false);
         }
-        let customLocationPresent = component.get('location');
-        if (customLocationPresent) {
-          component.navigateLocation();
-        } else if (locateLastPlayedItem) {
-          component.identifyUserLocationAndLocate();
-        }
-        component.set('isLoading', false);
       }
-    });
+    );
   },
 
   fetchMilestonePerformance() {
@@ -1014,7 +1028,11 @@ export default Ember.Component.extend({
    * This Method is responsible for milestone display based on students class grade.
    * @return {Array}
    */
-  renderMilestonesBasedOnStudentGradeRange(grades, milestones) {
+  renderMilestonesBasedOnStudentGradeRange(
+    grades,
+    milestones,
+    milestoneHasContent
+  ) {
     let component = this;
     let gradeBounds = component.get('class.memberGradeBounds');
     let userUid = component.get('userId');
@@ -1037,6 +1055,23 @@ export default Ember.Component.extend({
       milestone.set('hasLessonFetched', false);
       milestone.set('prevMilestoneIsActive', false);
       milestone.set('isActive', false);
+      milestone.set('prevMilestoneRescope', false);
+      const milestoneId = milestone.get('milestone_id');
+      const hasMilestoneContent = milestoneHasContent.findBy(
+        'milestone_id',
+        milestoneId
+      );
+      if (!hasMilestoneContent) {
+        milestone.set('rescope', true);
+      } else {
+        milestone.set('rescope', false);
+      }
+      if (index < milestones.length - 1 && milestone.get('rescope')) {
+        let nextMilestone = milestones.objectAt(index + 1);
+        if (nextMilestone) {
+          nextMilestone.set('prevMilestoneIsRescope', true);
+        }
+      }
       let grade = studentGrades.findBy('id', gradeId);
       if (grade) {
         if (gradeId === classGradeId) {
