@@ -48,6 +48,7 @@ export default Ember.Service.extend({
     );
     this.set('taxonomySubjectContainer', {});
     this.set('taxonomyClassificationContainer', null);
+    this.set('crosswalkFWCompetencies', Ember.Object.create({}));
   },
 
   /**
@@ -503,6 +504,29 @@ export default Ember.Service.extend({
           service.set('taxonomyCategoriesContainer', categories);
           resolve(categories);
         });
+      }
+    });
+  },
+
+  fetchCrossWalkFWC(frameworkCode, subjectCode) {
+    const service = this;
+    const apiTaxonomyService = service.get('apiTaxonomyService');
+    return new Ember.RSVP.Promise(function(resolve) {
+      let crosswalkFWCompetencies = service.get('crosswalkFWCompetencies');
+      if (
+        crosswalkFWCompetencies.get('framework') === frameworkCode &&
+        crosswalkFWCompetencies.get('subject') === subjectCode
+      ) {
+        resolve(crosswalkFWCompetencies);
+      } else {
+        return apiTaxonomyService
+          .fetchCrossWalkFWC(frameworkCode, subjectCode)
+          .then(function(crosswalkFWCompetencyMatrix) {
+            crosswalkFWCompetencies.set('framework', frameworkCode);
+            crosswalkFWCompetencies.set('subject', subjectCode);
+            service.set('crosswalkFWCompetencies', crosswalkFWCompetencyMatrix);
+            resolve(crosswalkFWCompetencyMatrix);
+          });
       }
     });
   }

@@ -3,7 +3,6 @@ import TaxonomyRoot from 'gooru-web/models/taxonomy/taxonomy-root';
 import TaxonomyItem from 'gooru-web/models/taxonomy/taxonomy-item';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import { TAXONOMY_LEVELS } from 'gooru-web/config/config';
-
 /**
  * Serializer for Taxonomy endpoints
  *
@@ -392,5 +391,17 @@ export default Ember.Object.extend({
       resultSet.pushObject(result);
     });
     return resultSet;
+  },
+
+  normalizeFWCMatrixs(payload) {
+    let domainMatrixs = Ember.A(payload.competencyMatrix);
+    return domainMatrixs.map(domainMatrix => {
+      let domain = Ember.Object.create(domainMatrix);
+      let domainComptencies = domain.get('competencies').map(competency => {
+        return Ember.Object.create(competency);
+      });
+      domain.set('competencies', domainComptencies);
+      return domain;
+    });
   }
 });

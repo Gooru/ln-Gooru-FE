@@ -1,9 +1,9 @@
 <div class="competency-performance">
   <div class="competency-name">
-    {{#if classFramework}}
+    {{#if (and classFramework competency.isMappedWithFramework)}}
       {{classFramework}}:
     {{/if}}
-    {{competency.competencyName}}
+    {{competencyName}}
   </div>
   {{#if (and competency (not isPlayerProficiency))}}
     <div class="signature-content">

@@ -230,5 +230,13 @@ export default Ember.Component.extend({
     );
     component.set('showSignatureAssessment', showSignatureAssessment);
     component.loadCompetencyPerformanceData();
+  }),
+
+  competencyName: Ember.computed('competency', function() {
+    let component = this;
+    let competency = component.get('competency');
+    return competency.get('isMappedWithFramework')
+      ? competency.get('framework.frameworkCompetencyName')
+      : competency.get('competencyName');
   })
 });

@@ -15,10 +15,10 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
 
   /**
-   * competency service dependency injection
+   * taxonomy service dependency injection
    * @type {Object}
    */
-  competencyService: Ember.inject.service('api-sdk/competency'),
+  taxonomy: Ember.inject.service('taxonomy'),
 
   /**
    * taxonomy service dependency injection
@@ -69,6 +69,10 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    onToggleToShowFWC() {
+      let component = this;
+      component.toggleProperty('showFWCompetency');
+    },
     // Action triggered when toggle chart view
     onToggleChart() {
       let component = this;
@@ -238,6 +242,10 @@ export default Ember.Component.extend({
   ),
   // -------------------------------------------------------------------------
   // Properties
+  /**
+   * @property {Boolean} showFWCompetency
+   */
+  showFWCompetency: false,
 
   /**
    * @property {Array} domainBoundariesContainer
@@ -549,7 +557,6 @@ export default Ember.Component.extend({
           let competencyName = competency.get('competencyName');
           let competencySeq = competency.get('competencySeq');
           let status = competency.get('status');
-
           let data = Ember.Object.create({
             domainName: domainName,
             domainCode: domainCode,
@@ -557,6 +564,8 @@ export default Ember.Component.extend({
             competencyCode: competencyCode,
             competencyName: competencyName,
             competencySeq: competencySeq,
+            framework: competency.get('framework'),
+            isMappedWithFramework: competency.get('isMappedWithFramework'),
             competencyStudentDesc: competency.get('competencyStudentDesc'),
             status: status
           });
@@ -702,7 +711,8 @@ export default Ember.Component.extend({
         let domainBoundaryCompetency = d.isDomainBoundaryCompetency
           ? 'domain-boundary'
           : '';
-        return `competency ${skylineClassName} competency-${
+        let noFrameWorkClass = !d.isMappedWithFramework ? 'no-framework' : '';
+        return `competency ${noFrameWorkClass} ${skylineClassName} competency-${
           d.xAxisSeq
         } competency-${d.xAxisSeq}-${
           d.yAxisSeq
@@ -1104,7 +1114,6 @@ export default Ember.Component.extend({
     let component = this;
     component.clearChart();
     component.set('isShowMatrixChart', false);
-    component.set('taxonomyGrades', []);
   },
 
   clearChart() {
