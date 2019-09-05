@@ -86,6 +86,11 @@ export default Ember.Mixin.create({
   }),
 
   /**
+   * @property {Boolean} showGutCompetency
+   */
+  showGutCompetency: false,
+
+  /**
    * @property {Boolean}
    * Property to store given screen value is compatible
    */

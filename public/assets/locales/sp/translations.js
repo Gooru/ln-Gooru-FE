@@ -1936,6 +1936,9 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'Proficiency',
   'profile.gru-navigation.preference.preference': 'Preference',
   'profile.edit.select-district': 'Seleccione un distrito ...',
+  'counts-based-on-gut': 'Counts are based on GUT',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'No data available yet. Once you begin studying, your data will become available.',
   'profile.proficiency.expand-chart': 'Expand Chart',

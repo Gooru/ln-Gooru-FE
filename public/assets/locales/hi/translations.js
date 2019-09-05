@@ -1921,6 +1921,9 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'प्रवीणता',
   'profile.gru-navigation.preference.preference': 'चयन',
   'profile.edit.select-district': 'एक जिले का चयन करें...',
+  'counts-based-on-gut': 'Counts are based on GUT',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'अभी तक कोई डेटा उपलब्ध नहीं है। एक बार अध्ययन शुरू करने के बाद, आपका डेटा उपलब्ध हो जाएगा।',
   'profile.proficiency.expand-chart': 'चार्ट का विस्तार करें',

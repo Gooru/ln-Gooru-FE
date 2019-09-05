@@ -91,6 +91,14 @@
       min-height: inherit;
 
       #render-proficiency-matrix {
+        .stop-top {
+          stop-color: #37424b;
+        }
+
+        .stop-bottom {
+          stop-color: #687782;
+        }
+
         .selected-competency {
           position: absolute;
 
@@ -177,13 +185,13 @@
             align-items: end;
             @extend %scroll-style;
 
-            &.show-competency {
+            &.show-gut {
               #render-proficiency-matrix {
                 svg {
                   #cell-container {
                     rect {
                       &.no-framework {
-                        fill: #535e67;
+                        fill: url(#linearGradient);
                       }
                     }
                   }
@@ -236,7 +244,7 @@
 
               .competency {
                 cursor: pointer;
-                stroke: $dark-300;
+                stroke: #fff;
                 stroke-width: 1;
                 shape-rendering: crispedges;
                 stroke-opacity: 0.7;

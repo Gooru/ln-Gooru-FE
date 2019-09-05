@@ -17,6 +17,7 @@
        isSelectBaseLine=isSelectBaseLine
        selectedCategory=selectedCategory
        selectedCompetency=selectedCompetency
+       showGutCompetency=showGutCompetency
        selectedDomain=selectedDomain
        onSelectMonth="onSelectMonth"
        onSelectCompetency="onSelectCompetency"
@@ -36,8 +37,8 @@
   <div class="pull-up-container">
     {{#if isShowMatrixChart}}
       {{#proficiency/proficiency-subject-panel onDomainSelect="onDomainSelect" class=class subject=activeSubject competencyMatrixCoordinates=competencyMatrixCoordinates}}
-        {{proficiency/domain-info-pull-up onSelectCompetency="onSelectCompetency" showPullUp=showDomainInfo competencies=selectedDomainCompetencies domain=selectedDomain}}
-        {{proficiency/competency-info-pull-up isInspectCompetency=showCompetencyInfo classFramework=classFramework onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
+        {{proficiency/domain-info-pull-up onSelectCompetency="onSelectCompetency" showPullUp=showDomainInfo showGutCompetency=showGutCompetency competencies=selectedDomainCompetencies domain=selectedDomain}}
+        {{proficiency/competency-info-pull-up isInspectCompetency=showCompetencyInfo showGutCompetency=showGutCompetency classFramework=classFramework onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
       {{/proficiency/proficiency-subject-panel}}
     {{/if}}
   </div>

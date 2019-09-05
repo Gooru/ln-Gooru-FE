@@ -9,10 +9,10 @@
     {{#each competencies as |competency|}}
       <div class="competency-info" {{action 'onInspectCompetency' competency}}>
         <div class="competency">
-          <div class="title">{{competency.competencyCode}}</div>
+          <div class="title">{{if (and (not showGutCompetency)  competency.isMappedWithFramework) competency.framework.frameworkCompetencyDisplayCode  competency.competencyCode}}</div>
           <div class="competency-status status-{{competency.status}}"></div>
         </div>
-        <div class="competency-desc">{{competency.competencyStudentDesc}}</div>
+        <div class="competency-desc">{{if (and (not showGutCompetency) competency.isMappedWithFramework) competency.framework.frameworkCompetencyName competency.competencyStudentDesc}}</div>
       </div>
     {{/each}}
   </div>

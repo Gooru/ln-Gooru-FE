@@ -1906,6 +1906,9 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'నైపుణ్యత',
   'profile.gru-navigation.preference.preference': 'ప్రాధాన్యత',
   'profile.edit.select-district': 'జిల్లాను ఎంచుకోండి ...',
+  'counts-based-on-gut': 'Counts are based on GUT',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'ఇంకా సమాచారం అందుబాటులో లేదు. మీరు చదువుతున్నప్పుడు, మీ డేటా అందుబాటులోకి వస్తుంది.',
   'profile.proficiency.expand-chart': 'చార్ట్ను విస్తరించండి',
