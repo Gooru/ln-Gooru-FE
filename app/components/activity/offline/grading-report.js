@@ -290,7 +290,7 @@ export default Ember.Component.extend({
         'offlineActivitySubmissions'
       );
       return offlineActivitySubmissions
-        ? !!offlineActivitySubmissions.get('oaRubrics.studentGrades')
+        ? !!offlineActivitySubmissions.get('oaRubrics.studentGrades.grader')
         : false;
     }
   ),
@@ -667,6 +667,7 @@ export default Ember.Component.extend({
     userGrade.set('unitId', context.get('content.unitId') || null);
     userGrade.set('lessonId', context.get('content.lessonId') || null);
     userGrade.set('isCourseMapGrading', component.get('isCourseMapGrading'));
+    component.set('isStudentGradingDone', true);
     component
       .get('oaAnaltyicsService')
       .submitOAGrade(userGrade)
@@ -674,7 +675,6 @@ export default Ember.Component.extend({
         currentStudent.set('isGraded', true);
         component.slideToNextUser();
       });
-    component.set('isStudentGradingDone', true);
   },
 
   /**
@@ -689,7 +689,7 @@ export default Ember.Component.extend({
         title: category.get('title')
       }
     );
-    rubricCategory.set('levelMaxScore', 0);
+    rubricCategory.set('levelMaxScore', null);
     if (level) {
       rubricCategory.set('levelObtained', level.get('name'));
       if (category.get('allowsLevels') && category.get('allowsScoring')) {
