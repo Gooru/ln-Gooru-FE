@@ -25,7 +25,7 @@ export default Ember.Component.extend({
     let competency = component.get('competency');
     return competency
       ? competency.get('isMappedWithFramework')
-        ? competency.get('framework.frameworkCompetencyCode')
+        ? competency.get('framework.frameworkCompetencyDisplayCode')
         : competency.get('competencyCode')
       : null;
   }),

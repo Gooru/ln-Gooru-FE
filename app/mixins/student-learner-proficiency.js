@@ -402,8 +402,11 @@ export default Ember.Mixin.create({
         'domainCode',
         domainCode
       );
+      let fwCompetencies = [];
       let domainCompetencies = domain.get('competencies');
-      let fwCompetencies = fwDomainCompetency.get('competencies');
+      if (fwDomainCompetency) {
+        fwCompetencies = fwDomainCompetency.get('competencies');
+      }
       domainCompetencies.map(domainCompetency => {
         let competency = fwCompetencies.findBy(
           'competencyCode',
