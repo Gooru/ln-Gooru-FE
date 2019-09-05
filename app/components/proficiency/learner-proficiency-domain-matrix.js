@@ -69,9 +69,9 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
-    onToggleToShowFWC() {
+    onToggleToShowGUTC() {
       let component = this;
-      component.toggleProperty('showFWCompetency');
+      component.toggleProperty('showGutCompetency');
     },
     // Action triggered when toggle chart view
     onToggleChart() {
@@ -243,9 +243,9 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
   /**
-   * @property {Boolean} showFWCompetency
+   * @property {Boolean} showGutCompetency
    */
-  showFWCompetency: false,
+  showGutCompetency: false,
 
   /**
    * @property {Array} domainBoundariesContainer
@@ -729,6 +729,7 @@ export default Ember.Component.extend({
     component.drawSkyline();
     component.drawBaseLine();
     component.drawDomainBoundaryLine();
+    component.showGutCompetencyColorGradient();
   },
 
   selectCompetency(competency) {
@@ -785,6 +786,24 @@ export default Ember.Component.extend({
       cellIndex++;
     });
     component.showDropShadow();
+  },
+
+  showGutCompetencyColorGradient() {
+    const chartContainer = d3.select('#render-proficiency-matrix svg');
+    var svgDefs = chartContainer.append('defs');
+    var linearGradient = svgDefs
+      .append('linearGradient')
+      .attr('id', 'linearGradient')
+      .attr('x2', '0%')
+      .attr('y2', '100%');
+    linearGradient
+      .append('stop')
+      .attr('class', 'stop-top')
+      .attr('offset', '0');
+    linearGradient
+      .append('stop')
+      .attr('class', 'stop-bottom')
+      .attr('offset', '1');
   },
 
   /**

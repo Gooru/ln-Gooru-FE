@@ -1,6 +1,6 @@
 <div class="competency-performance">
   <div class="competency-name">
-    {{#if (and classFramework competency.isMappedWithFramework)}}
+    {{#if (and classFramework (not showGutCompetency))}}
       {{classFramework}}:
     {{/if}}
     {{competencyName}}

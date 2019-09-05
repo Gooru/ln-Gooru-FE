@@ -1950,6 +1950,9 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'ಕುಶಲತೆ',
   'profile.gru-navigation.preference.preference': 'ಆದ್ಯತೆ',
   'profile.edit.select-district': 'ಜಿಲ್ಲೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ...',
+  'counts-based-on-gut': 'Counts are based on GUT',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'ಇನ್ನೂ ಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ. ಒಮ್ಮೆ ನೀವು ಅಧ್ಯಯನ ಪ್ರಾರಂಭಿಸಿದಾಗ, ನಿಮ್ಮ ಡೇಟಾ ಲಭ್ಯವಾಗುತ್ತದೆ.',
   'profile.proficiency.expand-chart': 'ಚಾರ್ಟ್ ವಿಸ್ತರಿಸಿ',

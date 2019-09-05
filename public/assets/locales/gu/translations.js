@@ -1894,6 +1894,9 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'પ્રાવીણ્ય',
   'profile.gru-navigation.preference.preference': 'પસંદગી',
   'profile.edit.select-district': 'એક જિલ્લા પસંદ કરો ...',
+  'counts-based-on-gut': 'Counts are based on GUT',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'હજી સુધી કોઈ ડેટા ઉપલબ્ધ નથી. એકવાર તમે અભ્યાસ કરવાનું શરૂ કરો, પછી તમારો ડેટા ઉપલબ્ધ થશે.',
   'profile.proficiency.expand-chart': 'ચાર્ટ વિસ્તૃત કરો',

@@ -1947,6 +1947,9 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'യോഗ്യത',
   'profile.gru-navigation.preference.preference': 'മുൻഗണന',
   'profile.edit.select-district': 'ഒരു ജില്ല തിരഞ്ഞെടുക്കൂ ...',
+  'counts-based-on-gut': 'Counts are based on GUT',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'ഇതുവരെ ഡാറ്റയൊന്നും ലഭ്യമല്ല. ഒരിക്കൽ നിങ്ങൾ പഠിക്കാൻ തുടങ്ങുമ്പോൾ, നിങ്ങളുടെ ഡാറ്റ ലഭ്യമാകും.',
   'profile.proficiency.expand-chart': 'ചാർട്ട് വികസിപ്പിക്കുക',

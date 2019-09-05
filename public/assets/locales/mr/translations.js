@@ -1920,6 +1920,9 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'प्राविण्य',
   'profile.gru-navigation.preference.preference': 'प्राधान्यक्रम',
   'profile.edit.select-district': 'एक जिल्हा निवडा ...',
+  'counts-based-on-gut': 'Counts are based on GUT',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'अद्याप कोणताही डेटा उपलब्ध नाही एकदा तुम्ही अभ्यास करायला सुरूवात केली की आपला डेटा उपलब्ध होईल.',
   'profile.proficiency.expand-chart': 'विस्तृत तक्ता दाखवा',

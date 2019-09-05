@@ -1886,6 +1886,9 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'দক্ষতা',
   'profile.gru-navigation.preference.preference': 'পক্ষপাত',
   'profile.edit.select-district': 'একটি জেলা নির্বাচন করুন ...',
+  'counts-based-on-gut': 'Counts are based on GUT',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'কোন তথ্য এখনো পাওয়া যায় নি। একবার আপনি অধ্যয়ন শুরু, আপনার তথ্য উপলব্ধ হবে।',
   'profile.proficiency.expand-chart': 'চার্ট প্রসারিত করুন',

@@ -1903,6 +1903,9 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'ਮੁਹਾਰਤ',
   'profile.gru-navigation.preference.preference': 'ਤਰਜੀਹ',
   'profile.edit.select-district': 'ਇੱਕ ਜ਼ਿਲ੍ਹਾ ਚੁਣੋ ...',
+  'counts-based-on-gut': 'Counts are based on GUT',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'ਕੋਈ ਡਾਟਾ ਅਜੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ ਇਕ ਵਾਰ ਅਧਿਐਨ ਕਰਨਾ ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਤੁਹਾਡਾ ਡਾਟਾ ਉਪਲਬਧ ਹੋ ਜਾਵੇਗਾ',
   'profile.proficiency.expand-chart': 'ਚਾਰਟ ਦਾ ਵਿਸਤਾਰ ਕਰੋ',

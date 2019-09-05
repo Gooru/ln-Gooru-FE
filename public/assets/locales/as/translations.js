@@ -1938,6 +1938,9 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'প্ৰবীণতা',
   'profile.gru-navigation.preference.preference': 'পচন্দ',
   'profile.edit.select-district': ' এখন জিলা নিৰ্বাচন কৰক...',
+  'counts-based-on-gut': 'Counts are based on GUT',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'এতিয়ালৈকে কোনো ডাটা উপলব্দ্ধ নাই। আপুনি এবাৰ পঢ়িবলৈ আৰম্ভ কৰাৰ পাচত, আপোনাৰ ডাটা উপলব্দ্ধ হ\'ব।',
   'profile.proficiency.expand-chart': 'তালিকা ডাঙৰ কৰক',

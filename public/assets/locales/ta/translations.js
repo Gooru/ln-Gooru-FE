@@ -1954,6 +1954,9 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'திறமை',
   'profile.gru-navigation.preference.preference': 'விருப்பம்',
   'profile.edit.select-district': 'ஒரு மாவட்டத்தைத் தேர்ந்தெடுக்கவும் ...',
+  'counts-based-on-gut': 'Counts are based on GUT',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'இன்னும் தரவு எதுவும் கிடைக்கவில்லை. நீங்கள் படிக்கும் போது, உங்கள் தரவு கிடைக்கும்.',
   'profile.proficiency.expand-chart': 'விளக்கப்படம் விரிவுபடுத்தவும்',
