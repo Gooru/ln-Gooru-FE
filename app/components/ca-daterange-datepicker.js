@@ -65,6 +65,12 @@ export default Ember.Component.extend({
   enableScheduleMonth: true,
 
   /**
+   * Maintain course active date
+   */
+
+  courseStartDate: null,
+
+  /**
    * Disable future Date
    */
   disableFutureDate: true,
@@ -82,6 +88,12 @@ export default Ember.Component.extend({
       (!component.get('allowTwoDateRangePicker') && component.get('startDate'))
     );
   }),
+
+  /**
+   * Change start date datepicker navigation month
+   */
+
+  forChangeStartDateNavMonth: false,
 
   // -------------------------------------------------------------------------
   // Actions

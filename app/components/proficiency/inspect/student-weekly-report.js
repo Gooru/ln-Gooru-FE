@@ -38,7 +38,6 @@ export default Ember.Component.extend({
     onSelectReportPeriod(reportPeriod) {
       const component = this;
       component.set('rangeStartDate', null);
-      component.set('rangeEndDate', null);
       component.set('activeReportPeriod', null);
       let isWeeklyReport = reportPeriod.get('value') !== 'till-now';
       if (reportPeriod.get('type') === 'weekly') {
@@ -112,9 +111,25 @@ export default Ember.Component.extend({
   rangeStartDate: null,
 
   /**
+   * Set course activated date
+   **/
+  courseStartDate: Ember.computed('course.createdDate', function() {
+    if (this.get('course.createdDate')) {
+      return moment(this.get('course.createdDate')).format('YYYY-MM-DD');
+    }
+    return moment()
+      .subtract(30, 'd')
+      .format('YYYY-MM-DD');
+  }),
+
+  /**
    * Set custom range end date
    */
-  rangeEndDate: null,
+  rangeEndDate: Ember.computed(function() {
+    return moment()
+      .endOf('day')
+      .format('YYYY-MM-DD');
+  }),
 
   /**
    * @property {UUID} classId
