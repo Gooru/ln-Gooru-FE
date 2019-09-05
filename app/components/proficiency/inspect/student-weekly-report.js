@@ -118,7 +118,7 @@ export default Ember.Component.extend({
       return moment(this.get('course.createdDate')).format('YYYY-MM-DD');
     }
     return moment()
-      .subtract(30, 'd')
+      .subtract(1, 'M')
       .format('YYYY-MM-DD');
   }),
 
