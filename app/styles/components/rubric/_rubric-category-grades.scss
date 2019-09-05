@@ -85,6 +85,14 @@
                 opacity: 1 !important;
                 background-color: #4b9147;
               }
+
+              &.grade-radio-input {
+                opacity: 1;
+                margin: auto;
+                &.selected-level {
+                  background-color: unset;
+                }
+              }
             }
           }
 
