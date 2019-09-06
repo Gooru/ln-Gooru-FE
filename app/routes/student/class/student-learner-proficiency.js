@@ -54,28 +54,24 @@ export default Ember.Route.extend({
     const courseId = params.courseId;
     if (classId && courseId) {
       const isTeacher = params.role === 'teacher';
-      return Ember.RSVP
-        .hash({
-          profilePromise: route
-            .get('profileService')
-            .readUserProfile(studentId),
-          classPromise: route.get('classService').readClassInfo(classId),
-          coursePromise: route.get('courseService').fetchById(courseId),
-          taxonomyCategories: route.get('taxonomyService').getCategories()
-        })
-        .then(function(hash) {
-          const studentProfile = hash.profilePromise;
-          const taxonomyCategories = hash.taxonomyCategories;
-          const aClass = hash.classPromise;
-          const course = hash.coursePromise;
-          return Ember.Object.create({
-            profile: studentProfile,
-            categories: taxonomyCategories,
-            class: aClass,
-            course: course,
-            isTeacher: isTeacher
-          });
+      return Ember.RSVP.hash({
+        profilePromise: route.get('profileService').readUserProfile(studentId),
+        classPromise: route.get('classService').readClassInfo(classId),
+        coursePromise: route.get('courseService').fetchById(courseId),
+        taxonomyCategories: route.get('taxonomyService').getCategories()
+      }).then(function(hash) {
+        const studentProfile = hash.profilePromise;
+        const taxonomyCategories = hash.taxonomyCategories;
+        const aClass = hash.classPromise;
+        const course = hash.coursePromise;
+        return Ember.Object.create({
+          profile: studentProfile,
+          categories: taxonomyCategories,
+          class: aClass,
+          course: course,
+          isTeacher: isTeacher
         });
+      });
     }
   },
 
@@ -96,5 +92,6 @@ export default Ember.Route.extend({
     controller.set('showDomainInfo', false);
     controller.set('showCompetencyInfo', false);
     controller.set('selectedCompetency', null);
+    controller.set('showGutCompetency', false);
   }
 });
