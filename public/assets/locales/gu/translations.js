@@ -31,6 +31,8 @@ window.i18ln = {
   'errors.tooShort': '{{description}} ખૂબ ટૂંકા છે (ન્યૂનતમ {{min}} અક્ષરો છે)',
   'errors.before': '{{વર્ણન}} {{પહેલા}} પહેલા હોવું આવશ્યક છે',
   'errors.after': '{{description}} {{બાદ}} પછી હોવી આવશ્યક છે',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'errors.wrongDateFormat':
     '{{description}} {{format}} ના ફોર્મેટમાં હોવું આવશ્યક છે',
   'errors.wrongLength':
@@ -1894,6 +1896,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'પ્રાવીણ્ય',
   'profile.gru-navigation.preference.preference': 'પસંદગી',
   'profile.edit.select-district': 'એક જિલ્લા પસંદ કરો ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'હજી સુધી કોઈ ડેટા ઉપલબ્ધ નથી. એકવાર તમે અભ્યાસ કરવાનું શરૂ કરો, પછી તમારો ડેટા ઉપલબ્ધ થશે.',
   'profile.proficiency.expand-chart': 'ચાર્ટ વિસ્તૃત કરો',
@@ -2702,6 +2708,7 @@ window.i18ln = {
   'suggestion-taken': 'Suggestions Taken',
   'this-week': 'This Week',
   'previous-week': 'Previous Week',
+  'custom-range': 'Custom',
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
@@ -2716,5 +2723,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };

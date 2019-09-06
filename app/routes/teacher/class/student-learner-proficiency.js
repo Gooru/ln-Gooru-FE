@@ -42,21 +42,19 @@ export default Ember.Route.extend({
     const studentId = params.studentId;
     const currentClass = route.modelFor('teacher.class').class;
     const course = route.modelFor('teacher.class').course;
-    return Ember.RSVP
-      .hash({
-        profilePromise: route.get('profileService').readUserProfile(studentId),
-        taxonomyCategories: route.get('taxonomyService').getCategories()
-      })
-      .then(function(hash) {
-        const studentProfile = hash.profilePromise;
-        const taxonomyCategories = hash.taxonomyCategories;
-        return Ember.Object.create({
-          profile: studentProfile,
-          categories: taxonomyCategories,
-          class: currentClass,
-          course: course
-        });
+    return Ember.RSVP.hash({
+      profilePromise: route.get('profileService').readUserProfile(studentId),
+      taxonomyCategories: route.get('taxonomyService').getCategories()
+    }).then(function(hash) {
+      const studentProfile = hash.profilePromise;
+      const taxonomyCategories = hash.taxonomyCategories;
+      return Ember.Object.create({
+        profile: studentProfile,
+        categories: taxonomyCategories,
+        class: currentClass,
+        course: course
       });
+    });
   },
 
   setupController(controller, model) {
@@ -68,6 +66,7 @@ export default Ember.Route.extend({
     controller.loadData();
   },
   resetController(controller) {
+    controller.set('showGutCompetency', false);
     controller.set('showDomainInfo', false);
     controller.set('showCompetencyInfo', false);
   }

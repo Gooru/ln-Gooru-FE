@@ -45,9 +45,20 @@
   }
 
   .actions {
-    grid-template-columns: auto max-content;
+    grid-template-columns: auto max-content max-content;
     display: grid;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.5);
+    align-items: center;
+
+    .fwc-panel {
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+
+      .fwc-toggle {
+        margin-top: 5px;
+      }
+    }
 
     .toggle-chart {
       width: max-content;
@@ -80,6 +91,14 @@
       min-height: inherit;
 
       #render-proficiency-matrix {
+        .stop-top {
+          stop-color: #37424b;
+        }
+
+        .stop-bottom {
+          stop-color: #687782;
+        }
+
         .selected-competency {
           position: absolute;
 
@@ -99,6 +118,10 @@
           &.background5 {
             box-shadow: 0 0 6px 5px rgb(222, 223, 224);
             background-color: #006eb5;
+          }
+
+          &.dark-backfill {
+            background-color: $dark-400;
           }
         }
 
@@ -166,6 +189,20 @@
             align-items: end;
             @extend %scroll-style;
 
+            &.show-gut {
+              #render-proficiency-matrix {
+                svg {
+                  #cell-container {
+                    rect {
+                      &.no-framework {
+                        fill: url("#linearGradient");
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
             #popover {
               width: 234px;
               height: 100px;
@@ -211,7 +248,7 @@
 
               .competency {
                 cursor: pointer;
-                stroke: $dark-300;
+                stroke: #fff;
                 stroke-width: 1;
                 shape-rendering: crispedges;
                 stroke-opacity: 0.7;

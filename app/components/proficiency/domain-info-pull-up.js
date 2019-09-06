@@ -17,6 +17,14 @@ export default Ember.Component.extend({
     onInspectCompetency(selectedCompetency) {
       let component = this;
       let competencies = component.get('competencies');
+      selectedCompetency.set(
+        'fwDomainCode',
+        component.get('domain.fwDomainCode')
+      );
+      selectedCompetency.set(
+        'fwDomainName',
+        component.get('domain.fwDomainName')
+      );
       selectedCompetency.set('domainName', component.get('domain.domainName'));
       selectedCompetency.set('domainCode', component.get('domain.domainCode'));
       component.sendAction(

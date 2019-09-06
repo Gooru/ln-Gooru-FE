@@ -9,9 +9,16 @@
       <div class="grade-rubric-level-container">
         {{#if category.allowsLevels}}
           <div class="grade-rubric-levels {{unless (and category.allowsLevels category.allowsScoring) 'no-progress'}} {{if category.scoreInPrecentage 'active'}}">
-            {{#each category.levels as |level levelIndex|}}
-              <i class="grade-info-popover {{if level.selected 'selected'}}" data-html="true" title="Points: {{level.score}}" data-content="{{level.name}}" data-category={{categoryIndex}} data-level={{levelIndex}}></i>
-            {{/each}}
+            {{#if category.allowsScoring}}
+              {{#each category.levels as |level levelIndex|}}
+                <i class="grade-info-popover {{if level.selected 'selected'}}" data-html="true" title="Points: {{level.score}}" data-content="{{level.name}}" data-category={{categoryIndex}} data-level={{levelIndex}}></i>
+              {{/each}}
+            {{else}}
+              {{#each category.levels as |level levelIndex|}}
+                <input type="radio" disabled={{if isReadOnly true false}} name="category-{{categoryIndex}}-level" checked="{{if level.selected 'checked'}}" class="grade-info-popover grade-radio-input {{if level.selected 'selected-level'}}"  data-html="true" data-content="{{level.name}}" data-category={{categoryIndex}} data-level={{levelIndex}}/>
+              {{/each}}
+            {{/if}}
+
             {{#if (and category.allowsLevels category.allowsScoring)}}
               <div class="progress-bar" style={{safe-html (concat "background-color:" (grade-color category.scoreInPrecentage) ";width:" category.scoreInPrecentage "%")}}></div>
             {{/if}}

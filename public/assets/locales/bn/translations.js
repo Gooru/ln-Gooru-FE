@@ -62,6 +62,8 @@ window.i18ln = {
   'common.list': 'তালিকা',
   'common.first': 'প্রথম',
   'common.last': 'গত',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'self-grade.not-required': 'Student self-grading not required',
   'common.name': 'নাম',
   'common.user': 'ব্যবহারকারী',
@@ -1886,6 +1888,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'দক্ষতা',
   'profile.gru-navigation.preference.preference': 'পক্ষপাত',
   'profile.edit.select-district': 'একটি জেলা নির্বাচন করুন ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'কোন তথ্য এখনো পাওয়া যায় নি। একবার আপনি অধ্যয়ন শুরু, আপনার তথ্য উপলব্ধ হবে।',
   'profile.proficiency.expand-chart': 'চার্ট প্রসারিত করুন',
@@ -2696,6 +2702,7 @@ window.i18ln = {
   'suggestion-taken': 'Suggestions Taken',
   'this-week': 'This Week',
   'previous-week': 'Previous Week',
+  'custom-range': 'Custom',
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
@@ -2710,5 +2717,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };

@@ -55,6 +55,8 @@ window.i18ln = {
   'common.engagement': 'কাম',
   'common.efficacy': 'দক্ষতা',
   'common.grid': 'গ্ৰিড',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.list': 'তালিকা',
   'self-grade.not-required': 'Student self-grading not required',
   'common.first': 'প্ৰথম',
@@ -1938,6 +1940,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'প্ৰবীণতা',
   'profile.gru-navigation.preference.preference': 'পচন্দ',
   'profile.edit.select-district': ' এখন জিলা নিৰ্বাচন কৰক...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'এতিয়ালৈকে কোনো ডাটা উপলব্দ্ধ নাই। আপুনি এবাৰ পঢ়িবলৈ আৰম্ভ কৰাৰ পাচত, আপোনাৰ ডাটা উপলব্দ্ধ হ\'ব।',
   'profile.proficiency.expand-chart': 'তালিকা ডাঙৰ কৰক',
@@ -2760,6 +2766,7 @@ window.i18ln = {
   'suggestion-taken': 'Suggestions Taken',
   'this-week': 'This Week',
   'previous-week': 'Previous Week',
+  'custom-range': 'Custom',
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
@@ -2774,5 +2781,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };

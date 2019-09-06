@@ -47,6 +47,8 @@ window.i18ln = {
   'errors.lessThanOrEqualTo':
     '{{description}} {{lte}} എന്നതിലും കുറഞ്ഞതിലും ആയിരിക്കണം',
   'errors.otherThan': '{{വിവരണം}} {{value}}',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'errors.odd': '{{description}} ഒറ്റ സംഖ്യയായിരിക്കണം',
   'errors.even': '{{description}} ഉണ്ടായിരിക്കണം',
   'errors.positive': '{{വിവരണം}} പോസിറ്റീവ് ആയിരിക്കണം',
@@ -1947,6 +1949,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'യോഗ്യത',
   'profile.gru-navigation.preference.preference': 'മുൻഗണന',
   'profile.edit.select-district': 'ഒരു ജില്ല തിരഞ്ഞെടുക്കൂ ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'ഇതുവരെ ഡാറ്റയൊന്നും ലഭ്യമല്ല. ഒരിക്കൽ നിങ്ങൾ പഠിക്കാൻ തുടങ്ങുമ്പോൾ, നിങ്ങളുടെ ഡാറ്റ ലഭ്യമാകും.',
   'profile.proficiency.expand-chart': 'ചാർട്ട് വികസിപ്പിക്കുക',
@@ -2779,6 +2785,7 @@ window.i18ln = {
   'suggestion-taken': 'Suggestions Taken',
   'this-week': 'This Week',
   'previous-week': 'Previous Week',
+  'custom-range': 'Custom',
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
@@ -2793,5 +2800,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };

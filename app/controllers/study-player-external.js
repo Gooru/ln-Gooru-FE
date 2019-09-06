@@ -263,47 +263,45 @@ export default Ember.Controller.extend({
     let lesson = controller.get('lesson');
     let lastPlayedUnitId = unit.get('id');
     let lastPlayedLessonId = lesson.get('id');
-    return Ember.RSVP
-      .hash({
-        //loading breadcrumb information and navigation info
-        unit:
-          lastPlayedUnitId !== unitId
-            ? controller.get('unitService').fetchById(courseId, unitId)
-            : unit,
-        lesson:
-          lastPlayedLessonId !== lessonId
-            ? controller
-              .get('lessonService')
-              .fetchById(courseId, unitId, lessonId)
-            : lesson,
-        collection:
-          collectionType === CONTENT_TYPES.EXTERNAL_ASSESSMENT
-            ? controller
-              .get('assessmentService')
-              .readExternalAssessment(collectionId)
-            : collectionType === CONTENT_TYPES.OFFLINE_ACTIVITY
-              ? controller
-                .get('offlineActivityService')
-                .readActivity(collectionId)
-              : controller
-                .get('collectionService')
-                .readExternalCollection(collectionId)
-      })
-      .then(({ unit, lesson, collection }) => {
-        controller.setProperties({
-          unitId: unit.get('id'),
-          lessonId: lesson.get('id'),
-          collectionId: collection.get('id'),
-          type: collectionType,
-          unit,
-          lesson,
-          collection,
-          mapLocation,
-          content: mapLocation.get('content'),
-          dataParams: null,
-          isShowOaLandingPage: true //By default show OA Landing page
-        });
+    controller.set('isLoading', true);
+    return Ember.RSVP.hash({
+      //loading breadcrumb information and navigation info
+      unit:
+        lastPlayedUnitId !== unitId
+          ? controller.get('unitService').fetchById(courseId, unitId)
+          : unit,
+      lesson:
+        lastPlayedLessonId !== lessonId
+          ? controller
+            .get('lessonService')
+            .fetchById(courseId, unitId, lessonId)
+          : lesson,
+      collection:
+        collectionType === CONTENT_TYPES.EXTERNAL_ASSESSMENT
+          ? controller
+            .get('assessmentService')
+            .readExternalAssessment(collectionId)
+          : collectionType === CONTENT_TYPES.OFFLINE_ACTIVITY
+            ? controller.get('offlineActivityService').readActivity(collectionId)
+            : controller
+              .get('collectionService')
+              .readExternalCollection(collectionId)
+    }).then(({ unit, lesson, collection }) => {
+      controller.setProperties({
+        unitId: unit.get('id'),
+        lessonId: lesson.get('id'),
+        collectionId: collection.get('id'),
+        type: collectionType,
+        unit,
+        lesson,
+        collection,
+        mapLocation,
+        content: mapLocation.get('content'),
+        dataParams: null,
+        isShowOaLandingPage: true, //By default show OA Landing page
+        isLoading: false
       });
+    });
   },
 
   /**
@@ -315,7 +313,7 @@ export default Ember.Controller.extend({
     if (!scoreInPercentage) {
       let score = parseInt(dataParams.score);
       let maxScore = parseInt(dataParams.max_score);
-      scoreInPercentage = score / maxScore * 100;
+      scoreInPercentage = (score / maxScore) * 100;
     }
     return roundFloat(scoreInPercentage);
   }

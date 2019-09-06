@@ -1,100 +1,100 @@
-<div class="offline-activity-submission-container">
-  <div class="offline-activity-info-container">
-    <div class="offline-activity-title-container">
-      <div class="icon-container">
+<div class="offline-activity-submission-container {{if isOaCompleted 'grading-enabled'}}">
+  <div class="left-panel">
+    <div class="offline-activity-info-container">
+      <div class="offline-activity-title-container">
+        <div class="icon-container">
+        </div>
+        <div class="title-container">
+          {{offlineActivity.title}}
+        </div>
       </div>
-      <div class="title-container">
-        {{offlineActivity.title}}
+      <div class="offline-activity-description-container">
+        {{offlineActivity.learningObjectives}}
       </div>
     </div>
-    <div class="offline-activity-description-container">
-      {{offlineActivity.learningObjectives}}
+    <div class="oa-references-container">
+      {{player/offline-activity/gru-offline-activity-references offlineActivity = offlineActivity}}
     </div>
+    <div class="offline-activity-timespent">
+      <div class="timespent-info-container" {{action "onToggleTimespent"}}>
+        <div class="icon-container">
+          {{gru-icon name="schedule"}}
+        </div>
+        <div class="label-container">
+          <span class="title-container">Time spent</span>
+          <span class="description-container">
+            {{t 'oa.enter-timespent-label'}}
+          </span>
+        </div>
+        <div class="toggle-container">
+          {{gru-icon name=(if isTimespentExpanded 'expand_less' 'expand_more')}}
+        </div>
+      </div>
+      <div class="timespent-container">
+        {{cards/gru-timepicker-card
+          maxHour= -1
+          hour=oaTimespentHour
+          minute=oaTimespentMinute
+        }}
+        <div class="save-timespent-action {{unless isEnableSaveTimespent 'disable-event'}}" {{action "onSaveTimespent"}}>
+          {{t 'common.save'}}
+        </div>
+      </div>
+    </div>
+    <div class="task-submissions-container">
+      {{#each activityTasks as |task|}}
+        {{player/offline-activity/gru-offline-activity-task-submission
+          task=task
+          caContentId=caContentId
+          showSubmissions=true
+          showToggle=true
+          classId=classId
+          timespentInMilliSec=timespentInMilliSec
+          isStudyPlayer = isStudyPlayer
+          courseId = courseId
+          unitId = unitId
+          lessonId = lessonId
+          contentSource = contentSource
+          isReadOnly = isOaCompleted}}
+      {{/each}}
+    </div>
+    <div class="complete-submission-container {{if isShowCompletionConfirmation 'hidden'}} {{unless isEnableCompletionButton 'disable-event'}}">
+      <div class="complete-submit-btn" {{action "onShowCompletionConfirmation"}}>{{t 'oa-player.mark-complete'}}</div>
+    </div>
+
+    {{#if isShowCompletionConfirmation}}
+      <div class="completion-confirmation-popup">
+        <div class="info-container">
+          {{t 'oa-player.complete-confirm'}}
+        </div>
+        <div class="action-container">
+          <div class="cancel-btn action-btn" {{action "onCancelCompletion"}}>
+            {{t 'common.no'}}
+          </div>
+          <div class="confirm-btn action-btn" {{action "onCompleteSubmission"}}>
+            {{t 'common.yes'}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
   </div>
-  <div class="oa-references-container">
-    {{player/offline-activity/gru-offline-activity-references offlineActivity = offlineActivity}}
-  </div>
-  <div class="offline-activity-timespent">
-    <div class="timespent-info-container" {{action "onToggleTimespent"}}>
-      <div class="icon-container">
-        {{gru-icon name="schedule"}}
-      </div>
-      <div class="label-container">
-        <span class="title-container">Time spent</span>
-        <span class="description-container">
-          {{t 'oa.enter-timespent-label'}}
-        </span>
-      </div>
-      <div class="toggle-container">
-        {{gru-icon name=(if isTimespentExpanded 'expand_less' 'expand_more')}}
-      </div>
-    </div>
-    <div class="timespent-container">
-      {{cards/gru-timepicker-card
-        maxHour= -1
-        hour=oaTimespentHour
-        minute=oaTimespentMinute
+  <div class="right-panel {{if isSelfGradingDone 'grading-done'}}">
+    {{#if isShowOaSelfGrading}}
+      {{activity/offline/grading-report
+        context=selfGradeItemContext
+        itemsToGrade=itemsToGrade
+        isTeacher=false
+        studentId=userId
+        isCourseMapGrading = isCourseMapGrading
+        refreshItem = "onDoneOaGrading"
+        isInlineGrading = true
+        offlineActivitySubmissions = offlineActivitySubmissions
       }}
-      <div class="save-timespent-action {{unless isEnableSaveTimespent 'disable-event'}}" {{action "onSaveTimespent"}}>
-        {{t 'common.save'}}
-      </div>
-    </div>
+    {{/if}}
   </div>
-  <div class="task-submissions-container">
-    {{#each activityTasks as |task|}}
-      {{player/offline-activity/gru-offline-activity-task-submission
-        task=task
-        caContentId=caContentId
-        showSubmissions=true
-        showToggle=true
-        classId=classId
-        timespentInMilliSec=timespentInMilliSec
-        isStudyPlayer = isStudyPlayer
-        courseId = courseId
-        unitId = unitId
-        lessonId = lessonId
-        contentSource = contentSource}}
-    {{/each}}
-  </div>
-  <div class="complete-submission-container {{unless isEnableCompletionButton 'disable-event'}}">
-    <div class="complete-submit-btn" {{action "onShowCompletionConfirmation"}}>{{t 'oa-player.mark-complete'}}</div>
-  </div>
-  {{#if isEnableSelfGrading}}
-    <div class="self-grading-button-container">
-      <div class="self-grade-btn" {{action "onTriggerSelfGrade"}}>{{concat (t 'common.self') (t 'class.info.grade')}}</div>
-    </div>
-  {{/if}}
 </div>
 {{#if isLoading}}
   <div class="loading-spinner">
     {{three-bounce-spinner}}
   </div>
-{{/if}}
-{{#if isShowCompletionConfirmation}}
-  <div class="confirmation-popup-overlay">
-    <div class="completion-confirmation-popup">
-      <div class="info-container">
-        {{t 'oa-player.complete-confirm'}}
-      </div>
-      <div class="action-container">
-        <div class="cancel-btn action-btn" {{action "onCancelCompletion"}}>
-          {{t 'common.no'}}
-        </div>
-        <div class="confirm-btn action-btn" {{action "onCompleteSubmission"}}>
-          {{t 'common.yes'}}
-        </div>
-      </div>
-    </div>
-  </div>
-{{/if}}
-{{#if isShowOaSelfGrading}}
-  {{activity/offline/grading-report
-    showPullUp=isShowOaSelfGrading
-    context=selfGradeItemContext
-    itemsToGrade=itemsToGrade
-    isTeacher=false
-    studentId=userId
-    isCourseMapGrading = isCourseMapGrading
-    refreshItem = "onDoneOaGrading"
-  }}
 {{/if}}

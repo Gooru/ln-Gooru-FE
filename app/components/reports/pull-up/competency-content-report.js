@@ -230,5 +230,14 @@ export default Ember.Component.extend({
     );
     component.set('showSignatureAssessment', showSignatureAssessment);
     component.loadCompetencyPerformanceData();
+  }),
+
+  competencyName: Ember.computed('competency', 'showGutCompetency', function() {
+    let component = this;
+    let competency = component.get('competency');
+    return competency.get('isMappedWithFramework') &&
+      !component.get('showGutCompetency')
+      ? competency.get('framework.frameworkCompetencyName')
+      : competency.get('competencyName');
   })
 });

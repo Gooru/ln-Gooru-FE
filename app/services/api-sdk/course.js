@@ -267,11 +267,11 @@ export default Ember.Service.extend(StoreMixin, {
    * @param {string} fwCode
    * @returns {Promise.<Milestones>}
    */
-  getCourseMilestones(courseId, fwCode) {
+  getCourseMilestones(courseId, fwCode, class_id, user_id) {
     const service = this;
     return service
       .get('adapter')
-      .getCourseMilestones(courseId, fwCode)
+      .getCourseMilestones(courseId, fwCode, class_id, user_id)
       .then(function(courseData) {
         return service
           .get('serializer')

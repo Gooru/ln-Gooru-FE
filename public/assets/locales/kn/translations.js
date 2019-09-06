@@ -61,6 +61,8 @@ window.i18ln = {
   'common.grid': 'ಗ್ರಿಡ್ ',
   'common.list': 'ಪಟ್ಟಿ ',
   'common.first': 'ಮೊದಲ ',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
@@ -1950,6 +1952,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'ಕುಶಲತೆ',
   'profile.gru-navigation.preference.preference': 'ಆದ್ಯತೆ',
   'profile.edit.select-district': 'ಜಿಲ್ಲೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'ಇನ್ನೂ ಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ. ಒಮ್ಮೆ ನೀವು ಅಧ್ಯಯನ ಪ್ರಾರಂಭಿಸಿದಾಗ, ನಿಮ್ಮ ಡೇಟಾ ಲಭ್ಯವಾಗುತ್ತದೆ.',
   'profile.proficiency.expand-chart': 'ಚಾರ್ಟ್ ವಿಸ್ತರಿಸಿ',
@@ -2771,6 +2777,7 @@ window.i18ln = {
   'suggestion-taken': 'ಸಲಹೆಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಲಾಗಿದೆ',
   'this-week': 'ಈ ವಾರ',
   'previous-week': 'ಹಿಂದಿನ ವಾರ',
+  'custom-range': 'ಕಸ್ಟಮ್',
   'beginning-till-now': 'ಈಗ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ',
   'report.class-proficiency-report': 'ವರ್ಗ ಪ್ರಾವೀಣ್ಯತೆಯ ವರದಿ',
   'report.domain-proficiency-report': 'ಡೊಮೇನ್ ಸಾಮರ್ಥ್ಯ ವರದಿ',
@@ -2785,5 +2792,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };

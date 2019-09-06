@@ -58,6 +58,8 @@ window.i18ln = {
   'common.efficacy': 'ਕਾਰਗੁਜ਼ਾਰੀ',
   'common.grid': 'ਗਰਿੱਡ',
   'common.list': 'ਸੂਚੀ',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.first': 'ਪਹਿਲਾ',
@@ -1903,6 +1905,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'ਮੁਹਾਰਤ',
   'profile.gru-navigation.preference.preference': 'ਤਰਜੀਹ',
   'profile.edit.select-district': 'ਇੱਕ ਜ਼ਿਲ੍ਹਾ ਚੁਣੋ ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'ਕੋਈ ਡਾਟਾ ਅਜੇ ਉਪਲਬਧ ਨਹੀਂ ਹੈ ਇਕ ਵਾਰ ਅਧਿਐਨ ਕਰਨਾ ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਬਾਅਦ, ਤੁਹਾਡਾ ਡਾਟਾ ਉਪਲਬਧ ਹੋ ਜਾਵੇਗਾ',
   'profile.proficiency.expand-chart': 'ਚਾਰਟ ਦਾ ਵਿਸਤਾਰ ਕਰੋ',
@@ -2711,6 +2717,7 @@ window.i18ln = {
   'suggestion-taken': 'Suggestions Taken',
   'this-week': 'This Week',
   'previous-week': 'Previous Week',
+  'custom-range': 'Custom',
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
@@ -2725,5 +2732,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };

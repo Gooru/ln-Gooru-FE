@@ -148,6 +148,11 @@ export default Ember.Component.extend({
   allowDateSelectorToggle: false,
 
   /**
+   * Enable previous date visible and disable future date in range date picker
+   */
+  disableFutureDate: false,
+
+  /**
    * It will decide whether today button need to show or not.
    * @type {Boolean}
    */
@@ -181,6 +186,15 @@ export default Ember.Component.extend({
    */
   updateMonthAndYear: true,
 
+  /**
+   * Maintain course active date
+   */
+  courseStartDate: null,
+
+  /**
+   * Change start date datepicker month navigation
+   */
+  forChangeStartDateNavMonth: false,
   // -------------------------------------------------------------------------
   // Observers
   /**
@@ -197,8 +211,10 @@ export default Ember.Component.extend({
   onSelectStartDate: Ember.observer('startDate', function() {
     let component = this;
     let startDate = this.get('startDate');
-    let forFirstDateOfMonth = moment(startDate).format('YYYY-MM-DD');
-    component.set('forFirstDateOfMonth', forFirstDateOfMonth);
+    if (!this.get('courseStartDate')) {
+      let forFirstDateOfMonth = moment(startDate).format('YYYY-MM-DD');
+      component.set('forFirstDateOfMonth', forFirstDateOfMonth);
+    }
     if (startDate) {
       component.$('#ca-datepicker').datepicker('setStartDate', startDate);
     }
@@ -211,6 +227,8 @@ export default Ember.Component.extend({
     let datepickerEle = component.$('#ca-datepicker');
     let defaultParams = {
       maxViewMode: 0,
+      startDate: this.get('courseStartDate'),
+      endDate: this.get('disableFutureDate') ? null : 'today',
       format: 'yyyy-mm-dd',
       todayHighlight: true
     };
@@ -223,6 +241,10 @@ export default Ember.Component.extend({
       defaultParams.startDate = moment(startDate).format('YYYY-MM-DD');
     }
     datepickerEle.datepicker(defaultParams);
+    if (this.get('forChangeStartDateNavMonth')) {
+      this.set('forFirstDateOfMonth', this.get('courseStartDate'));
+      datepickerEle.datepicker('setDate', this.get('courseStartDate'));
+    }
     let selectedDate = component.get('selectedDate');
     if (selectedDate) {
       let parsedDate = moment(selectedDate).format('YYYY-MM-DD');

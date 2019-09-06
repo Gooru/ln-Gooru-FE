@@ -65,6 +65,8 @@ window.i18ln = {
     'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.list': 'सूची',
   'common.first': 'प्रथम',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',
   'common.last': 'अंतिम',
@@ -1921,6 +1923,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'प्रवीणता',
   'profile.gru-navigation.preference.preference': 'चयन',
   'profile.edit.select-district': 'एक जिले का चयन करें...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'अभी तक कोई डेटा उपलब्ध नहीं है। एक बार अध्ययन शुरू करने के बाद, आपका डेटा उपलब्ध हो जाएगा।',
   'profile.proficiency.expand-chart': 'चार्ट का विस्तार करें',
@@ -2735,6 +2741,7 @@ window.i18ln = {
   'suggestion-taken': 'सुझाव लिया गया',
   'this-week': 'इस सप्ताह',
   'previous-week': 'पिछला सप्ताह',
+  'custom-range': 'रिवाज',
   'beginning-till-now': 'अब तक की शुरुआत',
   'report.class-proficiency-report': 'कक्षा प्रवीणता का रिपोर्ट',
   'report.domain-proficiency-report': 'डोमेन की योग्यता रिपोर्ट',
@@ -2756,5 +2763,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };

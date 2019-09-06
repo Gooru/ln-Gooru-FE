@@ -1,5 +1,5 @@
 <div class="domain-panel-header">
-  <div class="domain-name">{{locale-translation (t (concat 'domain-code.' domain.domainCode)) domain.domainName}}</div>
+  <div class="domain-name">{{locale-translation (t (concat 'domain-code.' domain.domainCode)) (if (and (not showGutCompetency)  domain.isMappedWithFramework) domain.fwDomainName  domain.domainName)}}</div>
   <div class="domain-seq">{{t 'common.domain'}} {{domain.domainSeq}}</div>
   <span class="close" {{action 'closePullUp'}}>{{gru-icon name="close"}}</span>
 </div>
@@ -9,10 +9,10 @@
     {{#each competencies as |competency|}}
       <div class="competency-info" {{action 'onInspectCompetency' competency}}>
         <div class="competency">
-          <div class="title">{{competency.competencyCode}}</div>
+          <div class="title">{{if (and (not showGutCompetency)  competency.isMappedWithFramework) competency.framework.frameworkCompetencyDisplayCode  competency.competencyCode}}</div>
           <div class="competency-status status-{{competency.status}}"></div>
         </div>
-        <div class="competency-desc">{{competency.competencyStudentDesc}}</div>
+        <div class="competency-desc">{{if (and (not showGutCompetency) competency.isMappedWithFramework) competency.framework.frameworkCompetencyName competency.competencyStudentDesc}}</div>
       </div>
     {{/each}}
   </div>

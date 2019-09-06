@@ -1,6 +1,10 @@
 import Ember from 'ember';
 import { isCompatibleVW } from 'gooru-web/utils/utils';
-import { SCREEN_SIZES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  SCREEN_SIZES,
+  PLAYER_EVENT_SOURCE,
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -290,6 +294,9 @@ export default Ember.Component.extend({
     if (collectionType === 'assessment-external') {
       component.set('showExternalAssessmentReport', true);
       component.set('showCollectionReport', false);
+    } else if (collectionType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+      params.performance = collection.get('performance');
+      component.set('isShowOfflineActivityReport', true);
     } else {
       component.set('showExternalAssessmentReport', false);
       component.set('showCollectionReport', true);

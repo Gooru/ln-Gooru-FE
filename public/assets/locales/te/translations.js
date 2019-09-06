@@ -64,6 +64,8 @@ window.i18ln = {
   'common.first': 'ప్రధమ',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',
   'common.upload-image': 'upload image',
@@ -1906,6 +1908,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'నైపుణ్యత',
   'profile.gru-navigation.preference.preference': 'ప్రాధాన్యత',
   'profile.edit.select-district': 'జిల్లాను ఎంచుకోండి ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'ఇంకా సమాచారం అందుబాటులో లేదు. మీరు చదువుతున్నప్పుడు, మీ డేటా అందుబాటులోకి వస్తుంది.',
   'profile.proficiency.expand-chart': 'చార్ట్ను విస్తరించండి',
@@ -2724,6 +2730,7 @@ window.i18ln = {
   'suggestion-taken': 'Suggestions Taken',
   'this-week': 'This Week',
   'previous-week': 'Previous Week',
+  'custom-range': 'Custom',
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
@@ -2738,5 +2745,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };

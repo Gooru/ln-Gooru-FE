@@ -45,6 +45,8 @@ window.i18ln = {
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'i2d.new-upload-msg':
     'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
@@ -1954,6 +1956,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'திறமை',
   'profile.gru-navigation.preference.preference': 'விருப்பம்',
   'profile.edit.select-district': 'ஒரு மாவட்டத்தைத் தேர்ந்தெடுக்கவும் ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'இன்னும் தரவு எதுவும் கிடைக்கவில்லை. நீங்கள் படிக்கும் போது, உங்கள் தரவு கிடைக்கும்.',
   'profile.proficiency.expand-chart': 'விளக்கப்படம் விரிவுபடுத்தவும்',
@@ -2788,6 +2794,7 @@ window.i18ln = {
   'suggestion-taken': 'Suggestions Taken',
   'this-week': 'This Week',
   'previous-week': 'Previous Week',
+  'custom-range': 'Custom',
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
@@ -2802,5 +2809,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };

@@ -214,6 +214,18 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  fetchCrossWalkFWC: function(frameworkCode, subjectCode) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/crosswalk/frameworks/${frameworkCode}/subjects/${subjectCode}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   /**
    * Return list of  taxonomy subject classification details based  on tenant settings
    */

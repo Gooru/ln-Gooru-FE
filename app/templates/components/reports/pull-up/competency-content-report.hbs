@@ -1,13 +1,18 @@
+{{#unless competency.isMappedWithFramework}}
+  <div class="no-framework-message">
+    {{t 'not-covered-in-fw-msg' framework=classFramework}}
+  </div>
+{{/unless}}
 <div class="competency-performance">
   <div class="competency-name">
-    {{#if classFramework}}
+    {{#if (and classFramework (not showGutCompetency))}}
       {{classFramework}}:
     {{/if}}
-    {{competency.competencyName}}
+    {{competencyName}}
   </div>
   {{#if (and competency (not isPlayerProficiency))}}
     <div class="signature-content">
-      {{reports/pull-up/signature-content-report userId=userId domainCompetencyList=domainCompetencyList collectionPerformances=collectionPerformances showSignatureAssessment=showSignatureAssessment competency=competency isStudent=isStudent}}
+      {{reports/pull-up/signature-content-report showGutCompetency=showGutCompetency classFramework=classFramework userId=userId domainCompetencyList=domainCompetencyList collectionPerformances=collectionPerformances showSignatureAssessment=showSignatureAssessment competency=competency isStudent=isStudent}}
     </div>
   {{/if}}
 </div>

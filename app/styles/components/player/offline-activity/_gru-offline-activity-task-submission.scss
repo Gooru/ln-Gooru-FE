@@ -25,7 +25,11 @@
         .task-title {
           color: #3e5e67;
           font-weight: bold;
-          @include ellipsis($font-size: 14px, $line-height: 1.2, $lines-to-show: 1);
+          @include ellipsis(
+            $font-size: 14px,
+            $line-height: 1.2,
+            $lines-to-show: 1
+          );
         }
       }
 
@@ -42,6 +46,7 @@
           font-size: 11px;
           color: #37424b;
           opacity: 0.7;
+          text-transform: capitalize;
         }
       }
 
@@ -240,6 +245,7 @@
 
         .task-url-upload-container {
           grid-row-start: 3;
+          max-width: 350px;
 
           .urls-label {
             font-size: 14px;

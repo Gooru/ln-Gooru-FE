@@ -8,6 +8,8 @@ export default Ember.Component.extend({
 
   classNames: ['grade', 'backdrop-pull-ups', 'oa-grading-report'],
 
+  classNameBindings: ['isInlineGrading:inline-grading'],
+
   // -------------------------------------------------------------------------
   // Dependencies
   /**
@@ -247,6 +249,52 @@ export default Ember.Component.extend({
           component.get('content.maxScore');
   }),
 
+  /**
+   * @property {Boolean} isInlineGrading
+   * Property to determine whether doing inline grading (inside player) or not
+   */
+  isInlineGrading: false,
+
+  /**
+   * @property {Object} offlineActivitySubmissions
+   * Property for current OA submissions
+   */
+  offlineActivitySubmissions: null,
+
+  /**
+   * @property {Boolean} isTeacherGradingDone
+   * Property to determine whether the teacher graded the student or not
+   */
+  isTeacherGradingDone: Ember.computed(
+    'offlineActivitySubmissions.oaRubrics',
+    function() {
+      const component = this;
+      const offlineActivitySubmissions = component.get(
+        'offlineActivitySubmissions'
+      );
+      return offlineActivitySubmissions
+        ? !!offlineActivitySubmissions.get('oaRubrics.teacherGrades')
+        : false;
+    }
+  ),
+
+  /**
+   * @property {Boolean} isStudentGradingDone
+   * Property to determine whether the student graded
+   */
+  isStudentGradingDone: Ember.computed(
+    'offlineActivitySubmissions.oaRubrics',
+    function() {
+      const component = this;
+      const offlineActivitySubmissions = component.get(
+        'offlineActivitySubmissions'
+      );
+      return offlineActivitySubmissions
+        ? !!offlineActivitySubmissions.get('oaRubrics.studentGrades.grader')
+        : false;
+    }
+  ),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -335,8 +383,17 @@ export default Ember.Component.extend({
    * Function to triggered once when the component element is first rendered.
    */
   didInsertElement() {
-    this.openPullUp();
-    this.initialize();
+    const component = this;
+    if (!component.get('isInlineGrading')) {
+      component.openPullUp();
+    }
+    component.initialize();
+  },
+
+  willDestroyElement() {
+    const component = this;
+    component.set('isInlineGrading', false);
+    component.set('offlineActivitySubmissions', null);
   },
 
   didDestroyElement() {
@@ -385,7 +442,9 @@ export default Ember.Component.extend({
             users.pushObject(student);
           }
           return Ember.RSVP.hash({
-            submission: component.fetchStudentSubmissions(),
+            submission: component.get('offlineActivitySubmissions')
+              ? component.get('offlineActivitySubmissions')
+              : component.fetchStudentSubmissions(),
             users
           });
         }
@@ -416,6 +475,7 @@ export default Ember.Component.extend({
             );
           });
           component.set('users', users);
+          component.set('offlineActivitySubmissions', submission);
           let studentGrade = submission.get('oaRubrics.studentGrades');
           let teacherGrade = submission.get('oaRubrics.teacherGrades');
           let taskSubmission = submission.get('tasks');
@@ -607,6 +667,7 @@ export default Ember.Component.extend({
     userGrade.set('unitId', context.get('content.unitId') || null);
     userGrade.set('lessonId', context.get('content.lessonId') || null);
     userGrade.set('isCourseMapGrading', component.get('isCourseMapGrading'));
+    component.set('isStudentGradingDone', true);
     component
       .get('oaAnaltyicsService')
       .submitOAGrade(userGrade)
@@ -628,7 +689,7 @@ export default Ember.Component.extend({
         title: category.get('title')
       }
     );
-    rubricCategory.set('levelMaxScore', 0);
+    rubricCategory.set('levelMaxScore', null);
     if (level) {
       rubricCategory.set('levelObtained', level.get('name'));
       if (category.get('allowsLevels') && category.get('allowsScoring')) {
@@ -669,6 +730,7 @@ export default Ember.Component.extend({
       let studentGrade = submission.get('oaRubrics.studentGrades');
       let teacherGrade = submission.get('oaRubrics.teacherGrades');
       let taskSubmission = submission.get('tasks');
+      component.set('offlineActivitySubmissions', submission);
       component.parseSubmissionGrade(
         studentGrade,
         teacherGrade,
@@ -774,7 +836,7 @@ export default Ember.Component.extend({
         .carousel(nextUserIndex);
       component.loadData();
       component.handleCarouselControl();
-    } else {
+    } else if (!component.get('isInlineGrading')) {
       component.$('.caught-up-container').show(400, function() {
         let itemsToGrade = component.get('itemsToGrade');
         if (itemsToGrade) {

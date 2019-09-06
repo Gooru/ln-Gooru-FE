@@ -15,10 +15,10 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
 
   /**
-   * competency service dependency injection
+   * taxonomy service dependency injection
    * @type {Object}
    */
-  competencyService: Ember.inject.service('api-sdk/competency'),
+  taxonomy: Ember.inject.service('taxonomy'),
 
   /**
    * taxonomy service dependency injection
@@ -69,6 +69,10 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    onToggleToShowGUTC() {
+      let component = this;
+      component.toggleProperty('showGutCompetency');
+    },
     // Action triggered when toggle chart view
     onToggleChart() {
       let component = this;
@@ -163,6 +167,7 @@ export default Ember.Component.extend({
         width: cellWidth,
         height: cellHeight,
         top: yAxisSeq,
+        isMappedWithFramework: selectedCompetency.isMappedWithFramework,
         left: xAxisSeq
       })
     );
@@ -238,6 +243,10 @@ export default Ember.Component.extend({
   ),
   // -------------------------------------------------------------------------
   // Properties
+  /**
+   * @property {Boolean} showGutCompetency
+   */
+  showGutCompetency: false,
 
   /**
    * @property {Array} domainBoundariesContainer
@@ -549,7 +558,6 @@ export default Ember.Component.extend({
           let competencyName = competency.get('competencyName');
           let competencySeq = competency.get('competencySeq');
           let status = competency.get('status');
-
           let data = Ember.Object.create({
             domainName: domainName,
             domainCode: domainCode,
@@ -557,6 +565,10 @@ export default Ember.Component.extend({
             competencyCode: competencyCode,
             competencyName: competencyName,
             competencySeq: competencySeq,
+            fwDomainCode: competency.get('fwDomainCode'),
+            fwDomainName: competency.get('fwDomainName'),
+            framework: competency.get('framework'),
+            isMappedWithFramework: competency.get('isMappedWithFramework'),
             competencyStudentDesc: competency.get('competencyStudentDesc'),
             status: status
           });
@@ -702,7 +714,8 @@ export default Ember.Component.extend({
         let domainBoundaryCompetency = d.isDomainBoundaryCompetency
           ? 'domain-boundary'
           : '';
-        return `competency ${skylineClassName} competency-${
+        let noFrameWorkClass = !d.isMappedWithFramework ? 'no-framework' : '';
+        return `competency ${noFrameWorkClass} ${skylineClassName} competency-${
           d.xAxisSeq
         } competency-${d.xAxisSeq}-${
           d.yAxisSeq
@@ -719,6 +732,7 @@ export default Ember.Component.extend({
     component.drawSkyline();
     component.drawBaseLine();
     component.drawDomainBoundaryLine();
+    component.showGutCompetencyColorGradient();
   },
 
   selectCompetency(competency) {
@@ -775,6 +789,24 @@ export default Ember.Component.extend({
       cellIndex++;
     });
     component.showDropShadow();
+  },
+
+  showGutCompetencyColorGradient() {
+    const chartContainer = d3.select('#render-proficiency-matrix svg');
+    var svgDefs = chartContainer.append('defs');
+    var linearGradient = svgDefs
+      .append('linearGradient')
+      .attr('id', 'linearGradient')
+      .attr('x2', '0%')
+      .attr('y2', '100%');
+    linearGradient
+      .append('stop')
+      .attr('class', 'stop-top')
+      .attr('offset', '0');
+    linearGradient
+      .append('stop')
+      .attr('class', 'stop-bottom')
+      .attr('offset', '1');
   },
 
   /**
@@ -1104,7 +1136,6 @@ export default Ember.Component.extend({
     let component = this;
     component.clearChart();
     component.set('isShowMatrixChart', false);
-    component.set('taxonomyGrades', []);
   },
 
   clearChart() {

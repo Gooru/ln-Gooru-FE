@@ -25,6 +25,20 @@
       &.class-grade {
         box-shadow: 0 0 10px 0 #4cc32b;
       }
+      &.rescope {
+        display: none;
+
+        &.show-all-rescoped-content {
+          display: block;
+          .milestone-icon-upward-line {
+            display: block;
+          }
+        }
+
+        &.class-grade-milestone {
+          display: block;
+        }
+      }
 
       .milestone-course-map-panel {
         display: inline-grid;
@@ -723,9 +737,6 @@
 
                     &.format-offline-activity {
                       background-image: url("../assets/gooru/images/offline.svg");
-                      width: 27px;
-                      height: 27px;
-                      background-size: 27px 27px;
                     }
                   }
 

@@ -12,10 +12,10 @@
     </div>
   {{/if}}
   {{#each milestones as | milestone milestoneIndex | }}
-    <div class="milestone-course-map {{if milestone.isClassGrade 'class-grade'}}">
+    <div class="milestone-course-map {{if milestone.isClassGrade 'class-grade'}} {{if (or showAllRescopedContent milestone.isClassGrade) 'show-all-rescoped-content'}} {{if milestone.rescope 'rescope'}}">
       <div class="milestone-course-map-panel prev-col-path-{{milestone.prevMilestoneOfLastCollectionPath}} {{if (and milestone.prevMilestoneIsActive milestone.prevMilestoneOfLastLessonIsActive) 'lesson-active'}} {{if milestone.isActive 'active'}}">
         <div class="milestone-info-container" {{action 'toggleMilestoneItems' milestone }}>
-          <div class="milestone-icon-upward-line {{if (or (eq milestoneIndex 0) milestone.prevMileStoneShowLessons) 'hidden'}}">
+          <div class="milestone-icon-upward-line {{if (and milestone.prevMilestoneIsRescope (not showAllRescopedContent)) 'hidden'}} {{if (or (eq milestoneIndex 0) milestone.prevMileStoneShowLessons) 'hidden'}}">
             <svg height="40" width="20">
               <line x1="0" y1="0" x2="0" y2="40" />
               <path class="path-right" d="M 0 0  t 8 17 -5 60" />
@@ -230,7 +230,7 @@
 {{/if}}
 
 {{#if isShowStudentOfflineActivityReport}}
-  {{reports.pull-up.oa-preview
+  {{reports/pull-up/oa-preview
     showPullUp=isShowStudentOfflineActivityReport
     oaId=studentCollectionReportContext.collection.id
     isReportView=true

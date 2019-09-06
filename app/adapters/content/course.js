@@ -236,13 +236,17 @@ export default Ember.Object.extend({
    * @param {string} fwCode
    * @returns {Promise.<Milestones>}
    */
-  getCourseMilestones(courseId, fwCode) {
+  getCourseMilestones(courseId, fwCode, class_id, user_id) {
     const namespace = this.get('namespace');
     const url = `${namespace}/ms/${courseId}/fw/${fwCode}`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
-      headers: this.defineHeaders()
+      headers: this.defineHeaders(),
+      data: {
+        class_id,
+        user_id
+      }
     };
 
     return Ember.$.ajax(url, options);

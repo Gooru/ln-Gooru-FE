@@ -1,5 +1,8 @@
 <div class="weekly-report-container">
   <div class="report-period-selector">
+    {{#if (and rangeEndDate rangeStartDate)}}
+    <span class="custom-range-shower">{{rangeStartDate}} - {{rangeEndDate}}</span>
+    {{/if}}
     <div class="active-period" {{action "onToggleReportPeriod"}}>
       <span class="report-period-text">{{activeReportPeriod.text}}</span>
       <span class="toggle-icon">{{gru-icon name="arrow_drop_down"}}</span>
@@ -158,4 +161,19 @@
       {{/if}}
     </div>
   {{/if}}
+  <div class="student-rangepicker-container">
+
+ {{ca-daterange-datepicker
+      closeDatePicker='onCloseDatePicker'
+      onScheduleForDate='onChangeDateForStudent'
+      userStartDateAsToday=false
+      disableFutureDate=false
+      enableScheduleMonth=false
+      courseStartDate=courseStartDate
+      startDate=courseStartDate
+      endDate=rangeEndDate
+      forChangeStartDateNavMonth=true
+      allowTwoDateRangePicker=true}}
+
+</div>
 </div>

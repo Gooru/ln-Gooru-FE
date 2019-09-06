@@ -86,6 +86,11 @@ export default Ember.Mixin.create({
   }),
 
   /**
+   * @property {Boolean} showGutCompetency
+   */
+  showGutCompetency: false,
+
+  /**
    * @property {Boolean}
    * Property to store given screen value is compatible
    */
@@ -219,15 +224,13 @@ export default Ember.Mixin.create({
     let component = this;
     let subject = component.get('subjectCode');
     let userId = component.get('studentProfile.id');
-    return Ember.RSVP
-      .hash({
-        competencyList: component
-          .get('competencyService')
-          .getUserSignatureCompetencies(userId, subject)
-      })
-      .then(({ competencyList }) => {
-        component.set('signatureCompetencyList', competencyList);
-      });
+    return Ember.RSVP.hash({
+      competencyList: component
+        .get('competencyService')
+        .getUserSignatureCompetencies(userId, subject)
+    }).then(({ competencyList }) => {
+      component.set('signatureCompetencyList', competencyList);
+    });
   },
 
   /**
@@ -299,19 +302,28 @@ export default Ember.Mixin.create({
     let component = this;
     let subjectId = component.get('activeSubject.id');
     let userId = component.get('studentProfile.id');
+    let fwCode = component.get('classFramework');
     let timeLine = component.get('timeLine');
     if (subjectId) {
-      return Ember.RSVP
-        .hash({
-          competencyMatrixs: component
-            .get('competencyService')
-            .getCompetencyMatrixDomain(userId, subjectId, timeLine),
-          competencyMatrixCoordinates: component
-            .get('competencyService')
-            .getCompetencyMatrixCoordinates(subjectId),
-          userProficiencyBaseLine: component.fetchBaselineCompetencies()
-        })
-        .then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
+      return Ember.RSVP.hash({
+        fwCompetencyMatrixCoordinates: fwCode
+          ? component
+            .get('taxonomyService')
+            .fetchCrossWalkFWC(fwCode, subjectId)
+          : null,
+        competencyMatrixs: component
+          .get('competencyService')
+          .getCompetencyMatrixDomain(userId, subjectId, timeLine),
+        competencyMatrixCoordinates: component
+          .get('competencyService')
+          .getCompetencyMatrixCoordinates(subjectId),
+        userProficiencyBaseLine: component.fetchBaselineCompetencies()
+      }).then(
+        ({
+          fwCompetencyMatrixCoordinates,
+          competencyMatrixs,
+          competencyMatrixCoordinates
+        }) => {
           if (
             !(component.get('isDestroyed') || component.get('isDestroying'))
           ) {
@@ -320,11 +332,22 @@ export default Ember.Mixin.create({
               'competencyMatrixCoordinates',
               competencyMatrixCoordinates
             );
-            this.setCompetencyCount();
+            component.set(
+              'fwCompetencyMatrixCoordinates',
+              fwCompetencyMatrixCoordinates
+            );
+            component.parseCompetencyData();
+            if (fwCompetencyMatrixCoordinates) {
+              component.mergeUserCompetencyWithCrossWalkFWC();
+            } else {
+              component.set('showGutCompetency', true);
+            }
           } else {
             Ember.Logger.warn('comp is destroyed...');
           }
-        }, this);
+        },
+        this
+      );
     }
   },
 
@@ -337,29 +360,44 @@ export default Ember.Mixin.create({
     let classId = component.get('class.id');
     let courseId = component.get('class.courseId');
     let userId = component.get('studentProfile.id');
-    return Ember.RSVP
-      .hash({
-        userProficiencyBaseLine: component
-          .get('competencyService')
-          .getUserProficiencyBaseLine(classId, courseId, userId)
-      })
-      .then(({ userProficiencyBaseLine }) => {
-        component.set('userProficiencyBaseLine', userProficiencyBaseLine);
-        return userProficiencyBaseLine;
-      });
+    return Ember.RSVP.hash({
+      userProficiencyBaseLine: component
+        .get('competencyService')
+        .getUserProficiencyBaseLine(classId, courseId, userId)
+    }).then(({ userProficiencyBaseLine }) => {
+      component.set('userProficiencyBaseLine', userProficiencyBaseLine);
+      return userProficiencyBaseLine;
+    });
   },
 
-  setCompetencyCount() {
+  parseCompetencyData() {
     let controller = this;
     let domainMatrixs = controller.get('competencyMatrixDomains');
     let competencyMatrixCoordinates = controller.get(
       'competencyMatrixCoordinates'
+    );
+    let fwCompetencyMatrixCoordinates = controller.get(
+      'fwCompetencyMatrixCoordinates'
     );
     competencyMatrixCoordinates.domains.map(domain => {
       let domainCompetency = domainMatrixs.findBy(
         'domainCode',
         domain.get('domainCode')
       );
+      if (fwCompetencyMatrixCoordinates) {
+        let fwDomainCompetency = fwCompetencyMatrixCoordinates.findBy(
+          'domainCode',
+          domain.get('domainCode')
+        );
+        if (fwDomainCompetency) {
+          domain.set('isMappedWithFramework', true);
+          domain.set('fwDomainCode', fwDomainCompetency.get('fwDomainCode'));
+          domain.set('fwDomainName', fwDomainCompetency.get('fwDomainName'));
+        } else {
+          domain.set('isMappedWithFramework', false);
+        }
+      }
+
       let notStartedCompetencies = domainCompetency.competencies.filterBy(
         'status',
         0
@@ -380,6 +418,60 @@ export default Ember.Mixin.create({
     });
   },
 
+  mergeUserCompetencyWithCrossWalkFWC() {
+    let controller = this;
+    let domainMatrixs = controller.get('competencyMatrixDomains');
+    let fwCompetencyMatrixCoordinates = controller.get(
+      'fwCompetencyMatrixCoordinates'
+    );
+    domainMatrixs.map(domain => {
+      let domainCode = domain.get('domainCode');
+      let fwDomainCompetency = fwCompetencyMatrixCoordinates.findBy(
+        'domainCode',
+        domainCode
+      );
+      let fwCompetencies = [];
+      let domainCompetencies = domain.get('competencies');
+      if (fwDomainCompetency) {
+        fwCompetencies = fwDomainCompetency.get('competencies');
+      }
+      domainCompetencies.map(domainCompetency => {
+        let competency = fwCompetencies.findBy(
+          'competencyCode',
+          domainCompetency.get('competencyCode')
+        );
+        if (competency) {
+          domainCompetency.set('isMappedWithFramework', true);
+          domainCompetency.set(
+            'framework',
+            Ember.Object.create({
+              frameworkCompetencyCode: competency.get(
+                'frameworkCompetencyCode'
+              ),
+              frameworkCompetencyName: competency.get(
+                'frameworkCompetencyName'
+              ),
+              frameworkCompetencyDisplayCode: competency.get(
+                'frameworkCompetencyDisplayCode'
+              )
+            })
+          );
+          domainCompetency.set(
+            'fwDomainCode',
+            fwDomainCompetency.get('fwDomainCode')
+          );
+          domainCompetency.set(
+            'fwDomainName',
+            fwDomainCompetency.get('fwDomainName')
+          );
+        } else {
+          domainCompetency.set('framework', null);
+          domainCompetency.set('isMappedWithFramework', false);
+        }
+      });
+    });
+  },
+
   /**
    * @function fetchTaxonomyGrades
    * Method to fetch taxonomy grades
@@ -395,16 +487,16 @@ export default Ember.Mixin.create({
       filters.fw_code = fwCode;
     }
     if (component.get('subjectCode')) {
-      return Ember.RSVP
-        .hash({
-          taxonomyGrades: taxonomyService.fetchGradesBySubject(filters)
-        })
-        .then(({ taxonomyGrades }) => {
+      return Ember.RSVP.hash({
+        taxonomyGrades: taxonomyService.fetchGradesBySubject(filters)
+      }).then(({ taxonomyGrades }) => {
+        if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
           component.set(
             'taxonomyGrades',
             taxonomyGrades.sortBy('sequence').reverse()
           );
-        });
+        }
+      });
     }
   }
 });

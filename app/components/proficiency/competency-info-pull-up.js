@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  COMPETENCY_STATUS
-} from 'gooru-web/config/config';
+import { COMPETENCY_STATUS } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['competency-info-pull-up'],
@@ -17,6 +15,20 @@ export default Ember.Component.extend({
     let component = this;
     let competency = component.get('competency');
     return competency && COMPETENCY_STATUS[competency.status];
+  }),
+
+  /**
+   * @property {String} competencyStatus
+   */
+  competencyCode: Ember.computed('competency', 'showGutCompetency', function() {
+    let component = this;
+    let competency = component.get('competency');
+    return competency
+      ? competency.get('isMappedWithFramework') &&
+        !component.get('showGutCompetency')
+        ? competency.get('framework.frameworkCompetencyDisplayCode')
+        : competency.get('competencyCode')
+      : null;
   }),
 
   actions: {

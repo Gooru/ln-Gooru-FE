@@ -58,6 +58,8 @@ window.i18ln = {
   'errors.phone': '{{description}} एक वैध फोन नंबर असणे आवश्यक आहे',
   'errors.url': '{{description}} वैध url असणे आवश्यक आहे',
   'common.relevance': 'समर्पकता',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.engagement': 'प्रतिबद्धता',
   'common.tenantLibrary': 'Tenant Library',
   'rubric-details': 'Rubric Details',
@@ -1920,6 +1922,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'प्राविण्य',
   'profile.gru-navigation.preference.preference': 'प्राधान्यक्रम',
   'profile.edit.select-district': 'एक जिल्हा निवडा ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'अद्याप कोणताही डेटा उपलब्ध नाही एकदा तुम्ही अभ्यास करायला सुरूवात केली की आपला डेटा उपलब्ध होईल.',
   'profile.proficiency.expand-chart': 'विस्तृत तक्ता दाखवा',
@@ -2736,6 +2742,7 @@ window.i18ln = {
   'suggestion-taken': 'सूचना घेतल्या',
   'this-week': 'हा आठवडा',
   'previous-week': 'मागचा आठवडा',
+  'custom-range': 'सानुकूल',
   'beginning-till-now': 'सुरुवातीपासून आतापर्यंत',
   'report.class-proficiency-report': 'वर्ग प्राविण्य अहवाल',
   'report.domain-proficiency-report': 'अध्ययन क्षेत्र क्षमता अहवाल',
@@ -2757,5 +2764,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };

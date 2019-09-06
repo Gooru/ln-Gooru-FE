@@ -73,6 +73,8 @@ window.i18ln = {
   'common.day': 'day',
   'common.week': 'week',
   'rubric-details': 'Rubric Details',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
@@ -1958,6 +1960,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'ଦକ୍ଷତା',
   'profile.gru-navigation.preference.preference': 'ଅଗ୍ରାଧିକାର',
   'profile.edit.select-district': 'ଏକ ଜିଲ୍ଲା ଚୟନ କରନ୍ତୁ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'କୌଣସି ତଥ୍ୟ ବର୍ତ୍ତମାନ ସୁଦ୍ଧା ଉପଲବ୍ଧ ନାହିଁ | ଆପଣ ଅଧ୍ୟୟନ ଆରମ୍ଭ କଲେ ଆପଣଙ୍କ ତଥ୍ୟ ଉପଲବ୍ଧ ହେବ ।',
   'profile.proficiency.expand-chart': 'ସଂପ୍ରସାରିତ ସୂଚୀ',
@@ -2780,6 +2786,7 @@ window.i18ln = {
   'suggestion-taken': 'Suggestions Taken',
   'this-week': 'This Week',
   'previous-week': 'Previous Week',
+  'custom-range': 'Custom',
   'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
@@ -2794,5 +2801,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
-  'common.content-owner': 'Content Owner'
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts'
 };
