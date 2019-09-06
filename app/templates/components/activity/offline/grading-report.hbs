@@ -189,7 +189,7 @@
         {{#if (and (not isTeacherGradingDone) (or studentRubric.scoring isTeacher))}}
           <div class="oa-grade-action-btns">
             <button type="button" class="btn confirm btn-primary btn-lg" {{action 'saveGrade'}}>
-              {{#if isStudentGradingDone}}
+              {{#if (and isStudentGradingDone (not isTeacher))}}
                 {{t 'goals.manage.update'}}
               {{else}}
                 {{t 'common.submit'}}

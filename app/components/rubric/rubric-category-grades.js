@@ -94,11 +94,7 @@ export default Ember.Component.extend({
       trigger: 'manual'
     });
     let isMobile = window.matchMedia('only screen and (max-width: 768px)');
-    if (isMobile.matches) {
-      component.$('.close-popover').click(function() {
-        component.$('.grade-info-popover').popover('hide');
-      });
-    }
+
     component.$('.grade-info-popover').on('click', function() {
       let levelIndex = component.$(this).data('level');
       let categoryIndex = component.$(this).data('category');
@@ -116,14 +112,13 @@ export default Ember.Component.extend({
           .not(this)
           .popover('hide');
         component.$(this).popover('show');
-        Ember.$('.popover-title')
-          .append('<span class="close-popover">x</span>')
-          .css(
-            'background-color',
-            getGradeColor(level.get('scoreInPrecentage'))
-          );
+        Ember.$('.popover-title').css(
+          'background-color',
+          getGradeColor(level.get('scoreInPrecentage'))
+        );
       }
     });
+
     if (!isMobile.matches) {
       component.$('.grade-info-popover').on('mouseleave', function() {
         $(this).popover('hide');
