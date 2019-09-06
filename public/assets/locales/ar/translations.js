@@ -1853,13 +1853,16 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'Proficiency',
   'profile.gru-navigation.preference.preference': 'Preference',
   'profile.edit.select-district': 'اختر مقاطعة...',
-  'counts-based-on-gut': 'Counts are based on GUT',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
   'show-gut-competencies': 'Show GUT competencies',
   'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'No data available yet. Once you begin studying, your data will become available.',
   'profile.proficiency.expand-chart': 'Expand Chart',
   'profile.proficiency.mastered': 'Mastered',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'profile.proficiency.in-progress': 'In Progress',
   'profile.proficiency.not-started': 'Not Started',
   'profile.proficiency.skyline': 'Skyline',

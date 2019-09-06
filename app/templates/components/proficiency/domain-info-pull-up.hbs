@@ -1,5 +1,5 @@
 <div class="domain-panel-header">
-  <div class="domain-name">{{locale-translation (t (concat 'domain-code.' domain.domainCode)) domain.domainName}}</div>
+  <div class="domain-name">{{locale-translation (t (concat 'domain-code.' domain.domainCode)) (if (and (not showGutCompetency)  domain.isMappedWithFramework) domain.fwDomainName  domain.domainName)}}</div>
   <div class="domain-seq">{{t 'common.domain'}} {{domain.domainSeq}}</div>
   <span class="close" {{action 'closePullUp'}}>{{gru-icon name="close"}}</span>
 </div>

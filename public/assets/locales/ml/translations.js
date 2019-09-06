@@ -47,6 +47,8 @@ window.i18ln = {
   'errors.lessThanOrEqualTo':
     '{{description}} {{lte}} എന്നതിലും കുറഞ്ഞതിലും ആയിരിക്കണം',
   'errors.otherThan': '{{വിവരണം}} {{value}}',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'errors.odd': '{{description}} ഒറ്റ സംഖ്യയായിരിക്കണം',
   'errors.even': '{{description}} ഉണ്ടായിരിക്കണം',
   'errors.positive': '{{വിവരണം}} പോസിറ്റീവ് ആയിരിക്കണം',
@@ -1947,7 +1949,8 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'യോഗ്യത',
   'profile.gru-navigation.preference.preference': 'മുൻഗണന',
   'profile.edit.select-district': 'ഒരു ജില്ല തിരഞ്ഞെടുക്കൂ ...',
-  'counts-based-on-gut': 'Counts are based on GUT',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
   'show-gut-competencies': 'Show GUT competencies',
   'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':

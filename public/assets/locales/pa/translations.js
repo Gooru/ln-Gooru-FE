@@ -58,6 +58,8 @@ window.i18ln = {
   'common.efficacy': 'ਕਾਰਗੁਜ਼ਾਰੀ',
   'common.grid': 'ਗਰਿੱਡ',
   'common.list': 'ਸੂਚੀ',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.first': 'ਪਹਿਲਾ',
@@ -1903,7 +1905,8 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'ਮੁਹਾਰਤ',
   'profile.gru-navigation.preference.preference': 'ਤਰਜੀਹ',
   'profile.edit.select-district': 'ਇੱਕ ਜ਼ਿਲ੍ਹਾ ਚੁਣੋ ...',
-  'counts-based-on-gut': 'Counts are based on GUT',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
   'show-gut-competencies': 'Show GUT competencies',
   'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':

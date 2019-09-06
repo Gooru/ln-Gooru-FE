@@ -46,10 +46,14 @@ export default Ember.Component.extend({
    */
   standardCode: Ember.computed.alias('competency.competencyCode'),
 
-  onCompetencyChange: Ember.observer('competency', function() {
-    let component = this;
-    component.loadData();
-  }),
+  onCompetencyChange: Ember.observer(
+    'competency',
+    'showGutCompetency',
+    function() {
+      let component = this;
+      component.loadData();
+    }
+  ),
 
   /**
    * @property {Object} signatureContent
@@ -154,9 +158,14 @@ export default Ember.Component.extend({
   fetchCodes() {
     let component = this;
     let courseId = component.get('courseId');
-    let domainId = component.get('domainId');
+    let domainId =
+      component.get('competency.isMappedWithFramework') &&
+      !component.get('showGutCompetency')
+        ? component.get('competency.fwDomainCode')
+        : component.get('domainId');
     let subjectId = component.get('subjectId');
-    let frameworkId = GOORU_DEFAULT_FRAMEWORK;
+    let frameworkId =
+      component.get('classFramework') || GOORU_DEFAULT_FRAMEWORK;
     return Ember.RSVP.hash({
       competencyCodes: component
         .get('taxonomyService')
@@ -261,7 +270,13 @@ export default Ember.Component.extend({
    * Method to filter micro competency
    */
   filterMicroCompetency(codes) {
-    let regex = new RegExp(this.get('standardCode'));
+    let component = this;
+    let standardCode =
+      component.get('competency.isMappedWithFramework') &&
+      !component.get('showGutCompetency')
+        ? component.get('competency.framework.frameworkCompetencyCode')
+        : component.get('competency.competencyCode');
+    let regex = new RegExp(standardCode);
     let microCompetencies = codes.filter(function(code) {
       return (
         regex.test(code.id) &&

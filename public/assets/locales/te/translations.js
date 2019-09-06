@@ -64,6 +64,8 @@ window.i18ln = {
   'common.first': 'ప్రధమ',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',
   'common.upload-image': 'upload image',
@@ -1906,7 +1908,8 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'నైపుణ్యత',
   'profile.gru-navigation.preference.preference': 'ప్రాధాన్యత',
   'profile.edit.select-district': 'జిల్లాను ఎంచుకోండి ...',
-  'counts-based-on-gut': 'Counts are based on GUT',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
   'show-gut-competencies': 'Show GUT competencies',
   'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':

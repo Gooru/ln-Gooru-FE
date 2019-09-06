@@ -65,6 +65,8 @@ window.i18ln = {
     'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.list': 'सूची',
   'common.first': 'प्रथम',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',
   'common.last': 'अंतिम',
@@ -1921,7 +1923,8 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'प्रवीणता',
   'profile.gru-navigation.preference.preference': 'चयन',
   'profile.edit.select-district': 'एक जिले का चयन करें...',
-  'counts-based-on-gut': 'Counts are based on GUT',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
   'show-gut-competencies': 'Show GUT competencies',
   'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':

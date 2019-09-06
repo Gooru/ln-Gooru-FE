@@ -167,6 +167,7 @@ export default Ember.Component.extend({
         width: cellWidth,
         height: cellHeight,
         top: yAxisSeq,
+        isMappedWithFramework: selectedCompetency.isMappedWithFramework,
         left: xAxisSeq
       })
     );
@@ -564,6 +565,8 @@ export default Ember.Component.extend({
             competencyCode: competencyCode,
             competencyName: competencyName,
             competencySeq: competencySeq,
+            fwDomainCode: competency.get('fwDomainCode'),
+            fwDomainName: competency.get('fwDomainName'),
             framework: competency.get('framework'),
             isMappedWithFramework: competency.get('isMappedWithFramework'),
             competencyStudentDesc: competency.get('competencyStudentDesc'),

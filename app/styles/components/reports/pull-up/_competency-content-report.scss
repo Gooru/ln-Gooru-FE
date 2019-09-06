@@ -1,6 +1,12 @@
 .competency-content-report {
   overflow-x: hidden;
 
+  .no-framework-message {
+    font-style: italic;
+    text-align: center;
+    padding-top: 10px;
+  }
+
   .competency-performance {
     .competency-name {
       font-size: 15px;

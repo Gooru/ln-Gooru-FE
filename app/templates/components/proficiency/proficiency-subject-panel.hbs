@@ -4,11 +4,13 @@
 </div>
 <div class="domain-list">
   <div class="title">{{t 'common.domains'}}</div>
-  <div class="desc">{{t 'counts-based-on-gut'}}</div>
+  {{#unless showGutCompetency}}
+    <div class="desc">{{t 'counts-based-on-gut'}}</div>
+  {{/unless}}
   <ol>
     {{#each domains as |domain|}}
       <li {{action 'onDomainSelect' domain }}>
-        <span class="domain-title">{{locale-translation (t (concat 'domain-code.' domain.domainCode)) domain.domainName}}</span>
+        <span class="domain-title">{{locale-translation (t (concat 'domain-code.' domain.domainCode)) (if (and (not showGutCompetency)  domain.isMappedWithFramework) domain.fwDomainName  domain.domainName)}}</span>
         <div class="competency-sec">
           <div class="competency-status">
             <div class="mastered">

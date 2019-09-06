@@ -62,6 +62,8 @@ window.i18ln = {
   'common.list': 'তালিকা',
   'common.first': 'প্রথম',
   'common.last': 'গত',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'self-grade.not-required': 'Student self-grading not required',
   'common.name': 'নাম',
   'common.user': 'ব্যবহারকারী',
@@ -1886,7 +1888,8 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'দক্ষতা',
   'profile.gru-navigation.preference.preference': 'পক্ষপাত',
   'profile.edit.select-district': 'একটি জেলা নির্বাচন করুন ...',
-  'counts-based-on-gut': 'Counts are based on GUT',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
   'show-gut-competencies': 'Show GUT competencies',
   'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':

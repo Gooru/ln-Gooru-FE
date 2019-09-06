@@ -73,6 +73,8 @@ window.i18ln = {
   'common.day': 'day',
   'common.week': 'week',
   'rubric-details': 'Rubric Details',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
@@ -1958,7 +1960,8 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'ଦକ୍ଷତା',
   'profile.gru-navigation.preference.preference': 'ଅଗ୍ରାଧିକାର',
   'profile.edit.select-district': 'ଏକ ଜିଲ୍ଲା ଚୟନ କରନ୍ତୁ...',
-  'counts-based-on-gut': 'Counts are based on GUT',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
   'show-gut-competencies': 'Show GUT competencies',
   'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':

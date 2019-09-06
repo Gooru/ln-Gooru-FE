@@ -45,6 +45,8 @@ window.i18ln = {
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'i2d.new-upload-msg':
     'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
@@ -1954,7 +1956,8 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'திறமை',
   'profile.gru-navigation.preference.preference': 'விருப்பம்',
   'profile.edit.select-district': 'ஒரு மாவட்டத்தைத் தேர்ந்தெடுக்கவும் ...',
-  'counts-based-on-gut': 'Counts are based on GUT',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
   'show-gut-competencies': 'Show GUT competencies',
   'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
