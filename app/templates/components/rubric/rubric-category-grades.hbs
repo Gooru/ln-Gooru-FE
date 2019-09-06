@@ -15,7 +15,7 @@
               {{/each}}
             {{else}}
               {{#each category.levels as |level levelIndex|}}
-                <input type="radio" name="category-{{categoryIndex}}-level" checked="{{if level.selected 'checked'}}" class="grade-info-popover grade-radio-input {{if level.selected 'selected-level'}}"  data-html="true" data-content="{{level.name}}" data-category={{categoryIndex}} data-level={{levelIndex}}/>
+                <input type="radio" disabled={{if isReadOnly true false}} name="category-{{categoryIndex}}-level" checked="{{if level.selected 'checked'}}" class="grade-info-popover grade-radio-input {{if level.selected 'selected-level'}}"  data-html="true" data-content="{{level.name}}" data-category={{categoryIndex}} data-level={{levelIndex}}/>
               {{/each}}
             {{/if}}
 

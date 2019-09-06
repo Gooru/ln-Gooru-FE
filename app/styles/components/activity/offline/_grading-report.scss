@@ -632,6 +632,10 @@
           .oa-grade-right-panel-header {
             justify-items: left;
             padding-left: 10px;
+            .oa-grade-score {
+              border-top: 1px solid #5d676f;
+              border-right: 1px solid #5d676f;
+            }
           }
           .oa-grade-right-panel-body {
             max-height: none;
