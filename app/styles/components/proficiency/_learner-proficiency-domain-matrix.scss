@@ -119,6 +119,10 @@
             box-shadow: 0 0 6px 5px rgb(222, 223, 224);
             background-color: #006eb5;
           }
+
+          &.dark-backfill {
+            background-color: $dark-400;
+          }
         }
 
         &.highlight {
@@ -191,7 +195,7 @@
                   #cell-container {
                     rect {
                       &.no-framework {
-                        fill: url(#linearGradient);
+                        fill: url("#linearGradient");
                       }
                     }
                   }

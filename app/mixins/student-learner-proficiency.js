@@ -370,11 +370,26 @@ export default Ember.Mixin.create({
     let competencyMatrixCoordinates = controller.get(
       'competencyMatrixCoordinates'
     );
+    let fwCompetencyMatrixCoordinates = controller.get(
+      'fwCompetencyMatrixCoordinates'
+    );
     competencyMatrixCoordinates.domains.map(domain => {
       let domainCompetency = domainMatrixs.findBy(
         'domainCode',
         domain.get('domainCode')
       );
+      let fwDomainCompetency = fwCompetencyMatrixCoordinates.findBy(
+        'domainCode',
+        domain.get('domainCode')
+      );
+      if (fwDomainCompetency) {
+        domain.set('isMappedWithFramework', true);
+        domain.set('fwDomainCode', fwDomainCompetency.get('fwDomainCode'));
+        domain.set('fwDomainName', fwDomainCompetency.get('fwDomainName'));
+      } else {
+        domain.set('isMappedWithFramework', false);
+      }
+
       let notStartedCompetencies = domainCompetency.competencies.filterBy(
         'status',
         0
@@ -432,6 +447,14 @@ export default Ember.Mixin.create({
                 'frameworkCompetencyDisplayCode'
               )
             })
+          );
+          domainCompetency.set(
+            'fwDomainCode',
+            fwDomainCompetency.get('fwDomainCode')
+          );
+          domainCompetency.set(
+            'fwDomainName',
+            fwDomainCompetency.get('fwDomainName')
           );
         } else {
           domainCompetency.set('framework', null);

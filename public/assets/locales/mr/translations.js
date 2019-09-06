@@ -58,6 +58,8 @@ window.i18ln = {
   'errors.phone': '{{description}} एक वैध फोन नंबर असणे आवश्यक आहे',
   'errors.url': '{{description}} वैध url असणे आवश्यक आहे',
   'common.relevance': 'समर्पकता',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.engagement': 'प्रतिबद्धता',
   'common.tenantLibrary': 'Tenant Library',
   'rubric-details': 'Rubric Details',
@@ -1920,7 +1922,8 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'प्राविण्य',
   'profile.gru-navigation.preference.preference': 'प्राधान्यक्रम',
   'profile.edit.select-district': 'एक जिल्हा निवडा ...',
-  'counts-based-on-gut': 'Counts are based on GUT',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
   'show-gut-competencies': 'Show GUT competencies',
   'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':

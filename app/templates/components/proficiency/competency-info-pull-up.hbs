@@ -1,7 +1,7 @@
 <div class="competency-panel-header" {{action 'expandPullUp' bubbles=false}}>
   <div class="competency-status status-{{competency.status}}"></div>
   <div class="competency-title">
-    <div class="competency-domain">{{locale-translation (t (concat 'domain-code.' competency.domainCode)) competency.domainName}}</div>
+    <div class="competency-domain">{{locale-translation (t (concat 'domain-code.' competency.domainCode)) (if (and (not showGutCompetency)  competency.isMappedWithFramework) competency.fwDomainName  competency.domainName)}}</div>
     <div class="competency-name">{{competencyCode}}</div>
   </div>
   <div class="status">

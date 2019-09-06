@@ -44,6 +44,8 @@ window.i18ln = {
     '{{Description}} debe ser mayor o igual que {{gte}}',
   'errors.equalTo': '{{description}} debe ser igual a {{is}}',
   'errors.lessThan': '{{description}} debe ser menor que {{lt}}',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'errors.lessThanOrEqualTo':
     '{{description}} debe ser menor o igual que {{lte}}',
   'errors.otherThan': '{{description}} debe ser distinto de {{value}}',
@@ -1936,7 +1938,8 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'Proficiency',
   'profile.gru-navigation.preference.preference': 'Preference',
   'profile.edit.select-district': 'Seleccione un distrito ...',
-  'counts-based-on-gut': 'Counts are based on GUT',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
   'show-gut-competencies': 'Show GUT competencies',
   'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':

@@ -31,6 +31,8 @@ window.i18ln = {
   'errors.tooShort': '{{description}} ખૂબ ટૂંકા છે (ન્યૂનતમ {{min}} અક્ષરો છે)',
   'errors.before': '{{વર્ણન}} {{પહેલા}} પહેલા હોવું આવશ્યક છે',
   'errors.after': '{{description}} {{બાદ}} પછી હોવી આવશ્યક છે',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'errors.wrongDateFormat':
     '{{description}} {{format}} ના ફોર્મેટમાં હોવું આવશ્યક છે',
   'errors.wrongLength':
@@ -1894,7 +1896,8 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'પ્રાવીણ્ય',
   'profile.gru-navigation.preference.preference': 'પસંદગી',
   'profile.edit.select-district': 'એક જિલ્લા પસંદ કરો ...',
-  'counts-based-on-gut': 'Counts are based on GUT',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
   'show-gut-competencies': 'Show GUT competencies',
   'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
