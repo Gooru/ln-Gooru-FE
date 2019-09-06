@@ -306,9 +306,11 @@ export default Ember.Mixin.create({
     let timeLine = component.get('timeLine');
     if (subjectId) {
       return Ember.RSVP.hash({
-        fwCompetencyMatrixCoordinates: component
-          .get('taxonomyService')
-          .fetchCrossWalkFWC(fwCode, subjectId),
+        fwCompetencyMatrixCoordinates: fwCode
+          ? component
+            .get('taxonomyService')
+            .fetchCrossWalkFWC(fwCode, subjectId)
+          : null,
         competencyMatrixs: component
           .get('competencyService')
           .getCompetencyMatrixDomain(userId, subjectId, timeLine),
@@ -334,8 +336,12 @@ export default Ember.Mixin.create({
               'fwCompetencyMatrixCoordinates',
               fwCompetencyMatrixCoordinates
             );
-            this.parseCompetencyData();
-            this.mergeUserCompetencyWithCrossWalkFWC();
+            component.parseCompetencyData();
+            if (fwCompetencyMatrixCoordinates) {
+              component.mergeUserCompetencyWithCrossWalkFWC();
+            } else {
+              component.set('showGutCompetency', true);
+            }
           } else {
             Ember.Logger.warn('comp is destroyed...');
           }
@@ -378,16 +384,18 @@ export default Ember.Mixin.create({
         'domainCode',
         domain.get('domainCode')
       );
-      let fwDomainCompetency = fwCompetencyMatrixCoordinates.findBy(
-        'domainCode',
-        domain.get('domainCode')
-      );
-      if (fwDomainCompetency) {
-        domain.set('isMappedWithFramework', true);
-        domain.set('fwDomainCode', fwDomainCompetency.get('fwDomainCode'));
-        domain.set('fwDomainName', fwDomainCompetency.get('fwDomainName'));
-      } else {
-        domain.set('isMappedWithFramework', false);
+      if (fwCompetencyMatrixCoordinates) {
+        let fwDomainCompetency = fwCompetencyMatrixCoordinates.findBy(
+          'domainCode',
+          domain.get('domainCode')
+        );
+        if (fwDomainCompetency) {
+          domain.set('isMappedWithFramework', true);
+          domain.set('fwDomainCode', fwDomainCompetency.get('fwDomainCode'));
+          domain.set('fwDomainName', fwDomainCompetency.get('fwDomainName'));
+        } else {
+          domain.set('isMappedWithFramework', false);
+        }
       }
 
       let notStartedCompetencies = domainCompetency.competencies.filterBy(
