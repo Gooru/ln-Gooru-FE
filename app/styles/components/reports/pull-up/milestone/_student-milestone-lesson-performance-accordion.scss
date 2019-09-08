@@ -12,6 +12,7 @@
         justify-self: center;
         align-self: center;
         display: grid;
+        position: relative;
         .icon {
           width: 20px;
           height: 20px;
@@ -25,6 +26,10 @@
         .lesson-connector {
           stroke: #ccc;
           stroke-width: 2;
+        }
+        .lesson-icon-upward-line {
+          position: absolute;
+          top: -32px;
         }
 
         &.started {
@@ -79,6 +84,14 @@
       .collection-icon {
         justify-self: center;
         display: grid;
+        position: relative;
+        path {
+          display: none;
+        }
+        .collecions-icon-upward-line {
+          position: absolute;
+          top: -32px;
+        }
 
         .collection-connector {
           stroke: #ccc;
@@ -130,6 +143,45 @@
         &.suggestion {
           .collection-connector {
             stroke: #ec8f42;
+          }
+          &.path-teacher {
+            path {
+              stroke: #ec8f42;
+              stroke-width: 2;
+              fill: none;
+            }
+            .collection-connector,
+            .path-right {
+              display: none;
+            }
+            .path-left {
+              display: block;
+            }
+            .icon {
+              position: relative;
+              left: -6px;
+            }
+          }
+          &.path-system {
+            path {
+              stroke: #ec8f42;
+              stroke-width: 2;
+              fill: none;
+            }
+            .collection-connector,
+            .path-left {
+              display: none;
+            }
+            .path-right {
+              display: block;
+            }
+            svg {
+              margin-left: 6px;
+            }
+            .icon {
+              position: relative;
+              left: 6px;
+            }
           }
           .icon {
             color: #ec8f42;
