@@ -13,7 +13,7 @@
       <div class="lesson-title">{{lesson.lesson_title}}</div>
     </div>
   </div>
-  <div class="lesson-performance-container grade-range-{{grade-range lesson.performance.scoreInPercentage}}">
+  <div class="lesson-performance-container grade-range-{{grade-range lesson.performance.scoreInPercentage}}" {{action "onToggleLesson"}}>
     {{if (gte lesson.performance.scoreInPercentage 0) (concat lesson.performance.scoreInPercentage '%') '--'}}
   </div>
 </div>
