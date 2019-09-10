@@ -27,7 +27,7 @@
               {{#each domainsCompletionList as |domainData|}}
                 <div class="domain-completion-report" {{action "onSelectDomain" domainData}}>
                   <div class="domain-info-container">
-                    <div class="domain-code">{{domain-gut-to-fw-transform fwDomains domainData.domainCode domainData.domainCode 'fwDomainCode'}}</div>
+                    <div class="domain-code">{{domainData.domainCode}}</div>
                     <div class="domain-title ellipsis">{{locale-translation (t (concat 'domain-code.' domainData.domainCode)) (domain-gut-to-fw-transform fwDomains domainData.domainCode domainData.domainName 'fwDomainName')}}</div>
                   </div>
                   <div class="domain-performance-container">
