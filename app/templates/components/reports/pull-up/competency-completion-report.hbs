@@ -7,7 +7,7 @@
         <div class="competency-container {{unless activeCompetency.suggestionContentCount 'empty-suggestion'}} competency-{{competencySeq}} {{if competencyData.isExpanded 'expanded' 'collapsed'}}">
           <div class="competency-completion-info-container">
             <div class="competency-info" {{action "onSelectCompetency" competencyData}}>
-              <div class="competency-code">{{competencyData.competencyCode}} {{competencyData.suggestionContentCount}}</div>
+              <div class="competency-code">{{competency-gut-to-fw-transform fwCompetencies competencyData.competencyCode competencyData.competencyCode 'frameworkCompetencyDisplayCode'}} {{competencyData.suggestionContentCount}}</div>
               <div class="competency-name ellipsis">{{competencyData.competencyDesc}}</div>
             </div>
             <div class="competency-completion-performance">
