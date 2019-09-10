@@ -21,9 +21,9 @@
   {{#if isLoading}}
     {{three-bounce-spinner}}
   {{else}}
-    {{#each collections as |collection|}}
+    {{#each collections as |collection index|}}
       <div class="collection-info-container {{if (and collection.isRescopedCollection (not collection.performance)) 'hidden'}}">
-        <div class="collection-icon {{if collection.performance 'started'}} {{if collection.isSuggestedContent 'suggestion'}} path-{{collection.pathType}}">
+        <div class="collection-icon {{if collection.performance 'started'}} {{if collection.isSuggestedContent 'suggestion'}} path-{{collection.pathType}} path-prev-{{if collection.prevCollectionIsActive 'available'}}">
           <div class="collecions-icon-upward-line">
             <svg width="20" height="35">
               <line class="collection-connector" x1="10" y1="0" x2="10" y2="35" />

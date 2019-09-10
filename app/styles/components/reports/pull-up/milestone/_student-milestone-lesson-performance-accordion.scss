@@ -165,6 +165,20 @@
               left: -6px;
             }
           }
+
+          &.path-teacher.path-prev-available {
+            svg {
+              margin-left: -6px;
+            }
+            path {
+              display: none;
+            }
+            .collection-connector {
+              display: block;
+              stroke: #ec8f42;
+            }
+          }
+
           &.path-system {
             path {
               stroke: #ec8f42;
@@ -184,6 +198,18 @@
             .icon {
               position: relative;
               left: 6px;
+            }
+          }
+          &.path-system.path-prev-available {
+            svg {
+              margin-left: 6px;
+            }
+            path {
+              display: none;
+            }
+            .collection-connector {
+              display: block;
+              stroke: #ec8f42;
             }
           }
           .icon {
