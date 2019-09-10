@@ -156,3 +156,34 @@ export function getDomainCode(gutCode) {
   }
   return domainCode;
 }
+
+/**
+ * parse and form a json object
+ * @param {Array} competencyMatrixs
+ * @return {Array}
+ */
+export function flattenGutToFwCompetency(competencyMatrixs) {
+  let fwCompetencies = [];
+  competencyMatrixs.map(competencyMatrix => {
+    let competencies = competencyMatrix.get('competencies');
+    competencies.forEach(competency => {
+      fwCompetencies.push({
+        [competency.competencyCode]: competency
+      });
+    });
+  });
+  return fwCompetencies;
+}
+
+/**
+ * parse and form a json object
+ * @param {Array} competencyMatrixs
+ * @return {Array}
+ */
+export function flattenGutToFwDomain(competencyMatrixs) {
+  return competencyMatrixs.map(competencyMatrix => {
+    return {
+      [competencyMatrix.domainCode]: competencyMatrix
+    };
+  });
+}

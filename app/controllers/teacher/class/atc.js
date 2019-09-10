@@ -158,6 +158,15 @@ export default Ember.Controller.extend({
    */
   maxLimitToSuggestContent: 6,
 
+  /**
+   * @property {Array} fwCompetencies
+   */
+  fwCompetencies: Ember.computed.alias('classController.fwCompetencies'),
+
+  /**
+   * @property {Array} fwDomains
+   */
+  fwDomains: Ember.computed.alias('classController.fwDomains'),
   // -------------------------------------------------------------------------
   // Events
   initializeController() {
@@ -279,12 +288,11 @@ export default Ember.Controller.extend({
     const classId = controller.get('classId');
     let month = controller.get('activeMonth');
     let year = controller.get('activeYear');
-    return Ember.RSVP
-      .hash({
-        activitiesCount: Ember.RSVP.resolve(
-          classActivitiesService.getMonthlyActivitiesCount(classId, month, year)
-        )
-      })
+    return Ember.RSVP.hash({
+      activitiesCount: Ember.RSVP.resolve(
+        classActivitiesService.getMonthlyActivitiesCount(classId, month, year)
+      )
+    })
       .then(({ activitiesCount }) => {
         controller.set('activitiesCount', activitiesCount);
         return activitiesCount;
@@ -315,15 +323,13 @@ export default Ember.Controller.extend({
       year,
       agent
     };
-    return Ember.RSVP
-      .hash({
-        domainsCompletionReport: Ember.RSVP.resolve(
-          competencyService.getDomainsCompletionReport(requestBody)
-        )
-      })
-      .then(({ domainsCompletionReport }) => {
-        return domainsCompletionReport;
-      });
+    return Ember.RSVP.hash({
+      domainsCompletionReport: Ember.RSVP.resolve(
+        competencyService.getDomainsCompletionReport(requestBody)
+      )
+    }).then(({ domainsCompletionReport }) => {
+      return domainsCompletionReport;
+    });
   },
 
   /**
