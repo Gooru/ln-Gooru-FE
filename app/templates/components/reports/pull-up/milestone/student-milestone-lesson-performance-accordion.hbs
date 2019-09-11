@@ -1,7 +1,7 @@
 <div class="student-milestone-lesson-performance-container {{if isRescopedLesson 'hidden'}}">
   <div class="lesson-info-container" {{action "onToggleLesson"}}>
     <div class="lesson-icon {{if (or lesson.performance lesson.isPerformed) 'started'}} first-path-{{lesson.firstCollHasSuggsType}} prev-col-path-{{lesson.prevLeCollHasSuggsType}}">
-      <div class="lesson-icon-upward-line">
+      <div class="lesson-icon-upward-line {{if isPrevLessonExpanded 'prev-expanded'}}">
         <svg width="20" height="32">
           <line class="lesson-connector" x1="10" y1="0" x2="10" y2="32" />
           <path class="path-right" d="M 0 0  t 8 17 -5 60" />

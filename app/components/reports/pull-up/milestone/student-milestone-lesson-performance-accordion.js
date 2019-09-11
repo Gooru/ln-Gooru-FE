@@ -125,6 +125,20 @@ export default Ember.Component.extend({
    */
   isStudent: Ember.computed.not('isTeacher'),
 
+  /**
+   * @property {Boolean} isPrevLessonExpanded
+   */
+
+  isPrevLessonExpanded: Ember.computed(
+    'milestoneLessons.@each.isExpaned',
+    function() {
+      let lessonIndex = this.get('lessonIndex');
+      return this.get('milestoneLessons').objectAt(lessonIndex - 1)
+        ? this.get('milestoneLessons').objectAt(lessonIndex - 1).isExpaned
+        : false;
+    }
+  ),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -276,6 +290,7 @@ export default Ember.Component.extend({
       component.$('.collections-info-container').slideDown(400);
     }
     component.toggleProperty('isExpanded');
+    component.set('lesson.isExpaned', component.get('isExpanded'));
   },
 
   /**
