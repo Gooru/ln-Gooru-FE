@@ -348,6 +348,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('skylineInitialState', model.skylineInitialState);
     controller.set('isPremiumCourse', model.isPremiumCourse);
     controller.set('classmodel', model);
+    controller.fetchCrossWalkFWC();
   },
 
   resetController(controller) {
