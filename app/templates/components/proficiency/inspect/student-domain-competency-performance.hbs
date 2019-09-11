@@ -6,7 +6,7 @@
           {{gru-icon name="arrow_back"}}
         </div>
         <div class="domain-name ellipsis">
-          {{concat activeDomain.domainSeq '. ' (locale-translation (t (concat 'domain-code.' activeDomain.domainCode)) activeDomain.domainName)}}
+          {{concat activeDomain.domainSeq '. ' (locale-translation (t (concat 'domain-code.' activeDomain.domainCode)) (domain-gut-to-fw-transform fwDomains activeDomain.domainCode activeDomain.domainName 'fwDomainName'))}}
         </div>
       </div>
       <div class="competency-count">
@@ -48,7 +48,20 @@
     <div class="students-competencies-performance-container">
       <div class="competencies-info">
         {{#each activeDomainCompetencyPerformance.domainData.competencies as |competency|}}
-          <div class="competency-info"><i class="info-icon" title="{{if competency.competencyStudentDesc competency.competencyStudentDesc competency.competencyCode}}" data-toggle="tooltip" data-placement="bottom auto"></i></div>
+          <div class="competency-info">
+            <i class="info-icon"
+               title="{{competency-gut-to-fw-transform
+               fwCompetencies
+               competency.competencyCode
+               (if competency.competencyStudentDesc competency.competencyStudentDesc competency.competencyCode)
+               'frameworkCompetencyName'
+               false
+               true
+              }}"
+               data-toggle="tooltip"
+               data-placement="bottom auto">
+            </i>
+          </div>
         {{/each}}
       </div>
       {{#each activeDomainCompetencyPerformance.studentCompetencies as |studentCompetencyPerformance|}}
@@ -65,8 +78,9 @@
 </div>
 
 {{#if isShowCompetencyContentReport}}
-  {{#reports/pull-up/competency-report type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
+{{log selectedCompetency}}
+  {{#reports/pull-up/competency-report fwDomains=fwDomains fwCompetencies=fwCompetencies type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
     onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
-    {{reports/pull-up/competency-content-report domainCompetencyList=domainCompetencyList competency=selectedCompetency userId=selectedStudentUserId learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
+    {{reports/pull-up/competency-content-report fwCompetencies=fwCompetencies domainCompetencyList=domainCompetencyList competency=selectedCompetency userId=selectedStudentUserId learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
   {{/reports/pull-up/competency-report}}
 {{/if}}
