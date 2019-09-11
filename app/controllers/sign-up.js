@@ -36,9 +36,7 @@ export default Ember.Controller.extend({
     next: function() {
       const controller = this;
       const profile = controller.get('profile');
-      if (!controller.validDateImpl()) {
-        return false;
-      }
+
       const birthDayDate = controller.validDateSelectPicker();
 
       if (controller.get('didValidate') === false) {
@@ -58,6 +56,10 @@ export default Ember.Controller.extend({
 
       profile.validate().then(function({ validations }) {
         if (validations.get('isValid') && birthDayDate !== '') {
+          if (!controller.validDateImpl()) {
+            controller.set('dateValidated', false);
+            return false;
+          }
           profile.set('dateOfBirth', birthDayDate);
           controller
             .get('profileService')
@@ -102,7 +104,7 @@ export default Ember.Controller.extend({
     },
     close: function() {
       var controller = this;
-      if (controller.validDate()) {
+      if (controller.validDateImpl()) {
         controller.set('showChildLayout', false);
         controller.send('closeSignUp');
       }
@@ -114,18 +116,13 @@ export default Ember.Controller.extend({
      */
     validDate: function() {
       const controller = this;
-      let dateValidated = false;
       const birthDayDate = controller.validDateSelectPicker();
 
       if (controller.calculateAge(birthDayDate) >= 13) {
-        dateValidated = true;
         controller.set('showChildLayout', false);
       } else {
-        dateValidated = false;
         controller.set('showChildLayout', true);
       }
-      console.log('dateValidated', dateValidated); //eslint-disable-line
-      return dateValidated;
     }
   },
   // -------------------------------------------------------------------------
