@@ -10,6 +10,11 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   // Dependencies
   session: Ember.inject.service('session'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
   // -------------------------------------------------------------------------
   // Actions
   actions: {
