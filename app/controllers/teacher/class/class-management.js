@@ -35,6 +35,8 @@ export default Ember.Controller.extend(ModalMixin, {
 
   profileService: Ember.inject.service('api-sdk/profile'),
 
+  session: Ember.inject.service('session'),
+
   // -------------------------------------------------------------------------
   // Properties
 
