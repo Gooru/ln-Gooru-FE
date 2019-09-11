@@ -114,14 +114,12 @@ export default Ember.Controller.extend({
    */
   loadStudentsProficiencyData() {
     let controller = this;
-    return Ember.RSVP
-      .hash({
-        domainLevelSummary: controller.fetchDomainLevelSummary()
-      })
-      .then(({ domainLevelSummary }) => {
-        controller.set('domainLevelSummary', domainLevelSummary);
-        controller.parseStudentsDomainProficiencyData();
-      });
+    return Ember.RSVP.hash({
+      domainLevelSummary: controller.fetchDomainLevelSummary()
+    }).then(({ domainLevelSummary }) => {
+      controller.set('domainLevelSummary', domainLevelSummary);
+      controller.parseStudentsDomainProficiencyData();
+    });
   },
 
   /**
@@ -138,10 +136,9 @@ export default Ember.Controller.extend({
     let domainLevelSummaryPromise = Ember.RSVP.resolve(
       competencyService.getDomainLevelSummary(filters)
     );
-    return Ember.RSVP
-      .hash({
-        domainLevelSummary: domainLevelSummaryPromise
-      })
+    return Ember.RSVP.hash({
+      domainLevelSummary: domainLevelSummaryPromise
+    })
       .then(({ domainLevelSummary }) => {
         controller.set('isDataNotAvailable', false);
         return domainLevelSummary;
@@ -522,5 +519,15 @@ export default Ember.Controller.extend({
     let controller = this;
     let subjectBucket = controller.get('subjectBucket');
     return subjectBucket ? subjectBucket.replace(/\./g, ' | ') : '';
-  })
+  }),
+
+  /**
+   * @property {Array} fwCompetencies
+   */
+  fwCompetencies: Ember.computed.alias('classController.fwCompetencies'),
+
+  /**
+   * @property {Array} fwDomains
+   */
+  fwDomains: Ember.computed.alias('classController.fwDomains')
 });

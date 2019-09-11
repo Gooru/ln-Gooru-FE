@@ -39,7 +39,7 @@
     {{#if isShowMatrixChart}}
       {{#proficiency/proficiency-subject-panel showGutCompetency=showGutCompetency onDomainSelect="onDomainSelect" class=class subject=activeSubject competencyMatrixCoordinates=competencyMatrixCoordinates}}
         {{proficiency/domain-info-pull-up onSelectCompetency="onSelectCompetency" showPullUp=showDomainInfo showGutCompetency=showGutCompetency competencies=selectedDomainCompetencies domain=selectedDomain}}
-        {{proficiency/competency-info-pull-up isInspectCompetency=showCompetencyInfo showGutCompetency=showGutCompetency classFramework=classFramework onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
+        {{proficiency/competency-info-pull-up fwDomains=fwDomains fwCompetencies=fwCompetencies isInspectCompetency=showCompetencyInfo showGutCompetency=showGutCompetency classFramework=classFramework onClosePullUp="onClosePullUp" isStudent=isStudent competency=selectedCompetency studentId=studentProfile.id domainCompetencyList=domainCompetencyList}}
       {{/proficiency/proficiency-subject-panel}}
     {{/if}}
   </div>
