@@ -75,11 +75,11 @@
                   <div class='sub-sec-row'>
                     <div class='teacher-icon' style="background-image: url({{coteacher.avatarUrl}})"></div>
                     <div class='co-teacher-label'> {{coteacher.lastName}} {{coteacher.firstName}}</div>
-                    <div class='delete-co-teacher' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
+                    <div class='delete-co-teacher {{if (not-eq selfId class.creatorId) 'disable-event disable-color' }}' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
                   </div>
                 {{/each}}
               {{/if}}
-              <div class="trigger-add-coteacher" {{action "onToggleAddCollaborator"}}>
+              <div class="trigger-add-coteacher {{if (not-eq selfId class.creatorId) 'disable-event disable-color' }}" {{action "onToggleAddCollaborator"}}>
                 <div class="add-co-teacher-icon">
                   {{gru-icon name="add_circle_outline"}}
                 </div>
@@ -282,7 +282,6 @@
                 <th class="hidden-xs">{{t 'teacher-landing.class.class-settings.student-id'}}</th>
                 <th><span class="hidden-xs">{{t 'teacher-landing.class.class-settings.student-settings-sec.col-head-active'}}</span></th>
               </tr>
-
               {{#each classStudents as |student index|}}
                 <tr class="{{if (eq (plus-one index) studentsWithoutGradeBoundaries.length) 'end-no-boundary-sec'}}">
                   <td class="student-info">

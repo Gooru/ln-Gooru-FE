@@ -54,6 +54,8 @@ export default Ember.Controller.extend(ModalMixin, {
     }
   ),
 
+  selfId: Ember.computed.alias('session.userId'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
