@@ -125,6 +125,20 @@ export default Ember.Component.extend({
    */
   isStudent: Ember.computed.not('isTeacher'),
 
+  /**
+   * @property {Boolean} isPrevLessonExpanded
+   */
+
+  isPrevLessonExpanded: Ember.computed(
+    'milestoneLessons.@each.isExpaned',
+    function() {
+      let lessonIndex = this.get('lessonIndex');
+      return this.get('milestoneLessons').objectAt(lessonIndex - 1)
+        ? this.get('milestoneLessons').objectAt(lessonIndex - 1).isExpaned
+        : false;
+    }
+  ),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -154,7 +168,11 @@ export default Ember.Component.extend({
             )
           );
 
-          component.handleLineBasedOnPreviousLine(this.get('collections'));
+          component.handleLineBasedOnPreviousLine(
+            this.get('milestoneLessons'),
+            this.get('lesson'),
+            this.get('collections')
+          );
           component.parseRescopedCollections(collections);
           component.set('isLoading', false);
         }
@@ -272,6 +290,7 @@ export default Ember.Component.extend({
       component.$('.collections-info-container').slideDown(400);
     }
     component.toggleProperty('isExpanded');
+    component.set('lesson.isExpaned', component.get('isExpanded'));
   },
 
   /**
@@ -348,14 +367,60 @@ export default Ember.Component.extend({
     return collections;
   },
 
-  handleLineBasedOnPreviousLine(collections) {
-    collections.forEach((collection, index) => {
-      collection.set('prevCollectionIsActive', false);
-      if (index > 0) {
-        if (collections.objectAt(index - 1).pathType === collection.pathType) {
-          collection.set('prevCollectionIsActive', true);
-        }
-      }
+  /**
+   * handle line and path for lesson and collection
+   */
+  handleLineBasedOnPreviousLine(lessons, selectedLesson, collections) {
+    let collectionSuggestions = collections.filter(collection => {
+      let pathType = collection.get('pathType');
+      return pathType === 'system' || pathType === 'teacher';
     });
+    if (collectionSuggestions.length > 0) {
+      collectionSuggestions.forEach(collectionSuggestion => {
+        let indexOfCollection = collections.indexOf(collectionSuggestion);
+        if (indexOfCollection === 0) {
+          selectedLesson.set(
+            'firstCollHasSuggsType',
+            collectionSuggestion.get('pathType')
+          );
+        }
+        if (collections.length === indexOfCollection + 1) {
+          let selectedLessonIndex = lessons.indexOf(selectedLesson);
+          let nextLesson = lessons.objectAt(selectedLessonIndex + 1);
+          if (nextLesson) {
+            nextLesson.set(
+              'prevLeCollHasSuggsType',
+              collectionSuggestion.get('pathType')
+            );
+          }
+        }
+        let prevCollection = collections.objectAt(indexOfCollection - 1);
+        if (prevCollection) {
+          if (prevCollection.get('pathId') > 0) {
+            collectionSuggestion.set(
+              'prevCollHasSuggsType',
+              prevCollection.get('pathType')
+            );
+          }
+          prevCollection.set(
+            'nextCollHasSuggsType',
+            collectionSuggestion.get('pathType')
+          );
+        }
+        let nextCollection = collections.objectAt(indexOfCollection + 1);
+        if (nextCollection) {
+          if (nextCollection.get('pathId') > 0) {
+            collectionSuggestion.set(
+              'nextCollHasSuggsType',
+              nextCollection.get('pathType')
+            );
+          }
+          nextCollection.set(
+            'prevCollHasSuggsType',
+            collectionSuggestion.get('pathType')
+          );
+        }
+      });
+    }
   }
 });

@@ -22,7 +22,9 @@
           display: block;
           line-height: 50px;
         }
-
+        path {
+          display: none;
+        }
         .lesson-connector {
           stroke: #ccc;
           stroke-width: 2;
@@ -31,12 +33,74 @@
           position: absolute;
           top: -32px;
         }
-
+        &.prev-col-path-teacher {
+          .prev-expanded {
+            path {
+              stroke: #ec8f42;
+              stroke-width: 2;
+              fill: none;
+            }
+            .lesson-connector,
+            .path-left {
+              display: none;
+            }
+            .path-right {
+              display: block;
+            }
+          }
+        }
+        &.prev-col-path-system {
+          .prev-expanded {
+            path {
+              stroke: #ec8f42;
+              stroke-width: 2;
+              fill: none;
+            }
+            .lesson-connector,
+            .path-right {
+              display: none;
+            }
+            .path-left {
+              display: block;
+            }
+          }
+        }
         &.started {
           .lesson-connector {
             stroke: #548fe2;
           }
-
+          &.prev-col-path-teacher {
+            .prev-expanded {
+              path {
+                stroke: #ec8f42;
+                stroke-width: 2;
+                fill: none;
+              }
+              .lesson-connector,
+              .path-left {
+                display: none;
+              }
+              .path-right {
+                display: block;
+              }
+            }
+          }
+          &.prev-col-path-system {
+            .prev-expanded {
+              path {
+                stroke: #ec8f42;
+                stroke-width: 2;
+                fill: none;
+              }
+              .lesson-connector,
+              .path-right {
+                display: none;
+              }
+              .path-left {
+                display: block;
+              }
+            }
+          }
           .icon {
             background-image: url("../assets/gooru/images/lesson-blue-outline.svg");
           }
@@ -95,7 +159,6 @@
           position: absolute;
           top: -32px;
         }
-
         .collection-connector {
           stroke: #ccc;
           stroke-width: 2;
@@ -128,6 +191,40 @@
           .collection-connector {
             stroke: #548fe2;
           }
+          &.path-.prev-coll-path-system.next-coll-path-teacher,
+          &.path-.prev-coll-path-system.next-coll-path- {
+            path {
+              stroke: #ec8f42;
+              stroke-width: 2;
+              fill: none;
+            }
+            .collection-connector,
+            .path-right {
+              display: none;
+            }
+            .path-left {
+              display: block;
+            }
+          }
+          &.path-.prev-coll-path-teacher.next-coll-path-system,
+          &.path-.prev-coll-path-teacher.next-coll-path- {
+            path {
+              stroke: #ec8f42;
+              stroke-width: 2;
+              fill: none;
+            }
+            .collection-connector,
+            .path-left {
+              display: none;
+            }
+            .path-right {
+              display: block;
+            }
+            svg {
+              margin-left: 6px;
+            }
+          }
+
           .icon {
             color: #548fe2;
 
@@ -142,12 +239,50 @@
             }
           }
         }
+        &.path-.prev-coll-path-system.next-coll-path-teacher,
+        &.path-.prev-coll-path-system.next-coll-path- {
+          path {
+            stroke: #ec8f42;
+            stroke-width: 2;
+            fill: none;
+          }
+          .collection-connector,
+          .path-right {
+            display: none;
+          }
+          .path-left {
+            display: block;
+          }
+        }
+        &.path-.prev-coll-path-teacher.next-coll-path-system,
+        &.path-.prev-coll-path-teacher.next-coll-path- {
+          path {
+            stroke: #ec8f42;
+            stroke-width: 2;
+            fill: none;
+          }
+          .collection-connector,
+          .path-left {
+            display: none;
+          }
+          .path-right {
+            display: block;
+          }
+          svg {
+            margin-left: 6px;
+          }
+        }
 
         &.suggestion {
           .collection-connector {
             stroke: #ec8f42;
           }
-          &.path-teacher {
+          &.path-teacher.prev-coll-path-system.next-coll-path-teacher,
+          &.path-teacher.prev-coll-path-system.next-coll-path-,
+          &.path-teacher.prev-coll-path-.next-coll-path-,
+          &.path-teacher.prev-coll-path-.next-coll-path-teacher,
+          &.path-teacher.prev-coll-path-.next-coll-path-system,
+          &.path-teacher.prev-coll-path-system.next-coll-path-teacher {
             path {
               stroke: #ec8f42;
               stroke-width: 2;
@@ -165,8 +300,9 @@
               left: -6px;
             }
           }
-
-          &.path-teacher.path-prev-available {
+          &.path-teacher.prev-coll-path-teacher.next-coll-path-teacher,
+          &.path-teacher.prev-coll-path-teacher.next-coll-path-system,
+          &.path-teacher.prev-coll-path-teacher.next-coll-path- {
             svg {
               margin-left: -6px;
             }
@@ -177,9 +313,17 @@
               display: block;
               stroke: #ec8f42;
             }
+            .icon {
+              position: relative;
+              left: -6px;
+            }
           }
-
-          &.path-system {
+          &.path-system.prev-coll-path-teacher.next-coll-path-system,
+          &.path-system.prev-coll-path-teacher.next-coll-path-,
+          &.path-system.prev-coll-path-.next-coll-path-,
+          &.path-system.prev-coll-path-.next-coll-path-system,
+          &.path-system.prev-coll-path-.next-coll-path-teacher,
+          &.path-system.prev-coll-path-.next-coll-path-system {
             path {
               stroke: #ec8f42;
               stroke-width: 2;
@@ -200,7 +344,9 @@
               left: 6px;
             }
           }
-          &.path-system.path-prev-available {
+          &.path-system.prev-coll-path-system.next-coll-path-system,
+          &.path-system.prev-coll-path-system.next-coll-path-teacher,
+          &.path-system.prev-coll-path-system.next-coll-path- {
             svg {
               margin-left: 6px;
             }
@@ -210,6 +356,10 @@
             .collection-connector {
               display: block;
               stroke: #ec8f42;
+            }
+            .icon {
+              position: relative;
+              left: 6px;
             }
           }
           .icon {
