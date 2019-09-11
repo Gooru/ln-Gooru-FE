@@ -367,6 +367,9 @@ export default Ember.Component.extend({
     return collections;
   },
 
+  /**
+   * handle line and path for lesson and collection
+   */
   handleLineBasedOnPreviousLine(lessons, selectedLesson, collections) {
     let collectionSuggestions = collections.filter(collection => {
       let pathType = collection.get('pathType');
