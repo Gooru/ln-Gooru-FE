@@ -1,7 +1,7 @@
 <div class="weekly-report-container">
   <div class="report-period-selector">
     {{#if (and rangeEndDate rangeStartDate)}}
-    <span class="custom-range-shower">{{rangeStartDate}} - {{rangeEndDate}}</span>
+      <span class="custom-range-shower">{{rangeStartDate}} - {{rangeEndDate}}</span>
     {{/if}}
     <div class="active-period" {{action "onToggleReportPeriod"}}>
       <span class="report-period-text">{{activeReportPeriod.text}}</span>
@@ -52,7 +52,8 @@
     <div class="body-container {{if isShowStudentCompetencies 'student-competencies-activate'}}">
       <div class="body-left">
         {{#each studentsSummaryReportData as |reportData|}}
-          <div class="student-info-container {{if (or reportData.weeklyReportData.masteredCompetenciesCount reportData.weeklyReportData.inprogressCompetenciesCount) 'data-available'}} {{if reportData.active 'active-student'}}" {{action "onSelectStudent" reportData}}>
+          <div class="student-info-container {{if (or reportData.weeklyReportData.masteredCompetenciesCount reportData.weeklyReportData.inprogressCompetenciesCount) 'data-available'}} {{if reportData.active 'active-student'}}"
+            {{action "onSelectStudent" reportData}}>
             <div class="student-thumbnail" style="background-image: url({{reportData.student.thumbnailUrl}});">
               <div class="active-student-data">
                 {{gru-icon name="clear"}}
@@ -141,17 +142,37 @@
       {{#if isShowStudentCompetencies}}
         <div class="student-competencies-container">
           {{#each studentDomainCompetencies as |domainCompetencies|}}
-            <div class="domain-name ellipsis">{{locale-translation (t (concat 'domain-code.' domainCompetencies.domainCode)) domainCompetencies.domainName}}</div>
+            <div class="domain-name ellipsis">
+              {{domain-gut-to-fw-transform fwDomains domainCompetencies.domainCode domainCompetencies.domainName 'fwDomainName'}}
+            </div>
             <div class="competencies">
               {{#each domainCompetencies.competencies as |competency|}}
                 <div class="student-competency">
                   <div class="code-info">
-                    <div class="display-code">{{competency.displayCode}}</div>
+                    <div class="display-code">
+                      {{competency-gut-to-fw-transform
+                         fwCompetencies
+                         competency.competencyCode
+                         competency.displayCode
+                         'frameworkCompetencyDisplayCode'
+                         false
+                         true
+                      }}
+                    </div>
                     <div class="status competency-status-{{competency.status}}"></div>
-                    <div class="short-desc ellipsis">{{competency.competencyStudentDesc}}</div>
+                    <div class="short-desc ellipsis">
+                      {{competency.competencyStudentDesc}}
+                    </div>
                   </div>
                   <div class="competency-name">
-                    {{competency.competencyName}}
+                    {{competency-gut-to-fw-transform
+                       fwCompetencies
+                       competency.competencyCode
+                       competency.competencyName
+                       'frameworkCompetencyName'
+                       false
+                       true
+                    }}
                   </div>
                 </div>
               {{/each}}
@@ -163,7 +184,7 @@
   {{/if}}
   <div class="student-rangepicker-container">
 
- {{ca-daterange-datepicker
+    {{ca-daterange-datepicker
       closeDatePicker='onCloseDatePicker'
       onScheduleForDate='onChangeDateForStudent'
       userStartDateAsToday=false
@@ -175,5 +196,5 @@
       forChangeStartDateNavMonth=true
       allowTwoDateRangePicker=true}}
 
-</div>
+  </div>
 </div>
