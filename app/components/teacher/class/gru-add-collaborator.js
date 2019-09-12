@@ -50,8 +50,13 @@ export default Ember.Component.extend({
       const component = this;
       const enteredUserEmail = component.get('userEmail');
       const isEnteredValidEmailId = isValidEmailId(enteredUserEmail);
+
       if (isEnteredValidEmailId) {
-        component.doValidateTeacherUser(enteredUserEmail);
+        if (!component.isDuplicate()) {
+          component.doValidateTeacherUser(enteredUserEmail);
+        } else {
+          component.set('isDuplicateEmail', true);
+        }
       }
       component.set('inValidEmail', !isEnteredValidEmailId);
     }
@@ -59,6 +64,33 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
+
+  isDuplicate() {
+    const component = this;
+    let isDuplicate = false;
+    const enteredUserEmail = component.get('userEmail');
+
+    const selectedUsers = component.get('users');
+    let doesExists = selectedUsers.findBy('email', enteredUserEmail),
+      existsAsOwner =
+        component.get('class').get('owner').email === enteredUserEmail,
+      existsAsCoTeacher = component
+        .get('class')
+        .get('collaborators')
+        .findBy('email', enteredUserEmail);
+
+    if (
+      (!doesExists || (doesExists && doesExists.length === 0)) &&
+      (!existsAsOwner || (existsAsOwner && existsAsOwner.length === 0)) &&
+      (!existsAsCoTeacher ||
+        (existsAsCoTeacher && existsAsCoTeacher.length === 0))
+    ) {
+      isDuplicate = false;
+    } else {
+      isDuplicate = true;
+    }
+    return isDuplicate;
+  },
 
   /**
    * @property {Boolean} isEnableDone
@@ -84,6 +116,12 @@ export default Ember.Component.extend({
    * Property to evaluate whether the entered email id is valid or not
    */
   inValidEmail: false,
+
+  /**
+   * @property {Boolean} isDuplicate
+   * Property to evaluate whether the entered email id already exits or not
+   */
+  isDuplicateEmail: false,
 
   /**
    * @property {String} userEmail
@@ -113,9 +151,12 @@ export default Ember.Component.extend({
     component.$('.email-value-container .email-value').keyup(function(event) {
       let userEmail = component.get('userEmail');
       if (event.keyCode === KEY_CODES.ENTER && isValidEmailId(userEmail)) {
-        component.doValidateTeacherUser(userEmail);
+        if (!component.isDuplicate()) {
+          component.doValidateTeacherUser(userEmail);
+        }
       } else {
         component.set('inValidEmail', false);
+        component.set('isDuplicateEmail', false);
       }
     });
   },
@@ -141,6 +182,7 @@ export default Ember.Component.extend({
           userData.set('email', userEmail);
           users.pushObject(userData);
           component.set('inValidEmail', false);
+          component.set('isDuplicateEmail', false);
           component.set('userEmail', null);
         } else {
           component.set('inValidEmail', true);

@@ -19,8 +19,10 @@
       {{#if inValidEmail}}
         <span class="error-msg">{{t 'no-teacher-found'}}</span>
       {{/if}}
+      {{#if isDuplicateEmail}}
+        <span class="error-msg">Duplicate Email</span>
+      {{/if}}
     </div>
-
   </div>
   <div class="collaborator-action-container">
     <div class="action-btn cancel-btn" {{action "onToggleAddCollaborator"}}>{{t 'common.cancel'}}</div>
