@@ -74,10 +74,10 @@ export default Ember.Component.extend({
     let doesExists = selectedUsers.findBy('email', enteredUserEmail),
       existsAsOwner =
         component.get('class').get('owner').email === enteredUserEmail,
-      existsAsCoTeacher = component
-        .get('class')
-        .get('collaborators')
-        .findBy('email', enteredUserEmail);
+      collaborator =
+        component.get('class').get('collaborators') ||
+        component.get('class').get('collaborator'),
+      existsAsCoTeacher = collaborator.findBy('email', enteredUserEmail);
 
     if (
       (!doesExists || (doesExists && doesExists.length === 0)) &&
