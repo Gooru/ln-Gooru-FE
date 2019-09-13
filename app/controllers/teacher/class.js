@@ -1,5 +1,8 @@
 import Ember from 'ember';
-
+import {
+  flattenGutToFwCompetency,
+  flattenGutToFwDomain
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
@@ -15,6 +18,11 @@ export default Ember.Controller.extend({
    */
   analyticsService: Ember.inject.service('api-sdk/analytics'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -180,11 +188,30 @@ export default Ember.Controller.extend({
   isShowCollectionReportPullUp: false,
 
   /**
-   * @property {boolean} Indicates to show DCA summary report for offline class
+   * @property {boolean}
+   * Indicates to show DCA summary report for offline class
    */
   isShowOCASummaryReportPullUp: false,
 
   isShowMilestoneReport: false,
+
+  /**
+   * @property {string}
+   * frameworkId its based on class or teacher preference
+   */
+  frameworkId: Ember.computed('class', function() {
+    const controller = this;
+    return controller.get('class.preference.framework');
+  }),
+
+  /**
+   * @property {string}
+   * subjectId its based on class or teacher preference
+   */
+  subjectId: Ember.computed('class', function() {
+    const controller = this;
+    return controller.get('class.preference.subject');
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -306,13 +333,29 @@ export default Ember.Controller.extend({
     const performanceSummaryForDCAPromise = controller
       .get('analyticsService')
       .getDCASummaryPerformance(classId);
-    return Ember.RSVP
-      .hash({
-        performanceSummaryForDCA: performanceSummaryForDCAPromise
-      })
-      .then(function(hash) {
-        const performanceSummaryForDCA = hash.performanceSummaryForDCA;
-        controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
+    return Ember.RSVP.hash({
+      performanceSummaryForDCA: performanceSummaryForDCAPromise
+    }).then(function(hash) {
+      const performanceSummaryForDCA = hash.performanceSummaryForDCA;
+      controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
+    });
+  },
+
+  fetchCrossWalkFWC() {
+    const controller = this;
+    const frameworkId = controller.get('frameworkId');
+    const subjectId = controller.get('subjectId');
+    if (frameworkId) {
+      let crossWalkFWCPromise = controller
+        .get('taxonomyService')
+        .fetchCrossWalkFWC(frameworkId, subjectId);
+      crossWalkFWCPromise.then(crossWalkFWCData => {
+        controller.set(
+          'fwCompetencies',
+          flattenGutToFwCompetency(crossWalkFWCData)
+        );
+        controller.set('fwDomains', flattenGutToFwDomain(crossWalkFWCData));
       });
+    }
   }
 });

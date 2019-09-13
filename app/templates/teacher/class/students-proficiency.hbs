@@ -27,6 +27,8 @@
           subjectBucket=subjectBucket
           numberOfStudents=numberOfStudents
           subjectFramework=subjectFramework
+          fwCompetencies=fwCompetencies
+          fwDomains=fwDomains
           onSelectDomain="onSelectDomain"
           onSelectStudent="onSelectStudent"
         }}
@@ -34,6 +36,8 @@
         {{proficiency/inspect/student-domain-competency-performance
           domainLevelSummary=domainLevelSummary
           classMembers=classMembers
+          fwCompetencies=fwCompetencies
+          fwDomains=fwDomains
           activeDomain=activeDomain
           onClickBack="onClickBack"
         }}
@@ -55,7 +59,9 @@
       {{else if isShowClassWeeklyReport}}
         {{proficiency/inspect/student-weekly-report
           course=course
-          domainLevelSummary = domainLevelSummary
+          fwCompetencies=fwCompetencies
+          fwDomains=fwDomains
+          domainLevelSummary=domainLevelSummary
           class=class}}
       {{/if}}
     {{/unless}}

@@ -36,6 +36,7 @@ export default Ember.Controller.extend({
     next: function() {
       const controller = this;
       const profile = controller.get('profile');
+
       const birthDayDate = controller.validDateSelectPicker();
 
       if (controller.get('didValidate') === false) {
@@ -55,6 +56,10 @@ export default Ember.Controller.extend({
 
       profile.validate().then(function({ validations }) {
         if (validations.get('isValid') && birthDayDate !== '') {
+          if (!controller.validDateImpl()) {
+            controller.set('dateValidated', false);
+            return false;
+          }
           profile.set('dateOfBirth', birthDayDate);
           controller
             .get('profileService')
@@ -91,10 +96,18 @@ export default Ember.Controller.extend({
       });
     },
 
+    closeMsg: function() {
+      var controller = this;
+      $('.selectpicker.years option:selected').text('Year');
+      controller.set('birthYearSelected', null);
+      controller.set('showChildLayout', false);
+    },
     close: function() {
       var controller = this;
-      controller.set('showChildLayout', false);
-      controller.send('closeSignUp');
+      if (controller.validDateImpl()) {
+        controller.set('showChildLayout', false);
+        controller.send('closeSignUp');
+      }
     },
 
     /**
@@ -198,9 +211,7 @@ export default Ember.Controller.extend({
     });
 
     controller.set('profile', profile);
-    const url = `${window.location.protocol}//${window.location.host}${
-      Env['google-sign-in'].url
-    }?redirectURL=${window.location.protocol}//${window.location.host}`;
+    const url = `${window.location.protocol}//${window.location.host}${Env['google-sign-in'].url}?redirectURL=${window.location.protocol}//${window.location.host}`;
     controller.set('googleSignUpUrl', url);
     controller.set('didValidate', false);
     controller.set('emailError', false);
@@ -284,5 +295,21 @@ export default Ember.Controller.extend({
     $email.on('keydown', function() {
       controller.set('emailError', false);
     });
+  },
+
+  validDateImpl: function() {
+    const controller = this;
+    let dateValidated = false;
+    const birthDayDate = controller.validDateSelectPicker();
+
+    if (controller.calculateAge(birthDayDate) >= 13) {
+      dateValidated = true;
+      controller.set('showChildLayout', false);
+    } else {
+      dateValidated = false;
+      controller.set('showChildLayout', true);
+    }
+    console.log('dateValidated', dateValidated); //eslint-disable-line
+    return dateValidated;
   }
 });

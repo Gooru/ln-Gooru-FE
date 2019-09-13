@@ -3,13 +3,24 @@
 {{/if}}
 <div class="competency-report">
   <div class="competency-report-header">
-      <div class="competency-status status-{{competency.status}}"></div>
+    <div class="competency-status status-{{competency.status}}"></div>
     <div class="report-info">
       <div class="title-section {{if competency 'content'}}">
-        <div class="domain-name">{{locale-translation (t (concat 'domain-code.' competency.domainCode)) competency.domainName}}</div>
+        <div class="domain-name">
+          {{locale-translation (t (concat 'domain-code.' competency.domainCode)) (domain-gut-to-fw-transform fwDomains competency.domainCode competency.domainName 'fwDomainName')}}
+        </div>
         <div class="title-content">
-        <div class="competency-code">{{competency.competencyCode}}</div>
-      </div>
+          <div class="competency-code">
+            {{competency-gut-to-fw-transform
+            fwCompetencies
+            competency.competencyCode
+            competency.competencyCode
+            'frameworkCompetencyCode'
+            showGutCompetency
+            true
+           }}
+          </div>
+        </div>
         {{#unless competency}}
           <div class="title">
             {{title}}

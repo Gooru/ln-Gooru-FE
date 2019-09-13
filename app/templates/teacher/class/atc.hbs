@@ -5,7 +5,7 @@
   {{#if isShowAtcView}}
     {{#if isPremiumClass}}
       <div class="month-picker {{if isCurrentMonth 'current-month'}}">
-            {{ca-date-picker
+        {{ca-date-picker
           showToday=true
           forMonth=activeMonth
           allowDateSelectorToggle=true
@@ -28,7 +28,7 @@
                 <div class="domain-completion-report" {{action "onSelectDomain" domainData}}>
                   <div class="domain-info-container">
                     <div class="domain-code">{{domainData.domainCode}}</div>
-                    <div class="domain-title ellipsis">{{locale-translation (t (concat 'domain-code.' domainData.domainCode)) domainData.domainName}}</div>
+                    <div class="domain-title ellipsis">{{locale-translation (t (concat 'domain-code.' domainData.domainCode)) (domain-gut-to-fw-transform fwDomains domainData.domainCode domainData.domainName 'fwDomainName')}}</div>
                   </div>
                   <div class="domain-performance-container">
                     <div class="completion-percentage">{{domainData.completionPercentage}}%</div>
@@ -58,12 +58,12 @@
       </div>
     {{/if}}
   {{else}}
-    <div class="data-not-available">  {{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
+    <div class="data-not-available"> {{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
   {{/if}}
 </div>
 
 {{#if isShowCompetencyCompletionReport}}
-  {{reports/pull-up/competency-completion-report showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency" maxLimitToSuggestContent=maxLimitToSuggestContent}}
+  {{reports/pull-up/competency-completion-report fwCompetencies=fwCompetencies showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency" maxLimitToSuggestContent=maxLimitToSuggestContent}}
 {{/if}}
 
 {{#if isShowActivitySearchContentPullup}}

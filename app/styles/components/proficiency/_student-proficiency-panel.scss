@@ -179,7 +179,13 @@
     justify-content: center;
     grid-template-columns: auto auto;
     margin: auto;
-    grid-gap: 10px;
+
+    .framework {
+      font-style: italic;
+      text-align: center;
+      align-self: center;
+      grid-column-start: 2;
+    }
 
     .dropdown-menu > li {
       padding: 3px 25px;

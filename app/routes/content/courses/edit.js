@@ -60,9 +60,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('classId', model.classId);
     controller.set('isEditing', model.isEditing);
     controller.set('isLibraryContent', model.isLibraryContent);
-    if (model.isEditing) {
-      controller.set('tempCourse', course.copy());
-    }
+    //Create a tempCourse copy at once the route load
+    controller.set('tempCourse', course.copy());
   },
 
   deactivate: function() {
