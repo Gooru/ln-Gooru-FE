@@ -1429,7 +1429,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   addContent(content, activityId, startDate) {
     let controller = this;
-    let scheduledClassActivities = controller.get('scheduledClassActivities');
     let newClassActivity = controller.serializerActivityContent(
       content,
       activityId,
@@ -1437,14 +1436,14 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     );
     if (controller.get('selectedDate') === startDate) {
       if (controller.get('scheduledClassActivities.length')) {
-        scheduledClassActivities = controller
+        let scheduledClassActivities = controller
           .get('scheduledClassActivities')
           .objectAt(0);
         scheduledClassActivities
           .get('classActivities')
           .pushObject(newClassActivity);
       } else {
-        scheduledClassActivities = Ember.A([
+        let scheduledClassActivities = Ember.A([
           Ember.Object.create({
             added_date: startDate,
             classActivities: Ember.A([newClassActivity])
