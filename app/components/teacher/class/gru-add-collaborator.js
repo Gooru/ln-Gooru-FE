@@ -153,6 +153,8 @@ export default Ember.Component.extend({
       if (event.keyCode === KEY_CODES.ENTER && isValidEmailId(userEmail)) {
         if (!component.isDuplicate()) {
           component.doValidateTeacherUser(userEmail);
+        } else {
+          component.set('isDuplicateEmail', true);
         }
       } else {
         component.set('inValidEmail', false);
