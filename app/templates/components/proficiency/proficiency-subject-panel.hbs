@@ -10,7 +10,15 @@
   <ol>
     {{#each domains as |domain|}}
       <li {{action 'onDomainSelect' domain }}>
-        <span class="domain-title">{{locale-translation (t (concat 'domain-code.' domain.domainCode)) (if (and (not showGutCompetency)  domain.isMappedWithFramework) domain.fwDomainName  domain.domainName)}}</span>
+        <span class="domain-title">
+          {{domain-gut-to-fw-transform
+             fwDomains
+             domain.domainCode
+             domain.domainName
+            'fwDomainName'
+            (not showGutCompetency)
+          }}
+        </span>
         <div class="competency-sec">
           <div class="competency-status">
             <div class="mastered">

@@ -30,6 +30,21 @@ export default Ember.Controller.extend(StudentLearnerProficiency, {
    */
   studyPlayerController: Ember.inject.controller('study-player'),
 
+  /**
+   * Inject the  student class parent controller.
+   */
+  studentClassController: Ember.inject.controller('student.class'),
+
+  /**
+   * @property {Array} fwCompetencies
+   */
+  fwCompetencies: Ember.computed.alias('studentClassController.fwCompetencies'),
+
+  /**
+   * @property {Array} fwDomains
+   */
+  fwDomains: Ember.computed.alias('studentClassController.fwDomains'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
