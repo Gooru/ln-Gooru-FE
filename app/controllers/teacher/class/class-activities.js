@@ -1443,13 +1443,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           .get('classActivities')
           .pushObject(newClassActivity);
       } else {
-        let scheduledClassActivities = Ember.A([
+        controller.get('classActivities').pushObject(
           Ember.Object.create({
             added_date: startDate,
             classActivities: Ember.A([newClassActivity])
           })
-        ]);
-        controller.set('scheduledClassActivities', scheduledClassActivities);
+        );
       }
       newClassActivity.set('isNewlyAdded', true);
       Ember.run.later(function() {
