@@ -1,5 +1,6 @@
 .student-learner-proficiency {
   background-color: #35424b;
+
   .gru-header {
     display: none !important;
   }
@@ -135,6 +136,7 @@
       height: max-content;
       margin-bottom: 50px;
       justify-content: center;
+
       .gru-study-header {
         top: 0;
         z-index: 22;
@@ -142,17 +144,19 @@
       @media screen and (max-width: $screen-xs) {
         padding-top: 140px;
       }
-
       //Overwrite proficiency chart panel styles
       .panel-container {
         .student-proficiency-panel {
           .panel-header {
             grid-template-columns: 1fr auto;
+
             span.back {
               display: none;
             }
+
             .taxonomy-info {
               pointer-events: none;
+
               .dropdown {
                 button {
                   .caret {
@@ -162,13 +166,23 @@
               }
             }
           }
+
           .panel-content {
             padding-bottom: 15px;
+
             .proficiency-chart {
               .learner-proficiency-domain-matrix {
                 .actions {
-                  display: none;
+                  .grade-selector,
+                  .toggle-chart {
+                    display: none;
+                  }
+
+                  .fwc-panel {
+                    justify-content: flex-end;
+                  }
                 }
+
                 .chart-area {
                   .matrix-chart {
                     .chart-container {
@@ -186,25 +200,27 @@
                 }
               }
             }
+
             .time-series-container {
               display: none;
             }
           }
         }
       }
-
       //Disable pointer events
       .pull-up-container {
         .proficiency-subject-panel {
           .domain-list {
             max-height: 400px;
           }
+
           .competency-info-pull-up {
             .competency-panel-header {
               .close {
                 display: none;
               }
             }
+
             .body {
               pointer-events: none;
             }
@@ -258,8 +274,8 @@
     z-index: 22;
   }
 }
-
 //Toggle screen styles
+
 body.student-learner-proficiency {
   &.fullscreen {
     .player-proficiency {
@@ -267,6 +283,7 @@ body.student-learner-proficiency {
     }
   }
 }
+
 body.student_class-student-learner-proficiency {
   // overwrite report/collection style of 100vh
   .app-container {
