@@ -28,6 +28,11 @@
             <span>{{t "common.followers"}}</span>
           </a>
         {{/link-to}}
+        <li class="profile-menu-item portfolio" {{action 'selectItem' 'portfolio'}}>
+          <a href='{{view.href}}' class="btn btn-category">
+            <span>Portfolio</span>
+          </a>
+        </li>
         {{#if isMyProfile}}
           {{#link-to "profile.preference" tagName="li" class='preference'  }}
             <a href='{{view.href}}' class="btn btn-category select" {{ action 'selectItem' 'preference'}}>
