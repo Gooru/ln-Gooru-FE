@@ -265,6 +265,7 @@ Router.map(function() {
       });
 
       this.route('proficiency');
+      this.route('portfolio');
     }
   );
   /**

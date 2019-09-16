@@ -1,0 +1,47 @@
+<div class="portfolio-card-container">
+  <div class="content-info-container">
+    <div class="content-thumbnail" style="background-image: url({{content.thumbnailUrl}})"></div>
+    <div class="content-title-container ellipsis">
+      <div class="content-title ellipsis">
+        {{content.title}}
+      </div>
+      <div class="content-type ellipsis">
+        {{content.learningObjective}}
+      </div>
+    </div>
+    <div class="content-count-container">
+      {{#if isCollection}}
+        <div class="count-container resource-count"><span class="icon"></span><span class="count-value">{{content.resourceCount}}</span></div>
+        <div class="count-container question-count"><span class="icon"></span><span class="count-value">{{content.questionCount}}</span></div>
+      {{else if isAssessment}}
+        <div class="count-container question-count"><span class="icon"></span><span class="count-value">{{content.questionCount}}</span></div>
+      {{else if isOfflineActivity}}
+        <div class="count-container task-count"><span class="icon"></span><span class="count-value">{{content.taskCount}}</span></div>
+      {{/if}}
+    </div>
+    {{#if (or isCollection isExternalCollection)}}
+      <div class="performance-container timespent">
+        {{#if content.timespent}}
+          {{format-time content.timespent}}
+        {{else}}
+          --
+        {{/if}}
+      </div>
+    {{else}}
+      <div class="performance-container grade-range-{{grade-range content.score}}">
+        {{content.score}}%
+      </div>
+    {{/if}}
+
+  </div>
+  <div class="content-details-container">
+    <div class="taxonomy-container">
+      {{#if tags.length}}
+        {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true}}
+      {{/if}}
+    </div>
+    <div class="completed-date">
+      <span class="date-label">Completed:</span> <span class="date-value">{{format-date content.activityTimestamp 'DD MMM YYYY'}}</span>
+    </div>
+  </div>
+</div>
