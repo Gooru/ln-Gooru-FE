@@ -1,10 +1,6 @@
 import Ember from 'ember';
 import { ANONYMOUS_COLOR } from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
-import {
-  flattenGutToFwCompetency,
-  flattenGutToFwDomain
-} from 'gooru-web/utils/taxonomy';
 export default Ember.Controller.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
@@ -122,24 +118,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   }),
 
   /**
-   * @property {string}
-   * frameworkId its based on class or teacher preference
-   */
-  frameworkId: Ember.computed('class', function() {
-    const controller = this;
-    return controller.get('class.preference.framework');
-  }),
-
-  /**
-   * @property {string}
-   * subjectId its based on class or teacher preference
-   */
-  subjectId: Ember.computed('class', function() {
-    const controller = this;
-    return controller.get('class.preference.subject');
-  }),
-
-  /**
    * Maintains the state of course report visibility
    * @type {Boolean}
    */
@@ -220,23 +198,5 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   populateMilestoneReport() {
     const controller = this;
     controller.set('isShowMilestoneReport', true);
-  },
-
-  fetchCrossWalkFWC() {
-    const controller = this;
-    const frameworkId = controller.get('frameworkId');
-    const subjectId = controller.get('subjectId');
-    if (frameworkId) {
-      let crossWalkFWCPromise = controller
-        .get('taxonomyService')
-        .fetchCrossWalkFWC(frameworkId, subjectId);
-      crossWalkFWCPromise.then(crossWalkFWCData => {
-        controller.set(
-          'fwCompetencies',
-          flattenGutToFwCompetency(crossWalkFWCData)
-        );
-        controller.set('fwDomains', flattenGutToFwDomain(crossWalkFWCData));
-      });
-    }
   }
 });
