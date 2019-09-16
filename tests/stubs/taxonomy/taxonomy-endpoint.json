@@ -162,6 +162,24 @@
     }
   },
   {
+    "description": "Get crosswalk data based on framework code",
+    "request": {
+      "url": "^/api/nucleus/v1/taxonomy/crosswalk/frameworks/(.+)/subjects/(.+)",
+      "method": "GET",
+      "headers": {
+        "Authorization": "Token (.+)"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": "File not found!",
+      "file": "taxonomy-crosswalk-by-code-200-response.json"
+    }
+  },
+  {
     "description": "Get taxonomy grades based on subject code",
     "request": {
       "url": "^/api/ds/users/v2/tx/grades$",
