@@ -230,10 +230,6 @@ Router.map(function() {
     );
   });
 
-  this.route('add-from-course-map', {
-    path: '/add-from-course-map/:classId'
-  });
-
   this.route('featured');
 
   this.route('account-settings', {
