@@ -1,12 +1,16 @@
 import Ember from 'ember';
 import { ANONYMOUS_COLOR } from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
-
 export default Ember.Controller.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
   session: Ember.inject.service('session'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
   // -------------------------------------------------------------------------
   // Actions
   actions: {

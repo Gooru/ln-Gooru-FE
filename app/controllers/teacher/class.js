@@ -1,5 +1,4 @@
 import Ember from 'ember';
-
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
@@ -15,6 +14,11 @@ export default Ember.Controller.extend({
    */
   analyticsService: Ember.inject.service('api-sdk/analytics'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -180,7 +184,8 @@ export default Ember.Controller.extend({
   isShowCollectionReportPullUp: false,
 
   /**
-   * @property {boolean} Indicates to show DCA summary report for offline class
+   * @property {boolean}
+   * Indicates to show DCA summary report for offline class
    */
   isShowOCASummaryReportPullUp: false,
 
@@ -306,13 +311,11 @@ export default Ember.Controller.extend({
     const performanceSummaryForDCAPromise = controller
       .get('analyticsService')
       .getDCASummaryPerformance(classId);
-    return Ember.RSVP
-      .hash({
-        performanceSummaryForDCA: performanceSummaryForDCAPromise
-      })
-      .then(function(hash) {
-        const performanceSummaryForDCA = hash.performanceSummaryForDCA;
-        controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
-      });
+    return Ember.RSVP.hash({
+      performanceSummaryForDCA: performanceSummaryForDCAPromise
+    }).then(function(hash) {
+      const performanceSummaryForDCA = hash.performanceSummaryForDCA;
+      controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
+    });
   }
 });

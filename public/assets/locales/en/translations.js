@@ -2751,6 +2751,7 @@ window.i18ln = {
   'common.content-owner': 'Content Owner',
   'oa.self-grading.comment-label':
     'Please share your thoughts on how you performed in this activity',
-  'common.your-thoughts': 'Your Thoughts'
+  'common.your-thoughts': 'Your Thoughts',
+  'common.email.error': 'Duplicate email'
 };
 //export default window.i18ln;

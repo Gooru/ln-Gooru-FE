@@ -548,7 +548,7 @@ export default Ember.Component.extend({
       let domainSeq = domainData.get('domainSeq');
       let competencyMatrix = competencyMatrixs.findBy('domainCode', domainCode);
       let competencyMatrixByCompetency = competencyMatrix
-        ? competencyMatrix.get('competencies')
+        ? this.parseCrossWalkFWC(competencyMatrix.get('competencies'))
         : [];
       if (competencyMatrix && competencyMatrixByCompetency.length > 0) {
         taxonomyDomain.pushObject(domainData);
@@ -565,8 +565,6 @@ export default Ember.Component.extend({
             competencyCode: competencyCode,
             competencyName: competencyName,
             competencySeq: competencySeq,
-            fwDomainCode: competency.get('fwDomainCode'),
-            fwDomainName: competency.get('fwDomainName'),
             framework: competency.get('framework'),
             isMappedWithFramework: competency.get('isMappedWithFramework'),
             competencyStudentDesc: competency.get('competencyStudentDesc'),
@@ -616,6 +614,25 @@ export default Ember.Component.extend({
     component.set('height', height);
     component.set('taxonomyDomains', taxonomyDomain);
     return resultSet;
+  },
+
+  /**
+   * @function parseCrossWalkFWC
+   * Method to check cross walk competency with user competency matrix
+   */
+  parseCrossWalkFWC(competencies) {
+    const component = this;
+    const fwCompetencies = component.get('fwCompetencies') || [];
+    if (fwCompetencies && fwCompetencies.length) {
+      competencies.forEach(competency => {
+        let fwCompetency = fwCompetencies.find(fwCompetency => {
+          return fwCompetency[competency.competencyCode];
+        });
+        const isMappedWithFramework = !!fwCompetency;
+        competency.set('isMappedWithFramework', isMappedWithFramework);
+      });
+    }
+    return competencies;
   },
 
   /**

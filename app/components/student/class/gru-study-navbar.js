@@ -322,7 +322,9 @@ export default Ember.Component.extend({
         if (isILActivity) {
           route.transitionTo('student-independent-learning');
         } else {
-          route.transitionTo('student-home');
+          route.transitionTo('student-home', {
+            queryParams: { refresh: true }
+          });
         }
       }
     }

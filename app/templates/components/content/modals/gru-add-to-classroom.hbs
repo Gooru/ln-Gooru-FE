@@ -15,8 +15,18 @@
       {{action "selectClassroom" classroom}}>
         <div class="panel-heading">{{classroom.title}}</div>
         <div class="panel-body">
-          {{gru-icon name="group"}} <span>{{t "cards.gru-class-card.student"
-            count=classroom.studentCount}}</span>
+          <div class="class-code-container">
+            <span class="class-code-label">
+              {{t 'student-landing.class-code'}}: 
+            </span>
+            <span class="class-code-value">
+              {{classroom.code}}
+            </span>
+          </div>
+          <div class="student-count-container out-of-scope">
+            {{gru-icon name="group"}} <span>{{t "cards.gru-class-card.student"
+              count=classroom.studentCount}}</span>
+          </div>
         </div>
       </div>
     {{/each}}

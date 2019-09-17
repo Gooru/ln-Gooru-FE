@@ -46,6 +46,15 @@ export default Ember.Component.extend({
     );
   }),
 
+  /**
+   * @property {Array} classroomWithoutCourse
+   * Propety to get list of classrooms which doesn't associated with a course
+   */
+  classroomWithoutCourse: Ember.computed('activeClasses.[]', function() {
+    const component = this;
+    return component.get('activeClasses').filterBy('courseId', null) || [];
+  }),
+
   // -------------------------------------------------------------------------
   // Events
   didRender() {

@@ -30,11 +30,11 @@
         {{#each domainCoverageCount as |domain|}}
           <div class="domain-coverage-count" {{action "onSelectDomain" domain}}>
             <div class="domain-name title">
-              {{locale-translation (t (concat 'domain-code.' domain.domainCode)) domain.domainName}}
+              {{locale-translation (t (concat 'domain-code.' domain.domainCode)) (domain-gut-to-fw-transform fwDomains domain.domainCode domain.domainName 'fwDomainName')}}
             </div>
             <div class="coverage-count">
               <div class="count-container">
-                <span class="mastered-count" style="width: {{find-percentage domain.total-coverage domain.mastered}}%;" ></span>
+                <span class="mastered-count" style="width: {{find-percentage domain.total-coverage domain.mastered}}%;"></span>
                 <span class="inprogress-count" style="width: {{find-percentage domain.total-coverage domain.in-progress}}%;"></span>
                 <span class="notstarted-count" style="width: {{find-percentage domain.total-coverage domain.not-started}}%;"></span>
               </div>
@@ -82,7 +82,8 @@
               <div class="performance-chart-container">
                 {{charts/student-domain-performance domainSeq=domainCompetencies.domainSeq studentSeq=studentSeq competencies=domainCompetencies.competencies}}
               </div>
-              <div class="competency-count-container"><span class="mastered">{{domainCompetencies.mastered}}</span>/<span class="in-progress">{{domainCompetencies.in-progress}}</span>/<span class="not-started">{{domainCompetencies.not-started}}</span></div>
+              <div class="competency-count-container"><span class="mastered">{{domainCompetencies.mastered}}</span>/<span class="in-progress">{{domainCompetencies.in-progress}}</span>/<span
+                  class="not-started">{{domainCompetencies.not-started}}</span></div>
             </div>
           {{/each}}
         </div>

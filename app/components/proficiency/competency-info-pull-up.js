@@ -18,18 +18,9 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * @property {String} competencyStatus
+   * @property {String} competencyCode
    */
-  competencyCode: Ember.computed('competency', 'showGutCompetency', function() {
-    let component = this;
-    let competency = component.get('competency');
-    return competency
-      ? competency.get('isMappedWithFramework') &&
-        !component.get('showGutCompetency')
-        ? competency.get('framework.frameworkCompetencyDisplayCode')
-        : competency.get('competencyCode')
-      : null;
-  }),
+  competencyCode: null,
 
   actions: {
     /**

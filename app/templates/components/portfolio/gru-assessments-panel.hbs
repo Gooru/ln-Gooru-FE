@@ -1,0 +1,18 @@
+<div class="assessments-container">
+  <div class="header-container">
+    <div class="icon"></div>
+    <div class="title">Assessments</div>
+    <div class="search-items-container">
+      <div class="filter-search hidden">
+        {{gru-icon name="filter_list"}}
+      </div>
+    </div>
+  </div>
+  <div class="body-container">
+    <div class="assessments">
+      {{#each learnedPortfolioItems as | assessment |}}
+          {{portfolio/gru-portfolio-content-card content = assessment}}
+      {{/each}}
+    </div>
+  </div>
+</div>

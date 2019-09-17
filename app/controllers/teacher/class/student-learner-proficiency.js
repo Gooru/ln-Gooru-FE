@@ -6,5 +6,15 @@ export default Ember.Controller.extend(StudentLearnerProficiency, {
   /**
    * Teacher class controller
    */
-  classController: Ember.inject.controller('teacher/class')
+  classController: Ember.inject.controller('teacher/class'),
+
+  /**
+   * @property {Array} fwCompetencies
+   */
+  fwCompetencies: Ember.computed.alias('classController.fwCompetencies'),
+
+  /**
+   * @property {Array} fwDomains
+   */
+  fwDomains: Ember.computed.alias('classController.fwDomains')
 });

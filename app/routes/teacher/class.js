@@ -1,6 +1,9 @@
 import Ember from 'ember';
 import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
-
+import {
+  flattenGutToFwCompetency,
+  flattenGutToFwDomain
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Route.extend(PrivateRouteMixin, {
   queryParams: {
     refresh: {
@@ -40,6 +43,12 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    * @requires service:api-sdk/competency
    */
   competencyService: Ember.inject.service('api-sdk/competency'),
+
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -125,63 +134,69 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           .get('performanceService')
           .findClassPerformanceSummaryByClassIds(classCourseId)
         : null;
-      return Ember.RSVP
-        .hash({
-          class: classPromise,
-          members: membersPromise,
-          classPerformanceSummaryItems: performanceSummaryPromise
-        })
-        .then(function(hash) {
-          const aClass = hash.class;
-          const members = hash.members;
-          const classPerformanceSummaryItems =
-            hash.classPerformanceSummaryItems;
-          let classPerformanceSummary = classPerformanceSummaryItems
-            ? classPerformanceSummaryItems.findBy('classId', classId)
-            : null;
-          aClass.set('performanceSummary', classPerformanceSummary);
-          const setting = aClass.get('setting');
-          const isPremiumClass = setting != null && setting['course.premium'];
-          const courseId = aClass.get('courseId');
-          let visibilityPromise = Ember.RSVP.resolve([]);
-          let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
-          const competencyCompletionStats = isPremiumClass
-            ? route
-              .get('competencyService')
-              .getCompetencyCompletionStats([classId])
-            : Ember.RSVP.resolve(Ember.A());
+      return Ember.RSVP.hash({
+        class: classPromise,
+        members: membersPromise,
+        classPerformanceSummaryItems: performanceSummaryPromise
+      }).then(function(hash) {
+        const aClass = hash.class;
+        const members = hash.members;
+        const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
+        let classPerformanceSummary = classPerformanceSummaryItems
+          ? classPerformanceSummaryItems.findBy('classId', classId)
+          : null;
+        aClass.set('performanceSummary', classPerformanceSummary);
+        const setting = aClass.get('setting');
+        const isPremiumClass = setting != null && setting['course.premium'];
+        const courseId = aClass.get('courseId');
+        let visibilityPromise = Ember.RSVP.resolve([]);
+        let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
+        const competencyCompletionStats = isPremiumClass
+          ? route
+            .get('competencyService')
+            .getCompetencyCompletionStats([classId])
+          : Ember.RSVP.resolve(Ember.A());
 
-          if (courseId) {
-            visibilityPromise = route
-              .get('classService')
-              .readClassContentVisibility(classId);
-            coursePromise = route.get('courseService').fetchById(courseId);
-          }
-          return Ember.RSVP
-            .hash({
-              contentVisibility: visibilityPromise,
-              course: coursePromise,
-              competencyStats: competencyCompletionStats
-            })
-            .then(function(hash) {
-              const contentVisibility = hash.contentVisibility;
-              const course = hash.course;
-              aClass.set('owner', members.get('owner'));
-              aClass.set('collaborators', members.get('collaborators'));
-              aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
-              aClass.set('members', members.get('members'));
-              aClass.set(
-                'competencyStats',
-                hash.competencyStats.findBy('classId', classId)
-              );
-              return {
-                class: aClass,
-                course,
-                members,
-                contentVisibility
-              };
-            });
+        if (courseId) {
+          visibilityPromise = route
+            .get('classService')
+            .readClassContentVisibility(classId);
+          coursePromise = route.get('courseService').fetchById(courseId);
+        }
+        const frameworkId = aClass.get('preference.framework');
+        const subjectId = aClass.get('preference.subject');
+        let crossWalkFWCPromise = null;
+        if (frameworkId && subjectId) {
+          crossWalkFWCPromise = route
+            .get('taxonomyService')
+            .fetchCrossWalkFWC(frameworkId, subjectId);
+        }
+        return Ember.RSVP.hash({
+          contentVisibility: visibilityPromise,
+          course: coursePromise,
+          crossWalkFWC: crossWalkFWCPromise,
+          competencyStats: competencyCompletionStats
+        }).then(function(hash) {
+          const contentVisibility = hash.contentVisibility;
+          const course = hash.course;
+          const crossWalkFWC = hash.crossWalkFWC || [];
+          aClass.set('owner', members.get('owner'));
+          aClass.set('collaborators', members.get('collaborators'));
+          aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
+          aClass.set('members', members.get('members'));
+          aClass.set(
+            'competencyStats',
+            hash.competencyStats.findBy('classId', classId)
+          );
+          return {
+            class: aClass,
+            course,
+            members,
+            contentVisibility,
+            crossWalkFWC
+          };
         });
+      });
     });
   },
 
@@ -199,6 +214,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     let classData = model.class;
     classData.course = model.course;
     controller.fetchDcaSummaryPerformance();
+    controller.set(
+      'fwCompetencies',
+      flattenGutToFwCompetency(model.crossWalkFWC)
+    );
+    controller.set('fwDomains', flattenGutToFwDomain(model.crossWalkFWC));
   },
 
   resetController(controller) {

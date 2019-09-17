@@ -7,6 +7,11 @@
   &.student-competency-summary {
     grid-template-columns: 1fr 80px;
   }
+  @media screen and (max-width: $screen-767) {
+    &.student-competency-summary {
+      grid-template-columns: 1fr;
+    }
+  }
 
   .milestone-course-map-container {
     width: 100%;
@@ -893,6 +898,12 @@
 
   .competency-summary-graph {
     justify-self: right;
+
+    @media screen and (max-width: $screen-767) {
+      .charts.competencies-progress-graph {
+        display: none;
+      }
+    }
   }
 
   .loading-spinner {

@@ -6,7 +6,10 @@ import {
   createStudyPlayerQueryParams,
   currentLocationToMapContext
 } from 'gooru-web/utils/navigation-util';
-
+import {
+  flattenGutToFwCompetency,
+  flattenGutToFwDomain
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Route.extend(PrivateRouteMixin, {
   queryParams: {
     refresh: {
@@ -35,6 +38,12 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    * @type {UnitService} Service to retrieve unit information
    */
   unitService: Ember.inject.service('api-sdk/unit'),
+
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
 
   analyticsService: Ember.inject.service('api-sdk/analytics'),
 
@@ -296,6 +305,14 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           locationQueryParam.fwCode = aClass.preference.framework;
         }
 
+        const frameworkId = aClass.get('preference.framework');
+        const subjectId = aClass.get('preference.subject');
+        let crossWalkFWCPromise = null;
+        if (frameworkId && subjectId) {
+          crossWalkFWCPromise = route
+            .get('taxonomyService')
+            .fetchCrossWalkFWC(frameworkId, subjectId);
+        }
         var userLocationPromise = route
           .get('analyticsService')
           .getUserCurrentLocation(classId, myId, locationQueryParam);
@@ -305,11 +322,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           course: coursePromise,
           skylineInitialState: skylineInitialStatePromise,
           currentLocation: userLocationPromise,
-          competencyStats: competencyCompletionStats
+          competencyStats: competencyCompletionStats,
+          crossWalkFWC: crossWalkFWCPromise
         }).then(function(hash) {
           const contentVisibility = hash.contentVisibility;
           const course = hash.course;
-          var currentLocation = hash.currentLocation;
+          const crossWalkFWC = hash.crossWalkFWC || [];
+          let currentLocation = hash.currentLocation;
           const skylineInitialState = hash.skylineInitialState;
           aClass.set('owner', members.get('owner'));
           aClass.set('collaborators', members.get('collaborators'));
@@ -328,7 +347,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             contentVisibility: contentVisibility,
             currentLocation: currentLocation,
             skylineInitialState: skylineInitialState,
-            isPremiumCourse: isPremiumCourse
+            isPremiumCourse: isPremiumCourse,
+            crossWalkFWC
           });
         });
       });
@@ -348,6 +368,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('skylineInitialState', model.skylineInitialState);
     controller.set('isPremiumCourse', model.isPremiumCourse);
     controller.set('classmodel', model);
+    controller.set(
+      'fwCompetencies',
+      flattenGutToFwCompetency(model.crossWalkFWC)
+    );
+    controller.set('fwDomains', flattenGutToFwDomain(model.crossWalkFWC));
   },
 
   resetController(controller) {
