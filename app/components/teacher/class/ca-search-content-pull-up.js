@@ -40,6 +40,13 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   libraryService: Ember.inject.service('api-sdk/library'),
 
+  setupComponent: Ember.on('didInsertElement', function() {
+    $(
+      '.ca-course-map-container, .search-list-container, .tenant-libraries'
+    ).click(function() {
+      $('.search-filter-container-list').removeClass('active');
+    });
+  }),
   /**
    * Session object of logged in user
    * @type {Object}
@@ -419,6 +426,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     toggleMenuList() {
       this.toggleProperty('isMenuEnabled');
+      return false;
     },
 
     /**
