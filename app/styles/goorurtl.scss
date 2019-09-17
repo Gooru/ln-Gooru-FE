@@ -25,7 +25,6 @@ $box-shadow: -1px 0px;
 @import "mixins/gru-accordion";
 
 @import "controllers/application";
-@import "controllers/class";
 @import "controllers/class/analytics/performance/student";
 @import "controllers/class/analytics/performance/teacher";
 @import "controllers/teacher/class/collection";
@@ -156,8 +155,6 @@ $box-shadow: -1px 0px;
 @import "components/charts/gru-radial-chart";
 @import "components/charts/gru-x-bar-chart";
 @import "components/charts/gru-performance-chart";
-
-@import "components/class/gru-class-navigation";
 
 //@import "components/class/gru-class-navbar";
 @import "components/class/gru-class-activity-panel";

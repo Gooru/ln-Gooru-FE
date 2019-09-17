@@ -240,9 +240,6 @@ Router.map(function() {
     path: '/account-settings/:userId'
   });
 
-  this.route('integration', {
-    path: '/integration/:appType'
-  });
   this.route('player-external');
   this.route('not-found', {
     path: '/not-found/:entity'
