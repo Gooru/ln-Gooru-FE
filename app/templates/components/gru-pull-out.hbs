@@ -5,8 +5,25 @@
     <header class="pull-out-header">
       <div class=header-content>
         <div class="info pull-left">
-          <div class="title">{{title}}</div>
-          <div class="description">{{description}}</div>
+          <div class="title">
+            {{domain-gut-to-fw-transform
+               fwDomains
+               competencyData.domainCode
+               competencyData.domainName
+              'fwDomainName'
+              (not showGutCompetency)
+            }}
+          </div>
+          <div class="description">
+            {{competency-gut-to-fw-transform
+               fwCompetencies
+               competencyData.competencyCode
+               competencyData.competencyCode
+               'frameworkCompetencyDisplayCode'
+               showGutCompetency
+               true
+            }}
+          </div>
         </div>
         <div class="action pull-right">
           {{#if showMore}}

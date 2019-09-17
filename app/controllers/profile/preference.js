@@ -19,10 +19,19 @@ export default Ember.Controller.extend({
    */
   lookupService: Ember.inject.service('api-sdk/lookup'),
 
+  parentController: Ember.inject.controller('profile'),
+
   //------------------------------------------------------------------------------
   // Attributes
 
+  /**
+   * it maintains profile data
+   * @type {Object}
+   */
+  userPreference: Ember.computed.alias('parentController.userPreference'),
+
   categoriesMaster: null,
+
   categoriesDropDown: null,
 
   /**
@@ -297,7 +306,12 @@ export default Ember.Controller.extend({
   },
 
   scrollToEnd() {
-    $('html,body').animate({ scrollTop: document.body.scrollHeight }, 'fast');
+    $('html,body').animate(
+      {
+        scrollTop: document.body.scrollHeight
+      },
+      'fast'
+    );
   },
   /**
    *
@@ -598,12 +612,8 @@ export default Ember.Controller.extend({
 
   getProfilePreference() {
     const controller = this;
-    controller
-      .get('profileService')
-      .getProfilePreference()
-      .then(response => {
-        controller.normalizeProfilePreference(response);
-      });
+    const userPreference = controller.get('userPreference');
+    controller.normalizeProfilePreference(userPreference);
   },
 
   updateProfilePreference(data) {

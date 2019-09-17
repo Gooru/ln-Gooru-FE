@@ -244,6 +244,10 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
   /**
+   * @property {Boolean} showBaseLine
+   */
+  showBaseLine: true,
+  /**
    * @property {Boolean} showGutCompetency
    */
   showGutCompetency: false,
@@ -747,7 +751,9 @@ export default Ember.Component.extend({
     cards.exit().remove();
     component.$('.scrollable-chart').scrollTop(height);
     component.drawSkyline();
-    component.drawBaseLine();
+    if (component.get('showBaseLine')) {
+      component.drawBaseLine();
+    }
     component.drawDomainBoundaryLine();
     component.showGutCompetencyColorGradient();
   },
