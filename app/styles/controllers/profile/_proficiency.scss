@@ -161,6 +161,15 @@
       }
     }
 
+    .framework {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      padding-right: 10px;
+      font-weight: bold;
+    }
+
     .toggle-chart-view {
       width: 24%;
       display: flex;
@@ -205,6 +214,38 @@
       .title {
         font-size: 20px;
         margin-left: 30px;
+      }
+    }
+
+    .matrix {
+      .learner-proficiency-domain-matrix {
+        .actions {
+          box-shadow: none;
+        }
+
+        .chart-area {
+          .matrix-chart {
+            .chart-container {
+              .domain-chart-container {
+                max-width: 741px;
+                overflow: auto;
+                @media only screen and(max-width: $screen-xs) {
+                  max-width: 360px;
+                }
+
+                .scrollable-chart {
+                  width: max-content;
+                }
+
+                .domain-sequence-container {
+                  li {
+                    pointer-events: none;
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -336,15 +377,15 @@
           }
         }
 
-        &.skyline {
-          .box-skyline {
-            background-color: $white;
+        &.show-gut {
+          .box {
+            background-image: linear-gradient(to bottom, #687782, #37424b);
           }
         }
 
-        &.baseline {
-          .box-baseline {
-            background-color: $dark-400;
+        &.skyline {
+          .box-skyline {
+            background-color: $white;
           }
         }
       }

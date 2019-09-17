@@ -6,9 +6,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('userId', controller.get('parentController.profile.id'));
     //Make the proficiency tab get selected
     controller.get('parentController').selectMenuItem('proficiency');
+    controller.initialize();
   },
 
   resetController(controller) {
+    controller.set('showProficiencyChart', false);
     controller.set('showPullOut', false);
   }
 });

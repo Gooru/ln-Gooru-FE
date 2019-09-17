@@ -1,6 +1,9 @@
 import Ember from 'ember';
 import { DEFAULT_K12_SUBJECT } from 'gooru-web/config/config';
-
+import {
+  flattenGutToFwCompetency,
+  flattenGutToFwDomain
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
@@ -10,7 +13,19 @@ export default Ember.Controller.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
+  /**
+   * competency service dependency injection
+   * @type {Object}
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
+
   parentController: Ember.inject.controller('profile'),
+
+  /**
+   * it maintains profile data
+   * @type {Object}
+   */
+  userPreference: Ember.computed.alias('parentController.userPreference'),
 
   /**
    * show pull out .
@@ -35,8 +50,9 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  init() {
+  initialize() {
     let controller = this;
+    this.set('showProficiencyChart', true);
     controller.fetchCategories().then(() => {
       let selectedCategory = controller.get('selectedCategory');
       controller.fetchSubjectsByCategory(selectedCategory);
@@ -61,6 +77,7 @@ export default Ember.Controller.extend({
     onSelectItem(item) {
       let controller = this;
       controller.set('selectedSubject', item);
+      controller.loadDataBySubject(item.get('id'));
     },
 
     /**
@@ -81,21 +98,22 @@ export default Ember.Controller.extend({
      * Triggered when an cell is selected
      * @param item
      */
-    onCompetencyPullOut(data, competencyMatrixs) {
+    onSelectCompetency(competency, competencyMatrixs) {
       let controller = this;
       controller.set('isLoading', true);
       controller.set('showMore', false);
       let userId = controller.get('userId');
       controller.set('userId', userId);
-      controller.set('competencyData', data);
-      controller.set('competencyMatrixs', competencyMatrixs);
+      controller.set('competencyData', competency);
+      controller.set(
+        'competencyMatrixs',
+        competencyMatrixs.get('competencies')
+      );
     },
 
-    /**
-     * Action triggered once the last updated date returned from the API
-     */
-    onGetLastUpdated(lastUpdated) {
-      this.set('lastUpdated', lastUpdated);
+    onClosePullOut() {
+      this.set('selectedCompetency', null);
+      this.set('showPullOut', false);
     },
 
     /**
@@ -107,6 +125,7 @@ export default Ember.Controller.extend({
         year: date.getFullYear()
       };
       this.set('timeLine', timeLine);
+      this.loadDataBySubject(this.get('selectedSubject.id'));
     }
   },
 
@@ -118,15 +137,15 @@ export default Ember.Controller.extend({
    * Method  fetch list of taxonomy categories
    */
   fetchCategories() {
-    let component = this;
+    let controller = this;
     return new Ember.RSVP.Promise(reslove => {
-      component
+      controller
         .get('taxonomyService')
         .getCategories()
         .then(categories => {
           let category = categories.objectAt(0);
-          component.set('selectedCategory', category);
-          component.set('categories', categories);
+          controller.set('selectedCategory', category);
+          controller.set('categories', categories);
           reslove();
         });
     });
@@ -150,12 +169,72 @@ export default Ember.Controller.extend({
           : subjects.objectAt(0);
         controller.set('taxonomySubjects', subjects);
         controller.set('selectedSubject', selectedSubject);
+        if (selectedSubject) {
+          controller.loadDataBySubject(selectedSubject.get('id'));
+        }
       });
+  },
+
+  loadDataBySubject(subjectId) {
+    let controller = this;
+    let userId = controller.get('userId');
+    let timeLine = controller.get('timeLine');
+    const subjectCode = controller.get('selectedSubject.code');
+    const userPreference = controller.get('userPreference.standard_preference');
+    const frameworkCode = userPreference[subjectCode];
+    controller.set('framework', frameworkCode);
+    if (!frameworkCode) {
+      controller.set('showGutCompetency', true);
+    }
+    controller.set('isLoading', true);
+    return Ember.RSVP.hash({
+      competencyMatrixs: controller
+        .get('competencyService')
+        .getCompetencyMatrixDomain(userId, subjectId, timeLine),
+      competencyMatrixCoordinates: controller
+        .get('competencyService')
+        .getCompetencyMatrixCoordinates(subjectId),
+      crossWalkFWC: frameworkCode
+        ? controller
+          .get('taxonomyService')
+          .fetchCrossWalkFWC(frameworkCode, subjectId)
+        : null
+    }).then(
+      ({ competencyMatrixs, competencyMatrixCoordinates, crossWalkFWC }) => {
+        if (
+          !(controller.get('isDestroyed') || controller.get('isDestroying'))
+        ) {
+          controller.set('isLoading', false);
+          controller.set('competencyMatrixDomains', competencyMatrixs.domains);
+          controller.set(
+            'competencyMatrixCoordinates',
+            competencyMatrixCoordinates
+          );
+          if (crossWalkFWC) {
+            controller.set(
+              'fwCompetencies',
+              flattenGutToFwCompetency(crossWalkFWC)
+            );
+            controller.set('fwDomains', flattenGutToFwDomain(crossWalkFWC));
+          }
+        } else {
+          Ember.Logger.warn('comp is destroyed...');
+        }
+      },
+      this
+    );
   },
 
   // -------------------------------------------------------------------------
   // Properties
 
+  showProficiencyChart: true,
+
+  /**
+   * @property {Boolean}
+   * Property to store show gut competency
+   */
+  showGutCompetency: false,
   /**
    * @property {JSON}
    * Property to store active category
@@ -201,5 +280,14 @@ export default Ember.Controller.extend({
       month: curDate.getMonth() + 1,
       year: curDate.getFullYear()
     };
+  }),
+
+  /**
+   * @property {String} subjectCode
+   */
+  subjectCode: Ember.computed('selectedSubject', function() {
+    let controller = this;
+    let subject = controller.get('selectedSubject');
+    return subject ? subject.id : '';
   })
 });
