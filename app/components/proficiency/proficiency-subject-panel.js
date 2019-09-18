@@ -20,7 +20,7 @@ export default Ember.Component.extend({
   /**
    * @property {String} framework
    */
-  framework: Ember.computed.alias('class.preference.framework'),
+  framework: null,
 
   actions: {
     onClosePullUp() {

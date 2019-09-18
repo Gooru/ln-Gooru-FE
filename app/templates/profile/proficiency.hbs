@@ -1,31 +1,37 @@
 <div class="user-proficiency">
-  <div class="taxonomy-info">
-    <div class="dropdown categories">
-      <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{selectedCategory.title}}
-        <span class="caret"></span></button>
-      <ul class="dropdown-menu category-list">
-        {{#each categories as |category|}}
-          <li class="list-item category {{if (eq selectedCategory.id category.id) 'active'}}" {{action "onSelectCategory" category}}>{{category.title}}</li>
-        {{/each}}
-      </ul>
-    </div>
-    <div class="dropdown subjects">
-      <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{selectedSubject.title}}
-        <span class="caret"></span></button>
-      <ul class="dropdown-menu subject-list">
-        {{#each taxonomySubjects as |subject|}}
-          <li class="list-item subject {{if (eq selectedSubject.id subject.id) 'active'}}" {{action "onSelectItem" subject}}>{{subject.title}}</li>
-        {{/each}}
-      </ul>
-    </div>
-  </div>
   <div class="panel left-panel">
     <div class="panel-header">
-      <div class="title {{selectedMatrixView}}">
+      <div class="title ellipsis">
         {{selectedSubject.title}}<br>
       </div>
-      <div class="framework">
-        {{framework}}
+      <div class="taxonomy-info">
+        <div class="col-1">
+          <div class="dropdown categories">
+            <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">
+              <div class="ellipsis">{{selectedCategory.title}}</div>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu category-list">
+              {{#each categories as |category|}}
+                <li class="list-item category {{if (eq selectedCategory.id category.id) 'active'}}" {{action "onSelectCategory" category}}>{{category.title}}</li>
+              {{/each}}
+            </ul>
+          </div>
+          <div class="dropdown subjects">
+            <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">
+              <div class="ellipsis">{{selectedSubject.title}}</div>
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu subject-list">
+              {{#each taxonomySubjects as |subject|}}
+                <li class="list-item subject {{if (eq selectedSubject.id subject.id) 'active'}}" {{action "onSelectItem" subject}}>{{subject.title}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        <div class="col-2">
+          {{framework}}
+        </div>
       </div>
     </div>
     <div class="panel-body matrix">
@@ -40,12 +46,27 @@
           selectedDomain=selectedDomain
           showGutCompetency=showGutCompetency
           subjectCode=subjectCode
-          showExpandedButton=true
           showBaseLine=false
           onSelectCompetency="onSelectCompetency"
           selectedCompetency=selectedCompetency
           fwCompetencies=fwCompetencies
         }}
+      {{/if}}
+      {{#if isMobile}}
+        <div class="inspect-competency">
+          {{proficiency/competency-info-pull-up
+            fwDomains=fwDomains
+            fwCompetencies=fwCompetencies
+            isInspectCompetency=showCompetencyInfo
+            showGutCompetency=showGutCompetency
+            classFramework=framework
+            onClosePullUp="onClosePullUp"
+            isStudent=true
+            competency=selectedCompetency
+            studentId=userId
+            domainCompetencyList=domainCompetencyList
+          }}
+        </div>
       {{/if}}
       <div class="proficiency-tags">
         <div class="proficiency-legends">
@@ -79,35 +100,37 @@
     </div>
   </div>
   <div class="panel right-panel">
-    <div class="panel-header">
-      <div class="dropdown categories">
-        <div class="active-item active-categrory">
-          <div class="label ellipsis">{{selectedCategory.title}}</div>
-          <div class="icon">{{gru-icon name="arrow_drop_down"}}</div>
-        </div>
-        <div class="dropdown-content categrory-list">
-          {{#each categories as |category|}}
-            <div class="list-item categrory {{if (eq selectedCategory.id category.id) 'active'}}" {{action "onSelectCategory" category}}>{{category.title}}</div>
-          {{/each}}
-        </div>
-      </div>
-    </div>
-    <div class="panel-body">
-      {{proficiency/subject-item-list taxonomySubjects=taxonomySubjects selectedItem=selectedSubject onSelectItem="onSelectItem"}}
-    </div>
+    {{#proficiency/proficiency-subject-panel
+         fwDomains=fwDomains
+         showGutCompetency=showGutCompetency
+         onDomainSelect="onDomainSelect"
+         framework=framework
+         subject=selectedSubject
+         competencyMatrixCoordinates=competencyMatrixCoordinates
+       }}
+      {{#if showDomainInfo}}
+        {{proficiency/domain-info-pull-up
+           fwDomains=fwDomains
+           fwCompetencies=fwCompetencies
+           onSelectCompetency="onSelectCompetency"
+           showGutCompetency=showGutCompetency
+           showPullUp=showDomainInfo
+           competencies=selectedDomainCompetencies
+           domain=selectedDomain
+          }}
+      {{/if}}
+      {{proficiency/competency-info-pull-up
+          fwDomains=fwDomains
+          fwCompetencies=fwCompetencies
+          isInspectCompetency=showCompetencyInfo
+          showGutCompetency=showGutCompetency
+          classFramework=framework
+          onClosePullUp="onClosePullUp"
+          isStudent=true
+          competency=selectedCompetency
+          studentId=userId
+          domainCompetencyList=domainCompetencyList
+        }}
+    {{/proficiency/proficiency-subject-panel}}
   </div>
-  {{#gru-pull-out showPullOut=showPullOut competencyData=competencyData showGutCompetency=showGutCompetency fwDomains=fwDomains fwCompetencies=fwCompetencies onClosePullOut='onClosePullOut' title=description description=title showMore=showMore isLoading=isLoading as |section|}}
-    {{#if section.isLessContent}}
-      {{proficiency/competencies-pull-out-body
-        userId=userId
-        fwCompetencies=fwCompetencies
-        competencyData=competencyData
-        isLoading=isLoading
-        competencyMatrixs=competencyMatrixs
-        showPullOut=showPullOut
-        title=description
-        description=title
-     }}
-    {{/if}}
-  {{/gru-pull-out}}
 </div>
