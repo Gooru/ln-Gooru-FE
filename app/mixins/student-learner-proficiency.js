@@ -1,9 +1,6 @@
 import Ember from 'ember';
 import { ROLES, SCREEN_SIZES } from 'gooru-web/config/config';
-import {
-  getSubjectIdFromSubjectBucket,
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
 export default Ember.Mixin.create({
   // -------------------------------------------------------------------------
@@ -89,6 +86,8 @@ export default Ember.Mixin.create({
    * @property {Boolean} showGutCompetency
    */
   showGutCompetency: false,
+
+  isShowMatrixChart: true,
 
   /**
    * @property {Boolean}
@@ -244,13 +243,18 @@ export default Ember.Mixin.create({
       .get('taxonomyService')
       .getTaxonomySubjects(category.get('id'))
       .then(subjects => {
-        let subject = component.getActiveSubject(subjects);
         component.set('taxonomySubjects', subjects);
-        component.set('activeSubject', subject);
-        component.checkTaxonomySubject();
-        component.fetchTaxonomyGrades();
-        component.loadDataBySubject();
-        component.fetchSignatureCompetencyList();
+        if (subjects.length) {
+          let subject = component.getActiveSubject(subjects);
+          component.set('activeSubject', subject);
+          component.set('isShowMatrixChart', true);
+          component.fetchTaxonomyGrades();
+          component.loadDataBySubject();
+          component.fetchSignatureCompetencyList();
+        } else {
+          component.set('isShowMatrixChart', false);
+          component.set('activeSubject', null);
+        }
       });
   },
 
@@ -270,28 +274,6 @@ export default Ember.Mixin.create({
       }
     });
     return activeSubject;
-  },
-
-  /**
-   * @function checkTaxonomySubject
-   * Method to check subject bucket is assigned to the course or not
-   */
-  checkTaxonomySubject() {
-    let component = this;
-    let course = component.get('course');
-    if (course.get('id')) {
-      let taxonomySubjects = component.get('taxonomySubjects');
-      let subjectBucket = component.get('subjectBucket');
-      let subjectCode = subjectBucket
-        ? getSubjectIdFromSubjectBucket(subjectBucket)
-        : null;
-      let isSupportedTaxonomySubject = taxonomySubjects.findBy(
-        'code',
-        subjectCode
-      );
-      let isShowMatrixChart = !!isSupportedTaxonomySubject;
-      component.set('isShowMatrixChart', isShowMatrixChart);
-    }
   },
 
   /**
