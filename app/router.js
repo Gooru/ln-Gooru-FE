@@ -103,8 +103,6 @@ Router.map(function() {
       '/player/class/:classId/course/:courseId/unit/:unitId/lesson/:lessonId/collection/:collectionId'
   });
 
-  this.route('classes');
-
   this.route('student-learner-proficiency', {
     path: '/student-learner-proficiency/:userId'
   });
@@ -115,16 +113,8 @@ Router.map(function() {
       path: '/class/:classId'
     },
     function() {
-      this.route('overview');
-      this.route('info');
-      this.route('edit');
-      this.route('channel', {
-        path: '/channel/:channelId'
-      });
-
       this.route('analytics', function() {
         this.route('performance', function() {
-          this.route('student');
           this.route('teacher', function() {
             this.route('course');
             this.route('unit', {
