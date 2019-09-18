@@ -177,10 +177,16 @@ export default Ember.Component.extend({
   competencyFocusIn() {
     let component = this;
     let selectedCompetency = component.get('selectedCompetency');
-    if (!selectedCompetency.get('xAxisSeq')) {
-      selectedCompetency = component
-        .get('chartData')
-        .findBy('competencyCode', selectedCompetency.get('competencyCode'));
+    const chartData = component.get('chartData');
+    if (
+      selectedCompetency &&
+      !selectedCompetency.get('xAxisSeq') &&
+      Ember.isArray(chartData)
+    ) {
+      selectedCompetency = chartData.findBy(
+        'competencyCode',
+        selectedCompetency.get('competencyCode')
+      );
     }
     component.blockChartContainer(selectedCompetency);
   },
@@ -243,6 +249,10 @@ export default Ember.Component.extend({
   ),
   // -------------------------------------------------------------------------
   // Properties
+  /**
+   * @property {Boolean} showBaseLine
+   */
+  showBaseLine: true,
   /**
    * @property {Boolean} showGutCompetency
    */
@@ -747,7 +757,9 @@ export default Ember.Component.extend({
     cards.exit().remove();
     component.$('.scrollable-chart').scrollTop(height);
     component.drawSkyline();
-    component.drawBaseLine();
+    if (component.get('showBaseLine')) {
+      component.drawBaseLine();
+    }
     component.drawDomainBoundaryLine();
     component.showGutCompetencyColorGradient();
   },

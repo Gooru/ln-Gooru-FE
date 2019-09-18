@@ -25,12 +25,7 @@ $box-shadow: -1px 0px;
 @import "mixins/gru-accordion";
 
 @import "controllers/application";
-@import "controllers/class/analytics/performance/student";
 @import "controllers/teacher/class/collection";
-@import "controllers/class/info";
-@import "controllers/class/overview";
-@import "controllers/class/edit";
-@import "controllers/classes";
 @import "controllers/content/classes/modals";
 @import "controllers/content/classes/create";
 @import "controllers/content/classes/join";

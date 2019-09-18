@@ -1,10 +1,10 @@
-.controller.profile {
+.profile {
   min-height: 100%;
 
-  > .content {
+  .content-panel {
     height: 100%;
-    max-width: 1017px;
     margin: 25px auto auto;
+    float: inherit;
 
     .panel.add-content {
       border-radius: 5px;

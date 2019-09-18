@@ -1,6 +1,10 @@
 import Ember from 'ember';
-import { DEFAULT_K12_SUBJECT } from 'gooru-web/config/config';
-
+import { SCREEN_SIZES, DEFAULT_K12_SUBJECT } from 'gooru-web/config/config';
+import {
+  flattenGutToFwCompetency,
+  flattenGutToFwDomain
+} from 'gooru-web/utils/taxonomy';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
@@ -10,7 +14,19 @@ export default Ember.Controller.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
+  /**
+   * competency service dependency injection
+   * @type {Object}
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
+
   parentController: Ember.inject.controller('profile'),
+
+  /**
+   * it maintains profile data
+   * @type {Object}
+   */
+  userPreference: Ember.computed.alias('parentController.userPreference'),
 
   /**
    * show pull out .
@@ -35,8 +51,9 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  init() {
+  initialize() {
     let controller = this;
+    this.set('showProficiencyChart', true);
     controller.fetchCategories().then(() => {
       let selectedCategory = controller.get('selectedCategory');
       controller.fetchSubjectsByCategory(selectedCategory);
@@ -54,6 +71,8 @@ export default Ember.Controller.extend({
     onSelectCategory(category) {
       let controller = this;
       controller.set('selectedCategory', category);
+      controller.set('showDomainInfo', false);
+      controller.set('showCompetencyInfo', false);
       controller.fetchSubjectsByCategory(category);
     },
 
@@ -61,41 +80,14 @@ export default Ember.Controller.extend({
     onSelectItem(item) {
       let controller = this;
       controller.set('selectedSubject', item);
+      controller.set('showDomainInfo', false);
+      controller.set('showCompetencyInfo', false);
+      controller.loadDataBySubject(item.get('id'));
     },
 
-    /**
-     * Action triggered when the use toggle matrix view
-     */
-    onToggleView(item) {
-      let controller = this;
-      controller.set('selectedMatrixView', item);
-    },
-
-    onToggleChart(isChecked) {
-      let controller = this;
-      controller.set('isExpandChartEnabled', isChecked);
-    },
-
-    /**
-     *
-     * Triggered when an cell is selected
-     * @param item
-     */
-    onCompetencyPullOut(data, competencyMatrixs) {
-      let controller = this;
-      controller.set('isLoading', true);
-      controller.set('showMore', false);
-      let userId = controller.get('userId');
-      controller.set('userId', userId);
-      controller.set('competencyData', data);
-      controller.set('competencyMatrixs', competencyMatrixs);
-    },
-
-    /**
-     * Action triggered once the last updated date returned from the API
-     */
-    onGetLastUpdated(lastUpdated) {
-      this.set('lastUpdated', lastUpdated);
+    onClosePullOut() {
+      this.set('selectedCompetency', null);
+      this.set('showPullOut', false);
     },
 
     /**
@@ -107,26 +99,104 @@ export default Ember.Controller.extend({
         year: date.getFullYear()
       };
       this.set('timeLine', timeLine);
+      this.loadDataBySubject(this.get('selectedSubject.id'));
+    },
+
+    /**
+     * Action triggered when select a competency
+     */
+    onSelectCompetency(competency, domainCompetencyList) {
+      let controller = this;
+      controller.setSignatureContent(competency);
+      controller.set('selectedCompetency', competency);
+      controller.set('domainCompetencyList', domainCompetencyList);
+      controller.set('showCompetencyInfo', true);
+    },
+
+    onDomainSelect(domain) {
+      let controller = this;
+      controller.set('selectedDomain', domain);
+      let domainCompetencies = controller.get('competencyMatrixDomains');
+      let selectedDomainCompetencies = domainCompetencies.findBy(
+        'domainCode',
+        domain.get('domainCode')
+      );
+      controller.set(
+        'selectedDomainCompetencies',
+        selectedDomainCompetencies.get('competencies')
+      );
+      controller.set('selectedCompetency', null);
+      controller.set('showDomainInfo', true);
+      controller.set('showCompetencyInfo', false);
+    },
+
+    onClosePullUp() {
+      let controller = this;
+      controller.set('selectedCompetency', null);
     }
   },
 
   // -------------------------------------------------------------------------
   // Methods
 
+  parseCompetencyData() {
+    let controller = this;
+    let domainMatrixs = controller.get('competencyMatrixDomains');
+    let competencyMatrixCoordinates = controller.get(
+      'competencyMatrixCoordinates'
+    );
+    competencyMatrixCoordinates.domains.map(domain => {
+      let domainCompetency = domainMatrixs.findBy(
+        'domainCode',
+        domain.get('domainCode')
+      );
+      let notStartedCompetencies = domainCompetency.competencies.filterBy(
+        'status',
+        0
+      );
+      let inProgressCompetencies = domainCompetency.competencies.filterBy(
+        'status',
+        1
+      );
+      let masteredCompetencies = domainCompetency.competencies.filter(
+        competency => {
+          return competency.get('status') >= 2;
+        }
+      );
+      domain.set('notStartedCompetenciesCount', notStartedCompetencies.length);
+      domain.set('inProgressCompetenciesCount', inProgressCompetencies.length);
+      domain.set('masteredCompetenciesCount', masteredCompetencies.length);
+      domain.set('competencyCount', domainCompetency.competencies.length);
+    });
+  },
+
+  setSignatureContent(competency) {
+    let controller = this;
+    const signatureCompetencyList = controller.get('signatureCompetencyList');
+    const domainCode = competency.get('domainCode');
+    const competencyStatus = competency.get('status');
+    let showSignatureAssessment =
+      signatureCompetencyList[domainCode] ===
+        competency.get('competencyCode') ||
+      competencyStatus === 2 ||
+      competencyStatus === 4;
+    competency.set('showSignatureAssessment', showSignatureAssessment);
+  },
+
   /**
    * @function fetchCategories
    * Method  fetch list of taxonomy categories
    */
   fetchCategories() {
-    let component = this;
+    let controller = this;
     return new Ember.RSVP.Promise(reslove => {
-      component
+      controller
         .get('taxonomyService')
         .getCategories()
         .then(categories => {
           let category = categories.objectAt(0);
-          component.set('selectedCategory', category);
-          component.set('categories', categories);
+          controller.set('selectedCategory', category);
+          controller.set('categories', categories);
           reslove();
         });
     });
@@ -150,12 +220,82 @@ export default Ember.Controller.extend({
           : subjects.objectAt(0);
         controller.set('taxonomySubjects', subjects);
         controller.set('selectedSubject', selectedSubject);
+        if (selectedSubject) {
+          controller.loadDataBySubject(selectedSubject.get('id'));
+        }
       });
+  },
+
+  loadDataBySubject(subjectId) {
+    let controller = this;
+    let userId = controller.get('userId');
+    let timeLine = controller.get('timeLine');
+    const subjectCode = controller.get('selectedSubject.code');
+    const userPreference = controller.get('userPreference.standard_preference');
+    const frameworkCode = userPreference[subjectCode];
+    controller.set('framework', frameworkCode);
+    if (!frameworkCode) {
+      controller.set('showGutCompetency', true);
+    }
+    controller.set('isLoading', true);
+    return Ember.RSVP.hash({
+      competencyMatrixs: controller
+        .get('competencyService')
+        .getCompetencyMatrixDomain(userId, subjectId, timeLine),
+      competencyMatrixCoordinates: controller
+        .get('competencyService')
+        .getCompetencyMatrixCoordinates(subjectId),
+      signatureList: controller
+        .get('competencyService')
+        .getUserSignatureCompetencies(userId, subjectCode),
+      crossWalkFWC: frameworkCode
+        ? controller
+          .get('taxonomyService')
+          .fetchCrossWalkFWC(frameworkCode, subjectId)
+        : null
+    }).then(
+      ({
+        competencyMatrixs,
+        competencyMatrixCoordinates,
+        signatureList,
+        crossWalkFWC
+      }) => {
+        if (
+          !(controller.get('isDestroyed') || controller.get('isDestroying'))
+        ) {
+          controller.set('isLoading', false);
+          controller.set('competencyMatrixDomains', competencyMatrixs.domains);
+          controller.set('signatureCompetencyList', signatureList);
+          controller.set(
+            'competencyMatrixCoordinates',
+            competencyMatrixCoordinates
+          );
+          controller.parseCompetencyData();
+          if (crossWalkFWC) {
+            controller.set(
+              'fwCompetencies',
+              flattenGutToFwCompetency(crossWalkFWC)
+            );
+            controller.set('fwDomains', flattenGutToFwDomain(crossWalkFWC));
+          }
+        } else {
+          Ember.Logger.warn('comp is destroyed...');
+        }
+      },
+      this
+    );
   },
 
   // -------------------------------------------------------------------------
   // Properties
 
+  showProficiencyChart: true,
+
+  /**
+   * @property {Boolean}
+   * Property to store show gut competency
+   */
+  showGutCompetency: false,
   /**
    * @property {JSON}
    * Property to store active category
@@ -201,5 +341,20 @@ export default Ember.Controller.extend({
       month: curDate.getMonth() + 1,
       year: curDate.getFullYear()
     };
-  })
+  }),
+
+  /**
+   * @property {String} subjectCode
+   */
+  subjectCode: Ember.computed('selectedSubject', function() {
+    let controller = this;
+    let subject = controller.get('selectedSubject');
+    return subject ? subject.id : '';
+  }),
+
+  /**
+   * @property {Boolean}
+   * Property to store given screen value is compatible
+   */
+  isMobile: isCompatibleVW(SCREEN_SIZES.LARGE)
 });

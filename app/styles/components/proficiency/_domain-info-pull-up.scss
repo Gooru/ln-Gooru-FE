@@ -17,6 +17,7 @@
     overflow-y: auto;
     display: grid;
     height: 100%;
+    grid-template-rows: max-content 1fr;
 
     .title {
       text-transform: uppercase;
@@ -30,7 +31,6 @@
       background-color: #fff;
       grid-gap: 10px;
       grid-template-columns: repeat(2, 1fr);
-      overflow: auto;
 
       .competency-info {
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
@@ -38,6 +38,7 @@
         padding: 10px;
         height: 100%;
         cursor: pointer;
+        max-height: 180px;
 
         .competency-desc {
           margin-top: 10px;

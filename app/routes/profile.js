@@ -53,6 +53,7 @@ export default Ember.Route.extend({
             .get('profileService')
             .readUserProfile(route.get('currentLoginId'))
           : null;
+      const userPreference = route.get('profileService').getProfilePreference();
       return profilePromise.then(function(profile) {
         var EditProfileValidation = Profile.extend(EditProfileValidations);
         var editProfile = EditProfileValidation.create(
@@ -61,13 +62,15 @@ export default Ember.Route.extend({
         editProfile.merge(profile, profile.modelProperties());
         return Ember.RSVP.hash({
           profile: editProfile,
-          loginUserProfile: loginUserProfile
+          loginUserProfile: loginUserProfile,
+          userPreference: userPreference
         });
       });
     }
     return Ember.RSVP.hash({
       profile: null,
-      loginUserProfile: null
+      loginUserProfile: null,
+      userPreference: null
     });
   },
 
@@ -79,6 +82,7 @@ export default Ember.Route.extend({
   setupController: function(controller, model) {
     controller.set('profile', model.profile);
     controller.set('steps', model.tourSteps);
+    controller.set('userPreference', model.userPreference);
     controller.set('currentLoginUser', model.loginUserProfile);
   },
 

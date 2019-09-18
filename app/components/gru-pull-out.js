@@ -81,7 +81,7 @@ export default Ember.Component.extend({
     onPullOutClose() {
       this.set('showMore', false);
       this.set('showLess', false);
-      this.set('showPullOut', false);
+      this.sendAction('onClosePullOut');
     }
   },
 
