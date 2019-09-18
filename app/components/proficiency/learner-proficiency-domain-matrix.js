@@ -177,10 +177,16 @@ export default Ember.Component.extend({
   competencyFocusIn() {
     let component = this;
     let selectedCompetency = component.get('selectedCompetency');
-    if (!selectedCompetency.get('xAxisSeq')) {
-      selectedCompetency = component
-        .get('chartData')
-        .findBy('competencyCode', selectedCompetency.get('competencyCode'));
+    const chartData = component.get('chartData');
+    if (
+      selectedCompetency &&
+      !selectedCompetency.get('xAxisSeq') &&
+      Ember.isArray(chartData)
+    ) {
+      selectedCompetency = chartData.findBy(
+        'competencyCode',
+        selectedCompetency.get('competencyCode')
+      );
     }
     component.blockChartContainer(selectedCompetency);
   },
