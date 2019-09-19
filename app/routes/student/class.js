@@ -368,11 +368,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('skylineInitialState', model.skylineInitialState);
     controller.set('isPremiumCourse', model.isPremiumCourse);
     controller.set('classmodel', model);
-    controller.set(
-      'fwCompetencies',
-      flattenGutToFwCompetency(model.crossWalkFWC)
-    );
-    controller.set('fwDomains', flattenGutToFwDomain(model.crossWalkFWC));
+    if (model.crossWalkFWC) {
+      controller.set(
+        'fwCompetencies',
+        flattenGutToFwCompetency(model.crossWalkFWC)
+      );
+      controller.set('fwDomains', flattenGutToFwDomain(model.crossWalkFWC));
+    }
   },
 
   resetController(controller) {

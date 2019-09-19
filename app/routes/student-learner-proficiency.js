@@ -111,11 +111,13 @@ export default Ember.Route.extend({
     controller.set('taxonomyCategories', model.get('categories'));
     controller.set('mapLocation', model.get('mapLocation'));
     controller.set('contextId', model.get('contextId'));
-    controller.set(
-      'fwCompetencies',
-      flattenGutToFwCompetency(model.crossWalkFWC)
-    );
-    controller.set('fwDomains', flattenGutToFwDomain(model.crossWalkFWC));
+    if (model.crossWalkFWC) {
+      controller.set(
+        'fwCompetencies',
+        flattenGutToFwCompetency(model.crossWalkFWC)
+      );
+      controller.set('fwDomains', flattenGutToFwDomain(model.crossWalkFWC));
+    }
     controller.loadData();
   },
   resetController(controller) {
