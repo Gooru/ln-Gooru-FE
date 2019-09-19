@@ -214,11 +214,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     let classData = model.class;
     classData.course = model.course;
     controller.fetchDcaSummaryPerformance();
-    controller.set(
-      'fwCompetencies',
-      flattenGutToFwCompetency(model.crossWalkFWC)
-    );
-    controller.set('fwDomains', flattenGutToFwDomain(model.crossWalkFWC));
+    if (model.crossWalkFWC) {
+      controller.set(
+        'fwCompetencies',
+        flattenGutToFwCompetency(model.crossWalkFWC)
+      );
+      controller.set('fwDomains', flattenGutToFwDomain(model.crossWalkFWC));
+    }
   },
 
   resetController(controller) {
