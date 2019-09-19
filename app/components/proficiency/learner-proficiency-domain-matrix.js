@@ -66,6 +66,16 @@ export default Ember.Component.extend({
       .addClass('show-tooltip');
   },
 
+  resetAttributes() {
+    const component = this;
+    component.set('cellHeight', 6);
+    component.set('cellWidth', 32);
+    component.set('selectedDomain', null);
+    component.set('selectedCompetency', null);
+    component.set('isExpandChartEnabled', false);
+    component.set('showExpandedButton', true);
+  },
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -242,8 +252,7 @@ export default Ember.Component.extend({
     'competencyMatrixCoordinates',
     function() {
       let component = this;
-      component.set('selectedDomain', null);
-      component.set('selectedCompetency', null);
+      component.resetAttributes();
       component.loadChartData();
     }
   ),

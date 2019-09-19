@@ -172,7 +172,7 @@
 
         &.no-grade {
           .domain-chart-container {
-            max-width: 100%;
+            max-width: 840px;
           }
         }
         @extend %scroll-style;
@@ -188,6 +188,7 @@
             grid-template-columns: auto;
             align-items: end;
             @extend %scroll-style;
+            width: max-content;
 
             &.show-gut {
               #render-proficiency-matrix {
