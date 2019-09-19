@@ -6,7 +6,7 @@
           {{gru-icon name="arrow_back"}}
         </div>
         <div class="domain-name ellipsis">
-          {{concat activeDomain.domainSeq '. ' (locale-translation (t (concat 'domain-code.' activeDomain.domainCode)) (domain-gut-to-fw-transform fwDomains activeDomain.domainCode activeDomain.domainName 'fwDomainName'))}}
+          {{concat activeDomain.domainSeq '. ' (domain-gut-to-fw-transform fwDomains activeDomain.domainCode activeDomain.domainName 'fwDomainName' true)}}
         </div>
       </div>
       <div class="competency-count">
@@ -49,17 +49,14 @@
       <div class="competencies-info">
         {{#each activeDomainCompetencyPerformance.domainData.competencies as |competency|}}
           <div class="competency-info">
-            <i class="info-icon"
-               title="{{competency-gut-to-fw-transform
+            <i class="info-icon" title="{{competency-gut-to-fw-transform
                fwCompetencies
                competency.competencyCode
                (if competency.competencyStudentDesc competency.competencyStudentDesc competency.competencyCode)
                'frameworkCompetencyName'
                false
                true
-              }}"
-               data-toggle="tooltip"
-               data-placement="bottom auto">
+              }}" data-toggle="tooltip" data-placement="bottom auto">
             </i>
           </div>
         {{/each}}
@@ -78,7 +75,6 @@
 </div>
 
 {{#if isShowCompetencyContentReport}}
-{{log selectedCompetency}}
   {{#reports/pull-up/competency-report fwDomains=fwDomains fwCompetencies=fwCompetencies type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
     onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
     {{reports/pull-up/competency-content-report fwCompetencies=fwCompetencies domainCompetencyList=domainCompetencyList competency=selectedCompetency userId=selectedStudentUserId learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}

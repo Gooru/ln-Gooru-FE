@@ -143,7 +143,7 @@
         <div class="student-competencies-container">
           {{#each studentDomainCompetencies as |domainCompetencies|}}
             <div class="domain-name ellipsis">
-              {{domain-gut-to-fw-transform fwDomains domainCompetencies.domainCode domainCompetencies.domainName 'fwDomainName'}}
+              {{domain-gut-to-fw-transform fwDomains domainCompetencies.domainCode domainCompetencies.domainName 'fwDomainName' true}}
             </div>
             <div class="competencies">
               {{#each domainCompetencies.competencies as |competency|}}
