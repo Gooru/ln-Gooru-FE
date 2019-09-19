@@ -154,6 +154,8 @@ export default Ember.Mixin.create({
       component.set('selectedCategory', category);
       component.set('showDomainInfo', false);
       component.set('showCompetencyInfo', false);
+      component.set('selectedCompetency', null);
+      component.set('selectedDomain', null);
       component.fetchSubjectsByCategory(category);
     },
     /**
@@ -173,6 +175,8 @@ export default Ember.Mixin.create({
       component.set('activeSubject', subject);
       component.set('showDomainInfo', false);
       component.set('showCompetencyInfo', false);
+      component.set('selectedCompetency', null);
+      component.set('selectedDomain', null);
       component.fetchTaxonomyGrades();
       component.loadDataBySubject();
       component.fetchSignatureCompetencyList();
