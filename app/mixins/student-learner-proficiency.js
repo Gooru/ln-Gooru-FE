@@ -233,6 +233,7 @@ export default Ember.Mixin.create({
    */
   loadData() {
     let component = this;
+    component.getUserPreference();
     let categories = component.get('taxonomyCategories');
     let categoryCode = component.get('categoryCode');
     let defaultCategory = categories.findBy('code', categoryCode);
@@ -240,7 +241,6 @@ export default Ember.Mixin.create({
       component.set('selectedCategory', defaultCategory);
       component.fetchSubjectsByCategory(defaultCategory);
     }
-    component.getUserPreference();
   },
 
   getUserPreference() {
