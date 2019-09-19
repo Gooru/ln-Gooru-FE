@@ -152,6 +152,8 @@ export default Ember.Mixin.create({
     onSelectCategory(category) {
       let component = this;
       component.set('selectedCategory', category);
+      component.set('showDomainInfo', false);
+      component.set('showCompetencyInfo', false);
       component.fetchSubjectsByCategory(category);
     },
     /**
