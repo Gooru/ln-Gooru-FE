@@ -31,6 +31,7 @@
       background-color: #fff;
       grid-gap: 10px;
       grid-template-columns: repeat(2, 1fr);
+      height: max-content;
 
       .competency-info {
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);

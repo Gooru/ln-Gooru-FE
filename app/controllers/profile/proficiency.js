@@ -73,6 +73,8 @@ export default Ember.Controller.extend({
       controller.set('selectedCategory', category);
       controller.set('showDomainInfo', false);
       controller.set('showCompetencyInfo', false);
+      controller.set('selectedCompetency', null);
+      controller.set('selectedDomain', null);
       controller.fetchSubjectsByCategory(category);
     },
 
@@ -82,6 +84,8 @@ export default Ember.Controller.extend({
       controller.set('selectedSubject', item);
       controller.set('showDomainInfo', false);
       controller.set('showCompetencyInfo', false);
+      controller.set('selectedCompetency', null);
+      controller.set('selectedDomain', null);
       controller.loadDataBySubject(item.get('id'));
     },
 
