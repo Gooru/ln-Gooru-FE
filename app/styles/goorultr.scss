@@ -11,8 +11,6 @@
 @import "mixins/content/edit";
 @import "mixins/gru-accordion";
 @import "controllers/application";
-@import "controllers/class/analytics/performance/teacher";
-@import "controllers/teacher/class/collection";
 @import "controllers/content/classes/modals";
 @import "controllers/content/classes/create";
 @import "controllers/content/classes/join";
@@ -44,8 +42,6 @@
 @import "controllers/student-independent-learning";
 @import "controllers/forgot-password";
 @import "controllers/reset-password";
-@import "controllers/featured";
-@import "controllers/account-settings";
 @import "controllers/grading-player";
 @import "controllers/study-player";
 @import "controllers/study-player/timeline-view";
@@ -64,9 +60,7 @@
 @import "controllers/teacher/class";
 @import "controllers/teacher/class/class-activities";
 @import "controllers/teacher/class/class-management";
-@import "controllers/teacher/class/students";
 @import "controllers/teacher/class/course-map";
-@import "controllers/teacher/class/performance";
 @import "controllers/teacher/class/students-proficiency";
 @import "controllers/teacher/class/atc";
 @import "controllers/goals/manage";
