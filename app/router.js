@@ -135,22 +135,18 @@ Router.map(function() {
   });
 
   this.route('student', function() {
-    this.route('performance');
     this.route(
       'class',
       {
         path: '/class/:classId'
       },
       function() {
-        this.route('analytics', function() {
-          this.route('performance');
-        });
+        this.route('analytics');
         this.route('course-map');
         this.route('milestone', {
           path: '/course-map-milestone'
         });
         this.route('class-activities');
-        this.route('performance');
         this.route('setup-in-complete');
         this.route('proficiency');
         this.route('diagnosis-of-knowledge');
@@ -164,7 +160,6 @@ Router.map(function() {
       },
       function() {
         this.route('course-map');
-        this.route('performance');
       }
     );
   });
@@ -181,11 +176,6 @@ Router.map(function() {
         this.route('class-activities');
         this.route('class-management');
         this.route('course-map');
-        this.route('performance');
-        this.route('collection', {
-          path: '/unit/:unitId/lesson/:lessonId/collection/:collectionId'
-        });
-        this.route('students');
         this.route('students-proficiency');
         this.route('student-learner-proficiency');
         this.route('add-course');
@@ -198,6 +188,7 @@ Router.map(function() {
   this.route('not-found', {
     path: '/not-found/:entity'
   });
+
   this.route(
     'profile',
     {
@@ -207,12 +198,10 @@ Router.map(function() {
       this.route('about');
       this.route('edit');
       this.route('preference');
-
       this.route('network', function() {
         this.route('following');
         this.route('followers');
       });
-
       this.route('proficiency');
       this.route('portfolio');
     }
