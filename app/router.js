@@ -194,10 +194,6 @@ Router.map(function() {
     );
   });
 
-  this.route('account-settings', {
-    path: '/account-settings/:userId'
-  });
-
   this.route('player-external');
   this.route('not-found', {
     path: '/not-found/:entity'
@@ -210,8 +206,6 @@ Router.map(function() {
     function() {
       this.route('about');
       this.route('edit');
-      this.route('activity');
-      this.route('analytics');
       this.route('preference');
 
       this.route('network', function() {
