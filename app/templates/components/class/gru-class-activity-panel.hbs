@@ -90,7 +90,7 @@
     </div>
     <div class="ca-panel-container-2">
       <div class="ca-actions">
-        <div class="student-count {{if showCohort 'active'}}">
+        <div class="student-count pointer {{if showCohort 'active'}}" {{action 'showStudentList'}}>
           {{gru-icon name="account_circle"}}
           {{#if (eq classActivity.usersCount -1)}}
             <span class="hidden-xs" {{action 'showStudentList'}}>{{t 'common.all'}}</span>

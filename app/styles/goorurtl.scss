@@ -25,8 +25,6 @@ $box-shadow: -1px 0px;
 @import "mixins/gru-accordion";
 
 @import "controllers/application";
-@import "controllers/class/analytics/performance/teacher";
-@import "controllers/teacher/class/collection";
 @import "controllers/content/classes/modals";
 @import "controllers/content/classes/create";
 @import "controllers/content/classes/join";
@@ -57,8 +55,6 @@ $box-shadow: -1px 0px;
 @import "controllers/student-independent-learning";
 @import "controllers/forgot-password";
 @import "controllers/reset-password";
-@import "controllers/featured";
-@import "controllers/account-settings";
 @import "controllers/grading-player";
 @import "controllers/study-player";
 @import "controllers/study-player-external";
@@ -74,7 +70,6 @@ $box-shadow: -1px 0px;
 @import "controllers/teacher/class/class-activities";
 @import "controllers/teacher/class/class-management";
 @import "controllers/teacher/class/course-map";
-@import "controllers/teacher/class/performance";
 
 @import "controllers/goals/manage";
 

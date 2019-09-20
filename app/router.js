@@ -107,31 +107,6 @@ Router.map(function() {
     path: '/student-learner-proficiency/:userId'
   });
 
-  this.route(
-    'class',
-    {
-      path: '/class/:classId'
-    },
-    function() {
-      this.route('analytics', function() {
-        this.route('performance', function() {
-          this.route('teacher', function() {
-            this.route('course');
-            this.route('unit', {
-              path: '/unit/:unitId'
-            });
-            this.route('lesson', {
-              path: '/unit/:unitId/lesson/:lessonId'
-            });
-            this.route('collection', {
-              path: '/unit/:unitId/lesson/:lessonId/collection/:collectionId'
-            });
-          });
-        });
-      });
-    }
-  );
-
   this.route('reports', function() {
     this.route('collection', {
       path: '/class/:classId/collection/:collectionId'
@@ -219,12 +194,6 @@ Router.map(function() {
     );
   });
 
-  this.route('featured');
-
-  this.route('account-settings', {
-    path: '/account-settings/:userId'
-  });
-
   this.route('player-external');
   this.route('not-found', {
     path: '/not-found/:entity'
@@ -237,8 +206,6 @@ Router.map(function() {
     function() {
       this.route('about');
       this.route('edit');
-      this.route('activity');
-      this.route('analytics');
       this.route('preference');
 
       this.route('network', function() {
@@ -254,7 +221,6 @@ Router.map(function() {
    * IMPORTANT! the profile route should be the last one at this file, so we can handle the app urls
    * and the vanity urls for profiles like www.gooru.org/javier-perez
    */
-  this.route('preference');
   this.route('library');
   this.route('library-search');
   this.route('player-offline-activity', {

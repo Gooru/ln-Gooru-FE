@@ -1,7 +1,11 @@
 import Ember from 'ember';
 import { ROLES, SCREEN_SIZES } from 'gooru-web/config/config';
 import { isCompatibleVW } from 'gooru-web/utils/utils';
-import { getCategoryCodeFromSubjectId } from 'gooru-web/utils/taxonomy';
+import {
+  flattenGutToFwCompetency,
+  flattenGutToFwDomain,
+  getCategoryCodeFromSubjectId
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Mixin.create({
   // -------------------------------------------------------------------------
   // Dependencies
@@ -25,6 +29,11 @@ export default Ember.Mixin.create({
    * @type {Object}
    */
   competencyService: Ember.inject.service('api-sdk/competency'),
+
+  /**
+   * @type {ProfileService} Service to retrieve profile information
+   */
+  profileService: Ember.inject.service('api-sdk/profile'),
 
   /**
    * @property {Object}
@@ -87,6 +96,14 @@ export default Ember.Mixin.create({
    */
   showGutCompetency: false,
 
+  /**
+   * @property {Object} userStandardPreference
+   */
+  userStandardPreference: null,
+
+  /**
+   * @property {Boolean} isShowMatrixChart
+   */
   isShowMatrixChart: true,
 
   /**
@@ -129,12 +146,16 @@ export default Ember.Mixin.create({
    * @property {String}
    * Property to store is class framework
    */
-  classFramework: Ember.computed.alias('class.preference.framework'),
+  framework: null,
 
   actions: {
     onSelectCategory(category) {
       let component = this;
       component.set('selectedCategory', category);
+      component.set('showDomainInfo', false);
+      component.set('showCompetencyInfo', false);
+      component.set('selectedCompetency', null);
+      component.set('selectedDomain', null);
       component.fetchSubjectsByCategory(category);
     },
     /**
@@ -154,6 +175,8 @@ export default Ember.Mixin.create({
       component.set('activeSubject', subject);
       component.set('showDomainInfo', false);
       component.set('showCompetencyInfo', false);
+      component.set('selectedCompetency', null);
+      component.set('selectedDomain', null);
       component.fetchTaxonomyGrades();
       component.loadDataBySubject();
       component.fetchSignatureCompetencyList();
@@ -210,6 +233,7 @@ export default Ember.Mixin.create({
    */
   loadData() {
     let component = this;
+    component.getUserPreference();
     let categories = component.get('taxonomyCategories');
     let categoryCode = component.get('categoryCode');
     let defaultCategory = categories.findBy('code', categoryCode);
@@ -217,6 +241,19 @@ export default Ember.Mixin.create({
       component.set('selectedCategory', defaultCategory);
       component.fetchSubjectsByCategory(defaultCategory);
     }
+  },
+
+  getUserPreference() {
+    let component = this;
+    component
+      .get('profileService')
+      .getProfilePreference()
+      .then(userPreference => {
+        component.set(
+          'userStandardPreference',
+          userPreference.standard_preference
+        );
+      });
   },
 
   fetchSignatureCompetencyList() {
@@ -285,6 +322,16 @@ export default Ember.Mixin.create({
     let subjectId = component.get('activeSubject.id');
     let userId = component.get('studentProfile.id');
     let timeLine = component.get('timeLine');
+    const subjectCode = component.get('activeSubject.code');
+    const classFrameworkCode = component.get('class.preference.framework');
+    if (component.get('subjectBucket') !== subjectCode || !classFrameworkCode) {
+      const userStandardPreference = component.get('userStandardPreference');
+      const frameworkCode = userStandardPreference[subjectCode];
+      component.set('framework', frameworkCode);
+    } else {
+      component.set('framework', classFrameworkCode);
+    }
+    let frameworkId = component.get('framework');
     if (subjectId) {
       return Ember.RSVP.hash({
         competencyMatrixs: component
@@ -293,19 +340,38 @@ export default Ember.Mixin.create({
         competencyMatrixCoordinates: component
           .get('competencyService')
           .getCompetencyMatrixCoordinates(subjectId),
+        crossWalkFWC: frameworkId
+          ? component
+            .get('taxonomyService')
+            .fetchCrossWalkFWC(frameworkId, subjectId)
+          : null,
         userProficiencyBaseLine: component.fetchBaselineCompetencies()
-      }).then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
-        if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
-          component.set('competencyMatrixDomains', competencyMatrixs.domains);
-          component.set(
-            'competencyMatrixCoordinates',
-            competencyMatrixCoordinates
-          );
-          component.parseCompetencyData();
-        } else {
-          Ember.Logger.warn('comp is destroyed...');
-        }
-      }, this);
+      }).then(
+        ({ competencyMatrixs, competencyMatrixCoordinates, crossWalkFWC }) => {
+          if (
+            !(component.get('isDestroyed') || component.get('isDestroying'))
+          ) {
+            component.set('competencyMatrixDomains', competencyMatrixs.domains);
+            component.set(
+              'competencyMatrixCoordinates',
+              competencyMatrixCoordinates
+            );
+            if (crossWalkFWC) {
+              component.set(
+                'fwCompetencies',
+                flattenGutToFwCompetency(crossWalkFWC)
+              );
+              component.set('fwDomains', flattenGutToFwDomain(crossWalkFWC));
+            }
+            component.set('showGutCompetency', !frameworkId);
+            component.set('hideGutCompetencyButton', !frameworkId);
+            component.parseCompetencyData();
+          } else {
+            Ember.Logger.warn('comp is destroyed...');
+          }
+        },
+        this
+      );
     }
   },
 

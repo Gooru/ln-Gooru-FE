@@ -86,9 +86,9 @@ export default Ember.Service.extend({
             service.get('taxonomySerializer').normalizeFWCMatrixs(response)
           );
         })
-        .catch(function(error) {
-          Ember.Logger(
-            `${subjectCode} is doesn't exists in this ${frameworkCode} - ${error}`
+        .catch(function() {
+          Ember.Logger.error(
+            `${subjectCode} is doesn't exists in this ${frameworkCode}`
           );
           resolve([]);
         });
