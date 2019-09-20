@@ -29,6 +29,11 @@
           </a>
         {{/link-to}}
         {{#if isMyProfile}}
+          <li class="profile-menu-item portfolio out-of-scope" {{action 'selectItem' 'portfolio'}}>
+            <a href='{{view.href}}' class="btn btn-category">
+              <span>Portfolio</span>
+            </a>
+          </li>
           {{#link-to "profile.preference" tagName="li" class='preference'  }}
             <a href='{{view.href}}' class="btn btn-category select" {{ action 'selectItem' 'preference'}}>
               <span>{{t "profile.gru-navigation.preference.preference"}}</span>

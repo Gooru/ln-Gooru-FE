@@ -1,5 +1,8 @@
 import Ember from 'ember';
-
+import {
+  flattenGutToFwCompetency,
+  flattenGutToFwDomain
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Route.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -67,22 +70,38 @@ export default Ember.Route.extend({
     const classId = params.classId;
     const courseId = params.courseId;
     const contextId = params.contextId || null;
-    return Ember.RSVP.hash({
-      profilePromise: route.get('profileService').readUserProfile(studentId),
-      classPromise: route.get('classService').readClassInfo(classId),
-      coursePromise: route.get('courseService').fetchById(courseId),
-      taxonomyCategories: route.get('taxonomyService').getCategories(),
-      mapLocation: route.get('navigateMapService').getMapLocation(params)
-    }).then(function(hash) {
-      return Ember.Object.create({
-        profile: hash.profilePromise,
-        categories: hash.taxonomyCategories,
-        class: hash.classPromise,
-        course: hash.coursePromise,
-        mapLocation: hash.mapLocation,
-        contextId
+    return route
+      .get('classService')
+      .readClassInfo(classId)
+      .then(aClass => {
+        const frameworkId = aClass.get('preference.framework');
+        const subjectId = aClass.get('preference.subject');
+        let crossWalkFWCPromise = null;
+        if (frameworkId && subjectId) {
+          crossWalkFWCPromise = route
+            .get('taxonomyService')
+            .fetchCrossWalkFWC(frameworkId, subjectId);
+        }
+        return Ember.RSVP.hash({
+          profilePromise: route
+            .get('profileService')
+            .readUserProfile(studentId),
+          coursePromise: route.get('courseService').fetchById(courseId),
+          taxonomyCategories: route.get('taxonomyService').getCategories(),
+          mapLocation: route.get('navigateMapService').getMapLocation(params),
+          crossWalkFWC: crossWalkFWCPromise
+        }).then(function(hash) {
+          return Ember.Object.create({
+            profile: hash.profilePromise,
+            categories: hash.taxonomyCategories,
+            class: aClass,
+            course: hash.coursePromise,
+            mapLocation: hash.mapLocation,
+            crossWalkFWC: hash.crossWalkFWC,
+            contextId
+          });
+        });
       });
-    });
   },
 
   setupController(controller, model) {
@@ -92,6 +111,13 @@ export default Ember.Route.extend({
     controller.set('taxonomyCategories', model.get('categories'));
     controller.set('mapLocation', model.get('mapLocation'));
     controller.set('contextId', model.get('contextId'));
+    if (model.crossWalkFWC) {
+      controller.set(
+        'fwCompetencies',
+        flattenGutToFwCompetency(model.crossWalkFWC)
+      );
+      controller.set('fwDomains', flattenGutToFwDomain(model.crossWalkFWC));
+    }
     controller.loadData();
   },
   resetController(controller) {

@@ -5,26 +5,38 @@ export default Ember.Component.extend({
   // Attributes
   classNames: ['domain-info-pull-up'],
 
-  classNameBindings: ['showPullUp:open'],
+  // -------------------------------------------------------------------------
+  // Events
+  didInsertElement() {
+    let component = this;
+    component.openPullUp();
+  },
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    /**
+     * Action when click on close button
+     */
     closePullUp() {
-      let component = this;
-      component.toggleProperty('showPullUp');
-      component.set('domain', null);
+      const component = this;
+      component.$().animate(
+        {
+          top: '100%'
+        },
+        400,
+        function() {
+          component.set('showPullUp', false);
+          component.set('domain', null);
+        }
+      );
     },
-
+    /**
+     * Action when click on competency title
+     */
     onInspectCompetency(selectedCompetency) {
-      let component = this;
+      const component = this;
       let competencies = component.get('competencies');
-      selectedCompetency.set(
-        'fwDomainCode',
-        component.get('domain.fwDomainCode')
-      );
-      selectedCompetency.set(
-        'fwDomainName',
-        component.get('domain.fwDomainName')
-      );
       selectedCompetency.set('domainName', component.get('domain.domainName'));
       selectedCompetency.set('domainCode', component.get('domain.domainCode'));
       component.sendAction(
@@ -33,5 +45,20 @@ export default Ember.Component.extend({
         competencies
       );
     }
+  },
+
+  // -------------------------------------------------------------------------
+  // Methods
+  /**
+   * Function to animate the  pullup from bottom to top
+   */
+  openPullUp() {
+    const component = this;
+    component.$().animate(
+      {
+        top: '0%'
+      },
+      400
+    );
   }
 });

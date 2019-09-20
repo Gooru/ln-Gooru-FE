@@ -1,172 +1,28 @@
-.controller.profile {
+.profile {
   .user-proficiency {
-    display: grid;
-
-    .taxonomy-info {
-      display: grid;
-      padding-bottom: 15px;
-      align-items: center;
-      justify-items: center;
-      grid-template-columns: 1fr;
-      margin: 0;
-
-      .dropdown-content {
-        .list-item,
-        .list-item.active {
-          display: block !important;
-        }
-      }
-
-      .dropdown-content {
-        .list-item.active {
-          background-color: #bbb;
-        }
-
-        .list-item,
-        .list-item.active {
-          display: none;
-        }
-      }
-
-      .label {
-        margin-right: 0;
-      }
-    }
-
-    .panel.left-panel {
-      margin: auto;
-    }
-
-    .panel.right-panel {
-      display: none;
-    }
     @media screen and (max-width: $screen-sm - 1) {
-      .panel.left-panel {
-        width: 100vw;
+      .left-panel {
+        width: 100%;
 
-        .panel-header {
-          display: grid;
-          grid-template-columns: auto 125px;
+        .panel-body {
+          .inspect-competency {
+            .competency-info-pull-up {
+              left: 0;
 
-          .title {
-            width: 100%;
-            margin-left: 10px;
-          }
-
-          .toggle-chart-view {
-            display: none;
-          }
-
-          .actions {
-            .toggle-view {
-              span {
-                margin-right: 10px;
+              &.open {
+                height: 385px;
               }
-            }
-          }
-        }
 
-        .panel-body.matrix {
-          .domain {
-            .proficiency-matrix {
-              .competency-chart-tab-container {
-                .competency-courses-chart {
-                  .courses {
-                    display: none;
-                  }
-
-                  .matrix-chart-container {
-                    zoom: 0.8;
-                    width: 100%;
-                    display: grid;
-                    justify-content: center;
-                  }
-                }
+              &.expand {
+                height: calc(100% - -15px);
               }
-            }
-          }
 
-          .course {
-            .proficiency-course-matrix {
-              .course-matrix-container {
-                zoom: 0.5;
-
-                .course-chart {
-                  display: grid;
-                  grid-template-columns: auto auto;
-                  justify-content: center;
-                }
-              }
-            }
-          }
-
-          .proficiency-tags {
-            .proficiency-legends {
-              .legend {
-                .box,
-                .box-skyline {
-                  margin-right: 5px;
-                }
-                margin-right: 10px;
-              }
-            }
-          }
-
-          .time-series {
-            display: none;
-          }
-        }
-      }
-    }
-    @media screen and (max-width: $screen-359 + 1) {
-      .panel.left-panel {
-        .panel-header {
-          .title {
-            font-size: 15px;
-          }
-        }
-
-        .panel-body.matrix {
-          .course {
-            .proficiency-course-matrix {
-              .course-matrix-container {
-                zoom: 0.4;
-              }
-            }
-          }
-
-          .proficiency-tags {
-            .proficiency-legends {
-              .legend {
-                margin-right: 5px;
-
-                .box,
-                .box-skyline {
-                  margin-right: 5px;
-                }
-
-                .title {
-                  font-size: 11px;
-                }
-              }
-            }
-          }
-
-          .time-series {
-            display: none;
-          }
-        }
-      }
-    }
-    @media screen and (max-width: $screen-400) {
-      .panel.left-panel {
-        .panel-body.matrix {
-          .domain {
-            .proficiency-matrix {
-              .competency-chart-tab-container {
-                .competency-courses-chart {
-                  .matrix-chart-container {
-                    zoom: 0.6;
+              .body {
+                .competency-content-report {
+                  .competency-performance {
+                    .competency-name {
+                      align-items: center;
+                    }
                   }
                 }
               }
@@ -174,37 +30,9 @@
           }
         }
       }
-    }
-    @media screen and (max-width: $screen-xs) {
-      .proficiency-tags {
-        .proficiency-legends {
-          display: grid;
-          grid-template-columns: auto auto auto;
-          grid-gap: 10px;
-        }
-      }
 
-      .panel.left-panel {
-        .panel-body.matrix {
-          .competency-chart-tab-container,
-          .course-matrix-container {
-            #render-proficiency-course-matrix,
-            #render-proficiency-matrix {
-              svg {
-                .competency {
-                  pointer-events: none;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    @media screen and (max-height: $screen-359 + 1) {
-      .panel.left-panel {
-        .panel-body.matrix {
-          margin-bottom: 70px;
-        }
+      .right-panel {
+        display: none;
       }
     }
   }

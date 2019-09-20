@@ -28,7 +28,15 @@
                 <div class="domain-completion-report" {{action "onSelectDomain" domainData}}>
                   <div class="domain-info-container">
                     <div class="domain-code">{{domainData.domainCode}}</div>
-                    <div class="domain-title ellipsis">{{locale-translation (t (concat 'domain-code.' domainData.domainCode)) (domain-gut-to-fw-transform fwDomains domainData.domainCode domainData.domainName 'fwDomainName')}}</div>
+                    <div class="domain-title ellipsis">
+                      {{domain-gut-to-fw-transform
+                        fwDomains
+                        domainData.domainCode
+                        domainData.domainName
+                        'fwDomainName'
+                        true
+                      }}
+                    </div>
                   </div>
                   <div class="domain-performance-container">
                     <div class="completion-percentage">{{domainData.completionPercentage}}%</div>

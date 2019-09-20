@@ -7,7 +7,7 @@
     <div class="report-info">
       <div class="title-section {{if competency 'content'}}">
         <div class="domain-name">
-          {{locale-translation (t (concat 'domain-code.' competency.domainCode)) (domain-gut-to-fw-transform fwDomains competency.domainCode competency.domainName 'fwDomainName')}}
+          {{domain-gut-to-fw-transform fwDomains competency.domainCode competency.domainName 'fwDomainName' true}}
         </div>
         <div class="title-content">
           <div class="competency-code">

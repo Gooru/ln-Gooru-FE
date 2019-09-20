@@ -1,7 +1,7 @@
 <div class="dca-panel-container {{if isUnScheduled 'unscheduled'}} {{if classActivity.isNewlyAdded 'new'}} {{if isActivityPast 'past-date'}}">
   {{#unless isUnScheduled}}
     <div class="ca-panel-container-1">
-      <div class="icon">
+      <div class="icon" {{action 'onPlayContent' item}}>
         <i class="{{item.format}}-icon" />
       </div>
       <div class="title-info {{if isOfflineActivity 'offline'}}" {{action 'onPlayContent' item}}>
@@ -90,7 +90,7 @@
     </div>
     <div class="ca-panel-container-2">
       <div class="ca-actions">
-        <div class="student-count {{if showCohort 'active'}}">
+        <div class="student-count pointer {{if showCohort 'active'}}" {{action 'showStudentList'}}>
           {{gru-icon name="account_circle"}}
           {{#if (eq classActivity.usersCount -1)}}
             <span class="hidden-xs" {{action 'showStudentList'}}>{{t 'common.all'}}</span>
@@ -153,7 +153,7 @@
     </div>
   {{else}}
     <div class="ca-panel-container-1 unschedule">
-      <div class="icon">
+      <div class="icon" {{action 'onPlayContent' item}}>
         <i class="{{item.format}}-icon" />
       </div>
       <div class="title-info ellipsis" {{action 'onPlayContent' item}}>

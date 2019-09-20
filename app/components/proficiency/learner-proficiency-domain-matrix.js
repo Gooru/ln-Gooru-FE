@@ -66,6 +66,16 @@ export default Ember.Component.extend({
       .addClass('show-tooltip');
   },
 
+  resetAttributes() {
+    const component = this;
+    component.set('cellHeight', 6);
+    component.set('cellWidth', 32);
+    component.set('selectedDomain', null);
+    component.set('selectedCompetency', null);
+    component.set('isExpandChartEnabled', false);
+    component.set('showExpandedButton', true);
+  },
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -177,10 +187,16 @@ export default Ember.Component.extend({
   competencyFocusIn() {
     let component = this;
     let selectedCompetency = component.get('selectedCompetency');
-    if (!selectedCompetency.get('xAxisSeq')) {
-      selectedCompetency = component
-        .get('chartData')
-        .findBy('competencyCode', selectedCompetency.get('competencyCode'));
+    const chartData = component.get('chartData');
+    if (
+      selectedCompetency &&
+      !selectedCompetency.get('xAxisSeq') &&
+      Ember.isArray(chartData)
+    ) {
+      selectedCompetency = chartData.findBy(
+        'competencyCode',
+        selectedCompetency.get('competencyCode')
+      );
     }
     component.blockChartContainer(selectedCompetency);
   },
@@ -236,13 +252,16 @@ export default Ember.Component.extend({
     'competencyMatrixCoordinates',
     function() {
       let component = this;
-      component.set('selectedDomain', null);
-      component.set('selectedCompetency', null);
+      component.resetAttributes();
       component.loadChartData();
     }
   ),
   // -------------------------------------------------------------------------
   // Properties
+  /**
+   * @property {Boolean} showBaseLine
+   */
+  showBaseLine: true,
   /**
    * @property {Boolean} showGutCompetency
    */
@@ -548,7 +567,7 @@ export default Ember.Component.extend({
       let domainSeq = domainData.get('domainSeq');
       let competencyMatrix = competencyMatrixs.findBy('domainCode', domainCode);
       let competencyMatrixByCompetency = competencyMatrix
-        ? competencyMatrix.get('competencies')
+        ? this.parseCrossWalkFWC(competencyMatrix.get('competencies'))
         : [];
       if (competencyMatrix && competencyMatrixByCompetency.length > 0) {
         taxonomyDomain.pushObject(domainData);
@@ -565,8 +584,6 @@ export default Ember.Component.extend({
             competencyCode: competencyCode,
             competencyName: competencyName,
             competencySeq: competencySeq,
-            fwDomainCode: competency.get('fwDomainCode'),
-            fwDomainName: competency.get('fwDomainName'),
             framework: competency.get('framework'),
             isMappedWithFramework: competency.get('isMappedWithFramework'),
             competencyStudentDesc: competency.get('competencyStudentDesc'),
@@ -616,6 +633,25 @@ export default Ember.Component.extend({
     component.set('height', height);
     component.set('taxonomyDomains', taxonomyDomain);
     return resultSet;
+  },
+
+  /**
+   * @function parseCrossWalkFWC
+   * Method to check cross walk competency with user competency matrix
+   */
+  parseCrossWalkFWC(competencies) {
+    const component = this;
+    const fwCompetencies = component.get('fwCompetencies') || [];
+    if (fwCompetencies && fwCompetencies.length) {
+      competencies.forEach(competency => {
+        let fwCompetency = fwCompetencies.find(fwCompetency => {
+          return fwCompetency[competency.competencyCode];
+        });
+        const isMappedWithFramework = !!fwCompetency;
+        competency.set('isMappedWithFramework', isMappedWithFramework);
+      });
+    }
+    return competencies;
   },
 
   /**
@@ -730,7 +766,9 @@ export default Ember.Component.extend({
     cards.exit().remove();
     component.$('.scrollable-chart').scrollTop(height);
     component.drawSkyline();
-    component.drawBaseLine();
+    if (component.get('showBaseLine')) {
+      component.drawBaseLine();
+    }
     component.drawDomainBoundaryLine();
     component.showGutCompetencyColorGradient();
   },

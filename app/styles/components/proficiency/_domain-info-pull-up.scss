@@ -1,24 +1,23 @@
 .domain-info-pull-up {
   $line-height: 1.2;
-  $lines-to-show: 4;
+  $lines-to-show: 6;
   width: 100%;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   background-color: #ffffff;
   display: grid;
   position: absolute;
   grid-template-rows: auto 1fr;
-  height: 0;
-  transition: height 0.5s ease-out;
-  overflow: hidden;
-  bottom: 0;
-
-  &.open {
-    height: 100%;
-    transition: height 0.5s ease-in;
-  }
+  top: 100%;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  height: 100%;
 
   .competency-container {
     overflow-y: auto;
+    display: grid;
+    height: 100%;
+    grid-template-rows: max-content 1fr;
 
     .title {
       text-transform: uppercase;
@@ -32,6 +31,8 @@
       background-color: #fff;
       grid-gap: 10px;
       grid-template-columns: repeat(2, 1fr);
+      height: max-content;
+      grid-template-rows: repeat(auto-fill, minmax(max-content, 180px));
 
       .competency-info {
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
@@ -39,6 +40,8 @@
         padding: 10px;
         height: 100%;
         cursor: pointer;
+        max-height: 180px;
+        min-height: 180px;
 
         .competency-desc {
           margin-top: 10px;

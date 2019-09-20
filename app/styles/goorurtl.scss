@@ -25,14 +25,8 @@ $box-shadow: -1px 0px;
 @import "mixins/gru-accordion";
 
 @import "controllers/application";
-@import "controllers/class";
-@import "controllers/class/analytics/performance/student";
 @import "controllers/class/analytics/performance/teacher";
 @import "controllers/teacher/class/collection";
-@import "controllers/class/info";
-@import "controllers/class/overview";
-@import "controllers/class/edit";
-@import "controllers/classes";
 @import "controllers/content/classes/modals";
 @import "controllers/content/classes/create";
 @import "controllers/content/classes/join";
@@ -69,7 +63,6 @@ $box-shadow: -1px 0px;
 @import "controllers/study-player";
 @import "controllers/study-player-external";
 @import "controllers/resource-player";
-@import "controllers/_add-from-course-map.scss";
 
 @import "controllers/student/class";
 @import "controllers/student/independent";
@@ -82,7 +75,6 @@ $box-shadow: -1px 0px;
 @import "controllers/teacher/class/class-management";
 @import "controllers/teacher/class/course-map";
 @import "controllers/teacher/class/performance";
-@import "controllers/teacher/class/quick-start";
 
 @import "controllers/goals/manage";
 
@@ -156,8 +148,6 @@ $box-shadow: -1px 0px;
 @import "components/charts/gru-radial-chart";
 @import "components/charts/gru-x-bar-chart";
 @import "components/charts/gru-performance-chart";
-
-@import "components/class/gru-class-navigation";
 
 //@import "components/class/gru-class-navbar";
 @import "components/class/gru-class-activity-panel";

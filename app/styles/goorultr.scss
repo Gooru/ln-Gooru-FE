@@ -11,14 +11,8 @@
 @import "mixins/content/edit";
 @import "mixins/gru-accordion";
 @import "controllers/application";
-@import "controllers/class";
-@import "controllers/class/analytics/performance/student";
 @import "controllers/class/analytics/performance/teacher";
 @import "controllers/teacher/class/collection";
-@import "controllers/class/info";
-@import "controllers/class/overview";
-@import "controllers/class/edit";
-@import "controllers/classes";
 @import "controllers/content/classes/modals";
 @import "controllers/content/classes/create";
 @import "controllers/content/classes/join";
@@ -58,7 +52,6 @@
 @import "controllers/study-player-external";
 @import "controllers/player-external";
 @import "controllers/resource-player";
-@import "controllers/_add-from-course-map.scss";
 @import "controllers/student/class";
 @import "controllers/student/independent";
 @import "controllers/student/performance";
@@ -74,7 +67,6 @@
 @import "controllers/teacher/class/students";
 @import "controllers/teacher/class/course-map";
 @import "controllers/teacher/class/performance";
-@import "controllers/teacher/class/quick-start";
 @import "controllers/teacher/class/students-proficiency";
 @import "controllers/teacher/class/atc";
 @import "controllers/goals/manage";
@@ -169,7 +161,6 @@
 @import "components/charts/proficiency-view";
 @import "components/charts/score-fill-gauge-chart";
 @import "components/charts/competencies-progress-graph";
-@import "components/class/gru-class-navigation";
 @import "components/class/gru-class-navbar";
 @import "components/class/gru-class-activity-panel";
 @import "components/class/gru-student-class-activity-panel";
@@ -510,3 +501,10 @@
 
 //Search Students
 @import "components/search/gru-search-student";
+
+//Portfolio
+@import "controllers/profile/portfolio";
+@import "components/portfolio/gru-offline-activities-panel";
+@import "components/portfolio/gru-assessments-panel";
+@import "components/portfolio/gru-collections-panel";
+@import "components/portfolio/gru-portfolio-content-card";

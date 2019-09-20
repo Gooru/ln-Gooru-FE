@@ -1,6 +1,9 @@
 import Ember from 'ember';
 import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
-
+import {
+  flattenGutToFwCompetency,
+  flattenGutToFwDomain
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Route.extend(PrivateRouteMixin, {
   queryParams: {
     refresh: {
@@ -40,6 +43,12 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    * @requires service:api-sdk/competency
    */
   competencyService: Ember.inject.service('api-sdk/competency'),
+
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -154,13 +163,23 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             .readClassContentVisibility(classId);
           coursePromise = route.get('courseService').fetchById(courseId);
         }
+        const frameworkId = aClass.get('preference.framework');
+        const subjectId = aClass.get('preference.subject');
+        let crossWalkFWCPromise = null;
+        if (frameworkId && subjectId) {
+          crossWalkFWCPromise = route
+            .get('taxonomyService')
+            .fetchCrossWalkFWC(frameworkId, subjectId);
+        }
         return Ember.RSVP.hash({
           contentVisibility: visibilityPromise,
           course: coursePromise,
+          crossWalkFWC: crossWalkFWCPromise,
           competencyStats: competencyCompletionStats
         }).then(function(hash) {
           const contentVisibility = hash.contentVisibility;
           const course = hash.course;
+          const crossWalkFWC = hash.crossWalkFWC || [];
           aClass.set('owner', members.get('owner'));
           aClass.set('collaborators', members.get('collaborators'));
           aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
@@ -173,7 +192,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             class: aClass,
             course,
             members,
-            contentVisibility
+            contentVisibility,
+            crossWalkFWC
           };
         });
       });
@@ -194,7 +214,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     let classData = model.class;
     classData.course = model.course;
     controller.fetchDcaSummaryPerformance();
-    controller.fetchCrossWalkFWC();
+    if (model.crossWalkFWC) {
+      controller.set(
+        'fwCompetencies',
+        flattenGutToFwCompetency(model.crossWalkFWC)
+      );
+      controller.set('fwDomains', flattenGutToFwDomain(model.crossWalkFWC));
+    }
   },
 
   resetController(controller) {

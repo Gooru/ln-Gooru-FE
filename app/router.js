@@ -103,8 +103,6 @@ Router.map(function() {
       '/player/class/:classId/course/:courseId/unit/:unitId/lesson/:lessonId/collection/:collectionId'
   });
 
-  this.route('classes');
-
   this.route('student-learner-proficiency', {
     path: '/student-learner-proficiency/:userId'
   });
@@ -115,16 +113,8 @@ Router.map(function() {
       path: '/class/:classId'
     },
     function() {
-      this.route('overview');
-      this.route('info');
-      this.route('edit');
-      this.route('channel', {
-        path: '/channel/:channelId'
-      });
-
       this.route('analytics', function() {
         this.route('performance', function() {
-          this.route('student');
           this.route('teacher', function() {
             this.route('course');
             this.route('unit', {
@@ -216,7 +206,6 @@ Router.map(function() {
         this.route('class-activities');
         this.route('class-management');
         this.route('course-map');
-        this.route('quick-start');
         this.route('performance');
         this.route('collection', {
           path: '/unit/:unitId/lesson/:lessonId/collection/:collectionId'
@@ -230,19 +219,12 @@ Router.map(function() {
     );
   });
 
-  this.route('add-from-course-map', {
-    path: '/add-from-course-map/:classId'
-  });
-
   this.route('featured');
 
   this.route('account-settings', {
     path: '/account-settings/:userId'
   });
 
-  this.route('integration', {
-    path: '/integration/:appType'
-  });
   this.route('player-external');
   this.route('not-found', {
     path: '/not-found/:entity'
@@ -265,6 +247,7 @@ Router.map(function() {
       });
 
       this.route('proficiency');
+      this.route('portfolio');
     }
   );
   /**
