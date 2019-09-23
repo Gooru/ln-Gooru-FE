@@ -32,14 +32,14 @@
         }
 
         &.status-1 {
-          background-color: #99c5e6;
+          background-color: $blue-in-progress;
         }
 
         &.status-2,
         &.status-3,
         &.status-4,
         &.status-5 {
-          background-color: #6f9ce2;
+          background-color: $blue-mastery;
         }
       }
 
