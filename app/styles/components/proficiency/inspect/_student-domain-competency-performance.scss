@@ -178,6 +178,7 @@
               background-position: center;
               background-repeat: no-repeat;
               &.status-0 {
+                background-color: $gray-no-started;
                 // background-image: url('gooru/images/check-circle-0.svg');
               }
               &.status-1 {
