@@ -99,13 +99,6 @@
                     <span>{{t "common.library"}}</span>
                   {{/link-to}}
                 </li>
-                {{#unless profile.isTeacher}}
-                  <li class="navbar-nav-list visible-md visible-lg notifications-link out-of-scope">
-                    <a>
-                      {{gru-icon name='notifications'}}
-                    </a>
-                  </li>
-                {{/unless}}
                 <li class="navbar-nav-list visible-md visible-lg notifications-link">
                   <a style="opacity:1;">
                     {{notification/notification-indicator displayNotificationList=displayNotificationList}} </a>
