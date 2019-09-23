@@ -104,6 +104,21 @@ export default Ember.Component.extend({
     onClearStudents() {
       const component = this;
       component.resetSelectedUserIds();
+    },
+
+    onSelectAllStudent() {
+      const component = this;
+      let competencyData = component.get('activeCompetency');
+
+      if (
+        competencyData.get('isExpanded') ||
+        component.get('activeCompetency.competencyCode') !==
+          competencyData.get('competencyCode')
+      ) {
+        component.selectAllStudents(
+          competencyData.get('usersCompletionSummary')
+        );
+      }
     }
   },
 
@@ -155,14 +170,16 @@ export default Ember.Component.extend({
 
   closePullUp() {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.resetSelectedUserIds();
-      component.set('showPullUp', false);
-    });
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.resetSelectedUserIds();
+        component.set('showPullUp', false);
+      }
+    );
   },
 
   /**
@@ -201,15 +218,13 @@ export default Ember.Component.extend({
       year,
       agent
     };
-    return Ember.RSVP
-      .hash({
-        usersPerformanceSummary: competencyService.getUsersCompetencyPerformanceSummary(
-          requestBody
-        )
-      })
-      .then(({ usersPerformanceSummary }) => {
-        return usersPerformanceSummary;
-      });
+    return Ember.RSVP.hash({
+      usersPerformanceSummary: competencyService.getUsersCompetencyPerformanceSummary(
+        requestBody
+      )
+    }).then(({ usersPerformanceSummary }) => {
+      return usersPerformanceSummary;
+    });
   },
 
   /**

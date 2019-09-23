@@ -285,7 +285,7 @@
 
   .trigger-suggestion {
     display: grid;
-    grid-template-columns: 40px auto 1fr 24px;
+    grid-template-columns: 40px auto 1fr auto auto;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -327,6 +327,11 @@
         align-items: center;
         i {
           color: #f98e4e;
+        }
+      }
+      .unselect {
+        i {
+          color: gray;
         }
       }
       .selected-all-text {
