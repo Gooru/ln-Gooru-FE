@@ -117,12 +117,6 @@ Router.map(function() {
     this.route('student-open-ended-summary');
   });
 
-  this.route('goals', function() {
-    this.route('manage');
-  });
-
-  this.route('home');
-
   this.route('student-home');
 
   this.route('student-independent-learning', function() {

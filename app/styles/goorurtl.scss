@@ -49,7 +49,6 @@ $box-shadow: -1px 0px;
 @import "controllers/reports/student-open-ended-summary";
 @import "controllers/sign-in";
 @import "controllers/sign-up";
-@import "controllers/home";
 @import "controllers/teacher-home";
 @import "controllers/student-home";
 @import "controllers/student-independent-learning";
@@ -69,8 +68,6 @@ $box-shadow: -1px 0px;
 @import "controllers/teacher/class/class-activities";
 @import "controllers/teacher/class/class-management";
 @import "controllers/teacher/class/course-map";
-
-@import "controllers/goals/manage";
 
 @import "controllers/student-independent-learning/learning-base";
 
