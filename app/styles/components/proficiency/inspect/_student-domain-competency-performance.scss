@@ -178,17 +178,18 @@
               background-position: center;
               background-repeat: no-repeat;
               &.status-0 {
+                background-color: $gray-no-started;
                 // background-image: url('gooru/images/check-circle-0.svg');
               }
               &.status-1 {
-                background-color: #1aa9eb;
+                background-color: $blue-in-progress;
                 background-image: url("gooru/images/check-circle-mastered.svg");
               }
               &.status-2,
               &.status-3,
               &.status-4,
               &.status-5 {
-                background-color: #1d7dc2;
+                background-color: $blue-mastery;
                 background-position: center;
                 background-repeat: no-repeat;
                 background-image: url("gooru/images/check-circle-mastered.svg");
