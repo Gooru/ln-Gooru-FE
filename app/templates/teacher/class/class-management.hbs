@@ -79,7 +79,7 @@
                   </div>
                 {{/each}}
               {{/if}}
-              <div class="trigger-add-coteacher {{if (not-eq selfId class.creatorId) 'disable-event disable-color' }}" {{action "onToggleAddCollaborator"}}>
+              <div class="trigger-add-coteacher {{if (not-eq selfId class.owner.id) 'disable-event disable-color' }}" {{action "onToggleAddCollaborator"}}>
                 <div class="add-co-teacher-icon">
                   {{gru-icon name="add_circle_outline"}}
                 </div>
@@ -112,7 +112,8 @@
           </div>
         </div>
       </div>
-      <div class="class-layout-btn">
+
+      <div class="class-layout-btn {{if (not-eq selfId class.owner.id) 'disable-event disable-color' }}">
         <div class="btn-panel">
           <div class='class-btn delete-btn' {{action 'deleteClass'}}>
             {{t 'class.info.delete'}} {{gru-icon name='delete'}}
@@ -122,6 +123,7 @@
           </div>
         </div>
       </div>
+
     </div>
     {{!-- two col layout ends --}}
     <div class='sec-rows-layout right-panel'>
