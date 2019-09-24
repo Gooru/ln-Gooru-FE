@@ -332,8 +332,6 @@
 
       .student-competencies-container {
         padding: 0 15px 15px 15px;
-        max-height: 390px;
-        overflow-y: auto;
         display: grid;
         &::-webkit-scrollbar {
           height: 6px;
@@ -567,15 +565,17 @@
     .ca-daterange-picker {
       background-color: transparent;
       .ca-datepicker-body {
-        right: 0;
+        right: 3%;
         left: auto;
-        top: 60%;
+        top: 29%;
+        transform: none;
       }
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: $screen-sm) {
         .ca-datepicker-body {
           right: auto;
           left: 50%;
           top: 50%;
+          transform: translate(-50%, -50%);
         }
       }
     }
