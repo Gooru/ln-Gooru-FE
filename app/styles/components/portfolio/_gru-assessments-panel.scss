@@ -1,5 +1,6 @@
 .portfolio.gru-assessments-panel {
   .assessments-container {
+    position: relative;
     .header-container {
       display: grid;
       grid-template-columns: 30px auto 1fr;
@@ -11,7 +12,7 @@
       padding: 0 15px;
       background-color: rgba(83, 94, 103, 0.9);
       .icon {
-        background-image: url(gooru/images/offline-white.svg);
+        background-image: url(gooru/images/assessment-white.svg);
         width: 30px;
         height: 48px;
         background-size: 30px;
@@ -27,6 +28,14 @@
         display: grid;
         grid-template-columns: auto auto;
         justify-self: right;
+        .filter-search {
+          height: 55px;
+          cursor: pointer;
+          i.filter_list {
+            color: $white;
+            line-height: 55px;
+          }
+        }
         .input-search {
           display: grid;
           grid-template-columns: auto auto;
@@ -36,6 +45,16 @@
     .body-container {
       padding: 0 15px;
       background-color: rgb(83, 94, 103);
+
+      @media screen and (max-width: $screen-360) {
+        padding: 0;
+      }
+      &.filter-populated {
+        opacity: 0.2;
+      }
+    }
+    .portfolio.gru-content-filters {
+      top: 48px;
     }
   }
 }

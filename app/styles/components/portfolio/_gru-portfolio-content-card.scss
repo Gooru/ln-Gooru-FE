@@ -4,6 +4,7 @@
     background-color: $white;
     display: grid;
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    margin-bottom: 5px;
     .content-info-container {
       display: grid;
       grid-template-columns: 60px 1fr 75px 60px;
@@ -142,6 +143,18 @@
         color: #535e67;
         .date-value {
           font-weight: bold;
+        }
+      }
+
+      @media screen and (max-width: $screen-360) {
+        padding: 0;
+
+        .taxonomy-container {
+          .gru-taxonomy-tag-list {
+            button.non-visible-tags {
+              width: 50px;
+            }
+          }
         }
       }
     }
