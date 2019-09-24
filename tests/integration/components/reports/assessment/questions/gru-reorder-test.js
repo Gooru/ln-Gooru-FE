@@ -3,6 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 import T from 'gooru-web/tests/helpers/assert';
 import Ember from 'ember';
 
+//TestCommpent
 moduleForComponent(
   'reports/assessment/questions/gru-reorder',
   'Integration | Component | reports/assessment/questions/gru reorder',
