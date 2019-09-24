@@ -173,8 +173,10 @@ export default Ember.Component.extend({
     },
 
     onSelectStudentForSuggestion(student) {
-      this.get('studentsSelectedForSuggest').pushObject(student);
-      student.set('selectedForSuggestion', true);
+      if (this.get('context.contentType') === 'assessment') {
+        this.get('studentsSelectedForSuggest').pushObject(student);
+        student.set('selectedForSuggestion', true);
+      }
     },
 
     onDeSelectStudentForSuggestion(student) {
