@@ -65,13 +65,13 @@ export default Ember.Route.extend({
         const taxonomyCategories = hash.taxonomyCategories;
         const aClass = hash.classPromise;
         const course = hash.coursePromise;
-        const standardPreference = hash.userPreference;
+        const userPreference = hash.userPreference;
         return Ember.Object.create({
           profile: studentProfile,
           categories: taxonomyCategories,
           class: aClass,
           course: course,
-          standardPreference: standardPreference,
+          userPreference: userPreference,
           isTeacher: isTeacher
         });
       });
@@ -87,7 +87,7 @@ export default Ember.Route.extend({
       controller.set('taxonomyCategories', model.get('categories'));
       controller.set(
         'userStandardPreference',
-        model.get('standardPreference').standard_preference
+        model.get('userPreference.standard_preference')
       );
       controller.get('studentClassController').selectMenuItem('profile-prof');
       controller.loadData();

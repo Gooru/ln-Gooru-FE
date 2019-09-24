@@ -98,7 +98,7 @@ export default Ember.Route.extend({
             class: aClass,
             course: hash.coursePromise,
             mapLocation: hash.mapLocation,
-            standardPreference: hash.userPreference,
+            userPreference: hash.userPreference,
             crossWalkFWC: hash.crossWalkFWC,
             contextId
           });
@@ -114,7 +114,7 @@ export default Ember.Route.extend({
     controller.set('mapLocation', model.get('mapLocation'));
     controller.set(
       'userStandardPreference',
-      model.get('standardPreference').standard_preference
+      model.get('standardPreference.standard_preference')
     );
     controller.set('contextId', model.get('contextId'));
     if (model.crossWalkFWC) {
