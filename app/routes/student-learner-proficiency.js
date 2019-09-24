@@ -89,6 +89,7 @@ export default Ember.Route.extend({
           coursePromise: route.get('courseService').fetchById(courseId),
           taxonomyCategories: route.get('taxonomyService').getCategories(),
           mapLocation: route.get('navigateMapService').getMapLocation(params),
+          userPreference: route.get('profileService').getProfilePreference(),
           crossWalkFWC: crossWalkFWCPromise
         }).then(function(hash) {
           return Ember.Object.create({
@@ -97,6 +98,7 @@ export default Ember.Route.extend({
             class: aClass,
             course: hash.coursePromise,
             mapLocation: hash.mapLocation,
+            standardPreference: hash.userPreference,
             crossWalkFWC: hash.crossWalkFWC,
             contextId
           });
@@ -110,6 +112,10 @@ export default Ember.Route.extend({
     controller.set('course', model.get('course'));
     controller.set('taxonomyCategories', model.get('categories'));
     controller.set('mapLocation', model.get('mapLocation'));
+    controller.set(
+      'userStandardPreference',
+      model.get('standardPreference').standard_preference
+    );
     controller.set('contextId', model.get('contextId'));
     if (model.crossWalkFWC) {
       controller.set(
