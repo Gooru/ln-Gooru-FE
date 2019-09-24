@@ -3,12 +3,12 @@
     <div class="icon"></div>
     <div class="title">Offline Activities</div>
     <div class="search-items-container">
-      <div class="filter-search hidden">
+      <div class="filter-search" {{action "onOpenFilter"}}>
         {{gru-icon name="filter_list"}}
       </div>
     </div>
   </div>
-  <div class="body-container">
+  <div class="body-container {{if isShowContentFilters 'filter-populated'}}">
     {{#each learnedPortfolioItems as | portfolioItems |}}
       <div class="type-level-container">
         <div class="sub-type-label">
@@ -22,4 +22,10 @@
       </div>
     {{/each}}
   </div>
+  {{#if isShowContentFilters}}
+    {{portfolio/gru-content-filters
+      refreshFilters = "refreshFilters"
+      pickerStartDate = userCreatedAt
+      userPreference = userPreference}}
+  {{/if}}
 </div>

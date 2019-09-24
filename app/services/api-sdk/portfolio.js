@@ -21,12 +21,12 @@ export default Ember.Service.extend({
     );
   },
 
-  getUserPortfolioUniqueItems(requestParam) {
+  getUserPortfolioUniqueItems(requestParam, contentBase) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('portfolioAdapter')
-        .getUserPortfolioUniqueItems(requestParam)
+        .getUserPortfolioUniqueItems(requestParam, contentBase)
         .then(
           function(response) {
             resolve(
