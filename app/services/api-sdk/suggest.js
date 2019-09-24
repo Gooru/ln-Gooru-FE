@@ -161,5 +161,15 @@ export default Ember.Service.extend({
           );
         }, reject);
     });
+  },
+
+  /**
+   * Add class-activity suggestions
+   * @param {SuggestContext} context
+   * @returns {Promise}
+   */
+  suggestForCA(context) {
+    const service = this;
+    return service.get('suggestAdapter').suggestForCA(context);
   }
 });

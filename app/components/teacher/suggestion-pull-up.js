@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import {
+  PLAYER_EVENT_SOURCE,
   SUGGESTION_FILTER_BY_CONTENT_TYPES,
   KEY_CODES
 } from 'gooru-web/config/config';
@@ -19,6 +20,11 @@ export default Ember.Component.extend({
    * @requires service:api-sdk/search
    */
   searchService: Ember.inject.service('api-sdk/search'),
+
+  /**
+   * @requires service:api-sdk/search
+   */
+  suggestService: Ember.inject.service('api-sdk/suggest'),
 
   /**
    * @requires service:api-sdk/navigate-map
@@ -120,6 +126,12 @@ export default Ember.Component.extend({
    */
   defaultSuggestContentType: 'collection',
 
+  /**
+   * suggestionOrigin
+   * @type {String}
+   */
+  suggestionOrigin: PLAYER_EVENT_SOURCE.COURSE_MAP,
+
   // -------------------------------------------------------------------------
   // actions
 
@@ -159,30 +171,13 @@ export default Ember.Component.extend({
      * Trigger when confirm suggest  popup
      */
     onConfirmSuggest() {
-      let component = this;
-      let collection = this.get('suggestSelectedCollection');
-      let userIds = this.get('students').map(student => {
-        return student.get('id');
-      });
-      let contextParams = {
-        ctx_user_ids: userIds,
-        ctx_class_id: component.get('context.classId'),
-        ctx_course_id: component.get('context.courseId'),
-        ctx_unit_id: component.get('context.unitId'),
-        ctx_lesson_id: component.get('context.lessonId'),
-        ctx_collection_id: component.get('collection.id'),
-        suggested_content_id: collection.get('id'),
-        suggested_content_type: component.get('activeContentType')
-      };
-      component
-        .get('navigateMapService')
-        .teacherSuggestions(contextParams)
-        .then(() => {
-          component.set('students', Ember.A([]));
-          component.set('showSuggestConfirmation', false);
-          component.set('showPullUp', false);
-          component.sendAction('onCloseSuggest');
-        });
+      const component = this;
+      const suggestionOrigin = component.get('suggestionOrigin');
+      if (suggestionOrigin === PLAYER_EVENT_SOURCE.COURSE_MAP) {
+        component.suggestForCourseMap();
+      } else if (suggestionOrigin === PLAYER_EVENT_SOURCE.CLASS_ACTIVITY) {
+        component.suggestForClassActivity();
+      }
     },
 
     backToSuggestion() {
@@ -355,5 +350,67 @@ export default Ember.Component.extend({
       term: term,
       filters: params
     };
+  },
+
+  suggestForCourseMap() {
+    const component = this;
+    let collection = component.get('suggestSelectedCollection');
+    let userIds = component.get('students').map(student => {
+      return student.get('id');
+    });
+    let contextParams = {
+      ctx_user_ids: userIds,
+      ctx_class_id: component.get('context.classId'),
+      ctx_course_id: component.get('context.courseId'),
+      ctx_unit_id: component.get('context.unitId'),
+      ctx_lesson_id: component.get('context.lessonId'),
+      ctx_collection_id: component.get('collection.id'),
+      suggested_content_id: collection.get('id'),
+      suggested_content_type: component.get('activeContentType')
+    };
+    component
+      .get('navigateMapService')
+      .teacherSuggestions(contextParams)
+      .then(() => {
+        component.set('students', Ember.A([]));
+        component.set('showSuggestConfirmation', false);
+        component.set('showPullUp', false);
+        component.sendAction('onCloseSuggest');
+      });
+  },
+
+  suggestForClassActivity() {
+    const component = this;
+    let collection = component.get('suggestSelectedCollection');
+    let userIds = component.get('students').map(student => {
+      return student.get('id');
+    });
+    userIds.map(userId => {
+      let contextParams = {
+        user_id: userId,
+        collection_id: component.get('context.collectionId'),
+        class_id: component.get('context.classId'),
+        suggested_content_id: collection.get('id'),
+        suggestion_origin: component.get('context.suggestionOrigin'),
+        suggestion_originator_id: component.get(
+          'context.suggestionOriginatorId'
+        ),
+        suggestion_criteria: 'performance',
+        suggested_content_type: component.get('activeContentType'),
+        suggested_to: component.get('context.suggestionTo'),
+        suggestion_area: component.get('context.suggestionArea'),
+        tx_code: null,
+        tx_code_type: null,
+        ca_id: component.get('context.caContentId')
+      };
+      return component.get('suggestService').suggestForCA(contextParams);
+    });
+
+    Ember.RSVP.all(userIds).then(function() {
+      component.set('students', Ember.A([]));
+      component.set('showSuggestConfirmation', false);
+      component.set('showPullUp', false);
+      component.sendAction('onCloseSuggest');
+    });
   }
 });

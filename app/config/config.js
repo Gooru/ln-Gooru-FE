@@ -336,7 +336,8 @@ export const PLAYER_EVENT_SOURCE = {
   INDEPENDENT_ACTIVITY: 'ILActivity',
   RGO: 'rgo',
   DIAGNOSTIC: 'diagnostic',
-  MASTER_COMPETENCY: 'competencyMastery'
+  MASTER_COMPETENCY: 'competencyMastery',
+  CLASS_ACTIVITY: 'class-activity'
 };
 
 export const DCA_CALENDAR_VIEWS = {

@@ -40,6 +40,22 @@
       <span class="title">{{t 'teacher-landing.class.offline-class-report.conducted-on'}}</span>
       <span class="date">{{format-date context.activation_date 'DD MMM YY'}}</span>
     </div>
+    <div class="suggest-bar on-scroll-fixed {{if (gt studentsSelectedForSuggest.length 0) 'active'}}">
+      <div class="suggest-bar-container">
+        <div class="close-all-suggestion" {{action 'onCloseSuggest'}}>
+          {{gru-icon name="close" }}
+        </div>
+        <div class="no-of-student-selected">
+          <span>{{studentsSelectedForSuggest.length}} {{t 'common.student-selected'}}</span>
+        </div>
+        <div class="suggestion-count-container" {{action 'onOpenSuggestionPullup'}}>
+          <span>{{t 'common.suggestion'}}</span>
+          <div class="suggestion-explore">
+            {{gru-icon name="explore"}}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   {{#if isLoading}}
     {{three-bounce-spinner}}
@@ -49,7 +65,16 @@
         <div class="student-row-container {{unless student.performance 'not-started'}}" {{action 'onSelectStudent' student}}>
           <div class="student-info">
             <div class="user-profile-img">
-              <img src="{{student.avatarUrl}}" />
+              {{#if student.selectedForSuggestion}}
+                <div class="selected-user-for-suggestion">
+                  {{gru-icon name="done_all"}}
+                  <div class="de-select-user" {{action 'onDeSelectStudentForSuggestion' student bubbles=false}}>
+                    {{gru-icon name="close"}}
+                  </div>
+                </div>
+              {{else}}
+                <img src="{{student.avatarUrl}}" class="{{if student.selectedForSuggestion 'selected'}}" {{action 'onSelectStudentForSuggestion' student bubbles=false}} />
+              {{/if}}
             </div>
             <span class="username">{{student.name}}</span>
           </div>
@@ -69,4 +94,16 @@
 </div>
 {{#if isShowStudentActivityReport}}
   {{teacher/offline-class/oca-student-activity-report-pull-up students=students collection=collection student=selectedStudent classId=classId showPullUp=isShowStudentActivityReport onClosePullUp="pullUpClose"}}
+{{/if}}
+
+{{#if showSuggestionPullup}}
+  {{teacher/suggestion-pull-up
+    showPullUp=showSuggestionPullup
+    students=studentsSelectedForSuggest
+    onCloseSuggest="onCloseSuggest"
+    context=contextParams
+    collection=collection
+    defaultSuggestContentType=defaultSuggestContentType
+    suggestionOrigin=origin
+  }}
 {{/if}}
