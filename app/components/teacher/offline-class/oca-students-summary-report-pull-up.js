@@ -1,5 +1,5 @@
 import Ember from 'ember';
-
+import { ROLES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   classNames: ['oca-students-summary-report-pull-up'],
 
@@ -16,6 +16,11 @@ export default Ember.Component.extend({
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
   /**
+   * @requires service:session
+   */
+  session: Ember.inject.service('session'),
+
+  /**
    * Propery of class id
    * @property {Number}
    */
@@ -28,10 +33,47 @@ export default Ember.Component.extend({
   context: null,
 
   /**
+   * Maintains the origin value
+   * @type {Object}
+   */
+  origin: PLAYER_EVENT_SOURCE.CLASS_ACTIVITY,
+
+  /**
+   * Maintains the context object
+   * @type {Object}
+   */
+  contextParams: Ember.computed('context', function() {
+    let context = this.get('context');
+    let params = Ember.Object.create({
+      classId: this.get('classId'),
+      collectionId: context.get('contentId'),
+      collectionType: context.get('contentType'),
+      suggestionOriginatorId: this.get('session.userId'),
+      suggestionOrigin: ROLES.TEACHER,
+      suggestionTo: ROLES.STUDENT,
+      suggestionArea: this.get('origin'),
+      caContentId: context.get('id')
+    });
+    return params;
+  }),
+
+  /**
+   * defaultSuggestContentType
+   * @type {String}
+   */
+  defaultSuggestContentType: 'collection',
+
+  /**
    * Propery of students
    * @property {Array}
    */
   students: Ember.A([]),
+
+  /**
+   * Maintains list of students selected for  suggest
+   * @type {Array}
+   */
+  studentsSelectedForSuggest: Ember.A([]),
 
   /**
    * Propery of performance activities
@@ -130,6 +172,31 @@ export default Ember.Component.extend({
       component.set('selectedStudent', student);
     },
 
+    onSelectStudentForSuggestion(student) {
+      if (this.get('context.contentType') === 'assessment') {
+        this.get('studentsSelectedForSuggest').pushObject(student);
+        student.set('selectedForSuggestion', true);
+      }
+    },
+
+    onDeSelectStudentForSuggestion(student) {
+      this.get('studentsSelectedForSuggest').removeObject(student);
+      student.set('selectedForSuggestion', false);
+    },
+
+    onOpenSuggestionPullup() {
+      this.set('showSuggestionPullup', true);
+    },
+
+    onCloseSuggest() {
+      this.set('studentsSelectedForSuggest', Ember.A());
+      this.get('students')
+        .filterBy('selectedForSuggestion', true)
+        .map(data => {
+          data.set('selectedForSuggestion', false);
+        });
+    },
+
     toggle(isLeft) {
       let component = this;
       let currentIndex = component.get('selectedIndex');
@@ -157,6 +224,7 @@ export default Ember.Component.extend({
   init() {
     let component = this;
     component._super(...arguments);
+    component.set('studentsSelectedForSuggest', Ember.A());
     component.loadData();
   },
 

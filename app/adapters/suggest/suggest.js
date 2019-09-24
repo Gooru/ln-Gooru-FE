@@ -10,6 +10,8 @@ export default ApplicationAdapter.extend({
 
   namespaceV3: '/gooru-search/rest/v3/suggest',
 
+  namespaceST: '/api/stracker/v2',
+
   suggestResources: function(term, params = {}) {
     const adapter = this;
     const namespace = this.get('namespace');
@@ -42,7 +44,7 @@ export default ApplicationAdapter.extend({
    * @param {SuggestContext} context
    * @param {number} limit
    * @returns {*}
-     */
+   */
   suggestResourcesForResource: function(resourceId, context, limit = 10) {
     const adapter = this;
     const namespace = this.get('namespaceV3');
@@ -73,7 +75,7 @@ export default ApplicationAdapter.extend({
    * @param {SuggestContext} context
    * @param {number} limit
    * @returns {*}
-     */
+   */
   suggestResourcesForCollection: function(context, limit = 3) {
     const adapter = this;
     const namespace = this.get('namespaceV3');
@@ -104,6 +106,26 @@ export default ApplicationAdapter.extend({
             context.get('timeSpent') >= 0 ? context.get('timeSpent') : undefined
         }
       })
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Add class-activity suggestions
+   * @param {SuggestContext} context
+   * @returns {*}
+   */
+  suggestForCA(context) {
+    const adapter = this;
+    const namespace = adapter.get('namespaceST');
+    const url = `${namespace}/track`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(context)
     };
     return Ember.$.ajax(url, options);
   },
