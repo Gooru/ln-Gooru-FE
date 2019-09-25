@@ -48,27 +48,19 @@ export default Ember.Component.extend(QuestionMixin, {
         });
 
       return answers.map(function(answer, inx) {
-        const userAnswer =
-          (userAnswers && userAnswers.findBy('value', answer.value)) || {};
-        const correctAnswer = correctAnswers.findBy(
-          'value',
-          (userAnswer && userAnswer.value) || null
-        );
-        const correct =
-          correctAnswer &&
-          correctAnswers.indexOf(correctAnswer) ===
-            userAnswers.indexOf(userAnswer);
+        let userAnswerAtIndex = userAnswers && userAnswers.objectAt(inx);
+        let correctAnswerAtIndex = correctAnswers.objectAt(inx);
+
         return {
           showCorrect: component.get('showCorrect'),
           selectedOrderText:
             userAnswersWithText &&
             userAnswersWithText.length > 0 &&
             userAnswersWithText[inx].userAnsText,
-          selectedOrder: userAnswers
-            ? userAnswers.indexOf(userAnswer) + 1
-            : inx,
+          selectedOrder:
+            userAnswers && userAnswers.indexOf(correctAnswerAtIndex) + 1,
           text: answer.get('text'),
-          correct
+          correct: questionUtil.isAnswerChoiceCorrect(userAnswerAtIndex, inx)
         };
       });
     }
