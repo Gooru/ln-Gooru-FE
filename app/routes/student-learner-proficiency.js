@@ -114,7 +114,7 @@ export default Ember.Route.extend({
     controller.set('mapLocation', model.get('mapLocation'));
     controller.set(
       'userStandardPreference',
-      model.get('standardPreference.standard_preference')
+      model.get('userPreference.standard_preference')
     );
     controller.set('contextId', model.get('contextId'));
     if (model.crossWalkFWC) {
