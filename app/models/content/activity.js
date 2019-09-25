@@ -42,7 +42,7 @@ export default Ember.Object.extend(Validations, CollectionBase, {
   /**
    * @property {string} indicates it is an assessment
    */
-  collectionType: 'activity',
+  collectionType: CONTENT_TYPES.OFFLINE_ACTIVITY,
 
   /**
    * @property {string}
