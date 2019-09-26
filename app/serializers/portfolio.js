@@ -62,6 +62,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       serializedPortfolioItem = Ember.Object.create({
         activityTimestamp: content.activityTimestamp,
         contentSource: content.contentSource,
+        efficacy: content.efficacy,
+        engagement: content.engagement,
         gradingStatus: content.gradingStatus,
         gutCodes: content.gutCodes,
         id: content.id,
@@ -71,6 +73,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
         maxScore: content.maxScore,
         questionCount: content.questionCount,
         resourceCount: content.resourceCount,
+        relevance: content.relevance,
         score: content.score,
         status: content.status,
         subType: content.subType,

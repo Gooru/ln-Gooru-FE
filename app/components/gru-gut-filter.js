@@ -21,7 +21,9 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     const component = this;
-    component.loadCategories();
+    component.loadCategories().then(function(categories) {
+      component.reloadGutFilters(categories);
+    });
   },
 
   actions: {
@@ -52,6 +54,13 @@ export default Ember.Component.extend({
         component.resetProperties(
           Ember.A(['activeDomain', 'activeCompetency'])
         );
+        let subjectFilterObject = Ember.Object.create({
+          type: 'subject',
+          filteKey: 'subjectCode',
+          value: subject.get('code'),
+          displayValue: subject.get('title')
+        });
+        component.sendAction('onSelectFilterItem', subjectFilterObject);
       }
     },
 
@@ -74,6 +83,13 @@ export default Ember.Component.extend({
         component.set('activeDomain', domain);
         component.updateGutFilters('domain', domain.get('domainCode'));
         component.resetProperties(Ember.A(['activeCompetency']));
+        let domainFilterObject = Ember.Object.create({
+          type: 'domain',
+          filterKey: 'domainCode',
+          value: domain.get('domainCode'),
+          displayValue: domain.get('domainName')
+        });
+        component.sendAction('onSelectFilterItem', domainFilterObject);
       }
     },
 
@@ -88,6 +104,12 @@ export default Ember.Component.extend({
           'competency',
           competency.get('competencyCode')
         );
+        let gutFilterObject = Ember.Object.create({
+          type: 'competency',
+          value: competency.get('competencyCode'),
+          displayValue: competency.get('competencyCode')
+        });
+        component.sendAction('onSelectFilterItem', gutFilterObject);
       }
     }
   },
@@ -115,36 +137,46 @@ export default Ember.Component.extend({
     return component.get('userPreference.standard_preference') || {};
   }),
 
+  isLoading: false,
+
   loadCategories() {
     const component = this;
-    component
+    return component
       .get('taxonomyService')
       .getCategories()
       .then(categories => {
         component.set('categories', categories);
+        return categories;
       });
   },
 
   loadSubjects(category) {
     const component = this;
     const categoryId = category.get('id');
-    component
+    component.set('isLoading', true);
+    return component
       .get('taxonomyService')
       .getTaxonomySubjects(categoryId)
       .then(function(subjects) {
-        component.set('subjects', subjects);
+        if (!component.isDestroyed) {
+          component.set('subjects', subjects);
+          component.set('isLoading', false);
+        }
+        return subjects;
       });
   },
 
-  loadDomainCompetencies(subject = {}) {
+  loadDomainCompetencies(activeSubject) {
     const component = this;
+    const subject = activeSubject || component.get('activeSubject');
     const standardPreference = component.get('standardPreference');
     const frameworkId = standardPreference[subject.get('code')] || null;
     const taxonomyService = component.get('taxonomyService');
     const competencyService = component.get('competencyService');
     const userId = component.get('userId');
     const subjectId = subject.get('id');
-    Ember.RSVP.hash({
+    component.set('isLoading', true);
+    return Ember.RSVP.hash({
       domainCompetencies: competencyService.getCompetencyMatrixDomain(
         userId,
         subjectId
@@ -157,24 +189,28 @@ export default Ember.Component.extend({
         : Ember.RSVP.resolve(null)
     }).then(
       ({ domainCompetencies, matrixCoordinates, crossWalkFWCompetencies }) => {
-        component.set(
-          'domains',
-          matrixCoordinates.get('domains') || Ember.A([])
-        );
-        component.set(
-          'domainCompetencies',
-          domainCompetencies.domains || Ember.A([])
-        );
-        if (crossWalkFWCompetencies) {
+        if (!component.isDestroyed) {
           component.set(
-            'fwCompetencies',
-            flattenGutToFwCompetency(crossWalkFWCompetencies)
+            'domains',
+            matrixCoordinates.get('domains') || Ember.A([])
           );
           component.set(
-            'fwDomains',
-            flattenGutToFwDomain(crossWalkFWCompetencies)
+            'domainCompetencies',
+            domainCompetencies.domains || Ember.A([])
           );
+          if (crossWalkFWCompetencies) {
+            component.set(
+              'fwCompetencies',
+              flattenGutToFwCompetency(crossWalkFWCompetencies)
+            );
+            component.set(
+              'fwDomains',
+              flattenGutToFwDomain(crossWalkFWCompetencies)
+            );
+          }
+          component.set('isLoading', false);
         }
+        return domainCompetencies;
       }
     );
   },
@@ -202,7 +238,50 @@ export default Ember.Component.extend({
   resetProperties(properties = Ember.A([])) {
     const component = this;
     properties.map(property => {
-      component.set(`${property}`, null);
+      if (!component.isDestroyed) {
+        component.set(`${property}`, null);
+      }
     });
+  },
+
+  reloadGutFilters(categories) {
+    const component = this;
+    const appliedFilters = component.get('appliedFilters');
+    const filterSubjectCode = appliedFilters.subjectCode;
+    const filterDomainCode = appliedFilters.domainCode;
+    const filterGutCode = appliedFilters.gutCode;
+    if (filterSubjectCode) {
+      const activeCategory = categories.findBy(
+        'code',
+        filterSubjectCode.split('.')[0]
+      );
+      component.set('activeCategory', activeCategory);
+      component.loadSubjects(activeCategory).then(function(subjects) {
+        const activeSubject = subjects.findBy('code', filterSubjectCode);
+        component.set('activeSubject', activeSubject);
+        if (filterDomainCode) {
+          component
+            .loadDomainCompetencies(activeSubject, filterDomainCode)
+            .then(function(domainCompetencies) {
+              const activeDomain = domainCompetencies.domains.findBy(
+                'domainCode',
+                filterDomainCode
+              );
+              component.set('activeDomain', activeDomain);
+              component.set('competencies', activeDomain.get('competencies'));
+              if (filterGutCode) {
+                const activeCompetency = activeDomain
+                  .get('competencies')
+                  .findBy('competencyCode', filterGutCode);
+                component.set('activeCompetency', activeCompetency);
+                component.set(
+                  'appliedFilters.gutCode',
+                  activeCompetency.get('competencyCode')
+                );
+              }
+            });
+        }
+      });
+    }
   }
 });

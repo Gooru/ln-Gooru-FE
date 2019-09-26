@@ -23,6 +23,7 @@ export default Ember.Component.extend({
 
     refreshFilters(appliedFilters) {
       const component = this;
+      component.set('appliedFilters', appliedFilters);
       component.loadPortfolioItems(appliedFilters);
       component.toggleProperty('isShowContentFilters');
     },
@@ -38,6 +39,10 @@ export default Ember.Component.extend({
   isShowContentFilters: false,
 
   filters: {},
+
+  appliedFilters: {},
+
+  activeFiltersList: Ember.A([]),
 
   userCreatedAt: Ember.computed('userProfile.createdAt', function() {
     return moment(this.get('userProfile.createdAt')).format('YYYY-MM-DD');
