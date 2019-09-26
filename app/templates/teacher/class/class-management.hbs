@@ -75,11 +75,14 @@
                   <div class='sub-sec-row'>
                     <div class='teacher-icon' style="background-image: url({{coteacher.avatarUrl}})"></div>
                     <div class='co-teacher-label'> {{coteacher.lastName}} {{coteacher.firstName}}</div>
-                    <div class='delete-co-teacher {{if (not-eq selfId class.creatorId) 'disable-event disable-color' }}' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
+                    {{#if (eq selfId class.owner.id)}}
+                    <div class='delete-co-teacher' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
+                    {{/if}}
                   </div>
                 {{/each}}
               {{/if}}
-              <div class="trigger-add-coteacher {{if (not-eq selfId class.creatorId) 'disable-event disable-color' }}" {{action "onToggleAddCollaborator"}}>
+              {{#if (eq selfId class.owner.id)}}
+              <div class="trigger-add-coteacher" {{action "onToggleAddCollaborator"}}>
                 <div class="add-co-teacher-icon">
                   {{gru-icon name="add_circle_outline"}}
                 </div>
@@ -87,6 +90,7 @@
                   {{t 'common.add'}}
                 </div>
               </div>
+              {{/if}}
               <div class="add-collaborator-panel">
                 {{teacher/class/gru-add-collaborator
                   onAddCollaborators = "onAddCollaborators"
@@ -112,6 +116,7 @@
           </div>
         </div>
       </div>
+      {{#if (eq selfId class.owner.id)}}
       <div class="class-layout-btn">
         <div class="btn-panel">
           <div class='class-btn delete-btn' {{action 'deleteClass'}}>
@@ -122,6 +127,8 @@
           </div>
         </div>
       </div>
+      {{/if}}
+
     </div>
     {{!-- two col layout ends --}}
     <div class='sec-rows-layout right-panel'>

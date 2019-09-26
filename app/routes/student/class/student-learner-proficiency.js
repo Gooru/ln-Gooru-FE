@@ -58,17 +58,20 @@ export default Ember.Route.extend({
         profilePromise: route.get('profileService').readUserProfile(studentId),
         classPromise: route.get('classService').readClassInfo(classId),
         coursePromise: route.get('courseService').fetchById(courseId),
-        taxonomyCategories: route.get('taxonomyService').getCategories()
+        taxonomyCategories: route.get('taxonomyService').getCategories(),
+        userPreference: route.get('profileService').getProfilePreference()
       }).then(function(hash) {
         const studentProfile = hash.profilePromise;
         const taxonomyCategories = hash.taxonomyCategories;
         const aClass = hash.classPromise;
         const course = hash.coursePromise;
+        const userPreference = hash.userPreference;
         return Ember.Object.create({
           profile: studentProfile,
           categories: taxonomyCategories,
           class: aClass,
           course: course,
+          userPreference: userPreference,
           isTeacher: isTeacher
         });
       });
@@ -82,6 +85,10 @@ export default Ember.Route.extend({
       controller.set('isTeacher', model.get('isTeacher'));
       controller.set('course', model.get('course'));
       controller.set('taxonomyCategories', model.get('categories'));
+      controller.set(
+        'userStandardPreference',
+        model.get('userPreference.standard_preference')
+      );
       controller.get('studentClassController').selectMenuItem('profile-prof');
       controller.loadData();
     }

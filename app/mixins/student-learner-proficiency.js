@@ -31,11 +31,6 @@ export default Ember.Mixin.create({
   competencyService: Ember.inject.service('api-sdk/competency'),
 
   /**
-   * @type {ProfileService} Service to retrieve profile information
-   */
-  profileService: Ember.inject.service('api-sdk/profile'),
-
-  /**
    * @property {Object}
    * Property to store active subject which is selected
    */
@@ -233,27 +228,15 @@ export default Ember.Mixin.create({
    */
   loadData() {
     let component = this;
-    component.getUserPreference();
     let categories = component.get('taxonomyCategories');
     let categoryCode = component.get('categoryCode');
-    let defaultCategory = categories.findBy('code', categoryCode);
+    let defaultCategory = categoryCode
+      ? categories.findBy('code', categoryCode)
+      : categories.get('firstObject');
     if (defaultCategory) {
       component.set('selectedCategory', defaultCategory);
       component.fetchSubjectsByCategory(defaultCategory);
     }
-  },
-
-  getUserPreference() {
-    let component = this;
-    component
-      .get('profileService')
-      .getProfilePreference()
-      .then(userPreference => {
-        component.set(
-          'userStandardPreference',
-          userPreference.standard_preference
-        );
-      });
   },
 
   fetchSignatureCompetencyList() {
@@ -324,7 +307,8 @@ export default Ember.Mixin.create({
     let timeLine = component.get('timeLine');
     const subjectCode = component.get('activeSubject.code');
     const classFrameworkCode = component.get('class.preference.framework');
-    if (component.get('subjectBucket') !== subjectCode || !classFrameworkCode) {
+    const classSubjectCode = component.get('class.preference.subject');
+    if (classSubjectCode !== subjectCode || !classFrameworkCode) {
       const userStandardPreference = component.get('userStandardPreference');
       const frameworkCode = userStandardPreference[subjectCode];
       component.set('framework', frameworkCode);
