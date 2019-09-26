@@ -10,7 +10,7 @@
         </div>
       </a>
     {{else}}
-      {{#link-to (if (eq model.format 'offline-activity') 'player-offline-activity' 'player') model.id (query-params offlineActivityId=model.id type=model.collectionType role='student' isPreview=true) class="title"}}
+      {{#link-to (if (eq model.format 'offline-activity') 'player-offline-activity' 'player') model.id (query-params offlineActivityId=model.id type=model.collectionType role='teacher' isPreview=true) class="title"}}
         <img class="img-rounded" src="{{model.thumbnailUrl}}" />
         <div>
           <strong>{{model.title}}</strong>
