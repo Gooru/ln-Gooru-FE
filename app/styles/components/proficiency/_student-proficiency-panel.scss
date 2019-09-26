@@ -59,13 +59,13 @@
 
           &.mastered {
             .box {
-              background-color: $blue-400;
+              background-color: $blue-mastery;
             }
           }
 
           &.in-progress {
             .box {
-              background-color: $in-progress;
+              background-color: $blue-in-progress;
             }
           }
 
