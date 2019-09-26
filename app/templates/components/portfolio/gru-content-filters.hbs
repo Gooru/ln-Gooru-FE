@@ -1,6 +1,11 @@
 <div class="content-filters-container">
   <div class="filters-header-label">
     Choose filters to apply
+    {{#if (gt activeFiltersList.length 0)}}
+      <div class="clear-filters" {{action "onResetFilters"}} title="Clear Filters" data-toggle="tooltip">
+        Clear Filters
+      </div>
+    {{/if}}
   </div>
   <div class="filters-container">
     <div class="date-range-filter-container">
@@ -13,7 +18,7 @@
             {{format-date daterange.startDate 'DD MMM YYYY'}} -
             {{format-date daterange.endDate 'DD MMM YYYY'}}
           {{else}}
-            Click here to select date range
+            All Time
           {{/if}}
         </div>
       </div>
@@ -41,7 +46,10 @@
       <div class="gut-body-container">
         {{gru-gut-filter
           gutFilters = gutFilters
-          userPreference = userPreference}}
+          userPreference = userPreference
+          onSelectFilterItem = "onSelectFilterItem"
+          appliedFilters = appliedFilters
+          isReloadFilters = isReloadFilters}}
       </div>
     </div>
   </div>
