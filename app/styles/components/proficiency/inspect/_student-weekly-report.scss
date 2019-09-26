@@ -173,9 +173,8 @@
     }
     .body-container {
       display: grid;
-      grid-template-columns: 300px 1fr;
+      grid-template-columns: 1fr;
       height: calc(100vh - 260px);
-      overflow-y: auto;
 
       &::-webkit-scrollbar {
         height: 6px;
@@ -187,152 +186,170 @@
         border: 1px solid $gray-light;
         border-radius: 5px;
       }
-      .body-left {
-        .student-info-container {
-          height: 45px;
-          display: grid;
-          grid-template-columns: 32px 1fr;
-          justify-content: left;
-          column-gap: 8px;
-          align-items: center;
-          padding-left: 10px;
-          border-bottom: 1px solid #f2f2f2;
-          cursor: pointer;
-          pointer-events: none;
+      .body-scroll {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        height: calc(100vh - 260px);
+        overflow: hidden;
+        overflow-y: auto;
 
-          &.data-available {
-            pointer-events: unset;
-          }
-          &:last-child {
-            border: none;
-          }
-          .student-thumbnail {
-            width: 32px;
-            height: 32px;
-            background-size: 32px;
-            display: block;
-            border-radius: 50%;
-            .active-student-data {
-              display: none;
-            }
-          }
-
-          .student-name {
-            font-size: 13px;
-            color: #000;
-            text-transform: capitalize;
-          }
-          &.active-student {
-            background-color: rgba(26, 169, 235, 0.2);
-          }
+        &::-webkit-scrollbar {
+          height: 6px;
+          width: 5px;
         }
-      }
-      .body-right {
-        .student-summary-container {
-          display: grid;
-          grid-template-columns: repeat(8, 1fr);
-          height: 45px;
-          line-height: 45px;
-          padding-right: 10px;
-          border-bottom: 1px solid #f2f2f2;
-          &:last-child {
-            border: none;
-          }
-          .gained-competencies,
-          .inprogress-competencies {
+
+        &::-webkit-scrollbar-thumb {
+          background: $gray-light;
+          border: 1px solid $gray-light;
+          border-radius: 5px;
+        }
+
+        .body-left {
+          .student-info-container {
+            height: 45px;
             display: grid;
-            grid-template-columns: auto auto;
-            align-items: center;
-            justify-content: center;
+            grid-template-columns: 32px 1fr;
+            justify-content: left;
             column-gap: 8px;
-            .competency-status {
-              width: 8px;
-              height: 8px;
-              border-radius: 50%;
-              display: block;
+            align-items: center;
+            padding-left: 10px;
+            border-bottom: 1px solid #f2f2f2;
+            cursor: pointer;
+            pointer-events: none;
+
+            &.data-available {
+              pointer-events: unset;
             }
-            .competency-count {
+            &:last-child {
+              border: none;
+            }
+            .student-thumbnail {
+              width: 32px;
+              height: 32px;
+              background-size: 32px;
+              display: block;
+              border-radius: 50%;
+              .active-student-data {
+                display: none;
+              }
+            }
+
+            .student-name {
               font-size: 13px;
               color: #000;
+              text-transform: capitalize;
             }
             &.active-student {
               background-color: rgba(26, 169, 235, 0.2);
             }
           }
-          .total-timespent,
-          .collection-timespent,
-          .assessment-timespent {
-            justify-self: center;
-            .time-spent {
-              font-size: 13px;
-              color: #000;
+        }
+        .body-right {
+          .student-summary-container {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            height: 45px;
+            line-height: 45px;
+            padding-right: 10px;
+            border-bottom: 1px solid #f2f2f2;
+            &:last-child {
+              border: none;
             }
-          }
-
-          .badge-earned {
-            justify-self: center;
-            .badge {
-              background-color: #e5be34;
-              width: auto;
-              height: auto;
-              border-radius: 50%;
-              text-align: center;
-              line-height: 24px;
-              padding: 0;
-              .badge-count {
+            .gained-competencies,
+            .inprogress-competencies {
+              display: grid;
+              grid-template-columns: auto auto;
+              align-items: center;
+              justify-content: center;
+              column-gap: 8px;
+              .competency-status {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                display: block;
+              }
+              .competency-count {
                 font-size: 13px;
-                color: $white;
-                padding: 8px;
+                color: #000;
+              }
+              &.active-student {
+                background-color: rgba(26, 169, 235, 0.2);
               }
             }
-          }
-
-          .average-score {
-            justify-self: center;
-            .score {
-              font-size: 16px;
-              font-weight: bold;
-
-              &.score-range-not-started {
-                color: black;
-              }
-
-              &.score-range-0-59 {
-                color: #f46360;
-              }
-
-              &.score-range-60-69 {
-                color: #ed8e36;
-              }
-
-              &.score-range-70-79 {
-                color: #faba36;
-              }
-
-              &.score-range-80-89 {
-                color: #a8c99c;
-              }
-
-              &.score-range-90-100 {
-                color: #4b9740;
+            .total-timespent,
+            .collection-timespent,
+            .assessment-timespent {
+              justify-self: center;
+              .time-spent {
+                font-size: 13px;
+                color: #000;
               }
             }
-          }
 
-          .suggestion-taken {
-            justify-self: center;
-            .suggestion-count {
-              font-size: 16px;
-              font-weight: bold;
-              color: #f89e1b;
+            .badge-earned {
+              justify-self: center;
+              .badge {
+                background-color: #e5be34;
+                width: auto;
+                height: auto;
+                border-radius: 50%;
+                text-align: center;
+                line-height: 24px;
+                padding: 0;
+                .badge-count {
+                  font-size: 13px;
+                  color: $white;
+                  padding: 8px;
+                }
+              }
+            }
+
+            .average-score {
+              justify-self: center;
+              .score {
+                font-size: 16px;
+                font-weight: bold;
+
+                &.score-range-not-started {
+                  color: black;
+                }
+
+                &.score-range-0-59 {
+                  color: #f46360;
+                }
+
+                &.score-range-60-69 {
+                  color: #ed8e36;
+                }
+
+                &.score-range-70-79 {
+                  color: #faba36;
+                }
+
+                &.score-range-80-89 {
+                  color: #a8c99c;
+                }
+
+                &.score-range-90-100 {
+                  color: #4b9740;
+                }
+              }
+            }
+
+            .suggestion-taken {
+              justify-self: center;
+              .suggestion-count {
+                font-size: 16px;
+                font-weight: bold;
+                color: #f89e1b;
+              }
             }
           }
         }
       }
-
       .student-competencies-container {
         padding: 0 15px 15px 15px;
-        display: grid;
+        overflow-y: auto;
         &::-webkit-scrollbar {
           height: 6px;
           width: 8px;
@@ -404,33 +421,37 @@
       }
 
       &.student-competencies-activate {
-        grid-template-columns: 200px 250px 1fr;
-        .body-right {
-          .student-summary-container {
-            grid-template-columns: repeat(3, 1fr);
-            .gained-competencies,
-            .inprogress-competencies {
-              justify-content: left;
-            }
-            .active-student-data {
-              justify-self: center;
-              text-align: center;
-              height: 45px;
-              background-color: rgba(26, 169, 235, 0.2);
-              width: 100%;
-              cursor: pointer;
-              i.clear {
-                line-height: 45px;
+        grid-template-columns: 450px 1fr;
+        overflow: hidden;
+        .body-scroll {
+          grid-template-columns: 200px 1fr;
+          .body-right {
+            .student-summary-container {
+              grid-template-columns: repeat(3, 1fr);
+              .gained-competencies,
+              .inprogress-competencies {
+                justify-content: left;
+              }
+              .active-student-data {
+                justify-self: center;
+                text-align: center;
+                height: 45px;
+                background-color: rgba(26, 169, 235, 0.2);
+                width: 100%;
+                cursor: pointer;
+                i.clear {
+                  line-height: 45px;
+                }
               }
             }
-          }
-          .collection-timespent,
-          .assessment-timespent,
-          .total-timespent,
-          .badge-earned,
-          .average-score,
-          .suggestion-taken {
-            display: none;
+            .collection-timespent,
+            .assessment-timespent,
+            .total-timespent,
+            .badge-earned,
+            .average-score,
+            .suggestion-taken {
+              display: none;
+            }
           }
         }
       }
@@ -439,7 +460,11 @@
 
   @media screen and (max-width: $screen-1024) {
     .weekly-report-container {
-      .body-container,
+      .body-container {
+        .body-scroll {
+          grid-template-columns: 200px 1fr;
+        }
+      }
       .header-container {
         grid-template-columns: 200px 1fr;
       }
@@ -494,31 +519,36 @@
         }
       }
       .body-container {
-        grid-template-columns: 120px 1fr;
-        width: 100vw;
-        .body-left {
-          .student-info-container {
-            .student-name {
-              display: grid;
-              line-height: 15px;
+        .body-scroll {
+          grid-template-columns: 120px 1fr;
+          width: 100vw;
+          .body-left {
+            .student-info-container {
+              .student-name {
+                display: grid;
+                line-height: 15px;
+              }
+            }
+          }
+          .body-right {
+            width: calc(100vw- 150px);
+            overflow-x: auto;
+            .student-summary-container {
+              .column-data {
+                min-width: 80px;
+                text-align: center;
+              }
             }
           }
         }
-        .body-right {
-          width: calc(100vw- 150px);
-          overflow-x: auto;
-          .student-summary-container {
-            .column-data {
-              min-width: 80px;
-              text-align: center;
-            }
-          }
-        }
-
         &.student-competencies-activate {
           grid-template-columns: 200px 1fr;
-          .body-right {
-            display: none;
+          .body-scroll {
+            width: 100%;
+            grid-template-columns: 200px 1fr;
+            .body-right {
+              display: none;
+            }
           }
         }
       }
@@ -530,6 +560,9 @@
       .body-container {
         &.student-competencies-activate {
           grid-template-columns: 150px 1fr;
+          .body-scroll {
+            grid-template-columns: 150px 1fr;
+          }
         }
 
         .body-left {
