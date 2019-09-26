@@ -30,18 +30,18 @@
   }
 
   .fillArea0 {
-    fill: #e7e8e9;
+    fill: $gray-no-started;
   }
 
   .fillArea1 {
-    fill: #1aa9eb;
+    fill: $blue-in-progress;
   }
 
   .fillArea2,
   .fillArea3,
   .fillArea4,
   .fillArea5 {
-    fill: #006eb5;
+    fill: $blue-mastery;
   }
 
   .actions {
