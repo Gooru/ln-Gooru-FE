@@ -11,6 +11,11 @@ import Ember from 'ember';
  */
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
+  // Dependencies
+
+  session: Ember.inject.service('session'),
+
+  // -------------------------------------------------------------------------
   // Attributes
 
   classNames: ['content', 'courses', 'gru-accordion-lesson-item', 'view'],
