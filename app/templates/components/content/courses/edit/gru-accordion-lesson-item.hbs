@@ -14,14 +14,6 @@
           <span>{{model.collectionType}}</span>
         </div>
       {{/link-to}}
-    {{else if (or (eq model.collectionType 'assessment') (eq model.collectionType 'collection'))}}
-        {{#link-to (if  (eq model.collectionType 'assessment') 'content.assessments.edit' 'content.collections.edit' ) model.id (query-params courseId=course.id allowBackToCourse=true unitId=unitId lessonId=lessonId editingContent=true) class="title"}}
-        <img class="img-rounded" src="{{model.thumbnailUrl}}" />
-        <div>
-          <strong>{{model.title}}</strong>
-          <span>{{model.collectionType}}</span>
-        </div>
-         {{/link-to}}
     {{else if model.isExternalAssessment}}
       <a href="{{model.url}}" target="_blank" class="title">
         <img class="img-rounded" src="{{model.thumbnailUrl}}" />
