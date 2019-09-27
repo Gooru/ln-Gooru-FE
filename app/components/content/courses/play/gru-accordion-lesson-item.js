@@ -46,7 +46,7 @@ export default Ember.Component.extend({
   model: null,
 
   /**
-   * @prop {String} Role Get current use role from session
+   * @prop {String} role Get current use role from session
    */
-  Role: Ember.computed.alias('session.role')
+  role: Ember.computed.alias('session.role')
 });
