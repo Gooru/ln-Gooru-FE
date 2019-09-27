@@ -35,14 +35,14 @@ const Validations = buildValidations({
 });
 
 /**
- *  Activity model
+ *  Offline Activity model
  * typedef {Object} Assessment
  */
 export default Ember.Object.extend(Validations, CollectionBase, {
   /**
-   * @property {string} indicates it is an assessment
+   * @property {string} indicates it is an offline activity
    */
-  collectionType: 'activity',
+  collectionType: CONTENT_TYPES.OFFLINE_ACTIVITY,
 
   /**
    * @property {string}
