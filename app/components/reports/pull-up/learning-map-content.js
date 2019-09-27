@@ -31,10 +31,6 @@ export default Ember.Component.extend({
       component.set('activityContentType', contentType);
       component.loadActivityContentData(contentType);
       component.set('isShowActivityPullup', true);
-    },
-    onClickShowMoreActivity() {
-      let component = this;
-      component.loadActivityContentData();
     }
   },
   loadActivityContentData(contentType) {

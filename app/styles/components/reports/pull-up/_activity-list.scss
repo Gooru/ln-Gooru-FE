@@ -35,7 +35,7 @@
     }
 
     .activity-list-body {
-      height: 80vh;
+      height: 77vh;
       min-height: 135px;
       max-width: 760px;
       overflow-x: hidden;
@@ -46,13 +46,8 @@
       .activity-contents {
         display: grid;
         grid-gap: 8px;
-        grid-template-columns: auto auto auto;
-        &.cards-2 {
-          grid-template-columns: auto auto;
-        }
-        &.cards-1 {
-          grid-template-columns: auto;
-        }
+        grid-template-columns: auto;
+        justify-content: space-around;
       }
     }
   }
