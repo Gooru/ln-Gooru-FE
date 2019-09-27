@@ -37,7 +37,6 @@
   }}
 {{/if}}
 
-
 {{#if showStudentDcaReport}}
   {{reports/pull-up/dca-student-collection-report useSession=true showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
@@ -63,4 +62,25 @@
       previewContentType=previewContentType
       playerContext=previewPlayerContext
     }}
+{{/if}}
+
+
+{{#if isShowStudentOfflineActivityReport}}
+  {{reports/pull-up/oa-preview
+    showPullUp=isShowStudentOfflineActivityReport
+    oaId=studentReportContextData.collectionId
+    classId=studentReportContextData.classId
+    reportContext=studentReportContextData
+    isReportView=true
+    isCmReport=isCmReport
+  }}
+{{/if}}
+
+{{#if isShowOfflineActivityPreview}}
+  {{reports/pull-up/oa-preview
+    showPullUp=isShowOfflineActivityPreview
+    oaId=previewContent.id
+    classId=previewPlayerContext.classId
+    isReportView=false
+  }}
 {{/if}}
