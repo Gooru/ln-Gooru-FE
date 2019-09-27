@@ -54,7 +54,7 @@ export default Ember.Component.extend({
       : Ember.A([]);
     component.set(
       'activityContents',
-      activityContents.pushObject(activityContentData)
+      activityContents.concat(activityContentData)
     );
     component.set('activityTotalHitCount', activityTotalHitCount);
     component.set('startAt', startAt + length);

@@ -189,7 +189,7 @@ export default Ember.Component.extend({
     };
     component.set('isLoading', true);
     return Ember.RSVP.hash({
-      learningMapData: searchService.fetchLearningMapsContent(
+      learningMapData: searchService.fetchLearningMapsCompetencyContent(
         competencyCode,
         filters
       )
