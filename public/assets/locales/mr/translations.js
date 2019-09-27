@@ -2674,6 +2674,7 @@ window.i18ln = {
   'common.subtask.oa.debate': 'चर्चा विवाद',
   'common.subtask.oa.others': 'इतर',
   project: 'प्रकल्प',
+  'oa.others': 'इतर',
   'oa.project.poster': 'भित्तीपत्रिका',
   'oa.project.presentation': 'सादरीकरण',
   'oa.project.video': 'Video',

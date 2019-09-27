@@ -2673,6 +2673,7 @@ window.i18ln = {
   'common.subtask.oa.debate': 'परिचर्चा',
   'common.subtask.oa.others': 'अन्य',
   project: 'परियोजना',
+  'oa.others': 'अन्य',
   'oa.project.poster': 'पोस्टर',
   'oa.project.presentation': 'प्रदर्शन',
   'oa.project.video': 'वीडियो',

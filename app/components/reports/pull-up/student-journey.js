@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  PLAYER_EVENT_SOURCE
-} from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -21,6 +19,12 @@ export default Ember.Component.extend({
    * @requires {CollectionService} Service to retrieve a collection
    */
   collectionService: Ember.inject.service('api-sdk/collection'),
+
+  /**
+   * @requires service:api-sdk/class-activity
+   */
+  oaService: Ember.inject.service('api-sdk/offline-activity/offline-activity'),
+
   /**
    * @property {collection}
    */
@@ -56,6 +60,10 @@ export default Ember.Component.extend({
       collectionPromise = component
         .get('assessmentService')
         .readExternalAssessment(activity.get('id'));
+    } else if (contentType === 'offline-activity') {
+      collectionPromise = component
+        .get('oaService')
+        .readActivity(activity.get('id'));
     } else {
       collectionPromise = component
         .get('collectionService')
@@ -63,9 +71,7 @@ export default Ember.Component.extend({
     }
     return Ember.RSVP.hash({
       collection: collectionPromise
-    }).then(({
-      collection
-    }) => {
+    }).then(({ collection }) => {
       component.set('collection', collection);
       collection.set(
         'performance',
@@ -109,7 +115,13 @@ export default Ember.Component.extend({
       component.set('previewPlayerContext', previewPlayerContext);
       component.set('previewContent', collection);
       component.set('previewContentType', collection.get('collectionType'));
-      component.set('isShowContentPreview', true);
+      if (component.get('previewContentType') === 'offline-activity') {
+        component.set('isShowContentPreview', false);
+        component.set('isShowOfflineActivityPreview', true);
+      } else {
+        component.set('isShowContentPreview', true);
+        component.set('isShowOfflineActivityPreview', false);
+      }
     }
   },
 
@@ -120,8 +132,10 @@ export default Ember.Component.extend({
   openStudentCollectionReport(activity, collection, collectionType) {
     let component = this;
     if (activity.get('contentSource') === PLAYER_EVENT_SOURCE.DAILY_CLASS) {
+      component.set('isCmReport', false);
       component.showDCAReport(activity, collection, collectionType);
     } else {
+      component.set('isCmReport', true);
       component.showCourseMapReport(activity, collection, collectionType);
     }
   },
@@ -129,22 +143,32 @@ export default Ember.Component.extend({
   showCourseMapReport(activity, collection, collectionType) {
     let component = this;
     let params = {
-      userId: component.get('isStudent') ? component.get('session.userId') : component.get('userId'),
+      userId: component.get('isStudent')
+        ? component.get('session.userId')
+        : component.get('userId'),
       classId: activity.get('classId'),
       courseId: activity.get('courseId'),
       unitId: activity.get('unitId'),
       lessonId: activity.get('lessonId'),
       collectionId: activity.get('id'),
-      sessionId: collectionType === 'assessment' ? activity.get('sessionId') : null,
+      sessionId:
+        collectionType === 'assessment' ? activity.get('sessionId') : null,
       type: collectionType,
       isStudent: component.get('isStudent'),
-      collection
+      collection,
+      performance: collection.performance
     };
     if (collectionType === 'assessment-external') {
       component.set('showExternalAssessmentReport', true);
+      component.set('isShowStudentOfflineActivityReport', false);
+      component.set('showCollectionReport', false);
+    } else if (collectionType === 'offline-activity') {
+      component.set('isShowStudentOfflineActivityReport', true);
+      component.set('showExternalAssessmentReport', false);
       component.set('showCollectionReport', false);
     } else {
       component.set('showExternalAssessmentReport', false);
+      component.set('isShowStudentOfflineActivityReport', false);
       component.set('showCollectionReport', true);
     }
     component.set('studentReportContextData', params);
@@ -161,14 +185,22 @@ export default Ember.Component.extend({
       component.set('isShowStudentExternalAssessmentReport', true);
       component.set('showStudentDcaReport', false);
       component.set('isShowStudentExternalCollectionReport', false);
+      component.set('isShowStudentOfflineActivityReport', false);
     } else if (collectionType === 'collection-external') {
       component.set('showStudentDcaReport', false);
       component.set('isShowStudentExternalAssessmentReport', false);
       component.set('isShowStudentExternalCollectionReport', true);
+      component.set('isShowStudentOfflineActivityReport', false);
+    } else if (collectionType === 'offline-activity') {
+      component.set('isShowStudentOfflineActivityReport', true);
+      component.set('isShowStudentExternalAssessmentReport', false);
+      component.set('showStudentDcaReport', false);
+      component.set('isShowStudentExternalCollectionReport', false);
     } else {
       component.set('showStudentDcaReport', true);
       component.set('isShowStudentExternalAssessmentReport', false);
       component.set('isShowStudentExternalCollectionReport', false);
+      component.set('isShowStudentOfflineActivityReport', false);
     }
     component.set('studentReportContextData', params);
   },
@@ -181,7 +213,9 @@ export default Ember.Component.extend({
       classId: activity.get('classId'),
       isStudent: component.get('isStudent'),
       type: collectionType,
-      userId: component.get('isStudent') ? component.get('session.userId') : component.get('userId'),
+      userId: component.get('isStudent')
+        ? component.get('session.userId')
+        : component.get('userId'),
       collection: component.getDCACollectionData(collection, collectionType),
       studentPerformance: component.getDCACollectionPerformance(activity)
     });

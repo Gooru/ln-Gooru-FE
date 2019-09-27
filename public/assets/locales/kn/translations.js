@@ -2709,6 +2709,7 @@ window.i18ln = {
   'common.subtask.oa.debate': 'ಚರ್ಚೆ',
   'common.subtask.oa.others': 'Others',
   project: 'ಯೋಜನೆ',
+  'oa.others': 'Others',
   'oa.project.poster': 'ಪೋಸ್ಟರ್',
   'oa.project.presentation': 'ಪ್ರಸ್ತುತಿ',
   'oa.project.video': 'ವೀಡಿಯೊ',
