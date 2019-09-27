@@ -11,10 +11,10 @@ export default Ember.Object.extend({
    * @return {Promise}
    * Method to do partial search like fetching users based on partial matching user context
    */
-  getUserPortfolioUniqueItems(requestParams) {
+  getUserPortfolioUniqueItems(requestParams, contentBase = 'content') {
     const adapter = this;
     const namespace = adapter.get('portfolioNamespace');
-    const url = `${namespace}/content/portfolio/items`;
+    const url = `${namespace}/${contentBase}/portfolio/items`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',

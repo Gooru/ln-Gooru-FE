@@ -11,8 +11,6 @@
 @import "mixins/content/edit";
 @import "mixins/gru-accordion";
 @import "controllers/application";
-@import "controllers/class/analytics/performance/teacher";
-@import "controllers/teacher/class/collection";
 @import "controllers/content/classes/modals";
 @import "controllers/content/classes/create";
 @import "controllers/content/classes/join";
@@ -38,14 +36,11 @@
 @import "controllers/reports/student-open-ended-summary";
 @import "controllers/sign-in";
 @import "controllers/sign-up";
-@import "controllers/home";
 @import "controllers/teacher-home";
 @import "controllers/student-home";
 @import "controllers/student-independent-learning";
 @import "controllers/forgot-password";
 @import "controllers/reset-password";
-@import "controllers/featured";
-@import "controllers/account-settings";
 @import "controllers/grading-player";
 @import "controllers/study-player";
 @import "controllers/study-player/timeline-view";
@@ -54,7 +49,6 @@
 @import "controllers/resource-player";
 @import "controllers/student/class";
 @import "controllers/student/independent";
-@import "controllers/student/performance";
 @import "controllers/student/class/course-map";
 @import "controllers/student/class/class-activities";
 @import "controllers/student/class/proficiency";
@@ -64,12 +58,9 @@
 @import "controllers/teacher/class";
 @import "controllers/teacher/class/class-activities";
 @import "controllers/teacher/class/class-management";
-@import "controllers/teacher/class/students";
 @import "controllers/teacher/class/course-map";
-@import "controllers/teacher/class/performance";
 @import "controllers/teacher/class/students-proficiency";
 @import "controllers/teacher/class/atc";
-@import "controllers/goals/manage";
 @import "controllers/student-independent-learning/learning-base";
 @import "controllers/not-found";
 @import "controllers/student-locate";
@@ -82,7 +73,6 @@
 @import "components/datepicker-field";
 @import "components/search-filter";
 @import "components/rating-stars";
-@import "components/collection-results";
 @import "components/gru-resource-results";
 @import "components/grade-dropdown";
 @import "components/gru-breadcrumb";
@@ -170,12 +160,9 @@
 @import "components/class/analytics/performance/student/gru-student-performance";
 @import "components/class/analytics/performance/student/gru-unit-performance";
 @import "components/class/analytics/performance/student/gru-lesson-performance";
-@import "components/class/analytics/performance/teacher/gru-metrics-table";
-@import "components/class/analytics/performance/teacher/gru-metrics-sub-header";
 @import "components/class/overview/gru-accordion-course";
 @import "components/class/overview/gru-accordion-unit";
 @import "components/class/overview/gru-accordion-lesson";
-@import "components/class/gru-learner-pathway";
 @import "components/class/gru-report-panel";
 @import "components/class/learner/gru-learner-accordion-unit";
 @import "components/class/learner/gru-learner-accordion-lesson";
@@ -184,9 +171,7 @@
 @import "components/content/assessments/gru-assessment-edit";
 @import "components/content/activity/_gru-activity-edit.scss";
 
-@import "components/content/activity/_gru-activity-edit.scss";
 @import "components/content/gru-audience";
-@import "components/content/gru-category";
 @import "components/content/gru-image";
 @import "components/content/gru-settings-edit";
 @import "components/content/gru-depth-of-knowledge";
@@ -508,3 +493,5 @@
 @import "components/portfolio/gru-assessments-panel";
 @import "components/portfolio/gru-collections-panel";
 @import "components/portfolio/gru-portfolio-content-card";
+@import "components/portfolio/gru-content-filters";
+@import "components/gru-gut-filter";

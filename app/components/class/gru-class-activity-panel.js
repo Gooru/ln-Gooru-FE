@@ -132,28 +132,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
       );
     },
 
-    onPullUpClose(closeAll) {
-      this.closePullUp(closeAll);
-    },
-
     onUpdateMasteryAccrual() {
       let classActivity = this.get('classActivity');
       this.sendAction('onUpdateMasteryAccrual', classActivity);
     }
-  },
-
-  closePullUp(closeAll) {
-    let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-        component.sendAction('onClosePullUp', closeAll);
-      }
-    );
   },
 
   // -------------------------------------------------------------------------

@@ -25,8 +25,6 @@ $box-shadow: -1px 0px;
 @import "mixins/gru-accordion";
 
 @import "controllers/application";
-@import "controllers/class/analytics/performance/teacher";
-@import "controllers/teacher/class/collection";
 @import "controllers/content/classes/modals";
 @import "controllers/content/classes/create";
 @import "controllers/content/classes/join";
@@ -51,14 +49,11 @@ $box-shadow: -1px 0px;
 @import "controllers/reports/student-open-ended-summary";
 @import "controllers/sign-in";
 @import "controllers/sign-up";
-@import "controllers/home";
 @import "controllers/teacher-home";
 @import "controllers/student-home";
 @import "controllers/student-independent-learning";
 @import "controllers/forgot-password";
 @import "controllers/reset-password";
-@import "controllers/featured";
-@import "controllers/account-settings";
 @import "controllers/grading-player";
 @import "controllers/study-player";
 @import "controllers/study-player-external";
@@ -66,7 +61,6 @@ $box-shadow: -1px 0px;
 
 @import "controllers/student/class";
 @import "controllers/student/independent";
-@import "controllers/student/performance";
 @import "controllers/student/class/course-map";
 @import "controllers/student/class/class-activities";
 
@@ -74,9 +68,6 @@ $box-shadow: -1px 0px;
 @import "controllers/teacher/class/class-activities";
 @import "controllers/teacher/class/class-management";
 @import "controllers/teacher/class/course-map";
-@import "controllers/teacher/class/performance";
-
-@import "controllers/goals/manage";
 
 @import "controllers/student-independent-learning/learning-base";
 
@@ -87,7 +78,6 @@ $box-shadow: -1px 0px;
 @import "components/datepicker-field";
 @import "components/search-filter";
 @import "components/rating-stars";
-@import "components/collection-results";
 @import "components/gru-resource-results";
 @import "components/grade-dropdown";
 @import "components/gru-breadcrumb";
@@ -158,15 +148,12 @@ $box-shadow: -1px 0px;
 @import "components/class/analytics/performance/student/gru-student-performance";
 @import "components/class/analytics/performance/student/gru-unit-performance";
 @import "components/class/analytics/performance/student/gru-lesson-performance";
-@import "components/class/analytics/performance/teacher/gru-metrics-table";
-@import "components/class/analytics/performance/teacher/gru-metrics-sub-header";
 @import "components/class/overview/gru-accordion-course";
 @import "components/class/overview/gru-accordion-unit";
 @import "components/class/overview/gru-accordion-lesson";
 
 @import "components/content/assessments/gru-assessment-edit";
 @import "components/content/gru-audience";
-@import "components/content/gru-category";
 @import "components/content/gru-image";
 @import "components/content/gru-settings-edit";
 @import "components/content/gru-depth-of-knowledge";

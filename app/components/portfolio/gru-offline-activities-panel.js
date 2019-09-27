@@ -15,18 +15,49 @@ export default Ember.Component.extend({
     component.loadPortfolioItems();
   },
 
+  actions: {
+    onOpenFilter() {
+      const component = this;
+      component.toggleProperty('isShowContentFilters');
+    },
+
+    refreshFilters(appliedFilters) {
+      const component = this;
+      component.set('appliedFilters', appliedFilters);
+      component.loadPortfolioItems(appliedFilters);
+      component.toggleProperty('isShowContentFilters');
+    },
+
+    clearFilters() {
+      const component = this;
+      component.loadPortfolioItems();
+    }
+  },
+
   userId: Ember.computed.alias('session.userId'),
 
-  loadPortfolioItems() {
+  isShowContentFilters: false,
+
+  filters: {},
+
+  appliedFilters: {},
+
+  activeFiltersList: Ember.A([]),
+
+  userCreatedAt: Ember.computed('userProfile.createdAt', function() {
+    return moment(this.get('userProfile.createdAt')).format('YYYY-MM-DD');
+  }),
+
+  loadPortfolioItems(filters = {}) {
     const component = this;
     component
-      .fetchStudiedOfflineActivities()
+      .fetchStudiedOfflineActivities(filters)
       .then(function(studiedOfflineActivities) {
         component.parseStudiedOfflineActivities(studiedOfflineActivities);
       });
   },
 
-  fetchStudiedOfflineActivities() {
+  fetchStudiedOfflineActivities(filters = {}) {
     const component = this;
     const portfolioService = component.get('portfolioService');
     const userId = component.get('userId');
@@ -35,7 +66,9 @@ export default Ember.Component.extend({
       userId,
       activityType
     };
-    return portfolioService.getUserPortfolioUniqueItems(requestParam);
+    filters = Object.assign(filters, requestParam);
+    let contentBase = component.getContentBaseByFilter(filters);
+    return portfolioService.getUserPortfolioUniqueItems(filters, contentBase);
   },
 
   parseStudiedOfflineActivities(studiedOfflineActivities) {
@@ -56,5 +89,17 @@ export default Ember.Component.extend({
       });
       component.set('learnedPortfolioItems', parsedOfflineActivities);
     }
+  },
+
+  getContentBaseByFilter(filters) {
+    let contentBase = 'content';
+    if (filters.gutCode && filters.gutCode !== '') {
+      contentBase = 'competency';
+    } else if (filters.domainCode && filters.domainCode !== '') {
+      contentBase = 'domain';
+    } else if (filters.subjectCode && filters.subjectCode !== '') {
+      contentBase = 'subject';
+    }
+    return contentBase;
   }
 });

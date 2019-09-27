@@ -15,16 +15,48 @@ export default Ember.Component.extend({
     component.loadStudiedAssessments();
   },
 
-  userId: Ember.computed.alias('session.userId'),
+  actions: {
+    onOpenFilter() {
+      const component = this;
+      component.toggleProperty('isShowContentFilters');
+    },
 
-  loadStudiedAssessments() {
-    const component = this;
-    component.fetchStudiedAssessments().then(function(studiedAssessments) {
-      component.parseStudiedAssessments(studiedAssessments);
-    });
+    refreshFilters(appliedFilters) {
+      const component = this;
+      component.loadStudiedAssessments(appliedFilters);
+      component.toggleProperty('isShowContentFilters');
+    },
+
+    clearFilters() {
+      const component = this;
+      component.loadStudiedAssessments();
+    }
   },
 
-  fetchStudiedAssessments() {
+  userId: Ember.computed.alias('session.userId'),
+
+  isShowContentFilters: false,
+
+  filters: {},
+
+  userCreatedAt: Ember.computed('userProfile.createdAt', function() {
+    return moment(this.get('userProfile.createdAt')).format('YYYY-MM-DD');
+  }),
+
+  activeFiltersList: Ember.A([]),
+
+  appliedFilters: {},
+
+  loadStudiedAssessments(filters) {
+    const component = this;
+    component
+      .fetchStudiedAssessments(filters)
+      .then(function(studiedAssessments) {
+        component.set('learnedPortfolioItems', studiedAssessments);
+      });
+  },
+
+  fetchStudiedAssessments(filters = {}) {
     const component = this;
     const portfolioService = component.get('portfolioService');
     const userId = component.get('userId');
@@ -33,13 +65,20 @@ export default Ember.Component.extend({
       userId,
       activityType
     };
-    return portfolioService.getUserPortfolioUniqueItems(requestParam);
+    filters = Object.assign(filters, requestParam);
+    let contentBase = component.getContentBaseByFilter(filters);
+    return portfolioService.getUserPortfolioUniqueItems(filters, contentBase);
   },
 
-  parseStudiedAssessments(studiedAssessments) {
-    const component = this;
-    if (!component.isDestroyed) {
-      component.set('learnedPortfolioItems', studiedAssessments);
+  getContentBaseByFilter(filters) {
+    let contentBase = 'content';
+    if (filters.gutCode && filters.gutCode !== '') {
+      contentBase = 'competency';
+    } else if (filters.domainCode && filters.domainCode !== '') {
+      contentBase = 'domain';
+    } else if (filters.subjectCode && filters.subjectCode !== '') {
+      contentBase = 'subject';
     }
+    return contentBase;
   }
 });

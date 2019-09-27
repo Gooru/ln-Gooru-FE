@@ -1,9 +1,9 @@
-<div class="offline-activites-container">
+<div class="offline-activites-container {{if isShowContentFilters 'filters-active'}}">
   <div class="header-container">
     <div class="icon"></div>
     <div class="title">Offline Activities</div>
     <div class="search-items-container">
-      <div class="filter-search hidden">
+      <div class="filter-search" {{action "onOpenFilter"}}>
         {{gru-icon name="filter_list"}}
       </div>
     </div>
@@ -22,4 +22,12 @@
       </div>
     {{/each}}
   </div>
+  {{#if isShowContentFilters}}
+    {{portfolio/gru-content-filters
+      refreshFilters = "refreshFilters"
+      pickerStartDate = userCreatedAt
+      userPreference = userPreference
+      activeFiltersList = activeFiltersList
+      appliedFilters = appliedFilters}}
+  {{/if}}
 </div>
