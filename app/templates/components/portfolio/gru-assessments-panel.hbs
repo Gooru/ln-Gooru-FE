@@ -1,4 +1,4 @@
-<div class="assessments-container">
+<div class="assessments-container {{if isShowContentFilters 'filters-active'}}">
   <div class="header-container">
     <div class="icon"></div>
     <div class="title">Assessments</div>
@@ -8,7 +8,7 @@
       </div>
     </div>
   </div>
-  <div class="body-container {{if isShowContentFilters 'filter-populated'}}">
+  <div class="body-container">
     <div class="assessments">
       {{#each learnedPortfolioItems as | assessment |}}
           {{portfolio/gru-portfolio-content-card content = assessment}}
@@ -19,6 +19,8 @@
     {{portfolio/gru-content-filters
       refreshFilters = "refreshFilters"
       pickerStartDate = userCreatedAt
-      userPreference = userPreference}}
+      userPreference = userPreference
+      activeFiltersList = activeFiltersList
+      appliedFilters = appliedFilters}}
   {{/if}}
 </div>
