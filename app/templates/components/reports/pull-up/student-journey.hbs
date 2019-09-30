@@ -2,7 +2,7 @@
 <div class="collections-accordion">
   {{#if collectionPerformances}}
     {{#each collectionPerformances as |collectionPerformance|}}
-      <div class="collection-panel {{if (and (eq collectionPerformance.collectionType offlineActivity) (eq collectionPerformance.contentSource classActivity)) 'disable-event'}}">
+      <div class="collection-panel {{if (and (eq collectionPerformance.collectionType OFFLINE_CLASS) (eq collectionPerformance.contentSource DAILY_CLASS)) 'disable-event'}}">
         <i class="icon {{collectionPerformance.collectionType}}"></i>
         <div class="collection-title" {{action 'onPreviewContent' collectionPerformance}}>{{collectionPerformance.title}}</div>
         {{#if ( or (eq collectionPerformance.collectionType 'collection') (eq collectionPerformance.collectionType 'collection-external'))}}
