@@ -41,6 +41,16 @@ export default Ember.Component.extend({
   studentCollectionReport: null,
 
   /**
+   * @property {offlineActivity}
+   */
+  offlineActivity: PLAYER_EVENT_SOURCE.OFFLINE_CLASS,
+
+  /**
+   * @property {classActivity}
+   */
+  classActivity: PLAYER_EVENT_SOURCE.DAILY_CLASS,
+
+  /**
    * @function getStundentCollectionReport
    * Method to get student collection report
    */
@@ -185,22 +195,14 @@ export default Ember.Component.extend({
       component.set('isShowStudentExternalAssessmentReport', true);
       component.set('showStudentDcaReport', false);
       component.set('isShowStudentExternalCollectionReport', false);
-      component.set('isShowStudentOfflineActivityReport', false);
     } else if (collectionType === 'collection-external') {
       component.set('showStudentDcaReport', false);
       component.set('isShowStudentExternalAssessmentReport', false);
       component.set('isShowStudentExternalCollectionReport', true);
-      component.set('isShowStudentOfflineActivityReport', false);
-    } else if (collectionType === 'offline-activity') {
-      component.set('isShowStudentOfflineActivityReport', true);
-      component.set('isShowStudentExternalAssessmentReport', false);
-      component.set('showStudentDcaReport', false);
-      component.set('isShowStudentExternalCollectionReport', false);
     } else {
       component.set('showStudentDcaReport', true);
       component.set('isShowStudentExternalAssessmentReport', false);
       component.set('isShowStudentExternalCollectionReport', false);
-      component.set('isShowStudentOfflineActivityReport', false);
     }
     component.set('studentReportContextData', params);
   },
