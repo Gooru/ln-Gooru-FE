@@ -31,10 +31,6 @@ export default Ember.Component.extend({
       component.set('activityContentType', contentType);
       component.loadActivityContentData(contentType);
       component.set('isShowActivityPullup', true);
-    },
-    onClickShowMoreActivity() {
-      let component = this;
-      component.loadActivityContentData();
     }
   },
   loadActivityContentData(contentType) {
@@ -54,7 +50,7 @@ export default Ember.Component.extend({
       : Ember.A([]);
     component.set(
       'activityContents',
-      activityContents.pushObject(activityContentData)
+      activityContents.concat(activityContentData)
     );
     component.set('activityTotalHitCount', activityTotalHitCount);
     component.set('startAt', startAt + length);

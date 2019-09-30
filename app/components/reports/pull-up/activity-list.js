@@ -12,6 +12,10 @@ export default Ember.Component.extend({
     component.openPullUp();
   },
 
+  didDestroyElement() {
+    this.set('activityContents', Ember.A([]));
+  },
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -21,14 +25,6 @@ export default Ember.Component.extend({
     onClosePullUp(closeAll) {
       let component = this;
       component.closePullUp(closeAll);
-    },
-
-    /**
-     * Action triggered when click show more activity
-     */
-    onClickShowMoreActivity() {
-      let component = this;
-      component.sendAction('onClickShowMoreActivity');
     }
   },
 
@@ -45,16 +41,6 @@ export default Ember.Component.extend({
    * @property {String} type
    */
   type: '',
-
-  /**
-   * @property {Boolean} isShowMoveVisible
-   */
-  isShowMoveVisible: Ember.computed('activityContents', function() {
-    let component = this;
-    let activityTotalHitCount = component.get('activityTotalHitCount');
-    let numberOfActivityContents = component.get('activityContents.length');
-    return activityTotalHitCount > numberOfActivityContents;
-  }),
 
   // -------------------------------------------------------------------------
   // Methods
