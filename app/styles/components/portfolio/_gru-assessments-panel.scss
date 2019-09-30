@@ -31,6 +31,7 @@
         .filter-search {
           height: 55px;
           cursor: pointer;
+          transition: transform 1s;
           i.filter_list {
             color: $white;
             line-height: 55px;
@@ -49,12 +50,21 @@
       @media screen and (max-width: $screen-360) {
         padding: 0;
       }
-      &.filter-populated {
-        opacity: 0.2;
-      }
     }
     .portfolio.gru-content-filters {
       top: 48px;
+    }
+    &.filters-active {
+      .header-container {
+        .search-items-container {
+          .filter-search {
+            transform: rotate(180deg);
+          }
+        }
+      }
+      .body-container {
+        opacity: 0.2;
+      }
     }
   }
 }

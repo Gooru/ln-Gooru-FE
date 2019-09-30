@@ -69,5 +69,11 @@
         </div>
       </div>
     {{/if}}
+
+    {{#if isLoading}}
+      <div class="loading-spinner">
+        {{three-bounce-spinner}}
+      </div>
+    {{/if}}
   </div>
 </div>

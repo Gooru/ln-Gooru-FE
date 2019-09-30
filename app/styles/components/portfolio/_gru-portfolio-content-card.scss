@@ -89,11 +89,19 @@
 
     .content-details-container {
       display: grid;
-      grid-template-columns: auto auto;
+      grid-template-columns: repeat(3, 1fr);
       align-items: center;
       height: 31px;
       padding: 0 13px;
       align-items: center;
+
+      @media screen and (max-width: $screen-sm) {
+        grid-template-columns: auto auto;
+
+        .reef-values-container {
+          display: none;
+        }
+      }
 
       .taxonomy-container {
         .gru-taxonomy-tag-list {
@@ -122,7 +130,7 @@
           }
 
           .non-visible-tags {
-            width: 81px;
+            width: 50px;
             height: 23px;
             border-radius: 12px;
             background-color: #2d2d2d;
@@ -134,6 +142,32 @@
               font-size: 14px;
               margin-left: 10px;
             }
+          }
+        }
+      }
+
+      .reef-values-container {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        .values-container {
+          display: grid;
+          justify-items: center;
+          grid-template-rows: 16px 16px;
+          align-content: center;
+          row-gap: 2px;
+          .label-container {
+            font-size: 11px;
+          }
+          .value-container {
+            width: 30px;
+            height: 12px;
+            border-radius: 6px;
+            background-color: rgba(0, 114, 188, 0.5);
+            color: $white;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 12px;
           }
         }
       }

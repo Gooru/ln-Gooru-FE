@@ -43,6 +43,10 @@ export default Ember.Component.extend({
     return moment(this.get('userProfile.createdAt')).format('YYYY-MM-DD');
   }),
 
+  activeFiltersList: Ember.A([]),
+
+  appliedFilters: {},
+
   loadStudiedAssessments(filters) {
     const component = this;
     component

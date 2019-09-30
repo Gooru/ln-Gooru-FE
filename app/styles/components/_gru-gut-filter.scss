@@ -11,7 +11,8 @@
         padding-bottom: 4px;
       }
       .categories-container {
-        display: -webkit-box;
+        display: flex;
+        flex-wrap: wrap;
         .category-container {
           opacity: 0.5;
           color: #37424b;
@@ -23,7 +24,7 @@
           padding: 0 8px;
           margin: 0 4px;
           cursor: pointer;
-
+          width: max-content;
           &:hover,
           &.active {
             opacity: 1;
@@ -36,8 +37,9 @@
     .slide-level-selector {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-
+      position: relative;
       .level-selector {
+        max-width: 300px;
         .level-header-container {
           color: #37424b;
           font-size: 15px;
@@ -63,6 +65,33 @@
               color: $white;
               background-color: #37424b;
             }
+          }
+          &::-webkit-scrollbar {
+            height: 6px;
+            width: 8px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: $gray-light;
+            border: 1px solid $gray-light;
+            border-radius: 5px;
+          }
+        }
+      }
+      .loading-spinner {
+        position: absolute;
+        margin: auto;
+        width: 100%;
+      }
+
+      @media screen and (max-width: $screen-sm) {
+        grid-template-columns: auto;
+
+        .level-selector {
+          max-width: unset;
+          width: 100%;
+          .level-items-container {
+            height: auto;
           }
         }
       }
