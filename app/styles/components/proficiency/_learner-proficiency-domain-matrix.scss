@@ -104,12 +104,12 @@
 
           &.background0 {
             box-shadow: 0 0 6px 5px rgba(0, 0, 0, 0.5);
-            background-color: #e7e8e9;
+            background-color: $gray-no-started;
           }
 
           &.background1 {
             box-shadow: 0 0 6px 5px rgba(0, 0, 0, 0.5);
-            background-color: #1aa9eb;
+            background-color: $blue-in-progress;
           }
 
           &.background2,
@@ -117,7 +117,7 @@
           &.background4,
           &.background5 {
             box-shadow: 0 0 6px 5px rgb(222, 223, 224);
-            background-color: #006eb5;
+            background-color: $blue-mastery;
           }
 
           &.dark-backfill {
