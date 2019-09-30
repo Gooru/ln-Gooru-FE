@@ -41,11 +41,6 @@ export default Ember.Component.extend({
   studentCollectionReport: null,
 
   /**
-   * @property {OFFLINE_CLASS}
-   */
-  OFFLINE_CLASS: PLAYER_EVENT_SOURCE.OFFLINE_CLASS,
-
-  /**
    * @property {DAILY_CLASS}
    */
   DAILY_CLASS: PLAYER_EVENT_SOURCE.DAILY_CLASS,
