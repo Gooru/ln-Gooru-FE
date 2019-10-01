@@ -2696,6 +2696,7 @@ window.i18ln = {
   'common.subtask.oa.debate': 'Debate',
   'common.subtask.oa.others': 'Others',
   project: 'Project',
+  'oa.others': 'Others',
   'oa.project.poster': 'Poster',
   'oa.project.presentation': 'Presentation',
   'oa.project.video': 'Video',
