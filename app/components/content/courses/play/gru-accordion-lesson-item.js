@@ -11,6 +11,11 @@ import Ember from 'ember';
  */
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
+  // Dependencies
+
+  session: Ember.inject.service('session'),
+
+  // -------------------------------------------------------------------------
   // Attributes
 
   classNames: ['content', 'courses', 'gru-accordion-lesson-item', 'view'],
@@ -38,5 +43,10 @@ export default Ember.Component.extend({
   /**
    * @prop {Content/Collection-Assessment} model
    */
-  model: null
+  model: null,
+
+  /**
+   * @prop {String} role Get current use role from session
+   */
+  role: Ember.computed.alias('session.role')
 });

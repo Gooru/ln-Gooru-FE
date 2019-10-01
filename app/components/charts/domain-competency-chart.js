@@ -1,8 +1,8 @@
 import Ember from 'ember';
 import d3 from 'd3';
+import { colorsBasedOnStatus } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['domain-competency-chart'],
@@ -17,18 +17,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
-  /**
-   * Different color range based on status
-   * @type {Object}
-   */
-  colorsBasedOnStatus: Ember.Object.create({
-    '0': '#e7e8e9',
-    '1': '#1aa9eb',
-    '2': '#006eb5',
-    '3': '#006eb5',
-    '4': '#006eb5',
-    '5': '#006eb5'
-  }),
 
   /**
    * @type {Number}
@@ -64,17 +52,18 @@ export default Ember.Component.extend({
     let component = this;
     let cellWidth = component.get('cellWidth');
     let cellHeight = component.get('cellHeight');
-    let colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     let numberOfCompetencies = competencyDataSet.length;
     let domainSeq = component.get('domainSeq');
     let studentSeq = component.get('studentSeq');
-    const svgContainer = d3.select(`.render-domain-competency-chart-${domainSeq}-${studentSeq}`)
+    const svgContainer = d3
+      .select(`.render-domain-competency-chart-${domainSeq}-${studentSeq}`)
       .append('svg')
       .attr('width', 20)
       .attr('height', cellHeight * numberOfCompetencies);
-    const cellContainer = svgContainer.append('g')
-      .attr('id', 'cell-container');
-    const cells = cellContainer.selectAll('.competency').data(competencyDataSet);
+    const cellContainer = svgContainer.append('g').attr('id', 'cell-container');
+    const cells = cellContainer
+      .selectAll('.competency')
+      .data(competencyDataSet);
     cells
       .enter()
       .append('rect')

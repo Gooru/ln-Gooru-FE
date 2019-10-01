@@ -688,18 +688,18 @@ label {
 }
 
 .competency-status-0 {
-  background-color: #cdcdcd;
+  background-color: $gray-no-started;
 }
 
 .competency-status-1 {
-  background-color: #1aa9eb;
+  background-color: $blue-in-progress;
 }
 
 .competency-status-2,
 .competency-status-3,
 .competency-status-4,
 .competency-status-5 {
-  background-color: #006eb5;
+  background-color: $blue-mastery;
 }
 
 .disable-event {
