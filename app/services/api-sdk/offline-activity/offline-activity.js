@@ -148,7 +148,6 @@ export default Ember.Service.extend({
         .get('offlineActivityAdapter')
         .updateActivity(oaId, serializedData)
         .then(function() {
-          service.notifyQuizzesActivityChange(oaId);
           resolve();
         }, reject);
     });
