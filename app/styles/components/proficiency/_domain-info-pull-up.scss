@@ -14,9 +14,8 @@
   height: 100%;
 
   .competency-container {
-    overflow-y: auto;
     display: grid;
-    height: 100%;
+    overflow-y: auto;
     grid-template-rows: max-content 1fr;
 
     .title {
