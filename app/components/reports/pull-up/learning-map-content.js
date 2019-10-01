@@ -69,8 +69,8 @@ export default Ember.Component.extend({
       : Ember.A([]);
     if (startAt) {
       let filters = {
-        startAt: component.get('startAt'),
-        length: 5,
+        startAt: startAt,
+        length: length,
         isCrosswalk: false
       };
       Ember.RSVP.hash({
