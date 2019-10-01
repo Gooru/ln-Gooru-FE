@@ -175,16 +175,17 @@
                   height: inherit;
                 }
 
+                //Comp
                 .mastered-count {
-                  background-color: #0c70bb;
+                  background-color: $blue-mastery;
                 }
 
                 .inprogress-count {
-                  background-color: #24ade6;
+                  background-color: $blue-in-progress;
                 }
 
                 .notstarted-count {
-                  background-color: #e7e8e9;
+                  background-color: $gray-no-started;
                 }
               }
 
@@ -204,18 +205,17 @@
                     font-weight: bold;
                     text-transform: uppercase;
                   }
-
+                  //Comp
                   .mastered {
-                    color: #0c70bb;
+                    color: $blue-mastery;
                   }
 
                   .in-progress {
-                    color: #24ade6;
+                    color: $blue-in-progress;
                   }
 
                   .not-started {
-                    color: #35424b;
-                    opacity: 0.5;
+                    color: $gray-no-started;
                   }
                 }
               }
@@ -318,17 +318,17 @@
             font-weight: bold;
             line-height: 48px;
             height: inherit;
-
+            //comp
             .mastered {
-              color: #0c70bb;
-            }
-
-            .not-started {
-              color: #35424b;
+              color: $blue-mastery;
             }
 
             .in-progress {
-              color: #24ade6;
+              color: $blue-in-progress;
+            }
+
+            .not-started {
+              color: $gray-no-started;
             }
           }
         }
