@@ -7,16 +7,16 @@
     transform-style: preserve-3d;
 
     .fill-0 {
-      fill: #e7e8e9;
+      fill: $gray-no-started;
     }
     .fill-1 {
-      fill: #1aa9eb;
+      fill: $blue-in-progress;
     }
     .fill-2,
     .fill-3,
     .fill-4,
     .fill-5 {
-      fill: #006eb5;
+      fill: $blue-mastery;
     }
 
     #skyline-container {
