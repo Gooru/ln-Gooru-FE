@@ -26,6 +26,10 @@ export const UPLOADABLE_TYPES = [
 
 export const VIDEO_RESOURCE_TYPE = 'video';
 
+export const SUGGESTION_SCOPE_TYPE = {
+  'class-activity': 'dca'
+};
+
 export const RESOURCE_TYPES = [
   'webpage',
   VIDEO_RESOURCE_TYPE,
@@ -68,6 +72,11 @@ export const TAXONOMY_CATEGORIES = [
   EDUCATION_CATEGORY,
   LEARNING_CATEGORY
 ];
+
+export const SUGGESTION_TYPE = {
+  CA_TEACHER: 'ca.teacher',
+  PROFICIENY_TEACHER: 'proficiency.teacher'
+};
 
 export const CONTENT_CATEGORIES = [K12_CATEGORY, EDUCATION_CATEGORY];
 

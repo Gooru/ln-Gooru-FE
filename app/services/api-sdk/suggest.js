@@ -2,7 +2,7 @@ import Ember from 'ember';
 import SuggestAdapter from 'gooru-web/adapters/suggest/suggest';
 import SuggestSerializer from 'gooru-web/serializers/suggest/suggest';
 import SuggestContext from 'gooru-web/models/suggest/suggest-context';
-
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 /**
  * Service to support the suggest functionality
  *
@@ -14,6 +14,21 @@ export default Ember.Service.extend({
   suggestSerializer: null,
 
   suggestAdapter: null,
+
+  /**
+   * @property {CollectionService}
+   */
+  collectionService: Ember.inject.service('api-sdk/collection'),
+
+  /**
+   * @property {CollectionService}
+   */
+  assessmentService: Ember.inject.service('api-sdk/assessment'),
+
+  /**
+   * @property {PerformanceService}
+   */
+  performanceService: Ember.inject.service('api-sdk/performance'),
 
   init: function() {
     this._super(...arguments);
@@ -171,5 +186,70 @@ export default Ember.Service.extend({
   suggestForCA(context) {
     const service = this;
     return service.get('suggestAdapter').suggestForCA(context);
+  },
+
+  fetchSuggestionsByCAId(userId, classId, context) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('suggestAdapter')
+        .fetchSuggestionForCA(userId, classId, context)
+        .then(function(response) {
+          let normalizedContent = service
+            .get('suggestSerializer')
+            .normalizeSuggestionContents(response.suggestions.objectAt(0));
+          // let pathIds = normalizedContent.suggestions.map(
+          //   suggestion => suggestion.id
+          // );
+          let collectionPromise = [];
+          normalizedContent.suggestions.forEach(suggestion => {
+            let collectionService = null;
+            if (suggestion.suggestedContentType === CONTENT_TYPES.ASSESSMENT) {
+              collectionService = service
+                .get('assessmentService')
+                .readAssessment(suggestion.suggestedContentId);
+            } else {
+              collectionService = service
+                .get('collectionService')
+                .readCollection(suggestion.suggestedContentId);
+            }
+            collectionPromise.push(collectionService);
+          });
+          Ember.RSVP.Promise.all(collectionPromise).then(function(data) {
+            data.forEach((collection, index) => {
+              let suggestionContent = normalizedContent.suggestions.objectAt(
+                index
+              );
+              suggestionContent.set('collection', collection);
+            });
+            resolve(normalizedContent);
+          }); // .then((collection) => {
+          //   suggestion.set('collection', collection);
+          // });
+          // service.get('performanceService').findSuggestionPerformance({
+          //   userId,
+          //   classId,
+          //   source: SUGGESTION_SCOPE_TYPE[context.scope],
+          //   pathIds
+          // }).then((performance) => {
+          //   console.log(performance);
+          // });
+        }, reject);
+    });
+  },
+
+  getSuggestionCountForCA(userId, classId, context) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('suggestAdapter')
+        .fetchSuggestionForCA(userId, classId, context)
+        .then(function(response) {
+          let suggestions = service
+            .get('suggestSerializer')
+            .normalizeSuggestionCount(response);
+          resolve(suggestions);
+        }, reject);
+    });
   }
 });

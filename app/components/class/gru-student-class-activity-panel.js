@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE, SUGGESTION_TYPE } from 'gooru-web/config/config';
 
 /**
  * Student Class Activity Panel
@@ -48,6 +48,28 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
+    showSuggestions() {
+      let component = this;
+      let panelContainerEle = component.$('.suggestions');
+      let elementHeight = component.get('classActivity.suggestionCount') * 60;
+      panelContainerEle.height(elementHeight);
+      if (!panelContainerEle.hasClass('active')) {
+        panelContainerEle.slideDown({
+          start: function() {
+            component.$(this).addClass('active');
+            let classActivity = component.get('classActivity');
+            classActivity.set('isSuggestionFetched', false);
+            component.sendAction('onShowSuggestion', classActivity);
+          }
+        });
+      } else {
+        panelContainerEle.slideUp({
+          start: function() {
+            component.$(this).removeClass('active');
+          }
+        });
+      }
+    },
     /**
      * Action triggred when dca report action invoke
      */
@@ -127,6 +149,11 @@ export default Ember.Component.extend({
   class: null,
 
   /**
+   * @property {Number} suggestionCount
+   */
+  suggestionCount: Ember.computed.alias('classActivity.suggestionCount'),
+
+  /**
    * @property {Collection/Assessment} item
    */
   item: Ember.computed.alias('classActivity.collection'),
@@ -153,6 +180,8 @@ export default Ember.Component.extend({
     PLAYER_EVENT_SOURCE.OFFLINE_CLASS
   ),
 
+  suggestionPathType: SUGGESTION_TYPE.CA_TEACHER,
+
   /**
    * Class activity date
    * @type {Date}
@@ -177,5 +206,7 @@ export default Ember.Component.extend({
     let activityDate = this.get('activityDate');
     let currentDate = moment().format('YYYY-MM-DD');
     return moment(activityDate).isAfter(currentDate);
-  })
+  }),
+
+  suggestions: Ember.computed.alias('classActivity.suggestions')
 });

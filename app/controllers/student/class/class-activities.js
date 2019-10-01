@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import SessionMixin from 'gooru-web/mixins/session';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { SCREEN_SIZES } from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE, SCREEN_SIZES } from 'gooru-web/config/config';
 import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 /**
@@ -25,6 +25,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
   /**
+   * @requires service:api-sdk/suggest
+   */
+  suggestService: Ember.inject.service('api-sdk/suggest'),
+
+  /**
    * @requires service:api-sdk/offline-activity-analytics
    */
   oaAnaltyicsService: Ember.inject.service(
@@ -41,6 +46,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Actions
 
   actions: {
+    onShowSuggestion(classActivity) {
+      const controller = this;
+      controller.fetchSuggestionContent(classActivity);
+    },
     onOpenReportGrade(itemToGrade) {
       let controller = this;
       controller.set('itemToGradeContextData', itemToGrade);
@@ -330,8 +339,54 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       .getStudentScheduledActivities(userId, classId, date)
       .then(function(classActivities) {
         controller.set('classActivities', classActivities);
+        if (classActivities.length) {
+          controller.getSuggestionCounts(classActivities);
+        }
         controller.set('isLoading', false);
       });
+  },
+
+  getSuggestionCounts(classActivities) {
+    const controller = this;
+    const classId = controller.get('classId');
+    const userId = controller.get('session.userId');
+    const caIds = classActivities.map(classActivity => classActivity.get('id'));
+    const context = {
+      scope: PLAYER_EVENT_SOURCE.CLASS_ACTIVITY,
+      caIds
+    };
+    controller
+      .get('suggestService')
+      .getSuggestionCountForCA(userId, classId, context)
+      .then(contents => {
+        contents.map(content => {
+          const caId = content.get('caId');
+          let classActivity = classActivities.findBy('id', caId);
+          classActivity.set('suggestionCount', content.get('total'));
+        });
+      });
+  },
+
+  fetchSuggestionContent(classActivity) {
+    const controller = this;
+    const classId = controller.get('classId');
+    const userId = controller.get('session.userId');
+    const caId = classActivity.get('id');
+    const context = {
+      scope: PLAYER_EVENT_SOURCE.CLASS_ACTIVITY,
+      caIds: [caId],
+      detail: true
+    };
+    if (!classActivity.get('suggestions')) {
+      controller
+        .get('suggestService')
+        .fetchSuggestionsByCAId(userId, classId, context)
+        .then(content => {
+          let suggestions = content.get('suggestions');
+          classActivity.set('suggestions', suggestions);
+          classActivity.set('isSuggestionFetched', true);
+        });
+    }
   },
 
   /**
@@ -396,28 +451,26 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let controller = this;
     const classId = controller.get('classId');
     const userId = controller.get('session.userId');
-    Ember.RSVP
-      .hash({
-        oaItems: controller
-          .get('oaAnaltyicsService')
-          .getOAToGrade(classId, userId)
-      })
-      .then(function(hash) {
-        let gradeItems = hash.oaItems.gradeItems;
-        if (gradeItems) {
-          let itemsToGrade = Ember.A([]);
-          gradeItems.map(function(item) {
-            let gradeItem;
-            gradeItem = controller.createActivityGradeItemObject(item);
-            if (gradeItem) {
-              itemsToGrade.push(gradeItem);
-            }
-          });
-          Ember.RSVP.all(itemsToGrade).then(function(gradeItems) {
-            controller.set('itemsToGrade', gradeItems);
-          });
-        }
-      });
+    Ember.RSVP.hash({
+      oaItems: controller
+        .get('oaAnaltyicsService')
+        .getOAToGrade(classId, userId)
+    }).then(function(hash) {
+      let gradeItems = hash.oaItems.gradeItems;
+      if (gradeItems) {
+        let itemsToGrade = Ember.A([]);
+        gradeItems.map(function(item) {
+          let gradeItem;
+          gradeItem = controller.createActivityGradeItemObject(item);
+          if (gradeItem) {
+            itemsToGrade.push(gradeItem);
+          }
+        });
+        Ember.RSVP.all(itemsToGrade).then(function(gradeItems) {
+          controller.set('itemsToGrade', gradeItems);
+        });
+      }
+    });
   },
 
   /**
