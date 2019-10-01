@@ -40,6 +40,28 @@
         {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true}}
       {{/if}}
     </div>
+    <div class="reef-values-container">
+      {{#if content.relevance}}
+        <div class="relevance-container values-container">
+          <span class="label-container">Relevance</span>
+          <span class="value-container">{{content.relevance}}</span>
+        </div>
+      {{/if}}
+
+      {{#if content.efficacy}}
+        <div class="efficacy-container values-container">
+          <span class="label-container">Efficacy</span>
+          <span class="value-container">{{content.efficacy}}</span>
+        </div>
+      {{/if}}
+
+      {{#if content.engagement}}
+        <div class="engagement-container values-container">
+          <span class="label-container">Engagement</span>
+          <span class="value-container">{{content.engagement}}</span>
+        </div>
+      {{/if}}
+    </div>
     <div class="completed-date">
       <span class="date-label">{{t 'common.latest-attempt'}}:</span> <span class="date-value">{{format-date content.activityTimestamp 'DD MMM YYYY'}}</span>
     </div>

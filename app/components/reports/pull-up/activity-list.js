@@ -12,6 +12,10 @@ export default Ember.Component.extend({
     component.openPullUp();
   },
 
+  didDestroyElement() {
+    this.set('activityContents', Ember.A([]));
+  },
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {

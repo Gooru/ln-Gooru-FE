@@ -41,7 +41,7 @@ export default PlayerAccordionLessonItem.extend(ModalMixin, {
   actions: {
     edit: function(item) {
       const component = this;
-      const format = item.get('format');
+      const format = item.get('format') || item.get('collectionType');
       let route = 'content.collections.edit';
       if (format === CONTENT_TYPES.OFFLINE_ACTIVITY) {
         route = 'content.activity.edit';
