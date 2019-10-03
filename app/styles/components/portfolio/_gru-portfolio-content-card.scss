@@ -89,10 +89,10 @@
 
     .content-details-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, auto);
       align-items: center;
       height: 31px;
-      padding: 0 13px;
+      padding: 0 5px;
       align-items: center;
 
       @media screen and (max-width: $screen-sm) {

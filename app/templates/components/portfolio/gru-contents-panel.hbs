@@ -1,0 +1,45 @@
+<div class="portfolio-contents-container {{if isShowContentFilters 'filters-active'}}">
+  <div class="header-container">
+    <div class="icon {{contentType}}"></div>
+    <div class="title">{{activeContentLabel}} ({{totalStudiedActivities}})</div>
+    <div class="search-items-container">
+      <div class="filter-search" {{action "onOpenFilter"}}>
+        {{gru-icon name="filter_list"}}
+      </div>
+    </div>
+  </div>
+  <div class="body-container">
+    {{#if (eq contentType 'offline-activity')}}
+      {{#each studiedPortfolioActivities as | groupedActivities |}}
+        <div class="type-level-container">
+          <div class="sub-type-label">
+            {{t groupedActivities.label}}
+          </div>
+          <div class="offline-activities">
+            {{#each groupedActivities.offlineActivities as |offlineActivity|}}
+              {{portfolio/gru-portfolio-content-card content = offlineActivity}}
+            {{/each}}
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="activities">
+        {{#each studiedPortfolioActivities as | activity |}}
+            {{portfolio/gru-portfolio-content-card content = activity}}
+        {{/each}}
+      </div>
+    {{/if}}
+    {{#if isLoading}}
+      <div class="loading-spinner">
+        {{three-bounce-spinner}}
+      </div>
+    {{/if}}
+  </div>
+  {{#if isShowContentFilters}}
+    {{portfolio/gru-content-filters
+      refreshFilters = "refreshFilters"
+      pickerStartDate = userCreatedAt
+      userPreference = userPreference
+      appliedFilters = appliedFilters}}
+  {{/if}}
+</div>
