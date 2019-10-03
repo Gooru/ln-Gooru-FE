@@ -6,7 +6,12 @@ moduleForService(
   'service:api-sdk/suggest',
   'Unit | Service | api-sdk/suggest',
   {
-    // needs: []
+    needs: [
+      'service:api-sdk/collection',
+      'service:api-sdk/assessment',
+      'service:api-sdk/performance',
+      'service:api-sdk/offline-activity/offline-activity'
+    ]
   }
 );
 
@@ -30,7 +35,9 @@ test('suggestResourcesForCollectionInCourse', function(assert) {
         assert.equal(context.get('score'), 10, 'Wrong score');
         assert.equal(context.get('timeSpent'), 100, 'Wrong time spent');
         assert.equal(limit, undefined, 'Wrong limit');
-        return Ember.RSVP.resolve({ a: 1 });
+        return Ember.RSVP.resolve({
+          a: 1
+        });
       }
     })
   );
@@ -39,7 +46,13 @@ test('suggestResourcesForCollectionInCourse', function(assert) {
     'suggestSerializer',
     Ember.Object.create({
       normalizeSuggestResources: function(payload) {
-        assert.deepEqual({ a: 1 }, payload, 'Wrong suggest payload');
+        assert.deepEqual(
+          {
+            a: 1
+          },
+          payload,
+          'Wrong suggest payload'
+        );
         return 'fakeResponse';
       }
     })
@@ -79,7 +92,9 @@ test('suggestResourcesForCollection', function(assert) {
         assert.equal(context.get('score'), 10, 'Wrong score');
         assert.equal(context.get('timeSpent'), 100, 'Wrong time spent');
         assert.equal(limit, undefined, 'Wrong limit');
-        return Ember.RSVP.resolve({ a: 1 });
+        return Ember.RSVP.resolve({
+          a: 1
+        });
       }
     })
   );
@@ -88,7 +103,13 @@ test('suggestResourcesForCollection', function(assert) {
     'suggestSerializer',
     Ember.Object.create({
       normalizeSuggestResources: function(payload) {
-        assert.deepEqual({ a: 1 }, payload, 'Wrong suggest payload');
+        assert.deepEqual(
+          {
+            a: 1
+          },
+          payload,
+          'Wrong suggest payload'
+        );
         return 'fakeResponse';
       }
     })
@@ -122,7 +143,9 @@ test('suggestResourcesForResourceInCourse', function(assert) {
         assert.equal(context.get('unitId'), 'unit-id', 'Wrong unit id');
         assert.equal(context.get('lessonId'), 'lesson-id', 'Wrong lesson id');
         assert.equal(limit, undefined, 'Wrong limit');
-        return Ember.RSVP.resolve({ a: 1 });
+        return Ember.RSVP.resolve({
+          a: 1
+        });
       }
     })
   );
@@ -131,7 +154,13 @@ test('suggestResourcesForResourceInCourse', function(assert) {
     'suggestSerializer',
     Ember.Object.create({
       normalizeSuggestResources: function(payload) {
-        assert.deepEqual({ a: 1 }, payload, 'Wrong suggest payload');
+        assert.deepEqual(
+          {
+            a: 1
+          },
+          payload,
+          'Wrong suggest payload'
+        );
         return 'fakeResponse';
       }
     })
@@ -164,7 +193,9 @@ test('suggestResourcesForResource', function(assert) {
         assert.equal(resourceId, 'resource-id', 'Wrong resource id');
         assert.equal(context.get('userId'), 'user-id', 'Wrong user id');
         assert.equal(limit, undefined, 'Wrong limit');
-        return Ember.RSVP.resolve({ a: 1 });
+        return Ember.RSVP.resolve({
+          a: 1
+        });
       }
     })
   );
@@ -173,7 +204,13 @@ test('suggestResourcesForResource', function(assert) {
     'suggestSerializer',
     Ember.Object.create({
       normalizeSuggestResources: function(payload) {
-        assert.deepEqual({ a: 1 }, payload, 'Wrong suggest payload');
+        assert.deepEqual(
+          {
+            a: 1
+          },
+          payload,
+          'Wrong suggest payload'
+        );
         return 'fakeResponse';
       }
     })

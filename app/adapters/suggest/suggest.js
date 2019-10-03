@@ -130,6 +130,26 @@ export default ApplicationAdapter.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * Add class-activity suggestions
+   * @param {SuggestContext} context
+   * @returns {*}
+   */
+  fetchSuggestionForCA(userId, classId, context) {
+    const adapter = this;
+    const namespace = adapter.get('namespaceST');
+    const url = `${namespace}/ca/user/${userId}/class/${classId}`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(context)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`
