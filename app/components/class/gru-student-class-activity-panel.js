@@ -51,12 +51,11 @@ export default Ember.Component.extend({
     showSuggestions() {
       let component = this;
       let panelContainerEle = component.$('.suggestions');
-      let elementHeight = component.get('classActivity.suggestionCount') * 60;
-      panelContainerEle.height(elementHeight);
       if (!panelContainerEle.hasClass('active')) {
         panelContainerEle.slideDown({
           start: function() {
             component.$(this).addClass('active');
+            component.$(this).css('display', 'grid');
             let classActivity = component.get('classActivity');
             classActivity.set('isSuggestionFetched', false);
             component.sendAction('onShowSuggestion', classActivity);
@@ -67,6 +66,49 @@ export default Ember.Component.extend({
           start: function() {
             component.$(this).removeClass('active');
           }
+        });
+      }
+    },
+    /**
+     * Action triggered when the user play collection
+     */
+    onPlaySuggestionContent(suggestionContent) {
+      const component = this;
+      const content = suggestionContent.get('collection');
+      const contentId = content.get('id');
+      const collectionType = suggestionContent.get('suggestedContentType');
+      const classData = component.get('class');
+      const classId = classData.get('id');
+      const caContentId = suggestionContent.get('caId');
+      const pathId = suggestionContent.get('id');
+      const pathType = component.get('suggestionPathType');
+      let queryParams = {
+        collectionId: content.get('id'),
+        classId,
+        role: 'student',
+        source: component.get('source'),
+        type: collectionType,
+        caContentId,
+        pathId,
+        pathType
+      };
+      if (
+        collectionType === 'assessment-external' ||
+        collectionType === 'collection-external'
+      ) {
+        component.get('router').transitionTo('player-external', {
+          queryParams
+        });
+      } else if (collectionType === 'offlineactivity') {
+        queryParams.offlineActivityId = contentId;
+        component
+          .get('router')
+          .transitionTo('player-offline-activity', contentId, {
+            queryParams
+          });
+      } else {
+        component.get('router').transitionTo('player', contentId, {
+          queryParams
         });
       }
     },

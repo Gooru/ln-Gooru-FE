@@ -324,7 +324,8 @@ export default Ember.Mixin.create({
     let timeLine = component.get('timeLine');
     const subjectCode = component.get('activeSubject.code');
     const classFrameworkCode = component.get('class.preference.framework');
-    if (component.get('subjectBucket') !== subjectCode || !classFrameworkCode) {
+    const classSubjectCode = component.get('class.preference.subject');
+    if (classSubjectCode !== subjectCode || !classFrameworkCode) {
       const userStandardPreference = component.get('userStandardPreference');
       const frameworkCode = userStandardPreference[subjectCode];
       component.set('framework', frameworkCode);

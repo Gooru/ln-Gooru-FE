@@ -26,6 +26,15 @@ export default Ember.Service.extend({
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
   /**
+   * @property {OfflineActivityService}
+   */
+  /**
+   * @requires service:api-sdk/offline-activity
+   */
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
+  /**
    * @property {PerformanceService}
    */
   performanceService: Ember.inject.service('api-sdk/performance'),
@@ -198,9 +207,6 @@ export default Ember.Service.extend({
           let normalizedContent = service
             .get('suggestSerializer')
             .normalizeSuggestionContents(response.suggestions.objectAt(0));
-          // let pathIds = normalizedContent.suggestions.map(
-          //   suggestion => suggestion.id
-          // );
           let collectionPromise = [];
           normalizedContent.suggestions.forEach(suggestion => {
             let collectionService = null;
@@ -208,10 +214,16 @@ export default Ember.Service.extend({
               collectionService = service
                 .get('assessmentService')
                 .readAssessment(suggestion.suggestedContentId);
-            } else {
+            } else if (
+              suggestion.suggestedContentType === CONTENT_TYPES.COLLECTION
+            ) {
               collectionService = service
                 .get('collectionService')
                 .readCollection(suggestion.suggestedContentId);
+            } else {
+              collectionService = service
+                .get('offlineActivityService')
+                .readActivity(suggestion.suggestedContentId);
             }
             collectionPromise.push(collectionService);
           });
@@ -223,17 +235,7 @@ export default Ember.Service.extend({
               suggestionContent.set('collection', collection);
             });
             resolve(normalizedContent);
-          }); // .then((collection) => {
-          //   suggestion.set('collection', collection);
-          // });
-          // service.get('performanceService').findSuggestionPerformance({
-          //   userId,
-          //   classId,
-          //   source: SUGGESTION_SCOPE_TYPE[context.scope],
-          //   pathIds
-          // }).then((performance) => {
-          //   console.log(performance);
-          // });
+          });
         }, reject);
     });
   },

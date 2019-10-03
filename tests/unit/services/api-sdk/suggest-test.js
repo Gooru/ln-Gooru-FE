@@ -9,7 +9,8 @@ moduleForService(
     needs: [
       'service:api-sdk/collection',
       'service:api-sdk/assessment',
-      'service:api-sdk/performance'
+      'service:api-sdk/performance',
+      'service:api-sdk/offline-activity/offline-activity'
     ]
   }
 );

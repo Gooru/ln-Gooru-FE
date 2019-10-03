@@ -71,34 +71,36 @@
 </div>
 <div class="suggestions">
   {{#each suggestions as |suggestion|}}
-    <div class="suggestion-panel">
-      <div class="icon {{suggestion.suggestedContentType}}"></div>
-      <div class="title-info ellipsis">{{suggestion.collection.title}}</div>
-      <div class="content-counts">
-        <div class="resource-count">
-          {{#if (gt suggestion.collection.resourceCount 0)}}
-            <i class="resource-icon"></i>
-            <span>{{suggestion.collection.resourceCount}}</span>
-          {{/if}}
+    {{#if suggestion.collection}}
+      <div class="suggestion-panel">
+        <div class="icon">
+          <i class="{{suggestion.suggestedContentType}}"></i>
         </div>
-        <div class="question-count">
-          {{#if (gt suggestion.collection.questionCount 0)}}
-            <i class="question-icon"></i>
-            <span>{{suggestion.collection.questionCount}}</span>
-          {{/if}}
+        <div class="title-info ellipsis">{{suggestion.collection.title}}</div>
+        <div class="content-counts">
+          <div class="resource-count">
+            {{#if (gt suggestion.collection.resourceCount 0)}}
+              <i class="resource-icon"></i>
+              <span>{{suggestion.collection.resourceCount}}</span>
+            {{/if}}
+          </div>
+          <div class="question-count">
+            {{#if (gt suggestion.collection.questionCount 0)}}
+              <i class="question-icon"></i>
+              <span>{{suggestion.collection.questionCount}}</span>
+            {{/if}}
+          </div>
         </div>
-      </div>
-      <div class="play-container">
-        <div class="ca-play-btn">
-          {{#link-to 'player' suggestion.suggestedContentId (query-params type=suggestion.suggestedContentType role='student' source=source pathId=suggestion.id pathType=suggestionPathType) target="_blank"}}
+        <div class="play-container">
+          <div class="ca-play-btn" {{action 'onPlaySuggestionContent' suggestion}}>
             {{gru-icon name='play_arrow'}}
-          {{/link-to}}
+          </div>
+        </div>
+        <div class="thumbnail-img">
+          <img src="{{suggestion.collection.thumbnailUrl}}" />
         </div>
       </div>
-      <div class="thumbnail-img">
-        <img src="{{suggestion.collection.thumbnailUrl}}" />
-      </div>
-    </div>
+    {{/if}}
   {{else if (not classActivity.isSuggestionFetched)}}
     {{three-bounce-spinner}}
   {{/each}}
