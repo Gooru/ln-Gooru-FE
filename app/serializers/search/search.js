@@ -512,6 +512,21 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Normalize the Search unit response
+   *
+   * @param payload is the endpoint response in JSON format
+   * @returns {Question[]}
+   */
+  normalizeSearchUnits: function(payload) {
+    const serializer = this;
+    if (Ember.isArray(payload.searchResults)) {
+      return payload.searchResults.map(function(result) {
+        return serializer.normalizeUnit(result);
+      });
+    }
+  },
+
+  /**
    * Normalizes a unit
    * @param {*} result
    * @returns {unit}
@@ -553,6 +568,21 @@ export default Ember.Object.extend(ConfigurationMixin, {
       engagement: result.engagement,
       type: result.format
     });
+  },
+
+  /**
+   * Normalize the Search unit response
+   *
+   * @param payload is the endpoint response in JSON format
+   * @returns {Question[]}
+   */
+  normalizeSearchLessons: function(payload) {
+    const serializer = this;
+    if (Ember.isArray(payload.searchResults)) {
+      return payload.searchResults.map(function(result) {
+        return serializer.normalizeLesson(result);
+      });
+    }
   },
 
   /**

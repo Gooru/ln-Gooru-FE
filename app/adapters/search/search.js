@@ -1,9 +1,7 @@
 import Ember from 'ember';
 import ResourceModel from 'gooru-web/models/content/resource';
 import QuestionModel from 'gooru-web/models/content/question';
-import {
-  DEFAULT_SEARCH_PAGE_SIZE
-} from 'gooru-web/config/config';
+import { DEFAULT_SEARCH_PAGE_SIZE } from 'gooru-web/config/config';
 
 /**
  * Adapter to support the Search for Collections, Assessments, Resources and Questions
@@ -30,6 +28,7 @@ export default Ember.Object.extend({
     const url = `${namespace}/scollection`;
     const page = !params.page || resetPagination ? 0 : params.page;
     const pageSize = params.pageSize || DEFAULT_SEARCH_PAGE_SIZE;
+    const gutCode = params.gutCode || null;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -40,7 +39,8 @@ export default Ember.Object.extend({
         'flt.collectionType': 'collection',
         'flt.publishStatus': 'published',
         start: page + 1,
-        length: pageSize
+        length: pageSize,
+        'flt.gutCode': gutCode
       }
     };
     const taxonomies = params.taxonomies;
@@ -101,6 +101,7 @@ export default Ember.Object.extend({
     const url = `${namespace}/scollection`;
     const page = !params.page || resetPagination ? 0 : params.page;
     const pageSize = params.pageSize || DEFAULT_SEARCH_PAGE_SIZE;
+    const gutCode = params.gutCode || null;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -111,7 +112,8 @@ export default Ember.Object.extend({
         'flt.collectionType': 'assessment',
         'flt.publishStatus': 'published',
         start: page + 1, //page starts at one
-        length: pageSize
+        length: pageSize,
+        'flt.gutCode': gutCode
       }
     };
     const taxonomies = params.taxonomies;
@@ -136,6 +138,7 @@ export default Ember.Object.extend({
     const url = `${namespace}/resource`;
     const page = !params.page || resetPagination ? 0 : params.page;
     const pageSize = params.pageSize || DEFAULT_SEARCH_PAGE_SIZE;
+    const gutCode = params.gutCode || null;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -146,7 +149,8 @@ export default Ember.Object.extend({
         start: page + 1,
         length: pageSize,
         'flt.contentFormat': 'resource',
-        'flt.publishStatus': 'published'
+        'flt.publishStatus': 'published',
+        'flt.gutCode': gutCode
       }
     };
     const formats = params.formats;
@@ -185,6 +189,7 @@ export default Ember.Object.extend({
     const url = `${namespace}/resource`;
     const page = !params.page || resetPagination ? 0 : params.page;
     const pageSize = params.pageSize || DEFAULT_SEARCH_PAGE_SIZE;
+    const gutCode = params.gutCode || null;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -195,7 +200,8 @@ export default Ember.Object.extend({
         start: page + 1,
         length: pageSize,
         'flt.resourceFormat': 'question',
-        'flt.publishStatus': 'published'
+        'flt.publishStatus': 'published',
+        'flt.gutCode': gutCode
       }
     };
     const types = params.formats;
@@ -252,6 +258,7 @@ export default Ember.Object.extend({
     const url = `${namespace}/course`;
     const page = !params.page || resetPagination ? 0 : params.page;
     const pageSize = params.pageSize || DEFAULT_SEARCH_PAGE_SIZE;
+    const gutCode = params.gutCode || null;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -260,7 +267,66 @@ export default Ember.Object.extend({
       data: {
         q: term || '*',
         start: page + 1,
-        length: pageSize
+        length: pageSize,
+        'flt.gutCode': gutCode
+      }
+    };
+    adapter.appendFilters(params, options);
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Fetches unit that match with the term
+   *
+   * @param term the term to search
+   * @returns {Promise.<Unit[]>}
+   */
+  searchUnits: function(term, params = {}, resetPagination = false) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/unit`;
+    const page = !params.page || resetPagination ? 0 : params.page;
+    const pageSize = params.pageSize || DEFAULT_SEARCH_PAGE_SIZE;
+    const gutCode = params.gutCode || null;
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: {
+        q: term || '*',
+        start: page + 1,
+        length: pageSize,
+        'flt.gutCode': gutCode
+      }
+    };
+    adapter.appendFilters(params, options);
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Fetches lesson that match with the term
+   *
+   * @param term the term to search
+   * @returns {Promise.<Lesson[]>}
+   */
+  searchlessons: function(term, params = {}, resetPagination = false) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/lesson`;
+    const page = !params.page || resetPagination ? 0 : params.page;
+    const pageSize = params.pageSize || DEFAULT_SEARCH_PAGE_SIZE;
+    const gutCode = params.gutCode || null;
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: {
+        q: term || '*',
+        start: page + 1,
+        length: pageSize,
+        'flt.gutCode': gutCode
       }
     };
     adapter.appendFilters(params, options);
@@ -293,7 +359,6 @@ export default Ember.Object.extend({
     adapter.appendFilters(params, options);
     return Ember.$.ajax(url, options);
   },
-
 
   /**
    * Fetches results that match with the term
