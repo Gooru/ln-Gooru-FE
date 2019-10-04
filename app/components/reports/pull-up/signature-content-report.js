@@ -157,15 +157,34 @@ export default Ember.Component.extend({
    */
   fetchCodes() {
     let component = this;
-    let courseId = component.get('courseId');
+    let fwDomainCode = component.get('competency.framework')
+      ? component
+        .get('competency.framework.frameworkCompetencyCode')
+        .substring(
+          0,
+          component
+            .get('competency.framework.frameworkCompetencyCode')
+            .lastIndexOf('-')
+        )
+      : null;
+    let courseId =
+      component.get('competency.isMappedWithFramework') &&
+      !component.get('showGutCompetency')
+        ? fwDomainCode.substring(0, fwDomainCode.lastIndexOf('-'))
+        : component.get('courseId');
     let domainId =
       component.get('competency.isMappedWithFramework') &&
       !component.get('showGutCompetency')
-        ? component.get('competency.fwDomainCode')
+        ? fwDomainCode
         : component.get('domainId');
-    let subjectId = component.get('subjectId');
-    let frameworkId =
-      component.get('classFramework') || GOORU_DEFAULT_FRAMEWORK;
+    let subjectId =
+      component.get('competency.isMappedWithFramework') &&
+      !component.get('showGutCompetency')
+        ? courseId.substring(0, courseId.lastIndexOf('-'))
+        : component.get('subjectId');
+    let frameworkId = fwDomainCode
+      ? component.get('classFramework')
+      : GOORU_DEFAULT_FRAMEWORK;
     return Ember.RSVP.hash({
       competencyCodes: component
         .get('taxonomyService')
