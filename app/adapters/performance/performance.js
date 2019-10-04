@@ -316,6 +316,20 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  getPerformanceForSuggestion(context) {
+    const adapter = this;
+    const namespace = adapter.get('insightsNamespace');
+    const url = `${namespace}/suggestions/performance`;
+    const options = {
+      type: 'POST',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      data: JSON.stringify(context)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

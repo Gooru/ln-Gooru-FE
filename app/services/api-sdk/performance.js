@@ -1245,5 +1245,16 @@ export default Ember.Service.extend({
           return activities;
         }
       });
+  },
+
+  /**
+   * Get performance of suggestion
+   * @returns {Promise.<[]>}
+   */
+  findSuggestionPerformance: function(context) {
+    const service = this;
+    return service
+      .get('performanceAdapter')
+      .getPerformanceForSuggestion(context);
   }
 });
