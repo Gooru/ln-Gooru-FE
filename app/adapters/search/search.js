@@ -268,7 +268,7 @@ export default Ember.Object.extend({
         q: term || '*',
         start: page + 1,
         length: pageSize,
-        'flt.gutCode': gutCode
+        'flt.relatedGutCode': gutCode
       }
     };
     adapter.appendFilters(params, options);
@@ -297,7 +297,7 @@ export default Ember.Object.extend({
         q: term || '*',
         start: page + 1,
         length: pageSize,
-        'flt.gutCode': gutCode
+        'flt.relatedGutCode': gutCode
       }
     };
     adapter.appendFilters(params, options);
@@ -310,7 +310,7 @@ export default Ember.Object.extend({
    * @param term the term to search
    * @returns {Promise.<Lesson[]>}
    */
-  searchlessons: function(term, params = {}, resetPagination = false) {
+  searchLessons: function(term, params = {}, resetPagination = false) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/lesson`;
@@ -326,7 +326,7 @@ export default Ember.Object.extend({
         q: term || '*',
         start: page + 1,
         length: pageSize,
-        'flt.gutCode': gutCode
+        'flt.relatedGutCode': gutCode
       }
     };
     adapter.appendFilters(params, options);
