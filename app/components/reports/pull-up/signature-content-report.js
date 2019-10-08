@@ -171,20 +171,17 @@ export default Ember.Component.extend({
    */
   fetchCodes() {
     let component = this;
+    let fwCompetencyCode = component.get(
+      'competency.framework.frameworkCompetencyCode'
+    );
     let courseId = component.get('isMappedWithGutCode')
-      ? getCourseId(
-        component.get('competency.framework.frameworkCompetencyCode')
-      )
+      ? getCourseId(fwCompetencyCode)
       : component.get('courseId');
     let domainId = component.get('isMappedWithGutCode')
-      ? getDomainId(
-        component.get('competency.framework.frameworkCompetencyCode')
-      )
+      ? getDomainId(fwCompetencyCode)
       : component.get('domainId');
     let subjectId = component.get('isMappedWithGutCode')
-      ? getSubjectId(
-        component.get('competency.framework.frameworkCompetencyCode')
-      )
+      ? getSubjectId(fwCompetencyCode)
       : component.get('subjectId');
     let frameworkId = component.get('isMappedWithGutCode')
       ? component.get('classFramework')
