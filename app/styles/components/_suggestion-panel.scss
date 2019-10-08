@@ -1,0 +1,93 @@
+.suggestion-panel {
+  height: auto;
+  display: grid;
+  cursor: pointer;
+  align-items: center;
+
+  .suggestion-header {
+    display: grid;
+    height: 49px;
+    grid-template-columns: 49px 1fr;
+
+    .suggestion-icon {
+      width: 100%;
+      background-position: center;
+      height: 100%;
+      background-repeat: no-repeat;
+
+      &.assessment {
+        background-image: url("/assets/gooru/images/assessment-orange.svg");
+      }
+
+      &.collection {
+        background-image: url("/assets/gooru/images/collection-orange.svg");
+      }
+    }
+
+    .suggestion {
+      border-bottom: solid 1px #cacaca;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr max-content 49px 49px;
+      align-items: center;
+
+      &.hide-play {
+        grid-template-columns: 1fr max-content 49px;
+      }
+
+      .title {
+        height: auto;
+        font-size: 15px;
+        font-weight: bold;
+        color: #ef8f2f;
+      }
+
+      .content-count {
+        display: flex;
+        margin: 0 5px;
+        align-items: center;
+        justify-content: space-around;
+
+        span {
+          opacity: 0.5;
+          display: flex;
+
+          &.invisible {
+            width: 0;
+          }
+        }
+      }
+
+      .action {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        color: #f98e4e;
+        height: 49px;
+        border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+
+        i {
+          height: 24px;
+        }
+      }
+
+      .suggestion-icon {
+        display: flex;
+        justify-content: center;
+        color: #f98e4e;
+        cursor: default;
+
+        &.suggest {
+          cursor: pointer;
+        }
+
+        i {
+          width: max-content;
+          height: max-content;
+          margin: auto;
+        }
+      }
+    }
+  }
+}

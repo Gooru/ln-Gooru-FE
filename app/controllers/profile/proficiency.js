@@ -26,6 +26,12 @@ export default Ember.Controller.extend({
    * it maintains profile data
    * @type {Object}
    */
+  profile: Ember.computed.alias('parentController.profile'),
+
+  /**
+   * it maintains profile data
+   * @type {Object}
+   */
   userPreference: Ember.computed.alias('parentController.userPreference'),
 
   /**

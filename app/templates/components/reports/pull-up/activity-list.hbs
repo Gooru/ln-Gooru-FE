@@ -23,11 +23,11 @@
         {{/each}}
       {{else if (eq activityContentType 'collection')}}
         {{#each activityContents as |content|}}
-          {{activity/collection-card collection=content}}
+          {{activity/collection-card onSuggestContent="onSuggestContent" collection=content}}
         {{/each}}
       {{else if (eq activityContentType 'assessment')}}
         {{#each activityContents as |content|}}
-          {{activity/assessment-card assessment=content}}
+          {{activity/assessment-card onSuggestContent="onSuggestContent" assessment=content}}
         {{/each}}
       {{else if (eq activityContentType 'resource')}}
         {{#each activityContents as |content|}}
@@ -42,9 +42,9 @@
       {{/if}}
     </div>
     {{#if isShowMoveVisible}}
-     <div class="show-more-results" {{action "onClickShowMoreActivity"}}>
-       Show more
-     </div>
+      <div class="show-more-results" {{action "onClickShowMoreActivity"}}>
+        Show more
+      </div>
     {{/if}}
   </div>
 </div>

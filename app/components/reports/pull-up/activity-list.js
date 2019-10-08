@@ -19,6 +19,10 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    onSuggestContent(collection) {
+      let component = this;
+      component.sendAction('onSuggestContent', collection);
+    },
     /**
      * Action triggered when close pull up
      */

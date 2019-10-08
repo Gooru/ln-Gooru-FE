@@ -13,8 +13,12 @@ export default Ember.Component.extend({
 
   actions: {
     selectItem(item) {
-      let component = this;
+      const component = this;
       component.set('selectedItem', item);
+    },
+    onSuggestContent(collection, collectionType) {
+      const component = this;
+      component.sendAction('onSuggestContent', collection, collectionType);
     }
   }
 });
