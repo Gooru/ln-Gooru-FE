@@ -116,18 +116,12 @@
 @import "components/notification/gru-notification";
 @import "components/cards/gru-class-card";
 @import "components/cards/gru-student-class-card";
-@import "components/cards/gru-teacher-class-card";
 @import "components/cards/gru-collection-card";
 @import "components/cards/gru-course-card";
 @import "components/cards/gru-profile-card";
-@import "components/cards/gru-resource-card";
 @import "components/cards/gru-rubric-card";
-@import "components/cards/gru-user-card";
 @import "components/cards/gru-user-network-card";
 @import "components/cards/gru-resource-result-card";
-@import "components/cards/gru-goal-card";
-@import "components/cards/gru-bookmark-card";
-@import "components/cards/gru-independent-card";
 @import "components/cards/gru-join-class-card";
 @import "components/cards/suggest-collection-card";
 @import "components/cards/no-suggest-result-found";
@@ -223,7 +217,6 @@
 @import "components/content/rubric/gru-fixed-footer";
 @import "components/content/rubric/gru-category";
 @import "components/content/rubric/gru-scoring-levels";
-@import "components/goal/gru-goal-form";
 @import "components/grading/gru-roster-header";
 @import "components/grading/gru-student-roster";
 @import "components/grading/gru-task-header";
