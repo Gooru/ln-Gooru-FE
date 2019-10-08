@@ -48,6 +48,23 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Normalize the search collection with totalHitCount
+   * @param payload is the endpoint response in JSON format
+   * @return {Collection[]}
+   */
+  normalizeSearchCollectionWithCounts: function(payload) {
+    const serializer = this;
+    if (Ember.isArray(payload.searchResults)) {
+      return Ember.Object.create({
+        results: payload.searchResults.map(function(result) {
+          return serializer.normalizeCollection(result);
+        }),
+        totalHitCount: payload.totalHitCount
+      });
+    }
+  },
+
+  /**
    * Normalize a collection
    * @param {*} collectionData
    * @returns {Collection}
@@ -260,6 +277,23 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Normalize the search assessment with totalHitCount
+   * @param payload is the endpoint response in JSON format
+   * @return {Assessment[]}
+   */
+  normalizeSearchAssessmentWithCounts: function(payload) {
+    const serializer = this;
+    if (Ember.isArray(payload.searchResults)) {
+      return Ember.Object.create({
+        results: payload.searchResults.map(function(result) {
+          return serializer.normalizeAssessment(result);
+        }),
+        totalHitCount: payload.totalHitCount
+      });
+    }
+  },
+
+  /**
    * Normalize the Search resources response
    *
    * @param payload is the endpoint response in JSON format
@@ -275,6 +309,23 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Normalize the search resource with totalHitCount
+   * @param payload is the endpoint response in JSON format
+   * @return {Resource[]}
+   */
+  normalizeSearchResourceWithCounts: function(payload) {
+    const serializer = this;
+    if (Ember.isArray(payload.searchResults)) {
+      return Ember.Object.create({
+        results: payload.searchResults.map(function(result) {
+          return serializer.normalizeResource(result);
+        }),
+        totalHitCount: payload.totalHitCount
+      });
+    }
+  },
+
+  /**
    * Normalize the rubrics
    * @param payload
    * @returns {Rubric[]}
@@ -285,6 +336,23 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return rubrics.map(function(rubricData) {
       return serializer.normalizeRubric(rubricData);
     });
+  },
+
+  /**
+   * Normalize the search rubric with totalHitCount
+   * @param payload is the endpoint response in JSON format
+   * @return {Rubric[]}
+   */
+  normalizeSearchRubricWithCounts: function(payload) {
+    const serializer = this;
+    if (Ember.isArray(payload.searchResults)) {
+      return Ember.Object.create({
+        results: payload.searchResults.map(function(result) {
+          return serializer.normalizeRubric(result);
+        }),
+        totalHitCount: payload.totalHitCount
+      });
+    }
   },
 
   /**
@@ -360,6 +428,23 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (Ember.isArray(payload.searchResults)) {
       return payload.searchResults.map(function(result) {
         return serializer.normalizeQuestion(result);
+      });
+    }
+  },
+
+  /**
+   * Normalize the search question with totalHitCount
+   * @param payload is the endpoint response in JSON format
+   * @return {Question[]}
+   */
+  normalizeSearchQuestionsWithCounts: function(payload) {
+    const serializer = this;
+    if (Ember.isArray(payload.searchResults)) {
+      return Ember.Object.create({
+        results: payload.searchResults.map(function(result) {
+          return serializer.normalizeQuestion(result);
+        }),
+        totalHitCount: payload.totalHitCount
       });
     }
   },
@@ -472,6 +557,23 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Normalize the search resource with totalHitCount
+   * @param payload is the endpoint response in JSON format
+   * @return {Resource[]}
+   */
+  normalizeSearchCoursesWithCounts: function(payload) {
+    const serializer = this;
+    if (Ember.isArray(payload.searchResults)) {
+      return Ember.Object.create({
+        results: payload.searchResults.map(function(result) {
+          return serializer.normalizeCourse(result);
+        }),
+        totalHitCount: payload.totalHitCount
+      });
+    }
+  },
+
+  /**
    * Normalizes a course
    * @param {*} result
    * @returns {Course}
@@ -520,8 +622,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeSearchUnits: function(payload) {
     const serializer = this;
     if (Ember.isArray(payload.searchResults)) {
-      return payload.searchResults.map(function(result) {
-        return serializer.normalizeUnit(result);
+      return Ember.Object.create({
+        results: payload.searchResults.map(function(result) {
+          return serializer.normalizeUnit(result);
+        }),
+        totalHitCount: payload.totalHitCount
       });
     }
   },
@@ -574,14 +679,19 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * Normalize the Search unit response
    *
    * @param payload is the endpoint response in JSON format
-   * @returns {Question[]}
+   * @returns {Lesson[]}
    */
   normalizeSearchLessons: function(payload) {
     const serializer = this;
     if (Ember.isArray(payload.searchResults)) {
-      return payload.searchResults.map(function(result) {
-        return serializer.normalizeLesson(result);
-      });
+      if (Ember.isArray(payload.searchResults)) {
+        return Ember.Object.create({
+          results: payload.searchResults.map(function(result) {
+            return serializer.normalizeLesson(result);
+          }),
+          totalHitCount: payload.totalHitCount
+        });
+      }
     }
   },
 

@@ -59,7 +59,6 @@ export default Ember.Component.extend({
       contentType || component.get('activityContentType');
     let startAt = component.get('startAt');
     let length = component.get('length');
-    let learningMapData = component.get('learningMapData');
     let params = {
       page: startAt / length,
       pageSize: length,
@@ -70,11 +69,10 @@ export default Ember.Component.extend({
       .then(loadMoreLearningMapData => {
         component.set(
           'activityContents',
-          activityContents.concat(loadMoreLearningMapData)
+          activityContents.concat(loadMoreLearningMapData.get('results'))
         );
-        let activityTotalHitCount = learningMapData
-          ? learningMapData.contents[`${activityContentType}`].totalHitCount
-          : 0;
+        let activityTotalHitCount =
+          loadMoreLearningMapData.get('totalHitCount') || 0;
         component.set('activityTotalHitCount', activityTotalHitCount);
       });
 
@@ -87,19 +85,21 @@ export default Ember.Component.extend({
     let searchService = component.get('searchService');
     switch (contentType) {
     case 'course':
-      return searchService.searchCourses('*', params);
+      return searchService.searchCoursesWithCounts('*', params);
     case 'unit':
-      return searchService.searchUnits('*', params);
+      return searchService.searchUnitsWithCounts('*', params);
     case 'lesson':
-      return searchService.searchLessons('*', params);
+      return searchService.searchLessonsWithCounts('*', params);
     case 'collection':
-      return searchService.searchCollections('*', params);
+      return searchService.searchCollectionsWithCounts('*', params);
     case 'assessment':
-      return searchService.searchAssessments('*', params);
+      return searchService.searchAssessmentsWithCounts('*', params);
     case 'resource':
-      return searchService.searchResources('*', params);
+      return searchService.searchResourcesWithCounts('*', params);
     case 'question':
-      return searchService.searchQuestions('*', params);
+      return searchService.searchQuestionsWithCounts('*', params);
+    case 'rubric':
+      return searchService.searchRubricsWithCounts('*', params);
     default:
       break;
     }
