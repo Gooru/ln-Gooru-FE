@@ -60,33 +60,21 @@ export default Ember.Component.extend({
     let activityContents = component.get('activityContents');
     let startAt = component.get('startAt');
     let length = component.get('length');
-    let learningMapData = component.get('learningMapData');
-    let activityTotalHitCount = learningMapData
-      ? learningMapData.contents[`${activityContentType}`].totalHitCount
-      : 0;
-    let activityContentData = learningMapData
-      ? learningMapData.learningMapsContent[`${activityContentType}`]
-      : Ember.A([]);
-    if (startAt) {
-      let filters = {
-        startAt: startAt,
-        length: length,
-        isCrosswalk: false
-      };
-      Ember.RSVP.hash({
-        loadMoreLearningMapData: searchService.fetchLearningMapsCompetencyContent(
-          competencyCode,
-          filters
-        )
-      }).then(({ loadMoreLearningMapData }) => {
+    let params = {
+      page: startAt / length,
+      pageSize: length,
+      gutCode: competencyCode
+    };
+    component
+      .loadingMoreLearnMapData(activityContentType, params)
+      .then(loadMoreLearningMapData => {
         component.set(
           'activityContents',
-          activityContents.concat(
-            loadMoreLearningMapData.learningMapsContent[
-              `${activityContentType}`
-            ]
-          )
+          activityContents.concat(loadMoreLearningMapData.get('results'))
         );
+        let activityTotalHitCount =
+          loadMoreLearningMapData.get('totalHitCount') || 0;
+        component.set('activityTotalHitCount', activityTotalHitCount);
       });
     } else {
       component.set(
@@ -97,6 +85,31 @@ export default Ember.Component.extend({
     component.set('activityTotalHitCount', activityTotalHitCount);
     component.set('startAt', startAt + length);
     component.set('isLoading', false);
+  },
+
+  loadingMoreLearnMapData(contentType, params) {
+    let component = this;
+    let searchService = component.get('searchService');
+    switch (contentType) {
+    case 'course':
+      return searchService.searchCoursesWithCounts('*', params);
+    case 'unit':
+      return searchService.searchUnitsWithCounts('*', params);
+    case 'lesson':
+      return searchService.searchLessonsWithCounts('*', params);
+    case 'collection':
+      return searchService.searchCollectionsWithCounts('*', params);
+    case 'assessment':
+      return searchService.searchAssessmentsWithCounts('*', params);
+    case 'resource':
+      return searchService.searchResourcesWithCounts('*', params);
+    case 'question':
+      return searchService.searchQuestionsWithCounts('*', params);
+    case 'rubric':
+      return searchService.searchRubricsWithCounts('*', params);
+    default:
+      break;
+    }
   },
 
   /**
