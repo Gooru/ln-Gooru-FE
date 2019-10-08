@@ -1,10 +1,10 @@
 import Ember from 'ember';
-import { ROLES } from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE, ROLES } from 'gooru-web/config/config';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Attributes
-  queryParams: ['caContentId', 'classId', 'role', 'isPreview'],
+  queryParams: ['caContentId', 'classId', 'role', 'isPreview', 'source'],
 
   // -------------------------------------------------------------------------
   // Dependencies
@@ -27,9 +27,12 @@ export default Ember.Controller.extend({
     onClosePlayer: function() {
       const controller = this;
       const classId = controller.get('classId');
+      const source = controller.get('source');
       //Redirect to CA if class ID is available otherwise go back to last accessed url
       if (classId) {
         controller.transitionToRoute('student.class.class-activities', classId);
+      } else if (source === PLAYER_EVENT_SOURCE.RGO) {
+        window.close();
       } else {
         window.history.back();
       }
@@ -108,7 +111,9 @@ export default Ember.Controller.extend({
     controller.set('isLoading', true);
     Ember.RSVP.hash({
       offlineActivitySubmissions: !(
-        controller.get('isPreview') && controller.get('isTeacher')
+        controller.get('isPreview') &&
+        (controller.get('isTeacher') ||
+          controller.get('source') === PLAYER_EVENT_SOURCE.RGO)
       )
         ? controller.fetchTasksSubmissions()
         : null
