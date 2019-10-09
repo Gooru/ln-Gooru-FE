@@ -9,37 +9,74 @@
     }}
   </div>
   <div class="domain-seq">{{t 'common.domain'}} {{domain.domainSeq}}</div>
+  <div class="data-model-selector out-of-scope">
+    <div class="proficiency-selector {{if isShowCompetencies 'active'}}" {{action "onSelectDatamodel" 'proficiency'}}>Proficiency</div>
+    <span>|</span>
+    <div class="portfolio-selector {{unless isShowCompetencies 'active'}}" {{action "onSelectDatamodel" 'portfolio'}}>Portfolio</div>
+  </div>
   <span class="close" {{action 'closePullUp'}}>{{gru-icon name="close"}}</span>
 </div>
-<div class="competency-container">
-  <div class="title">{{t 'common.competencies'}}</div>
-  <div class="competency-list">
-    {{#each competencies as |competency|}}
-      <div class="competency-info" {{action 'onInspectCompetency' competency}}>
-        <div class="competency">
-          <div class="title">
+
+{{#if isShowCompetencies}}
+  <div class="competency-container">
+    <div class="title">{{t 'common.competencies'}}</div>
+    <div class="competency-list">
+      {{#each competencies as |competency|}}
+        <div class="competency-info" {{action 'onInspectCompetency' competency}}>
+          <div class="competency">
+            <div class="title">
+              {{competency-gut-to-fw-transform
+                fwCompetencies
+                competency.competencyCode
+                competency.competencyCode
+                'frameworkCompetencyDisplayCode'
+                showGutCompetency
+                true
+                }}
+            </div>
+            <div class="competency-status status-{{competency.status}}"></div>
+          </div>
+          <div class="competency-desc">
             {{competency-gut-to-fw-transform
               fwCompetencies
               competency.competencyCode
-              competency.competencyCode
-              'frameworkCompetencyDisplayCode'
+              competency.competencyStudentDesc
+              'frameworkCompetencyName'
               showGutCompetency
               true
-              }}
+            }}
           </div>
-          <div class="competency-status status-{{competency.status}}"></div>
         </div>
-        <div class="competency-desc">
-          {{competency-gut-to-fw-transform
-            fwCompetencies
-            competency.competencyCode
-            competency.competencyStudentDesc
-            'frameworkCompetencyName'
-            showGutCompetency
-            true
-          }}
-        </div>
-      </div>
-    {{/each}}
+      {{/each}}
+    </div>
   </div>
-</div>
+{{else}}
+  <div class="portfolio-contents-container">
+    {{portfolio/gru-contents-panel
+      contentType = 'offline-activity'
+      userProfile = userProfile
+      userPreference = userPreference
+      subject = subject
+      domain = domain
+      isDisableFilter = true
+      isExpanded = true}}
+
+    {{portfolio/gru-contents-panel
+      contentType = 'collection'
+      userProfile = userProfile
+      userPreference = userPreference
+      subject = subject
+      domain = domain
+      isDisableFilter = true
+      isExpanded = false}}
+
+    {{portfolio/gru-contents-panel
+      contentType = 'assessment'
+      userProfile = userProfile
+      userPreference = userPreference
+      subject = subject
+      domain = domain
+      isDisableFilter = true
+      isExpanded = false}}
+  </div>
+{{/if}}

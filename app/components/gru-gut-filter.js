@@ -5,6 +5,8 @@ import {
 } from 'gooru-web/utils/taxonomy';
 
 export default Ember.Component.extend({
+  // -------------------------------------------------------------------------
+  // Attributes
   classNames: ['filter', 'gru-gut-filter'],
 
   // -------------------------------------------------------------------------
@@ -19,6 +21,8 @@ export default Ember.Component.extend({
 
   session: Ember.inject.service('session'),
 
+  // -------------------------------------------------------------------------
+  // Events
   didInsertElement() {
     const component = this;
     component.loadCategories().then(function(categories) {
@@ -26,44 +30,30 @@ export default Ember.Component.extend({
     });
   },
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    //Action triggered when selecting a category
     onSelectCategory(category) {
       const component = this;
       if (component.get('activeCategory.id') !== category.get('id')) {
         component.loadSubjects(category);
-        component.updateGutFilters({});
         component.set('activeCategory', category);
-        component.set('subjects', Ember.A([]));
-        component.set('domains', Ember.A([]));
-        component.set('competencies', Ember.A([]));
         component.updateGutFilters('category');
-        component.resetProperties(
-          Ember.A(['activeSubject', 'activeDomain', 'activeCompetency'])
-        );
       }
     },
 
+    //Action triggered when selecting a subject
     onSelectSubject(subject) {
       const component = this;
       if (component.get('activeSubject.id') !== subject.get('id')) {
         component.loadDomainCompetencies(subject);
         component.set('activeSubject', subject);
         component.updateGutFilters('subject', subject.get('code'));
-        component.set('domains', Ember.A([]));
-        component.set('competencies', Ember.A([]));
-        component.resetProperties(
-          Ember.A(['activeDomain', 'activeCompetency'])
-        );
-        let subjectFilterObject = Ember.Object.create({
-          type: 'subject',
-          filteKey: 'subjectCode',
-          value: subject.get('code'),
-          displayValue: subject.get('title')
-        });
-        component.sendAction('onSelectFilterItem', subjectFilterObject);
       }
     },
 
+    //Action triggered when selecting a domain
     onSelectDomain(domain) {
       const component = this;
       if (
@@ -82,17 +72,10 @@ export default Ember.Component.extend({
         );
         component.set('activeDomain', domain);
         component.updateGutFilters('domain', domain.get('domainCode'));
-        component.resetProperties(Ember.A(['activeCompetency']));
-        let domainFilterObject = Ember.Object.create({
-          type: 'domain',
-          filterKey: 'domainCode',
-          value: domain.get('domainCode'),
-          displayValue: domain.get('domainName')
-        });
-        component.sendAction('onSelectFilterItem', domainFilterObject);
       }
     },
 
+    //Action triggered when selecting a competency
     onSelectCompetency(competency) {
       const component = this;
       if (
@@ -104,41 +87,77 @@ export default Ember.Component.extend({
           'competency',
           competency.get('competencyCode')
         );
-        let gutFilterObject = Ember.Object.create({
-          type: 'competency',
-          value: competency.get('competencyCode'),
-          displayValue: competency.get('competencyCode')
-        });
-        component.sendAction('onSelectFilterItem', gutFilterObject);
       }
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {UUID} userId
+   * Userid of active user
+   */
   userId: Ember.computed.alias('session.userId'),
 
+  /**
+   * @property {Array} competencies
+   * List of competencies aligned to selected domain
+   */
   competencies: Ember.A([]),
 
+  /**
+   * @property {Object} activeCategory
+   */
   activeCategory: null,
 
+  /**
+   * @property {Object} activeSubject
+   */
   activeSubject: null,
 
+  /**
+   * @property {Object} activeDomain
+   */
   activeDomain: null,
 
+  /**
+   * @property {Object} activeCompetency
+   */
   activeCompetency: null,
 
+  /**
+   * @property {Object} gutFilters
+   * Default filter object item
+   */
   gutFilters: {
     subjectCode: undefined,
     domainCode: undefined,
     gutCode: undefined
   },
 
+  /**
+   * @property {Object} standardPreference
+   * Student selected subject and framework preference
+   */
   standardPreference: Ember.computed(function() {
     const component = this;
     return component.get('userPreference.standard_preference') || {};
   }),
 
+  /**
+   * @property {Boolean} isLoading
+   */
   isLoading: false,
 
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function loadCategories
+   * @return {Array}
+   * Method to load categories
+   */
   loadCategories() {
     const component = this;
     return component
@@ -150,6 +169,12 @@ export default Ember.Component.extend({
       });
   },
 
+  /**
+   * @function loadCategories
+   * @param {Object} category
+   * @return {Array}
+   * Method to load subjects aligned to given category
+   */
   loadSubjects(category) {
     const component = this;
     const categoryId = category.get('id');
@@ -166,6 +191,11 @@ export default Ember.Component.extend({
       });
   },
 
+  /**
+   * @function loadDomainCompetencies
+   * @param {Object} activeSubject
+   * Method to load domain competencies aligned to given subject
+   */
   loadDomainCompetencies(activeSubject) {
     const component = this;
     const subject = activeSubject || component.get('activeSubject');
@@ -215,35 +245,63 @@ export default Ember.Component.extend({
     );
   },
 
+  /**
+   * @function updateGutFilters
+   * @param {String} dataKey
+   * @param {String} value
+   * Method to update selected gut filters
+   */
   updateGutFilters(dataKey, value) {
     const component = this;
-    let gutFilters = component.get('gutFilters') || {};
-    if (dataKey === 'category') {
-      gutFilters.subjectCode = undefined;
-      gutFilters.domainCode = undefined;
-      gutFilters.gutCode = undefined;
-    } else if (dataKey === 'subject') {
-      gutFilters.subjectCode = value;
-      gutFilters.domainCode = undefined;
-      gutFilters.gutCode = undefined;
-    } else if (dataKey === 'domain') {
-      gutFilters.domainCode = value;
-      gutFilters.gutCode = undefined;
-    } else if (dataKey === 'competency') {
-      gutFilters.gutCode = value;
-    }
-    component.set('gutFilters', gutFilters);
-  },
-
-  resetProperties(properties = Ember.A([])) {
-    const component = this;
-    properties.map(property => {
-      if (!component.isDestroyed) {
-        component.set(`${property}`, null);
+    if (!component.isDestroyed) {
+      let gutFilters = component.get('gutFilters') || {};
+      if (dataKey === 'category') {
+        gutFilters.subjectCode = undefined;
+        gutFilters.domainCode = undefined;
+        gutFilters.gutCode = undefined;
+        component.setProperties({
+          subjects: Ember.A([]),
+          domains: Ember.A([]),
+          competencies: Ember.A([])
+        });
+        component.setProperties({
+          activeSubject: null,
+          activeDomain: null,
+          activeCompetency: null
+        });
+      } else if (dataKey === 'subject') {
+        gutFilters.subjectCode = value;
+        gutFilters.domainCode = undefined;
+        gutFilters.gutCode = undefined;
+        component.setProperties({
+          domains: Ember.A([]),
+          competencies: Ember.A([])
+        });
+        component.setProperties({
+          activeDomain: null,
+          activeCompetency: null
+        });
+      } else if (dataKey === 'domain') {
+        gutFilters.domainCode = value;
+        gutFilters.gutCode = undefined;
+        component.setProperties({
+          competencies: Ember.A([])
+        });
+        component.setProperties({
+          activeCompetency: null
+        });
+      } else if (dataKey === 'competency') {
+        gutFilters.gutCode = value;
       }
-    });
+      component.set('gutFilters', gutFilters);
+    }
   },
 
+  /**
+   * @function reloadGutFilters
+   * @param {Array} categories
+   * Method to reload gut filters based on selection
+   */
   reloadGutFilters(categories) {
     const component = this;
     const appliedFilters = component.get('appliedFilters');
