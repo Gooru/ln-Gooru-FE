@@ -44,8 +44,14 @@ export default Ember.Component.extend({
         selectedCompetency,
         competencies
       );
+    },
+
+    onSelectDatamodel(dataModel) {
+      this.set('isShowCompetencies', dataModel === 'proficiency');
     }
   },
+
+  isShowCompetencies: true,
 
   // -------------------------------------------------------------------------
   // Methods

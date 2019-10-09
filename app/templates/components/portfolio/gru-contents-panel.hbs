@@ -1,11 +1,19 @@
 <div class="portfolio-contents-container {{if isShowContentFilters 'filters-active'}}">
   <div class="header-container">
-    <div class="icon {{contentType}}"></div>
-    <div class="title">{{activeContentLabel}} ({{totalStudiedActivities}})</div>
+    <div class="panel-info-container" {{action "onToggleContainer"}}>
+      <div class="icon {{contentType}}"></div>
+      <div class="title">{{activeContentLabel}} ({{totalStudiedActivities}})</div>
+    </div>
     <div class="search-items-container">
-      <div class="filter-search" {{action "onOpenFilter"}}>
-        {{gru-icon name="filter_list"}}
-      </div>
+      {{#unless isDisableFilter}}
+        <div class="filter-search" {{action "onOpenFilter"}}>
+          {{gru-icon name="filter_list"}}
+        </div>
+      {{else}}
+        <div class="toggle-panel {{if (lt totalStudiedActivities 1) 'hidden'}}" {{action "onToggleContainer"}}>
+          {{gru-icon name=(if isExpanded 'keyboard_arrow_up' 'keyboard_arrow_down')}}
+        </div>
+      {{/unless}}
     </div>
   </div>
   <div class="body-container">
@@ -40,6 +48,8 @@
       refreshFilters = "refreshFilters"
       pickerStartDate = userCreatedAt
       userPreference = userPreference
-      appliedFilters = appliedFilters}}
+      appliedFilters = appliedFilters
+      subject = subject
+      domain = domain}}
   {{/if}}
 </div>

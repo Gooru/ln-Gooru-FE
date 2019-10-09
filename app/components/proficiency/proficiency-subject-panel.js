@@ -31,6 +31,11 @@ export default Ember.Component.extend({
     onDomainSelect(selectedDomain) {
       let component = this;
       component.sendAction('onDomainSelect', selectedDomain);
+    },
+
+    onSelectDatamodel(datamodel) {
+      const component = this;
+      component.set('isShowDomainList', datamodel === 'proficiency');
     }
   },
 
@@ -39,5 +44,7 @@ export default Ember.Component.extend({
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });
-  }
+  },
+
+  isShowDomainList: true
 });

@@ -6,6 +6,8 @@ export default Ember.Component.extend({
   // Attributes
   classNames: ['portfolio', 'gru-contents-panel'],
 
+  classNameBindings: ['isExpanded:expanded-panel'],
+
   // -------------------------------------------------------------------------
   // Dependencies
   session: Ember.inject.service('session'),
@@ -18,7 +20,20 @@ export default Ember.Component.extend({
   // Events
   didInsertElement() {
     const component = this;
-    component.loadPortfolioActivities();
+    let appliedFilters = component.get('appliedFilters');
+    const activeSubject = component.get('subject');
+    const activeDomain = component.get('domain');
+    const activeCompetency = component.get('competency');
+    appliedFilters.subjectCode = activeSubject
+      ? activeSubject.get('code')
+      : undefined;
+    appliedFilters.domainCode = activeDomain
+      ? activeDomain.get('domainCode')
+      : undefined;
+    appliedFilters.gutCode = activeCompetency
+      ? activeCompetency.get('competencyCode')
+      : undefined;
+    component.loadPortfolioActivities(appliedFilters);
     component.scrollHandler();
   },
 
@@ -44,6 +59,12 @@ export default Ember.Component.extend({
     clearFilters() {
       const component = this;
       component.loadPortfolioActivities();
+    },
+
+    //Action triggered while toggling body container
+    onToggleContainer() {
+      const component = this;
+      component.$('.body-container').slideToggle();
     }
   },
 
@@ -62,6 +83,9 @@ export default Ember.Component.extend({
    */
   isShowContentFilters: false,
 
+  /**
+   * @property {Object} filters
+   */
   filters: {},
 
   /**
@@ -71,8 +95,6 @@ export default Ember.Component.extend({
   userCreatedAt: Ember.computed('userProfile.createdAt', function() {
     return moment(this.get('userProfile.createdAt')).format('YYYY-MM-DD');
   }),
-
-  activeFiltersList: Ember.A([]),
 
   /**
    * @property {Object} appliedFilters
@@ -126,6 +148,12 @@ export default Ember.Component.extend({
     return component.get('i18n').t(localString);
   }),
 
+  /**
+   * @property {Boolean} isExpanded
+   * Property to toggle the container between expanded/collapsed state
+   */
+  isExpanded: true,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -146,6 +174,7 @@ export default Ember.Component.extend({
     }).then(({ portfolioContents }) => {
       if (filters && !component.get('isLoadingMore')) {
         studiedPortfolioActivities = Ember.A([]);
+        component.set('totalStudiedActivities', 0);
       }
       if (contentType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
         component.parseStudiedOfflineActivities(
@@ -153,20 +182,25 @@ export default Ember.Component.extend({
           portfolioContents
         );
       } else {
-        studiedPortfolioActivities = studiedPortfolioActivities.concat(
-          portfolioContents
-        );
-        component.set(
-          'totalStudiedActivities',
-          studiedPortfolioActivities.length
-        );
-        component.set('studiedPortfolioActivities', studiedPortfolioActivities);
-        component.set(
-          'isFetchedAllContent',
-          portfolioContents.length < component.get('limit')
-        );
-        component.set('isLoading', false);
-        component.set('isLoadingMore', false);
+        if (!component.isDestroyed) {
+          studiedPortfolioActivities = studiedPortfolioActivities.concat(
+            portfolioContents
+          );
+          component.set(
+            'totalStudiedActivities',
+            studiedPortfolioActivities.length
+          );
+          component.set(
+            'studiedPortfolioActivities',
+            studiedPortfolioActivities
+          );
+          component.set(
+            'isFetchedAllContent',
+            portfolioContents.length < component.get('limit')
+          );
+          component.set('isLoading', false);
+          component.set('isLoadingMore', false);
+        }
       }
     });
   },
@@ -186,17 +220,18 @@ export default Ember.Component.extend({
     let totalStudiedActivities = component.get('totalStudiedActivities') || 0;
     let totalFetchedActitivities = 0;
     let parsedOfflineActivities = Ember.A([]);
+
+    offlineActivitySubtypes.map(subType => {
+      let offlineActivities = studiedActivities[subType];
+      totalFetchedActitivities += offlineActivities.length;
+      parsedOfflineActivities.pushObject(
+        Ember.Object.create({
+          label: `common.subtask.${subType}`,
+          offlineActivities
+        })
+      );
+    });
     if (!component.isDestroyed) {
-      offlineActivitySubtypes.map(subType => {
-        let offlineActivities = studiedActivities[subType];
-        totalFetchedActitivities += offlineActivities.length;
-        parsedOfflineActivities.pushObject(
-          Ember.Object.create({
-            label: `common.subtask.${subType}`,
-            offlineActivities
-          })
-        );
-      });
       studiedPortfolioActivities = studiedPortfolioActivities.concat(
         parsedOfflineActivities
       );
