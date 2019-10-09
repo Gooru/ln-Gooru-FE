@@ -31,6 +31,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.loadTaskSubmissionData();
+    component.afterRender();
     if (!component.get('isTeacher')) {
       component.doCheckOaCompleted();
     }
@@ -544,5 +545,17 @@ export default Ember.Component.extend({
     return component
       .get('oaAnalyticsService')
       .getOaCompletedStudents(classId, oaId, caContentId, dataParam);
+  },
+
+  afterRender: function() {
+    const component = this;
+    const activityTasks = component.get('offlineActivity.tasks') || Ember.A([]);
+    activityTasks.map(act => act.set('focus', false));
+    const taskUnSubmitted = activityTasks.filter(
+      task => !task.isAddedMandatorySubmission
+    );
+    if (taskUnSubmitted.length > 0) {
+      taskUnSubmitted.get('lastObject').set('focus', true);
+    }
   }
 });
