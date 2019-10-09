@@ -4,31 +4,37 @@
       background-color: #35424b;
       padding: 15px 50px 5px;
       min-height: 290px;
+
       .domain-details {
         display: grid;
         grid-template-columns: auto auto;
         border-bottom: 1px dashed $white;
         margin-bottom: 15px;
+
         .domain-info {
           display: grid;
           grid-template-columns: 30px auto;
           justify-content: center;
           align-items: center;
           justify-self: left;
+
           .back-arrow {
             cursor: pointer;
+
             i {
               color: $white;
               font-size: 20px;
               font-weight: bold;
             }
           }
+
           .domain-name {
             color: $white;
             font-size: 20px;
             font-weight: bold;
           }
         }
+
         .competency-count {
           color: $white;
           justify-self: end;
@@ -36,13 +42,17 @@
           font-weight: bold;
         }
       }
+
       .competency-performance-chartlist {
         position: relative;
+
         .scrollable-chartlist {
           display: flex;
           overflow-x: auto;
+
           .student-performance-detail {
             display: grid;
+
             .thumbnail-container {
               width: 40px;
               height: 40px;
@@ -53,6 +63,7 @@
               border: 2px solid $white;
             }
           }
+
           &::-webkit-scrollbar {
             height: 6px;
             width: 8px;
@@ -64,10 +75,12 @@
             border-radius: 5px;
           }
         }
+
         .domain-scroll-controller {
           position: absolute;
           width: 100%;
           top: 35%;
+
           .move-left,
           .move-right {
             width: 77px;
@@ -75,58 +88,120 @@
             position: absolute;
             text-align: center;
             cursor: pointer;
+
             &:hover {
               text-align: center;
               border-radius: 50%;
               background-color: rgba(255, 255, 255, 0.8);
               box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04),
                 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-              -webkit-transition: background-color 2s; /* Safari */
+              -webkit-transition: background-color 2s;
+              /* Safari */
               transition: background-color 2s;
               border: none;
             }
           }
+
           .move-left {
             left: 0;
           }
+
           .move-right {
             right: 0;
           }
+
           .disabled {
             pointer-events: none;
             opacity: 0.3;
           }
+
           i {
             font-size: 78px;
           }
         }
       }
     }
+
     .performance-body-container {
-      padding: 5px 50px 50px 50px;
+      padding: 5px 50px 50px;
       background-color: $white;
       display: grid;
       grid-template-columns: 200px auto;
+
       .students-container {
         margin-top: 40px;
+
         .student-container {
           display: grid;
           grid-template-columns: 35px auto;
           align-items: center;
           border-bottom: 1px solid rgba(151, 151, 151, 0.2);
           height: 40px;
+
           &:first-child {
             border-top: 1px solid rgba(151, 151, 151, 0.2);
           }
-          .thumbnail-container {
-            width: 30px;
-            height: 30px;
-            background-size: 30px 30px;
-            border: none;
-            display: block;
-            border-radius: 50%;
-            margin: 5px 0;
+
+          .user-profile-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .selected-user-for-suggestion {
+              width: 29px;
+              background: #f98e4e;
+              border-radius: 50%;
+              line-height: 19px;
+              box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.2);
+              color: #fff;
+              height: 29px;
+
+              .done_all {
+                position: relative;
+                top: 3px;
+                left: 3px;
+              }
+
+              .de-select-user {
+                position: relative;
+                top: -29px;
+                width: 29px;
+                height: 29px;
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 50%;
+                line-height: 19px;
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.3s, visibility 0.3s;
+
+                .close {
+                  font-size: 16px;
+                  margin-right: 6px;
+                  margin-top: 3px;
+                }
+              }
+
+              &:hover {
+                .de-select-user {
+                  visibility: visible;
+                  opacity: 1;
+                  transition: opacity 0.3s, visibility 0.3s;
+                }
+              }
+            }
+
+            img {
+              width: 29px;
+              border-radius: 50%;
+              border-color: transparent;
+              height: 29px;
+
+              &.selected {
+                visibility: hidden;
+              }
+            }
           }
+
           .student-name {
             color: #37424b;
             $font-size: 14px;
@@ -141,14 +216,18 @@
           }
         }
       }
+
       .students-competencies-performance-container {
         overflow-x: auto;
+
         .competencies-info {
           display: flex;
+
           .competency-info {
             height: 40px;
             width: 40px;
             display: grid;
+
             .info-icon {
               width: 40px;
               height: 40px;
@@ -160,9 +239,11 @@
             }
           }
         }
+
         .competencies-performance-container {
           display: flex;
           width: max-content;
+
           .competency-performance {
             min-height: 40px;
             width: 40px;
@@ -171,20 +252,24 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
+
             .check-circle {
               height: 39px;
               width: 39px;
               background-size: 20px 20px;
               background-position: center;
               background-repeat: no-repeat;
+
               &.status-0 {
                 background-color: $gray-no-started;
                 // background-image: url('gooru/images/check-circle-0.svg');
               }
+
               &.status-1 {
                 background-color: $blue-in-progress;
                 background-image: url("gooru/images/check-circle-mastered.svg");
               }
+
               &.status-2,
               &.status-3,
               &.status-4,
@@ -197,6 +282,7 @@
             }
           }
         }
+
         &::-webkit-scrollbar {
           height: 6px;
           width: 8px;
@@ -209,15 +295,14 @@
         }
       }
     }
-
     @media screen and (max-width: 992px) {
       .performance-header-container {
         .competency-performance-chartlist {
           .domain-scroll-controller {
             .move-left,
             .move-right {
-              &:hover,
-              &:focus {
+              &:focus,
+              &:hover {
                 background-color: none;
               }
             }
@@ -225,11 +310,11 @@
         }
       }
     }
-
     @media screen and (max-width: 481px) {
       .performance-header-container {
         padding: 5px;
       }
+
       .performance-body-container {
         padding: 5px;
       }
@@ -238,37 +323,43 @@
       .performance-body-container {
         .students-container {
           margin-top: 0;
+
           .student-container {
             .student-name {
               font-size: 12px;
             }
           }
         }
+
         .students-competencies-performance-container {
           .competencies-info {
             display: none;
           }
         }
       }
+
       .performance-header-container {
         min-height: unset;
+
         .domain-details {
           border-bottom: none;
+
           .competency-count {
             margin-top: 7px;
           }
+
           .domain-info {
             .back-arrow {
               margin-top: 8px;
             }
           }
         }
+
         .competency-performance-chartlist {
           display: none;
         }
       }
     }
-
     @media screen and (max-width: 320px) {
       .performance-header-container {
         .domain-details {
@@ -279,8 +370,38 @@
           }
         }
       }
+
       .performance-body-container {
         grid-template-columns: 150px auto;
+      }
+    }
+  }
+
+  .gru-pull-out {
+    .pull-out-less-content-container {
+      .pull-out-content {
+        padding: 0 5px 5px;
+        width: inherit;
+
+        .learning-map-content {
+          width: inherit;
+
+          .activity-list-pull-up {
+            width: inherit;
+            right: unset;
+            height: calc(100% - 100px);
+
+            .activity-list {
+              .activity-list-body {
+                height: calc(90vh - 10px);
+
+                .activity-contents {
+                  grid-template-columns: unset;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

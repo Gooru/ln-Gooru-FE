@@ -188,10 +188,7 @@ export default Ember.Component.extend({
     let component = this;
     component.fetchLearningMapsContent();
     component.fetchCodes();
-    const isStudent = component.get('isStudent');
-    if (isStudent) {
-      component.fetchTeacherSuggestions();
-    }
+    component.fetchTeacherSuggestions();
   },
 
   didRender() {
@@ -257,9 +254,6 @@ export default Ember.Component.extend({
         ? signatureContentList.assessments
         : signatureContentList.collections;
       let content = signatureContent.objectAt(0);
-      if (!component.get('isStudent')) {
-        component.set('isLoading', false);
-      }
       if (content) {
         component.set('signatureContent', Ember.Object.create(content));
         component.fetchContentSettings(content.id);

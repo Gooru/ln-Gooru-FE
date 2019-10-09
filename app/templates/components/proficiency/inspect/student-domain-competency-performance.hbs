@@ -18,7 +18,7 @@
         {{#each activeDomainCompetencyPerformance.studentCompetencies as |studentPerformance studentSeq|}}
           <div class="student-performance-detail">
             {{charts/domain-competency-chart domainSeq=activeDomainCompetencyPerformance.domainData.domainSeq studentSeq=studentSeq competencies=studentPerformance.competencies maxChartHeight=180}}
-            <div class="thumbnail-container" style="background-image: url({{studentPerformance.thumbnail}})">
+            <div class="thumbnail-container" style="background-image: url({{studentPerformance.avatarUrl}})">
             </div>
           </div>
         {{/each}}
@@ -37,7 +37,17 @@
     <div class="students-container">
       {{#each activeDomainCompetencyPerformance.studentCompetencies as |student|}}
         <div class="student-container">
-          <div class="thumbnail-container" style="background-image: url({{student.thumbnail}})">
+          <div class="user-profile-img">
+            {{#if student.selectedForSuggestion}}
+              <div class="selected-user-for-suggestion">
+                {{gru-icon name="done_all"}}
+                <div class="de-select-user" {{action 'onDeSelectStudentForSuggestion' student bubbles=false}}>
+                  {{gru-icon name="close"}}
+                </div>
+              </div>
+            {{else}}
+              <img src="{{student.avatarUrl}}" class="{{if student.selectedForSuggestion 'selected'}}" {{action 'onSelectStudentForSuggestion' student bubbles=false}} />
+            {{/if}}
           </div>
           <div class="student-name">
             {{student.fullName}}
@@ -48,7 +58,7 @@
     <div class="students-competencies-performance-container">
       <div class="competencies-info">
         {{#each activeDomainCompetencyPerformance.domainData.competencies as |competency|}}
-          <div class="competency-info">
+          <div class="competency-info" {{action 'onShowCompetencyInfo' competency}}>
             <i class="info-icon" title="{{competency-gut-to-fw-transform
                fwCompetencies
                competency.competencyCode
@@ -77,6 +87,25 @@
 {{#if isShowCompetencyContentReport}}
   {{#reports/pull-up/competency-report fwDomains=fwDomains fwCompetencies=fwCompetencies type=(if selectedCompetency.competencyStudentDesc selectedCompetency.competencyStudentDesc selectedCompetency.competencyCode) title=selectedCompetency.competencyStudentDesc showPullUp=isShowCompetencyContentReport
     onClosePullUp="onCloseCompetencyReportPullUp" competency=selectedCompetency}}
-    {{reports/pull-up/competency-content-report fwCompetencies=fwCompetencies domainCompetencyList=domainCompetencyList competency=selectedCompetency userId=selectedStudentUserId learningMapData=learningMapData onToggleGlobalCompetencyView="onToggleGlobalCompetencyView"}}
+    {{reports/pull-up/competency-content-report fwCompetencies=fwCompetencies domainCompetencyList=domainCompetencyList competency=selectedCompetency classId=classId userId=selectedStudentUserId learningMapData=learningMapData}}
   {{/reports/pull-up/competency-report}}
+{{/if}}
+{{#gru-pull-out showPullOut=showPullOut title=selectedCompetencyForSuggestion.competencyCode  description=selectedCompetencyForSuggestion.competencyStudentDesc onClosePullOut="onClosePullOut"}}
+  {{#if showPullOut}}
+    {{#if isLoading}}
+      {{three-bounce-spinner}}
+    {{else}}
+      {{reports/pull-up/learning-map-content onSuggestContent="onSuggestContent" learningMapData=learningMapData isStudent=false}}
+    {{/if}}
+  {{/if}}
+{{/gru-pull-out}}
+
+{{#if showSuggestConfirmation}}
+  {{cards/suggest-confirmation
+   collection=suggestedCollection
+   students=studentsSelectedForSuggest
+   contentType=suggestedCollectionType
+   onCancelSuggest="onCancelSuggest"
+   onConfirmSuggest="onConfirmSuggest"
+ }}
 {{/if}}
