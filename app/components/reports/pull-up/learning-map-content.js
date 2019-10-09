@@ -60,10 +60,22 @@ export default Ember.Component.extend({
     let activityContents = component.get('activityContents');
     let startAt = component.get('startAt');
     let length = component.get('length');
+    let filter = {
+      'flt.gutCode': competencyCode
+    };
+    if (
+      activityContentType === 'course' ||
+      activityContentType === 'unit' ||
+      activityContentType === 'lesson'
+    ) {
+      filter = {
+        'flt.relatedGutCode': competencyCode
+      };
+    }
     let params = {
       page: startAt / length,
       pageSize: length,
-      gutCode: competencyCode
+      filters: filter
     };
     component
       .loadingMoreLearnMapData(activityContentType, params)
@@ -72,7 +84,7 @@ export default Ember.Component.extend({
           'activityContents',
           activityContents.concat(loadMoreLearningMapData)
         );
-        component.set('activityTotalHitCount', component.get('startAt'));
+        component.set('offsetCount', component.get('startAt'));
       });
     } else {
       component.set(
@@ -120,6 +132,6 @@ export default Ember.Component.extend({
     component.set('startAt', 0);
     component.set('isShowActivityPullup', false);
     component.set('activityContentType', '');
-    component.set('activityTotalHitCount', 0);
+    component.set('offsetCount', 0);
   }
 });
