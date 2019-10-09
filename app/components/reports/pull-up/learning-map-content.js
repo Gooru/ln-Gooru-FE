@@ -70,11 +70,9 @@ export default Ember.Component.extend({
       .then(loadMoreLearningMapData => {
         component.set(
           'activityContents',
-          activityContents.concat(loadMoreLearningMapData.get('results'))
+          activityContents.concat(loadMoreLearningMapData)
         );
-        let activityTotalHitCount =
-          loadMoreLearningMapData.get('totalHitCount') || 0;
-        component.set('activityTotalHitCount', activityTotalHitCount);
+        component.set('activityTotalHitCount', component.get('startAt'));
       });
     } else {
       component.set(
@@ -92,21 +90,21 @@ export default Ember.Component.extend({
     let searchService = component.get('searchService');
     switch (contentType) {
     case 'course':
-      return searchService.searchCoursesWithCounts('*', params);
+      return searchService.searchCourses('*', params);
     case 'unit':
-      return searchService.searchUnitsWithCounts('*', params);
+      return searchService.searchUnits('*', params);
     case 'lesson':
-      return searchService.searchLessonsWithCounts('*', params);
+      return searchService.searchLessons('*', params);
     case 'collection':
-      return searchService.searchCollectionsWithCounts('*', params);
+      return searchService.searchCollections('*', params);
     case 'assessment':
-      return searchService.searchAssessmentsWithCounts('*', params);
+      return searchService.searchAssessments('*', params);
     case 'resource':
-      return searchService.searchResourcesWithCounts('*', params);
+      return searchService.searchResources('*', params);
     case 'question':
-      return searchService.searchQuestionsWithCounts('*', params);
+      return searchService.searchQuestions('*', params);
     case 'rubric':
-      return searchService.searchRubricsWithCounts('*', params);
+      return searchService.searchRubrics('*', params);
     default:
       break;
     }

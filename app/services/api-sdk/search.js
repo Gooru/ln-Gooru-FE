@@ -53,30 +53,6 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for collections with count
-   *
-   * @param term the term to search
-   * @param params
-   * @param resetPagination indicates if the pagination needs a reset
-   * @returns {Promise}
-   */
-  searchCollectionsWithCounts: function(term, params, resetPagination = false) {
-    const service = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      service
-        .get('searchAdapter')
-        .searchCollections(term, params, resetPagination)
-        .then(function(response) {
-          resolve(
-            service
-              .get('searchSerializer')
-              .normalizeSearchCollectionWithCounts(response)
-          );
-        }, reject);
-    });
-  },
-
-  /**
    * Search for Offline Activity
    *
    * @param term the term to search
@@ -123,30 +99,6 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for assessments with count
-   *
-   * @param term the term to search
-   * @param params
-   * @param resetPagination indicates if the pagination needs a reset
-   * @returns {Promise}
-   */
-  searchAssessmentsWithCounts: function(term, params, resetPagination = false) {
-    const service = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      service
-        .get('searchAdapter')
-        .searchAssessments(term, params, resetPagination)
-        .then(function(response) {
-          resolve(
-            service
-              .get('searchSerializer')
-              .normalizeSearchAssessmentWithCounts(response)
-          );
-        }, reject);
-    });
-  },
-
-  /**
    * Search for resources
    *
    * @param term the term to search
@@ -174,35 +126,6 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for resources with count
-   *
-   * @param term the term to search
-   * @param params
-   * @param resetPagination indicates if the pagination needs a reset
-   * @returns {Promise.<Resource[]>}
-   */
-  searchResourcesWithCounts: function(term, params, resetPagination = false) {
-    const service = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      service
-        .get('searchAdapter')
-        .searchResources(term, params, resetPagination)
-        .then(
-          function(response) {
-            resolve(
-              service
-                .get('searchSerializer')
-                .normalizeSearchResourceWithCounts(response)
-            );
-          },
-          function(error) {
-            reject(error);
-          }
-        );
-    });
-  },
-
-  /**
    * Search for questions
    *
    * @param term the term to search
@@ -220,35 +143,6 @@ export default Ember.Service.extend({
           function(response) {
             resolve(
               service.get('searchSerializer').normalizeSearchQuestions(response)
-            );
-          },
-          function(error) {
-            reject(error);
-          }
-        );
-    });
-  },
-
-  /**
-   * Search for questions with count
-   *
-   * @param term the term to search
-   * @param params
-   * @param resetPagination indicates if the pagination needs a reset
-   * @returns {Promise.<Question[]>}
-   */
-  searchQuestionsWithCounts: function(term, params, resetPagination = false) {
-    const service = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      service
-        .get('searchAdapter')
-        .searchQuestions(term, params, resetPagination)
-        .then(
-          function(response) {
-            resolve(
-              service
-                .get('searchSerializer')
-                .normalizeSearchQuestionsWithCounts(response)
             );
           },
           function(error) {
@@ -309,39 +203,12 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for rubrics
-   *
-   * @param term the term to search
-   * @returns {Promise.<Rubrics[]>}
-   */
-  searchRubricsWithCounts: function(term, filters) {
-    const service = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      service
-        .get('searchAdapter')
-        .searchRubrics(term, filters)
-        .then(
-          function(response) {
-            resolve(
-              service
-                .get('searchSerializer')
-                .normalizeSearchRubricWithCounts(response)
-            );
-          },
-          function(error) {
-            reject(error);
-          }
-        );
-    });
-  },
-
-  /**
    * Search for unit
    *
    * @param term the term to search
    * @returns {Promise.<Units[]>}
    */
-  searchUnitsWithCounts: function(term, params, resetPagination = false) {
+  searchUnits: function(term, params, resetPagination = false) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
@@ -366,7 +233,7 @@ export default Ember.Service.extend({
    * @param term the term to search
    * @returns {Promise.<Lessons[]>}
    */
-  searchLessonsWithCounts: function(term, params, resetPagination = false) {
+  searchLessons: function(term, params, resetPagination = false) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
@@ -401,33 +268,6 @@ export default Ember.Service.extend({
           function(response) {
             resolve(
               service.get('searchSerializer').normalizeSearchCourses(response)
-            );
-          },
-          function(error) {
-            reject(error);
-          }
-        );
-    });
-  },
-
-  /**
-   * Search for courses with count
-   *
-   * @param term the term to search
-   * @returns {Promise.<Question[]>}
-   */
-  searchCoursesWithCounts: function(term, params, resetPagination = false) {
-    const service = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      service
-        .get('searchAdapter')
-        .searchCourses(term, params, resetPagination)
-        .then(
-          function(response) {
-            resolve(
-              service
-                .get('searchSerializer')
-                .normalizeSearchCoursesWithCounts(response)
             );
           },
           function(error) {

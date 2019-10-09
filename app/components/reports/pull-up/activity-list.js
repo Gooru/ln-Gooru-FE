@@ -57,7 +57,10 @@ export default Ember.Component.extend({
     let component = this;
     let activityTotalHitCount = component.get('activityTotalHitCount');
     let numberOfActivityContents = component.get('activityContents.length');
-    return activityTotalHitCount > numberOfActivityContents;
+    return (
+      activityTotalHitCount === numberOfActivityContents &&
+      activityTotalHitCount >= 5
+    );
   }),
 
   // -------------------------------------------------------------------------
