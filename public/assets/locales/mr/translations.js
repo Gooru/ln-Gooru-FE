@@ -2712,8 +2712,8 @@ window.i18ln = {
   'report.class-weekly-report': 'वर्ग साप्ताहिक अहवाल',
   'no-teacher-found': 'या ईमेल आय डी शी संबंधित कोणतेही शिक्षक सापडले नाहीत!',
   'oa-player.complete-confirm':
-    'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
-  'oa-player.mark-complete': 'Mark Complete',
+    'एकदा पूर्ण झाले म्हणून मार्क केल्यानंतर त्यामध्ये तुम्ही बदल करू शकणार नाही! <br> आपण सुरू ठेऊ इच्छिता?',
+  'oa-player.mark-complete': 'मार्क कम्प्लीट',
   'domain-code.FD': 'अपूर्णांक आणि दशांश अपूर्णांक',
   'domain-code.PD': 'आकृतिबंध आणि माहितीचे व्यवस्थापन',
   'domain-code.PN': 'गणन पूरक संबोध',
@@ -2721,15 +2721,15 @@ window.i18ln = {
   'domain-code.G': 'भौमितिक आकारांची ओळख',
   'domain-code.M': 'मापन',
   'domain-code.NS': 'संख्याज्ञान',
-  'no.content.assoc.fw': 'Currently no content associated with this framework.',
+  'no.content.assoc.fw': 'सध्या सदर फ्रेमवर्क संबधीत काहीही मजकूर नाही.',
   'report.offline-activity-report.note':
-    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
-  'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey',
-  'search-by': 'Search By',
-  'common.content-owner': 'Content Owner',
+    'हे एक ऑफलाईन काम असून विद्यार्थ्यांना याच्यासाठी गुण दिले जातील किंवा रुब्रिक नुसार श्रेणी दिली जाईल. वैयक्तिक कामाची माहिती उपलब्ध नाही.',
+  'teacher-landing.class.student-locator': 'स्टुडंट लोकेटर',
+  'teacher-landing.class.learning-journey': 'शिक्षण प्रवास',
+  'search-by': 'याद्वारे शोधा',
+  'common.content-owner': 'कंटेंट ओनर',
   'oa.self-grading.comment-label':
-    'Please share your thoughts on how you performed in this activity',
-  'common.your-thoughts': 'Your Thoughts',
-  'common.email.error': 'Duplicate email'
+    'आपण या वर कशा पद्धतीने काम केले याबद्दल आपले विचार सांगा',
+  'common.your-thoughts': 'आपले विचार',
+  'common.email.error': 'डुप्लिकेट ईमेल'
 };
