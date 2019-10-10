@@ -278,6 +278,8 @@ export default Ember.Controller.extend({
 
   userId: Ember.computed.alias('session.userId'),
 
+  isLessonPlanView: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -583,10 +585,15 @@ export default Ember.Controller.extend({
     /**
      * This Action is responsible for switch between milestone  and course map.
      */
-    viewSwitcher() {
-      this.toggleProperty('isMilestoneView');
-      //Reset milestone report to false when course map view is active
-      if (!this.get('isMilestoneView')) {
+    viewSwitcher(tabName) {
+      this.set('isMilestoneView', false);
+      this.set('isLessonPlanView', false);
+      if (tabName === 'milestone') {
+        this.set('isMilestoneView', true);
+      } else if (tabName === 'lesson-plan') {
+        this.set('isLessonPlanView', true);
+        this.set('classController.isShowMilestoneReport', false);
+      } else {
         this.set('classController.isShowMilestoneReport', false);
       }
     },

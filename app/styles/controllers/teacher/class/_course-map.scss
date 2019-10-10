@@ -267,19 +267,25 @@
 
         .ms-cm-view-switcher-ctn {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr 1fr 1fr;
           align-items: center;
-          height: 50px;
           background: #fff;
-          border-radius: 4px;
-          margin-bottom: 5px;
+          overflow: hidden;
+          text-align: center;
+          border-radius: 5px;
+          margin-bottom: 10px;
           box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.4);
+          .ms-cm-view-tabs {
+            padding: 8px;
+            cursor: pointer;
 
-          .current-view {
-            padding-left: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
+            &.current-view {
+              padding-left: 10px;
+              font-weight: bold;
+              background-color: #5c8fd2;
+              color: $white;
+              text-transform: uppercase;
+            }
           }
 
           .view-switcher {

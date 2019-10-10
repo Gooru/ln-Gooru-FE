@@ -2731,5 +2731,17 @@ window.i18ln = {
   'oa.self-grading.comment-label':
     'आपण या वर कशा पद्धतीने काम केले याबद्दल आपले विचार सांगा',
   'common.your-thoughts': 'आपले विचार',
-  'common.email.error': 'डुप्लिकेट ईमेल'
+  'common.email.error': 'डुप्लिकेट ईमेल',
+  'common.lesson-plan': 'Lesson Plan',
+  'lesson-plan.sessions': 'sessions',
+  'common.session': 'Session',
+  'prior-knowledge': 'Prior Knowledge',
+  'guiding-question': 'Guiding Questions',
+  'anticipated-struggle': 'Aniticipated Struggles',
+  'teacher-resource': 'Teacher Resources',
+  'content.anticipated-struggles':
+    'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
+  'common.no-lesson-plan-info-message':
+    'This lesson does have any lesson plan.',
+  'student-resource': 'Student Resources'
 };
