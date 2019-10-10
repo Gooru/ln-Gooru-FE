@@ -53,7 +53,6 @@ export default Ember.Component.extend({
   loadActivityContentData(contentType) {
     let component = this;
     component.set('isLoading', true);
-    let searchService = component.get('searchService');
     let competencyCode = component.get('learningMapData.gutCode');
     let activityContentType =
       contentType || component.get('activityContentType');
@@ -86,13 +85,7 @@ export default Ember.Component.extend({
         );
         component.set('offsetCount', component.get('startAt'));
       });
-    } else {
-      component.set(
-        'activityContents',
-        activityContents.concat(activityContentData)
-      );
-    }
-    component.set('activityTotalHitCount', activityTotalHitCount);
+
     component.set('startAt', startAt + length);
     component.set('isLoading', false);
   },
