@@ -551,11 +551,6 @@ export default Ember.Component.extend({
     const component = this;
     const activityTasks = component.get('offlineActivity.tasks') || Ember.A([]);
     activityTasks.map(act => act.set('focus', false));
-    const taskUnSubmitted = activityTasks.filter(
-      task => !task.isAddedMandatorySubmission
-    );
-    if (taskUnSubmitted.length > 0) {
-      taskUnSubmitted.get('lastObject').set('focus', true);
-    }
+    activityTasks.get('firstObject').set('focus', true); //first task to focus
   }
 });
