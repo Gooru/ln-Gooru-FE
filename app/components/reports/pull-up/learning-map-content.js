@@ -53,50 +53,66 @@ export default Ember.Component.extend({
   loadActivityContentData(contentType) {
     let component = this;
     component.set('isLoading', true);
-    let searchService = component.get('searchService');
     let competencyCode = component.get('learningMapData.gutCode');
+    let activityContents = component.get('activityContents');
     let activityContentType =
       contentType || component.get('activityContentType');
-    let activityContents = component.get('activityContents');
     let startAt = component.get('startAt');
     let length = component.get('length');
-    let learningMapData = component.get('learningMapData');
-    let activityTotalHitCount = learningMapData
-      ? learningMapData.contents[`${activityContentType}`].totalHitCount
-      : 0;
-    let activityContentData = learningMapData
-      ? learningMapData.learningMapsContent[`${activityContentType}`]
-      : Ember.A([]);
-    if (startAt) {
-      let filters = {
-        startAt: startAt,
-        length: length,
-        isCrosswalk: false
+    let filter = {
+      'flt.gutCode': competencyCode
+    };
+    if (
+      activityContentType === 'course' ||
+      activityContentType === 'unit' ||
+      activityContentType === 'lesson'
+    ) {
+      filter = {
+        'flt.relatedGutCode': competencyCode
       };
-      Ember.RSVP.hash({
-        loadMoreLearningMapData: searchService.fetchLearningMapsCompetencyContent(
-          competencyCode,
-          filters
-        )
-      }).then(({ loadMoreLearningMapData }) => {
+    }
+    let params = {
+      page: startAt / length,
+      pageSize: length,
+      filters: filter
+    };
+    component
+      .loadingMoreLearnMapData(activityContentType, params)
+      .then(loadMoreLearningMapData => {
         component.set(
           'activityContents',
-          activityContents.concat(
-            loadMoreLearningMapData.learningMapsContent[
-              `${activityContentType}`
-            ]
-          )
+          activityContents.concat(loadMoreLearningMapData)
         );
+        component.set('offsetCount', component.get('startAt'));
       });
-    } else {
-      component.set(
-        'activityContents',
-        activityContents.concat(activityContentData)
-      );
-    }
-    component.set('activityTotalHitCount', activityTotalHitCount);
+
     component.set('startAt', startAt + length);
     component.set('isLoading', false);
+  },
+
+  loadingMoreLearnMapData(contentType, params) {
+    let component = this;
+    let searchService = component.get('searchService');
+    switch (contentType) {
+    case 'course':
+      return searchService.searchCourses('*', params);
+    case 'unit':
+      return searchService.searchUnits('*', params);
+    case 'lesson':
+      return searchService.searchLessons('*', params);
+    case 'collection':
+      return searchService.searchCollections('*', params);
+    case 'assessment':
+      return searchService.searchAssessments('*', params);
+    case 'resource':
+      return searchService.searchResources('*', params);
+    case 'question':
+      return searchService.searchQuestions('*', params);
+    case 'rubric':
+      return searchService.searchRubrics('*', params);
+    default:
+      break;
+    }
   },
 
   /**
@@ -109,6 +125,6 @@ export default Ember.Component.extend({
     component.set('startAt', 0);
     component.set('isShowActivityPullup', false);
     component.set('activityContentType', '');
-    component.set('activityTotalHitCount', 0);
+    component.set('offsetCount', 0);
   }
 });
