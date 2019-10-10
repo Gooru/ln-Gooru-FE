@@ -75,7 +75,9 @@ export default Ember.Component.extend({
    * @property {UUID} userId
    * Active userID should be student
    */
-  userId: Ember.computed.alias('session.userId'),
+  userId: Ember.computed(function() {
+    return this.get('session.userId');
+  }),
 
   /**
    * @property {Boolean} isShowContentFilters
