@@ -203,6 +203,56 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Search for unit
+   *
+   * @param term the term to search
+   * @returns {Promise.<Units[]>}
+   */
+  searchUnits: function(term, params, resetPagination = false) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('searchAdapter')
+        .searchUnits(term, params, resetPagination)
+        .then(
+          function(response) {
+            resolve(
+              service.get('searchSerializer').normalizeSearchUnits(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Search for lesson
+   *
+   * @param term the term to search
+   * @returns {Promise.<Lessons[]>}
+   */
+  searchLessons: function(term, params, resetPagination = false) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('searchAdapter')
+        .searchLessons(term, params, resetPagination)
+        .then(
+          function(response) {
+            resolve(
+              service.get('searchSerializer').normalizeSearchLessons(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
    * Search for courses
    *
    * @param term the term to search

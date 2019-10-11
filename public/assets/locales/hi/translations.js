@@ -1948,7 +1948,7 @@ window.i18ln = {
   'report.external-assessment-report.wish': 'बधाई हो! आपने स्कोर किया',
   'report.external-assessment-report.reference': 'इस अतिरिक्त मूल्यांकन का उपयोग किया जा सकता है',
   'report.external-collection-report.note': 'यह एक अतिरिक्त संकलन है जिसमें संकलन के लिए छात्र रिपोर्ट किए गए स्कोर हैं। व्यक्तिगत प्रश्न स्तर का डेटा उपलब्ध नहीं है।',
-  'report.external-collection-report.wish': 'Congratulations! You scored',
+  'report.external-collection-report.wish': 'अभिनंदन! आपका स्कोर है',
   'report.external-collection-report.reference': 'इस अतिरिक्त संकलन तक पहुँचा जा सकता है',
   'report.competency-report.title': 'दक्षता रिपोर्ट',
   'report.competency-report.no-subject': 'कोई विषय निर्दिष्ट नहीं किया गया',
@@ -2122,8 +2122,8 @@ window.i18ln = {
   'report.class-weekly-report': 'कक्षा की साप्ताहिक रिपोर्ट',
   'no-teacher-found': 'इस ईमेल आईडी वाला कोई शिक्षक नहीं मिला है!',
   'oa-player.complete-confirm':
-    'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
-  'oa-player.mark-complete': 'Mark Complete',
+    'एक बार आप उसे समाप्त कर देँगे उसके बाद वो सबमीशन के लिए और परिवर्तन करने हेतु उपलब्ध नही रहेगा! <br> क्या आप आगे बढना चाहेँगे?',
+  'oa-player.mark-complete': 'समाप्त चिह्नित करेँ',
   'domain-code.G': 'ज्यामितीय आकृतियां',
   'domain-code.PN': 'पूर्व संख्या ज्ञान',
   'domain-code.PD': 'पैटर्न और आँकड़े',
@@ -2131,15 +2131,15 @@ window.i18ln = {
   'domain-code.M': 'मापन',
   'domain-code.NS': 'संख्या ज्ञान',
   'domain-code.NO': 'संख्याओं पर संक्रियाए',
-  'no.content.assoc.fw': 'Currently no content associated with this framework.',
+  'no.content.assoc.fw': 'हाल मेँ कीसी भी प्रकार का साहीत्य इस फ्रेमवर्क के साथ जुडा नही है।',
   'report.offline-activity-report.note':
-    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
-  'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey',
-  'search-by': 'Search By',
-  'common.content-owner': 'Content Owner',
+    'यह एक ओफलाइन प्रवृति है और विद्यार्थीओँ को नियमो के अनुसार ग्रेड दिए जाएँगे। व्यक्तिगत कार्य स्तर डेटा उपलब्ध नहीं है।',
+  'teacher-landing.class.student-locator': 'स्टुडंट लोकेटर/ विद्यार्थी खोज',
+  'teacher-landing.class.learning-journey': 'सीखने का सफर',
+  'search-by': 'के ध्वारा ढुँढे',
+  'common.content-owner': 'लेखक/ कंन्टेंट ओनर',
   'oa.self-grading.comment-label':
-    'Please share your thoughts on how you performed in this activity',
-  'common.your-thoughts': 'Your Thoughts',
-  'common.email.error': 'Duplicate email'
+    'आपने इस एक्टीवीटी मेँ केसा प्रदर्शन किया कृपया अपने विचार साझा करेँ।',
+  'common.your-thoughts': 'आपके विचार',
+  'common.email.error': 'डुप्लीकेट ईमेल'
 };

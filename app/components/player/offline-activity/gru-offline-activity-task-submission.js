@@ -24,6 +24,9 @@ export default Ember.Component.extend({
   // Events
   didInsertElement() {
     const component = this;
+    if (!component.get('isReadOnly')) {
+      component.setFocusCurrentTask();
+    }
     component.setDefaultProperties();
   },
 
@@ -621,5 +624,22 @@ export default Ember.Component.extend({
         })
       );
     }
+  },
+
+  /**
+   * Sets focus on last not submitted task
+   */
+
+  setFocusCurrentTask: function() {
+    const component = this;
+    const $component = this.$();
+    if (component.get('task.focus', true)) {
+      Ember.run.later(function() {
+        $component.get(0).scrollIntoView();
+        let rte = $component.find('.rich-editor');
+        rte.focus();
+      }, 1000);
+    }
   }
+  //})
 });

@@ -128,6 +128,20 @@ export default Ember.Component.extend({
    */
   source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
 
+  /**
+   *
+   */
+  isMappedWithGutCode: Ember.computed(
+    'competency.isMappedWithFramework',
+    'showGutCompetency',
+    function() {
+      return (
+        this.get('competency.isMappedWithFramework') &&
+        !this.get('showGutCompetency')
+      );
+    }
+  ),
+
   actions: {
     //Action triggered when click collection/assessment title
     onPreviewContent() {
@@ -157,15 +171,21 @@ export default Ember.Component.extend({
    */
   fetchCodes() {
     let component = this;
-    let courseId = component.get('courseId');
-    let domainId =
-      component.get('competency.isMappedWithFramework') &&
-      !component.get('showGutCompetency')
-        ? component.get('competency.fwDomainCode')
-        : component.get('domainId');
-    let subjectId = component.get('subjectId');
-    let frameworkId =
-      component.get('classFramework') || GOORU_DEFAULT_FRAMEWORK;
+    let fwCompetencyCode = component.get(
+      'competency.framework.frameworkCompetencyCode'
+    );
+    let courseId = component.get('isMappedWithGutCode')
+      ? getCourseId(fwCompetencyCode)
+      : component.get('courseId');
+    let domainId = component.get('isMappedWithGutCode')
+      ? getDomainId(fwCompetencyCode)
+      : component.get('domainId');
+    let subjectId = component.get('isMappedWithGutCode')
+      ? getSubjectId(fwCompetencyCode)
+      : component.get('subjectId');
+    let frameworkId = component.get('isMappedWithGutCode')
+      ? component.get('classFramework')
+      : GOORU_DEFAULT_FRAMEWORK;
     return Ember.RSVP.hash({
       competencyCodes: component
         .get('taxonomyService')
@@ -271,11 +291,9 @@ export default Ember.Component.extend({
    */
   filterMicroCompetency(codes) {
     let component = this;
-    let standardCode =
-      component.get('competency.isMappedWithFramework') &&
-      !component.get('showGutCompetency')
-        ? component.get('competency.framework.frameworkCompetencyCode')
-        : component.get('competency.competencyCode');
+    let standardCode = component.get('isMappedWithGutCode')
+      ? component.get('competency.framework.frameworkCompetencyCode')
+      : component.get('competency.competencyCode');
     let regex = new RegExp(standardCode);
     let microCompetencies = codes.filter(function(code) {
       return (

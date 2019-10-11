@@ -55,9 +55,9 @@ export default Ember.Component.extend({
    */
   isShowMoveVisible: Ember.computed('activityContents', function() {
     let component = this;
-    let activityTotalHitCount = component.get('activityTotalHitCount');
+    let offsetCount = component.get('offsetCount');
     let numberOfActivityContents = component.get('activityContents.length');
-    return activityTotalHitCount > numberOfActivityContents;
+    return offsetCount === numberOfActivityContents && offsetCount >= 5;
   }),
 
   // -------------------------------------------------------------------------

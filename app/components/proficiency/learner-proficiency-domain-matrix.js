@@ -649,6 +649,9 @@ export default Ember.Component.extend({
         });
         const isMappedWithFramework = !!fwCompetency;
         competency.set('isMappedWithFramework', isMappedWithFramework);
+        if (fwCompetency) {
+          competency.set('framework', fwCompetency[competency.competencyCode]);
+        }
       });
     }
     return competencies;
