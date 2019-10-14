@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import Lesson from 'gooru-web/models/content/lesson';
+import LessonPlanSerializer from 'gooru-web/serializers/content/lesson-plan';
 import LessonItem from 'gooru-web/models/content/lessonItem';
 import { DEFAULT_IMAGES, CONTENT_TYPES } from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
@@ -18,11 +19,20 @@ export default Ember.Object.extend(ConfigurationMixin, {
    */
   taxonomySerializer: null,
 
+  /**
+   * @property {LessonPlanSerializer} lessonPlanSerializer
+   */
+  lessonPlanSerializer: null,
+
   init: function() {
     this._super(...arguments);
     this.set(
       'taxonomySerializer',
       TaxonomySerializer.create(Ember.getOwner(this).ownerInjection())
+    );
+    this.set(
+      'lessonPlanSerializer',
+      LessonPlanSerializer.create(Ember.getOwner(this).ownerInjection())
     );
   },
 
@@ -59,6 +69,24 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
+    if (lessonData.lesson_plan && lessonData.lesson_plan.sessions) {
+      lessonData.lesson_plan.sessions.forEach(session => {
+        if (session.duration) {
+          session.duration = session.duration * 1000;
+        }
+        if (session.student_contents) {
+          let studentContent = [];
+          session.student_contents.map(content => {
+            let collection = lessonData.collection_summary.findBy(
+              'id',
+              content.content_id
+            );
+            studentContent.push(collection);
+          });
+          session.student_contents = studentContent;
+        }
+      });
+    }
     return Lesson.create(Ember.getOwner(this).ownerInjection(), {
       children: (function() {
         var lessonItems = [];
@@ -100,7 +128,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
       title: lessonData.title,
       taxonomy: serializer
         .get('taxonomySerializer')
-        .normalizeTaxonomyObject(lessonData.taxonomy)
+        .normalizeTaxonomyObject(lessonData.taxonomy),
+      lessonPlan: serializer
+        .get('lessonPlanSerializer')
+        .normalizeLessonPlan(lessonData.lesson_plan)
     });
   },
 

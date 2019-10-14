@@ -15,6 +15,23 @@
     <div class="oa-references-container">
       {{player/offline-activity/gru-offline-activity-references offlineActivity = offlineActivity}}
     </div>
+    <div class="task-submissions-container">
+      {{#each activityTasks as |task|}}
+        {{player/offline-activity/gru-offline-activity-task-submission
+          task=task
+          caContentId=caContentId
+          showSubmissions=true
+          showToggle=true
+          classId=classId
+          timespentInMilliSec=timespentInMilliSec
+          isStudyPlayer = isStudyPlayer
+          courseId = courseId
+          unitId = unitId
+          lessonId = lessonId
+          contentSource = contentSource
+          isReadOnly = isOaCompleted}}
+      {{/each}}
+    </div>
     <div class="offline-activity-timespent">
       <div class="timespent-info-container" {{action "onToggleTimespent"}}>
         <div class="icon-container">
@@ -41,27 +58,9 @@
         </div>
       </div>
     </div>
-    <div class="task-submissions-container">
-      {{#each activityTasks as |task|}}
-        {{player/offline-activity/gru-offline-activity-task-submission
-          task=task
-          caContentId=caContentId
-          showSubmissions=true
-          showToggle=true
-          classId=classId
-          timespentInMilliSec=timespentInMilliSec
-          isStudyPlayer = isStudyPlayer
-          courseId = courseId
-          unitId = unitId
-          lessonId = lessonId
-          contentSource = contentSource
-          isReadOnly = isOaCompleted}}
-      {{/each}}
-    </div>
     <div class="complete-submission-container {{if isShowCompletionConfirmation 'hidden'}} {{unless isEnableCompletionButton 'disable-event'}}">
       <div class="complete-submit-btn" {{action "onShowCompletionConfirmation"}}>{{t 'oa-player.mark-complete'}}</div>
     </div>
-
     {{#if isShowCompletionConfirmation}}
       <div class="completion-confirmation-popup">
         <div class="info-container">

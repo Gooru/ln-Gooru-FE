@@ -90,16 +90,32 @@
   .panel-header {
     padding: 16px;
     border-bottom: solid 1px #979797;
-
-    .subject-name {
-      font-size: 25px;
-      color: #1aa9eb;
-      line-height: 1;
+    display: grid;
+    grid-template-columns: auto auto;
+    .data-model-selector {
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: auto auto auto;
+      justify-content: center;
+      align-items: center;
+      column-gap: 4px;
+      opacity: 0.8;
+      .active {
+        color: #000;
+        opacity: 1;
+      }
     }
+    .proficiency-selector {
+      .subject-name {
+        font-size: 25px;
+        color: #1aa9eb;
+        line-height: 1;
+      }
 
-    .framework-title {
-      font-weight: bold;
-      font-size: 14px;
+      .framework-title {
+        font-weight: bold;
+        font-size: 14px;
+      }
     }
   }
 }

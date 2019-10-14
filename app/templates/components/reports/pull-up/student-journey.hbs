@@ -1,5 +1,28 @@
 <div class="heading">{{t (if isStudent 'student-journey.heading' 'student-journey.teacher-heading')}}</div>
-<div class="collections-accordion">
+<div class="portfolio-contents-container">
+  {{portfolio/gru-contents-panel
+    contentType = 'offline-activity'
+    userId = userId
+    competency = competency
+    isDisableFilter = true
+    isExpanded = true}}
+
+  {{portfolio/gru-contents-panel
+    contentType = 'collection'
+    userId = userId
+    competency = competency
+    isDisableFilter = true
+    isExpanded = false}}
+
+  {{portfolio/gru-contents-panel
+    contentType = 'assessment'
+    userId = userId
+    competency = competency
+    isDisableFilter = true
+    isExpanded = false}}
+</div>
+<!-- NOTE retaining this container until move things to prod -->
+<div class="collections-accordion out-of-scope">
   {{#if collectionPerformances}}
     {{#each collectionPerformances as |collectionPerformance|}}
       <div class="collection-panel {{if (and (eq collectionPerformance.collectionType 'offline-activity') (eq collectionPerformance.contentSource DAILY_CLASS)) 'disable-event'}}">

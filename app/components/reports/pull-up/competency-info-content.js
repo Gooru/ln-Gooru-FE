@@ -9,7 +9,10 @@ export default Ember.Component.extend({
    * @property {String} selectedItem
    * Property to store selected item
    */
-  selectedItem: 'journey',
+  selectedItem: Ember.computed('userId', function() {
+    const component = this;
+    return component.get('userId') ? 'journey' : 'metadata';
+  }),
 
   actions: {
     selectItem(item) {

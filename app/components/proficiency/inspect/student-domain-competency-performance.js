@@ -48,18 +48,19 @@ export default Ember.Component.extend({
     },
 
     //Action triggered when select a competency
-    onSelectCompetency(competency, studentId) {
-      let component = this;
+    onSelectStudentCompetency(competency, studentId) {
+      const component = this;
       component.set('selectedCompetency', competency);
       component.set('selectedStudentUserId', studentId);
       component.set('isShowCompetencyContentReport', true);
     },
 
-    onShowCompetencyInfo(competency) {
+    onSelectCompetency(competency) {
       const component = this;
+      competency.domainCode = component.get('activeDomain.domainCode');
+      competency.domainName = component.get('activeDomain.domainName');
       component.set('selectedCompetencyForSuggestion', competency);
-      component.fetchLearningMapsContent(competency.competencyCode);
-      component.set('showPullOut', true);
+      component.set('showCompetencyInfo', true);
     },
 
     onClosePullOut() {
@@ -97,6 +98,11 @@ export default Ember.Component.extend({
         'selectedCompetencyForSuggestion.competencyCode'
       );
       component.suggestContent(collection, collectionType, competencyCode);
+    },
+
+    onClosePullUp() {
+      const component = this;
+      component.set('showCompetencyInfo', false);
     }
   },
 
@@ -111,7 +117,7 @@ export default Ember.Component.extend({
   /**
    * @property {String} classId
    */
-  classId: null,
+  classId: Ember.computed.alias('class.id'),
 
   /**
    * @property {Array} studentsSelectedForSuggest
@@ -188,6 +194,10 @@ export default Ember.Component.extend({
         competencies: doaminCompetencies.competencies
       });
     }
+  ),
+
+  domainCompetencies: Ember.computed.alias(
+    'activeDomainCompetencyPerformance.domainData.competencies'
   ),
 
   /**
@@ -272,6 +282,8 @@ export default Ember.Component.extend({
       let competencies = Ember.A([]);
       domainData.competencies.map(competency => {
         let competencyData = {
+          domainCode: domainData.domainCode,
+          domainName: domainData.domainName,
           competencyCode: competency.competencyCode,
           competencySeq: competency.competencySeq,
           competencyName: competency.competencyName,

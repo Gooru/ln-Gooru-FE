@@ -137,9 +137,23 @@ export default Ember.Component.extend({
    */
   students: Ember.computed('student', function() {
     const component = this;
-    let student = component.get('student');
-    return [student];
+    const studentListForSuggestion = component.get('studentListForSuggestion');
+    let students = studentListForSuggestion
+      ? studentListForSuggestion
+      : [component.get('student')];
+    return students;
   }),
+
+  isMappedWithGutCode: Ember.computed(
+    'competency.isMappedWithFramework',
+    'showGutCompetency',
+    function() {
+      return (
+        this.get('competency.isMappedWithFramework') &&
+        !this.get('showGutCompetency')
+      );
+    }
+  ),
 
   actions: {
     onSuggestContent(collection, collectionType) {
@@ -169,11 +183,12 @@ export default Ember.Component.extend({
     },
 
     //Action triggered when click collection/assessment title
-    onPreviewContent() {
+    onPreviewContent(content) {
       const component = this;
-      let collection = component.get('signatureContent.collection');
-      component.set('previewContent', collection);
-      component.set('previewContentType', component.get('collectionType'));
+      const collectionType =
+        content.get('suggestedContentType') || component.get('collectionType');
+      component.set('previewContent', content.get('collection'));
+      component.set('previewContentType', collectionType);
       component.set('isShowContentPreview', true);
     }
   },
@@ -188,7 +203,9 @@ export default Ember.Component.extend({
     let component = this;
     component.fetchLearningMapsContent();
     component.fetchCodes();
-    component.fetchTeacherSuggestions();
+    if (component.get('userId')) {
+      component.fetchTeacherSuggestions();
+    }
   },
 
   didRender() {
@@ -204,15 +221,21 @@ export default Ember.Component.extend({
    */
   fetchCodes() {
     let component = this;
-    let courseId = component.get('courseId');
-    let domainId =
-      component.get('competency.isMappedWithFramework') &&
-      !component.get('showGutCompetency')
-        ? component.get('competency.fwDomainCode')
-        : component.get('domainId');
-    let subjectId = component.get('subjectId');
-    let frameworkId =
-      component.get('classFramework') || GOORU_DEFAULT_FRAMEWORK;
+    let fwCompetencyCode = component.get(
+      'competency.framework.frameworkCompetencyCode'
+    );
+    let courseId = component.get('isMappedWithGutCode')
+      ? getCourseId(fwCompetencyCode)
+      : component.get('courseId');
+    let domainId = component.get('isMappedWithGutCode')
+      ? getDomainId(fwCompetencyCode)
+      : component.get('domainId');
+    let subjectId = component.get('isMappedWithGutCode')
+      ? getSubjectId(fwCompetencyCode)
+      : component.get('subjectId');
+    let frameworkId = component.get('isMappedWithGutCode')
+      ? component.get('classFramework')
+      : GOORU_DEFAULT_FRAMEWORK;
     return Ember.RSVP.hash({
       competencyCodes: component
         .get('taxonomyService')
@@ -241,22 +264,27 @@ export default Ember.Component.extend({
         filters
       )
     }).then(({ learningMapData }) => {
-      component.set('learningMapData', learningMapData);
-      component.checkPrerequisiteCompetencyStatus(
-        learningMapData.prerequisites
-      );
-      let signatureContentList = learningMapData.signatureContents;
-      let showSignatureAssessment =
-        component.get('showSignatureAssessment') &&
-        signatureContentList.assessments.length > 0;
-      component.set('showSignatureAssessment', showSignatureAssessment);
-      let signatureContent = showSignatureAssessment
-        ? signatureContentList.assessments
-        : signatureContentList.collections;
-      let content = signatureContent.objectAt(0);
-      if (content) {
-        component.set('signatureContent', Ember.Object.create(content));
-        component.fetchContentSettings(content.id);
+      if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
+        component.set('learningMapData', learningMapData);
+        component.checkPrerequisiteCompetencyStatus(
+          learningMapData.prerequisites
+        );
+        let signatureContentList = learningMapData.signatureContents;
+        let showSignatureAssessment =
+          component.get('showSignatureAssessment') &&
+          signatureContentList.assessments.length > 0;
+        component.set('showSignatureAssessment', showSignatureAssessment);
+        let signatureContent = showSignatureAssessment
+          ? signatureContentList.assessments
+          : signatureContentList.collections;
+        let content = signatureContent.objectAt(0);
+        if (!component.get('userId')) {
+          component.set('isLoading', false);
+        }
+        if (content) {
+          component.set('signatureContent', Ember.Object.create(content));
+          component.fetchContentSettings(content.id);
+        }
       }
     });
   },
@@ -314,11 +342,9 @@ export default Ember.Component.extend({
    */
   filterMicroCompetency(codes) {
     let component = this;
-    let standardCode =
-      component.get('competency.isMappedWithFramework') &&
-      !component.get('showGutCompetency')
-        ? component.get('competency.framework.frameworkCompetencyCode')
-        : component.get('competency.competencyCode');
+    let standardCode = component.get('isMappedWithGutCode')
+      ? component.get('competency.framework.frameworkCompetencyCode')
+      : component.get('competency.competencyCode');
     let regex = new RegExp(standardCode);
     let microCompetencies = codes.filter(function(code) {
       return (

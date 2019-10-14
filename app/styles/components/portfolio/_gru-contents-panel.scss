@@ -3,7 +3,7 @@
     position: relative;
     .header-container {
       display: grid;
-      grid-template-columns: 30px auto 1fr;
+      grid-template-columns: auto auto;
       column-gap: 8px;
       height: 48px;
       line-height: 48px;
@@ -11,41 +11,49 @@
       border-bottom: 1px solid;
       padding: 0 15px;
       background-color: rgba(83, 94, 103, 0.9);
-      .icon {
-        width: 30px;
-        height: 48px;
-        background-size: 30px;
-        background-repeat: no-repeat;
-        background-position: center;
+      cursor: pointer;
+      .panel-info-container {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: left;
+        column-gap: 5px;
+        .icon {
+          width: 30px;
+          height: 48px;
+          background-size: 30px;
+          background-repeat: no-repeat;
+          background-position: center;
 
-        &.assessment {
-          background-image: url(gooru/images/assessment-white.svg);
-          background-size: 28px;
-        }
+          &.assessment {
+            background-image: url(gooru/images/assessment-white.svg);
+            background-size: 25px;
+          }
 
-        &.collection {
-          background-image: url(gooru/images/collection-white.svg);
-          background-size: 28px;
-        }
+          &.collection {
+            background-image: url(gooru/images/collection-white.svg);
+            background-size: 25px;
+          }
 
-        &.offline-activity {
-          background-image: url(gooru/images/offline-white.svg);
+          &.offline-activity {
+            background-image: url(gooru/images/offline-white.svg);
+          }
         }
-      }
-      .title {
-        color: $white;
-        font-size: 14px;
-        font-weight: bold;
+        .title {
+          color: $white;
+          font-size: 14px;
+          font-weight: bold;
+        }
       }
       .search-items-container {
         display: grid;
         grid-template-columns: auto auto;
         justify-self: right;
-        .filter-search {
+        .filter-search,
+        .toggle-panel {
           height: 55px;
           cursor: pointer;
           transition: transform 1s;
-          i.filter_list {
+          i {
             color: $white;
             line-height: 55px;
           }
@@ -61,6 +69,7 @@
       background-color: rgb(83, 94, 103);
       max-height: 325px;
       overflow-y: auto;
+      display: none;
 
       .type-level-container {
         .sub-type-label {
@@ -82,6 +91,17 @@
         top: 50%;
         left: 44%;
       }
+
+      &::-webkit-scrollbar {
+        height: 6px;
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $gray-light;
+        border: 1px solid $gray-light;
+        border-radius: 5px;
+      }
     }
     .portfolio.gru-content-filters {
       top: 48px;
@@ -96,6 +116,14 @@
       }
       .body-container {
         opacity: 0.2;
+      }
+    }
+  }
+
+  &.expanded-panel {
+    .portfolio-contents-container {
+      .body-container {
+        display: block;
       }
     }
   }

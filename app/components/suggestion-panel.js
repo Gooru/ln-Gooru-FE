@@ -20,6 +20,30 @@ export default Ember.Component.extend({
     onSuggestContent(content, collectionType) {
       const component = this;
       component.sendAction('onSuggestContent', content, collectionType);
+    },
+
+    onPreviewContent() {
+      const component = this;
+      component.sendAction('onPreviewContent', this.content);
+    },
+
+    playContent() {
+      const component = this;
+      const content = component.get('content');
+      const contentId = content.get('collection.id');
+      let queryParams = {
+        collectionId: contentId,
+        role: 'student',
+        source: component.get('source'),
+        type: component.get('collectionType')
+      };
+      if (component.get('isTeacherSuggestion')) {
+        queryParams.pathId = content.id;
+        queryParams.pathType = 'proficiency.teacher';
+      }
+      component.get('router').transitionTo('player', contentId, {
+        queryParams
+      });
     }
   }
 });

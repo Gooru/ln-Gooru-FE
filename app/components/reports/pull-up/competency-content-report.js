@@ -41,7 +41,25 @@ export default Ember.Component.extend({
   actions: {
     onConfirmSuggest(collection, collectionType, competencyCode) {
       const component = this;
-      component.suggestContent(collection, collectionType, competencyCode);
+      const studentList = component.get('studentListForSuggestion');
+      if (studentList && studentList.length) {
+        studentList.map(student => {
+          component.suggestContent(
+            student.userId,
+            collection,
+            collectionType,
+            competencyCode
+          );
+        });
+      } else {
+        const userId = component.get('userId');
+        component.suggestContent(
+          userId,
+          collection,
+          collectionType,
+          competencyCode
+        );
+      }
     }
   },
 
@@ -53,12 +71,15 @@ export default Ember.Component.extend({
    * Method to load individual competency performance of the user
    */
   loadCompetencyPerformanceData() {
-    let component = this;
-    return Ember.RSVP.hash({
-      collectionPerformances: component.fetchUserCompetencyPerformance()
-    }).then(({ collectionPerformances }) => {
-      component.set('collectionPerformances', collectionPerformances);
-    });
+    const component = this;
+    const userId = component.get('userId');
+    if (userId) {
+      return Ember.RSVP.hash({
+        collectionPerformances: component.fetchUserCompetencyPerformance()
+      }).then(({ collectionPerformances }) => {
+        component.set('collectionPerformances', collectionPerformances);
+      });
+    }
   },
 
   /**
@@ -66,10 +87,10 @@ export default Ember.Component.extend({
    * Method to fetch competency performance of an user
    */
   fetchUserCompetencyPerformance() {
-    let component = this;
-    let competencyService = component.get('competencyService');
-    let userId = component.get('userId');
-    let competencyCode = component.get('competency.competencyCode');
+    const component = this;
+    const userId = component.get('userId');
+    const competencyService = component.get('competencyService');
+    const competencyCode = component.get('competency.competencyCode');
     return new Ember.RSVP.resolve(
       competencyService.getUserPerformanceCompetencyCollections(
         userId,
@@ -78,10 +99,10 @@ export default Ember.Component.extend({
     );
   },
 
-  suggestContent(collection, collectionType, competencyCode) {
+  suggestContent(userId, collection, collectionType, competencyCode) {
     const component = this;
     let contextParams = {
-      user_id: component.get('userId'),
+      user_id: userId,
       class_id: component.get('classId'),
       suggested_content_id: collection.get('id'),
       suggestion_origin: 'teacher',

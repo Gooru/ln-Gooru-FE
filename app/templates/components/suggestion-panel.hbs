@@ -13,11 +13,9 @@
         {{/if}}
       </div>
       {{#if isStudent}}
-        {{#link-to 'player' content.collection.id (query-params type=collectionType role='student' source=source pathId=content.id pathType='proficiency.teacher') target="_blank"}}
-          <div class="action">
-            {{gru-icon name='play_arrow'}}
-          </div>
-        {{/link-to}}
+        <div class="action" {{action 'playContent'}}>
+          {{gru-icon name='play_arrow'}}
+        </div>
       {{/if}}
       {{#if isStudent}}
         <span class="suggestion-icon">

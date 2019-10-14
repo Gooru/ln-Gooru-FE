@@ -2806,5 +2806,17 @@ window.i18ln = {
   'oa.self-grading.comment-label':
     'Please share your thoughts on how you performed in this activity',
   'common.your-thoughts': 'Your Thoughts',
-  'common.email.error': 'Duplicate email'
+  'common.lesson-plan': 'Lesson Plan',
+  'lesson-plan.sessions': 'sessions',
+  'common.session': 'Session',
+  'prior-knowledge': 'Prior Knowledge',
+  'guiding-question': 'Guiding Questions',
+  'anticipated-struggle': 'Aniticipated Struggles',
+  'teacher-resource': 'Teacher Resources',
+  'content.anticipated-struggles':
+    'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
+  'common.no-lesson-plan-info-message':
+    'This lesson does have any lesson plan.',
+  'common.email.error': 'Duplicate email',
+  'student-resource': 'Student Resources'
 };

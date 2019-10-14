@@ -8,7 +8,11 @@ moduleForComponent(
   'Unit | Model | content/question',
   {
     unit: true,
-    needs: ['validator:presence', 'validator:presence-html']
+    needs: [
+      'validator:presence',
+      'validator:presence-html',
+      'validator:square-bracket'
+    ]
   }
 );
 

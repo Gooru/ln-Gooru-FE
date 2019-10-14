@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['teacher-class-milestone-course-map'],
+  classNames: ['teacher-class-milestone-course-map-lesson-plan'],
 
   // -------------------------------------------------------------------------
   // Dependencies
@@ -142,7 +142,6 @@ export default Ember.Component.extend({
 
   init: function() {
     this._super(...arguments);
-
     this.set(
       'currentLocationSerializer',
       CurrentLocationSerializer.create(Ember.getOwner(this).ownerInjection())
@@ -174,107 +173,51 @@ export default Ember.Component.extend({
       );
     },
 
-    /**
-     * Send action to preview collection
+    /**sessionIndexsessionIndex
+     * Toggle lesson plan accordion
      */
-    openCollectionPreview(unitId, lessonId, collection) {
-      this.sendAction('onPreviewContent', unitId, lessonId, collection);
-    },
-
-    /**
-     * @function goLive
-     */
-    goLive: function(collection) {
-      let options = {
-        collectionId: collection.get('id'),
-        collectionType: collection.get('collectionType')
-      };
-      this.sendAction('onGoLive', options);
-    },
-
-    //Action triggered when click on milestone performance
-    onOpenMilestoneReport(milestone) {
-      const component = this;
-      const milestoneReportContext = {
-        classId: component.get('classId'),
-        courseId: component.get('courseId'),
-        unitId: milestone.get('milestone_id'),
-        milestoneId: milestone.get('milestone_id'),
-        unit: milestone,
-        units: component.get('milestones'),
-        classMembers: component.get('classMembers')
-      };
-      component.sendAction(
-        'onOpenTeacherMilestoneReport',
-        milestoneReportContext
-      );
-    },
-
-    onOpenLessonReport(milestone, lesson) {
-      const component = this;
-      const lessonReportContext = {
-        classId: component.get('classId'),
-        courseId: component.get('courseId'),
-        lesson,
-        unit: milestone,
-        unitId: lesson.get('unit_id'),
-        lessonId: lesson.get('lesson_id'),
-        classMembers: component.get('classMembers'),
-        lessons: milestone.get('lessons')
-      };
-      component.sendAction(
-        'onOpenTeacherMilestoneLessonReport',
-        lessonReportContext
-      );
-    },
-
-    onOpenCollectionReport(milestone, lesson, collection) {
-      const component = this;
-      let collectionReportContext = {
-        classId: component.get('classId'),
-        courseId: component.get('courseId'),
-        unitId: lesson.get('unit_id'),
-        lessonId: lesson.get('lesson_id'),
-        lessonModel: lesson,
-        unitModel: milestone,
-        collections: lesson.get('collections'),
-        classMembers: component.get('classMembers'),
-        collection
-      };
-      collectionReportContext.unitModel.id = lesson.get('unit_id');
-      collectionReportContext.lessonModel.id = lesson.get('lesson_id');
-      component.sendAction(
-        'onOpenTeacherMilestoneCollectionReport',
-        collectionReportContext
-      );
-    },
-
-    //Action triggered when click on collection performance
-    onShowStudentMilestoneCollectionReport(lesson, collection) {
-      const component = this;
-      let studentCollectionReportContext = {
-        userId: component.get('userId'),
-        classId: component.get('classId'),
-        courseId: component.get('courseId'),
-        unitId: lesson.get('unit_id'),
-        lessonId: lesson.get('lesson_id'),
-        collectionId: collection.get('id'),
-        type: collection.get('format'),
-        lesson,
-        isStudent: true,
-        isTeacher: false,
-        collection
-      };
-      let reportType = collection.get('format');
-      if (reportType === 'assessment-external') {
-        component.set('isShowStudentExternalAssessmentReport', true);
+    toggleLessonPlanItems(milestoneId, lessonId, lesson) {
+      let component = this;
+      let selectedElement = `#lesson-plan-${milestoneId}-${lessonId}-${lesson.id}`;
+      if (lesson.isActive) {
+        component.$(selectedElement).slideUp(400, function() {
+          lesson.isActive = false;
+        });
       } else {
-        component.set('isShowStudentCollectionReport', true);
+        component.$(selectedElement).slideDown(400, function() {
+          lesson.isActive = true;
+        });
       }
-      component.set(
-        'studentCollectionReportContext',
-        studentCollectionReportContext
-      );
+    },
+
+    toggleLessonPlanType(milestoneId, lessonId, titleName) {
+      let component = this;
+      let selectedElement = `#lesson-plan-${milestoneId}-${lessonId}-${titleName}`;
+      let isActive = $(selectedElement).hasClass('active');
+      if (!isActive) {
+        component
+          .$(selectedElement)
+          .addClass('active')
+          .slideDown(400);
+      } else {
+        component
+          .$(selectedElement)
+          .removeClass('active')
+          .slideUp(400);
+      }
+    },
+    toggleSessionCollection(milestoneId, lessonId, lesson, sessionIndex) {
+      let component = this;
+      let selectedElement = `#session-collection-${milestoneId}-${lessonId}-${lesson.id}-session-${sessionIndex}`;
+      if (lesson.isSessionActive) {
+        component.$(selectedElement).slideUp(400, function() {
+          lesson.isSessionActive = false;
+        });
+      } else {
+        component.$(selectedElement).slideDown(400, function() {
+          lesson.isSessionActive = true;
+        });
+      }
     }
   },
 
@@ -284,27 +227,12 @@ export default Ember.Component.extend({
   /**
    * Function to triggered once when the component element is first rendered.
    */
-  notInit: null,
   didInsertElement() {
     const component = this;
     component.loadData();
-    this.set('notInit', true);
     let activeMilestone = component.get('activeMilestone');
     if (activeMilestone) {
       component.send('toggleMilestoneItems', activeMilestone);
-    }
-  },
-
-  didUpdateAttrs() {
-    this._super(...arguments);
-    const component = this;
-    let customLocationPresent = component.get('location');
-
-    if (customLocationPresent && this.get('notInit') === true) {
-      Ember.run.later(function() {
-        component.navigateLocation();
-        component.set('isLoading', false);
-      }, 5000);
     }
   },
 
@@ -495,87 +423,6 @@ export default Ember.Component.extend({
     });
   },
 
-  fetchCollectionPerformance(lesson, collections) {
-    let component = this;
-    let classId = component.get('classId');
-    let courseId = component.get('courseId');
-    let unitId = lesson.get('unit_id');
-    let lessonId = lesson.get('lesson_id');
-    let performanceService = component.get('performanceService');
-
-    Ember.RSVP.hash({
-      performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
-        classId,
-        courseId,
-        unitId,
-        lessonId,
-        CONTENT_TYPES.ASSESSMENT,
-        undefined
-      ),
-      performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
-        classId,
-        courseId,
-        unitId,
-        lessonId,
-        CONTENT_TYPES.COLLECTION,
-        undefined
-      )
-    }).then(({ performanceAssessment, performanceCollection }) => {
-      let collectionsPerformance = performanceAssessment.concat(
-        performanceCollection
-      );
-      collections.forEach((collection, index) => {
-        let collectionPerformances = collectionsPerformance.filterBy(
-          'collectionId',
-          collection.get('id')
-        );
-        collection.set(
-          'performance',
-          Ember.Object.create({
-            scoreInPercentage: null,
-            score: null,
-            timeSpent: null,
-            hasStarted: false
-          })
-        );
-        let isAssessment =
-          collection.get('format') === CONTENT_TYPES.ASSESSMENT ||
-          collection.get('format') === CONTENT_TYPES.EXTERNAL_ASSESSMENT;
-        let isOfflineActivity =
-          collection.get('format') === CONTENT_TYPES.OFFLINE_ACTIVITY;
-        collection.set('isAssessment', isAssessment);
-        collection.set('isOfflineActivity', isOfflineActivity);
-        collection.set('sequence', index + 1);
-        if (collectionPerformances.length) {
-          let numberOfSubmissions = component.findNumberOfStudentsByItem(
-            collectionPerformances,
-            'collectionId',
-            collection.get('id'),
-            'userUid'
-          );
-          collection.set('numberOfSubmissions', numberOfSubmissions);
-          let collectionAggregatedScore =
-            isAssessment || isOfflineActivity
-              ? aggregateMilestonePerformanceScore(collectionPerformances)
-              : null;
-          let collectionAggregatedTimeSpent = aggregateMilestonePerformanceTimeSpent(
-            collectionPerformances
-          );
-          collection.set(
-            'performance.scoreInPercentage',
-            collectionAggregatedScore
-          );
-          collection.set('performance.score', collectionAggregatedScore);
-          collection.set(
-            'performance.timeSpent',
-            collectionAggregatedTimeSpent
-          );
-          collection.set('performance.hasStarted', true);
-        }
-      });
-    });
-  },
-
   setMilestoneCollectionPerformanceData(
     collections,
     lessonCollectionsPerformance
@@ -650,15 +497,91 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+   * Study material collection performance
+   */
+
+  fetchCollectionPerformance(lesson, collections) {
+    let component = this;
+    let classId = component.get('classId');
+    let courseId = component.get('courseId');
+    let unitId = lesson.get('unit_id');
+    let lessonId = lesson.get('lesson_id');
+    let performanceService = component.get('performanceService');
+
+    Ember.RSVP.hash({
+      performanceAssessment: performanceService.getCollectionsPerformanceByLessonId(
+        classId,
+        courseId,
+        unitId,
+        lessonId,
+        CONTENT_TYPES.ASSESSMENT,
+        undefined
+      ),
+      performanceCollection: performanceService.getCollectionsPerformanceByLessonId(
+        classId,
+        courseId,
+        unitId,
+        lessonId,
+        CONTENT_TYPES.COLLECTION,
+        undefined
+      )
+    }).then(({ performanceAssessment, performanceCollection }) => {
+      let collectionsPerformance = performanceAssessment.concat(
+        performanceCollection
+      );
+      collections.forEach((collection, index) => {
+        let collectionPerformances = collectionsPerformance.filterBy(
+          'collectionId',
+          collection.content_id
+        );
+        collection.performance = Ember.Object.create({
+          scoreInPercentage: null,
+          score: null,
+          timeSpent: null,
+          hasStarted: false
+        });
+        let isAssessment =
+          collection.content_format === CONTENT_TYPES.ASSESSMENT ||
+          collection.content_format === CONTENT_TYPES.EXTERNAL_ASSESSMENT;
+        let isOfflineActivity =
+          collection.content_format === CONTENT_TYPES.OFFLINE_ACTIVITY;
+        collection.isAssessment = isAssessment;
+        collection.isOfflineActivity = isOfflineActivity;
+        collection.sequence = index + 1;
+        if (collectionPerformances.length) {
+          let numberOfSubmissions = component.findNumberOfStudentsByItem(
+            collectionPerformances,
+            'collectionId',
+            collection.content_id,
+            'userUid'
+          );
+          collection.numberOfSubmissions = numberOfSubmissions;
+          let collectionAggregatedScore =
+            isAssessment || isOfflineActivity
+              ? aggregateMilestonePerformanceScore(collectionPerformances)
+              : null;
+          let collectionAggregatedTimeSpent = aggregateMilestonePerformanceTimeSpent(
+            collectionPerformances
+          );
+          collection.performance.scoreInPercentage = collectionAggregatedScore;
+
+          collection.performance.score = collectionAggregatedScore;
+          collection.performance.timeSpent = collectionAggregatedTimeSpent;
+          collection.performance.hasStarted = true;
+        }
+      });
+    });
+  },
+
   handleMilestoneLessonToggle(milestone, lessons, selectedLesson, lessonIndex) {
     let component = this;
     let classId = component.get('classId');
     let unitId = selectedLesson.get('unit_id');
     let lessonId = selectedLesson.get('lesson_id');
     let milestoneId = milestone.get('milestone_id');
-    let element = `#milestone-lesson-${milestoneId}-${lessonId}-${lessonIndex}`;
     let showPerformance = component.get('showPerformance');
-    let locateLastPlayedItem = component.get('locateLastPlayedItem');
+    let element = `#milestone-lesson-${milestoneId}-${lessonId}-${lessonIndex}`;
     let courseId = component.get('courseId');
     let selectedLessonIndex = lessons.indexOf(selectedLesson);
     let prevLesson = lessons.objectAt(selectedLessonIndex + 1);
@@ -689,88 +612,29 @@ export default Ember.Component.extend({
         });
       }
     }
-    if (!selectedLesson.get('hasCollectionFetched')) {
+    if (!selectedLesson.get('hasLessonPlanFetched')) {
       component
         .get('courseMapService')
         .getLessonInfo(classId, courseId, unitId, lessonId, true)
         .then(lesson => {
           if (!component.isDestroyed) {
-            let collections = lesson.get('children');
-            component.updateSuggestionDetails(
-              lessons,
-              selectedLesson,
-              collections
-            );
-            selectedLesson.set('collections', collections);
-            selectedLesson.set('hasCollectionFetched', true);
-
-            let userCurrentLocation = component.get('userCurrentLocation');
-            if (locateLastPlayedItem && userCurrentLocation) {
-              let collectionId = userCurrentLocation.get('collectionId');
-              let selectedCollection = collections.findBy('id', collectionId);
-              if (selectedCollection) {
-                selectedCollection.set('last-played-collection', true);
-              }
+            let lessonPlan = lesson.get('lessonPlan');
+            if (lessonPlan.sessions) {
+              lessonPlan.sessions.forEach(session => {
+                if (session.student_contents) {
+                  if (showPerformance) {
+                    component.fetchCollectionPerformance(
+                      selectedLesson,
+                      session.student_contents
+                    );
+                  }
+                }
+              });
             }
-            if (showPerformance) {
-              component.fetchCollectionPerformance(selectedLesson, collections);
-            }
+            selectedLesson.set('lessonPlans', lessonPlan);
+            selectedLesson.set('hasLessonPlanFetched', true);
           }
         });
-    }
-  },
-
-  updateSuggestionDetails(lessons, selectedLesson, collections) {
-    let collectionSuggestions = collections.filter(collection => {
-      let pathType = collection.get('pathType');
-      return pathType === 'system' || pathType === 'teacher';
-    });
-    if (collectionSuggestions.length > 0) {
-      collectionSuggestions.forEach(collectionSuggestion => {
-        let indexOfCollection = collections.indexOf(collectionSuggestion);
-        if (indexOfCollection === 0) {
-          selectedLesson.set(
-            'firstCollHasSuggsType',
-            collectionSuggestion.get('pathType')
-          );
-        }
-        if (collections.length === indexOfCollection + 1) {
-          let selectedLessonIndex = lessons.indexOf(selectedLesson);
-          let nextLesson = lessons.objectAt(selectedLessonIndex + 1);
-          if (nextLesson) {
-            nextLesson.set(
-              'prevLeCollHasSuggsType',
-              collectionSuggestion.get('pathType')
-            );
-          }
-        }
-        let prevCollection = collections.objectAt(indexOfCollection - 1);
-        if (prevCollection) {
-          if (prevCollection.get('pathId') > 0) {
-            collectionSuggestion.set(
-              'prevCollHasSuggsType',
-              prevCollection.get('pathType')
-            );
-          }
-          prevCollection.set(
-            'nextCollHasSuggsType',
-            collectionSuggestion.get('pathType')
-          );
-        }
-        let nextCollection = collections.objectAt(indexOfCollection + 1);
-        if (nextCollection) {
-          if (nextCollection.get('pathId') > 0) {
-            collectionSuggestion.set(
-              'nextCollHasSuggsType',
-              nextCollection.get('pathType')
-            );
-          }
-          nextCollection.set(
-            'prevCollHasSuggsType',
-            collectionSuggestion.get('pathType')
-          );
-        }
-      });
     }
   },
 

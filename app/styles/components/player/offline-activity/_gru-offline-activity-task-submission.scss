@@ -290,6 +290,9 @@
                 }
               }
             }
+            @media screen and (max-width: $screen-xs) {
+              grid-template-columns: 50px 1fr 30px;
+            }
           }
         }
 
@@ -331,6 +334,10 @@
                 background-color: $white;
               }
             }
+          }
+          @media screen and (max-width: $screen-xs) {
+            grid-row-start: 4;
+            grid-column-start: 2;
           }
         }
       }
