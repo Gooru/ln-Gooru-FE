@@ -2798,5 +2798,21 @@ window.i18ln = {
   'common.no-lesson-plan-info-message':
     'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
-  'student-resource': 'Student Resources'
+  'student-resource': 'Student Resources',
+  'common.activity': 'Activity Title',
+  'content.oa.reference.uploaded': 'Uploaded',
+  'content.oa.reference.image': 'Image',
+  'content.oa.reference.pdf': 'Pdf',
+  'content.oa.reference.presentation': 'Presentation',
+  'content.oa.reference.document': 'Document',
+  'content.oa.reference.others': 'Others',
+  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.OA-info':
+    'The activities listed here <b>do not</b> belong to another lesson or course',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'Select a activity to add to this lesson.',
+  'gru-share-pop-over.share-OA': 'Offline Activity',
+  'gru-suggest-test.pre-tessignaturet-lead':
+    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
+  'common.choose-lang': 'Choose Language'
 };
