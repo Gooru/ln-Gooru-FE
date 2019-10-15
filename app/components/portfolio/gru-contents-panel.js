@@ -65,6 +65,13 @@ export default Ember.Component.extend({
     onToggleContainer() {
       const component = this;
       component.$('.body-container').slideToggle();
+    },
+
+    onShowActivityReport(activity) {
+      const component = this;
+      component.set('reportActivityId', activity.get('id'));
+      component.set('reportActivityType', activity.get('type'));
+      component.set('isShowPortfolioActivityReport', true);
     }
   },
 

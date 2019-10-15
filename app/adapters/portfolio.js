@@ -25,6 +25,34 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  getAllAttemptsByItem(requestParams) {
+    const adapter = this;
+    const namespace = adapter.get('portfolioNamespace');
+    const url = `${namespace}/content/portfolio/item`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: requestParams
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  getActivityPerformanceBySession(requestParams, contentType = 'collection') {
+    const adapter = this;
+    const namespace = adapter.get('portfolioNamespace');
+    const url = `${namespace}/content/portfolio/${contentType}/summary`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: requestParams
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`
