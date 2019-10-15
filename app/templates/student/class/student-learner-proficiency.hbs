@@ -81,11 +81,22 @@
             competency=selectedCompetency
             studentId=studentProfile.id
             domainCompetencyList=domainCompetencyList
+            isOpenPlayer=isOpenPlayer
+            playerUrl=playerUrl
+            playerContent=playerContent
           }}
         {{/proficiency/proficiency-subject-panel}}
       {{/if}}
     </div>
   </div>
+  {{#if isOpenPlayer}}
+    {{reports/pull-up/open-player-pull-up
+      showPullUp=isOpenPlayer
+      playerUrl=playerUrl
+      playerContent=playerContent
+      onclosePullUp="closePullUp"
+    }}
+  {{/if}}
 {{else}}
   <div class="no-course-content">{{t 'student-landing.no-course-assigned'}}</div>
 {{/if}}

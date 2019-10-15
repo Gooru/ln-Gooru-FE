@@ -136,6 +136,25 @@ export default Ember.Component.extend({
       component.set('previewContent', collection);
       component.set('previewContentType', component.get('collectionType'));
       component.set('isShowContentPreview', true);
+    },
+
+    openPlayerPullup() {
+      const component = this;
+      let content = component.get('signatureContent');
+      let contentId = content.id;
+      let collectionType = component.get('collectionType');
+      let queryParams = {
+        role: 'student',
+        source: component.get('source'),
+        type: collectionType,
+        isIframeMode: true
+      };
+      component.set(
+        'playerUrl',
+        component.get('router').generate('player', contentId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', content);
     }
   },
 

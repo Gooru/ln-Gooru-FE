@@ -37,6 +37,14 @@ export default QuizzesReport.extend(PublicRouteMixin, ContextMixin, {
       let toRoute = controller.get('backUrl');
       toRoute = toRoute || 'index'; //index when refreshing the page, TODO fix
       route.transitionTo(toRoute);
+    },
+    closePlayer: function() {
+      const component = this;
+      const controller = component.get('controller');
+      let isIframeMode = controller.get('isIframeMode');
+      if (isIframeMode) {
+        window.parent.postMessage('PUllUP_CLOSE', '*');
+      }
     }
   },
 
@@ -73,15 +81,14 @@ export default QuizzesReport.extend(PublicRouteMixin, ContextMixin, {
 
     let collection;
 
-    return Ember.RSVP
-      .hashSettled({
-        assessment: loadAssessment
-          ? route.get('assessmentService').readAssessment(collectionId)
-          : false,
-        collection: loadCollection
-          ? route.get('collectionService').readCollection(collectionId)
-          : false
-      })
+    return Ember.RSVP.hashSettled({
+      assessment: loadAssessment
+        ? route.get('assessmentService').readAssessment(collectionId)
+        : false,
+      collection: loadCollection
+        ? route.get('collectionService').readCollection(collectionId)
+        : false
+    })
       .then(function(hash) {
         let collectionFound =
           hash.assessment.state === 'rejected' ||

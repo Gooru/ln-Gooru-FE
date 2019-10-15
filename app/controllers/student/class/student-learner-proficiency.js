@@ -14,5 +14,15 @@ export default Ember.Controller.extend(StudentLearnerProficiency, {
   /**
    * @property {Array} fwDomains
    */
-  fwDomains: Ember.computed.alias('studentClassController.fwDomains')
+  fwDomains: Ember.computed.alias('studentClassController.fwDomains'),
+
+  // -------------------------------------------------------------------------
+  // Actions
+
+  actions: {
+    closePullUp() {
+      let Controller = this;
+      Controller.set('isOpenPlayer', false);
+    }
+  }
 });

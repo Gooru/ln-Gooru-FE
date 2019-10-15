@@ -1,0 +1,12 @@
+<div class="iframe-player-container">
+  {{#if isLoading}}
+    <div class="loading-player">
+      <span>{{playerContent.title}}</span>
+      <img src="/assets/gooru/player-loader.gif" class="center-block">
+      <span>Loading...</span>
+    </div>
+  {{/if}}
+    <div class="iframe-container">
+    <iframe src="{{rootURL}}{{playerUrl}}"></iframe>
+  </div>
+</div>

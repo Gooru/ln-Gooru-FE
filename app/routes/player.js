@@ -139,13 +139,18 @@ export default QuizzesPlayer.extend(
             type: controller.get('type'),
             role: controller.get('role'),
             classId: controller.get('classId'),
-            contextId: controller.get('contextResult.contextId')
+            contextId: controller.get('contextResult.contextId'),
+            isIframeMode: controller.get('isIframeMode')
           };
           const reportController = this.controllerFor(
             'reports.student-collection'
           );
           //this doesn't work when refreshing the page, TODO
           reportController.set('backUrl', this.get('history.lastRoute.url'));
+          let isIframe = controller.get('isIframeMode');
+          if (isIframe) {
+            Ember.$(document.body).addClass('hide-report-header');
+          }
           this.transitionTo('reports.student-collection', {
             queryParams
           });
@@ -256,7 +261,7 @@ export default QuizzesPlayer.extend(
       const type = params.type;
       const role = params.role || ROLES.TEACHER;
       params.lessonId =
-      params.lessonId === 'undefined' ? null : params.lessonId;
+        params.lessonId === 'undefined' ? null : params.lessonId;
       params.unitId = params.unitId === 'undefined' ? null : params.unitId; // Add more undefined to sanitize as required
       params.sourceUrl = location.host;
       params.partnerId = this.get('session.partnerId');

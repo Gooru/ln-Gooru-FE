@@ -22,7 +22,19 @@
   </div>
   {{#if (and competency (not isPlayerProficiency))}}
     <div class="signature-content">
-      {{reports/pull-up/signature-content-report showGutCompetency=showGutCompetency classFramework=classFramework userId=userId domainCompetencyList=domainCompetencyList collectionPerformances=collectionPerformances showSignatureAssessment=showSignatureAssessment competency=competency isStudent=isStudent}}
+      {{reports/pull-up/signature-content-report
+        showGutCompetency=showGutCompetency
+        classFramework=classFramework
+        userId=userId
+        domainCompetencyList=domainCompetencyList
+        collectionPerformances=collectionPerformances
+        showSignatureAssessment=showSignatureAssessment
+        competency=competency
+        isStudent=isStudent
+        isOpenPlayer=isOpenPlayer
+        playerUrl=playerUrl
+        playerContent=playerContent
+      }}
     </div>
   {{/if}}
 </div>

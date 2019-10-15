@@ -23,11 +23,9 @@
                 {{/if}}
               </div>
               {{#if isStudent}}
-                {{#link-to 'player' signatureContent.id (query-params type=collectionType role='student' source=source) target="_blank"}}
-                  <div class="action">
-                    {{gru-icon name='play_arrow'}}
-                  </div>
-                {{/link-to}}
+                <div class="action"  {{action 'openPlayerPullup'}}>
+                  {{gru-icon name='play_arrow'}}
+                </div>
               {{/if}}
               <span class="suggestion-icon">
                 {{gru-icon name='explore'}}
