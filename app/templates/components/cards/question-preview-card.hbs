@@ -1,8 +1,25 @@
 <div class="question-preview-container {{question.type}} {{if isShowCorrectAnswer 'answer-visible'}}">
-  <div class="question-title-container">
-    <div class="question-order">{{contentSeq}}.</div>
-    <div class="question-icon"></div>
-    <div class="title ellipsis">{{safe-html question.title}}</div>
+  <div class="question-header-container">
+    <div class="question-title-container">
+      <div class="question-order">{{contentSeq}}.</div>
+      <div class="question-icon"></div>
+      <div class="title ellipsis">{{safe-html question.title}}</div>
+    </div>
+    {{#if isReportView}}
+      <div class="question-performance-container">
+        <div class="question-reaction">
+          {{reaction-icon question.reaction }}
+        </div>
+        {{#if question.score}}
+          <div class="question-score">
+            {{question.score}}/{{question.maxScore}}
+          </div>
+        {{/if}}
+        <div class="question-timespent">
+          {{format-time question.timespent}}
+        </div>
+      </div>
+    {{/if}}
   </div>
   <div class="taxonomies-conatiner">
     {{#if taxonomyTags.length}}
@@ -17,11 +34,28 @@
       <img src="{{question.thumbnail}}"/>
     </div>
   {{/if}}
-  <div class="answer-container">
-    {{#if isShowCorrectAnswer}}
-      {{{component (question-config question.type 'component.answer') question=question showCorrect=true}}}
-    {{else}}
-      {{{component (question-config question.type 'component.player') question=question readOnly=true}}}
+  <div class="answer-container {{unless question.answerObject 'single-container'}}">
+    {{#if (and question.answerObject isReportView)}}
+      <div class="user-answer answer-section">
+        <div class="answer-type-label type-label">User Answer</div>
+        <div class="answer-value-container">
+          {{#if question.userAnswer}}
+            {{{component (question-config question.type 'component.answer') question=question userAnswer = question.userAnswer}}}
+          {{/if}}
+        </div>
+      </div>
     {{/if}}
+    <div class="correct-answer answer-section">
+      {{#if isReportView}}
+        <div class="answer-type-label type-label">Correct Answer</div>
+      {{/if}}
+      <div class="answer-value-container">
+        {{#if (or isShowCorrectAnswer isReportView)}}
+          {{{component (question-config question.type 'component.answer') question=question showCorrect=true}}}
+        {{else}}
+          {{{component (question-config question.type 'component.player') question=question readOnly=true}}}
+        {{/if}}
+      </div>
+    </div>
   </div>
 </div>

@@ -33,7 +33,9 @@
     {{else}}
       <div class="activities">
         {{#each studiedPortfolioActivities as | activity |}}
-            {{portfolio/gru-portfolio-content-card content = activity}}
+            {{portfolio/gru-portfolio-content-card
+              content = activity
+              onShowActivityReport = "onShowActivityReport"}}
         {{/each}}
       </div>
     {{/if}}
@@ -53,3 +55,13 @@
       domain = domain}}
   {{/if}}
 </div>
+
+{{#if isShowPortfolioActivityReport}}
+  {{reports/pull-up/gru-collection-preview
+      showPullUp=isShowPortfolioActivityReport
+      previewContentId=reportActivityId
+      previewContentType=reportActivityType
+      isReportView = true
+      userId = userId
+    }}
+{{/if}}

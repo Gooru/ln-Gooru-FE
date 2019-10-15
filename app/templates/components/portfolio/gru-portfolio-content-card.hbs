@@ -56,7 +56,7 @@
         {{/if}}
       </div>
     {{else}}
-      <div class="activity-performance grade-range-{{grade-range content.score}}">
+      <div class="activity-performance grade-range-{{grade-range content.score}}" {{action "onShowReport"}}>
         {{content.score}}%
       </div>
     {{/if}}
