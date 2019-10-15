@@ -1,7 +1,6 @@
 .suggestion-panel {
   height: auto;
   display: grid;
-  cursor: pointer;
   align-items: center;
 
   .suggestion-header {
@@ -40,6 +39,7 @@
         font-size: 15px;
         font-weight: bold;
         color: #ef8f2f;
+        cursor: pointer;
       }
 
       .content-count {
@@ -66,9 +66,24 @@
         height: 49px;
         border-left: 1px solid #ccc;
         border-right: 1px solid #ccc;
+        cursor: pointer;
 
         i {
           height: 24px;
+        }
+      }
+
+      .teacher-suggestion {
+        display: flex;
+        width: 100%;
+        height: 100%;
+
+        .icon {
+          width: 100%;
+          background-position: center;
+          height: 100%;
+          background-repeat: no-repeat;
+          background-image: url("/assets/gooru/images/account-cirlce-orange.svg");
         }
       }
 

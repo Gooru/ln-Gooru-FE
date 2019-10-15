@@ -22,9 +22,15 @@
           {{gru-icon name='explore'}}
         </span>
       {{else}}
-        <span class="suggestion-icon suggest" {{action 'onSuggestContent' content collectionType}} data-toggle="tooltip" data-placement="left" title="Suggest">
-          {{gru-icon name='explore'}}
-        </span>
+        {{#if isTeacherSuggestion}}
+          <span class="teacher-suggestion">
+            <i class="icon"></i>
+          </span>
+        {{else}}
+          <span class="suggestion-icon suggest" {{action 'onSuggestContent' content collectionType}} data-toggle="tooltip" data-placement="left" title="Suggest">
+            {{gru-icon name='explore'}}
+          </span>
+        {{/if}}
       {{/if}}
     </div>
   </div>
