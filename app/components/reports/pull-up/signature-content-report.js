@@ -32,6 +32,10 @@ export default Ember.Component.extend({
    * @property {service} collectionService
    */
   collectionService: Ember.inject.service('api-sdk/collection'),
+  /**
+   * @property {service} suggestService
+   */
+  suggestService: Ember.inject.service('api-sdk/suggest'),
 
   // -------------------------------------------------------------------------
   // Properties
@@ -128,33 +132,69 @@ export default Ember.Component.extend({
    */
   source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
 
+  /**
+   * @property {Array} students
+   */
+  students: Ember.computed('student', function() {
+    const component = this;
+    const studentListForSuggestion = component.get('studentListForSuggestion');
+    let students = studentListForSuggestion
+      ? studentListForSuggestion
+      : [component.get('student')];
+    return students;
+  }),
+
+  isMappedWithGutCode: Ember.computed(
+    'competency.isMappedWithFramework',
+    'showGutCompetency',
+    function() {
+      return (
+        this.get('competency.isMappedWithFramework') &&
+        !this.get('showGutCompetency')
+      );
+    }
+  ),
+
   actions: {
-    //Action triggered when click collection/assessment title
-    onPreviewContent() {
+    onSuggestContent(collection, collectionType) {
       const component = this;
-      let collection = component.get('content');
-      component.set('previewContent', collection);
-      component.set('previewContentType', component.get('collectionType'));
+      component.set('suggestedCollection', collection);
+      component.set('suggestedCollectionType', collectionType);
+      component.set('showSuggestConfirmation', true);
+    },
+
+    onCancelSuggest() {
+      const component = this;
+      component.set('showSuggestConfirmation', false);
+    },
+
+    onConfirmSuggest() {
+      const component = this;
+      const collection = component.get('suggestedCollection');
+      const collectionType = component.get('suggestedCollectionType');
+      const competencyCode = component.get('standardCode');
+      component.set('showSuggestConfirmation', false);
+      component.sendAction(
+        'onConfirmSuggest',
+        collection,
+        collectionType,
+        competencyCode
+      );
+    },
+
+    //Action triggered when click collection/assessment title
+    onPreviewContent(content) {
+      const component = this;
+      const collectionType =
+        content.get('suggestedContentType') || component.get('collectionType');
+      component.set('previewContent', content.get('collection'));
+      component.set('previewContentType', collectionType);
       component.set('isShowContentPreview', true);
     },
 
-    openPlayerPullup() {
+    playContent(queryParams, contentId, content) {
       const component = this;
-      let content = component.get('signatureContent');
-      let contentId = content.id;
-      let collectionType = component.get('collectionType');
-      let queryParams = {
-        role: 'student',
-        source: component.get('source'),
-        type: collectionType,
-        isIframeMode: true
-      };
-      component.set(
-        'playerUrl',
-        component.get('router').generate('player', contentId, { queryParams })
-      );
-      component.set('isOpenPlayer', true);
-      component.set('playerContent', content);
+      component.sendAction('playContent', queryParams, contentId, content);
     }
   },
 
@@ -168,6 +208,16 @@ export default Ember.Component.extend({
     let component = this;
     component.fetchLearningMapsContent();
     component.fetchCodes();
+    if (component.get('userId')) {
+      component.fetchTeacherSuggestions();
+    }
+  },
+
+  didRender() {
+    let component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   /**
@@ -176,15 +226,21 @@ export default Ember.Component.extend({
    */
   fetchCodes() {
     let component = this;
-    let courseId = component.get('courseId');
-    let domainId =
-      component.get('competency.isMappedWithFramework') &&
-      !component.get('showGutCompetency')
-        ? component.get('competency.fwDomainCode')
-        : component.get('domainId');
-    let subjectId = component.get('subjectId');
-    let frameworkId =
-      component.get('classFramework') || GOORU_DEFAULT_FRAMEWORK;
+    let fwCompetencyCode = component.get(
+      'competency.framework.frameworkCompetencyCode'
+    );
+    let courseId = component.get('isMappedWithGutCode')
+      ? getCourseId(fwCompetencyCode)
+      : component.get('courseId');
+    let domainId = component.get('isMappedWithGutCode')
+      ? getDomainId(fwCompetencyCode)
+      : component.get('domainId');
+    let subjectId = component.get('isMappedWithGutCode')
+      ? getSubjectId(fwCompetencyCode)
+      : component.get('subjectId');
+    let frameworkId = component.get('isMappedWithGutCode')
+      ? component.get('classFramework')
+      : GOORU_DEFAULT_FRAMEWORK;
     return Ember.RSVP.hash({
       competencyCodes: component
         .get('taxonomyService')
@@ -212,8 +268,8 @@ export default Ember.Component.extend({
         competencyCode,
         filters
       )
-    })
-      .then(({ learningMapData }) => {
+    }).then(({ learningMapData }) => {
+      if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
         component.set('learningMapData', learningMapData);
         component.checkPrerequisiteCompetencyStatus(
           learningMapData.prerequisites
@@ -227,15 +283,15 @@ export default Ember.Component.extend({
           ? signatureContentList.assessments
           : signatureContentList.collections;
         let content = signatureContent.objectAt(0);
-        component.set('isLoading', false);
+        if (!component.get('userId')) {
+          component.set('isLoading', false);
+        }
         if (content) {
-          component.set('signatureContent', content);
+          component.set('signatureContent', Ember.Object.create(content));
           component.fetchContentSettings(content.id);
         }
-      })
-      .catch(() => {
-        component.set('isLoading', false);
-      });
+      }
+    });
   },
 
   /**
@@ -280,7 +336,8 @@ export default Ember.Component.extend({
     return Ember.RSVP.hash({
       content: contentPromise
     }).then(({ content }) => {
-      component.set('content', content);
+      let signatureContent = component.get('signatureContent');
+      signatureContent.set('collection', content);
     });
   },
 
@@ -290,11 +347,9 @@ export default Ember.Component.extend({
    */
   filterMicroCompetency(codes) {
     let component = this;
-    let standardCode =
-      component.get('competency.isMappedWithFramework') &&
-      !component.get('showGutCompetency')
-        ? component.get('competency.framework.frameworkCompetencyCode')
-        : component.get('competency.competencyCode');
+    let standardCode = component.get('isMappedWithGutCode')
+      ? component.get('competency.framework.frameworkCompetencyCode')
+      : component.get('competency.competencyCode');
     let regex = new RegExp(standardCode);
     let microCompetencies = codes.filter(function(code) {
       return (
@@ -303,5 +358,21 @@ export default Ember.Component.extend({
       );
     });
     return microCompetencies;
+  },
+
+  fetchTeacherSuggestions() {
+    const component = this;
+    const userId = component.get('userId');
+    const competencyCode = component.get('competency.competencyCode');
+    let params = {
+      scope: 'proficiency'
+    };
+    component
+      .get('suggestService')
+      .fetchAcrossClassSuggestionsByCode(userId, competencyCode, params)
+      .then(content => {
+        component.set('suggestions', content.get('suggestions'));
+        component.set('isLoading', false);
+      });
   }
 });

@@ -55,7 +55,7 @@
           framework=framework
           isStudent=isStudent
           competency=selectedCompetency
-          studentId=studentProfile.id
+          studentProfile=studentProfile
           domainCompetencyList=domainCompetencyList
           isPlayerProficiency=isPlayerProficiency
         }}
@@ -92,12 +92,10 @@
           framework=framework
           isStudent=isStudent
           competency=selectedCompetency
-          studentId=studentProfile.id
+          studentProfile=studentProfile
           domainCompetencyList=domainCompetencyList
           isPlayerProficiency=isPlayerProficiency
-          isOpenPlayer=isOpenPlayer
-          playerUrl=playerUrl
-          playerContent=playerContent
+          playContent="playContent"
         }}
       {{/proficiency/proficiency-subject-panel}}
     {{/if}}
@@ -105,7 +103,7 @@
 </div>
 
 {{#if isOpenPlayer}}
-  {{reports/pull-up/open-player-pull-up
+  {{reports/pull-up/player-pull-up
     showPullUp=isOpenPlayer
     playerUrl=playerUrl
     playerContent=playerContent

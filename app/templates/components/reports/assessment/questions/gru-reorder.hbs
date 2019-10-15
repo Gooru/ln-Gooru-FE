@@ -5,7 +5,7 @@
       {{#if (eq answer.showCorrect true) }}
         <span class="answer-text" style='width:15em;'>{{answer.text}}</span>
       {{else}}
-        <span class="{{if answer.correct 'correct' 'incorrect'}} {{if anonymous 'anonymous'}}">{{answer.selectedOrderText}}</span>
+        <span class="">{{{gru-math-text text=answer.selectedOrderText}}} </span>
       {{/if}}
     </li>
   {{/each}}

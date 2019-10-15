@@ -649,6 +649,9 @@ export default Ember.Component.extend({
         });
         const isMappedWithFramework = !!fwCompetency;
         competency.set('isMappedWithFramework', isMappedWithFramework);
+        if (fwCompetency) {
+          competency.set('framework', fwCompetency[competency.competencyCode]);
+        }
       });
     }
     return competencies;
@@ -917,7 +920,9 @@ export default Ember.Component.extend({
     let component = this;
     let subjectBucket = component.get('subjectBucket');
     let subjectId = component.get('subject.id');
-    let isOwnSubject = subjectBucket.split(subjectId).length > 1;
+    let isOwnSubject = subjectBucket
+      ? subjectBucket.split(subjectId).length > 1
+      : null;
     let cellWidth = component.get('cellWidth');
     let cellHeight = component.get('cellHeight');
     if (!component.get('isBaseLineDrawn') || isOwnSubject) {

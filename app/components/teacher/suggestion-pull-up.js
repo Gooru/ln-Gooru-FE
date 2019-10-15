@@ -1,11 +1,14 @@
 import Ember from 'ember';
 import {
+  CONTENT_TYPES,
+  SCREEN_SIZES,
   PLAYER_EVENT_SOURCE,
   SUGGESTION_FILTER_BY_CONTENT_TYPES,
   KEY_CODES
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -30,6 +33,22 @@ export default Ember.Component.extend({
    * @requires service:api-sdk/navigate-map
    */
   navigateMapService: Ember.inject.service('api-sdk/navigate-map'),
+
+  /**
+   * @type {libraryService} Library service object
+   */
+  libraryService: Ember.inject.service('api-sdk/library'),
+
+  /**
+   * @type {ProfileService} Profile service object
+   */
+  profileService: Ember.inject.service('api-sdk/profile'),
+
+  /**
+   * Session object of logged in user
+   * @type {Object}
+   */
+  session: Ember.inject.service(),
 
   // -------------------------------------------------------------------------
   // Properties
@@ -132,10 +151,148 @@ export default Ember.Component.extend({
    */
   suggestionOrigin: PLAYER_EVENT_SOURCE.COURSE_MAP,
 
+  /**
+   * course Object extract from context
+   * @type {String}
+   */
+  course: Ember.computed.alias('context.course'),
+
+  /**
+   * courseId Object extract from context
+   * @type {String}
+   */
+  courseId: Ember.computed.alias('context.courseId'),
+
+  /**
+   * Maintains the list of  menu items
+   * @type {Array}
+   */
+  menuItems: Ember.computed('courseId', function() {
+    let courseId = this.get('courseId');
+    let menuItems = Ember.A([]);
+    menuItems.pushObject(
+      this.createMenuItem('catalog', 'common.gooru-catalog', true)
+    );
+    menuItems.pushObject(
+      this.createMenuItem('myContent', 'common.myContent', false)
+    );
+    menuItems.pushObject(
+      this.createMenuItem('tenantLibrary', 'common.tenantLibrary', false)
+    );
+    if (courseId) {
+      menuItems.pushObject(
+        this.createMenuItem('courseMap', 'common.course-map', false)
+      );
+    }
+    return menuItems;
+  }),
+
+  /**
+   * It will compute the selected menu item on changes of menu item selection or data change.
+   * @type {String}
+   */
+  selectedMenuItem: Ember.computed('menuItems.@each.selected', function() {
+    let menuItems = this.get('menuItems');
+    return menuItems.findBy('selected', true);
+  }),
+
+  /**
+   * Maintains the value of currently selected menu name.
+   * @return {String}
+   */
+  selectedMenuName: Ember.computed(
+    'menuItems.[]',
+    'menuItems.@each.selected',
+    function() {
+      let menuItem = this.get('menuItems').findBy('selected', true);
+      return menuItem.get('key');
+    }
+  ),
+
+  /**
+   * @property {Observe} onSelectFilter
+   */
+  onSelectFilter: Ember.observer('selectedFilters.[]', function() {
+    let component = this;
+    let selectedFilters = component.get('selectedFilters');
+    let selectedFiltersLimit = component.get('selectedFiltersLimit');
+    if (selectedFilters.length < selectedFiltersLimit) {
+      component.set('filters', selectedFilters);
+    } else {
+      component.set('filters', selectedFilters.slice(0, selectedFiltersLimit));
+      component.set(
+        'moreFilters',
+        selectedFilters.slice(selectedFiltersLimit, selectedFilters.length)
+      );
+    }
+  }),
+
+  /**
+   * @property {Boolean} isShowListView
+   * Property to toggle between list/grid view
+   */
+  isShowListView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+  /**
+   * @property {Number} selectedFiltersLimit
+   * Property to hold limit of selected filters to show
+   */
+  selectedFiltersLimit: Ember.computed('isShowListView', function() {
+    return this.get('isShowListView') ? 1 : 2;
+  }),
+
   // -------------------------------------------------------------------------
   // actions
 
   actions: {
+    goBackToTenantLibraries() {
+      let component = this;
+      component.set('showTenantLibraries', true);
+      component.set('selectedTenantLibrary', null);
+    },
+
+    onSelectLibrary(library) {
+      let component = this;
+      component.set('selectedTenantLibrary', library);
+      component.set('showTenantLibraries', false);
+      component.loadData();
+    },
+
+    /**
+     * Action get triggered when filter button is clicked
+     */
+    toggleSearchFilter() {
+      let component = this;
+      component.toggleProperty('isShow');
+    },
+
+    /**
+     * Choose the menu item
+     */
+    onChooseMenuItem(selectedItem) {
+      let component = this;
+      component.toggleMenuItem(selectedItem);
+    },
+    /**
+     * Toggle menu list based on the recent selection of the menu.
+     */
+    toggleMenuList() {
+      this.toggleProperty('isMenuEnabled');
+      return false;
+    },
+
+    /**
+     * Action get triggered when clear button is clicked
+     */
+    clearFilter(item) {
+      const component = this;
+      if (item.get('filter') === 'flt.standard') {
+        component.set('unCheckedItem', item);
+      }
+      component.get('selectedFilters').removeObject(item);
+      component.send('doSearch');
+    },
+
     /**
      * Action triggered when the user close the pull up.
      **/
@@ -189,6 +346,14 @@ export default Ember.Component.extend({
         component.get('defaultSuggestContentType')
       );
       component.loadData();
+    },
+
+    /**
+     * Action get triggered when search button is clicked
+     */
+    doSearch() {
+      const component = this;
+      component.loadData();
     }
   },
 
@@ -196,10 +361,14 @@ export default Ember.Component.extend({
   // Events
 
   didRender() {
-    this.handleAppContainerScroll();
+    const component = this;
+    component.initializePopover();
+    component.handleAppContainerScroll();
   },
+
   didDestroyElement() {
-    this.handleAppContainerScroll();
+    const component = this;
+    component.handleAppContainerScroll();
   },
 
   /**
@@ -208,13 +377,74 @@ export default Ember.Component.extend({
   didInsertElement() {
     let component = this;
     component.set('activeContentType', this.get('defaultSuggestContentType'));
-    component.loadData();
     component.openPullUp();
     component.handleSearchBar();
+    component.set('selectedFilters', Ember.A([])); //initialize
+    component.loadData();
+  },
+
+  initializePopover() {
+    let component = this;
+    component.$('.more-pointer').popover({
+      html: true,
+      trigger: 'click',
+      animation: true,
+      placement: 'auto',
+      content: () => {
+        return component.$('.more-filters').html();
+      }
+    });
+
+    component.$(document).click(function(event) {
+      if (event.target.className !== 'more-pointer') {
+        if (component.$('.more-pointer')) {
+          component.$('.more-pointer').popover('hide');
+        }
+      }
+    });
   },
 
   //--------------------------------------------------------------------------
   // Methods
+
+  /**
+   * @function toggleMenuItem
+   * Method to toggle selected menu item
+   */
+  toggleMenuItem(selectedItem, skipToggle) {
+    const component = this;
+    let menuItems = component.get('menuItems');
+    menuItems.forEach(item => {
+      item.set('selected', false);
+      if (selectedItem.get('label') === item.get('label')) {
+        item.set('selected', true);
+      }
+    });
+    const showTenantLibraries = selectedItem.get('key') === 'tenantLibrary';
+    if (showTenantLibraries) {
+      component.loadTenantLibraries();
+    }
+    component.set('selectedTenantLibrary', null);
+    component.set('showTenantLibraries', showTenantLibraries);
+    if (!skipToggle) {
+      component.toggleProperty('isMenuEnabled');
+    }
+    if (selectedItem.get('key') !== 'courseMap') {
+      component.loadData();
+    }
+  },
+
+  loadTenantLibraries() {
+    const component = this;
+    component.set('isLoading', true);
+    component
+      .get('libraryService')
+      .fetchLibraries()
+      .then(libraries => {
+        component.set('libraries', libraries);
+        component.set('isLoading', false);
+      });
+  },
 
   /**
    * Function to animate the  pullup from bottom to top
@@ -255,6 +485,14 @@ export default Ember.Component.extend({
     }
   },
 
+  createMenuItem(key, label, selected) {
+    return Ember.Object.create({
+      key: key,
+      label: label,
+      selected: selected
+    });
+  },
+
   handleSearchBar() {
     let component = this;
     component.$('#suggestion-search').on('keyup', function(e) {
@@ -276,34 +514,242 @@ export default Ember.Component.extend({
   loadData() {
     let component = this;
     component.set('isLoading', true);
+    component.set('page', 0);
+    component.set('isMoreDataExists', false);
+    component.set('isShow', false);
     Ember.RSVP.hash({
-      searchResults: component.getSearchServiceByType()
+      searchResults: component.getSearchService()
     }).then(({ searchResults }) => {
-      component.set('isLoading', false);
-      component.set('searchResults', searchResults);
+      if (!component.isDestroyed) {
+        component.set('isLoading', false);
+        component.set('searchResults', searchResults);
+        component.$('.search-list-container').scrollTop(0);
+        if (
+          searchResults &&
+          searchResults.length === component.get('defaultSearchPageSize') &&
+          component.get('isShowMoreEnabled')
+        ) {
+          component.set('isMoreDataExists', true);
+        }
+      }
     });
+  },
+
+  loadMoreData() {
+    let component = this;
+    component.set('isLoading', true);
+    let page = component.get('page') + 1;
+    component.set('page', page);
+    Ember.RSVP.hash({
+      searchResults: component.getSearchService()
+    }).then(({ searchResults }) => {
+      if (!component.isDestroyed) {
+        component.set('isLoading', false);
+        let searchResult = component.get('searchResults');
+        component.set('searchResults', searchResult.concat(searchResults));
+        if (
+          searchResults &&
+          searchResults.length === component.get('defaultSearchPageSize')
+        ) {
+          component.set('isMoreDataExists', true);
+        }
+      }
+    });
+  },
+
+  getSearchService() {
+    let component = this;
+    let searchService = null;
+    let label = component.get('selectedMenuItem.label');
+    if (
+      label === 'common.gooru-catalog' ||
+      component.get('selectedFilters').length > 0 ||
+      component.getSearchTerm()
+    ) {
+      searchService = component.getSearchServiceByType();
+    } else if (label === 'common.myContent') {
+      searchService = component.getMyContentByType();
+    } else if (
+      label === 'common.tenantLibrary' &&
+      !component.get('showTenantLibraries')
+    ) {
+      searchService = component.getLibraryServiceByType();
+    }
+    return searchService;
   },
 
   getSearchServiceByType() {
     let component = this;
     let activeContentType = component.get('activeContentType');
-    let filters = {};
-    let term = '*';
-    let isFromSearch = component.get('isFromSearch');
-    if (isFromSearch) {
-      filters = component.getFilters();
-      term = component.getSearchTerm() ? component.getSearchTerm() : '*';
-    } else {
-      let suggestFiltersAndTerm = component.getSuggestFiltersAndTerm();
-      filters = suggestFiltersAndTerm.filters;
-      term = suggestFiltersAndTerm.term;
+    let params = component.getSearchParams();
+    let term = component.getSearchTerm() ? component.getSearchTerm() : '*';
+    if (activeContentType === CONTENT_TYPES.COLLECTION) {
+      return component.get('searchService').searchCollections(term, params);
+    } else if (activeContentType === CONTENT_TYPES.ASSESSMENT) {
+      return component.get('searchService').searchAssessments(term, params);
+    } else if (activeContentType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+      return component.get('searchService').searchOfflineActivity(term, params);
     }
+  },
 
-    if (activeContentType === 'collection') {
-      return component.get('searchService').searchCollections(term, filters);
-    } else if (activeContentType === 'assessment') {
-      return component.get('searchService').searchAssessments(term, filters);
+  getMyContentByType() {
+    let component = this;
+    let currentUserId = component.get('session.userId');
+    let activeContentType = component.get('activeContentType');
+    let params = component.getMyContentParams();
+    let term = component.getSearchTerm();
+    if (term) {
+      params.searchText = term;
     }
+    if (activeContentType === CONTENT_TYPES.COLLECTION) {
+      return component
+        .get('profileService')
+        .readCollections(currentUserId, params);
+    } else if (activeContentType === CONTENT_TYPES.ASSESSMENT) {
+      return component
+        .get('profileService')
+        .readAssessments(currentUserId, params);
+    } else if (activeContentType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+      return component
+        .get('profileService')
+        .readOfflineActivities(currentUserId, params);
+    }
+  },
+
+  /**
+   * Method is used to get library service
+   */
+  getLibraryServiceByType() {
+    const component = this;
+    const libraryId = component.get('selectedTenantLibrary.id');
+    const activeContentType = component.get('activeContentType');
+    const pagination = {
+      offset: component.get('page') * component.get('defaultSearchPageSize'),
+      pageSize: component.get('defaultPageSize')
+    };
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      return component
+        .get('libraryService')
+        .fetchLibraryContent(libraryId, activeContentType, pagination)
+        .then(
+          result => {
+            let content;
+            if (result) {
+              let libraryContent = result.libraryContent;
+              content = libraryContent[Object.keys(libraryContent)[0]];
+            }
+            resolve(content);
+          },
+          error => {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  getSearchParams() {
+    let component = this;
+    let params = {
+      taxonomies: null,
+      page: component.get('page'),
+      pageSize: component.get('defaultSearchPageSize')
+    };
+    let filters = component.filterBuilder();
+    let term = component.getSearchTerm();
+    let label = component.get('selectedMenuItem.label');
+    if (label === 'common.myContent') {
+      filters.scopeKey = 'my-content';
+      filters['flt.publishStatus'] = 'published,unpublished';
+    } else if (label === 'common.tenantLibrary') {
+      filters.scopeKey = 'open-library';
+      filters.scopeTargetNames = component.get(
+        'selectedTenantLibrary.shortName'
+      );
+      filters['flt.publishStatus'] = 'published,unpublished';
+    } else {
+      filters.scopeKey = 'open-all';
+      filters['flt.publishStatus'] = 'published';
+    }
+    let subject = component.get('course.subject');
+    let competencyData = component.get('competencyData');
+    let primaryLanguage = component.get('class.primaryLanguage');
+    let tags = component.get('tags');
+    let taxonomies = null;
+    if (tags) {
+      taxonomies = tags.map(tag => {
+        return tag.data.id;
+      });
+    }
+    params.taxonomies =
+      taxonomies != null && taxonomies.length > 0 ? taxonomies : null;
+    let gutCode = competencyData ? competencyData.get('competencyCode') : null;
+    if (!component.get('selectedFilters').length && !term) {
+      if (subject) {
+        filters['flt.subject'] = subject;
+      }
+
+      if (gutCode) {
+        filters['flt.gutCode'] = gutCode;
+      }
+
+      if (primaryLanguage) {
+        filters['flt.languageId'] = primaryLanguage;
+      }
+    }
+    params.filters = filters;
+    return params;
+  },
+
+  filterBuilder() {
+    const component = this;
+    let filters = {};
+    filters['flt.audience'] = component.filterSelectedItems(
+      'filter',
+      'flt.audience'
+    );
+    filters['flt.educationalUse'] = component.filterSelectedItems(
+      'filter',
+      'flt.educational'
+    );
+    filters['flt.language'] = component.filterSelectedItems(
+      'filter',
+      'flt.language'
+    );
+    filters['flt.audience'] = component.filterSelectedItems(
+      'filter',
+      'flt.audience'
+    );
+    filters['flt.standard'] = component.filterSelectedItems(
+      'filter',
+      'flt.standard'
+    );
+    filters['flt.creator'] = component.get('selectedFilters')['flt.authorName'];
+    return filters;
+  },
+
+  filterSelectedItems(keyField, keyValue) {
+    const component = this;
+    let filterList = component
+      .get('selectedFilters')
+      .filterBy(keyField, keyValue);
+    let keyName = keyValue === 'flt.standard' ? 'id' : 'name';
+    return component.toArray(filterList, keyName);
+  },
+
+  toArray(filterList, key) {
+    let params = filterList.map(filter => {
+      return filter[key];
+    });
+    return params.length > 0 ? params.join(',') : null;
+  },
+
+  getMyContentParams() {
+    let component = this;
+    let params = {
+      page: component.get('page'),
+      pageSize: component.get('defaultSearchPageSize')
+    };
+    return params;
   },
 
   getSearchTerm() {
@@ -352,6 +798,25 @@ export default Ember.Component.extend({
     };
   },
 
+  handleShowMoreData() {
+    let component = this;
+    let container = component.$('.search-list-container');
+    component.$(container).scroll(function() {
+      let scrollTop = Ember.$(container).scrollTop();
+      let listContainerHeight = Ember.$(container).height() + 60;
+      let isScrollReachedBottom =
+        scrollTop ===
+        component.$(container).prop('scrollHeight') - listContainerHeight;
+      if (
+        isScrollReachedBottom &&
+        !component.get('isLoading') &&
+        component.get('isMoreDataExists')
+      ) {
+        component.loadMoreData();
+      }
+    });
+  },
+
   suggestForCourseMap() {
     const component = this;
     let collection = component.get('suggestSelectedCollection');
@@ -379,6 +844,16 @@ export default Ember.Component.extend({
       });
   },
 
+  resetMenuItems() {
+    let menuItems = this.get('menuItems');
+    menuItems.forEach(item => {
+      item.set('selected', false);
+      if (item.get('key') === 'catalog') {
+        item.set('selected', true);
+      }
+    });
+  },
+
   suggestForClassActivity() {
     const component = this;
     let collection = component.get('suggestSelectedCollection');
@@ -403,7 +878,7 @@ export default Ember.Component.extend({
         tx_code_type: null,
         ca_id: component.get('context.caContentId')
       };
-      return component.get('suggestService').suggestForCA(contextParams);
+      return component.get('suggestService').suggestContent(contextParams);
     });
 
     Ember.RSVP.all(userIds).then(function() {

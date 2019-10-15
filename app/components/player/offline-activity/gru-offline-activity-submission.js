@@ -31,6 +31,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.loadTaskSubmissionData();
+    component.afterRender();
     if (!component.get('isTeacher')) {
       component.doCheckOaCompleted();
     }
@@ -48,6 +49,7 @@ export default Ember.Component.extend({
     onSaveTimespent() {
       const component = this;
       component.set('isTimespentExpanded', false);
+      component.submitTaskDetails(component.createTaskTimeSubmissionPayload());
       component.$('.timespent-container').slideUp();
     },
 
@@ -544,5 +546,52 @@ export default Ember.Component.extend({
     return component
       .get('oaAnalyticsService')
       .getOaCompletedStudents(classId, oaId, caContentId, dataParam);
+  },
+
+  afterRender: function() {
+    const component = this;
+    const activityTasks = component.get('offlineActivity.tasks') || Ember.A([]);
+    activityTasks.map(act => act.set('focus', false));
+    activityTasks.get('firstObject').set('focus', true); //first task to focus
+  },
+
+  /**
+   * @function submitTaskDetails
+   * Method to send student task submissions into Analytics
+   */
+  submitTaskDetails(taskSubmissionPayload) {
+    const component = this;
+    component.get('oaService').oaTaskSubmissions(taskSubmissionPayload);
+  },
+
+  /**
+   * @function createTaskSubmissionPayload
+   * Method to create task submission request payload
+   */
+  createTaskTimeSubmissionPayload() {
+    const component = this;
+    const userId = component.get('userId');
+    const contentSource = component.get('contentSource');
+    const classId = component.get('classId');
+    const caContentId = component.get('caContentId');
+    let taskSubmissions = [];
+    let timespentInMilliSec = component.get('timespentInMilliSec');
+
+    let submissionPayload = {
+      student_id: userId,
+      class_id: classId,
+      oa_id: component.get('oaId'),
+      content_source: contentSource,
+      submissions: taskSubmissions,
+      time_spent: timespentInMilliSec
+    };
+    if (component.get('isStudyPlayer')) {
+      submissionPayload.course_id = component.get('courseId');
+      submissionPayload.unit_id = component.get('unitId');
+      submissionPayload.lesson_id = component.get('lessonId');
+    } else {
+      submissionPayload.oa_dca_id = parseInt(caContentId);
+    }
+    return submissionPayload;
   }
 });

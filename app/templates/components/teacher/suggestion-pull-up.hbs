@@ -5,57 +5,113 @@
       <div class="suggestion-pullup-close" {{action 'onPullUpClose'}}>
         {{gru-icon name="arrow_downward"}}
       </div>
-      {{else}}
-        <div class="suggestion-back" {{action 'backToSuggestion'}}>
-          {{gru-icon name="arrow_back"}}
-        </div>
+    {{else}}
+      <div class="suggestion-back" {{action 'backToSuggestion'}}>
+        {{gru-icon name="arrow_back"}}
+      </div>
     {{/unless}}
-    <div class="suggestion-explore-icon">
-      {{gru-icon name="explore"}}
+    <div class="search-filter-container">
+      <span class="ellipsis" {{action 'toggleMenuList'}}>{{t selectedMenuItem.label }}</span>
+      <span {{action 'toggleMenuList'}}>{{gru-icon name="arrow_drop_down"}}</span>
+      <div class="search-filter-container-list {{if isMenuEnabled 'active'}}">
+        {{#each menuItems as |item|}}
+          <p {{action 'onChooseMenuItem' item}} class="{{if item.selected 'selected'}}">{{t item.label}}</p>
+        {{/each}}
+      </div>
     </div>
-    <div class="suggestion-filter-container">
-      <span>{{t 'common.gooru-suggestions'}}</span>
-    </div>
-    <div class="suggestion-right-menu">
-      <div class="search-input-container">
-        {{input type="text"
+    {{#if (or (eq selectedMenuName 'catalog') (and (not showTenantLibraries) (eq selectedMenuName 'tenantLibrary')) (eq selectedMenuName 'myContent'))}}
+      <div class="suggestion-right-menu">
+        <div class="search-input-container">
+          {{input type="text"
           placeholder=(t "common.search-placeholder")
           spellcheck="true"
           id="suggestion-search"
         }}
-        <label for="suggestion-search" id="suggest-search" class="search-icon">
+          <div class="filter-items">
+            {{#each filters as |selectedFilter index|}}
+              <div class="filter-item">
+                <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
+                <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
+              </div>
+            {{/each}}
+            {{#if moreFilters}}
+              <span class="more-pointer">+{{moreFilters.length}}</span>
+            {{/if}}
+            <div class="more-filters hidden">
+              {{#each moreFilters as |moreFilter|}}
+                <div class="filter-item">
+                  <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+                  <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
+                </div>
+              {{/each}}
+            </div>
+          </div>
+          <label for="suggestion-search" id="suggest-search" class="search-icon">
             {{gru-icon name="search"}}
-        </label>
-      </div>
-      <div class="search-filter-icon">
-        {{gru-icon name="filter_list"}}
-      </div>
-    </div>
-  </div>
-  <div class="suggestion-content-type-filter">
-    <div class="filter-by">{{t 'common.filter-by'}}</div>
-    <div class="filter-content-types">
-      {{#each filterContentType as |contentType|}}
-        <div class="filter-item {{contentType.format}} {{if (eq contentType.format activeContentType) 'active' }}" {{action 'onSelectFilterBy' contentType.format}}>
-          <i></i>
-          <span>{{t contentType.label}}</span>
+          </label>
         </div>
-      {{/each}}
-    </div>
-  </div>
-  <div class="search-list-container">
-    {{#if (gt searchResults.length 0)}}
-      <div class="search-list">
-        {{#each searchResults as |result|}}
-          {{cards/suggest-collection-card collection=result contentType=activeContentType onSuggestCollection="onSuggestCollection"}}
-        {{/each}}
+        <div class="search-filter-icon" {{action 'toggleSearchFilter'}}>
+          {{gru-icon name="filter_list"}}
+        </div>
       </div>
-    {{else}}
-      {{#unless isLoading}}
-        {{cards/no-suggest-result-found isFromSearch=isFromSearch}}
-      {{/unless}}
     {{/if}}
   </div>
+  {{#unless showTenantLibraries}}
+    <div class="suggestion-content-type-filter">
+      <div class="filter-content-types">
+        {{#each filterContentType as |contentType|}}
+          <div class="filter-item {{contentType.format}} {{if (eq contentType.format activeContentType) 'active' }}" {{action 'onSelectFilterBy' contentType.format}}>
+            <i></i>
+            <span>{{t contentType.label}}</span>
+          </div>
+        {{/each}}
+      </div>
+      {{search/search-by-filter
+        isShow=isShow
+        onFilterApply="doSearch"
+        hideAppScroll=false
+        unCheckedItem=unCheckedItem
+        preference=class.preference
+        selectedFilters=selectedFilters
+      }}
+    </div>
+    {{#if selectedTenantLibrary}}
+      <div class="selected-tenant-library">
+        <div class="back" {{action 'goBackToTenantLibraries'}}>
+          {{gru-icon name="arrow_back"}}
+        </div>
+        <img class="image" src="{{selectedTenantLibrary.image}}" />
+        <div class="library-name">{{selectedTenantLibrary.name}}</div>
+      </div>
+    {{/if}}
+    <div class="search-list-container">
+      <div class="search-list {{if selectedTenantLibrary 'show-tenant-library'}}">
+        {{#if (gt searchResults.length 0)}}
+          <div class=" search-list">
+            {{#each searchResults as |result|}}
+              {{cards/suggest-collection-card collection=result contentType=activeContentType onSuggestCollection="onSuggestCollection"}}
+            {{/each}}
+          </div>
+        {{else}}
+          {{#unless isLoading}}
+            {{cards/no-suggest-result-found isFromSearch=isFromSearch}}
+          {{/unless}}
+        {{/if}}
+      </div>
+    </div>
+  {{else}}
+    <div class="tenant-libraries">
+      <div class="libraries-container">
+        {{#each libraries as |library|}}
+          {{library/gru-partner-library-card onSelectLibrary='onSelectLibrary' content=library}}
+        {{else}}
+          <div class="loading-spinner">
+            {{three-bounce-spinner}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  {{/unless}}
 </div>
 
 {{#if showSuggestConfirmation}}

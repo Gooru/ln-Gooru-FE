@@ -1,6 +1,8 @@
 <div class="header-tab-panel">
-  <div class="nav-tabs">
-    <div class="tab {{if (eq selectedItem 'journey') 'active'}}" {{action 'selectItem' 'journey'}}>{{t 'competency-info-content.portfolio'}}</div>
+  <div class="nav-tabs {{unless userId 'col-2'}}">
+    {{#if userId}}
+      <div class="tab {{if (eq selectedItem 'journey') 'active'}}" {{action 'selectItem' 'journey'}}>{{t 'competency-info-content.portfolio'}}</div>
+    {{/if}}
     <div class="tab {{if (eq selectedItem 'metadata') 'active'}}" {{action 'selectItem' 'metadata'}}>{{t 'competency-info-content.metadata'}}</div>
     <div class="tab {{if (eq selectedItem 'learning') 'active'}}" {{action 'selectItem' 'learning'}}>{{t 'competency-info-content.learning-map'}}</div>
   </div>
@@ -11,6 +13,6 @@
   {{else if (eq selectedItem 'metadata')}}
     {{reports/pull-up/competency-meta-data microCompetencies=microCompetencies prequisiteCompetencies=prequisiteCompetencies }}
   {{else}}
-    {{reports/pull-up/learning-map-content learningMapData=learningMapData onSelectActivityContent="onSelectActivityContent" isStudent=isStudent learningMapData=learningMapData}}
+    {{reports/pull-up/learning-map-content onSuggestContent="onSuggestContent" learningMapData=learningMapData onSelectActivityContent="onSelectActivityContent" isStudent=isStudent}}
   {{/if}}
 </div>

@@ -63,12 +63,41 @@ window.i18ln = {
   'common.first': 'First',
   'common.last': 'Last',
   'common.name': 'Name',
+  'common.add-data-choice-title': 'How do you want to enter the data?',
+  'common.take-photo': 'take photo',
+  'common.upload-image': 'upload image',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
+  'common.by-question': 'question-by-question',
+  'i2d.conversion-progress':
+    'The uploaded image(s) are being processed. Please check back later',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
+  'i2d.conversion-error':
+    'There was an error when trying to convert the image. Please resubmit the image',
+  'file-picker-placeholder': 'Choose a file or drag it here',
+  'no-preview-available': 'no preview available',
+  'common.success': 'Success',
+  'i2d-successfully-image-upload':
+    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
+  'common.dialog-close': 'Do you want to close ?',
+  'upload-success': 'Uploaded Successfully',
+  'mobile-camera-placeholder': 'Tap for image upload',
+  'i2d.mobile-upload-failed': 'There was a error',
+  'i2d.upload-failed':
+    'There was an error while uploading this image. Re-upload?',
+  're-upload': 'Re-Upload',
   'common.user': 'user',
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
+  'common.day': 'day',
+  'common.week': 'week',
+  'common.month': 'month',
   'common.more': 'more',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'apply filter',
   'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
@@ -101,6 +130,7 @@ window.i18ln = {
   'common.a-question': 'a question',
   'common.a-resource': 'a resource',
   'common.a-rubric': 'a rubric',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'All Completed',
   'common.a-assessment': 'an assessment',
   'common.about': 'About',
@@ -257,6 +287,10 @@ window.i18ln = {
   'common.not-answered': 'Not Answered',
   'common.rubric-not-answered': 'Rubric Not Answered',
   'common.country': 'Country',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
   'common.course-map': 'Course Map',
   'common.course': 'Course',
   'common.course-title': 'Course Title',
@@ -289,6 +323,10 @@ window.i18ln = {
   'common.domain': 'Domain',
   'common.domains': 'Domains',
   'common.download': 'Download',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
   'common.download-print': 'Download/Print',
   'common.drag-drop-suggestions': 'Or Drag and Drop Suggestions ...',
   'common.download-report': 'Download Report',
@@ -514,10 +552,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'Mastery',
   'common.menu': 'Menu',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'More Details',
   'common.move': 'Move',
   'common.myContent': 'My Content',
   'common.myProfile': 'My Location',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'Library',
   'common.myPerformance': 'My Performance',
   'common.edit-narration': 'Edit Narration',
@@ -554,6 +594,8 @@ window.i18ln = {
     'Your teacher has not yet assigned any collections or assessments to Class Activities.',
   'common.no-dca-teacher':
     'No current activities. Add  Class Activities from the Course Map or Content Catalog.',
+  'common.no-content-for-week':
+    'No class activities scheduled for the selected period',
   'common.notScored': 'Unscored',
   'common.notStarted': 'Not started',
   'common.not-added': 'Not Added',
@@ -1439,6 +1481,11 @@ window.i18ln = {
   'gru-add-to.add-collection-to-lesson': 'Add from my collections',
   'gru-add-to.add-collection-to-lesson-lead':
     'Select a collection to add to this lesson.',
+  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.OA-info':
+    'The activities listed here <b>do not</b> belong to another lesson or course',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'Select a activity to add to this lesson.',
   'gru-add-to.add-to-collection': 'Add to collection',
   'gru-add-to.add-to-collection-lead':
     'Choose a collection you want to add {{contentTitle}} to',
@@ -1867,6 +1914,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'Proficiency',
   'profile.gru-navigation.preference.preference': 'Preference',
   'profile.edit.select-district': 'Select a district...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'No data available yet. Once you begin studying, your data will become available.',
   'profile.proficiency.expand-chart': 'Expand Chart',
@@ -2436,7 +2487,7 @@ window.i18ln = {
     'Suggested Assessment (Optional)',
   'gru-suggest-test.signature_assessment-lead':
     'Based on your performance on this course, the following assessment may enhance your understanding.',
-  'gru-suggest-test.pre-test-lead':
+  'gru-suggest-test.pre-tessignaturet-lead':
     'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'gru-suggest-test.post-test-lead':
     'The following post-test is suggested to measure your understanding of the information presented. The post-test will not affect your course performance score.',
@@ -2610,7 +2661,9 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'Lab Report',
   'common.subtask.oa.explanation_argument': 'Explanation Argument',
   'common.subtask.oa.debate': 'Debate',
+  'common.subtask.oa.others': 'Others',
   project: 'Project',
+  'oa.others': 'Others',
   'oa.project.poster': 'Poster',
   'oa.project.presentation': 'Presentation',
   'oa.project.video': 'Video',
@@ -2671,18 +2724,18 @@ window.i18ln = {
   'common.urls': 'URLs',
   'oa.info.duration-hrs': 'Expected time to complete',
   'oa.info.hrs': ' hrs',
+  'class.add-teachers': 'Enter the email of other teachers',
   'common.collaborators': 'Collaborators',
   'common.no-collaborators':
     'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
-  'class.add-teachers': 'Enter the email of other teachers',
   'class.add-co-teachers': 'Add Co-teachers',
   'common.gained': 'Gained',
   'badges-earned': 'Badges Earned',
   'suggestion-taken': 'Suggestions Taken',
   'this-week': 'This Week',
   'previous-week': 'Previous Week',
-  'beginning-till-now': 'Beginning Till Now',
   'custom-range': 'Custom Date Range',
+  'beginning-till-now': 'Beginning Till Now',
   'report.class-proficiency-report': 'Class Proficiency Report',
   'report.domain-proficiency-report': 'Domain Competency Report',
   'report.class-weekly-report': 'Class Progress Report',
@@ -2690,13 +2743,29 @@ window.i18ln = {
   'oa-player.complete-confirm':
     'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
   'oa-player.mark-complete': 'Mark Complete',
+  'no.content.assoc.fw': 'Currently no content associated with this framework.',
   'report.offline-activity-report.note':
     'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
   'teacher-landing.class.student-locator': 'Student Locator',
   'teacher-landing.class.learning-journey': 'Learning Journey',
   'search-by': 'Search By',
+  'common.content-owner': 'Content Owner',
   'oa.self-grading.comment-label':
     'Please share your thoughts on how you performed in this activity',
-  'common.your-thoughts': 'Your Thoughts'
+  'common.your-thoughts': 'Your Thoughts',
+  'common.lesson-plan': 'Lesson Plan',
+  'lesson-plan.sessions': 'sessions',
+  'common.session': 'Session',
+  'prior-knowledge': 'Prior Knowledge',
+  'guiding-question': 'Guiding Questions',
+  'anticipated-struggle': 'Aniticipated Struggles',
+  'teacher-resource': 'Teacher Resources',
+  'content.anticipated-struggles':
+    'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
+  'common.no-lesson-plan-info-message':
+    'This lesson does have any lesson plan.',
+  'common.email.error': 'Duplicate email',
+  'student-resource': 'Student Study Material',
+  'common.choose-lang': 'Choose Language'
 };
 export default window.i18ln;

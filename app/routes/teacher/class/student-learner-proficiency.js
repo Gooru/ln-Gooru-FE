@@ -44,13 +44,16 @@ export default Ember.Route.extend({
     const course = route.modelFor('teacher.class').course;
     return Ember.RSVP.hash({
       profilePromise: route.get('profileService').readUserProfile(studentId),
-      taxonomyCategories: route.get('taxonomyService').getCategories()
+      taxonomyCategories: route.get('taxonomyService').getCategories(),
+      userPreference: route.get('profileService').getProfilePreference()
     }).then(function(hash) {
       const studentProfile = hash.profilePromise;
       const taxonomyCategories = hash.taxonomyCategories;
+      const userPreference = hash.userPreference;
       return Ember.Object.create({
         profile: studentProfile,
         categories: taxonomyCategories,
+        userPreference: userPreference,
         class: currentClass,
         course: course
       });
@@ -63,6 +66,10 @@ export default Ember.Route.extend({
     controller.set('class', model.get('class'));
     controller.set('course', model.get('course'));
     controller.set('taxonomyCategories', model.get('categories'));
+    controller.set(
+      'userStandardPreference',
+      model.get('userPreference.standard_preference')
+    );
     controller.loadData();
   },
   resetController(controller) {

@@ -17,7 +17,9 @@ export default Ember.Component.extend({
   // Events
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -42,6 +44,10 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    onSuggestContent(collection) {
+      const component = this;
+      component.sendAction('onSuggestContent', collection);
+    },
     /**
      * Action triggered when the user play collection
      * It'll open the player in new tab

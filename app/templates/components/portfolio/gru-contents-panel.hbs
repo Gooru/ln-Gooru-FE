@@ -1,0 +1,67 @@
+<div class="portfolio-contents-container {{if isShowContentFilters 'filters-active'}}">
+  <div class="header-container">
+    <div class="panel-info-container" {{action "onToggleContainer"}}>
+      <div class="icon {{contentType}}"></div>
+      <div class="title">{{activeContentLabel}} ({{totalStudiedActivities}})</div>
+    </div>
+    <div class="search-items-container">
+      {{#unless isDisableFilter}}
+        <div class="filter-search" {{action "onOpenFilter"}}>
+          {{gru-icon name="filter_list"}}
+        </div>
+      {{else}}
+        <div class="toggle-panel {{if (lt totalStudiedActivities 1) 'hidden'}}" {{action "onToggleContainer"}}>
+          {{gru-icon name=(if isExpanded 'keyboard_arrow_up' 'keyboard_arrow_down')}}
+        </div>
+      {{/unless}}
+    </div>
+  </div>
+  <div class="body-container">
+    {{#if (eq contentType 'offline-activity')}}
+      {{#each studiedPortfolioActivities as | groupedActivities |}}
+        <div class="type-level-container">
+          <div class="sub-type-label">
+            {{t groupedActivities.label}}
+          </div>
+          <div class="offline-activities">
+            {{#each groupedActivities.offlineActivities as |offlineActivity|}}
+              {{portfolio/gru-portfolio-content-card content = offlineActivity}}
+            {{/each}}
+          </div>
+        </div>
+      {{/each}}
+    {{else}}
+      <div class="activities">
+        {{#each studiedPortfolioActivities as | activity |}}
+            {{portfolio/gru-portfolio-content-card
+              content = activity
+              onShowActivityReport = "onShowActivityReport"}}
+        {{/each}}
+      </div>
+    {{/if}}
+    {{#if isLoading}}
+      <div class="loading-spinner">
+        {{three-bounce-spinner}}
+      </div>
+    {{/if}}
+  </div>
+  {{#if isShowContentFilters}}
+    {{portfolio/gru-content-filters
+      refreshFilters = "refreshFilters"
+      pickerStartDate = userCreatedAt
+      userPreference = userPreference
+      appliedFilters = appliedFilters
+      subject = subject
+      domain = domain}}
+  {{/if}}
+</div>
+
+{{#if isShowPortfolioActivityReport}}
+  {{reports/pull-up/gru-collection-preview
+      showPullUp=isShowPortfolioActivityReport
+      previewContentId=reportActivityId
+      previewContentType=reportActivityType
+      isReportView = true
+      userId = userId
+    }}
+{{/if}}

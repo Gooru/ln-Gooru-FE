@@ -46,7 +46,7 @@
       .activity-contents {
         display: grid;
         grid-gap: 8px;
-        grid-template-columns: auto auto auto;
+        grid-template-columns: auto auto;
         justify-content: space-around;
         &.cards-2 {
           grid-template-columns: auto auto;

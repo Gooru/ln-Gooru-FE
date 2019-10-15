@@ -175,6 +175,13 @@ export default Ember.Component.extend({
     },
 
     /**
+     * Send action to preview collection
+     */
+    openCollectionPreview(unitId, lessonId, collection) {
+      this.sendAction('onPreviewContent', unitId, lessonId, collection);
+    },
+
+    /**
      * @function goLive
      */
     goLive: function(collection) {
@@ -183,16 +190,6 @@ export default Ember.Component.extend({
         collectionType: collection.get('collectionType')
       };
       this.sendAction('onGoLive', options);
-    },
-
-    /**
-     * Action is responsible to preview the collection / assessment.
-     * @param  {String} unitId
-     * @param  {String} lessonId
-     * @param  {String} collection
-     */
-    openCollectionPreview(unitId, lessonId, collection) {
-      this.sendAction('onPreviewContent', unitId, lessonId, collection);
     },
 
     //Action triggered when click on milestone performance

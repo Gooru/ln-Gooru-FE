@@ -23,29 +23,19 @@
   {{#if (and competency (not isPlayerProficiency))}}
     <div class="signature-content">
       {{reports/pull-up/signature-content-report
-        showGutCompetency=showGutCompetency
-        classFramework=classFramework
-        userId=userId
-        domainCompetencyList=domainCompetencyList
-        collectionPerformances=collectionPerformances
-        showSignatureAssessment=showSignatureAssessment
-        competency=competency
-        isStudent=isStudent
-        isOpenPlayer=isOpenPlayer
-        playerUrl=playerUrl
-        playerContent=playerContent
-      }}
+         showGutCompetency=showGutCompetency
+         classFramework=classFramework
+         userId=userId
+         student=student
+         studentListForSuggestion=studentListForSuggestion
+         onConfirmSuggest="onConfirmSuggest"
+         domainCompetencyList=domainCompetencyList
+         collectionPerformances=collectionPerformances
+         showSignatureAssessment=showSignatureAssessment
+         competency=competency
+         isStudent=isStudent
+         playContent="playContent"
+       }}
     </div>
   {{/if}}
 </div>
-
-{{#if isShowActivityPullup}}
-  {{reports/pull-up/activity-list
-    activityContents=activityContents
-    activityContentType=activityContentType
-    activityTotalHitCount=activityTotalHitCount
-    showPullUp=isShowActivityPullup
-    onResetPullUpData="onResetPullUpData"
-    onClickShowMoreActivity="onClickShowMoreActivity"
-  }}
-{{/if}}

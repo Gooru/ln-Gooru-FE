@@ -5,6 +5,8 @@ export default Ember.Component.extend({
   // Attributes
   classNames: ['inspect', 'student-domain-competency-performance'],
 
+  searchService: Ember.inject.service('api-sdk/search'),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
@@ -46,24 +48,86 @@ export default Ember.Component.extend({
     },
 
     //Action triggered when select a competency
-    onSelectCompetency(competency, studentId) {
-      let component = this;
+    onSelectStudentCompetency(competency, studentId) {
+      const component = this;
       component.set('selectedCompetency', competency);
       component.set('selectedStudentUserId', studentId);
       component.set('isShowCompetencyContentReport', true);
     },
 
-    /**
-     * Action triggered when click global view
-     */
-    onToggleGlobalCompetencyView(gutCode) {
-      let component = this;
-      component.fetchLearningMapsContent(gutCode);
+    onSelectCompetency(competency) {
+      const component = this;
+      competency.domainCode = component.get('activeDomain.domainCode');
+      competency.domainName = component.get('activeDomain.domainName');
+      component.set('selectedCompetencyForSuggestion', competency);
+      component.set('showCompetencyInfo', true);
+    },
+
+    onClosePullOut() {
+      const component = this;
+      component.set('showPullOut', false);
+    },
+
+    onSelectStudentForSuggestion(student) {
+      this.get('studentsSelectedForSuggest').pushObject(student);
+      student.set('selectedForSuggestion', true);
+    },
+
+    onDeSelectStudentForSuggestion(student) {
+      this.get('studentsSelectedForSuggest').removeObject(student);
+      student.set('selectedForSuggestion', false);
+    },
+
+    onSuggestContent(collection, collectionType) {
+      const component = this;
+      component.set('suggestedCollection', collection);
+      component.set('suggestedCollectionType', collectionType);
+      component.set('showSuggestConfirmation', true);
+    },
+
+    onCancelSuggest() {
+      const component = this;
+      component.set('showSuggestConfirmation', false);
+    },
+
+    onConfirmSuggest() {
+      const component = this;
+      const collection = component.get('suggestedCollection');
+      const collectionType = component.get('suggestedCollectionType');
+      const competencyCode = component.get(
+        'selectedCompetencyForSuggestion.competencyCode'
+      );
+      component.suggestContent(collection, collectionType, competencyCode);
+    },
+
+    onClosePullUp() {
+      const component = this;
+      component.set('showCompetencyInfo', false);
     }
   },
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {service} suggestService
+   */
+  suggestService: Ember.inject.service('api-sdk/suggest'),
+
+  /**
+   * @property {String} classId
+   */
+  classId: Ember.computed.alias('class.id'),
+
+  /**
+   * @property {Array} studentsSelectedForSuggest
+   */
+  studentsSelectedForSuggest: Ember.A([]),
+
+  /**
+   * @property {Boolean} showPullOut
+   */
+  showPullOut: false,
 
   /**
    * @property {Array} domainsCompetencyPerformance
@@ -130,6 +194,10 @@ export default Ember.Component.extend({
         competencies: doaminCompetencies.competencies
       });
     }
+  ),
+
+  domainCompetencies: Ember.computed.alias(
+    'activeDomainCompetencyPerformance.domainData.competencies'
   ),
 
   /**
@@ -202,18 +270,20 @@ export default Ember.Component.extend({
    * Method to parse student, domain and user competencies data
    */
   parseStudentCompetencyData(student, domainData, studentDomainCompetencies) {
-    let studentDomainCompetencyData = {
+    let studentDomainCompetencyData = Ember.Object.create({
       firstName: student.firstName,
       lastName: student.lastName,
       userId: student.id,
-      thumbnail: student.avatarUrl,
+      avatarUrl: student.avatarUrl,
       fullName: `${student.lastName} ${student.firstName}`,
       competencies: Ember.A([])
-    };
+    });
     if (studentDomainCompetencies) {
       let competencies = Ember.A([]);
       domainData.competencies.map(competency => {
         let competencyData = {
+          domainCode: domainData.domainCode,
+          domainName: domainData.domainName,
           competencyCode: competency.competencyCode,
           competencySeq: competency.competencySeq,
           competencyName: competency.competencyName,
@@ -240,17 +310,49 @@ export default Ember.Component.extend({
       length: 5,
       isCrosswalk: false
     };
-    return Ember.RSVP
-      .hash({
-        learningMapData: searchService.fetchLearningMapsContent(
-          competencyCode,
-          filters
-        )
-      })
-      .then(({ learningMapData }) => {
-        if (!component.isDestroyed) {
-          component.set('learningMapData', learningMapData);
-        }
-      });
+    component.set('isLoading', true);
+    return Ember.RSVP.hash({
+      learningMapData: searchService.fetchLearningMapsContent(
+        competencyCode,
+        filters
+      )
+    }).then(({ learningMapData }) => {
+      if (!component.isDestroyed) {
+        component.set('learningMapData', learningMapData);
+        component.set('isLoading', false);
+      }
+    });
+  },
+
+  suggestContent(collection, collectionType, competencyCode) {
+    const component = this;
+    const students = component.get('studentsSelectedForSuggest');
+    students.map(student => {
+      let contextParams = {
+        user_id: student.get('userId'),
+        class_id: component.get('classId'),
+        suggested_content_id: collection.get('id'),
+        suggestion_origin: 'teacher',
+        suggestion_originator_id: component.get('session.userId'),
+        suggestion_criteria: 'performance',
+        suggested_content_type: collectionType,
+        suggested_to: 'student',
+        suggestion_area: 'proficiency',
+        tx_code: competencyCode,
+        tx_code_type: 'competency'
+      };
+      return component.get('suggestService').suggestContent(contextParams);
+    });
+    Ember.RSVP.all(students).then(function() {
+      component.set('studentsSelectedForSuggest', Ember.A([]));
+      component
+        .get('activeDomainCompetencyPerformance.studentCompetencies')
+        .filterBy('selectedForSuggestion', true)
+        .map(data => {
+          data.set('selectedForSuggestion', false);
+        });
+      component.set('showSuggestConfirmation', false);
+      component.set('showPullOut', false);
+    });
   }
 });

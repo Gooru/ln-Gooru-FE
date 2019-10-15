@@ -12,9 +12,17 @@ export default Ember.Component.extend({
     component.openPullUp();
   },
 
+  didDestroyElement() {
+    this.set('activityContents', Ember.A([]));
+  },
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    onSuggestContent(collection) {
+      let component = this;
+      component.sendAction('onSuggestContent', collection);
+    },
     /**
      * Action triggered when close pull up
      */
@@ -51,9 +59,9 @@ export default Ember.Component.extend({
    */
   isShowMoveVisible: Ember.computed('activityContents', function() {
     let component = this;
-    let activityTotalHitCount = component.get('activityTotalHitCount');
+    let offsetCount = component.get('offsetCount');
     let numberOfActivityContents = component.get('activityContents.length');
-    return activityTotalHitCount > numberOfActivityContents;
+    return offsetCount === numberOfActivityContents && offsetCount >= 5;
   }),
 
   // -------------------------------------------------------------------------
@@ -65,7 +73,7 @@ export default Ember.Component.extend({
     let component = this;
     component.$().animate(
       {
-        top: '9%'
+        top: '0%'
       },
       400
     );

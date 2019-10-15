@@ -21,8 +21,20 @@ export default Ember.Controller.extend(StudentLearnerProficiency, {
 
   actions: {
     closePullUp() {
-      let Controller = this;
-      Controller.set('isOpenPlayer', false);
+      const component = this;
+      component.set('isOpenPlayer', false);
+    },
+
+    playContent(queryParams, contentId, content) {
+      const component = this;
+      component.set(
+        'playerUrl',
+        component.target
+          .get('router')
+          .generate('player', contentId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', content);
     }
   }
 });

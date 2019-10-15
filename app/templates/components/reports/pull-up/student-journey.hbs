@@ -1,8 +1,31 @@
 <div class="heading">{{t (if isStudent 'student-journey.heading' 'student-journey.teacher-heading')}}</div>
-<div class="collections-accordion">
+<div class="portfolio-contents-container">
+  {{portfolio/gru-contents-panel
+    contentType = 'offline-activity'
+    userId = userId
+    competency = competency
+    isDisableFilter = true
+    isExpanded = true}}
+
+  {{portfolio/gru-contents-panel
+    contentType = 'collection'
+    userId = userId
+    competency = competency
+    isDisableFilter = true
+    isExpanded = false}}
+
+  {{portfolio/gru-contents-panel
+    contentType = 'assessment'
+    userId = userId
+    competency = competency
+    isDisableFilter = true
+    isExpanded = false}}
+</div>
+<!-- NOTE retaining this container until move things to prod -->
+<div class="collections-accordion out-of-scope">
   {{#if collectionPerformances}}
     {{#each collectionPerformances as |collectionPerformance|}}
-      <div class="collection-panel">
+      <div class="collection-panel {{if (and (eq collectionPerformance.collectionType 'offline-activity') (eq collectionPerformance.contentSource DAILY_CLASS)) 'disable-event'}}">
         <i class="icon {{collectionPerformance.collectionType}}"></i>
         <div class="collection-title" {{action 'onPreviewContent' collectionPerformance}}>{{collectionPerformance.title}}</div>
         {{#if ( or (eq collectionPerformance.collectionType 'collection') (eq collectionPerformance.collectionType 'collection-external'))}}
@@ -37,7 +60,6 @@
   }}
 {{/if}}
 
-
 {{#if showStudentDcaReport}}
   {{reports/pull-up/dca-student-collection-report useSession=true showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}
@@ -63,4 +85,25 @@
       previewContentType=previewContentType
       playerContext=previewPlayerContext
     }}
+{{/if}}
+
+
+{{#if isShowStudentOfflineActivityReport}}
+  {{reports/pull-up/oa-preview
+    showPullUp=isShowStudentOfflineActivityReport
+    oaId=studentReportContextData.collectionId
+    classId=studentReportContextData.classId
+    reportContext=studentReportContextData
+    isReportView=true
+    isCmReport=isCmReport
+  }}
+{{/if}}
+
+{{#if isShowOfflineActivityPreview}}
+  {{reports/pull-up/oa-preview
+    showPullUp=isShowOfflineActivityPreview
+    oaId=previewContent.id
+    classId=previewPlayerContext.classId
+    isReportView=false
+  }}
 {{/if}}

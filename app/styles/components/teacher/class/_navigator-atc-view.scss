@@ -215,15 +215,15 @@
           }
 
           .mastered-count {
-            background-color: #0076ba;
+            background-color: $blue-mastery;
           }
 
           .inprogress-count {
-            background-color: #00b1e5;
+            background-color: $blue-in-progress;
           }
 
           .not-started-count {
-            background-color: #e7e8e9;
+            background-color: $gray-no-started;
           }
         }
 
@@ -237,15 +237,15 @@
           }
 
           .mastered {
-            color: #0076ba;
+            color: $blue-mastery;
           }
 
           .inprogress {
-            color: #00b1e5;
+            color: $blue-in-progress;
           }
 
           .not-started {
-            color: #35424b;
+            color: $gray-no-started;
           }
         }
       }

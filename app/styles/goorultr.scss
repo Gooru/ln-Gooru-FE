@@ -73,7 +73,6 @@
 @import "components/datepicker-field";
 @import "components/search-filter";
 @import "components/rating-stars";
-@import "components/collection-results";
 @import "components/gru-resource-results";
 @import "components/grade-dropdown";
 @import "components/gru-breadcrumb";
@@ -155,12 +154,9 @@
 @import "components/class/analytics/performance/student/gru-student-performance";
 @import "components/class/analytics/performance/student/gru-unit-performance";
 @import "components/class/analytics/performance/student/gru-lesson-performance";
-@import "components/class/analytics/performance/teacher/gru-metrics-table";
-@import "components/class/analytics/performance/teacher/gru-metrics-sub-header";
 @import "components/class/overview/gru-accordion-course";
 @import "components/class/overview/gru-accordion-unit";
 @import "components/class/overview/gru-accordion-lesson";
-@import "components/class/gru-learner-pathway";
 @import "components/class/gru-report-panel";
 @import "components/class/learner/gru-learner-accordion-unit";
 @import "components/class/learner/gru-learner-accordion-lesson";
@@ -169,9 +165,7 @@
 @import "components/content/assessments/gru-assessment-edit";
 @import "components/content/activity/_gru-activity-edit.scss";
 
-@import "components/content/activity/_gru-activity-edit.scss";
 @import "components/content/gru-audience";
-@import "components/content/gru-category";
 @import "components/content/gru-image";
 @import "components/content/gru-settings-edit";
 @import "components/content/gru-depth-of-knowledge";
@@ -325,7 +319,7 @@
 @import "components/reports/pull-up/student-activity-report";
 @import "components/reports/pull-up/activity/class-summary-report";
 @import "components/reports/pull-up/activity/monthly-summary-report";
-@import "components/reports/pull-up/open-player-pull-up";
+@import "components/reports/pull-up/player-pull-up";
 @import "components/search/gru-question-options";
 @import "components/search/gru-resource-options";
 @import "components/student/gru-performance-filter-panel";
@@ -345,6 +339,7 @@
 @import "components/teacher/class/ca-student-list-pull-up";
 @import "components/teacher/navigator-math-banner";
 @import "components/teacher/class/milestone-course-map";
+@import "components/teacher/class/lesson-plan";
 @import "components/taxonomy/gru-subject-course-picker";
 @import "components/taxonomy/gru-subject-picker";
 @import "components/taxonomy/gru-taxonomy-selector";
@@ -489,7 +484,9 @@
 
 //Portfolio
 @import "controllers/profile/portfolio";
-@import "components/portfolio/gru-offline-activities-panel";
-@import "components/portfolio/gru-assessments-panel";
-@import "components/portfolio/gru-collections-panel";
 @import "components/portfolio/gru-portfolio-content-card";
+@import "components/portfolio/gru-content-filters";
+@import "components/portfolio/gru-contents-panel";
+@import "components/gru-gut-filter";
+
+@import "components/suggestion-panel";

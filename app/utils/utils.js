@@ -1226,3 +1226,16 @@ export function getObjectsDeepCopy(objectElements) {
   }
   return clonedObjectElements;
 }
+
+/**
+ * Different color range based on status
+ * @type {Object}
+ */
+export var colorsBasedOnStatus = Ember.Object.create({
+  '0': '#e7e8e9', // Not started
+  '1': '#1aa9eb', //in-progress
+  '2': '#1d7dc2', //Mastered
+  '3': '#1d7dc2',
+  '4': '#1d7dc2',
+  '5': '#1d7dc2'
+});
