@@ -33,6 +33,12 @@ export default Ember.Component.extend({
   length: 5,
 
   actions: {
+    onSuggestContent(collection) {
+      const component = this;
+      const activityContentType = component.get('activityContentType');
+      component.sendAction('onSuggestContent', collection, activityContentType);
+    },
+
     onSelectActivityContent(contentType) {
       let component = this;
       component.set('activityContentType', contentType);

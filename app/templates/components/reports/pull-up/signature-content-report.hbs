@@ -2,44 +2,40 @@
   {{three-bounce-spinner}}
 {{else}}
   <div class="signature-content">
-    {{#if showSignatureAssessment}}
-      <div class="competency-content">
-        <div class="competency-img"></div>
-        <div class="competency-note">{{t 'report.competency-report.note'}}</div>
-      </div>
-    {{/if}}
-    {{#if signatureContent}}
-      <div class="signature-accordion">
-        <div class="signature-panel">
-          <div class="signature-header">
-            <i class="signature-icon {{collectionType}}"></i>
-            <div class="signature {{unless isStudent 'hide-play'}}">
-              <div class="title ellipsis" {{action 'onPreviewContent'}} title="{{signatureContent.title}}">
-                {{signatureContent.title}}</div>
-              <div class="content-count">
-                {{#if (or content.questionCount content.resourceCount)}}
-                  <span class="{{if (gt content.resourceCount 0) '' 'invisible'}}" title="{{t "common.resources"}}">{{gru-icon name='local_library'}}</span><span class="{{if (gt content.resourceCount 0) '' 'invisible'}}">{{content.resourceCount}}</span>
-                  <span class="{{if (gt content.questionCount 0) '' 'invisible'}}" title="{{t "common.questions"}}">{{gru-icon name='help_outline'}}</span><span class="{{if (gt content.questionCount 0) '' 'invisible'}}">{{content.questionCount}}</span>
-                {{/if}}
-              </div>
-              {{#if isStudent}}
-                {{#link-to 'player' signatureContent.id (query-params type=collectionType role='student' source=source) target="_blank"}}
-                  <div class="action">
-                    {{gru-icon name='play_arrow'}}
-                  </div>
-                {{/link-to}}
-              {{/if}}
-              <span class="suggestion-icon">
-                {{gru-icon name='explore'}}
-              </span>
-            </div>
-          </div>
+    {{#each suggestions as |suggestion|}}
+      {{suggestion-panel
+        isStudent=isStudent
+        collectionType=suggestion.suggestedContentType
+        content=suggestion
+        isTeacherSuggestion=true
+        source=source
+        onPreviewContent="onPreviewContent"
+        onSuggestContent="onSuggestContent"
+      }}
+    {{else}}
+      {{#if showSignatureAssessment}}
+        <div class="competency-content">
+          <div class="competency-img"></div>
+          <div class="competency-note">{{t 'report.competency-report.note'}}</div>
         </div>
-      </div>
-    {{/if}}
+      {{/if}}
+      {{#if signatureContent}}
+        <div class="signature-accordion">
+          {{suggestion-panel
+          isStudent=isStudent
+          collectionType=collectionType
+          content=signatureContent
+          isTeacherSuggestion=false
+          source=source
+          doSuggest=true
+          onPreviewContent="onPreviewContent"
+          onSuggestContent="onSuggestContent"
+        }}
+        </div>
+      {{/if}}
+    {{/each}}
   </div>
-
-    {{reports/pull-up/competency-info-content
+  {{reports/pull-up/competency-info-content
     userId=userId
     competency=competency
     microCompetencies=microCompetencies
@@ -47,7 +43,9 @@
     userId=userId
     prequisiteCompetencies=prerequisites
     learningMapData=learningMapData
-    isStudent=isStudent}}
+    onSuggestContent="onSuggestContent"
+    isStudent=isStudent
+  }}
 {{/if}}
 {{#if (and isShowContentPreview (not isStudent))}}
   {{reports/pull-up/gru-collection-preview
@@ -56,4 +54,13 @@
     previewContentType=previewContentType
     playContent=false
   }}
+{{/if}}
+{{#if showSuggestConfirmation}}
+  {{cards/suggest-confirmation
+   collection=suggestedCollection
+   students=students
+   contentType=suggestedCollectionType
+   onCancelSuggest="onCancelSuggest"
+   onConfirmSuggest="onConfirmSuggest"
+ }}
 {{/if}}

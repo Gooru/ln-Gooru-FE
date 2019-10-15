@@ -115,7 +115,7 @@ export default ApplicationAdapter.extend({
    * @param {SuggestContext} context
    * @returns {*}
    */
-  suggestForCA(context) {
+  suggestContent(context) {
     const adapter = this;
     const namespace = adapter.get('namespaceST');
     const url = `${namespace}/track`;
@@ -146,6 +146,42 @@ export default ApplicationAdapter.extend({
       processData: false,
       headers: adapter.defineHeaders(),
       data: JSON.stringify(context)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Add class-activity suggestions
+   */
+  fetchAcrossClassSuggestionsByCode(userId, code, params) {
+    const adapter = this;
+    const namespace = adapter.get('namespaceST');
+    const url = `${namespace}/user/${userId}/code/${code}/codetype/competency`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: params
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Add class-activity suggestions
+   */
+  fetchInClassSuggestionsByCode(userId, code, params) {
+    const adapter = this;
+    const namespace = adapter.get('namespaceST');
+    const url = `${namespace}/user/${userId}/code/${code}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: params
     };
     return Ember.$.ajax(url, options);
   },

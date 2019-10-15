@@ -878,7 +878,7 @@ export default Ember.Component.extend({
         tx_code_type: null,
         ca_id: component.get('context.caContentId')
       };
-      return component.get('suggestService').suggestForCA(contextParams);
+      return component.get('suggestService').suggestContent(contextParams);
     });
 
     Ember.RSVP.all(userIds).then(function() {

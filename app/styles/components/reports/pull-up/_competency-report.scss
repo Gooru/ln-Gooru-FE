@@ -98,6 +98,7 @@
           color: $dark-400;
           font-size: 16px;
           justify-self: center;
+          height: 100%;
 
           .badge {
             background-image: url("gooru/gooru-edu-rights-badge.png");
@@ -112,7 +113,6 @@
       }
 
       .close-pullup {
-        padding-top: 10px;
         opacity: 0.5;
         align-items: center;
         display: flex;
