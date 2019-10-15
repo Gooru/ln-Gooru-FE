@@ -1,4 +1,4 @@
-.open-player-pull-up {
+.player-pull-up {
   width: 100%;
   height: 100vh;
   position: fixed;
@@ -12,6 +12,10 @@
 
   .iframe-player-container {
     .iframe-container {
+      display: none;
+      &.not-loading {
+        display: block;
+      }
       width: 100%;
       height: 100vh;
       iframe {

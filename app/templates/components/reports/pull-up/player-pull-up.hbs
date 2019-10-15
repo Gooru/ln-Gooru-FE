@@ -6,7 +6,7 @@
       <span>Loading...</span>
     </div>
   {{/if}}
-    <div class="iframe-container">
+  <div class="iframe-container {{if isLoading '' 'not-loading'}}">
     <iframe src="{{rootURL}}{{playerUrl}}"></iframe>
   </div>
 </div>

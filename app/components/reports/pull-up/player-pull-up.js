@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['player', 'open-player-pull-up'],
+  classNames: ['player', 'player-pull-up'],
 
   //--------------------------------------------------------------------------
   //property
