@@ -1205,7 +1205,6 @@ export default Ember.Component.extend({
           collectionSubType,
           pathId,
           classId,
-          pathType,
           milestoneId
         );
     } else {
