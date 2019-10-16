@@ -7,7 +7,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     editingContent: {
       refreshModel: true
     },
-    isLibraryContent: false
+    isLibraryContent: false,
+    isPreviewReferrer: false
   },
 
   // -------------------------------------------------------------------------
@@ -38,6 +39,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   // Methods
 
   model: function(params) {
+    this.set('isPreviewReferrer', params.isPreviewReferrer);
+
     const route = this;
     return route
       .get('assessmentService')
@@ -67,7 +70,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           course: course,
           isEditing: !!isEditing,
           editingContent: editingContent,
-          isLibraryContent
+          isLibraryContent,
+          isPreviewReferrer: params.isPreviewReferrer
         });
       });
   },
@@ -84,6 +88,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('editingContent', model.editingContent);
     controller.set('isAssessment', true);
     controller.set('isLibraryContent', model.isLibraryContent);
+    controller.set('isPreviewReferrer', model.isPreviewReferrer);
 
     route
       .get('centurySkillService')
@@ -95,5 +100,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     if (model.isEditing || model.editingContent) {
       controller.set('tempCollection', model.assessment.copy());
     }
+  },
+  resetController(controller) {
+    controller.set('isPreviewReferrer', undefined);
   }
 });
