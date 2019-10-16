@@ -219,11 +219,13 @@ export default Ember.Component.extend({
         {
           queryParams: {
             editingContent: true,
-            isLibraryContent: true
+            isLibraryContent: true,
+            isPreviewReferrer: false
           }
         }
       );
     },
+
     /**
      * Action triggered when click preview button
      */
