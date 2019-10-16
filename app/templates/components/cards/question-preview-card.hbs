@@ -10,11 +10,9 @@
         <div class="question-reaction">
           {{reaction-icon question.reaction }}
         </div>
-        {{#if question.score}}
-          <div class="question-score">
-            {{question.score}}/{{question.maxScore}}
-          </div>
-        {{/if}}
+        <div class="question-score">
+          {{question.score}}/{{question.maxScore}}
+        </div>
         <div class="question-timespent">
           {{format-time question.timespent}}
         </div>

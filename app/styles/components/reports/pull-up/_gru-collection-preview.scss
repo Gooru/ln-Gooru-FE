@@ -192,6 +192,13 @@
           justify-items: right;
           column-gap: 15px;
           height: inherit;
+
+          &.collection-performance {
+            grid-template-columns: 1fr;
+            .timespent-container {
+              padding-right: 15px;
+            }
+          }
           .timespent-container {
             display: grid;
             grid-template-columns: auto auto;
