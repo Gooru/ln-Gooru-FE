@@ -104,7 +104,7 @@ export default Ember.Component.extend({
       this.get('router').transitionTo(
         'content.collections.edit',
         collection.get('id'),
-        { queryParams: { isLibraryContent: true } }
+        { queryParams: { isLibraryContent: true, isPreviewReferrer: false } }
       );
     },
 
