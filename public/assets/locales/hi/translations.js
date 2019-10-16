@@ -2738,5 +2738,6 @@ window.i18ln = {
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
   'common.no-lesson-plan-info-message':
     'This lesson does have any lesson plan.',
-  'student-resource': 'Student Resources'
+  'student-resource': 'Student Resources',
+  'common-show': 'Show'
 };
