@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -108,6 +110,12 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Properties
+
+  /**
+   * @property {Boolean}
+   * Property to store given screen value is compatible
+   */
+  isMobile: isCompatibleVW(SCREEN_SIZES.SMALL),
 
   /**
    * @property {service} suggestService
