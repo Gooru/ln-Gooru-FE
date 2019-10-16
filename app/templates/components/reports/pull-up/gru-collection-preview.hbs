@@ -41,7 +41,7 @@
         </div>
       {{/if}}
       {{#if isReportView}}
-        <div class="activity-performance-container">
+        <div class="activity-performance-container {{if isCollection 'collection-performance'}}">
           <div class="timespent-container">
             <div class="timespent-icon">
               {{gru-icon name="query_builder"}}
@@ -57,9 +57,11 @@
               </div>
             </div>
           </div>
-          <div class="activity-score-container grade-range-{{grade-range activeAttempt.score}}">
-            {{activeAttempt.score}}%
-          </div>
+          {{#if isAssessment}}
+            <div class="activity-score-container grade-range-{{grade-range activeAttempt.score}}">
+              {{activeAttempt.score}}%
+            </div>
+          {{/if}}
         </div>
       {{/if}}
     </div>

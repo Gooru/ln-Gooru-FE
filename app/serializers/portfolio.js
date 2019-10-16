@@ -139,13 +139,13 @@ export default Ember.Object.extend(ConfigurationMixin, {
 
   serializeActivityPerformance(payload) {
     const serializer = this;
-    let content = payload.collection || payload.assessment;
+    let collection = payload.collection || payload.assessment;
     let resources = payload.resources || payload.questions;
-    let collection = content ? content[0] : {};
+    // let collection = content ? content[0] : {};
     return Ember.Object.create({
       score: collection.score,
       collectionId: collection.id,
-      timeSpent: collection.timespent,
+      timespent: collection.timespent,
       resourceResults: serializer.normalizeResourceResults(resources),
       reaction: collection.reaction,
       submittedAt: collection.eventTime ? toLocal(collection.eventTime) : null,
@@ -167,34 +167,41 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeResourceResult(resourceResult) {
     const serializer = this;
     let questionType = resourceResult.questionType;
-    if (Object.values(QUESTION_TYPES).indexOf(questionType) <= -1) {
-      questionType = getQuestionTypeByApiType(questionType);
-    }
+    let questionUtil = undefined;
+    let answerObjects = undefined;
     let resourceType = resourceResult.resourceType;
-    let answerObjects = serializer
-      .get('analyticsSerializer')
-      .normalizeAnswerObjects(resourceResult.answerObject, questionType);
+    if (resourceType === 'question') {
+      if (Object.values(QUESTION_TYPES).indexOf(questionType) <= -1) {
+        questionType = getQuestionTypeByApiType(questionType);
+      }
+      answerObjects = serializer
+        .get('analyticsSerializer')
+        .normalizeAnswerObjects(resourceResult.answerObject, questionType);
+      questionUtil = getQuestionUtil(questionType).create();
+    }
 
     let eventTime = resourceResult.eventTime
       ? toLocal(resourceResult.eventTime)
       : null;
 
-    let questionUtil = getQuestionUtil(questionType).create();
-
     return Ember.Object.create({
       //Commons fields for real time and student collection performance
       resourceId: resourceResult.id,
       reaction: resourceResult.reaction,
-      timeSpent: resourceResult.timeSpent,
+      timespent: resourceResult.timespent || resourceResult.timeSpent,
       answerObject: resourceResult.answerObject,
-      userAnswer: questionUtil.toUserAnswer(answerObjects),
+      answerStatus: resourceResult.answerStatus,
+      userAnswer:
+        resourceType === 'question'
+          ? questionUtil.toUserAnswer(answerObjects)
+          : null,
       correct: resourceResult.score > 0,
       score: resourceResult.score,
       title: resourceResult.title,
       maxScore: resourceResult.maxScore,
       resourceType,
       questionType,
-      eventTime: eventTime,
+      eventTime,
       isGraded: resourceResult.isGraded
     });
   },

@@ -34,7 +34,9 @@ export default Ember.Mixin.create({
       : Ember.Object.create({});
   }),
 
-  totalNumberOfAttempts: Ember.computed.alias('activityAttempts.length'),
+  totalNumberOfAttempts: Ember.computed('activityAttempts', function() {
+    return this.get('activityAttempts.length') - 1;
+  }),
 
   loadActivityAttempts() {
     const mixin = this;
@@ -59,7 +61,7 @@ export default Ember.Mixin.create({
     }).then(({ activityPerformance }) => {
       if (!mixin.isDestroyed) {
         mixin.set('activityPerformance', activityPerformance);
-        mixin.parseAssessmentPerformance();
+        mixin.parseActivityPerformance();
       }
     });
   },
