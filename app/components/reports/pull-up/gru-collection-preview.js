@@ -5,7 +5,8 @@ import {
   PLAYER_WINDOW_NAME,
   PLAYER_EVENT_SOURCE,
   ROLES,
-  CONTENT_TYPES
+  CONTENT_TYPES,
+  ASSESSMENT_SHOW_VALUES
 } from 'gooru-web/config/config';
 import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
 import ModalMixin from 'gooru-web/mixins/modal';
@@ -194,6 +195,18 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       .get('previewContentType')
       .includes(CONTENT_TYPES.COLLECTION);
   }),
+
+  isShowReportCorrectAnswer: Ember.computed(
+    'previewContentType',
+    'previewContent',
+    function() {
+      const component = this;
+      const previewContent = component.get('previewContent');
+      return (
+        previewContent.get('showFeedback') !== ASSESSMENT_SHOW_VALUES.NEVER
+      );
+    }
+  ),
 
   //--------------------------------------------------------------------------
   // Methods
