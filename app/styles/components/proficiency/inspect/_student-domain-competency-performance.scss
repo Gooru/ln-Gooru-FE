@@ -4,6 +4,18 @@
   grid-gap: 10px;
   height: calc(100vh - 120px);
 
+  .inspect-competency {
+    .competency-info-pull-up {
+      &.open {
+        height: 385px;
+      }
+
+      &.expand {
+        height: calc(100% - 100px);
+      }
+    }
+  }
+
   .domain-right-panel {
     position: relative;
     height: inherit;
@@ -312,18 +324,10 @@
     @media screen and (max-width: $screen-568) {
       .performance-body-container {
         .students-container {
-          margin-top: 0;
-
           .student-container {
             .student-name {
               font-size: 12px;
             }
-          }
-        }
-
-        .students-competencies-performance-container {
-          .competencies-info {
-            display: none;
           }
         }
       }
@@ -393,6 +397,19 @@
           }
         }
       }
+    }
+  }
+}
+@media screen and (max-width: $screen-767) {
+  .inspect.student-domain-competency-performance {
+    grid-template-columns: unset;
+
+    .domain-competency-performance-container {
+      padding: 0;
+    }
+
+    .domain-right-panel {
+      display: none;
     }
   }
 }
