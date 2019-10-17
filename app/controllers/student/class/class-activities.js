@@ -79,7 +79,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       collection,
       studentPerformance,
       activityDate,
-      classActivity
+      classActivity,
+      isSuggested
     ) {
       let component = this;
       let userId = component.get('session.userId');
@@ -87,8 +88,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let params = {
         userId: userId,
         classId: component.get('class.id'),
-        collectionId: collection.get('id'),
-        type: collection.get('format'),
+        collectionId:
+          collection.get('id') || collection.get('suggestedContentId'),
+        type:
+          collection.get('format') || collection.get('suggestedContentType'),
         isStudent: true,
         collection,
         activityDate,
@@ -109,6 +112,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       } else {
         component.set('showStudentDcaReport', true);
       }
+      component.set('isSuggestedContent', isSuggested);
       component.set('studentReportContextData', params);
     },
 
@@ -353,11 +357,12 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const caIds = classActivities.map(classActivity => classActivity.get('id'));
     const context = {
       scope: PLAYER_EVENT_SOURCE.CLASS_ACTIVITY,
-      caIds
+      caIds,
+      userId
     };
     controller
       .get('suggestService')
-      .getSuggestionCountForCA(userId, classId, context)
+      .getSuggestionCountForCA(classId, context)
       .then(contents => {
         contents.map(content => {
           const caId = content.get('caId');
@@ -375,12 +380,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     const context = {
       scope: PLAYER_EVENT_SOURCE.CLASS_ACTIVITY,
       caIds: [caId],
-      detail: true
+      detail: true,
+      userId
     };
     if (!classActivity.get('suggestions')) {
       controller
         .get('suggestService')
-        .fetchSuggestionsByCAId(userId, classId, context)
+        .fetchSuggestionsByCAId(classId, context)
         .then(content => {
           let suggestions = content.get('suggestions');
           classActivity.set('suggestions', suggestions);

@@ -135,10 +135,10 @@ export default ApplicationAdapter.extend({
    * @param {SuggestContext} context
    * @returns {*}
    */
-  fetchSuggestionForCA(userId, classId, context) {
+  fetchSuggestionForCA(classId, context) {
     const adapter = this;
     const namespace = adapter.get('namespaceST');
-    const url = `${namespace}/ca/user/${userId}/class/${classId}`;
+    const url = `${namespace}/ca/class/${classId}`;
     const options = {
       type: 'POST',
       contentType: 'application/json; charset=utf-8',

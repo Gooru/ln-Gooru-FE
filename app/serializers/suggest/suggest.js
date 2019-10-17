@@ -7,6 +7,8 @@ import SearchSerializer from 'gooru-web/serializers/search/search';
  * @typedef {Object} SuggestSerializer
  */
 export default SearchSerializer.extend({
+  session: Ember.inject.service('session'),
+
   /**
    * Normalize the suggest resources response
    *
@@ -43,18 +45,24 @@ export default SearchSerializer.extend({
    * @param payload is the endpoint response in JSON format
    * @returns {Array[]}
    */
-  normalizeSuggestionContents: function(payload) {
+  normalizeCASuggestionContents(payload) {
     let result = Ember.Object.create({
-      suggestions: this.normalizeSuggestionList(payload.suggestions),
+      caId: payload.caId,
+      suggestions: this.normalizeCASuggestionList(payload.suggestedContents),
       total: payload.total
     });
-    if (payload.caId) {
-      result.set('caId', payload.caId);
-    }
     return result;
   },
 
-  normalizeSuggestionList(suggestions) {
+  normalizeProficiencySuggestionContents(payload) {
+    let result = Ember.Object.create({
+      suggestions: this.normalizeProficiencySuggestionList(payload.suggestions),
+      total: payload.total
+    });
+    return result;
+  },
+
+  normalizeProficiencySuggestionList(suggestions) {
     return suggestions.map(suggestion => {
       return Ember.Object.create({
         id: suggestion.id,
@@ -62,7 +70,6 @@ export default SearchSerializer.extend({
         lessonId: suggestion.lessonId,
         collectionId: suggestion.collectionId,
         classId: suggestion.classId,
-        caId: suggestion.caId,
         suggestedContentId: suggestion.suggestedContentId,
         suggestedContentType: suggestion.suggestedContentType.toLowerCase(),
         suggestedTo: suggestion.suggestedTo,
@@ -80,6 +87,56 @@ export default SearchSerializer.extend({
         accepted: suggestion.accepted,
         updatedAt: suggestion.updatedAt
       });
+    });
+  },
+
+  normalizeCASuggestionList(suggestions) {
+    return suggestions.map(suggestion => {
+      return Ember.Object.create({
+        collectionId: suggestion.collectionId,
+        classId: suggestion.classId,
+        suggestedContentId: suggestion.suggestedContentId,
+        suggestedContentType: suggestion.suggestedContentType,
+        title: suggestion.title,
+        userCount: suggestion.userCount,
+        url: suggestion.url,
+        resourceCount: suggestion.resource_count,
+        questionCount: suggestion.question_count,
+        suggestedForContent: this.normalizeSuggestedForContent(
+          suggestion.suggestedForContent
+        ),
+        suggestedToContext: this.normalizeSuggestedToContext(
+          suggestion.suggestedToContext[0]
+        ),
+        taxonomy: suggestion.taxonomy
+      });
+    });
+  },
+
+  normalizeSuggestedForContent(payload) {
+    const basePath = this.get('session.cdnUrls.content');
+    const thumbnailUrl = basePath + payload.thumbnail;
+    let content = Ember.Object.create({
+      collectionId: payload.collectionId,
+      title: payload.title,
+      thumbnail: thumbnailUrl,
+      taxonomy: payload.taxonomy,
+      url: payload.url,
+      questionCount: payload.question_count,
+      resourceCount: payload.resource_count
+    });
+    return content;
+  },
+
+  normalizeSuggestedToContext(payload) {
+    return Ember.Object.create({
+      id: payload.id,
+      suggestedTo: payload.suggestedTo,
+      suggestionArea: payload.suggestionArea,
+      suggestionOrigin: payload.suggestionOrigin,
+      suggestionCriteria: payload.suggestionCriteria,
+      suggestionOriginatorId: payload.suggestionOriginatorId,
+      userId: payload.userId
     });
   }
 });

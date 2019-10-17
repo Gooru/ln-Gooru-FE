@@ -74,16 +74,15 @@ export default Ember.Component.extend({
      */
     onPlaySuggestionContent(suggestionContent) {
       const component = this;
-      const content = suggestionContent.get('collection');
-      const contentId = content.get('id');
+      const contentId = suggestionContent.get('suggestedContentId');
       const collectionType = suggestionContent.get('suggestedContentType');
       const classData = component.get('class');
       const classId = classData.get('id');
-      const caContentId = suggestionContent.get('caId');
-      const pathId = suggestionContent.get('id');
+      const caContentId = component.get('classActivity.id');
+      const pathId = suggestionContent.get('suggestedToContext.id');
       const pathType = component.get('suggestionPathType');
       let queryParams = {
-        collectionId: content.get('id'),
+        collectionId: contentId,
         classId,
         role: 'student',
         source: component.get('source'),
@@ -122,7 +121,21 @@ export default Ember.Component.extend({
         assessment,
         studentPerformance,
         activityDate,
-        classActivity
+        classActivity,
+        false
+      );
+    },
+
+    studentSuggestionReport(suggestion) {
+      let classActivity = this.get('classActivity');
+      const activityDate = this.get('activityDate');
+      this.sendAction(
+        'studentDcaReport',
+        suggestion,
+        suggestion.get('performance'),
+        activityDate,
+        classActivity,
+        true
       );
     },
 
