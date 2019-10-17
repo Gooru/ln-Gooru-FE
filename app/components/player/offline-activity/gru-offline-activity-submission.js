@@ -551,8 +551,10 @@ export default Ember.Component.extend({
   afterRender: function() {
     const component = this;
     const activityTasks = component.get('offlineActivity.tasks') || Ember.A([]);
-    activityTasks.map(act => act.set('focus', false));
-    activityTasks.get('firstObject').set('focus', true); //first task to focus
+    if (activityTasks && activityTasks.length > 0) {
+      activityTasks.map(act => act.set('focus', false));
+      activityTasks.get('firstObject').set('focus', true); //first task to focus
+    }
   },
 
   /**
