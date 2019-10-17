@@ -227,7 +227,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     if (component.get('isReportView')) {
       previewContentPromise.then(function() {
         //Method implemented in mixin
-        component.loadActivityAttempts();
+        component.loadActivityAttempts().then(function(activityAttempts) {
+          if (activityAttempts.length) {
+            component.loadActivityPerformance(activityAttempts.objectAt(0));
+          }
+        });
       });
     }
   },

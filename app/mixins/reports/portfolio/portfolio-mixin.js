@@ -40,15 +40,13 @@ export default Ember.Mixin.create({
 
   loadActivityAttempts() {
     const mixin = this;
-    Ember.RSVP.hash({
+    return Ember.RSVP.hash({
       activityAttempts: mixin.fetchActivityAttempts()
     }).then(({ activityAttempts }) => {
       if (!mixin.isDestroyed) {
         mixin.set('activityAttempts', activityAttempts);
-        if (activityAttempts.length) {
-          mixin.loadActivityPerformance(activityAttempts.objectAt(0));
-        }
       }
+      return activityAttempts;
     });
   },
 
