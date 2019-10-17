@@ -39,7 +39,7 @@
       </div>
       <div class="activate">
         {{#if (and showDcaAssignButton (not classActivity.isCompleted))}}
-          <span class="dca-assign" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.assign"}}">
+          <span class="dca-assign" data-toggle="tooltip" data-html="true" data-placement="top" title=" {{if (gt item.taskCount 0) (t 'common.assign') (t 'oa.teacher-task.tooltip.disable-msg') }}">
             {{#unless classActivity.isActive}}
               {{#if (gt item.taskCount 0)}}
                 {{gru-switch switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=classActivity.isActive item=item}}
