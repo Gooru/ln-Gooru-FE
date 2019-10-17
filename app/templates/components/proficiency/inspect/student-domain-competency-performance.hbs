@@ -69,6 +69,22 @@
       {{/each}}
     </div>
   </div>
+  {{#if isMobile}}
+    <div class="inspect-competency">
+      {{proficiency/competency-info-pull-up
+      fwDomains=fwDomains
+      fwCompetencies=fwCompetencies
+      students=studentsSelectedForSuggest
+      isInspectCompetency=showCompetencyInfo
+      class=class
+      onClosePullUp="onClosePullUp"
+      isStudent=false
+      studentListForSuggestion=studentsSelectedForSuggest
+      competency=selectedCompetencyForSuggestion
+      domainCompetencyList=domainCompetencies
+    }}
+    </div>
+  {{/if}}
 </div>
 <div class="domain-right-panel">
   {{proficiency/domain-info-pull-up

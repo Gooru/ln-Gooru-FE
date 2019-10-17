@@ -41,7 +41,7 @@
         </div>
       {{/if}}
       {{#if isReportView}}
-        <div class="activity-performance-container">
+        <div class="activity-performance-container {{if isCollection 'collection-performance'}}">
           <div class="timespent-container">
             <div class="timespent-icon">
               {{gru-icon name="query_builder"}}
@@ -57,15 +57,17 @@
               </div>
             </div>
           </div>
-          <div class="activity-score-container grade-range-{{grade-range activeAttempt.score}}">
-            {{activeAttempt.score}}%
-          </div>
+          {{#if isAssessment}}
+            <div class="activity-score-container grade-range-{{grade-range activeAttempt.score}}">
+              {{activeAttempt.score}}%
+            </div>
+          {{/if}}
         </div>
       {{/if}}
     </div>
     {{#if isReportView}}
       <div class="activity-attempts-container">
-        <div class="latest-attempt" {{action "onSelectAttempt" latestAttempt}}>
+        <div class="latest-attempt">
           <span class="attempt-label">Latest Attempt</span> - {{format-date latestAttempt.createdAt 'DD MMM YYYY HH:mm'}}
         </div>
         {{#if (gt totalNumberOfAttempts 1)}}
@@ -99,9 +101,15 @@
               question=content
               isShowCorrectAnswer=isShowCorrectAnswer
               contentSeq=(plus-one seq)
-              isReportView = isReportView}}
+              isReportView = isReportView
+              previewContentType = previewContentType
+              isShowReportCorrectAnswer = isShowReportCorrectAnswer
+              isStudent = isStudent}}
           {{else}}
-            {{cards/resource-preview-card resource=content contentSeq=(plus-one seq)}}
+            {{cards/resource-preview-card
+              resource=content
+              contentSeq=(plus-one seq)
+              isReportView = isReportView}}
           {{/if}}
         {{/each}}
       {{/if}}

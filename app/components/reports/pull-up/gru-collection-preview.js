@@ -5,7 +5,8 @@ import {
   PLAYER_WINDOW_NAME,
   PLAYER_EVENT_SOURCE,
   ROLES,
-  CONTENT_TYPES
+  CONTENT_TYPES,
+  ASSESSMENT_SHOW_VALUES
 } from 'gooru-web/config/config';
 import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
 import ModalMixin from 'gooru-web/mixins/modal';
@@ -30,26 +31,10 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
   didInsertElement() {
     const component = this;
     component.openPullUp();
-    let previewContentType = component.get('previewContentType');
-    if (previewContentType === 'assessment') {
-      component.fetchAssessment();
-    } else if (previewContentType === 'collection') {
-      component.fetchCollection();
-    } else if (previewContentType === 'assessment-external') {
-      component.fetchExternalAssessment();
-    } else if (previewContentType === 'collection-external') {
-      component.fetchExternalCollection();
-    }
+    component.loadPreviewContent();
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });
-    if (
-      previewContentType.includes(CONTENT_TYPES.ASSESSMENT) &&
-      component.get('isReportView')
-    ) {
-      // Function implementend in the portfolio mixin
-      component.loadActivityAttempts();
-    }
   },
 
   // -------------------------------------------------------------------------
@@ -197,8 +182,59 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
 
   isReportView: false,
 
+  isAssessment: Ember.computed('previewContentType', function() {
+    const component = this;
+    return component
+      .get('previewContentType')
+      .includes(CONTENT_TYPES.ASSESSMENT);
+  }),
+
+  isCollection: Ember.computed('previewContentType', function() {
+    const component = this;
+    return component
+      .get('previewContentType')
+      .includes(CONTENT_TYPES.COLLECTION);
+  }),
+
+  isShowReportCorrectAnswer: Ember.computed(
+    'previewContentType',
+    'previewContent',
+    function() {
+      const component = this;
+      const previewContent = component.get('previewContent');
+      return (
+        previewContent.get('showFeedback') !== ASSESSMENT_SHOW_VALUES.NEVER
+      );
+    }
+  ),
+
   //--------------------------------------------------------------------------
   // Methods
+
+  loadPreviewContent() {
+    const component = this;
+    let previewContentType = component.get('previewContentType');
+    let previewContentPromise = null;
+    if (previewContentType === 'assessment') {
+      previewContentPromise = component.fetchAssessment();
+    } else if (previewContentType === 'collection') {
+      previewContentPromise = component.fetchCollection();
+    } else if (previewContentType === 'assessment-external') {
+      previewContentPromise = component.fetchExternalAssessment();
+    } else if (previewContentType === 'collection-external') {
+      previewContentPromise = component.fetchExternalCollection();
+    }
+    if (component.get('isReportView')) {
+      previewContentPromise.then(function() {
+        //Method implemented in mixin
+        component.loadActivityAttempts().then(function(activityAttempts) {
+          if (activityAttempts.length) {
+            component.loadActivityPerformance(activityAttempts.objectAt(0));
+          }
+        });
+      });
+    }
+  },
 
   /**
    * @function fetchAssessment
@@ -214,6 +250,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       if (!component.isDestroyed) {
         component.set('previewContent', assessment);
       }
+      return assessment;
     });
   },
 
@@ -231,6 +268,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       if (!component.isDestroyed) {
         component.set('previewContent', collection);
       }
+      return collection;
     });
   },
 
@@ -250,6 +288,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       if (!component.isDestroyed) {
         component.set('previewContent', externalAssessment);
       }
+      return externalAssessment;
     });
   },
 
@@ -269,6 +308,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       if (!component.isDestroyed) {
         component.set('previewContent', externalCollection);
       }
+      return externalCollection;
     });
   },
 
@@ -294,22 +334,25 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     }
   },
 
-  parseAssessmentPerformance() {
+  parseActivityPerformance() {
     const component = this;
-    let assessmentQuestions = component.get('previewContent.children');
-    let assessmentQuestionsPerformance = component.get(
+    let activityResources = component.get('previewContent.children');
+    let activityResourcesPerformance = component.get(
       'activityPerformance.resourceResults'
     );
-    assessmentQuestionsPerformance.map(questionPerformance => {
-      let question = assessmentQuestions.findBy(
-        'id',
-        questionPerformance.get('resourceId')
-      );
-      question.set('userAnswer', questionPerformance.get('userAnswer'));
-      question.set('answerObject', questionPerformance.get('answerObject'));
-      question.set('reaction', questionPerformance.get('reaction'));
-      question.set('timespent', questionPerformance.get('timeSpent'));
-      question.set('score', questionPerformance.get('score'));
+    activityResourcesPerformance.map(resourcePerformance => {
+      if (!component.isDestroyed) {
+        let resource = activityResources.findBy(
+          'id',
+          resourcePerformance.get('resourceId')
+        );
+        resource.set('userAnswer', resourcePerformance.get('userAnswer'));
+        resource.set('answerObject', resourcePerformance.get('answerObject'));
+        resource.set('reaction', resourcePerformance.get('reaction'));
+        resource.set('timespent', resourcePerformance.get('timespent'));
+        resource.set('score', resourcePerformance.get('score'));
+        resource.set('answerStatus', resourcePerformance.get('answerStatus'));
+      }
     });
   }
 });

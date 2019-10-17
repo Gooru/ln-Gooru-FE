@@ -27,7 +27,7 @@
     }}
     {{/if}}
   {{else}}
-    {{#link-to 'player' collection.id (query-params type=collection.collectionType) class="btn btn-default preview" tagName="button"
+    {{#link-to 'player' collection.id (query-params type=collection.collectionType isPreviewReferrer=true) class="btn btn-default preview" tagName="button"
   }}{{t "common.preview"}}{{/link-to}}
   {{/if}}
 </div>

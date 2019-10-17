@@ -25,7 +25,9 @@
           </div>
           <div class="offline-activities">
             {{#each groupedActivities.offlineActivities as |offlineActivity|}}
-              {{portfolio/gru-portfolio-content-card content = offlineActivity}}
+              {{portfolio/gru-portfolio-content-card
+                content = offlineActivity
+                onShowActivityReport = "onShowActivityReport"}}
             {{/each}}
           </div>
         </div>
@@ -64,4 +66,13 @@
       isReportView = true
       userId = userId
     }}
+{{/if}}
+
+{{#if isShowOfflineActivityReport}}
+  {{reports/pull-up/oa-preview
+    showPullUp=isShowOfflineActivityReport
+    oaId=reportActivityId
+    isReportView=true
+    isPortfolioReport = true
+  }}
 {{/if}}

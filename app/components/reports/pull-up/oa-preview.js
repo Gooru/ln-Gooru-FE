@@ -3,10 +3,11 @@ import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import PullUpMixin from 'gooru-web/mixins/reports/pull-up/pull-up-mixin';
 import ModalMixin from 'gooru-web/mixins/modal';
+import PortfolioMixin from 'gooru-web/mixins/reports/portfolio/portfolio-mixin';
 import { isCompatibleVW } from 'gooru-web/utils/utils';
 import { SCREEN_SIZES, ROLES } from 'gooru-web/config/config';
 
-export default Ember.Component.extend(ModalMixin, PullUpMixin, {
+export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['preview', 'oa-preview'],
@@ -56,7 +57,9 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     const component = this;
     component._super(...arguments);
     component.openPullUp();
-    if (component.get('isCmReport')) {
+    if (component.get('isPortfolioReport')) {
+      component.loadPortfolioReport();
+    } else if (component.get('isCmReport')) {
       component.loadStudentCmReportData();
     } else {
       component.loadData();
@@ -127,6 +130,19 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
         .transitionTo('player-offline-activity', offlineActivityId, {
           queryParams
         });
+    },
+
+    onToggleAttemptsList() {
+      const component = this;
+      component.$('.attempts-container .all-attempts').slideToggle(function() {
+        $(this).css('position', 'absolute');
+      });
+    },
+
+    onSelectAttempt(attempt) {
+      const component = this;
+      component.loadOaAttemptPerforamance(attempt);
+      component.set('activeAttempt', attempt);
     }
   },
 
@@ -284,6 +300,20 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
    */
   reportContext: {},
 
+  contentId: Ember.computed.alias('oaId'),
+
+  userId: Ember.computed(function() {
+    return this.get('session.userId');
+  }),
+
+  totalNumberOfAttempts: Ember.computed('activityAttempts.[]', function() {
+    const component = this;
+    const activityAttempts = component.get('activityAttempts');
+    return activityAttempts ? activityAttempts.length - 1 : 0;
+  }),
+
+  portfolioCaId: null,
+
   //--------------------------------------------------------------------------
   // Methods
 
@@ -359,6 +389,51 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
     });
   },
 
+  loadPortfolioReport() {
+    const component = this;
+    component.loadActivityAttempts().then(function(activityAttempts) {
+      let latestAttempt = activityAttempts.objectAt(0);
+      component.loadOaAttemptPerforamance(latestAttempt);
+      component.set('latestAttempt', latestAttempt);
+      component.set('activeAttempt', latestAttempt);
+      component.set('activityAttempts', activityAttempts);
+    });
+  },
+
+  loadOaAttemptPerforamance(attempt) {
+    const component = this;
+    if (attempt.get('contentSource') === 'coursemap') {
+      component.set('isPortfolioCmReport', true);
+      component.set(
+        'reportContext',
+        Ember.Object.create({
+          courseId: attempt.get('courseId'),
+          unitId: attempt.get('unitId'),
+          lessonId: attempt.get('lessonId')
+        })
+      );
+    } else {
+      component.set('portfolioCaId', attempt.get('dcaContentId'));
+      component.set('isPortfolioCmReport', false);
+    }
+    component.set('classId', attempt.get('classId'));
+    Ember.RSVP.hash({
+      userProfile: component.fetchUserProfile(component.get('userId')),
+      offlineActivity: component
+        .get('oaService')
+        .readActivity(component.get('oaId'))
+    }).then(({ userProfile, offlineActivity }) => {
+      component.fetchSubmissions(userProfile);
+      component.set('selectedUser', userProfile);
+      let userPerformance = Ember.Object.create({
+        score: attempt.get('score'),
+        timeSpent: attempt.get('timespent')
+      });
+      component.set('selectedUser.performance', userPerformance);
+      component.set('offlineActivity', offlineActivity);
+    });
+  },
+
   resetValues() {
     const component = this;
     let teacherRubric = component.get('teacherRubric');
@@ -376,11 +451,14 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, {
   fetchSubmissions(user) {
     const component = this;
     const classId = component.get('classId');
-    const oaId = component.get('classActivity.id') || component.get('oaId');
+    const oaId =
+      component.get('classActivity.id') ||
+      component.get('portfolioCaId') ||
+      component.get('oaId');
     const isReportView = component.get('isReportView');
     const userId = user.get('id');
     let dataParam = undefined;
-    if (component.get('isCmReport')) {
+    if (component.get('isCmReport') || component.get('isPortfolioCmReport')) {
       dataParam = {
         courseId: component.get('reportContext.courseId'),
         unitId: component.get('reportContext.unitId'),

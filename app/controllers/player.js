@@ -19,7 +19,8 @@ export default QuizzesPlayerController.extend({
     'classId',
     'isStudyPlayer',
     'caContentId',
-    'isIframeMode'
+    'isIframeMode',
+    'isPreviewReferrer'
   ],
 
   // -------------------------------------------------------------------------

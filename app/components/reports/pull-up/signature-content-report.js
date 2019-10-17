@@ -271,9 +271,6 @@ export default Ember.Component.extend({
     }).then(({ learningMapData }) => {
       if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
         component.set('learningMapData', learningMapData);
-        component.checkPrerequisiteCompetencyStatus(
-          learningMapData.prerequisites
-        );
         let signatureContentList = learningMapData.signatureContents;
         let showSignatureAssessment =
           component.get('showSignatureAssessment') &&
@@ -286,6 +283,9 @@ export default Ember.Component.extend({
         if (!component.get('userId')) {
           component.set('isLoading', false);
         }
+        component.checkPrerequisiteCompetencyStatus(
+          learningMapData.prerequisites
+        );
         if (content) {
           component.set('signatureContent', Ember.Object.create(content));
           component.fetchContentSettings(content.id);

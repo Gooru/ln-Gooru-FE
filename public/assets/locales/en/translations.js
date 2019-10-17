@@ -2766,6 +2766,9 @@ window.i18ln = {
     'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Study Material',
-  'common.choose-lang': 'Choose Language'
+  'common.choose-lang': 'Choose Language',
+  'common-show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation'
 };
 //export default window.i18ln;

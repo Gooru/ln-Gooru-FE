@@ -37,6 +37,12 @@
         display: grid;
         grid-template-columns: auto auto auto;
         column-gap: 8px;
+        .question-reaction {
+          .emotion {
+            width: 25px;
+            height: 25px;
+          }
+        }
         .question-score,
         .question-timespent {
           font-size: 13px;
@@ -111,7 +117,7 @@
 
     .answer-container {
       display: grid;
-      grid-template-columns: auto auto;
+      grid-template-columns: repeat(2, 1fr);
       column-gap: 8px;
 
       .answer-section {
@@ -123,7 +129,7 @@
       }
 
       &.single-container {
-        grid-template-columns: auto;
+        grid-template-columns: 1fr;
       }
 
       .user-answer {
