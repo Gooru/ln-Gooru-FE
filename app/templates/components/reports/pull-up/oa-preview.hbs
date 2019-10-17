@@ -28,7 +28,7 @@
       {{/if}}
     </div>
 
-    {{#if (and isReportView isTeacher)}}
+    {{#if (and isReportView isTeacher (not isPortfolioReport))}}
       <div class="oa-overall-performance-container">
         {{#if (gte classActivity.collection.performance.score 0)}}
           <div class="oa-performance grade-range-{{grade-range classActivity.collection.performance.score}}">
@@ -42,7 +42,28 @@
     {{/if}}
   </div>
 
-  {{#if isReportView}}
+  {{#if isPortfolioReport}}
+    <div class="attempts-container">
+      <div class="latest-attempt">
+        <span class="attempt-label">Latest Attempt - </span>
+        <span class="attempt-value">{{format-date latestAttempt.createdAt 'DD MMM YYYY HH:mm'}}</span>
+      </div>
+      {{#if totalNumberOfAttempts}}
+        <div class="toggle-attempts" {{action "onToggleAttemptsList"}}>
+          + {{totalNumberOfAttempts}} attempts (show)
+        </div>
+      {{/if}}
+      <div class="all-attempts">
+        {{#each activityAttempts as |attempt|}}
+          <div class="attempt-info {{if (eq attempt.createdAt activeAttempt.createdAt) 'active-attempt'}}" {{action "onSelectAttempt" attempt}}>
+            <span class="attempt-value">{{format-date attempt.createdAt 'DD MMM YYYY HH:mm'}}</span>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if (and isReportView (not isPortfolioReport))}}
     <div class="oa-user-list-container">
       <div class="user-selected-profile" {{action 'toggleListOfStudents'}}>
         <div class="user-profile-img">

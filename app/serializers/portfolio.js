@@ -217,7 +217,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
       sessionId: attempt.sessionId,
       timespent: attempt.timespent,
       type: attempt.type,
-      updatedAt: attempt.updatedAt
+      updatedAt: attempt.updatedAt,
+      dcaContentId: attempt.dcaContentId || undefined,
+      courseId: attempt.courseId || undefined,
+      unitId: attempt.unitId || undefined,
+      lessonId: attempt.lessonId || undefined
     });
   },
 

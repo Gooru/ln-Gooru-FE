@@ -71,7 +71,11 @@ export default Ember.Component.extend({
       const component = this;
       component.set('reportActivityId', activity.get('id'));
       component.set('reportActivityType', activity.get('type'));
-      component.set('isShowPortfolioActivityReport', true);
+      if (activity.get('type') === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        component.set('isShowOfflineActivityReport', true);
+      } else {
+        component.set('isShowPortfolioActivityReport', true);
+      }
     }
   },
 
