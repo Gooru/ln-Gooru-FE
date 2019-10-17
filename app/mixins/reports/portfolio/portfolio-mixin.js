@@ -2,15 +2,16 @@ import Ember from 'ember';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default Ember.Mixin.create({
+  // -------------------------------------------------------------------------
+  // Dependencies
   portfolioService: Ember.inject.service('api-sdk/portfolio'),
 
   session: Ember.inject.service('session'),
 
-  userId: Ember.computed(function() {
-    return this.get('session.userId');
-  }),
-
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    //Action triggered while selecting an attempt
     onSelectAttempt(attempt) {
       const mixin = this;
       mixin.set('activeAttempt', attempt);
@@ -18,6 +19,20 @@ export default Ember.Mixin.create({
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {UUID} userId
+   */
+  userId: Ember.computed(function() {
+    return this.get('session.userId');
+  }),
+
+  /**
+   * @property {Object} activeAttempt
+   * Property for active/selected attempt object
+   */
   activeAttempt: Ember.computed('activityAttempts.[]', function() {
     const mixin = this;
     const activityAttempts = mixin.get('activityAttempts');
@@ -26,6 +41,10 @@ export default Ember.Mixin.create({
       : Ember.Object.create({});
   }),
 
+  /**
+   * @property {Object} latestAttempt
+   * Property for latest attempt
+   */
   latestAttempt: Ember.computed('activityAttempts.[]', function() {
     const mixin = this;
     const activityAttempts = mixin.get('activityAttempts');
@@ -34,10 +53,22 @@ export default Ember.Mixin.create({
       : Ember.Object.create({});
   }),
 
+  /**
+   * @property {Number} totalNumberOfAttempts
+   * Property for total number of attempts done by student
+   */
   totalNumberOfAttempts: Ember.computed('activityAttempts', function() {
     return this.get('activityAttempts.length') - 1;
   }),
 
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function loadActivityAttempts
+   * @return {Array} activityAttempts
+   * Method to load list of activity attempts
+   */
   loadActivityAttempts() {
     const mixin = this;
     return Ember.RSVP.hash({
@@ -50,20 +81,31 @@ export default Ember.Mixin.create({
     });
   },
 
+  /**
+   * @function loadActivityPerformance
+   * @param {Object} activityAttempt
+   * @return {Object} activityPerformance
+   * Method to load performance summary of an activity
+   */
   loadActivityPerformance(activityAttempt) {
     const mixin = this;
-    Ember.RSVP.hash({
+    return Ember.RSVP.hash({
       activityPerformance: mixin.fetchActivityAttemptPerformance(
         activityAttempt
       )
     }).then(({ activityPerformance }) => {
       if (!mixin.isDestroyed) {
         mixin.set('activityPerformance', activityPerformance);
-        mixin.parseActivityPerformance();
       }
+      return activityPerformance;
     });
   },
 
+  /**
+   * @function fetchActivityAttempts
+   * @return {Promise.activityAttempts}
+   * Method to fetch activity attempts promise
+   */
   fetchActivityAttempts() {
     const mixin = this;
     const userId = mixin.get('userId');
@@ -75,6 +117,12 @@ export default Ember.Mixin.create({
     return mixin.get('portfolioService').getAllAttemptsByItem(requestParams);
   },
 
+  /**
+   * @function fetchActivityAttemptPerformance
+   * @param {Object} activityAttempt
+   * @return {Promise.activityPerformance}
+   * Method to fetch activity performance by given attempt
+   */
   fetchActivityAttemptPerformance(activityAttempt) {
     const mixin = this;
     const userId = mixin.get('userId');

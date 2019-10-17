@@ -34,6 +34,7 @@
       background-color: #425e67;
       display: flex;
       padding-left: 16px;
+      position: relative;
 
       .close-pullup {
         width: 32px;
@@ -87,6 +88,7 @@
     .body-container {
       height: 100%;
       width: 100%;
+      position: relative;
 
       .content-info-container {
         box-shadow: 0 0 4px 0 rgba(102, 102, 102, 0.3);
@@ -302,6 +304,12 @@
             }
           }
         }
+      }
+      .loading-spinner {
+        position: absolute;
+        margin: auto;
+        top: 50px;
+        left: 48%;
       }
     }
 
