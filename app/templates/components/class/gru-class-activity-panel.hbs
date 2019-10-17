@@ -41,7 +41,11 @@
         {{#if (and showDcaAssignButton (not classActivity.isCompleted))}}
           <span class="dca-assign" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.assign"}}">
             {{#unless classActivity.isActive}}
-              {{gru-switch switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=classActivity.isActive item=item}}
+              {{#if (gt item.taskCount 0)}}
+                {{gru-switch switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=classActivity.isActive item=item}}
+              {{else}}
+                {{gru-switch class='disable-event' switchOptions=switchOptions onOptionSwitch='changeVisibility' isChecked=classActivity.isActive item=item}}
+              {{/if}}
             {{else}}
               {{gru-switch class="assigned" switchOptions=switchOptions  isChecked=classActivity.isActive item=item}}
             {{/unless}}
