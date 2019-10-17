@@ -10,9 +10,19 @@
         <div class="question-reaction">
           {{reaction-icon question.reaction }}
         </div>
-        <div class="question-score">
-          {{question.score}}/{{question.maxScore}}
-        </div>
+        {{#if (eq question.answerStatus 'skipped')}}
+          <div class="question-status" data-toggle="tooltip" title="Skipped">
+            {{gru-icon name="block"}}
+          </div>
+        {{else}}
+          <div class="question-score">
+            {{#if (eq question.maxScore 1)}}
+              {{gru-icon name=(if (eq question.score 0) 'clear' 'done')}}
+            {{else}}
+              {{question.score}}/{{question.maxScore}}
+            {{/if}}
+          </div>
+        {{/if}}
         <div class="question-timespent">
           {{format-time question.timespent}}
         </div>

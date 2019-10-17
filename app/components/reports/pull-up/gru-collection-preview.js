@@ -213,6 +213,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
 
   loadPreviewContent() {
     const component = this;
+    component.set('isLoading', true);
     let previewContentType = component.get('previewContentType');
     let previewContentPromise = null;
     if (previewContentType === 'assessment') {
@@ -229,10 +230,18 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
         //Method implemented in mixin
         component.loadActivityAttempts().then(function(activityAttempts) {
           if (activityAttempts.length) {
-            component.loadActivityPerformance(activityAttempts.objectAt(0));
+            component
+              .loadActivityPerformance(activityAttempts.objectAt(0))
+              .then(function() {
+                component.parseActivityPerformance();
+              });
           }
         });
       });
+    } else {
+      if (component.isDestroyed) {
+        component.set('isLoading', false);
+      }
     }
   },
 
@@ -354,5 +363,6 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
         resource.set('answerStatus', resourcePerformance.get('answerStatus'));
       }
     });
+    component.set('isLoading', false);
   }
 });

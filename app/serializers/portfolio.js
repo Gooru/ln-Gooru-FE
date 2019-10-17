@@ -123,6 +123,12 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return serializedPortfolioItem;
   },
 
+  /**
+   * @function serializeActivityAttempts
+   * @param {Object} activityAttemptsObject
+   * @return {Ember.Array}
+   * Method to serialize list of activity attempts
+   */
   serializeActivityAttempts(activityAttemptsObject) {
     const serializer = this;
     let activityAttempts = Ember.A([]);
@@ -137,11 +143,16 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return activityAttempts;
   },
 
+  /**
+   * @function serializeActivityPerformance
+   * @param {Object} payload
+   * @return {Ember.Object}
+   * Method to serialize activity performance
+   */
   serializeActivityPerformance(payload) {
     const serializer = this;
     let collection = payload.collection || payload.assessment;
     let resources = payload.resources || payload.questions;
-    // let collection = content ? content[0] : {};
     return Ember.Object.create({
       score: collection.score,
       collectionId: collection.id,
@@ -153,6 +164,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
     });
   },
 
+  /**
+   * @function normalizeResourceResults
+   * @param {Ember.Array} resourceResults
+   * @return {Ember.Array}
+   */
   normalizeResourceResults(resourceResults = Ember.A([])) {
     const serializer = this;
     let normalizedResourceResults = Ember.A([]);
@@ -164,6 +180,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return normalizedResourceResults;
   },
 
+  /**
+   * @function normalizeResourceResult
+   * @param {Object} resourceResult
+   * @return {Ember.Object}
+   */
   normalizeResourceResult(resourceResult) {
     const serializer = this;
     let questionType = resourceResult.questionType;
@@ -183,14 +204,21 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let eventTime = resourceResult.eventTime
       ? toLocal(resourceResult.eventTime)
       : null;
+    let timespent = resourceResult.timespent || resourceResult.timeSpent;
 
     return Ember.Object.create({
       //Commons fields for real time and student collection performance
       resourceId: resourceResult.id,
       reaction: resourceResult.reaction,
-      timespent: resourceResult.timespent || resourceResult.timeSpent,
+      timespent,
       answerObject: resourceResult.answerObject,
-      answerStatus: resourceResult.answerStatus,
+      answerStatus:
+        resourceResult.answerStatus ||
+        (!resourceResult.score &&
+        !resourceResult.answerObject.length &&
+        !timespent
+          ? 'skipped'
+          : 'completed'),
       userAnswer:
         resourceType === 'question'
           ? questionUtil.toUserAnswer(answerObjects)
@@ -206,6 +234,11 @@ export default Ember.Object.extend(ConfigurationMixin, {
     });
   },
 
+  /**
+   * @function normalizeActivityAttemptObject
+   * @param {Object} attempt
+   * @return {Ember.Object}
+   */
   normalizeActivityAttemptObject(attempt) {
     return Ember.Object.create({
       classId: attempt.classId,
