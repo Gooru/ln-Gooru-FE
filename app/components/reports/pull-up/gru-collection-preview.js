@@ -239,7 +239,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
         });
       });
     } else {
-      if (component.isDestroyed) {
+      if (!component.isDestroyed) {
         component.set('isLoading', false);
       }
     }
