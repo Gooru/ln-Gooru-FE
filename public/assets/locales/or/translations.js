@@ -2834,5 +2834,6 @@ window.i18ln = {
   'gru-share-pop-over.share-OA': 'Offline Activity',
   'gru-suggest-test.pre-tessignaturet-lead':
     'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
-  'common.choose-lang': 'Choose Language'
+  'common.choose-lang': 'Choose Language',
+  'common-show': 'Show'
 };

@@ -299,11 +299,12 @@ export default Ember.Component.extend({
     this._super(...arguments);
     const component = this;
     let customLocationPresent = component.get('location');
-
     if (customLocationPresent && this.get('notInit') === true) {
       Ember.run.later(function() {
         component.navigateLocation();
-        component.set('isLoading', false);
+        if (!component.isDestroyed) {
+          component.set('isLoading', false);
+        }
       }, 5000);
     }
   },
@@ -815,7 +816,6 @@ export default Ember.Component.extend({
         //ToDo: Refactoring required to remove the Later based workaround, here as well as in other implementation
         Ember.run.later(function() {
           component.handleMilestoneToggle(selectedMilestone);
-
           if (component.get('showLocationReport') === 'assesmentreport') {
             Ember.run.later(function() {
               Ember.run.later(function() {

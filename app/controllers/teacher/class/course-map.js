@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
+import { SCREEN_SIZES, CONTENT_TYPES } from 'gooru-web/config/config';
 
 /**
  * Class Overview controller
@@ -279,6 +280,28 @@ export default Ember.Controller.extend({
   userId: Ember.computed.alias('session.userId'),
 
   isLessonPlanView: false,
+
+  /**
+   * List of options to show in the switch
+   *
+   * @property {Array}
+   */
+  switchOptions: Ember.A([
+    Ember.Object.create({
+      label: 'On',
+      value: true
+    }),
+    Ember.Object.create({
+      label: 'Off',
+      value: false
+    })
+  ]),
+
+  /**
+   * @property {Boolean} isMobileView
+   * Property to handle is mobile view
+   */
+  isMobileView: isCompatibleVW(SCREEN_SIZES.SMALL),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -585,15 +608,27 @@ export default Ember.Controller.extend({
     /**
      * This Action is responsible for switch between milestone  and course map.
      */
-    viewSwitcher(tabName) {
-      this.set('isMilestoneView', false);
+    viewSwitcher() {
       this.set('isLessonPlanView', false);
-      if (tabName === 'milestone') {
-        this.set('isMilestoneView', true);
-      } else if (tabName === 'lesson-plan') {
-        this.set('isLessonPlanView', true);
+      this.toggleProperty('isMilestoneView');
+      //Reset milestone report to false when course map view is active
+      if (!this.get('isMilestoneView')) {
         this.set('classController.isShowMilestoneReport', false);
+      }
+    },
+
+    // Action on change checkbox value in lesson plan tab
+    onScoringChange(isChecked) {
+      this.set('isLessonPlanView', isChecked);
+    },
+
+    // Action trigger when select dropdown course map
+    switchDropdown(type) {
+      this.set('isLessonPlanView', false);
+      if (type === 'milestone') {
+        this.set('isMilestoneView', true);
       } else {
+        this.set('isMilestoneView', false);
         this.set('classController.isShowMilestoneReport', false);
       }
     },

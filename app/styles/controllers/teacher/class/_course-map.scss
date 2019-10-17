@@ -264,27 +264,57 @@
           align-items: center;
           display: none;
         }
-
         .ms-cm-view-switcher-ctn {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
           align-items: center;
-          background: #fff;
-          overflow: hidden;
-          text-align: center;
-          border-radius: 5px;
-          margin-bottom: 10px;
+          height: 50px;
+          border-radius: 4px;
+          margin-bottom: 5px;
+          background-color: $white;
           box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.4);
-          .ms-cm-view-tabs {
-            padding: 8px;
-            cursor: pointer;
 
-            &.current-view {
-              padding-left: 10px;
-              font-weight: bold;
-              background-color: #5c8fd2;
-              color: $white;
-              text-transform: uppercase;
+          .current-view {
+            padding-left: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+          }
+
+          .ms-cm-view-lesson-plan {
+            padding: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+
+            .gru-switch {
+              .switch {
+                .toggle {
+                  width: 40px !important;
+                  height: 20px !important;
+                  border-radius: 20px;
+                  .toggle-group {
+                    .toggle-on {
+                      left: -13px;
+                      font-style: italic;
+                      font-size: 10px;
+                      line-height: 4px !important;
+                    }
+                    .toggle-off {
+                      left: 33px;
+                      font-style: italic;
+                      line-height: 4px !important;
+                      font-size: 10px;
+                    }
+                    .toggle-handle {
+                      top: -5px;
+                      border-radius: 20px;
+                    }
+                  }
+                }
+              }
             }
           }
 
@@ -293,9 +323,44 @@
             padding-right: 20px;
             text-transform: uppercase;
             font-size: 12px;
-            color: #1aa9eb;
+            color: $blue-in-progress;
             cursor: pointer;
             font-weight: bold;
+          }
+          &.mobile-view-switcher-ctn {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            grid-column-gap: 10px;
+            .dropdown {
+              left: 10px;
+              font-weight: bold;
+              .dropbtn {
+                &.btn-dropdown {
+                  background: none;
+                  border: none;
+                  font-size: 14px;
+                  border-bottom: 2px solid $gray-80;
+                  border-radius: 5px;
+                  padding: 5px;
+                  box-shadow: 0 1px 10px $gray-80;
+                  width: 100%;
+                }
+              }
+              .dropdown-menu {
+                padding: 10px;
+                li {
+                  padding: 5px 0;
+                  &.active {
+                    color: $blue-in-progress;
+                  }
+                }
+              }
+            }
+            .ms-cm-view-lesson-plan {
+              text-align: right;
+              display: inline-block;
+              align-items: center;
+            }
           }
         }
 

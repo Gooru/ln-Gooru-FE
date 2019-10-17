@@ -2800,5 +2800,6 @@ window.i18ln = {
   'common.no-collaborators':
     'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'custom-range': 'Custom Date Range',
-  'common.choose-lang': 'Choose Language'
+  'common.choose-lang': 'Choose Language',
+  'common-show': 'Show'
 };

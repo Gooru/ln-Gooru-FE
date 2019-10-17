@@ -2717,5 +2717,6 @@ window.i18ln = {
   'gru-share-pop-over.share-OA': 'Offline Activity',
   'gru-suggest-test.pre-tessignaturet-lead':
     'A pre-test is suggested to measure y',
-  'common.choose-lang': 'Choose Language'
+  'common.choose-lang': 'Choose Language',
+  'common-show': 'Show'
 };
