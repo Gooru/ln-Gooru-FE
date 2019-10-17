@@ -83,7 +83,8 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
         contextId,
         source: controller.get('source'),
         minScore: controller.get('minScore'),
-        pathType: controller.get('pathType') || ''
+        pathType: controller.get('pathType') || '',
+        isIframeMode: controller.get('isIframeMode')
       };
       if (classId) {
         queryParams.classId = classId;
@@ -159,7 +160,8 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
         lessonId: params.lessonId,
         milestoneId: params.milestoneId,
         collectionId: params.collectionId,
-        source: params.source
+        source: params.source,
+        isIframeMode: params.isIframeMode
       };
       route.transitionTo('study-player-external', {
         queryParams
@@ -265,81 +267,77 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
               );
           }
 
-          return Ember.RSVP
-            .hash({
-              course: route.get('courseService').fetchById(courseId),
-              unit: unitPromise,
-              lesson: lessonPromise,
-              suggestedResources:
-                collectionId != null
-                  ? route
-                    .get('suggestService')
-                    .suggestResourcesForCollection(
-                      route.get('session.userId'),
-                      collectionId
-                    )
-                  : null,
-              notificationNextStarted: notificationNextPromise,
-              milestoneLessons: milestoneLessonsPromise
-            })
-            .then(function(hash) {
-              //setting query params using the map location
-              params.collectionId = collectionId;
-              //params.classId = params.classId || mapLocation.get('context.classId');
-              params.unitId =
-                params.unitId || mapLocation.get('context.unitId');
-              params.lessonId =
-                params.lessonId || mapLocation.get('context.lessonId');
-              params.pathId =
-                params.pathId || mapLocation.get('context.pathId');
-              params.collectionSubType =
-                params.subtype || mapLocation.get('context.collectionSubType');
+          return Ember.RSVP.hash({
+            course: route.get('courseService').fetchById(courseId),
+            unit: unitPromise,
+            lesson: lessonPromise,
+            suggestedResources:
+              collectionId != null
+                ? route
+                  .get('suggestService')
+                  .suggestResourcesForCollection(
+                    route.get('session.userId'),
+                    collectionId
+                  )
+                : null,
+            notificationNextStarted: notificationNextPromise,
+            milestoneLessons: milestoneLessonsPromise
+          }).then(function(hash) {
+            //setting query params using the map location
+            params.collectionId = collectionId;
+            //params.classId = params.classId || mapLocation.get('context.classId');
+            params.unitId = params.unitId || mapLocation.get('context.unitId');
+            params.lessonId =
+              params.lessonId || mapLocation.get('context.lessonId');
+            params.pathId = params.pathId || mapLocation.get('context.pathId');
+            params.collectionSubType =
+              params.subtype || mapLocation.get('context.collectionSubType');
 
-              if (hash.milestoneLessons && hash.milestoneLessons.length) {
-                let milestoneLesson = hash.milestoneLessons.findBy(
-                  'lesson_id',
-                  hash.lesson.get('id')
-                );
-                route.parseMilestoneLesson(milestoneLesson, hash.lesson);
-              }
+            if (hash.milestoneLessons && hash.milestoneLessons.length) {
+              let milestoneLesson = hash.milestoneLessons.findBy(
+                'lesson_id',
+                hash.lesson.get('id')
+              );
+              route.parseMilestoneLesson(milestoneLesson, hash.lesson);
+            }
 
-              // Set the correct unit sequence number
-              if (params.pathType !== 'route0') {
-                hash.course.children.find((child, index) => {
-                  let found = false;
-                  if (child.get('id') === hash.unit.get('id')) {
-                    found = true;
-                    hash.unit.set('sequence', index + 1);
-                  }
-                  return found;
-                });
+            // Set the correct unit sequence number
+            if (params.pathType !== 'route0') {
+              hash.course.children.find((child, index) => {
+                let found = false;
+                if (child.get('id') === hash.unit.get('id')) {
+                  found = true;
+                  hash.unit.set('sequence', index + 1);
+                }
+                return found;
+              });
 
-                // Set the correct lesson sequence number
-                hash.unit.children.find((child, index) => {
-                  let found = false;
-                  if (child.get('id') === hash.lesson.get('id')) {
-                    found = true;
-                    hash.lesson.set('sequence', index + 1);
-                  }
-                  return found;
-                });
-              }
-              //loads the player model if it has no suggestions
-              return route.playerModel(params).then(function(model) {
-                return Object.assign(model, {
-                  course: hash.course,
-                  unit: hash.unit,
-                  lesson: hash.lesson,
-                  mapLocation,
-                  collectionId: params.collectionId,
-                  type: params.type,
-                  minScore: params.minScore,
-                  suggestedResources: hash.suggestedResources,
-                  collectionSource: params.collectionSource,
-                  collectionSubType: params.collectionSubType
-                });
+              // Set the correct lesson sequence number
+              hash.unit.children.find((child, index) => {
+                let found = false;
+                if (child.get('id') === hash.lesson.get('id')) {
+                  found = true;
+                  hash.lesson.set('sequence', index + 1);
+                }
+                return found;
+              });
+            }
+            //loads the player model if it has no suggestions
+            return route.playerModel(params).then(function(model) {
+              return Object.assign(model, {
+                course: hash.course,
+                unit: hash.unit,
+                lesson: hash.lesson,
+                mapLocation,
+                collectionId: params.collectionId,
+                type: params.type,
+                minScore: params.minScore,
+                suggestedResources: hash.suggestedResources,
+                collectionSource: params.collectionSource,
+                collectionSubType: params.collectionSubType
               });
             });
+          });
         });
     }
   },

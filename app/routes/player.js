@@ -149,7 +149,7 @@ export default QuizzesPlayer.extend(
           reportController.set('backUrl', this.get('history.lastRoute.url'));
           let isIframe = controller.get('isIframeMode');
           if (isIframe) {
-            Ember.$(document.body).addClass('hide-report-header');
+            Ember.$(document.body).addClass('iframe-panel');
           }
           this.transitionTo('reports.student-collection', {
             queryParams

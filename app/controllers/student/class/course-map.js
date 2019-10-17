@@ -63,7 +63,7 @@ export default Ember.Controller.extend({
     return {
       iconClass: 'msaddonTop',
       offset: {
-        left: '-20px',
+        left: '-30px',
         top: '9px'
       }
     };
@@ -161,6 +161,12 @@ export default Ember.Controller.extend({
     studyCoursePlayer: function(type, unitId, lessonId, item) {
       let controller = this;
       controller.send('studyPlayer', type, unitId, lessonId, item);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
+      component.get('target.router').refresh();
     }
   },
 
@@ -338,10 +344,9 @@ export default Ember.Controller.extend({
     let skippedContentsPromise = Ember.RSVP.resolve(
       controller.get('rescopeService').getSkippedContents(filter)
     );
-    return Ember.RSVP
-      .hash({
-        skippedContents: skippedContentsPromise
-      })
+    return Ember.RSVP.hash({
+      skippedContents: skippedContentsPromise
+    })
       .then(function(hash) {
         controller.set('skippedContents', hash.skippedContents);
         return hash.skippedContents;

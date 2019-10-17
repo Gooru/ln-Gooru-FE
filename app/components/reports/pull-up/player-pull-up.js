@@ -17,7 +17,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
-    this.handleAppContainerScroll();
+    Ember.$(document.body).addClass('iframe-panel');
     this.openPullUp();
   },
 
@@ -33,7 +33,6 @@ export default Ember.Component.extend({
         component.set('isLoading', false);
       }
     }
-
     window.addEventListener('message', receiveMessage, false);
   },
 
@@ -43,19 +42,6 @@ export default Ember.Component.extend({
 
   //--------------------------------------------------------------------------
   // Methods
-  /**
-   * Method to handle container scroll
-   */
-  handleAppContainerScroll() {
-    let activePlayerPullUp = Ember.$(document.body).find(
-      '.iframe-player-container'
-    ).length;
-    if (activePlayerPullUp > 0) {
-      Ember.$(document.body).addClass('no-vertical-scroll');
-    } else if (activePlayerPullUp === 0) {
-      Ember.$(document.body).removeClass('no-vertical-scroll');
-    }
-  },
 
   /**
    * Function to animate the  pullup from bottom to top
@@ -80,8 +66,7 @@ export default Ember.Component.extend({
       400,
       function() {
         component.sendAction('onclosePullUp');
-        Ember.$(document.body).removeClass('no-vertical-scroll');
-        Ember.$(document.body).removeClass('hide-report-header');
+        Ember.$(document.body).removeClass('iframe-panel');
       }
     );
   }

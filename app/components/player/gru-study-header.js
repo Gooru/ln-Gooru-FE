@@ -145,6 +145,14 @@ export default Ember.Component.extend(ConfigurationMixin, {
           route.transitionTo('student.class');
         } // end of if block
       }
+    },
+
+    closePlayer: function() {
+      let component = this;
+      let isIframeMode = component.get('isIframeMode');
+      if (isIframeMode) {
+        window.parent.postMessage('PUllUP_CLOSE', '*');
+      }
     }
   },
 

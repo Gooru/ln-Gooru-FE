@@ -33,6 +33,16 @@ export default Ember.Component.extend({
     onToggleScreen() {
       let component = this;
       component.sendAction('onToggleScreen');
+    },
+
+    onExit(route, id) {
+      let component = this;
+      let isIframeMode = component.get('isIframeMode');
+      if (isIframeMode) {
+        window.parent.postMessage('PUllUP_CLOSE', '*');
+      } else {
+        component.sendAction('onExit', route, id);
+      }
     }
   }
 });
