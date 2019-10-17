@@ -2767,6 +2767,8 @@ window.i18ln = {
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Study Material',
   'common.choose-lang': 'Choose Language',
-  'common-show': 'Show'
+  'common-show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation'
 };
 //export default window.i18ln;
