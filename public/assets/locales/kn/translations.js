@@ -2823,5 +2823,7 @@ window.i18ln = {
   'common.no-collaborators':
     'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'common.choose-lang': 'Choose Language',
-  'common-show': 'Show'
+  'common-show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation'
 };
