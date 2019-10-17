@@ -6,23 +6,10 @@
       <div class=header-content>
         <div class="info pull-left">
           <div class="title">
-            {{domain-gut-to-fw-transform
-               fwDomains
-               competencyData.domainCode
-               competencyData.domainName
-              'fwDomainName'
-              (not showGutCompetency)
-            }}
+            {{title}}
           </div>
           <div class="description">
-            {{competency-gut-to-fw-transform
-               fwCompetencies
-               competencyData.competencyCode
-               competencyData.competencyCode
-               'frameworkCompetencyDisplayCode'
-               showGutCompetency
-               true
-            }}
+            {{description}}
           </div>
         </div>
         <div class="action pull-right">

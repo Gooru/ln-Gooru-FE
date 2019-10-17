@@ -6,7 +6,15 @@ export default Ember.Component.extend({
 
   classNameBindings: ['isInspectCompetency:open', 'isExpand:expand'],
 
+  /**
+   * @property {Boolean} isExpand
+   */
   isExpand: false,
+
+  /**
+   * @property {String} studentId
+   */
+  studentId: Ember.computed.alias('studentProfile.id'),
 
   /**
    * @property {String} competencyStatus

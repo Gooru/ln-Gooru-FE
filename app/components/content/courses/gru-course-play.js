@@ -45,6 +45,25 @@ export default Ember.Component.extend(ModalMixin, {
 
     onCloseWindow() {
       window.close();
+    },
+
+    /**
+     * Course button logic for send to previous page state
+     */
+    coursePlayBackButton: function() {
+      let component = this;
+      if (component.get('classId') && !component.get('isLibraryContent')) {
+        component
+          .get('router')
+          .transitionTo('teacher.class.course-map', component.get('classId'));
+      } else {
+        component.get('router').transitionTo('library-search', {
+          queryParams: {
+            profileId: component.get('session.userId'),
+            type: 'my-content'
+          }
+        });
+      }
     }
   },
 

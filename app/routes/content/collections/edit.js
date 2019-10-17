@@ -7,7 +7,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     editingContent: {
       refreshModel: true
     },
-    isLibraryContent: false
+    isLibraryContent: false,
+    isPreviewReferrer: false
   },
 
   // -------------------------------------------------------------------------
@@ -31,6 +32,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   centurySkillService: Ember.inject.service('century-skill'),
 
+  isPreviewReferrer: false,
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -39,6 +42,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
   model: function(params) {
     const route = this;
+    this.set('isPreviewReferrer', params.isPreviewReferrer);
 
     return route
       .get('collectionService')
@@ -61,11 +65,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
         let resourcePromiseList = collection
           .get('children')
-          .map(
-            resource =>
-              resource.get('format') === 'question'
-                ? route.get('questionService').readQuestion(resource.get('id'))
-                : resource
+          .map(resource =>
+            resource.get('format') === 'question'
+              ? route.get('questionService').readQuestion(resource.get('id'))
+              : resource
           );
 
         return Ember.RSVP.hash({
@@ -74,7 +77,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           course: course,
           isEditing: !!isEditing,
           editingContent: params.editingContent,
-          isLibraryContent: isLibraryContent
+          isLibraryContent: isLibraryContent,
+          isPreviewReferrer: params.isPreviewReferrer
         });
       });
   },
@@ -87,7 +91,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('isEditing', model.isEditing);
     controller.set('editingContent', model.editingContent);
     controller.set('isLibraryContent', model.isLibraryContent);
-
+    controller.set('isPreviewReferrer', model.isPreviewReferrer);
     route
       .get('centurySkillService')
       .findCenturySkills()
@@ -98,5 +102,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     if (model.isEditing || model.editingContent) {
       controller.set('tempCollection', model.collection.copy());
     }
+  },
+
+  resetController(controller) {
+    controller.set('isPreviewReferrer', undefined);
   }
 });

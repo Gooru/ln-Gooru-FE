@@ -36,6 +36,7 @@ export default Ember.Component.extend({
      */
     onInspectCompetency(selectedCompetency) {
       const component = this;
+      selectedCompetency = Ember.Object.create(selectedCompetency);
       let competencies = component.get('competencies');
       selectedCompetency.set('domainName', component.get('domain.domainName'));
       selectedCompetency.set('domainCode', component.get('domain.domainCode'));

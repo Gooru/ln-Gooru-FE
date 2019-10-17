@@ -11,7 +11,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     isIndependentOA: {
       refreshModel: true
     },
-    isLibraryContent: false
+    isLibraryContent: false,
+    isPreviewReferrer: false
   },
   //ToDo: Store implementation
   // -------------------------------------------------------------------------

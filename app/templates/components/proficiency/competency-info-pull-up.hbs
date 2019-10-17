@@ -28,6 +28,17 @@
 </div>
 <div class="body">
   {{#if isInspectCompetency}}
-    {{reports/pull-up/competency-content-report fwCompetencies=fwCompetencies showGutCompetency=showGutCompetency classFramework=framework domainCompetencyList=domainCompetencyList competency=competency userId=studentId isStudent=isStudent isPlayerProficiency = isPlayerProficiency}}
+    {{reports/pull-up/competency-content-report
+       fwCompetencies=fwCompetencies
+       showGutCompetency=showGutCompetency
+       classFramework=framework
+       class=class
+       domainCompetencyList=domainCompetencyList
+       competency=competency
+       userId=studentId
+       studentListForSuggestion=studentListForSuggestion
+       student=studentProfile
+       isStudent=isStudent
+       isPlayerProficiency=isPlayerProficiency}}
   {{/if}}
 </div>

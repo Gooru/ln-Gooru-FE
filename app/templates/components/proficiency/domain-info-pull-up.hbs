@@ -16,10 +16,9 @@
   </div>
   <span class="close" {{action 'closePullUp'}}>{{gru-icon name="close"}}</span>
 </div>
-
 {{#if isShowCompetencies}}
   <div class="competency-container">
-    <div class="title">{{t 'common.competencies'}}</div>
+    <div class="title">{{competencies.length}} {{t 'common.competencies'}}</div>
     <div class="competency-list">
       {{#each competencies as |competency|}}
         <div class="competency-info" {{action 'onInspectCompetency' competency}}>

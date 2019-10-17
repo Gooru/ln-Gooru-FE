@@ -128,12 +128,21 @@
             }
           }
         }
+      }
 
+      .content-details-container {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        height: 50px;
+        align-items: center;
+        &.single-container {
+          grid-template-columns: 1fr;
+        }
         .taxonomy-container {
-          height: 48px;
+          height: 50px;
           display: grid;
           align-items: center;
-          padding-left: 94px;
+          padding-left: 15px;
 
           .gru-taxonomy-tag-list {
             .gru-taxonomy-tag {
@@ -176,10 +185,84 @@
             }
           }
         }
+
+        .activity-performance-container {
+          display: grid;
+          grid-template-columns: 1fr 70px;
+          justify-items: right;
+          column-gap: 15px;
+          height: inherit;
+
+          &.collection-performance {
+            grid-template-columns: 1fr;
+            .timespent-container {
+              padding-right: 15px;
+            }
+          }
+          .timespent-container {
+            display: grid;
+            grid-template-columns: auto auto;
+            align-items: center;
+            column-gap: 5px;
+            .timespent-icon {
+              i.query_builder {
+                height: 50px;
+                line-height: 50px;
+                font-size: 30px;
+              }
+            }
+            .timespent-data {
+              .timespent-label {
+                font-size: 13px;
+              }
+              .timespent-value {
+                font-weight: bold;
+                font-size: 14px;
+              }
+            }
+          }
+          .activity-score-container {
+            color: $white;
+            font-size: 17px;
+            font-weight: bold;
+            width: 70px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+          }
+        }
+      }
+
+      .activity-attempts-container {
+        box-shadow: 0 2px 4px 0 rgba(102, 102, 102, 0.3);
+        padding: 0 15px;
+        .latest-attempt {
+          color: rgb(62, 94, 103);
+          font-size: 13px;
+          cursor: pointer;
+        }
+        .toggle-all-attempts {
+          cursor: pointer;
+        }
+        .attempt-label {
+          font-weight: bold;
+        }
+        .all-attempts {
+          display: none;
+          .attempt-info {
+            color: rgb(62, 94, 103);
+            font-size: 13px;
+            cursor: pointer;
+
+            &.active-attempt {
+              font-weight: bold;
+            }
+          }
+        }
       }
 
       .content-items-container {
-        height: calc(100% - 100px);
+        height: calc(100% - 140px);
         overflow-y: auto;
         padding-bottom: 48px;
 

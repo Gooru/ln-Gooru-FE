@@ -44,11 +44,14 @@ export default SearchSerializer.extend({
    * @returns {Array[]}
    */
   normalizeSuggestionContents: function(payload) {
-    return Ember.Object.create({
-      caId: payload.caId,
+    let result = Ember.Object.create({
       suggestions: this.normalizeSuggestionList(payload.suggestions),
       total: payload.total
     });
+    if (payload.caId) {
+      result.set('caId', payload.caId);
+    }
+    return result;
   },
 
   normalizeSuggestionList(suggestions) {

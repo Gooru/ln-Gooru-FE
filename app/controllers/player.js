@@ -18,7 +18,8 @@ export default QuizzesPlayerController.extend({
     'source',
     'classId',
     'isStudyPlayer',
-    'caContentId'
+    'caContentId',
+    'isPreviewReferrer'
   ],
 
   // -------------------------------------------------------------------------

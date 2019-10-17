@@ -3,29 +3,54 @@
     padding: 8px 24px 8px 24px;
     border-bottom: 1px solid rgba(102, 102, 102, 0.5);
 
-    .question-title-container {
+    .question-header-container {
       display: grid;
-      grid-template-columns: 16px 16px 1fr;
-      align-items: center;
-      column-gap: 8px;
-      padding-bottom: 8px;
-      .question-order {
-        font-weight: bold;
-        color: #3e5e67;
-        font-size: 15px;
+      grid-template-columns: 85% auto;
+      column-gap: 10px;
+      .question-title-container {
+        display: grid;
+        grid-template-columns: 16px 16px 1fr;
+        align-items: center;
+        column-gap: 8px;
+        padding-bottom: 8px;
+        .question-order {
+          font-weight: bold;
+          color: #3e5e67;
+          font-size: 15px;
+        }
+        .question-icon {
+          width: 16px;
+          height: 16px;
+          background-size: 16px 16px;
+          background-repeat: no-repeat;
+          display: block;
+          background-image: url("gooru/images/question-icon.svg") !important;
+        }
+        .title {
+          font-weight: bold;
+          color: #3e5e67;
+          font-size: 15px;
+        }
       }
-      .question-icon {
-        width: 16px;
-        height: 16px;
-        background-size: 16px 16px;
-        background-repeat: no-repeat;
-        display: block;
-        background-image: url("gooru/images/question-icon.svg") !important;
-      }
-      .title {
-        font-weight: bold;
-        color: #3e5e67;
-        font-size: 15px;
+      .question-performance-container {
+        justify-self: right;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        column-gap: 8px;
+        .question-reaction {
+          .emotion {
+            width: 25px;
+            height: 25px;
+          }
+        }
+        .question-score,
+        .question-timespent {
+          font-size: 13px;
+          color: #3e5e67;
+        }
+        .question-score {
+          font-weight: bold;
+        }
       }
     }
 
@@ -91,6 +116,27 @@
     }
 
     .answer-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 8px;
+
+      .answer-section {
+        .type-label {
+          color: #3e5e67;
+          font-size: 15px;
+          border-bottom: 1px solid rgba(151, 151, 151, 0.4);
+        }
+      }
+
+      &.single-container {
+        grid-template-columns: 1fr;
+      }
+
+      .user-answer {
+      }
+
+      .correct-answer {
+      }
       %circle-tick-icon {
         background: url("/assets/gooru/images/check-circle-light-blue.svg")
           no-repeat center !important;
@@ -270,7 +316,8 @@
             opacity: 0.4;
 
             .column,
-            .correct {
+            .correct,
+            .incorrect {
               i {
                 position: relative;
                 line-height: 48px;
@@ -317,6 +364,10 @@
                 i {
                   visibility: hidden;
                 }
+              }
+
+              .incorrect {
+                margin-right: 3px;
               }
 
               .answer-text {

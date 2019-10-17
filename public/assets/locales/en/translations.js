@@ -2766,6 +2766,7 @@ window.i18ln = {
     'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Study Material',
+  'common.choose-lang': 'Choose Language',
   'common-show': 'Show'
 };
 //export default window.i18ln;

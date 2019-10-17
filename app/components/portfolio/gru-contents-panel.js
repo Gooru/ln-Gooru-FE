@@ -31,7 +31,7 @@ export default Ember.Component.extend({
       ? activeDomain.get('domainCode')
       : undefined;
     appliedFilters.gutCode = activeCompetency
-      ? activeCompetency.get('competencyCode')
+      ? activeCompetency.competencyCode
       : undefined;
     component.loadPortfolioActivities(appliedFilters);
     component.scrollHandler();
@@ -65,6 +65,13 @@ export default Ember.Component.extend({
     onToggleContainer() {
       const component = this;
       component.$('.body-container').slideToggle();
+    },
+
+    onShowActivityReport(activity) {
+      const component = this;
+      component.set('reportActivityId', activity.get('id'));
+      component.set('reportActivityType', activity.get('type'));
+      component.set('isShowPortfolioActivityReport', true);
     }
   },
 
@@ -102,7 +109,9 @@ export default Ember.Component.extend({
    * @property {Object} appliedFilters
    * Property for currently applied filters
    */
-  appliedFilters: {},
+  appliedFilters: Ember.computed(function() {
+    return Ember.Object.create({});
+  }),
 
   /**
    * @property {Number} offset
@@ -166,6 +175,7 @@ export default Ember.Component.extend({
    */
   loadPortfolioActivities(filters) {
     const component = this;
+    filters = JSON.parse(JSON.stringify(filters));
     const contentType = component.get('contentType');
     let studiedPortfolioActivities = component.get(
       'studiedPortfolioActivities'

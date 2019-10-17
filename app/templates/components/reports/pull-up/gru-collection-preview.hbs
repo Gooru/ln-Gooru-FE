@@ -5,22 +5,22 @@
       {{gru-icon name="arrow_downward"}}
     </div>
     <div class="preview-title {{previewContentType}}-preview">
-      {{t (concat 'common.' previewContentType)}} {{t 'common.preview'}}
+      {{t (concat 'common.' previewContentType)}} {{t (if isReportView 'common.report' 'common.preview')}}
     </div>
     {{#if showAssessmentCode}}
       <div class="assessment-code">{{assessmentCode}}</div>
     {{/if}}
     {{#unless (or (not playContent) isExternalContent)}}
-      <div class="content-player" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
+      <div class="content-player {{if isReportView 'hidden'}}" title="{{t 'common.play'}}" data-toggle="tooltip" {{action "onPlayContent"}}>
         {{gru-icon name="play_arrow"}}
       </div>
     {{/unless}}
     {{#if (and isRemixableContent (or isTeacher isAnonymous))}}
-      <div class="content-remix" title="{{t 'common.remix'}}" data-toggle="tooltip" {{action "onRemixContent"}}>
+      <div class="content-remix {{if isReportView 'hidden'}}" title="{{t 'common.remix'}}" data-toggle="tooltip" {{action "onRemixContent"}}>
         {{gru-icon name="content_copy"}}
       </div>
     {{/if}}
-    {{#if (and (not isAnonymous) showPrintPreview)}}
+    {{#if (and (not isAnonymous) showPrintPreview (not isReportView))}}
       <div class="print-preview" title="{{t 'common.download-print'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
         {{gru-icon name="get_app"}}
       </div>
@@ -33,12 +33,53 @@
         <div class="content-icon {{previewContentType}}"></div>
         <div class="content-title ellipsis">{{previewContent.title}}</div>
       </div>
+    </div>
+    <div class="content-details-container {{if (lt taxonomyTags.length 1) 'single-container'}}">
       {{#if taxonomyTags.length}}
         <div class="taxonomy-container">
-          {{taxonomy/gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=2 isInCard=true}}
+          {{taxonomy/gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=1 isInCard=true}}
+        </div>
+      {{/if}}
+      {{#if isReportView}}
+        <div class="activity-performance-container {{if isCollection 'collection-performance'}}">
+          <div class="timespent-container">
+            <div class="timespent-icon">
+              {{gru-icon name="query_builder"}}
+            </div>
+            <div class="timespent-data">
+              <div class="timespent-label">Timespent</div>
+              <div class="timespent-value">
+                {{#if activeAttempt.timespent}}
+                  {{format-time activeAttempt.timespent}}
+                {{else}}
+                  --
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          {{#if isAssessment}}
+            <div class="activity-score-container grade-range-{{grade-range activeAttempt.score}}">
+              {{activeAttempt.score}}%
+            </div>
+          {{/if}}
         </div>
       {{/if}}
     </div>
+    {{#if isReportView}}
+      <div class="activity-attempts-container">
+        <div class="latest-attempt">
+          <span class="attempt-label">Latest Attempt</span> - {{format-date latestAttempt.createdAt 'DD MMM YYYY HH:mm'}}
+        </div>
+        {{#if (gt totalNumberOfAttempts 1)}}
+          <div class="toggle-all-attempts" {{action "onToggleAttemptsList"}}>+ {{totalNumberOfAttempts}} other Attempts (show)</div>
+          <div class="all-attempts">
+            {{#each activityAttempts as |attempt|}}
+              <div class="attempt-info {{if (eq attempt.createdAt activeAttempt.createdAt) 'active-attempt'}}" {{action "onSelectAttempt" attempt}}>{{format-date attempt.createdAt 'DD MMM YYYY HH:mm'}}</div>
+            {{/each}}
+          </div>
+        {{/if}}
+      </div>
+    {{/if}}
     <div class="content-items-container">
       {{#if isExternalContent}}
         <div class="external-content">
@@ -56,15 +97,25 @@
       {{else}}
         {{#each previewContent.children as |content seq|}}
           {{#if (or (eq previewContentType 'assessment') (eq content.content_format 'question'))}}
-            {{cards/question-preview-card question=content isShowCorrectAnswer=isShowCorrectAnswer contentSeq=(plus-one seq)}}
+            {{cards/question-preview-card
+              question=content
+              isShowCorrectAnswer=isShowCorrectAnswer
+              contentSeq=(plus-one seq)
+              isReportView = isReportView
+              previewContentType = previewContentType
+              isShowReportCorrectAnswer = isShowReportCorrectAnswer
+              isStudent = isStudent}}
           {{else}}
-            {{cards/resource-preview-card resource=content contentSeq=(plus-one seq)}}
+            {{cards/resource-preview-card
+              resource=content
+              contentSeq=(plus-one seq)
+              isReportView = isReportView}}
           {{/if}}
         {{/each}}
       {{/if}}
     </div>
   </div>
-  {{#if isEnableToggleAnswer}}
+  {{#if (and isEnableToggleAnswer (not isReportView))}}
     <div class="footer-container" {{action "onToggleAnswer"}}>
       {{t (if isShowCorrectAnswer 'common.hide-correct-answer'  'common.show-correct-answer')}}
     </div>

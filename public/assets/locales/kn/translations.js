@@ -2810,5 +2810,18 @@ window.i18ln = {
     'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
+  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.OA-info':
+    'The activities listed here <b>do not</b> belong to another lesson or course',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'Select a activity to add to this lesson.',
+  'gru-suggest-test.pre-tessignaturet-lead':
+    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
+  'common.collaborators': 'Collaborators',
+  'common.no-collaborators':
+    'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
+  'common.choose-lang': 'Choose Language',
   'common-show': 'Show'
 };

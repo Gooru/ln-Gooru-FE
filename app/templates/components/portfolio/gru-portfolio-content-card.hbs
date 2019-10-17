@@ -48,7 +48,7 @@
       </div>
     </div>
     {{#if (or isCollection isExternalCollection)}}
-      <div class="activity-performance timespent">
+      <div class="activity-performance timespent" {{action "onShowReport"}}>
         {{#if content.timespent}}
           {{format-time content.timespent}}
         {{else}}
@@ -56,7 +56,7 @@
         {{/if}}
       </div>
     {{else}}
-      <div class="activity-performance grade-range-{{grade-range content.score}}">
+      <div class="activity-performance grade-range-{{grade-range content.score}}" {{action "onShowReport"}}>
         {{content.score}}%
       </div>
     {{/if}}

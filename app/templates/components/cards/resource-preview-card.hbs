@@ -1,8 +1,25 @@
 <div class="resource-preview-container">
-  <div class="resource-title-container">
-    <div class="resource-order">{{contentSeq}}.</div>
-    <div class="resource-type {{resource.format}}"></div>
-    <div class="title ellipsis">{{safe-html resource.title}}</div>
+  <div class="resource-header-container">
+    <div class="resource-title-container">
+      <div class="resource-order">{{contentSeq}}.</div>
+      <div class="resource-type {{resource.format}}"></div>
+      <div class="title ellipsis">{{safe-html resource.title}}</div>
+    </div>
+    {{#if isReportView}}
+      <div class="resource-performance-container {{if (eq resource.answerStatus 'skipped') 'skipped-resource'}}">
+        {{#if (eq resource.answerStatus 'skipped')}}
+          <div class="resoure-status" data-toggle="tooltip" title="Skipped">
+            {{gru-icon name="block"}}
+          </div>
+        {{/if}}
+        <div class="resource-reaction">
+          {{reaction-icon question.reaction }}
+        </div>
+        <div class="resource-timespent">
+          {{format-time resource.timespent}}
+        </div>
+      </div>
+    {{/if}}
   </div>
   {{#if taxonomyTags.length}}
     <div class="resource-taxonomies-container">

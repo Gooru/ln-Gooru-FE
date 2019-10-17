@@ -13,7 +13,7 @@
   {{#if isShowCompetencyReport}}
     {{#unless domainLevelSummary}}
       {{#if isDataNotAvailable}}
-        <div class="no-data">{{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
+        <div class="proficiency-no-data">{{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
       {{else }}
         {{three-bounce-spinner}}
       {{/if}}
@@ -39,6 +39,7 @@
           fwCompetencies=fwCompetencies
           fwDomains=fwDomains
           activeDomain=activeDomain
+          class=class
           onClickBack="onClickBack"
         }}
       {{else if isShowClassProficiencyReport}}
@@ -66,7 +67,7 @@
       {{/if}}
     {{/unless}}
   {{else}}
-    <div class="no-data">{{t 'teacher-landing.class.students-tab.error-message'}}</div>
+    <div class="proficiency-no-data">{{t 'teacher-landing.class.students-tab.error-message'}}</div>
   {{/if}}
 </div>
 
