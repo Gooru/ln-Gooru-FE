@@ -153,7 +153,13 @@
 </div>
 
 {{#if showStudentDcaReport}}
-  {{reports/pull-up/dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/dca-student-collection-report
+    showPullUp=showStudentDcaReport
+    reportData=studentReportContextData
+    isStudent=true
+    useSession=isSuggestedContent
+    onClosePullUp="onClosePullUp"
+  }}
 {{/if}}
 
 {{#if isShowStudentExternalCollectionReport}}

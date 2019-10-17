@@ -316,7 +316,7 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
-  getPerformanceForSuggestion(context) {
+  getSuggestionPerformance(context) {
     const adapter = this;
     const namespace = adapter.get('insightsNamespace');
     const url = `${namespace}/suggestions/performance`;
