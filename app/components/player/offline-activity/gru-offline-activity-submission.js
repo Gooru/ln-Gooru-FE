@@ -222,16 +222,20 @@ export default Ember.Component.extend({
     function() {
       const component = this;
       const activityTasks = component.get('activityTasks') || Ember.A([]);
-      const isInCompleteTaskAvailable = activityTasks.filter(
-        task => !task.isAddedMandatorySubmission
-      );
-      const isUnSubmittedTaskAvailable = activityTasks.filter(
-        task => !task.isTaskSubmitted
-      );
-      let enableCompletionButton = !(
-        isInCompleteTaskAvailable.length || isUnSubmittedTaskAvailable.length
-      );
-      return enableCompletionButton;
+      if (activityTasks && activityTasks.length > 0) {
+        const isInCompleteTaskAvailable = activityTasks.filter(
+          task => !task.isAddedMandatorySubmission
+        );
+        const isUnSubmittedTaskAvailable = activityTasks.filter(
+          task => !task.isTaskSubmitted
+        );
+        let enableCompletionButton = !(
+          isInCompleteTaskAvailable.length || isUnSubmittedTaskAvailable.length
+        );
+        return enableCompletionButton;
+      } else {
+        return false;
+      }
     }
   ),
 
