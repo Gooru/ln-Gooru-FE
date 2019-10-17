@@ -2718,5 +2718,7 @@ window.i18ln = {
   'gru-suggest-test.pre-tessignaturet-lead':
     'A pre-test is suggested to measure y',
   'common.choose-lang': 'Choose Language',
-  'common-show': 'Show'
+  'common-show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation'
 };
