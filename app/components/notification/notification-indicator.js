@@ -100,6 +100,7 @@ export default Ember.Component.extend({
       {
         type: 'teacher.suggestion',
         action: 'explore',
+        ctxSource: 'coursemap',
         actionType: 'navigate',
         postActionHook: {
           dismissPopupAfterAction: true,
@@ -127,6 +128,65 @@ export default Ember.Component.extend({
               isStudyPlayer: true,
               milestoneId: null,
               pathType: '',
+              isNotification: true
+            }
+          }
+        }
+      },
+      {
+        type: 'teacher.suggestion',
+        action: 'explore',
+        ctxSource: 'class-activity',
+        actionType: 'navigate',
+        postActionHook: {
+          dismissPopupAfterAction: true,
+          deletenotificationuponaction: false,
+          refreshAfterDeleteNotification: true,
+          navigate: true,
+          navigationDetails: {
+            route: 'player',
+            exactparams: 'itemId',
+            queryPType: 'hybrid',
+            queryparams: {
+              itemId: null,
+              caContentId: null,
+              collectionId: null,
+              classId: null,
+              pathId: null,
+              pathType: null,
+              type: null,
+              source: PLAYER_EVENT_SOURCE.DAILY_CLASS,
+              resourceId: null,
+              role: ROLES.STUDENT,
+              isNotification: true
+            }
+          }
+        }
+      },
+      {
+        type: 'teacher.suggestion',
+        action: 'explore',
+        ctxSource: 'proficiency',
+        actionType: 'navigate',
+        postActionHook: {
+          dismissPopupAfterAction: true,
+          deletenotificationuponaction: false,
+          refreshAfterDeleteNotification: true,
+          navigate: true,
+          navigationDetails: {
+            route: 'player',
+            exactparams: 'itemId',
+            queryPType: 'hybrid',
+            queryparams: {
+              itemId: null,
+              collectionId: null,
+              classId: null,
+              pathId: null,
+              pathType: null,
+              type: null,
+              source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
+              resourceId: null,
+              role: ROLES.STUDENT,
               isNotification: true
             }
           }
@@ -435,7 +495,11 @@ export default Ember.Component.extend({
    */
   getDataFilter() {
     const component = this;
-    let filter = { classId: '', limit: 2, boundary: '' };
+    let filter = {
+      classId: '',
+      limit: 2,
+      boundary: ''
+    };
     filter.boundary =
       component.notificationModel && component.notificationModel.boundary
         ? component.notificationModel.boundary
@@ -455,7 +519,11 @@ export default Ember.Component.extend({
    */
   getDefaultFilter() {
     const component = this;
-    let filter = { classId: '', limit: 2, boundary: '' };
+    let filter = {
+      classId: '',
+      limit: 2,
+      boundary: ''
+    };
     filter.classId =
       component.get('model.isClass') && component.get('classId')
         ? component.get('classId')

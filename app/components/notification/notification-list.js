@@ -18,9 +18,16 @@ export default Ember.Component.extend({
      */
     addressItemNotification(notinItem) {
       const component = this;
-      let notifionAddresAction = component.notificationAddressAction.notificationTypes.find(
-        ntype => ntype.type === notinItem.notificationType
-      );
+      let notifionAddresAction;
+      if (notinItem.notificationType === 'teacher.suggestion') {
+        notifionAddresAction = component.notificationAddressAction.notificationTypes.find(
+          ntype => ntype.ctxSource === notinItem.ctxSource
+        );
+      } else {
+        notifionAddresAction = component.notificationAddressAction.notificationTypes.find(
+          ntype => ntype.type === notinItem.notificationType
+        );
+      }
       //Run post address hook, can refresh become part of post hook ?
       if (notifionAddresAction && notifionAddresAction.postActionHook) {
         component.postActionHook(notifionAddresAction, notinItem);
@@ -100,9 +107,7 @@ export default Ember.Component.extend({
     var route = component.get('router');
     qpm = component.transfromQpms(notin, ngtnDetails.queryparams);
     if (ngtnDetails.setlocation === true) {
-      let userlocation = `${qpm.unitId}+${qpm.lessonId}+${qpm.collectionId}+${
-        qpm.milestoneId
-      }+${notin.currentItemType}`;
+      let userlocation = `${qpm.unitId}+${qpm.lessonId}+${qpm.collectionId}+${qpm.milestoneId}+${notin.currentItemType}`;
       qpm.location = userlocation;
     }
     if (ngtnDetails.queryPType === 'qponly') {
@@ -136,7 +141,9 @@ export default Ember.Component.extend({
       fresult = {};
     var fix_key = function(key) {
       let retvar = '';
-      if (key.indexOf('ctx') > -1) {
+      if (key === 'ctxCaId') {
+        retvar = 'caContentId';
+      } else if (key.indexOf('ctx') > -1) {
         retvar = key.substring(3);
         retvar = retvar.camelize();
       } else if (key.indexOf('current') === 0) {
