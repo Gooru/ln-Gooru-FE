@@ -92,9 +92,21 @@ export default QuizzesPlayer.extend(
               : !route.get('history.lastRoute.name')
                 ? 'index'
                 : route.get('history.lastRoute.url');
-          route.transitionTo(redirectTo);
+
+          let isPreviewReferrer = controller.get('isPreviewReferrer');
+          if (
+            isPreviewReferrer &&
+            (isPreviewReferrer === true || isPreviewReferrer === 'true') &&
+            redirectTo !== 'index'
+          ) {
+            redirectTo = `${redirectTo}&isPreviewReferrer=true`;
+            route.transitionTo(redirectTo);
+          } else {
+            route.defaultTransitionToLibraryBasedOnType();
+          }
         }
       },
+
       /**
        * Action triggered to remix the collection
        */
@@ -256,7 +268,7 @@ export default QuizzesPlayer.extend(
       const type = params.type;
       const role = params.role || ROLES.TEACHER;
       params.lessonId =
-      params.lessonId === 'undefined' ? null : params.lessonId;
+        params.lessonId === 'undefined' ? null : params.lessonId;
       params.unitId = params.unitId === 'undefined' ? null : params.unitId; // Add more undefined to sanitize as required
       params.sourceUrl = location.host;
       params.partnerId = this.get('session.partnerId');
@@ -316,6 +328,19 @@ export default QuizzesPlayer.extend(
 
     deactivate: function() {
       this.get('controller').resetValues();
+    },
+
+    defaultTransitionToLibraryBasedOnType() {
+      let route = this,
+        defaultRoute = 'library-search',
+        myId = this.get('session.userId'),
+        type = this.get('controller').get('type'),
+        queryParams = {
+          profileId: myId,
+          type: 'my-content',
+          activeContentType: type
+        };
+      route.transitionTo(defaultRoute, { queryParams });
     }
   }
 );
