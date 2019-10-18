@@ -143,7 +143,8 @@ export default Ember.Component.extend({
         role: 'student',
         source: component.get('source'),
         type: collectionType,
-        caContentId
+        caContentId,
+        isIframeMode: true
       };
       if (
         collectionType === 'assessment-external' ||
@@ -160,9 +161,13 @@ export default Ember.Component.extend({
             queryParams
           });
       } else {
-        component.get('router').transitionTo('player', contentId, {
-          queryParams
-        });
+        component.sendAction(
+          'playContent',
+          'player',
+          queryParams,
+          contentId,
+          content
+        );
       }
     }
   },

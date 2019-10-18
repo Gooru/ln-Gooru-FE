@@ -21,6 +21,20 @@
     }
   }
 
+  .iframe-view {
+    .qz-player {
+      padding-top: 40px !important;
+    }
+  }
+
+  .iframe-view {
+    .qz-player {
+      .player {
+        overflow: hidden;
+      }
+    }
+  }
+
   .gru-study-navbar {
     top: 0 !important;
   }

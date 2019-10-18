@@ -3,7 +3,7 @@
   height: 100vh;
   position: fixed;
   z-index: 1000;
-  background: #f1f3f7;
+  background: $white;
   left: 0;
   right: 0;
   bottom: 100%;
@@ -35,14 +35,14 @@
       align-items: center;
       flex-direction: column;
       i {
-        background: url(gooru/player-loader.gif) no-repeat center;
+        background: url(gooru/loader.svg) no-repeat center;
         display: inline-block;
         width: 200px;
-        height: 150px;
+        height: 100px;
       }
       span {
         font-weight: 600;
-        font-size: 14px;
+        font-size: 24px;
       }
     }
   }

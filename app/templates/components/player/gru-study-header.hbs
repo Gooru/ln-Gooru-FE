@@ -23,7 +23,7 @@
       </div>
     </div>
   {{/if}}
-  <div class="bar-charts" data-content="{{performancePercentage}}% Completed">
+  <div class="bar-charts {{if isIframeMode 'disable-event' ''}}" data-content="{{performancePercentage}}% Completed">
     <div class="completion-chart">
       <div class="start-point">{{gru-icon name="stars"}}</div>
       {{charts/gru-x-bar-chart

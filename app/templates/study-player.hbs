@@ -15,6 +15,6 @@
   updateModel=(action 'updateModel')
 }}
 
-<div class="player-container {{if collection.isCollection 'collection' 'assessment'}} {{if showConfirmation 'show-confirmation' 'no-confirmation'}}">
+<div class="player-container {{if collection.isCollection 'collection' 'assessment'}} {{if showConfirmation 'show-confirmation' 'no-confirmation'}} {{if isIframeMode 'iframe-view' ''}}">
     {{partial 'partials/qz-player'}}
 </div>

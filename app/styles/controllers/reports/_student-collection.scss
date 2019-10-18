@@ -7,8 +7,7 @@
   .player-title-panel {
     height: 64px;
     background-color: #0072bc;
-    width: calc(100% - 360px);
-    margin: 0 auto;
+    margin: 0 181px 0 180px;
     color: $white;
     .back-to-collection {
       width: 75px;
@@ -64,6 +63,18 @@
           $excerpt-bg: $blue-400
         );
       }
+    }
+    @media (min-width: $screen-md) and (max-width: $screen-lg) {
+      margin: 0 108px 0 110px;
+    }
+    @media only screen and (max-width: $sm-width-max) {
+      margin: 0;
+    }
+    @media only screen and (min-width: $sm-width-max) and (max-width: $screen-sm) {
+      margin: 0 51px 0 70px;
+    }
+    @media only screen and (min-width: $screen-sm) and (max-width: $screen-md) {
+      margin: 0 65px 0 70px;
     }
   }
 
