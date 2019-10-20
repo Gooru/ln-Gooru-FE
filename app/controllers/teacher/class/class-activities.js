@@ -319,7 +319,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           );
         }
       }
-      controller.fetchAssessmentsMasteryAccrual();
+      controller.fetchAssessmentsMasteryAccrual(true);
     },
 
     /**
@@ -1860,7 +1860,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     });
   },
 
-  fetchAssessmentsMasteryAccrual() {
+  fetchAssessmentsMasteryAccrual(addToActivity = false) {
     let controller = this;
     let activeOfflineActivities = controller.get('activeOfflineActivities');
     let scheduledClassActivities = controller.get('scheduledClassActivities');
@@ -1874,9 +1874,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         let collection = activity.get('collection');
         let standards = activity.get('collection.standards');
         if (
-          collectionType === 'assessment' &&
-          standards &&
-          standards.length > 0
+          (collectionType === 'assessment' &&
+            standards &&
+            standards.length > 0) ||
+          (collectionType === 'assessment' && addToActivity)
         ) {
           assessments.pushObject(collection);
         }
