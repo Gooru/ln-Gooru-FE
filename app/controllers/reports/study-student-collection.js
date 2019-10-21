@@ -178,6 +178,11 @@ export default StudentCollection.extend({
       const controller = this;
       controller.showStudentProficiencyProgress();
       controller.set('isShowMasteryGreeting', false);
+    },
+
+    onExit(rouet, id) {
+      const controller = this;
+      controller.transitionToRoute(rouet, id);
     }
   },
 
@@ -384,7 +389,8 @@ export default StudentCollection.extend({
     const context = this.get('mapLocation.context');
     let queryParams = {
       role: ROLES.STUDENT,
-      source: this.get('source')
+      source: this.get('source'),
+      isIframeMode: this.get('isIframeMode')
     };
     let classId = context.get('classId');
     if (classId) {

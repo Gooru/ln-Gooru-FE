@@ -80,7 +80,8 @@ export default Ember.Route.extend({
           courseId,
           unitId,
           lessonId,
-          item.pathType
+          item.pathType,
+          item
         );
       } else if (type === 'resource') {
         route.startResourceStudyPlayer(classId, courseId, item);
@@ -276,7 +277,8 @@ export default Ember.Route.extend({
       minScore,
       collectionSource: collection.source || 'course_map',
       isStudyPlayer: true,
-      pathType
+      pathType,
+      isIframeMode: true
     };
 
     let suggestionPromise = null;
@@ -309,11 +311,14 @@ export default Ember.Route.extend({
           pathType
         );
     }
-    suggestionPromise.then(() =>
-      route.transitionTo('study-player', courseId, {
-        queryParams
-      })
-    );
+    suggestionPromise.then(function() {
+      route.controller.set(
+        'playerUrl',
+        route.get('router').generate('study-player', courseId, { queryParams })
+      );
+      route.controller.set('isOpenPlayer', true);
+      route.controller.set('playerContent', collection);
+    });
   },
 
   /**
@@ -322,13 +327,16 @@ export default Ember.Route.extend({
    * @param {string} courseId
    * @param {string} unitId
    * @param {string} lessonId
+   * @param {string} pathType
+   * @param {string} collection
    */
   startLessonStudyPlayer: function(
     classId,
     courseId,
     unitId,
     lessonId,
-    pathType
+    pathType,
+    collection
   ) {
     const route = this;
     const role = ROLES.STUDENT;
@@ -338,16 +346,22 @@ export default Ember.Route.extend({
       lessonId,
       role,
       source: PLAYER_EVENT_SOURCE.COURSE_MAP,
-      pathType
+      pathType,
+      isIframeMode: true
     };
     route
       .get('navigateMapService')
       .startLesson(courseId, unitId, lessonId, classId, pathType)
-      .then(() =>
-        route.transitionTo('study-player', courseId, {
-          queryParams
-        })
-      );
+      .then(function() {
+        route.controller.set(
+          'playerUrl',
+          route
+            .get('router')
+            .generate('study-player', courseId, { queryParams })
+        );
+        route.controller.set('isOpenPlayer', true);
+        route.controller.set('playerContent', collection);
+      });
   },
 
   /**
@@ -360,7 +374,8 @@ export default Ember.Route.extend({
     const queryParams = {
       role: ROLES.STUDENT,
       source: PLAYER_EVENT_SOURCE.COURSE_MAP,
-      classId
+      classId,
+      isIframeMode: true
     };
     route
       .get('navigateMapService')

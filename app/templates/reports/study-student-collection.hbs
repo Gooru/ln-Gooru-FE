@@ -1,3 +1,4 @@
+
 {{player/gru-study-header
   classId=classId
   collection=collection
@@ -8,6 +9,7 @@
   class=class
   sourceType=source
   isStudyPlayer=true
+  isIframeMode=isIframeMode
 }}
 
 <div class="report-container {{if isShowSuggestion 'show-suggestion'}}">
@@ -17,7 +19,7 @@
     {{/if}}
     {{reports/qz-student-report attemptData=attemptData profile=profile}}
   </div>
-  {{player/gru-player-summary-footer isDone=isDone classId=classId parents="next" courseId=courseId collection=collection isFullScreen=isFullScreen onToggleScreen="onToggleScreen"}}
+  {{player/gru-player-summary-footer isDone=isDone classId=classId parents="next" courseId=courseId collection=collection isFullScreen=isFullScreen onToggleScreen="onToggleScreen" isIframeMode=isIframeMode onExit="onExit"}}
 </div>
 
 {{#if isShowSuggestion}}

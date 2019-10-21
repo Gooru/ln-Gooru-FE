@@ -35,15 +35,14 @@ export default Ember.Component.extend({
         collectionId: contentId,
         role: 'student',
         source: component.get('source'),
-        type: component.get('collectionType')
+        type: component.get('collectionType'),
+        isIframeMode: true
       };
       if (component.get('isTeacherSuggestion')) {
         queryParams.pathId = content.id;
         queryParams.pathType = 'proficiency.teacher';
       }
-      component.get('router').transitionTo('player', contentId, {
-        queryParams
-      });
+      component.sendAction('playContent', queryParams, contentId, content);
     }
   }
 });

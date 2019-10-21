@@ -83,6 +83,14 @@
 {{else}}
   <div class="no-course-content">{{t 'student-landing.no-course-assigned'}}</div>
 {{/if}}
+{{#if isOpenPlayer}}
+  {{reports/pull-up/player-pull-up
+    showPullUp=isOpenPlayer
+    playerUrl=playerUrl
+    playerContent=playerContent
+    onclosePullUp="closePullUp"
+  }}
+{{/if}}
 {{#if showCourseReport}}
   {{reports/pull-up/student-course-report onClosePullUp="onClosePullUp" context=studentCourseReportContext showPullUp=showCourseReport}}
 {{/if}}

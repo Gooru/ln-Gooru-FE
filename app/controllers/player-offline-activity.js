@@ -1,10 +1,21 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE, ROLES } from 'gooru-web/config/config';
+import {
+  PLAYER_EVENT_SOURCE,
+  ROLES,
+  PLAYER_EVENT_MESSAGE
+} from 'gooru-web/config/config';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Attributes
-  queryParams: ['caContentId', 'classId', 'role', 'isPreview', 'source'],
+  queryParams: [
+    'caContentId',
+    'classId',
+    'role',
+    'isPreview',
+    'source',
+    'isIframeMode'
+  ],
 
   // -------------------------------------------------------------------------
   // Dependencies
@@ -28,8 +39,11 @@ export default Ember.Controller.extend({
       const controller = this;
       const classId = controller.get('classId');
       const source = controller.get('source');
+      const isIframeMode = controller.get('isIframeMode');
       //Redirect to CA if class ID is available otherwise go back to last accessed url
-      if (classId) {
+      if (isIframeMode) {
+        window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
+      } else if (classId) {
         controller.transitionToRoute('student.class.class-activities', classId);
       } else if (source === PLAYER_EVENT_SOURCE.RGO) {
         window.close();
