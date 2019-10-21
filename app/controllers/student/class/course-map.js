@@ -515,6 +515,7 @@ export default Ember.Controller.extend({
           let collectionId = userLocationObj.get('collectionId');
           userLocation = `${unitId}+${lessonId}+${collectionId}`;
           controller.set('userLocation', userLocation);
+          controller.get('target.router').refresh();
         }
       });
   }

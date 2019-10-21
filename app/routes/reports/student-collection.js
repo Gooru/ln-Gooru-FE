@@ -2,7 +2,7 @@ import Ember from 'ember';
 import PublicRouteMixin from 'gooru-web/mixins/public-route-mixin';
 import ContextMixin from 'gooru-web/mixins/quizzes/context';
 import QuizzesReport from 'quizzes-addon/routes/reports/student-context';
-import { ROLES } from 'gooru-web/config/config';
+import { ROLES, PLAYER_EVENT_MESSAGE } from 'gooru-web/config/config';
 
 /**
  *
@@ -43,7 +43,7 @@ export default QuizzesReport.extend(PublicRouteMixin, ContextMixin, {
       const controller = component.get('controller');
       let isIframeMode = controller.get('isIframeMode');
       if (isIframeMode) {
-        window.parent.postMessage('PUllUP_CLOSE', '*');
+        window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
       }
     }
   },

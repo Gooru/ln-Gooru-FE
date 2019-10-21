@@ -13,7 +13,7 @@
     backUrl=collectionUrl
   }}
 {{/unless}}
-<div class= {{if isIframeMode 'iframe-mode' ''}}>
+<div>
   {{#if isIframeMode}}
     <div class="close-panal">
       <div class="back-to-collection pull-left" {{action 'closePlayer'}} data-toggle="tooltip" data-placement="bottom" title="{{t 'common.close'}}">

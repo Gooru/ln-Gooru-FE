@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { PLAYER_EVENT_MESSAGE } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -27,9 +28,9 @@ export default Ember.Component.extend({
      * method used to listen the events from iframe.
      **/
     function receiveMessage(event) {
-      if (event.data === 'PUllUP_CLOSE') {
+      if (event.data === PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE) {
         component.closePullUp();
-      } else if (event.data === 'LOADING_COMPLETED') {
+      } else if (event.data === PLAYER_EVENT_MESSAGE.GRU_LOADING_COMPLETED) {
         component.set('isLoading', false);
       }
     }

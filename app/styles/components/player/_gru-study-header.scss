@@ -115,7 +115,8 @@
     }
   }
 
-  .iframe-mode {
+  &.iframe-mode {
+    height: 40px;
     .back-to-collection {
       width: 55px;
       height: 40px;
