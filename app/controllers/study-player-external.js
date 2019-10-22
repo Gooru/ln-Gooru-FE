@@ -19,7 +19,8 @@ export default Ember.Controller.extend({
     'unitId',
     'lessonId',
     'milestoneId',
-    'source'
+    'source',
+    'isIframeMode'
   ],
 
   // -------------------------------------------------------------------------
@@ -98,6 +99,11 @@ export default Ember.Controller.extend({
           .removeClass('fullscreen-exit')
           .addClass('fullscreen');
       }
+    },
+
+    onExit(rouet, id) {
+      const controller = this;
+      controller.transitionToRoute(rouet, id);
     }
   },
 
@@ -202,7 +208,8 @@ export default Ember.Controller.extend({
     const context = this.get('mapLocation.context');
     let queryParams = {
       role: ROLES.STUDENT,
-      source: this.get('source')
+      source: this.get('source'),
+      isIframeMode: this.get('isIframeMode')
     };
     let classId = context.get('classId');
     if (classId) {

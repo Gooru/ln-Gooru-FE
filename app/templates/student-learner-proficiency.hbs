@@ -95,11 +95,21 @@
           studentProfile=studentProfile
           domainCompetencyList=domainCompetencyList
           isPlayerProficiency=isPlayerProficiency
+          playContent="playContent"
         }}
       {{/proficiency/proficiency-subject-panel}}
     {{/if}}
   </div>
 </div>
+
+{{#if isOpenPlayer}}
+  {{reports/pull-up/player-pull-up
+    showPullUp=isOpenPlayer
+    playerUrl=playerUrl
+    playerContent=playerContent
+    onclosePullUp="closePullUp"
+  }}
+{{/if}}
 
 {{#if isPlayerProficiency}}
   {{player/gru-player-summary-footer isDone=isDone classId=classId parents="onPlayNext" courseId=courseId courseTitle=course.title isPlayerProficiency = isPlayerProficiency isFullScreen=isFullScreen onToggleScreen="onToggleScreen"}}

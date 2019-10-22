@@ -7,8 +7,9 @@
   sourceType= source
   showConfirmation=(if isOfflineActivity false true)
   isStudyPlayer=true
+  isIframeMode=isIframeMode
 }}
-<div class="player-container  {{type}}">
+<div class="player-container {{type}} {{if isIframeMode 'iframe-player-container' ''}}">
   <div class="player">
     {{#if isLoading}}
       {{three-bounce-spinner}}
@@ -19,6 +20,7 @@
           source = source
           mapLocation = mapLocation
           isStudyPlayer = true
+          isIframeMode=isIframeMode
         }}
       {{else if isAsssessment}}
         {{player/gru-external-assessment-page
@@ -45,6 +47,7 @@
       isDone=isDone
       classId=classId
       courseId=courseId
+      onExit="onExit"
     }}
   </div>
 </div>

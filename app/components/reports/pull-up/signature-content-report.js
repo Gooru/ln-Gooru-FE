@@ -190,6 +190,11 @@ export default Ember.Component.extend({
       component.set('previewContent', content.get('collection'));
       component.set('previewContentType', collectionType);
       component.set('isShowContentPreview', true);
+    },
+
+    playContent(queryParams, contentId, content) {
+      const component = this;
+      component.sendAction('playContent', queryParams, contentId, content);
     }
   },
 
