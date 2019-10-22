@@ -106,20 +106,20 @@ export default Ember.Component.extend({
       .get('taxonomyService')
       .getSubjects(category)
       .then(function(subjects) {
-        component.set('subjects', subjects);
-        if (component.get('selectedCategory')) {
-          let preferedSubjects = subjects.findBy(
-            'code',
-            component.get('selectedSubject.subjectCode')
-          );
-          if (preferedSubjects) {
-            let subject = preferedSubjects
-              .get('frameworks')
-              .findBy(
-                'frameworkId',
-                component.get('selectedSubject.frameworkCode')
-              );
-            if (!component.isDestroyed) {
+        if (!component.isDestroyed) {
+          component.set('subjects', subjects);
+          if (component.get('selectedCategory')) {
+            let preferedSubjects = subjects.findBy(
+              'code',
+              component.get('selectedSubject.subjectCode')
+            );
+            if (preferedSubjects) {
+              let subject = preferedSubjects
+                .get('frameworks')
+                .findBy(
+                  'frameworkId',
+                  component.get('selectedSubject.frameworkCode')
+                );
               component.set('selectedSubject', subject);
             }
           }
