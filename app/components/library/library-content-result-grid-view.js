@@ -158,7 +158,8 @@ export default Ember.Component.extend({
         } else {
           let queryParams = {
             role: ROLES.STUDENT,
-            source: PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY
+            source: PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY,
+            isIframeMode: true
           };
           this.get('router').transitionTo('player', id, {
             queryParams

@@ -70,6 +70,11 @@ export default Ember.Controller.extend(ModalMixin, ConfigurationMixin, {
             }
           }
         );
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 

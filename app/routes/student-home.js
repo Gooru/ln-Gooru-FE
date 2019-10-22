@@ -421,9 +421,18 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     nextPromise
       .then(route.nextPromiseHandler)
       .then(queryParams => {
-        route.transitionTo('study-player', courseId, {
-          queryParams
-        });
+        queryParams.isIframeMode = true;
+        route.controller.set(
+          'playerUrl',
+          route
+            .get('router')
+            .generate('study-player', courseId, { queryParams })
+        );
+        route.controller.set('isOpenPlayer', true);
+        let playerContent = {
+          title: currentLocation ? currentLocation.get('collectionTitle') : null
+        };
+        route.controller.set('playerContent', playerContent);
       })
       .catch(() => {
         let selectedClass = activeClasses.findBy('id', classData.get('id'));

@@ -90,7 +90,8 @@ export default Ember.Component.extend({
         type: collectionType,
         caContentId,
         pathId,
-        pathType
+        pathType,
+        isIframeMode: true
       };
       if (
         collectionType === 'assessment-external' ||
@@ -101,15 +102,21 @@ export default Ember.Component.extend({
         });
       } else if (collectionType === 'offlineactivity') {
         queryParams.offlineActivityId = contentId;
-        component
-          .get('router')
-          .transitionTo('player-offline-activity', contentId, {
-            queryParams
-          });
+        component.sendAction(
+          'playContent',
+          'player-offline-activity',
+          queryParams,
+          contentId,
+          content
+        );
       } else {
-        component.get('router').transitionTo('player', contentId, {
-          queryParams
-        });
+        component.sendAction(
+          'playContent',
+          'player',
+          queryParams,
+          contentId,
+          content
+        );
       }
     },
     /**
