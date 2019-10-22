@@ -20,6 +20,11 @@ export default Ember.Component.extend({
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
   /**
+   * @requires service:api-sdk/assessment
+   */
+  assessmentService: Ember.inject.service('api-sdk/assessment'),
+
+  /**
    * @type {CourseService} Service to retrieve course information
    */
   courseService: Ember.inject.service('api-sdk/course'),
@@ -168,7 +173,19 @@ export default Ember.Component.extend({
      * Action get triggered when add content to DCA got clicked
      */
     onAddContentToDCA(content) {
-      this.sendAction('onAddContentToDCA', content);
+      let component = this;
+      let collectionType = content.get('format');
+      if (collectionType === 'assessment') {
+        component
+          .get('assessmentService')
+          .readAssessment(content.get('id'))
+          .then(assessment => {
+            content.set('standards', assessment.get('standards'));
+            component.sendAction('onAddContentToDCA', content);
+          });
+      } else {
+        component.sendAction('onAddContentToDCA', content);
+      }
     },
 
     /**
@@ -185,9 +202,7 @@ export default Ember.Component.extend({
       let courseId = component.get('courseId');
       let collectionId = collection.get('id');
       let collectionType = collection.get('collectionType');
-      let url = `${
-        window.location.origin
-      }/player/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${collectionId}?role=teacher&type=${collectionType}`;
+      let url = `${window.location.origin}/player/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${collectionId}?role=teacher&type=${collectionType}`;
       if (collection.get('isExternalAssessment')) {
         url = collection.get('url');
       }
