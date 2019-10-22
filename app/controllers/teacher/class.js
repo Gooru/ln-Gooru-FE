@@ -191,6 +191,20 @@ export default Ember.Controller.extend({
 
   isShowMilestoneReport: false,
 
+  /**
+   * @property {Array} secondaryClassess
+   * Property for list of secondary classess attached with the class
+   */
+
+  secondaryClassess: Ember.computed('class.setting', function() {
+    const controller = this;
+    const classSetting = controller.get('class.setting');
+    const attachedSecondaryClassList = classSetting['secondary.classes']
+      ? classSetting['secondary.classes'].list
+      : Ember.A([]);
+    return attachedSecondaryClassList;
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
