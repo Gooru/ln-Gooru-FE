@@ -17,7 +17,7 @@
     {{#if enableConfetti }}
       {{gru-confetti}}
     {{/if}}
-    {{reports/qz-student-report attemptData=attemptData profile=profile}}
+    {{reports/qz-student-report attemptData=attemptData profile=profile isIframeMode=isIframeMode}}
   </div>
   {{player/gru-player-summary-footer isDone=isDone classId=classId parents="next" courseId=courseId collection=collection isFullScreen=isFullScreen onToggleScreen="onToggleScreen" isIframeMode=isIframeMode onExit="onExit"}}
 </div>
