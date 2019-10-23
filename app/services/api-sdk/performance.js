@@ -1251,10 +1251,15 @@ export default Ember.Service.extend({
    * Get performance of suggestion
    * @returns {Promise.<[]>}
    */
-  findSuggestionPerformance: function(context) {
+  fecthSuggestionPerformance: function(context) {
     const service = this;
     return service
       .get('performanceAdapter')
-      .getPerformanceForSuggestion(context);
+      .getSuggestionPerformance(context)
+      .then(data => {
+        return service
+          .get('collectionPerformanceSummarySerializer')
+          .normalizeAllCollectionPerformanceSummary(data);
+      });
   }
 });

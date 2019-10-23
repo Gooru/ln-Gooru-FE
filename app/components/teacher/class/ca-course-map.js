@@ -168,7 +168,8 @@ export default Ember.Component.extend({
      * Action get triggered when add content to DCA got clicked
      */
     onAddContentToDCA(content) {
-      this.sendAction('onAddContentToDCA', content);
+      let component = this;
+      component.sendAction('onAddContentToDCA', content);
     },
 
     /**
@@ -185,9 +186,7 @@ export default Ember.Component.extend({
       let courseId = component.get('courseId');
       let collectionId = collection.get('id');
       let collectionType = collection.get('collectionType');
-      let url = `${
-        window.location.origin
-      }/player/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${collectionId}?role=teacher&type=${collectionType}`;
+      let url = `${window.location.origin}/player/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${collectionId}?role=teacher&type=${collectionType}`;
       if (collection.get('isExternalAssessment')) {
         url = collection.get('url');
       }

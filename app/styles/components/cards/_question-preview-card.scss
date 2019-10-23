@@ -50,6 +50,12 @@
         }
         .question-score {
           font-weight: bold;
+          i.clear {
+            color: $brand-incorrect;
+          }
+          i.done {
+            color: $brand-success;
+          }
         }
       }
     }

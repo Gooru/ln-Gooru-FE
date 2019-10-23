@@ -406,6 +406,10 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     });
   },
 
+  /**
+   * @function loadPortfolioReport
+   * Method to load portfolio OA report
+   */
   loadPortfolioReport() {
     const component = this;
     component.loadActivityAttempts().then(function(activityAttempts) {
@@ -417,6 +421,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     });
   },
 
+  /**
+   * @function loadOaAttemptPerforamance
+   * @param {Ember.Object} attempt
+   * Method to load OA performance by given attempt
+   */
   loadOaAttemptPerforamance(attempt) {
     const component = this;
     if (attempt.get('contentSource') === 'coursemap') {

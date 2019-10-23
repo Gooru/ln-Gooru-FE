@@ -114,6 +114,12 @@
         {{/each}}
       {{/if}}
     </div>
+
+      {{#if isLoading}}
+        <div class="loading-spinner">
+          {{three-bounce-spinner}}
+        </div>
+      {{/if}}
   </div>
   {{#if (and isEnableToggleAnswer (not isReportView))}}
     <div class="footer-container" {{action "onToggleAnswer"}}>

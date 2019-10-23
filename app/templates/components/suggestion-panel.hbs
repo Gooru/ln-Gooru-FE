@@ -2,7 +2,7 @@
   <div class="suggestion-header">
     <i class="suggestion-icon {{collectionType}}"></i>
     <div class="suggestion {{unless isStudent 'hide-play'}}">
-      <div class="title ellipsis" {{action 'onPreviewContent'}} title="{{content.title}}">
+      <div class="title ellipsis {{if isStudent 'disable-event'}}" {{action 'onPreviewContent'}} title="{{content.title}}">
         {{content.collection.title}}</div>
       <div class="content-count">
         {{#if (or content.collection.questionCount content.collection.resourceCount)}}
@@ -17,14 +17,14 @@
           {{gru-icon name='play_arrow'}}
         </div>
       {{/if}}
-      {{#if isStudent}}
-        <span class="suggestion-icon">
-          {{gru-icon name='explore'}}
+      {{#if isTeacherSuggestion}}
+        <span class="teacher-suggestion">
+          <i class="icon"></i>
         </span>
       {{else}}
-        {{#if isTeacherSuggestion}}
-          <span class="teacher-suggestion">
-            <i class="icon"></i>
+        {{#if isStudent}}
+          <span class="suggestion-icon">
+            {{gru-icon name='explore'}}
           </span>
         {{else}}
           <span class="suggestion-icon suggest" {{action 'onSuggestContent' content collectionType}} data-toggle="tooltip" data-placement="left" title="Suggest">
