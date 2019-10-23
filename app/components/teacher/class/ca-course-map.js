@@ -20,11 +20,6 @@ export default Ember.Component.extend({
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
   /**
-   * @requires service:api-sdk/assessment
-   */
-  assessmentService: Ember.inject.service('api-sdk/assessment'),
-
-  /**
    * @type {CourseService} Service to retrieve course information
    */
   courseService: Ember.inject.service('api-sdk/course'),
@@ -174,18 +169,7 @@ export default Ember.Component.extend({
      */
     onAddContentToDCA(content) {
       let component = this;
-      let collectionType = content.get('format');
-      if (collectionType === 'assessment') {
-        component
-          .get('assessmentService')
-          .readAssessment(content.get('id'))
-          .then(assessment => {
-            content.set('standards', assessment.get('standards'));
-            component.sendAction('onAddContentToDCA', content);
-          });
-      } else {
-        component.sendAction('onAddContentToDCA', content);
-      }
+      component.sendAction('onAddContentToDCA', content);
     },
 
     /**
