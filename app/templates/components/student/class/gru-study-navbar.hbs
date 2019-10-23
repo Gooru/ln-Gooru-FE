@@ -7,24 +7,24 @@
     </div>
     {{#unless isILActivity}}
       <div class="class-activities tab grade-range-{{grade-range caPerformanceSummary.scoreInPercentage}} {{if (eq selectedMenuItem 'class-activities') 'vactive'}}">
-        <a  class="tab-menu" title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
+        <a class="tab-menu" title="{{t 'teacher-landing.class.class-activities'}}" role="tab" data-toggle="tooltip">
           <span class="class-activity-tab" {{action 'selectItem' 'class-activities'}}>
             <i class="dca-pin"></i>
             <span class="add-info dca-text">{{t 'teacher-landing.class.class-activities'}}</span>
           </span>
-            <span class="performance-score {{if (not hasCAStarted) 'not-started'}}" {{action 'onOpenCAReport'}}>{{if hasCAStarted (concat caPerformanceSummary.scoreInPercentage '%') '--' }}</span>
-          </a>
+          <span class="performance-score {{if (not hasCAStarted) 'not-started'}}" {{action 'onOpenCAReport'}}>{{if hasCAStarted (concat caPerformanceSummary.scoreInPercentage '%') '--' }}</span>
+        </a>
       </div>
     {{/unless}}
     <div class="course-map study-player tab grade-range-{{grade-range cmPerformanceSummary.score}} {{destination}} {{if isPremiumCourse 'premium-course'}} {{if (or (eq selectedMenuItem 'course-map') (eq selectedMenuItem 'study-player')) 'vactive'}}">
       {{#if (eq selectedMenuItem 'course-map')}}
         <a role="tab" data-toggle="tooltip" title="{{t 'student-landing.study-player'}}" class="{{unless isCourseMapped 'no-course'}} tab-menu">
-            <span class="course-map-tab" {{action 'selectItem' 'study-player'}}>
-              {{gru-icon name='play_arrow'}}
-              <span class="add-info">{{t 'student-landing.study-player'}}</span>
-            </span>
-            <span class="performance-score {{if (not hasCMStarted) 'not-started'}}" {{action 'openCourseReport'}}>{{if hasCMStarted (concat cmPerformanceSummary.score '%') '--' }}</span>
-          </a>
+          <span class="course-map-tab" {{action 'selectItem' 'study-player'}}>
+            {{gru-icon name='play_arrow'}}
+            <span class="add-info">{{t 'student-landing.study-player'}}</span>
+          </span>
+          <span class="performance-score {{if (not hasCMStarted) 'not-started'}}" {{action 'openCourseReport'}}>{{if hasCMStarted (concat cmPerformanceSummary.score '%') '--' }}</span>
+        </a>
       {{else}}
         <a class="tab-menu" role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.course-map'}}">
           <span class="course-map-tab" {{action 'selectItem' 'course-map'}}>
@@ -46,6 +46,17 @@
     <div class="studyplayer-title">
       <span>{{navTitle}}</span>
     </div>
+    {{#if class}}
+      <div class="suggestion-tab">
+        <div class="suggestion-explore" {{action 'toogleSuggestionContainer'}}>
+          {{gru-icon name="explore"}}
+          <div class="suggestion-count">5</div>
+        </div>
+        {{#if showSuggestionContainer}}
+          {{student-suggestion-container classId=classId onCloseContainer='toogleSuggestionContainer'}}
+        {{/if}}
+      </div>
+    {{/if}}
     <div class="notification-tab">
       {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' classId=classId isTeacher=false }}
     </div>
@@ -64,7 +75,7 @@
       <div class="class-info">
         <a {{action 'selectItem' 'class-info'}} role="tab" data-toggle="tooltip" title="{{t 'teacher-landing.class.class-management-tab.class-information'}}">
           {{gru-icon name="info" style='material-icons-outlined'}}
-      </a>
+        </a>
       </div>
     {{/if}}
   </div>

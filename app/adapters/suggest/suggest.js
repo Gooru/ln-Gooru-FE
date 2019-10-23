@@ -161,7 +161,23 @@ export default ApplicationAdapter.extend({
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      processData: false,
+      headers: adapter.defineHeaders(),
+      data: params
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Fetch In-class suggestionsnfor student
+   */
+  fetchInClassSuggestionsForStudent(userId, classId, params) {
+    const adapter = this;
+    const namespace = adapter.get('namespaceST');
+    const url = `${namespace}/user/${userId}/class/${classId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
       headers: adapter.defineHeaders(),
       data: params
     };
@@ -179,7 +195,6 @@ export default ApplicationAdapter.extend({
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      processData: false,
       headers: adapter.defineHeaders(),
       data: params
     };

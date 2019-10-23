@@ -40,7 +40,7 @@
       height: 100%;
       display: grid;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-      grid-template-columns: 59px 145px 145px 145px 1fr 59px 59px;
+      grid-template-columns: 59px 145px 145px 145px 1fr 59px 59px 59px;
 
       &.no-class-info {
         grid-template-columns: 59px 145px 145px 145px 1fr 59px;
@@ -55,14 +55,14 @@
       }
 
       &.nav-menu-class-activities {
-        grid-template-columns: 59px 180px 145px 145px 1fr 59px 59px;
+        grid-template-columns: 59px 180px 145px 145px 1fr 59px 59px 59px;
 
         &.no-class-info {
           grid-template-columns: 59px 180px 145px 145px 1fr 59px;
         }
 
         &.premium-class {
-          grid-template-columns: 59px 180px 145px 145px 1fr 59px 59px 59px;
+          grid-template-columns: 59px 180px 145px 145px 1fr 59px 59px 59px 59px;
 
           &.no-class-info {
             grid-template-columns: 59px 180px 145px 145px 1fr 59px 59px;
@@ -72,14 +72,14 @@
 
       &.nav-menu-course-map,
       &.nav-menu-study-player {
-        grid-template-columns: 59px 145px 180px 145px 1fr 59px 59px;
+        grid-template-columns: 59px 145px 180px 145px 1fr 59px 59px 59px;
 
         &.no-class-info {
           grid-template-columns: 59px 145px 180px 145px 1fr 59px;
         }
 
         &.premium-class {
-          grid-template-columns: 59px 145px 180px 145px 1fr 59px 59px 59px;
+          grid-template-columns: 59px 145px 180px 145px 1fr 59px 59px 59px 59px;
 
           &.no-class-info {
             grid-template-columns: 59px 145px 180px 145px 1fr 59px 59px;
@@ -88,7 +88,7 @@
       }
 
       &.independent-learning {
-        grid-template-columns: 59px 180px 1fr 59px 59px;
+        grid-template-columns: 59px 180px 1fr 59px 59px 59px;
 
         &.no-class-info {
           grid-template-columns: 59px 180px 1fr 59px;
@@ -96,7 +96,7 @@
 
         &.nav-menu-course-map,
         &.nav-menu-study-player {
-          grid-template-columns: 59px 180px 1fr 59px 59px;
+          grid-template-columns: 59px 180px 1fr 59px 59px 59px;
 
           &.no-class-info {
             grid-template-columns: 59px 180px 1fr 59px;
@@ -105,7 +105,7 @@
       }
       /* Extra small devices (phones, 600px and down) */
       @media only screen and (max-width: $screen-xs) {
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
         &.no-class-info {
           grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -114,7 +114,7 @@
         &.nav-menu-class-activities,
         &.nav-menu-course-map,
         &.nav-menu-study-player {
-          grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
           &.no-class-info {
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -122,7 +122,7 @@
         }
 
         &.independent-learning {
-          grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 
           &.no-class-info {
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -130,7 +130,7 @@
 
           &.nav-menu-course-map,
           &.nav-menu-study-player {
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 
             &.no-class-info {
               grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -139,7 +139,7 @@
         }
 
         &.premium-class {
-          grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
           &.no-class-info {
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -149,7 +149,7 @@
           &.nav-menu-course-map,
           &.nav-menu-study-player {
             &.no-class-info {
-              grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+              grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
             }
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
           }
@@ -256,10 +256,10 @@
         }
       }
       @media only screen and (min-width: $screen-xs) and (max-width: $screen-sm) {
-        grid-template-columns: 59px 59px 59px 59px 1fr 59px 59px;
+        grid-template-columns: 59px 59px 59px 59px 1fr 59px 59px 59px;
 
         &.independent-learning {
-          grid-template-columns: 59px 89px 1fr 59px 59px;
+          grid-template-columns: 59px 89px 1fr 59px 59px 59px;
 
           &.no-class-info {
             grid-template-columns: 59px 89px 1fr 59px;
@@ -267,7 +267,7 @@
 
           &.nav-menu-course-map,
           &.nav-menu-study-player {
-            grid-template-columns: 59px 89px 1fr 59px 59px;
+            grid-template-columns: 59px 89px 1fr 59px 59px 59px;
 
             &.no-class-info {
               grid-template-columns: 59px 89px 1fr 59px;
@@ -276,23 +276,23 @@
         }
 
         &.premium-class {
-          grid-template-columns: 59px 59px 59px 59px 1fr 59px 75px 59px;
+          grid-template-columns: 59px 59px 59px 59px 1fr 59px 75px 59px 59px;
 
           &.no-class-info {
             grid-template-columns: 59px 59px 59px 59px 1fr 59px 75px;
           }
 
           &.nav-menu-class-activities {
-            grid-template-columns: 59px 89px 59px 59px 1fr 59px 89px 59px;
+            grid-template-columns: 59px 89px 59px 59px 1fr 59px 89px 59px 59px;
 
-            &.no-class-info {
+            59px &.no-class-info {
               grid-template-columns: 59px 89px 59px 59px 1fr 59px 89px;
             }
           }
 
           &.nav-menu-course-map,
           &.nav-menu-study-player {
-            grid-template-columns: 59px 59px 89px 59px 1fr 59px 89px 59px;
+            grid-template-columns: 59px 59px 89px 59px 1fr 59px 89px 59px 59px;
 
             &.no-class-info {
               grid-template-columns: 59px 59px 89px 59px 1fr 59px 89px;
@@ -301,7 +301,7 @@
         }
 
         &.nav-menu-class-activities {
-          grid-template-columns: 59px 89px 59px 59px 1fr 59px 59px;
+          grid-template-columns: 59px 89px 59px 59px 1fr 59px 59px 59px;
 
           &.no-class-info {
             grid-template-columns: 59px 89px 59px 59px 1fr 59px;
@@ -310,7 +310,7 @@
 
         &.nav-menu-course-map,
         &.nav-menu-study-player {
-          grid-template-columns: 59px 59px 89px 59px 1fr 59px 59px;
+          grid-template-columns: 59px 59px 89px 59px 1fr 59px 59px 59px;
 
           &.no-class-info {
             grid-template-columns: 59px 59px 89px 59px 1fr 59px;
@@ -530,6 +530,48 @@
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+        }
+      }
+
+      .suggestion-tab {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        position: relative;
+
+        .suggestion-explore {
+          width: 20px;
+          border-radius: 50%;
+          background: #ffffff57;
+          height: 20px;
+          box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.5);
+          margin-top: 2px;
+          color: #fff;
+          position: relative;
+          cursor: pointer;
+
+          .explore {
+            transform: rotate(90deg);
+            margin-top: -2px;
+            margin-left: -2px;
+            color: #f88c49;
+          }
+
+          .suggestion-count {
+            width: 16px;
+            border-radius: 50%;
+            background: #fff;
+            position: absolute;
+            line-height: 14px;
+            top: -5px;
+            height: 16px;
+            left: 14px;
+            color: #37424a;
+            border: 1px solid #37424a;
+            font-size: 9px;
+            text-indent: 4px;
+          }
         }
       }
 

@@ -292,6 +292,7 @@ export default Ember.Service.extend({
         }, reject);
     });
   },
+
   fetchInClassSuggestionsByCode(userId, code, params) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -300,6 +301,46 @@ export default Ember.Service.extend({
         .fetchInClassSuggestionsByCode(userId, code, params)
         .then(function(response) {
           resolve(response);
+        }, reject);
+    });
+  },
+
+  /**
+   * fetch In-Class suggestions for student
+   * @param {string} source
+   * @returns {Promise}
+   */
+  fetchInClassSuggestionsForStudent(userId, classId, params) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('suggestAdapter')
+        .fetchInClassSuggestionsForStudent(userId, classId, params)
+        .then(function(response) {
+          let suggestions = service
+            .get('suggestSerializer')
+            .normalizeSuggestionContainer(response);
+          const pathIds = suggestions.map(suggestion => {
+            return suggestion.get('id');
+          });
+          if (pathIds.length) {
+            service
+              .get('performanceService')
+              .fecthSuggestionPerformance({
+                source: params.performanceScopeType,
+                classId,
+                userId,
+                pathIds
+              })
+              .then(result => {
+                result.map(performance => {
+                  const pathId = performance.get('pathId');
+                  let suggestion = suggestions.findBy('id', pathId);
+                  suggestion.set('performance', performance);
+                });
+              });
+          }
+          resolve(suggestions);
         }, reject);
     });
   }
