@@ -121,15 +121,27 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     onPlayContent() {
       const component = this;
       const offlineActivityId = component.get('oaId');
+      const offlineActivity = component.get('classActivity');
       const queryParams = {
         role: component.get('isTeacher') ? ROLES.TEACHER : ROLES.STUDENT,
-        isPreview: true
+        isPreview: true,
+        isIframeMode: true
       };
-      component
-        .get('router')
-        .transitionTo('player-offline-activity', offlineActivityId, {
-          queryParams
-        });
+      // component
+      //   .get('router')
+      //   .transitionTo('player-offline-activity', offlineActivityId, {
+      //     queryParams
+      //   });
+      component.set(
+        'playerUrl',
+        component
+          .get('router')
+          .generate('player-offline-activity', offlineActivityId, {
+            queryParams
+          })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', offlineActivity);
     },
 
     onToggleAttemptsList() {
@@ -143,6 +155,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       const component = this;
       component.loadOaAttemptPerforamance(attempt);
       component.set('activeAttempt', attempt);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 

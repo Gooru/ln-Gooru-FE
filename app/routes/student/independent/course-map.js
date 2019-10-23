@@ -97,6 +97,7 @@ export default Ember.Route.extend({
    * @param {Collection} collection
    */
   startCollectionStudyPlayer: function(courseId, unitId, lessonId, collection) {
+    const route = this;
     let role = ROLES.STUDENT;
     let source = PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY;
     let collectionId = collection.get('id');
@@ -108,16 +109,22 @@ export default Ember.Route.extend({
       collectionId,
       role,
       source,
-      type: collectionType
+      type: collectionType,
+      isIframeMode: true
     };
 
     this.get('navigateMapService')
       .startCollection(courseId, unitId, lessonId, collectionId, collectionType)
-      .then(() =>
-        this.transitionTo('study-player', courseId, {
-          queryParams
-        })
-      );
+      .then(function() {
+        route.controller.set(
+          'playerUrl',
+          route
+            .get('router')
+            .generate('study-player', courseId, { queryParams })
+        );
+        route.controller.set('isOpenPlayer', true);
+        route.controller.set('playerContent', collection);
+      });
   },
 
   /**
@@ -127,20 +134,26 @@ export default Ember.Route.extend({
    * @param {string} lessonId
    */
   startLessonStudyPlayer: function(courseId, unitId, lessonId) {
+    const route = this;
     const role = ROLES.STUDENT;
     const queryParams = {
       unitId,
       lessonId,
       role,
-      source: PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY
+      source: PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY,
+      isIframeMode: true
     };
     this.get('navigateMapService')
       .startLesson(courseId, unitId, lessonId)
-      .then(() =>
-        this.transitionTo('study-player', courseId, {
-          queryParams
-        })
-      );
+      .then(function() {
+        route.controller.set(
+          'playerUrl',
+          route
+            .get('router')
+            .generate('study-player', courseId, { queryParams })
+        );
+        route.controller.set('isOpenPlayer', true);
+      });
   },
 
   /**

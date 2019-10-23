@@ -57,6 +57,11 @@ export default Ember.Controller.extend({
     locateMe: function(location) {
       this.set('location', location);
       this.set('showLocation', true);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 
