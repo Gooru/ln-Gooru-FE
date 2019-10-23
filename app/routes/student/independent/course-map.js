@@ -38,7 +38,7 @@ export default Ember.Route.extend({
       const courseId = currentCourse.get('id');
 
       if (type === 'lesson') {
-        route.startLessonStudyPlayer(courseId, unitId, lessonId);
+        route.startLessonStudyPlayer(courseId, unitId, lessonId, item);
       } else if (type === 'resource') {
         route.startResourceStudyPlayer(null, courseId, item);
       } else {
@@ -133,7 +133,7 @@ export default Ember.Route.extend({
    * @param {string} unitId
    * @param {string} lessonId
    */
-  startLessonStudyPlayer: function(courseId, unitId, lessonId) {
+  startLessonStudyPlayer: function(courseId, unitId, lessonId, collection) {
     const route = this;
     const role = ROLES.STUDENT;
     const queryParams = {
@@ -153,6 +153,7 @@ export default Ember.Route.extend({
             .generate('study-player', courseId, { queryParams })
         );
         route.controller.set('isOpenPlayer', true);
+        route.controller.set('playerContent', collection);
       });
   },
 
