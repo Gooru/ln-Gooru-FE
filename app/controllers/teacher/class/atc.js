@@ -172,7 +172,7 @@ export default Ember.Controller.extend({
 
   secondaryClassToBeShownList: Ember.computed('secondaryClassess', function() {
     return this.get('secondaryClassess')
-      ? this.get('secondaryClassess')
+      ? Ember.A(this.get('secondaryClassess'))
       : Ember.A([]);
   }),
 

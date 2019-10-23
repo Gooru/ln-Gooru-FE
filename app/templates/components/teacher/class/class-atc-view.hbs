@@ -4,11 +4,11 @@
 {{#if isShowAtcView}}
   {{#if isPremiumClass}}
       <div class="performance-overview-header">
-        <div class="class-grade {{unless isMultiClassEnabled 'hidden'}}">
+        <div class="class-grade {{unless isMultiClassView 'hidden'}}">
           <div class="clear-class {{if isPrimaryClass 'hidden'}}" {{action "onRemoveClassView" classId}}>{{gru-icon name="clear"}}</div>
           <div class="class-title">{{class.title}}</div>
         </div>
-          <div class="class-selector {{unless isMultiClassEnabled 'hidden'}} {{unless (and isPrimaryClass isMultiClassView) 'disable-event'}}">
+          <div class="class-selector {{unless isMultiClassView 'hidden'}} {{unless (and isPrimaryClass isMultiClassView) 'disable-event'}}">
             <div class="view-class-label {{unless (and isPrimaryClass isMultiClassView) 'hidden'}}" {{action "onToggleMultiClassSelector"}}>
               <span>View Other Classess</span>
               <span class="toggle-icon">{{gru-icon name="keyboard_arrow_down"}}</span>

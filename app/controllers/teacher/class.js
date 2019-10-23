@@ -199,13 +199,17 @@ export default Ember.Controller.extend({
   secondaryClassess: Ember.computed('class.setting', function() {
     const controller = this;
     const classSetting = controller.get('class.setting');
-    const attachedSecondaryClassList = classSetting['secondary.classes']
-      ? classSetting['secondary.classes'].list
-      : Ember.A([]);
+    const attachedSecondaryClassList =
+      classSetting && classSetting['secondary.classes']
+        ? classSetting['secondary.classes'].list
+        : Ember.A([]);
     return attachedSecondaryClassList;
   }),
 
-  isMultiClassEnabled: Ember.computed.gt('secondaryClassess.length', 0),
+  isMultiClassEnabled: Ember.computed('secondaryClassess.[]', function() {
+    const component = this;
+    return component.get('secondaryClassess.length') > 0;
+  }),
 
   // -------------------------------------------------------------------------
   // Methods

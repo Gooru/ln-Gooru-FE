@@ -1,5 +1,4 @@
 <div class="controller teacher class atc">
-
   {{teacher/class/class-atc-view
     classId = classId
     isPrimaryClass = (if isMultiClassEnabled true)
@@ -13,6 +12,6 @@
       {{teacher/class/class-atc-view
         classId = secondaryClassId
         onRemoveClassView = "onRemoveClassView"
-        isMultiClassEnabled = isMultiClassEnabled}}
+        isMultiClassView = isMultiClassEnabled}}
     {{/each}}
 </div>

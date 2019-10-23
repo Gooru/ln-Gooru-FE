@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['class-atc-view'],
 
-  classNameBindings: ['isMultiClassEnabled:multi-class-view'],
+  classNameBindings: ['isMultiClassView:multi-class-view'],
   // -------------------------------------------------------------------------
   // Dependencies
   /**
@@ -39,9 +39,9 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     if (component.get('class') && component.get('course')) {
-      component.loadClassData();
-    } else {
       component.loadData();
+    } else {
+      component.loadClassData();
     }
   },
 
@@ -155,8 +155,6 @@ export default Ember.Component.extend({
 
   students: Ember.computed.alias('class.members'),
 
-  isMultiClassEnabled: false,
-
   // -------------------------------------------------------------------------
   // Events
 
@@ -262,6 +260,7 @@ export default Ember.Component.extend({
   loadClassData() {
     const component = this;
     const classId = component.get('classId');
+    component.set('isLoading', true);
     Ember.RSVP.hash({
       classData: component.get('classService').readClassInfo(classId),
       classMembers: component.get('classService').readClassMembers(classId)
