@@ -1,0 +1,107 @@
+{{#if isLoading}}
+  <div class="loading-spinner">{{three-bounce-spinner}}</div>
+{{/if}}
+{{#if isShowAtcView}}
+  {{#if isPremiumClass}}
+      <div class="performance-overview-header">
+        <div class="class-grade {{unless isMultiClassEnabled 'hidden'}}">
+          <div class="clear-class {{if isPrimaryClass 'hidden'}}" {{action "onRemoveClassView" classId}}>{{gru-icon name="clear"}}</div>
+          <div class="class-title">{{class.title}}</div>
+        </div>
+          <div class="class-selector {{unless isMultiClassEnabled 'hidden'}} {{unless (and isPrimaryClass isMultiClassView) 'disable-event'}}">
+            <div class="view-class-label {{unless (and isPrimaryClass isMultiClassView) 'hidden'}}" {{action "onToggleMultiClassSelector"}}>
+              <span>View Other Classess</span>
+              <span class="toggle-icon">{{gru-icon name="keyboard_arrow_down"}}</span>
+            </div>
+            <div class="multi-class-list {{unless (gt secondaryClassToBeShownList.length 0) 'hidden'}}">
+              {{#each secondaryClassToBeShownList as |secondaryClass|}}
+                <div class="multi-class-info" {{action "onSelectSecondaryClass" secondaryClass}}>
+                  {{secondaryClass}}
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        <div class="month-picker {{if isCurrentMonth 'current-month'}}">
+          {{ca-date-picker
+            showToday=true
+            forMonth=activeMonth
+            allowDateSelectorToggle=true
+            forYear=activeYear
+            showPreviousMonth="onChangeMonth"
+            showNextMonth="onChangeMonth"
+          }}
+        </div>
+      </div>
+
+    <div class="data-view-container navigator-class">
+      <div class="chart-container">
+        <div class="chart-area">
+          {{teacher/class/navigator-atc-view classData=class month=activeMonth year=activeYear}}
+        </div>
+      </div>
+      <div class="data-analysis-cards-container">
+        <div class="domains-card-container">
+          <div class="title-container">{{t 'teacher-landing.class.atc-view.domains-reviewed'}}</div>
+          <div class="domains-completion-container">
+            {{#each domainsCompletionList as |domainData|}}
+              <div class="domain-completion-report" {{action "onSelectDomain" domainData}}>
+                <div class="domain-info-container">
+                  <div class="domain-code">{{domainData.domainCode}}</div>
+                  <div class="domain-title ellipsis">
+                    {{domain-gut-to-fw-transform
+                      fwDomains
+                      domainData.domainCode
+                      domainData.domainName
+                      'fwDomainName'
+                      true
+                    }}
+                  </div>
+                </div>
+                <div class="domain-performance-container">
+                  <div class="completion-percentage">{{domainData.completionPercentage}}%</div>
+                  <div class="completion-box"><span style="background-color: {{safe-html (grade-color domainData.completionPercentage)}}; width: {{domainData.completionPercentage}}%;"></span></div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+        <div class="activities-count-container" {{action "onRedirectToCA"}}>
+          <div class="activities-container completed">
+            <div class="activity-count">{{activitiesCount.scheduled}}</div>
+            <div class="activities-info"><span><i class="pin-icon"></i></span>{{t 'teacher-landing.class.atc-view.class-activities-completed'}}</div>
+          </div>
+          <div class="activities-container pending">
+            <div class="activity-count">{{activitiesCount.unscheduled}}</div>
+            <div class="activities-info"><span><i class="pin-icon"></i></span>{{t 'teacher-landing.class.atc-view.class-activities-pending'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="data-view-container regular-class">
+      <div class="chart-container">
+        {{teacher/class/atc-chart classData=class isPremiumClass=isPremiumClass}}
+      </div>
+    </div>
+  {{/if}}
+{{else}}
+  <div class="data-not-available"> {{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
+{{/if}}
+
+{{#if isShowCompetencyCompletionReport}}
+  {{reports/pull-up/competency-completion-report fwCompetencies=fwCompetencies showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency" maxLimitToSuggestContent=maxLimitToSuggestContent}}
+{{/if}}
+
+{{#if isShowActivitySearchContentPullup}}
+  {{teacher/class/ca-search-content-pull-up
+    showPullUp=isShowActivitySearchContentPullup
+    addedContentToDCA="addedContentToDCA"
+    context=contextParams
+    selectedSearchContentType=selectedContentType
+    classPreference=classPreference
+    classId=classId
+    competencyData=selectedCompetencyData
+    defaultSearchPageSize=maxLimitToSuggestContent
+    isShowMoreEnabled=false
+  }}
+{{/if}}

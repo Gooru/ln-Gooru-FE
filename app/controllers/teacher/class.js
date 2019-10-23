@@ -205,6 +205,8 @@ export default Ember.Controller.extend({
     return attachedSecondaryClassList;
   }),
 
+  isMultiClassEnabled: Ember.computed.gt('secondaryClassess.length', 0),
+
   // -------------------------------------------------------------------------
   // Methods
 
