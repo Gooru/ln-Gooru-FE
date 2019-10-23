@@ -127,11 +127,6 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
         isPreview: true,
         isIframeMode: true
       };
-      // component
-      //   .get('router')
-      //   .transitionTo('player-offline-activity', offlineActivityId, {
-      //     queryParams
-      //   });
       component.set(
         'playerUrl',
         component
