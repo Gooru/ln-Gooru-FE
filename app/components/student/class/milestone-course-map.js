@@ -332,6 +332,11 @@ export default Ember.Component.extend({
           }
         }
       );
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 
@@ -1191,7 +1196,8 @@ export default Ember.Component.extend({
       minScore,
       collectionSource: collection.source || 'course_map',
       isStudyPlayer: true,
-      pathType
+      pathType,
+      isIframeMode: true
     };
 
     let suggestionPromise = null;
@@ -1225,10 +1231,15 @@ export default Ember.Component.extend({
           milestoneId
         );
     }
-    suggestionPromise.then(() =>
-      component.get('router').transitionTo('study-player', courseId, {
-        queryParams
-      })
-    );
+    suggestionPromise.then(function() {
+      component.set(
+        'playerUrl',
+        component
+          .get('router')
+          .generate('study-player', courseId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', collection);
+    });
   }
 });

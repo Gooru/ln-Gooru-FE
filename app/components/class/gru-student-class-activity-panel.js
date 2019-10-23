@@ -74,6 +74,7 @@ export default Ember.Component.extend({
      */
     onPlaySuggestionContent(suggestionContent) {
       const component = this;
+      const content = suggestionContent.get('collection');
       const contentId = suggestionContent.get('suggestedContentId');
       const collectionType = suggestionContent.get('suggestedContentType');
       const classData = component.get('class');
