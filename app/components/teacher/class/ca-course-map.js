@@ -168,7 +168,8 @@ export default Ember.Component.extend({
      * Action get triggered when add content to DCA got clicked
      */
     onAddContentToDCA(content) {
-      this.sendAction('onAddContentToDCA', content);
+      let component = this;
+      component.sendAction('onAddContentToDCA', content);
     },
 
     /**
