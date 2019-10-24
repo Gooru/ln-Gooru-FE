@@ -120,10 +120,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     const classId = params.classId;
     const classPromise = route.get('classService').readClassInfo(classId);
     const membersPromise = route.get('classService').readClassMembers(classId);
-    const secondaryClassListPromise = route
-      .get('multipleClassService')
-      .fetchMultipleClassList(classId);
-
     return classPromise.then(function(classData) {
       let classCourseId = null;
       if (classData.courseId) {
@@ -142,12 +138,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       return Ember.RSVP.hash({
         class: classPromise,
         members: membersPromise,
-        classPerformanceSummaryItems: performanceSummaryPromise,
-        secondaryClassList: secondaryClassListPromise
+        classPerformanceSummaryItems: performanceSummaryPromise
       }).then(function(hash) {
         const aClass = hash.class;
         const members = hash.members;
-        const secondaryClassList = hash.secondaryClassList;
         const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
         let classPerformanceSummary = classPerformanceSummaryItems
           ? classPerformanceSummaryItems.findBy('classId', classId)
@@ -172,6 +166,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         }
         const frameworkId = aClass.get('preference.framework');
         const subjectId = aClass.get('preference.subject');
+        const secondaryClassListPromise = subjectId
+          ? route.get('multipleClassService').fetchMultipleClassList(classId)
+          : Ember.RSVP.resolve(null);
+
         let crossWalkFWCPromise = null;
         if (frameworkId && subjectId) {
           crossWalkFWCPromise = route
@@ -182,11 +180,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           contentVisibility: visibilityPromise,
           course: coursePromise,
           crossWalkFWC: crossWalkFWCPromise,
-          competencyStats: competencyCompletionStats
+          competencyStats: competencyCompletionStats,
+          secondaryClassList: secondaryClassListPromise
         }).then(function(hash) {
           const contentVisibility = hash.contentVisibility;
           const course = hash.course;
           const crossWalkFWC = hash.crossWalkFWC || [];
+          const secondaryClassList = hash.secondaryClassList;
           aClass.set('owner', members.get('owner'));
           aClass.set('collaborators', members.get('collaborators'));
           aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
