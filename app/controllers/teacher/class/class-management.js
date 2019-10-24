@@ -37,6 +37,12 @@ export default Ember.Controller.extend(ModalMixin, {
 
   session: Ember.inject.service('session'),
 
+  /**
+   * taxonomy service dependency injection
+   * @property {Object}
+   */
+  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -439,6 +445,19 @@ export default Ember.Controller.extend(ModalMixin, {
         controller.reloadClassMembers();
       });
       controller.actions.onToggleAddStudent();
+    },
+
+    // Action trigger when click checkbox on view multiple class
+    toggleCheckbox(selectedClass) {
+      let controller = this;
+      controller.set('isEnableSave', true);
+      selectedClass.toggleProperty('isChecked', true);
+    },
+
+    // Action trigger when click save button in multiple class
+    saveMultipleClass() {
+      let controller = this;
+      controller.updateSecondaryClass();
     }
   },
 
@@ -597,6 +616,34 @@ export default Ember.Controller.extend(ModalMixin, {
    * Property for list of class collaborators
    */
   collaborators: Ember.computed.alias('class.collaborators'),
+
+  /**
+   * @property {Object} secondaryclass
+   */
+  secondaryClasses: Ember.computed.alias('classController.secondaryClassess'),
+
+  /**
+   * @property {Object} multipleClass
+   * property for list of class in class settigns
+   */
+  multipleClassList: Ember.computed('multipleClasses', function() {
+    let multipleClasses = this.get('multipleClasses');
+    let secondaryClasses = this.get('classController.secondaryClasses');
+    if (secondaryClasses) {
+      secondaryClasses.map(classId => {
+        let checkedClass = multipleClasses.findBy('id', classId);
+        if (checkedClass) {
+          checkedClass.set('isChecked', true);
+        }
+      });
+    }
+    return multipleClasses.sortBy('isChecked').reverse();
+  }),
+
+  /**
+   * @property {Boolean} isEnableSave
+   */
+  isEnableSave: false,
 
   /**
    * @function fetchTaxonomyGrades
@@ -849,6 +896,35 @@ export default Ember.Controller.extend(ModalMixin, {
           classMembers.get('memberGradeBounds')
         );
         controller.updateBoundValuesToStudent();
+      });
+  },
+
+  updateSecondaryClass() {
+    let controller = this;
+    let classId = controller.get('class.id');
+    let multipleClassList = controller.get('multipleClassList');
+    let checkedClassIdList = [];
+    if (multipleClassList) {
+      multipleClassList.map(checkedClass => {
+        if (checkedClass.isChecked === true) {
+          checkedClassIdList.push(checkedClass.id);
+        }
+      });
+    }
+    let classSetting = {
+      setting: {
+        'course.premium': true,
+        'secondary.classes': {
+          list: checkedClassIdList,
+          confirmation: true
+        }
+      }
+    };
+    controller
+      .get('multipleClassService')
+      .updateMultipleClass(classId, classSetting)
+      .then(() => {
+        controller.set('isEnableSave', false);
       });
   }
 });

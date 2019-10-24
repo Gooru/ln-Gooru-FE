@@ -2817,5 +2817,8 @@ window.i18ln = {
   'common.choose-lang': 'Choose Language',
   'common-show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
-    'At least one task is required for activity activation'
+    'At least one task is required for activity activation',
+  'common.view-mulitple-classes': 'View Multiple Classes',
+  'common.class-name': 'Class Name',
+  'common.multiple-class-setting': 'Multiple Class Settings'
 };
