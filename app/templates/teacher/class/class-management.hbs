@@ -100,7 +100,8 @@
           </div>
         </div>
       </div>
-      <div class="view-mulitple-class-layout {{if (not isPremiumClass) 'hidden'}}">
+      {{#if isPremiumClass}}
+      <div class="view-mulitple-class-layout">
         <div class="view-multiple-class-label">
            {{t 'common.multiple-class-setting'}}
         </div>
@@ -145,6 +146,7 @@
           </div>
         </div>
       </div>
+      {{/if}}
       <div class="assessment-template-layout">
         <div class="template-sec-cont">
           <div class="assessment-template-label">

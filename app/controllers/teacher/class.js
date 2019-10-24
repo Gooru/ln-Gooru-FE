@@ -200,7 +200,7 @@ export default Ember.Controller.extend({
     const controller = this;
     const classSetting = controller.get('class.setting')
       ? controller.get('class.setting')
-      : Ember.A([]);
+      : {};
     const attachedSecondaryClassList = classSetting['secondary.classes']
       ? classSetting['secondary.classes'].list
       : Ember.A([]);

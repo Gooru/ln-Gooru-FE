@@ -2767,7 +2767,7 @@ window.i18ln = {
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Study Material',
   'common.choose-lang': 'Choose Language',
-  'common-show': 'Show',
+  'common.show': 'Show',
   'common.view-mulitple-classes': 'View Multiple Classes',
   'common.class-name': 'Class Name',
   'common.multiple-class-setting': 'Multiple Class Settings'

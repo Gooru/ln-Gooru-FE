@@ -10,7 +10,7 @@ export default Ember.Object.extend({
 
   /**
    * @function fetchMultipleClassList
-   * Adapter layer to fetch student destination based comeptency summary
+   * Adapter layer to fetch multiple class list
    */
   fetchMultipleClassList(classId) {
     const adapter = this;
@@ -26,7 +26,7 @@ export default Ember.Object.extend({
 
   /**
    * @function updateMultipleClass
-   * Adapter layer to fetch student destination based comeptency summary
+   * Adapter layer to update secondary classes
    */
   updateMultipleClass(classId, requestBody) {
     const adapter = this;

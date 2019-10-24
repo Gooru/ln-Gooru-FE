@@ -913,7 +913,6 @@ export default Ember.Controller.extend(ModalMixin, {
     }
     let classSetting = {
       setting: {
-        'course.premium': true,
         'secondary.classes': {
           list: checkedClassIdList,
           confirmation: true
