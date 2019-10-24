@@ -37,12 +37,6 @@ export default Ember.Controller.extend(ModalMixin, {
 
   session: Ember.inject.service('session'),
 
-  /**
-   * taxonomy service dependency injection
-   * @property {Object}
-   */
-  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -632,7 +626,7 @@ export default Ember.Controller.extend(ModalMixin, {
    * @property {Object} multipleClass
    * property for list of class in class settigns
    */
-  multipleClassList: Ember.computed('multipleClasses', function() {
+  multipleClassList: Ember.computed('secondaryClassList.[]', function() {
     let multipleClasses = this.get('secondaryClassList');
     let secondaryClasses = this.get('secondaryClasses');
     if (secondaryClasses) {
