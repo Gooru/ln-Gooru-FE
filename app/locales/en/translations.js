@@ -2770,6 +2770,7 @@ window.i18ln = {
   'common.show': 'Show',
   'common.view-mulitple-classes': 'View Multiple Classes',
   'common.class-name': 'Class Name',
-  'common.multiple-class-setting': 'Multiple Class Settings'
+  'common.multiple-class-setting': 'Multiple Class Settings',
+  'common.secondary-class-not-available': 'Secondary Classes Not Available'
 };
 export default window.i18ln;

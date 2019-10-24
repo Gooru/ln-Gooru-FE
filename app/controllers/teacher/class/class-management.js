@@ -623,15 +623,21 @@ export default Ember.Controller.extend(ModalMixin, {
   secondaryClasses: Ember.computed.alias('classController.secondaryClassess'),
 
   /**
+   * @property {Object} secondaryclassList
+   */
+  secondaryClassList: Ember.computed.alias(
+    'classController.secondaryClassList'
+  ),
+  /**
    * @property {Object} multipleClass
    * property for list of class in class settigns
    */
   multipleClassList: Ember.computed('multipleClasses', function() {
-    let multipleClasses = this.get('multipleClasses');
-    let secondaryClasses = this.get('classController.secondaryClasses');
+    let multipleClasses = this.get('secondaryClassList');
+    let secondaryClasses = this.get('secondaryClasses');
     if (secondaryClasses) {
-      secondaryClasses.map(classId => {
-        let checkedClass = multipleClasses.findBy('id', classId);
+      secondaryClasses.map(classes => {
+        let checkedClass = multipleClasses.findBy('id', classes.id);
         if (checkedClass) {
           checkedClass.set('isChecked', true);
         }

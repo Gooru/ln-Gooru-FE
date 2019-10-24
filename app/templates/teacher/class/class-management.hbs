@@ -117,6 +117,7 @@
             </div>
           </div>
           <div class="multiple-class-section">
+            {{#if (gt multipleClassList.length  0)}}
             <div class="class-section-header">
                 <div class="class-action-header">
                   {{t 'teacher-landing.class.class-management-tab.actions'}}
@@ -143,6 +144,11 @@
               </div>
               {{/each}}
             </div>
+            {{else}}
+            <div class="no-class-available">
+               {{t 'common.secondary-class-not-available'}}
+            </div>
+            {{/if}}
           </div>
         </div>
       </div>
