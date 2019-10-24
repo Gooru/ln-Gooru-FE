@@ -15,12 +15,6 @@ export default Ember.Route.extend({
    */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
-  /**
-   * taxonomy service dependency injection
-   * @property {Object}
-   */
-  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
-
   // -------------------------------------------------------------------------
   // Events
   didRender() {
@@ -52,10 +46,7 @@ export default Ember.Route.extend({
         : [],
       class: currentClass,
       gradeSubjectFWK: subject ? taxonomyService.fetchSubject(subject) : [],
-      frameworks: subject ? taxonomyService.fetchSubjectFWKs(subject) : [],
-      multipleClasses: route
-        .get('multipleClassService')
-        .fetchMultipleClassList(currentClass.get('id'))
+      frameworks: subject ? taxonomyService.fetchSubjectFWKs(subject) : []
     });
   },
 
@@ -73,7 +64,6 @@ export default Ember.Route.extend({
     controller.set('tempClass', model.class.copy());
     controller.set('tempClass.preference', controller.get('class.preference'));
     controller.get('classController').selectMenuItem('class-management');
-    controller.set('multipleClasses', model.multipleClasses || Ember.A([]));
     controller.setupDisplayProperties();
   }
 });
