@@ -50,6 +50,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
+  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -118,6 +120,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     const classId = params.classId;
     const classPromise = route.get('classService').readClassInfo(classId);
     const membersPromise = route.get('classService').readClassMembers(classId);
+    const secondaryClassListPromise = route
+      .get('multipleClassService')
+      .fetchMultipleClassList(classId);
 
     return classPromise.then(function(classData) {
       let classCourseId = null;
@@ -137,10 +142,12 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       return Ember.RSVP.hash({
         class: classPromise,
         members: membersPromise,
-        classPerformanceSummaryItems: performanceSummaryPromise
+        classPerformanceSummaryItems: performanceSummaryPromise,
+        secondaryClassList: secondaryClassListPromise
       }).then(function(hash) {
         const aClass = hash.class;
         const members = hash.members;
+        const secondaryClassList = hash.secondaryClassList;
         const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
         let classPerformanceSummary = classPerformanceSummaryItems
           ? classPerformanceSummaryItems.findBy('classId', classId)
@@ -193,7 +200,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             course,
             members,
             contentVisibility,
-            crossWalkFWC
+            crossWalkFWC,
+            secondaryClassList
           };
         });
       });
@@ -210,6 +218,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('course', model.course);
     controller.set('members', model.members);
     controller.set('contentVisibility', model.contentVisibility);
+    controller.set('secondaryClassList', model.secondaryClassList);
     controller.set('router', this.get('router'));
     let classData = model.class;
     classData.course = model.course;

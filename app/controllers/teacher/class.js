@@ -19,6 +19,8 @@ export default Ember.Controller.extend({
    * @type {Object}
    */
   taxonomyService: Ember.inject.service('taxonomy'),
+
+  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -196,17 +198,34 @@ export default Ember.Controller.extend({
    * Property for list of secondary classess attached with the class
    */
 
-  secondaryClasses: Ember.computed('class.setting', function() {
-    const controller = this;
-    const classSetting = controller.get('class.setting')
-      ? controller.get('class.setting')
-      : {};
-    const attachedSecondaryClassList = classSetting['secondary.classes']
-      ? classSetting['secondary.classes'].list
-      : Ember.A([]);
-    return attachedSecondaryClassList;
+  secondaryClassess: Ember.computed(
+    'class.setting',
+    'secondaryClassList',
+    function() {
+      const controller = this;
+      const classSetting = controller.get('class.setting');
+      const secondaryClassList = controller.get('secondaryClassList');
+      let attachedSecondaryClassList =
+        classSetting && classSetting['secondary.classes']
+          ? classSetting['secondary.classes'].list
+          : Ember.A([]);
+      let secondaryClassess = Ember.A([]);
+      attachedSecondaryClassList.map(classId => {
+        let attchedClass = secondaryClassList.findBy('id', classId);
+        if (attchedClass) {
+          secondaryClassess.pushObject(attchedClass);
+        }
+      });
+      return secondaryClassess;
+    }
+  ),
+
+  isMultiClassEnabled: Ember.computed('secondaryClassess.[]', function() {
+    const component = this;
+    return component.get('secondaryClassess.length') > 0;
   }),
 
+  secondaryClassList: Ember.A([]),
   // -------------------------------------------------------------------------
   // Methods
 
