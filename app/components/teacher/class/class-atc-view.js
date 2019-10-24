@@ -249,8 +249,8 @@ export default Ember.Component.extend({
       this.sendAction('onSelectSecondaryClass', secondaryClass);
     },
 
-    onRemoveClassView(classId) {
-      this.sendAction('onRemoveClassView', classId);
+    onRemoveClassView(secondaryClass) {
+      this.sendAction('onRemoveClassView', secondaryClass);
     }
   },
 

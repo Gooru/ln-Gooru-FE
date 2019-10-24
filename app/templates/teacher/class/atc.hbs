@@ -8,9 +8,10 @@
     class = class
     course = course}}
 
-    {{#each selectedSecondaryClassList as |secondaryClassId|}}
+    {{#each selectedSecondaryClassList as |secondaryClass|}}
       {{teacher/class/class-atc-view
-        classId = secondaryClassId
+        classId = secondaryClass.id
+        classInfo = secondaryClass
         onRemoveClassView = "onRemoveClassView"
         isMultiClassView = isMultiClassEnabled}}
     {{/each}}

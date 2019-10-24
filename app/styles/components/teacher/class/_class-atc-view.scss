@@ -51,12 +51,14 @@
         position: absolute;
         background-color: white;
         top: 41px;
-        width: max-content;
+        min-width: 250px;
+        max-width: 360px;
         padding: 8px;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
         .multi-class-info {
           height: 30px;
           line-height: 30px;
+          font-size: 14px;
         }
       }
     }

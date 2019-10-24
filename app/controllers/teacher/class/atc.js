@@ -171,9 +171,9 @@ export default Ember.Controller.extend({
   secondaryClassess: Ember.computed.alias('classController.secondaryClassess'),
 
   secondaryClassToBeShownList: Ember.computed('secondaryClassess', function() {
-    return this.get('secondaryClassess')
-      ? Ember.A(this.get('secondaryClassess'))
-      : Ember.A([]);
+    const controller = this;
+    const secondaryClassess = controller.get('secondaryClassess');
+    return secondaryClassess ? Ember.copy(secondaryClassess) : Ember.A([]);
   }),
 
   selectedSecondaryClassList: Ember.A([]),
@@ -205,10 +205,10 @@ export default Ember.Controller.extend({
         .removeObject(secondaryClass);
     },
 
-    onRemoveClassView(classId) {
+    onRemoveClassView(secondaryClass) {
       const controller = this;
-      controller.get('selectedSecondaryClassList').removeObject(classId);
-      controller.get('secondaryClassToBeShownList').pushObject(classId);
+      controller.get('selectedSecondaryClassList').removeObject(secondaryClass);
+      controller.get('secondaryClassToBeShownList').pushObject(secondaryClass);
     }
   }
 

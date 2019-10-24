@@ -5,7 +5,7 @@
   {{#if isPremiumClass}}
       <div class="performance-overview-header">
         <div class="class-grade {{unless isMultiClassView 'hidden'}}">
-          <div class="clear-class {{if isPrimaryClass 'hidden'}}" {{action "onRemoveClassView" classId}}>{{gru-icon name="clear"}}</div>
+          <div class="clear-class {{if isPrimaryClass 'hidden'}}" {{action "onRemoveClassView" classInfo}}>{{gru-icon name="clear"}}</div>
           <div class="class-title">{{class.title}}</div>
         </div>
           <div class="class-selector {{unless isMultiClassView 'hidden'}} {{unless (and isPrimaryClass isMultiClassView) 'disable-event'}}">
@@ -16,7 +16,7 @@
             <div class="multi-class-list {{unless (gt secondaryClassToBeShownList.length 0) 'hidden'}}">
               {{#each secondaryClassToBeShownList as |secondaryClass|}}
                 <div class="multi-class-info" {{action "onSelectSecondaryClass" secondaryClass}}>
-                  {{secondaryClass}}
+                  {{secondaryClass.title}}
                 </div>
               {{/each}}
             </div>
