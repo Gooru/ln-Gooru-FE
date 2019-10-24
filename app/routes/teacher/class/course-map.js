@@ -135,7 +135,6 @@ export default Ember.Route.extend({
     const course = route.modelFor('teacher.class').course;
     const units = course.get('children') || [];
     const classMembers = currentClass.get('members');
-    route.getUnitLevelPerformance(units, classMembers);
     const subject = currentClass.get('preference.subject');
     let taxonomyService = route.get('taxonomyService');
     const courseId = currentClass.get('courseId');

@@ -226,7 +226,6 @@ export default Ember.Controller.extend({
   }),
 
   secondaryClassList: Ember.A([]),
-
   // -------------------------------------------------------------------------
   // Methods
 

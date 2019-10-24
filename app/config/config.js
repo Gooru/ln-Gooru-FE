@@ -468,3 +468,8 @@ export const OA_TASK_SUBMISSION_TYPES = [
     icon: 'fa-link'
   }
 ];
+
+export const PLAYER_EVENT_MESSAGE = {
+  GRU_PUllUP_CLOSE: 'gru_pullup_close',
+  GRU_LOADING_COMPLETED: 'gru_loading_completed'
+};

@@ -29,7 +29,7 @@
     display: grid;
     align-items: center;
     height: 40px;
-    grid-template-columns: 22px 1fr 20px;
+    grid-template-columns: 22px 1fr 22px;
     cursor: pointer;
 
     .destination-point {
@@ -100,11 +100,11 @@
     width: 100%;
     height: 40px;
     position: fixed;
+    padding: 0 5px;
     top: 52px;
     @media only screen and (max-width: $screen-xs) {
       top: 102px;
     }
-    left: 0;
     background-color: $white;
     display: inline-block;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
@@ -112,6 +112,31 @@
     .charts.gru-x-bar-chart {
       background-color: $light-300;
       height: 10px;
+    }
+  }
+
+  &.iframe-mode {
+    height: 40px;
+    .back-to-collection {
+      width: 55px;
+      height: 40px;
+      border-right: 2px solid #e3e5ea;
+      cursor: pointer;
+      padding: 10px;
+      background: #fff;
+      color: #000;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+
+      .nav-icon-container {
+        i {
+          margin-left: -67px;
+          margin-top: -2px;
+        }
+      }
+    }
+    .bar-charts {
+      width: 96%;
+      top: 0;
     }
   }
 }

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { PLAYER_EVENT_MESSAGE } from 'gooru-web/config/config';
 
 export default Ember.Route.extend({
   // -------------------------------------------------------------------------
@@ -25,6 +26,7 @@ export default Ember.Route.extend({
   },
 
   setupController(controller, model) {
+    window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_LOADING_COMPLETED, '*');
     controller.set('offlineActivity', model.get('offlineActivity'));
     controller.loadOfflineActivitySubmissions();
   },

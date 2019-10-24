@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { ANONYMOUS_COLOR } from 'gooru-web/config/config';
+import { ANONYMOUS_COLOR, PLAYER_EVENT_MESSAGE } from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 /**
@@ -46,7 +46,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   classNames: ['gru-study-header'],
 
-  classNameBindings: ['showConfirmation:non-clickable'],
+  classNameBindings: [
+    'showConfirmation:non-clickable',
+    'isIframeMode:iframe-mode'
+  ],
 
   mileStone: Ember.computed(function() {
     return {
@@ -144,6 +147,14 @@ export default Ember.Component.extend(ConfigurationMixin, {
         } else {
           route.transitionTo('student.class');
         } // end of if block
+      }
+    },
+
+    closePlayer: function() {
+      let component = this;
+      let isIframeMode = component.get('isIframeMode');
+      if (isIframeMode) {
+        window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
       }
     }
   },

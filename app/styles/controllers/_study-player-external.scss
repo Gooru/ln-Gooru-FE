@@ -17,8 +17,10 @@
       height: 100%;
       overflow: auto;
     }
+    &.iframe-player-container {
+      height: calc(100vh - 80px);
+    }
   }
-
   &.fullscreen {
     &.fullscreen {
       @mixin fullscreenStyle {

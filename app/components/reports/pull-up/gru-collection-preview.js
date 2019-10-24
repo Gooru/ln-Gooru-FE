@@ -2,7 +2,6 @@ import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import {
-  PLAYER_WINDOW_NAME,
   PLAYER_EVENT_SOURCE,
   ROLES,
   CONTENT_TYPES,
@@ -58,11 +57,13 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
         let unitId = playerContext.get('unitId');
         let lessonId = playerContext.get('lessonId');
         let contentType = component.get('previewContentType');
-        playerURL += `/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${contentId}?role=teacher&type=${contentType}&source=${PLAYER_EVENT_SOURCE.RGO}`;
+        playerURL += `/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${contentId}?role=teacher&type=${contentType}&source=${PLAYER_EVENT_SOURCE.RGO}&isIframeMode=true`;
       } else {
-        playerURL += `/${contentId}?source=${PLAYER_EVENT_SOURCE.RGO}`;
+        playerURL += `/${contentId}?isIframeMode=true&source=${PLAYER_EVENT_SOURCE.RGO}`;
       }
-      window.open(playerURL, PLAYER_WINDOW_NAME);
+      component.set('playerUrl', playerURL);
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', playerContext);
     },
 
     //Action triggered when click print preview
@@ -78,6 +79,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
 
     onToggleAttemptsList() {
       this.$('.activity-attempts-container .all-attempts').slideToggle();
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 

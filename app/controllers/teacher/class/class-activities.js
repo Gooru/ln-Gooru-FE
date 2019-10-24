@@ -1872,12 +1872,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           activity.get('collection.format') ||
           activity.get('collection.collectionType');
         let collection = activity.get('collection');
-        let standards = activity.get('collection.standards');
-        if (
-          collectionType === 'assessment' &&
-          standards &&
-          standards.length > 0
-        ) {
+        if (collectionType === 'assessment') {
           assessments.pushObject(collection);
         }
       });

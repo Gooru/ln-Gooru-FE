@@ -151,13 +151,18 @@ export default QuizzesPlayer.extend(
             type: controller.get('type'),
             role: controller.get('role'),
             classId: controller.get('classId'),
-            contextId: controller.get('contextResult.contextId')
+            contextId: controller.get('contextResult.contextId'),
+            isIframeMode: controller.get('isIframeMode')
           };
           const reportController = this.controllerFor(
             'reports.student-collection'
           );
           //this doesn't work when refreshing the page, TODO
           reportController.set('backUrl', this.get('history.lastRoute.url'));
+          let isIframe = controller.get('isIframeMode');
+          if (isIframe) {
+            Ember.$(document.body).addClass('iframe-panel');
+          }
           this.transitionTo('reports.student-collection', {
             queryParams
           });
