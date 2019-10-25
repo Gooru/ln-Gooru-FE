@@ -91,6 +91,8 @@ window.i18ln = {
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.by-question': 'question-by-question',
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',

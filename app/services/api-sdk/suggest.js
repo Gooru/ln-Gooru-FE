@@ -292,6 +292,7 @@ export default Ember.Service.extend({
         }, reject);
     });
   },
+
   fetchInClassSuggestionsByCode(userId, code, params) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -300,6 +301,100 @@ export default Ember.Service.extend({
         .fetchInClassSuggestionsByCode(userId, code, params)
         .then(function(response) {
           resolve(response);
+        }, reject);
+    });
+  },
+
+  /**
+   * fetch In-Class suggestions for student
+   * @param {string} source
+   * @returns {Promise}
+   */
+  fetchInClassSuggestionsForStudent(userId, classId, params) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('suggestAdapter')
+        .fetchInClassSuggestionsForStudent(userId, classId, params)
+        .then(function(response) {
+          let suggestions = service
+            .get('suggestSerializer')
+            .normalizeSuggestionContainer(response);
+          const caContents = suggestions.filterBy(
+            'suggestionArea',
+            'class-activity'
+          );
+          const courseMapContents = suggestions.filterBy(
+            'suggestionArea',
+            'course-map'
+          );
+          const proficiencyContents = suggestions.filterBy(
+            'suggestionArea',
+            'proficiency'
+          );
+          const caPathIds = caContents.map(caContent => {
+            return caContent.get('id');
+          });
+          const proficienyPathIds = proficiencyContents.map(
+            proficiencyContent => {
+              return proficiencyContent.get('id');
+            }
+          );
+          const courseMapPathIds = courseMapContents.map(courseMapContent => {
+            return courseMapContent.get('id');
+          });
+          if (caPathIds.length) {
+            service
+              .get('performanceService')
+              .fecthSuggestionPerformance({
+                source: 'dca',
+                classId,
+                userId,
+                pathIds: caPathIds
+              })
+              .then(result => {
+                result.map(performance => {
+                  const pathId = performance.get('pathId');
+                  let suggestion = suggestions.findBy('id', pathId);
+                  suggestion.set('performance', performance);
+                });
+              });
+          }
+          if (proficienyPathIds.length) {
+            service
+              .get('performanceService')
+              .fecthSuggestionPerformance({
+                source: 'proficiency',
+                classId,
+                userId,
+                pathIds: proficienyPathIds
+              })
+              .then(result => {
+                result.map(performance => {
+                  const pathId = performance.get('pathId');
+                  let suggestion = suggestions.findBy('id', pathId);
+                  suggestion.set('performance', performance);
+                });
+              });
+          }
+          if (courseMapPathIds.length) {
+            service
+              .get('performanceService')
+              .fecthSuggestionPerformance({
+                source: 'coursemap',
+                classId,
+                userId,
+                pathIds: courseMapPathIds
+              })
+              .then(result => {
+                result.map(performance => {
+                  const pathId = performance.get('pathId');
+                  let suggestion = suggestions.findBy('id', pathId);
+                  suggestion.set('performance', performance);
+                });
+              });
+          }
+          resolve(suggestions);
         }, reject);
     });
   }

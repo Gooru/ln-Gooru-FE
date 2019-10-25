@@ -119,6 +119,8 @@ window.i18ln = {
   'common.avg-score': 'ശരാശരി സ്കോർ',
   'common.frq': 'frq',
   'common.plan': 'plan',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'self-grade.not-required': 'Student self-grading not required',
   'offline-activities.no-completed-content':
     'There are no projects or other offline activities that have been completed yet',

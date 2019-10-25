@@ -283,6 +283,8 @@ window.i18ln = {
   'common.depth-of-knowledge': 'ज्ञान की गहराई',
   'common.description': 'विवरण',
   'common.destination': 'गंतव्य',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.disappear-after-login':
     'यह {{loginnumber}} लॉगिन के बाद गायब हो जाएगा',
   'common.disappear-next-login': 'यह अगले लॉगिन पर दिखाई नहीं देगा',

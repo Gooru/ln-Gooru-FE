@@ -26,6 +26,14 @@ export default Ember.Component.extend({
   actions: {
     /**
      *
+     * Triggered when an suggestion icon is clicked
+     */
+    toogleSuggestionContainer() {
+      const component = this;
+      component.toggleProperty('showSuggestionContainer');
+    },
+    /**
+     *
      * Triggered when an menu item is selected
      * @param item
      */
@@ -323,7 +331,9 @@ export default Ember.Component.extend({
           route.transitionTo('student-independent-learning');
         } else {
           route.transitionTo('student-home', {
-            queryParams: { refresh: true }
+            queryParams: {
+              refresh: true
+            }
           });
         }
       }

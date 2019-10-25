@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import SearchSerializer from 'gooru-web/serializers/search/search';
+import { DEFAULT_IMAGES } from 'gooru-web/config/config';
 
 /**
  * Serializer to support Suggest functionality
@@ -105,9 +106,9 @@ export default SearchSerializer.extend({
         suggestedForContent: this.normalizeSuggestedForContent(
           suggestion.suggestedForContent
         ),
-        suggestedToContext: this.normalizeSuggestedToContext(
-          suggestion.suggestedToContext[0]
-        ),
+        suggestedToContext: suggestion.suggestedToContext
+          ? this.normalizeSuggestedToContext(suggestion.suggestedToContext[0])
+          : null,
         taxonomy: suggestion.taxonomy
       });
     });
@@ -137,6 +138,48 @@ export default SearchSerializer.extend({
       suggestionCriteria: payload.suggestionCriteria,
       suggestionOriginatorId: payload.suggestionOriginatorId,
       userId: payload.userId
+    });
+  },
+
+  normalizeSuggestionContainer(response) {
+    const serializer = this;
+    const suggestions = response.suggestions;
+    return suggestions.map(suggestion => {
+      const basePath = serializer.get('session.cdnUrls.content');
+      const appRootPath = this.get('appRootPath');
+      const thumbnailUrl = suggestion.thumbnail
+        ? basePath + suggestion.thumbnail
+        : suggestion.suggestedContentType === 'collection'
+          ? appRootPath + DEFAULT_IMAGES.COLLECTION
+          : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+      return Ember.Object.create({
+        id: suggestion.id,
+        caId: suggestion.caId,
+        courseId: suggestion.courseId,
+        unitId: suggestion.unitId,
+        lessonId: suggestion.lessonId,
+        collectionId: suggestion.collectionId,
+        classId: suggestion.classId,
+        suggestedContentType: suggestion.suggestedContentType,
+        title: suggestion.title,
+        url: suggestion.url,
+        txCodeType: suggestion.txCodeType,
+        txCode: suggestion.txCode,
+        pathId: suggestion.pathId,
+        resourceCount: suggestion.resource_count,
+        questionCount: suggestion.question_count,
+        suggestedContentId: suggestion.suggestedContentId,
+        suggestedTo: suggestion.suggestedTo,
+        suggestionArea: suggestion.suggestionArea,
+        suggestionCriteria: suggestion.suggestionCriteria,
+        suggestionOrigin: suggestion.suggestionOrigin,
+        suggestionOriginatorId: suggestion.suggestionOriginatorId,
+        thumbnailUrl: thumbnailUrl,
+        suggestedForContent: suggestion.suggestedForContent
+          ? this.normalizeSuggestedForContent(suggestion.suggestedForContent)
+          : null,
+        taxonomy: suggestion.taxonomy
+      });
     });
   }
 });

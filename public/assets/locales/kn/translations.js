@@ -187,6 +187,8 @@ window.i18ln = {
   'common.advanced-editing': 'ಸುಧಾರಿತ ಸಂಪಾದನೆ',
   'common.announcements': 'ಪ್ರಕಟಣೆಗಳು',
   'common.anonymous_mode': 'ಅನಾಮಧೇಯ ಮೋಡ್',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer': 'ನಿಮ್ಮ ಉತ್ತರ',
   'common.answer-correct': 'ನೀವು ಸರಿಯಾಗಿದ್ದೀರಿ!',
   'common.answer-incorrect': 'ನೀವು ತಪ್ಪಾಗಿರುವಿರಿ ...',

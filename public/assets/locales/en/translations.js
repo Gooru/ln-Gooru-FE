@@ -187,6 +187,8 @@ window.i18ln = {
   'common.anonymous_mode': 'Anonymous Mode',
   'common.answer': 'Your Answer',
   'common.answer-correct': 'You are correct!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'You are incorrect...',
   'common.answer-key-was-hidden':
     'Note: Your teacher has hidden the answer key.',
@@ -201,7 +203,6 @@ window.i18ln = {
   'common.assessment-title': 'Assessment Title',
   'common.activity-title': 'Activity Title',
   'common.activity': 'Activity Title',
-
   'common.assessmentInitial': 'A',
   'common.assessments': 'Assessments',
   'common.assign': 'Assign',

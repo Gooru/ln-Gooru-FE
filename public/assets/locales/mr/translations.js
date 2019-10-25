@@ -179,6 +179,8 @@ window.i18ln = {
   'common.assessmentInitial': 'ए',
   'common.assessments': 'मूल्यमापन',
   'common.assign': 'नेमून द्या',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.assign-to-class': 'वर्गाकडे नेमून द्या',
   'common.assign-to-course': 'अभ्यासक्रम नेमून दिद्या',
   'common.attempt': 'हा क्रमांक सोडवण्याचा प्रयत्न प्रयत्न करा',
