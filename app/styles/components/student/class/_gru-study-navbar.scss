@@ -213,7 +213,7 @@
         }
         @media only screen and (max-width: $screen-xs) {
           .suggestion-tab {
-            position: inherit;
+            position: inherit !important;
           }
         }
 
