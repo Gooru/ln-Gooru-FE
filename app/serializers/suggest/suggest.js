@@ -155,6 +155,9 @@ export default SearchSerializer.extend({
       return Ember.Object.create({
         id: suggestion.id,
         caId: suggestion.caId,
+        courseId: suggestion.courseId,
+        unitId: suggestion.unitId,
+        lessonId: suggestion.lessonId,
         collectionId: suggestion.collectionId,
         classId: suggestion.classId,
         suggestedContentType: suggestion.suggestedContentType,

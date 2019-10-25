@@ -43,14 +43,14 @@
       grid-template-columns: 59px 145px 145px 145px 1fr 59px 59px 59px;
 
       &.no-class-info {
-        grid-template-columns: 59px 145px 145px 145px 1fr 59px;
+        grid-template-columns: 59px 145px 145px 145px 1fr 59px 59px;
       }
 
       &.premium-class {
-        grid-template-columns: 59px 145px 145px 145px 1fr 59px 59px 59px;
+        grid-template-columns: 59px 145px 145px 145px 1fr 59px 59px 59px 59px;
 
         &.no-class-info {
-          grid-template-columns: 59px 145px 145px 145px 1fr 59px 59px;
+          grid-template-columns: 59px 145px 145px 145px 1fr 59px 59px 59px;
         }
       }
 
@@ -75,7 +75,7 @@
         grid-template-columns: 59px 145px 180px 145px 1fr 59px 59px 59px;
 
         &.no-class-info {
-          grid-template-columns: 59px 145px 180px 145px 1fr 59px;
+          grid-template-columns: 59px 145px 180px 145px 1fr 59px 59px;
         }
 
         &.premium-class {
@@ -155,12 +155,12 @@
           }
 
           .studyplayer-title {
-            grid-column: 2 / 6;
+            grid-column: 2 / 5;
           }
         }
 
         .studyplayer-title {
-          grid-column: 2 / 7;
+          grid-column: 2 / 8;
           order: 2;
           border-right: 1px solid #ccc;
           border-bottom: 1px solid #ccc;
@@ -210,6 +210,16 @@
           &.vactive {
             grid-column: 3 / 4;
           }
+        }
+        @media only screen and (max-width: $screen-xs) {
+          .suggestion-tab {
+            position: inherit;
+          }
+        }
+
+        .suggestion-tab {
+          order: 2;
+          border-right: 1px solid #cccccc;
         }
 
         .notification-tab {

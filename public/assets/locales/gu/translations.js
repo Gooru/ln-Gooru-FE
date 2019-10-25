@@ -114,6 +114,8 @@ window.i18ln = {
   'search-help-message': 'Choose filters to apply',
   'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.avg-score': 'સરેરાશ સ્કોર',
   'common.frq': 'ફ્રિક',
   'common.schedule': 'શેડ્યૂલ',

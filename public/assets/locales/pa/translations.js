@@ -119,6 +119,8 @@ window.i18ln = {
   'common.no-collection-info-message': 'ਇਸ ਪਾਠ ਵਿੱਚ ਕੋਈ ਸੰਗ੍ਰਹਿ ਹੈ',
   'common.gooru-suggestions': 'ਗੋਰੂ ਸੁਝਾਅ',
   'common.gooru-catalog': 'ਗੋੂਰੂ ਕੈਟਾਲਾਗ',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.no-users-to-grade-oa':
     'There are no users to grade for this Offline Activity.',
   'ca.student.no-content':

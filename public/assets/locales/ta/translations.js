@@ -40,6 +40,8 @@ window.i18ln = {
   'rubric-details': 'Rubric Details',
   'common.day': 'day',
   'common.week': 'week',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.month': 'month',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',

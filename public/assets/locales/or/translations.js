@@ -111,6 +111,8 @@ window.i18ln = {
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
   'i2d.mobile-upload-failed': 'There was a error',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'i2d.upload-failed':
     'There was an error while uploading this image. Re-upload?',
   'common.apply-filter': 'apply filter',

@@ -50,10 +50,9 @@
       <div class="suggestion-tab">
         <div class="suggestion-explore" {{action 'toogleSuggestionContainer'}}>
           {{gru-icon name="explore"}}
-          <div class="suggestion-count">5</div>
         </div>
         {{#if showSuggestionContainer}}
-          {{student-suggestion-container classId=classId onCloseContainer='toogleSuggestionContainer'}}
+          {{student-suggestion-container classId=classId courseId=courseId onCloseContainer='toogleSuggestionContainer'}}
         {{/if}}
       </div>
     {{/if}}

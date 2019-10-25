@@ -63,6 +63,8 @@ window.i18ln = {
   'common.grid': 'Grid',
   'common.list': 'List',
   'common.tenantLibrary': 'Tenant Library',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',

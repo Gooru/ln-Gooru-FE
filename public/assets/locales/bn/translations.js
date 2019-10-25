@@ -154,6 +154,8 @@ window.i18ln = {
   'oa.student.no-completed-content':
     'There are no offline activities that are completed yet',
   'common.a-offline-activity': 'a offline activity',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.plan-an-activities-msg':
     'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
   'common.Reschedule': 'পুনরায় সঞ্চালনের জন্য নির্ধারণ',

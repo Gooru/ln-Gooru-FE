@@ -119,6 +119,8 @@ window.i18ln = {
   'common.no-collection-info-message': 'ఈ పాఠం ఏ సేకరణలు కలిగి ఉంది.',
   'common.gooru-suggestions': 'గోరు సూచనలు',
   'common.gooru-catalog': 'gooru కేటలాగ్',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.suggestion-made-to': 'చేసిన సూచన',
   'common.student-selected': 'విద్యార్థి ఎంపిక',
   'common.no-suggest-result-message': ' సరిపోలే కంటెంట్ కనుగొనబడలేదు',

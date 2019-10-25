@@ -1,20 +1,21 @@
 <div class="backdrop" {{action 'onCloseContainer'}}></div>
 <div class="panel">
-  <div class="tabs">
-    <div class="tab-item {{if (eq selectedTab 'system') 'active'}}" {{action 'onSelectTab' 'system'}}>
-      <div class="title">System</div>
+  <div class="header">
+    <div class="tabs">
+      <div class="tab-item {{if (eq selectedTab 'system') 'active'}}" {{action 'onSelectTab' 'system'}}>
+        <div class="title">System</div>
+      </div>
+      <div class="tab-item {{if (eq selectedTab 'teacher') 'active'}}" {{action 'onSelectTab' 'teacher'}}>
+        <div class="title">Teacher</div>
+      </div>
     </div>
     <div class="scope-filter-container">
-      <span class="ellipsis" {{action 'toggleScopeList'}}>{{t selectedScopeItem.label }}</span>
-      <span {{action 'toggleScopeList'}}>{{gru-icon name="arrow_drop_down"}}</span>
+      <span {{action 'toggleScopeList'}}>{{gru-icon name="filter_list"}}</span>
       <div class="scope-filter-container-list {{if isScopeSelected 'active'}}">
         {{#each scopeItems as |item|}}
           <p {{action 'onChooseScopeItem' item}} class="{{if item.selected 'selected'}}">{{t item.label}}</p>
         {{/each}}
       </div>
-    </div>
-    <div class="tab-item {{if (eq selectedTab 'teacher') 'active'}}" {{action 'onSelectTab' 'teacher'}}>
-      <div class="title">Teacher</div>
     </div>
   </div>
   <div class="suggested-contents">
@@ -24,7 +25,18 @@
           <div class="icon">
             <i class="{{suggestion.suggestedContentType}}"></i>
           </div>
-          <div class="title-info ellipsis">{{suggestion.title}}</div>
+          <div class="title-info ellipsis">
+            <span class="ellipsis">{{suggestion.title}}</span>
+          </div>
+          <div class="source">
+            {{#if (eq suggestion.suggestionArea 'class-activity')}}
+              <i class="{{suggestion.suggestionArea}}"></i>
+            {{else if (eq suggestion.suggestionArea 'proficiency')}}
+              <i class="proficiency">{{gru-icon name='school'}}</i>
+            {{else}}
+              <i class="course-map">{{gru-icon name='sort'}}</i>
+            {{/if}}
+          </div>
           <div class="content-counts">
             <div class="resource-count">
               {{#if (gt suggestion.resourceCount 0)}}
@@ -65,7 +77,9 @@
           </div>
         </div>
       {{else}}
-        <div class="message">No suggestion made</div>
+        <div class="message">
+          {{t 'common.no-suggestion-message'}}
+        </div>
       {{/each}}
       {{#if isShowMoreVisible}}
         <div class="show-more-results" {{action "onClickShowMoreSuggstions"}}>
@@ -77,3 +91,12 @@
     {{/unless}}
   </div>
 </div>
+{{#if isShowPerformanceReport}}
+  {{reports/pull-up/gru-collection-preview
+      showPullUp=isShowPerformanceReport
+      previewContentId=reportActivityId
+      previewContentType=reportActivityType
+      isReportView=true
+      userId=userId
+    }}
+{{/if}}

@@ -45,6 +45,11 @@ export default Ember.Component.extend({
   classId: null,
 
   /**
+   * @property {String} userId
+   */
+  userId: Ember.computed.alias('session.userId'),
+
+  /**
    * @property {Boolean} isScopeSelected
    */
   isScopeSelected: false,
@@ -61,7 +66,7 @@ export default Ember.Component.extend({
   scopeItems: Ember.computed('classId', function() {
     let scopeItems = Ember.A([]);
     scopeItems.pushObject(
-      this.createScopeItem('course-map', 'common.course-map', true)
+      this.createScopeItem('course-map', 'common.course-map', false)
     );
     scopeItems.pushObject(
       this.createScopeItem(
@@ -120,6 +125,8 @@ export default Ember.Component.extend({
      */
     onChooseScopeItem(selectedItem) {
       const component = this;
+      component.set('page', 1);
+      component.set('offset', 0);
       component.toggleScopeItem(selectedItem);
     },
     /**
@@ -127,7 +134,7 @@ export default Ember.Component.extend({
      */
     onPlaySuggestionContent(suggestionContent) {
       const component = this;
-      // const suggestionOrigin = suggestionContent.get('suggestionOrigin');
+      const suggestionOrigin = suggestionContent.get('suggestionOrigin');
       const suggestionArea = suggestionContent.get('suggestionArea');
       // TODO: CA and Proficiency doesn't support system suggestion
       if (suggestionArea === 'class-activity') {
@@ -137,9 +144,16 @@ export default Ember.Component.extend({
         const pathType = SUGGESTION_TYPE.PROFICIENY_TEACHER;
         component.playProficiencyContent(suggestionContent, pathType);
       } else {
-        // const pathType = suggestionOrigin;
-        // component.playCourseMapContent(suggestionContent, pathType);
+        const pathType = suggestionOrigin;
+        component.playCourseMapContent(suggestionContent, pathType);
       }
+    },
+
+    studentSuggestionReport(activity) {
+      const component = this;
+      component.set('isShowPerformanceReport', true);
+      component.set('reportActivityId', activity.get('suggestedContentId'));
+      component.set('reportActivityType', activity.get('suggestedContentType'));
     },
 
     onCloseContainer() {
@@ -187,7 +201,32 @@ export default Ember.Component.extend({
     });
   },
 
-  // playCourseMapContent(suggestionContent, pathType) {},
+  playCourseMapContent(suggestionContent, pathType) {
+    const component = this;
+    const contentId = suggestionContent.get('suggestedContentId');
+    const collectionType = suggestionContent.get('suggestedContentType');
+    const classId = component.get('classId');
+    const pathId = suggestionContent.get('id');
+    const courseId = suggestionContent.get('courseId');
+    const unitId = suggestionContent.get('unitId');
+    const lessonId = suggestionContent.get('lessonId');
+    const collectionSource = `${pathType}_suggestions`;
+    let queryParams = {
+      collectionId: contentId,
+      classId,
+      role: 'student',
+      source: PLAYER_EVENT_SOURCE.COURSE_MAP,
+      type: collectionType,
+      pathId,
+      unitId,
+      lessonId,
+      collectionSource,
+      pathType
+    };
+    component.get('router').transitionTo('study-player', courseId, {
+      queryParams
+    });
+  },
 
   playProficiencyContent(suggestionContent, pathType) {
     const component = this;
@@ -215,6 +254,21 @@ export default Ember.Component.extend({
     component.loadSuggestionData();
   },
 
+  didInsertElement() {
+    const component = this;
+    component.onOpenSuggestionContainer();
+  },
+
+  onOpenSuggestionContainer() {
+    const component = this;
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400
+    );
+  },
+
   createScopeItem(key, label, selected) {
     return Ember.Object.create({
       key: key,
@@ -226,26 +280,17 @@ export default Ember.Component.extend({
   loadSuggestionData(loadMore = false) {
     const component = this;
     component.set('isLoading', true);
-    const userId = component.get('session.userId');
+    const userId = component.get('userId');
     const classId = component.get('classId');
     const offset = component.get('offset');
     const max = component.get('max');
     const suggestionOrigin = component.get('selectedTab');
     const scope = component.get('selectedScopeItem.key');
-    let performanceScopeType;
-    if (scope === 'class-activity') {
-      performanceScopeType = 'dca';
-    } else if (scope === 'course-map') {
-      performanceScopeType = 'coursemap';
-    } else {
-      performanceScopeType = scope;
-    }
     component
       .get('suggestService')
       .fetchInClassSuggestionsForStudent(userId, classId, {
         scope,
         suggestionOrigin,
-        performanceScopeType,
         offset,
         max
       })

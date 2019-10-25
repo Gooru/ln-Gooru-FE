@@ -320,17 +320,71 @@ export default Ember.Service.extend({
           let suggestions = service
             .get('suggestSerializer')
             .normalizeSuggestionContainer(response);
-          const pathIds = suggestions.map(suggestion => {
-            return suggestion.get('id');
+          const caContents = suggestions.filterBy(
+            'suggestionArea',
+            'class-activity'
+          );
+          const courseMapContents = suggestions.filterBy(
+            'suggestionArea',
+            'course-map'
+          );
+          const proficiencyContents = suggestions.filterBy(
+            'suggestionArea',
+            'proficiency'
+          );
+          const caPathIds = caContents.map(caContent => {
+            return caContent.get('id');
           });
-          if (pathIds.length) {
+          const proficienyPathIds = proficiencyContents.map(
+            proficiencyContent => {
+              return proficiencyContent.get('id');
+            }
+          );
+          const courseMapPathIds = courseMapContents.map(courseMapContent => {
+            return courseMapContent.get('id');
+          });
+          if (caPathIds.length) {
             service
               .get('performanceService')
               .fecthSuggestionPerformance({
-                source: params.performanceScopeType,
+                source: 'dca',
                 classId,
                 userId,
-                pathIds
+                pathIds: caPathIds
+              })
+              .then(result => {
+                result.map(performance => {
+                  const pathId = performance.get('pathId');
+                  let suggestion = suggestions.findBy('id', pathId);
+                  suggestion.set('performance', performance);
+                });
+              });
+          }
+          if (proficienyPathIds.length) {
+            service
+              .get('performanceService')
+              .fecthSuggestionPerformance({
+                source: 'proficiency',
+                classId,
+                userId,
+                pathIds: proficienyPathIds
+              })
+              .then(result => {
+                result.map(performance => {
+                  const pathId = performance.get('pathId');
+                  let suggestion = suggestions.findBy('id', pathId);
+                  suggestion.set('performance', performance);
+                });
+              });
+          }
+          if (courseMapPathIds.length) {
+            service
+              .get('performanceService')
+              .fecthSuggestionPerformance({
+                source: 'coursemap',
+                classId,
+                userId,
+                pathIds: courseMapPathIds
               })
               .then(result => {
                 result.map(performance => {
