@@ -1,52 +1,32 @@
-<div class="heading">{{t (if isStudent 'student-journey.heading' 'student-journey.teacher-heading')}}</div>
-<div class="portfolio-contents-container">
+<div class="portfolio-contents-container competency-portfolio">
   {{portfolio/gru-contents-panel
     contentType = 'offline-activity'
     userId = userId
     competency = competency
     isDisableFilter = true
-    isExpanded = true}}
+    isExpanded = true
+    isLazyLoadEnabled = true
+    isAllowAutoPagination = false}}
 
   {{portfolio/gru-contents-panel
     contentType = 'collection'
     userId = userId
     competency = competency
     isDisableFilter = true
-    isExpanded = false}}
+    isExpanded = true
+    isLazyLoadEnabled = true
+    isAllowAutoPagination = false}}
 
   {{portfolio/gru-contents-panel
     contentType = 'assessment'
     userId = userId
     competency = competency
     isDisableFilter = true
-    isExpanded = false}}
+    isExpanded = true
+    isLazyLoadEnabled = true
+    isAllowAutoPagination = false}}
 </div>
-<!-- NOTE retaining this container until move things to prod -->
-<div class="collections-accordion out-of-scope">
-  {{#if collectionPerformances}}
-    {{#each collectionPerformances as |collectionPerformance|}}
-      <div class="collection-panel {{if (and (eq collectionPerformance.collectionType 'offline-activity') (eq collectionPerformance.contentSource DAILY_CLASS)) 'disable-event'}}">
-        <i class="icon {{collectionPerformance.collectionType}}"></i>
-        <div class="collection-title" {{action 'onPreviewContent' collectionPerformance}}>{{collectionPerformance.title}}</div>
-        {{#if ( or (eq collectionPerformance.collectionType 'collection') (eq collectionPerformance.collectionType 'collection-external'))}}
-          <div class="performance collection {{unless isStudent 'disable'}}">
-            <span class="timespent"> {{if collectionPerformance.timeSpent (format-time  collectionPerformance.timeSpent) '--'}}</span>
-          </div>
-        {{else}}
-          <div class="performance {{unless isStudent 'disable'}}" {{action 'onOpenCollectionReport' collectionPerformance}} style="background-color:{{grade-color collectionPerformance.score}}">
-            <span class="score">{{collectionPerformance.score}}%</span>
-          </div>
-        {{/if}}
-      </div>
-    {{/each}}
-  {{else}}
-    {{#if isStudent}}
-      <span class="message">{{t (if (or (eq competency.status 2) (eq competency.status 3)) (concat 'student-journey.student-status-' competency.status) 'student-journey.nodata')}}</span>
-    {{else}}
-      <span class="message">{{t (if (or (eq competency.status 2) (eq competency.status 3)) (concat 'student-journey.teacher-status-' competency.status) 'student-journey.no-data-teacher')}}</span>
-    {{/if}}
-  {{/if}}
-</div>
+
 {{#if showCollectionReport}}
   {{class/gru-report-panel showPullUp=showCollectionReport reportData=studentReportContextData  model=studentReportContextData.lesson isStudent=isStudent onClosePullUp="onClosePullUp"}}
 {{/if}}

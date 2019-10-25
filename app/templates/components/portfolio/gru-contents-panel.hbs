@@ -35,12 +35,19 @@
     {{else}}
       <div class="activities">
         {{#each studiedPortfolioActivities as | activity |}}
-            {{portfolio/gru-portfolio-content-card
-              content = activity
-              onShowActivityReport = "onShowActivityReport"}}
+          {{portfolio/gru-portfolio-content-card
+            content = activity
+            onShowActivityReport = "onShowActivityReport"}}
         {{/each}}
       </div>
     {{/if}}
+
+    {{#if (and (or isLazyLoadEnabled (not isFetchedAllContent)) (not isAllowAutoPagination) (gte totalStudiedActivities 1))}}
+      <div class="show-more-container" {{action "onShowMoreItems"}}>
+        Show More
+      </div>
+    {{/if}}
+
     {{#if isLoading}}
       <div class="loading-spinner">
         {{three-bounce-spinner}}

@@ -12,6 +12,58 @@
     color: #ffffff;
   }
 
+  .portfolio-contents-container {
+    &.competency-portfolio {
+      .gru-contents-panel {
+        .portfolio-contents-container {
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+          .header-container {
+            background-color: $white;
+            .panel-info-container {
+              .icon {
+                background-size: 20px;
+                &.offline-activity {
+                  background-image: url(gooru/images/offline.svg);
+                }
+                &.assessment {
+                  background-image: url(gooru/images/add_assessment.svg);
+                }
+                &.collection {
+                  background-image: url(gooru/images/add_collection.svg);
+                }
+              }
+              .title {
+                color: rgb(83, 94, 103);
+              }
+            }
+            .search-items-container {
+              .toggle-panel {
+                i.keyboard_arrow_up {
+                  color: rgb(83, 94, 103);
+                }
+              }
+            }
+          }
+          .body-container {
+            background-color: $white;
+            padding: 0;
+            .activities {
+              .gru-portfolio-content-card {
+                .portfolio-card-container {
+                  border: 1px solid rgba(0, 0, 0, 0.3);
+                }
+              }
+            }
+            .show-more-container {
+              border: 1px solid rgba(0, 0, 0, 0.3);
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .collections-accordion {
     background-color: #fff;
 

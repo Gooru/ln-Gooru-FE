@@ -6,7 +6,10 @@ export default Ember.Component.extend({
   // Attributes
   classNames: ['portfolio', 'gru-contents-panel'],
 
-  classNameBindings: ['isExpanded:expanded-panel'],
+  classNameBindings: [
+    'isExpanded:expanded-panel',
+    'isLazyLoadEnabled:lazy-load'
+  ],
 
   // -------------------------------------------------------------------------
   // Dependencies
@@ -34,7 +37,9 @@ export default Ember.Component.extend({
       ? activeCompetency.competencyCode
       : undefined;
     component.loadPortfolioActivities(appliedFilters);
-    component.scrollHandler();
+    if (component.get('isAllowAutoPagination')) {
+      component.scrollHandler();
+    }
   },
 
   // -------------------------------------------------------------------------
@@ -67,6 +72,7 @@ export default Ember.Component.extend({
       component.$('.body-container').slideToggle();
     },
 
+    //Action triggered when click performance of an activity
     onShowActivityReport(activity) {
       const component = this;
       component.set('reportActivityId', activity.get('id'));
@@ -76,6 +82,12 @@ export default Ember.Component.extend({
       } else {
         component.set('isShowPortfolioActivityReport', true);
       }
+    },
+
+    //Actio triggered when click show more button
+    onShowMoreItems() {
+      const component = this;
+      component.set('isLazyLoadEnabled', false);
     }
   },
 
@@ -168,6 +180,18 @@ export default Ember.Component.extend({
    * Property to toggle the container between expanded/collapsed state
    */
   isExpanded: true,
+
+  /**
+   * @property {Boolean} isLazyLoadEnabled
+   * Property to enable lazy load of activity list
+   */
+  isLazyLoadEnabled: false,
+
+  /**
+   * @property {Boolean} isAllowAutoPagination
+   * Property to enable auto pagination of activities while scroll down to bottom
+   */
+  isAllowAutoPagination: true,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -323,11 +347,20 @@ export default Ember.Component.extend({
           const scrollTop = component.$(this).scrollTop();
           const scrollHeight = component.$(this)[0].scrollHeight;
           if (scrollTop + innerHeight >= scrollHeight - 100) {
-            component.incrementProperty('offset', 10);
-            component.set('isLoadingMore', true);
-            component.loadPortfolioActivities(component.get('appliedFilters'));
+            component.loadMoreContents();
           }
         }
       });
+  },
+
+  /**
+   * @function loadMoreContents
+   * Method to load more contents by given offset and limit values
+   */
+  loadMoreContents() {
+    const component = this;
+    component.incrementProperty('offset', component.get('limit'));
+    component.set('isLoadingMore', true);
+    component.loadPortfolioActivities(component.get('appliedFilters'));
   }
 });

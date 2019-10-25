@@ -7,19 +7,17 @@
     margin-bottom: 5px;
     .left-panel {
       display: grid;
+      grid-template-rows: 55px auto 35px;
       .activity-info,
       .activity-details {
-        height: 60px;
         display: grid;
         grid-template-columns: 80px 1fr;
         column-gap: 5px;
-        height: 63px;
       }
 
       .activity-info {
         .activity-thumbnail {
           width: 80px;
-          height: 60px;
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center;
@@ -27,15 +25,18 @@
 
         .activity-title {
           display: grid;
+          grid-template-rows: auto auto;
+          align-items: center;
           .title {
             font-weight: bold;
-            font-size: 14px;
-            align-self: self-end;
-            line-height: 1;
+            @include ellipsis(
+              $font-size: 14px,
+              $line-height: 1,
+              $lines-to-show: 2
+            );
           }
           .owner {
             font-size: 10px;
-            align-self: self-start;
           }
         }
       }
@@ -46,10 +47,12 @@
           @include ellipsis(
             $font-size: 12px,
             $line-height: 1.2,
-            $lines-to-show: 4
+            $lines-to-show: 3
           );
         }
         .taxonomies {
+          display: grid;
+          align-items: center;
           .gru-taxonomy-tag-list {
             display: grid;
             justify-content: center;
@@ -106,8 +109,8 @@
         display: grid;
         grid-template-columns: auto auto;
         justify-content: space-between;
-        height: 42px;
-        line-height: 42px;
+        height: 35px;
+        line-height: 35px;
         border-top: 1px solid rgba(0, 0, 0, 0.3);
         padding: 0 5px;
         .last-accessed {
@@ -130,7 +133,7 @@
             width: 20px;
             background-size: 20px;
             background-position: center;
-            height: 42px;
+            height: 35px;
             background-repeat: no-repeat;
           }
           .resource-count {
@@ -166,11 +169,11 @@
           display: grid;
           justify-content: center;
           align-content: center;
-          background-color: #9fc5e8;
-          color: #000;
+          background-color: rgba(0, 114, 188, 0.5);
+          color: $white;
           border-bottom: 1px solid rgba(0, 0, 0, 0.3);
           border-left: 1px solid rgba(0, 0, 0, 0.3);
-          height: 42px;
+          height: 35px;
           &.activity-reef-value {
             span {
               text-align: center;
@@ -181,14 +184,15 @@
               }
               &.reef-value {
                 align-self: self-start;
+                font-weight: bold;
               }
             }
           }
         }
       }
       .activity-performance {
-        height: 42px;
-        line-height: 42px;
+        height: 35px;
+        line-height: 35px;
         text-align: center;
         color: $white;
         font-weight: bold;
