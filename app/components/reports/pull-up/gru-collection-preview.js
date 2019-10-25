@@ -2,16 +2,17 @@ import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import {
-  PLAYER_WINDOW_NAME,
   PLAYER_EVENT_SOURCE,
-  ROLES
+  ROLES,
+  CONTENT_TYPES,
+  ASSESSMENT_SHOW_VALUES
 } from 'gooru-web/config/config';
-import {
-  getEndpointUrl
-} from 'gooru-web/utils/endpoint-config';
+import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
 import ModalMixin from 'gooru-web/mixins/modal';
+import PullUpMixin from 'gooru-web/mixins/reports/pull-up/pull-up-mixin';
+import PortfolioMixin from 'gooru-web/mixins/reports/portfolio/portfolio-mixin';
 
-export default Ember.Component.extend(ModalMixin, {
+export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['preview', 'gru-collection-preview'],
@@ -29,16 +30,7 @@ export default Ember.Component.extend(ModalMixin, {
   didInsertElement() {
     const component = this;
     component.openPullUp();
-    let previewContentType = component.get('previewContentType');
-    if (previewContentType === 'assessment') {
-      component.fetchAssessment();
-    } else if (previewContentType === 'collection') {
-      component.fetchCollection();
-    } else if (previewContentType === 'assessment-external') {
-      component.fetchExternalAssessment();
-    } else if (previewContentType === 'collection-external') {
-      component.fetchExternalCollection();
-    }
+    component.loadPreviewContent();
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });
@@ -53,12 +45,6 @@ export default Ember.Component.extend(ModalMixin, {
       component.toggleProperty('isShowCorrectAnswer');
     },
 
-    //Action triggered when close preview pullup
-    onClosePullUp() {
-      const component = this;
-      component.closePullUp();
-    },
-
     //Action triggered when play  content
     onPlayContent() {
       const component = this;
@@ -71,11 +57,13 @@ export default Ember.Component.extend(ModalMixin, {
         let unitId = playerContext.get('unitId');
         let lessonId = playerContext.get('lessonId');
         let contentType = component.get('previewContentType');
-        playerURL += `/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${contentId}?role=teacher&type=${contentType}&source=${PLAYER_EVENT_SOURCE.RGO}`;
+        playerURL += `/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${contentId}?role=teacher&type=${contentType}&source=${PLAYER_EVENT_SOURCE.RGO}&isIframeMode=true`;
       } else {
-        playerURL += `/${contentId}?source=${PLAYER_EVENT_SOURCE.RGO}`;
+        playerURL += `/${contentId}?isIframeMode=true&source=${PLAYER_EVENT_SOURCE.RGO}`;
       }
-      window.open(playerURL, PLAYER_WINDOW_NAME);
+      component.set('playerUrl', playerURL);
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', playerContext);
     },
 
     //Action triggered when click print preview
@@ -87,6 +75,15 @@ export default Ember.Component.extend(ModalMixin, {
     onRemixContent() {
       const component = this;
       component.remixContent();
+    },
+
+    onToggleAttemptsList() {
+      this.$('.activity-attempts-container .all-attempts').slideToggle();
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 
@@ -117,7 +114,7 @@ export default Ember.Component.extend(ModalMixin, {
    */
   isShowCorrectAnswer: Ember.computed('isTeacher', function() {
     const component = this;
-    return component.get('isTeacher');
+    return component.get('isTeacher') || true;
   }),
 
   showPrintPreview: true,
@@ -183,33 +180,75 @@ export default Ember.Component.extend(ModalMixin, {
     return previewContentType.includes('external');
   }),
 
+  userId: Ember.computed(function() {
+    return this.get('session.userId');
+  }),
+
+  contentId: Ember.computed.alias('previewContentId'),
+
+  isReportView: false,
+
+  isAssessment: Ember.computed('previewContentType', function() {
+    const component = this;
+    return component
+      .get('previewContentType')
+      .includes(CONTENT_TYPES.ASSESSMENT);
+  }),
+
+  isCollection: Ember.computed('previewContentType', function() {
+    const component = this;
+    return component
+      .get('previewContentType')
+      .includes(CONTENT_TYPES.COLLECTION);
+  }),
+
+  isShowReportCorrectAnswer: Ember.computed(
+    'previewContentType',
+    'previewContent',
+    function() {
+      const component = this;
+      const previewContent = component.get('previewContent');
+      return (
+        previewContent.get('showFeedback') !== ASSESSMENT_SHOW_VALUES.NEVER
+      );
+    }
+  ),
+
   //--------------------------------------------------------------------------
   // Methods
 
-  /**
-   * Function to animate the  pullup from bottom to top
-   */
-  openPullUp() {
-    let component = this;
-    component.$().animate({
-      top: '10%'
-    },
-    400
-    );
-  },
-
-  /**
-   * Method to close pullup
-   */
-  closePullUp() {
-    let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-    });
+  loadPreviewContent() {
+    const component = this;
+    component.set('isLoading', true);
+    let previewContentType = component.get('previewContentType');
+    let previewContentPromise = null;
+    if (previewContentType === 'assessment') {
+      previewContentPromise = component.fetchAssessment();
+    } else if (previewContentType === 'collection') {
+      previewContentPromise = component.fetchCollection();
+    } else if (previewContentType === 'assessment-external') {
+      previewContentPromise = component.fetchExternalAssessment();
+    } else if (previewContentType === 'collection-external') {
+      previewContentPromise = component.fetchExternalCollection();
+    }
+    if (component.get('isReportView')) {
+      previewContentPromise.then(function() {
+        //Method implemented in mixin
+        component.loadActivityAttempts().then(function(activityAttempts) {
+          if (activityAttempts.length) {
+            component
+              .loadActivityPerformance(activityAttempts.objectAt(0))
+              .then(function() {
+                component.parseActivityPerformance();
+              });
+          }
+        });
+      });
+    } else {
+      if (!component.isDestroyed) {
+        component.set('isLoading', false);
+      }
+    }
   },
 
   /**
@@ -220,17 +259,14 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     const assessmentId = component.get('previewContentId');
     const assessmentService = component.get('assessmentService');
-    return Ember.RSVP
-      .hash({
-        assessment: assessmentService.readAssessment(assessmentId)
-      })
-      .then(({
-        assessment
-      }) => {
-        if (!component.isDestroyed) {
-          component.set('previewContent', assessment);
-        }
-      });
+    return Ember.RSVP.hash({
+      assessment: assessmentService.readAssessment(assessmentId)
+    }).then(({ assessment }) => {
+      if (!component.isDestroyed) {
+        component.set('previewContent', assessment);
+      }
+      return assessment;
+    });
   },
 
   /**
@@ -241,17 +277,14 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     const collectionId = component.get('previewContentId');
     const collectionService = component.get('collectionService');
-    return Ember.RSVP
-      .hash({
-        collection: collectionService.readCollection(collectionId)
-      })
-      .then(({
-        collection
-      }) => {
-        if (!component.isDestroyed) {
-          component.set('previewContent', collection);
-        }
-      });
+    return Ember.RSVP.hash({
+      collection: collectionService.readCollection(collectionId)
+    }).then(({ collection }) => {
+      if (!component.isDestroyed) {
+        component.set('previewContent', collection);
+      }
+      return collection;
+    });
   },
 
   /**
@@ -262,19 +295,16 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     const externalAssessmentId = component.get('previewContentId');
     const assessmentService = component.get('assessmentService');
-    return Ember.RSVP
-      .hash({
-        externalAssessment: assessmentService.readExternalAssessment(
-          externalAssessmentId
-        )
-      })
-      .then(({
-        externalAssessment
-      }) => {
-        if (!component.isDestroyed) {
-          component.set('previewContent', externalAssessment);
-        }
-      });
+    return Ember.RSVP.hash({
+      externalAssessment: assessmentService.readExternalAssessment(
+        externalAssessmentId
+      )
+    }).then(({ externalAssessment }) => {
+      if (!component.isDestroyed) {
+        component.set('previewContent', externalAssessment);
+      }
+      return externalAssessment;
+    });
   },
 
   /**
@@ -285,19 +315,16 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     const externalCollectionId = component.get('previewContentId');
     const collectionService = component.get('collectionService');
-    return Ember.RSVP
-      .hash({
-        externalCollection: collectionService.readExternalCollection(
-          externalCollectionId
-        )
-      })
-      .then(({
-        externalCollection
-      }) => {
-        if (!component.isDestroyed) {
-          component.set('previewContent', externalCollection);
-        }
-      });
+    return Ember.RSVP.hash({
+      externalCollection: collectionService.readExternalCollection(
+        externalCollectionId
+      )
+    }).then(({ externalCollection }) => {
+      if (!component.isDestroyed) {
+        component.set('previewContent', externalCollection);
+      }
+      return externalCollection;
+    });
   },
 
   /**
@@ -320,5 +347,28 @@ export default Ember.Component.extend(ModalMixin, {
         remixModel
       );
     }
+  },
+
+  parseActivityPerformance() {
+    const component = this;
+    let activityResources = component.get('previewContent.children');
+    let activityResourcesPerformance = component.get(
+      'activityPerformance.resourceResults'
+    );
+    activityResourcesPerformance.map(resourcePerformance => {
+      if (!component.isDestroyed) {
+        let resource = activityResources.findBy(
+          'id',
+          resourcePerformance.get('resourceId')
+        );
+        resource.set('userAnswer', resourcePerformance.get('userAnswer'));
+        resource.set('answerObject', resourcePerformance.get('answerObject'));
+        resource.set('reaction', resourcePerformance.get('reaction'));
+        resource.set('timespent', resourcePerformance.get('timespent'));
+        resource.set('score', resourcePerformance.get('score'));
+        resource.set('answerStatus', resourcePerformance.get('answerStatus'));
+      }
+    });
+    component.set('isLoading', false);
   }
 });

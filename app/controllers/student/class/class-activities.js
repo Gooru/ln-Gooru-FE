@@ -156,6 +156,23 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       } else {
         controller.animateOfflineActivityForDesktop();
       }
+    },
+
+    playContent(route, queryParams, contentId, content) {
+      const component = this;
+      component.set(
+        'playerUrl',
+        component.target
+          .get('router')
+          .generate(route, contentId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', content);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 

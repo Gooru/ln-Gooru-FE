@@ -2765,6 +2765,14 @@ window.i18ln = {
   'common.no-lesson-plan-info-message':
     'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
-  'student-resource': 'Student Study Material'
+  'student-resource': 'Student Study Material',
+  'common.choose-lang': 'Choose Language',
+  'common.show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation',
+  'common.view-mulitple-classes': 'View Multiple Classes',
+  'common.class-name': 'Class Name',
+  'common.multiple-class-setting': 'Multiple Class Settings',
+  'common.secondary-class-not-available': 'Secondary Classes Not Available'
 };
 //export default window.i18ln;

@@ -264,6 +264,42 @@
       }
     }
 
+    .attempts-container {
+      background-color: $white;
+      margin: 0 15px;
+      padding: 5px 15px;
+      position: relative;
+      .latest-attempt {
+        color: rgb(62, 94, 103);
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .toggle-attempts {
+        cursor: pointer;
+      }
+      .all-attempts {
+        display: none;
+        top: 57px;
+        background-color: $white;
+        width: 100%;
+        left: 0;
+        padding-left: 15px;
+        z-index: 1;
+        box-shadow: 0 2px 4px 0 rgba(102, 102, 102, 0.3);
+        right: 15px;
+
+        .attempt-info {
+          color: rgb(62, 94, 103);
+          font-size: 13px;
+          cursor: pointer;
+
+          &.active-attempt {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
     .oa-body-container {
       height: calc(100% - 50px);
       overflow-y: auto;

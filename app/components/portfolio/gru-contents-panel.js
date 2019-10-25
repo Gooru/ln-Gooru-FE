@@ -65,6 +65,17 @@ export default Ember.Component.extend({
     onToggleContainer() {
       const component = this;
       component.$('.body-container').slideToggle();
+    },
+
+    onShowActivityReport(activity) {
+      const component = this;
+      component.set('reportActivityId', activity.get('id'));
+      component.set('reportActivityType', activity.get('type'));
+      if (activity.get('type') === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        component.set('isShowOfflineActivityReport', true);
+      } else {
+        component.set('isShowPortfolioActivityReport', true);
+      }
     }
   },
 

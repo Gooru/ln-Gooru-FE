@@ -1,7 +1,14 @@
 import Ember from 'ember';
 import TaxonomySerializer from 'gooru-web/serializers/taxonomy/taxonomy';
+import AnalyticsSerializer from 'gooru-web/serializers/analytics/analytics';
+import {
+  getQuestionUtil,
+  QUESTION_TYPES,
+  getQuestionTypeByApiType
+} from 'gooru-web/config/question';
 import { DEFAULT_IMAGES, CONTENT_TYPES } from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
+import { toLocal } from 'gooru-web/utils/utils';
 
 export default Ember.Object.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
@@ -17,6 +24,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
     this.set(
       'taxonomySerializer',
       TaxonomySerializer.create(Ember.getOwner(this).ownerInjection())
+    );
+    this.set(
+      'analyticsSerializer',
+      AnalyticsSerializer.create(Ember.getOwner(this).ownerInjection())
     );
   },
 
@@ -110,6 +121,141 @@ export default Ember.Object.extend(ConfigurationMixin, {
       });
     }
     return serializedPortfolioItem;
+  },
+
+  /**
+   * @function serializeActivityAttempts
+   * @param {Object} activityAttemptsObject
+   * @return {Ember.Array}
+   * Method to serialize list of activity attempts
+   */
+  serializeActivityAttempts(activityAttemptsObject) {
+    const serializer = this;
+    let activityAttempts = Ember.A([]);
+    if (activityAttemptsObject && activityAttemptsObject.usageData.length) {
+      let attemptsList = activityAttemptsObject.usageData;
+      attemptsList.map(attempt => {
+        activityAttempts.pushObject(
+          serializer.normalizeActivityAttemptObject(attempt)
+        );
+      });
+    }
+    return activityAttempts;
+  },
+
+  /**
+   * @function serializeActivityPerformance
+   * @param {Object} payload
+   * @return {Ember.Object}
+   * Method to serialize activity performance
+   */
+  serializeActivityPerformance(payload) {
+    const serializer = this;
+    let collection = payload.collection || payload.assessment;
+    let resources = payload.resources || payload.questions;
+    return Ember.Object.create({
+      score: collection.score,
+      collectionId: collection.id,
+      timespent: collection.timespent,
+      resourceResults: serializer.normalizeResourceResults(resources),
+      reaction: collection.reaction,
+      submittedAt: collection.eventTime ? toLocal(collection.eventTime) : null,
+      type: collection.type
+    });
+  },
+
+  /**
+   * @function normalizeResourceResults
+   * @param {Ember.Array} resourceResults
+   * @return {Ember.Array}
+   */
+  normalizeResourceResults(resourceResults = Ember.A([])) {
+    const serializer = this;
+    let normalizedResourceResults = Ember.A([]);
+    resourceResults.map(resourceResult => {
+      normalizedResourceResults.pushObject(
+        serializer.normalizeResourceResult(resourceResult)
+      );
+    });
+    return normalizedResourceResults;
+  },
+
+  /**
+   * @function normalizeResourceResult
+   * @param {Object} resourceResult
+   * @return {Ember.Object}
+   */
+  normalizeResourceResult(resourceResult) {
+    const serializer = this;
+    let questionType = resourceResult.questionType;
+    let questionUtil = undefined;
+    let answerObjects = undefined;
+    let resourceType = resourceResult.resourceType;
+    if (resourceType === 'question') {
+      if (Object.values(QUESTION_TYPES).indexOf(questionType) <= -1) {
+        questionType = getQuestionTypeByApiType(questionType);
+      }
+      answerObjects = serializer
+        .get('analyticsSerializer')
+        .normalizeAnswerObjects(resourceResult.answerObject, questionType);
+      questionUtil = getQuestionUtil(questionType).create();
+    }
+
+    let eventTime = resourceResult.eventTime
+      ? toLocal(resourceResult.eventTime)
+      : null;
+    let timespent = resourceResult.timespent || resourceResult.timeSpent;
+
+    return Ember.Object.create({
+      //Commons fields for real time and student collection performance
+      resourceId: resourceResult.id,
+      reaction: resourceResult.reaction,
+      timespent,
+      answerObject: resourceResult.answerObject,
+      answerStatus:
+        resourceResult.answerStatus ||
+        (!resourceResult.score &&
+        !resourceResult.answerObject.length &&
+        !timespent
+          ? 'skipped'
+          : 'completed'),
+      userAnswer:
+        resourceType === 'question'
+          ? questionUtil.toUserAnswer(answerObjects)
+          : null,
+      correct: resourceResult.score > 0,
+      score: resourceResult.score,
+      title: resourceResult.title,
+      maxScore: resourceResult.maxScore,
+      resourceType,
+      questionType,
+      eventTime,
+      isGraded: resourceResult.isGraded
+    });
+  },
+
+  /**
+   * @function normalizeActivityAttemptObject
+   * @param {Object} attempt
+   * @return {Ember.Object}
+   */
+  normalizeActivityAttemptObject(attempt) {
+    return Ember.Object.create({
+      classId: attempt.classId,
+      contentSource: attempt.contentSource,
+      createdAt: attempt.createdAt,
+      id: attempt.id,
+      maxScore: attempt.maxScore,
+      score: attempt.score,
+      sessionId: attempt.sessionId,
+      timespent: attempt.timespent,
+      type: attempt.type,
+      updatedAt: attempt.updatedAt,
+      dcaContentId: attempt.dcaContentId || undefined,
+      courseId: attempt.courseId || undefined,
+      unitId: attempt.unitId || undefined,
+      lessonId: attempt.lessonId || undefined
+    });
   },
 
   /**

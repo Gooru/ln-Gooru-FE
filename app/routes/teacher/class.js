@@ -50,6 +50,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
+  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -118,7 +120,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     const classId = params.classId;
     const classPromise = route.get('classService').readClassInfo(classId);
     const membersPromise = route.get('classService').readClassMembers(classId);
-
     return classPromise.then(function(classData) {
       let classCourseId = null;
       if (classData.courseId) {
@@ -165,6 +166,10 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         }
         const frameworkId = aClass.get('preference.framework');
         const subjectId = aClass.get('preference.subject');
+        const secondaryClassListPromise = subjectId
+          ? route.get('multipleClassService').fetchMultipleClassList(classId)
+          : Ember.RSVP.resolve(null);
+
         let crossWalkFWCPromise = null;
         if (frameworkId && subjectId) {
           crossWalkFWCPromise = route
@@ -175,11 +180,13 @@ export default Ember.Route.extend(PrivateRouteMixin, {
           contentVisibility: visibilityPromise,
           course: coursePromise,
           crossWalkFWC: crossWalkFWCPromise,
-          competencyStats: competencyCompletionStats
+          competencyStats: competencyCompletionStats,
+          secondaryClassList: secondaryClassListPromise
         }).then(function(hash) {
           const contentVisibility = hash.contentVisibility;
           const course = hash.course;
           const crossWalkFWC = hash.crossWalkFWC || [];
+          const secondaryClassList = hash.secondaryClassList;
           aClass.set('owner', members.get('owner'));
           aClass.set('collaborators', members.get('collaborators'));
           aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
@@ -193,7 +200,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
             course,
             members,
             contentVisibility,
-            crossWalkFWC
+            crossWalkFWC,
+            secondaryClassList
           };
         });
       });
@@ -210,6 +218,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('course', model.course);
     controller.set('members', model.members);
     controller.set('contentVisibility', model.contentVisibility);
+    controller.set('secondaryClassList', model.secondaryClassList);
     controller.set('router', this.get('router'));
     let classData = model.class;
     classData.course = model.course;

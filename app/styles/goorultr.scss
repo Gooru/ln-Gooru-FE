@@ -319,6 +319,7 @@
 @import "components/reports/pull-up/student-activity-report";
 @import "components/reports/pull-up/activity/class-summary-report";
 @import "components/reports/pull-up/activity/monthly-summary-report";
+@import "components/reports/pull-up/player-pull-up";
 @import "components/search/gru-question-options";
 @import "components/search/gru-resource-options";
 @import "components/student/gru-performance-filter-panel";
@@ -364,6 +365,7 @@
 @import "components/teacher/class-performance-chart";
 @import "components/teacher/class/atc-chart";
 @import "components/teacher/class/navigator-atc-view";
+@import "components/teacher/class/class-atc-view";
 @import "components/reports/pull-up/competency-completion-report";
 @import "routes/student/class/performance";
 @import "routes/content/rubric/preview"; //Pull Up

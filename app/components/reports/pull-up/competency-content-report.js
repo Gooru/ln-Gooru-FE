@@ -60,6 +60,11 @@ export default Ember.Component.extend({
           competencyCode
         );
       }
+    },
+
+    playContent(queryParams, contentId, content) {
+      const component = this;
+      component.sendAction('playContent', queryParams, contentId, content);
     }
   },
 

@@ -21,7 +21,6 @@ export default Ember.Route.extend({
 
   setupController(controller) {
     controller.get('classController').selectMenuItem('atc');
-    controller.initializeController();
   },
 
   resetController(controller) {

@@ -71,6 +71,11 @@ export default Ember.Component.extend({
       component.set('selectedCompetency', competency);
       component.set('selectedStudentUserId', userId);
       component.set('isShowCompetencyContentReport', true);
+    },
+
+    onSelectSecondaryClass(secondaryClass) {
+      const component = this;
+      component.sendAction('onSelectSecondaryClass', secondaryClass);
     }
   },
 

@@ -19,6 +19,7 @@ export default Ember.Controller.extend({
    * @type {Object}
    */
   taxonomyService: Ember.inject.service('taxonomy'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -191,6 +192,39 @@ export default Ember.Controller.extend({
 
   isShowMilestoneReport: false,
 
+  /**
+   * @property {Array} secondaryClassess
+   * Property for list of secondary classess attached with the class
+   */
+
+  secondaryClassess: Ember.computed(
+    'class.setting',
+    'secondaryClassList',
+    function() {
+      const controller = this;
+      const classSetting = controller.get('class.setting');
+      const secondaryClassList = controller.get('secondaryClassList');
+      let attachedSecondaryClassList =
+        classSetting && classSetting['secondary.classes']
+          ? classSetting['secondary.classes'].list
+          : Ember.A([]);
+      let secondaryClassess = Ember.A([]);
+      attachedSecondaryClassList.map(classId => {
+        let attchedClass = secondaryClassList.findBy('id', classId);
+        if (attchedClass) {
+          secondaryClassess.pushObject(attchedClass);
+        }
+      });
+      return secondaryClassess;
+    }
+  ),
+
+  isMultiClassEnabled: Ember.computed('secondaryClassess.[]', function() {
+    const component = this;
+    return component.get('secondaryClassess.length') > 0;
+  }),
+
+  secondaryClassList: Ember.A([]),
   // -------------------------------------------------------------------------
   // Methods
 

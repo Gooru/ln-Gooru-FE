@@ -113,6 +113,23 @@ export default Ember.Controller.extend(StudentLearnerProficiency, {
           .removeClass('fullscreen-exit')
           .addClass('fullscreen');
       }
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
+    },
+
+    playContent(queryParams, contentId, content) {
+      const component = this;
+      component.set(
+        'playerUrl',
+        component.target
+          .get('router')
+          .generate('player', contentId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', content);
     }
   },
 

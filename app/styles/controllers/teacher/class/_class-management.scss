@@ -472,7 +472,101 @@
           }
         }
       }
+      .view-mulitple-class-layout {
+        .view-multiple-class-label {
+          font-size: 12px;
+          padding: 10px;
+          color: #fff;
+          padding-left: 20px;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+        .view-mulitple-class-panel {
+          background-color: $white;
+          border-radius: 5px;
 
+          .multiple-class-panel-header {
+            display: grid;
+            grid-template-columns: 1fr 100px;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            padding-left: 20px;
+            border-bottom: 1px solid $gray-80;
+
+            .class-save-btn {
+              padding: 10px;
+              color: $white;
+              text-align: center;
+              background-color: #0072bc;
+              cursor: pointer;
+
+              &.disabled {
+                pointer-events: none;
+                cursor: none;
+                opacity: 0.5;
+              }
+            }
+          }
+          .multiple-class-section {
+            .class-section-header {
+              display: grid;
+              grid-template-columns: 70px 1fr 1fr;
+              border-bottom: 1px solid $gray-80;
+              align-items: center;
+              font-weight: 700;
+              padding: 5px;
+              padding-left: 20px;
+              background-color: $light-100;
+            }
+            .class-section-body {
+              max-height: 200px;
+              overflow: hidden;
+              overflow-y: auto;
+
+              .class-section-content {
+                display: grid;
+                grid-template-columns: 70px 1fr 1fr;
+                align-items: center;
+                padding: 5px;
+                padding-left: 20px;
+                border-bottom: 1px solid $gray-80;
+                .class-action-content {
+                  height: max-content;
+                  display: flex;
+
+                  &.class-checked {
+                    background: url("/assets/gooru/images/check-circle-1.svg")
+                      no-repeat center;
+                    background-size: contain;
+                    border: none;
+                    display: block;
+                    width: 18px;
+                    height: 18px;
+                    cursor: pointer;
+
+                    i {
+                      visibility: hidden;
+                    }
+                  }
+
+                  i {
+                    cursor: pointer;
+                    color: #4e5e67;
+                    height: auto;
+                    font-size: 20px;
+                  }
+                }
+              }
+            }
+            .no-class-available {
+              padding: 5px;
+              padding-left: 20px;
+              font-size: 13px;
+            }
+          }
+        }
+      }
       .course-sec-cont {
         .dropdown-menu {
           z-index: 1000;

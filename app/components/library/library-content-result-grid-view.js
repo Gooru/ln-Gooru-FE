@@ -104,7 +104,7 @@ export default Ember.Component.extend({
       this.get('router').transitionTo(
         'content.collections.edit',
         collection.get('id'),
-        { queryParams: { isLibraryContent: true } }
+        { queryParams: { isLibraryContent: true, isPreviewReferrer: false } }
       );
     },
 
@@ -158,7 +158,8 @@ export default Ember.Component.extend({
         } else {
           let queryParams = {
             role: ROLES.STUDENT,
-            source: PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY
+            source: PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY,
+            isIframeMode: true
           };
           this.get('router').transitionTo('player', id, {
             queryParams
@@ -219,11 +220,13 @@ export default Ember.Component.extend({
         {
           queryParams: {
             editingContent: true,
-            isLibraryContent: true
+            isLibraryContent: true,
+            isPreviewReferrer: false
           }
         }
       );
     },
+
     /**
      * Action triggered when click preview button
      */

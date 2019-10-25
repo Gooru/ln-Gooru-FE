@@ -6,6 +6,13 @@ import { CONTENT_TYPES } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   classNames: ['portfolio', 'gru-portfolio-content-card'],
 
+  actions: {
+    onShowReport() {
+      const component = this;
+      component.sendAction('onShowActivityReport', component.get('content'));
+    }
+  },
+
   isOfflineActivity: Ember.computed.equal(
     'content.type',
     CONTENT_TYPES.OFFLINE_ACTIVITY

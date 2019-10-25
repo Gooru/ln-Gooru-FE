@@ -74,6 +74,7 @@ export default Ember.Component.extend({
      */
     onPlaySuggestionContent(suggestionContent) {
       const component = this;
+      const content = suggestionContent.get('collection');
       const contentId = suggestionContent.get('suggestedContentId');
       const collectionType = suggestionContent.get('suggestedContentType');
       const classData = component.get('class');
@@ -89,7 +90,8 @@ export default Ember.Component.extend({
         type: collectionType,
         caContentId,
         pathId,
-        pathType
+        pathType,
+        isIframeMode: true
       };
       if (
         collectionType === 'assessment-external' ||
@@ -100,15 +102,21 @@ export default Ember.Component.extend({
         });
       } else if (collectionType === 'offlineactivity') {
         queryParams.offlineActivityId = contentId;
-        component
-          .get('router')
-          .transitionTo('player-offline-activity', contentId, {
-            queryParams
-          });
+        component.sendAction(
+          'playContent',
+          'player-offline-activity',
+          queryParams,
+          contentId,
+          content
+        );
       } else {
-        component.get('router').transitionTo('player', contentId, {
-          queryParams
-        });
+        component.sendAction(
+          'playContent',
+          'player',
+          queryParams,
+          contentId,
+          content
+        );
       }
     },
     /**
@@ -156,7 +164,8 @@ export default Ember.Component.extend({
         role: 'student',
         source: component.get('source'),
         type: collectionType,
-        caContentId
+        caContentId,
+        isIframeMode: true
       };
       if (
         collectionType === 'assessment-external' ||
@@ -167,15 +176,21 @@ export default Ember.Component.extend({
         });
       } else if (collectionType === 'offline-activity') {
         queryParams.offlineActivityId = contentId;
-        component
-          .get('router')
-          .transitionTo('player-offline-activity', contentId, {
-            queryParams
-          });
+        component.sendAction(
+          'playContent',
+          'player-offline-activity',
+          queryParams,
+          contentId,
+          content
+        );
       } else {
-        component.get('router').transitionTo('player', contentId, {
-          queryParams
-        });
+        component.sendAction(
+          'playContent',
+          'player',
+          queryParams,
+          contentId,
+          content
+        );
       }
     }
   },

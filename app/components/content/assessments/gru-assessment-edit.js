@@ -221,7 +221,22 @@ export default CollectionEdit.extend({
 
     //Action triggered when click back in the edit page
     onClickBack() {
-      window.history.back();
+      let isPreview = this.get('isPreviewReferrer');
+      const router = this.get('router');
+      const previewRoute = 'library-search';
+      const myId = this.get('session.userId');
+
+      let queryParams = {
+        profileId: myId,
+        type: 'my-content',
+        activeContentType: 'assessment'
+      };
+
+      if (isPreview) {
+        router.transitionTo(previewRoute, { queryParams });
+      } else {
+        window.history.back();
+      }
     }
   },
 

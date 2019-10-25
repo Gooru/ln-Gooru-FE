@@ -18,7 +18,9 @@ export default QuizzesPlayerController.extend({
     'source',
     'classId',
     'isStudyPlayer',
-    'caContentId'
+    'caContentId',
+    'isIframeMode',
+    'isPreviewReferrer'
   ],
 
   // -------------------------------------------------------------------------
@@ -54,6 +56,12 @@ export default QuizzesPlayerController.extend({
    * Property to find out whether study-player rendered or not
    */
   isStudyPlayer: false,
+
+  /**
+   * @property {Boolean}
+   * Property to find out whether player pullup close or not
+   */
+  isIframeMode: false,
 
   // -------------------------------------------------------------------------
   // Methods

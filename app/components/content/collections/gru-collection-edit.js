@@ -280,7 +280,22 @@ export default Ember.Component.extend(ContentEditMixin, ModalMixin, {
 
     //Action triggered when click back
     onClickBack() {
-      window.history.back();
+      let isPreview = this.get('isPreviewReferrer');
+      const router = this.get('router');
+      const previewRoute = 'library-search';
+      const myId = this.get('session.userId');
+
+      let queryParams = {
+        profileId: myId,
+        type: 'my-content',
+        activeContentType: 'collection'
+      };
+
+      if (isPreview) {
+        router.transitionTo(previewRoute, { queryParams });
+      } else {
+        window.history.back();
+      }
     }
   },
   // -------------------------------------------------------------------------

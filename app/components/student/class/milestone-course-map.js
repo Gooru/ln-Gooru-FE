@@ -222,7 +222,10 @@ export default Ember.Component.extend({
      * @return {Object}
      */
     toggleMilestoneItems(selectedMilestone) {
-      this.handleMilestoneToggle(selectedMilestone);
+      let component = this;
+      if (selectedMilestone) {
+        component.handleMilestoneToggle(selectedMilestone);
+      }
     },
 
     /**
@@ -329,6 +332,11 @@ export default Ember.Component.extend({
           }
         }
       );
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 
@@ -658,7 +666,7 @@ export default Ember.Component.extend({
             .get('courseService')
             .getCourseMilestoneLessons(courseId, milestoneId)
             .then(lessons => {
-              if (!component.isDestroyed) {
+              if (!component.isDestroyed && lessons) {
                 if (rescopedLessonContents) {
                   rescopedLessonContents.forEach(rescopedLessonId => {
                     let lesson = lessons.findBy('lesson_id', rescopedLessonId);
@@ -958,12 +966,11 @@ export default Ember.Component.extend({
   navigateLocation() {
     const component = this;
     let rawCustomLocation = this.get('location');
-    if (rawCustomLocation) {
+    if (rawCustomLocation !== 'null' && !component.isDestroyed) {
       let customLocation = component.parserLocation(rawCustomLocation),
         userLocation = component.formatCustomLocationToUserLocation(
           customLocation
         );
-
       component.set('userCurrentLocation', userLocation);
       component.set('locateLastPlayedItem', userLocation);
 
@@ -973,25 +980,26 @@ export default Ember.Component.extend({
 
       //ToDo: Refactoring required to remove the Later based workaround, here as well as in other implementation
       Ember.run.later(function() {
-        component.handleMilestoneToggle(selectedMilestone);
-
-        Ember.run.later(function() {
+        if (selectedMilestone) {
+          component.handleMilestoneToggle(selectedMilestone);
           Ember.run.later(function() {
-            let lessonO = selectedMilestone.lessons.findBy(
-                'lesson_id',
-                userLocation.lessonId
-              ),
-              collectionO = lessonO.collections.findBy(
-                'id',
-                userLocation.collectionId
+            Ember.run.later(function() {
+              let lessonO = selectedMilestone.lessons.findBy(
+                  'lesson_id',
+                  userLocation.lessonId
+                ),
+                collectionO = lessonO.collections.findBy(
+                  'id',
+                  userLocation.collectionId
+                );
+              component.send(
+                'onShowStudentMilestoneCollectionReport',
+                lessonO,
+                collectionO
               );
-            component.send(
-              'onShowStudentMilestoneCollectionReport',
-              lessonO,
-              collectionO
-            );
-          }, 8000);
-        }, 500);
+            }, 8000);
+          }, 500);
+        }
       });
     }
   },
@@ -1188,7 +1196,8 @@ export default Ember.Component.extend({
       minScore,
       collectionSource: collection.source || 'course_map',
       isStudyPlayer: true,
-      pathType
+      pathType,
+      isIframeMode: true
     };
 
     let suggestionPromise = null;
@@ -1205,7 +1214,6 @@ export default Ember.Component.extend({
           collectionSubType,
           pathId,
           classId,
-          pathType,
           milestoneId
         );
     } else {
@@ -1223,10 +1231,15 @@ export default Ember.Component.extend({
           milestoneId
         );
     }
-    suggestionPromise.then(() =>
-      component.get('router').transitionTo('study-player', courseId, {
-        queryParams
-      })
-    );
+    suggestionPromise.then(function() {
+      component.set(
+        'playerUrl',
+        component
+          .get('router')
+          .generate('study-player', courseId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', collection);
+    });
   }
 });
