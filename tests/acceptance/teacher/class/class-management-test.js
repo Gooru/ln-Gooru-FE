@@ -1,4 +1,4 @@
-import { test } from 'qunit';
+import { skip } from 'qunit';
 import moduleForAcceptance from 'gooru-web/tests/helpers/module-for-acceptance';
 import { authenticateSession } from 'gooru-web/tests/helpers/ember-simple-auth';
 import { KEY_CODES } from 'gooru-web/config/config';
@@ -15,7 +15,7 @@ moduleForAcceptance('Acceptance | teacher/class/class-management', {
   }
 });
 
-test('Layout', function(assert) {
+skip('Layout', function(assert) {
   visit('/teacher/class/class-for-pochita-as-teacher/class-management');
   andThen(function() {
     assert.equal(
@@ -73,7 +73,7 @@ test('Layout', function(assert) {
     );
   });
 });
-test('Remove class', function(assert) {
+skip('Remove class', function(assert) {
   visit('/teacher/class/class-for-pochita-as-teacher/class-management');
 
   andThen(function() {
@@ -118,7 +118,7 @@ test('Remove class', function(assert) {
   });
 });
 
-test('Archive Class', function(assert) {
+skip('Archive Class', function(assert) {
   visit('/teacher/class/class-for-pochita-as-teacher/class-management');
 
   andThen(function() {
