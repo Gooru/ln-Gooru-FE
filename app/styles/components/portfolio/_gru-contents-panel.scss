@@ -18,20 +18,18 @@
         justify-content: left;
         column-gap: 5px;
         .icon {
-          width: 30px;
+          width: 25px;
           height: 48px;
-          background-size: 30px;
+          background-size: 25px;
           background-repeat: no-repeat;
           background-position: center;
 
           &.assessment {
             background-image: url(gooru/images/assessment-white.svg);
-            background-size: 25px;
           }
 
           &.collection {
             background-image: url(gooru/images/collection-white.svg);
-            background-size: 25px;
           }
 
           &.offline-activity {
@@ -50,7 +48,7 @@
         justify-self: right;
         .filter-search,
         .toggle-panel {
-          height: 55px;
+          height: 48px;
           cursor: pointer;
           transition: transform 1s;
           i {
@@ -102,6 +100,19 @@
         border: 1px solid $gray-light;
         border-radius: 5px;
       }
+
+      .show-more-container {
+        margin: 8px auto;
+        height: 30px;
+        color: #535e67;
+        font-size: 15px;
+        background-color: $white;
+        width: 100px;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+      }
     }
     .portfolio.gru-content-filters {
       top: 48px;
@@ -124,6 +135,18 @@
     .portfolio-contents-container {
       .body-container {
         display: block;
+      }
+    }
+  }
+
+  &.lazy-load {
+    .portfolio-contents-container {
+      .body-container {
+        .activities {
+          div.gru-portfolio-content-card:not(:first-child) {
+            display: none;
+          }
+        }
       }
     }
   }
