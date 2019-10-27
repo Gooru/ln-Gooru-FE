@@ -118,6 +118,10 @@ export default Ember.Controller.extend({
     onOpenOCAReport() {
       let controller = this;
       controller.openDCAReportForOfflineClass();
+    },
+
+    onSelectClass(secondaryClass) {
+      this.send('updateClassId', secondaryClass);
     }
   },
 
@@ -215,6 +219,14 @@ export default Ember.Controller.extend({
           secondaryClassess.pushObject(attchedClass);
         }
       });
+      secondaryClassess.pushObject(
+        Ember.Object.create({
+          id: controller.get('class.id'),
+          code: controller.get('class.code'),
+          title: controller.get('class.title'),
+          isPrimaryClass: true
+        })
+      );
       return secondaryClassess;
     }
   ),
