@@ -37,8 +37,6 @@ export default Ember.Controller.extend(ModalMixin, {
 
   session: Ember.inject.service('session'),
 
-  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -922,7 +920,7 @@ export default Ember.Controller.extend(ModalMixin, {
       }
     };
     controller
-      .get('multipleClassService')
+      .get('classController.multipleClassService')
       .updateMultipleClass(classId, classSetting)
       .then(() => {
         controller.set('isEnableSave', false);
