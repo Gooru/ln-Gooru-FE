@@ -10,7 +10,7 @@ export default DS.JSONAPISerializer.extend({
   normalizeMulitpleClass(payload) {
     let result = Ember.A([]);
     let secondaryClasses = payload ? payload.classes : Ember.A([]);
-    if (secondaryClasses.length > 0) {
+    if (payload.classes && secondaryClasses.length > 0) {
       secondaryClasses.forEach(secondaryClass => {
         result.push(
           Ember.Object.create({
