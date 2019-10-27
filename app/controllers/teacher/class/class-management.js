@@ -37,6 +37,8 @@ export default Ember.Controller.extend(ModalMixin, {
 
   session: Ember.inject.service('session'),
 
+  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
+
   // -------------------------------------------------------------------------
   // Properties
 
