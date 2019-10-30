@@ -73,43 +73,39 @@
         <div class="render-course-map {{if (and (not isStudentCourseMap) questionItems) 'sm-course-map'}}">
           {{#if (and class.milestoneViewApplicable hasMilestoneViewReady (not isStudentCourseMap))}}
           <div class="ms-cm-view-switcher-ctn-container">
-            <div class="ms-cm-view-switcher-ctn {{if isMobileView 'mobile-view-switcher-ctn'}}">
-              {{#if (not isMobileView)}}
-              <div class="current-view">
+            <div class="ms-cm-view-switcher-ctn">
+              <div class="view-switcher" {{action 'viewSwitcher' 'milestone-course'}}>
+                <span>{{t 'common.show'}}</span><br>
                 {{#if isMilestoneView}}
-                  {{t 'milestones'}}
+                 <span>{{t 'common.course-map'}}</span>
                 {{else}}
-                  {{t 'common.course-map'}}
+                  <span>{{t 'milestones'}}</span>
                 {{/if}}
               </div>
-              <div class="ms-cm-view-lesson-plan {{if isLessonPlanView 'current-view'}}">
-                {{t 'common.show'}} {{t 'common.lesson-plan'}} {{gru-switch switchOptions=switchOptions onOptionSwitch='onScoringChange' isChecked=isLessonPlanView}}
+              <div class="current-class-view">
+                {{t 'locateme.view'}} {{t 'common.view-class-course-map'}}
+                <div class="class-selector">
+                  <div class="selected-class-name" {{action "onToggleClassListContainer"}}>
+                    <span class="active-class-text">{{class.title}}</span>
+                    <span class="toggle-icon">{{gru-icon name="arrow_drop_down"}}</span>
+                  </div>
+                  <div class="class-list-container">
+                    {{#each selectedClassList as |classes|}}
+                      <div class="class-name  {{if (or (and classes.isPrimaryClass (not isSecondaryClass)) classes.isSelected) 'active-class'}}" {{action 'addSecondaryClass' classes}}>
+                          {{classes.title}}
+                      </div>
+                    {{/each}}
+                  </div>
+                </div>
               </div>
-              <div class="view-switcher" {{action 'viewSwitcher'}}>
-                {{#if isMilestoneView}}
-                  {{t 'show-course-map'}}
+              <div class="ms-cm-view-lesson-plan" {{action 'viewSwitcher' 'lesson-plan'}}>
+                {{t 'common.show'}} <br>
+                {{#if isLessonPlanView}}
+                  {{t 'common.lessonObj.zero'}}
                 {{else}}
-                  {{t 'show-milestones'}}
+                  {{t 'common.lesson-plan'}}
                 {{/if}}
               </div>
-              {{else}}
-                <div class="dropdown">
-                  <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">
-                    {{#if isMilestoneView}}
-                      {{t 'milestones'}}
-                    {{else}}
-                      {{t 'common.course-map'}}
-                    {{/if}}
-                    <span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li class="list-item {{if isMilestoneView 'active' }}" {{action 'switchDropdown' 'milestone'}}>{{t 'milestones'}}</li>
-                    <li class="list-item {{if (not isMilestoneView isLessonPlanView) 'active' }}" {{action 'switchDropdown' 'course-map'}}>{{t 'common.course-map'}}</li>
-                  </ul>
-                </div>
-                <div class="ms-cm-view-lesson-plan {{if isLessonPlanView 'current-view'}}">
-                  {{t 'common.show'}} {{t 'common.lesson-plan'}} {{gru-switch switchOptions=switchOptions onOptionSwitch='onScoringChange' isChecked=isLessonPlanView}}
-                </div>
-              {{/if}}
             </div>
           </div>
           {{/if}}

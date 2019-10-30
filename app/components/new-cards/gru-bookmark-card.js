@@ -110,6 +110,30 @@ export default Ember.Component.extend(ModalMixin, {
         'content.modals.gru-delete-bookmark',
         model
       );
+    },
+
+    openPlayerContent: function() {
+      const component = this;
+      const bookmark = component.get('bookmark');
+      let id = bookmark.get('contentId');
+      let type = bookmark.get('contentType');
+      let queryParams = {
+        type: type,
+        role: 'student',
+        source: component.get('source'),
+        isIframeMode: true
+      };
+      component.set(
+        'playerUrl',
+        component.get('router').generate('player', id, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', bookmark);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 

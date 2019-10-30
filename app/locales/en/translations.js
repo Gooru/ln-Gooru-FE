@@ -2768,9 +2768,8 @@ window.i18ln = {
   'student-resource': 'Student Study Material',
   'common.choose-lang': 'Choose Language',
   'common.show': 'Show',
-  'common.view-mulitple-classes': 'View Multiple Classes',
   'common.class-name': 'Class Name',
-  'common.multiple-class-setting': 'Multiple Class Settings',
-  'common.secondary-class-not-available': 'Secondary Classes Not Available'
+  'common.view-class-course-map': 'Class',
+  'common.secondary-class-setting': 'Secondary Class Settings'
 };
 export default window.i18ln;

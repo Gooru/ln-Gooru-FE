@@ -65,6 +65,7 @@ export default Ember.Component.extend({
    */
   scopeItems: Ember.computed('classId', function() {
     let scopeItems = Ember.A([]);
+    scopeItems.pushObject(this.createScopeItem('all', 'common.all', false));
     scopeItems.pushObject(
       this.createScopeItem('course-map', 'common.course-map', false)
     );
@@ -285,7 +286,11 @@ export default Ember.Component.extend({
     const offset = component.get('offset');
     const max = component.get('max');
     const suggestionOrigin = component.get('selectedTab');
-    const scope = component.get('selectedScopeItem.key');
+    let scope = component.get('selectedScopeItem.key');
+    //Set All scope value as undefined to fetch from all origin
+    if (scope === 'all') {
+      scope = undefined;
+    }
     component
       .get('suggestService')
       .fetchInClassSuggestionsForStudent(userId, classId, {

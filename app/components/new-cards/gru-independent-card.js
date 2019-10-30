@@ -67,7 +67,7 @@ export default Ember.Component.extend({
     /**
      * When opening the player for current activity
      */
-    playCurrent: function() {
+    openCoursePlayer: function() {
       const component = this;
       let collectionId = component.get('location.currentId');
       let type = component.get('location.currentType');
@@ -103,6 +103,26 @@ export default Ember.Component.extend({
           component.set('playerContent', playerContent);
         });
     },
+
+    openPlayerContent: function() {
+      const component = this;
+      const location = component.get('location');
+      let id = location.get('collectionId');
+      let type = location.get('type');
+      let queryParams = {
+        type: type,
+        role: 'student',
+        source: component.get('source'),
+        isIframeMode: true
+      };
+      component.set(
+        'playerUrl',
+        component.get('router').generate('player', id, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', location);
+    },
+
     closePullUp() {
       const component = this;
       component.set('isOpenPlayer', false);

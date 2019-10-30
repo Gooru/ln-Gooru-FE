@@ -209,27 +209,45 @@ export default Ember.Service.extend({
             .get('suggestSerializer')
             .normalizeCASuggestionContents(response.suggestions.objectAt(0));
           const suggestions = normalizedContent.get('suggestions');
-          const pathIds = suggestions.map(suggestion => {
-            return suggestion.get('suggestedToContext.id');
-          });
-          service
-            .get('performanceService')
-            .fecthSuggestionPerformance({
-              source: 'dca',
-              classId,
-              userId,
-              pathIds
-            })
-            .then(result => {
-              result.map(performance => {
-                const pathId = performance.get('pathId');
-                let suggestion = suggestions.findBy(
-                  'suggestedToContext.id',
-                  pathId
-                );
-                suggestion.set('performance', performance);
+          const pathIds = [];
+          suggestions.map(suggestion => {
+            const suggestedToContext = suggestion.get('suggestedToContext');
+            if (suggestedToContext) {
+              suggestedToContext.map(context => {
+                pathIds.push(context.get('id'));
               });
-            });
+            }
+          });
+          if (pathIds.length) {
+            service
+              .get('performanceService')
+              .fecthSuggestionPerformance({
+                source: 'dca',
+                classId,
+                userId,
+                pathIds
+              })
+              .then(result => {
+                suggestions.map(suggestion => {
+                  const suggestedToContext = suggestion.get(
+                    'suggestedToContext'
+                  );
+                  if (suggestedToContext) {
+                    suggestedToContext.map(context => {
+                      const performance = result.findBy(
+                        'pathId',
+                        context.get('id')
+                      );
+                      if (!userId) {
+                        context.set('performance', performance);
+                      } else {
+                        suggestion.set('performance', performance);
+                      }
+                    });
+                  }
+                });
+              });
+          }
           resolve(normalizedContent);
         }, reject);
     });

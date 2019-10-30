@@ -98,6 +98,7 @@ export default SearchSerializer.extend({
         classId: suggestion.classId,
         suggestedContentId: suggestion.suggestedContentId,
         suggestedContentType: suggestion.suggestedContentType,
+        collectionType: suggestion.suggestedContentType,
         title: suggestion.title,
         userCount: suggestion.userCount,
         url: suggestion.url,
@@ -107,7 +108,7 @@ export default SearchSerializer.extend({
           suggestion.suggestedForContent
         ),
         suggestedToContext: suggestion.suggestedToContext
-          ? this.normalizeSuggestedToContext(suggestion.suggestedToContext[0])
+          ? this.normalizeSuggestedToContext(suggestion.suggestedToContext)
           : null,
         taxonomy: suggestion.taxonomy
       });
@@ -129,15 +130,17 @@ export default SearchSerializer.extend({
     return content;
   },
 
-  normalizeSuggestedToContext(payload) {
-    return Ember.Object.create({
-      id: payload.id,
-      suggestedTo: payload.suggestedTo,
-      suggestionArea: payload.suggestionArea,
-      suggestionOrigin: payload.suggestionOrigin,
-      suggestionCriteria: payload.suggestionCriteria,
-      suggestionOriginatorId: payload.suggestionOriginatorId,
-      userId: payload.userId
+  normalizeSuggestedToContext(content) {
+    return content.map(item => {
+      return Ember.Object.create({
+        id: item.id,
+        suggestedTo: item.suggestedTo,
+        suggestionArea: item.suggestionArea,
+        suggestionOrigin: item.suggestionOrigin,
+        suggestionCriteria: item.suggestionCriteria,
+        suggestionOriginatorId: item.suggestionOriginatorId,
+        userId: item.userId
+      });
     });
   },
 
