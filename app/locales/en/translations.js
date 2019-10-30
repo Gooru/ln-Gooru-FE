@@ -2769,6 +2769,7 @@ window.i18ln = {
   'common.choose-lang': 'Choose Language',
   'common.show': 'Show',
   'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
   'common.secondary-class-setting': 'Secondary Class Settings'
 };
 export default window.i18ln;

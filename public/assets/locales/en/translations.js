@@ -2772,6 +2772,7 @@ window.i18ln = {
   'oa.teacher-task.tooltip.disable-msg':
     'At least one task is required for activity activation',
   'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
   'common.secondary-class-setting': 'Secondary Class Settings'
 };
 //export default window.i18ln;
