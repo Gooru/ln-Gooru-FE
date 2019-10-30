@@ -614,7 +614,7 @@ export default Ember.Controller.extend(ModalMixin, {
   /**
    * @property {Object} secondaryclass
    */
-  secondaryClasses: Ember.computed.alias('classController.secondaryClassess'),
+  secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
 
   /**
    * @property {Object} secondaryclassList

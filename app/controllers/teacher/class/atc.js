@@ -168,12 +168,12 @@ export default Ember.Controller.extend({
    */
   fwDomains: Ember.computed.alias('classController.fwDomains'),
 
-  secondaryClassess: Ember.computed.alias('classController.secondaryClassess'),
+  secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
 
-  secondaryClassToBeShownList: Ember.computed('secondaryClassess', function() {
+  secondaryClassToBeShownList: Ember.computed('secondaryClasses', function() {
     const controller = this;
-    const secondaryClassess = controller.get('secondaryClassess');
-    return secondaryClassess ? Ember.copy(secondaryClassess) : Ember.A([]);
+    const secondaryClasses = controller.get('secondaryClasses');
+    return secondaryClasses ? Ember.copy(secondaryClasses) : Ember.A([]);
   }),
 
   selectedSecondaryClassList: Ember.A([]),

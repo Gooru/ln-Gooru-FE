@@ -110,8 +110,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     /**
      * Update class id when change classes
      */
-    updateClassId(secondaryClass) {
-      this.set('selectedClassId', secondaryClass.get('id'));
+    updateClassId(classId) {
+      this.set('selectedClassId', classId);
       this.refresh();
     }
   },
@@ -129,8 +129,8 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    */
   model: function(params) {
     const route = this;
-    const seletedClass = route.get('selectedClassId');
-    const classId = seletedClass ? seletedClass : params.classId;
+    const selectedClassId = route.get('selectedClassId');
+    const classId = selectedClassId ? selectedClassId : params.classId;
     const classPromise = route.get('classService').readClassInfo(classId);
     const membersPromise = route.get('classService').readClassMembers(classId);
     return classPromise.then(function(classData) {

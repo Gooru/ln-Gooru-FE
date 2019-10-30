@@ -126,8 +126,8 @@ export default Ember.Controller.extend({
       controller.openDCAReportForOfflineClass();
     },
 
-    onSelectClass(secondaryClass) {
-      this.send('updateClassId', secondaryClass);
+    onSelectClass(classId) {
+      this.send('updateClassId', classId);
     }
   },
 
@@ -203,11 +203,11 @@ export default Ember.Controller.extend({
   isShowMilestoneReport: false,
 
   /**
-   * @property {Array} secondaryClassess
+   * @property {Array} secondaryClasses
    * Property for list of secondary classess attached with the class
    */
 
-  secondaryClassess: Ember.computed(
+  secondaryClasses: Ember.computed(
     'class.setting',
     'secondaryClassList',
     function() {
@@ -218,28 +218,16 @@ export default Ember.Controller.extend({
         classSetting && classSetting['secondary.classes']
           ? classSetting['secondary.classes'].list
           : Ember.A([]);
-      let secondaryClassess = Ember.A([]);
-      attachedSecondaryClassList.map(classId => {
-        let attchedClass = secondaryClassList.findBy('id', classId);
-        if (attchedClass) {
-          secondaryClassess.pushObject(attchedClass);
-        }
-      });
-      secondaryClassess.pushObject(
-        Ember.Object.create({
-          id: controller.get('class.id'),
-          code: controller.get('class.code'),
-          title: controller.get('class.title'),
-          isPrimaryClass: true
-        })
+      return controller.createSecondaryClassList(
+        attachedSecondaryClassList,
+        secondaryClassList
       );
-      return secondaryClassess;
     }
   ),
 
-  isMultiClassEnabled: Ember.computed('secondaryClassess.[]', function() {
+  isMultiClassEnabled: Ember.computed('secondaryClasses.[]', function() {
     const component = this;
-    return component.get('secondaryClassess.length') > 0;
+    return component.get('secondaryClasses.length') > 0;
   }),
 
   secondaryClassList: Ember.A([]),
@@ -369,5 +357,25 @@ export default Ember.Controller.extend({
       const performanceSummaryForDCA = hash.performanceSummaryForDCA;
       controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
     });
+  },
+
+  createSecondaryClassList(attachedSecondaryClassList, secondaryClassList) {
+    let controller = this;
+    let secondaryClasses = Ember.A([]);
+    attachedSecondaryClassList.map(classId => {
+      let attchedClass = secondaryClassList.findBy('id', classId);
+      if (attchedClass) {
+        secondaryClasses.pushObject(attchedClass);
+      }
+    });
+    secondaryClasses.pushObject(
+      Ember.Object.create({
+        id: controller.get('class.id'),
+        code: controller.get('class.code'),
+        title: controller.get('class.title'),
+        isPrimaryClass: true
+      })
+    );
+    return secondaryClasses;
   }
 });

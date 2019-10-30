@@ -306,7 +306,7 @@ export default Ember.Controller.extend({
   /**
    * @property {Object} secondaryClasses
    */
-  secondaryClasses: Ember.computed.alias('classController.secondaryClassess'),
+  secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
 
   /**
    * Maintain secondary class list
@@ -648,11 +648,17 @@ export default Ember.Controller.extend({
 
     //Action trigged when click secondary class dropdown
     addSecondaryClass(secondaryClass) {
-      let selecedElement = Ember.$(`.select-class-${secondaryClass.id}`);
-      Ember.$('.class-name').removeClass('active-class');
-      selecedElement.addClass('active-class');
+      let secondaryClassList = this.get('selectedClassList');
+      let selectedClass = secondaryClassList.findBy('isSelected', true);
+      if (selectedClass) {
+        selectedClass.set('isSelected', false);
+      }
+      secondaryClass.set('isSelected', true);
       this.set('isSecondaryClass', true);
-      this.get('classController').send('onSelectClass', secondaryClass);
+      this.get('classController').send(
+        'onSelectClass',
+        secondaryClass.get('id')
+      );
     }
   },
 

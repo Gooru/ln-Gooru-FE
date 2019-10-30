@@ -91,7 +91,7 @@
                   </div>
                   <div class="class-list-container">
                     {{#each selectedClassList as |classes|}}
-                      <div class="class-name select-class-{{classes.id}} {{if (and classes.isPrimaryClass (not isSecondaryClass)) 'active-class'}}" {{action 'addSecondaryClass' classes}}>
+                      <div class="class-name  {{if (or (and classes.isPrimaryClass (not isSecondaryClass)) classes.isSelected) 'active-class'}}" {{action 'addSecondaryClass' classes}}>
                           {{classes.title}}
                       </div>
                     {{/each}}

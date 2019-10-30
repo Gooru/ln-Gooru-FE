@@ -312,6 +312,7 @@
 
                   &.active-class {
                     background-color: $light-100;
+                    pointer-events: none;
                   }
                 }
               }
