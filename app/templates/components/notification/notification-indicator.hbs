@@ -23,6 +23,16 @@
       inClass=inClass
       dismissNotification=(action "dismissNotification")
       showMore=(action "showMore")
+      playerContent = "playerContent"
     }}
   </div>
 {{/gru-pull-up-ex}}
+
+{{#if isOpenPlayer}}
+  {{reports/pull-up/player-pull-up
+    showPullUp=isOpenPlayer
+    playerUrl=playerUrl
+    playerContent=playerContent
+    onclosePullUp="closePullUp"
+  }}
+{{/if}}

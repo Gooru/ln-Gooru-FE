@@ -159,6 +159,11 @@ export default Ember.Component.extend({
     onCloseContainer() {
       const component = this;
       component.sendAction('onCloseContainer');
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 
@@ -194,11 +199,15 @@ export default Ember.Component.extend({
       type: collectionType,
       caContentId,
       pathId,
-      pathType
+      pathType,
+      isIframeMode: true
     };
-    component.get('router').transitionTo('player', contentId, {
-      queryParams
-    });
+    component.set(
+      'playerUrl',
+      component.get('router').generate('player', contentId, { queryParams })
+    );
+    component.set('isOpenPlayer', true);
+    component.set('playerContent', suggestionContent);
   },
 
   playCourseMapContent(suggestionContent, pathType) {
@@ -221,11 +230,17 @@ export default Ember.Component.extend({
       unitId,
       lessonId,
       collectionSource,
-      pathType
+      pathType,
+      isIframeMode: true
     };
-    component.get('router').transitionTo('study-player', courseId, {
-      queryParams
-    });
+    component.set(
+      'playerUrl',
+      component
+        .get('router')
+        .generate('study-player', courseId, { queryParams })
+    );
+    component.set('isOpenPlayer', true);
+    component.set('playerContent', suggestionContent);
   },
 
   playProficiencyContent(suggestionContent, pathType) {
@@ -241,11 +256,15 @@ export default Ember.Component.extend({
       source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
       type: collectionType,
       pathId,
-      pathType
+      pathType,
+      isIframeMode: true
     };
-    component.get('router').transitionTo('player', contentId, {
-      queryParams
-    });
+    component.set(
+      'playerUrl',
+      component.get('router').generate('player', contentId, { queryParams })
+    );
+    component.set('isOpenPlayer', true);
+    component.set('playerContent', suggestionContent);
   },
 
   init() {
