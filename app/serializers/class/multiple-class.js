@@ -11,7 +11,7 @@ export default DS.JSONAPISerializer.extend({
     let result = Ember.A([]);
     if (payload) {
       let secondaryClasses = payload.classes ? payload.classes : Ember.A([]);
-      if (secondaryClasses.length) {
+      if (secondaryClasses && secondaryClasses.length) {
         secondaryClasses.forEach(secondaryClass => {
           result.push(
             Ember.Object.create({
