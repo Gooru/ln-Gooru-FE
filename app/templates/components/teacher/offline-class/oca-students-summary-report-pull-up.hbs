@@ -36,10 +36,12 @@
   <div class="activity-info">
     <div class="circle-img"></div>
     <span class="students-count">{{students.length}} Students</span>
-    <div class="conducted-on">
-      <span class="title">{{t 'teacher-landing.class.offline-class-report.conducted-on'}}</span>
-      <span class="date">{{format-date context.activation_date 'DD MMM YY'}}</span>
-    </div>
+    {{#unless isSuggestedContent}}
+      <div class="conducted-on">
+        <span class="title">{{t 'teacher-landing.class.offline-class-report.conducted-on'}}</span>
+        <span class="date">{{format-date context.activation_date 'DD MMM YY'}}</span>
+      </div>
+    {{/unless}}
     <div class="suggest-bar on-scroll-fixed {{if (gt studentsSelectedForSuggest.length 0) 'active'}}">
       <div class="suggest-bar-container">
         <div class="close-all-suggestion" {{action 'onCloseSuggest'}}>
