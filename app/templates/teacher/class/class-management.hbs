@@ -100,16 +100,14 @@
           </div>
         </div>
       </div>
-      {{#if isPremiumClass}}
+      {{#if (and isPremiumClass (gt multipleClassList.length  0))}}
       <div class="view-mulitple-class-layout">
         <div class="view-multiple-class-label">
-           {{t 'common.multiple-class-setting'}}
+           {{t 'common.secondary-class-setting'}}
         </div>
         <div class="view-mulitple-class-panel">
           <div class="multiple-class-panel-header">
-            <div class="class-panel-header-title">
-                {{t 'common.view-mulitple-classes'}}
-            </div>
+            <div class="class-panel-header-title"></div>
             <div class="class-panel-header-action">
               <div class="class-save-btn {{if isEnableSave '' 'disabled'}}" {{action 'saveMultipleClass'}}>
                  {{t 'common.save'}}
@@ -117,10 +115,9 @@
             </div>
           </div>
           <div class="multiple-class-section">
-            {{#if (gt multipleClassList.length  0)}}
             <div class="class-section-header">
                 <div class="class-action-header">
-                  {{t 'teacher-landing.class.class-management-tab.actions'}}
+
                 </div>
                 <div class="class-code-header">
                    {{t 'student-landing.class-code'}}
@@ -144,11 +141,6 @@
               </div>
               {{/each}}
             </div>
-            {{else}}
-            <div class="no-class-available">
-               {{t 'common.secondary-class-not-available'}}
-            </div>
-            {{/if}}
           </div>
         </div>
       </div>
