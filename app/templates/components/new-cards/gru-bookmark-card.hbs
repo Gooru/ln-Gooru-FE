@@ -9,13 +9,13 @@
         </div>
         {{/link-to}}
       {{else}}
-        {{#link-to 'player' bookmark.contentId (query-params type=bookmark.contentType role='student' source=source)}}
+        <a {{action 'openPlayerContent'}}>
           <div class="card-heading" style="background-image: url({{content.thumbnailUrl}})">
             <div class="title pointer">
               {{bookmark.title}}
             </div>
           </div>
-        {{/link-to}}
+        </a>
       {{/if}}
   </div>
   <div class="panel-body">
@@ -53,3 +53,11 @@
     </div>
   </div>
 </div>
+{{#if isOpenPlayer}}
+  {{reports/pull-up/player-pull-up
+    showPullUp=isOpenPlayer
+    playerUrl=playerUrl
+    playerContent=playerContent
+    onclosePullUp="closePullUp"
+  }}
+{{/if}}

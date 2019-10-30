@@ -7,11 +7,16 @@
         </div>
       {{/link-to}}
     {{else}}
-      {{#link-to 'player' location.collectionId (query-params type=location.type role='student' source=source)}}
+      <!-- {{#link-to 'player' location.collectionId (query-params type=location.type role='student' source=source)}}
         <div class="title pointer {{if isCollection 'collection'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover" title="{{content.title}}" style="background-color:{{grade-color performance.scoreInPercentage}}" >
           {{content.title}}
         </div>
-      {{/link-to}}
+      {{/link-to}} -->
+      <a {{action 'openPlayerContent'}}>
+        <div class="title pointer {{if isCollection 'collection'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover" title="{{content.title}}" style="background-color:{{grade-color performance.scoreInPercentage}}" >
+          {{content.title}}
+        </div>
+      </a>
     {{/if}}
     <div class="card-heading" style="background-image: url({{content.thumbnailUrl}})">
       <div class="current-activity">
@@ -19,7 +24,7 @@
         {{#if isCourse}}
           {{#if location.currentTitle}}
             <div class="title">
-              <a {{action 'playCurrent'}}>
+              <a {{action 'openCoursePlayer'}}>
                 {{location.currentTitle}}
               </a>
             </div>
