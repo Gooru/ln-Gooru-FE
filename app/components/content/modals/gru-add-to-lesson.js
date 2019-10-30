@@ -22,6 +22,16 @@ export default AddToModal.extend({
    */
   session: Ember.inject.service('session'),
 
+  /**
+   * @type {CollectionService} Service to make copy of the collection
+   */
+  collectionService: Ember.inject.service('api-sdk/collection'),
+
+  /**
+   * @type {AssessmentService} Service to make copy of the assessment
+   */
+  assessmentService: Ember.inject.service('api-sdk/assessment'),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -46,7 +56,18 @@ export default AddToModal.extend({
     }
   },
   copyContent: function() {
-    return Ember.RSVP.resolve();
+    let collectionType = this.get('isCollection')
+      ? this.get('collectionService').copyCollection(
+        this.get('selectedCollection.id')
+      )
+      : this.get('assessmentService').copyAssessment(
+        this.get('selectedCollection.id')
+      );
+    return Ember.RSVP.hash({
+      collectionId: collectionType
+    }).then(({ collectionId }) => {
+      this.set('copyCollectionId', collectionId);
+    });
   },
   init() {
     this._super(...arguments);
@@ -58,7 +79,7 @@ export default AddToModal.extend({
     );
   },
   addContent: function() {
-    var collectionId = this.get('selectedCollection.id');
+    var collectionId = this.get('copyCollectionId');
     var courseId = this.get('model.courseId');
     var unitId = this.get('model.unitId');
     var lessonId = this.get('content.id');
@@ -213,6 +234,11 @@ export default AddToModal.extend({
       this.get('collections.length') % this.get('pagination.pageSize') === 0
     );
   }),
+
+  /**
+   * @property {UID} copyCollectionId
+   */
+  copyCollectionId: null,
 
   /**
    * @property {*}
