@@ -15,6 +15,14 @@
           </div>
         </div>
       </div>
+      <div class="suggestion">
+        {{#if (gt suggestionCount 0)}}
+          <div class="suggestion-explore" {{action 'showSuggestions'}}>
+            {{gru-icon name="explore"}}
+            <div class="suggestion-count">{{suggestionCount}}</div>
+          </div>
+        {{/if}}
+      </div>
       <div class="resource-info">
         {{#if (gt classActivity.resourceCount 0)}}
           <div class="resource-count">
@@ -212,4 +220,8 @@
 {{/if}}
 {{#if isShowStudentsSummaryReport}}
   {{teacher/offline-class/oca-students-summary-report-pull-up context=selectedActivity classActivities=activities classId=classId showPullUp=isShowStudentsSummaryReport}}
+{{/if}}
+
+{{#if showStudentSuggestionPullUp}}
+  {{ca-student-suggestion-panel showPullUp=showStudentSuggestionPullUp onClosePullUp="onClosePullUp" activity=selectedActivity classId=classId}}
 {{/if}}

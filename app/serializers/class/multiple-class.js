@@ -9,17 +9,19 @@ export default DS.JSONAPISerializer.extend({
    */
   normalizeMulitpleClass(payload) {
     let result = Ember.A([]);
-    let secondaryClasses = payload ? payload.classes : Ember.A([]);
-    if (secondaryClasses.length > 0) {
-      secondaryClasses.forEach(secondaryClass => {
-        result.push(
-          Ember.Object.create({
-            id: secondaryClass.id,
-            title: secondaryClass.title,
-            code: secondaryClass.code
-          })
-        );
-      });
+    if (payload) {
+      let secondaryClasses = payload.classes ? payload.classes : Ember.A([]);
+      if (secondaryClasses && secondaryClasses.length) {
+        secondaryClasses.forEach(secondaryClass => {
+          result.push(
+            Ember.Object.create({
+              id: secondaryClass.id,
+              title: secondaryClass.title,
+              code: secondaryClass.code
+            })
+          );
+        });
+      }
     }
     return result;
   }

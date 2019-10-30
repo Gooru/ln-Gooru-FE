@@ -303,6 +303,21 @@ export default Ember.Controller.extend({
    */
   isMobileView: isCompatibleVW(SCREEN_SIZES.SMALL),
 
+  /**
+   * @property {Object} secondaryClasses
+   */
+  secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
+
+  /**
+   * Maintain secondary class list
+   */
+  selectedClassList: null,
+
+  /**
+   * checking class is Primary or secondary class
+   */
+  isSecondaryClass: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -608,29 +623,19 @@ export default Ember.Controller.extend({
     /**
      * This Action is responsible for switch between milestone  and course map.
      */
-    viewSwitcher() {
-      this.set('isLessonPlanView', false);
-      this.toggleProperty('isMilestoneView');
-      //Reset milestone report to false when course map view is active
+    viewSwitcher(switchOptions) {
+      if (switchOptions === 'milestone-course') {
+        this.toggleProperty('isMilestoneView');
+      } else {
+        this.toggleProperty('isLessonPlanView');
+      }
       if (!this.get('isMilestoneView')) {
         this.set('classController.isShowMilestoneReport', false);
       }
     },
 
-    // Action on change checkbox value in lesson plan tab
-    onScoringChange(isChecked) {
-      this.set('isLessonPlanView', isChecked);
-    },
-
-    // Action trigger when select dropdown course map
-    switchDropdown(type) {
-      this.set('isLessonPlanView', false);
-      if (type === 'milestone') {
-        this.set('isMilestoneView', true);
-      } else {
-        this.set('isMilestoneView', false);
-        this.set('classController.isShowMilestoneReport', false);
-      }
+    onToggleClassListContainer() {
+      Ember.$('.class-selector .class-list-container').slideToggle(500);
     },
 
     //Action triggered when click on student toggle list container
@@ -639,6 +644,21 @@ export default Ember.Controller.extend({
       Ember.$(
         '.students-dropdown-list-container .student-list-container'
       ).slideToggle(1000);
+    },
+
+    //Action trigged when click secondary class dropdown
+    addSecondaryClass(secondaryClass) {
+      let secondaryClassList = this.get('selectedClassList');
+      let selectedClass = secondaryClassList.findBy('isSelected', true);
+      if (selectedClass) {
+        selectedClass.set('isSelected', false);
+      }
+      secondaryClass.set('isSelected', true);
+      this.set('isSecondaryClass', true);
+      this.get('classController').send(
+        'onSelectClass',
+        secondaryClass.get('id')
+      );
     }
   },
 
@@ -648,6 +668,12 @@ export default Ember.Controller.extend({
   init() {
     const controller = this;
     controller._super(...arguments);
+    if (!controller.get('isSecondaryClass')) {
+      controller.set(
+        'selectedClassList',
+        Ember.copy(controller.get('secondaryClasses'))
+      );
+    }
     let milestoneViewApplicable = controller.get(
       'currentClass.milestoneViewApplicable'
     );

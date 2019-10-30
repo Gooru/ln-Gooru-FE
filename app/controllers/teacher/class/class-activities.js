@@ -29,6 +29,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
   /**
+   * @requires service:api-sdk/suggest
+   */
+  suggestService: Ember.inject.service('api-sdk/suggest'),
+
+  /**
    * @requires service:api-sdk/offline-activity-analytics
    */
   oaAnaltyicsService: Ember.inject.service(
@@ -1192,6 +1197,26 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // -------------------------------------------------------------------------
   // Methods
 
+  getSuggestionCounts(classActivities) {
+    const controller = this;
+    const classId = controller.get('classId');
+    const caIds = classActivities.map(classActivity => classActivity.get('id'));
+    const context = {
+      scope: PLAYER_EVENT_SOURCE.CLASS_ACTIVITY,
+      caIds
+    };
+    controller
+      .get('suggestService')
+      .getSuggestionCountForCA(classId, context)
+      .then(contents => {
+        contents.map(content => {
+          const caId = content.get('caId');
+          let classActivity = classActivities.findBy('id', caId);
+          classActivity.set('suggestionCount', content.get('total'));
+        });
+      });
+  },
+
   onSetDataForCalendarView(type) {
     const controller = this;
     let forMonth = controller.get('forMonth');
@@ -1652,6 +1677,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       .then(function(classActivities) {
         controller.set('classActivities', Ember.A([]));
         if (classActivities && classActivities.length > 0) {
+          controller.getSuggestionCounts(classActivities);
           controller.parseClassActivityData(classActivities);
         }
         controller.fetchAssessmentsMasteryAccrual();
