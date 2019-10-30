@@ -20,6 +20,12 @@ export default Ember.Controller.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
+  /**
+   * multiple class service dependency injection
+   * @type {Object}
+   */
+  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {

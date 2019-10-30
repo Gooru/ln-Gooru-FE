@@ -920,7 +920,7 @@ export default Ember.Controller.extend(ModalMixin, {
       }
     };
     controller
-      .get('multipleClassService')
+      .get('classController.multipleClassService')
       .updateMultipleClass(classId, classSetting)
       .then(() => {
         controller.set('isEnableSave', false);
