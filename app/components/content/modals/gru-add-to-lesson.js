@@ -79,8 +79,7 @@ export default AddToModal.extend({
     );
   },
   addContent: function() {
-    var collectionId =
-      this.get('copyCollectionId') || this.get('selectedCollection.id');
+    var collectionId = this.get('copyCollectionId');
     var courseId = this.get('model.courseId');
     var unitId = this.get('model.unitId');
     var lessonId = this.get('content.id');
