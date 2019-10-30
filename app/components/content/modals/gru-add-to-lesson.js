@@ -56,7 +56,7 @@ export default AddToModal.extend({
     }
   },
   copyContent: function() {
-    let collectionType = this.get('isCollection')
+    let collectionOrAssesmentService = this.get('isCollection')
       ? this.get('collectionService').copyCollection(
         this.get('selectedCollection.id')
       )
@@ -64,7 +64,7 @@ export default AddToModal.extend({
         this.get('selectedCollection.id')
       );
     return Ember.RSVP.hash({
-      collectionId: collectionType
+      collectionId: collectionOrAssesmentService
     }).then(({ collectionId }) => {
       this.set('copyCollectionId', collectionId);
     });
@@ -79,7 +79,8 @@ export default AddToModal.extend({
     );
   },
   addContent: function() {
-    var collectionId = this.get('copyCollectionId');
+    var collectionId =
+      this.get('copyCollectionId') || this.get('selectedCollection.id');
     var courseId = this.get('model.courseId');
     var unitId = this.get('model.unitId');
     var lessonId = this.get('content.id');
