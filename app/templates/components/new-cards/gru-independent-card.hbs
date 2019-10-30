@@ -7,11 +7,6 @@
         </div>
       {{/link-to}}
     {{else}}
-      <!-- {{#link-to 'player' location.collectionId (query-params type=location.type role='student' source=source)}}
-        <div class="title pointer {{if isCollection 'collection'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover" title="{{content.title}}" style="background-color:{{grade-color performance.scoreInPercentage}}" >
-          {{content.title}}
-        </div>
-      {{/link-to}} -->
       <a {{action 'openPlayerContent'}}>
         <div class="title pointer {{if isCollection 'collection'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover" title="{{content.title}}" style="background-color:{{grade-color performance.scoreInPercentage}}" >
           {{content.title}}
