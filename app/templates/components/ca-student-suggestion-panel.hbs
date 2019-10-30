@@ -1,6 +1,9 @@
 <div class="backdrop" {{action 'onPullUpClose'}}></div>
 <div class="panel">
   <div class="header">
+    <div class="title">
+      <span>{{t 'common.suggestions'}}</span>
+    </div>
     <div class="report-close" {{action 'onPullUpClose'}}>
       {{gru-icon name="close" }}
     </div>
@@ -31,7 +34,7 @@
           </div>
         </div>
         <div class="play-container">
-          <div class="ca-play-btn" {{action 'onPlaySuggestionContent' suggestion}}>
+          <div class="ca-play-btn">
             {{gru-icon name='play_arrow'}}
           </div>
         </div>
