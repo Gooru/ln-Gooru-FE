@@ -238,7 +238,11 @@ export default Ember.Service.extend({
                         'pathId',
                         context.get('id')
                       );
-                      context.set('performance', performance);
+                      if (!userId) {
+                        context.set('performance', performance);
+                      } else {
+                        suggestion.set('performance', performance);
+                      }
                     });
                   }
                 });
