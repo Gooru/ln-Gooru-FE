@@ -66,8 +66,8 @@ export default Ember.Component.extend({
       },
       400,
       function() {
-        component.sendAction('onclosePullUp');
         Ember.$(document.body).removeClass('iframe-panel');
+        component.sendAction('onclosePullUp');
       }
     );
   }

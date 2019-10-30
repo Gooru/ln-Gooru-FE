@@ -10,13 +10,13 @@
         </div>
       </a>
     {{else}}
-      {{#link-to (if (eq model.format 'offline-activity') 'player-offline-activity' 'player') model.id (query-params offlineActivityId=model.id type=model.collectionType role=role isPreview=true) class="title"}}
+      <a class="title" {{action 'openPlayerContent'}}>
         <img class="img-rounded" src="{{model.thumbnailUrl}}" />
         <div>
           <strong>{{model.title}}</strong>
           <span>{{model.format}}</span>
         </div>
-      {{/link-to}}
+      </a>
     {{/if}}
     <div class="detail">
       {{#if model.isCollection}}
@@ -34,3 +34,11 @@
     </div>
   </div>
 </div>
+{{#if isOpenPlayer}}
+  {{reports/pull-up/player-pull-up
+    showPullUp=isOpenPlayer
+    playerUrl=playerUrl
+    playerContent=playerContent
+    onclosePullUp="closePullUp"
+  }}
+{{/if}}

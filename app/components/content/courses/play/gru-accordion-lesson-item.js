@@ -48,5 +48,45 @@ export default Ember.Component.extend({
   /**
    * @prop {String} role Get current use role from session
    */
-  role: Ember.computed.alias('session.role')
+  role: Ember.computed.alias('session.role'),
+
+  // -------------------------------------------------------------------------
+  // Actions
+
+  actions: {
+    openPlayerContent: function() {
+      const component = this;
+      const model = component.get('model');
+      let format = model.get('format');
+      let id = model.get('id');
+      let type = model.get('collectionType');
+      let queryParams = {
+        offlineActivityId: id,
+        type: type,
+        role: component.get('role'),
+        isPreview: true,
+        isIframeMode: true
+      };
+      if (format === 'offline-activity') {
+        component.set(
+          'playerUrl',
+          component
+            .get('router')
+            .generate('player-offline-activity', id, { queryParams })
+        );
+      } else {
+        component.set(
+          'playerUrl',
+          component.get('router').generate('player', id, { queryParams })
+        );
+      }
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', model);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
+    }
+  }
 });
