@@ -32,6 +32,13 @@ export default AddToModal.extend({
    */
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
+  /**
+   * @type {OfflineActivityService} Service to make copy of the offline activity
+   */
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -56,13 +63,20 @@ export default AddToModal.extend({
     }
   },
   copyContent: function() {
-    let collectionOrAssesmentService = this.get('isCollection')
-      ? this.get('collectionService').copyCollection(
-        this.get('selectedCollection.id')
-      )
-      : this.get('assessmentService').copyAssessment(
-        this.get('selectedCollection.id')
-      );
+    let collectionOrAssesmentService = this.get('selectedCollection.id');
+    if (this.get('selectedCollection.format') === 'collection') {
+      collectionOrAssesmentService = this.get(
+        'collectionService'
+      ).copyCollection(this.get('selectedCollection.id'));
+    } else if (this.get('selectedCollection.format') === 'assessment') {
+      collectionOrAssesmentService = this.get(
+        'assessmentService'
+      ).copyAssessment(this.get('selectedCollection.id'));
+    } else if (this.get('selectedCollection.format') === 'offline-activity') {
+      collectionOrAssesmentService = this.get(
+        'offlineActivityService'
+      ).copyActivity(this.get('selectedCollection.id'));
+    }
     return Ember.RSVP.hash({
       collectionId: collectionOrAssesmentService
     }).then(({ collectionId }) => {
@@ -239,6 +253,14 @@ export default AddToModal.extend({
    * @property {UID} copyCollectionId
    */
   copyCollectionId: null,
+
+  /**
+   * @property {Boolean} isCollectionOrAssesment
+   */
+  isCollectionOrAssesment: Ember.computed('selectedCollection', function() {
+    let format = this.get('selectedCollection.format');
+    return format !== 'collection-external' && format !== 'assessment-external';
+  }),
 
   /**
    * @property {*}
