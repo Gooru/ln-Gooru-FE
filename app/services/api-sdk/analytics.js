@@ -139,7 +139,8 @@ export default Ember.Service.extend({
     classId,
     userId,
     collectionType,
-    dateVal
+    dateVal,
+    pathId
   ) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -151,7 +152,8 @@ export default Ember.Service.extend({
           classId: classId,
           userId: userId,
           date: dateVal,
-          collectionType: collectionType
+          collectionType: collectionType,
+          pathId: pathId
         })
         .then(
           function(payload) {

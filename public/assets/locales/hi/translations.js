@@ -89,6 +89,7 @@ window.i18ln = {
   'common.no-collection-info-message': 'इस पाठ में कोई संकलन नहीं है।',
   'common.gooru-suggestions': 'Gooru सुझाव',
   'common.gooru-catalog': 'Gooru सूची',
+  'common.suggest-to-student':'Suggest to student',
   'common.suggestion-made-to': 'सुझाव दिया गया',
   'common.student-selected': 'चुना गया छात्र',
   'self-grade.not-required': 'छात्र के स्वयं-वर्गीकरण की आवश्यकता नहीं है',

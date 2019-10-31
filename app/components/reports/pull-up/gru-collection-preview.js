@@ -7,7 +7,9 @@ import {
   CONTENT_TYPES,
   ASSESSMENT_SHOW_VALUES
 } from 'gooru-web/config/config';
-import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
+import {
+  getEndpointUrl
+} from 'gooru-web/utils/endpoint-config';
 import ModalMixin from 'gooru-web/mixins/modal';
 import PullUpMixin from 'gooru-web/mixins/reports/pull-up/pull-up-mixin';
 import PortfolioMixin from 'gooru-web/mixins/reports/portfolio/portfolio-mixin';
@@ -22,6 +24,10 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
   assessmentService: Ember.inject.service('api-sdk/assessment'),
 
   collectionService: Ember.inject.service('api-sdk/collection'),
+
+  analyticsService: Ember.inject.service('api-sdk/analytics'),
+
+  performanceService: Ember.inject.service('api-sdk/performance'),
 
   session: Ember.inject.service('session'),
 
@@ -93,6 +99,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
    * @property {Boolean} showPullUp
    */
   showPullUp: false,
+
+  /**
+   * @property {Boolean} isSuggestionReport
+   */
+  isSuggestionReport: false,
 
   /**
    * @property {UUID} previewContentId
@@ -217,6 +228,39 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
   //--------------------------------------------------------------------------
   // Methods
 
+  loadSuggestionContent() {
+    const component = this;
+    component.set('isLoading', true);
+    let contentPromise = null;
+    let activeAttempt = component.get('activeAttempt');
+    const previewContentType = component.get('previewContentType');
+    if (previewContentType === 'assessment') {
+      contentPromise = component.fetchAssessmentForSuggestion();
+    } else if (previewContentType === 'collection') {
+      contentPromise = component.fetchCollectionForSuggestion();
+    }
+    contentPromise.then(() => {
+      const activityPerformance = component.get('activityPerformance');
+      activeAttempt.set('score', activityPerformance.get('score'));
+      activeAttempt.set('timespent', activityPerformance.get('timeSpent'));
+      component.parseActivityPerformance();
+    });
+  },
+
+  loadPortfolioContent() {
+    const component = this;
+    //Method implemented in mixin
+    component.loadActivityAttempts().then(function(activityAttempts) {
+      if (activityAttempts.length) {
+        component
+          .loadActivityPerformance(activityAttempts.objectAt(0))
+          .then(function() {
+            component.parseActivityPerformance();
+          });
+      }
+    });
+  },
+
   loadPreviewContent() {
     const component = this;
     component.set('isLoading', true);
@@ -233,16 +277,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     }
     if (component.get('isReportView')) {
       previewContentPromise.then(function() {
-        //Method implemented in mixin
-        component.loadActivityAttempts().then(function(activityAttempts) {
-          if (activityAttempts.length) {
-            component
-              .loadActivityPerformance(activityAttempts.objectAt(0))
-              .then(function() {
-                component.parseActivityPerformance();
-              });
-          }
-        });
+        if (component.get('isSuggestionReport')) {
+          component.loadSuggestionContent();
+        } else {
+          component.loadPortfolioContent();
+        }
       });
     } else {
       if (!component.isDestroyed) {
@@ -261,11 +300,86 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     const assessmentService = component.get('assessmentService');
     return Ember.RSVP.hash({
       assessment: assessmentService.readAssessment(assessmentId)
-    }).then(({ assessment }) => {
+    }).then(({
+      assessment
+    }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', assessment);
       }
       return assessment;
+    });
+  },
+
+  fetchAssessmentForSuggestion() {
+    const component = this;
+    const suggestedContext = component.get('suggestedActivityContext');
+    const collectionId = component.get('previewContentId');
+    const collectionType = component.get('previewContentType');
+    const sessionId = suggestedContext.get('performance.sessionId');
+    const classId = suggestedContext.get('classId');
+    const userId = component.get('userId');
+    let assessmentPromise;
+    const suggestionArea = suggestedContext.get('suggestionArea');
+    if (suggestionArea === 'class-activity') {
+      assessmentPromise = component.get('analyticsService').getDCAPerformanceBySessionId(
+        userId,
+        classId,
+        collectionId,
+        collectionType,
+        sessionId
+      );
+    } else {
+      assessmentPromise = component.get('performanceService')
+        .findAssessmentResultByCollectionAndStudent({
+          userId,
+          collectionId,
+          collectionType,
+          sessionId
+        });
+    }
+    return assessmentPromise.then((assessment) => {
+      if (!component.isDestroyed) {
+        component.set('activityPerformance', assessment);
+      }
+      return assessment;
+    });
+  },
+
+  fetchCollectionForSuggestion() {
+    const component = this;
+    const suggestedContext = component.get('suggestedActivityContext');
+    const collectionId = component.get('previewContentId');
+    const collectionType = component.get('previewContentType');
+    const sessionId = suggestedContext.get('performance.sessionId');
+    const pathId = suggestedContext.get('performance.pathId');
+    const classId = suggestedContext.get('classId');
+    const userId = component.get('userId');
+    let collectionPromise;
+    const suggestionArea = suggestedContext.get('suggestionArea');
+    if (suggestionArea === 'class-activity') {
+      collectionPromise = component.get('analyticsService').findResourcesByCollectionforDCA(
+        sessionId,
+        collectionId,
+        classId,
+        userId,
+        collectionType,
+        null,
+        pathId
+      );
+    } else {
+      collectionPromise = component.get('performanceService')
+        .findAssessmentResultByCollectionAndStudent({
+          userId,
+          collectionId,
+          collectionType,
+          sessionId
+        });
+    }
+    return collectionPromise.then((collection) => {
+      if (!component.isDestroyed) {
+        component.set('activityPerformance', collection);
+      }
+      return collection;
     });
   },
 
@@ -279,7 +393,9 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     const collectionService = component.get('collectionService');
     return Ember.RSVP.hash({
       collection: collectionService.readCollection(collectionId)
-    }).then(({ collection }) => {
+    }).then(({
+      collection
+    }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', collection);
       }
@@ -299,7 +415,9 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       externalAssessment: assessmentService.readExternalAssessment(
         externalAssessmentId
       )
-    }).then(({ externalAssessment }) => {
+    }).then(({
+      externalAssessment
+    }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', externalAssessment);
       }
@@ -319,7 +437,9 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       externalCollection: collectionService.readExternalCollection(
         externalCollectionId
       )
-    }).then(({ externalCollection }) => {
+    }).then(({
+      externalCollection
+    }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', externalCollection);
       }

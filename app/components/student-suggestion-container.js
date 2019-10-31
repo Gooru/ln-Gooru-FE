@@ -1,5 +1,8 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE, SUGGESTION_TYPE } from 'gooru-web/config/config';
+import {
+  PLAYER_EVENT_SOURCE,
+  SUGGESTION_TYPE
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['student-suggestion-container'],
@@ -153,8 +156,7 @@ export default Ember.Component.extend({
     studentSuggestionReport(activity) {
       const component = this;
       component.set('isShowPerformanceReport', true);
-      component.set('reportActivityId', activity.get('suggestedContentId'));
-      component.set('reportActivityType', activity.get('suggestedContentType'));
+      component.set('selectedActivityContext', activity);
     },
 
     onCloseContainer() {
@@ -262,11 +264,10 @@ export default Ember.Component.extend({
 
   onOpenSuggestionContainer() {
     const component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400
+    component.$().animate({
+      top: '100%'
+    },
+    400
     );
   },
 
