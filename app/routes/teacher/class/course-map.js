@@ -35,6 +35,8 @@ export default Ember.Route.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
+  secondaryClass: null,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -115,6 +117,11 @@ export default Ember.Route.extend({
       this.transitionTo('content.courses.edit', id, {
         queryParams
       });
+    },
+
+    onSelectedClass(secondaryClassDetails) {
+      this.set('secondaryClass', secondaryClassDetails);
+      this.refresh();
     }
   },
 
@@ -122,17 +129,27 @@ export default Ember.Route.extend({
   // Methods
 
   beforeModel: function() {
-    const currentClass = this.modelFor('teacher.class').class;
-    const userId = this.get('session.userId');
-    if (currentClass.isTeacher(userId) && !currentClass.get('courseId')) {
-      this.transitionTo('teacher.class.add-course');
+    if (!this.get('secondaryClass')) {
+      const currentClass = this.modelFor('teacher.class').class;
+      const userId = this.get('session.userId');
+      if (currentClass.isTeacher(userId) && !currentClass.get('courseId')) {
+        this.transitionTo('teacher.class.add-course');
+      }
     }
   },
 
   model: function() {
     const route = this;
-    const currentClass = route.modelFor('teacher.class').class;
-    const course = route.modelFor('teacher.class').course;
+    const secondaryClass = route.get('secondaryClass');
+    if (secondaryClass) {
+      secondaryClass.class.set('isSecondaryClass', true);
+    }
+    const currentClass = secondaryClass
+      ? secondaryClass.class
+      : route.modelFor('teacher.class').class;
+    const course = secondaryClass
+      ? secondaryClass.course
+      : route.modelFor('teacher.class').course;
     const units = course.get('children') || [];
     const classMembers = currentClass.get('members');
     const subject = currentClass.get('preference.subject');
@@ -157,7 +174,10 @@ export default Ember.Route.extend({
    **/
   getUnitLevelPerformance(units, classMembers) {
     let component = this;
-    let currentClass = component.modelFor('teacher.class');
+    let secondaryClass = component.get('secondaryClass');
+    let currentClass = secondaryClass
+      ? secondaryClass.class
+      : component.modelFor('teacher.class');
     let classId = currentClass.class.id;
     let courseId = currentClass.course.id;
     let unitPerformancePromise = new Ember.RSVP.resolve(

@@ -142,7 +142,6 @@ export default Ember.Component.extend({
 
   init: function() {
     this._super(...arguments);
-
     this.set(
       'currentLocationSerializer',
       CurrentLocationSerializer.create(Ember.getOwner(this).ownerInjection())

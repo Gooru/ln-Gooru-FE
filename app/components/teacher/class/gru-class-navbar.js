@@ -33,6 +33,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
   class: null,
 
   /**
+   * @property {SecondaryClass} secondaryClass
+   */
+  selectedSecondaryClass: null,
+
+  /**
    * @property {String|Function} onItemSelected - event handler for when an menu item is selected
    */
   onItemSelected: null,
@@ -78,6 +83,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
       'performanceSummaryForDCA.performance.scoreInPercentage'
     );
     return scorePercentage !== null && isNumeric(scorePercentage);
+  }),
+
+  secondaryClassNavTitle: Ember.computed.alias('selectedSecondaryClass.title'),
+
+  isPrimaryClass: Ember.computed('selectedSecondaryClass', 'class', function() {
+    let secondaryClass = this.get('selectedSecondaryClass');
+    return secondaryClass
+      ? this.get('selectedSecondaryClass.id') === this.get('class.id')
+      : true;
   }),
 
   // -------------------------------------------------------------------------
@@ -129,6 +143,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     closeNotificationList() {
       this.set('displayNotificationList', false);
+    },
+
+    onSelectSecondaryClass(secondaryClass) {
+      this.set('secondaryClass', secondaryClass);
     }
   },
 
