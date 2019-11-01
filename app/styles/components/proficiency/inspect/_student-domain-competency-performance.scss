@@ -30,6 +30,8 @@
       .body {
         .learning-map-content {
           .activity-list-pull-up {
+            height: 100%;
+
             .activity-list {
               .activity-list-body {
                 height: 70vh;
@@ -188,11 +190,7 @@
             $line-height: 1.3;
             text-transform: capitalize;
             $lines-to-show: 2;
-            @include ellipsis(
-              $font-size: $font-size,
-              $line-height: $line-height,
-              $lines-to-show: $lines-to-show
-            );
+            @include ellipsis($font-size: $font-size, $line-height: $line-height, $lines-to-show: $lines-to-show);
           }
         }
       }

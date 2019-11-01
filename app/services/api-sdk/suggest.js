@@ -2,7 +2,9 @@ import Ember from 'ember';
 import SuggestAdapter from 'gooru-web/adapters/suggest/suggest';
 import SuggestSerializer from 'gooru-web/serializers/suggest/suggest';
 import SuggestContext from 'gooru-web/models/suggest/suggest-context';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 /**
  * Service to support the suggest functionality
  *
@@ -209,23 +211,35 @@ export default Ember.Service.extend({
             .get('suggestSerializer')
             .normalizeCASuggestionContents(response.suggestions.objectAt(0));
           const suggestions = normalizedContent.get('suggestions');
-          const pathIds = [];
-          suggestions.map(suggestion => {
+          const collectionPathIds = [];
+          const assessmentPathIds = [];
+          const assessmentSuggestions = suggestions.filterBy('suggestedContentType', CONTENT_TYPES.ASSESSMENT);
+          const collectionSuggestions = suggestions.filterBy('suggestedContentType', CONTENT_TYPES.COLLECTION);
+          collectionSuggestions.map(suggestion => {
             const suggestedToContext = suggestion.get('suggestedToContext');
             if (suggestedToContext) {
               suggestedToContext.map(context => {
-                pathIds.push(context.get('id'));
+                collectionPathIds.push(context.get('id'));
               });
             }
           });
-          if (pathIds.length) {
+          assessmentSuggestions.map(suggestion => {
+            const suggestedToContext = suggestion.get('suggestedToContext');
+            if (suggestedToContext) {
+              suggestedToContext.map(context => {
+                assessmentPathIds.push(context.get('id'));
+              });
+            }
+          });
+          if (collectionPathIds.length) {
             service
               .get('performanceService')
               .fecthSuggestionPerformance({
                 source: 'dca',
                 classId,
                 userId,
-                pathIds
+                pathIds: collectionPathIds,
+                collectionType: CONTENT_TYPES.COLLECTION
               })
               .then(result => {
                 suggestions.map(suggestion => {
@@ -238,10 +252,45 @@ export default Ember.Service.extend({
                         'pathId',
                         context.get('id')
                       );
-                      if (!userId) {
-                        context.set('performance', performance);
-                      } else {
-                        suggestion.set('performance', performance);
+                      if (performance) {
+                        if (!userId) {
+                          context.set('performance', performance);
+                        } else {
+                          suggestion.set('performance', performance);
+                        }
+                      }
+                    });
+                  }
+                });
+              });
+          }
+          if (assessmentPathIds.length) {
+            service
+              .get('performanceService')
+              .fecthSuggestionPerformance({
+                source: 'dca',
+                classId,
+                userId,
+                pathIds: assessmentPathIds,
+                collectionType: CONTENT_TYPES.ASSESSMENT
+              })
+              .then(result => {
+                suggestions.map(suggestion => {
+                  const suggestedToContext = suggestion.get(
+                    'suggestedToContext'
+                  );
+                  if (suggestedToContext) {
+                    suggestedToContext.map(context => {
+                      const performance = result.findBy(
+                        'pathId',
+                        context.get('id')
+                      );
+                      if (performance) {
+                        if (!userId) {
+                          context.set('performance', performance);
+                        } else {
+                          suggestion.set('performance', performance);
+                        }
                       }
                     });
                   }
@@ -350,25 +399,23 @@ export default Ember.Service.extend({
             'suggestionArea',
             'proficiency'
           );
-          const caPathIds = caContents.map(caContent => {
+          const caCollections = caContents.filterBy('suggestedContentType', CONTENT_TYPES.COLLECTION);
+          const caAssessments = caContents.filterBy('suggestedContentType', CONTENT_TYPES.ASSESSMENT);
+          const caCollectionPathIds = caCollections.map(caContent => {
             return caContent.get('id');
           });
-          const proficienyPathIds = proficiencyContents.map(
-            proficiencyContent => {
-              return proficiencyContent.get('id');
-            }
-          );
-          const courseMapPathIds = courseMapContents.map(courseMapContent => {
-            return courseMapContent.get('id');
+          const caAssessmentPathIds = caAssessments.map(caContent => {
+            return caContent.get('id');
           });
-          if (caPathIds.length) {
+          if (caCollectionPathIds.length) {
             service
               .get('performanceService')
               .fecthSuggestionPerformance({
                 source: 'dca',
                 classId,
                 userId,
-                pathIds: caPathIds
+                pathIds: caCollectionPathIds,
+                collectionType: CONTENT_TYPES.COLLECTION
               })
               .then(result => {
                 result.map(performance => {
@@ -378,14 +425,41 @@ export default Ember.Service.extend({
                 });
               });
           }
-          if (proficienyPathIds.length) {
+          if (caAssessmentPathIds.length) {
+            service
+              .get('performanceService')
+              .fecthSuggestionPerformance({
+                source: 'dca',
+                classId,
+                userId,
+                pathIds: caAssessmentPathIds,
+                collectionType: CONTENT_TYPES.ASSESSMENT
+              })
+              .then(result => {
+                result.map(performance => {
+                  const pathId = performance.get('pathId');
+                  let suggestion = suggestions.findBy('id', pathId);
+                  suggestion.set('performance', performance);
+                });
+              });
+          }
+          const proficiencyCollections = proficiencyContents.filterBy('suggestedContentType', CONTENT_TYPES.COLLECTION);
+          const proficiencyAssessments = proficiencyContents.filterBy('suggestedContentType', CONTENT_TYPES.ASSESSMENT);
+          const proficiencyCollectionPathIds = proficiencyCollections.map(proficiencyContent => {
+            return proficiencyContent.get('id');
+          });
+          const proficiencyAssessmentPathIds = proficiencyAssessments.map(proficiencyContent => {
+            return proficiencyContent.get('id');
+          });
+          if (proficiencyCollectionPathIds.length) {
             service
               .get('performanceService')
               .fecthSuggestionPerformance({
                 source: 'proficiency',
                 classId,
                 userId,
-                pathIds: proficienyPathIds
+                pathIds: proficiencyCollectionPathIds,
+                collectionType: CONTENT_TYPES.COLLECTION
               })
               .then(result => {
                 result.map(performance => {
@@ -395,14 +469,59 @@ export default Ember.Service.extend({
                 });
               });
           }
-          if (courseMapPathIds.length) {
+          if (proficiencyAssessmentPathIds.length) {
+            service
+              .get('performanceService')
+              .fecthSuggestionPerformance({
+                source: 'proficiency',
+                classId,
+                userId,
+                pathIds: proficiencyAssessmentPathIds,
+                collectionType: CONTENT_TYPES.COLLECTION
+              })
+              .then(result => {
+                result.map(performance => {
+                  const pathId = performance.get('pathId');
+                  let suggestion = suggestions.findBy('id', pathId);
+                  suggestion.set('performance', performance);
+                });
+              });
+          }
+          const courseMapCollections = courseMapContents.filterBy('suggestedContentType', CONTENT_TYPES.COLLECTION);
+          const courseMapAssessments = courseMapContents.filterBy('suggestedContentType', CONTENT_TYPES.ASSESSMENT);
+          const courseMapCollectionPathIds = courseMapCollections.map(courseMapContent => {
+            return courseMapContent.get('id');
+          });
+          const courseMapAssessmentPathIds = courseMapAssessments.map(courseMapContent => {
+            return courseMapContent.get('id');
+          });
+          if (courseMapCollectionPathIds.length) {
             service
               .get('performanceService')
               .fecthSuggestionPerformance({
                 source: 'coursemap',
                 classId,
                 userId,
-                pathIds: courseMapPathIds
+                pathIds: courseMapCollectionPathIds,
+                collectionType: CONTENT_TYPES.COLLECTION
+              })
+              .then(result => {
+                result.map(performance => {
+                  const pathId = performance.get('pathId');
+                  let suggestion = suggestions.findBy('id', pathId);
+                  suggestion.set('performance', performance);
+                });
+              });
+          }
+          if (courseMapAssessmentPathIds.length) {
+            service
+              .get('performanceService')
+              .fecthSuggestionPerformance({
+                source: 'coursemap',
+                classId,
+                userId,
+                pathIds: courseMapAssessmentPathIds,
+                collectionType: CONTENT_TYPES.ASSESSMENT
               })
               .then(result => {
                 result.map(performance => {

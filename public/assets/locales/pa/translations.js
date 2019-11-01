@@ -90,6 +90,7 @@ window.i18ln = {
   'common.dialog-close': 'Do you want to close ?',
   're-upload': 'Re-Upload',
   'upload-success': 'Uploaded Successfully',
+  'common.suggest-to-student':'Suggest to student',
   'mobile-camera-placeholder': 'Tap for image upload',
   'i2d.mobile-upload-failed': 'There was a error',
   'i2d.upload-failed':

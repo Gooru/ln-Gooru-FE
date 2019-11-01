@@ -71,6 +71,7 @@ window.i18ln = {
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
   'reroute.suggestion': 'reroute suggestion',
+  'common.suggest-to-student':'Suggest to student',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
     'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
