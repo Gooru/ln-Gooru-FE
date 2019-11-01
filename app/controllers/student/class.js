@@ -45,6 +45,11 @@ export default Ember.Controller.extend(ConfigurationMixin, {
     //Action triggered when click on CA score
     onOpenCAReport() {
       this.populateClassActivityReport();
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 
