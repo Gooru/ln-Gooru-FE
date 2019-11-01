@@ -45,11 +45,13 @@
   </div>
   <div class="list">
     {{#each collections as |collection|}}
+      {{#unless (or (eq collection.format 'collection-external') (eq collection.format 'assessment-external'))}}
       <div class="{{collection.id}} collection" {{action "selectCollection" collection}}>
         {{cards/gru-collection-card
         collection=collection
         isSmall=true}}
       </div>
+      {{/unless}}
     {{/each}}
     {{#if showMoreResultsButton}}
       <span class="show-more-results" {{action 'showMoreResults'}}>{{t "common.show-more-results"}}</span>
