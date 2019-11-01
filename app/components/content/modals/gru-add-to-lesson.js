@@ -269,5 +269,14 @@ export default AddToModal.extend({
     page: 1,
     filterBy: 'notInCourse',
     pageSize: DEFAULT_PAGE_SIZE
-  }
+  },
+
+  filteredCollections: Ember.computed('collections.[]', function() {
+    let collections = this.get('collections');
+    return collections.filter(
+      collection =>
+        collection.format !== 'collection-external' &&
+        collection.format !== 'assessment-external'
+    );
+  })
 });
