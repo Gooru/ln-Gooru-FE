@@ -128,7 +128,8 @@ export default Ember.Component.extend({
               isStudyPlayer: true,
               milestoneId: null,
               pathType: '',
-              isNotification: true
+              isNotification: true,
+              isIframeMode: true
             }
           }
         }
@@ -158,7 +159,8 @@ export default Ember.Component.extend({
               source: PLAYER_EVENT_SOURCE.DAILY_CLASS,
               resourceId: null,
               role: ROLES.STUDENT,
-              isNotification: true
+              isNotification: true,
+              isIframeMode: true
             }
           }
         }
@@ -187,7 +189,8 @@ export default Ember.Component.extend({
               source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
               resourceId: null,
               role: ROLES.STUDENT,
-              isNotification: true
+              isNotification: true,
+              isIframeMode: true
             }
           }
         }
@@ -429,6 +432,18 @@ export default Ember.Component.extend({
       }
       component.set('notificationModel', dataModel);
       component.set('displayNotificationList', false);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
+    },
+
+    playerContent(playerUrl, content) {
+      const component = this;
+      component.set('playerUrl', playerUrl);
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', content);
     }
   },
   // -------------------------------------------------------------------------

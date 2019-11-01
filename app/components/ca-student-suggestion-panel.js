@@ -26,6 +26,34 @@ export default Ember.Component.extend({
       const component = this;
       component.set('selectedSuggestion', suggestion);
       component.set('showStudentList', true);
+    },
+
+    onPlayCASuggestionContent(suggestionContent) {
+      const component = this;
+      const contentId = suggestionContent.get('suggestedContentId');
+      const collectionType = suggestionContent.get('suggestedContentType');
+      const classId = component.get('classId');
+
+      let queryParams = {
+        collectionId: contentId,
+        classId,
+        role: 'teacher',
+        source: PLAYER_EVENT_SOURCE.CLASS_ACTIVITY,
+        type: collectionType,
+        isIframeMode: true
+      };
+
+      component.set(
+        'playerUrl',
+        component.get('router').generate('player', contentId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', suggestionContent);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 

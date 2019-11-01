@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="play-container">
-          <div class="ca-play-btn">
+          <div class="ca-play-btn" {{action 'onPlayCASuggestionContent' suggestion}}>
             {{gru-icon name='play_arrow'}}
           </div>
         </div>
@@ -65,4 +65,12 @@
 </div>
 {{#if showStudentList}}
   {{ca-student-list-suggestion suggestion=selectedSuggestion classId=classId onClosePullUp="onClosePullUp"}}
+{{/if}}
+{{#if isOpenPlayer}}
+  {{reports/pull-up/player-pull-up
+    showPullUp=isOpenPlayer
+    playerUrl=playerUrl
+    playerContent=playerContent
+    onclosePullUp="closePullUp"
+  }}
 {{/if}}
