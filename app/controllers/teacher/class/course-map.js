@@ -143,9 +143,7 @@ export default Ember.Controller.extend({
    * @property {Class}
    */
   class: Ember.computed('classController.class', 'currentClass', function() {
-    return this.get('currentClass.isSecondaryClass')
-      ? this.get('currentClass')
-      : this.get('classController.class');
+    return this.get('currentClass');
   }),
 
   /**
@@ -346,7 +344,19 @@ export default Ember.Controller.extend({
   /**
    * checking class is Primary or secondary class
    */
-  isSecondaryClass: Ember.computed.alias('class.isSecondaryClass'),
+
+  isSecondaryClass: Ember.computed('class', function() {
+    if (!this.get('class.isSecondaryClass')) {
+      let secondaryClassList = this.get('selectedClassList');
+      let selectedClass = secondaryClassList
+        ? secondaryClassList.findBy('isSelected', true)
+        : null;
+      if (selectedClass) {
+        selectedClass.set('isSelected', false);
+      }
+    }
+    return this.get('class.isSecondaryClass') || false;
+  }),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -696,7 +706,7 @@ export default Ember.Controller.extend({
     const controller = this;
     controller._super(...arguments);
     if (
-      !controller.get('class.isSecondaryClass') ||
+      !this.get('isSecondaryClass') ||
       controller.get('classController.class.isUpdatedSecondaryClass')
     ) {
       controller.set(
@@ -738,6 +748,7 @@ export default Ember.Controller.extend({
       controller.handleScrollToFixHeader();
     });
   },
+
   // -------------------------------------------------------------------------
   // Observers
 

@@ -234,5 +234,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
 
   resetController(controller) {
     controller.set('isShowMilestoneReport', false);
+    controller.set('selectedSecondaryClass', null);
   }
 });

@@ -140,6 +140,10 @@ export default Ember.Component.extend({
 
   classMembers: Ember.A([]),
 
+  secondaryClass: Ember.observer('class', function() {
+    this.loadData();
+  }),
+
   init: function() {
     this._super(...arguments);
     this.set(

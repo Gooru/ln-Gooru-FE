@@ -119,8 +119,8 @@ export default Ember.Route.extend({
       });
     },
 
-    onSelectedClass(secondaryClassDetails) {
-      this.set('secondaryClass', secondaryClassDetails);
+    onSelectedClass(secondaryClass) {
+      this.set('secondaryClass', secondaryClass);
       this.refresh();
     }
   },
@@ -246,5 +246,6 @@ export default Ember.Route.extend({
     controller.set('questionItems', null);
     controller.set('isAccepted', false);
     controller.set('itemsToGradeList', Ember.A([]));
+    this.set('secondaryClass', null);
   }
 });

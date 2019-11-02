@@ -85,12 +85,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
     return scorePercentage !== null && isNumeric(scorePercentage);
   }),
 
-  secondaryClassNavTitle: Ember.computed.alias('selectedSecondaryClass.title'),
-
   isPrimaryClass: Ember.computed('selectedSecondaryClass', 'class', function() {
     let secondaryClass = this.get('selectedSecondaryClass');
     return secondaryClass
-      ? this.get('selectedSecondaryClass.id') === this.get('class.id')
+      ? secondaryClass.get('id') === this.get('class.id')
       : true;
   }),
 
@@ -143,10 +141,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     closeNotificationList() {
       this.set('displayNotificationList', false);
-    },
-
-    onSelectSecondaryClass(secondaryClass) {
-      this.set('secondaryClass', secondaryClass);
     }
   },
 
@@ -195,6 +189,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   refreshSelectedMenuItem: function() {
     var item = this.get('selectedMenuItem');
+    if (item === 'course-map') {
+      this.set('selectedSecondaryClass', null);
+    }
     this.selectItem(item);
   }.observes('selectedMenuItem'),
 
