@@ -36,7 +36,7 @@ export default Ember.Object.extend({
     if (query.date) {
       includedateParam = `date=${query.date}`;
     }
-    if(query.pathId){
+    if (query.pathId) {
       includepathIdParam = `pathId=${query.pathId}`;
     }
     const collectionId = query.collectionId;

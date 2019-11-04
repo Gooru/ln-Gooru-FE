@@ -65,7 +65,7 @@ window.i18ln = {
   'common.first': 'पहिले',
   'common.last': 'शेवटचे',
   'common.name': 'नाव',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'common.user': 'वापरणारी व्यक्ती',
   'common.content-name': 'आशयाचे नाव',
   'common.lastName': 'आडनाव',
@@ -2809,5 +2809,8 @@ window.i18ln = {
     'At least one task is required for activity activation',
   'common.class-name': 'Class Name',
   'common.view-class-course-map': 'Class',
-  'common.secondary-class-setting': 'Secondary Class Settings'
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };

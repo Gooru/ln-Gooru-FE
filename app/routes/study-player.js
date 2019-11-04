@@ -191,11 +191,11 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
           var lessonPromise = null;
           var notificationNextPromise = null;
           //Milestone info is required to show breadcrumb
-          let milestoneLessonsPromise = milestoneId
-            ? route
+          let milestoneLessonsPromise = milestoneId ?
+            route
               .get('courseService')
-              .getCourseMilestoneLessons(courseId, milestoneId)
-            : null;
+              .getCourseMilestoneLessons(courseId, milestoneId) :
+            null;
           if (params.pathType === 'route0') {
             let route0Model = route.get('route0Service').getRoute0({
               classId: params.classId,
@@ -271,15 +271,13 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
             course: route.get('courseService').fetchById(courseId),
             unit: unitPromise,
             lesson: lessonPromise,
-            suggestedResources:
-              collectionId != null
-                ? route
-                  .get('suggestService')
-                  .suggestResourcesForCollection(
-                    route.get('session.userId'),
-                    collectionId
-                  )
-                : null,
+            suggestedResources: collectionId != null ?
+              route
+                .get('suggestService')
+                .suggestResourcesForCollection(
+                  route.get('session.userId'),
+                  collectionId
+                ) : null,
             notificationNextStarted: notificationNextPromise,
             milestoneLessons: milestoneLessonsPromise
           }).then(function(hash) {
@@ -405,9 +403,9 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
 
   doCheckClassDestination(classId) {
     const route = this;
-    const classPromise = classId
-      ? route.get('classService').readClassInfo(classId)
-      : Ember.RSVP.resolve({});
+    const classPromise = classId ?
+      route.get('classService').readClassInfo(classId) :
+      Ember.RSVP.resolve({});
     return classPromise.then(function(classData) {
       if (route.findClassIsPermium(classData)) {
         return route
@@ -425,7 +423,7 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
               );
             } else if (
               destination ===
-                CLASS_SKYLINE_INITIAL_DESTINATION.showDirections ||
+              CLASS_SKYLINE_INITIAL_DESTINATION.showDirections ||
               destination === CLASS_SKYLINE_INITIAL_DESTINATION.ILPInProgress
             ) {
               return route.transitionTo('student.class.proficiency', classId);

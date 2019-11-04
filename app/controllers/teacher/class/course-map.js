@@ -65,6 +65,32 @@ export default Ember.Controller.extend({
     'api-sdk/offline-activity/offline-activity'
   ),
 
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
+  /**
+   * @type {UnitService} Service to retrieve unit information
+   */
+  unitService: Ember.inject.service('api-sdk/unit'),
+
+  /**
+   * @type {i18nService} Service to retrieve translations information
+   */
+  i18n: Ember.inject.service(),
+
+  /**
+   * @requires service:api-sdk/competency
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
+
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -116,7 +142,9 @@ export default Ember.Controller.extend({
    * @see controllers/class.js
    * @property {Class}
    */
-  class: Ember.computed.alias('classController.class'),
+  class: Ember.computed('classController.class', 'currentClass', function() {
+    return this.get('currentClass');
+  }),
 
   /**
    * @property {Course} the selected course
@@ -316,7 +344,19 @@ export default Ember.Controller.extend({
   /**
    * checking class is Primary or secondary class
    */
-  isSecondaryClass: false,
+
+  isSecondaryClass: Ember.computed('class', function() {
+    if (!this.get('class.isSecondaryClass')) {
+      let secondaryClassList = this.get('selectedClassList');
+      let selectedClass = secondaryClassList
+        ? secondaryClassList.findBy('isSelected', true)
+        : null;
+      if (selectedClass) {
+        selectedClass.set('isSelected', false);
+      }
+    }
+    return this.get('class.isSecondaryClass') || false;
+  }),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -654,11 +694,8 @@ export default Ember.Controller.extend({
         selectedClass.set('isSelected', false);
       }
       secondaryClass.set('isSelected', true);
-      this.set('isSecondaryClass', true);
-      this.get('classController').send(
-        'onSelectClass',
-        secondaryClass.get('id')
-      );
+      this.actions.onToggleClassListContainer();
+      this.loadSecondaryClassInfo(secondaryClass.get('id'));
     }
   },
 
@@ -668,7 +705,10 @@ export default Ember.Controller.extend({
   init() {
     const controller = this;
     controller._super(...arguments);
-    if (!controller.get('isSecondaryClass')) {
+    if (
+      !this.get('isSecondaryClass') ||
+      controller.get('classController.class.isUpdatedSecondaryClass')
+    ) {
       controller.set(
         'selectedClassList',
         Ember.copy(controller.get('secondaryClasses'))
@@ -708,6 +748,7 @@ export default Ember.Controller.extend({
       controller.handleScrollToFixHeader();
     });
   },
+
   // -------------------------------------------------------------------------
   // Observers
 
@@ -1246,6 +1287,99 @@ export default Ember.Controller.extend({
           });
           resolve(itemObject);
         }, reject);
+    });
+  },
+
+  loadSecondaryClassInfo(classId) {
+    const controller = this;
+    const classPromise = controller.get('classService').readClassInfo(classId);
+    const membersPromise = controller
+      .get('classService')
+      .readClassMembers(classId);
+    return classPromise.then(function(classData) {
+      let classCourseId = null;
+      if (classData.courseId) {
+        classCourseId = Ember.A([
+          {
+            classId: classId,
+            courseId: classData.courseId
+          }
+        ]);
+      }
+      const performanceSummaryPromise = classCourseId
+        ? controller
+          .get('performanceService')
+          .findClassPerformanceSummaryByClassIds(classCourseId)
+        : null;
+      return Ember.RSVP.hash({
+        class: classPromise,
+        members: membersPromise,
+        classPerformanceSummaryItems: performanceSummaryPromise
+      }).then(function(hash) {
+        const aClass = hash.class;
+        const members = hash.members;
+        const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
+        let classPerformanceSummary = classPerformanceSummaryItems
+          ? classPerformanceSummaryItems.findBy('classId', classId)
+          : null;
+        aClass.set('performanceSummary', classPerformanceSummary);
+        const setting = aClass.get('setting');
+        const isPremiumClass = setting != null && setting['course.premium'];
+        const courseId = aClass.get('courseId');
+        let visibilityPromise = Ember.RSVP.resolve([]);
+        let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
+        const competencyCompletionStats = isPremiumClass
+          ? controller
+            .get('competencyService')
+            .getCompetencyCompletionStats([classId])
+          : Ember.RSVP.resolve(Ember.A());
+
+        if (courseId) {
+          visibilityPromise = controller
+            .get('classService')
+            .readClassContentVisibility(classId);
+          coursePromise = controller.get('courseService').fetchById(courseId);
+        }
+        const frameworkId = aClass.get('preference.framework');
+        const subjectId = aClass.get('preference.subject');
+
+        let crossWalkFWCPromise = null;
+        if (frameworkId && subjectId) {
+          crossWalkFWCPromise = controller
+            .get('taxonomyService')
+            .fetchCrossWalkFWC(frameworkId, subjectId);
+        }
+        return Ember.RSVP.hash({
+          contentVisibility: visibilityPromise,
+          course: coursePromise,
+          crossWalkFWC: crossWalkFWCPromise,
+          competencyStats: competencyCompletionStats
+        }).then(function(hash) {
+          const contentVisibility = hash.contentVisibility;
+          const course = hash.course;
+          const crossWalkFWC = hash.crossWalkFWC || [];
+          const secondaryClassList = hash.secondaryClassList;
+          aClass.set('owner', members.get('owner'));
+          aClass.set('collaborators', members.get('collaborators'));
+          aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
+          aClass.set('members', members.get('members'));
+          aClass.set(
+            'competencyStats',
+            hash.competencyStats.findBy('classId', classId)
+          );
+          controller
+            .get('classController')
+            .send('onSelectSecondaryClass', aClass);
+          controller.send('onSelectedClass', {
+            class: aClass,
+            course,
+            members,
+            contentVisibility,
+            crossWalkFWC,
+            secondaryClassList
+          });
+        });
+      });
     });
   }
 });

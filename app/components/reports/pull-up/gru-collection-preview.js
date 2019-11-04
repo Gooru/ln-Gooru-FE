@@ -7,9 +7,7 @@ import {
   CONTENT_TYPES,
   ASSESSMENT_SHOW_VALUES
 } from 'gooru-web/config/config';
-import {
-  getEndpointUrl
-} from 'gooru-web/utils/endpoint-config';
+import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
 import ModalMixin from 'gooru-web/mixins/modal';
 import PullUpMixin from 'gooru-web/mixins/reports/pull-up/pull-up-mixin';
 import PortfolioMixin from 'gooru-web/mixins/reports/portfolio/portfolio-mixin';
@@ -56,20 +54,22 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       const component = this;
       let contentId = component.get('previewContentId');
       let playerContext = component.get('playerContext');
+      let contentType = component.get('previewContentType');
       let playerURL = `${getEndpointUrl()}/player`;
       if (playerContext) {
         let classId = playerContext.get('classId');
         let courseId = playerContext.get('courseId');
         let unitId = playerContext.get('unitId');
         let lessonId = playerContext.get('lessonId');
-        let contentType = component.get('previewContentType');
         playerURL += `/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${contentId}?role=teacher&type=${contentType}&source=${PLAYER_EVENT_SOURCE.RGO}&isIframeMode=true`;
       } else {
         playerURL += `/${contentId}?isIframeMode=true&source=${PLAYER_EVENT_SOURCE.RGO}`;
       }
+      component.set('playerContent', component.get('previewContent'));
+      let content = component.get('playerContent');
+      content.set('format', contentType);
       component.set('playerUrl', playerURL);
       component.set('isOpenPlayer', true);
-      component.set('playerContent', playerContext);
     },
 
     //Action triggered when click print preview
@@ -306,9 +306,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     const assessmentService = component.get('assessmentService');
     return Ember.RSVP.hash({
       assessment: assessmentService.readAssessment(assessmentId)
-    }).then(({
-      assessment
-    }) => {
+    }).then(({ assessment }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', assessment);
       }
@@ -327,15 +325,18 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     let assessmentPromise;
     const suggestionArea = suggestedContext.get('suggestionArea');
     if (suggestionArea === 'class-activity') {
-      assessmentPromise = component.get('analyticsService').getDCAPerformanceBySessionId(
-        userId,
-        classId,
-        collectionId,
-        collectionType,
-        sessionId
-      );
+      assessmentPromise = component
+        .get('analyticsService')
+        .getDCAPerformanceBySessionId(
+          userId,
+          classId,
+          collectionId,
+          collectionType,
+          sessionId
+        );
     } else {
-      assessmentPromise = component.get('performanceService')
+      assessmentPromise = component
+        .get('performanceService')
         .findAssessmentResultByCollectionAndStudent({
           userId,
           collectionId,
@@ -343,7 +344,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
           sessionId
         });
     }
-    return assessmentPromise.then((assessment) => {
+    return assessmentPromise.then(assessment => {
       if (!component.isDestroyed) {
         component.set('activityPerformance', assessment);
       }
@@ -363,17 +364,20 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     let collectionPromise;
     const suggestionArea = suggestedContext.get('suggestionArea');
     if (suggestionArea === 'class-activity') {
-      collectionPromise = component.get('analyticsService').findResourcesByCollectionforDCA(
-        sessionId,
-        collectionId,
-        classId,
-        userId,
-        collectionType,
-        null,
-        pathId
-      );
+      collectionPromise = component
+        .get('analyticsService')
+        .findResourcesByCollectionforDCA(
+          sessionId,
+          collectionId,
+          classId,
+          userId,
+          collectionType,
+          null,
+          pathId
+        );
     } else {
-      collectionPromise = component.get('performanceService')
+      collectionPromise = component
+        .get('performanceService')
         .findAssessmentResultByCollectionAndStudent({
           classId,
           userId,
@@ -382,7 +386,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
           pathId
         });
     }
-    return collectionPromise.then((collection) => {
+    return collectionPromise.then(collection => {
       if (!component.isDestroyed) {
         component.set('activityPerformance', collection);
       }
@@ -400,9 +404,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     const collectionService = component.get('collectionService');
     return Ember.RSVP.hash({
       collection: collectionService.readCollection(collectionId)
-    }).then(({
-      collection
-    }) => {
+    }).then(({ collection }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', collection);
       }
@@ -422,9 +424,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       externalAssessment: assessmentService.readExternalAssessment(
         externalAssessmentId
       )
-    }).then(({
-      externalAssessment
-    }) => {
+    }).then(({ externalAssessment }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', externalAssessment);
       }
@@ -444,9 +444,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       externalCollection: collectionService.readExternalCollection(
         externalCollectionId
       )
-    }).then(({
-      externalCollection
-    }) => {
+    }).then(({ externalCollection }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', externalCollection);
       }

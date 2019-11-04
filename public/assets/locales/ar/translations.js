@@ -79,7 +79,7 @@ window.i18ln = {
   'self-grade.not-required': 'Student self-grading not required',
   'common.more': 'more',
   'common.tasks': 'tasks',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'common.no-suggestion-message':
     'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.apply-filter': 'apply filter',
@@ -2726,5 +2726,8 @@ window.i18ln = {
     'At least one task is required for activity activation',
   'common.class-name': 'Class Name',
   'common.view-class-course-map': 'Class',
-  'common.secondary-class-setting': 'Secondary Class Settings'
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };

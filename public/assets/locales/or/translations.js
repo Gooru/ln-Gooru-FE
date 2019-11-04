@@ -86,7 +86,7 @@ window.i18ln = {
   'common.content-name': 'ବିଷୟ ନାମ',
   'common.lastName': 'ଅନ୍ତିମ ନାମ',
   'common.firstName': 'ପ୍ରଥମ ନାମ',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'common.filter-by': 'ଦ୍ୱାରା ଫିଲ୍ଟର ହୋଇଛି',
   'common.tasks': 'tasks',
   'common.more': 'ଅଧିକ',
@@ -2843,5 +2843,8 @@ window.i18ln = {
     'At least one task is required for activity activation',
   'common.class-name': 'Class Name',
   'common.view-class-course-map': 'Class',
-  'common.secondary-class-setting': 'Secondary Class Settings'
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };

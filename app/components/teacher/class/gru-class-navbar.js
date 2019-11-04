@@ -33,6 +33,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
   class: null,
 
   /**
+   * @property {SecondaryClass} secondaryClass
+   */
+  selectedSecondaryClass: null,
+
+  /**
    * @property {String|Function} onItemSelected - event handler for when an menu item is selected
    */
   onItemSelected: null,
@@ -78,6 +83,13 @@ export default Ember.Component.extend(ConfigurationMixin, {
       'performanceSummaryForDCA.performance.scoreInPercentage'
     );
     return scorePercentage !== null && isNumeric(scorePercentage);
+  }),
+
+  isPrimaryClass: Ember.computed('selectedSecondaryClass', 'class', function() {
+    let secondaryClass = this.get('selectedSecondaryClass');
+    return secondaryClass
+      ? secondaryClass.get('id') === this.get('class.id')
+      : true;
   }),
 
   // -------------------------------------------------------------------------
@@ -177,6 +189,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   refreshSelectedMenuItem: function() {
     var item = this.get('selectedMenuItem');
+    if (item === 'course-map') {
+      this.set('selectedSecondaryClass', null);
+    }
     this.selectItem(item);
   }.observes('selectedMenuItem'),
 

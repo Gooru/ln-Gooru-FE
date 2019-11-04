@@ -46,7 +46,7 @@ window.i18ln = {
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'common.by-question': 'question-by-question',
   'not-covered-in-fw-msg':
     'Note: This competency is not covered by the {{framework}} framework',
@@ -2851,5 +2851,8 @@ window.i18ln = {
     'At least one task is required for activity activation',
   'common.class-name': 'Class Name',
   'common.view-class-course-map': 'Class',
-  'common.secondary-class-setting': 'Secondary Class Settings'
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };

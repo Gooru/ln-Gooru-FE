@@ -923,6 +923,9 @@ export default Ember.Controller.extend(ModalMixin, {
       .get('classController.multipleClassService')
       .updateMultipleClass(classId, classSetting)
       .then(() => {
+        const primaryClass = controller.get('class');
+        primaryClass.set('isUpdatedSecondaryClass', true);
+        primaryClass.set('setting', classSetting.setting);
         controller.set('isEnableSave', false);
       });
   }

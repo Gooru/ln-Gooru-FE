@@ -52,7 +52,7 @@ window.i18ln = {
   'errors.phone': '{{description}} এটা বৈধ ফোন নম্বৰ হ\'ব লাগিব',
   'errors.url': '{{description}} এটা বৈধ url হ\'ব লাগিব',
   'common.relevance': 'প্ৰাসংগিকতা',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'common.engagement': 'কাম',
   'common.efficacy': 'দক্ষতা',
   'common.grid': 'গ্ৰিড',
@@ -2823,5 +2823,8 @@ window.i18ln = {
     'At least one task is required for activity activation',
   'common.class-name': 'Class Name',
   'common.view-class-course-map': 'Class',
-  'common.secondary-class-setting': 'Secondary Class Settings'
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };

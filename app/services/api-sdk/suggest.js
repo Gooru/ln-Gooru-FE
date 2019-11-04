@@ -219,11 +219,15 @@ export default Ember.Service.extend({
           const suggestions = normalizedContent.get('suggestions');
           const collectionPathIds = [];
           const assessmentPathIds = [];
-          const assessmentSuggestions = suggestions.filterBy('suggestedContentType',
-            CONTENT_TYPES.ASSESSMENT);
-          const collectionSuggestions = suggestions.filterBy('suggestedContentType',
-            CONTENT_TYPES.COLLECTION);
           const lookupKey = 'id';
+          const assessmentSuggestions = suggestions.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.ASSESSMENT
+          );
+          const collectionSuggestions = suggestions.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.COLLECTION
+          );
           collectionSuggestions.map(suggestion => {
             const suggestedToContext = suggestion.get('suggestedToContext');
             if (suggestedToContext) {
@@ -420,10 +424,14 @@ export default Ember.Service.extend({
             'suggestionArea',
             'proficiency'
           );
-          const caCollections = caContents.filterBy('suggestedContentType',
-            CONTENT_TYPES.COLLECTION);
-          const caAssessments = caContents.filterBy('suggestedContentType',
-            CONTENT_TYPES.ASSESSMENT);
+          const caCollections = caContents.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.COLLECTION
+          );
+          const caAssessments = caContents.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.ASSESSMENT
+          );
           const caCollectionPathIds = caCollections.map(caContent => {
             return caContent.get('id');
           });
@@ -440,16 +448,24 @@ export default Ember.Service.extend({
               classId, userId, caAssessmentPathIds,
               CONTENT_TYPES.ASSESSMENT, suggestions, 'id');
           }
-          const proficiencyCollections = proficiencyContents.filterBy('suggestedContentType',
-            CONTENT_TYPES.COLLECTION);
-          const proficiencyAssessments = proficiencyContents.filterBy('suggestedContentType',
-            CONTENT_TYPES.ASSESSMENT);
-          const proficiencyCollectionPathIds = proficiencyCollections.map(proficiencyContent => {
-            return proficiencyContent.get('id');
-          });
-          const proficiencyAssessmentPathIds = proficiencyAssessments.map(proficiencyContent => {
-            return proficiencyContent.get('id');
-          });
+          const proficiencyCollections = proficiencyContents.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.COLLECTION
+          );
+          const proficiencyAssessments = proficiencyContents.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.ASSESSMENT
+          );
+          const proficiencyCollectionPathIds = proficiencyCollections.map(
+            proficiencyContent => {
+              return proficiencyContent.get('id');
+            }
+          );
+          const proficiencyAssessmentPathIds = proficiencyAssessments.map(
+            proficiencyContent => {
+              return proficiencyContent.get('id');
+            }
+          );
           if (proficiencyCollectionPathIds.length) {
             service.fetchStudentPerformance('proficiency',
               classId, userId, proficiencyCollectionPathIds,
@@ -460,16 +476,20 @@ export default Ember.Service.extend({
               classId, userId, proficiencyAssessmentPathIds,
               CONTENT_TYPES.ASSESSMENT, suggestions, 'id');
           }
-          const courseMapCollections = courseMapContents.filterBy('suggestedContentType',
+          const courseMapCollections = courseMapContents.filterBy(
+            'suggestedContentType',
             CONTENT_TYPES.COLLECTION);
-          const courseMapAssessments = courseMapContents.filterBy('suggestedContentType',
+          const courseMapAssessments = courseMapContents.filterBy(
+            'suggestedContentType',
             CONTENT_TYPES.ASSESSMENT);
-          const courseMapCollectionPathIds = courseMapCollections.map(courseMapContent => {
-            return courseMapContent.get('pathId');
-          });
-          const courseMapAssessmentPathIds = courseMapAssessments.map(courseMapContent => {
-            return courseMapContent.get('pathId');
-          });
+          const courseMapCollectionPathIds = courseMapCollections.map(
+            courseMapContent => {
+              return courseMapContent.get('pathId');
+            });
+          const courseMapAssessmentPathIds = courseMapAssessments.map(
+            courseMapContent => {
+              return courseMapContent.get('pathId');
+            });
           if (courseMapCollectionPathIds.length) {
             service.fetchStudentPerformance('coursemap',
               classId, userId, courseMapCollectionPathIds,
