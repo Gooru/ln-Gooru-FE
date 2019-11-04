@@ -53,7 +53,6 @@
         <div class="my-proficiency" {{action 'selectItem' 'profile-prof'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'student-landing.class.my-proficiency'}}" data-trigger="hover">
           {{gru-icon name="school"}}
         </div>
-
         {{#if isPremiumClass}}
           <div class="completion-score {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'profile-prof'}}>
             {{#if class.competencyStats}}
@@ -68,11 +67,11 @@
         <span>{{t 'teacher-landing.class.class-management-tab.class-code'}}</span>
         <span class="class-code">{{class.code}}</span>
       </div>
-      {{else}}
-        <div class="alert-player-error">
-          <span class="clear-alert" {{action 'onClearAlert'}}>{{gru-icon name="clear"}}</span>
-          <div class="alert-status">{{t 'common.errors.no-studymaterial'}}</div>
-        </div>
+    {{else}}
+      <div class="alert-player-error">
+        <span class="clear-alert" {{action 'onClearAlert'}}>{{gru-icon name="clear"}}</span>
+        <div class="alert-status">{{t 'common.errors.no-studymaterial'}}</div>
+      </div>
     {{/unless}}
   </div>
 </div>

@@ -164,13 +164,14 @@ export default Ember.Service.extend({
       collectionType: context.collectionType,
       contentId: context.collectionId,
       userId: context.userId,
-      sessionId: context.sessionId
+      sessionId: context.sessionId,
     };
     if (context.classId) {
       params.classId = context.classId;
       params.courseId = context.courseId;
       params.unitId = context.unitId;
       params.lessonId = context.lessonId;
+      params.pathId = context.pathId;
     }
     return new Ember.RSVP.Promise(function(resolve) {
       return service
@@ -680,9 +681,9 @@ export default Ember.Service.extend({
   getRecord: function(modelName, id) {
     const store = this.get('store');
     const found = store.recordIsLoaded(modelName, id);
-    return found
-      ? store.recordForId(modelName, id)
-      : store.createRecord(modelName, {
+    return found ?
+      store.recordForId(modelName, id) :
+      store.createRecord(modelName, {
         id: id
       });
   },
@@ -916,8 +917,8 @@ export default Ember.Service.extend({
         .then(function(response) {
           resolve(
             service
-              .get('performanceSerializer')
-              .normalizeGetStudentsCollectionPerformance(response)
+            .get('performanceSerializer')
+            .normalizeGetStudentsCollectionPerformance(response)
           );
         }, reject);
     });
@@ -952,8 +953,8 @@ export default Ember.Service.extend({
         .then(function(response) {
           resolve(
             service
-              .get('performanceSerializer')
-              .normalizeUserPerformanceResourceInAssessment(response)
+            .get('performanceSerializer')
+            .normalizeUserPerformanceResourceInAssessment(response)
           );
         }, reject);
     });
@@ -988,8 +989,8 @@ export default Ember.Service.extend({
         .then(function(response) {
           resolve(
             service
-              .get('performanceSerializer')
-              .normalizeUserPerformanceResourceInCollection(response)
+            .get('performanceSerializer')
+            .normalizeUserPerformanceResourceInCollection(response)
           );
         }, reject);
     });
@@ -1021,8 +1022,8 @@ export default Ember.Service.extend({
           function(response) {
             resolve(
               service
-                .get('performanceSerializer')
-                .normalizeCAPerformanceData(response)
+              .get('performanceSerializer')
+              .normalizeCAPerformanceData(response)
             );
           },
           function(error) {
@@ -1058,8 +1059,8 @@ export default Ember.Service.extend({
           function(response) {
             resolve(
               service
-                .get('milestonePerformanceSerializer')
-                .normalizePerformanceDataForMilestones(response)
+              .get('milestonePerformanceSerializer')
+              .normalizePerformanceDataForMilestones(response)
             );
           },
           function(error) {
@@ -1097,8 +1098,8 @@ export default Ember.Service.extend({
           function(response) {
             resolve(
               service
-                .get('milestonePerformanceSerializer')
-                .normalizeLessonsPerformanceDataForMilestone(response)
+              .get('milestonePerformanceSerializer')
+              .normalizeLessonsPerformanceDataForMilestone(response)
             );
           },
           function(error) {
@@ -1136,8 +1137,8 @@ export default Ember.Service.extend({
           function(response) {
             resolve(
               service
-                .get('collectionPerformanceSummarySerializer')
-                .normalizeCollectionsPerformanceDataForLesson(response)
+              .get('collectionPerformanceSummarySerializer')
+              .normalizeCollectionsPerformanceDataForLesson(response)
             );
           },
           function(error) {
@@ -1177,8 +1178,8 @@ export default Ember.Service.extend({
           function(response) {
             resolve(
               service
-                .get('performanceSerializer')
-                .normalizeUnitsPerformanceDataForCourse(response)
+              .get('performanceSerializer')
+              .normalizeUnitsPerformanceDataForCourse(response)
             );
           },
           function(error) {
@@ -1208,8 +1209,8 @@ export default Ember.Service.extend({
           function(response) {
             resolve(
               service
-                .get('performanceSerializer')
-                .normalizeLessonsPerformanceDataForUnit(response)
+              .get('performanceSerializer')
+              .normalizeLessonsPerformanceDataForUnit(response)
             );
           },
           function(error) {

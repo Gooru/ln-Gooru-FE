@@ -209,7 +209,7 @@ export default Ember.Component.extend({
     const contentId = suggestionContent.get('suggestedContentId');
     const collectionType = suggestionContent.get('suggestedContentType');
     const classId = component.get('classId');
-    const pathId = suggestionContent.get('id');
+    const pathId = suggestionContent.get('pathId');
     const courseId = suggestionContent.get('courseId');
     const unitId = suggestionContent.get('unitId');
     const lessonId = suggestionContent.get('lessonId');
@@ -265,9 +265,9 @@ export default Ember.Component.extend({
   onOpenSuggestionContainer() {
     const component = this;
     component.$().animate({
-      top: '100%'
-    },
-    400
+        top: '100%'
+      },
+      400
     );
   },
 
