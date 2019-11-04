@@ -126,8 +126,8 @@ export default Ember.Controller.extend({
       controller.openDCAReportForOfflineClass();
     },
 
-    onSelectClass(classId) {
-      this.send('updateClassId', classId);
+    onSelectSecondaryClass(secondaryClass) {
+      this.set('selectedSecondaryClass', secondaryClass);
     }
   },
 
@@ -231,6 +231,8 @@ export default Ember.Controller.extend({
   }),
 
   secondaryClassList: Ember.A([]),
+
+  selectedSecondaryClass: null,
   // -------------------------------------------------------------------------
   // Methods
 

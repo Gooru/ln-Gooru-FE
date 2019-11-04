@@ -103,11 +103,13 @@
       {{#if (and isPremiumClass (gt multipleClassList.length  0))}}
       <div class="view-mulitple-class-layout">
         <div class="view-multiple-class-label">
-           {{t 'common.secondary-class-setting'}}
+           {{t 'common.multi-grade-class-setting'}}
         </div>
         <div class="view-mulitple-class-panel">
           <div class="multiple-class-panel-header">
-            <div class="class-panel-header-title"></div>
+            <div class="class-panel-header-title">
+              {{t 'common.select-your-other-classes-from-below'}}
+            </div>
             <div class="class-panel-header-action">
               <div class="class-save-btn {{if isEnableSave '' 'disabled'}}" {{action 'saveMultipleClass'}}>
                  {{t 'common.save'}}
