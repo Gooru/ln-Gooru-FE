@@ -51,8 +51,8 @@ export default ApplicationAdapter.extend({
     let queryParams = pathId ? `classGooruId=${classId}&pathId=${pathId}` : sessionId ?
       `sessionId=${sessionId}` :
       classId ?
-      `classGooruId=${classId}&courseGooruId=${courseId}&unitGooruId=${unitId}&lessonGooruId=${lessonId}` :
-      '';
+        `classGooruId=${classId}&courseGooruId=${courseId}&unitGooruId=${unitId}&lessonGooruId=${lessonId}` :
+        '';
 
     return Ember.$.ajax(
       `${namespace}/${collectionType}/${contentId}/user/${userId}?${queryParams}`,

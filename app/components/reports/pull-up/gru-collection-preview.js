@@ -243,7 +243,6 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     }
     contentPromise.then(() => {
       const activityPerformance = component.get('activityPerformance');
-      console.log(activityPerformance)
       if (activityPerformance) {
         activeAttempt.set('score', activityPerformance.get('score'));
         activeAttempt.set('timespent', activityPerformance.get('timeSpent'));

@@ -267,7 +267,6 @@ export default Ember.Service.extend({
    */
   fetchStudentPerformance(source, classId, userId, pathIds, collectionType, suggestions, lookupKey) {
     const service = this;
-    console.log(source, classId, userId, pathIds, collectionType, suggestions, lookupKey)
     service
       .get('performanceService')
       .fecthSuggestionPerformance({
@@ -302,11 +301,7 @@ export default Ember.Service.extend({
               suggestion[lookupKey]
             );
             if (performance) {
-              if (!userId) {
-                context.set('performance', performance);
-              } else {
-                suggestion.set('performance', performance);
-              }
+              suggestion.set('performance', performance);
             }
           }
         });

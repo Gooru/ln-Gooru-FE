@@ -265,9 +265,9 @@ export default Ember.Component.extend({
   onOpenSuggestionContainer() {
     const component = this;
     component.$().animate({
-        top: '100%'
-      },
-      400
+      top: '100%'
+    },
+    400
     );
   },
 
