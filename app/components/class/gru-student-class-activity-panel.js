@@ -97,26 +97,21 @@ export default Ember.Component.extend({
         collectionType === 'assessment-external' ||
         collectionType === 'collection-external'
       ) {
-        component.get('router').transitionTo('player-external', {
-          queryParams
-        });
+        let playerUrl = component
+          .get('router')
+          .generate('player-external', { queryParams });
+        component.sendAction('playContent', playerUrl, content);
       } else if (collectionType === 'offlineactivity') {
         queryParams.offlineActivityId = contentId;
-        component.sendAction(
-          'playContent',
-          'player-offline-activity',
-          queryParams,
-          contentId,
-          content
-        );
+        let playerUrl = component
+          .get('router')
+          .generate('player-offline-activity', contentId, { queryParams });
+        component.sendAction('playContent', playerUrl, content);
       } else {
-        component.sendAction(
-          'playContent',
-          'player',
-          queryParams,
-          contentId,
-          content
-        );
+        let playerUrl = component
+          .get('router')
+          .generate('player', contentId, { queryParams });
+        component.sendAction('playContent', playerUrl, content);
       }
     },
     /**
@@ -171,26 +166,21 @@ export default Ember.Component.extend({
         collectionType === 'assessment-external' ||
         collectionType === 'collection-external'
       ) {
-        component.get('router').transitionTo('player-external', {
-          queryParams
-        });
+        let playerUrl = component
+          .get('router')
+          .generate('player-external', { queryParams });
+        component.sendAction('playContent', playerUrl, content);
       } else if (collectionType === 'offline-activity') {
         queryParams.offlineActivityId = contentId;
-        component.sendAction(
-          'playContent',
-          'player-offline-activity',
-          queryParams,
-          contentId,
-          content
-        );
+        let playerUrl = component
+          .get('router')
+          .generate('player-offline-activity', contentId, { queryParams });
+        component.sendAction('playContent', playerUrl, content);
       } else {
-        component.sendAction(
-          'playContent',
-          'player',
-          queryParams,
-          contentId,
-          content
-        );
+        let playerUrl = component
+          .get('router')
+          .generate('player', contentId, { queryParams });
+        component.sendAction('playContent', playerUrl, content);
       }
     }
   },

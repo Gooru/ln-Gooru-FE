@@ -1,6 +1,17 @@
 <div class="iframe-player-container">
   {{#if isLoading}}
+  <div class="close-player-container">
+    <div {{action 'closePlayer'}} data-toggle="tooltip" data-placement="bottom" title="{{t 'common.close'}}">
+      {{gru-icon name='ic_close'}}
+    </div>
+  </div>
     <div class="loading-panel">
+      {{#if playerContent.thumbnailUrl}}
+        <img src="{{playerContent.thumbnailUrl}}">
+      {{else}}
+        <i class="thumbnai {{playerContent.format}}"></i>
+      {{/if}}
+      <span class="loading-title">Loading {{playerContent.format}}</span>
       <span>{{playerContent.title}}</span>
       <i class="loding-icon center-block"></i>
     </div>

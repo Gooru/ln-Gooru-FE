@@ -428,11 +428,14 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
             .get('router')
             .generate('study-player', courseId, { queryParams })
         );
-        route.controller.set('isOpenPlayer', true);
-        let playerContent = {
-          title: currentLocation ? currentLocation.get('collectionTitle') : null
-        };
+        let playerContent = Ember.Object.create({
+          title: currentLocation
+            ? currentLocation.get('collectionTitle')
+            : null,
+          format: currentLocation ? currentLocation.get('collectionType') : null
+        });
         route.controller.set('playerContent', playerContent);
+        route.controller.set('isOpenPlayer', true);
       })
       .catch(() => {
         let selectedClass = activeClasses.findBy('id', classData.get('id'));

@@ -127,8 +127,12 @@ export default Ember.Component.extend(ModalMixin, {
         'playerUrl',
         component.get('router').generate('player', id, { queryParams })
       );
+      let playerContent = Ember.Object.create({
+        title: bookmark.get('title'),
+        format: bookmark.get('contentType')
+      });
       component.set('isOpenPlayer', true);
-      component.set('playerContent', bookmark);
+      component.set('playerContent', playerContent);
     },
 
     closePullUp() {

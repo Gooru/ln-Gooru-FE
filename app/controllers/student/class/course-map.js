@@ -29,6 +29,11 @@ export default Ember.Controller.extend({
   analyticsService: Ember.inject.service('api-sdk/analytics'),
 
   /**
+   * @type {PerformanceService} Service to retrieve class performance summary
+   */
+  performanceService: Ember.inject.service('api-sdk/performance'),
+
+  /**
    * Logged in user session object
    * @type {Session}
    */
@@ -492,6 +497,8 @@ export default Ember.Controller.extend({
     let classId = currentClass.get('id');
     let userId = controller.get('userId');
     let courseId = currentClass.get('courseId');
+    let units = controller.get('units');
+    controller.fetchUnitsPerformance(userId, classId, courseId, units);
     let locationQueryParam = {
       courseId
     };
@@ -516,7 +523,24 @@ export default Ember.Controller.extend({
           userLocation = `${unitId}+${lessonId}+${collectionId}`;
           controller.set('userLocation', userLocation);
           controller.set('location', userLocation);
+          controller.set('showLocation', true);
+          controller.set('toggleLocation', !controller.get('toggleLocation'));
         }
+      });
+  },
+
+  fetchUnitsPerformance(userId, classId, courseId, units) {
+    let route = this;
+    route
+      .get('performanceService')
+      .findStudentPerformanceByCourse(userId, classId, courseId, units)
+      .then(unitsPerformance => {
+        units.forEach(unit => {
+          let unitPerformance = unitsPerformance.findBy('id', unit.get('id'));
+          if (unitPerformance) {
+            unit.set('performance', unitPerformance);
+          }
+        });
       });
   }
 });

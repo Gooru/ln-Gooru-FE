@@ -49,6 +49,8 @@ export default Ember.Component.extend({
       );
       component.set('isOpenPlayer', true);
       component.set('playerContent', suggestionContent);
+      let content = component.get('playerContent');
+      content.set('format', collectionType);
     },
 
     closePullUp() {

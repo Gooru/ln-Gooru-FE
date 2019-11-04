@@ -7,10 +7,10 @@ import {
   CONTENT_TYPES,
   ASSESSMENT_SHOW_VALUES
 } from 'gooru-web/config/config';
-import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
 import ModalMixin from 'gooru-web/mixins/modal';
 import PullUpMixin from 'gooru-web/mixins/reports/pull-up/pull-up-mixin';
 import PortfolioMixin from 'gooru-web/mixins/reports/portfolio/portfolio-mixin';
+import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
 
 export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
   // -------------------------------------------------------------------------
@@ -50,20 +50,22 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       const component = this;
       let contentId = component.get('previewContentId');
       let playerContext = component.get('playerContext');
+      let contentType = component.get('previewContentType');
       let playerURL = `${getEndpointUrl()}/player`;
       if (playerContext) {
         let classId = playerContext.get('classId');
         let courseId = playerContext.get('courseId');
         let unitId = playerContext.get('unitId');
         let lessonId = playerContext.get('lessonId');
-        let contentType = component.get('previewContentType');
         playerURL += `/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${contentId}?role=teacher&type=${contentType}&source=${PLAYER_EVENT_SOURCE.RGO}&isIframeMode=true`;
       } else {
         playerURL += `/${contentId}?isIframeMode=true&source=${PLAYER_EVENT_SOURCE.RGO}`;
       }
+      component.set('playerContent', component.get('previewContent'));
+      let content = component.get('playerContent');
+      content.set('format', contentType);
       component.set('playerUrl', playerURL);
       component.set('isOpenPlayer', true);
-      component.set('playerContent', playerContext);
     },
 
     //Action triggered when click print preview

@@ -70,7 +70,12 @@ export default Ember.Component.extend({
      */
     onCancel() {
       let component = this;
-      component.redirectTo();
+      let isIframeMode = component.get('isIframeMode');
+      if (isIframeMode) {
+        component.sendAction('onClosePlayer');
+      } else {
+        component.redirectTo();
+      }
     }
   },
 
@@ -218,10 +223,9 @@ export default Ember.Component.extend({
     let dataParams = component.getDataParams();
     let selfReportedPromise = analyticsService.studentSelfReporting(dataParams);
     component.set('score', '');
-    Ember.RSVP
-      .hash({
-        selfReport: selfReportedPromise
-      })
+    Ember.RSVP.hash({
+      selfReport: selfReportedPromise
+    })
       .then(function() {
         component.set('score', component.getEnteredScore(dataParams));
         component.set('dataParams', dataParams);
@@ -264,7 +268,7 @@ export default Ember.Component.extend({
    * Method to round milliseconds
    */
   roundMilliseconds(milliseconds) {
-    return milliseconds - milliseconds % 1000;
+    return milliseconds - (milliseconds % 1000);
   },
 
   /**
