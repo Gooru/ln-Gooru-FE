@@ -709,10 +709,10 @@ export default Ember.Controller.extend({
       !this.get('isSecondaryClass') ||
       controller.get('classController.class.isUpdatedSecondaryClass')
     ) {
-      controller.set(
-        'selectedClassList',
-        Ember.copy(controller.get('secondaryClasses'))
-      );
+      const secondaryClass = this.get(
+        'classController'
+      ).serializeSecondaryClass(this.get('secondaryClasses'));
+      this.set('selectedClassList', secondaryClass);
     }
     let milestoneViewApplicable = controller.get(
       'currentClass.milestoneViewApplicable'

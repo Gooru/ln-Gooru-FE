@@ -86,10 +86,13 @@ export default Ember.Component.extend(ConfigurationMixin, {
   }),
 
   isPrimaryClass: Ember.computed('selectedSecondaryClass', 'class', function() {
-    let secondaryClass = this.get('selectedSecondaryClass');
-    return secondaryClass
+    let secondaryClass = this.get('selectedSecondaryClass.isSecondaryClass')
+      ? this.get('selectedSecondaryClass')
+      : null;
+    let primaryClass = secondaryClass
       ? secondaryClass.get('id') === this.get('class.id')
       : true;
+    return primaryClass;
   }),
 
   // -------------------------------------------------------------------------
@@ -121,6 +124,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     selectItem: function(item) {
       let isPremiumClass = this.get('isPremiumClass');
+      this.set('selectedSecondaryClass', null);
       if (this.get('onItemSelected')) {
         if (!(item === 'performance' && isPremiumClass)) {
           this.selectItem(item);
@@ -189,9 +193,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
   refreshSelectedMenuItem: function() {
     var item = this.get('selectedMenuItem');
-    if (item === 'course-map') {
-      this.set('selectedSecondaryClass', null);
-    }
     this.selectItem(item);
   }.observes('selectedMenuItem'),
 

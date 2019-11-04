@@ -40,7 +40,7 @@
     {{#if navTitle}}
       <div class="studyplayer-title">
         <span>{{navTitle}}</span>
-        {{#unless (or isPrimaryClass (not-eq selectedMenuItem 'course-map'))}}
+        {{#unless isPrimaryClass}}
         <span class="secondary-class">{{t 'common.multi-grade-view'}} {{selectedSecondaryClass.title}}</span>
         {{/unless}}
       </div>
@@ -49,8 +49,8 @@
       {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' isTeacher=true classId=class.id }}
     </div>
     {{#if isPremiumClass}}
-      <div class="performance-summary {{if (or (and class.competencyStats (or isPrimaryClass (not-eq selectedMenuItem 'course-map'))) (and selectedSecondaryClass.competencyStats (not isPrimaryClass))) 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
-        {{#if (and class.competencyStats (or isPrimaryClass (not-eq selectedMenuItem 'course-map')))}}
+      <div class="performance-summary {{if (or (and class.competencyStats isPrimaryClass) (and selectedSecondaryClass.competencyStats (not isPrimaryClass))) 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
+        {{#if (and class.competencyStats isPrimaryClass)}}
           <span class="numerator">{{class.competencyStats.completedCompetencies}}</span>
           <span class="denominator">{{class.competencyStats.totalCompetencies}}</span>
         {{else if (and selectedSecondaryClass.competencyStats (not isPrimaryClass))}}
