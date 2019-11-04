@@ -244,10 +244,10 @@ export default Ember.Component.extend({
     component.set(
       'playerUrl',
       component
-      .get('router')
-      .generate('study-player', courseId, {
-        queryParams
-      })
+        .get('router')
+        .generate('study-player', courseId, {
+          queryParams
+        })
     );
     let content = suggestionContent;
     content.set('format', collectionType);
@@ -297,9 +297,9 @@ export default Ember.Component.extend({
   onOpenSuggestionContainer() {
     const component = this;
     component.$().animate({
-        top: '100%'
-      },
-      400
+      top: '100%'
+    },
+    400
     );
   },
 
