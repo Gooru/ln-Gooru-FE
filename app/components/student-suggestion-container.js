@@ -1,5 +1,8 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE, SUGGESTION_TYPE } from 'gooru-web/config/config';
+import {
+  PLAYER_EVENT_SOURCE,
+  SUGGESTION_TYPE
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['student-suggestion-container'],
@@ -204,7 +207,9 @@ export default Ember.Component.extend({
     };
     component.set(
       'playerUrl',
-      component.get('router').generate('player', contentId, { queryParams })
+      component.get('router').generate('player', contentId, {
+        queryParams
+      })
     );
     let content = suggestionContent;
     content.set('format', collectionType);
@@ -217,7 +222,7 @@ export default Ember.Component.extend({
     const contentId = suggestionContent.get('suggestedContentId');
     const collectionType = suggestionContent.get('suggestedContentType');
     const classId = component.get('classId');
-    const pathId = suggestionContent.get('id');
+    const pathId = suggestionContent.get('pathId');
     const courseId = suggestionContent.get('courseId');
     const unitId = suggestionContent.get('unitId');
     const lessonId = suggestionContent.get('lessonId');
@@ -233,13 +238,16 @@ export default Ember.Component.extend({
       lessonId,
       collectionSource,
       pathType,
-      isIframeMode: true
+      isIframeMode: true,
+      isNotification: true
     };
     component.set(
       'playerUrl',
       component
         .get('router')
-        .generate('study-player', courseId, { queryParams })
+        .generate('study-player', courseId, {
+          queryParams
+        })
     );
     let content = suggestionContent;
     content.set('format', collectionType);
@@ -265,7 +273,9 @@ export default Ember.Component.extend({
     };
     component.set(
       'playerUrl',
-      component.get('router').generate('player', contentId, { queryParams })
+      component.get('router').generate('player', contentId, {
+        queryParams
+      })
     );
     let content = suggestionContent;
     content.set('format', collectionType);
@@ -286,11 +296,10 @@ export default Ember.Component.extend({
 
   onOpenSuggestionContainer() {
     const component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400
+    component.$().animate({
+      top: '100%'
+    },
+    400
     );
   },
 

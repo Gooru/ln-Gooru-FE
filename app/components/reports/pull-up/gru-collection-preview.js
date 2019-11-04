@@ -225,6 +225,8 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     }
   ),
 
+  activityPerformance: null,
+
   //--------------------------------------------------------------------------
   // Methods
 
@@ -241,9 +243,13 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     }
     contentPromise.then(() => {
       const activityPerformance = component.get('activityPerformance');
-      activeAttempt.set('score', activityPerformance.get('score'));
-      activeAttempt.set('timespent', activityPerformance.get('timeSpent'));
-      component.parseActivityPerformance();
+      if (activityPerformance) {
+        activeAttempt.set('score', activityPerformance.get('score'));
+        activeAttempt.set('timespent', activityPerformance.get('timeSpent'));
+        component.parseActivityPerformance();
+      } else {
+        component.set('isLoading', false);
+      }
     });
   },
 
@@ -373,10 +379,11 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       collectionPromise = component
         .get('performanceService')
         .findAssessmentResultByCollectionAndStudent({
+          classId,
           userId,
           collectionId,
           collectionType,
-          sessionId
+          pathId
         });
     }
     return collectionPromise.then(collection => {
