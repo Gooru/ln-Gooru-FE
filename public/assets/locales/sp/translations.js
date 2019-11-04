@@ -62,7 +62,7 @@ window.i18ln = {
   'common.efficacy': 'Efficacy',
   'common.grid': 'Grid',
   'common.list': 'List',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'common.tenantLibrary': 'Tenant Library',
   'common.no-suggestion-message':
     'Looks like you are doing very well! There are no suggestions at this time for you to study!',

@@ -126,7 +126,7 @@ window.i18ln = {
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
   'i2d.mobile-upload-failed': 'There was a error',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'i2d.upload-failed':
     'There was an error while uploading this image. Re-upload?',
   'common.a-collection': 'ಸಂಗ್ರಹ',

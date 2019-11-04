@@ -66,7 +66,7 @@ window.i18ln = {
   'common.list': 'યાદી',
   'common.first': 'પ્રથમ',
   'common.last': 'છેલ્લા',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'rubric-details': 'Rubric Details',
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',

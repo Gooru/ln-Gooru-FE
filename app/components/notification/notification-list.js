@@ -124,9 +124,10 @@ export default Ember.Component.extend({
     } else if (ngtnDetails.queryPType === 'hybrid') {
       queryParams = qpm;
       if (queryParams.isIframeMode) {
-        let playerContent = {
-          title: notin.currentItemTitle
-        };
+        let playerContent = Ember.Object.create({
+          title: notin.currentItemTitle,
+          format: notin.currentItemType
+        });
         let playerUrl = component
           .get('router')
           .generate(ngtnDetails.route, queryParams[ngtnDetails.exactparams], {

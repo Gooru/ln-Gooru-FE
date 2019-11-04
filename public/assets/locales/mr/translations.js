@@ -65,7 +65,7 @@ window.i18ln = {
   'common.first': 'पहिले',
   'common.last': 'शेवटचे',
   'common.name': 'नाव',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'common.user': 'वापरणारी व्यक्ती',
   'common.content-name': 'आशयाचे नाव',
   'common.lastName': 'आडनाव',

@@ -2,9 +2,7 @@ import Ember from 'ember';
 import SuggestAdapter from 'gooru-web/adapters/suggest/suggest';
 import SuggestSerializer from 'gooru-web/serializers/suggest/suggest';
 import SuggestContext from 'gooru-web/models/suggest/suggest-context';
-import {
-  CONTENT_TYPES
-} from 'gooru-web/config/config';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 /**
  * Service to support the suggest functionality
  *
@@ -213,8 +211,14 @@ export default Ember.Service.extend({
           const suggestions = normalizedContent.get('suggestions');
           const collectionPathIds = [];
           const assessmentPathIds = [];
-          const assessmentSuggestions = suggestions.filterBy('suggestedContentType', CONTENT_TYPES.ASSESSMENT);
-          const collectionSuggestions = suggestions.filterBy('suggestedContentType', CONTENT_TYPES.COLLECTION);
+          const assessmentSuggestions = suggestions.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.ASSESSMENT
+          );
+          const collectionSuggestions = suggestions.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.COLLECTION
+          );
           collectionSuggestions.map(suggestion => {
             const suggestedToContext = suggestion.get('suggestedToContext');
             if (suggestedToContext) {
@@ -399,8 +403,14 @@ export default Ember.Service.extend({
             'suggestionArea',
             'proficiency'
           );
-          const caCollections = caContents.filterBy('suggestedContentType', CONTENT_TYPES.COLLECTION);
-          const caAssessments = caContents.filterBy('suggestedContentType', CONTENT_TYPES.ASSESSMENT);
+          const caCollections = caContents.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.COLLECTION
+          );
+          const caAssessments = caContents.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.ASSESSMENT
+          );
           const caCollectionPathIds = caCollections.map(caContent => {
             return caContent.get('id');
           });
@@ -443,14 +453,24 @@ export default Ember.Service.extend({
                 });
               });
           }
-          const proficiencyCollections = proficiencyContents.filterBy('suggestedContentType', CONTENT_TYPES.COLLECTION);
-          const proficiencyAssessments = proficiencyContents.filterBy('suggestedContentType', CONTENT_TYPES.ASSESSMENT);
-          const proficiencyCollectionPathIds = proficiencyCollections.map(proficiencyContent => {
-            return proficiencyContent.get('id');
-          });
-          const proficiencyAssessmentPathIds = proficiencyAssessments.map(proficiencyContent => {
-            return proficiencyContent.get('id');
-          });
+          const proficiencyCollections = proficiencyContents.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.COLLECTION
+          );
+          const proficiencyAssessments = proficiencyContents.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.ASSESSMENT
+          );
+          const proficiencyCollectionPathIds = proficiencyCollections.map(
+            proficiencyContent => {
+              return proficiencyContent.get('id');
+            }
+          );
+          const proficiencyAssessmentPathIds = proficiencyAssessments.map(
+            proficiencyContent => {
+              return proficiencyContent.get('id');
+            }
+          );
           if (proficiencyCollectionPathIds.length) {
             service
               .get('performanceService')
@@ -487,14 +507,24 @@ export default Ember.Service.extend({
                 });
               });
           }
-          const courseMapCollections = courseMapContents.filterBy('suggestedContentType', CONTENT_TYPES.COLLECTION);
-          const courseMapAssessments = courseMapContents.filterBy('suggestedContentType', CONTENT_TYPES.ASSESSMENT);
-          const courseMapCollectionPathIds = courseMapCollections.map(courseMapContent => {
-            return courseMapContent.get('id');
-          });
-          const courseMapAssessmentPathIds = courseMapAssessments.map(courseMapContent => {
-            return courseMapContent.get('id');
-          });
+          const courseMapCollections = courseMapContents.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.COLLECTION
+          );
+          const courseMapAssessments = courseMapContents.filterBy(
+            'suggestedContentType',
+            CONTENT_TYPES.ASSESSMENT
+          );
+          const courseMapCollectionPathIds = courseMapCollections.map(
+            courseMapContent => {
+              return courseMapContent.get('id');
+            }
+          );
+          const courseMapAssessmentPathIds = courseMapAssessments.map(
+            courseMapContent => {
+              return courseMapContent.get('id');
+            }
+          );
           if (courseMapCollectionPathIds.length) {
             service
               .get('performanceService')

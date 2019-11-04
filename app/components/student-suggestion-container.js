@@ -1,8 +1,5 @@
 import Ember from 'ember';
-import {
-  PLAYER_EVENT_SOURCE,
-  SUGGESTION_TYPE
-} from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE, SUGGESTION_TYPE } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['student-suggestion-container'],
@@ -209,8 +206,10 @@ export default Ember.Component.extend({
       'playerUrl',
       component.get('router').generate('player', contentId, { queryParams })
     );
+    let content = suggestionContent;
+    content.set('format', collectionType);
     component.set('isOpenPlayer', true);
-    component.set('playerContent', suggestionContent);
+    component.set('playerContent', content);
   },
 
   playCourseMapContent(suggestionContent, pathType) {
@@ -242,8 +241,10 @@ export default Ember.Component.extend({
         .get('router')
         .generate('study-player', courseId, { queryParams })
     );
+    let content = suggestionContent;
+    content.set('format', collectionType);
     component.set('isOpenPlayer', true);
-    component.set('playerContent', suggestionContent);
+    component.set('playerContent', content);
   },
 
   playProficiencyContent(suggestionContent, pathType) {
@@ -266,8 +267,10 @@ export default Ember.Component.extend({
       'playerUrl',
       component.get('router').generate('player', contentId, { queryParams })
     );
+    let content = suggestionContent;
+    content.set('format', collectionType);
     component.set('isOpenPlayer', true);
-    component.set('playerContent', suggestionContent);
+    component.set('playerContent', content);
   },
 
   init() {
@@ -283,10 +286,11 @@ export default Ember.Component.extend({
 
   onOpenSuggestionContainer() {
     const component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400
     );
   },
 

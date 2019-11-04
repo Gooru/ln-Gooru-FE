@@ -52,7 +52,7 @@ window.i18ln = {
   'errors.phone': '{{description}} এটা বৈধ ফোন নম্বৰ হ\'ব লাগিব',
   'errors.url': '{{description}} এটা বৈধ url হ\'ব লাগিব',
   'common.relevance': 'প্ৰাসংগিকতা',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'common.engagement': 'কাম',
   'common.efficacy': 'দক্ষতা',
   'common.grid': 'গ্ৰিড',

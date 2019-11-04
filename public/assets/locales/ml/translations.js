@@ -59,7 +59,7 @@ window.i18ln = {
   'common.relevance': 'പ്രാധാന്യം',
   'common.engagement': 'ഇടപഴകൽ',
   'common.efficacy': 'ഫലപ്രാപ്തി',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'common.tenantLibrary': 'Tenant Library',
   'common.for': 'for',
   'common.offline-activites': 'offline activites',

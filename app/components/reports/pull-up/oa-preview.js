@@ -121,7 +121,6 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     onPlayContent() {
       const component = this;
       const offlineActivityId = component.get('oaId');
-      const offlineActivity = component.get('classActivity');
       const queryParams = {
         role: component.get('isTeacher') ? ROLES.TEACHER : ROLES.STUDENT,
         isPreview: true,
@@ -136,7 +135,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
           })
       );
       component.set('isOpenPlayer', true);
-      component.set('playerContent', offlineActivity);
+      component.set('playerContent', component.get('offlineActivity'));
     },
 
     onToggleAttemptsList() {

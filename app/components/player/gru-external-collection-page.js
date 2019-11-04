@@ -62,7 +62,12 @@ export default Ember.Component.extend({
      */
     onCancel() {
       let component = this;
-      component.redirectTo();
+      let isIframeMode = component.get('isIframeMode');
+      if (isIframeMode) {
+        component.sendAction('onClosePlayer');
+      } else {
+        component.redirectTo();
+      }
     }
   },
 

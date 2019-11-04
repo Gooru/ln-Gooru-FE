@@ -79,7 +79,7 @@ window.i18ln = {
   'self-grade.not-required': 'Student self-grading not required',
   'common.more': 'more',
   'common.tasks': 'tasks',
-  'common.suggest-to-student':'Suggest to student',
+  'common.suggest-to-student': 'Suggest to student',
   'common.no-suggestion-message':
     'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.apply-filter': 'apply filter',
