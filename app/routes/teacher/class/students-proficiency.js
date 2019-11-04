@@ -61,7 +61,15 @@ export default Ember.Route.extend({
 
   model() {
     const route = this;
-    const secondaryClassId = route.get('secondaryClassId');
+    const learnerProficicency = route
+      .modelFor('teacher.class')
+      .class.get('isStudentLearner');
+    let secondaryClassId = route.get('secondaryClassId') || null;
+    if (learnerProficicency) {
+      secondaryClassId = route
+        .modelFor('teacher.class')
+        .class.get('secondaryClassId');
+    }
     const primaryClass = route.modelFor('teacher.class').class;
     const classId = secondaryClassId
       ? secondaryClassId
@@ -171,7 +179,12 @@ export default Ember.Route.extend({
     }
     controller.get('classController').selectMenuItem('students');
     controller.loadStudentsProficiencyData();
+    controller.set('classController.class.secondaryClassId', null);
+    controller.set('classController.class.isStudentLearner', false);
     if (model.class.get('isSecondaryClass')) {
+      controller
+        .get('classController.class')
+        .set('secondaryClassId', model.class.get('id'));
       controller
         .get('classController')
         .send('onSelectSecondaryClass', model.class);
