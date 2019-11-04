@@ -346,15 +346,6 @@ export default Ember.Controller.extend({
    */
 
   isSecondaryClass: Ember.computed('class', function() {
-    if (!this.get('class.isSecondaryClass')) {
-      let secondaryClassList = this.get('selectedClassList');
-      let selectedClass = secondaryClassList
-        ? secondaryClassList.findBy('isSelected', true)
-        : null;
-      if (selectedClass) {
-        selectedClass.set('isSelected', false);
-      }
-    }
     return this.get('class.isSecondaryClass') || false;
   }),
 

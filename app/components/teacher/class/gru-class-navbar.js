@@ -124,7 +124,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     selectItem: function(item) {
       let isPremiumClass = this.get('isPremiumClass');
-      this.set('selectedSecondaryClass', null);
+      if (item !== this.get('selectedMenuItem')) {
+        this.set('selectedSecondaryClass', null);
+      }
       if (this.get('onItemSelected')) {
         if (!(item === 'performance' && isPremiumClass)) {
           this.selectItem(item);
