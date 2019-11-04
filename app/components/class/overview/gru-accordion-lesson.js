@@ -94,6 +94,15 @@ export default Ember.Component.extend(
     enableCollectionLiveLearning: function() {
       return true;
     }.property(),
+
+    resetPerformance: false,
+
+    reloadScore: Ember.observer('resetPerformance', function() {
+      if (this.get('resetPerformance')) {
+        this.loadData();
+      }
+    }),
+
     // -------------------------------------------------------------------------
     // Actions
     actions: {

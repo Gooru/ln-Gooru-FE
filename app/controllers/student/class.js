@@ -11,6 +11,17 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    * @type {Object}
    */
   taxonomyService: Ember.inject.service('taxonomy'),
+
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
+  /**
+   * @type {PerformanceService} Service to retrieve class performance summary
+   */
+  performanceService: Ember.inject.service('api-sdk/performance'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -25,6 +36,58 @@ export default Ember.Controller.extend(ConfigurationMixin, {
       } else {
         $panels.slideDown();
       }
+    },
+
+    reloadData: function() {
+      const route = this;
+      const myId = route.get('session.userId');
+      const classId = route.get('class.id');
+      const classPromise = route.get('classService').readClassInfo(classId);
+      const membersPromise = route
+        .get('classService')
+        .readClassMembers(classId);
+
+      return classPromise.then(function(classData) {
+        let classCourseId = null;
+        if (classData.courseId) {
+          classCourseId = Ember.A([
+            {
+              classId: classId,
+              courseId: classData.courseId
+            }
+          ]);
+        }
+        const performanceSummaryPromise = classCourseId
+          ? route
+            .get('performanceService')
+            .findClassPerformanceSummaryByStudentAndClassIds(
+              myId,
+              classCourseId
+            )
+          : null;
+        let caClassPerfSummaryPromise = route
+          .get('performanceService')
+          .getCAPerformanceData([classId], myId);
+        return Ember.RSVP.hash({
+          class: classPromise,
+          members: membersPromise,
+          classPerformanceSummaryItems: performanceSummaryPromise,
+          performanceSummaryForDCA: caClassPerfSummaryPromise
+        }).then(function(hash) {
+          const aClass = hash.class;
+          const classPerformanceSummaryItems =
+            hash.classPerformanceSummaryItems;
+          let classPerformanceSummary = classPerformanceSummaryItems
+            ? classPerformanceSummaryItems.findBy('classId', classId)
+            : null;
+          aClass.set('performanceSummary', classPerformanceSummary);
+          const performanceSummaryForDCA = hash.performanceSummaryForDCA
+            ? hash.performanceSummaryForDCA.objectAt(0)
+            : null;
+          aClass.set('performanceSummaryForDCA', performanceSummaryForDCA);
+          route.set('class', aClass);
+        });
+      });
     },
 
     /**

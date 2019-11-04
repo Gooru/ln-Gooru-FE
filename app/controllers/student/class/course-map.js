@@ -67,6 +67,8 @@ export default Ember.Controller.extend({
 
   isFirstLoad: true,
 
+  resetPerformance: false,
+
   demo: false,
 
   mileStone: Ember.computed(function() {
@@ -177,7 +179,9 @@ export default Ember.Controller.extend({
     closePullUp() {
       const component = this;
       component.set('isOpenPlayer', false);
+      component.set('resetPerformance', true);
       component.getUserCurrentLocation();
+      component.get('studentClassController').send('reloadData');
     }
   },
 
