@@ -46,6 +46,7 @@ window.i18ln = {
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
+  'common.suggest-to-student': 'Suggest to student',
   'common.by-question': 'question-by-question',
   'not-covered-in-fw-msg':
     'Note: This competency is not covered by the {{framework}} framework',

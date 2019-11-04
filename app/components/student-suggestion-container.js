@@ -153,8 +153,7 @@ export default Ember.Component.extend({
     studentSuggestionReport(activity) {
       const component = this;
       component.set('isShowPerformanceReport', true);
-      component.set('reportActivityId', activity.get('suggestedContentId'));
-      component.set('reportActivityType', activity.get('suggestedContentType'));
+      component.set('selectedActivityContext', activity);
     },
 
     onCloseContainer() {

@@ -86,6 +86,7 @@ window.i18ln = {
   'common.content-name': 'ବିଷୟ ନାମ',
   'common.lastName': 'ଅନ୍ତିମ ନାମ',
   'common.firstName': 'ପ୍ରଥମ ନାମ',
+  'common.suggest-to-student': 'Suggest to student',
   'common.filter-by': 'ଦ୍ୱାରା ଫିଲ୍ଟର ହୋଇଛି',
   'common.tasks': 'tasks',
   'common.more': 'ଅଧିକ',

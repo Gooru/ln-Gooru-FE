@@ -46,6 +46,7 @@ window.i18ln = {
   'errors.otherThan': '{{description}} {{মান}} এর চেয়ে অন্য হতে হবে',
   'errors.odd': '{{বর্ণনা}} অদ্ভুত হতে হবে',
   'errors.even': '{{বর্ণনা}} এমনকি হতে হবে',
+  'common.suggest-to-student': 'Suggest to student',
   'common.no-users-to-grade-oa':
     'There are no users to grade for this Offline Activity.',
   'errors.positive': '{{বর্ণনা}} ইতিবাচক হতে হবে',

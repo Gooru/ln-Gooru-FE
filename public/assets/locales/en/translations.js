@@ -2473,6 +2473,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'Question',
   'gru-study-header.question.one': 'Question',
   'gru-study-header.question.other': 'Questions',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'To learn more, check out these resources.',
   'gru-suggest-test.pre-test-header': 'Pre-Test (Optional)',

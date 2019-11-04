@@ -21,7 +21,7 @@ export default AnalyticsSerializer.extend({
         sessionId: collection.sessionId,
         score: collection.score,
         resourceId: collection.gooruOId,
-        timeSpent: collection.timeSpent,
+        timeSpent: collection.timeSpent || collection.timespent,
         views: collection.views,
         totalAttempts: collection.attempts,
         resourceResults: serializer.normalizeResourceResults(resources),

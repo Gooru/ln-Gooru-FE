@@ -22,6 +22,23 @@ export default AddToModal.extend({
    */
   session: Ember.inject.service('session'),
 
+  /**
+   * @type {CollectionService} Service to make copy of the collection
+   */
+  collectionService: Ember.inject.service('api-sdk/collection'),
+
+  /**
+   * @type {AssessmentService} Service to make copy of the assessment
+   */
+  assessmentService: Ember.inject.service('api-sdk/assessment'),
+
+  /**
+   * @type {OfflineActivityService} Service to make copy of the offline activity
+   */
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -46,7 +63,25 @@ export default AddToModal.extend({
     }
   },
   copyContent: function() {
-    return Ember.RSVP.resolve();
+    let collectionOrAssesmentService = this.get('selectedCollection.id');
+    if (this.get('selectedCollection.format') === 'collection') {
+      collectionOrAssesmentService = this.get(
+        'collectionService'
+      ).copyCollection(this.get('selectedCollection.id'));
+    } else if (this.get('selectedCollection.format') === 'assessment') {
+      collectionOrAssesmentService = this.get(
+        'assessmentService'
+      ).copyAssessment(this.get('selectedCollection.id'));
+    } else if (this.get('selectedCollection.format') === 'offline-activity') {
+      collectionOrAssesmentService = this.get(
+        'offlineActivityService'
+      ).copyActivity(this.get('selectedCollection.id'));
+    }
+    return Ember.RSVP.hash({
+      collectionId: collectionOrAssesmentService
+    }).then(({ collectionId }) => {
+      this.set('copyCollectionId', collectionId);
+    });
   },
   init() {
     this._super(...arguments);
@@ -58,7 +93,7 @@ export default AddToModal.extend({
     );
   },
   addContent: function() {
-    var collectionId = this.get('selectedCollection.id');
+    var collectionId = this.get('copyCollectionId');
     var courseId = this.get('model.courseId');
     var unitId = this.get('model.unitId');
     var lessonId = this.get('content.id');
@@ -215,11 +250,33 @@ export default AddToModal.extend({
   }),
 
   /**
+   * @property {UID} copyCollectionId
+   */
+  copyCollectionId: null,
+
+  /**
+   * @property {Boolean} isCollectionOrAssesment
+   */
+  isCollectionOrAssesment: Ember.computed('selectedCollection', function() {
+    let format = this.get('selectedCollection.format');
+    return format !== 'collection-external' && format !== 'assessment-external';
+  }),
+
+  /**
    * @property {*}
    */
   pagination: {
     page: 1,
     filterBy: 'notInCourse',
     pageSize: DEFAULT_PAGE_SIZE
-  }
+  },
+
+  filteredCollections: Ember.computed('collections.[]', function() {
+    let collections = this.get('collections');
+    return collections.filter(
+      collection =>
+        collection.format !== 'collection-external' &&
+        collection.format !== 'assessment-external'
+    );
+  })
 });
