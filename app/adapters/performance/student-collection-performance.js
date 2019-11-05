@@ -48,11 +48,13 @@ export default ApplicationAdapter.extend({
     delete query.sessionId;
     delete query.pathId;
     //If there is a session opened we are going to  use only the sessionId to get the data
-    let queryParams = pathId ? `classGooruId=${classId}&pathId=${pathId}` : sessionId ?
-      `sessionId=${sessionId}` :
-      classId ?
-        `classGooruId=${classId}&courseGooruId=${courseId}&unitGooruId=${unitId}&lessonGooruId=${lessonId}` :
-        '';
+    let queryParams = pathId
+      ? `classGooruId=${classId}&pathId=${pathId}`
+      : sessionId
+        ? `sessionId=${sessionId}`
+        : classId
+          ? `classGooruId=${classId}&courseGooruId=${courseId}&unitGooruId=${unitId}&lessonGooruId=${lessonId}`
+          : '';
 
     return Ember.$.ajax(
       `${namespace}/${collectionType}/${contentId}/user/${userId}?${queryParams}`,

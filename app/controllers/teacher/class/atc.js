@@ -170,11 +170,14 @@ export default Ember.Controller.extend({
 
   secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
 
-  secondaryClassToBeShownList: Ember.computed('secondaryClasses', function() {
-    const controller = this;
-    const secondaryClasses = controller.get('secondaryClasses');
-    return secondaryClasses ? Ember.copy(secondaryClasses) : Ember.A([]);
-  }),
+  secondaryClassToBeShownList: Ember.computed(
+    'secondaryClasses.@each.id',
+    function() {
+      const controller = this;
+      const secondaryClasses = controller.get('secondaryClasses');
+      return secondaryClasses ? Ember.copy(secondaryClasses) : Ember.A([]);
+    }
+  ),
 
   selectedSecondaryClassList: Ember.A([]),
 

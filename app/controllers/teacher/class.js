@@ -5,6 +5,11 @@ export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
 
   /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
+  /**
    * @requires service:api-sdk/course
    */
   courseService: Ember.inject.service('api-sdk/course'),

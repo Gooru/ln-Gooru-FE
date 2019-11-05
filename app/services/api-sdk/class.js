@@ -14,6 +14,10 @@ export default Ember.Service.extend({
 
   classAdapter: null,
 
+  classContainer: {},
+
+  classMembersContainer: {},
+
   init: function() {
     this._super(...arguments);
     this.set(
@@ -238,14 +242,18 @@ export default Ember.Service.extend({
   readClassInfo: function(classId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
+      const classContainer = service.get('classContainer');
       service
         .get('classAdapter')
         .readClassInfo(classId)
         .then(
           function(response) {
-            resolve(
-              service.get('classSerializer').normalizeReadClassInfo(response)
-            );
+            if (!classContainer[classId]) {
+              classContainer[classId] = service
+                .get('classSerializer')
+                .normalizeReadClassInfo(response);
+            }
+            resolve(classContainer[classId]);
           },
           function(error) {
             reject(error);
@@ -262,14 +270,18 @@ export default Ember.Service.extend({
   readClassMembers: function(classId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
+      const classMembersContainer = service.get('classMembersContainer');
       service
         .get('classAdapter')
         .readClassMembers(classId)
         .then(
           function(response) {
-            resolve(
-              service.get('classSerializer').normalizeReadClassMembers(response)
-            );
+            if (!classMembersContainer[classId]) {
+              classMembersContainer[classId] = service
+                .get('classSerializer')
+                .normalizeReadClassMembers(response);
+            }
+            resolve(classMembersContainer[classId]);
           },
           function(error) {
             reject(error);

@@ -2,9 +2,7 @@ import Ember from 'ember';
 import SuggestAdapter from 'gooru-web/adapters/suggest/suggest';
 import SuggestSerializer from 'gooru-web/serializers/suggest/suggest';
 import SuggestContext from 'gooru-web/models/suggest/suggest-context';
-import {
-  CONTENT_TYPES
-} from 'gooru-web/config/config';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 /**
  * Service to support the suggest functionality
  *
@@ -245,14 +243,26 @@ export default Ember.Service.extend({
             }
           });
           if (collectionPathIds.length) {
-            service.fetchStudentPerformance('dca',
-              classId, userId, collectionPathIds,
-              CONTENT_TYPES.COLLECTION, suggestions, lookupKey);
+            service.fetchStudentPerformance(
+              'dca',
+              classId,
+              userId,
+              collectionPathIds,
+              CONTENT_TYPES.COLLECTION,
+              suggestions,
+              lookupKey
+            );
           }
           if (assessmentPathIds.length) {
-            service.fetchStudentPerformance('dca',
-              classId, userId, assessmentPathIds,
-              CONTENT_TYPES.ASSESSMENT, suggestions, lookupKey);
+            service.fetchStudentPerformance(
+              'dca',
+              classId,
+              userId,
+              assessmentPathIds,
+              CONTENT_TYPES.ASSESSMENT,
+              suggestions,
+              lookupKey
+            );
           }
           resolve(normalizedContent);
         }, reject);
@@ -269,7 +279,15 @@ export default Ember.Service.extend({
    * @param {suggestions} suggestions
    * @returns {Promise}
    */
-  fetchStudentPerformance(source, classId, userId, pathIds, collectionType, suggestions, lookupKey) {
+  fetchStudentPerformance(
+    source,
+    classId,
+    userId,
+    pathIds,
+    collectionType,
+    suggestions,
+    lookupKey
+  ) {
     const service = this;
     service
       .get('performanceService')
@@ -282,15 +300,10 @@ export default Ember.Service.extend({
       })
       .then(result => {
         suggestions.map(suggestion => {
-          const suggestedToContext = suggestion.get(
-            'suggestedToContext'
-          );
+          const suggestedToContext = suggestion.get('suggestedToContext');
           if (suggestedToContext) {
             suggestedToContext.map(context => {
-              const performance = result.findBy(
-                'pathId',
-                context[lookupKey]
-              );
+              const performance = result.findBy('pathId', context[lookupKey]);
               if (performance) {
                 if (!userId) {
                   context.set('performance', performance);
@@ -300,10 +313,7 @@ export default Ember.Service.extend({
               }
             });
           } else {
-            const performance = result.findBy(
-              'pathId',
-              suggestion[lookupKey]
-            );
+            const performance = result.findBy('pathId', suggestion[lookupKey]);
             if (performance) {
               suggestion.set('performance', performance);
             }
@@ -439,14 +449,26 @@ export default Ember.Service.extend({
             return caContent.get('id');
           });
           if (caCollectionPathIds.length) {
-            service.fetchStudentPerformance('dca',
-              classId, userId, caCollectionPathIds,
-              CONTENT_TYPES.COLLECTION, suggestions, 'id');
+            service.fetchStudentPerformance(
+              'dca',
+              classId,
+              userId,
+              caCollectionPathIds,
+              CONTENT_TYPES.COLLECTION,
+              suggestions,
+              'id'
+            );
           }
           if (caAssessmentPathIds.length) {
-            service.fetchStudentPerformance('dca',
-              classId, userId, caAssessmentPathIds,
-              CONTENT_TYPES.ASSESSMENT, suggestions, 'id');
+            service.fetchStudentPerformance(
+              'dca',
+              classId,
+              userId,
+              caAssessmentPathIds,
+              CONTENT_TYPES.ASSESSMENT,
+              suggestions,
+              'id'
+            );
           }
           const proficiencyCollections = proficiencyContents.filterBy(
             'suggestedContentType',
@@ -467,38 +489,66 @@ export default Ember.Service.extend({
             }
           );
           if (proficiencyCollectionPathIds.length) {
-            service.fetchStudentPerformance('proficiency',
-              classId, userId, proficiencyCollectionPathIds,
-              CONTENT_TYPES.COLLECTION, suggestions, 'id');
+            service.fetchStudentPerformance(
+              'proficiency',
+              classId,
+              userId,
+              proficiencyCollectionPathIds,
+              CONTENT_TYPES.COLLECTION,
+              suggestions,
+              'id'
+            );
           }
           if (proficiencyAssessmentPathIds.length) {
-            service.fetchStudentPerformance('proficiency',
-              classId, userId, proficiencyAssessmentPathIds,
-              CONTENT_TYPES.ASSESSMENT, suggestions, 'id');
+            service.fetchStudentPerformance(
+              'proficiency',
+              classId,
+              userId,
+              proficiencyAssessmentPathIds,
+              CONTENT_TYPES.ASSESSMENT,
+              suggestions,
+              'id'
+            );
           }
           const courseMapCollections = courseMapContents.filterBy(
             'suggestedContentType',
-            CONTENT_TYPES.COLLECTION);
+            CONTENT_TYPES.COLLECTION
+          );
           const courseMapAssessments = courseMapContents.filterBy(
             'suggestedContentType',
-            CONTENT_TYPES.ASSESSMENT);
+            CONTENT_TYPES.ASSESSMENT
+          );
           const courseMapCollectionPathIds = courseMapCollections.map(
             courseMapContent => {
               return courseMapContent.get('pathId');
-            });
+            }
+          );
           const courseMapAssessmentPathIds = courseMapAssessments.map(
             courseMapContent => {
               return courseMapContent.get('pathId');
-            });
+            }
+          );
           if (courseMapCollectionPathIds.length) {
-            service.fetchStudentPerformance('coursemap',
-              classId, userId, courseMapCollectionPathIds,
-              CONTENT_TYPES.COLLECTION, suggestions, 'pathId');
+            service.fetchStudentPerformance(
+              'coursemap',
+              classId,
+              userId,
+              courseMapCollectionPathIds,
+              CONTENT_TYPES.COLLECTION,
+              suggestions,
+              'pathId'
+            );
           }
           if (courseMapAssessmentPathIds.length) {
-            service.fetchStudentPerformance('coursemap',
-              classId, userId, courseMapAssessmentPathIds,
-              CONTENT_TYPES.ASSESSMENT, suggestions, 'pathId');
+            service.fetchStudentPerformance(
+              'coursemap',
+              classId,
+              userId,
+              courseMapAssessmentPathIds,
+              CONTENT_TYPES.ASSESSMENT,
+              suggestions,
+              'pathId'
+            );
           }
           resolve(suggestions);
         }, reject);

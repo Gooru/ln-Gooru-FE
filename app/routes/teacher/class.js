@@ -219,6 +219,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('members', model.members);
     controller.set('contentVisibility', model.contentVisibility);
     controller.set('secondaryClassList', model.secondaryClassList);
+    // controller.loadSecondaryClasses();
     controller.set('router', this.get('router'));
     let classData = model.class;
     classData.course = model.course;

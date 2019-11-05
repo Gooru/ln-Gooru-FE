@@ -681,9 +681,9 @@ export default Ember.Service.extend({
   getRecord: function(modelName, id) {
     const store = this.get('store');
     const found = store.recordIsLoaded(modelName, id);
-    return found ?
-      store.recordForId(modelName, id) :
-      store.createRecord(modelName, {
+    return found
+      ? store.recordForId(modelName, id)
+      : store.createRecord(modelName, {
         id: id
       });
   },

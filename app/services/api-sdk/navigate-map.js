@@ -4,9 +4,7 @@ import NavigateMapAdapter from 'gooru-web/adapters/map/navigate-map';
 import MapContext from 'gooru-web/models/map/map-context';
 import MapLocation from 'gooru-web/models/map/map-location';
 import Utils from 'gooru-web/utils/utils';
-import {
-  ASSESSMENT_SUB_TYPES
-} from 'gooru-web/config/config';
+import { ASSESSMENT_SUB_TYPES } from 'gooru-web/config/config';
 
 /**
  * Navigate Map Service
@@ -363,8 +361,9 @@ export default Ember.Service.extend({
           parsedResponse.suggestions
         ),
         hasContent,
-        content: hasContent ?
-          mapSerializer.normalizeMapContent(parsedResponse.content) : null
+        content: hasContent
+          ? mapSerializer.normalizeMapContent(parsedResponse.content)
+          : null
       })
     );
   },

@@ -1,8 +1,5 @@
 import Ember from 'ember';
-import {
-  PLAYER_EVENT_SOURCE,
-  SUGGESTION_TYPE
-} from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE, SUGGESTION_TYPE } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['student-suggestion-container'],
@@ -243,11 +240,9 @@ export default Ember.Component.extend({
     };
     component.set(
       'playerUrl',
-      component
-        .get('router')
-        .generate('study-player', courseId, {
-          queryParams
-        })
+      component.get('router').generate('study-player', courseId, {
+        queryParams
+      })
     );
     let content = suggestionContent;
     content.set('format', collectionType);
@@ -296,10 +291,11 @@ export default Ember.Component.extend({
 
   onOpenSuggestionContainer() {
     const component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400
     );
   },
 

@@ -1,8 +1,6 @@
 import Ember from 'ember';
 import AccordionMixin from 'gooru-web/mixins/gru-accordion';
-import {
-  CONTENT_TYPES
-} from 'gooru-web/config/config';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 import ModalMixin from 'gooru-web/mixins/modal';
 
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
@@ -24,7 +22,8 @@ var isUpdatingLocation = false;
 export default Ember.Component.extend(
   AccordionMixin,
   ModalMixin,
-  ConfigurationMixin, {
+  ConfigurationMixin,
+  {
     // -------------------------------------------------------------------------
     // Dependencies
 
@@ -256,11 +255,11 @@ export default Ember.Component.extend(
           userId = component.get('session.userId');
         }
         let classId = currentClass ? currentClass.get('id') : null;
-        let courseId = currentClass ?
-          currentClass.get('courseId') :
-          currentCourse ?
-            currentCourse.get('id') :
-            null;
+        let courseId = currentClass
+          ? currentClass.get('courseId')
+          : currentCourse
+            ? currentCourse.get('id')
+            : null;
         let unitId = component.get('unitId');
         let lessonId = component.get('model.id');
         let collectionId = collection.get('id');
@@ -533,10 +532,11 @@ export default Ember.Component.extend(
 
         if (this.get('showLocation')) {
           if (divPosition) {
-            $('html, body').animate({
-              scrollTop: divPosition.top - 80
-            },
-            'slow'
+            $('html, body').animate(
+              {
+                scrollTop: divPosition.top - 80
+              },
+              'slow'
             );
           }
           this.set('activeElement', '');
@@ -568,11 +568,11 @@ export default Ember.Component.extend(
 
       component.set('loading', true);
 
-      let peersPromise = classId ?
-        component
+      let peersPromise = classId
+        ? component
           .get('analyticsService')
-          .getLessonPeers(classId, courseId, unitId, lessonId) :
-        Ember.RSVP.resolve(lessonPeers);
+          .getLessonPeers(classId, courseId, unitId, lessonId)
+        : Ember.RSVP.resolve(lessonPeers);
 
       return Ember.RSVP.hash({
         lesson: component
@@ -580,18 +580,14 @@ export default Ember.Component.extend(
           .getLessonInfo(classId, courseId, unitId, lessonId, isTeacher),
         peers: peersPromise
       })
-        .then(({
-          lesson,
-          peers
-        }) => {
+        .then(({ lesson, peers }) => {
           collections = lesson.get('children');
           lessonPeers = peers;
 
           let loadDataPromise = Ember.RSVP.resolve();
           if (classId) {
             isTeacher
-              ?
-              component
+              ? component
                 .loadTeacherData(
                   classId,
                   courseId,
@@ -610,8 +606,8 @@ export default Ember.Component.extend(
                     classMembers,
                     collections
                   );
-                }) :
-              (loadDataPromise = component.loadStudentData(
+                })
+              : (loadDataPromise = component.loadStudentData(
                 userId,
                 classId,
                 courseId,
@@ -680,15 +676,15 @@ export default Ember.Component.extend(
                 collection.get('format') === 'assessment-external';
               const collectionId = collection.get('id');
               const peer = lessonPeers.findBy('id', collectionId);
-              const assessmentDataPromise = isAssessment ?
-                component
+              const assessmentDataPromise = isAssessment
+                ? component
                   .get('assessmentService')
-                  .readAssessment(collectionId) :
-                isExternalAssessment ?
-                  component
+                  .readAssessment(collectionId)
+                : isExternalAssessment
+                  ? component
                     .get('assessmentService')
-                    .readExternalAssessment(collectionId) :
-                  Ember.RSVP.resolve(true);
+                    .readExternalAssessment(collectionId)
+                  : Ember.RSVP.resolve(true);
 
               return assessmentDataPromise.then(function(assessmentData) {
                 const averageScore = performance.calculateAverageScoreByItem(
@@ -712,9 +708,11 @@ export default Ember.Component.extend(
                   Ember.Object.create({
                     score: averageScore,
                     hasStarted: averageScore > 0 || timeSpent > 0,
-                    isDisabled: isAssessment ?
-                      !assessmentData.get('classroom_play_enabled') : undefined,
-                    isCompleted: completionDone > 0 && completionDone >= completionTotal,
+                    isDisabled: isAssessment
+                      ? !assessmentData.get('classroom_play_enabled')
+                      : undefined,
+                    isCompleted:
+                      completionDone > 0 && completionDone >= completionTotal,
                     numberOfStudents
                   })
                 );
@@ -751,7 +749,8 @@ export default Ember.Component.extend(
             courseId,
             unitId,
             lessonId,
-            classMembers, {
+            classMembers,
+            {
               collectionType: CONTENT_TYPES.COLLECTION
             }
           )
@@ -802,7 +801,8 @@ export default Ember.Component.extend(
               courseId,
               unitId,
               lessonId,
-              collections, {
+              collections,
+              {
                 collectionType: CONTENT_TYPES.ASSESSMENT
               }
             ),
@@ -814,14 +814,12 @@ export default Ember.Component.extend(
               courseId,
               unitId,
               lessonId,
-              collections, {
+              collections,
+              {
                 collectionType: CONTENT_TYPES.COLLECTION
               }
             )
-        }).then(({
-          performanceAssessment,
-          performanceCollection
-        }) => {
+        }).then(({ performanceAssessment, performanceCollection }) => {
           let assessments = performanceAssessment.filterBy(
             'type',
             'assessment'
@@ -974,10 +972,7 @@ export default Ember.Component.extend(
               lessonId,
               CONTENT_TYPES.COLLECTION
             )
-        }).then(({
-          performanceAssessment,
-          performanceCollection
-        }) => {
+        }).then(({ performanceAssessment, performanceCollection }) => {
           let performance = performanceAssessment.concat(performanceCollection);
           const promises = collections.map(function(collection) {
             const collectionId = collection.get('id');
@@ -1166,7 +1161,8 @@ export default Ember.Component.extend(
       let component = this;
       let params = {
         classId: component.get('currentClass.id'),
-        courseId: component.get('currentClass.courseId') ||
+        courseId:
+          component.get('currentClass.courseId') ||
           component.get('currentCourse.id'),
         unitId: component.get('unit.id'),
         lessonId: component.get('model.id'),
