@@ -492,3 +492,8 @@
 
 @import "components/suggestion-panel";
 @import "components/student-suggestion-container";
+
+// Class Activities
+@import "controllers/teacher/class/class-activities-new";
+@import "components/class/activities/gru-class-activities-listing";
+@import "components/new-cards/gru-class-activity-card";
