@@ -273,15 +273,18 @@
           margin-bottom: 5px;
           background-color: $white;
           box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.4);
+          line-height: 1.4;
 
           .current-class-view {
             font-size: 12px;
             font-weight: bold;
             text-transform: uppercase;
             text-align: center;
+            padding-top: 10px;
 
             .class-selector {
               position: relative;
+              top: -5px;
               @media screen and (max-width: $screen-sm) {
                 position: static;
               }
@@ -294,6 +297,12 @@
                 cursor: pointer;
                 span {
                   line-height: 1;
+                  &.active-class-text {
+                    padding-left: 10px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                  }
                 }
               }
               .class-list-container {

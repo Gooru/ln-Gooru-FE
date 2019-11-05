@@ -40,8 +40,14 @@ export default Ember.Route.extend({
     let route = this;
     route._super(...arguments);
     const studentId = params.studentId;
-    const currentClass = route.modelFor('teacher.class').class;
-    const course = route.modelFor('teacher.class').course;
+    const secondaryClassId =
+      route.modelFor('teacher.class').class.get('secondaryClassId') || null;
+    const currentClass = secondaryClassId
+      ? route.modelFor('teacher.class.students-proficiency').class
+      : route.modelFor('teacher.class').class;
+    const course = secondaryClassId
+      ? route.modelFor('teacher.class.students-proficiency').course
+      : route.modelFor('teacher.class').course;
     return Ember.RSVP.hash({
       profilePromise: route.get('profileService').readUserProfile(studentId),
       taxonomyCategories: route.get('taxonomyService').getCategories(),

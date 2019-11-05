@@ -379,5 +379,16 @@ export default Ember.Controller.extend({
       })
     );
     return secondaryClasses;
+  },
+
+  serializeSecondaryClass(secondaryClass) {
+    let classList = JSON.parse(JSON.stringify(secondaryClass));
+    let result = Ember.A([]);
+    if (classList && classList.length) {
+      classList.map(activeClass => {
+        result.pushObject(Ember.Object.create(activeClass));
+      });
+    }
+    return result;
   }
 });

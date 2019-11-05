@@ -457,6 +457,7 @@
         align-items: center;
         pointer-events: none;
         color: $dark-600;
+        text-align: center;
 
         span {
           white-space: nowrap;
@@ -464,7 +465,8 @@
           text-overflow: ellipsis;
         }
         .secondary-class {
-          font-size: 10px;
+          padding-top: 10px;
+          font-size: 12px;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
