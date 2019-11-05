@@ -2473,6 +2473,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'Question',
   'gru-study-header.question.one': 'Question',
   'gru-study-header.question.other': 'Questions',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'To learn more, check out these resources.',
   'gru-suggest-test.pre-test-header': 'Pre-Test (Optional)',
@@ -2771,9 +2772,11 @@ window.i18ln = {
   'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
     'At least one task is required for activity activation',
-  'common.view-mulitple-classes': 'View Multiple Classes',
   'common.class-name': 'Class Name',
-  'common.multiple-class-setting': 'Multiple Class Settings',
-  'common.secondary-class-not-available': 'Secondary Classes Not Available'
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };
 //export default window.i18ln;

@@ -25,6 +25,12 @@ export default Ember.Controller.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
+  /**
+   * multiple class service dependency injection
+   * @type {Object}
+   */
+  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -123,6 +129,10 @@ export default Ember.Controller.extend({
     onOpenOCAReport() {
       let controller = this;
       controller.openDCAReportForOfflineClass();
+    },
+
+    onSelectSecondaryClass(secondaryClass) {
+      this.set('selectedSecondaryClass', secondaryClass);
     }
   },
 
@@ -197,6 +207,11 @@ export default Ember.Controller.extend({
 
   isShowMilestoneReport: false,
 
+  /**
+   * @property {Array} secondaryClasses
+   * Property for list of secondary classess attached with the class
+   */
+
   secondaryClasses: Ember.computed(
     'class.setting',
     'secondaryClassList',
@@ -208,21 +223,12 @@ export default Ember.Controller.extend({
         classSetting && classSetting['secondary.classes']
           ? classSetting['secondary.classes'].list
           : Ember.A([]);
-      let secondaryClasses = Ember.A([]);
-      attachedSecondaryClassList.map(classId => {
-        let attchedClass = secondaryClassList.findBy('id', classId);
-        if (attchedClass) {
-          secondaryClasses.pushObject(attchedClass);
-        }
-      });
-      return secondaryClasses;
+      return controller.createSecondaryClassList(
+        attachedSecondaryClassList,
+        secondaryClassList
+      );
     }
   ),
-
-  /**
-   * @property {Array} secondaryClasses
-   * Property for list of secondary classess attached with the class
-   */
 
   isMultiClassEnabled: Ember.computed('secondaryClasses.[]', function() {
     const component = this;
@@ -230,6 +236,8 @@ export default Ember.Controller.extend({
   }),
 
   secondaryClassList: Ember.A([]),
+
+  selectedSecondaryClass: null,
   // -------------------------------------------------------------------------
   // Methods
 
@@ -358,34 +366,34 @@ export default Ember.Controller.extend({
     });
   },
 
-  loadSecondaryClasses() {
-    const controller = this;
-    const classSetting = controller.get('class.setting');
-    const secondaryClassList = controller.get('secondaryClassList');
-    let attachedSecondaryClassList =
-      classSetting && classSetting['secondary.classes']
-        ? classSetting['secondary.classes'].list
-        : Ember.A([]);
+  createSecondaryClassList(attachedSecondaryClassList, secondaryClassList) {
+    let controller = this;
     let secondaryClasses = Ember.A([]);
     attachedSecondaryClassList.map(classId => {
       let attchedClass = secondaryClassList.findBy('id', classId);
       if (attchedClass) {
-        controller.fetchClassData(classId).then(function(classData) {
-          secondaryClasses.pushObject(classData);
-        });
+        secondaryClasses.pushObject(attchedClass);
       }
     });
-    controller.set('secondaryClasses', secondaryClasses);
+    secondaryClasses.pushObject(
+      Ember.Object.create({
+        id: controller.get('class.id'),
+        code: controller.get('class.code'),
+        title: controller.get('class.title'),
+        isPrimaryClass: true
+      })
+    );
+    return secondaryClasses;
   },
 
-  fetchClassData(classId) {
-    const controller = this;
-    return Ember.RSVP.hash({
-      classData: controller.get('classService').readClassInfo(classId),
-      classMembers: controller.get('classService').readClassMembers(classId)
-    }).then(({ classData, classMembers }) => {
-      classData.set('members', classMembers.get('members'));
-      return classData;
-    });
+  serializeSecondaryClass(secondaryClass) {
+    let classList = JSON.parse(JSON.stringify(secondaryClass));
+    let result = Ember.A([]);
+    if (classList && classList.length) {
+      classList.map(activeClass => {
+        result.pushObject(Ember.Object.create(activeClass));
+      });
+    }
+    return result;
   }
 });

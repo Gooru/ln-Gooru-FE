@@ -59,6 +59,7 @@ window.i18ln = {
   'common.relevance': 'പ്രാധാന്യം',
   'common.engagement': 'ഇടപഴകൽ',
   'common.efficacy': 'ഫലപ്രാപ്തി',
+  'common.suggest-to-student': 'Suggest to student',
   'common.tenantLibrary': 'Tenant Library',
   'common.for': 'for',
   'common.offline-activites': 'offline activites',
@@ -2839,8 +2840,10 @@ window.i18ln = {
   'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
     'At least one task is required for activity activation',
-  'common.view-mulitple-classes': 'View Multiple Classes',
   'common.class-name': 'Class Name',
-  'common.multiple-class-setting': 'Multiple Class Settings',
-  'common.secondary-class-not-available': 'Secondary Classes Not Available'
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };

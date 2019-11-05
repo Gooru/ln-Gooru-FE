@@ -123,13 +123,26 @@ export default Ember.Component.extend({
       );
     } else if (ngtnDetails.queryPType === 'hybrid') {
       queryParams = qpm;
-      route.transitionTo(
-        ngtnDetails.route,
-        queryParams[ngtnDetails.exactparams],
-        {
-          queryParams: queryParams
-        }
-      );
+      if (queryParams.isIframeMode) {
+        let playerContent = Ember.Object.create({
+          title: notin.currentItemTitle,
+          format: notin.currentItemType
+        });
+        let playerUrl = component
+          .get('router')
+          .generate(ngtnDetails.route, queryParams[ngtnDetails.exactparams], {
+            queryParams
+          });
+        component.sendAction('playerContent', playerUrl, playerContent);
+      } else {
+        route.transitionTo(
+          ngtnDetails.route,
+          queryParams[ngtnDetails.exactparams],
+          {
+            queryParams: queryParams
+          }
+        );
+      }
     }
   },
 

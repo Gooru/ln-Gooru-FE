@@ -65,6 +65,7 @@ export default Ember.Component.extend({
    */
   scopeItems: Ember.computed('classId', function() {
     let scopeItems = Ember.A([]);
+    scopeItems.pushObject(this.createScopeItem('all', 'common.all', false));
     scopeItems.pushObject(
       this.createScopeItem('course-map', 'common.course-map', false)
     );
@@ -152,13 +153,17 @@ export default Ember.Component.extend({
     studentSuggestionReport(activity) {
       const component = this;
       component.set('isShowPerformanceReport', true);
-      component.set('reportActivityId', activity.get('suggestedContentId'));
-      component.set('reportActivityType', activity.get('suggestedContentType'));
+      component.set('selectedActivityContext', activity);
     },
 
     onCloseContainer() {
       const component = this;
       component.sendAction('onCloseContainer');
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 
@@ -194,11 +199,19 @@ export default Ember.Component.extend({
       type: collectionType,
       caContentId,
       pathId,
-      pathType
+      pathType,
+      isIframeMode: true
     };
-    component.get('router').transitionTo('player', contentId, {
-      queryParams
-    });
+    component.set(
+      'playerUrl',
+      component.get('router').generate('player', contentId, {
+        queryParams
+      })
+    );
+    let content = suggestionContent;
+    content.set('format', collectionType);
+    component.set('isOpenPlayer', true);
+    component.set('playerContent', content);
   },
 
   playCourseMapContent(suggestionContent, pathType) {
@@ -206,7 +219,7 @@ export default Ember.Component.extend({
     const contentId = suggestionContent.get('suggestedContentId');
     const collectionType = suggestionContent.get('suggestedContentType');
     const classId = component.get('classId');
-    const pathId = suggestionContent.get('id');
+    const pathId = suggestionContent.get('pathId');
     const courseId = suggestionContent.get('courseId');
     const unitId = suggestionContent.get('unitId');
     const lessonId = suggestionContent.get('lessonId');
@@ -221,11 +234,20 @@ export default Ember.Component.extend({
       unitId,
       lessonId,
       collectionSource,
-      pathType
+      pathType,
+      isIframeMode: true,
+      isNotification: true
     };
-    component.get('router').transitionTo('study-player', courseId, {
-      queryParams
-    });
+    component.set(
+      'playerUrl',
+      component.get('router').generate('study-player', courseId, {
+        queryParams
+      })
+    );
+    let content = suggestionContent;
+    content.set('format', collectionType);
+    component.set('isOpenPlayer', true);
+    component.set('playerContent', content);
   },
 
   playProficiencyContent(suggestionContent, pathType) {
@@ -241,11 +263,19 @@ export default Ember.Component.extend({
       source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
       type: collectionType,
       pathId,
-      pathType
+      pathType,
+      isIframeMode: true
     };
-    component.get('router').transitionTo('player', contentId, {
-      queryParams
-    });
+    component.set(
+      'playerUrl',
+      component.get('router').generate('player', contentId, {
+        queryParams
+      })
+    );
+    let content = suggestionContent;
+    content.set('format', collectionType);
+    component.set('isOpenPlayer', true);
+    component.set('playerContent', content);
   },
 
   init() {
@@ -285,7 +315,11 @@ export default Ember.Component.extend({
     const offset = component.get('offset');
     const max = component.get('max');
     const suggestionOrigin = component.get('selectedTab');
-    const scope = component.get('selectedScopeItem.key');
+    let scope = component.get('selectedScopeItem.key');
+    //Set All scope value as undefined to fetch from all origin
+    if (scope === 'all') {
+      scope = undefined;
+    }
     component
       .get('suggestService')
       .fetchInClassSuggestionsForStudent(userId, classId, {

@@ -62,6 +62,7 @@ window.i18ln = {
   'common.efficacy': 'Efficacy',
   'common.grid': 'Grid',
   'common.list': 'List',
+  'common.suggest-to-student': 'Suggest to student',
   'common.tenantLibrary': 'Tenant Library',
   'common.no-suggestion-message':
     'Looks like you are doing very well! There are no suggestions at this time for you to study!',
@@ -2822,8 +2823,10 @@ window.i18ln = {
   'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
     'At least one task is required for activity activation',
-  'common.view-mulitple-classes': 'View Multiple Classes',
   'common.class-name': 'Class Name',
-  'common.multiple-class-setting': 'Multiple Class Settings',
-  'common.secondary-class-not-available': 'Secondary Classes Not Available'
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };

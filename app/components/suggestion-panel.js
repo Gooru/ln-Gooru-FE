@@ -42,7 +42,14 @@ export default Ember.Component.extend({
         queryParams.pathId = content.id;
         queryParams.pathType = 'proficiency.teacher';
       }
-      component.sendAction('playContent', queryParams, contentId, content);
+      let playerContent = content.get('collection');
+      playerContent.set('format', component.get('collectionType'));
+      component.sendAction(
+        'playContent',
+        queryParams,
+        contentId,
+        playerContent
+      );
     }
   }
 });

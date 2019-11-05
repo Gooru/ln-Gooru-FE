@@ -171,6 +171,7 @@ export default Ember.Service.extend({
       params.courseId = context.courseId;
       params.unitId = context.unitId;
       params.lessonId = context.lessonId;
+      params.pathId = context.pathId;
     }
     return new Ember.RSVP.Promise(function(resolve) {
       return service

@@ -158,14 +158,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       }
     },
 
-    playContent(route, queryParams, contentId, content) {
+    playContent(playerUrl, content) {
       const component = this;
-      component.set(
-        'playerUrl',
-        component.target
-          .get('router')
-          .generate(route, contentId, { queryParams })
-      );
+      component.set('playerUrl', playerUrl);
       component.set('isOpenPlayer', true);
       component.set('playerContent', content);
     },
@@ -173,6 +168,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     closePullUp() {
       const component = this;
       component.set('isOpenPlayer', false);
+      component.get('classController').send('reloadData');
+      let todayDate = moment().format('YYYY-MM-DD');
+      component.loadActivityForDate(todayDate);
     }
   },
 
@@ -191,6 +189,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * @property {String} tab
    */
   tab: null,
+
+  resetPerformance: false,
 
   /**
    * Contains classActivity objects

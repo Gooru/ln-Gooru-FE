@@ -89,6 +89,7 @@ window.i18ln = {
   'common.no-collection-info-message': 'इस पाठ में कोई संकलन नहीं है।',
   'common.gooru-suggestions': 'Gooru सुझाव',
   'common.gooru-catalog': 'Gooru सूची',
+  'common.suggest-to-student': 'Suggest to student',
   'common.suggestion-made-to': 'सुझाव दिया गया',
   'common.student-selected': 'चुना गया छात्र',
   'self-grade.not-required': 'छात्र के स्वयं-वर्गीकरण की आवश्यकता नहीं है',
@@ -2800,8 +2801,10 @@ window.i18ln = {
   'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
     'At least one task is required for activity activation',
-  'common.view-mulitple-classes': 'View Multiple Classes',
   'common.class-name': 'Class Name',
-  'common.multiple-class-setting': 'Multiple Class Settings',
-  'common.secondary-class-not-available': 'Secondary Classes Not Available'
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };

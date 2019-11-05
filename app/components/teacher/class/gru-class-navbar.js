@@ -33,6 +33,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
   class: null,
 
   /**
+   * @property {SecondaryClass} secondaryClass
+   */
+  selectedSecondaryClass: null,
+
+  /**
    * @property {String|Function} onItemSelected - event handler for when an menu item is selected
    */
   onItemSelected: null,
@@ -80,6 +85,16 @@ export default Ember.Component.extend(ConfigurationMixin, {
     return scorePercentage !== null && isNumeric(scorePercentage);
   }),
 
+  isPrimaryClass: Ember.computed('selectedSecondaryClass', 'class', function() {
+    let secondaryClass = this.get('selectedSecondaryClass.isSecondaryClass')
+      ? this.get('selectedSecondaryClass')
+      : null;
+    let primaryClass = secondaryClass
+      ? secondaryClass.get('id') === this.get('class.id')
+      : true;
+    return primaryClass;
+  }),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -109,6 +124,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     selectItem: function(item) {
       let isPremiumClass = this.get('isPremiumClass');
+      if (item !== this.get('selectedMenuItem')) {
+        this.set('selectedSecondaryClass', null);
+      }
       if (this.get('onItemSelected')) {
         if (!(item === 'performance' && isPremiumClass)) {
           this.selectItem(item);

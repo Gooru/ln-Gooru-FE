@@ -479,6 +479,12 @@ export default Ember.Service.extend({
     return mapLocationPromise;
   },
 
+  removeItem: function() {
+    const navigateMapService = this;
+    navigateMapService
+      .getLocalStorage()
+      .removeItem(navigateMapService.generateKey());
+  },
   /**
    * Teacher suggestions
    * @param  context as  params

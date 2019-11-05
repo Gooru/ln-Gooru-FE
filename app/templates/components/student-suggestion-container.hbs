@@ -94,9 +94,20 @@
 {{#if isShowPerformanceReport}}
   {{reports/pull-up/gru-collection-preview
       showPullUp=isShowPerformanceReport
-      previewContentId=reportActivityId
-      previewContentType=reportActivityType
+      previewContentId=selectedActivityContext.suggestedContentId
+      previewContentType=selectedActivityContext.suggestedContentType
       isReportView=true
+      isSuggestionReport=true
+      suggestedActivityContext=selectedActivityContext
       userId=userId
     }}
+{{/if}}
+
+{{#if isOpenPlayer}}
+  {{reports/pull-up/player-pull-up
+    showPullUp=isOpenPlayer
+    playerUrl=playerUrl
+    playerContent=playerContent
+    onclosePullUp="closePullUp"
+  }}
 {{/if}}

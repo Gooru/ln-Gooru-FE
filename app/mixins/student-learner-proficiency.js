@@ -208,6 +208,14 @@ export default Ember.Mixin.create({
     onClosePullUp() {
       let component = this;
       component.set('selectedCompetency', null);
+    },
+
+    onChangeToBack() {
+      this.set('classController.class.isStudentLearner', true);
+      this.transitionToRoute(
+        'teacher.class.students-proficiency',
+        this.get('classController.class.id')
+      );
     }
   },
 

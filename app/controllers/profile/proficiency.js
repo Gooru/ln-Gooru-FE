@@ -143,6 +143,23 @@ export default Ember.Controller.extend({
     onClosePullUp() {
       let controller = this;
       controller.set('selectedCompetency', null);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
+    },
+
+    playContent(queryParams, contentId, content) {
+      const component = this;
+      component.set(
+        'playerUrl',
+        component.target
+          .get('router')
+          .generate('player', contentId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', content);
     }
   },
 

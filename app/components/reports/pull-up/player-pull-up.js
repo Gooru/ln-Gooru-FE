@@ -5,6 +5,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['player', 'player-pull-up'],
+  classNameBindings: ['player-background'],
 
   //--------------------------------------------------------------------------
   //property
@@ -18,8 +19,15 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
+    const component = this;
     Ember.$(document.body).addClass('iframe-panel');
-    this.openPullUp();
+    component.openPullUp();
+    let content = component.get('playerContent');
+    if (content.format === 'collection') {
+      component.set('player-background', 'collection');
+    } else {
+      component.set('player-background', 'assessment');
+    }
   },
 
   didReceiveAttrs() {
@@ -39,7 +47,12 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Actions
-  actions: {},
+  actions: {
+    closePlayer: function() {
+      const component = this;
+      component.closePullUp();
+    }
+  },
 
   //--------------------------------------------------------------------------
   // Methods
@@ -66,8 +79,8 @@ export default Ember.Component.extend({
       },
       400,
       function() {
-        component.sendAction('onclosePullUp');
         Ember.$(document.body).removeClass('iframe-panel');
+        component.sendAction('onclosePullUp');
       }
     );
   }

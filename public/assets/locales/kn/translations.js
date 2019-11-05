@@ -126,6 +126,7 @@ window.i18ln = {
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
   'i2d.mobile-upload-failed': 'There was a error',
+  'common.suggest-to-student': 'Suggest to student',
   'i2d.upload-failed':
     'There was an error while uploading this image. Re-upload?',
   'common.a-collection': 'ಸಂಗ್ರಹ',
@@ -2828,8 +2829,10 @@ window.i18ln = {
   'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
     'At least one task is required for activity activation',
-  'common.view-mulitple-classes': 'View Multiple Classes',
   'common.class-name': 'Class Name',
-  'common.multiple-class-setting': 'Multiple Class Settings',
-  'common.secondary-class-not-available': 'Secondary Classes Not Available'
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };

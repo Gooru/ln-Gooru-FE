@@ -273,7 +273,12 @@ export default Ember.Component.extend({
   },
 
   loadData() {
-    let component = this;
+    const component = this;
+    component.loadCAReport();
+  },
+
+  loadCAReport() {
+    const component = this;
     const classId = component.get('classId');
     const activityId = component.get('context.id');
     const format = component.get('context.collection.format');
