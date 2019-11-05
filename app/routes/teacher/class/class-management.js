@@ -63,6 +63,8 @@ export default Ember.Route.extend({
     controller.set('frameworks', model.frameworks);
     controller.set('tempClass', model.class.copy());
     controller.set('tempClass.preference', controller.get('class.preference'));
+    controller.set('tempClass.setting', controller.get('class.setting'));
+
     controller.get('classController').selectMenuItem('class-management');
     controller.setupDisplayProperties();
   }
