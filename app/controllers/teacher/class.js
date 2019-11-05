@@ -367,7 +367,6 @@ export default Ember.Controller.extend({
   },
 
   createSecondaryClassList(attachedSecondaryClassList, secondaryClassList) {
-    let controller = this;
     let secondaryClasses = Ember.A([]);
     attachedSecondaryClassList.map(classId => {
       let attchedClass = secondaryClassList.findBy('id', classId);
@@ -375,20 +374,20 @@ export default Ember.Controller.extend({
         secondaryClasses.pushObject(attchedClass);
       }
     });
-    secondaryClasses.pushObject(
-      Ember.Object.create({
-        id: controller.get('class.id'),
-        code: controller.get('class.code'),
-        title: controller.get('class.title'),
-        isPrimaryClass: true
-      })
-    );
     return secondaryClasses;
   },
 
   serializeSecondaryClass(secondaryClass) {
     let classList = JSON.parse(JSON.stringify(secondaryClass));
     let result = Ember.A([]);
+    result.pushObject(
+      Ember.Object.create({
+        id: this.get('class.id'),
+        code: this.get('class.code'),
+        title: this.get('class.title'),
+        isPrimaryClass: true
+      })
+    );
     if (classList && classList.length) {
       classList.map(activeClass => {
         result.pushObject(Ember.Object.create(activeClass));
