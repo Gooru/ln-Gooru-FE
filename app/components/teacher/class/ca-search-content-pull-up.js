@@ -404,6 +404,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
             date
           );
           content.set('isAdded', true);
+          //dummy comment
           let classSetting = this.get('class.setting'),
             allowMasteryAccrual = classSetting['mastery.applicable'];
           if (allowMasteryAccrual && allowMasteryAccrual === 'true') {
