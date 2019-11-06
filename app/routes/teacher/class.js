@@ -240,6 +240,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
   },
 
   resetController(controller) {
+    controller.set('pullUpSecondaryClass', null);
     controller.set('isShowMilestoneReport', false);
     controller.set('selectedSecondaryClass', null);
   }
