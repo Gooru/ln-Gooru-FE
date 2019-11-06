@@ -167,10 +167,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
     closePullUp() {
       const component = this;
+      let selectedDate = component.get('selectedDate');
       component.set('isOpenPlayer', false);
+      component.loadActivityForDate(selectedDate);
       component.get('classController').send('reloadData');
-      let todayDate = moment().format('YYYY-MM-DD');
-      component.loadActivityForDate(todayDate);
     }
   },
 
@@ -400,6 +400,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       detail: true,
       userId
     };
+
     if (!classActivity.get('suggestions')) {
       controller
         .get('suggestService')
