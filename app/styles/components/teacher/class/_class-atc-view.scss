@@ -159,6 +159,7 @@
         .competency-struggling-container {
           display: grid;
           grid-template-columns: 1fr 40px 30px;
+          align-items: center;
 
           .competency-sub-heading {
             padding: 0;
@@ -176,6 +177,15 @@
               border-right: 1px solid;
               line-height: 1;
             }
+          }
+          .competency-icon {
+            font-size: 13px;
+            text-align: center;
+            display: grid;
+            color: $orange-500;
+          }
+          .competency-count {
+            text-align: center;
           }
         }
       }
