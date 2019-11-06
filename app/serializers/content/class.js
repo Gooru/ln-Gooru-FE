@@ -69,15 +69,10 @@ export default Ember.Object.extend({
   },
 
   serializeClass: function(classModel, update = false) {
-    let setting = classModel.get('setting');
-    let maValue = setting.mastery_applicable;
-    setting['mastery.applicable'] = maValue.toString();
-    delete setting.mastery_applicable;
     let data = {
       title: classModel.get('title'),
       class_sharing: classModel.get('classSharing'),
-      min_score: classModel.get('minScore') || 0,
-      setting: setting
+      min_score: classModel.get('minScore') || 0
     };
 
     if (!update) {
@@ -107,9 +102,6 @@ export default Ember.Object.extend({
         })
       ]
     );
-
-    let defReadSetting = { mastery_applicable: false };
-    let defReadSettingObj = Ember.Object.create(defReadSetting);
     return ClassModel.create(Ember.getOwner(this).ownerInjection(), {
       id: payload.id,
       creatorId: payload.creator_id,
@@ -143,9 +135,7 @@ export default Ember.Object.extend({
         });
       }),
       courseVersion: payload.course_version,
-      setting: payload.setting
-        ? Ember.Object.create(payload.setting)
-        : defReadSettingObj,
+      setting: payload.setting ? Ember.Object.create(payload.setting) : null,
       preference: payload.preference
         ? Ember.Object.create(payload.preference)
         : null,

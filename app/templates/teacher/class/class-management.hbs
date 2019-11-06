@@ -61,17 +61,6 @@
               </div>
             </div>
             {{!-- language  ends--}}
-            <div class="sub-sec language-row">
-              <div class='row-label'>
-                {{t 'class.setting.mastery'}}
-              </div>
-              <div class="row-value">
-                <div class='action-button-slide-yes'>
-                  {{gru-switch switchOptions=switchOptions onOptionSwitch='updateMastery'
-                              isChecked=isMasteryApplicable }}
-                </div>
-              </div>
-            </div>
             <div class="sub-sec-teach">
               <div class='sub-sec-head'>{{t 'class.info.teachers'}}</div>
               <div class="sub-sec-row">
@@ -87,20 +76,20 @@
                     <div class='teacher-icon' style="background-image: url({{coteacher.avatarUrl}})"></div>
                     <div class='co-teacher-label'> {{coteacher.lastName}} {{coteacher.firstName}}</div>
                     {{#if (eq selfId class.owner.id)}}
-                      <div class='delete-co-teacher' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
+                    <div class='delete-co-teacher' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
                     {{/if}}
                   </div>
                 {{/each}}
               {{/if}}
               {{#if (eq selfId class.owner.id)}}
-                <div class="trigger-add-coteacher" {{action "onToggleAddCollaborator"}}>
-                  <div class="add-co-teacher-icon">
-                    {{gru-icon name="add_circle_outline"}}
-                  </div>
-                  <div class="add-co-teacher-label">
-                    {{t 'common.add'}}
-                  </div>
+              <div class="trigger-add-coteacher" {{action "onToggleAddCollaborator"}}>
+                <div class="add-co-teacher-icon">
+                  {{gru-icon name="add_circle_outline"}}
                 </div>
+                <div class="add-co-teacher-label">
+                  {{t 'common.add'}}
+                </div>
+              </div>
               {{/if}}
               <div class="add-collaborator-panel">
                 {{teacher/class/gru-add-collaborator
@@ -175,17 +164,18 @@
         </div>
       </div>
       {{#if (eq selfId class.owner.id)}}
-        <div class="class-layout-btn">
-          <div class="btn-panel">
-            <div class='class-btn delete-btn' {{action 'deleteClass'}}>
-              {{t 'class.info.delete'}} {{gru-icon name='delete'}}
-            </div>
-            <div class='class-btn archive-btn' {{action 'archiveClass'}}>
-              {{t 'teacher-landing.class.class-management-tab.archive-classroom'}} {{gru-icon name="archive"}}
-            </div>
+      <div class="class-layout-btn">
+        <div class="btn-panel">
+          <div class='class-btn delete-btn' {{action 'deleteClass'}}>
+            {{t 'class.info.delete'}} {{gru-icon name='delete'}}
+          </div>
+          <div class='class-btn archive-btn' {{action 'archiveClass'}}>
+            {{t 'teacher-landing.class.class-management-tab.archive-classroom'}} {{gru-icon name="archive"}}
           </div>
         </div>
+      </div>
       {{/if}}
+
     </div>
     {{!-- two col layout ends --}}
     <div class='sec-rows-layout right-panel'>

@@ -875,7 +875,6 @@ window.i18ln = {
   'class.info.add-students': 'Add Students',
   'class.info.class-code': 'Classroom Code',
   'class.info.delete': 'Delete Classroom',
-  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'Assigned course',
   'class.edit.basic-info': 'Basic Information',
   'class.edit.class-name': 'Classroom Name',
