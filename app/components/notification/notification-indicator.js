@@ -100,12 +100,12 @@ export default Ember.Component.extend({
       {
         type: 'teacher.suggestion',
         action: 'explore',
-        ctxSource: 'coursemap',
+        ctxSource: 'course-map',
         actionType: 'navigate',
         postActionHook: {
           dismissPopupAfterAction: true,
-          deletenotificationuponaction: false,
-          refreshAfterDeleteNotification: true,
+          deletenotificationuponaction: true,
+          refreshAfterDeleteNotification: false,
           navigate: true,
           navigationDetails: {
             route: 'study-player',
@@ -141,8 +141,8 @@ export default Ember.Component.extend({
         actionType: 'navigate',
         postActionHook: {
           dismissPopupAfterAction: true,
-          deletenotificationuponaction: false,
-          refreshAfterDeleteNotification: true,
+          deletenotificationuponaction: true,
+          refreshAfterDeleteNotification: false,
           navigate: true,
           navigationDetails: {
             route: 'player',
@@ -172,8 +172,8 @@ export default Ember.Component.extend({
         actionType: 'navigate',
         postActionHook: {
           dismissPopupAfterAction: true,
-          deletenotificationuponaction: false,
-          refreshAfterDeleteNotification: true,
+          deletenotificationuponaction: true,
+          refreshAfterDeleteNotification: false,
           navigate: true,
           navigationDetails: {
             route: 'player',
