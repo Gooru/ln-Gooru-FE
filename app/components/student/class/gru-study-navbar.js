@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { isNumeric } from 'gooru-web/utils/math';
+import {
+  isNumeric
+} from 'gooru-web/utils/math';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -39,14 +41,14 @@ export default Ember.Component.extend({
      */
     selectItem: function(item) {
       let component = this;
+      component.set('showSuggestionContainer', false);
       if (component.get('onItemSelected')) {
         component.selectItem(item);
         if (item === 'class-info') {
-          Ember.$('.classroom-information').toggle(
-            {
-              direction: 'left'
-            },
-            1000
+          Ember.$('.classroom-information').toggle({
+            direction: 'left'
+          },
+          1000
           );
         } else {
           component.sendAction('onItemSelected', item);
@@ -100,7 +102,9 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     this._super(...arguments);
 
-    const { getOwner } = Ember;
+    const {
+      getOwner
+    } = Ember;
     let currentPath = getOwner(this).lookup('controller:application')
       .currentPath;
 
