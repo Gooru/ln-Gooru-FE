@@ -368,12 +368,14 @@ export default Ember.Controller.extend({
 
   createSecondaryClassList(attachedSecondaryClassList, secondaryClassList) {
     let secondaryClasses = Ember.A([]);
-    attachedSecondaryClassList.map(classId => {
-      let attchedClass = secondaryClassList.findBy('id', classId);
-      if (attchedClass) {
-        secondaryClasses.pushObject(attchedClass);
-      }
-    });
+    if (secondaryClassList) {
+      attachedSecondaryClassList.map(classId => {
+        let attchedClass = secondaryClassList.findBy('id', classId);
+        if (attchedClass) {
+          secondaryClasses.pushObject(attchedClass);
+        }
+      });
+    }
     return secondaryClasses;
   },
 

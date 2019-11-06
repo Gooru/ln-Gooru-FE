@@ -629,7 +629,7 @@ export default Ember.Controller.extend(ModalMixin, {
   multipleClassList: Ember.computed('secondaryClassList.[]', function() {
     let multipleClasses = this.get('secondaryClassList');
     let secondaryClasses = this.get('secondaryClasses');
-    if (secondaryClasses) {
+    if (secondaryClasses && multipleClasses) {
       secondaryClasses.map(classes => {
         let checkedClass = multipleClasses.findBy('id', classes.id);
         if (checkedClass) {
@@ -637,7 +637,9 @@ export default Ember.Controller.extend(ModalMixin, {
         }
       });
     }
-    return multipleClasses.sortBy('isChecked').reverse();
+    return multipleClasses
+      ? multipleClasses.sortBy('isChecked').reverse()
+      : null;
   }),
 
   /**
