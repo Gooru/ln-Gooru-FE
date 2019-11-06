@@ -12,7 +12,8 @@ test('serializeCreateClass with default visibility', function(assert) {
   const classObject = ClassModel.create({
     title: 'class-title',
     classSharing: 'open',
-    minScore: null
+    minScore: null,
+    setting: { mastery_applicable: true }
   });
 
   const response = serializer.serializeCreateClass(classObject);
@@ -62,7 +63,8 @@ test('serializeCreateClass with custom visibility', function(assert) {
     title: 'class-title',
     classSharing: 'open',
     minScore: null,
-    contentVisibility: 'visible_all'
+    contentVisibility: 'visible_all',
+    setting: { mastery_applicable: true }
   });
 
   const response = serializer.serializeCreateClass(classObject);
@@ -82,7 +84,8 @@ test('serializeUpdateClass', function(assert) {
     title: 'class-title',
     classSharing: 'open',
     greeting: 'class-greeting',
-    minScore: 90
+    minScore: 90,
+    setting: { mastery_applicable: true }
   });
   const response = serializer.serializeUpdateClass(classObject);
   assert.equal(response.title, 'class-title', 'Wrong title');
