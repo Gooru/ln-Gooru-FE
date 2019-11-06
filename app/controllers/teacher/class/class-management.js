@@ -147,18 +147,6 @@ export default Ember.Controller.extend(ModalMixin, {
 
     /**
      *
-     * Triggered when a setting mastery
-     */
-    updateMastery: function(mastery = false) {
-      let controller = this,
-        editedClass = controller.get('tempClass'),
-        setting = editedClass.get('setting');
-      setting.set('mastery_applicable', mastery);
-      this.saveClass();
-    },
-
-    /**
-     *
      * Triggered when a edit min score class option is selected
      */
     editScore: function() {
@@ -504,12 +492,6 @@ export default Ember.Controller.extend(ModalMixin, {
     return setting ? setting['course.premium'] : false;
   }),
 
-  isMasteryApplicable: Ember.computed('tempClass', function() {
-    let controller = this;
-    const currentClass = controller.get('tempClass');
-    let setting = currentClass.get('setting');
-    return setting ? setting.mastery_applicable : false;
-  }),
   subject: Ember.computed.alias('class.preference.subject'),
 
   /**
@@ -734,12 +716,7 @@ export default Ember.Controller.extend(ModalMixin, {
               controller.send('updateUserClasses');
               controller
                 .get('class')
-                .merge(editedClass, [
-                  'title',
-                  'minScore',
-                  'classSharing',
-                  'setting'
-                ]);
+                .merge(editedClass, ['title', 'minScore', 'classSharing']);
             });
         } else {
           var classForEditing = controller.get('class').copy();

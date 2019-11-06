@@ -233,13 +233,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
      * @param  {Object} classActivity
      * @param  {Date} addedDate
      */
-    addedContentToDCA(
-      classActivityData,
-      addedDate,
-      forMonth,
-      forYear,
-      allowMasteryAccrual = false
-    ) {
+    addedContentToDCA(classActivityData, addedDate, forMonth, forYear) {
       let controller = this;
       let isOfflineActivity =
         classActivityData.get('collection.format') ===
@@ -255,9 +249,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         classActivityData.set('isNewlyAdded', true);
         Ember.run.later(function() {
           classActivityData.set('isNewlyAdded', false);
-          if (allowMasteryAccrual === true) {
-            classActivityData.set('allowMasteryAccrual', true);
-          }
         }, 2000);
       } else {
         let addedMonth = forMonth
