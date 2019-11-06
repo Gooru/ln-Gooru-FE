@@ -40,29 +40,23 @@
         </div>
       </div>
       <div class="data-analysis-cards-container">
-        <div class="domains-card-container">
-          <div class="title-container">{{t 'teacher-landing.class.atc-view.domains-reviewed'}}</div>
-          <div class="domains-completion-container">
-            {{#each domainsCompletionList as |domainData|}}
-              <div class="domain-completion-report" {{action "onSelectDomain" domainData}}>
-                <div class="domain-info-container">
-                  <div class="domain-code">{{domainData.domainCode}}</div>
-                  <div class="domain-title ellipsis">
-                    {{domain-gut-to-fw-transform
-                      fwDomains
-                      domainData.domainCode
-                      domainData.domainName
-                      'fwDomainName'
-                      true
-                    }}
-                  </div>
-                </div>
-                <div class="domain-performance-container">
-                  <div class="completion-percentage">{{domainData.completionPercentage}}%</div>
-                  <div class="completion-box"><span style="background-color: {{safe-html (grade-color domainData.completionPercentage)}}; width: {{domainData.completionPercentage}}%;"></span></div>
-                </div>
-              </div>
-            {{/each}}
+        <div class="competency-card-container">
+          <div class="title-container">Struggling Competencies</div>
+          <div class="competency-struggling-container">
+            <div class="competency-heading">
+             <span>Competency heading</span>
+            <ul class="competency-sub-heading">
+              <li>Domain</li>
+              <li>8.EE.4</li>
+              <li>Learning Outcome Name</li>
+            </ul>
+            </div>
+            <div class="competency-icon">
+
+            </div>
+            <div class="competency-count">
+
+            </div>
           </div>
         </div>
         <div class="activities-count-container" {{action "onRedirectToCA"}}>

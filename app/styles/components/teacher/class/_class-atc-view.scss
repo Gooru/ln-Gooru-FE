@@ -140,96 +140,42 @@
     }
     .data-analysis-cards-container {
       width: 304px;
-      .domains-card-container {
+
+      .competency-card-container {
         background-color: $white;
-        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
-        border-radius: 4px;
+        padding: 10px;
+        border: 1px solid $gray-80;
+        border-radius: 5px;
+        box-shadow: 0 0 2px $gray-80;
 
         .title-container {
           font-size: 15px;
           font-weight: bold;
-          color: #37424b;
-          height: 38px;
-          line-height: 38px;
-          box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
-          padding-left: 8px;
-          text-transform: uppercase;
+          border-bottom: 1px solid $gray-80;
+          padding-bottom: 10px;
+          margin-bottom: 10px;
         }
-        .domains-completion-container {
-          height: 355px;
-          overflow-y: hidden;
-          transition: height 0.2s ease-in;
-          overflow-y: auto;
 
-          &::-webkit-scrollbar {
-            height: 6px;
-            width: 4px;
-          }
-
-          &::-webkit-scrollbar-thumb {
-            background: $gray-light;
-            border: 1px solid $gray-light;
-            border-radius: 5px;
-          }
-
-          &.expanded-view {
-            height: 294px;
-            overflow-y: auto;
-          }
-          .domain-completion-report {
-            display: grid;
-            grid-template-columns: 209px auto;
-            border-bottom: 1px solid #979797;
-            padding: 4px 8px;
-            cursor: pointer;
-            .domain-info-container {
-              .domain-title {
-                font-size: 12px;
-                font-weight: bold;
-                color: #37424b;
-              }
-              .domain-code {
-                font-size: 10px;
-                color: #37424b;
-              }
-            }
-            .domain-performance-container {
-              display: grid;
-              justify-content: right;
-              .completion-percentage {
-                font-size: 15px;
-                font-weight: bold;
-                text-align: right;
-                color: #3a444d;
-              }
-              .completion-box {
-                display: block;
-                height: 10px;
-                width: 75px;
-                background-color: rgba(191, 191, 191, 0.5);
-                span {
-                  height: inherit;
-                  float: right;
-                }
-              }
-            }
-            &.disabled {
-              pointer-events: none;
-            }
-          }
-        }
-        .actions-container {
-          height: 40px;
+        .competency-struggling-container {
           display: grid;
-          justify-content: center;
-          align-items: center;
-          box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
-          cursor: pointer;
-          .action-container {
-            font-size: 12px;
-            font-weight: bold;
-            color: #007ab8;
-            text-transform: uppercase;
+          grid-template-columns: 1fr 40px 30px;
+
+          .competency-sub-heading {
+            padding: 0;
+            list-style: none;
+            display: flex;
+            font-size: 10px;
+            li {
+              &:first-child {
+                padding-left: 0;
+              }
+              &:last-child {
+                border: none;
+              }
+              padding: 0 5px;
+              border-right: 1px solid;
+              line-height: 1;
+            }
           }
         }
       }
