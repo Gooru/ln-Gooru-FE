@@ -208,7 +208,7 @@
           border-right: unset;
 
           &.vactive {
-            grid-column: 3 / 4;
+            grid-column: 3 / 5;
           }
         }
         @media only screen and (max-width: $screen-xs) {
@@ -218,33 +218,33 @@
         }
 
         .suggestion-tab {
-          order: 2;
+          order: 6;
           border-right: 1px solid #cccccc;
         }
 
         .notification-tab {
-          order: 7;
-          grid-column-start: 5;
+          order: 8;
+          grid-column-start: 6;
           border-right: 1px solid #cccccc;
 
           &.vactive {
-            grid-column: 4 / 6;
+            grid-column: 6 / 6;
           }
         }
 
         &.nav-menu-default {
           .notification-tab {
-            grid-column: 4 / 6;
+            grid-column: 6 / 6;
           }
         }
 
         .class-info {
-          order: 8;
+          order: 9;
           border-top: 1px solid #ccc;
           width: 100%;
 
           &.vactive {
-            grid-column: 6 / 7;
+            grid-column: 7 / 8;
           }
 
           a {

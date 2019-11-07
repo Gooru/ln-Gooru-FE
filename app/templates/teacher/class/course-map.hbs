@@ -73,7 +73,17 @@
         <div class="render-course-map {{if (and (not isStudentCourseMap) questionItems) 'sm-course-map'}}">
           {{#if (and class.milestoneViewApplicable hasMilestoneViewReady (not isStudentCourseMap))}}
           <div class="ms-cm-view-switcher-ctn-container">
-            <div class="ms-cm-view-switcher-ctn">
+            <div class="ms-cm-view-switcher-ctn {{if (not isLessonPlanShow) 'switch-not-show-lesson-plan'}}">
+              {{#unless isLessonPlanShow}}
+              <div class="show-title-head">
+                {{#if isMilestoneView}}
+                  <span>{{t 'milestones'}}</span>
+                {{else}}
+                  <span>{{t 'common.course-map'}}</span>
+                {{/if}}
+              </div>
+              <div class=""></div>
+              {{/unless}}
               <div class="view-switcher" {{action 'viewSwitcher' 'milestone-course'}}>
                 <span>{{t 'common.show'}}</span><br>
                 {{#if isMilestoneView}}
@@ -82,7 +92,9 @@
                   <span>{{t 'milestones'}}</span>
                 {{/if}}
               </div>
+              {{#if isLessonPlanShow}}
               <div class="current-class-view">
+              {{#if (gt secondaryClasses.length 0)}}
                 {{t 'locateme.view'}} {{t 'common.view-class-course-map'}}
                 <div class="class-selector">
                   <div class="selected-class-name" {{action "onToggleClassListContainer"}}>
@@ -97,6 +109,7 @@
                     {{/each}}
                   </div>
                 </div>
+              {{/if}}
               </div>
               <div class="ms-cm-view-lesson-plan" {{action 'viewSwitcher' 'lesson-plan'}}>
                 {{t 'common.show'}} <br>
@@ -106,6 +119,7 @@
                   {{t 'common.lesson-plan'}}
                 {{/if}}
               </div>
+              {{/if}}
             </div>
           </div>
           {{/if}}

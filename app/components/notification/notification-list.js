@@ -139,8 +139,7 @@ export default Ember.Component.extend({
       } else {
         route.transitionTo(
           ngtnDetails.route,
-          queryParams[ngtnDetails.exactparams],
-          {
+          queryParams[ngtnDetails.exactparams], {
             queryParams: queryParams
           }
         );

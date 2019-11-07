@@ -1,14 +1,14 @@
 import Ember from 'ember';
 import { isCompatibleVW } from 'gooru-web/utils/utils';
 import { SCREEN_SIZES, CONTENT_TYPES } from 'gooru-web/config/config';
-
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 /**
  * Class Overview controller
  *
  * Controller responsible of the logic for the class overview page
  */
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -348,6 +348,10 @@ export default Ember.Controller.extend({
   isSecondaryClass: Ember.computed('class', function() {
     return this.get('class.isSecondaryClass') || false;
   }),
+
+  isLessonPlanShow: Ember.computed.alias(
+    'configuration.GRU_FEATURE_FLAG.isLessonPlanShow'
+  ),
 
   // -------------------------------------------------------------------------
   // Actions

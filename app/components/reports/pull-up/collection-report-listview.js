@@ -1,5 +1,7 @@
 import Ember from 'ember';
-
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -188,22 +190,20 @@ export default Ember.Component.extend({
     onClickScrollLeftArrow() {
       let component = this;
       let scrollLeft = component.$('.table-fixed-right').scrollLeft() - 400;
-      component.$('.table-fixed-right').animate(
-        {
-          scrollLeft: `${scrollLeft}px`
-        },
-        400
+      component.$('.table-fixed-right').animate({
+        scrollLeft: `${scrollLeft}px`
+      },
+      400
       );
     },
 
     onClickScrollRightArrow() {
       let component = this;
       let scrollLeft = component.$('.table-fixed-right').scrollLeft() + 400;
-      component.$('.table-fixed-right').animate(
-        {
-          scrollLeft: `${scrollLeft}px`
-        },
-        400
+      component.$('.table-fixed-right').animate({
+        scrollLeft: `${scrollLeft}px`
+      },
+      400
       );
     },
 
@@ -213,8 +213,11 @@ export default Ember.Component.extend({
     },
 
     onSelectUser(student) {
-      this.get('studentsSelectedForSuggest').pushObject(student);
-      student.set('selectedForSuggestion', true);
+      const collectionType = this.get('context.collection.format');
+      if (collectionType !== CONTENT_TYPES.COLLECTION) {
+        this.get('studentsSelectedForSuggest').pushObject(student);
+        student.set('selectedForSuggestion', true);
+      }
     },
 
     onOpenSuggestionPullup() {

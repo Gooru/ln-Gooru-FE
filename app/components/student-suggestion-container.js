@@ -1,5 +1,8 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE, SUGGESTION_TYPE } from 'gooru-web/config/config';
+import {
+  PLAYER_EVENT_SOURCE,
+  SUGGESTION_TYPE
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['student-suggestion-container'],
@@ -27,7 +30,7 @@ export default Ember.Component.extend({
   /**
    * @property {Number} max
    */
-  max: 5,
+  max: 10,
 
   /**
    * @property {Number} page
@@ -164,6 +167,7 @@ export default Ember.Component.extend({
     closePullUp() {
       const component = this;
       component.set('isOpenPlayer', false);
+      component.loadSuggestionData();
     }
   },
 
@@ -283,6 +287,13 @@ export default Ember.Component.extend({
     component.loadSuggestionData();
   },
 
+  didRender() {
+    const component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
+  },
+
   didInsertElement() {
     const component = this;
     component.onOpenSuggestionContainer();
@@ -290,11 +301,10 @@ export default Ember.Component.extend({
 
   onOpenSuggestionContainer() {
     const component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400
+    component.$().animate({
+      top: '100%'
+    },
+    400
     );
   },
 

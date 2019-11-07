@@ -26,16 +26,7 @@
             <i class="{{suggestion.suggestedContentType}}"></i>
           </div>
           <div class="title-info ellipsis">
-            <span class="ellipsis">{{suggestion.title}}</span>
-          </div>
-          <div class="source">
-            {{#if (eq suggestion.suggestionArea 'class-activity')}}
-              <i class="{{suggestion.suggestionArea}}"></i>
-            {{else if (eq suggestion.suggestionArea 'proficiency')}}
-              <i class="proficiency">{{gru-icon name='school'}}</i>
-            {{else}}
-              <i class="course-map">{{gru-icon name='sort'}}</i>
-            {{/if}}
+            <span class="ellipsis" title="{{suggestion.title}}" data-toggle="tooltip" data-placement="bottom">{{suggestion.title}}</span>
           </div>
           <div class="content-counts">
             <div class="resource-count">
@@ -51,7 +42,16 @@
               {{/if}}
             </div>
           </div>
-          <div class="play-container">
+          <div class="source" >
+            {{#if (eq suggestion.suggestionArea 'class-activity')}}
+              <i title="{{t 'student-landing.class.class-activities' }}" data-toggle="tooltip" data-placement="bottom" class="{{suggestion.suggestionArea}}"></i>
+            {{else if (eq suggestion.suggestionArea 'proficiency')}}
+              <i title="{{t 'profile.gru-navigation.proficiency'}}" data-toggle="tooltip" data-placement="bottom" class="proficiency">{{gru-icon name='school'}}</i>
+            {{else}}
+              <i title="{{t 'student-landing.class.course-map'}}" data-toggle="tooltip" data-placement="bottom" class="course-map">{{gru-icon name='sort'}}</i>
+            {{/if}}
+          </div>
+          <div class="play-container" title="{{t 'common.play'}}" data-toggle="tooltip" data-placement="bottom">
             <div class="ca-play-btn" {{action 'onPlaySuggestionContent' suggestion}}>
               {{gru-icon name='play_arrow'}}
             </div>
