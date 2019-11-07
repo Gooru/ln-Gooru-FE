@@ -889,6 +889,7 @@ window.i18ln = {
   'class.info.add-students': 'വിദ്യാർത്ഥികളെ ചേർക്കുക',
   'class.info.class-code': 'ക്ലാസ്റൂം കോഡ്',
   'class.info.delete': 'ക്ലാസ്റൂം ഇല്ലാതാക്കുക',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'നിയുക്ത കോഴ്സ്',
   'class.edit.basic-info': 'അടിസ്ഥാന വിവരങ്ങൾ',
   'class.edit.class-name': 'ക്ലാസ്മുറിയുടെ പേര്',

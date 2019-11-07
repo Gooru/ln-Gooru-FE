@@ -868,6 +868,7 @@ window.i18ln = {
   'class.info.add-students': 'ছাত্র যোগ করুন',
   'class.info.class-code': 'শ্রেণীকক্ষ কোড',
   'class.info.delete': 'শ্রেণীকক্ষ মুছে দিন',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'নির্ধারিত কোর্স',
   'class.edit.basic-info': 'মৌলিক তথ্য',
   'class.edit.class-name': 'শ্রেণীকক্ষ নাম',

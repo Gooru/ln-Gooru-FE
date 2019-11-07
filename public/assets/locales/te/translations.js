@@ -875,6 +875,7 @@ window.i18ln = {
   'class.info.add-students': 'విద్యార్థులు చేర్చండి',
   'class.info.class-code': 'తరగతిలో కోడ్',
   'class.info.delete': 'తరగతి గదిని తొలగించండి',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'కేటాయించిన కోర్సు',
   'class.edit.basic-info': 'ప్రాథమిక సమాచారం',
   'class.edit.class-name': 'తరగతిలో పేరు',

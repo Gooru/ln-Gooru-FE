@@ -853,6 +853,7 @@ window.i18ln = {
   'class.info.add-students': 'विद्यार्थी जोडा',
   'class.info.class-code': 'वर्ग संकेतांक',
   'class.info.delete': 'वर्ग डिलीट करा',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'नेमून दिलेला अभ्यासक्रम',
   'class.edit.basic-info': 'मुलभूत माहिती',
   'class.edit.class-name': 'वर्गाचे नाव',

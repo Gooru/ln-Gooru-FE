@@ -901,6 +901,7 @@ window.i18ln = {
   'class.info.add-students': 'ବିଦ୍ୟାର୍ଥୀମାନଙ୍କୁ ଯୋଗ କରନ୍ତୁ',
   'class.info.class-code': 'କ୍ଲାସରୁମ୍ କୋଡ୍',
   'class.info.delete': 'କ୍ଲାସରୁମ୍ ବିଲୋପ କରନ୍ତୁ',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'ନ୍ୟସ୍ତ ପାଠ୍ୟକ୍ରମ',
   'class.edit.basic-info': 'ମୌଳିକ ସୂଚନା',
   'class.edit.class-name': 'କ୍ଲାସରୁମ୍ ନାମ',
