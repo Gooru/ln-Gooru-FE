@@ -891,6 +891,7 @@ window.i18ln = {
   'class.info.add-students': 'Añadir Estudiantes',
   'class.info.class-code': 'Código de aula',
   'class.info.delete': 'Eliminar sala de clase',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'Curso asignado',
   'class.edit.basic-info': 'Información básica',
   'class.edit.class-name': 'Nombre del aula',

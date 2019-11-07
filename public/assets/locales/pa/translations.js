@@ -881,6 +881,7 @@ window.i18ln = {
   'class.info.add-students': 'ਵਿਦਿਆਰਥੀ ਸ਼ਾਮਿਲ',
   'class.info.class-code': 'ਕਲਾਸਰੂਮ ਕੋਡ',
   'class.info.delete': 'ਕਲਾਸਰੂਮ ਮਿਟਾਓ',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'ਨਿਰਧਾਰਤ ਕੋਰਸ',
   'class.edit.basic-info': 'ਬੁਨਿਆਦੀ ਜਾਣਕਾਰੀ',
   'class.edit.class-name': 'ਕਲਾਸਰੂਮ ਦਾ ਨਾਂ',

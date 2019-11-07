@@ -883,6 +883,7 @@ window.i18ln = {
     'ટ્રૉફિઝ (1-100%) માટે ન્યૂનતમ સ્કોરનું મૂલ્યાંકન',
   'class.edit.course-map': 'કોર્સ નકશો',
   'class.edit.edit-class': 'વર્ગખંડમાં સેટિંગ્સ સંપાદિત કરો',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.overview.title': 'કોર્સ નકશો',
   'class.overview.locate': 'મને શોધો',
   'class.overview.edit-content': 'સામગ્રી સંપાદિત કરો',

@@ -870,6 +870,7 @@ window.i18ln = {
   'class.edit.class-minscore': 'علامة التقييم الدنيا للجوائز (1-100%)',
   'class.edit.course-map': 'خريطة المساق الدراسي',
   'class.edit.edit-class': 'تعديل إعدادات الصف الدراسي',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.overview.title': 'خريطة المساق الدراسي',
   'class.overview.locate': 'حدد موقعي',
   'class.overview.edit-content': 'تعديل المحتوى',

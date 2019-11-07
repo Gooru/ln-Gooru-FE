@@ -896,6 +896,7 @@ window.i18ln = {
   'class.info.add-students': 'மாணவர்கள் சேர்க்க',
   'class.info.class-code': 'வகுப்பறை குறியீடு',
   'class.info.delete': 'வகுப்பறை நீக்க',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'ஒதுக்கப்பட்டுள்ள பாடநெறி',
   'class.edit.basic-info': 'அடிப்படை தகவல்',
   'class.edit.class-name': 'வகுப்பறை பெயர்',
