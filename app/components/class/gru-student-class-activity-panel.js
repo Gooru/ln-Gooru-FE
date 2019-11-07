@@ -80,7 +80,7 @@ export default Ember.Component.extend({
       const classData = component.get('class');
       const classId = classData.get('id');
       const caContentId = component.get('classActivity.id');
-      const pathId = suggestionContent.get('suggestedToContext.id');
+      const pathId = suggestionContent.get('suggestedToContext.firstObject.id');
       const pathType = component.get('suggestionPathType');
       let queryParams = {
         collectionId: contentId,
@@ -113,6 +113,12 @@ export default Ember.Component.extend({
           .generate('player', contentId, { queryParams });
         component.sendAction('playContent', playerUrl, content);
       }
+      component.sendAction('playContent', playerUrl, Ember.Object.create({
+        format: collectionType,
+        title: suggestionContent.get('title'),
+        thumbnailUrl: suggestionContent.get('url'),
+        isSuggestedContentPlay: true
+      }));
     },
     /**
      * Action triggred when dca report action invoke
