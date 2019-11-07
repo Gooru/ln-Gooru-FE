@@ -132,6 +132,7 @@ export default Ember.Controller.extend({
     },
 
     onSelectSecondaryClass(secondaryClass) {
+      this.set('pullUpSecondaryClass', secondaryClass);
       this.set('selectedSecondaryClass', secondaryClass);
     }
   },
@@ -238,6 +239,8 @@ export default Ember.Controller.extend({
   secondaryClassList: Ember.A([]),
 
   selectedSecondaryClass: null,
+
+  pullUpSecondaryClass: null,
   // -------------------------------------------------------------------------
   // Methods
 
@@ -368,12 +371,14 @@ export default Ember.Controller.extend({
 
   createSecondaryClassList(attachedSecondaryClassList, secondaryClassList) {
     let secondaryClasses = Ember.A([]);
-    attachedSecondaryClassList.map(classId => {
-      let attchedClass = secondaryClassList.findBy('id', classId);
-      if (attchedClass) {
-        secondaryClasses.pushObject(attchedClass);
-      }
-    });
+    if (secondaryClassList) {
+      attachedSecondaryClassList.map(classId => {
+        let attchedClass = secondaryClassList.findBy('id', classId);
+        if (attchedClass) {
+          secondaryClasses.pushObject(attchedClass);
+        }
+      });
+    }
     return secondaryClasses;
   },
 

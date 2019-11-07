@@ -277,7 +277,13 @@ export default Ember.Component.extend({
   /**
    * @property {String} frameworkCode
    */
-  frameworkCode: Ember.computed.alias('class.preference.framework'),
+  frameworkCode: Ember.computed('class', 'secondaryClass', function() {
+    let secondaryClass = this.get('secondaryClass');
+    let frameworkCode = secondaryClass
+      ? secondaryClass.get('preference.framework')
+      : this.get('class.preference.framework');
+    return frameworkCode;
+  }),
 
   //--------------------------------------------------------------------------
   // Methods

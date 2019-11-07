@@ -337,6 +337,8 @@ export default Ember.Component.extend({
     closePullUp() {
       const component = this;
       component.set('isOpenPlayer', false);
+      component.sendAction('resetPerformance');
+      component.loadData();
     }
   },
 

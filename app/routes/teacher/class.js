@@ -4,7 +4,8 @@ import {
   flattenGutToFwCompetency,
   flattenGutToFwDomain
 } from 'gooru-web/utils/taxonomy';
-export default Ember.Route.extend(PrivateRouteMixin, {
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
+export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
   queryParams: {
     refresh: {
       refreshModel: true
@@ -118,6 +119,9 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   model: function(params) {
     const route = this;
     const classId = params.classId;
+    const isEnableSecondaryClass = route.get(
+      'configuration.GRU_FEATURE_FLAG.isShowSecondaryClass'
+    );
     const classPromise = route.get('classService').readClassInfo(classId);
     const membersPromise = route.get('classService').readClassMembers(classId);
     return classPromise.then(function(classData) {
@@ -166,10 +170,12 @@ export default Ember.Route.extend(PrivateRouteMixin, {
         }
         const frameworkId = aClass.get('preference.framework');
         const subjectId = aClass.get('preference.subject');
-        const secondaryClassListPromise = subjectId
-          ? route.get('multipleClassService').fetchMultipleClassList(classId)
-          : Ember.RSVP.resolve(null);
-
+        let secondaryClassListPromise = null;
+        if (isEnableSecondaryClass) {
+          secondaryClassListPromise = subjectId
+            ? route.get('multipleClassService').fetchMultipleClassList(classId)
+            : Ember.RSVP.resolve(null);
+        }
         let crossWalkFWCPromise = null;
         if (frameworkId && subjectId) {
           crossWalkFWCPromise = route
@@ -234,6 +240,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   },
 
   resetController(controller) {
+    controller.set('pullUpSecondaryClass', null);
     controller.set('isShowMilestoneReport', false);
     controller.set('selectedSecondaryClass', null);
   }
