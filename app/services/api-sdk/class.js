@@ -16,8 +16,6 @@ export default Ember.Service.extend({
 
   classContainer: {},
 
-  classMembersContainer: {},
-
   init: function() {
     this._super(...arguments);
     this.set(
@@ -266,18 +264,14 @@ export default Ember.Service.extend({
   readClassMembers: function(classId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      const classMembersContainer = service.get('classMembersContainer');
       service
         .get('classAdapter')
         .readClassMembers(classId)
         .then(
           function(response) {
-            if (!classMembersContainer[classId]) {
-              classMembersContainer[classId] = service
-                .get('classSerializer')
-                .normalizeReadClassMembers(response);
-            }
-            resolve(classMembersContainer[classId]);
+            resolve(
+              service.get('classSerializer').normalizeReadClassMembers(response)
+            );
           },
           function(error) {
             reject(error);
