@@ -199,14 +199,15 @@ export default Ember.Component.extend({
       collectionId: contentId,
       classId,
       role: 'student',
-      source: PLAYER_EVENT_SOURCE.DAILY_CLASS,
+      source: PLAYER_EVENT_SOURCE.CLASS_ACTIVITY,
       type: collectionType,
       caContentId,
       pathId,
       pathType,
       isIframeMode: true
     };
-    component.set('playerUrl',
+    component.set(
+      'playerUrl',
       component.get('router').generate('player', contentId, {
         queryParams
       })

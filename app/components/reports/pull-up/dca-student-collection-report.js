@@ -1,14 +1,9 @@
 import Ember from 'ember';
-import {
-  getBarGradeColor,
-  toLocal
-} from 'gooru-web/utils/utils';
+import { getBarGradeColor, toLocal } from 'gooru-web/utils/utils';
 import Context from 'gooru-web/models/result/context';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import {
-  ASSESSMENT_SHOW_VALUES
-} from 'gooru-web/config/config';
+import { ASSESSMENT_SHOW_VALUES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -297,10 +292,11 @@ export default Ember.Component.extend({
    */
   openPullUp() {
     let component = this;
-    component.$().animate({
-      top: '10%'
-    },
-    400
+    component.$().animate(
+      {
+        top: '10%'
+      },
+      400
     );
   },
 
@@ -348,19 +344,16 @@ export default Ember.Component.extend({
     const sessionId = context.get('studentPerformance.sessionId');
     const type = params.type || 'collection';
     const isCollection = type === 'collection';
-    const isSuggestedCollection = component.get('isSuggestedCollection');
-    let pathId;
-    if (isSuggestedCollection) {
-      pathId = params.collection.performance.pathId;
-    }
-    const collectionPromise = isCollection ?
-      component.get('collectionService').readCollection(params.collectionId) :
-      component.get('assessmentService').readAssessment(params.collectionId);
+    const collectionPromise = isCollection
+      ? component.get('collectionService').readCollection(params.collectionId)
+      : component.get('assessmentService').readAssessment(params.collectionId);
     return Ember.RSVP
       .hashSettled({
         collection: collectionPromise,
-        profile: context.userId !== 'anonymous' ?
-          component.get('profileService').readUserProfile(context.userId) : {}
+        profile:
+          context.userId !== 'anonymous'
+            ? component.get('profileService').readUserProfile(context.userId)
+            : {}
       })
       .then(function(hash) {
         component.set(
@@ -372,22 +365,21 @@ export default Ember.Component.extend({
           hash.collection.state === 'fulfilled' ? hash.collection.value : null
         );
         const analyticsService = component.get('analyticsService');
-        const performanceSummaryPromise = component.get('useSession') ?
-          analyticsService.getDCAPerformanceBySessionId(
+        const performanceSummaryPromise = component.get('useSession')
+          ? analyticsService.getDCAPerformanceBySessionId(
             userId,
             classId,
             collectionId,
             collectionType,
             sessionId
-          ) :
-          analyticsService.findResourcesByCollectionforDCA(
+          )
+          : analyticsService.findResourcesByCollectionforDCA(
             sessionId,
             collectionId,
             classId,
             userId,
             collectionType,
-            !isSuggestedCollection ? activityDate : null,
-            isSuggestedCollection ? pathId : null
+            activityDate
           );
         performanceSummaryPromise.then(function(assessmentResult) {
           component.setAssessmentResult(assessmentResult);
@@ -402,9 +394,9 @@ export default Ember.Component.extend({
     assessmentResult.merge(collection);
     assessmentResult.set('totalAttempts', totalAttempts);
     let submittedAt =
-      session && session.eventTime ?
-        toLocal(session.eventTime) :
-        component.get('reportData.activityDate') || null;
+      session && session.eventTime
+        ? toLocal(session.eventTime)
+        : component.get('reportData.activityDate') || null;
     assessmentResult.set('submittedAt', submittedAt);
     component.set('assessmentResult', assessmentResult);
     component.set('isReportLoading', false);

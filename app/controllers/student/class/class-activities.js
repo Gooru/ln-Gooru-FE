@@ -1,13 +1,8 @@
 import Ember from 'ember';
 import SessionMixin from 'gooru-web/mixins/session';
 import ModalMixin from 'gooru-web/mixins/modal';
-import {
-  PLAYER_EVENT_SOURCE,
-  SCREEN_SIZES
-} from 'gooru-web/config/config';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { PLAYER_EVENT_SOURCE, SCREEN_SIZES } from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 /**
  * Class activities controller
@@ -53,7 +48,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   actions: {
     onShowSuggestion(classActivity) {
       const controller = this;
-      controller.set('selectedClassActivity', classActivity);
       controller.fetchSuggestionContent(classActivity);
     },
     onOpenReportGrade(itemToGrade) {
@@ -88,14 +82,16 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       classActivity,
       isSuggested
     ) {
-      let controller = this;
-      let userId = controller.get('session.userId');
-      let users = controller.get('class.members').filterBy('id', userId);
+      let component = this;
+      let userId = component.get('session.userId');
+      let users = component.get('class.members').filterBy('id', userId);
       let params = {
         userId: userId,
-        classId: controller.get('class.id'),
-        collectionId: collection.get('id') || collection.get('suggestedContentId'),
-        type: collection.get('format') || collection.get('suggestedContentType'),
+        classId: component.get('class.id'),
+        collectionId:
+          collection.get('id') || collection.get('suggestedContentId'),
+        type:
+          collection.get('format') || collection.get('suggestedContentType'),
         isStudent: true,
         collection,
         activityDate,
@@ -103,31 +99,29 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         classActivity,
         users
       };
-      controller.set('isShowStudentExternalAssessmentReport', false);
-      controller.set('showStudentDcaReport', false);
-      controller.set('isShowStudentExternalCollectionReport', false);
-      controller.set('isShowOfflineActivityReport', false);
-      const isCollection = params.type === 'collection';
+      component.set('isShowStudentExternalAssessmentReport', false);
+      component.set('showStudentDcaReport', false);
+      component.set('isShowStudentExternalCollectionReport', false);
+      component.set('isShowOfflineActivityReport', false);
       if (collection.get('format') === 'assessment-external') {
-        controller.set('isShowStudentExternalAssessmentReport', true);
+        component.set('isShowStudentExternalAssessmentReport', true);
       } else if (collection.get('format') === 'collection-external') {
-        controller.set('isShowStudentExternalCollectionReport', true);
+        component.set('isShowStudentExternalCollectionReport', true);
       } else if (collection.get('format') === 'offline-activity') {
-        controller.set('isShowOfflineActivityReport', true);
+        component.set('isShowOfflineActivityReport', true);
       } else {
-        controller.set('showStudentDcaReport', true);
+        component.set('showStudentDcaReport', true);
       }
-      controller.set('isSuggestedCollection', isSuggested && isCollection);
-      controller.set('useSession', isSuggested && !isCollection);
-      controller.set('studentReportContextData', params);
+      component.set('isSuggestedContent', isSuggested);
+      component.set('studentReportContextData', params);
     },
 
     onClosePullUp() {
-      let controller = this;
-      controller.set('isShowStudentExternalCollectionReport', false);
-      controller.set('isShowStudentExternalAssessmentReport', false);
-      controller.set('studentDcaReport', false);
-      controller.set('isShowOfflineActivityReport', false);
+      let component = this;
+      component.set('isShowStudentExternalCollectionReport', false);
+      component.set('isShowStudentExternalAssessmentReport', false);
+      component.set('studentDcaReport', false);
+      component.set('isShowOfflineActivityReport', false);
     },
 
     showPreviousMonth(date) {
@@ -165,27 +159,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     },
 
     playContent(playerUrl, content) {
-      const controller = this;
-      controller.set('playerUrl', playerUrl);
-      controller.set('isOpenPlayer', true);
-      controller.set('playerContent', content);
-      controller.set('isSuggestedContentPlay',
-        content.get('isSuggestedContentPlay'));
+      const component = this;
+      component.set('playerUrl', playerUrl);
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', content);
     },
 
     closePullUp() {
-      const controller = this;
-      const isSuggestedContentPlay = controller.get('isSuggestedContentPlay');
-      if (isSuggestedContentPlay) {
-        const classActivity = controller.get('selectedClassActivity');
-        classActivity.set('suggestions', false);
-        controller.fetchSuggestionContent(classActivity);
-      } else {
-        const selectedDate = controller.get('selectedDate');
-        controller.loadActivityForDate(selectedDate);
-      }
-      controller.set('isOpenPlayer', false);
-      controller.get('classController').send('reloadData');
+      const component = this;
+      let selectedDate = component.get('selectedDate');
+      component.set('isOpenPlayer', false);
+      component.loadActivityForDate(selectedDate);
+      component.get('classController').send('reloadData');
     }
   },
 
@@ -548,20 +533,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     );
     let windowHeight = $(window).height();
     if (itemToGradeEle.hasClass('active')) {
-      itemToGradeEle.animate({
-        top: windowHeight - 100
-      },
-      400,
-      function() {
-        itemToGradeEle.removeClass('active');
-      }
+      itemToGradeEle.animate(
+        {
+          top: windowHeight - 100
+        },
+        400,
+        function() {
+          itemToGradeEle.removeClass('active');
+        }
       );
     } else {
       itemToGradeEle.addClass('active');
-      itemToGradeEle.animate({
-        top: 100
-      },
-      400
+      itemToGradeEle.animate(
+        {
+          top: 100
+        },
+        400
       );
     }
   },
@@ -625,20 +612,22 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     );
     let windowHeight = $(window).height();
     if (offlineActivityEle.hasClass('toggle')) {
-      offlineActivityEle.animate({
-        top: windowHeight - 50
-      },
-      400,
-      function() {
-        offlineActivityEle.removeClass('toggle');
-      }
+      offlineActivityEle.animate(
+        {
+          top: windowHeight - 50
+        },
+        400,
+        function() {
+          offlineActivityEle.removeClass('toggle');
+        }
       );
     } else {
       offlineActivityEle.addClass('toggle');
-      offlineActivityEle.animate({
-        top: 100
-      },
-      400
+      offlineActivityEle.animate(
+        {
+          top: 100
+        },
+        400
       );
     }
   }
