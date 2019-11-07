@@ -66,8 +66,8 @@ export default Ember.Component.extend({
         component.notificationModel &&
         component.notificationModel.notifications &&
         component.notificationModel.notifications.length > 0 ?
-        component.notificationModel.notifications.length :
-        0,
+          component.notificationModel.notifications.length :
+          0,
         notnCnt = 0,
         displyNotn = '';
 
@@ -97,206 +97,206 @@ export default Ember.Component.extend({
    */
   notificationAddressAction: {
     notificationTypes: [{
-        type: 'teacher.suggestion',
-        action: 'explore',
-        ctxOrigin: 'coursemap',
-        actionType: 'navigate',
-        postActionHook: {
-          dismissPopupAfterAction: true,
-          deletenotificationuponaction: true,
-          refreshAfterDeleteNotification: false,
-          navigate: true,
-          navigationDetails: {
-            route: 'study-player',
-            exactparams: 'courseId',
-            queryPType: 'hybrid',
-            queryparams: {
-              courseId: null,
-              classId: null,
-              unitId: null,
-              lessonId: null,
-              collectionId: null,
-              role: ROLES.STUDENT,
-              source: PLAYER_EVENT_SOURCE.COURSE_MAP,
-              type: null,
-              itemId: null,
-              itemType: '',
-              subtype: null,
-              pathId: 0,
-              collectionSource: 'course_map',
-              isStudyPlayer: true,
-              milestoneId: null,
-              pathType: '',
-              isNotification: true,
-              isIframeMode: true
-            }
-          }
-        }
-      },
-      {
-        type: 'teacher.suggestion',
-        action: 'explore',
-        ctxOrigin: 'class-activity',
-        actionType: 'navigate',
-        postActionHook: {
-          dismissPopupAfterAction: true,
-          deletenotificationuponaction: true,
-          refreshAfterDeleteNotification: false,
-          navigate: true,
-          navigationDetails: {
-            route: 'player',
-            exactparams: 'itemId',
-            queryPType: 'hybrid',
-            queryparams: {
-              itemId: null,
-              caContentId: null,
-              collectionId: null,
-              classId: null,
-              pathId: null,
-              pathType: null,
-              type: null,
-              source: PLAYER_EVENT_SOURCE.DAILY_CLASS,
-              resourceId: null,
-              role: ROLES.STUDENT,
-              isNotification: true,
-              isIframeMode: true
-            }
-          }
-        }
-      },
-      {
-        type: 'teacher.suggestion',
-        action: 'explore',
-        ctxOrigin: 'proficiency',
-        actionType: 'navigate',
-        postActionHook: {
-          dismissPopupAfterAction: true,
-          deletenotificationuponaction: true,
-          refreshAfterDeleteNotification: false,
-          navigate: true,
-          navigationDetails: {
-            route: 'player',
-            exactparams: 'itemId',
-            queryPType: 'hybrid',
-            queryparams: {
-              itemId: null,
-              collectionId: null,
-              classId: null,
-              pathId: null,
-              pathType: null,
-              type: null,
-              source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
-              resourceId: null,
-              role: ROLES.STUDENT,
-              isNotification: true,
-              isIframeMode: true
-            }
-          }
-        }
-      },
-      {
-        type: 'teacher.override',
-        action: 'explore',
-        actionType: 'navigate',
-        postActionHook: {
-          dismissPopupAfterAction: true,
-          deletenotificationuponaction: true,
-          refreshAfterDeleteNotification: false,
-          navigate: true,
-          navigationDetails: {
-            route: 'student.class.course-map',
-            queryPType: 'hybrid',
-            exactparams: 'classId',
-            setlocation: true,
-            queryparams: {
-              classId: null,
-              unitId: null,
-              lessonId: null,
-              collectionId: null,
-              milestoneId: null,
-              tab: 'assesmentreport',
-              location: 'unitId+lessonId+collectionId+milestoneId+currentItemType',
-              refresh: true
-            }
-          }
-        }
-      },
-      {
-        type: 'teacher.grading.complete',
-        action: 'explore',
-        actionType: 'navigate',
-        postActionHook: {
-          dismissPopupAfterAction: true,
-          deletenotificationuponaction: true,
-          refreshAfterDeleteNotification: false,
-          navigate: true,
-          navigationDetails: {
-            route: 'student.class.course-map',
-            queryPType: 'hybrid',
-            exactparams: 'classId',
-            setlocation: true,
-            queryparams: {
-              classId: null,
-              unitId: null,
-              lessonId: null,
-              collectionId: null,
-              milestoneId: null,
-              tab: 'none',
-              location: 'unitId+lessonId+collectionId+milestoneId+currentItemType'
-            }
-          }
-        }
-      },
-      {
-        type: 'student.self.report',
-        action: 'explore',
-        actionType: 'navigate',
-        postActionHook: {
-          dismissPopupAfterAction: true,
-          deletenotificationuponaction: true,
-          refreshAfterDeleteNotification: false,
-          navigate: true,
-          navigationDetails: {
-            route: 'teacher.class.course-map',
-            queryPType: 'hybrid',
-            exactparams: 'classId',
-            setlocation: true,
-            queryparams: {
-              classId: null,
-              unitId: null,
-              lessonId: null,
-              collectionId: null,
-              milestoneId: null,
-              tab: 'assesmentreport',
-              location: 'unitId+lessonId+collectionId+milestoneId+currentItemType'
-            }
-          }
-        }
-      },
-      {
-        type: 'student.gradable.submission',
-        action: 'explore',
-        actionType: 'navigate',
-        postActionHook: {
-          dismissPopupAfterAction: true,
-          deletenotificationuponaction: false,
-          navigate: true,
-          navigationDetails: {
-            route: 'teacher.class.course-map',
-            queryPType: 'hybrid',
-            exactparams: 'classId',
-            setlocation: true,
-            queryparams: {
-              classId: null,
-              unitId: null,
-              lessonId: null,
-              collectionId: null,
-              milestoneId: null,
-              location: 'unitId+lessonId+collectionId+milestoneId+currentItemType'
-            }
+      type: 'teacher.suggestion',
+      action: 'explore',
+      ctxOrigin: 'coursemap',
+      actionType: 'navigate',
+      postActionHook: {
+        dismissPopupAfterAction: true,
+        deletenotificationuponaction: true,
+        refreshAfterDeleteNotification: false,
+        navigate: true,
+        navigationDetails: {
+          route: 'study-player',
+          exactparams: 'courseId',
+          queryPType: 'hybrid',
+          queryparams: {
+            courseId: null,
+            classId: null,
+            unitId: null,
+            lessonId: null,
+            collectionId: null,
+            role: ROLES.STUDENT,
+            source: PLAYER_EVENT_SOURCE.COURSE_MAP,
+            type: null,
+            itemId: null,
+            itemType: '',
+            subtype: null,
+            pathId: 0,
+            collectionSource: 'course_map',
+            isStudyPlayer: true,
+            milestoneId: null,
+            pathType: '',
+            isNotification: true,
+            isIframeMode: true
           }
         }
       }
+    },
+    {
+      type: 'teacher.suggestion',
+      action: 'explore',
+      ctxOrigin: 'class-activity',
+      actionType: 'navigate',
+      postActionHook: {
+        dismissPopupAfterAction: true,
+        deletenotificationuponaction: true,
+        refreshAfterDeleteNotification: false,
+        navigate: true,
+        navigationDetails: {
+          route: 'player',
+          exactparams: 'itemId',
+          queryPType: 'hybrid',
+          queryparams: {
+            itemId: null,
+            caContentId: null,
+            collectionId: null,
+            classId: null,
+            pathId: null,
+            pathType: null,
+            type: null,
+            source: PLAYER_EVENT_SOURCE.DAILY_CLASS,
+            resourceId: null,
+            role: ROLES.STUDENT,
+            isNotification: true,
+            isIframeMode: true
+          }
+        }
+      }
+    },
+    {
+      type: 'teacher.suggestion',
+      action: 'explore',
+      ctxOrigin: 'proficiency',
+      actionType: 'navigate',
+      postActionHook: {
+        dismissPopupAfterAction: true,
+        deletenotificationuponaction: true,
+        refreshAfterDeleteNotification: false,
+        navigate: true,
+        navigationDetails: {
+          route: 'player',
+          exactparams: 'itemId',
+          queryPType: 'hybrid',
+          queryparams: {
+            itemId: null,
+            collectionId: null,
+            classId: null,
+            pathId: null,
+            pathType: null,
+            type: null,
+            source: PLAYER_EVENT_SOURCE.MASTER_COMPETENCY,
+            resourceId: null,
+            role: ROLES.STUDENT,
+            isNotification: true,
+            isIframeMode: true
+          }
+        }
+      }
+    },
+    {
+      type: 'teacher.override',
+      action: 'explore',
+      actionType: 'navigate',
+      postActionHook: {
+        dismissPopupAfterAction: true,
+        deletenotificationuponaction: true,
+        refreshAfterDeleteNotification: false,
+        navigate: true,
+        navigationDetails: {
+          route: 'student.class.course-map',
+          queryPType: 'hybrid',
+          exactparams: 'classId',
+          setlocation: true,
+          queryparams: {
+            classId: null,
+            unitId: null,
+            lessonId: null,
+            collectionId: null,
+            milestoneId: null,
+            tab: 'assesmentreport',
+            location: 'unitId+lessonId+collectionId+milestoneId+currentItemType',
+            refresh: true
+          }
+        }
+      }
+    },
+    {
+      type: 'teacher.grading.complete',
+      action: 'explore',
+      actionType: 'navigate',
+      postActionHook: {
+        dismissPopupAfterAction: true,
+        deletenotificationuponaction: true,
+        refreshAfterDeleteNotification: false,
+        navigate: true,
+        navigationDetails: {
+          route: 'student.class.course-map',
+          queryPType: 'hybrid',
+          exactparams: 'classId',
+          setlocation: true,
+          queryparams: {
+            classId: null,
+            unitId: null,
+            lessonId: null,
+            collectionId: null,
+            milestoneId: null,
+            tab: 'none',
+            location: 'unitId+lessonId+collectionId+milestoneId+currentItemType'
+          }
+        }
+      }
+    },
+    {
+      type: 'student.self.report',
+      action: 'explore',
+      actionType: 'navigate',
+      postActionHook: {
+        dismissPopupAfterAction: true,
+        deletenotificationuponaction: true,
+        refreshAfterDeleteNotification: false,
+        navigate: true,
+        navigationDetails: {
+          route: 'teacher.class.course-map',
+          queryPType: 'hybrid',
+          exactparams: 'classId',
+          setlocation: true,
+          queryparams: {
+            classId: null,
+            unitId: null,
+            lessonId: null,
+            collectionId: null,
+            milestoneId: null,
+            tab: 'assesmentreport',
+            location: 'unitId+lessonId+collectionId+milestoneId+currentItemType'
+          }
+        }
+      }
+    },
+    {
+      type: 'student.gradable.submission',
+      action: 'explore',
+      actionType: 'navigate',
+      postActionHook: {
+        dismissPopupAfterAction: true,
+        deletenotificationuponaction: false,
+        navigate: true,
+        navigationDetails: {
+          route: 'teacher.class.course-map',
+          queryPType: 'hybrid',
+          exactparams: 'classId',
+          setlocation: true,
+          queryparams: {
+            classId: null,
+            unitId: null,
+            lessonId: null,
+            collectionId: null,
+            milestoneId: null,
+            location: 'unitId+lessonId+collectionId+milestoneId+currentItemType'
+          }
+        }
+      }
+    }
     ]
   },
 
@@ -399,12 +399,12 @@ export default Ember.Component.extend({
       if (notin && component.get('notificationCtxRole')) {
         let serviceEndpoint =
           component.get('notificationCtxRole') === 'student' ?
-          component
-          .get('notificationService')
-          .resetStudentNotification(notin.id) :
-          component
-          .get('notificationService')
-          .resetTeacherNotification(notin.id);
+            component
+              .get('notificationService')
+              .resetStudentNotification(notin.id) :
+            component
+              .get('notificationService')
+              .resetTeacherNotification(notin.id);
         return serviceEndpoint;
         //}
       }
@@ -472,7 +472,7 @@ export default Ember.Component.extend({
         notndetail,
         component.get('notificationModel') &&
         component.get('notificationModel').notifications ?
-        component.get('notificationModel').notifications : {}
+          component.get('notificationModel').notifications : {}
       );
       let newDataModel = {},
         newNotificationDetails = [];
@@ -510,13 +510,13 @@ export default Ember.Component.extend({
     };
     filter.boundary =
       component.notificationModel && component.notificationModel.boundary ?
-      component.notificationModel.boundary :
-      '';
+        component.notificationModel.boundary :
+        '';
     filter.limit = component.get('rowsPerPage');
     filter.classId =
       component.get('model.isClass') && component.get('classId') ?
-      component.get('classId') :
-      ''; // from page Options passed to instance
+        component.get('classId') :
+        ''; // from page Options passed to instance
 
     return filter;
   },
@@ -534,8 +534,8 @@ export default Ember.Component.extend({
     };
     filter.classId =
       component.get('model.isClass') && component.get('classId') ?
-      component.get('classId') :
-      ''; // from page Options passed to instance
+        component.get('classId') :
+        ''; // from page Options passed to instance
     filter.limit = component.get('rowsPerPage');
     return filter;
   }
