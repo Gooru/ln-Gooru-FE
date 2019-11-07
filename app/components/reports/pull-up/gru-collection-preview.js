@@ -7,7 +7,9 @@ import {
   CONTENT_TYPES,
   ASSESSMENT_SHOW_VALUES
 } from 'gooru-web/config/config';
-import { getEndpointUrl } from 'gooru-web/utils/endpoint-config';
+import {
+  getEndpointUrl
+} from 'gooru-web/utils/endpoint-config';
 import ModalMixin from 'gooru-web/mixins/modal';
 import PullUpMixin from 'gooru-web/mixins/reports/pull-up/pull-up-mixin';
 import PortfolioMixin from 'gooru-web/mixins/reports/portfolio/portfolio-mixin';
@@ -306,7 +308,9 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     const assessmentService = component.get('assessmentService');
     return Ember.RSVP.hash({
       assessment: assessmentService.readAssessment(assessmentId)
-    }).then(({ assessment }) => {
+    }).then(({
+      assessment
+    }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', assessment);
       }
@@ -404,7 +408,9 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
     const collectionService = component.get('collectionService');
     return Ember.RSVP.hash({
       collection: collectionService.readCollection(collectionId)
-    }).then(({ collection }) => {
+    }).then(({
+      collection
+    }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', collection);
       }
@@ -424,7 +430,9 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       externalAssessment: assessmentService.readExternalAssessment(
         externalAssessmentId
       )
-    }).then(({ externalAssessment }) => {
+    }).then(({
+      externalAssessment
+    }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', externalAssessment);
       }
@@ -444,7 +452,9 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
       externalCollection: collectionService.readExternalCollection(
         externalCollectionId
       )
-    }).then(({ externalCollection }) => {
+    }).then(({
+      externalCollection
+    }) => {
       if (!component.isDestroyed) {
         component.set('previewContent', externalCollection);
       }

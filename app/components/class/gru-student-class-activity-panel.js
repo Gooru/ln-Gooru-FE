@@ -82,7 +82,7 @@ export default Ember.Component.extend({
       const classData = component.get('class');
       const classId = classData.get('id');
       const caContentId = component.get('classActivity.id');
-      const pathId = suggestionContent.get('suggestedToContext.id');
+      const pathId = suggestionContent.get('suggestedToContext.firstObject.id');
       const pathType = component.get('suggestionPathType');
       let playerUrl;
       let queryParams = {
@@ -122,7 +122,8 @@ export default Ember.Component.extend({
       component.sendAction('playContent', playerUrl, Ember.Object.create({
         format: collectionType,
         title: suggestionContent.get('title'),
-        thumbnailUrl: suggestionContent.get('url')
+        thumbnailUrl: suggestionContent.get('url'),
+        isSuggestedContentPlay: true
       }));
     },
     /**
