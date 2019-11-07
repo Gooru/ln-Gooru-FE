@@ -63,11 +63,11 @@ export default Ember.Component.extend({
     function() {
       const component = this;
       let actvnot =
-          component.notificationModel &&
-          component.notificationModel.notifications &&
-          component.notificationModel.notifications.length > 0
-            ? component.notificationModel.notifications.length
-            : 0,
+        component.notificationModel &&
+        component.notificationModel.notifications &&
+        component.notificationModel.notifications.length > 0 ?
+        component.notificationModel.notifications.length :
+        0,
         notnCnt = 0,
         displyNotn = '';
 
@@ -96,11 +96,10 @@ export default Ember.Component.extend({
    * also provides config if dismissed after action taken
    */
   notificationAddressAction: {
-    notificationTypes: [
-      {
+    notificationTypes: [{
         type: 'teacher.suggestion',
         action: 'explore',
-        ctxSource: 'course-map',
+        ctxOrigin: 'coursemap',
         actionType: 'navigate',
         postActionHook: {
           dismissPopupAfterAction: true,
@@ -137,7 +136,7 @@ export default Ember.Component.extend({
       {
         type: 'teacher.suggestion',
         action: 'explore',
-        ctxSource: 'class-activity',
+        ctxOrigin: 'class-activity',
         actionType: 'navigate',
         postActionHook: {
           dismissPopupAfterAction: true,
@@ -168,7 +167,7 @@ export default Ember.Component.extend({
       {
         type: 'teacher.suggestion',
         action: 'explore',
-        ctxSource: 'proficiency',
+        ctxOrigin: 'proficiency',
         actionType: 'navigate',
         postActionHook: {
           dismissPopupAfterAction: true,
@@ -216,8 +215,7 @@ export default Ember.Component.extend({
               collectionId: null,
               milestoneId: null,
               tab: 'assesmentreport',
-              location:
-                'unitId+lessonId+collectionId+milestoneId+currentItemType',
+              location: 'unitId+lessonId+collectionId+milestoneId+currentItemType',
               refresh: true
             }
           }
@@ -244,8 +242,7 @@ export default Ember.Component.extend({
               collectionId: null,
               milestoneId: null,
               tab: 'none',
-              location:
-                'unitId+lessonId+collectionId+milestoneId+currentItemType'
+              location: 'unitId+lessonId+collectionId+milestoneId+currentItemType'
             }
           }
         }
@@ -271,8 +268,7 @@ export default Ember.Component.extend({
               collectionId: null,
               milestoneId: null,
               tab: 'assesmentreport',
-              location:
-                'unitId+lessonId+collectionId+milestoneId+currentItemType'
+              location: 'unitId+lessonId+collectionId+milestoneId+currentItemType'
             }
           }
         }
@@ -296,8 +292,7 @@ export default Ember.Component.extend({
               lessonId: null,
               collectionId: null,
               milestoneId: null,
-              location:
-                'unitId+lessonId+collectionId+milestoneId+currentItemType'
+              location: 'unitId+lessonId+collectionId+milestoneId+currentItemType'
             }
           }
         }
@@ -403,13 +398,13 @@ export default Ember.Component.extend({
       const component = this;
       if (notin && component.get('notificationCtxRole')) {
         let serviceEndpoint =
-          component.get('notificationCtxRole') === 'student'
-            ? component
-              .get('notificationService')
-              .resetStudentNotification(notin.id)
-            : component
-              .get('notificationService')
-              .resetTeacherNotification(notin.id);
+          component.get('notificationCtxRole') === 'student' ?
+          component
+          .get('notificationService')
+          .resetStudentNotification(notin.id) :
+          component
+          .get('notificationService')
+          .resetTeacherNotification(notin.id);
         return serviceEndpoint;
         //}
       }
@@ -476,26 +471,24 @@ export default Ember.Component.extend({
       Object.assign(
         notndetail,
         component.get('notificationModel') &&
-          component.get('notificationModel').notifications
-          ? component.get('notificationModel').notifications
-          : {}
+        component.get('notificationModel').notifications ?
+        component.get('notificationModel').notifications : {}
       );
       let newDataModel = {},
         newNotificationDetails = [];
 
       Object.assign(newNotificationDetails, data.notifications);
       Object.assign(newDataModel, data);
-      let concatAndDeDuplicateObjects = (p, ...arrs) =>
-        []
-          .concat(...arrs)
-          .reduce(
-            (a, b) => (!a.filter(c => b[p] === c[p]).length ? [...a, b] : a),
-            []
-          );
+      let concatAndDeDuplicateObjects = (p, ...arrs) => []
+        .concat(...arrs)
+        .reduce(
+          (a, b) => (!a.filter(c => b[p] === c[p]).length ? [...a, b] : a),
+          []
+        );
 
-      var ndt = showMoreFlow
-        ? concatAndDeDuplicateObjects('id', notndetail, newNotificationDetails)
-        : newNotificationDetails;
+      var ndt = showMoreFlow ?
+        concatAndDeDuplicateObjects('id', notndetail, newNotificationDetails) :
+        newNotificationDetails;
 
       if (!(component.get('isDestroyed') || component.get('isDestroying'))) {
         newDataModel.notifications = ndt;
@@ -516,14 +509,14 @@ export default Ember.Component.extend({
       boundary: ''
     };
     filter.boundary =
-      component.notificationModel && component.notificationModel.boundary
-        ? component.notificationModel.boundary
-        : '';
+      component.notificationModel && component.notificationModel.boundary ?
+      component.notificationModel.boundary :
+      '';
     filter.limit = component.get('rowsPerPage');
     filter.classId =
-      component.get('model.isClass') && component.get('classId')
-        ? component.get('classId')
-        : ''; // from page Options passed to instance
+      component.get('model.isClass') && component.get('classId') ?
+      component.get('classId') :
+      ''; // from page Options passed to instance
 
     return filter;
   },
@@ -540,9 +533,9 @@ export default Ember.Component.extend({
       boundary: ''
     };
     filter.classId =
-      component.get('model.isClass') && component.get('classId')
-        ? component.get('classId')
-        : ''; // from page Options passed to instance
+      component.get('model.isClass') && component.get('classId') ?
+      component.get('classId') :
+      ''; // from page Options passed to instance
     filter.limit = component.get('rowsPerPage');
     return filter;
   }
