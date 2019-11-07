@@ -404,6 +404,23 @@ export default Ember.Component.extend(ConfigurationMixin, {
             date
           );
           content.set('isAdded', true);
+          let classSetting = this.get('class.setting'),
+            allowMasteryAccrual = classSetting['mastery.applicable'];
+          if (allowMasteryAccrual && allowMasteryAccrual === 'true') {
+            component
+              .get('classActivityService')
+              .updateMasteryAccrualClassActivity(classId, newContentId, true)
+              .then(() => {
+                component.sendAction(
+                  'addedContentToDCA',
+                  data,
+                  date,
+                  null,
+                  null,
+                  true
+                );
+              });
+          }
           component.sendAction('addedContentToDCA', data, date);
         });
     },
