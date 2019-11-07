@@ -1,5 +1,7 @@
 import Ember from 'ember';
-
+import {
+  NOTIFICATION_PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Display properties
@@ -21,7 +23,7 @@ export default Ember.Component.extend({
       let notifionAddresAction;
       if (notinItem.notificationType === 'teacher.suggestion') {
         notifionAddresAction = component.notificationAddressAction.notificationTypes.find(
-          ntype => ntype.ctxSource === notinItem.ctxSource
+          ntype => ntype.ctxOrigin === notinItem.ctxSource
         );
       } else {
         notifionAddresAction = component.notificationAddressAction.notificationTypes.find(
@@ -167,9 +169,12 @@ export default Ember.Component.extend({
     };
     for (let i = 0; i < keys.length; i++) {
       var key = keys[i];
-      result[fix_key(key)] = srcObj[key];
+      if (key === 'ctxSource') {
+        result[fix_key(key)] = NOTIFICATION_PLAYER_EVENT_SOURCE[srcObj[key]];
+      } else {
+        result[fix_key(key)] = srcObj[key];
+      }
     }
-
     var tgtkeys = Object.keys(tgtQueryParams);
     for (let i = 0; i < tgtkeys.length; i++) {
       var tkey = tgtkeys[i];

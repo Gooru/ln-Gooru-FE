@@ -142,20 +142,20 @@
           grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 
           &.no-class-info {
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr ;
           }
 
           &.nav-menu-class-activities,
           &.nav-menu-course-map,
           &.nav-menu-study-player {
             &.no-class-info {
-              grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+              grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
             }
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
           }
 
           .studyplayer-title {
-            grid-column: 2 / 5;
+            grid-column: 2 / 7;
           }
         }
 
