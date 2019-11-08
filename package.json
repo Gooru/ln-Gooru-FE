@@ -71,7 +71,8 @@
     "grunt-svgstore": "^1.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.1",
-    "prettier": "^1.5.3"
+    "prettier": "^1.5.3",
+    "sort-package-json": "1.22.1"
   },
   "dependencies": {
     "broccoli-sass": "^0.7.0",
@@ -91,9 +92,7 @@
     "grunt-exec": "^1.0.0",
     "loader.js": "^4.2.3",
     "quizzes-addon": "4.9.13",
-    "url-search-params": "^0.10.0",
-    "sort-package-json": "1.22.1",
-    "detect-indent": "5.0.0"
+    "url-search-params": "^0.10.0"
   },
   "ember-addon": {
     "paths": [
