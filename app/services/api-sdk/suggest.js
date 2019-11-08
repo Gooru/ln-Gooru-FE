@@ -2,7 +2,9 @@ import Ember from 'ember';
 import SuggestAdapter from 'gooru-web/adapters/suggest/suggest';
 import SuggestSerializer from 'gooru-web/serializers/suggest/suggest';
 import SuggestContext from 'gooru-web/models/suggest/suggest-context';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 /**
  * Service to support the suggest functionality
  *
@@ -510,14 +512,18 @@ export default Ember.Service.extend({
               'id'
             );
           }
-          const courseMapCollections = courseMapContents.filterBy(
+          let courseMapCollections = courseMapContents.filterBy(
             'suggestedContentType',
             CONTENT_TYPES.COLLECTION
           );
-          const courseMapAssessments = courseMapContents.filterBy(
+          let courseMapAssessments = courseMapContents.filterBy(
             'suggestedContentType',
             CONTENT_TYPES.ASSESSMENT
           );
+          if (params.suggestionOrigin === 'system') {
+            courseMapCollections = courseMapCollections.filterBy('accepted', true);
+            courseMapAssessments = courseMapAssessments.filterBy('accepted', true);
+          }
           const courseMapCollectionPathIds = courseMapCollections.map(
             courseMapContent => {
               return courseMapContent.get('pathId');
