@@ -30,10 +30,10 @@ rm -rf /tmp/yarn-cache/npm-quizzes-addon*
 silent yarn remove quizzes-addon
 
 info "Installing quizzes addon..."
-silent yarn add file:./quizzes-addon-${QUIZZES_VERSION}.tgz
+silent yarn add file:./quizzes-addon-${QUIZZES_VERSION}.tgz --ignore-engines
 
 info "Installing npm dependencies..."
-silent yarn install
+silent yarn install --ignore-engines
 
 info "Installing bower dependencies..."
 silent bower install
