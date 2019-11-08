@@ -98,5 +98,6 @@
     "paths": [
       "lib/remove"
     ]
-  }
+  },
+  "detect-indent": "5.0.0"
 }
