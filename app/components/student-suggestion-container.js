@@ -16,6 +16,11 @@ export default Ember.Component.extend({
   suggestService: Ember.inject.service('api-sdk/suggest'),
 
   /**
+   * @property {CourseMapService}
+   */
+  courseMapService: Ember.inject.service('api-sdk/course-map'),
+
+  /**
    * @property {service} session
    */
   session: Ember.inject.service('session'),
@@ -141,6 +146,7 @@ export default Ember.Component.extend({
       const suggestionOrigin = suggestionContent.get('suggestionOrigin');
       const suggestionArea = suggestionContent.get('suggestionArea');
       // TODO: CA and Proficiency doesn't support system suggestion
+
       if (suggestionArea === 'class-activity') {
         const pathType = SUGGESTION_TYPE.CA_TEACHER;
         component.playCAContent(suggestionContent, pathType);
@@ -149,7 +155,14 @@ export default Ember.Component.extend({
         component.playProficiencyContent(suggestionContent, pathType);
       } else {
         const pathType = suggestionOrigin;
-        component.playCourseMapContent(suggestionContent, pathType);
+        if (pathType === 'system' && !suggestionContent.get('accepted')) {
+          component.addSuggestedPath(suggestionContent).then((pathId) => {
+            suggestionContent.pathId = pathId;
+            component.playCourseMapContent(suggestionContent, pathType);
+          });
+        } else {
+          component.playCourseMapContent(suggestionContent, pathType);
+        }
       }
     },
 
@@ -186,6 +199,30 @@ export default Ember.Component.extend({
         component.loadSuggestionData();
       }
     });
+  },
+
+
+  /**
+   * @function addSuggestedPath
+   * Method to add Suggested Path
+   */
+  addSuggestedPath(suggestion) {
+    const component = this;
+    const courseMapService = this.get('courseMapService');
+    let mapContext = {};
+    mapContext.ctx_user_id = component.get('userId');
+    mapContext.ctx_class_id = component.get('classId');
+    mapContext.ctx_course_id = suggestion.get('courseId');
+    mapContext.lessonId = suggestion.get('lessonId');
+    mapContext.ctx_collection_id = suggestion.get('collectionId');
+    mapContext.ctx_unit_id = suggestion.get('unitId');
+    mapContext.suggested_content_type = suggestion.get('suggestedContentType');
+    mapContext.suggested_content_id = suggestion.get('suggestedContentId');
+    mapContext.suggested_content_subtype =
+      suggestion.get('suggestedContentType') === 'collection' ?
+        'signature-collection' :
+        'signature-assessment';
+    return courseMapService.addSuggestedPath(mapContext);
   },
 
   playCAContent(suggestionContent, pathType) {
