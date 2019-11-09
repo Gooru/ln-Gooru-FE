@@ -1,7 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: ['pull-up', 'struggling-competency-domain-level'],
+  //---------------------------------------------------------------
+  // Attributes
+
+  classNames: ['pull-up', 'struggling-competency-other-grade-level'],
 
   //-------------------------------------------------------------
   // Property
@@ -11,8 +14,14 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
-    toggleDomain(test) {
-      this.$(`.domain-accordion-${test}`).slideToggle(500);
+    onToggleGrade(gradeIndex) {
+      this.$(`.sc-other-grade-panel-accordian-${gradeIndex}`).slideToggle(500);
+    },
+
+    toggleDomain(gradeIndex, domainIndex) {
+      this.$(
+        `.sc-other-grade-domain-accordion-${gradeIndex}-${domainIndex}`
+      ).slideToggle(500);
     },
 
     onClosePullUp() {

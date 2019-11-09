@@ -42,7 +42,7 @@
       <div class="data-analysis-cards-container">
         <div class="competency-card-container">
           <div class="title-container">Struggling Competencies</div>
-          <div class="competency-struggling-container">
+          <div class="competency-struggling-container" {{action "onSelectDomain"}}>
             <div class="competency-heading">
              <span>Competency heading</span>
             <ul class="competency-sub-heading">
@@ -78,7 +78,7 @@
 
         <div class="competency-card-container other-grade">
           <div class="title-container">Struggling Competencies(Other Grade)</div>
-          <div class="competency-struggling-container">
+          <div class="competency-struggling-container" {{action "onSelectGrade"}}>
             <div class="competency-heading">
              <span>Competency heading</span>
             <ul class="competency-sub-heading">
@@ -137,8 +137,13 @@
 {{#if isShowCompetencyCompletionReport}}
   {{reports/pull-up/competency-completion-report fwCompetencies=fwCompetencies showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency" maxLimitToSuggestContent=maxLimitToSuggestContent}}
 {{/if}}
+{{#if isShowStrugglingCompetencyReport}}
+  {{reports/pull-up/struggling-competency-domain-level closePullUp="onClosePullUp"}}
+{{/if}}
 
-{{reports/pull-up/struggling-competency-domain-level}}
+{{#if isShowOtherGradeCompetency}}
+ {{reports/pull-up/struggling-competency-other-grade-level closePullUp="onCloseOtherGrade"}}
+{{/if}}
 
 {{#if isShowActivitySearchContentPullup}}
   {{teacher/class/ca-search-content-pull-up

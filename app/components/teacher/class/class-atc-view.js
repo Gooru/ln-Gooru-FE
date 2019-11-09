@@ -155,6 +155,18 @@ export default Ember.Component.extend({
 
   students: Ember.computed.alias('class.members'),
 
+  /**
+   * @property {Boolean} isShowStrugglingCompetencyReport
+   * property hold the show / hide activity for struggling competency
+   */
+  isShowStrugglingCompetencyReport: false,
+
+  /**
+   * @property {Boolean} isShowOtherGradeCompetency
+   * property hold show/hide activity for other grade competency
+   */
+  isShowOtherGradeCompetency: false,
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -162,14 +174,15 @@ export default Ember.Component.extend({
   // Actions
   actions: {
     //Action triggered when click a domain
-    onSelectDomain(domainData) {
+    onSelectDomain() {
       const component = this;
-      component.set(
-        'competencyCompletionReport',
-        domainData.get('competenciesData').sortBy('completionPercentage')
-      );
-      component.set('selectedDomain', domainData);
-      component.set('isShowCompetencyCompletionReport', true);
+      component.set('isShowStrugglingCompetencyReport', true);
+    },
+
+    //Action triggered when click a grade
+    onSelectGrade() {
+      let component = this;
+      component.set('isShowOtherGradeCompetency', true);
     },
 
     //Action triggered when change month
@@ -251,6 +264,16 @@ export default Ember.Component.extend({
 
     onRemoveClassView(secondaryClass) {
       this.sendAction('onRemoveClassView', secondaryClass);
+    },
+
+    // action trigger when close struggling competency pull up
+    onClosePullUp() {
+      this.set('isShowStrugglingCompetencyReport', false);
+    },
+
+    // action trigger when click backbutton in other grade pull up
+    onCloseOtherGrade() {
+      this.set('isShowOtherGradeCompetency', false);
     }
   },
 

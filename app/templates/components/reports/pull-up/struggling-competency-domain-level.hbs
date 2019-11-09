@@ -1,16 +1,16 @@
-<div class="backdrop"></div>
+<div class="backdrop" {{action "onClosePullUp"}}></div>
 <div class="struggling-competency-domain-level-container">
-  <div class="struggling-competency-title">
+  <div class="struggling-competency-title" {{action "onClosePullUp"}}>
     {{gru-icon name="arrow_back"}}<span>Struggling Competency</span>
   </div>
   <div class="struggling-competency-domain-level-content">
-     {{#each testing as |test|}}
+     {{#each testing as |toplevel test|}}
      <div class="competency-domain-level-panel">
          <div class="grade-domain-name-accordion" {{action "toggleDomain" test}}>
              Domain Name
              {{gru-icon name="arrow_drop_down"}}
          </div>
-         <div class="grade-domain-competency-list-container domain-accordion-{{test}}">
+         <div class="grade-domain-competency-list-container {{if (eq toplevel 1) 'first-child'}} domain-accordion-{{test}}">
            {{#each testing as |index data|}}
            <div class="grade-domain-competency-list-panel">
              <div class="grade-domain-competency-heading">
