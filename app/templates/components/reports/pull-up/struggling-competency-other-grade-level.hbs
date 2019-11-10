@@ -27,7 +27,7 @@
              </div>
              <div class="grade-domain-competency-list-container {{if (and (eq gradeIndex 0) (eq domainIndex 0)) 'first-child'}} sc-other-grade-domain-accordion-{{gradeIndex}}-{{domainIndex}}">
                {{#each testing as |index data|}}
-               <div class="grade-domain-competency-list-panel">
+               <div class="grade-domain-competency-list-panel" {{action "onSelectCompetency"}}>
                  <div class="grade-domain-competency-heading">
                   <span>Competency heading</span>
                  <ul class="grade-domain-competency-sub-heading">

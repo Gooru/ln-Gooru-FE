@@ -31,6 +31,11 @@ export default Ember.Component.extend({
           component.sendAction('closePullUp');
         }
       });
+    },
+
+    onSelectCompetency() {
+      let component = this;
+      component.sendAction('selectCompetency');
     }
   },
 

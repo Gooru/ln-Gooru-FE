@@ -1,0 +1,151 @@
+.struggling-competency-report {
+  background-color: $white;
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  width: 50vw;
+  height: calc(100vh - 10vh);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: none;
+  @media screen and (max-width: $screen-md) {
+    width: 70%;
+  }
+  @media screen and (max-width: $screen-sm) {
+    width: 100%;
+  }
+
+  .backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    cursor: pointer;
+    opacity: 0.8;
+    background-color: #000;
+  }
+
+  %scroll-style {
+    &::-webkit-scrollbar {
+      height: 6px;
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $gray-light;
+      border: 1px solid $gray-light;
+      border-radius: 5px;
+    }
+  }
+  .struggling-competency-report-container {
+    background-color: $white;
+    height: 100%;
+    .struggling-competency-report-header {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      align-items: center;
+      border-bottom: 1px solid $gray-80;
+      box-shadow: 0 0 5px $gray-80;
+      padding: 10px;
+      cursor: pointer;
+
+      .struggling-competency-report-header-panel {
+        .struggling-competency-report-title {
+          font-size: 15px;
+          font-weight: bold;
+        }
+        .struggling-competency-report-sub-titles {
+          display: inline-flex;
+          list-style: none;
+          margin: 0;
+          line-height: 1;
+          padding: 0;
+          li {
+            border-right: 1px solid $gray-80;
+            padding: 0 5px;
+            &:last-child {
+              border: none;
+            }
+            &:first-child {
+              padding-left: 0;
+            }
+          }
+        }
+      }
+    }
+    .struggling-competency-report-student-list-container {
+      height: 100%;
+      overflow-y: auto;
+      .struggling-competency-report-student-list-panel {
+        display: grid;
+        grid-template-columns: 1fr 50px 50px;
+        align-items: center;
+        padding: 10px;
+        cursor: pointer;
+        .sc-report-student-list {
+          .sc-report-student-profile {
+            list-style: none;
+            display: inline-flex;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            li {
+              margin: 10px;
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              background-color: $gray-light;
+              border: $gray-80;
+              display: grid;
+              align-items: center;
+              text-align: center;
+            }
+          }
+        }
+        .sc-report-student-count {
+          font-size: 16px;
+        }
+        .sc-report-student-list-icon {
+          display: grid;
+          align-items: center;
+          i {
+            font-size: 30px;
+          }
+        }
+      }
+      .sc-student-dropdown-list-container {
+        display: none;
+        .sc-student-dropdown-list {
+          display: grid;
+          grid-template-columns: 70px 1fr 70px;
+          align-items: center;
+          padding: 5px 25px;
+          font-weight: bold;
+          font-size: 15px;
+          .sc-student-profile-thumbnail-container {
+            .sc-student-thumbnail {
+              width: 40px;
+              height: 40px;
+              background-color: $gray-80;
+              border-radius: 50%;
+            }
+          }
+          ,
+          .sc-student-performance-container {
+            .sc-student-performance {
+              padding: 5px;
+              background-color: $red-500;
+              color: $white;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}

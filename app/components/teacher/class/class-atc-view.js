@@ -157,7 +157,7 @@ export default Ember.Component.extend({
 
   /**
    * @property {Boolean} isShowStrugglingCompetencyReport
-   * property hold the show / hide activity for struggling competency
+   * property hold the show / hide activity for grade competency
    */
   isShowStrugglingCompetencyReport: false,
 
@@ -166,6 +166,12 @@ export default Ember.Component.extend({
    * property hold show/hide activity for other grade competency
    */
   isShowOtherGradeCompetency: false,
+
+  /**
+   * @property {Boolean} isShowGradeCompetency
+   * property hold show/hide activity for struggling competency
+   */
+  isShowGradeCompetency: false,
 
   // -------------------------------------------------------------------------
   // Events
@@ -176,13 +182,19 @@ export default Ember.Component.extend({
     //Action triggered when click a domain
     onSelectDomain() {
       const component = this;
-      component.set('isShowStrugglingCompetencyReport', true);
+      component.set('isShowGradeCompetency', true);
     },
 
     //Action triggered when click a grade
     onSelectGrade() {
       let component = this;
       component.set('isShowOtherGradeCompetency', true);
+    },
+
+    //Action triggered when click a competency
+    onSelectCompetency() {
+      let component = this;
+      component.set('isShowStrugglingCompetencyReport', true);
     },
 
     //Action triggered when change month
@@ -267,13 +279,22 @@ export default Ember.Component.extend({
     },
 
     // action trigger when close struggling competency pull up
-    onClosePullUp() {
+    onClosePullUp(isCloseAll) {
+      if (isCloseAll) {
+        this.set('isShowOtherGradeCompetency', false);
+        this.set('isShowGradeCompetency', false);
+      }
       this.set('isShowStrugglingCompetencyReport', false);
     },
 
     // action trigger when click backbutton in other grade pull up
     onCloseOtherGrade() {
       this.set('isShowOtherGradeCompetency', false);
+    },
+
+    // action trigger when click backbutton in pull up
+    onCloseGradePullUp() {
+      this.set('isShowGradeCompetency', false);
     }
   },
 

@@ -10,6 +10,13 @@
   margin: 0 auto;
   display: none;
 
+  @media screen and (max-width: $screen-md) {
+    width: 70%;
+  }
+  @media screen and (max-width: $screen-sm) {
+    width: 100%;
+  }
+
   .backdrop {
     position: fixed;
     width: 100%;

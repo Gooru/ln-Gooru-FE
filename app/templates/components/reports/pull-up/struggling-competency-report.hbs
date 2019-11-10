@@ -1,0 +1,51 @@
+<div class="backdrop" {{action "onClosePullUp" true}}></div>
+<div class="struggling-competency-report-container">
+  <div class="struggling-competency-report-header" {{action "onClosePullUp"}}>
+    {{gru-icon name="arrow_back"}}
+    <div class="struggling-competency-report-header-panel">
+      <div class="struggling-competency-report-title">
+          Competency heading
+      </div>
+       <ul class="struggling-competency-report-sub-titles">
+          <li>Domain</li>
+          <li>8.EE.4</li>
+          <li>Learning Outcome Name</li>
+       </ul>
+    </div>
+  </div>
+  <div class="struggling-competency-report-student-list-container">
+    <div class="struggling-competency-report-student-list-panel" {{action "showStudentList"}}>
+      <div class="sc-report-student-list">
+         <ul class="sc-report-student-profile">
+           {{#each studentList as |student|}}
+           <li>{{student}}</li>
+           {{/each}}
+         </ul>
+      </div>
+      <div class="sc-report-student-count">
+        5+
+      </div>
+      <div class="sc-report-student-list-icon">
+        {{gru-icon name="arrow_drop_down"}}
+      </div>
+    </div>
+    <div class="sc-student-dropdown-list-container">
+      {{#each studentList as |student|}}
+      <div class="sc-student-dropdown-list">
+          <div class="sc-student-profile-thumbnail-container">
+           <div class="sc-student-thumbnail">
+           </div>
+          </div>
+          <div class="sc-student-name">
+            Student Name
+          </div>
+          <div class="sc-student-performance-container">
+            <div class="sc-student-performance">
+              50%
+            </div>
+          </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>

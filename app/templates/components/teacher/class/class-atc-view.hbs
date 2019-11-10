@@ -137,12 +137,16 @@
 {{#if isShowCompetencyCompletionReport}}
   {{reports/pull-up/competency-completion-report fwCompetencies=fwCompetencies showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency" maxLimitToSuggestContent=maxLimitToSuggestContent}}
 {{/if}}
-{{#if isShowStrugglingCompetencyReport}}
-  {{reports/pull-up/struggling-competency-domain-level closePullUp="onClosePullUp"}}
+{{#if isShowGradeCompetency}}
+  {{reports/pull-up/struggling-competency-domain-level selectCompetency="onSelectCompetency" closePullUp="onCloseGradePullUp"}}
 {{/if}}
 
 {{#if isShowOtherGradeCompetency}}
- {{reports/pull-up/struggling-competency-other-grade-level closePullUp="onCloseOtherGrade"}}
+ {{reports/pull-up/struggling-competency-other-grade-level selectCompetency="onSelectCompetency" closePullUp="onCloseOtherGrade"}}
+{{/if}}
+
+{{#if isShowStrugglingCompetencyReport}}
+   {{reports/pull-up/struggling-competency-report closePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowActivitySearchContentPullup}}

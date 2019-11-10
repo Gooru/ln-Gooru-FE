@@ -11,10 +11,10 @@
   display: none;
 
   @media screen and (max-width: $screen-md) {
-    width: 70vw;
+    width: 70%;
   }
   @media screen and (max-width: $screen-sm) {
-    width: 100vw;
+    width: 100%;
   }
 
   .backdrop {

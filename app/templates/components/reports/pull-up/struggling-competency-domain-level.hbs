@@ -12,7 +12,7 @@
          </div>
          <div class="grade-domain-competency-list-container {{if (eq toplevel 1) 'first-child'}} domain-accordion-{{test}}">
            {{#each testing as |index data|}}
-           <div class="grade-domain-competency-list-panel">
+           <div class="grade-domain-competency-list-panel" {{action "onSelectCompetency"}}>
              <div class="grade-domain-competency-heading">
               <span>Competency heading</span>
              <ul class="grade-domain-competency-sub-heading">
