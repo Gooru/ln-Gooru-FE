@@ -509,13 +509,14 @@ export default Ember.Controller.extend(ModalMixin, {
     let isMasteryApplicable = false;
     const currentClass = controller.get('tempClass');
     let setting = currentClass.get('setting');
-    if (setting && setting.mastery_applicable) {
-      isMasteryApplicable = !!(
+    if (setting) {
+      isMasteryApplicable =
+        setting['mastery.applicable'] === true ||
+        setting['mastery.applicable'] === 'true' ||
         setting.mastery_applicable === 'true' ||
-        setting.mastery_applicable === true
-      );
+        setting.mastery_applicable === true;
     }
-    return !isMasteryApplicable;
+    return isMasteryApplicable;
   }),
   subject: Ember.computed.alias('class.preference.subject'),
 
@@ -612,11 +613,11 @@ export default Ember.Controller.extend(ModalMixin, {
   switchOptions: Ember.A([
     Ember.Object.create({
       label: 'Yes',
-      value: true
+      value: false
     }),
     Ember.Object.create({
       label: 'No',
-      value: false
+      value: true
     })
   ]),
 
