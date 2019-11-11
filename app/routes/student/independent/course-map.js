@@ -113,18 +113,12 @@ export default Ember.Route.extend({
       isIframeMode: true
     };
 
-    this.get('navigateMapService')
-      .startCollection(courseId, unitId, lessonId, collectionId, collectionType)
-      .then(function() {
-        route.controller.set(
-          'playerUrl',
-          route
-            .get('router')
-            .generate('study-player', courseId, { queryParams })
-        );
-        route.controller.set('isOpenPlayer', true);
-        route.controller.set('playerContent', collection);
-      });
+    route.controller.set(
+      'playerUrl',
+      route.get('router').generate('study-player', courseId, { queryParams })
+    );
+    route.controller.set('isOpenPlayer', true);
+    route.controller.set('playerContent', collection);
   },
 
   /**
@@ -143,18 +137,13 @@ export default Ember.Route.extend({
       source: PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY,
       isIframeMode: true
     };
-    this.get('navigateMapService')
-      .startLesson(courseId, unitId, lessonId)
-      .then(function() {
-        route.controller.set(
-          'playerUrl',
-          route
-            .get('router')
-            .generate('study-player', courseId, { queryParams })
-        );
-        route.controller.set('isOpenPlayer', true);
-        route.controller.set('playerContent', collection);
-      });
+
+    route.controller.set(
+      'playerUrl',
+      route.get('router').generate('study-player', courseId, { queryParams })
+    );
+    route.controller.set('isOpenPlayer', true);
+    route.controller.set('playerContent', collection);
   },
 
   /**
