@@ -363,6 +363,10 @@ export default Ember.Controller.extend(ConfigurationMixin, {
     onToggleRescope() {
       this.toggleProperty('showAllRescopedContent');
     },
+
+    getGradeListItem() {
+      this.loadItemsToGrade();
+    },
     /**
      * Trigger when user click on student list (mobile view)
      */
@@ -1093,6 +1097,7 @@ export default Ember.Controller.extend(ConfigurationMixin, {
         if (oaGradeItems.length) {
           controller.loadOaItemsToGrade(oaGradeItems);
         }
+        this.set('itemsToGradeList', Ember.A([]));
         if (gradeItems.length) {
           let itemsToGradeList = controller.get('itemsToGradeList');
           controller.getCourseStructure().then(function() {

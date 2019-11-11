@@ -153,8 +153,13 @@ export default Ember.Component.extend(ConfigurationMixin, {
     closePlayer: function() {
       let component = this;
       let isIframeMode = component.get('isIframeMode');
+      let backUrl = component.get('collectionUrl');
       if (isIframeMode) {
-        window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
+        if (backUrl) {
+          window.history.back();
+        } else {
+          window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
+        }
       }
     }
   },
