@@ -325,6 +325,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
             addClassActivity.set('isNewlyAdded', true);
             Ember.run.later(function() {
               addClassActivity.set('isNewlyAdded', false);
+              if (allowMasteryAccrual === true) {
+                addClassActivity.set('allowMasteryAccrual', true);
+              }
             }, 2000);
           }
           this.set(
