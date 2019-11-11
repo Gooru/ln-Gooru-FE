@@ -146,26 +146,12 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
       route.setStudyPlayerForTeacherNotifications(params);
     }
     if (
-      params.type === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
-      params.type === CONTENT_TYPES.EXTERNAL_COLLECTION ||
-      params.type === CONTENT_TYPES.OFFLINE_ACTIVITY
+      params.type &&
+      (params.type === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
+        params.type === CONTENT_TYPES.EXTERNAL_COLLECTION ||
+        params.type === CONTENT_TYPES.OFFLINE_ACTIVITY)
     ) {
-      let queryParams = {
-        role: params.role,
-        type: params.type,
-        sourceId: params.sourceId,
-        classId: params.classId,
-        courseId: params.courseId,
-        unitId: params.unitId,
-        lessonId: params.lessonId,
-        milestoneId: params.milestoneId,
-        collectionId: params.collectionId,
-        source: params.source,
-        isIframeMode: params.isIframeMode
-      };
-      route.transitionTo('study-player-external', {
-        queryParams
-      });
+      return route.routeToExternalPlayer(params);
     } else {
       return route
         .get('navigateMapService')
@@ -175,17 +161,26 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
           const unitId = mapLocation.get('context.unitId');
           const milestoneId = mapLocation.get('context.milestoneId');
           const lessonId = mapLocation.get('context.lessonId');
-
           const collectionId =
             mapLocation.get('context.itemId') ||
             mapLocation.get('context.collectionId');
-
           params.type =
             mapLocation.get('context.itemType') ||
             mapLocation.get('context.collectionType');
           params.classId = params.classId || mapLocation.get('context.classId');
+          params.collectionId =
+            params.collectionId || mapLocation.get('context.collectionId');
           params.courseId =
             params.courseId || mapLocation.get('context.courseId');
+
+          if (
+            params.type &&
+            (params.type === CONTENT_TYPES.EXTERNAL_ASSESSMENT ||
+              params.type === CONTENT_TYPES.EXTERNAL_COLLECTION ||
+              params.type === CONTENT_TYPES.OFFLINE_ACTIVITY)
+          ) {
+            return route.routeToExternalPlayer(params);
+          }
 
           var unitPromise = null;
           var lessonPromise = null;
@@ -461,5 +456,24 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
     lessonData.set('gradeName', milestoneLesson.get('grade_name'));
     lessonData.set('domainName', milestoneLesson.get('tx_domain_name'));
     lessonData.set('subjectCode', milestoneLesson.get('tx_subject_code'));
+  },
+
+  routeToExternalPlayer(params) {
+    let queryParams = {
+      role: params.role,
+      type: params.type,
+      sourceId: params.sourceId,
+      classId: params.classId,
+      courseId: params.courseId,
+      unitId: params.unitId,
+      lessonId: params.lessonId,
+      milestoneId: params.milestoneId,
+      collectionId: params.collectionId,
+      source: params.source,
+      isIframeMode: params.isIframeMode
+    };
+    return this.transitionTo('study-player-external', {
+      queryParams
+    });
   }
 });

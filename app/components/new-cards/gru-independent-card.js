@@ -86,23 +86,18 @@ export default Ember.Component.extend({
         isIframeMode: true
       };
 
-      component
-        .get('navigateMapService')
-        .startCollection(courseId, unitId, lessonId, collectionId, type)
-        .then(function() {
-          let playerContent = Ember.Object.create({
-            title: title,
-            format: type
-          });
-          component.set(
-            'playerUrl',
-            component
-              .get('router')
-              .generate('study-player', courseId, { queryParams })
-          );
-          component.set('isOpenPlayer', true);
-          component.set('playerContent', playerContent);
-        });
+      let playerContent = Ember.Object.create({
+        title: title,
+        format: type
+      });
+      component.set(
+        'playerUrl',
+        component
+          .get('router')
+          .generate('study-player', courseId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', playerContent);
     },
 
     openPlayerContent: function() {
