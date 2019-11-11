@@ -22,14 +22,14 @@
         </div>
       {{/if}}
     </div>
-    <div class="activity-date">
-      {{#unless isUnscheduledActivity}}
+    {{#if (and isOfflineActivity (not isUnscheduledActivity))}}
+      <div class="activity-date">
         {{format-date activity.added_date 'DD MMM'}} - {{format-date activity.end_date 'DD MMM'}}
-      {{/unless}}
-    </div>
+      </div>
+    {{/if}}
   </div>
   <div class="content-info">
-    {{activityContent.description}}
+    {{contentDescription}}
   </div>
   <div class="class-info">
     {{#each activityClasses as |activityClass|}}
@@ -37,7 +37,7 @@
         <div class="class-title ellipsis">
           {{activityClass.title}}
         </div>
-        <div class="activity-action student-count" {{action "onShowStudentsList" activityClass}}>
+        <div class="activity-action student-count {{if isUnscheduledActivity 'hidden'}}" {{action "onShowStudentsList" activityClass}}>
           {{gru-icon name="account_circle" class="icon-style"}}
         </div>
         <div class="activity-action suggestion-count hidden" {{action "onShowSuggestionList" activityClass}}>
@@ -67,18 +67,24 @@
     {{/each}}
   </div>
   <div class="activity-actions">
-    <div class="play-activity">
+    <div class="play-activity" title="Play" data-toggle="tooltip" {{action "onShowContentPreview"}}>
       {{gru-icon name="play_arrow"}}
     </div>
     {{#unless isUnscheduledActivity}}
-      <div class="activate-activity {{if activity.isActive 'disable-event'}}">
+      <div class="activate-activity {{if activity.isActive 'disable-event'}}" title="Assign" data-toggle="tooltip">
         {{gru-switch
           isChecked = activity.isActive
           switchOptions = switchOptions
           onOptionSwitch = "onToggleActivityVisibility"}}
       </div>
     {{/unless}}
-    <div class="reschedule-activity" {{action "onRescheduleActivity"}}>
+    {{#if isShowMasteryAccrual}}
+      <div class="mastery-accrual {{if activity.allowMasteryAccrual 'checked'}} {{if isActivityPast 'disable-event'}}" title="Mastery" data-toggle="tooltip" {{action "onEnableMastery"}}>
+        {{gru-icon name=(if activity.allowMasteryAccrual 'radio_button_checked' 'radio_button_unchecked')}}
+      </div>
+    {{/if}}
+    <!-- NOTE need to add completed marker for OA -->
+    <div class="reschedule-activity" title="Reschedule" data-toggle="tooltip" {{action "onRescheduleActivity"}}>
       {{gru-icon name="update"}}
     </div>
   </div>
