@@ -281,12 +281,44 @@ export default Ember.Route.extend({
       isIframeMode: true
     };
 
-    route.controller.set(
-      'playerUrl',
-      route.get('router').generate('study-player', courseId, { queryParams })
-    );
-    route.controller.set('isOpenPlayer', true);
-    route.controller.set('playerContent', collection);
+    let suggestionPromise = null;
+    // Verifies if it is a suggested Collection/Assessment
+    if (collectionSubType) {
+      suggestionPromise = route
+        .get('navigateMapService')
+        .startSuggestion(
+          courseId,
+          unitId,
+          lessonId,
+          collectionId,
+          collectionType,
+          collectionSubType,
+          pathId,
+          classId,
+          pathType
+        );
+    } else {
+      suggestionPromise = route
+        .get('navigateMapService')
+        .startCollection(
+          courseId,
+          unitId,
+          lessonId,
+          collectionId,
+          collectionType,
+          classId,
+          pathId,
+          pathType
+        );
+    }
+    suggestionPromise.then(function() {
+      route.controller.set(
+        'playerUrl',
+        route.get('router').generate('study-player', courseId, { queryParams })
+      );
+      route.controller.set('isOpenPlayer', true);
+      route.controller.set('playerContent', collection);
+    });
   },
 
   /**
@@ -317,12 +349,20 @@ export default Ember.Route.extend({
       pathType,
       isIframeMode: true
     };
-    route.controller.set(
-      'playerUrl',
-      route.get('router').generate('study-player', courseId, { queryParams })
-    );
-    route.controller.set('isOpenPlayer', true);
-    route.controller.set('playerContent', collection);
+
+    route
+      .get('navigateMapService')
+      .startLesson(courseId, unitId, lessonId, classId, pathType)
+      .then(function() {
+        route.controller.set(
+          'playerUrl',
+          route
+            .get('router')
+            .generate('study-player', courseId, { queryParams })
+        );
+        route.controller.set('isOpenPlayer', true);
+        route.controller.set('playerContent', collection);
+      });
   },
 
   /**

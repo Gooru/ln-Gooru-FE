@@ -1202,13 +1202,46 @@ export default Ember.Component.extend({
       isIframeMode: true
     };
 
-    component.set(
-      'playerUrl',
-      component
-        .get('router')
-        .generate('study-player', courseId, { queryParams })
-    );
-    component.set('isOpenPlayer', true);
-    component.set('playerContent', collection);
+    let suggestionPromise = null;
+    // Verifies if it is a suggested Collection/Assessment
+    if (collectionSubType) {
+      suggestionPromise = component
+        .get('navigateMapService')
+        .startSuggestion(
+          courseId,
+          unitId,
+          lessonId,
+          collectionId,
+          collectionType,
+          collectionSubType,
+          pathId,
+          classId,
+          milestoneId
+        );
+    } else {
+      suggestionPromise = component
+        .get('navigateMapService')
+        .startCollection(
+          courseId,
+          unitId,
+          lessonId,
+          collectionId,
+          collectionType,
+          classId,
+          pathId,
+          pathType,
+          milestoneId
+        );
+    }
+    suggestionPromise.then(function() {
+      component.set(
+        'playerUrl',
+        component
+          .get('router')
+          .generate('study-player', courseId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', collection);
+    });
   }
 });
