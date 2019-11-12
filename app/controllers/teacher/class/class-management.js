@@ -613,6 +613,17 @@ export default Ember.Controller.extend(ModalMixin, {
   switchOptions: Ember.A([
     Ember.Object.create({
       label: 'Yes',
+      value: true
+    }),
+    Ember.Object.create({
+      label: 'No',
+      value: false
+    })
+  ]),
+
+  switchOptionsMastery: Ember.A([
+    Ember.Object.create({
+      label: 'Yes',
       value: false
     }),
     Ember.Object.create({
