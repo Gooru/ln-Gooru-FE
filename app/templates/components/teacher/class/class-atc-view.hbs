@@ -42,12 +42,16 @@
       <div class="data-analysis-cards-container">
         <div class="competency-card-container">
           <div class="title-container">Struggling Competencies</div>
-          <div class="competency-struggling-container" {{action "onSelectDomain"}}>
+          {{#if gradeDomainsList }}
+          {{#each gradeDomainsList as |domain domainIndex|}}
+          <div class="competency-struggling-container" {{action "onSelectGrade" domainIndex}}>
+            {{#each domain.competencies as |competency competencyIndex|}}
+            {{#if (eq competencyIndex 0) }}
             <div class="competency-heading">
-             <span>Competency heading</span>
+             <div class="competency-heading-title">{{competency.name}}</div>
             <ul class="competency-sub-heading">
-              <li>Domain</li>
-              <li>8.EE.4</li>
+              <li>{{domain.domainName}}</li>
+              <li>{{competency.displayCode}}</li>
               <li>Learning Outcome Name</li>
             </ul>
             </div>
@@ -55,30 +59,20 @@
               {{gru-icon name="explore"}}
             </div>
             <div class="competency-count">
-              5
+              {{competency.studentsCount}}
             </div>
+            {{/if}}
+            {{/each}}
           </div>
-          <div class="competency-struggling-container">
-            <div class="competency-heading">
-             <span>Competency heading</span>
-            <ul class="competency-sub-heading">
-              <li>Domain</li>
-              <li>8.EE.4</li>
-              <li>Learning Outcome Name</li>
-            </ul>
-            </div>
-            <div class="competency-icon">
-              {{gru-icon name="explore"}}
-            </div>
-            <div class="competency-count">
-              5
-            </div>
-          </div>
+          {{/each}}
+          {{else}}
+             <span>Their is no competency</span>
+          {{/if}}
         </div>
 
         <div class="competency-card-container other-grade">
           <div class="title-container">Struggling Competencies(Other Grade)</div>
-          <div class="competency-struggling-container" {{action "onSelectGrade"}}>
+          <div class="competency-struggling-container" {{action "onSelectOtherGrade"}}>
             <div class="competency-heading">
              <span>Competency heading</span>
             <ul class="competency-sub-heading">
@@ -138,7 +132,7 @@
   {{reports/pull-up/competency-completion-report fwCompetencies=fwCompetencies showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency" maxLimitToSuggestContent=maxLimitToSuggestContent}}
 {{/if}}
 {{#if isShowGradeCompetency}}
-  {{reports/pull-up/struggling-competency-domain-level selectCompetency="onSelectCompetency" closePullUp="onCloseGradePullUp"}}
+  {{reports/pull-up/struggling-competency-domain-level selectCompetency="onSelectCompetency" gradeDomainIndex = gradeDomainIndex gradeDomainsList=gradeDomainsList closePullUp="onCloseGradePullUp"}}
 {{/if}}
 
 {{#if isShowOtherGradeCompetency}}

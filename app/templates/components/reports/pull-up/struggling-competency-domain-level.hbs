@@ -4,19 +4,19 @@
     {{gru-icon name="arrow_back"}}<span>Struggling Competency</span>
   </div>
   <div class="struggling-competency-domain-level-content">
-     {{#each testing as |toplevel test|}}
+     {{#each gradeDomainsList as |domain domainIndex|}}
      <div class="competency-domain-level-panel">
-         <div class="grade-domain-name-accordion" {{action "toggleDomain" test}}>
-             Domain Name
+         <div class="grade-domain-name-accordion" {{action "toggleDomain" domainIndex}}>
+             {{domain.domainName}}
              {{gru-icon name="arrow_drop_down"}}
          </div>
-         <div class="grade-domain-competency-list-container {{if (eq toplevel 1) 'first-child'}} domain-accordion-{{test}}">
-           {{#each testing as |index data|}}
+         <div class="grade-domain-competency-list-container {{if (eq domainIndex gradeDomainIndex) 'first-child'}} domain-accordion-{{domainIndex}}">
+           {{#each domain.competencies as |competency competencyIndex|}}
            <div class="grade-domain-competency-list-panel" {{action "onSelectCompetency"}}>
              <div class="grade-domain-competency-heading">
-              <span>Competency heading</span>
+              <span>{{competency.name}}</span>
              <ul class="grade-domain-competency-sub-heading">
-               <li>8.EE.4</li>
+               <li>{{competency.displayCode}}</li>
                <li>Learning Outcome Name</li>
              </ul>
              </div>
@@ -24,13 +24,15 @@
                {{gru-icon name="explore"}}
              </div>
              <div class="grade-domain-competency-count">
-               5
+               {{competency.studentsCount}}
              </div>
            </div>
           {{/each}}
+          {{#if (gt domain.competencies.length 5)}}
           <div class="domain-show-more-btn">
           <span>  Show More</span>
           </div>
+          {{/if}}
          </div>
 
      </div>

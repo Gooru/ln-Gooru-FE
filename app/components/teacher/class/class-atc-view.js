@@ -32,12 +32,20 @@ export default Ember.Component.extend({
   competencyService: Ember.inject.service('api-sdk/competency'),
 
   /**
+   * Struggling compentency service
+   */
+  strugglingCompetencyService: Ember.inject.service(
+    'api-sdk/struggling-competency'
+  ),
+
+  /**
    * @type {CourseService} Service to retrieve course information
    */
   courseService: Ember.inject.service('api-sdk/course'),
 
   didInsertElement() {
     const component = this;
+    component.fetchStrugglingCompetency();
     if (component.get('class') && component.get('course')) {
       component.loadData();
     } else {
@@ -173,6 +181,12 @@ export default Ember.Component.extend({
    */
   isShowGradeCompetency: false,
 
+  gradeDomainsList: [],
+
+  strugglingCompetencyGradeList: [],
+
+  gradeDomainIndex: null,
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -180,13 +194,14 @@ export default Ember.Component.extend({
   // Actions
   actions: {
     //Action triggered when click a domain
-    onSelectDomain() {
+    onSelectGrade(domainIndex) {
       const component = this;
+      component.set('gradeDomainIndex', domainIndex);
       component.set('isShowGradeCompetency', true);
     },
 
     //Action triggered when click a grade
-    onSelectGrade() {
+    onSelectOtherGrade() {
       let component = this;
       component.set('isShowOtherGradeCompetency', true);
     },
@@ -428,5 +443,27 @@ export default Ember.Component.extend({
     component
       .get('classActivitiesService')
       .addUsersToActivity(classId, contentId, studentIds);
+  },
+
+  fetchStrugglingCompetency() {
+    let component = this;
+    let params = {
+      grade: '5,6',
+      classId: component.get('class.id'),
+      month: 10,
+      year: 2019
+    };
+    Ember.RSVP.hash({
+      gradeLevelCompetency: component
+        .get('strugglingCompetencyService')
+        .fetchStrugglingCompetency(params)
+    }).then(({ gradeLevelCompetency }) => {
+      if (gradeLevelCompetency && gradeLevelCompetency.length) {
+        component.set(
+          'gradeDomainsList',
+          gradeLevelCompetency[0].get('domains')
+        );
+      }
+    });
   }
 });

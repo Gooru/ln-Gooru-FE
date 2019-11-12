@@ -161,24 +161,37 @@
           display: grid;
           grid-template-columns: 1fr 40px 30px;
           align-items: center;
-
-          .competency-sub-heading {
-            padding: 0;
-            list-style: none;
-            display: flex;
-            font-size: 10px;
-            li {
-              &:first-child {
-                padding-left: 0;
+          cursor: pointer;
+          .competency-heading {
+            .competency-heading-title {
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+              width: 200px;
+            }
+            .competency-sub-heading {
+              padding: 0;
+              list-style: none;
+              display: flex;
+              font-size: 10px;
+              width: 200px;
+              li {
+                &:first-child {
+                  padding-left: 0;
+                }
+                &:last-child {
+                  border: none;
+                }
+                padding: 0 5px;
+                border-right: 1px solid;
+                line-height: 1;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
               }
-              &:last-child {
-                border: none;
-              }
-              padding: 0 5px;
-              border-right: 1px solid;
-              line-height: 1;
             }
           }
+
           .competency-icon {
             font-size: 13px;
             text-align: center;

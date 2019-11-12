@@ -5,7 +5,9 @@ export default Ember.Component.extend({
 
   //-------------------------------------------------------------
   // Property
-  testing: [1, 3, 4, 5],
+  gradeDomainsList: null,
+
+  gradeDomainIndex: null,
 
   //-------------------------------------------------------------
   // Actions
