@@ -1,4 +1,4 @@
-<div class="student-proficiency-container {{if isShowSuggestion 'player-suggestion'}} {{if isPlayerProficiency 'player-proficiency'}}">
+<div class="student-proficiency-container {{if isShowSuggestion 'player-suggestion'}} {{if isPlayerProficiency 'player-proficiency'}} {{if isIframeMode 'player-iframe'}}">
   {{#if isPlayerProficiency}}
     {{player/gru-study-header
       classId=class.id
@@ -8,6 +8,7 @@
       sourceType= source
       isStudyPlayer=true
       menuItem = 'profile-prof'
+      isIframeMode=isIframeMode
     }}
   {{/if}}
   <div class="panel-container">
