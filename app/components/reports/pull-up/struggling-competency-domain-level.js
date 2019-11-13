@@ -26,9 +26,10 @@ export default Ember.Component.extend({
       });
     },
 
-    onSelectCompetency() {
+    onSelectCompetency(competency, domain) {
       let component = this;
-      component.sendAction('selectCompetency');
+      competency.set('domainName', domain.get('domainName'));
+      component.sendAction('selectCompetency', competency);
     }
   },
 

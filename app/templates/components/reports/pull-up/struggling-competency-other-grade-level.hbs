@@ -7,31 +7,31 @@
     </div>
   </div>
 <div class="sc-other-grade-panel-container">
-  {{#each testing as |grade gradeIndex| }}
+  {{#each otherGradeCompetency as |grade gradeIndex| }}
   <div class="sc-other-grade-panel">
     <div class="sc-other-grade-title-header">
       <div class="sc-other-grade-title" {{action "onToggleGrade" gradeIndex}}>
-          Grade {{grade}}
+           {{grade.grade}}
       </div>
       <div class="sc-other-grade-title-icon">
         {{gru-icon name="arrow_drop_down"}}
       </div>
     </div>
-    <div class="sc-other-grade-domain-container  sc-other-grade-panel-accordian-{{gradeIndex}} {{if (eq gradeIndex 0) 'first-child'}}">
+    <div class="sc-other-grade-domain-container  sc-other-grade-panel-accordian-{{gradeIndex}} {{if (eq gradeIndex gradeDomainIndex.gradeIndex) 'first-child'}}">
       <div class="sc-other-grade-domain-domain-level-content">
-         {{#each testing as |domain domainIndex|}}
+         {{#each grade.domains as |domain domainIndex|}}
          <div class="competency-domain-level-panel">
              <div class="grade-domain-name-accordion" {{action "toggleDomain" gradeIndex domainIndex}}>
-                 Domain Name
+                {{domain.domainName}}
                  {{gru-icon name="arrow_drop_down"}}
              </div>
-             <div class="grade-domain-competency-list-container {{if (and (eq gradeIndex 0) (eq domainIndex 0)) 'first-child'}} sc-other-grade-domain-accordion-{{gradeIndex}}-{{domainIndex}}">
-               {{#each testing as |index data|}}
-               <div class="grade-domain-competency-list-panel" {{action "onSelectCompetency"}}>
+             <div class="grade-domain-competency-list-container {{if (and (eq gradeIndex gradeDomainIndex.gradeIndex) (eq domainIndex gradeDomainIndex.domainIndex)) 'first-child'}} sc-other-grade-domain-accordion-{{gradeIndex}}-{{domainIndex}}">
+               {{#each domain.competencies as |competency data|}}
+               <div class="grade-domain-competency-list-panel" {{action "onSelectCompetency" competency domain}}>
                  <div class="grade-domain-competency-heading">
-                  <span>Competency heading</span>
+                  <span>{{competency.name}}</span>
                  <ul class="grade-domain-competency-sub-heading">
-                   <li>8.EE.4</li>
+                   <li>{{competency.displayCode}}</li>
                    <li>Learning Outcome Name</li>
                  </ul>
                  </div>
@@ -39,7 +39,7 @@
                    {{gru-icon name="explore"}}
                  </div>
                  <div class="grade-domain-competency-count">
-                   5
+                   {{competency.studentsCount}}
                  </div>
                </div>
               {{/each}}

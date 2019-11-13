@@ -35,5 +35,21 @@ export default Ember.Service.extend({
           );
         }, reject);
     });
+  },
+
+  fetchStudentsPerfomance(params) {
+    let service = this;
+    return new Ember.RSVP.Promise((resolve, reject) => {
+      service
+        .get('strugglingCompetencyAdapter')
+        .fetchStudentsPerfomance(params)
+        .then(response => {
+          resolve(
+            service
+              .get('strugglingCompetencySerializer')
+              .normalizeStudentsPerfomance(response)
+          );
+        }, reject);
+    });
   }
 });

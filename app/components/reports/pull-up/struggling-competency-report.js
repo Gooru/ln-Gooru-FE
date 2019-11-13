@@ -8,7 +8,11 @@ export default Ember.Component.extend({
   //--------------------------------------------------------
   // Properties
 
-  studentList: [2, 3, 5, 5, 4],
+  selectedCompetency: null,
+
+  studentsPerfomanceList: null,
+
+  collectionContents: null,
 
   //-------------------------------------------------------
   //Actions
@@ -25,6 +29,29 @@ export default Ember.Component.extend({
           component.sendAction('closePullUp', isCloseAll);
         }
       });
+    },
+    /**
+     * Action triggered when the user play collection
+     * It'll open the player in new tab
+     */
+    onPlayCollection(collection) {
+      const component = this;
+      component.sendAction('onPreviewContent', collection);
+    },
+
+    /**
+     * Action triggered when add collection to dca.
+     * @param  {Object} collection
+     */
+    onAddCollectionToDCA(collection) {
+      this.sendAction('onAddContentToDCA', collection);
+    },
+
+    /**
+     * Action get triggered when schedule content to CA got clicked
+     */
+    onScheduleContentToDCA(content, event) {
+      this.sendAction('onScheduleContentToDCA', content, event);
     }
   },
 

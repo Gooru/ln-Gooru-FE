@@ -8,7 +8,9 @@ export default Ember.Component.extend({
 
   //-------------------------------------------------------------
   // Property
-  testing: [1, 3, 4, 5],
+  otherGradeCompetency: null,
+
+  gradeDomainIndex: null,
 
   //-------------------------------------------------------------
   // Actions
@@ -33,9 +35,10 @@ export default Ember.Component.extend({
       });
     },
 
-    onSelectCompetency() {
+    onSelectCompetency(competency, domain) {
       let component = this;
-      component.sendAction('selectCompetency');
+      competency.set('domainName', domain.get('domainName'));
+      component.sendAction('selectCompetency', competency);
     }
   },
 

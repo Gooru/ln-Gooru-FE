@@ -146,6 +146,17 @@
           }
         }
       }
+      .sc-student-content-section-container {
+        margin-top: 30px;
+        .sc-student-content-section {
+          display: grid;
+          grid-template-columns: auto auto;
+          align-items: center;
+          grid-row-gap: 20px;
+          padding: 10px;
+          justify-items: center;
+        }
+      }
     }
   }
 }

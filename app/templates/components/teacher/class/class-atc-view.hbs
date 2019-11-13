@@ -40,9 +40,9 @@
         </div>
       </div>
       <div class="data-analysis-cards-container">
+        {{#if gradeDomainsList }}
         <div class="competency-card-container">
-          <div class="title-container">Struggling Competencies</div>
-          {{#if gradeDomainsList }}
+          <div class="title-container">{{t 'common.struggling-competencies'}}</div>
           {{#each gradeDomainsList as |domain domainIndex|}}
           <div class="competency-struggling-container" {{action "onSelectGrade" domainIndex}}>
             {{#each domain.competencies as |competency competencyIndex|}}
@@ -65,19 +65,18 @@
             {{/each}}
           </div>
           {{/each}}
-          {{else}}
-             <span>Their is no competency</span>
-          {{/if}}
         </div>
-
+        {{/if}}
+        {{#if otherGradeTopComp.length}}
         <div class="competency-card-container other-grade">
-          <div class="title-container">Struggling Competencies(Other Grade)</div>
-          <div class="competency-struggling-container" {{action "onSelectOtherGrade"}}>
+          <div class="title-container">{{t 'common.struggling-competencies'}}({{t 'profile.proficiency.grade-line'}})</div>
+          {{#each otherGradeTopComp as |competency competencyIndex|}}
+          <div class="competency-struggling-container" {{action "onSelectOtherGrade" competency.gradeIndex competency.domainIndex}}>
             <div class="competency-heading">
-             <span>Competency heading</span>
+             <div class="competency-heading-title">{{competency.name}}</div>
             <ul class="competency-sub-heading">
-              <li>Domain</li>
-              <li>8.EE.4</li>
+              <li>{{competency.domainName}}</li>
+              <li>{{competency.displayCode}}</li>
               <li>Learning Outcome Name</li>
             </ul>
             </div>
@@ -85,26 +84,12 @@
               {{gru-icon name="explore"}}
             </div>
             <div class="competency-count">
-              5
+              {{competency.studentsCount}}
             </div>
           </div>
-          <div class="competency-struggling-container">
-            <div class="competency-heading">
-             <span>Competency heading</span>
-            <ul class="competency-sub-heading">
-              <li>Domain</li>
-              <li>8.EE.4</li>
-              <li>Learning Outcome Name</li>
-            </ul>
-            </div>
-            <div class="competency-icon">
-              {{gru-icon name="explore"}}
-            </div>
-            <div class="competency-count">
-              5
-            </div>
-          </div>
+          {{/each}}
         </div>
+        {{/if}}
         <div class="activities-count-container" {{action "onRedirectToCA"}}>
           <div class="activities-container completed">
             <div class="activity-count">{{activitiesCount.scheduled}}</div>
@@ -136,11 +121,11 @@
 {{/if}}
 
 {{#if isShowOtherGradeCompetency}}
- {{reports/pull-up/struggling-competency-other-grade-level selectCompetency="onSelectCompetency" closePullUp="onCloseOtherGrade"}}
+ {{reports/pull-up/struggling-competency-other-grade-level selectCompetency="onSelectCompetency" gradeDomainIndex = gradeDomainIndex otherGradeCompetency = otherGradeCompetency closePullUp="onCloseOtherGrade"}}
 {{/if}}
 
 {{#if isShowStrugglingCompetencyReport}}
-   {{reports/pull-up/struggling-competency-report closePullUp="onClosePullUp"}}
+   {{reports/pull-up/struggling-competency-report collectionContents = collectionContents studentsPerfomanceList=studentsPerfomanceList selectedCompetency = selectedCompetency closePullUp="onClosePullUp"}}
 {{/if}}
 
 {{#if isShowActivitySearchContentPullup}}

@@ -21,6 +21,22 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  fetchStudentsPerfomance(params) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const competency = params.competency || null;
+    const classId = params.classId || null;
+    const month = params.month || null;
+    const year = params.year || null;
+    const url = `${namespace}/performance?class=${classId}&competency=${competency}&month=${month}&year=${year}`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8'
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

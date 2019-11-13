@@ -43,6 +43,11 @@ export default Ember.Component.extend({
    */
   courseService: Ember.inject.service('api-sdk/course'),
 
+  /**
+   * @property {service} searchService
+   */
+  searchService: Ember.inject.service('api-sdk/search'),
+
   didInsertElement() {
     const component = this;
     component.fetchStrugglingCompetency();
@@ -183,9 +188,17 @@ export default Ember.Component.extend({
 
   gradeDomainsList: [],
 
-  strugglingCompetencyGradeList: [],
+  otherGradeCompetency: [],
+
+  otherGradeTopComp: [],
 
   gradeDomainIndex: null,
+
+  selectedCompetency: null,
+
+  studentsPerfomanceList: null,
+
+  collectionContents: null,
 
   // -------------------------------------------------------------------------
   // Events
@@ -201,14 +214,20 @@ export default Ember.Component.extend({
     },
 
     //Action triggered when click a grade
-    onSelectOtherGrade() {
+    onSelectOtherGrade(gradeIndex, domainIndex) {
       let component = this;
+      this.set('gradeDomainIndex', {
+        gradeIndex,
+        domainIndex
+      });
       component.set('isShowOtherGradeCompetency', true);
     },
 
     //Action triggered when click a competency
-    onSelectCompetency() {
+    onSelectCompetency(selectedCompetency) {
       let component = this;
+      component.fetchStudentsPerfomance(selectedCompetency);
+      component.set('selectedCompetency', selectedCompetency);
       component.set('isShowStrugglingCompetencyReport', true);
     },
 
@@ -456,14 +475,78 @@ export default Ember.Component.extend({
     Ember.RSVP.hash({
       gradeLevelCompetency: component
         .get('strugglingCompetencyService')
+        .fetchStrugglingCompetency(params),
+      otherGradeLevelCompetency: component
+        .get('strugglingCompetencyService')
         .fetchStrugglingCompetency(params)
-    }).then(({ gradeLevelCompetency }) => {
+    }).then(({ gradeLevelCompetency, otherGradeLevelCompetency }) => {
       if (gradeLevelCompetency && gradeLevelCompetency.length) {
         component.set(
           'gradeDomainsList',
           gradeLevelCompetency[0].get('domains')
         );
       }
+      if (otherGradeLevelCompetency && otherGradeLevelCompetency.length) {
+        let otherGradeTopComp = [];
+        let cloneOtherGrade = JSON.parse(
+          JSON.stringify(otherGradeLevelCompetency)
+        );
+        cloneOtherGrade
+          .map(grade => grade.domains)
+          .map((domains, gradeIndex) => {
+            let competencyList = [];
+            domains.forEach((domain, domainIndex) => {
+              domain.competencies[0].domainIndex = domainIndex;
+              domain.competencies[0].domainName = domain.domainName;
+              competencyList.pushObject(domain.competencies[0]);
+            });
+            if (competencyList && competencyList.length) {
+              let gradeLevelTopCompetency = competencyList.reduce(
+                (prevCompetency, currentCompetency) => {
+                  return prevCompetency.studentsCount <
+                    currentCompetency.studentsCount
+                    ? currentCompetency
+                    : prevCompetency;
+                }
+              );
+              if (gradeLevelTopCompetency) {
+                gradeLevelTopCompetency.gradeIndex = gradeIndex;
+                otherGradeTopComp.pushObject(gradeLevelTopCompetency);
+              }
+            }
+          });
+        component.set('otherGradeTopComp', otherGradeTopComp);
+        component.set('otherGradeCompetency', otherGradeLevelCompetency);
+      }
+    });
+  },
+
+  fetchStudentsPerfomance(selectedCompetency) {
+    let component = this;
+    let params = {
+      competency: selectedCompetency.get('code'),
+      classId: component.get('class.id'),
+      month: 10,
+      year: 2019
+    };
+
+    let collectionParams = {
+      page: 0,
+      pageSize: 5,
+      filters: {
+        'flt.relatedGutCode': selectedCompetency.get('code')
+      }
+    };
+    Ember.RSVP.hash({
+      studentsPerfomance: component
+        .get('strugglingCompetencyService')
+        .fetchStudentsPerfomance(params),
+      collection: component
+        .get('searchService')
+        .searchCollections('*', collectionParams)
+    }).then(({ studentsPerfomance, collection }) => {
+      component.set('collectionContents', collection);
+      component.set('studentsPerfomanceList', studentsPerfomance);
     });
   }
 });

@@ -4,11 +4,11 @@
     {{gru-icon name="arrow_back"}}
     <div class="struggling-competency-report-header-panel">
       <div class="struggling-competency-report-title">
-          Competency heading
+          {{selectedCompetency.name}}
       </div>
        <ul class="struggling-competency-report-sub-titles">
-          <li>Domain</li>
-          <li>8.EE.4</li>
+          <li>{{selectedCompetency.domainName}}</li>
+          <li>{{selectedCompetency.displayCode}}</li>
           <li>Learning Outcome Name</li>
        </ul>
     </div>
@@ -17,42 +17,52 @@
     <div class="struggling-competency-report-student-list-panel" {{action "showStudentList"}}>
       <div class="sc-report-student-list">
          <ul class="sc-report-student-profile">
-           {{#each studentList as |student|}}
-           <li>{{student}}</li>
+           {{#each studentsPerfomanceList as |student studentIndex|}}
+             <li>{{student.firstName}}</li>
            {{/each}}
          </ul>
       </div>
       <div class="sc-report-student-count">
-        5+
+        {{# if (gt studentsPerfomanceList 5)}}
+          {{studentsPerfomanceList - 5}}
+        {{/if}}
       </div>
       <div class="sc-report-student-list-icon">
         {{gru-icon name="arrow_drop_down"}}
       </div>
     </div>
     <div class="sc-student-dropdown-list-container">
-      {{#each studentList as |student|}}
+      {{#each studentsPerfomanceList as |student|}}
       <div class="sc-student-dropdown-list">
           <div class="sc-student-profile-thumbnail-container">
            <div class="sc-student-thumbnail">
            </div>
           </div>
           <div class="sc-student-name">
-            Student Name
+            {{student.firstName}} {{student.lastName}}
           </div>
           <div class="sc-student-performance-container">
             <div class="sc-student-performance">
-              50%
+              {{student.performanceScore}}%
             </div>
           </div>
       </div>
       {{/each}}
     </div>
-  </div>
-  <div class="sc-student-content-section-container">
-    <div class="sc-student-content-section">
-        <div class="">
+    <div class="sc-student-content-section-container">
+      <div class="sc-student-content-section">
 
-        </div>
+            {{#each collectionContents as |content|}}
+            {{cards/dca-search-collection-card
+            onPreviewContent="onPreviewContent"
+            onScheduleContentToDCA='onScheduleContentToDCA'
+            collection=content contentType='collection'
+            onAddContentToDCA="onAddContentToDCA"
+            addedScheduleContentToDCA='addedScheduleContentToDCA'
+            classId=classId}}
+            {{/each}}
+
+      </div>
     </div>
   </div>
 </div>

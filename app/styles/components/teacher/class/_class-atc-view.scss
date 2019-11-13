@@ -168,6 +168,9 @@
               white-space: nowrap;
               overflow: hidden;
               width: 200px;
+              @media screen and (min-width: $screen-xs) and (max-width: $screen-md) {
+                width: auto;
+              }
             }
             .competency-sub-heading {
               padding: 0;
@@ -175,6 +178,10 @@
               display: flex;
               font-size: 10px;
               width: 200px;
+              @media screen and (min-width: $screen-xs) and (max-width: $screen-md) {
+                width: auto;
+              }
+
               li {
                 &:first-child {
                   padding-left: 0;
