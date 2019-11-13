@@ -355,7 +355,8 @@ export default Ember.Controller.extend(StudentLearnerProficiency, {
     const context = this.get('mapLocation.context');
     let queryParams = {
       role: ROLES.STUDENT,
-      source: this.get('source')
+      source: this.get('source'),
+      isIframeMode: this.get('isIframeMode')
     };
     let classId = context.get('classId');
     if (classId) {
