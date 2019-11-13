@@ -87,7 +87,7 @@ export default {
     searchFilter: true,
     i2dFlow: false,
     enableCollectionLiveLearning: true,
-    isLessonPlanShow: false,
+    isLessonPlanShow: true,
     isShowSecondaryClass: false
   }
 };
