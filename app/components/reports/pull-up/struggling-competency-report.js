@@ -30,6 +30,7 @@ export default Ember.Component.extend({
         }
       });
     },
+
     /**
      * Action triggered when the user play collection
      * It'll open the player in new tab
@@ -43,8 +44,9 @@ export default Ember.Component.extend({
      * Action triggered when add collection to dca.
      * @param  {Object} collection
      */
-    onAddCollectionToDCA(collection) {
-      this.sendAction('onAddContentToDCA', collection);
+    onAddContentToDCA(collection) {
+      const component = this;
+      component.sendAction('onAddContentToDCA', collection);
     },
 
     /**

@@ -364,3 +364,8 @@
     left: 50%;
   }
 }
+.ca-datepicker-schedule-container {
+  position: absolute;
+  z-index: 1000;
+  display: none;
+}

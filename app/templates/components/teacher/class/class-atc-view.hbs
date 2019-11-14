@@ -125,7 +125,23 @@
 {{/if}}
 
 {{#if isShowStrugglingCompetencyReport}}
-   {{reports/pull-up/struggling-competency-report collectionContents = collectionContents studentsPerfomanceList=studentsPerfomanceList selectedCompetency = selectedCompetency closePullUp="onClosePullUp"}}
+   {{reports/pull-up/struggling-competency-report
+     onPreviewContent='onPreviewContent'
+     onAddContentToDCA ='onAddCollectionToDCA'
+     onScheduleContentToDCA = 'onScheduleContentToDCA'
+     collectionContents = collectionContents
+     studentsPerfomanceList=studentsPerfomanceList
+     selectedCompetency = selectedCompetency
+     closePullUp="onClosePullUp"}}
+{{/if}}
+
+<!-- Preview -->
+{{#if isShowContentPreview}}
+  {{reports/pull-up/gru-collection-preview
+    showPullUp=isShowContentPreview
+    showAssessmentCode=true
+    previewContentId=previewContent.id
+    previewContentType=previewContentType}}
 {{/if}}
 
 {{#if isShowActivitySearchContentPullup}}
@@ -141,3 +157,12 @@
     isShowMoreEnabled=false
   }}
 {{/if}}
+
+<div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
+  {{ca-daterange-datepicker
+      closeDatePicker='onCloseDatePicker'
+      onScheduleForDate='onScheduleDate'
+      onScheduleForMonth='onScheduleForMonth'
+      endDate=endDate
+      allowTwoDateRangePicker=allowTwoDateRangePicker}}
+</div>

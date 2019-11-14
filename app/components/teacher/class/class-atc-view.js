@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['class-atc-view'],
@@ -200,6 +201,14 @@ export default Ember.Component.extend({
 
   collectionContents: null,
 
+  isShowContentPreview: false,
+
+  previewContentType: null,
+
+  previewContent: null,
+
+  selectedContentForSchedule: null,
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -318,6 +327,7 @@ export default Ember.Component.extend({
         this.set('isShowOtherGradeCompetency', false);
         this.set('isShowGradeCompetency', false);
       }
+      this.set('isShowContentPreview', false);
       this.set('isShowStrugglingCompetencyReport', false);
     },
 
@@ -329,6 +339,119 @@ export default Ember.Component.extend({
     // action trigger when click backbutton in pull up
     onCloseGradePullUp() {
       this.set('isShowGradeCompetency', false);
+    },
+
+    onPreviewContent(content) {
+      let component = this;
+      component.set(
+        'previewContentType',
+        content.get('format') || content.get('collectionType')
+      );
+      component.set('previewContent', content);
+      component.set('isShowContentPreview', true);
+    },
+
+    onAddCollectionToDCA(content) {
+      let component = this;
+      let classId = component.get('classId');
+      let contentType = content.get('format');
+      let contentId = content.get('id');
+      let date = moment().format('YYYY-MM-DD');
+      component
+        .get('classActivitiesService')
+        .addActivityToClass(classId, contentId, contentType, date)
+        .then(newContentId => {
+          content.set('isAdded', true);
+          let classSetting = this.get('class.setting'),
+            allowMasteryAccrual = classSetting['mastery.applicable'];
+          if (allowMasteryAccrual && allowMasteryAccrual === 'true') {
+            component
+              .get('classActivitiesService')
+              .updateMasteryAccrualClassActivity(classId, newContentId, true);
+          }
+        });
+    },
+
+    /**
+     * It will takes care of content will schedule for the specific date.
+     * @param  {String} scheduleDate
+     */
+    onScheduleDate(scheduleDate, scheduleEndDate) {
+      let component = this;
+      let classId = component.get('classId');
+      let contentType = component.get('selectedContentForSchedule.format');
+      let contentId = component.get('selectedContentForSchedule.id');
+      let datepickerEle = component.$('.ca-datepicker-schedule-container');
+      datepickerEle.hide();
+      let forMonth = moment(scheduleDate).format('MM');
+      let forYear = moment(scheduleDate).format('YYYY');
+      component
+        .get('classActivitiesService')
+        .addActivityToClass(
+          classId,
+          contentId,
+          contentType,
+          scheduleDate,
+          forMonth,
+          forYear,
+          scheduleEndDate
+        );
+    },
+
+    /**
+     * It will takes care of content will schedule for the specific month.
+     * @param  {Moment} Month
+     * @param  {Moment} Year
+     */
+    onScheduleForMonth(forMonth, forYear) {
+      let component = this;
+      let classId = component.get('classId');
+      let contentType = component.get('selectedContentForSchedule.format');
+      let contentId = component.get('selectedContentForSchedule.id');
+      let datepickerEle = component.$('.ca-datepicker-schedule-container');
+      datepickerEle.hide();
+      component
+        .get('classActivitiesService')
+        .addActivityToClass(
+          classId,
+          contentId,
+          contentType,
+          null,
+          forMonth,
+          forYear
+        )
+        .then(() => {
+          component.onCloseDatePicker();
+        });
+    },
+
+    /**
+     * Action get triggered when schedule content to CA got clicked
+     */
+    onScheduleContentToDCA(content, event) {
+      let component = this;
+      let datepickerEle = component.$('.ca-datepicker-schedule-container');
+      let selectedContentEle = component.$(event.target);
+      if (!selectedContentEle.hasClass('active')) {
+        selectedContentEle.addClass('active');
+        datepickerEle.show();
+      } else {
+        selectedContentEle.removeClass('active');
+        datepickerEle.hide();
+      }
+      component.set('selectedContentForSchedule', content);
+      component.set(
+        'allowTwoDateRangePicker',
+        content.get('format') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS
+      );
+      component.set('endDate', null);
+    },
+    /**
+     * Action triggered when the user click on close
+     */
+    onCloseDatePicker() {
+      let component = this;
+      component.sendAction('closeDatePicker');
     }
   },
 
