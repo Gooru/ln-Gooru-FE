@@ -55,7 +55,7 @@
     "searchFilter": true,
     "i2dFlow": true,
     "enableCollectionLiveLearning": false,
-    "isLessonPlanShow": false,
+    "isLessonPlanShow": true,
     "isShowSecondaryClass": false
   },
 
