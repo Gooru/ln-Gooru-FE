@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['class-atc-view'],
@@ -43,11 +42,6 @@ export default Ember.Component.extend({
    * @type {CourseService} Service to retrieve course information
    */
   courseService: Ember.inject.service('api-sdk/course'),
-
-  /**
-   * @property {service} searchService
-   */
-  searchService: Ember.inject.service('api-sdk/search'),
 
   didInsertElement() {
     const component = this;
@@ -187,26 +181,64 @@ export default Ember.Component.extend({
    */
   isShowGradeCompetency: false,
 
+  /**
+   * @property {Array} gradeDomainsList
+   * property hold struggling competency for current grade Domain
+   */
   gradeDomainsList: [],
 
+  /**
+   * @property {Array} otherGradeCompetency
+   * property hold struggling competency for other grade Domain
+   */
   otherGradeCompetency: [],
 
+  /**
+   * @property {Array} otherGradeTopComp
+   * property hold top competency for other grade domain
+   */
   otherGradeTopComp: [],
 
+  /**
+   * @property {Number} gradeDomainIndex
+   * property hold grade Domain index
+   */
   gradeDomainIndex: null,
 
+  /**
+   * @property {Object} selectedCompetency
+   * property hold selected competency
+   */
   selectedCompetency: null,
 
-  studentsPerfomanceList: null,
-
+  /**
+   * @property {Array} collectionContents
+   * property hold collection based on competency code
+   */
   collectionContents: null,
 
+  /**
+   * @property {Boolean} isShowContentPreview
+   * property help to show the preview collection from the competency pullup
+   */
   isShowContentPreview: false,
 
+  /**
+   * @property {String} previewContentType
+   * property hold the content type of the preview
+   */
   previewContentType: null,
 
+  /**
+   * @property {Array} previewContent
+   * property hold the content type of the preview
+   */
   previewContent: null,
 
+  /**
+   * @property {Object} selectedContentForSchedule
+   * property hold the selected sheduled content
+   */
   selectedContentForSchedule: null,
 
   // -------------------------------------------------------------------------
@@ -235,7 +267,6 @@ export default Ember.Component.extend({
     //Action triggered when click a competency
     onSelectCompetency(selectedCompetency) {
       let component = this;
-      component.fetchStudentsPerfomance(selectedCompetency);
       component.set('selectedCompetency', selectedCompetency);
       component.set('isShowStrugglingCompetencyReport', true);
     },
@@ -419,39 +450,25 @@ export default Ember.Component.extend({
           null,
           forMonth,
           forYear
-        )
-        .then(() => {
-          component.onCloseDatePicker();
-        });
+        );
     },
 
     /**
      * Action get triggered when schedule content to CA got clicked
      */
-    onScheduleContentToDCA(content, event) {
+    onScheduleContentToDCA(content) {
       let component = this;
       let datepickerEle = component.$('.ca-datepicker-schedule-container');
-      let selectedContentEle = component.$(event.target);
-      if (!selectedContentEle.hasClass('active')) {
-        selectedContentEle.addClass('active');
-        datepickerEle.show();
-      } else {
-        selectedContentEle.removeClass('active');
-        datepickerEle.hide();
-      }
+      datepickerEle.show();
       component.set('selectedContentForSchedule', content);
-      component.set(
-        'allowTwoDateRangePicker',
-        content.get('format') === PLAYER_EVENT_SOURCE.OFFLINE_CLASS
-      );
       component.set('endDate', null);
     },
     /**
      * Action triggered when the user click on close
      */
     onCloseDatePicker() {
-      let component = this;
-      component.sendAction('closeDatePicker');
+      let datepickerEle = Ember.$('.ca-datepicker-schedule-container');
+      datepickerEle.hide();
     }
   },
 
@@ -641,35 +658,6 @@ export default Ember.Component.extend({
         component.set('otherGradeTopComp', otherGradeTopComp);
         component.set('otherGradeCompetency', otherGradeLevelCompetency);
       }
-    });
-  },
-
-  fetchStudentsPerfomance(selectedCompetency) {
-    let component = this;
-    let params = {
-      competency: selectedCompetency.get('code'),
-      classId: component.get('class.id'),
-      month: 10,
-      year: 2019
-    };
-
-    let collectionParams = {
-      page: 0,
-      pageSize: 5,
-      filters: {
-        'flt.relatedGutCode': selectedCompetency.get('code')
-      }
-    };
-    Ember.RSVP.hash({
-      studentsPerfomance: component
-        .get('strugglingCompetencyService')
-        .fetchStudentsPerfomance(params),
-      collection: component
-        .get('searchService')
-        .searchCollections('*', collectionParams)
-    }).then(({ studentsPerfomance, collection }) => {
-      component.set('collectionContents', collection);
-      component.set('studentsPerfomanceList', studentsPerfomance);
     });
   }
 });

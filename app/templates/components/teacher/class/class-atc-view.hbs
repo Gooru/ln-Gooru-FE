@@ -126,11 +126,11 @@
 
 {{#if isShowStrugglingCompetencyReport}}
    {{reports/pull-up/struggling-competency-report
+     classId=class.id
      onPreviewContent='onPreviewContent'
      onAddContentToDCA ='onAddCollectionToDCA'
      onScheduleContentToDCA = 'onScheduleContentToDCA'
      collectionContents = collectionContents
-     studentsPerfomanceList=studentsPerfomanceList
      selectedCompetency = selectedCompetency
      closePullUp="onClosePullUp"}}
 {{/if}}
@@ -164,5 +164,5 @@
       onScheduleForDate='onScheduleDate'
       onScheduleForMonth='onScheduleForMonth'
       endDate=endDate
-      allowTwoDateRangePicker=allowTwoDateRangePicker}}
+      allowTwoDateRangePicker=false}}
 </div>

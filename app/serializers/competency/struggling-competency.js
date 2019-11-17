@@ -294,6 +294,15 @@ export default DS.JSONAPISerializer.extend({
           thumbnail: 'a55cdcdb-c3c2-408a-b26c-fe101755ceae.png',
           username: 'johnd',
           performance: 45
+        },
+        {
+          id: 'a976eeff-6b04-4688-ab51-f56d8cb84579',
+          first_name: 'Kumar',
+          last_name: 'Dahl',
+          display_name: 'johnd',
+          thumbnail: 'a55cdcdb-c3c2-408a-b26c-fe101755ceae.png',
+          username: 'johnd',
+          performance: 45
         }
       ]
     };

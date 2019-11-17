@@ -17,14 +17,14 @@
     <div class="struggling-competency-report-student-list-panel" {{action "showStudentList"}}>
       <div class="sc-report-student-list">
          <ul class="sc-report-student-profile">
-           {{#each studentsPerfomanceList as |student studentIndex|}}
+           {{#each studentsPerformanceList as |student studentIndex|}}
              <li>{{student.firstName}}</li>
            {{/each}}
          </ul>
       </div>
       <div class="sc-report-student-count">
-        {{# if (gt studentsPerfomanceList 5)}}
-          {{studentsPerfomanceList - 5}}
+        {{# if (gt studentsPerformanceList 5)}}
+          {{studentsPerformanceList - 5}}
         {{/if}}
       </div>
       <div class="sc-report-student-list-icon">
@@ -32,7 +32,7 @@
       </div>
     </div>
     <div class="sc-student-dropdown-list-container">
-      {{#each studentsPerfomanceList as |student|}}
+      {{#each studentsPerformanceList as |student|}}
       <div class="sc-student-dropdown-list">
           <div class="sc-student-profile-thumbnail-container">
            <div class="sc-student-thumbnail">
@@ -50,19 +50,54 @@
       {{/each}}
     </div>
     <div class="sc-student-content-section-container">
+    <div class="search-container">
+      <div class="search-filter-container">
+        <span class="ellipsis" {{action "onSelectDropdown"}}>{{t selectedMenuItem.label }}</span>
+        <span {{action "onSelectDropdown"}}>{{gru-icon name="arrow_drop_down"}}</span>
+        <div class="search-filter-container-list">
+          {{#each menuItems as |item|}}
+            <p class="{{if item.isSelected 'selected'}}" {{action "onSelectMenuItems" item}}>{{t item.label}}</p>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    {{#if showLibraryCollection}}
+        <div class="sc-library-title">
+          <span {{action "backToLibrary"}}>{{gru-icon name="arrow_back"}}</span>
+          <span >{{selectedLibrary.name}}</span>
+        </div>
+    {{/if}}
       <div class="sc-student-content-section">
+        {{#unless (and showTenantLibraries (not showLibraryCollection))}}
+        {{#each collectionContents as |content|}}
+        {{cards/dca-search-collection-card
+        onPreviewContent="onPlayCollection"
+        onScheduleContentToDCA='onScheduleContentToDCA'
+        collection=content contentType='collection'
+        onAddContentToDCA="onAddContentToDCA"
+        onSuggestContent = "onSuggestContent"
+        showSuggestionBtn = true
+        addedScheduleContentToDCA='addedScheduleContentToDCA'
+        classId=classId}}
+        {{/each}}
+        {{/unless}}
 
-            {{#each collectionContents as |content|}}
-            {{cards/dca-search-collection-card
-            onPreviewContent="onPlayCollection"
-            onScheduleContentToDCA='onScheduleContentToDCA'
-            collection=content contentType='collection'
-            onAddContentToDCA="onAddContentToDCA"
-            addedScheduleContentToDCA='addedScheduleContentToDCA'
-            classId=classId}}
-            {{/each}}
-
+        {{#if (and showTenantLibraries (not showLibraryCollection))}}
+        {{#each libraries as |library|}}
+          {{library/gru-partner-library-card onSelectLibrary='onSelectLibrary' content=library}}
+        {{/each}}
+        {{/if}}
       </div>
     </div>
   </div>
 </div>
+
+{{#if showSuggestConfirmation}}
+  {{cards/suggest-confirmation
+   collection=suggestedCollection
+   students = studentsPerformanceList
+   contentType='collection'
+   onCancelSuggest="onCancelSuggest"
+   onConfirmSuggest="onConfirmSuggest"
+ }}
+{{/if}}

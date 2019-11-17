@@ -210,6 +210,10 @@
         display: grid;
         grid-template-columns: 1fr 46px 46px;
 
+        &.has-suggestion {
+          grid-template-columns: 1fr 46px 46px 46px;
+        }
+
         .play-btn {
           width: 45px;
           border-right: 1px solid #f2f2f2;
@@ -220,6 +224,16 @@
             margin-top: 7px;
             color: #0072bc;
             pointer-events: none;
+          }
+        }
+
+        .dca-suggested-content {
+          display: grid;
+          align-items: center;
+          text-align: center;
+          i {
+            color: $orange-500;
+            cursor: pointer;
           }
         }
 
