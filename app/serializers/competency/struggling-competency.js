@@ -1,208 +1,12 @@
 import Ember from 'ember';
-import DS from 'ember-data';
+import { DEFAULT_IMAGES } from 'gooru-web/config/config';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
-export default DS.JSONAPISerializer.extend({
+export default Ember.Object.extend(ConfigurationMixin, {
+  session: Ember.inject.service('session'),
+
   normalizeStrugglingCompetency(payload) {
     let serialize = this;
-    payload = {
-      struggling_competencies: [
-        {
-          grade_id: 378,
-          grade: 'Grade 8',
-          grade_Seq: 9,
-          description: '',
-          fw_code: 'CT',
-          domains: [
-            {
-              domain_id: 20,
-              domain_name: 'Expressions and Equations',
-              domain_code: 'EE',
-              domain_seq: 9,
-              competencies: [
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 29,
-                  student_count: 30
-                },
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 28,
-                  student_count: 35
-                }
-              ]
-            },
-            {
-              domain_id: 20,
-              domain_name: 'Expressions and Equations',
-              domain_code: 'EE',
-              domain_seq: 9,
-              competencies: [
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 29,
-                  student_count: 53
-                },
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 28,
-                  student_count: 63
-                }
-              ]
-            },
-            {
-              domain_id: 23,
-              domain_name: 'Functions',
-              domain_code: 'F',
-              domain_seq: 12,
-              competencies: [
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 29,
-                  student_count: 23
-                },
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 28,
-                  student_count: 34
-                }
-              ]
-            }
-          ]
-        },
-        {
-          grade_id: 378,
-          grade: 'Grade 9',
-          grade_Seq: 9,
-          description: '',
-          fw_code: 'CT',
-          domains: [
-            {
-              domain_id: 20,
-              domain_name: 'Expressions and Equations',
-              domain_code: 'EE',
-              domain_seq: 9,
-              competencies: [
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 29,
-                  student_count: 40
-                },
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 28,
-                  student_count: 45
-                }
-              ]
-            },
-            {
-              domain_id: 23,
-              domain_name: 'Functions',
-              domain_code: 'F',
-              domain_seq: 12,
-              competencies: [
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 29,
-                  student_count: 43
-                },
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 28,
-                  student_count: 44
-                }
-              ]
-            }
-          ]
-        },
-        {
-          grade_id: 378,
-          grade: 'Grade 9',
-          grade_Seq: 9,
-          description: '',
-          fw_code: 'CT',
-          domains: [
-            {
-              domain_id: 20,
-              domain_name: 'Expressions and Equations',
-              domain_code: 'EE',
-              domain_seq: 9,
-              competencies: [
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 29,
-                  student_count: 40
-                },
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 28,
-                  student_count: 45
-                }
-              ]
-            },
-            {
-              domain_id: 23,
-              domain_name: 'Functions',
-              domain_code: 'F',
-              domain_seq: 12,
-              competencies: [
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 29,
-                  student_count: 43
-                },
-                {
-                  comp_code: 'K12.MA-MA5-NOBT-A.01',
-                  comp_display_code: '5.NBT.1',
-                  comp_name: 'Recognize that in a multi-digit number',
-                  comp_student_desc: 'Place Value',
-                  comp_seq: 28,
-                  student_count: 44
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    };
     let strugglingCompetency = payload.struggling_competencies
       ? payload.struggling_competencies
       : [];
@@ -266,57 +70,22 @@ export default DS.JSONAPISerializer.extend({
   },
 
   normalizeStudentsPerfomance(payload) {
-    payload = {
-      students: [
-        {
-          id: 'a976eeff-6b04-4688-ab51-f56d8cb84579',
-          first_name: 'John',
-          last_name: 'Dahl',
-          display_name: 'johnd',
-          thumbnail: 'a55cdcdb-c3c2-408a-b26c-fe101755ceae.png',
-          username: 'johnd',
-          performance: 45
-        },
-        {
-          id: 'a976eeff-6b04-4688-ab51-f56d8cb84579',
-          first_name: 'Arun',
-          last_name: 'kumar',
-          display_name: 'johnd',
-          thumbnail: 'a55cdcdb-c3c2-408a-b26c-fe101755ceae.png',
-          username: 'johnd',
-          performance: 45
-        },
-        {
-          id: 'a976eeff-6b04-4688-ab51-f56d8cb84579',
-          first_name: 'Kumar',
-          last_name: 'Dahl',
-          display_name: 'johnd',
-          thumbnail: 'a55cdcdb-c3c2-408a-b26c-fe101755ceae.png',
-          username: 'johnd',
-          performance: 45
-        },
-        {
-          id: 'a976eeff-6b04-4688-ab51-f56d8cb84579',
-          first_name: 'Kumar',
-          last_name: 'Dahl',
-          display_name: 'johnd',
-          thumbnail: 'a55cdcdb-c3c2-408a-b26c-fe101755ceae.png',
-          username: 'johnd',
-          performance: 45
-        }
-      ]
-    };
+    const basePath = this.get('session.cdnUrls.user');
+    const appRootPath = this.get('appRootPath'); //configuration appRootPath
     let students = payload.students ? payload.students : [];
     let studentsList = [];
     if (students && students.length) {
       students.forEach(student => {
+        const thumbnailUrl = student.thumbnail
+          ? basePath + student.thumbnail
+          : appRootPath + DEFAULT_IMAGES.USER_PROFILE;
         studentsList.pushObject(
           Ember.Object.create({
             id: student.id,
             firstName: student.first_name,
             lastName: student.last_name,
             displayName: student.display_name,
-            thumbnail: student.thumbnail,
+            thumbnail: thumbnailUrl,
             username: student.username,
             performanceScore: student.performance
           })

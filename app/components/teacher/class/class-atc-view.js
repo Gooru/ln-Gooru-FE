@@ -43,6 +43,12 @@ export default Ember.Component.extend({
    */
   courseService: Ember.inject.service('api-sdk/course'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
+
   didInsertElement() {
     const component = this;
     component.fetchStrugglingCompetency();
@@ -241,6 +247,11 @@ export default Ember.Component.extend({
    */
   selectedContentForSchedule: null,
 
+  /**
+   * @property {Array} memberGradeBounds
+   */
+  memberGradeBounds: Ember.computed.alias('class.memberGradeBounds'),
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -275,6 +286,7 @@ export default Ember.Component.extend({
     onChangeMonth() {
       const component = this;
       component.loadData();
+      component.fetchStrugglingCompetency();
     },
 
     //Action triggered when toggle domains to be reviewed list
@@ -426,7 +438,10 @@ export default Ember.Component.extend({
           forMonth,
           forYear,
           scheduleEndDate
-        );
+        )
+        .then(() => {
+          component.set('selectedContentForSchedule.isScheduled', true);
+        });
     },
 
     /**
@@ -450,7 +465,10 @@ export default Ember.Component.extend({
           null,
           forMonth,
           forYear
-        );
+        )
+        .then(() => {
+          component.set('selectedContentForSchedule.isScheduled', true);
+        });
     },
 
     /**
@@ -606,58 +624,118 @@ export default Ember.Component.extend({
 
   fetchStrugglingCompetency() {
     let component = this;
-    let params = {
-      grade: '5,6',
-      classId: component.get('class.id'),
-      month: 10,
-      year: 2019
+    let taxonomyService = component.get('taxonomyService');
+    let subject = component.get('subjectCode');
+    let fwk = component.get('class.preference.framework');
+    let filters = {
+      subject,
+      fw_code: fwk
     };
-    Ember.RSVP.hash({
-      gradeLevelCompetency: component
-        .get('strugglingCompetencyService')
-        .fetchStrugglingCompetency(params),
-      otherGradeLevelCompetency: component
-        .get('strugglingCompetencyService')
-        .fetchStrugglingCompetency(params)
-    }).then(({ gradeLevelCompetency, otherGradeLevelCompetency }) => {
-      if (gradeLevelCompetency && gradeLevelCompetency.length) {
-        component.set(
-          'gradeDomainsList',
-          gradeLevelCompetency[0].get('domains')
-        );
+    taxonomyService.fetchGradesBySubject(filters).then(grades => {
+      let gradeRange = component.getStudentsGradeRange();
+      let startGrade = grades.findBy('id', gradeRange.minGrade);
+      let startGradeIndex = grades.indexOf(startGrade);
+      let endGrade = grades.findBy('id', gradeRange.maxGrade);
+      let endGradeIndex = grades.indexOf(endGrade);
+      let studentGrades = grades.slice(startGradeIndex, endGradeIndex + 1);
+      let otherGradeList = [];
+      if (studentGrades) {
+        studentGrades.map(grade => {
+          otherGradeList.push(grade.get('id'));
+        });
       }
-      if (otherGradeLevelCompetency && otherGradeLevelCompetency.length) {
-        let otherGradeTopComp = [];
-        let cloneOtherGrade = JSON.parse(
-          JSON.stringify(otherGradeLevelCompetency)
-        );
-        cloneOtherGrade
-          .map(grade => grade.domains)
-          .map((domains, gradeIndex) => {
-            let competencyList = [];
-            domains.forEach((domain, domainIndex) => {
-              domain.competencies[0].domainIndex = domainIndex;
-              domain.competencies[0].domainName = domain.domainName;
-              competencyList.pushObject(domain.competencies[0]);
-            });
-            if (competencyList && competencyList.length) {
-              let gradeLevelTopCompetency = competencyList.reduce(
-                (prevCompetency, currentCompetency) => {
-                  return prevCompetency.studentsCount <
-                    currentCompetency.studentsCount
-                    ? currentCompetency
-                    : prevCompetency;
+      let params = {
+        grade: component.get('class.gradeCurrent'),
+        classId: component.get('class.id'),
+        month: component.get('activeMonth'),
+        year: component.get('activeYear')
+      };
+      let otherGradeParams = {
+        grade: otherGradeList.toString(),
+        classId: component.get('class.id'),
+        month: component.get('activeMonth'),
+        year: component.get('activeYear')
+      };
+      otherGradeParams.grade = otherGradeList.toString();
+      Ember.RSVP.hash({
+        gradeLevelCompetency: component
+          .get('strugglingCompetencyService')
+          .fetchStrugglingCompetency(params),
+        otherGradeLevelCompetency: component
+          .get('strugglingCompetencyService')
+          .fetchStrugglingCompetency(otherGradeParams)
+      }).then(({ gradeLevelCompetency, otherGradeLevelCompetency }) => {
+        if (gradeLevelCompetency && gradeLevelCompetency.length) {
+          component.set(
+            'gradeDomainsList',
+            gradeLevelCompetency[0].get('domains')
+          );
+        }
+        if (otherGradeLevelCompetency && otherGradeLevelCompetency.length) {
+          let otherGradeTopComp = [];
+          let cloneOtherGrade = JSON.parse(
+            JSON.stringify(otherGradeLevelCompetency)
+          );
+          cloneOtherGrade
+            .map(grade => grade.domains)
+            .map((domains, gradeIndex) => {
+              let competencyList = [];
+              domains.forEach((domain, domainIndex) => {
+                domain.competencies[0].domainIndex = domainIndex;
+                domain.competencies[0].domainName = domain.domainName;
+                competencyList.pushObject(domain.competencies[0]);
+              });
+              if (competencyList && competencyList.length) {
+                let gradeLevelTopCompetency = competencyList.reduce(
+                  (prevCompetency, currentCompetency) => {
+                    return prevCompetency.studentsCount <
+                      currentCompetency.studentsCount
+                      ? currentCompetency
+                      : prevCompetency;
+                  }
+                );
+                if (gradeLevelTopCompetency) {
+                  gradeLevelTopCompetency.gradeIndex = gradeIndex;
+                  otherGradeTopComp.pushObject(gradeLevelTopCompetency);
                 }
-              );
-              if (gradeLevelTopCompetency) {
-                gradeLevelTopCompetency.gradeIndex = gradeIndex;
-                otherGradeTopComp.pushObject(gradeLevelTopCompetency);
               }
-            }
-          });
-        component.set('otherGradeTopComp', otherGradeTopComp);
-        component.set('otherGradeCompetency', otherGradeLevelCompetency);
-      }
+            });
+          component.set('otherGradeTopComp', otherGradeTopComp);
+          component.set('otherGradeCompetency', otherGradeLevelCompetency);
+        }
+      });
     });
+  },
+
+  getStudentsGradeRange() {
+    let component = this;
+    let memberGradeBounds = component.get('memberGradeBounds');
+    let students = component.get('students');
+    let availableGrade = [];
+    if (students) {
+      students.map(student => {
+        let memberId = student.get('id');
+        let grade = memberGradeBounds.findBy(memberId);
+        if (grade) {
+          let gradeBounds = grade.get(memberId);
+          availableGrade.pushObject(gradeBounds);
+        }
+      });
+
+      let minGrade = availableGrade.reduce(function(prev, current) {
+        return prev.grade_lower_bound < current.grade_lower_bound
+          ? prev.grade_lower_bound
+          : current.grade_lower_bound;
+      });
+      let maxGrade = availableGrade.reduce(function(prev, current) {
+        return prev.grade_upper_bound > current.grade_upper_bound
+          ? prev.grade_upper_bound
+          : current.grade_upper_bound;
+      });
+      return {
+        minGrade,
+        maxGrade
+      };
+    }
   }
 });

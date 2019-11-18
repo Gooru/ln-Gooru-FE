@@ -58,7 +58,7 @@
         {{gru-icon name="ic_play_arrow"}}
       </div>
       {{#if showSuggestionBtn}}
-      <div class="dca-suggested-content" title="{{t 'common.suggest-to-student'}}" data-toggle="tooltip" data-placement="bottom" {{action "onSuggestContent" collection}}>
+      <div class="dca-suggested-content {{if collection.isSuggested 'has-suggested'}}" title="{{t 'common.suggest-to-student'}}" data-toggle="tooltip" data-placement="bottom" {{action "onSuggestContent" collection}}>
         {{gru-icon name="explore"}}
       </div>
       {{/if}}

@@ -113,6 +113,10 @@
                     grid-template-columns: auto;
                     span {
                       font-size: 15px;
+                      width: 200px;
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
                     }
                     .grade-domain-competency-sub-heading {
                       display: inline-flex;

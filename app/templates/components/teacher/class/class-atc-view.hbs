@@ -126,11 +126,10 @@
 
 {{#if isShowStrugglingCompetencyReport}}
    {{reports/pull-up/struggling-competency-report
-     classId=class.id
+     class=class
      onPreviewContent='onPreviewContent'
      onAddContentToDCA ='onAddCollectionToDCA'
      onScheduleContentToDCA = 'onScheduleContentToDCA'
-     collectionContents = collectionContents
      selectedCompetency = selectedCompetency
      closePullUp="onClosePullUp"}}
 {{/if}}

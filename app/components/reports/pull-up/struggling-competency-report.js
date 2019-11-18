@@ -42,7 +42,7 @@ export default Ember.Component.extend({
   /**
    * @property {String} classId
    */
-  classId: null,
+  classId: Ember.computed.alias('class.id'),
 
   /**
    * @property {Object} selectedCompetency
@@ -57,10 +57,16 @@ export default Ember.Component.extend({
   studentsPerformanceList: null,
 
   /**
+   * @property {Array} studentsPerformanceList
+   * property hold student count exceed max 5
+   */
+  studentsCount: 0,
+
+  /**
    * @property {Array} collectionContents
    * property hold collection based on competency code
    */
-  collectionContents: null,
+  collectionContents: [],
 
   /**
    * @property {Array} menuItems
@@ -106,6 +112,20 @@ export default Ember.Component.extend({
    * @property {Object} suggestedCollection
    */
   suggestedCollection: null,
+
+  startAt: 0,
+
+  pageSize: 5,
+
+  /**
+   * @property {Boolean} isShowMoreButton
+   */
+  isShowMoreButton: false,
+
+  /**
+   * @property {Boolean} isLoading
+   */
+  isLoading: true,
 
   //-------------------------------------------------------
   //Actions
@@ -171,6 +191,10 @@ export default Ember.Component.extend({
       component.set('showTenantLibraries', false);
       component.set('showLibraryCollection', false);
       component.set('selectedMenuItem', item);
+      component.set('collectionContents', []);
+      component.set('startAt', 0);
+      component.set('isShowMoreButton', false);
+      component.set('isLoading', true);
       component.actions.onSelectDropdown();
       component.fetchSuggestedCollection(item);
     },
@@ -181,13 +205,16 @@ export default Ember.Component.extend({
       let selectedItem = component.get('selectedMenuItem');
       component.set('selectedLibrary', library);
       component.set('showLibraryCollection', true);
+      component.set('isLoading', true);
       component.fetchSuggestedCollection(selectedItem);
     },
 
     // Action triggered when click on back button in library
     backToLibrary() {
-      this.set('collectionContents', null);
+      this.set('collectionContents', []);
       this.set('showLibraryCollection', false);
+      this.set('startAt', 0);
+      this.set('isShowMoreButton', false);
     },
 
     // Action call when click suggestion button
@@ -206,6 +233,7 @@ export default Ember.Component.extend({
       const collection = component.get('suggestedCollection');
       const competencyCode = component.get('selectedCompetency.code');
       component.set('showSuggestConfirmation', false);
+      collection.set('isSuggested', true);
       let studentList = component.get('studentsPerformanceList');
       if (studentList.length) {
         studentList.map(student => {
@@ -217,6 +245,12 @@ export default Ember.Component.extend({
           );
         });
       }
+    },
+
+    onShowMore() {
+      let component = this;
+      let selectedItem = component.get('selectedMenuItem');
+      component.fetchSuggestedCollection(selectedItem);
     }
   },
 
@@ -245,10 +279,10 @@ export default Ember.Component.extend({
   createMenuItems() {
     let component = this;
     let menuList = Ember.A([
-      Ember.Object.create({ label: 'common.gooru-catalog', isSelected: true }),
+      Ember.Object.create({ label: 'common.gooru-catalog' }),
       Ember.Object.create({ label: 'common.myContent' }),
       Ember.Object.create({ label: 'common.tenantLibrary' }),
-      Ember.Object.create({ label: 'common.suggested' })
+      Ember.Object.create({ label: 'common.suggested', isSelected: true })
     ]);
     component.set('selectedMenuItem', menuList.findBy('isSelected', true));
     component.set('menuItems', menuList);
@@ -268,54 +302,81 @@ export default Ember.Component.extend({
         .fetchStudentsPerfomance(params)
     }).then(({ studentsPerfomance }) => {
       component.set('studentsPerformanceList', studentsPerfomance);
+      if (studentsPerfomance.length > 5) {
+        component.set('studentsCount', studentsPerfomance.length - 5);
+      }
     });
   },
 
   fetchSuggestedCollection(item) {
     let component = this;
     Ember.RSVP.hash({
-      collection: component.collectionServices(item)
-    }).then(({ collection }) => {
-      if (component.get('showTenantLibraries')) {
-        component.set(
-          'collectionContents',
-          collection.get('libraryContent.collections')
-        );
-      } else {
-        component.set('collectionContents', collection);
+      collections: component.collectionServices(item)
+    }).then(({ collections }) => {
+      if (!component.isDestoryed) {
+        let collectionContents = component.get('collectionContents');
+        let collectionList = component.get('showLibraryCollection')
+          ? collections.get('libraryContent.collections')
+          : collections;
+        component.set('isShowMoreButton', false);
+        if (collectionList.length) {
+          let startAt = component.get('startAt');
+          component.set('startAt', startAt + 1);
+          if (collectionList.length === 5) {
+            component.set('isShowMoreButton', true);
+          }
+          collectionList.map(collection => {
+            collectionContents.pushObject(collection);
+          });
+        }
+        component.set('isLoading', false);
       }
     });
   },
 
   collectionServices(item = null) {
     let component = this;
+    let competencyCode = component.get('selectedCompetency.code');
     let params = {
-      page: 0,
-      pageSize: 5,
+      page: component.get('startAt'),
+      pageSize: component.get('pageSize'),
       filters: {
-        'flt.relatedGutCode': component.get('selectedCompetency.code')
+        'flt.relatedGutCode': competencyCode
       }
     };
     let libraryId = component.get('selectedLibrary.id');
     let currentUserId = component.get('session.userId');
     let selectedService = Ember.RSVP.resolve([]);
-    if (!item || item.label === 'common.gooru-catalog') {
-      selectedService = component
-        .get('searchService')
-        .searchCollections('*', params);
-    } else if (item.label === 'common.myContent') {
-      selectedService = component
-        .get('profileService')
-        .readCollections(currentUserId, params);
-    } else if (item.label === 'common.tenantLibrary') {
-      if (component.get('showTenantLibraries')) {
+    if (item) {
+      if (item.label === 'common.gooru-catalog') {
         selectedService = component
-          .get('libraryService')
-          .fetchLibraryContent(libraryId, 'collection', params);
-      } else {
-        component.loadTenantLibraries();
-        component.set('showTenantLibraries', true);
+          .get('searchService')
+          .searchCollections('*', params);
+      } else if (item.label === 'common.myContent') {
+        selectedService = component
+          .get('profileService')
+          .readCollections(currentUserId, params);
+      } else if (item.label === 'common.tenantLibrary') {
+        if (component.get('showTenantLibraries')) {
+          let page = params.page;
+          let pageSize = params.pageSize;
+          params.offset = parseInt(page) * parseInt(pageSize);
+          selectedService = component
+            .get('libraryService')
+            .fetchLibraryContent(libraryId, 'collection', params);
+        } else {
+          component.loadTenantLibraries();
+          component.set('showTenantLibraries', true);
+        }
       }
+    } else {
+      let param = {
+        scope: 'proficiency',
+        classId: component.get('classId')
+      };
+      selectedService = component
+        .get('suggestService')
+        .fetchInClassSuggestionsByCode(currentUserId, competencyCode, param);
     }
     return selectedService;
   },
@@ -326,7 +387,10 @@ export default Ember.Component.extend({
       .get('libraryService')
       .fetchLibraries()
       .then(libraries => {
-        component.set('libraries', libraries);
+        if (!component.isDestoryed) {
+          component.set('isLoading', false);
+          component.set('libraries', libraries);
+        }
       });
   },
 

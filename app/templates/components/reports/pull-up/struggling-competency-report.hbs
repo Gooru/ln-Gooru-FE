@@ -18,13 +18,15 @@
       <div class="sc-report-student-list">
          <ul class="sc-report-student-profile">
            {{#each studentsPerformanceList as |student studentIndex|}}
-             <li>{{student.firstName}}</li>
+           {{# if (lt studentIndex 5)}}
+             <li><img src="{{student.thumbnail}}"></li>
+          {{/if}}
            {{/each}}
          </ul>
       </div>
       <div class="sc-report-student-count">
-        {{# if (gt studentsPerformanceList 5)}}
-          {{studentsPerformanceList - 5}}
+        {{# if (gt studentsPerformanceList.length 5)}}
+          {{studentsCount}}+
         {{/if}}
       </div>
       <div class="sc-report-student-list-icon">
@@ -36,6 +38,7 @@
       <div class="sc-student-dropdown-list">
           <div class="sc-student-profile-thumbnail-container">
            <div class="sc-student-thumbnail">
+             <img src="{{student.thumbnail}}">
            </div>
           </div>
           <div class="sc-student-name">
@@ -50,6 +53,7 @@
       {{/each}}
     </div>
     <div class="sc-student-content-section-container">
+    {{#unless isLoading}}
     <div class="search-container">
       <div class="search-filter-container">
         <span class="ellipsis" {{action "onSelectDropdown"}}>{{t selectedMenuItem.label }}</span>
@@ -61,14 +65,17 @@
         </div>
       </div>
     </div>
+    {{/unless}}
     {{#if showLibraryCollection}}
         <div class="sc-library-title">
           <span {{action "backToLibrary"}}>{{gru-icon name="arrow_back"}}</span>
           <span >{{selectedLibrary.name}}</span>
         </div>
     {{/if}}
-      <div class="sc-student-content-section">
+    <div class="sc-student-content-section-container">
+      <div class="sc-student-content-section {{if  (and  (or (not showTenantLibraries) showLibraryCollection) (eq collectionContents.length 0) (not isLoading)) 'no-content' }}">
         {{#unless (and showTenantLibraries (not showLibraryCollection))}}
+        {{#if (gt collectionContents.length 0)}}
         {{#each collectionContents as |content|}}
         {{cards/dca-search-collection-card
         onPreviewContent="onPlayCollection"
@@ -80,6 +87,11 @@
         addedScheduleContentToDCA='addedScheduleContentToDCA'
         classId=classId}}
         {{/each}}
+        {{else}}
+          {{#unless isLoading}}
+            {{cards/no-suggest-result-found isFromSearch=true}}
+          {{/unless}}
+        {{/if}}
         {{/unless}}
 
         {{#if (and showTenantLibraries (not showLibraryCollection))}}
@@ -87,7 +99,18 @@
           {{library/gru-partner-library-card onSelectLibrary='onSelectLibrary' content=library}}
         {{/each}}
         {{/if}}
+        {{#if isLoading}}
+          <div class="loading-spinner">
+            {{three-bounce-spinner}}
+          </div>
+        {{/if}}
       </div>
+     {{#if (and isShowMoreButton (not-eq selectedItem.label 'common.suggested'))}}
+      <div class="sc-show-more">
+          <span {{action "onShowMore"}}>Show More</span>
+      </div>
+      {{/if}}
+    </div>
     </div>
   </div>
 </div>
