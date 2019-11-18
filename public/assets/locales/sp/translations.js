@@ -2800,8 +2800,7 @@ window.i18ln = {
   'teacher-resource': 'Teacher Resources',
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
-  'common.no-lesson-plan-info-message':
-    'There is no lesson plan for this lesson.
+  'common.no-lesson-plan-info-message': 'There is no lesson plan for this lesson.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
   'common.activity': 'Activity Title',
