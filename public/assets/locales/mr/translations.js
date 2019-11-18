@@ -1,7 +1,7 @@
 //eslint-disable-next-line
 window.i18ln = {
   en: 'English',
-  sp: 'Español',
+  es: 'Español',
   ar: 'عربى',
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
