@@ -85,5 +85,16 @@ export default Ember.Controller.extend({
 
   secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
 
-  secondaryClassList: Ember.computed.alias('classController.secondaryClassList')
+  secondaryClassList: Ember.computed.alias(
+    'classController.secondaryClassList'
+  ),
+
+  /*
+   * @property {Json} classPreference
+   */
+  classPreference: Ember.computed.alias('class.preference'),
+
+  isMultiClassEnabled: Ember.computed.alias(
+    'classController.isMultiClassEnabled'
+  )
 });

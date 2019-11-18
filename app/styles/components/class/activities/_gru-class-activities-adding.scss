@@ -1,0 +1,20 @@
+.class-activities.gru-clas-activities-adding {
+  width: 95%;
+  margin: 8px auto;
+  .class-activities-source-container {
+    display: grid;
+    grid-row-gap: 3px;
+    .header-container {
+      display: grid;
+      align-items: center;
+      background-color: $white;
+      padding: 0 5px;
+      box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
+      border-radius: 4px;
+    }
+    .body-container {
+      max-height: calc(100vh - 145px);
+      overflow-y: auto;
+    }
+  }
+}
