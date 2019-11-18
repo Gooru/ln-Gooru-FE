@@ -51,7 +51,6 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     const component = this;
-    component.fetchStrugglingCompetency();
     if (component.get('class') && component.get('course')) {
       component.loadData();
     } else {
@@ -252,6 +251,11 @@ export default Ember.Component.extend({
    */
   memberGradeBounds: Ember.computed.alias('class.memberGradeBounds'),
 
+  /**
+   * @property {Object} gradeRange
+   */
+  gradeRange: null,
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -286,7 +290,9 @@ export default Ember.Component.extend({
     onChangeMonth() {
       const component = this;
       component.loadData();
-      component.fetchStrugglingCompetency();
+      if (component.get('gradeRange')) {
+        component.fetchStrugglingCompetency();
+      }
     },
 
     //Action triggered when toggle domains to be reviewed list
@@ -524,6 +530,7 @@ export default Ember.Component.extend({
         component.set('domainsCompletionReport', domainsCompletionReport);
         component.getDomainListToShow(domainsCompletionReport);
         component.set('isLoading', false);
+        component.getStudentsGradeRange();
       });
   },
 
@@ -632,7 +639,7 @@ export default Ember.Component.extend({
       fw_code: fwk
     };
     taxonomyService.fetchGradesBySubject(filters).then(grades => {
-      let gradeRange = component.getStudentsGradeRange();
+      let gradeRange = component.get('gradeRange');
       let startGrade = grades.findBy('id', gradeRange.minGrade);
       let startGradeIndex = grades.indexOf(startGrade);
       let endGrade = grades.findBy('id', gradeRange.maxGrade);
@@ -718,24 +725,31 @@ export default Ember.Component.extend({
         let grade = memberGradeBounds.findBy(memberId);
         if (grade) {
           let gradeBounds = grade.get(memberId);
-          availableGrade.pushObject(gradeBounds);
+          availableGrade.push(gradeBounds);
         }
       });
-
-      let minGrade = availableGrade.reduce(function(prev, current) {
-        return prev.grade_lower_bound < current.grade_lower_bound
-          ? prev.grade_lower_bound
-          : current.grade_lower_bound;
-      });
-      let maxGrade = availableGrade.reduce(function(prev, current) {
-        return prev.grade_upper_bound > current.grade_upper_bound
-          ? prev.grade_upper_bound
-          : current.grade_upper_bound;
-      });
-      return {
-        minGrade,
-        maxGrade
-      };
+      let gradeAsc = availableGrade
+        .sortBy('grade_lower_bound')
+        .find(lowestGrade => lowestGrade.grade_lower_bound);
+      let gradeDesc = availableGrade
+        .sortBy('grade_upper_bound')
+        .reverse()
+        .find(highestGrade => highestGrade.grade_lower_bound);
+      let minGrade =
+        gradeAsc && gradeAsc.grade_lower_bound
+          ? gradeAsc.grade_lower_bound
+          : null;
+      let maxGrade =
+        gradeDesc && gradeDesc.grade_upper_bound
+          ? gradeDesc.grade_upper_bound
+          : null;
+      if (minGrade && maxGrade) {
+        component.set('gradeRange', {
+          minGrade,
+          maxGrade
+        });
+        component.fetchStrugglingCompetency();
+      }
     }
   }
 });
