@@ -3,11 +3,12 @@
   <div class="sc-other-grade-header" {{action "onClosePullUp"}}>
       {{gru-icon name="arrow_back"}}
     <div class="sc-other-grade-header-title">
-      Struggling Competency(Other Grade)
+      {{t 'common.struggling-competencies'}}({{t 'profile.proficiency.grade-line'}})
     </div>
   </div>
 <div class="sc-other-grade-panel-container">
   {{#each otherGradeCompetency as |grade gradeIndex| }}
+  {{#if grade.domains}}
   <div class="sc-other-grade-panel">
     <div class="sc-other-grade-title-header">
       <div class="sc-other-grade-title" {{action "onToggleGrade" gradeIndex}}>
@@ -22,7 +23,7 @@
          {{#each grade.domains as |domain domainIndex|}}
          <div class="competency-domain-level-panel">
              <div class="grade-domain-name-accordion" {{action "toggleDomain" gradeIndex domainIndex}}>
-                {{domain.domainName}}
+                <span>{{domain.domainName}}</span>
                  {{gru-icon name="arrow_drop_down"}}
              </div>
              <div class="grade-domain-competency-list-container {{if (and (eq gradeIndex gradeDomainIndex.gradeIndex) (eq domainIndex gradeDomainIndex.domainIndex)) 'first-child'}} sc-other-grade-domain-accordion-{{gradeIndex}}-{{domainIndex}}">
@@ -30,10 +31,11 @@
                <div class="grade-domain-competency-list-panel" {{action "onSelectCompetency" competency domain}}>
                  <div class="grade-domain-competency-heading">
                   <span>{{competency.name}}</span>
-                 <ul class="grade-domain-competency-sub-heading">
+                 <span>
+                   <ul class="grade-domain-competency-sub-heading">
                    <li>{{competency.displayCode}}</li>
                    <li>Learning Outcome Name</li>
-                 </ul>
+                 </ul></span>
                  </div>
                  <div class="grade-domain-competency-icon">
                    {{gru-icon name="explore"}}
@@ -43,9 +45,6 @@
                  </div>
                </div>
               {{/each}}
-              <div class="domain-show-more-btn">
-              <span>  Show More</span>
-              </div>
              </div>
 
          </div>
@@ -53,6 +52,7 @@
       </div>
     </div>
   </div>
+  {{/if}}
   {{/each}}
 </div>
 

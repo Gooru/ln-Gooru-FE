@@ -95,6 +95,12 @@
                 font-weight: bold;
                 border-bottom: 1px solid #ccc;
                 cursor: pointer;
+
+                span {
+                  text-overflow: ellipsis;
+                  overflow: hidden;
+                  white-space: nowrap;
+                }
               }
               .grade-domain-competency-list-container {
                 display: none;
@@ -113,7 +119,6 @@
                     grid-template-columns: auto;
                     span {
                       font-size: 15px;
-                      width: 200px;
                       white-space: nowrap;
                       overflow: hidden;
                       text-overflow: ellipsis;

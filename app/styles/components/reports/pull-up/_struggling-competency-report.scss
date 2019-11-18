@@ -227,6 +227,9 @@
             grid-row-gap: 20px;
             padding: 10px;
             justify-items: center;
+            @media screen and (max-width: $screen-xs) {
+              grid-template-columns: auto;
+            }
             &.no-content {
               grid-template-columns: auto;
             }

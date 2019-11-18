@@ -4,7 +4,7 @@
     {{gru-icon name="arrow_back"}}
     <div class="struggling-competency-report-header-panel">
       <div class="struggling-competency-report-title">
-          {{selectedCompetency.name}}
+          <span>{{selectedCompetency.name}}</span>
       </div>
        <ul class="struggling-competency-report-sub-titles">
           <li>{{selectedCompetency.domainName}}</li>
@@ -53,7 +53,6 @@
       {{/each}}
     </div>
     <div class="sc-student-content-section-container">
-    {{#unless isLoading}}
     <div class="search-container">
       <div class="search-filter-container">
         <span class="ellipsis" {{action "onSelectDropdown"}}>{{t selectedMenuItem.label }}</span>
@@ -65,7 +64,6 @@
         </div>
       </div>
     </div>
-    {{/unless}}
     {{#if showLibraryCollection}}
         <div class="sc-library-title">
           <span {{action "backToLibrary"}}>{{gru-icon name="arrow_back"}}</span>
