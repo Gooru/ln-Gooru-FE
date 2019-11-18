@@ -1,13 +1,18 @@
 <div class="class-activities-ctrl-container">
   <div class="left-panel">
-    {{#if secondaryClasses}}
-      {{class/activities/gru-class-activities-listing
-        secondaryClasses = secondaryClasses
-        secondaryClassList = secondaryClassList
-        isPremiumClass = isPremiumClass
-        primaryClass = class}}
-    {{/if}}
+    {{class/activities/gru-class-activities-listing
+      secondaryClasses = secondaryClasses
+      secondaryClassList = secondaryClassList
+      isPremiumClass = isPremiumClass
+      primaryClass = class}}
   </div>
   <div class="right-panel">
+    {{class/activities/gru-class-activities-adding
+      secondaryClasses = secondaryClasses
+      secondaryClassList = secondaryClassList
+      isPremiumClass = isPremiumClass
+      primaryClass = class
+      classPreference = classPreference
+      isMultiClassEnabled = isMultiClassEnabled}}
   </div>
 </div>

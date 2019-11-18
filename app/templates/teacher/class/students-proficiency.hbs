@@ -1,6 +1,7 @@
 <div class="students-proficiency-container">
   <div class="students-proficiency-header">
     <div class="class-selector">
+      {{#if (gt secondaryClasses.length 0)}}
       <div class="selected-class-name" {{action "onToggleClassListContainer"}}>
         <span class="active-class-text">{{class.title}}</span>
         <span class="toggle-icon">{{gru-icon name="arrow_drop_down"}}</span>
@@ -10,6 +11,7 @@
           <div class="class-name {{if (or (and classes.isPrimaryClass (not isSecondaryClass)) classes.isSelected) 'active-class'}}" {{action "onSelectClass" classes}}>{{classes.title}}</div>
         {{/each}}
       </div>
+      {{/if}}
     </div>
     <div class="report-selector">
       <div class="selected-report-type" {{action "onToggleReportTypeContainer"}}>

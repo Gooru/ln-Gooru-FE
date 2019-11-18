@@ -52,6 +52,13 @@ export default Ember.Controller.extend({
         let classId = controller.get('classId');
         controller.get('classService').updateProfileBaseline(classId);
       }
+    },
+
+    closePullUp() {
+      const component = this;
+      let classId = component.get('classId');
+      component.set('isOpenPlayer', false);
+      component.transitionToRoute('student.class.course-map', classId);
     }
   },
 
@@ -226,9 +233,18 @@ export default Ember.Controller.extend({
       .then(controller.nextPromiseHandler)
       .then(queryParams => {
         if (queryParams.collectionId) {
-          controller.transitionToRoute('study-player', courseId, {
-            queryParams
+          queryParams.isIframeMode = true;
+          let playerContent = Ember.Object.create({
+            format: queryParams.type
           });
+          controller.set(
+            'playerUrl',
+            controller.target
+              .get('router')
+              .generate('study-player', courseId, { queryParams })
+          );
+          controller.set('isOpenPlayer', true);
+          controller.set('playerContent', playerContent);
         } else {
           controller.get('notifications').warning(errorMessage);
           navigateMapService

@@ -1,0 +1,31 @@
+<div class="content-search-container">
+  <div class="content-source-container">
+    {{#each contentSources as |contentSource|}}
+      <div class="content-source {{if (eq activeContentSource contentSource.value) 'active'}}" {{action "onSelectContentSource" contentSource}}>
+        {{contentSource.label}}
+      </div>
+    {{/each}}
+  </div>
+  <div class="content-selector-container">
+    <div class="content-types-container">
+      {{#each contentTypes as |contentType|}}
+        <div class="content-type {{if (eq activeContentType contentType.value) 'active'}}" {{action "onSelectContentType" contentType}}>
+          <span class="icon {{contentType.value}}"></span>
+          <span class="type-label">{{contentType.label}}</span>
+        </div>
+      {{/each}}
+      <div class="content-type add-external-activity" {{action "onSelectExternalActivity"}}>
+        {{gru-icon name="add"}}
+      </div>
+    </div>
+    <div class="search-content-container">
+      {{input
+        type="text"
+        class="search-content"
+        value=contentSearchTerm}}
+    </div>
+    <div class="filter-container">
+      {{gru-icon name="filter_list"}}
+    </div>
+  </div>
+</div>
