@@ -9,7 +9,7 @@
        <ul class="struggling-competency-report-sub-titles">
           <li>{{selectedCompetency.domainName}}</li>
           <li>{{selectedCompetency.displayCode}}</li>
-           
+
        </ul>
     </div>
   </div>
@@ -103,7 +103,7 @@
           </div>
         {{/if}}
       </div>
-     {{#if (and isShowMoreButton (not-eq selectedItem.label 'common.suggested'))}}
+     {{#if isShowMoreButton}}
       <div class="sc-show-more">
           <span {{action "onShowMore"}}>Show More</span>
       </div>

@@ -181,6 +181,7 @@ export default Ember.Component.extend({
      */
     onSelectMenuItems(item) {
       const component = this;
+      component.set('collectionContents', []);
       let preSelectedMenu = component
         .get('menuItems')
         .findBy('isSelected', true);
@@ -191,7 +192,6 @@ export default Ember.Component.extend({
       component.set('showTenantLibraries', false);
       component.set('showLibraryCollection', false);
       component.set('selectedMenuItem', item);
-      component.set('collectionContents', []);
       component.set('startAt', 0);
       component.set('isShowMoreButton', false);
       component.set('isLoading', true);
@@ -238,7 +238,7 @@ export default Ember.Component.extend({
       if (studentList.length) {
         studentList.map(student => {
           component.suggestContent(
-            student.userId,
+            student.get('id'),
             collection,
             'collection',
             competencyCode
@@ -260,11 +260,13 @@ export default Ember.Component.extend({
   didInsertElement() {
     let component = this;
     if (component.get('selectedCompetency')) {
+      component.set('collectionContents', []);
+      component.set('isShowMoreButton', false);
       let selectedCompetency = component.get('selectedCompetency');
       component.fetchStudentsPerfomance(selectedCompetency);
       component.fetchSuggestedCollection();
-      this.openPullUp();
-      this.createMenuItems();
+      component.openPullUp();
+      component.createMenuItems();
     }
   },
 
@@ -322,7 +324,10 @@ export default Ember.Component.extend({
         if (collectionList.length) {
           let startAt = component.get('startAt');
           component.set('startAt', startAt + 1);
-          if (collectionList.length === 5) {
+          if (
+            collectionList.length === 5 &&
+            component.get('selectedMenuItem').label !== 'common.suggested'
+          ) {
             component.set('isShowMoreButton', true);
           }
           collectionList.map(collection => {
@@ -347,36 +352,30 @@ export default Ember.Component.extend({
     let libraryId = component.get('selectedLibrary.id');
     let currentUserId = component.get('session.userId');
     let selectedService = Ember.RSVP.resolve([]);
-    if (item) {
-      if (item.label === 'common.gooru-catalog') {
-        selectedService = component
-          .get('searchService')
-          .searchCollections('*', params);
-      } else if (item.label === 'common.myContent') {
-        selectedService = component
-          .get('profileService')
-          .readCollections(currentUserId, params);
-      } else if (item.label === 'common.tenantLibrary') {
-        if (component.get('showTenantLibraries')) {
-          let page = params.page;
-          let pageSize = params.pageSize;
-          params.offset = parseInt(page) * parseInt(pageSize);
-          selectedService = component
-            .get('libraryService')
-            .fetchLibraryContent(libraryId, 'collection', params);
-        } else {
-          component.loadTenantLibraries();
-          component.set('showTenantLibraries', true);
-        }
-      }
-    } else {
-      let param = {
-        scope: 'proficiency',
-        classId: component.get('classId')
-      };
+    if (!item || item.label === 'common.suggested') {
       selectedService = component
-        .get('suggestService')
-        .fetchInClassSuggestionsByCode(currentUserId, competencyCode, param);
+        .get('searchService')
+        .searchCollections('*', params);
+    } else if (item.label === 'common.gooru-catalog') {
+      selectedService = component
+        .get('searchService')
+        .searchCollections('*', params);
+    } else if (item.label === 'common.myContent') {
+      selectedService = component
+        .get('profileService')
+        .readCollections(currentUserId, params);
+    } else if (item.label === 'common.tenantLibrary') {
+      if (component.get('showTenantLibraries')) {
+        let page = params.page;
+        let pageSize = params.pageSize;
+        params.offset = parseInt(page) * parseInt(pageSize);
+        selectedService = component
+          .get('libraryService')
+          .fetchLibraryContent(libraryId, 'collection', params);
+      } else {
+        component.loadTenantLibraries();
+        component.set('showTenantLibraries', true);
+      }
     }
     return selectedService;
   },
