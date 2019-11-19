@@ -21,11 +21,23 @@
     <div class="search-content-container">
       {{input
         type="text"
+        id="search-content"
         class="search-content"
         value=contentSearchTerm}}
+      <span class="search-icon">{{gru-icon name="search"}}</span>
     </div>
-    <div class="filter-container">
+    <div class="filter-container" {{action "onClickFilterIcon"}}>
       {{gru-icon name="filter_list"}}
     </div>
   </div>
 </div>
+
+{{#if isFilterEnabled}}
+  {{search/search-by-filter
+  isShow=isShowFilter
+  onFilterApply="onApplyFilter"
+  hideAppScroll=false
+  unCheckedItem=removedFilterItem
+  preference=classPreference
+  selectedFilters=selectedFilters}}
+{{/if}}
