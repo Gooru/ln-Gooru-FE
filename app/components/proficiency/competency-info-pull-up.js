@@ -14,7 +14,9 @@ export default Ember.Component.extend({
   /**
    * @property {String} studentId
    */
-  studentId: Ember.computed.alias('studentProfile.id'),
+  studentId: Ember.computed('studentProfile', function() {
+    return this.get('studentProfile.id') || null;
+  }),
 
   /**
    * @property {String} competencyStatus
