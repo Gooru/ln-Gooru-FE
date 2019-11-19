@@ -9,6 +9,13 @@ export default Ember.Component.extend({
   isExpand: false,
 
   /**
+   * @property {String} studentId
+   */
+  studentId: Ember.computed('studentProfile', function() {
+    return this.get('studentProfile.id') || null;
+  }),
+
+  /**
    * @property {String} competencyStatus
    */
   competencyStatus: Ember.computed('competency', function() {
