@@ -850,6 +850,7 @@ window.i18ln = {
   'class.edit.class-minscore': 'ट्रॉफी के लिए न्यूनतम स्कोर मूल्यांकन (1-100%)',
   'class.edit.course-map': 'पाठ्यक्रम मानचित्र',
   'class.edit.edit-class': 'कक्षा सेटिंग्स संपादित करें',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.overview.title': 'पाठ्यक्रम मानचित्र',
   'class.overview.locate': 'मेरी स्थिति दर्शाएं ',
   'class.overview.edit-content': 'विषयवस्तु संपादित करें',

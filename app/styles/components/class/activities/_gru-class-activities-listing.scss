@@ -82,6 +82,8 @@
         }
       }
       .items-to-grade-selector {
+        display: flex;
+        opacity: 0.6;
         .grading-icon {
           width: 22px;
           height: 22px;
@@ -90,6 +92,9 @@
           background-position: center;
           background-repeat: no-repeat;
           background-image: url("../assets/gooru/images/add_rubric.svg");
+        }
+        &.active {
+          opacity: 1;
         }
       }
 
@@ -101,6 +106,19 @@
         background-color: #fff;
         display: none;
         width: 100%;
+
+        .date-range-selector {
+          display: grid;
+          grid-template-columns: auto auto auto;
+          justify-content: space-around;
+          span {
+            &.active,
+            &:hover {
+              color: #000;
+              cursor: pointer;
+            }
+          }
+        }
 
         .backdrop {
           position: fixed;
@@ -161,12 +179,17 @@
               grid-row-start: 1;
               padding: 10px 20px 20px;
 
+              //NOTE overwritting style for enabling all days to be clickable
+              .datepicker .table-condensed tr td.no-activities {
+                pointer-events: auto;
+              }
+
               &.weekly {
                 .datepicker {
                   .table-condensed {
                     tbody tr {
                       &.no-activities {
-                        pointer-events: none;
+                        // pointer-events: none;
                       }
 
                       &.week-active,
@@ -287,9 +310,17 @@
       background-color: $white;
       box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
       border-radius: 4px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
       .activities-cards-container {
         display: flex;
         flex-flow: wrap row;
+        > div {
+          width: 50%;
+          margin: auto;
+          display: grid;
+          justify-content: center;
+        }
         .plan-activities-msg {
           padding: 15px;
           width: 100%;

@@ -898,6 +898,7 @@ window.i18ln = {
   'class.info.add-students': 'ছাত্ৰ-ছাত্ৰীসকলক লগ লগাওক',
   'class.info.class-code': 'শ্ৰেণীকোঠাৰ সংকেত',
   'class.info.delete': 'শ্ৰেণীকোঠা গুচুৱা',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'ক\'ৰ্চৰ অনুমোদন',
   'class.edit.basic-info': 'প্ৰাথমিক তথ্য',
   'class.edit.class-name': 'শ্ৰেণীকোঠাৰ নাম',
