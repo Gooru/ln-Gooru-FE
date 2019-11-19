@@ -152,9 +152,7 @@ export default Ember.Component.extend({
           }
         });
       } else {
-        component
-          .get('router')
-          .transitionTo('teacher.class.students-proficiency', classId);
+        component.sendAction('onChangeToBack');
       }
     },
 

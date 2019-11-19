@@ -67,12 +67,14 @@ export default Ember.Component.extend({
     /**
      * When opening the player for current activity
      */
-    playCurrent: function() {
-      let collectionId = this.get('location.currentId');
-      let type = this.get('location.currentType');
-      let unitId = this.get('location.unitId');
-      let lessonId = this.get('location.lessonId');
-      let courseId = this.get('location.courseId');
+    openCoursePlayer: function() {
+      const component = this;
+      let collectionId = component.get('location.currentId');
+      let type = component.get('location.currentType');
+      let unitId = component.get('location.unitId');
+      let lessonId = component.get('location.lessonId');
+      let courseId = component.get('location.courseId');
+      let title = component.get('location.currentTitle');
       let queryParams = {
         classId: null,
         unitId,
@@ -80,16 +82,55 @@ export default Ember.Component.extend({
         collectionId,
         role: ROLES.STUDENT,
         source: PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY,
-        type
+        type,
+        isIframeMode: true
       };
 
-      this.get('navigateMapService')
+      component
+        .get('navigateMapService')
         .startCollection(courseId, unitId, lessonId, collectionId, type)
-        .then(() =>
-          this.get('router').transitionTo('study-player', courseId, {
-            queryParams
-          })
-        );
+        .then(function() {
+          let playerContent = Ember.Object.create({
+            title: title,
+            format: type
+          });
+          component.set(
+            'playerUrl',
+            component
+              .get('router')
+              .generate('study-player', courseId, { queryParams })
+          );
+          component.set('isOpenPlayer', true);
+          component.set('playerContent', playerContent);
+        });
+    },
+
+    openPlayerContent: function() {
+      const component = this;
+      const location = component.get('location');
+      let id = location.get('collectionId');
+      let type = location.get('type');
+      let queryParams = {
+        type: type,
+        role: 'student',
+        source: component.get('source'),
+        isIframeMode: true
+      };
+      let playerContent = Ember.Object.create({
+        title: location.get('title'),
+        format: location.get('type')
+      });
+      component.set(
+        'playerUrl',
+        component.get('router').generate('player', id, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', playerContent);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
     }
   },
 

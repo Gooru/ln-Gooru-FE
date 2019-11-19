@@ -2,8 +2,8 @@
   position: fixed;
   top: 25%;
   z-index: 1031;
-  width: 768px;
-  left: 41%;
+  width: 100%;
+  left: 0;
   right: 0;
   margin: auto;
   color: #37434d;
@@ -28,6 +28,7 @@
     border-radius: 4px;
     background-color: $white;
     box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
+    margin: auto;
 
     .card-panel-header {
       width: 234px;
@@ -166,6 +167,7 @@
         .suggestion-profile-details-popover {
           max-height: 400px;
           overflow-y: auto;
+
           .user-profile-details {
             display: grid;
             grid-template-columns: 30px 200px;

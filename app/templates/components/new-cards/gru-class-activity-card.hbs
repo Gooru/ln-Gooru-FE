@@ -1,0 +1,85 @@
+<div class="class-activity-card">
+  <div class="content-thumbnail" style="background-image: url({{activityContent.thumbnailUrl}})">
+    <div class="content-title">
+      {{activityContent.title}}
+    </div>
+  </div>
+  <div class="activity-info">
+    <div class="content-counts">
+      {{#if isOfflineActivity}}
+        <div class="task-count count-container">
+          <span class="task-icon icon-style"></span>
+          <span class="count-value">{{activityContent.taskCount}}</span>
+        </div>
+      {{else}}
+        <div class="resource-count count-container {{if isAssessment 'hidden'}}">
+          <span class="resource-icon icon-style"></span>
+          <span class="count-value">{{activityContent.resourceCount}}</span>
+        </div>
+        <div class="question-count count-container">
+          <span class="question-icon icon-style"></span>
+          <span class="count-value">{{activityContent.questionCount}}</span>
+        </div>
+      {{/if}}
+    </div>
+    <div class="activity-date">
+      {{#unless isUnscheduledActivity}}
+        {{format-date activity.added_date 'DD MMM'}} - {{format-date activity.end_date 'DD MMM'}}
+      {{/unless}}
+    </div>
+  </div>
+  <div class="content-info">
+    {{activityContent.description}}
+  </div>
+  <div class="class-info">
+    {{#each activityClasses as |activityClass|}}
+      <div class="assigned-class">
+        <div class="class-title ellipsis">
+          {{activityClass.title}}
+        </div>
+        <div class="activity-action student-count" {{action "onShowStudentsList" activityClass}}>
+          {{gru-icon name="account_circle" class="icon-style"}}
+        </div>
+        <div class="activity-action suggestion-count hidden" {{action "onShowSuggestionList" activityClass}}>
+          {{gru-icon name="check_circle" class="icon-style"}}
+        </div>
+        <div class="activity-action delete-activity {{unless (eq activityClass.activity.usersCount 0) 'hidden'}}" {{action "onDeleteActivity" activityClass}}>
+          {{gru-icon name="delete_outline" class="icon-style"}}
+        </div>
+        {{#unless isUnscheduledActivity}}
+          {{#if activityClass.content.performance.hasStarted}}
+            <div class="add-data performed-activity {{if isCollection 'collection-performance'}} grade-range-{{grade-range activityClass.content.performance.score}}"  {{action "onOpenPerformanceEntry" activityClass}}>
+              <span class="activity-score">
+                {{activityClass.content.performance.score}}%
+              </span>
+              <span class="activity-timespent">
+                {{format-time activityClass.content.performance.timeSpent}}
+              </span>
+            </div>
+          {{else}}
+            <div class="add-data not-started {{unless activity.isActive 'disable-performance'}}" {{action "onOpenPerformanceEntry" activityClass}}>
+              Add Data
+            </div>
+          {{/if}}
+        {{/unless}}
+
+      </div>
+    {{/each}}
+  </div>
+  <div class="activity-actions">
+    <div class="play-activity">
+      {{gru-icon name="play_arrow"}}
+    </div>
+    {{#unless isUnscheduledActivity}}
+      <div class="activate-activity {{if activity.isActive 'disable-event'}}">
+        {{gru-switch
+          isChecked = activity.isActive
+          switchOptions = switchOptions
+          onOptionSwitch = "onToggleActivityVisibility"}}
+      </div>
+    {{/unless}}
+    <div class="reschedule-activity" {{action "onRescheduleActivity"}}>
+      {{gru-icon name="update"}}
+    </div>
+  </div>
+</div>

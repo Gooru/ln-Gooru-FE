@@ -5,6 +5,11 @@ export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
 
   /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
+  /**
    * @requires service:api-sdk/course
    */
   courseService: Ember.inject.service('api-sdk/course'),
@@ -19,6 +24,13 @@ export default Ember.Controller.extend({
    * @type {Object}
    */
   taxonomyService: Ember.inject.service('taxonomy'),
+
+  /**
+   * multiple class service dependency injection
+   * @type {Object}
+   */
+  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -117,6 +129,11 @@ export default Ember.Controller.extend({
     onOpenOCAReport() {
       let controller = this;
       controller.openDCAReportForOfflineClass();
+    },
+
+    onSelectSecondaryClass(secondaryClass) {
+      this.set('pullUpSecondaryClass', secondaryClass);
+      this.set('selectedSecondaryClass', secondaryClass);
     }
   },
 
@@ -191,6 +208,39 @@ export default Ember.Controller.extend({
 
   isShowMilestoneReport: false,
 
+  /**
+   * @property {Array} secondaryClasses
+   * Property for list of secondary classess attached with the class
+   */
+
+  secondaryClasses: Ember.computed(
+    'class.setting',
+    'secondaryClassList',
+    function() {
+      const controller = this;
+      const classSetting = controller.get('class.setting');
+      const secondaryClassList = controller.get('secondaryClassList');
+      let attachedSecondaryClassList =
+        classSetting && classSetting['secondary.classes']
+          ? classSetting['secondary.classes'].list
+          : Ember.A([]);
+      return controller.createSecondaryClassList(
+        attachedSecondaryClassList,
+        secondaryClassList
+      );
+    }
+  ),
+
+  isMultiClassEnabled: Ember.computed('secondaryClasses.[]', function() {
+    const component = this;
+    return component.get('secondaryClasses.length') > 0;
+  }),
+
+  secondaryClassList: Ember.A([]),
+
+  selectedSecondaryClass: null,
+
+  pullUpSecondaryClass: null,
   // -------------------------------------------------------------------------
   // Methods
 
@@ -317,5 +367,37 @@ export default Ember.Controller.extend({
       const performanceSummaryForDCA = hash.performanceSummaryForDCA;
       controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
     });
+  },
+
+  createSecondaryClassList(attachedSecondaryClassList, secondaryClassList) {
+    let secondaryClasses = Ember.A([]);
+    if (secondaryClassList) {
+      attachedSecondaryClassList.map(classId => {
+        let attchedClass = secondaryClassList.findBy('id', classId);
+        if (attchedClass) {
+          secondaryClasses.pushObject(attchedClass);
+        }
+      });
+    }
+    return secondaryClasses;
+  },
+
+  serializeSecondaryClass(secondaryClass) {
+    let classList = JSON.parse(JSON.stringify(secondaryClass));
+    let result = Ember.A([]);
+    result.pushObject(
+      Ember.Object.create({
+        id: this.get('class.id'),
+        code: this.get('class.code'),
+        title: this.get('class.title'),
+        isPrimaryClass: true
+      })
+    );
+    if (classList && classList.length) {
+      classList.map(activeClass => {
+        result.pushObject(Ember.Object.create(activeClass));
+      });
+    }
+    return result;
   }
 });

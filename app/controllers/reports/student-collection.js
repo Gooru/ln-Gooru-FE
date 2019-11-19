@@ -21,7 +21,8 @@ export default Ember.Controller.extend(ConfigurationMixin, {
     'contextId',
     'source',
     'minScore',
-    'milestoneId'
+    'milestoneId',
+    'isIframeMode'
   ],
   // -------------------------------------------------------------------------
   // Dependencies
@@ -55,6 +56,8 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    * @property {String} source
    */
   source: null,
+
+  isIframeMode: false,
 
   // -------------------------------------------------------------------------
   // Observers

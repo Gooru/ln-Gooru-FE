@@ -120,6 +120,10 @@
               opacity: 0.5;
             }
           }
+          @media screen and (max-width: $screen-xs) {
+            display: grid;
+            grid-template-columns: 100%;
+          }
         }
       }
       .complete-submission-container,

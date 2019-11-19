@@ -1,5 +1,7 @@
 import Ember from 'ember';
-
+import {
+  NOTIFICATION_PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Display properties
@@ -18,9 +20,16 @@ export default Ember.Component.extend({
      */
     addressItemNotification(notinItem) {
       const component = this;
-      let notifionAddresAction = component.notificationAddressAction.notificationTypes.find(
-        ntype => ntype.type === notinItem.notificationType
-      );
+      let notifionAddresAction;
+      if (notinItem.notificationType === 'teacher.suggestion') {
+        notifionAddresAction = component.notificationAddressAction.notificationTypes.find(
+          ntype => ntype.ctxOrigin === notinItem.ctxSource
+        );
+      } else {
+        notifionAddresAction = component.notificationAddressAction.notificationTypes.find(
+          ntype => ntype.type === notinItem.notificationType
+        );
+      }
       //Run post address hook, can refresh become part of post hook ?
       if (notifionAddresAction && notifionAddresAction.postActionHook) {
         component.postActionHook(notifionAddresAction, notinItem);
@@ -100,9 +109,7 @@ export default Ember.Component.extend({
     var route = component.get('router');
     qpm = component.transfromQpms(notin, ngtnDetails.queryparams);
     if (ngtnDetails.setlocation === true) {
-      let userlocation = `${qpm.unitId}+${qpm.lessonId}+${qpm.collectionId}+${
-        qpm.milestoneId
-      }+${notin.currentItemType}`;
+      let userlocation = `${qpm.unitId}+${qpm.lessonId}+${qpm.collectionId}+${qpm.milestoneId}+${notin.currentItemType}`;
       qpm.location = userlocation;
     }
     if (ngtnDetails.queryPType === 'qponly') {
@@ -118,13 +125,25 @@ export default Ember.Component.extend({
       );
     } else if (ngtnDetails.queryPType === 'hybrid') {
       queryParams = qpm;
-      route.transitionTo(
-        ngtnDetails.route,
-        queryParams[ngtnDetails.exactparams],
-        {
-          queryParams: queryParams
-        }
-      );
+      if (queryParams.isIframeMode) {
+        let playerContent = Ember.Object.create({
+          title: notin.currentItemTitle,
+          format: notin.currentItemType
+        });
+        let playerUrl = component
+          .get('router')
+          .generate(ngtnDetails.route, queryParams[ngtnDetails.exactparams], {
+            queryParams
+          });
+        component.sendAction('playerContent', playerUrl, playerContent);
+      } else {
+        route.transitionTo(
+          ngtnDetails.route,
+          queryParams[ngtnDetails.exactparams], {
+            queryParams: queryParams
+          }
+        );
+      }
     }
   },
 
@@ -136,7 +155,9 @@ export default Ember.Component.extend({
       fresult = {};
     var fix_key = function(key) {
       let retvar = '';
-      if (key.indexOf('ctx') > -1) {
+      if (key === 'ctxCaId') {
+        retvar = 'caContentId';
+      } else if (key.indexOf('ctx') > -1) {
         retvar = key.substring(3);
         retvar = retvar.camelize();
       } else if (key.indexOf('current') === 0) {
@@ -147,9 +168,12 @@ export default Ember.Component.extend({
     };
     for (let i = 0; i < keys.length; i++) {
       var key = keys[i];
-      result[fix_key(key)] = srcObj[key];
+      if (key === 'ctxSource') {
+        result[fix_key(key)] = NOTIFICATION_PLAYER_EVENT_SOURCE[srcObj[key]];
+      } else {
+        result[fix_key(key)] = srcObj[key];
+      }
     }
-
     var tgtkeys = Object.keys(tgtQueryParams);
     for (let i = 0; i < tgtkeys.length; i++) {
       var tkey = tgtkeys[i];

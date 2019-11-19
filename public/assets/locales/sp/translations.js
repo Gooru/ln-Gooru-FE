@@ -62,7 +62,10 @@ window.i18ln = {
   'common.efficacy': 'Efficacy',
   'common.grid': 'Grid',
   'common.list': 'List',
+  'common.suggest-to-student': 'Suggest to student',
   'common.tenantLibrary': 'Tenant Library',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.day': 'day',
   'common.week': 'week',
   'common.month': 'month',
@@ -2797,8 +2800,7 @@ window.i18ln = {
   'teacher-resource': 'Teacher Resources',
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
-  'common.no-lesson-plan-info-message':
-    'This lesson does have any lesson plan.',
+  'common.no-lesson-plan-info-message': 'There is no lesson plan for this lesson.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
   'common.activity': 'Activity Title',
@@ -2817,7 +2819,14 @@ window.i18ln = {
   'gru-suggest-test.pre-tessignaturet-lead':
     'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'common.choose-lang': 'Choose Language',
-  'common-show': 'Show',
+  'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
-    'At least one task is required for activity activation'
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
+
 };

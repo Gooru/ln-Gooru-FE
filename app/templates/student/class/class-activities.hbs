@@ -49,7 +49,9 @@
                class=class
                classActivity=classActivity
                studentDcaReport='studentDcaReport'
+               onShowSuggestion="onShowSuggestion"
                activityDate=classActivity.added_date
+               playContent="playContent"
              }}
             {{else if (not isLoading)}}
               <p class="no-content">{{t 'ca.student.no-content'}}</p>
@@ -87,6 +89,7 @@
                      classActivity=offlineActivity
                      studentDcaReport='studentDcaReport'
                      activityDate=offlineActivity.added_date
+                     playContent="playContent"
                    }}
                     {{/each}}
                   </div>
@@ -152,7 +155,14 @@
 </div>
 
 {{#if showStudentDcaReport}}
-  {{reports/pull-up/dca-student-collection-report showPullUp=showStudentDcaReport reportData=studentReportContextData isStudent=true onClosePullUp="onClosePullUp"}}
+  {{reports/pull-up/dca-student-collection-report
+    showPullUp=showStudentDcaReport
+    reportData=studentReportContextData
+    isStudent=true
+    useSession=useSession
+    isSuggestedCollection=isSuggestedCollection
+    onClosePullUp="onClosePullUp"
+  }}
 {{/if}}
 
 {{#if isShowStudentExternalCollectionReport}}
@@ -187,5 +197,13 @@
     itemsToGrade=itemsToGrade
     isTeacher=false
     studentId=studentId
+  }}
+{{/if}}
+{{#if isOpenPlayer}}
+  {{reports/pull-up/player-pull-up
+    showPullUp=isOpenPlayer
+    playerUrl=playerUrl
+    playerContent=playerContent
+    onclosePullUp="closePullUp"
   }}
 {{/if}}

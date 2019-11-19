@@ -19,6 +19,10 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    onSuggestContent(collection) {
+      let component = this;
+      component.sendAction('onSuggestContent', collection);
+    },
     /**
      * Action triggered when close pull up
      */
@@ -69,7 +73,7 @@ export default Ember.Component.extend({
     let component = this;
     component.$().animate(
       {
-        top: '9%'
+        top: '0%'
       },
       400
     );

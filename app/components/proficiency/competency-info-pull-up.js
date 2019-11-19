@@ -6,7 +6,17 @@ export default Ember.Component.extend({
 
   classNameBindings: ['isInspectCompetency:open', 'isExpand:expand'],
 
+  /**
+   * @property {Boolean} isExpand
+   */
   isExpand: false,
+
+  /**
+   * @property {String} studentId
+   */
+  studentId: Ember.computed('studentProfile', function() {
+    return this.get('studentProfile.id') || null;
+  }),
 
   /**
    * @property {String} competencyStatus
@@ -37,6 +47,11 @@ export default Ember.Component.extend({
       component.toggleProperty('isInspectCompetency');
       component.set('isExpand', false);
       component.sendAction('onClosePullUp');
+    },
+
+    playContent(queryParams, contentId, content) {
+      const component = this;
+      component.sendAction('playContent', queryParams, contentId, content);
     }
   }
 });

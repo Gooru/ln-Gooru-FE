@@ -46,7 +46,7 @@
       {{/if}}
 
       <div class="course-map-body {{unless isStudentCourseMap 'teacher-cm'}}">
-        {{#if ( or (and class.milestoneViewApplicable  isMilestoneView) (not class.milestoneViewApplicable  isMilestoneView))}}
+      {{#if ( or (and class.milestoneViewApplicable  isMilestoneView) (not class.milestoneViewApplicable  isMilestoneView))}}
           <div class="students">
             <div class="header hidden-xs">
               {{t 'class.info.students'}}
@@ -72,22 +72,56 @@
 
         <div class="render-course-map {{if (and (not isStudentCourseMap) questionItems) 'sm-course-map'}}">
           {{#if (and class.milestoneViewApplicable hasMilestoneViewReady (not isStudentCourseMap))}}
-            <div class="ms-cm-view-switcher-ctn">
-              <div class="current-view">
+          <div class="ms-cm-view-switcher-ctn-container">
+            <div class="ms-cm-view-switcher-ctn {{if (not isLessonPlanShow) 'switch-not-show-lesson-plan'}}">
+              {{#unless isLessonPlanShow}}
+              <div class="show-title-head">
                 {{#if isMilestoneView}}
-                  {{t 'milestones'}}
+                  <span>{{t 'milestones'}}</span>
                 {{else}}
-                  {{t 'common.course-map'}}
+                  <span>{{t 'common.course-map'}}</span>
                 {{/if}}
               </div>
-              <div class="view-switcher" {{action 'viewSwitcher'}}>
+              <div class=""></div>
+              {{/unless}}
+              <div class="view-switcher" {{action 'viewSwitcher' 'milestone-course'}}>
+                <span>{{t 'common.show'}}</span><br>
                 {{#if isMilestoneView}}
-                  {{t 'show-course-map'}}
+                 <span>{{t 'common.course-map'}}</span>
                 {{else}}
-                  {{t 'show-milestones'}}
+                  <span>{{t 'milestones'}}</span>
                 {{/if}}
               </div>
+              {{#if isLessonPlanShow}}
+              <div class="current-class-view">
+              {{#if (gt secondaryClasses.length 0)}}
+                {{t 'locateme.view'}} {{t 'common.view-class-course-map'}}
+                <div class="class-selector">
+                  <div class="selected-class-name" {{action "onToggleClassListContainer"}}>
+                    <span class="active-class-text">{{class.title}}</span>
+                    <span class="toggle-icon">{{gru-icon name="arrow_drop_down"}}</span>
+                  </div>
+                  <div class="class-list-container">
+                    {{#each selectedClassList as |classes|}}
+                      <div class="class-name  {{if (or (and classes.isPrimaryClass (not isSecondaryClass)) classes.isSelected) 'active-class'}}" {{action 'addSecondaryClass' classes}}>
+                          {{classes.title}}
+                      </div>
+                    {{/each}}
+                  </div>
+                </div>
+              {{/if}}
+              </div>
+              <div class="ms-cm-view-lesson-plan" {{action 'viewSwitcher' 'lesson-plan'}}>
+                {{t 'common.show'}} <br>
+                {{#if isLessonPlanView}}
+                  {{t 'common.lessonObj.zero'}}
+                {{else}}
+                  {{t 'common.lesson-plan'}}
+                {{/if}}
+              </div>
+              {{/if}}
             </div>
+          </div>
           {{/if}}
           {{#if isLoading}}
             {{three-bounce-spinner}}
@@ -151,13 +185,12 @@
                   location=location
                   showAllRescopedContent=showAllRescopedContent
                   showLocationReport=tab
-
                 }}
                 {{/unless}}
               </div>
             {{else}}
               <div class="teacher-coursemap">
-                {{#unless (and class.milestoneViewApplicable isMilestoneView)}}
+                {{#unless (or (and class.milestoneViewApplicable isMilestoneView) isLessonPlanView ) }}
                   {{class/overview/gru-accordion-course
                 currentClass=class
                 currentCourse=course
@@ -179,6 +212,19 @@
                 showLocationReport= tab
               }}
                 {{else}}
+                {{#if isLessonPlanView}}
+                {{teacher/class/lesson-plan
+                  class=class
+                  gradeSubject=gradeSubject
+                  milestones=teacherMilestones
+                  classMembers=classMembers
+                  onOpenTeacherMilestoneReport = "onOpenTeacherMilestoneReport"
+                  onOpenTeacherMilestoneLessonReport = "onOpenTeacherMilestoneLessonReport"
+                  onOpenTeacherMilestoneCollectionReport = "onOpenTeacherMilestoneCollectionReport"
+                  location=location
+                  showLocationReport= tab
+                }}
+                  {{else}}
                   {{teacher/class/milestone-course-map
                     class=class
                     gradeSubject=gradeSubject
@@ -192,6 +238,7 @@
                     location=location
                     showLocationReport= tab
                   }}
+                  {{/if}}
                 {{/unless}}
               </div>
             {{/if}}
@@ -281,7 +328,9 @@
     isDCAContext=false
     showPullUp=showFRQuestionGrade
     context=itemToGradeContextData
-    itemsToGrade=questionItems}}
+    itemsToGrade=questionItems
+    getGradeListItem = "getGradeListItem"
+  }}
 {{/if}}
 
 {{#if isShowOfflineActivityPreview}}

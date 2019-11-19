@@ -76,6 +76,11 @@ export default Ember.Component.extend(
      */
     classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
+    /**
+     * @property {NavigateMapService}
+     */
+    navigateMapService: Ember.inject.service('api-sdk/navigate-map'),
+
     // -------------------------------------------------------------------------
     // Attributes
 
@@ -94,6 +99,15 @@ export default Ember.Component.extend(
     enableCollectionLiveLearning: function() {
       return true;
     }.property(),
+
+    resetPerformance: false,
+
+    reloadScore: Ember.observer('resetPerformance', function() {
+      if (this.get('resetPerformance')) {
+        this.loadData();
+      }
+    }),
+
     // -------------------------------------------------------------------------
     // Actions
     actions: {

@@ -1,5 +1,8 @@
 import Ember from 'ember';
-
+import {
+  ROLES,
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 export default Ember.Component.extend({
   classNames: ['oca-students-summary-report-pull-up'],
 
@@ -16,6 +19,11 @@ export default Ember.Component.extend({
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
   /**
+   * @requires service:session
+   */
+  session: Ember.inject.service('session'),
+
+  /**
    * Propery of class id
    * @property {Number}
    */
@@ -28,10 +36,47 @@ export default Ember.Component.extend({
   context: null,
 
   /**
+   * Maintains the origin value
+   * @type {Object}
+   */
+  origin: PLAYER_EVENT_SOURCE.CLASS_ACTIVITY,
+
+  /**
+   * Maintains the context object
+   * @type {Object}
+   */
+  contextParams: Ember.computed('context', function() {
+    let context = this.get('context');
+    let params = Ember.Object.create({
+      classId: this.get('classId'),
+      collectionId: context.get('contentId'),
+      collectionType: context.get('contentType'),
+      suggestionOriginatorId: this.get('session.userId'),
+      suggestionOrigin: ROLES.TEACHER,
+      suggestionTo: ROLES.STUDENT,
+      suggestionArea: this.get('origin'),
+      caContentId: context.get('id')
+    });
+    return params;
+  }),
+
+  /**
+   * defaultSuggestContentType
+   * @type {String}
+   */
+  defaultSuggestContentType: 'collection',
+
+  /**
    * Propery of students
    * @property {Array}
    */
   students: Ember.A([]),
+
+  /**
+   * Maintains list of students selected for  suggest
+   * @type {Array}
+   */
+  studentsSelectedForSuggest: Ember.A([]),
 
   /**
    * Propery of performance activities
@@ -130,6 +175,31 @@ export default Ember.Component.extend({
       component.set('selectedStudent', student);
     },
 
+    onSelectStudentForSuggestion(student) {
+      if (this.get('context.contentType') === 'assessment') {
+        this.get('studentsSelectedForSuggest').pushObject(student);
+        student.set('selectedForSuggestion', true);
+      }
+    },
+
+    onDeSelectStudentForSuggestion(student) {
+      this.get('studentsSelectedForSuggest').removeObject(student);
+      student.set('selectedForSuggestion', false);
+    },
+
+    onOpenSuggestionPullup() {
+      this.set('showSuggestionPullup', true);
+    },
+
+    onCloseSuggest() {
+      this.set('studentsSelectedForSuggest', Ember.A());
+      this.get('students')
+        .filterBy('selectedForSuggestion', true)
+        .map(data => {
+          data.set('selectedForSuggestion', false);
+        });
+    },
+
     toggle(isLeft) {
       let component = this;
       let currentIndex = component.get('selectedIndex');
@@ -157,6 +227,7 @@ export default Ember.Component.extend({
   init() {
     let component = this;
     component._super(...arguments);
+    component.set('studentsSelectedForSuggest', Ember.A());
     component.loadData();
   },
 
@@ -166,11 +237,10 @@ export default Ember.Component.extend({
   openPullUp() {
     let component = this;
     component.set('showPullUp', true);
-    component.$().animate(
-      {
-        top: '10%'
-      },
-      400
+    component.$().animate({
+      top: '10%'
+    },
+    400
     );
   },
 
@@ -179,15 +249,14 @@ export default Ember.Component.extend({
    */
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-        component.sendAction('onClosePullUp', closeAll);
-      }
+    component.$().animate({
+      top: '100%'
+    },
+    400,
+    function() {
+      component.set('showPullUp', false);
+      component.sendAction('onClosePullUp', closeAll);
+    }
     );
   },
 
@@ -205,14 +274,19 @@ export default Ember.Component.extend({
   },
 
   loadData() {
-    let component = this;
+    const component = this;
+    component.loadCAReport();
+  },
+
+  loadCAReport() {
+    const component = this;
     const classId = component.get('classId');
     const activityId = component.get('context.id');
     const format = component.get('context.collection.format');
     const collectionType =
-      format === 'collection' || format === 'collection-external'
-        ? 'collection'
-        : 'assessment';
+      format === 'collection' || format === 'collection-external' ?
+        'collection' :
+        'assessment';
     const collectionId = component.get('context.collection.id');
     const activityDate = component.get('context.activation_date');
     component.set('isLoading', true);
@@ -223,7 +297,10 @@ export default Ember.Component.extend({
       studentsPerformance: component
         .get('analyticsService')
         .getDCAPerformance(classId, collectionId, collectionType, activityDate)
-    }).then(({ usersClassActivity, studentsPerformance }) => {
+    }).then(({
+      usersClassActivity,
+      studentsPerformance
+    }) => {
       if (!component.isDestroyed) {
         component.parseClassMembers(
           usersClassActivity,
@@ -270,9 +347,8 @@ export default Ember.Component.extend({
       collectionPerformanceData = Ember.Object.create({
         type: collectionType,
         score: isAssessment ? performance.assessment.score : 0,
-        timeSpent: isAssessment
-          ? performance.assessment.timespent
-          : performance.collection.timeSpent,
+        timeSpent: isAssessment ?
+          performance.assessment.timespent : performance.collection.timeSpent,
         resources: performance.resourceResults
       });
     }

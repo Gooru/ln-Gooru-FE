@@ -14,6 +14,8 @@ export default Ember.Service.extend({
 
   classAdapter: null,
 
+  classContainer: {},
+
   init: function() {
     this._super(...arguments);
     this.set(

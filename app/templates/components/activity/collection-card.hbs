@@ -1,4 +1,4 @@
-<div class="card-panel-container" >
+<div class="card-panel-container">
   <div class="card-panel-header" style="background-image: url({{collection.thumbnailUrl}})">
     <div class="info">
       <div class="title">{{collection.title}}</div>
@@ -34,7 +34,8 @@
   </div>
   <div class="card-panel-footer">
     <div class="buttons-container">
-      <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="right" {{action "onPlayCollection" collection.id}}>{{gru-icon name="ic_play_arrow"}}</div>
+      <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="right" {{action "onPlayCollection" collection.id}}>{{gru-icon name="play_arrow"}}</div>
+      <div class="suggest-btn" title="Suggest" data-toggle="tooltip" data-placement="left" {{action "onSuggestContent" collection}}>{{gru-icon name="add"}}</div>
     </div>
     <div class="collection-prefs-container">
       <span class="left-arc"></span>

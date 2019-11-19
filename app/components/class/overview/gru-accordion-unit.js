@@ -296,6 +296,14 @@ export default Ember.Component.extend(AccordionMixin, {
 
   showUnitReportPullUp: false,
 
+  resetPerformance: false,
+
+  reloadScore: Ember.observer('resetPerformance', function() {
+    if (this.get('resetPerformance')) {
+      this.loadData();
+    }
+  }),
+
   /**
    * rescoped class average performance hide for teacher's
    * @property {Ember.Array}

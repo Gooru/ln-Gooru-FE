@@ -808,5 +808,51 @@ export default Ember.Service.extend({
           resolve(true);
         }, reject);
     });
+  },
+
+  getScheduledActivitiesByDate(classId, requestBody) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .getScheduledActivitiesByDate(classId, requestBody)
+        .then(function(scheduledActivities) {
+          const classActivities = service
+            .get('classActivitySerializer')
+            .normalizeFindClassActivities(scheduledActivities);
+          let uniqueClassIds = classActivities
+            .uniqBy('classId')
+            .mapBy('classId');
+          uniqueClassIds.map(classId => {
+            let activitiesByClass = classActivities.filterBy(
+              'classId',
+              classId
+            );
+            service.findClassActivitiesPerformanceSummary(
+              classId,
+              activitiesByClass,
+              requestBody.start_date,
+              requestBody.end_date
+            );
+          });
+          resolve(classActivities);
+        }, reject);
+    });
+  },
+
+  getUnScheduledActivitiesByMonthYear(classId, requestBody) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .getUnScheduledActivitiesByMonthYear(classId, requestBody)
+        .then(function(unScheduledActivities) {
+          resolve(
+            service
+              .get('classActivitySerializer')
+              .normalizeFindClassActivities(unScheduledActivities)
+          );
+        }, reject);
+    });
   }
 });
