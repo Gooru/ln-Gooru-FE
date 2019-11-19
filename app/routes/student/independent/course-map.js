@@ -143,6 +143,7 @@ export default Ember.Route.extend({
       source: PLAYER_EVENT_SOURCE.INDEPENDENT_ACTIVITY,
       isIframeMode: true
     };
+
     this.get('navigateMapService')
       .startLesson(courseId, unitId, lessonId)
       .then(function() {
