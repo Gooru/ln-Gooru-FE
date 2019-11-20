@@ -4,9 +4,11 @@
     <div class="lp-label">
       Lesson Plan
     </div>
-    <div class="lp-sessions-count">
-      {{sessionsCount}}
-    </div>
+    {{#if sessionsCount}}
+      <div class="lp-sessions-count">
+        {{sessionsCount}} sessions
+      </div>
+    {{/if}}
   </div>
   <div class="lp-body-container">
 
@@ -36,7 +38,7 @@
     {{#if guidingQuestions}}
       <div class="guiding-questions-container items-container">
         <div class="gq-header-container items-header-container" {{action "onToggleContainer" 'gq-body-container'}}>
-          <div class="gq-label">
+          <div class="gq-label item-label">
             Guiding Questions
           </div>
           <div class="gq-toggle">
@@ -52,7 +54,7 @@
     {{#if anticipatedStruggles}}
       <div class="anticipated-struggles-container items-container">
         <div class="as-header-container items-header-container" {{action "onToggleContainer" 'as-body-container'}}>
-          <div class="as-label">
+          <div class="as-label item-label">
             Anticipated Struggles
           </div>
           <div class="as-toggle">
@@ -67,13 +69,13 @@
     <div class="lp-sessions-container">
       {{#each sessions as |session index|}}
         <div class="lp-session-container">
-          <div class="session-header-container">
+          <div class="session-header-container" {{action "onToggleContainer" (concat 'session-body-container-' index)}}>
             <div class="session-label">Session {{plus-one index}}</div>
             <div class="session-toggle">
               {{gru-icon name="arrow_drop_down"}}
             </div>
           </div>
-          <div class="session-body-container">
+          <div class="session-body-container session-body-container-{{index}}">
             <div class="session-info-container">
               <div class="session-title">{{session.title}}
               </div>

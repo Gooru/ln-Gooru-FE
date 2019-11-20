@@ -6,6 +6,16 @@
     .lp-header-container {
       display: grid;
       grid-template-columns: auto 1fr auto;
+      height: 30px;
+      border-bottom: 1px solid;
+      .lp-label {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .lp-sessions-count {
+        font-size: 12px;
+        font-weight: bold;
+      }
     }
     .lp-body-container {
       display: grid;
@@ -14,6 +24,11 @@
         .pk-header-container {
           display: grid;
           grid-template-columns: 1fr auto;
+          cursor: pointer;
+          .pk-label {
+            font-size: 13px;
+            font-weight: bold;
+          }
         }
         .pk-body-container {
           display: none;
@@ -45,6 +60,11 @@
         .items-header-container {
           display: grid;
           grid-template-columns: 1fr auto;
+          cursor: pointer;
+          .item-label {
+            font-size: 13px;
+            font-weight: bold;
+          }
         }
         .items-body-container {
           display: none;
@@ -56,19 +76,67 @@
           .session-header-container {
             display: grid;
             grid-template-columns: 1fr auto;
+            cursor: pointer;
+            .session-label {
+              font-size: 13px;
+              font-weight: bold;
+            }
           }
           .session-body-container {
+            padding: 0 12px;
+            display: grid;
+            grid-row-gap: 8px;
             .session-info-container {
               display: grid;
+              .session-title {
+                font-size: 13px;
+                font-weight: bold;
+              }
+              .session-description {
+                font-weight: 12px;
+              }
             }
             .contents-container {
               display: grid;
               .content-label {
+                font-size: 13px;
+                font-weight: bold;
               }
               .contents-list {
                 .content-container {
                   display: grid;
-                  grid-template-columns: 40px 1fr 30px 30px;
+                  grid-template-columns: 25px 1fr 30px 30px;
+                  height: 30px;
+                  align-items: center;
+                  .content-icon {
+                    width: 20px;
+                    height: 20px;
+                    background-size: 20px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    &.collection {
+                      background-image: url("../assets/gooru/images/add_collection.svg");
+                    }
+
+                    &.offline-activity {
+                      background-image: url("../assets/gooru/images/offline.svg");
+                    }
+
+                    &.assessment {
+                      background-image: url("../assets/gooru/images/add_assessment.svg");
+                    }
+                  }
+                  .add-activity,
+                  .schedule-activity {
+                    display: grid;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    i.add,
+                    i.update {
+                      font-size: 18px;
+                    }
+                  }
                 }
               }
             }
