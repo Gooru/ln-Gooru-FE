@@ -27,15 +27,22 @@ export default Ember.Object.extend({
 
   queryRecordForDCA: function(query) {
     const namespace = this.get('namespace');
+    let includedateParam = '';
+    let includepathIdParam = '';
     let includesessionIdParam = `sessionId=${query.sessionId}`;
     if (query.sessionId === 'NA') {
       includesessionIdParam = `classId=${query.classId}`;
     }
-    const includedateParam = `date=${query.date}`;
+    if (query.date) {
+      includedateParam = `date=${query.date}`;
+    }
+    if (query.pathId) {
+      includepathIdParam = `pathId=${query.pathId}`;
+    }
     const collectionId = query.collectionId;
     const userId = query.userId;
     const collectionType = query.collectionType;
-    const url = `${namespace}/dca/${collectionType}/${collectionId}/user/${userId}?${includesessionIdParam}&${includedateParam}`;
+    const url = `${namespace}/dca/${collectionType}/${collectionId}/user/${userId}?${includesessionIdParam}&${includedateParam}&${includepathIdParam}`;
     const options = {
       type: 'GET',
       dataType: 'json',

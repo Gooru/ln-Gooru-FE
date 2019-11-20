@@ -6,9 +6,10 @@
   collectionUrl=collectionUrl
   class=class
   isStudyPlayer=true
+  isIframeMode = isIframeMode
 }}
 <div class="player-container">
-    <div class="player">
+    <div class="player {{if isIframeMode 'iframe-player' }}">
       <div class="qz-main" role="main">
         {{#if isDone}}
           {{player/gru-player-done classId=classId}}

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import PublicRouteMixin from 'gooru-web/mixins/public-route-mixin';
 import ContextMixin from 'gooru-web/mixins/quizzes/context';
 import QuizzesReport from 'quizzes-addon/routes/reports/student-context';
-import { ROLES } from 'gooru-web/config/config';
+import { ROLES, PLAYER_EVENT_MESSAGE } from 'gooru-web/config/config';
 
 /**
  *
@@ -37,6 +37,14 @@ export default QuizzesReport.extend(PublicRouteMixin, ContextMixin, {
       let toRoute = controller.get('backUrl');
       toRoute = toRoute || 'index'; //index when refreshing the page, TODO fix
       route.transitionTo(toRoute);
+    },
+    closePlayer: function() {
+      const component = this;
+      const controller = component.get('controller');
+      let isIframeMode = controller.get('isIframeMode');
+      if (isIframeMode) {
+        window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
+      }
     }
   },
 
@@ -73,15 +81,14 @@ export default QuizzesReport.extend(PublicRouteMixin, ContextMixin, {
 
     let collection;
 
-    return Ember.RSVP
-      .hashSettled({
-        assessment: loadAssessment
-          ? route.get('assessmentService').readAssessment(collectionId)
-          : false,
-        collection: loadCollection
-          ? route.get('collectionService').readCollection(collectionId)
-          : false
-      })
+    return Ember.RSVP.hashSettled({
+      assessment: loadAssessment
+        ? route.get('assessmentService').readAssessment(collectionId)
+        : false,
+      collection: loadCollection
+        ? route.get('collectionService').readCollection(collectionId)
+        : false
+    })
       .then(function(hash) {
         let collectionFound =
           hash.assessment.state === 'rejected' ||

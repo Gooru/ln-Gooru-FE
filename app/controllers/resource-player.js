@@ -14,7 +14,8 @@ export default Ember.Controller.extend({
     'pathId',
     'source',
     'collectionType',
-    'classId'
+    'classId',
+    'isIframeMode'
   ],
 
   actions: {},

@@ -1,7 +1,7 @@
 //eslint-disable-next-line
 window.i18ln = {
   en: 'English',
-  sp: 'Español',
+  es: 'Español',
   ar: 'عربى',
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
@@ -65,6 +65,7 @@ window.i18ln = {
   'common.first': 'पहिले',
   'common.last': 'शेवटचे',
   'common.name': 'नाव',
+  'common.suggest-to-student': 'Suggest to student',
   'common.user': 'वापरणारी व्यक्ती',
   'common.content-name': 'आशयाचे नाव',
   'common.lastName': 'आडनाव',
@@ -179,6 +180,8 @@ window.i18ln = {
   'common.assessmentInitial': 'ए',
   'common.assessments': 'मूल्यमापन',
   'common.assign': 'नेमून द्या',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.assign-to-class': 'वर्गाकडे नेमून द्या',
   'common.assign-to-course': 'अभ्यासक्रम नेमून दिद्या',
   'common.attempt': 'हा क्रमांक सोडवण्याचा प्रयत्न प्रयत्न करा',
@@ -2742,7 +2745,7 @@ window.i18ln = {
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
   'common.no-lesson-plan-info-message':
-    'This lesson does have any lesson plan.',
+    'There is no lesson plan for this lesson.',
   'student-resource': 'Student Resources',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
@@ -2804,7 +2807,14 @@ window.i18ln = {
     'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'custom-range': 'Custom Date Range',
   'common.choose-lang': 'Choose Language',
-  'common-show': 'Show',
+  'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
-    'At least one task is required for activity activation'
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
+
 };

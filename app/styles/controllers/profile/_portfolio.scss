@@ -1,7 +1,27 @@
-.controller.profile {
+.profile.profile_portfolio {
+  .controller.profile {
+    .content {
+      // max-width: unset;
+      // width: 100%;
+      .user-profile-container,
+      .profile.gru-navigation-tabs {
+        // max-width: 1017px;
+        // margin: auto;
+      }
+    }
+  }
+}
+
+.profile {
   .profile-portfolio-container {
     display: grid;
-    row-gap: 15px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 8px;
+    row-gap: 8px;
+
+    @media screen and (max-width: $screen-md) {
+      grid-template-columns: 1fr;
+    }
 
     .collections-container {
     }

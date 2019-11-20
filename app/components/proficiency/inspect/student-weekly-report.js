@@ -47,7 +47,7 @@ export default Ember.Component.extend({
         );
       }
       if (reportPeriod.get('type') === 'custom') {
-        component.onRangePickerReport(event);
+        component.onRangePickerReport();
       } else {
         component.loadSummaryReportData(isWeeklyReport);
         component.resetActiveStudentData();
@@ -405,16 +405,9 @@ export default Ember.Component.extend({
   /**
    * Show range date picker while click dropdown custom option
    */
-  onRangePickerReport(event) {
+  onRangePickerReport() {
     let component = this;
     let datepickerEle = component.$('.student-rangepicker-container');
-    let selectedContentEle = component.$(event.target);
-    if (!selectedContentEle.hasClass('active')) {
-      selectedContentEle.addClass('active');
-      datepickerEle.show();
-    } else {
-      selectedContentEle.removeClass('active');
-      datepickerEle.hide();
-    }
+    datepickerEle.show();
   }
 });

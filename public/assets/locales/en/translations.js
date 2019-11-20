@@ -1,6 +1,6 @@
 window.i18ln = {
   en: 'English',
-  sp: 'Español',
+  es: 'Español',
   ar: 'عربى',
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
@@ -187,6 +187,8 @@ window.i18ln = {
   'common.anonymous_mode': 'Anonymous Mode',
   'common.answer': 'Your Answer',
   'common.answer-correct': 'You are correct!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'You are incorrect...',
   'common.answer-key-was-hidden':
     'Note: Your teacher has hidden the answer key.',
@@ -201,7 +203,6 @@ window.i18ln = {
   'common.assessment-title': 'Assessment Title',
   'common.activity-title': 'Activity Title',
   'common.activity': 'Activity Title',
-
   'common.assessmentInitial': 'A',
   'common.assessments': 'Assessments',
   'common.assign': 'Assign',
@@ -2475,6 +2476,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'Question',
   'gru-study-header.question.one': 'Question',
   'gru-study-header.question.other': 'Questions',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'To learn more, check out these resources.',
   'gru-suggest-test.pre-test-header': 'Pre-Test (Optional)',
@@ -2766,12 +2768,18 @@ window.i18ln = {
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
   'common.no-lesson-plan-info-message':
-    'This lesson does have any lesson plan.',
+    'There is no lesson plan for this lesson.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Study Material',
   'common.choose-lang': 'Choose Language',
-  'common-show': 'Show',
+  'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
-    'At least one task is required for activity activation'
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };
 //export default window.i18ln;

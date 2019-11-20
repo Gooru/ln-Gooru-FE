@@ -167,6 +167,24 @@ export default Ember.Controller.extend({
    * @property {Array} fwDomains
    */
   fwDomains: Ember.computed.alias('classController.fwDomains'),
+
+  secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
+
+  secondaryClassToBeShownList: Ember.computed(
+    'secondaryClasses.@each.id',
+    function() {
+      const controller = this;
+      const secondaryClasses = controller.get('secondaryClasses');
+      return secondaryClasses ? Ember.copy(secondaryClasses) : Ember.A([]);
+    }
+  ),
+
+  selectedSecondaryClassList: Ember.A([]),
+
+  isMultiClassEnabled: Ember.computed.alias(
+    'classController.isMultiClassEnabled'
+  ),
+
   // -------------------------------------------------------------------------
   // Events
   initializeController() {
@@ -182,194 +200,21 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
-    //Action triggered when click a domain
-    onSelectDomain(domainData) {
+    onSelectSecondaryClass(secondaryClass) {
       const controller = this;
-      controller.set(
-        'competencyCompletionReport',
-        domainData.get('competenciesData').sortBy('completionPercentage')
-      );
-      controller.set('selectedDomain', domainData);
-      controller.set('isShowCompetencyCompletionReport', true);
+      controller.get('selectedSecondaryClassList').pushObject(secondaryClass);
+      controller
+        .get('secondaryClassToBeShownList')
+        .removeObject(secondaryClass);
     },
 
-    //Action triggered when change month
-    onChangeMonth() {
+    onRemoveClassView(secondaryClass) {
       const controller = this;
-      controller.loadData();
-    },
-
-    //Action triggered when toggle domains to be reviewed list
-    toggleView() {
-      const controller = this;
-      controller.set('isExpandedView', !controller.get('isExpandedView'));
-      let domainsCompletionReport = controller.get('domainsCompletionReport');
-      controller.getDomainListToShow(domainsCompletionReport);
-    },
-
-    //Action triggered when click activities count box
-    onRedirectToCA() {
-      const controller = this;
-      const classId = controller.get('classId');
-      let month = controller.get('activeMonth');
-      let year = controller.get('activeYear');
-      let queryParams = {
-        month,
-        year
-      };
-      controller.transitionToRoute('teacher.class.class-activities', classId, {
-        queryParams
-      });
-    },
-
-    //Action triggered when click on competency suggestion
-    onSuggestAtCompetency(
-      competency,
-      selectedContentType = null,
-      selectedStudents = []
-    ) {
-      const controller = this;
-      let contextParams = {
-        classId: controller.get('classId'),
-        class: controller.get('class'),
-        course: controller.get('course'),
-        courseId: controller.get('courseId')
-      };
-      controller.set('contextParams', contextParams);
-      controller.set('selectedCompetencyData', competency);
-      controller.set('isShowActivitySearchContentPullup', true);
-      controller.set(
-        'selectedContentType',
-        selectedContentType || controller.get('defaultContentTypeToSuggest')
-      );
-      controller.set('selectedStudents', selectedStudents);
-    },
-
-    //Action triggered at once an activity added into the DCA
-    addedContentToDCA(activityData) {
-      const controller = this;
-      let selectedStudents = controller.get('selectedStudents');
-      if (selectedStudents.length) {
-        let studentIds = selectedStudents.map(student => {
-          return student.get('id');
-        });
-        let activityId = activityData.get('id');
-        controller.assignStudentsToContent(studentIds, activityId);
-      }
+      controller.get('selectedSecondaryClassList').removeObject(secondaryClass);
+      controller.get('secondaryClassToBeShownList').pushObject(secondaryClass);
     }
-  },
+  }
 
   // -------------------------------------------------------------------------
   // Functions
-  /**
-   * @function loadData
-   * Method to load atc view data
-   */
-  loadData() {
-    const controller = this;
-    controller.set('isLoading', true);
-    controller.fetchClassActivitiesCount();
-    controller
-      .fetchDomainsCompletionReport()
-      .then(function(domainsCompletionReport) {
-        controller.set('domainsCompletionReport', domainsCompletionReport);
-        controller.getDomainListToShow(domainsCompletionReport);
-        controller.set('isLoading', false);
-      });
-  },
-
-  /**
-   * @function fetchClassActivitiesCount
-   * Method to fetch activities count
-   */
-  fetchClassActivitiesCount() {
-    const controller = this;
-    const classActivitiesService = controller.get('classActivitiesService');
-    const classId = controller.get('classId');
-    let month = controller.get('activeMonth');
-    let year = controller.get('activeYear');
-    return Ember.RSVP.hash({
-      activitiesCount: Ember.RSVP.resolve(
-        classActivitiesService.getMonthlyActivitiesCount(classId, month, year)
-      )
-    })
-      .then(({ activitiesCount }) => {
-        controller.set('activitiesCount', activitiesCount);
-        return activitiesCount;
-      })
-      .catch(function() {
-        let activitiesCount = {
-          scheduled: 0,
-          unscheduled: 0
-        };
-        controller.set('activitiesCount', activitiesCount);
-      });
-  },
-
-  /**
-   * @function fetchDomainsCompletionReport
-   * Method to fetch domains completion report
-   */
-  fetchDomainsCompletionReport() {
-    const controller = this;
-    const competencyService = controller.get('competencyService');
-    const classId = controller.get('classId');
-    let month = controller.get('activeMonth');
-    let year = controller.get('activeYear');
-    let agent = controller.get('userAgent');
-    let requestBody = {
-      classId,
-      month,
-      year,
-      agent
-    };
-    return Ember.RSVP.hash({
-      domainsCompletionReport: Ember.RSVP.resolve(
-        competencyService.getDomainsCompletionReport(requestBody)
-      )
-    }).then(({ domainsCompletionReport }) => {
-      return domainsCompletionReport;
-    });
-  },
-
-  /**
-   * @function getDomainListToShow
-   * Method to get domains list to show
-   */
-  getDomainListToShow(domainsCompletionReport) {
-    const controller = this;
-    let domainsCompletionList = Ember.A([]);
-    let notStartedCompletionList = Ember.A([]);
-    if (domainsCompletionReport) {
-      let domainsCompletionReportList = domainsCompletionReport.get(
-        'domainsData'
-      );
-      let sortedReportList = domainsCompletionReportList.sortBy(
-        'completionPercentage'
-      );
-      domainsCompletionList = sortedReportList.filter(function(domain) {
-        return domain.completionPercentage;
-      });
-      notStartedCompletionList = sortedReportList.filter(function(domain) {
-        return domain.completionPercentage === 0;
-      });
-    }
-    controller.set(
-      'domainsCompletionList',
-      domainsCompletionList.concat(notStartedCompletionList)
-    );
-    return domainsCompletionList;
-  },
-
-  /**
-   * @function assignStudentsToContent
-   * Method to assign list of students into an activity
-   */
-  assignStudentsToContent(studentIds, contentId) {
-    const controller = this;
-    const classId = controller.get('classId');
-    controller
-      .get('classActivitiesService')
-      .addUsersToActivity(classId, contentId, studentIds);
-  }
 });

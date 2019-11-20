@@ -178,6 +178,11 @@ export default StudentCollection.extend({
       const controller = this;
       controller.showStudentProficiencyProgress();
       controller.set('isShowMasteryGreeting', false);
+    },
+
+    onExit(rouet, id) {
+      const controller = this;
+      controller.transitionToRoute(rouet, id);
     }
   },
 
@@ -384,7 +389,8 @@ export default StudentCollection.extend({
     const context = this.get('mapLocation.context');
     let queryParams = {
       role: ROLES.STUDENT,
-      source: this.get('source')
+      source: this.get('source'),
+      isIframeMode: this.get('isIframeMode')
     };
     let classId = context.get('classId');
     if (classId) {
@@ -541,7 +547,8 @@ export default StudentCollection.extend({
       unitId: context.get('unitId'),
       lessonId: context.get('lessonId'),
       pathId: context.get('pathId') || 0,
-      pathType: context.get('pathType') || null
+      pathType: context.get('pathType') || null,
+      isIframeMode: controller.get('isIframeMode')
     };
     controller.updateStudentMasteredCompetencies();
     controller.transitionToRoute('student-learner-proficiency', profileId, {

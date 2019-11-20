@@ -60,9 +60,10 @@ export default Ember.Object.extend({
       collectionId: data.collectionId || data.collection_id,
       timeSpent: data.timeSpent,
       attempts: data.attempts,
+      pathId: data.pathId,
       views: data.views,
       score: data.scoreInPercentage,
-      sessionId: data.lastSessionId,
+      sessionId: data.lastSessionId || data.sessionId,
       status: data.status
     });
   },

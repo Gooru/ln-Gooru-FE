@@ -157,7 +157,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     nextPromise
       .then(route.nextPromiseHandler)
       .then(parsedOptions => {
-        return route.launchStudyPlayer(parsedOptions);
+        let content = Ember.Object.create({
+          title: currentLocation.get('collectionTitle'),
+          format: currentLocation.get('collectionType')
+        });
+        return route.launchStudyPlayer(parsedOptions, content);
       })
       .catch(() => {
         controller.set('isNotAbleToStartPlayer', true);
@@ -203,16 +207,23 @@ export default Ember.Route.extend(PrivateRouteMixin, {
    * launches study player
    * @param options {object} is the queryParams required to launch study-player
    */
-  launchStudyPlayer(queryParams) {
+  launchStudyPlayer(queryParams, content) {
     const route = this;
+    const controller = route.get('controller');
     if (queryParams.hasSuggestion) {
       route.transitionTo('reports.study-student-collection', {
         queryParams
       });
     } else {
-      route.transitionTo('study-player', queryParams.courseId, {
-        queryParams
-      });
+      queryParams.isIframeMode = true;
+      controller.set(
+        'playerUrl',
+        route
+          .get('router')
+          .generate('study-player', queryParams.courseId, { queryParams })
+      );
+      controller.set('isOpenPlayer', true);
+      controller.set('playerContent', content);
     }
   },
 

@@ -140,9 +140,12 @@ export default Ember.Component.extend({
 
   classMembers: Ember.A([]),
 
+  secondaryClass: Ember.observer('class', function() {
+    this.loadData();
+  }),
+
   init: function() {
     this._super(...arguments);
-
     this.set(
       'currentLocationSerializer',
       CurrentLocationSerializer.create(Ember.getOwner(this).ownerInjection())
@@ -175,6 +178,13 @@ export default Ember.Component.extend({
     },
 
     /**
+     * Send action to preview collection
+     */
+    openCollectionPreview(unitId, lessonId, collection) {
+      this.sendAction('onPreviewContent', unitId, lessonId, collection);
+    },
+
+    /**
      * @function goLive
      */
     goLive: function(collection) {
@@ -183,16 +193,6 @@ export default Ember.Component.extend({
         collectionType: collection.get('collectionType')
       };
       this.sendAction('onGoLive', options);
-    },
-
-    /**
-     * Action is responsible to preview the collection / assessment.
-     * @param  {String} unitId
-     * @param  {String} lessonId
-     * @param  {String} collection
-     */
-    openCollectionPreview(unitId, lessonId, collection) {
-      this.sendAction('onPreviewContent', unitId, lessonId, collection);
     },
 
     //Action triggered when click on milestone performance
@@ -302,11 +302,12 @@ export default Ember.Component.extend({
     this._super(...arguments);
     const component = this;
     let customLocationPresent = component.get('location');
-
     if (customLocationPresent && this.get('notInit') === true) {
       Ember.run.later(function() {
         component.navigateLocation();
-        component.set('isLoading', false);
+        if (!component.isDestroyed) {
+          component.set('isLoading', false);
+        }
       }, 5000);
     }
   },
@@ -818,7 +819,6 @@ export default Ember.Component.extend({
         //ToDo: Refactoring required to remove the Later based workaround, here as well as in other implementation
         Ember.run.later(function() {
           component.handleMilestoneToggle(selectedMilestone);
-
           if (component.get('showLocationReport') === 'assesmentreport') {
             Ember.run.later(function() {
               Ember.run.later(function() {

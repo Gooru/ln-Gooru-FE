@@ -119,5 +119,23 @@
       font-size: 14px;
       grid-area: sequence;
     }
+
+    .data-model-selector {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      justify-content: center;
+      column-gap: 5px;
+      grid-column-start: 3;
+      .proficiency-selector,
+      .portfolio-selector {
+        opacity: 0.7;
+        cursor: pointer;
+        &.active,
+        &:hover {
+          color: #000;
+          opacity: 1;
+        }
+      }
+    }
   }
 }

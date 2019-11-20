@@ -33,6 +33,12 @@ export default Ember.Component.extend({
   length: 5,
 
   actions: {
+    onSuggestContent(collection) {
+      const component = this;
+      const activityContentType = component.get('activityContentType');
+      component.sendAction('onSuggestContent', collection, activityContentType);
+    },
+
     onSelectActivityContent(contentType) {
       let component = this;
       component.set('activityContentType', contentType);
@@ -54,9 +60,9 @@ export default Ember.Component.extend({
     let component = this;
     component.set('isLoading', true);
     let competencyCode = component.get('learningMapData.gutCode');
+    let activityContents = component.get('activityContents');
     let activityContentType =
       contentType || component.get('activityContentType');
-    let activityContents = component.get('activityContents');
     let startAt = component.get('startAt');
     let length = component.get('length');
     let filter = {

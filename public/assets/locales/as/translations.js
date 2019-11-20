@@ -1,7 +1,7 @@
 //eslint-disable-next-line
 window.i18ln = {
   en: 'English',
-  sp: 'Español',
+  es: 'Español',
   ar: 'عربى',
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
@@ -52,6 +52,7 @@ window.i18ln = {
   'errors.phone': '{{description}} এটা বৈধ ফোন নম্বৰ হ\'ব লাগিব',
   'errors.url': '{{description}} এটা বৈধ url হ\'ব লাগিব',
   'common.relevance': 'প্ৰাসংগিকতা',
+  'common.suggest-to-student': 'Suggest to student',
   'common.engagement': 'কাম',
   'common.efficacy': 'দক্ষতা',
   'common.grid': 'গ্ৰিড',
@@ -94,6 +95,8 @@ window.i18ln = {
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.by-question': 'question-by-question',
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
@@ -2799,7 +2802,7 @@ window.i18ln = {
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
   'common.no-lesson-plan-info-message':
-    'This lesson does have any lesson plan.',
+    'There is no lesson plan for this lesson.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
   'common.activity': 'Activity Title',
@@ -2818,7 +2821,13 @@ window.i18ln = {
   'gru-suggest-test.pre-tessignaturet-lead':
     'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'common.choose-lang': 'Choose Language',
-  'common-show': 'Show',
+  'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
-    'At least one task is required for activity activation'
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };

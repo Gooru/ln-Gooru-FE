@@ -1,0 +1,111 @@
+.portfolio.gru-content-filters {
+  position: absolute;
+  width: 100%;
+  background-color: $white;
+  z-index: 99;
+  transition: 1s;
+  .content-filters-container {
+    border: 1px solid;
+    .filters-header-label {
+      font-size: 15px;
+      color: #37424b;
+      padding-left: 12px;
+      border-bottom: 1px solid rgba(55, 66, 75, 0.1);
+      display: grid;
+      grid-template-columns: auto auto;
+      background-color: rgba(83, 94, 103, 0.3);
+      height: 30px;
+      .clear-filters {
+        justify-self: right;
+        cursor: pointer;
+        padding-right: 15px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 14px;
+        i.clear {
+          height: 30px;
+          line-height: 30px;
+          font-size: 14px;
+        }
+      }
+    }
+    .filters-container {
+      padding: 0 15px 15px 15px;
+      max-height: 400px;
+      overflow: auto;
+      min-height: 165px;
+      &::-webkit-scrollbar {
+        height: 6px;
+        width: 8px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $gray-light;
+        border: 1px solid $gray-light;
+        border-radius: 5px;
+      }
+      .date-range-filter-container {
+        .date-range-selector {
+          .date-range-label {
+            color: #37424b;
+            font-size: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            .info-icon {
+              i.info {
+                font-size: 13px;
+                cursor: pointer;
+              }
+            }
+          }
+
+          .date-range-value {
+            cursor: pointer;
+          }
+        }
+        .date-range-filter {
+          .ca-daterange-picker {
+            position: unset;
+            .ca-datepicker-body {
+              left: 12px;
+              top: unset;
+              transform: unset;
+              box-shadow: 0px 1px 11px 3px rgba(0, 0, 0, 0.13);
+            }
+          }
+        }
+      }
+
+      .gut-selector {
+        .gut-header-container {
+          color: #37424b;
+          font-size: 15px;
+          font-weight: 700;
+          text-transform: uppercase;
+          .info-icon {
+            i.info {
+              font-size: 13px;
+              cursor: pointer;
+            }
+          }
+        }
+        .gut-body-container {
+        }
+      }
+    }
+
+    .apply-filters {
+      width: 100%;
+      box-shadow: 0 0 4px 0 rgba(102, 102, 102, 0.3);
+      background-color: #37424b;
+      color: $white;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      line-height: 48px;
+      cursor: pointer;
+      display: block;
+    }
+  }
+}

@@ -30,6 +30,7 @@
        fwCompetencies=fwCompetencies
        framework=framework
        onSelectCategory="onSelectCategory"
+       onChangeToBack="onChangeToBack"
      }}
     {{#if isMobile}}
       <div class="inspect-competency">
@@ -75,10 +76,11 @@
           isInspectCompetency=showCompetencyInfo
           showGutCompetency=showGutCompetency
           framework=framework
+          class=class
           onClosePullUp="onClosePullUp"
           isStudent=isStudent
           competency=selectedCompetency
-          studentId=studentProfile.id
+          studentProfile=studentProfile
           domainCompetencyList=domainCompetencyList
         }}
       {{/proficiency/proficiency-subject-panel}}
