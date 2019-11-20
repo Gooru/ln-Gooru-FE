@@ -72,6 +72,9 @@ window.i18ln = {
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
   'reroute.suggestion': 'reroute suggestion',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
   'reroute.suggestion.title': 'Having difficulty with the concepts?',
   'reroute.suggestion.desc':
     'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',

@@ -76,6 +76,9 @@ window.i18ln = {
   'not-covered-in-fw-msg':
     'Note: This competency is not covered by the {{framework}} framework',
   'reroute.suggestion': 'reroute suggestion',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
   'reroute.suggestion.title': 'Having difficulty with the concepts?',
   'reroute.suggestion.desc':
     'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
