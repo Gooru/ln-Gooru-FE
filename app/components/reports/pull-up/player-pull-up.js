@@ -39,7 +39,9 @@ export default Ember.Component.extend({
       if (event.data === PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE) {
         component.closePullUp();
       } else if (event.data === PLAYER_EVENT_MESSAGE.GRU_LOADING_COMPLETED) {
-        component.set('isLoading', false);
+        if (!component.get('isDestroyed')) {
+          component.set('isLoading', false);
+        }
       }
     }
     window.addEventListener('message', receiveMessage, false);

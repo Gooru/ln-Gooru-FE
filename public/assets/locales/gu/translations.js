@@ -1769,44 +1769,32 @@ window.i18ln = {
   'search-result.and': 'અને',
   'search-result.question': 'પ્રશ્ન',
   'search-result.questions': 'પ્રશ્નો',
-  'search-result.in-this-collection': 'આ સંગ્રહમાં',
-  'search-result.search-results-for': 'માટે શોધ પરિણામો',
-  'gru-image-picker.chooseFile': 'ફાઇલ પસંદ કરો ...',
-  'gru-image-picker.instruction':
-    'તમારા કમ્પ્યુટર પર ફાઇલમાંથી એક છબી અપલોડ કરો.',
-  'gru-image-picker.restriction':
-    'છબી 5 mb કરતા નાની JPG, GIF અથવા PNG ફાઇલ હોવી આવશ્યક છે.',
-  'gru-image-picker.submit': 'છબી વાપરો',
-  'gru-fib.instructions':
-    'કૃપા કરીને તમારા જવાબ (ઓ) ને ખાલી (ઓ) માં પ્રદાન કરો, અને  "{{ક્રિયા}} " ને ક્લિક કરો.',
-  'gru-hs-image.instructions':
-    'કૃપા કરીને સાચી છબી પસંદ કરો અને  "{{ક્રિયા}} " ને ક્લિક કરો.',
-  'gru-hs-text.instructions':
-    'કૃપા કરીને સાચા જવાબો પસંદ કરો અને  "{{ક્રિયા}} " ને ક્લિક કરો.',
-  'gru-hot-text.instructions':
-    'કૃપા કરીને સાચા જવાબ પસંદ કરો અને  "{{ક્રિયા}} " ને ક્લિક કરો.',
-  'gru-login-prompt.title': 'ગુરુ માં આપનું સ્વાગત છે!',
-  'gru-login-prompt.instructions':
-    'તમારે તે ક્રિયા પૂર્ણ કરવા માટે સાઇન ઇન કરવાની જરૂર છે.',
-  'gru-login-prompt.existing-user': 'પહેલેથી જ ખાતું છે?',
-  'gru-login-prompt.new-user': 'અહીં નવું?',
-  'gru-login-prompt.not-now': 'હવે નથી',
-  'gru-login-prompt.sign-in': 'સાઇન ઇન કરો',
-  'gru-multiple-answer.instructions':
-    'કૃપા કરીને સાચા જવાબ પસંદ કરો અને  "{{ક્રિયા}} " ને ક્લિક કરો.',
-  'gru-multiple-choice.instructions':
-    'કૃપા કરીને સાચા જવાબ પસંદ કરો અને  "{{ક્રિયા}} " ને ક્લિક કરો.',
-  'gru-open-ended.instructions':
-    'કૃપા કરીને તમારું જવાબ નીચે આપેલા ક્ષેત્રમાં લખો અને જ્યારે તમે કરો ત્યારે તમારું પ્રતિસાદ સાચવવા માટે  "{{action}} " બટનને ક્લિક કરો.',
+  'search-result.in-this-collection': 'આ ક્લેકશન માં',
+  'search-result.search-results-for': 'માટેના સર્ચ પરિણામ',
+  'gru-image-picker.chooseFile': 'ફાઈલ પસંદ કરો',
+  'gru-image-picker.instruction': 'કોમ્પ્યુટરમાં રહેલી ફાઈલમાંથી ઇમેજ અપલોડ કરો.',
+  'gru-image-picker.restriction': 'ઇમેજ JPG, GIF અથવા PNG ફોર્મેટમા જ  અને 5 MB કરતાં ઓછી સાઈઝની હોવી જોઈએ.',
+  'gru-image-picker.submit': 'ઇમેજ ઉપયોગ કરો',
+  'gru-fib.instructions': 'તમારો જવાબ(બો) આપેલ ખાલી જગ્યામાં લખો અને "{{action}}" પર ક્લિક કરો.',
+  'gru-hs-image.instructions': 'મહેરબાની કરી સાચી ઇમેજ પસંદ કરો અને "{{action}}". પર ક્લિક કરો.',
+  'gru-hs-text.instructions': 'મહેરબાની કરી સાચી જવાબ(બો)  પસંદ કરો અને "{{action}}". પર ક્લિક કરો.',
+  'gru-hot-text.instructions': 'મહેરબાની કરી સાચી જવાબ પસંદ કરો અને "{{action}}". પર ક્લિક કરો.',
+  'gru-login-prompt.title': 'ગુરુમાં તમારું સ્વાગત છે.',
+  'gru-login-prompt.instructions': 'આ એક્શન ને પૂર્ણ કરવા માટે તમારે સાઈન ઇન કરવું જરૂરી છે.',
+  'gru-login-prompt.existing-user': 'પહેલાથી જ એકાઉન્ટ ધરાવો છો?',
+  'gru-login-prompt.new-user': 'અંહી નવા છો?',
+  'gru-login-prompt.not-now': 'અત્યારે નહી',
+  'gru-login-prompt.sign-in': 'સાઈન ઇન',
+  'gru-multiple-answer.instructions': 'મહેરબાની કરી સાચી જવાબ પસંદ કરો અને "{{action}}". પર ક્લિક કરો.',
+  'gru-multiple-choice.instructions': 'મહેરબાની કરી સાચી જવાબ પસંદ કરો અને "{{action}}". પર ક્લિક કરો.',
+  'gru-open-ended.instructions': 'અંહી નીચે આપેલા ખાનામાં તમારો જવાબ ટાઈપ કરો અને લખી રહ્યા બાદ તમારો જવાબ સાચવી રાખવા માટે  "{{action}}" પર ક્લિક કરો.',
   'gru-open-ended.characterLimit': 'અક્ષર મર્યાદા',
   'gru-question-viewer.answer': 'જવાબ',
   'gru-question-viewer.question': 'પ્રશ્ન',
-  'gru-true-false.instructions':
-    'કૃપા કરીને સાચા જવાબ પસંદ કરો અને  "{{ક્રિયા}} " ને ક્લિક કરો.',
+  'gru-true-false.instructions': 'મહેરબાની કરી સાચી જવાબ પસંદ કરો અને "{{action}}". પર ક્લિક કરો.',
   'gru-true-false.true': 'સાચું',
   'gru-true-false.false': 'ખોટું',
-  'gru-reorder.instructions':
-    'કૃપા કરીને જવાબોને યોગ્ય ક્રમમાં પુનઃક્રમાંકિત કરો અને  "{{ક્રિયા}} " ને ક્લિક કરો.',
+  'gru-reorder.instructions': 'મહેરબાની કરી જવાબો ને સાચા ક્રમમા ગોઠવો અને "{{action}}"પર ક્લિક કરો.',
   'student-first-experience.preStudyTitle': '{{title}} માટે પૂર્વ અભ્યાસ',
   'student-first-experience.lp-compute-inprogress':
     'We are computing your initial proficiency profile in {{title}}',
@@ -2314,53 +2302,37 @@ window.i18ln = {
   'gru-take-tour.profile.stepThree.description':
     'તમારી વ્યક્તિગત માહિતી, શાળા માહિતી અને તમારી પ્રોફાઇલ ચિત્રને અપડેટ કરો.',
   'gru-take-tour.profile.stepFour.title': 'ગોલ',
-  'gru-take-tour.profile.stepFour.description':
-    'તમારા શીખવાની લક્ષ્યાંકો પ્રાપ્ત કરવામાં તમારી સહાય કરવા માટે લક્ષ્યો સેટ કરો અને ટ્રૅક કરો.',
-  'gru-take-tour.profile.stepFive.title': 'અનુયાયીઓ',
-  'gru-take-tour.profile.stepFive.description':
-    'જો તમને કોઈની સામગ્રી ગમે છે, તો તમે તેને અનુસરી શકો છો. તમે કોણ અનુસરી રહ્યા છો તે પણ જોઈ શકો છો.',
-  'gru-take-tour.profile.stepSix.title': 'બેજેસ',
-  'gru-take-tour.profile.stepSix.description':
-    'તમે પ્રાપ્ત કરેલા બેજેસની સમીક્ષા કરો. જો તમે તમારા શિક્ષક દ્વારા નિશ્ચિત બેંચમાર્ક મૂલ્યાંકન પૂર્ણ કરો છો તો તમને બેજ પ્રાપ્ત થાય છે.',
-  'gru-tour.assessments-settings.stepOne.title': 'સંશોધક અને સ્કોરિંગ',
-  'gru-tour.assessments-settings.stepOne.description':
-    'આ સેટિંગ નક્કી કરે છે કે વિદ્યાર્થીઓ મૂલ્યાંકન દ્વારા કેવી રીતે આગળ વધી શકે છે અને બતાવે છે કે તેમના જવાબો સાચા છે કે ખોટા છે. તે તેમને જવાબ કી બતાવતું નથી.',
-  'gru-tour.assessments-settings.stepTwo.title': 'જવાબ કી અને પ્રયાસોની સંખ્યા',
-  'gru-tour.assessments-settings.stepTwo.description':
-    'આ સેટિંગ જવાબ કીને જાહેર કરવાની મંજૂરી આપે છે અને મૂલ્યાંકન પર વિદ્યાર્થીઓની સંખ્યાને સેટ કરે છે.',
-  'gru-tour.overview.stepOne.title': 'કોર્સ નકશો',
-  'gru-tour.overview.stepOne.description':
-    'અભ્યાસક્રમનો નકશો તમારા વિદ્યાર્થીઓને તમે અસાઇન કરેલા બધા મૂલ્યાંકન અને સંગ્રહની ઍક્સેસ આપે છે.',
-  'gru-tour.overview.stepTwo.title': 'વર્ગ કોડ',
-  'gru-tour.overview.stepTwo.description':
-    'તમે બનાવેલા દરેક વર્ગમાં અનન્ય વર્ગ કોડ હોય છે. જ્યારે તમે તમારા વર્ગખંડમાં જોડાવા અને તમારી સામગ્રીને ઍક્સેસ કરવા માટે તૈયાર હો ત્યારે તમે આ કોડ વિદ્યાર્થીઓને વિદ્યાર્થીઓને આપો.',
-  'gru-tour.overview.stepThree.title': 'મોનિટર વિદ્યાર્થી અને વર્ગ માહિતી',
-  'gru-tour.overview.stepThree.description':
-    'આ જ્યારે તમે અભ્યાસક્રમનો ભાગ હો ત્યારે મૂલ્યાંકન પૂર્ણ કરે ત્યારે વર્ગ અને વ્યક્તિગત વિદ્યાર્થી મૂલ્યાંકન ડેટા જોવાની મંજૂરી આપે છે.',
-  'gru-tour.overview.stepFour.title': 'વર્ગખંડમાં માહિતી',
-  'gru-tour.overview.stepFour.description':
-    'અહીં તમે તમારા વર્ગખંડના નામને સંપાદિત કરી શકો છો, તમારા વિદ્યાર્થીઓ માટે ઘોષણાઓ પોસ્ટ કરી શકો છો, તમારા વર્ગમાં નોંધાયેલા વિદ્યાર્થીઓના નામ જોઈ શકો છો અને તમારા વર્ગખંડને કાઢી શકો છો.',
-  'gru-tour.overview.stepFive.title': 'તમારી કોર્સ સામગ્રી સંપાદન',
-  'gru-tour.overview.stepFive.description':
-    'જ્યારે તમે વર્ગખંડમાં હોવ ત્યારે, તમારા વિદ્યાર્થીઓને અસાઇન કરેલ કોઈ પણ સામગ્રી સામગ્રીને સંપાદિત કરવા માટે અહીં ક્લિક કરો.',
-  'gru-tour.overview.stepSix.title': 'વાસ્તવિક સમય માં મોનીટર પ્રગતિ!',
-  'gru-tour.overview.stepSix.description':
-    'રીઅલ-ટાઇમમાં મૂલ્યાંકન પર વર્ગ પ્રગતિની દેખરેખ રાખવા માટે રીઅલ-ટાઇમ ડેશબોર્ડનો ઉપયોગ કરો. [1] [2] વિદ્યાર્થીઓ માટે રીઅલ-ટાઇમ મૂલ્યાંકન શરૂ કરવા માટે દરેક મૂલ્યાંકનની ડાબી બાજુએ  "જીવંત જાઓ " આયકન પર ક્લિક કરો. . [3] [4] <i class =  "real-time-icon ">',
-  'gru-tour.quick-start.stepOne.title': 'તમારા વર્ગખંડ શોધખોળ',
-  'gru-tour.quick-start.stepOne.description':
-    'આ નવા બનાવેલ વર્ગખંડનો દૃષ્ટિકોણ છે. કોઈપણ સમયે વર્ગખંડમાં પાછા જવા માટે,  "વર્ગખંડ " પર ક્લિક કરો અને તમે જે વર્ગખંડ દાખલ કરવા માંગો છો તે પસંદ કરવા માટે ડ્રોપ ડાઉન મેનૂનો ઉપયોગ કરો.',
-  'gru-tour.quick-start.stepTwo.title': 'શરૂ કરી રહ્યા છીએ? આકારણી બનાવો!',
-  'gru-tour.quick-start.stepTwo.description':
-    'અમે ગુરુ સાથે પ્રારંભ કરવા અને તમારા વર્ગમાં વિદ્યાર્થી સમજણના વર્તમાન સ્તરનું મૂલ્યાંકન કરવાના માર્ગ તરીકે મૂલ્યાંકન બનાવવાનું સૂચન કરીએ છીએ.',
-  'gru-tour.real-time.stepOne.title': 'પ્રતિક્રિયાઓ ભંગ',
-  'gru-tour.real-time.stepOne.description':
-    'વિદ્યાર્થીઓએ કેવી રીતે જવાબ આપ્યો તેનો ભંગ જોવા માટે દરેક પ્રશ્ન પર ક્લિક કરો.',
-  'gru-tour.real-time.stepTwo.title': 'વ્યક્તિગત વિદ્યાર્થી માહિતી',
-  'gru-tour.real-time.stepTwo.description':
-    'વ્યક્તિગત વિદ્યાર્થી ડેટા રિપોર્ટ્સ જોવા માટે દરેક વિદ્યાર્થી ટાઇલ પસંદ કરો.',
-  'gru-tour.real-time.stepThree.title': 'દૃશ્ય પસંદ કરો',
-  'gru-tour.real-time.stepThree.description':
-    'ડેટા પ્રદર્શિત કરવા માટે વિકલ્પો જોવા માટે  "શીર્ષક દૃશ્ય " અથવા  "સૂચિ દૃશ્ય " પસંદ કરો.',
+  'gru-take-tour.profile.stepFour.description': 'ધ્યેય તમારા લર્નિંગ માઈલસ્ટોનને પૂરા કરવા માટે ગોલ બનાવો અને તેને ટ્રેક કરતાં રહો.',
+  'gru-take-tour.profile.stepFive.title': 'ફોલોઅર્સ',
+  'gru-take-tour.profile.stepFive.description': 'જો તમને કોઈનું કન્ટેન્ટ ગમતું હોય તો તમે તેને ફોલો કરી શકો છો. તમે એ પણ જોઈ શકો છો કે તમને કોણ ફોલો આઇ રહ્યું છે.',
+  'gru-take-tour.profile.stepSix.title': 'ચંદ્રક',
+  'gru-take-tour.profile.stepSix.description': 'તમને મળેલા ચંદ્રકૌ ની સમીક્ષા કરો. જો તમે તમારા શિક્ષક દ્વારા અપાવામાં આવેલા બેંચમાર્ક અસાઈમેન્ટ પૂરા કરો છો તો તમને ચંદ્રક મળે છે.',
+  'gru-tour.assessments-settings.stepOne.title': 'નેવિગેશન અને સ્કોરીંગ',
+  'gru-tour.assessments-settings.stepOne.description': 'આ સેટીંગ્સ નક્કી કરે છે કે વિદ્યાર્થીઓએ તેમના અસેસમેન્ટમાં કેવીરીતે આગળ વધશે અને જોઈ શકેશે કે તેઓ સાચા કે ખોટા છે. તે તેમને આન્સર કી દર્શાવશે નહી.',
+  'gru-tour.assessments-settings.stepTwo.title': 'આન્સર કી અને પ્રયાસના નંબર',
+  'gru-tour.assessments-settings.stepTwo.description': 'આ સેટીંગ આન્સર કી દર્શાવે છે અને બતાવે છે કે વિદ્યાર્થીઓએ અસેસમેન્ટ માટે કેટલા પ્રયાસ કર્યા છે.',
+  'gru-tour.overview.stepOne.title': 'કોર્ષ મેપ',
+  'gru-tour.overview.stepOne.description': 'કોર્સમેપ તમારા વિદ્યાર્થીઓને તમામ અસેસમેન્ટ અને કલેક્શન નો એક્સેસ આપે છે જે તમારા દ્વારા તેમણે આપવામાં આવ્યા હોય.',
+  'gru-tour.overview.stepTwo.title': 'ક્લાસ કોડ',
+  'gru-tour.overview.stepTwo.description': 'દરેક ક્લાસરૂમ  જે મે બનાવો છો તે એક અનોખો ક્લાસ કોડ ધરાવે છે. તમે આ કોડ વિદ્યાર્થીઓને આપશો',
+  'gru-tour.overview.stepThree.title': 'ક્લાસ અને વિદ્યાર્થીઓનો ડેટા મોનીટર કરો.',
+  'gru-tour.overview.stepThree.description': 'આમ કરવાથી તમે કલાસ અને દરેક વિદ્યાર્થીના અસેસમેન્ટા ડેટાને જોઈ શકશો જ્યારે વિદ્યાર્થી કોર્સના ભાગરુંપે અસાઈમેન્ટ પૂરા કરી દેશે.',
+  'gru-tour.overview.stepFour.title': 'ક્લાસરૂમ માહીતી',
+  'gru-tour.overview.stepFour.description': 'અંહી તમે તમારા ક્લાસરૂમનું નામ એદીત કરી શકો છો, તમારા વિદ્યાર્થીઓ માટે એનાઉંસમેન્ટ કરી શકો છો. તમારા ક્લાસમાં જોડાયેલા વિદ્યાર્થીઓના નામ જોઇ શકો છો અને તમારા ક્લાસરૂમને ડીલીટ કરી શકો છો.',
+  'gru-tour.overview.stepFive.title': 'તમારા કોર્સ કન્ટેન્ટને એડીટ કરો.',
+  'gru-tour.overview.stepFive.description': 'જ્યારે તમે ક્લાસ રૂમમાં હો ત્યારે વિદ્યાર્થીઓને અપાયેલ કોઈપણ કોર્સ કન્ટેન્ટ ને એડીટ કરવા માટે અંહી ક્લિક કરો.',
+  'gru-tour.overview.stepSix.title': 'પ્રોગેસને રીઅલ ટાઈમમાં જુઓ',
+  'gru-tour.overview.stepSix.description': 'રીયલટાઈમ ડેશબોર્ડ નો ઉપયોગ કરી ને ક્લાસના પ્રોગ્રેસને મોનીટર કરો અને અસેસમેન્ટને રીઅલ ટાઈમમાં જુઓ. <br><br> દરેક અસેસમેન્ટની ડાબી બાજુ આપેલા "Go Live" આઈકાન પર ક્લિક કરો અને વિદ્યાર્થીઓ માટે રીઅલ ટાઈમ અસેસમેન્ટ લોંચ કરો.',
+  'gru-tour.quick-start.stepOne.title': 'તમારા ક્લાસરૂમને નેવીગેટ કરો.',
+  'gru-tour.quick-start.stepOne.description': 'આ નવા બનાવાયેલા ક્લાસરૂમનો વ્યૂ છે. કોઈપણા સમયે ક્લાસરૂમ પર પાછા જાવા માટે "Classrooms" પર ક્લિક કરો અને જો તમે તેમાં જોડાવા ઇચ્છતા હો તો ડ્રોપ ડાઉન મેનૂ માંથી ક્લાસરૂમ સિલેકટ કરો.',
+  'gru-tour.quick-start.stepTwo.title': 'શરૂ આ જઈ રહ્યા છો? અસેસમેન્ટ બનાવો!',
+  'gru-tour.quick-start.stepTwo.description': 'અમે સૂચવવા માંગીએ છીએ કે અસેસમેન્ટ બનાવવા એ ગુરુ સાથે શરૂ કરવા માટે અને ક્લાસના વિદ્યાર્થીઓના લેવલ સમજવા માટેનો સારો રસ્તો છે.',
+  'gru-tour.real-time.stepOne.title': 'જવાબોને વર્ગીકૃત કરો.',
+  'gru-tour.real-time.stepOne.description': 'વિદ્યાર્થી ઑ એ કઈ રીતે જવાબા આપ્યો છે તેનું વર્ગીકરણ જોવા દરેક પ્રશ્ન પર ક્લિક કરો.',
+  'gru-tour.real-time.stepTwo.title': 'યક્તિગત વિદ્યાર્થી ડેટા',
+  'gru-tour.real-time.stepTwo.description': 'દરેક વિદ્યાર્થીનો વ્યક્તિગત ડેટા જોવા દરેક વિદ્યાર્થીના ના, પર ક્લિક કરો/',
+  'gru-tour.real-time.stepThree.title': 'વ્યૂ સિલેક્ટ કરો',
+  'gru-tour.real-time.stepThree.description': 'ડેટા જોવા માટેના વિકલ્પ જોવા માટે "title view" or "list view"  સિલેક્ટ કરો',
   'gru-tour.real-time.stepFour.title': 'સરેરાશ સ્કોર',
   'gru-tour.real-time.stepFour.description':
     'બધા જવાબો માટે રીઅલ-ટાઇમમાં ગણતરી કરેલ ક્લાસ એવરેજ જુઓ.',

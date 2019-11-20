@@ -11,6 +11,7 @@
     padding-left: 16px;
     overflow: hidden;
     height: calc(90vh - 100px);
+    overflow-y: auto;
 
     .title {
       font-weight: bold;

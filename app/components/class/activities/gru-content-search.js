@@ -43,7 +43,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
     onSelectContentSource(contentSource) {
       const component = this;
       component.set('activeContentSource', contentSource.get('value'));
+      let isShowContentSelector = true;
+      let contentSearchTerm = component.get('contentSearchTerm');
       if (contentSource.get('value') === 'tenant-library') {
+        isShowContentSelector = false;
+        contentSearchTerm = null;
         component.loadTenantLibraries();
       } else if (
         contentSource.get('value') === 'my-content' ||
@@ -51,8 +55,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
       ) {
         component.loadCotents();
       } else {
+        contentSearchTerm = null;
+        isShowContentSelector = false;
         component.sendAction('onShowLessonPlan');
       }
+      component.set('contentSearchTerm', contentSearchTerm);
+      component.set('isShowContentSelector', isShowContentSelector);
     },
 
     onSelectContentType(contentType) {
@@ -71,6 +79,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
       component.loadCotents();
     }
   },
+
+  isShowContentSelector: true,
 
   isFilterEnabled: Ember.computed.alias(
     'configuration.GRU_FEATURE_FLAG.searchFilter'

@@ -100,9 +100,6 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
     // in order to avoid the conflict.
 
     let navigateMapService = route.get('navigateMapService');
-    navigateMapService
-      .getLocalStorage()
-      .removeItem(navigateMapService.generateKey());
 
     //Removed stored mastered competencies to avoid conflict in proficiency chart rendering
     navigateMapService

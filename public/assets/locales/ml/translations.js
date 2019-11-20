@@ -1459,22 +1459,16 @@ window.i18ln = {
   'teacher-landing.class.class-settings.origin': 'ഉത്ഭവം',
   'teacher-landing.class.class-settings.destination': 'ഉദ്ദിഷ്ടസ്ഥാനം',
   'teacher-landing.class.class-settings.students': 'വിദ്യാർത്ഥികൾ',
-  'teacher-landing.class.class-settings.student-id': 'വിദ്യാർത്ഥി-ഐഡി',
-  'teacher-landing.class.class-settings.joined-on': 'ചേർന്നു',
-  'teacher-landing.class.class-settings.action-lable-add-student':
-    'മറ്റൊരു വിദ്യാർത്ഥിയെ ചേർക്കുക',
-  'teacher-landing.no-classrooms':
-    'നിങ്ങൾ ഇതുവരെ ക്ലാസ്മുറികളൊന്നും സൃഷ്ടിച്ചിട്ടില്ല. ലൈബ്രറി ടാബിൽ "തിരഞ്ഞെടുത്ത ക്ലാസ്റൂം" ക്ലിക്കുചെയ്യുക അല്ലെങ്കിൽ ഒരു തിരഞ്ഞെടുത്ത കോഴ്സിന് [1] തിരയുക.',
-  'teacher-landing.no-course':
-    'നിങ്ങൾ ഈ [1] ക്ലാസ്മുറിയിലേയ്ക്ക് ഒരു കോഴ്സ് നൽകിയിട്ടില്ല.',
-  'teacher-landing.teach': 'ഒരു കോറസ് ക്ലാസ്റൂം പഠിപ്പിക്കുക',
-  'teacher-landing.welcome-course-map':
-    'ഇത് നിങ്ങളുടെ കോഴ്സ് മാപ്പാണ്, അവിടെ നിങ്ങൾക്ക് കോഴ്സ് ഉള്ളടക്കം കാണാൻ കഴിയും, അസെസ്മെന്റുകൾ ഓണാക്കുക അല്ലെങ്കിൽ ഓഫ് ചെയ്ത് തത്സമയം അസെസ്മെന്റുകൾ ആരംഭിക്കുക. നിങ്ങൾക്ക് മൊത്തം ക്ലാസ് പ്രകടനവും പൂർത്തീകരണം കാണാനാകും. ക്ലാസ് പ്രകടനത്തിന്റെ വിശദമായ കാഴ്ചയ്ക്കായി, നിങ്ങളുടെ ക്ലാസ്റൂമിലെ റിപ്പോർട്ട് ടാബ് സന്ദർശിക്കുക.',
-  'teacher-landing.welcome-rescoped-course-map':
-    'ക്ലാസിൽ ഓരോ വിദ്യാർത്ഥിക്കും ഈ കോഴ്സിനു വ്യക്തിപരമാക്കുകയും ചെയ്തു. വിദ്യാർത്ഥിയുടെ \'s പഠന പാത്ത്വേ ( "-> ") ക്ലിക്ക് ചെയ്ത് ക്ലാസ് മാനേജ്മെൻറ് പേജിൽ ഓരോ വിദ്യാർത്ഥിയുടെ കോഴ്സ് മാപ്പും കാണാൻ കഴിയും.',
-  'teacher-landing.welcome-premium-course-map':
-    'ഈ നാവിഗേറ്റർ കോഴ്സ് ഒന്നിലധികം ഗ്രേഡുകളിൽ നിലവാരത്തെ ഉൾക്കൊള്ളുന്ന വ്യക്തിഗത കോഴ്സാണ്. ഓരോ വിദ്യാർത്ഥിക്കും വിടവ് നികത്താനും, ആശയങ്ങളെ ശക്തിപ്പെടുത്താനും, അവരുടെ പഠനത്തെ ത്വരിതപ്പെടുത്തുന്നതിനും സഹായിക്കുന്ന ഒരു അദ്വിതീയ കോഴ്സാണ് നൽകുന്നത്. വ്യക്തിഗതമാക്കിയ യാത്രാമാർഗ്ഗങ്ങൾ രൂപകൽപ്പന ചെയ്യപ്പെടുന്നു, ഓരോ വിദ്യാർത്ഥികളുടെയും പഠന ശേഷി പരമാവധിയാക്കാനും അവരുടെ സെറ്റ് ഡെസ്റ്റിനേഷനിലേക്ക് നാവിഗേറ്റുചെയ്യാനും വിദ്യാർത്ഥികൾ യഥാ സമയം വീണ്ടും രൂപത്തിൽ എത്തിച്ചേരുന്നു.',
-  'goals.manage.title': 'എന്റെ ലക്ഷ്യങ്ങൾ!',
+  'teacher-landing.class.class-settings.student-id': 'വിദ്യാർത്ഥി ഐഡി',
+  'teacher-landing.class.class-settings.joined-on': 'എന്നതിൽ ചേർന്നു',
+  'teacher-landing.class.class-settings.action-lable-add-student': 'മറ്റൊരു വിദ്യാർത്ഥിയെ ചേർക്കുക',
+  'teacher-landing.no-classrooms': 'നിങ്ങൾ ക്ലാസ്റൂമുകളൊന്നും സൃഷ്‍ടിച്ചിട്ടില്ല. ക്ലാസ്റൂം സൃഷ്ടിക്കുക എന്നതിൽ ക്ലിക്ക് ചെയ്യുക അല്ലെങ്കിൽ ലൈബ്രറി ടാബിൽ ഫീച്ചർ ചെയ്‍ത കോഴ്‍സുകൾക്കായി തിരയുക </br>.',
+  'teacher-landing.no-course': 'ഈ </br>ക്ലാസ്റൂമിലേക്ക് ഇതുവരെ കോഴ്‌സൊന്നും നിങ്ങൾ അസൈൻ ചെയ്‍തിട്ടില്ല.',
+  'teacher-landing.teach': 'Gooru ക്ലാസ്റൂം ഉപയോഗിച്ച് പഠിപ്പിക്കുക.',
+  'teacher-landing.welcome-course-map': 'നിങ്ങൾക്ക് കോഴ്‍സിന്‍റെ ഉള്ളടക്കം കാണാവുന്ന കോഴ്‍സ് മാപ്പാണിത്. ഇതിൽ നിങ്ങൾക്ക് മൂല്യനിർണ്ണയങ്ങൾ ഓഫാക്കാനും ഓണാക്കാനും, അവ ലോഞ്ച് ചെയ്യാനുമൊക്കെ കഴിയും. മൊത്തത്തിലുള്ള ക്ലാസിന്‍റെ പ്രകടനവും പൂർത്തീകരണവും ഇതിൽ കാണാനാവും. ക്ലാസ് പ്രകടനത്തിന്‍റെ വിശദമായ കാഴ്ച്ചയ്ക്കായ, നിങ്ങളുടെ ക്ലാസ്റൂമിന്‍റെ റിപ്പോർട്ട് ടാബ് സന്ദർശിക്കുക.',
+  'teacher-landing.welcome-rescoped-course-map': 'ക്ലാസിലെ ഓരോ വിദ്യാർത്ഥിയ്ക്കായും വ്യക്തിപരമാക്കിയതാണ് ഈ കോഴ്‌സ്. വിദ്യാർത്ഥിയുടെ പഠന പാതയിൽ ("->") ക്ലിക്ക് ചെയ്‌ത് ക്ലാസ് മാനേജ്മെന്‍റ് പേജിൽ ഓരോ വിദ്യാർത്ഥിയുടെയും കോഴ്‌സ് മാപ്പ് നിങ്ങൾക്ക് കാണാം',
+  'teacher-landing.welcome-premium-course-map': 'ഒന്നിലധികം ഗ്രേഡുകൾക്കായി, വ്യക്തിപരമാക്കിയ, കോഴ്‍സ് കവറിംഗ് സ്റ്റാൻഡേർഡ്‍സാണ് നാവിഗേറ്റർ കോഴ്‍സ്. ഓരോ വിദ്യാർത്ഥിക്കും അവരുടെ ഗ്യാപ്പുകൾ ഫിൽ ചെയ്യാനും, കോൺസെപ്റ്റുകളും പ്രാക്റ്റീസുകളും ഊട്ടിയുറപ്പിക്കാനും, പഠനം ആക്‌സിലറേറ്റ് ചെയ്യാനും കഴിയുന്ന തരത്തിൽ തനതായ കോഴ്‌സ് നൽകും. വ്യക്തിപരമാക്കിയ റൂട്ടുകൾ ഡിസൈൻ ചെയ്തതാണ്, തൽക്ഷണം വിദ്യാർത്ഥികളെ പ്രതീക്ഷിക്കാത്ത വഴികളിലൂടെ കയറ്റി വിടുകയും അവരുടെ പഠന കഴിവുകളെ പരമാവധി വർദ്ധിപ്പിക്കുകയും അവരുടെ നിശ്ചിത ലക്ഷ്യത്തിലേക്ക് നാവിഗേറ്റ് ചെയ്യുകയും ചെയ്യുന്നു.',
+  'goals.manage.title': 'എന്‍റെ ലക്ഷ്യങ്ങൾ!',
   'goals.manage.add-goal': 'ലക്ഷ്യം ചേർക്കുക',
   'goals.manage.goal-label': 'ലക്ഷ്യം',
   'goals.manage.start-date-label': 'തുടങ്ങുന്ന ദിവസം',
@@ -1682,25 +1676,20 @@ window.i18ln = {
   'sign-up.dateOfBirth.year': 'വർഷം',
   'sign-up.dateOfBirth.error-message': 'ദയവായി നിങ്ങളുടെ ജനനത്തീയതി നൽകുക.',
   'sign-up.email': 'ഇമെയിൽ',
-  'sign-up.password': 'password',
-  'sign-up.rePassword': 'പാസ്വേഡ് സ്ഥിരീകരിക്കുക',
-  'sign-up.state': 'സംസ്ഥാനം അല്ലെങ്കിൽ പ്രദേശം',
-  'sign-up.district': 'ജില്ലാ അല്ലെങ്കിൽ ചാർട്ടർ ഓർഗനൈസേഷൻ',
-  'sign-up.error-username-taken':
-    'എല്ലാം, ഈ ഉപയോക്തൃനാമം സ്വീകരിച്ചിരിക്കുന്നു. മറ്റൊന്ന് പരീക്ഷിക്കുക.',
-  'sign-up.error-email-taken': 'ഈ ഇമെയിൽ എടുത്തതാണ്. മറ്റൊന്ന് പരീക്ഷിക്കുക.',
-  'sign-up.error-role-message': 'ദയവായി ഒരു റോൾ തിരഞ്ഞെടുക്കുക.',
-  'sign-up.error-country-message': 'ദയവായി നിങ്ങളുടെ രാജ്യം തിരഞ്ഞെടുക്കൂ.',
-  'sign-up.error-state-message':
-    'നിങ്ങളുടെ സംസ്ഥാനമോ പ്രദേശമോ ദയവായി തിരഞ്ഞെടുക്കുക.',
-  'sign-up.error-district-message':
-    'പട്ടികയിൽ നിന്ന് നിങ്ങളുടെ ജില്ലാ / ചാർട്ടർ തിരഞ്ഞെടുക്കുക അല്ലെങ്കിൽ  "other " ൽ നൽകുക.',
-  'gru-user-sign-up-cancel.title': 'രജിസ്ട്രേഷൻ ഉപേക്ഷിക്കണോ?',
-  'gru-user-sign-up-cancel.exit?':
-    'തങ്കള് ഉറപ്പായും പുറത്തു പോവാന് ആഗ്രഹിക്കുന്നോ?',
-  'gru-user-sign-up-cancel.registration_incomplete':
-    'നിങ്ങളുടെ രജിസ്ട്രേഷൻ പൂർത്തിയായില്ല.',
-  'gru-user-sign-up-cancel.leave': 'രജിസ്ട്രേഷൻ ഉപേക്ഷിക്കുക',
+  'sign-up.password': 'പാസ്‍വേഡ്',
+  'sign-up.rePassword': 'പാസ്‍വേഡ് സ്ഥിരീകരിക്കുക',
+  'sign-up.state': 'സംസ്ഥാനമോ പ്രദേശമോ',
+  'sign-up.district': 'ജില്ല അല്ലെങ്കിൽ ചാർട്ടർ സംഘടന',
+  'sign-up.error-username-taken': 'കഷ്ടം, ഈ ഉപയോക്തൃനാമം മറ്റാരോ എടുത്തു. മറ്റൊന്ന് പരീക്ഷിക്കുക.',
+  'sign-up.error-email-taken': 'ഈ ഇമെയിൽ ആരോ എടുത്തു. മറ്റൊന്ന് പരീക്ഷിക്കുക.',
+  'sign-up.error-role-message': 'ഒരു റോൾ തിരഞ്ഞെടുക്കുക.',
+  'sign-up.error-country-message': 'നിങ്ങളുടെ രാജ്യം തിരഞ്ഞെടുക്കുക.',
+  'sign-up.error-state-message': 'നിങ്ങളുടെ സംസ്ഥാനമോ പ്രദേശമോ തിരഞ്ഞെടുക്കുക.',
+  'sign-up.error-district-message': 'ഈ ലിസ്റ്റിൽ നിന്ന് നിങ്ങളുടെ ജില്ല/കാർട്ടർ തിരഞ്ഞെടുക്കുക അല്ലെങ്കിൽ"Other" എന്നിടത് നൽകുക.',
+  'gru-user-sign-up-cancel.title': 'രജിസ്ട്രേഷനിൽ നിന്ന് പോകണോ?',
+  'gru-user-sign-up-cancel.exit?': 'പുറത്ത് കടക്കണമെന്ന് ഉറപ്പാണോ?',
+  'gru-user-sign-up-cancel.registration_incomplete': 'നിങ്ങളുടെ രജിസ്ട്രേഷൻ പൂർത്തിയായിട്ടില്ല',
+  'gru-user-sign-up-cancel.leave': 'രജിസ്ട്രേഷനിൽ നിന്ന് പോകുക',
   'gru-user-sign-up-cancel.continue': 'രജിസ്ട്രേഷൻ തുടരുക',
   'login.title': 'തിരികെ സ്വാഗതം!',
   'login.description': 'പഠനം ഏതാണ്ട് മൂലക്കല്ലാണ്.',
@@ -1827,57 +1816,40 @@ window.i18ln = {
   'gru-image-picker.restriction':
     'ചിത്രം 5 mb നേക്കാൾ ചെറുതായ jpg, gif അല്ലെങ്കിൽ png ഫയൽ ആയിരിക്കണം.',
   'gru-image-picker.submit': 'ചിത്രം ഉപയോഗിക്കുക',
-  'gru-fib.instructions':
-    'ദയവായി നിങ്ങളുടെ ഉത്തരം (കൾ) നൽകിയിരിക്കുന്ന ശൂന്യമായ (കള്) ടൈപ്പുചെയ്യുക, തുടർന്ന്  "{{action}} " ക്ലിക്കുചെയ്യുക.',
-  'gru-hs-image.instructions':
-    'ദയവായി ശരിയായ ചിത്രം (കൾ) തിരഞ്ഞെടുത്ത്  "{{action}} " ക്ലിക്കുചെയ്യുക.',
-  'gru-hs-text.instructions':
-    'ദയവായി ശരിയായ ഉത്തരം (കൾ) തിരഞ്ഞെടുത്ത്  "{{action}} " ക്ലിക്കുചെയ്യുക.',
-  'gru-hot-text.instructions':
-    'ദയവായി ശരിയായ ഉത്തരം തിരഞ്ഞെടുത്ത്  "{{action}} " ക്ലിക്കുചെയ്യുക.',
-  'gru-login-prompt.title': 'ഗോറുവിലേക്ക് സ്വാഗതം!',
-  'gru-login-prompt.instructions':
-    'ആ പ്രവർത്തനം പൂർത്തിയാക്കാൻ നിങ്ങൾ സൈൻ ഇൻ ചെയ്യേണ്ടതുണ്ട്.',
-  'gru-login-prompt.existing-user': 'ഇതിനകം ഒരു അക്കൗണ്ട് ഉണ്ടോ?',
-  'gru-login-prompt.new-user': 'ഇവിടെ പുതിയത്?',
-  'gru-login-prompt.not-now': 'ഇപ്പോൾ വേണ്ട',
-  'gru-login-prompt.sign-in': 'സൈൻ ഇൻ',
-  'gru-multiple-answer.instructions':
-    'ദയവായി ശരിയായ ഉത്തരം തിരഞ്ഞെടുത്ത്  "{{action}} " ക്ലിക്കുചെയ്യുക.',
-  'gru-multiple-choice.instructions':
-    'ദയവായി ശരിയായ ഉത്തരം തിരഞ്ഞെടുത്ത്  "{{action}} " ക്ലിക്കുചെയ്യുക.',
-  'gru-open-ended.instructions':
-    'ചുവടെയുള്ള ഫീൽഡിൽ നിങ്ങളുടെ ഉത്തരം ടൈപ്പുചെയ്യുക, തുടർന്ന് നിങ്ങൾ പൂർത്തിയാക്കിയപ്പോൾ നിങ്ങളുടെ പ്രതികരണം സംരക്ഷിക്കാൻ  "{{action}} " ബട്ടൺ ക്ലിക്കുചെയ്യുക.',
-  'gru-open-ended.characterLimit': 'പ്രതീക പരിധി',
+  'gru-fib.instructions': 'നിങ്ങളുടെ ഉത്തരം(ങ്ങൾ) ബ്ലാങ്കായ സ്ഥലത്ത് ടൈപ്പ് ചെയ്യുക, "{{action}}-ൽ ക്ലിക്ക് ചെയ്യുക.',
+  'gru-hs-image.instructions': 'ശരിയായ ചിത്രം(ങ്ങൾ) തിരഞ്ഞെടുത്ത ശേഷം  "{{action}}" എന്നതിൽ ക്ലിക്ക് ചെയ്യുക.',
+  'gru-hs-text.instructions': 'ശരിയായ ഉത്തരം(ങ്ങൾ) തിരഞ്ഞെടുത്ത ശേഷം  "{{action}}" എന്നതിൽ ക്ലിക്ക് ചെയ്യുക.',
+  'gru-hot-text.instructions': 'ശരിയായ ഉത്തരം തിരഞ്ഞെടുത്ത ശേഷം  "{{action}}" എന്നതിൽ ക്ലിക്ക് ചെയ്യുക.',
+  'gru-login-prompt.title': 'Gooru വിലേക്ക് സ്വാഗതം!',
+  'gru-login-prompt.instructions': 'ഈ നടപടി പൂർത്തിയാക്കാൻ നിങ്ങൾ സൈൻ ഇൻ ചെയ്യണം.',
+  'gru-login-prompt.existing-user': 'അക്കൌണ്ട് ഇപ്പോൾ തന്നെ ഉണ്ടോ?',
+  'gru-login-prompt.new-user': 'ഇവിടെ ആദ്യമായാണോ?',
+  'gru-login-prompt.not-now': 'ഇപ്പോൾ വേണ്ട',
+  'gru-login-prompt.sign-in': 'സൈൻ ഇൻ ചെയ്യുക',
+  'gru-multiple-answer.instructions': 'ശരിയായ ഉത്തരം തിരഞ്ഞെടുത്ത ശേഷം  "{{action}}" എന്നതിൽ ക്ലിക്ക് ചെയ്യുക.',
+  'gru-multiple-choice.instructions': 'ശരിയായ ഉത്തരം തിരഞ്ഞെടുത്ത ശേഷം  "{{action}}" എന്നതിൽ ക്ലിക്ക് ചെയ്യുക.',
+  'gru-open-ended.instructions': 'താഴെയുള്ള സ്ഥലത്ത് ഉത്തരം ടൈപ്പ് ചെയ്യുക, പൂർത്തിയായതിന് ശേഷം നിങ്ങളുടെ പ്രതികരണം സേവ് ചെയ്യുന്നതിനായി "{{action}}" ബട്ടൺ അമർത്തുക.',
+  'gru-open-ended.characterLimit': 'പ്രതീകങ്ങളുടെ എണ്ണം',
   'gru-question-viewer.answer': 'ഉത്തരം',
   'gru-question-viewer.question': 'ചോദ്യം',
-  'gru-true-false.instructions':
-    'ദയവായി ശരിയായ ഉത്തരം തിരഞ്ഞെടുത്ത്  "{{action}} " ക്ലിക്കുചെയ്യുക.',
+  'gru-true-false.instructions': 'ശരിയായ ഉത്തരം തിരഞ്ഞെടുത്ത ശേഷം  "{{action}}" എന്നതിൽ ക്ലിക്ക് ചെയ്യുക.',
   'gru-true-false.true': 'ശരി',
-  'gru-true-false.false': 'തെറ്റായ',
-  'gru-reorder.instructions':
-    'കൃത്യമായ ക്രമത്തിൽ ഉത്തരങ്ങൾ പുനഃക്രമീകരിക്കുക, തുടർന്ന്  "{{action}} " ക്ലിക്കുചെയ്യുക.',
-  'student-first-experience.preStudyTitle': '{{title}} നായുള്ള പ്രീ-പഠനം',
-  'student-first-experience.lp-compute-inprogress':
-    'We are computing your initial proficiency profile in {{title}}',
-  'student-first-experience.route0-action.accept': 'സ്വീകരിക്കൂ',
-  'student-first-experience.route0-action.ignore': 'അവഗണിക്കുക',
-  'student-first-experience.competency.popover.title': '{{title}} അതിർത്തി',
-  'student-first-experience.competency.popover.content':
-    'നിങ്ങളുടെ ലക്ഷ്യ സ്ഥാനത്തേക്കുള്ള നിങ്ങളുടെ ആകാശവാണിക്കും ഈ ഗ്രേഡ് ലൈനും തമ്മിലുള്ള എല്ലാ മാനദണ്ഡങ്ങളും നിങ്ങൾ പഠിക്കേണ്ടതുണ്ട്.',
-  'student-first-experience.assigned-course-title':
-    '{{title}} എന്നതിനായി നിയുക്ത കോഴ്സ്',
-  'student-first-experience.start-studying': 'Start Studying',
-  'student-first-experience.show-route': 'Show Route',
-  'student-first-experience.review-destination': 'Review Destination',
-  'student-first-experience.competency-level.title':
-    'നിങ്ങളുടെ പ്രൊഫിഷ്യൻസി പ്രൊഫൈൽ',
-  'student-first-experience.competency-level.mastery':
-    '{{count}} മാനദണ്ഡങ്ങൾ വികാസം പ്രാപിച്ചു',
-  'student-first-experience.competency-level.in-progress':
-    '{{count}} മാനദണ്ഡങ്ങൾ പുരോഗമിക്കുന്നു',
-  'student-first-experience.competency-level.not-started':
-    '{{count}} നിലവാരങ്ങൾ ആരംഭിച്ചിട്ടില്ല',
+  'gru-true-false.false': 'തെറ്റ്',
+  'gru-reorder.instructions': 'ഉത്തരങ്ങൾ ശരിയായ ക്രമത്തിൽ അടുക്കിയതിന് ശേഷം {{action}}" എന്നതിൽ ക്ലിക്ക് ചെയ്യുക.',
+  'student-first-experience.preStudyTitle': '{{title}} എന്നതിനുള്ള പ്രീ സ്റ്റഡി',
+  'student-first-experience.lp-compute-inprogress': '{{title}} എന്നതിലുള്ള നിങ്ങളുടെ ആദ്യത്തെ കാര്യക്ഷമതാ പ്രൊഫൈൽ ഞങ്ങൾ കംപ്യൂട്ട് ചെയ്യുകയാണ്',
+  'student-first-experience.route0-action.accept': 'അംഗീകരിക്കുക',
+  'student-first-experience.route0-action.ignore': 'തള്ളിക്കളയുക',
+  'student-first-experience.competency.popover.title': '{{title}} ഹൈലൈൻ',
+  'student-first-experience.competency.popover.content': 'നിങ്ങളുടെ ലക്ഷ്യത്തിലെത്താൻ നിങ്ങളുടെ സ്കൈലൈനിനും ഈ ഗ്രേഡിനും ഇടയിലുള്ള എല്ലാ സ്റ്റാൻഡേർഡുകളും നിങ്ങൾ പഠിക്കണം.',
+  'student-first-experience.assigned-course-title': '{{title}} എന്നതിനായി അസൈൻ ചെയ്‌ത കോഴ്‍സ്',
+  'student-first-experience.start-studying': 'പഠനം ആരംഭിക്കുക',
+  'student-first-experience.show-route': 'വഴി കാണിക്കുക',
+  'student-first-experience.review-destination': 'അവലോകന ലക്ഷ്യസ്ഥാനം',
+  'student-first-experience.competency-level.title': 'നിങ്ങളുടെ കാര്യക്ഷമതാ പ്രൊഫൈൽ',
+  'student-first-experience.competency-level.mastery': '{{count}} സ്റ്റാൻഡേർഡുകളിൽ വൈദഗ്ദ്ധ്യം നേടി',
+  'student-first-experience.competency-level.in-progress': '{{count}} സ്റ്റാൻഡേർഡുകൾ പുരോഗതിയിലാണ്',
+  'student-first-experience.competency-level.not-started': '{{count}} സ്റ്റാൻഡേർഡുകൾ തുടങ്ങിയിട്ടില്ല',
   'student-first-experience.competency-level.your-skyline': 'നിങ്ങളുടെ സ്കൈലൈൻ',
   'student-first-experience.explanatory.master.title': 'കഴിവുള്ളവൻ',
   'student-first-experience.explanatory.master.desc':
@@ -2403,31 +2375,21 @@ window.i18ln = {
   'gru-tour.overview.stepThree.description':
     'ഒരു കോഴ്സിന്റെ ഭാഗമായ വിദ്യാർത്ഥികളെ പൂർത്തിയാക്കാൻ വിദ്യാർത്ഥി ക്ലാസ്, വ്യക്തിഗത വിദ്യാർത്ഥി വിലയിരുത്തൽ ഡാറ്റ എന്നിവ കാണുന്നതിന് ഇത് അനുവദിക്കുന്നു.',
   'gru-tour.overview.stepFour.title': 'ക്ലാസ്റൂം വിവരം',
-  'gru-tour.overview.stepFour.description':
-    'ഇവിടെ നിങ്ങളുടെ ക്ലാസ്റൂം പേര് എഡിറ്റുചെയ്യാം, നിങ്ങളുടെ വിദ്യാർത്ഥികൾക്കുള്ള അറിയിപ്പുകൾ പോസ്റ്റ് ചെയ്യുക, നിങ്ങളുടെ ക്ലാസിൽ എൻറോൾ ചെയ്ത വിദ്യാർത്ഥികളുടെ പേരുകൾ കാണുക, നിങ്ങളുടെ ക്ലാസ്റൂം ഇല്ലാതാക്കുക.',
-  'gru-tour.overview.stepFive.title':
-    'നിങ്ങളുടെ കോഴ്സ് ഉള്ളടക്കം എഡിറ്റുചെയ്യുന്നു',
-  'gru-tour.overview.stepFive.description':
-    'നിങ്ങൾ ഒരു ക്ലാസ്റൂമിൽ ആയിരിക്കുമ്പോൾ, നിങ്ങളുടെ വിദ്യാർത്ഥികൾക്ക് നൽകിയിട്ടുള്ള കോഴ്സുകളുടെ ഏതെങ്കിലും ഉള്ളടക്കം എഡിറ്റുചെയ്യാൻ ഇവിടെ ക്ലിക്കുചെയ്യുക.',
-  'gru-tour.overview.stepSix.title': 'തത്സമയം പുരോഗതി നിരീക്ഷിക്കുക!',
-  'gru-tour.overview.stepSix.description':
-    'വിദ്യാർത്ഥികൾക്ക് തൽസമയ മൂല്യനിർണ്ണയം ആരംഭിക്കുന്നതിന് ഓരോ മൂല്യനിർണയത്തിന്റെയും ഇടതുവശത്തുള്ള  "തൽസമയ " ഐക്കണിൽ ക്ലിക്ക് ചെയ്യുക. [1] [2] . [3] [4] <i class =  "real-time-icon ">',
-  'gru-tour.quick-start.stepOne.title':
-    'നിങ്ങളുടെ ക്ലാസ്റൂമുകൾ നാവിഗേറ്റുചെയ്യുന്നു',
-  'gru-tour.quick-start.stepOne.description':
-    'ഇത് പുതുതായി സൃഷ്ടിച്ച ഒരു ക്ലാസ്റൂം ആണ്. ക്ലാസ്റൂമിലേക്ക് എത്താൻ നിങ്ങൾക്ക് എപ്പോൾ വേണമെങ്കിലും,  "ക്ലാസ്മുറികൾ " ക്ലിക്കുചെയ്ത് നിങ്ങൾ പ്രവേശിക്കാൻ ആഗ്രഹിക്കുന്ന ക്ലാസ്റൂം തിരഞ്ഞെടുക്കുന്നതിന് ഡ്രോപ്പ് ഡൗൺ മെനു ഉപയോഗിക്കുക.',
-  'gru-tour.quick-start.stepTwo.title': 'ആമുഖം? ഒരു വിലയിരുത്തൽ സൃഷ്ടിക്കുക!',
-  'gru-tour.quick-start.stepTwo.description':
-    'Gooru ഉപയോഗിച്ച് ആരംഭിക്കുന്നതിനുള്ള ഒരു മൂല്യനിർണ്ണയം സൃഷ്ടിക്കാനും നിങ്ങളുടെ ക്ലാസിലെ വിദ്യാർത്ഥി ഗ്രാഹ്യത്തിന്റെ നിലവിലെ നിലകളെ വിലയിരുത്താനും ഞങ്ങൾ നിർദ്ദേശിക്കുന്നു.',
-  'gru-tour.real-time.stepOne.title': 'പ്രതികരണങ്ങളുടെ തകർച്ച',
-  'gru-tour.real-time.stepOne.description':
-    'വിദ്യാർത്ഥികൾ എങ്ങനെ ഉത്തരം നൽകി എന്ന് വിശദീകരിക്കാൻ ഓരോ ചോദ്യത്തിലും ക്ലിക്ക് ചെയ്യുക.',
-  'gru-tour.real-time.stepTwo.title': 'വ്യക്തിഗത വിദ്യാർത്ഥിയുടെ ഡാറ്റ',
-  'gru-tour.real-time.stepTwo.description':
-    'വിദ്യാർത്ഥി ഡാറ്റ റിപ്പോർട്ടുകൾ കാണുന്നതിന് ഓരോ വിദ്യാർത്ഥി ടൈൽ തിരഞ്ഞെടുക്കുക.',
-  'gru-tour.real-time.stepThree.title': 'ഒരു കാഴ്ച തിരഞ്ഞെടുക്കുക',
-  'gru-tour.real-time.stepThree.description':
-    'ഡാറ്റ പ്രദർശിപ്പിക്കുന്നതിനുള്ള ഓപ്ഷനുകൾ കാണുന്നതിന്  "ശീർഷക കാഴ്ച " അല്ലെങ്കിൽ  "ലിസ്റ്റ് കാഴ്ച " തിരഞ്ഞെടുക്കുക.',
+  'gru-tour.overview.stepFour.description': 'ക്ലാസ്റൂം പേര് തിരുത്താനും, വിദ്യാർത്ഥികൾക്കായി പ്രഖ്യാപനങ്ങൾ പോസ്റ്റ് ചെയ്യാനും, ക്ലാസിൽ എൻറോൾ ചെയ്തിരിക്കുന്ന വിദ്യാർത്ഥികളുടെ പേരുകൾ കാണാനും, ക്ലാസ്റൂം ഇല്ലാതാക്കാനും നിങ്ങൾക്ക് ഈ സ്ഥലം ഉപയോഗിക്കാം.',
+  'gru-tour.overview.stepFive.title': 'നിങ്ങളുടെ കോഴ്‌സ് ഉള്ളടക്കം എഡിറ്റ് ചെയ്യുന്നു',
+  'gru-tour.overview.stepFive.description': 'ക്ലാസ്റൂമിൽ ആയിരിക്കുമ്പോൾ, വിദ്യാർത്ഥികൾക്ക് അസൈൻ ചെയ്‌തിരിക്കുന്ന കോഴ്‌സ് ഉള്ളടക്കങ്ങളിൽ ഏതെങ്കിലും തിരുത്താൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക.',
+  'gru-tour.overview.stepSix.title': 'തൽക്ഷണം പുരോഗതി നിരീക്ഷിക്കുക!',
+  'gru-tour.overview.stepSix.description': 'മൂല്യനിർണ്ണയത്തിലെ ക്ലാസ് പുരോഗതി തൽക്ഷണമായി അറിയാൻ തൽക്ഷണ ഡാഷ്ബോർഡ് ഉപയോഗിക്കുക.<br><br>',
+  'gru-tour.quick-start.stepOne.title': 'ക്ലാസ്റൂമുകൾ നാവിഗേറ്റ് ചെയ്യുന്നു',
+  'gru-tour.quick-start.stepOne.description': 'പുതുതായി സൃഷ്ടിച്ച ക്ലാസ്റൂം ഇങ്ങനെയായിരിക്കും കാണുന്നത്. ഏത് സമയത്തും ക്ലാസ്റൂമിലേക്ക് മടങ്ങി വരാൻ, "ക്ലാസ്റൂമുകൾ" എന്നതിൽ ക്ലിക്ക് ചെയ്യുക അതിന് ശേഷം ഡ്രോപ്പ്ഡൌൺ മെനുവിൽ നിന്ന് ചേരേണ്ട ക്ലാസ്റൂം തിരഞ്ഞെടുക്കുക.',
+  'gru-tour.quick-start.stepTwo.title': 'ആരംഭിക്കുകയാണോ? മൂല്യനിർണ്ണയം സൃഷ്ടിക്കുക!',
+  'gru-tour.quick-start.stepTwo.description': 'Gooru വിൽ തുടങ്ങുന്നതിന്‍റെ ഭാഗമായി ഒരു മൂല്യനിർണ്ണയം സൃഷ്ടിക്കാൻ ഞങ്ങൾ ശുപാർശ ചെയ്യുന്നു, ക്ലാസിലെ വിദ്യാർത്ഥികൾ കാര്യങ്ങൾ എത്രമാത്രം മനസ്സിലാക്കുന്നുണ്ട് എന്ന് അറിയുക.',
+  'gru-tour.real-time.stepOne.title': 'പ്രതികരണങ്ങളുടെ ബ്രേക്ക്ഡൌൺ',
+  'gru-tour.real-time.stepOne.description': 'കുട്ടികൾ എങ്ങനെ ഉത്തരം നൽകിയെന്നതിന്‍റെ വിശദാംശങ്ങൾ കാണാൻ ഓരോ ചോദ്യത്തിലും ക്ലിക്ക് ചെയ്യുക.',
+  'gru-tour.real-time.stepTwo.title': 'വിദ്യാർത്ഥിയുടെ വ്യക്തിഗത ഡാറ്റ',
+  'gru-tour.real-time.stepTwo.description': 'വിദ്യാർത്ഥികളുടെ വ്യക്തിഗത ഡാറ്റാ റിപ്പോർട്ടുകൾ കാണാൻ ഓരോ വിദ്യാർത്ഥി ടൈലും തിരഞ്ഞെടുക്കുക.',
+  'gru-tour.real-time.stepThree.title': 'ഒരു കാഴ്‍ച്ച തിരഞ്ഞെടുക്കുക',
+  'gru-tour.real-time.stepThree.description': 'ഡാറ്റ പ്രദർശിപ്പിക്കാനുള്ള ഓപ്ഷനുകൾ കാണാൻ "title view" അല്ലെങ്കിൽ "list view" തിരഞ്ഞെടുക്കുക.',
   'gru-tour.real-time.stepFour.title': 'ശരാശരി സ്കോർ',
   'gru-tour.real-time.stepFour.description':
     'എല്ലാ പ്രതികരണങ്ങൾക്കും തത്സമയം കണക്കാക്കിയ ക്ലാസ്സ് ശരാശരി കാണുക.',

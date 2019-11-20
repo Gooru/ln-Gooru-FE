@@ -81,5 +81,14 @@
         }
       }
     }
+
+    &.disable-content-selector {
+      .content-source-container {
+        border: none;
+      }
+      .content-selector-container {
+        display: none;
+      }
+    }
   }
 }

@@ -1465,12 +1465,9 @@ window.i18ln = {
   'teacher-landing.no-course':
     'Todavía no has asignado un curso a esta </br> clase',
   'teacher-landing.teach': 'Enseña con una clase Gooru',
-  'teacher-landing.welcome-course-map':
-    'Este es tu mapa de Curso en el cual puedes ver el contenido del curso, ver las evaluaciones activas o inactivas y realizar evaluaciones en tiempo real. También puedes ver el desempeño global de la clase y finalización. Para una mirada más detallada del desempeño de la clase, visita la pestaña de Informe de tu clase.',
-  'teacher-landing.welcome-rescoped-course-map':
-    'Este curso ha sido personalizado para cada estudiante en la clase. Puedes ver el Mapa de Cursos del estudiante en la página de Administración de Clase haciendo click en la ruta de aprendizaje del estudiante. ("->")',
-  'teacher-landing.welcome-premium-course-map':
-    'Este curso de Navegador es un curso personalizado que cubre los estándares a través de múltiples grados. A cada estudiante se le brinda un curso único para ayudar a llenar las brecha, reforzar conceptos y prácticas y acelerar el aprendizaje. Se diseñan rutas personalizadas y los estudiantes son redirigidos en tiempo real para maximizar el potencial de aprendizaje de cada estudiante y navegar hacia su destino.',
+  'teacher-landing.welcome-course-map': 'Este es tu mapa de Curso en el cual puedes ver el contenido del curso, ver las evaluaciones activas o inactivas y realizar evaluaciones en tiempo real. También puedes ver el desempeño global de la clase y finalización. Para una mirada más detallada del desempeño de la clase, visita la pestaña de Informe de tu clase.',
+  'teacher-landing.welcome-rescoped-course-map': 'Este curso ha sido personalizado para cada estudiante en la clase. Puedes ver el Mapa de Cursos del estudiante en la página de Administración de Clase haciendo click en la ruta de aprendizaje del estudiante. ("->")',
+  'teacher-landing.welcome-premium-course-map': 'Este curso de Navegador es un curso personalizado que cubre los estándares a través de múltiples grados. A cada estudiante se le brinda un curso único para ayudar a llenar las brecha, reforzar conceptos y prácticas y acelerar el aprendizaje. Se diseñan rutas personalizadas y los estudiantes son redirigidos en tiempo real para maximizar el potencial de aprendizaje de cada estudiante y navegar hacia su destino.',
   'goals.manage.title': '¡Mis Metas!',
   'goals.manage.add-goal': 'Agregar meta',
   'goals.manage.goal-label': 'Meta',
@@ -1485,8 +1482,7 @@ window.i18ln = {
   'goals.manage.reflection-label': 'Reflexión',
   'goals.manage.save': 'Guardar',
   'goals.manage.update': 'Actualizar',
-  'goals.manage.goals-not-found':
-    'Todavía no te has propuesto metas. Puedes agregar metas al hacer click en en el botón de arriba  "Agregar Meta"',
+  'goals.manage.goals-not-found': 'Todavía no te has propuesto metas. Puedes agregar metas al hacer click en en el botón de arriba  "Agregar Meta"',
   'goals.create.error-add-title': 'Por favor ingrese la meta',
   'goals.create.error-length-title':
     'La meta no puede exceder los 200 caracteres',
@@ -1691,8 +1687,7 @@ window.i18ln = {
   'sign-up.error-role-message': 'Por favor selecciona un rol.',
   'sign-up.error-country-message': 'Por favor selecciona tu país.',
   'sign-up.error-state-message': 'Por favor selecciona tu estado o territorio.',
-  'sign-up.error-district-message':
-    'Por favor selecciona tu distrito/carta de la lista o ingresarlo en "Otros".',
+  'sign-up.error-district-message': 'Por favor selecciona tu distrito/carta de la lista o ingresarlo en "Otros".',
   'gru-user-sign-up-cancel.title': '¿Abandonar Registro?',
   'gru-user-sign-up-cancel.exit?': '¿Seguro que quieres abandonar?',
   'gru-user-sign-up-cancel.registration_incomplete':
@@ -1824,14 +1819,10 @@ window.i18ln = {
   'gru-image-picker.restriction':
     'La imagen debe ser un archivo JPG, GIF o PNG menor a 5MB.',
   'gru-image-picker.submit': 'Usar imagen.',
-  'gru-fib.instructions':
-    'Por favor ingresa tu(s) respuesta(s) en los espacios en blanco, y haz click en "{{action}}".',
-  'gru-hs-image.instructions':
-    'Por favor selecciona la(s) imagen(es) correcta(s) y haz click en "{{action}}".',
-  'gru-hs-text.instructions':
-    'Por favor selecciona la(s) respuesta(s) correcta(s) y haz click en "{{action}}".',
-  'gru-hot-text.instructions':
-    'Por favor selecciona la respuesta correcta y haz click en "{{action}}".',
+  'gru-fib.instructions': 'Por favor ingresa tu(s) respuesta(s) en los espacios en blanco, y haz click en "{{action}}".',
+  'gru-hs-image.instructions': 'Por favor selecciona la(s) imagen(es) correcta(s) y haz click en "{{action}}".',
+  'gru-hs-text.instructions': 'Por favor selecciona la(s) respuesta(s) correcta(s) y haz click en "{{action}}".',
+  'gru-hot-text.instructions': 'Por favor selecciona la respuesta correcta y haz click en "{{action}}".',
   'gru-login-prompt.title': '¡Bienvenido a Gooru!',
   'gru-login-prompt.instructions':
     'Debes iniciar sesión para completar esa acción.',
@@ -1839,25 +1830,18 @@ window.i18ln = {
   'gru-login-prompt.new-user': '¿Eres nuevo aquí?',
   'gru-login-prompt.not-now': 'Ahora no',
   'gru-login-prompt.sign-in': 'Inicia sesión',
-  'gru-multiple-answer.instructions':
-    'Por favor selecciona la respuesta correcta y haz click en "{{action}}".',
-  'gru-multiple-choice.instructions':
-    'Por favor selecciona la respuesta correcta y haz click en "{{action}}".',
-  'gru-open-ended.instructions':
-    'Por favor ingresa tu respuesta en el campo de abajo, y haz click en el botón "{{action}}" para guardar tu respuesta cuando termines.',
+  'gru-multiple-answer.instructions': 'Por favor selecciona la respuesta correcta y haz click en "{{action}}".',
+  'gru-multiple-choice.instructions': 'Por favor selecciona la respuesta correcta y haz click en "{{action}}".',
+  'gru-open-ended.instructions': 'Por favor ingresa tu respuesta en el campo de abajo, y haz click en el botón "{{action}}" para guardar tu respuesta cuando termines.',
   'gru-open-ended.characterLimit': 'Límite de caracteres',
   'gru-question-viewer.answer': 'Responder',
   'gru-question-viewer.question': 'Pregunta',
-  'gru-true-false.instructions':
-    'Por favor selecciona la respuesta correcta y haz click en "{{action}}".',
+  'gru-true-false.instructions': 'Por favor selecciona la respuesta correcta y haz click en "{{action}}".',
   'gru-true-false.true': 'Verdadero',
   'gru-true-false.false': 'Falso',
-  'gru-reorder.instructions':
-    'Por favor reordena las respuestas en el orden correcto, y haz click en "{{action}}".',
-  'student-first-experience.preStudyTitle':
-    'Estudia anticipadamente  {{title}}',
-  'student-first-experience.lp-compute-inprogress':
-    'Estamos computando tu perfil de perfeccionamiento inicial en {{title}}',
+  'gru-reorder.instructions': 'Por favor reordena las respuestas en el orden correcto, y haz click en "{{action}}".',
+  'student-first-experience.preStudyTitle': 'Estudia anticipadamente  {{title}}',
+  'student-first-experience.lp-compute-inprogress': 'Estamos computando tu perfil de perfeccionamiento inicial en {{title}}',
   'student-first-experience.route0-action.accept': 'Aceptar',
   'student-first-experience.route0-action.ignore': 'Ignorar',
   'student-first-experience.competency.popover.title': '{{title}} Línea alta',
@@ -2403,15 +2387,11 @@ window.i18ln = {
   'gru-tour.overview.stepFive.description':
     'Cuando estas en una clase, haz click aquí para editar cualquier contenido del curso asignado a tus estudiantes.',
   'gru-tour.overview.stepSix.title': '¡Monitorea tu progreso en tiempo real!',
-  'gru-tour.overview.stepSix.description':
-    'Usa el tablero en tiempo real para monitorear el progreso de la clase en una evaluación en tiempo real. <br><br> Haz click en el ícono  "Tiempo real" a la izquierda de cada evaluación para lanzar una evaluación en tiempo real para los estudiantes.',
+  'gru-tour.overview.stepSix.description': 'Usa el tablero en tiempo real para monitorear el progreso de la clase en una evaluación en tiempo real. <br><br> Haz click en el ícono  "Tiempo real" a la izquierda de cada evaluación para lanzar una evaluación en tiempo real para los estudiantes.',
   'gru-tour.quick-start.stepOne.title': 'Navegando Tus Clases',
-  'gru-tour.quick-start.stepOne.description':
-    'Esta es una vista de tu nueva clase creada. Para regresar a la clase, haz click en  "Clases" y usa el menú desplegable para seleccionar la clase a la que quieras entrar.',
-  'gru-tour.quick-start.stepTwo.title':
-    '¿Comenzando? ¡Crea una nueva evaluación!',
-  'gru-tour.quick-start.stepTwo.description':
-    'Sugerimos crear una nueva evaluación como forma de comenzar con Gooru y evaluar los niveles actuales de entendimiento de los estudiantes en tu clase.',
+  'gru-tour.quick-start.stepOne.description': 'Esta es una vista de tu nueva clase creada. Para regresar a la clase, haz click en  "Clases" y usa el menú desplegable para seleccionar la clase a la que quieras entrar.',
+  'gru-tour.quick-start.stepTwo.title': '¿Comenzando? ¡Crea una nueva evaluación!',
+  'gru-tour.quick-start.stepTwo.description': 'Sugerimos crear una nueva evaluación como forma de comenzar con Gooru y evaluar los niveles actuales de entendimiento de los estudiantes en tu clase.',
   'gru-tour.real-time.stepOne.title': 'Desglose de Respuestas',
   'gru-tour.real-time.stepOne.description':
     'Haz click en cada pregunta para ver el desglose de cómo respondieron los estudiantes.',
@@ -2419,8 +2399,7 @@ window.i18ln = {
   'gru-tour.real-time.stepTwo.description':
     'Selecciona cada ficha de estudiante para ver los reportes de información individual de estudiante',
   'gru-tour.real-time.stepThree.title': 'Selecciona una vista',
-  'gru-tour.real-time.stepThree.description':
-    'Selecciona  "vista de título" o  "Listar vista" para ver opciones de información visualizada.',
+  'gru-tour.real-time.stepThree.description': 'Selecciona  "vista de título" o  "Listar vista" para ver opciones de información visualizada.',
   'gru-tour.real-time.stepFour.title': 'Puntaje promedio',
   'gru-tour.real-time.stepFour.description':
     'Observa el promedio de la clase calculado en tiempo real para todas las respuestas.',

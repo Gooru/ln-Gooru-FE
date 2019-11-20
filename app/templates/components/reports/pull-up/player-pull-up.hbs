@@ -1,19 +1,25 @@
 <div class="iframe-player-container">
   {{#if isLoading}}
-  <div class="close-player-container">
-    <div {{action 'closePlayer'}} data-toggle="tooltip" data-placement="bottom" title="{{t 'common.close'}}">
-      {{gru-icon name='ic_close'}}
-    </div>
-  </div>
-    <div class="loading-panel">
-      {{#if playerContent.thumbnailUrl}}
-        <img src="{{playerContent.thumbnailUrl}}">
-      {{else}}
-        <i class="thumbnail {{playerContent.format}}"></i>
-      {{/if}}
-      <span class="loading-title">Loading {{playerContent.format}}</span>
-      <span>{{playerContent.title}}</span>
-      <i class="loding-icon center-block"></i>
+    <div class="loading-container">
+      <div class="close-player-container">
+        <div {{action 'closePlayer'}} data-toggle="tooltip" data-placement="bottom" title="{{t 'common.close'}}">
+          {{gru-icon name='ic_close'}}
+        </div>
+      </div>
+      <div class="player-container">
+        <div class="loading-panel">
+          <div class="loading-content">
+            {{#if playerContent.thumbnailUrl}}
+              <img src="{{playerContent.thumbnailUrl}}">
+            {{else}}
+              <i class="thumbnail {{playerContent.format}}"></i>
+            {{/if}}
+            <span class="loading-title">Loading {{playerContent.format}}</span>
+            <span>{{playerContent.title}}</span>
+            <i class="loding-icon center-block"></i>
+          </div>
+        </div>
+      </div>
     </div>
   {{/if}}
   <div class="iframe-container {{if isLoading '' 'not-loading'}}">
