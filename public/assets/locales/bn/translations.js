@@ -79,9 +79,9 @@ window.i18ln = {
   'common.filter-by': 'দ্বারা ফিল্টার',
   'common.more': 'অধিক',
   'reroute.suggestion': 'reroute suggestion',
-  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.for': 'for',
   'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
