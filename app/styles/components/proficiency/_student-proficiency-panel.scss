@@ -201,7 +201,19 @@
         font-size: 16px;
         text-transform: capitalize;
         border: none;
-        display: block;
+        display: flex;
+        align-items: center;
+        .category-header-title {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          @media screen and (max-width: $screen-sm) {
+            width: 150px;
+          }
+          @media screen and (max-width: $screen-xs) {
+            width: 50px;
+          }
+        }
       }
     }
 
@@ -214,16 +226,6 @@
       margin-right: 10px;
     }
 
-    .dropdown {
-      position: relative;
-      display: inline-block;
-      width: max-content;
-      margin: auto;
-
-      .dropbtn {
-        display: block;
-      }
-    }
     /* Dropdown Content (Hidden by Default) */
     .dropdown-menu > li {
       font-weight: bold;
