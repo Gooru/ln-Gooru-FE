@@ -1,10 +1,19 @@
 import Ember from 'ember';
 
+/**
+ * Adapter for struggling Competency
+ *
+ * @typedef {Object} StrugglingCompetencyAdapter
+ */
 export default Ember.Object.extend({
   session: Ember.inject.service('session'),
 
   namespace: '/api/ds/users/v2/competencies/struggling',
 
+  /**
+   * get struggling competency based on competency
+   * @return {Promise}
+   */
   fetchStrugglingCompetency(params) {
     const adapter = this;
     const namespace = adapter.get('namespace');
@@ -21,6 +30,10 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * get student performance based on competency
+   * @return {Promise}
+   */
   fetchStudentsPerfomance(params) {
     const adapter = this;
     const namespace = adapter.get('namespace');

@@ -130,11 +130,13 @@ export default Ember.Component.extend({
   //-------------------------------------------------------
   //Actions
   actions: {
+    //Action trigger when click student heading
     showStudentList() {
       let component = this;
       component.$('.sc-student-dropdown-list-container').slideToggle(500);
     },
 
+    // Action trigger when click close
     onClosePullUp(isCloseAll = false) {
       let component = this;
       component.$().slideUp({
@@ -222,12 +224,13 @@ export default Ember.Component.extend({
       this.set('suggestedCollection', collection);
       this.set('showSuggestConfirmation', true);
     },
-
+    // Action trigger when click cancel button in suggest
     onCancelSuggest() {
       const component = this;
       component.set('showSuggestConfirmation', false);
     },
 
+    // Action trigger when click confirm button in suggest pullup
     onConfirmSuggest() {
       const component = this;
       const collection = component.get('suggestedCollection');
@@ -247,6 +250,7 @@ export default Ember.Component.extend({
       }
     },
 
+    // Action trigger when click show more on competency pull up
     onShowMore() {
       let component = this;
       let selectedItem = component.get('selectedMenuItem');
@@ -278,6 +282,10 @@ export default Ember.Component.extend({
     component.$().slideDown();
   },
 
+  /**
+   * @function createMenuItems
+   * Method used to create menu list that are show in dropdown
+   */
   createMenuItems() {
     let component = this;
     let menuList = Ember.A([
@@ -290,6 +298,10 @@ export default Ember.Component.extend({
     component.set('menuItems', menuList);
   },
 
+  /**
+   * @function fetchStudentsPerfomance
+   * Method used to fetch student performance
+   */
   fetchStudentsPerfomance(selectedCompetency) {
     let component = this;
     let params = {
@@ -310,6 +322,10 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function fetchSuggestedCollection
+   * Method used to fetch suggested collections
+   */
   fetchSuggestedCollection(item) {
     let component = this;
     Ember.RSVP.hash({
@@ -339,6 +355,10 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function collectionServices
+   * Method used to set collection service
+   */
   collectionServices(item = null) {
     let component = this;
     let competencyCode = component.get('selectedCompetency.code');
@@ -380,6 +400,10 @@ export default Ember.Component.extend({
     return selectedService;
   },
 
+  /**
+   * @function loadTenantLibraries
+   * Method used to load library
+   */
   loadTenantLibraries() {
     const component = this;
     component
@@ -393,6 +417,10 @@ export default Ember.Component.extend({
       });
   },
 
+  /**
+   * @function suggestContent
+   * Method used to post suggest content
+   */
   suggestContent(userId, collection, collectionType, competencyCode) {
     const component = this;
     let contextParams = {

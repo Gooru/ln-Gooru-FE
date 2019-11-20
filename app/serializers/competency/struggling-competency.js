@@ -2,9 +2,18 @@ import Ember from 'ember';
 import { DEFAULT_IMAGES } from 'gooru-web/config/config';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
+/**
+ * Serializer for Struggling Competency endpoints
+ *
+ * @typedef {Object} StrugglingCompetencySerializer
+ */
 export default Ember.Object.extend(ConfigurationMixin, {
   session: Ember.inject.service('session'),
 
+  /**
+   * Normalized data of struggling competency
+   * @return {Object}
+   */
   normalizeStrugglingCompetency(payload) {
     let serialize = this;
     let strugglingCompetency = payload.struggling_competencies
@@ -27,7 +36,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
     }
     return strugglingCompetencyPayload;
   },
-
+  /**
+   * Normalized data of struggling competency domains
+   * @return {Object}
+   */
   normalizeDomain(payload) {
     let domains = payload ? payload : null;
     let domainList = [];
@@ -47,6 +59,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return domainList;
   },
 
+  /**
+   * Normalized data of domains competencies
+   * @return {Object}
+   */
   normalizeCompetency(payload) {
     let competencies = payload ? payload : null;
     let competencyList = [];
@@ -69,6 +85,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
       : competencyList;
   },
 
+  /**
+   * Normalized data of student performance
+   * @return {Object}
+   */
   normalizeStudentsPerfomance(payload) {
     const basePath = this.get('session.cdnUrls.user');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath

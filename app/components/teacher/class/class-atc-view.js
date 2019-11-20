@@ -390,6 +390,7 @@ export default Ember.Component.extend({
       this.set('isShowGradeCompetency', false);
     },
 
+    // Action trigger when click ah play button
     onPreviewContent(content) {
       let component = this;
       component.set(
@@ -400,6 +401,7 @@ export default Ember.Component.extend({
       component.set('isShowContentPreview', true);
     },
 
+    // Action trigger when click add to class activity
     onAddCollectionToDCA(content) {
       let component = this;
       let classId = component.get('classId');
@@ -629,6 +631,10 @@ export default Ember.Component.extend({
       .addUsersToActivity(classId, contentId, studentIds);
   },
 
+  /**
+   * @function fetchStrugglingCompetency
+   * Method to fetach struggling competency
+   */
   fetchStrugglingCompetency() {
     let component = this;
     let taxonomyService = component.get('taxonomyService');
@@ -714,6 +720,10 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function getStudentsGradeRange
+   *Method to get student grade range
+   */
   getStudentsGradeRange() {
     let component = this;
     let memberGradeBounds = component.get('memberGradeBounds');

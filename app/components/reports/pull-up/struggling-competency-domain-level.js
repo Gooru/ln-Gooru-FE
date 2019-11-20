@@ -5,18 +5,29 @@ export default Ember.Component.extend({
 
   //-------------------------------------------------------------
   // Property
+
+  /**
+   * @property {Object} gradeDomainsList
+   * property hold grade domain list
+   */
   gradeDomainsList: null,
 
+  /**
+   * @property {Object} gradeDomainIndex
+   * property hold grade domain index
+   */
   gradeDomainIndex: null,
 
   //-------------------------------------------------------------
   // Actions
 
   actions: {
+    // Action triggered when click domain
     toggleDomain(test) {
       this.$(`.domain-accordion-${test}`).slideToggle(500);
     },
 
+    //Action triggered when click close
     onClosePullUp() {
       let component = this;
       component.$().slideUp({
@@ -26,6 +37,7 @@ export default Ember.Component.extend({
       });
     },
 
+    // Action trigger when select competency
     onSelectCompetency(competency, domain) {
       let component = this;
       competency.set('domainName', domain.get('domainName'));

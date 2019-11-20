@@ -1,7 +1,11 @@
 import Ember from 'ember';
 import StrugglingCompetencyAdapter from 'gooru-web/adapters/competency/struggling-competency';
 import StrugglingCompetencySerializer from 'gooru-web/serializers/competency/struggling-competency';
-
+/**
+ * Service for the struggling competency
+ *
+ * @typedef {Object} strugglingCompetencyService
+ */
 export default Ember.Service.extend({
   strugglingCompetencyAdapter: null,
 
@@ -21,6 +25,10 @@ export default Ember.Service.extend({
     );
   },
 
+  /**
+   * Get students struggling competency
+   * @returns {Promise.<[]>}
+   */
   fetchStrugglingCompetency(params) {
     let service = this;
     return new Ember.RSVP.Promise((resolve, reject) => {
@@ -37,6 +45,10 @@ export default Ember.Service.extend({
     });
   },
 
+  /**
+   * Get students performance
+   * @returns {Promise.<[]>}
+   */
   fetchStudentsPerfomance(params) {
     let service = this;
     return new Ember.RSVP.Promise((resolve, reject) => {
