@@ -138,17 +138,22 @@ export default Ember.Component.extend({
   loadClassData() {
     const component = this;
     const activityClasses = component.get('activityClasses');
+    const allowCachedData = true;
     activityClasses.map(activityClass => {
       const classId = activityClass.get('id');
       return Ember.RSVP.hash({
-        classData: component.get('classService').readClassInfo(classId),
+        classData: component
+          .get('classService')
+          .readClassInfo(classId, allowCachedData),
         classMembers:
           activityClass.get('members') ||
-          component.get('classService').readClassMembers(classId)
+          component
+            .get('classService')
+            .readClassMembers(classId, allowCachedData)
       }).then(({ classData, classMembers }) => {
         component
           .get('courseService')
-          .fetchById(classData.get('courseId'))
+          .fetchById(classData.get('courseId'), allowCachedData)
           .then(function(courseData) {
             activityClass.setProperties({
               course: courseData,
