@@ -151,5 +151,14 @@ export default Ember.Component.extend({
     return suggestedContent
       ? suggestedContent.get('type')
       : CONTENT_TYPES.COLLECTION;
-  })
+  }),
+
+  /**
+   * @property {Boolean} isAssessment
+   * Property to check whether suggested content is an assessment or not
+   */
+  isAssessment: Ember.computed.equal(
+    'suggestedContentType',
+    CONTENT_TYPES.ASSESSMENT
+  )
 });
