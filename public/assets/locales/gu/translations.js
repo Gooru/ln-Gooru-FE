@@ -68,9 +68,9 @@ window.i18ln = {
   'common.last': 'છેલ્લા',
   'rubric-details': 'Rubric Details',
   'reroute.suggestion': 'reroute suggestion',
-  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.for': 'for',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',

@@ -71,9 +71,9 @@ window.i18ln = {
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
   'reroute.suggestion': 'reroute suggestion',
-  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'i2d.new-upload-msg':
     'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':

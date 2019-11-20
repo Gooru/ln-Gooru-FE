@@ -62,9 +62,9 @@ window.i18ln = {
   'common.first': 'প্ৰথম',
   'common.last': 'শেষ',
   'reroute.suggestion': 'reroute suggestion',
-  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.name': 'নাম',
   'common.user': 'ব্যৱহাৰকাৰী',
   'common.content-name': 'বিষয়বস্তুৰ নাম',
