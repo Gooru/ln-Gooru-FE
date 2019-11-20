@@ -204,6 +204,12 @@ export default Ember.Component.extend({
     return getObjectsDeepCopy(this.get('classMilestones')) || Ember.A([]);
   }),
 
+  openingLocation: Ember.observer('location', function() {
+    if (this.get('location')) {
+      this.navigateLocation();
+    }
+  }),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -999,6 +1005,7 @@ export default Ember.Component.extend({
                 lessonO,
                 collectionO
               );
+              component.set('location', 'null');
             }, 8000);
           }, 500);
         }
