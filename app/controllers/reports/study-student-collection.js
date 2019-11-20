@@ -547,7 +547,8 @@ export default StudentCollection.extend({
       unitId: context.get('unitId'),
       lessonId: context.get('lessonId'),
       pathId: context.get('pathId') || 0,
-      pathType: context.get('pathType') || null
+      pathType: context.get('pathType') || null,
+      isIframeMode: controller.get('isIframeMode')
     };
     controller.updateStudentMasteredCompetencies();
     controller.transitionToRoute('student-learner-proficiency', profileId, {

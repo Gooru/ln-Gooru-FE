@@ -1,7 +1,14 @@
 import Ember from 'ember';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES,
+  KEY_CODES,
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
-export default Ember.Component.extend({
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
+
+export default Ember.Component.extend(ConfigurationMixin, {
   classNames: ['class-activities', 'gru-content-search'],
 
   /**
@@ -24,6 +31,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.loadCotents();
+    component.searchHandler();
   },
 
   actions: {
@@ -35,7 +43,11 @@ export default Ember.Component.extend({
     onSelectContentSource(contentSource) {
       const component = this;
       component.set('activeContentSource', contentSource.get('value'));
+      let isShowContentSelector = true;
+      let contentSearchTerm = component.get('contentSearchTerm');
       if (contentSource.get('value') === 'tenant-library') {
+        isShowContentSelector = false;
+        contentSearchTerm = null;
         component.loadTenantLibraries();
       } else if (
         contentSource.get('value') === 'my-content' ||
@@ -43,16 +55,57 @@ export default Ember.Component.extend({
       ) {
         component.loadCotents();
       } else {
+        contentSearchTerm = null;
+        isShowContentSelector = false;
         component.sendAction('onShowLessonPlan');
       }
+      component.set('contentSearchTerm', contentSearchTerm);
+      component.set('isShowContentSelector', isShowContentSelector);
     },
 
     onSelectContentType(contentType) {
       const component = this;
       component.set('activeContentType', contentType.get('value'));
       component.loadCotents();
+    },
+
+    onClickFilterIcon() {
+      const component = this;
+      component.toggleProperty('isShowFilter');
+    },
+
+    onApplyFilter() {
+      const component = this;
+      component.loadCotents();
     }
   },
+
+  isShowContentSelector: true,
+
+  isFilterEnabled: Ember.computed.alias(
+    'configuration.GRU_FEATURE_FLAG.searchFilter'
+  ),
+
+  removedFilterItem: null,
+
+  /**
+   * @property {Boolean} isShowListView
+   * Property to toggle between list/grid view
+   */
+  isShowListView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+  /**
+   * @property {Number} selectedFiltersLimit
+   * Property to hold limit of selected filters to show
+   */
+  selectedFiltersLimit: Ember.computed('isShowListView', function() {
+    return this.get('isShowListView') ? 1 : 2;
+  }),
+
+  /**
+   * @property {Array} selectedFilters
+   */
+  selectedFilters: Ember.A([]),
 
   contentSearchTerm: '',
 
@@ -98,6 +151,10 @@ export default Ember.Component.extend({
     ]);
   }),
 
+  page: 0,
+
+  searchContentLimit: 20,
+
   observeLibraryChange: Ember.observer('activeTenantLibrary', function() {
     const component = this;
     component.fetchLibraryContentByType().then(function(libraryContents) {
@@ -132,7 +189,7 @@ export default Ember.Component.extend({
   fetchCatalogContentByType() {
     let component = this;
     let activeContentType = component.get('activeContentType');
-    let queryParams = {};
+    let queryParams = component.getSearchRequestBody();
     let term = component.getSearchTerm();
     if (activeContentType === CONTENT_TYPES.COLLECTION) {
       return component
@@ -153,7 +210,10 @@ export default Ember.Component.extend({
     let component = this;
     let userId = component.get('session.userId');
     let activeContentType = component.get('activeContentType');
-    let params = {};
+    let params = {
+      page: component.get('page'),
+      pageSize: component.get('searchContentLimit')
+    };
     let term = component.getSearchTerm();
     if (term) {
       params.searchText = term;
@@ -174,8 +234,8 @@ export default Ember.Component.extend({
     const activeContentType = component.get('activeContentType');
     const activeTenantLibraryId = component.get('activeTenantLibrary.id');
     const pagination = {
-      offset: 0,
-      pageSize: 10
+      offset: component.get('page') * component.get('searchContentLimit'),
+      pageSize: component.get('searchContentLimit')
     };
     return Ember.RSVP.hash({
       libraryData: component
@@ -201,5 +261,109 @@ export default Ember.Component.extend({
     const component = this;
     const contentSearchTerm = component.get('contentSearchTerm');
     return contentSearchTerm !== '' ? contentSearchTerm : '*';
+  },
+
+  searchHandler() {
+    let component = this;
+    component.$('#search-content').on('keyup', function(e) {
+      const contentSearchTerm = component.get('contentSearchTerm');
+      if (e.which === KEY_CODES.ENTER && contentSearchTerm.length >= 3) {
+        component.loadCotents();
+      }
+    });
+
+    component.$('.search-icon i.search').click(function() {
+      const contentSearchTerm = component.get('contentSearchTerm');
+      if (contentSearchTerm.length >= 3) {
+        component.loadCotents();
+      }
+    });
+  },
+
+  getSearchRequestBody() {
+    let component = this;
+    let params = {
+      taxonomies: null,
+      page: component.get('page'),
+      pageSize: component.get('searchContentLimit')
+    };
+    let filters = component.filterBuilder();
+    let searchTerm = component.get('contentSearchTerm');
+    const activeContentSource = component.get('activeContentSource');
+    if (activeContentSource === 'my-content') {
+      filters.scopeKey = 'my-content';
+      filters['flt.publishStatus'] = 'published,unpublished';
+    } else if (activeContentSource === 'tenant-library') {
+      filters.scopeKey = 'open-library';
+      filters.scopeTargetNames = component.get(
+        'selectedTenantLibrary.shortName'
+      );
+      filters['flt.publishStatus'] = 'published,unpublished';
+    } else {
+      filters.scopeKey = 'open-all';
+      filters['flt.publishStatus'] = 'published';
+    }
+    let subject = component.get('course.subject');
+    let competencyData = component.get('competencyData');
+    let primaryLanguage = component.get('class.primaryLanguage');
+    let gutCode = competencyData ? competencyData.get('competencyCode') : null;
+    if (!component.get('selectedFilters').length && !searchTerm) {
+      if (subject) {
+        filters['flt.subject'] = subject;
+      }
+
+      if (gutCode) {
+        filters['flt.gutCode'] = gutCode;
+      }
+
+      if (primaryLanguage) {
+        filters['flt.languageId'] = primaryLanguage;
+      }
+    }
+    params.filters = filters;
+    return params;
+  },
+
+  filterBuilder() {
+    const component = this;
+    let filters = {};
+    filters['flt.audience'] = component.filterSelectedItems(
+      'filter',
+      'flt.audience'
+    );
+    filters['flt.educationalUse'] = component.filterSelectedItems(
+      'filter',
+      'flt.educational'
+    );
+    filters['flt.language'] = component.filterSelectedItems(
+      'filter',
+      'flt.language'
+    );
+    filters['flt.audience'] = component.filterSelectedItems(
+      'filter',
+      'flt.audience'
+    );
+    filters['flt.standard'] = component.filterSelectedItems(
+      'filter',
+      'flt.standard'
+    );
+    filters['flt.creator'] = component.get('selectedFilters')['flt.authorName'];
+    return filters;
+  },
+
+  filterSelectedItems(keyField, keyValue) {
+    const component = this;
+    let filterList = component
+      .get('selectedFilters')
+      .filterBy(keyField, keyValue);
+    let keyName = keyValue === 'flt.standard' ? 'id' : 'name';
+    return component.toArray(filterList, keyName);
+  },
+
+  toArray(filterList, key) {
+    let params = filterList.map(filter => {
+      return filter[key];
+    });
+    return params.length > 0 ? params.join(',') : null;
   }
 });

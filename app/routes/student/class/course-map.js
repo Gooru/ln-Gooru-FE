@@ -349,6 +349,7 @@ export default Ember.Route.extend({
       pathType,
       isIframeMode: true
     };
+
     route
       .get('navigateMapService')
       .startLesson(courseId, unitId, lessonId, classId, pathType)

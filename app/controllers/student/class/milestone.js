@@ -12,6 +12,7 @@ export default Ember.Controller.extend({
   queryParams: ['location'],
 
   location: null,
+
   /**
    * Inject the  student class parent controller.
    */
@@ -109,6 +110,11 @@ export default Ember.Controller.extend({
   // Actions
 
   actions: {
+    resetPerformance: function() {
+      const component = this;
+      component.get('studentClassController').send('reloadData');
+    },
+
     /**
      * This method will take care of routing page to student locate me view.
      */

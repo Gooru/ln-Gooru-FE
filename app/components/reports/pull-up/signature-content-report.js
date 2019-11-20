@@ -144,6 +144,7 @@ export default Ember.Component.extend({
     return students;
   }),
 
+
   isMappedWithGutCode: Ember.computed(
     'competency.isMappedWithFramework',
     'showGutCompetency',

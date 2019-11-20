@@ -264,6 +264,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
             component.parseActivityPerformance();
           });
       }
+      component.set('isLoading', false);
     });
   },
 

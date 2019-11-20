@@ -235,6 +235,10 @@
       opacity: 0.4;
       pointer-events: none;
     }
+
+    &.player-iframe {
+      padding-top: 50px;
+    }
   }
   @media only screen and (min-width: $screen-sm) and (max-width: $screen-in-1024) {
     .student-proficiency-container {

@@ -411,8 +411,9 @@ export default Ember.Service.extend({
     const collectionSubType = params.subtype;
     const collectionUrl = params.collectionUrl;
     const resourceId = params.resourceId;
-    const continueCourse = !unitId || !milestoneId;
+    const continueCourse = !lessonId && (!unitId || !milestoneId);
     const startLesson = lessonId && !collectionId;
+
     const pathType =
       params.pathType === 'null' ? null : params.pathType || null;
     const navigateMapService = this;

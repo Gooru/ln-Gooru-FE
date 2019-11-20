@@ -1,14 +1,14 @@
 import Ember from 'ember';
 import { isCompatibleVW } from 'gooru-web/utils/utils';
 import { SCREEN_SIZES, CONTENT_TYPES } from 'gooru-web/config/config';
-
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 /**
  * Class Overview controller
  *
  * Controller responsible of the logic for the class overview page
  */
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -349,6 +349,10 @@ export default Ember.Controller.extend({
     return this.get('class.isSecondaryClass') || false;
   }),
 
+  isLessonPlanShow: Ember.computed.alias(
+    'configuration.GRU_FEATURE_FLAG.isLessonPlanShow'
+  ),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -358,6 +362,10 @@ export default Ember.Controller.extend({
      */
     onToggleRescope() {
       this.toggleProperty('showAllRescopedContent');
+    },
+
+    getGradeListItem() {
+      this.loadItemsToGrade();
     },
     /**
      * Trigger when user click on student list (mobile view)
@@ -1089,6 +1097,7 @@ export default Ember.Controller.extend({
         if (oaGradeItems.length) {
           controller.loadOaItemsToGrade(oaGradeItems);
         }
+        this.set('itemsToGradeList', Ember.A([]));
         if (gradeItems.length) {
           let itemsToGradeList = controller.get('itemsToGradeList');
           controller.getCourseStructure().then(function() {

@@ -13,8 +13,21 @@
       border-radius: 4px;
     }
     .body-container {
-      max-height: calc(100vh - 145px);
+      max-height: calc(100vh - 155px);
       overflow-y: auto;
+      .lesson-plan-activities-container {
+        .teacher-class-ca-course-map {
+          .dca-course-map-unit-container {
+            padding: 0;
+            overflow: unset;
+            .dca-course-map-unit-panel {
+              .dca-course-map-lesson-container {
+                padding: 8px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
