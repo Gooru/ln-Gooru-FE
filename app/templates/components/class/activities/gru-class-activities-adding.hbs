@@ -16,7 +16,13 @@
       {{/each}}
     {{else if isShowLessonPlan}}
       <div class="lesson-plan-activities-container">
-        Coming Soon!..
+        {{teacher/class/ca-course-map
+          onAddActivity="onAddActivity"
+          onScheduleActivity="onShowDateRangePicker"
+          classId=primaryClass.id
+          courseId=primaryClass.courseId
+          isShowLessonPlan = true
+        }}
       </div>
     {{else}}
       {{#each filteredContents as |filteredContent|}}
@@ -34,4 +40,15 @@
     classPreference=classPreference
     classId=primaryClass.id
     onAddExternalCollectionToDCA="onAddExternalActivity"}}
+{{/if}}
+
+{{#if isShowDateRangePicker}}
+  <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
+    {{ca-daterange-datepicker
+        closeDatePicker='onCloseDateRangePicker'
+        onScheduleForDate='scheduleContentForDate'
+        onScheduleForMonth='scheduleContentForMonth'
+        endDate=endDate
+        allowTwoDateRangePicker=false}}
+  </div>
 {{/if}}

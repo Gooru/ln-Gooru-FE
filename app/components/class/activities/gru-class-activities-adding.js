@@ -8,6 +8,11 @@ export default Ember.Component.extend({
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
 
+  /**
+   * @type {CourseService} Service to retrieve course information
+   */
+  courseService: Ember.inject.service('api-sdk/course'),
+
   actions: {
     onSelectExternalActivity() {
       const component = this;
@@ -35,6 +40,7 @@ export default Ember.Component.extend({
       const component = this;
       component.set('tenantLibraries', tenantLibraries);
       component.set('isShowTenantLibraries', true);
+      component.set('isShowLessonPlan', false);
     },
 
     onSelectTenantLibrary(tenantLibrary) {
@@ -73,6 +79,37 @@ export default Ember.Component.extend({
     onShowLessonPlan() {
       const component = this;
       component.set('isShowLessonPlan', true);
+      component.set('isShowTenantLibraries', false);
+    },
+
+    onShowDateRangePicker(content) {
+      const component = this;
+      component.set('contentToSchedule', content);
+      component.set('isShowDateRangePicker', true);
+    },
+
+    onCloseDateRangePicker() {
+      this.set('isShowDateRangePicker', false);
+    },
+
+    scheduleContentForDate(scheduleDate, endDate) {
+      const component = this;
+      const content = component.get('contentToSchedule');
+      component.assignActivityToMultipleClass(content, scheduleDate, endDate);
+    },
+
+    scheduleContentForMonth(month, year) {
+      const component = this;
+      const content = component.get('contentToSchedule');
+      const scheduleDate = null;
+      const endDate = null;
+      component.assignActivityToMultipleClass(
+        content,
+        scheduleDate,
+        endDate,
+        month,
+        year
+      );
     }
   },
 
@@ -86,6 +123,8 @@ export default Ember.Component.extend({
     year = undefined
   ) {
     const component = this;
+    content.set('isScheduledActivity', !!scheduleDate);
+    content.set('isUnscheduledActivity', month && year);
     const secondaryClasses = component.get('secondaryClasses');
     const classesToBeAdded = Ember.A([component.get('primaryClass.id')]).concat(
       secondaryClasses.mapBy('id')
@@ -116,6 +155,7 @@ export default Ember.Component.extend({
           content.set('activityClasses', activityClasses);
         });
     });
+    component.sendAction('activityAdded', content);
   },
 
   addActivityToClass(classId, content, scheduleDate, month, year, endDate) {

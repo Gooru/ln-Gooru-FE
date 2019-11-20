@@ -343,6 +343,16 @@ export default Ember.Component.extend({
 
   datewiseActivities: Ember.A([]),
 
+  observeNewlyAddedActivity: Ember.observer('newlyAddedActivity', function() {
+    const component = this;
+    const activity = component.get('newlyAddedActivity');
+    if (activity.get('isScheduledActivity')) {
+      component.loadActivitiesByActiveContentType(activity.get('format'));
+    } else {
+      component.loadUnScheduledActivities();
+    }
+  }),
+
   loadActivitiesByActiveContentType() {
     const component = this;
     const activeContentTypes = component

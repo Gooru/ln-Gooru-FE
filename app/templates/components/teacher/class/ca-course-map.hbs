@@ -23,7 +23,16 @@
                   </div>
                 </div>
                 <div class="dca-course-map-collection-container" id="dca-lesson-{{lesson.id}}">
-                  {{#if lesson.hasCollectionFetched}}
+                  {{#if isShowLessonPlan}}
+                    {{#if lesson.lessonPlan}}
+                      {{class/overview/gru-lesson-plan
+                        lessonPlan = lesson.lessonPlan
+                        onAddActivity = "onAddActivity"
+                        onScheduleActivity = "onScheduleActivity"}}
+                    {{else}}
+                      Lesson Plan not available!
+                    {{/if}}
+                  {{else}}  <!-- If lesson plan is not enabled -->
                     {{#if lesson.children}}
                       {{#each lesson.children as | collection |}}
                         <div class="dca-course-map-collection">
@@ -68,7 +77,9 @@
                         <span>{{t 'common.no-collection-info-message'}}</span>
                       </div>
                     {{/if}}
-                  {{else}}
+                  {{/if}}
+
+                  {{#if lesson.isFetchingContent}}
                     <div class="collection-load-spinner">
                       {{#if lesson.isActive}}
                         {{three-bounce-spinner}}
