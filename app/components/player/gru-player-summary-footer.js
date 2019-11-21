@@ -25,7 +25,7 @@ export default Ember.Component.extend({
      * Action triggered for the next button
      */
     parentNext: function() {
-      this.sendAction('parents');
+      this.sendAction('OnFeedbackCapture');
     },
 
     /**

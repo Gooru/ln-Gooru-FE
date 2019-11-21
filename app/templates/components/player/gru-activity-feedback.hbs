@@ -1,0 +1,48 @@
+<div class="activity-feedback-container {{unless isCollection 'assessment'}}">
+  <div class="feedback-contaioner">
+    <div class="gru-activity-feedback-card">
+      <div class="card-container">
+        <div class="header-panel" style="background-image: url({{collection.thumbnailUrl}})">
+          <div class="header-content">
+            <div class="title">{{safe-html collection.title}}</div>
+            <div class="author-by">annenberg</div>
+          </div>
+        </div>
+        <div class="body-panel">
+          <div class="body-content">
+            <div class="description-panel">
+              <div class="description"><p>{{safe-html collection.learningObjectives}}</p></div>
+              <div class="details">
+                <div class="taxonomy">
+                  {{#if tags}}
+                    {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=1}}
+                  {{/if}}
+                </div>
+                <div class="resource">
+                  {{#if isCollection}}
+                    <span class="icon" data-toggle="tooltip" title="{{t 'common.resource'}}"></span>
+                    <span>{{collection.resourceCount}}</span>
+                  {{/if}}
+                </div>
+                <div class="question">
+                  <span class="icon" data-toggle="tooltip" title="{{t 'common.question'}}"></span>
+                  <span>{{collection.questionCount}}</span>
+                </div>
+                <div class="time-spent">
+                  <span>{{format-time timeSpent}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="content-panel">
+              <div class="content-body">
+                {{#if resourceInfo}}
+                  {{gru-feedback-form resourceInfo=resourceInfo format=format onNext='onNext' onSkipFeedback="onSkipFeedback" isPlayNextContent=isPlayNextContent}}
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

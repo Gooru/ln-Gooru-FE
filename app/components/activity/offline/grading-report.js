@@ -673,6 +673,7 @@ export default Ember.Component.extend({
       .submitOAGrade(userGrade)
       .then(function() {
         currentStudent.set('isGraded', true);
+        component.set('isShowActivityFeedback', !isTeacher);
         component.slideToNextUser();
       });
   },

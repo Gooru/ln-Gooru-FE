@@ -2773,6 +2773,10 @@ window.i18ln = {
   'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
   'common.select-your-other-classes-from-below':
     'Select your other classes from below to manage in this class',
-  'common.multi-grade-view': 'Multi-grade view. Viewing class'
+  'common.multi-grade-view': 'Multi-grade view. Viewing class',
+
+  'common.feedback-note':
+    'Please take a minute to rate the collection and its resources. It really helps!',
+  'common.skip-feedback': 'Skip Feedback'
 };
 export default window.i18ln;

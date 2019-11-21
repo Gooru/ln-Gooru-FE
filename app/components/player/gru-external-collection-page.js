@@ -51,11 +51,18 @@ export default Ember.Component.extend({
       let component = this;
       component.set('isTimeEntered', true);
       component.updateSelfReport();
+      Ember.run.later(function() {
+        component.set('isShowActivityFeedback', true);
+      }, 5000);
     },
 
     /**
-     * Action triggered when change score type
+     * Action triggered when click on skip feedback
      */
+    onSkipFeedback() {
+      const component = this;
+      component.sendAction('onSkipFeedback');
+    },
 
     /**
      * Action triggered when click cancel
@@ -115,6 +122,11 @@ export default Ember.Component.extend({
   timeZone: Ember.computed(function() {
     return moment.tz.guess() || null;
   }),
+
+  /**
+   * @property {Boolean} isShowActivityFeedback
+   */
+  isShowActivityFeedback: false,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -214,6 +226,7 @@ export default Ember.Component.extend({
     component.set('isStarted', false);
     component.set('isDisableTimeEditor', true);
     component.set('isValidtime', false);
+    component.set('isShowActivityFeedback', false);
   },
 
   /**

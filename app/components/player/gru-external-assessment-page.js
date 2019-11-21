@@ -55,6 +55,17 @@ export default Ember.Component.extend({
       component.set('isScoreEntered', true);
       component.set('stopTime', new Date().getTime());
       component.updateSelfReport();
+      Ember.run.later(function() {
+        component.set('isShowActivityFeedback', true);
+      }, 5000);
+    },
+
+    /**
+     * Action triggered when click on skip feedback
+     */
+    onSkipFeedback() {
+      const component = this;
+      component.sendAction('onSkipFeedback');
     },
 
     /**
@@ -91,6 +102,11 @@ export default Ember.Component.extend({
    * @property {Boolean} isScoreEntered
    */
   isScoreEntered: false,
+
+  /**
+   * @property {Boolean} isShowActivityFeedback
+   */
+  isShowActivityFeedback: false,
 
   /**
    * @property {Boolean} isValidScore
