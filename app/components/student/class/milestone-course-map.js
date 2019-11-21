@@ -205,7 +205,7 @@ export default Ember.Component.extend({
   }),
 
   openingLocation: Ember.observer('location', function() {
-    if (this.get('location')) {
+    if (this.get('location') !== 'null') {
       this.navigateLocation();
     }
   }),
@@ -991,12 +991,14 @@ export default Ember.Component.extend({
                 'id',
                 userLocation.collectionId
               );
-            component.send(
-              'onShowStudentMilestoneCollectionReport',
-              lessonO,
-              collectionO
-            );
-            component.set('location', 'null');
+            if (!component.isDestroyed) {
+              component.send(
+                'onShowStudentMilestoneCollectionReport',
+                lessonO,
+                collectionO
+              );
+              component.set('location', 'null');
+            }
           }, 8000);
         }, 500);
       });
