@@ -61,6 +61,9 @@ window.i18ln = {
   'common.first': 'First',
   'common.last': 'Last',
   'common.name': 'Name',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
   'reroute.suggestion': 'reroute suggestion',
   'reroute.suggestion.title': 'Having difficult with the concepts?',
   'reroute.suggestion.desc':
@@ -1350,36 +1353,57 @@ window.i18ln = {
   'teacher-landing.class.performance-tab.assessments': 'التقييمات',
   'teacher-landing.class.performance-tab.collections': 'مجموعات',
   'teacher-landing.class.view-more': 'عرض اكثر',
-  'teacher-landing.class.class-settings.class-settings-sec.generate-pathway': 'إضفاء الطابع الشخصي على مسار التعلم',
-  'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-head': 'اعدادات الفصل',
-  'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-desc': 'الحد الأدنى من الأداء لكسب الكأس',
-  'teacher-landing.class.class-settings.class-settings-sec.class-code': 'كود الفصل',
+  'teacher-landing.class.class-settings.class-settings-sec.generate-pathway':
+    'إضفاء الطابع الشخصي على مسار التعلم',
+  'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-head':
+    'اعدادات الفصل',
+  'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-desc':
+    'الحد الأدنى من الأداء لكسب الكأس',
+  'teacher-landing.class.class-settings.class-settings-sec.class-code':
+    'كود الفصل',
   'teacher-landing.class.class-settings.class-settings-sec.subject': 'الموضوع',
   'teacher-landing.class.class-settings.class-settings-sec.framework': 'اطار',
-  'teacher-landing.class.class-settings.class-settings-sec.grade-level': 'مستوى الصف',
-  'teacher-landing.class.class-settings.class-settings-sec.option-choose-one': 'اختر واحد',
-  'teacher-landing.class.class-settings.class-settings-sec.co-teachers': 'معلمين مشاركين',
-  'teacher-landing.class.class-settings.class-settings-sec.add-coteacher': 'اضافة معلم اخر',
-  'teacher-landing.class.class-settings.class-settings-sec.language': 'لغة التعليمات',
-  'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head': 'اعدادات الطالب',
-  'teacher-landing.class.class-settings.student-settings-sec.col-head-active': 'متاح',
-  'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head': 'اعدادات الدورة',
-  'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable': 'يجب أن يغطي مسار التعلم الشخصي الفجوات في الملف الشخصي؟',
-  'teacher-landing.class.class-settings.course-settings-sec.apply-settings': 'تطبيق إعدادات',
-  'teacher-landing.class.class-settings.course-settings-sec.origin-info': 'ما هو أدنى محتوى على مستوى الصف يجب أن يدرسه طلابك؟',
-  'teacher-landing.class.class-settings.course-settings-sec.current-grade-info': 'ما هو مستوى الصف الخاص بفصلك الدراسي؟',
+  'teacher-landing.class.class-settings.class-settings-sec.grade-level':
+    'مستوى الصف',
+  'teacher-landing.class.class-settings.class-settings-sec.option-choose-one':
+    'اختر واحد',
+  'teacher-landing.class.class-settings.class-settings-sec.co-teachers':
+    'معلمين مشاركين',
+  'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
+    'اضافة معلم اخر',
+  'teacher-landing.class.class-settings.class-settings-sec.language':
+    'لغة التعليمات',
+  'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
+    'اعدادات الطالب',
+  'teacher-landing.class.class-settings.student-settings-sec.col-head-active':
+    'متاح',
+  'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head':
+    'اعدادات الدورة',
+  'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable':
+    'يجب أن يغطي مسار التعلم الشخصي الفجوات في الملف الشخصي؟',
+  'teacher-landing.class.class-settings.course-settings-sec.apply-settings':
+    'تطبيق إعدادات',
+  'teacher-landing.class.class-settings.course-settings-sec.origin-info':
+    'ما هو أدنى محتوى على مستوى الصف يجب أن يدرسه طلابك؟',
+  'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
+    'ما هو مستوى الصف الخاص بفصلك الدراسي؟',
   'teacher-landing.class.class-settings.origin': 'الاصل',
   'teacher-landing.class.class-settings.destination': 'الغاية',
   'teacher-landing.class.class-settings.students': 'الطلاب',
   'teacher-landing.class.class-settings.student-id': 'هوية الطالب',
   'teacher-landing.class.class-settings.joined-on': 'انضم على',
-  'teacher-landing.class.class-settings.action-lable-add-student': 'اضافة طالب اخر',
-  'teacher-landing.no-classrooms': 'انت لم تنشئ اي فصول دراسية بعد. اضغط على"انشاء فصل دراسي" اوابحث</br> علىدوره مميزه ضمن علامة المكتبة.',
+  'teacher-landing.class.class-settings.action-lable-add-student':
+    'اضافة طالب اخر',
+  'teacher-landing.no-classrooms':
+    'انت لم تنشئ اي فصول دراسية بعد. اضغط على"انشاء فصل دراسي" اوابحث</br> علىدوره مميزه ضمن علامة المكتبة.',
   'teacher-landing.no-course': 'انت لم تعين دورة فى هذه </br> الفصل بعد',
   'teacher-landing.teach': 'درس مع فصل جورو',
-  'teacher-landing.welcome-course-map': 'هذه هى خريطة الدورة حيث يمكنك عرض محتوى الدورة وتشغيل التقييمات وايقافها واطلاق التقييمات  فى الوقت الفعلي.يمكنك أيضًا عرض الأداء الكلي للفصل الدراسي وإتمامه. للحصول على عرض تفصيلي لأداء الفصل، يفضل زيارة علامة التبويب الخاصة تقرير الفصل الدراسي.',
-  'teacher-landing.welcome-rescoped-course-map': 'تم تخصيص هذه الدورة لكل طالب في الفصل. يمكنك عرض خريطة المقرر لكل طالب في صفحة إدارة الفصل الدراسي من خلال النقر على مسار تعلم الطالب ("-> ")',
-  'teacher-landing.welcome-premium-course-map': 'مقرر الموجِّه هذا مقرر ذو طابع شخصي يغطي المعايير عبر مستويات متعددة، يتم تقديم مقرر فريد لكل طالب للمساعدة في سد الثغرات وتعزيز المفاهيم والممارسات وتسريع عملية التعلم. تم تصميم مسارات مخصصة وإعادة توجيه الطلاب في الوقت الفعلي لزيادة إمكانات التعلم لكل طالب للانتقال إلى وجهتهم المحددة.',
+  'teacher-landing.welcome-course-map':
+    'هذه هى خريطة الدورة حيث يمكنك عرض محتوى الدورة وتشغيل التقييمات وايقافها واطلاق التقييمات  فى الوقت الفعلي.يمكنك أيضًا عرض الأداء الكلي للفصل الدراسي وإتمامه. للحصول على عرض تفصيلي لأداء الفصل، يفضل زيارة علامة التبويب الخاصة تقرير الفصل الدراسي.',
+  'teacher-landing.welcome-rescoped-course-map':
+    'تم تخصيص هذه الدورة لكل طالب في الفصل. يمكنك عرض خريطة المقرر لكل طالب في صفحة إدارة الفصل الدراسي من خلال النقر على مسار تعلم الطالب ("-> ")',
+  'teacher-landing.welcome-premium-course-map':
+    'مقرر الموجِّه هذا مقرر ذو طابع شخصي يغطي المعايير عبر مستويات متعددة، يتم تقديم مقرر فريد لكل طالب للمساعدة في سد الثغرات وتعزيز المفاهيم والممارسات وتسريع عملية التعلم. تم تصميم مسارات مخصصة وإعادة توجيه الطلاب في الوقت الفعلي لزيادة إمكانات التعلم لكل طالب للانتقال إلى وجهتهم المحددة.',
   'goals.manage.title': 'اهدافي!',
   'goals.manage.add-goal': 'اضافة هدف',
   'goals.manage.goal-label': 'هدف',
@@ -1394,14 +1418,17 @@ window.i18ln = {
   'goals.manage.reflection-label': 'انعكاس',
   'goals.manage.save': 'حفظ',
   'goals.manage.update': 'تحديث',
-  'goals.manage.goals-not-found': 'أنت لم تحدد أي أهداف حتى الآن. يمكنك إضافة هدف بالنقر فوق الزر "إضافة هدف " أعلاه.',
+  'goals.manage.goals-not-found':
+    'أنت لم تحدد أي أهداف حتى الآن. يمكنك إضافة هدف بالنقر فوق الزر "إضافة هدف " أعلاه.',
   'goals.create.error-add-title': 'يرجى ادخال الهدف',
   'goals.create.error-length-title': 'يجب أن يكون الهدف 200 حرف كحد أقصى',
   'goals.create.error-add-start-date': 'يرجى اخال تاريخ البدأ',
   'goals.create.error-add-end-date': 'يرجى ادخال تاريخ الانتهاء',
-  'goals.create.error-greater-end-date': 'يجب أن يكون تاريخ الانتهاء أكبر من تاريخ البدء',
+  'goals.create.error-greater-end-date':
+    'يجب أن يكون تاريخ الانتهاء أكبر من تاريخ البدء',
   'goals.create.error-add-status': 'يرجى اختيار حالة الهدف',
-  'goals.create.error-length-reflection': 'يجب أن يكون الانعكاس 2000 حرف كحد أقصى',
+  'goals.create.error-length-reflection':
+    'يجب أن يكون الانعكاس 2000 حرف كحد أقصى',
   'goals.create.created-success-msg': 'لقد قمت بانشاء الهدف',
   'goals.delete.deleted-success-msg': 'لقدت قمت بحذف الهدف',
   'goals.update.updated-success-msg': 'لقد قمت بتحديث الهدف',
@@ -1410,32 +1437,45 @@ window.i18ln = {
   'gru-add-to.add-collection-to-lesson': 'اضف من مجموعاتي',
   'gru-add-to.add-collection-to-lesson-lead': 'اختر مجموعة للاضافة لهذا الدرس.',
   'gru-add-to.add-OA-to-lesson': 'اضف من نشاطاتى',
-  'gru-add-to.OA-info': 'الأنشطة المذكورة هنا <b> لا</b> تنتمي إلى درس أو مقرر آخر',
+  'gru-add-to.OA-info':
+    'الأنشطة المذكورة هنا <b> لا</b> تنتمي إلى درس أو مقرر آخر',
   'gru-add-to.add-oa-to-lesson-lead': 'اختر نشاط لاضافته لهذا الدرس.',
   'gru-add-to.add-to-collection': 'أضف إلى المجموعة',
-  'gru-add-to.add-to-collection-lead': 'اختر مجموعة تريد اضافتها {{contentTitle}} الى',
+  'gru-add-to.add-to-collection-lead':
+    'اختر مجموعة تريد اضافتها {{contentTitle}} الى',
   'gru-add-to.add-to-existing-classroom': 'اضف الى فصل موجود',
-  'gru-add-to.add-to-existing-classroom-lead': 'اختر فصل دراسي تريد ان تضيفه ال',
+  'gru-add-to.add-to-existing-classroom-lead':
+    'اختر فصل دراسي تريد ان تضيفه ال',
   'gru-add-to.add-to-assessment': 'اضف الى تقييم او مجموعة',
-  'gru-add-to.add-to-assessment-lead': 'اختر تقييم تريد اضافته{{contentTitle}}  الى',
-  'gru-add-to.assessments-info': 'التقييمات المذكورة هنا <b> لا</b> تنتمي إلى درس أو مقرر آخر',
-  'gru-add-to.collections-info': 'المجموعات المذكورة هنا <b> لا</b> تنتمي إلى درس أو مقرر آخر',
+  'gru-add-to.add-to-assessment-lead':
+    'اختر تقييم تريد اضافته{{contentTitle}}  الى',
+  'gru-add-to.assessments-info':
+    'التقييمات المذكورة هنا <b> لا</b> تنتمي إلى درس أو مقرر آخر',
+  'gru-add-to.collections-info':
+    'المجموعات المذكورة هنا <b> لا</b> تنتمي إلى درس أو مقرر آخر',
   'gru-add-rubric-to-question.title': 'اضف من عناويني',
   'gru-add-rubric-to-question.lead': 'حدد نموذج تقييم لإضافته إلى هذا السؤال.',
-  'gru-add-rubric-to-question.no-rubrics': 'لم تنشئ بعد أي قواعد يمكن إرفاقها بسؤال الاستجابة المجانية. يمكنك إنشاء نماذج تقييم تحت المحتوى الخاص بي والتي يمكن الوصول إليها من ملف التعريف الخاص بك.',
+  'gru-add-rubric-to-question.no-rubrics':
+    'لم تنشئ بعد أي قواعد يمكن إرفاقها بسؤال الاستجابة المجانية. يمكنك إنشاء نماذج تقييم تحت المحتوى الخاص بي والتي يمكن الوصول إليها من ملف التعريف الخاص بك.',
   'gru-add-rubric-to-question.go-to-content': 'اذهب للمحتوى الخاص بي',
   'gru-assessment-confirmation.title': 'انت على وشك البدأ فى تقييم....',
   'gru-assessment-confirmation.description': 'فى هذا التقييم،, {{model.title}}',
   'gru-assessment-confirmation.setting-forward': 'يمكنك التنقل للامام فقط',
-  'gru-assessment-confirmation.setting-forward-backward': 'يمكنك التنقل إلى الأمام والخلف للإجابة على الأسئلة',
-  'gru-assessment-confirmation.unlimited-attempts-left': 'لديك محاولات غير محدودة',
-  'gru-assessment-confirmation.setting-forward-teacher': 'الطلاب يمكنهم التنقل للامام فقط',
-  'gru-assessment-confirmation.setting-forward-backward-teacher': 'الطلاب يمكنهم التنقل للامام وللخلف للاجابة على الاسئلة',
-  'gru-assessment-confirmation.unlimited-attempts-left-teacher': 'الطلاب لديهم محاولات غير محدوده',
+  'gru-assessment-confirmation.setting-forward-backward':
+    'يمكنك التنقل إلى الأمام والخلف للإجابة على الأسئلة',
+  'gru-assessment-confirmation.unlimited-attempts-left':
+    'لديك محاولات غير محدودة',
+  'gru-assessment-confirmation.setting-forward-teacher':
+    'الطلاب يمكنهم التنقل للامام فقط',
+  'gru-assessment-confirmation.setting-forward-backward-teacher':
+    'الطلاب يمكنهم التنقل للامام وللخلف للاجابة على الاسئلة',
+  'gru-assessment-confirmation.unlimited-attempts-left-teacher':
+    'الطلاب لديهم محاولات غير محدوده',
   'gru-assessment-confirmation.attempts-left.zero': 'لديك محاولات{{count}}',
   'gru-assessment-confirmation.attempts-left.one': 'لديك محاولة واحدة متبقية',
   'gru-assessment-confirmation.attempts-left.other': 'لديك محاولات{{count}}',
-  'gru-assessment-confirmation.attempts-left.other-teacher': 'الطلاب لديهم محاولات{{count}}',
+  'gru-assessment-confirmation.attempts-left.other-teacher':
+    'الطلاب لديهم محاولات{{count}}',
   'gru-assessment-confirmation.unlimited-attempts': 'لديك محاولات غير محدودة',
   'gru-assessment-confirmation.cancel': 'الغي',
   'gru-assessment-confirmation.continue': 'استمر',
@@ -1564,7 +1604,8 @@ window.i18ln = {
   'sign-up.error-role-message': 'يرجى اختيار  دوراً. \n',
   'sign-up.error-country-message': 'يرجى اختيار بلدك.',
   'sign-up.error-state-message': 'يرجى اختيار الولاية أو الإقليم.',
-  'sign-up.error-district-message': 'يرجى اختيار منطقتك / ميثاقك من القائمة أو تقديمها في "أخرى ".',
+  'sign-up.error-district-message':
+    'يرجى اختيار منطقتك / ميثاقك من القائمة أو تقديمها في "أخرى ".',
   'gru-user-sign-up-cancel.title': 'تريد مغادرة التسجيل؟',
   'gru-user-sign-up-cancel.exit?': 'هل أنت متأكد أنك تريد الخروج؟',
   'gru-user-sign-up-cancel.registration_incomplete': 'تسجيلك لم يكتمل بعد.',
@@ -1585,14 +1626,19 @@ window.i18ln = {
   'login.log-in': 'تسجيل الدخول',
   'forgot-password.description': 'هذا يحدث لنا جميعا.',
   'forgot-password.usernameOrEmail': 'يرجى ادخال بريدك الالكترونى',
-  'forgot-password.footer-google-description-1': 'حاول تسجيل الدخول مرة أخرى عن طريق الضغط على <a href=\'/sign-in\'>  \'تسجيل الدخول باستخدام Google. \' </a>',
-  'forgot-password.footer-description-1': 'ستتلقى رسالة بريد إلكتروني بها رابط لإعادة تعيين كلمة المرور الخاصة بك.',
+  'forgot-password.footer-google-description-1':
+    'حاول تسجيل الدخول مرة أخرى عن طريق الضغط على <a href=\'/sign-in\'>  \'تسجيل الدخول باستخدام Google. \' </a>',
+  'forgot-password.footer-description-1':
+    'ستتلقى رسالة بريد إلكتروني بها رابط لإعادة تعيين كلمة المرور الخاصة بك.',
   'forgot-password.footer-description-2': 'لو لديك اي ، يرجى التواصل معنا',
   'forgot-password.mail': 'support@gooru.org	',
-  'forgot-password.error-email-not-exists': 'عذرًا ، لا نتعرف على هذا البريد الإلكتروني.',
+  'forgot-password.error-email-not-exists':
+    'عذرًا ، لا نتعرف على هذا البريد الإلكتروني.',
   'forgot-password.secondStepTitle': 'تحقق من بريدك الالكتروني',
-  'forgot-password.secondStepDescription-1': 'لقد أرسلنا لك رسالة بريد إلكتروني تحتوي على رابط لإعادة تعيين كلمة المرور الخاصة بك.',
-  'forgot-password.secondStepDescription-2': 'إذا كان لديك أي أسئلة، يرجى الاتصال',
+  'forgot-password.secondStepDescription-1':
+    'لقد أرسلنا لك رسالة بريد إلكتروني تحتوي على رابط لإعادة تعيين كلمة المرور الخاصة بك.',
+  'forgot-password.secondStepDescription-2':
+    'إذا كان لديك أي أسئلة، يرجى الاتصال',
   'reset-password.new-password': 'ادخل كلمة السر الخاصة بك',
   'reset-password.new-password-confirm': 'تأكد من كلمة السر الخاصة بك',
   'reset-password.title': 'اعادة تعيين كلمة السر',
@@ -1601,8 +1647,10 @@ window.i18ln = {
   'change-password.current-password-label': 'ادخل كلمة السر الحالية الخاصة بك',
   'change-password.change-success': 'تم تغيير كلمة السر بنجاح!!',
   'change-password.new-password-required': 'يرجى ادخال كلمة السر الجديدة.',
-  'change-password.change-password-error': 'اوه! شيئ ما غير صحيح. غير قادر على تغيير كلمة السر. يرجى المحاولة مره اخرى.',
-  'footer.footerDescription': 'تلتزم جورو بالحفاظ على المحتوى المفتوح المصدر ومنشئ المجتمع CC0.',
+  'change-password.change-password-error':
+    'اوه! شيئ ما غير صحيح. غير قادر على تغيير كلمة السر. يرجى المحاولة مره اخرى.',
+  'footer.footerDescription':
+    'تلتزم جورو بالحفاظ على المحتوى المفتوح المصدر ومنشئ المجتمع CC0.',
   'footer.company': 'شركة',
   'footer.community': 'المجتمع',
   'footer.legal': 'قانوني',
@@ -1681,55 +1729,81 @@ window.i18ln = {
   'search-result.in-this-collection': 'فى هذه المجموعة',
   'search-result.search-results-for': 'البحث عن النتتائج فى',
   'gru-image-picker.chooseFile': 'اختلر ملف..',
-  'gru-image-picker.instruction': 'قم بتحميل صورة من ملف على جهاز الكمبيوتر الخاص بك.',
-  'gru-image-picker.restriction': 'يجب أن تكون الصورة ملف JPG أو GIF أو PNG أصغر من 5 ميغابايت.',
+  'gru-image-picker.instruction':
+    'قم بتحميل صورة من ملف على جهاز الكمبيوتر الخاص بك.',
+  'gru-image-picker.restriction':
+    'يجب أن تكون الصورة ملف JPG أو GIF أو PNG أصغر من 5 ميغابايت.',
   'gru-image-picker.submit': 'استخدم صوره',
-  'gru-fib.instructions': 'يرجى كتابة إجابتك (جوابك) في الفراغ (الخانات) المتوفرة ، وانقر فوق "{{action}}".',
-  'gru-hs-image.instructions': 'يرجى تحديد الصورة (الصور) الصحيحة ، والنقر فوق "{{action}}".',
-  'gru-hs-text.instructions': 'يرجى تحديد الإجابات الصحيحة ، ثم انقر فوق "{{action}}".',
-  'gru-hot-text.instructions': 'يرجى تحديد الإجابة الصحيحة ، والنقر فوق "{{action}}".',
+  'gru-fib.instructions':
+    'يرجى كتابة إجابتك (جوابك) في الفراغ (الخانات) المتوفرة ، وانقر فوق "{{action}}".',
+  'gru-hs-image.instructions':
+    'يرجى تحديد الصورة (الصور) الصحيحة ، والنقر فوق "{{action}}".',
+  'gru-hs-text.instructions':
+    'يرجى تحديد الإجابات الصحيحة ، ثم انقر فوق "{{action}}".',
+  'gru-hot-text.instructions':
+    'يرجى تحديد الإجابة الصحيحة ، والنقر فوق "{{action}}".',
   'gru-login-prompt.title': 'مرحبا بكم فى جورو!',
   'gru-login-prompt.instructions': 'تحتاج إلى تسجيل الدخول لإكمال هذا الإجراء.',
   'gru-login-prompt.existing-user': 'بالفعل لديك حساب؟',
   'gru-login-prompt.new-user': 'انت جديد هنا؟',
   'gru-login-prompt.not-now': 'ليس الان',
   'gru-login-prompt.sign-in': 'تسجيل الدخول',
-  'gru-multiple-answer.instructions': 'يرجى تحديد الإجابة الصحيحة ، والنقر فوق "{{action}}".',
-  'gru-multiple-choice.instructions': 'يرجى تحديد الإجابة الصحيحة ، والنقر فوق "{{action}}".',
-  'gru-open-ended.instructions': 'يرجى كتابة إجابتك في الحقل أدناه ، وانقر فوق الزر"{{action}}".  لحفظ ردك عند الانتهاء.',
+  'gru-multiple-answer.instructions':
+    'يرجى تحديد الإجابة الصحيحة ، والنقر فوق "{{action}}".',
+  'gru-multiple-choice.instructions':
+    'يرجى تحديد الإجابة الصحيحة ، والنقر فوق "{{action}}".',
+  'gru-open-ended.instructions':
+    'يرجى كتابة إجابتك في الحقل أدناه ، وانقر فوق الزر"{{action}}".  لحفظ ردك عند الانتهاء.',
   'gru-open-ended.characterLimit': 'حد الحروف',
   'gru-question-viewer.answer': 'اجابة',
   'gru-question-viewer.question': 'سؤال',
-  'gru-true-false.instructions': 'يرجى تحديد الإجابة الصحيحة ، والنقر فوق "{{action}}".',
+  'gru-true-false.instructions':
+    'يرجى تحديد الإجابة الصحيحة ، والنقر فوق "{{action}}".',
   'gru-true-false.true': 'صحيح',
   'gru-true-false.false': 'خطأ',
-  'gru-reorder.instructions': 'يرجى اعادة ترتيب الاجابات فى ترتيب صحيح ،ثم اضغط"{{action}}".',
+  'gru-reorder.instructions':
+    'يرجى اعادة ترتيب الاجابات فى ترتيب صحيح ،ثم اضغط"{{action}}".',
   'student-first-experience.preStudyTitle': 'دراسة مسبقة لـ  {{title}}',
-  'student-first-experience.lp-compute-inprogress': 'نحن نحسب الكفاءة الأولية للملف الشخصي الخاص بك في {{title}}',
+  'student-first-experience.lp-compute-inprogress':
+    'نحن نحسب الكفاءة الأولية للملف الشخصي الخاص بك في {{title}}',
   'student-first-experience.route0-action.accept': 'اقبل',
   'student-first-experience.route0-action.ignore': 'تجاهل',
   'student-first-experience.competency.popover.title': ' {{title}}هايلاين',
-  'student-first-experience.competency.popover.content': 'تحتاج إلى دراسة جميع المعايير بين السكاي لاين وخط التقديرهذا للوصول إلى وجهتك.',
-  'student-first-experience.assigned-course-title': 'تم تعيين الدوره ل {{title}}',
+  'student-first-experience.competency.popover.content':
+    'تحتاج إلى دراسة جميع المعايير بين السكاي لاين وخط التقديرهذا للوصول إلى وجهتك.',
+  'student-first-experience.assigned-course-title':
+    'تم تعيين الدوره ل {{title}}',
   'student-first-experience.start-studying': 'بدأ الدراسة',
   'student-first-experience.show-route': 'عرض الطريق',
   'student-first-experience.review-destination': 'معاينة الوجهة',
-  'student-first-experience.competency-level.title': ' {{title}}ملف الكفائة الخاص بك',
-  'student-first-experience.competency-level.mastery': '{{count}} المعايير المميزة',
-  'student-first-experience.competency-level.in-progress': '{{count}}معايير قيد التنفيذ',
-  'student-first-experience.competency-level.not-started': '{{count}}معايير لم تبدأ',
-  'student-first-experience.competency-level.your-skyline': 'سكاي لاين الخاص بك',
+  'student-first-experience.competency-level.title':
+    ' {{title}}ملف الكفائة الخاص بك',
+  'student-first-experience.competency-level.mastery':
+    '{{count}} المعايير المميزة',
+  'student-first-experience.competency-level.in-progress':
+    '{{count}}معايير قيد التنفيذ',
+  'student-first-experience.competency-level.not-started':
+    '{{count}}معايير لم تبدأ',
+  'student-first-experience.competency-level.your-skyline':
+    'سكاي لاين الخاص بك',
   'student-first-experience.explanatory.master.title': 'مُتقن',
-  'student-first-experience.explanatory.master.desc': 'الاشارة بأن هناك دليل على انك قمت بإتقان المعايير بنجاح',
+  'student-first-experience.explanatory.master.desc':
+    'الاشارة بأن هناك دليل على انك قمت بإتقان المعايير بنجاح',
   'student-first-experience.explanatory.in-progress.title': 'قيد التنفيذ',
-  'student-first-experience.explanatory.in-progress.desc': 'يشير إلى أن هناك دليلًا على أنك بدأت دراسة المعايير وتتقدم نحو تحقيق إتقانها',
+  'student-first-experience.explanatory.in-progress.desc':
+    'يشير إلى أن هناك دليلًا على أنك بدأت دراسة المعايير وتتقدم نحو تحقيق إتقانها',
   'student-first-experience.explanatory.not-started.title': 'لم يبدأ',
-  'student-first-experience.explanatory.not-started.desc': 'يشير إلى أنه لا يوجد دليل على أنك لم تبدأ بعد في دراسة المعايير',
+  'student-first-experience.explanatory.not-started.desc':
+    'يشير إلى أنه لا يوجد دليل على أنك لم تبدأ بعد في دراسة المعايير',
   'student-first-experience.competency-level-partial.desc1': 'انت حالياً فى',
-  'student-first-experience.competency-level-partial.desc2': 'هذا هو ملفك الشخصي في . يُظهر إتقانك للمعايير (يُعرف أيضًا باسم الكفاءات) في مناطق التركيز المختلفة في (نطاقات الملقب). تُظهر الأعمدة المجالات وتظهر المربعات المعايير داخل كل مجال ',
-  'student-first-experience.competency-level-partial.desc3': 'أثناء إتقان كل من الكفاءات ، يتم تحديث المربع المقابل إلى اللون الأزرق الداكن.',
-  'student-first-experience.competency-level-partial.desc4': 'سكاي لاين هو الخط الأبيض الكثيف الذي يظهر أعلى الكفاءات التي تتقنها في كل مجال رياضي.',
-  'student-first-experience.competency-level-partial.desc5': 'إذا كان سكاي لاين في أسفل المجال ، فهذا يعني أن النظام يحتاج إلى مزيد من المعلومات ليتمكن من تحديد مكانك في هذا الموضوع. بمجرد البدء في الدروس والتحقق من وجود تفاهمات ، سيظهر السكاي لاين وسوف تتحدث كفاءتك في كل مجال.',
+  'student-first-experience.competency-level-partial.desc2':
+    'هذا هو ملفك الشخصي في . يُظهر إتقانك للمعايير (يُعرف أيضًا باسم الكفاءات) في مناطق التركيز المختلفة في (نطاقات الملقب). تُظهر الأعمدة المجالات وتظهر المربعات المعايير داخل كل مجال ',
+  'student-first-experience.competency-level-partial.desc3':
+    'أثناء إتقان كل من الكفاءات ، يتم تحديث المربع المقابل إلى اللون الأزرق الداكن.',
+  'student-first-experience.competency-level-partial.desc4':
+    'سكاي لاين هو الخط الأبيض الكثيف الذي يظهر أعلى الكفاءات التي تتقنها في كل مجال رياضي.',
+  'student-first-experience.competency-level-partial.desc5':
+    'إذا كان سكاي لاين في أسفل المجال ، فهذا يعني أن النظام يحتاج إلى مزيد من المعلومات ليتمكن من تحديد مكانك في هذا الموضوع. بمجرد البدء في الدروس والتحقق من وجود تفاهمات ، سيظهر السكاي لاين وسوف تتحدث كفاءتك في كل مجال.',
   'student-first-experience.units.other': 'وحدان',
   'player.gru-navigation.view-report': 'عرض التقرير',
   'player.gru-navigator.see-usage-report': 'شاهد تقرير الاستخدام.',
@@ -2206,37 +2280,53 @@ window.i18ln = {
   'gru-take-tour.profile.stepFive.description':
     'إذا أعجبك محتوى إحدى المساقات الدراسية، يمكنك متابعة الأشخاص الذين قاموا ببنائه. كما يمكنك مشاهدة المتابعين. ',
   'gru-take-tour.profile.stepSix.title': 'شارات',
-  'gru-take-tour.profile.stepSix.description': 'مراجعة الشارات التي تلقيتها. تتلقى شارة إذا أكملت تقييمًا قياسيًا تم تعيينه بواسطة معلمك.',
+  'gru-take-tour.profile.stepSix.description':
+    'مراجعة الشارات التي تلقيتها. تتلقى شارة إذا أكملت تقييمًا قياسيًا تم تعيينه بواسطة معلمك.',
   'gru-tour.assessments-settings.stepOne.title': 'الملاحة وسجل',
-  'gru-tour.assessments-settings.stepOne.description': 'يحدد هذا الإعداد كيف يمكن للطلاب الانتقال خلال التقييم ويظهر ما إذا كانت إجاباتهم صحيحة أو غير صحيحة. لا تظهر لهم مفتاح الإجابة.',
+  'gru-tour.assessments-settings.stepOne.description':
+    'يحدد هذا الإعداد كيف يمكن للطلاب الانتقال خلال التقييم ويظهر ما إذا كانت إجاباتهم صحيحة أو غير صحيحة. لا تظهر لهم مفتاح الإجابة.',
   'gru-tour.assessments-settings.stepTwo.title': 'مفتاح الإجابة وعدد المحاولات',
-  'gru-tour.assessments-settings.stepTwo.description': 'يتيح هذا الى الإعداد إمكانية الكشف عن مفتاح الإجابة وتحديد عدد محاولات الطلاب في التقييم.',
+  'gru-tour.assessments-settings.stepTwo.description':
+    'يتيح هذا الى الإعداد إمكانية الكشف عن مفتاح الإجابة وتحديد عدد محاولات الطلاب في التقييم.',
   'gru-tour.overview.stepOne.title': 'خطة الدورة التعليمية',
-  'gru-tour.overview.stepOne.description': 'توفر خريطة الدورة التدريبية لطلابك إمكانية الوصول إلى جميع التقييمات والمجموعات التي تقوم بتعيينها لهم.',
+  'gru-tour.overview.stepOne.description':
+    'توفر خريطة الدورة التدريبية لطلابك إمكانية الوصول إلى جميع التقييمات والمجموعات التي تقوم بتعيينها لهم.',
   'gru-tour.overview.stepTwo.title': 'كود الفصل',
-  'gru-tour.overview.stepTwo.description': 'يحتوي كل فصل دراسي تنشئه على رمز صف فريد. ستقدم هذا الرمز للطلاب عندما تكون جاهزًا لهم للانضمام إلى الفصل الدراسي والوصول إلى المحتوى الخاص بك.',
+  'gru-tour.overview.stepTwo.description':
+    'يحتوي كل فصل دراسي تنشئه على رمز صف فريد. ستقدم هذا الرمز للطلاب عندما تكون جاهزًا لهم للانضمام إلى الفصل الدراسي والوصول إلى المحتوى الخاص بك.',
   'gru-tour.overview.stepThree.title': 'مراقبة بيانات الطالب و الفصل',
-  'gru-tour.overview.stepThree.description': 'يتيح لك ذلك الاطلاع على بيانات تقييم الطالب والفصل الفردي عندما يستكمل الطلاب التقييمات التي تعد جزءًا من الدورة التدريبية.',
+  'gru-tour.overview.stepThree.description':
+    'يتيح لك ذلك الاطلاع على بيانات تقييم الطالب والفصل الفردي عندما يستكمل الطلاب التقييمات التي تعد جزءًا من الدورة التدريبية.',
   'gru-tour.overview.stepFour.title': 'معلومات الفصل الدراسي',
-  'gru-tour.overview.stepFour.description': 'يمكنك هنا تعديل اسم الفصل الدراسي ونشر إعلانات لطلابك ومشاهدة أسماء الطلاب المسجلين في الفصل وحذف الفصل الدراسي الخاص بك.',
+  'gru-tour.overview.stepFour.description':
+    'يمكنك هنا تعديل اسم الفصل الدراسي ونشر إعلانات لطلابك ومشاهدة أسماء الطلاب المسجلين في الفصل وحذف الفصل الدراسي الخاص بك.',
   'gru-tour.overview.stepFive.title': 'تحرير محتوى الدورة التدريبية الخاصة بك',
-  'gru-tour.overview.stepFive.description': 'تحرير محتوى الدورة التدريبية الخاصة بك',
+  'gru-tour.overview.stepFive.description':
+    'تحرير محتوى الدورة التدريبية الخاصة بك',
   'gru-tour.overview.stepSix.title': 'رصد التقدم في الوقت الحقيقي!',
-  'gru-tour.overview.stepSix.description': 'استخدم لوحة القيادة في الوقت الفعلي لمراقبة تقدم الفصل في التقييم في الوقت الفعلي. <br> <br> انقر على أيقونة "Go Live " الموجودة على يسار كل تقييم لبدء تقييم في الوقت الحقيقي للطلاب',
+  'gru-tour.overview.stepSix.description':
+    'استخدم لوحة القيادة في الوقت الفعلي لمراقبة تقدم الفصل في التقييم في الوقت الفعلي. <br> <br> انقر على أيقونة "Go Live " الموجودة على يسار كل تقييم لبدء تقييم في الوقت الحقيقي للطلاب',
   'gru-tour.quick-start.stepOne.title': 'التنقل في الفصول الدراسية الخاصة بك',
-  'gru-tour.quick-start.stepOne.description': 'هذه طريقة عرض للفصل الدراسي المنشأ حديثًا. للعودة إلى الفصل في أي وقت ، انقر فوق "الفصول الدراسية " واستخدم القائمة المنسدلة لتحديد الفصل الدراسي الذي ترغب في دخوله.',
+  'gru-tour.quick-start.stepOne.description':
+    'هذه طريقة عرض للفصل الدراسي المنشأ حديثًا. للعودة إلى الفصل في أي وقت ، انقر فوق "الفصول الدراسية " واستخدم القائمة المنسدلة لتحديد الفصل الدراسي الذي ترغب في دخوله.',
   'gru-tour.quick-start.stepTwo.title': 'ابدء؟ إنشاء تقييم!',
-  'gru-tour.quick-start.stepTwo.description': 'نقترح إنشاء تقييم كطريقة للبدء في جورو وتقييم المستويات الحالية لفهم الطلاب في الفصل الدراسي.',
+  'gru-tour.quick-start.stepTwo.description':
+    'نقترح إنشاء تقييم كطريقة للبدء في جورو وتقييم المستويات الحالية لفهم الطلاب في الفصل الدراسي.',
   'gru-tour.real-time.stepOne.title': 'انهيار الردود',
-  'gru-tour.real-time.stepOne.description': 'انقر على كل سؤال للاطلاع على تفاصيل كيفية إجابة الطلاب.',
+  'gru-tour.real-time.stepOne.description':
+    'انقر على كل سؤال للاطلاع على تفاصيل كيفية إجابة الطلاب.',
   'gru-tour.real-time.stepTwo.title': 'بيانات الطالب الفردية',
-  'gru-tour.real-time.stepTwo.description': 'حدد كل مربع من طبقات الطلاب لمشاهدة تقارير بيانات الطلاب الفردية.',
+  'gru-tour.real-time.stepTwo.description':
+    'حدد كل مربع من طبقات الطلاب لمشاهدة تقارير بيانات الطلاب الفردية.',
   'gru-tour.real-time.stepThree.title': 'حدد عرض',
-  'gru-tour.real-time.stepThree.description': 'حدد "عرض العنوان " أو "عرض القائمة " للاطلاع على خيارات لعرض البيانات.',
+  'gru-tour.real-time.stepThree.description':
+    'حدد "عرض العنوان " أو "عرض القائمة " للاطلاع على خيارات لعرض البيانات.',
   'gru-tour.real-time.stepFour.title': 'النتيجة المستعارة',
-  'gru-tour.real-time.stepFour.description': 'انظر متوسط الفصل المحسوب في الوقت الحقيقي لجميع الردود.',
+  'gru-tour.real-time.stepFour.description':
+    'انظر متوسط الفصل المحسوب في الوقت الحقيقي لجميع الردود.',
   'gru-tour.real-time.stepFive.title': 'بيانات المشروع مجهولة',
-  'gru-tour.real-time.stepFive.description': 'استخدم هذا الخيار لعرض طريقة عرض مجهولة لبيانات الطالب.',
+  'gru-tour.real-time.stepFive.description':
+    'استخدم هذا الخيار لعرض طريقة عرض مجهولة لبيانات الطالب.',
   'gru-course-play.hide-unit-details': 'إخفاء وحدة البيانات الوصفية',
   'gru-course-play.view-unit-details': 'عرض  وحدة البيانات الوصفية',
   'gru-course-play.performance': 'الاداء',
@@ -2244,11 +2334,14 @@ window.i18ln = {
   'gru-century-skills.legends.conley': 'كونلي أربعة مفاتيح',
   'gru-century-skills.legends.framework': 'P21 الإطار',
   'gru-century-skills.legends.national': 'المركز القومي للبحوث للحياة والعمل',
-  'gru-century-skills.content.groups.cognitive': 'المهارات المعرفية الأساسية والاستراتيجيات',
+  'gru-century-skills.content.groups.cognitive':
+    'المهارات المعرفية الأساسية والاستراتيجيات',
   'gru-century-skills.content.groups.content': 'معرفة المحتوى الرئيسي',
-  'gru-century-skills.content.groups.learning': 'مهارات التعلم الأساسية والتقنيات',
+  'gru-century-skills.content.groups.learning':
+    'مهارات التعلم الأساسية والتقنيات',
   'gru-rubric-edit.upload-rubric': 'رفع نموذج التقييم',
-  'gru-rubric-edit.copy.success-message': 'لقد قمت بنسخ نموذج تقييم . هل ترغب في تعديل نموذج التقييم هذا؟',
+  'gru-rubric-edit.copy.success-message':
+    'لقد قمت بنسخ نموذج تقييم . هل ترغب في تعديل نموذج التقييم هذا؟',
   'gru-rubric-creation.url': 'رابط',
   'gru-rubric-creation.upload-file': 'تحميل الملف',
   'gru-rubric-creation.add-category': 'ضِف فئة جديدة',
@@ -2617,11 +2710,6 @@ window.i18ln = {
   'content.oa.reference.pdf': 'Pdf',
   'content.oa.reference.presentation': 'Presentation',
   'content.oa.reference.uploaded': 'Uploaded',
-  'gru-add-to.OA-info':
-    'The activities listed here <b>do not</b> belong to another lesson or course',
-  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
-  'gru-add-to.add-oa-to-lesson-lead':
-    'Select a activity to add to this lesson.',
   'gru-share-pop-over.share-OA': 'Offline Activity',
   'gru-suggest-test.pre-tessignaturet-lead':
     'A pre-test is suggested to measure y',

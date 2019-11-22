@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['class-atc-view'],
@@ -411,15 +412,8 @@ export default Ember.Component.extend({
       component
         .get('classActivitiesService')
         .addActivityToClass(classId, contentId, contentType, date)
-        .then(newContentId => {
+        .then(() => {
           content.set('isAdded', true);
-          let classSetting = this.get('class.setting'),
-            allowMasteryAccrual = classSetting['mastery.applicable'];
-          if (allowMasteryAccrual && allowMasteryAccrual === 'true') {
-            component
-              .get('classActivitiesService')
-              .updateMasteryAccrualClassActivity(classId, newContentId, true);
-          }
         });
     },
 
@@ -686,9 +680,7 @@ export default Ember.Component.extend({
         }
         if (otherGradeLevelCompetency && otherGradeLevelCompetency.length) {
           let otherGradeTopComp = [];
-          let cloneOtherGrade = JSON.parse(
-            JSON.stringify(otherGradeLevelCompetency)
-          );
+          let cloneOtherGrade = getObjectsDeepCopy(otherGradeLevelCompetency);
           cloneOtherGrade
             .map(grade => grade.domains)
             .map((domains, gradeIndex) => {

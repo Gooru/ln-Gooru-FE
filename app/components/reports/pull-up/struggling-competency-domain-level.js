@@ -7,13 +7,13 @@ export default Ember.Component.extend({
   // Property
 
   /**
-   * @property {Object} gradeDomainsList
+   * @property {Array} gradeDomainsList
    * property hold grade domain list
    */
-  gradeDomainsList: null,
+  gradeDomainsList: [],
 
   /**
-   * @property {Object} gradeDomainIndex
+   * @property {Number} gradeDomainIndex
    * property hold grade domain index
    */
   gradeDomainIndex: null,
@@ -23,8 +23,8 @@ export default Ember.Component.extend({
 
   actions: {
     // Action triggered when click domain
-    toggleDomain(test) {
-      this.$(`.domain-accordion-${test}`).slideToggle(500);
+    toggleDomain(domainIndex) {
+      this.$(`.domain-accordion-${domainIndex}`).slideToggle(500);
     },
 
     //Action triggered when click close

@@ -71,9 +71,9 @@
         </div>
     {{/if}}
     <div class="sc-student-content-section-container">
-      <div class="sc-student-content-section {{if  (and  (or (not showTenantLibraries) showLibraryCollection) (eq collectionContents.length 0) (not isLoading)) 'no-content' }}">
+      <div class="sc-student-content-section {{if  hasCollectionContent 'no-content' }}">
         {{#unless (and showTenantLibraries (not showLibraryCollection))}}
-        {{#if (gt collectionContents.length 0)}}
+        {{#if collectionContents}}
         {{#each collectionContents as |content|}}
         {{cards/dca-search-collection-card
         onPreviewContent="onPlayCollection"

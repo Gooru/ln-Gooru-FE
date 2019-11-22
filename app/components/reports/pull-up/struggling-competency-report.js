@@ -54,7 +54,7 @@ export default Ember.Component.extend({
    * @property {Array} studentsPerformanceList
    * property hold student performance list
    */
-  studentsPerformanceList: null,
+  studentsPerformanceList: [],
 
   /**
    * @property {Array} studentsPerformanceList
@@ -72,7 +72,7 @@ export default Ember.Component.extend({
    * @property {Array} menuItems
    * property hold menu list that are showing in dropdown
    */
-  menuItems: null,
+  menuItems: [],
 
   /**
    * @property {Object} selectedMenuItem
@@ -84,7 +84,7 @@ export default Ember.Component.extend({
    * @property {Array} libraries
    * property hold the library content
    */
-  libraries: null,
+  libraries: [],
 
   /**
    * @property {Boolean} showTenantLibraries
@@ -126,6 +126,29 @@ export default Ember.Component.extend({
    * @property {Boolean} isLoading
    */
   isLoading: true,
+
+  /**
+   * @property {Boolean} hasCollectionContent
+   */
+
+  hasCollectionContent: Ember.computed(
+    'collectionContents.[]',
+    'showLibraryCollection',
+    'showTenantLibraries',
+    'isLoading',
+    function() {
+      let showTenantLibraries = this.get('showTenantLibraries');
+      let showLibraryCollection = this.get('showLibraryCollection');
+      let collectionContents = this.get('collectionContents');
+      let isLoading = this.get('isLoading');
+
+      return (
+        (!showTenantLibraries || showLibraryCollection) &&
+        !collectionContents.length &&
+        !isLoading
+      );
+    }
+  ),
 
   //-------------------------------------------------------
   //Actions
@@ -174,8 +197,8 @@ export default Ember.Component.extend({
     /*
      * Action triggered when click search dropdown from competency pullup
      */
-    onSelectDropdown() {
-      Ember.$('.search-filter-container-list').slideToggle(500);
+    onSelectDropdown(component = this) {
+      component.$('.search-filter-container-list').slideToggle(500);
     },
 
     /**
@@ -197,7 +220,7 @@ export default Ember.Component.extend({
       component.set('startAt', 0);
       component.set('isShowMoreButton', false);
       component.set('isLoading', true);
-      component.actions.onSelectDropdown();
+      component.actions.onSelectDropdown(component);
       component.fetchSuggestedCollection(item);
     },
 

@@ -74,9 +74,12 @@ window.i18ln = {
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'reroute.suggestion': 'reroute suggestion',
-  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.upload-image': 'upload image',
   'common.by-question': 'question-by-question',
   'rubric-details': 'Rubric Details',
@@ -2800,7 +2803,8 @@ window.i18ln = {
   'teacher-resource': 'Teacher Resources',
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
-  'common.no-lesson-plan-info-message': 'There is no lesson plan for this lesson.',
+  'common.no-lesson-plan-info-message':
+    'There is no lesson plan for this lesson.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
   'common.activity': 'Activity Title',
@@ -2828,5 +2832,4 @@ window.i18ln = {
   'common.select-your-other-classes-from-below':
     'Select your other classes from below to manage in this class',
   'common.multi-grade-view': 'Multi-grade view. Viewing class'
-
 };

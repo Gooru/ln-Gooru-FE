@@ -13,6 +13,8 @@ export default Ember.Service.extend(StoreMixin, {
 
   adapter: null,
 
+  courseContainer: {},
+
   /**
    * @requires service:api-sdk/lesson
    */
@@ -67,24 +69,32 @@ export default Ember.Service.extend(StoreMixin, {
    * @param {string} courseId
    * @returns {Promise|Content/Course}
    */
-  fetchById: function(courseId) {
+  fetchById: function(courseId, allowCachedCourse) {
     const service = this;
-    return service
-      .get('adapter')
-      .getCourseById(courseId)
-      .then(function(courseData) {
-        let course = service.get('serializer').normalizeCourse(courseData);
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      const courseContainer = service.get('courseContainer');
+      if (allowCachedCourse && courseContainer[courseId]) {
+        resolve(courseContainer[courseId]);
+      } else {
         return service
-          .get('profileService')
-          .readUserProfile(courseData.owner_id)
-          .then(function(profile) {
-            course.set('owner', profile);
-            return course;
+          .get('adapter')
+          .getCourseById(courseId)
+          .then(function(courseData) {
+            let course = service.get('serializer').normalizeCourse(courseData);
+            return service
+              .get('profileService')
+              .readUserProfile(courseData.owner_id)
+              .then(function(profile) {
+                course.set('owner', profile);
+                courseContainer[courseId] = course;
+                resolve(courseContainer[courseId]);
+              });
+          })
+          .catch(function(error) {
+            reject(error);
           });
-      })
-      .catch(function(error) {
-        return error;
-      });
+      }
+    });
   },
 
   /**

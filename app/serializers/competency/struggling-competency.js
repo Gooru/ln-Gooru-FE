@@ -29,7 +29,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
             gradeSeq: grade.grade_Seq,
             description: grade.description,
             fwCode: grade.fw_code,
-            domains: serialize.normalizeDomain(grade.domains)
+            domains: serialize.normalizeDomains(grade.domains)
           })
         );
       });
@@ -40,7 +40,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * Normalized data of struggling competency domains
    * @return {Object}
    */
-  normalizeDomain(payload) {
+  normalizeDomains(payload) {
     let domains = payload ? payload : null;
     let domainList = [];
     if (domains && domains.length) {

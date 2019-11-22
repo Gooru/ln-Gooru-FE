@@ -2770,9 +2770,12 @@ window.i18ln = {
     'Note: This competency is not covered by the {{framework}} framework',
   'common.a-offline-activity': 'a offline activity',
   'reroute.suggestion': 'reroute suggestion',
-  'reroute.suggestion.title': 'Having difficult with the concepts?',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
   'reroute.suggestion.desc':
-    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.template': 'Template',
   'assessment-template-msg':
     'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
