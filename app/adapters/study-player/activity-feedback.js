@@ -8,9 +8,9 @@ import Ember from 'ember';
 export default Ember.Object.extend({
   session: Ember.inject.service('session'),
 
-  namespace: '/api/ds/users/v2/activity',
+  activityFeedbackNamespace: '/api/ds/users/v2/activity',
 
-  namespacefc: '/api/nucleus/v1/lookups',
+  feedbackCategoryNamespace: '/api/nucleus/v1/lookups',
 
   /**
    * Fetch feedback category
@@ -18,7 +18,7 @@ export default Ember.Object.extend({
    */
   getFeedbackCategories(contentType, userCategoryId) {
     const adapter = this;
-    const namespace = adapter.get('namespacefc');
+    const namespace = adapter.get('feedbackCategoryNamespace');
     const url = `${namespace}/feedback-categories?content_type=${contentType}&&user_category_id=${userCategoryId}`;
     const options = {
       type: 'GET',
@@ -33,7 +33,7 @@ export default Ember.Object.extend({
    */
   fetchActivityFeedback(contentId, userId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    const namespace = adapter.get('activityFeedbackNamespace');
     const url = `${namespace}/feedbacks?content_id=${contentId}&&user_id=${userId}`;
     const options = {
       type: 'GET',
@@ -49,7 +49,7 @@ export default Ember.Object.extend({
    */
   submitUserFeedback(feedbackData) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    const namespace = adapter.get('activityFeedbackNamespace');
     const url = `${namespace}/feedbacks`;
     const options = {
       type: 'POST',

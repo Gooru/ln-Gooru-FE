@@ -57,6 +57,7 @@ export default Ember.Component.extend({
       component.updateSelfReport();
       Ember.run.later(function() {
         component.set('isShowActivityFeedback', true);
+        component.set('format', 'assessment-external');
       }, 5000);
     },
 
@@ -107,6 +108,11 @@ export default Ember.Component.extend({
    * @property {Boolean} isShowActivityFeedback
    */
   isShowActivityFeedback: false,
+
+  /**
+   * @property {String} format
+   */
+  format: '',
 
   /**
    * @property {Boolean} isValidScore

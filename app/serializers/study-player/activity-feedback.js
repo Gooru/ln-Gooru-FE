@@ -8,18 +8,17 @@ export default Ember.Object.extend({
   getFeedbackCategories(payload) {
     let feedbackCategory = payload ? payload.feedback_categories : [];
     let categoryList = [];
-    if (feedbackCategory.length) {
-      feedbackCategory.map(category => {
-        categoryList.pushObject(
-          Ember.Object.create({
-            categoryId: category.id,
-            categoryName: category.category_name,
-            feedbackTypeId: category.feedback_type_id,
-            maxScale: category.max_scale
-          })
-        );
-      });
-    }
+    feedbackCategory.map(category => {
+      categoryList.pushObject(
+        Ember.Object.create({
+          categoryId: category.id,
+          categoryName: category.category_name,
+          feedbackTypeId: category.feedback_type_id,
+          maxScale: category.max_scale,
+          rating: 0
+        })
+      );
+    });
     return categoryList;
   },
 

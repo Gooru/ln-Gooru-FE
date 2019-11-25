@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { ROLES } from 'gooru-web/config/config';
+import { USER_CATEGORY_ID } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -14,8 +14,6 @@ export default Ember.Component.extend({
    * @property {activityFeedbackService}
    */
   activityFeedbackService: Ember.inject.service('api-sdk/activity-feedback'),
-
-  isdescription: false,
 
   /**
    * Observe the resource change
@@ -38,7 +36,7 @@ export default Ember.Component.extend({
   actions: {
     showDescription: function() {
       const component = this;
-      component.set('isdescription', true);
+      component.$('.description').slideToggle();
     },
 
     onNext: function() {
@@ -48,8 +46,7 @@ export default Ember.Component.extend({
         .get('activityFeedbackService')
         .submitUserFeedback(learningFeedback)
         .then(() => {
-          let currentIndex = component.get('resourceInfo.index');
-          component.sendAction('onNext', currentIndex);
+          component.sendAction('onNext');
         });
     },
 
@@ -58,6 +55,35 @@ export default Ember.Component.extend({
       component.sendAction('onSkipFeedback');
     }
   },
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {String} collection format
+   */
+  contentType: Ember.computed('resourceInfo', function() {
+    let component = this;
+    let contentFormat = component.get('resourceInfo.content_format');
+    let format = component.get('format');
+    if (contentFormat) {
+      return contentFormat;
+    } else if (format) {
+      return format;
+    } else {
+      return 'question';
+    }
+  }),
+
+  contentId: Ember.computed('resourceInfo', function() {
+    let component = this;
+    let format = component.get('format');
+    if (format === 'offline-activity') {
+      return component.get('resourceInfo.oaId');
+    } else {
+      return component.get('resourceInfo.id');
+    }
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -69,32 +95,12 @@ export default Ember.Component.extend({
 
   fetchLearningActivityFeedback() {
     const component = this;
-    let userCategoryId, contentType, contentId;
     let userId = component.get('session.userId');
-    let format = component.get('format');
-    if (format === 'offline-activity') {
-      contentType = format;
-      contentId = component.get('resourceInfo.oaId');
-    } else if (format === 'assessment-external') {
-      contentType = format;
-      contentId = component.get('resourceInfo.id');
-    } else if (format === 'collection-external') {
-      contentType = format;
-      contentId = component.get('resourceInfo.id');
-    } else {
-      contentType = component.get('resourceInfo.content_format')
-        ? component.get('resourceInfo.content_format')
-        : 'question';
-      contentId = component.get('resourceInfo.id');
-    }
+    let contentType = component.get('contentType');
+    let contentId = component.get('contentId');
     let role = component.get('session.role');
-    if (role === ROLES.STUDENT) {
-      userCategoryId = 2;
-    } else if (role === ROLES.TEACHER) {
-      userCategoryId = 1;
-    } else {
-      userCategoryId = 3;
-    }
+    let userCategoryId =
+      USER_CATEGORY_ID[`${role}`] || USER_CATEGORY_ID.other;
     Ember.RSVP.hash({
       categoryLists: component
         .get('activityFeedbackService')
@@ -103,25 +109,19 @@ export default Ember.Component.extend({
         .get('activityFeedbackService')
         .fetchActivityFeedback(contentId, userId)
     }).then(function(hash) {
-      if (hash.categoryLists.length) {
-        hash.categoryLists.map(list => {
-          if (list.feedbackTypeId === 1) {
-            list.rating = 0;
-          }
-        });
-      }
-
       if (hash.activityFeedback.length) {
         hash.activityFeedback.map(feedback => {
-          hash.categoryLists.map(list => {
-            if (list.categoryId === feedback.categoryId) {
-              if (list.feedbackTypeId === 1) {
-                list.rating = feedback.rating;
-              } else {
-                list.comments = feedback.comments;
-              }
+          let category = hash.categoryLists.findBy(
+            'categoryId',
+            feedback.categoryId
+          );
+          if (category) {
+            if (category.feedbackTypeId === 1) {
+              category.rating = feedback.rating;
+            } else {
+              category.comments = feedback.comments;
             }
-          });
+          }
         });
       }
       component.set('categoryLists', hash.categoryLists);
@@ -135,29 +135,10 @@ export default Ember.Component.extend({
 
   feedbackObj() {
     const component = this;
-    let contentId, contentType, userCategoryId;
-    let format = component.get('format');
-    if (format === 'offline-activity') {
-      contentType = format;
-      contentId = component.get('resourceInfo.oaId');
-    } else if (format === 'assessment-external') {
-      contentType = format;
-      contentId = component.get('resourceInfo.id');
-    } else {
-      contentType = component.get('resourceInfo.content_format')
-        ? component.get('resourceInfo.content_format')
-        : 'question';
-      contentId = component.get('resourceInfo.id');
-    }
     let userId = component.get('session.userId');
     let role = component.get('session.role');
-    if (role === ROLES.STUDENT) {
-      userCategoryId = 2;
-    } else if (role === ROLES.TEACHER) {
-      userCategoryId = 1;
-    } else {
-      userCategoryId = 3;
-    }
+    let userCategoryId =
+      USER_CATEGORY_ID[`${role}`] || USER_CATEGORY_ID.other;
     let userFeedback = Ember.A([]);
     let categoryLists = component.get('categoryLists');
     categoryLists.map(category => {
@@ -172,8 +153,8 @@ export default Ember.Component.extend({
       userFeedback.pushObject(feedbackObj);
     });
     let userFeedbackObj = {
-      content_id: contentId,
-      content_type: contentType,
+      content_id: component.get('contentId'),
+      content_type: component.get('contentType'),
       user_category_id: userCategoryId,
       user_feedbacks: userFeedback,
       user_id: userId

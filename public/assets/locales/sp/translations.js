@@ -2800,7 +2800,8 @@ window.i18ln = {
   'teacher-resource': 'Teacher Resources',
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
-  'common.no-lesson-plan-info-message': 'There is no lesson plan for this lesson.',
+  'common.no-lesson-plan-info-message':
+    'There is no lesson plan for this lesson.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
   'common.activity': 'Activity Title',
@@ -2827,6 +2828,12 @@ window.i18ln = {
   'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
   'common.select-your-other-classes-from-below':
     'Select your other classes from below to manage in this class',
-  'common.multi-grade-view': 'Multi-grade view. Viewing class'
-
+  'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.feedback-note':
+    'Please take a minute to rate the collection and its resources. It really helps!',
+  'common.skip-feedback': 'Skip Feedback',
+  'common.external-collection.index-message':
+    'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
+  'common.external-assessment.index-message':
+    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here'
 };

@@ -53,6 +53,7 @@ export default Ember.Component.extend({
       component.updateSelfReport();
       Ember.run.later(function() {
         component.set('isShowActivityFeedback', true);
+        component.set('format', 'collection-external');
       }, 5000);
     },
 
@@ -127,6 +128,11 @@ export default Ember.Component.extend({
    * @property {Boolean} isShowActivityFeedback
    */
   isShowActivityFeedback: false,
+
+  /**
+   * @property {String} format
+   */
+  format: '',
 
   // -------------------------------------------------------------------------
   // Methods
@@ -227,6 +233,7 @@ export default Ember.Component.extend({
     component.set('isDisableTimeEditor', true);
     component.set('isValidtime', false);
     component.set('isShowActivityFeedback', false);
+    component.set('format', '');
   },
 
   /**

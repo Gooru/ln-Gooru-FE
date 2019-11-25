@@ -1,6 +1,6 @@
 .study-player-external {
   .gru-study-header {
-    position: relative;
+    // position: relative;
     height: 93px;
   }
   .gru-header {
@@ -10,16 +10,18 @@
     padding-top: 0px;
   }
   .player-container {
-    overflow: auto;
-    height: calc(100vh - 143px);
+    padding: 40px 0 50px 0;
+    height: 100%;
+
+    // height: calc(100vh - 143px);
 
     .player {
       height: 100%;
       overflow: auto;
     }
-    &.iframe-player-container {
-      height: calc(100vh - 80px);
-    }
+    // &.iframe-player-container {
+    //   height: calc(100vh - 80px);
+    // }
   }
   &.fullscreen {
     &.fullscreen {

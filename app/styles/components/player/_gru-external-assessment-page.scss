@@ -1,21 +1,22 @@
-@media screen and (min-width: $screen-1024) and (min-height: $screen-sm) {
-  .gru-external-assessment-page {
-    background-position: right !important;
-  }
-}
-@media screen and (min-width: $screen-1024) and (min-height: $screen-1366) {
-  .gru-external-assessment-page {
-    background-position: left !important;
-  }
-}
+// @media screen and (min-width: $screen-1024) and (min-height: $screen-sm) {
+//   .gru-external-assessment-page {
+//     background-position: right !important;
+//   }
+// }
+// @media screen and (min-width: $screen-1024) and (min-height: $screen-1366) {
+//   .gru-external-assessment-page {
+//     background-position: left !important;
+//   }
+// }
 .gru-external-assessment-page {
   background-image: url("gooru/assessment-start-page.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   background-position: center;
-  display: flex;
+  display: grid;
+  overflow: auto;
   .external-assessment-landing-page {
     display: flex;
     padding: 30px;
@@ -37,17 +38,12 @@
           padding: 15px 20px;
           .header-content {
             display: grid;
-            grid-template-rows: auto 30px;
             height: 100%;
             .title {
               font-size: 20px;
               align-items: center;
               display: flex;
               font-weight: 600;
-            }
-            .author-by {
-              font-size: 17px;
-              color: $gray-harder;
             }
           }
         }
@@ -197,6 +193,28 @@
             }
           }
         }
+      }
+    }
+  }
+}
+@media screen and (max-width: $screen-1024) and (min-width: $screen-sm) {
+  .gru-external-assessment-page {
+    background-position: inherit;
+    .external-assessment-landing-page {
+      justify-content: center;
+      .external-assessment-card {
+        width: 75%;
+      }
+    }
+  }
+}
+@media screen and (max-width: $screen-sm - 1) {
+  .gru-external-assessment-page {
+    background-position: inherit;
+    .external-assessment-landing-page {
+      justify-content: center;
+      .external-assessment-card {
+        width: 100%;
       }
     }
   }

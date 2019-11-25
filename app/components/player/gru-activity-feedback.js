@@ -19,9 +19,6 @@ export default Ember.Component.extend({
       resourceList = component.get('collection.children');
     }
     if (resourceList.length) {
-      resourceList.map((resource, index) => {
-        resource.index = parseInt(index + 1);
-      });
       component.set('resourceInfo', resourceList.get('firstObject'));
     } else {
       component.set('resourceInfo', component.get('collection'));
@@ -32,7 +29,7 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
-    onNext: function(currentIndex) {
+    onNext: function() {
       const component = this;
       let resourceList;
       let format = component.get('format');
@@ -41,8 +38,10 @@ export default Ember.Component.extend({
       } else {
         resourceList = component.get('collection.children');
       }
-      let nextIndex = currentIndex + 1;
-      let nextContent = resourceList.findBy('index', nextIndex);
+
+      let nextIndex = component.get('currentIndex') + 1;
+      component.set('currentIndex', nextIndex);
+      let nextContent = resourceList.objectAt(nextIndex);
       if (nextContent) {
         component.set('resourceInfo', nextContent);
       } else {
@@ -81,5 +80,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  isPlayNextContent: false
+  isPlayNextContent: false,
+
+  currentIndex: 0
 });

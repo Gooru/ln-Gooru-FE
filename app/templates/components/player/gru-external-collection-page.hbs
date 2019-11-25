@@ -1,5 +1,5 @@
 {{#if isShowActivityFeedback}}
-  {{player/gru-activity-feedback collection=assessment format='collection-external' onSkipFeedback="onSkipFeedback"}}
+  {{player/gru-activity-feedback collection=assessment format=format onSkipFeedback="onSkipFeedback"}}
 {{else}}
   <div class="external-collection-landing-page">
     <div class="external-collection-card">
@@ -7,7 +7,6 @@
         <div class="header-panel" style="background-image: url({{assessment.thumbnailUrl}})">
           <div class="header-content">
             <div class="title">{{safe-html assessment.title}}</div>
-            <div class="author-by">annenberg</div>
           </div>
         </div>
         <div class="body-panel">
@@ -52,7 +51,7 @@
               {{else}}
                 {{#if isDisableTimeEditor}}
                   <div class="message">
-                    You will be redirected to the partner site to take the collection. Once you have completed studying, enter the time spent here
+                    {{t 'common.external-collection.index-message'}}
                   </div>
                 {{else}}
                   <div class="time-spent {{if isDisableTimeEditor 'disabled'}}">
