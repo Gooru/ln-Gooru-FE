@@ -1005,17 +1005,17 @@ export default Ember.Component.extend({
                 lessonO,
                 collectionO
               );
-            if (!component.isDestroyed) {
-              component.send(
-                'onShowStudentMilestoneCollectionReport',
-                lessonO,
-                collectionO
-              );
-              component.set('location', 'null');
-            }
-          }, 8000);
-        }, 500);
-
+              if (!component.isDestroyed) {
+                component.send(
+                  'onShowStudentMilestoneCollectionReport',
+                  lessonO,
+                  collectionO
+                );
+                component.set('location', 'null');
+              }
+            }, 8000);
+          }, 500);
+        }
       });
     }
   },
