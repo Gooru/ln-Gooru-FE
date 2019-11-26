@@ -1,5 +1,8 @@
 import Ember from 'ember';
-import { USER_CATEGORY_ID } from 'gooru-web/config/config';
+import {
+  FEEDBACK_USER_CATEGORY,
+  FEEDBACK_RATING_TYPE
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -78,11 +81,9 @@ export default Ember.Component.extend({
   contentId: Ember.computed('resourceInfo', function() {
     let component = this;
     let format = component.get('format');
-    if (format === 'offline-activity') {
-      return component.get('resourceInfo.oaId');
-    } else {
-      return component.get('resourceInfo.id');
-    }
+    return format === 'offline-activity'
+      ? component.get('resourceInfo.oaId')
+      : component.get('resourceInfo.id');
   }),
 
   // -------------------------------------------------------------------------
@@ -99,7 +100,8 @@ export default Ember.Component.extend({
     let contentType = component.get('contentType');
     let contentId = component.get('contentId');
     let role = component.get('session.role');
-    let userCategoryId = USER_CATEGORY_ID[`${role}`] || USER_CATEGORY_ID.other;
+    let userCategoryId =
+      FEEDBACK_USER_CATEGORY[`${role}`] || FEEDBACK_USER_CATEGORY.other;
     Ember.RSVP.hash({
       categoryLists: component
         .get('activityFeedbackService')
@@ -115,7 +117,7 @@ export default Ember.Component.extend({
             feedback.categoryId
           );
           if (category) {
-            if (category.feedbackTypeId === 1) {
+            if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.quantitative) {
               category.rating = feedback.rating;
             } else {
               category.comments = feedback.comments;
@@ -136,16 +138,17 @@ export default Ember.Component.extend({
     const component = this;
     let userId = component.get('session.userId');
     let role = component.get('session.role');
-    let userCategoryId = USER_CATEGORY_ID[`${role}`] || USER_CATEGORY_ID.other;
+    let userCategoryId =
+      FEEDBACK_USER_CATEGORY[`${role}`] || FEEDBACK_USER_CATEGORY.other;
     let userFeedback = Ember.A([]);
     let categoryLists = component.get('categoryLists');
     categoryLists.map(category => {
       let feedbackObj = {
         feeback_category_id: category.categoryId
       };
-      if (category.feedbackTypeId === 1) {
+      if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.quantitative) {
         feedbackObj.user_feedback_quantitative = category.rating;
-      } else if (category.feedbackTypeId === 3) {
+      } else if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.both) {
         feedbackObj.user_feedback_qualitative = category.comments;
       }
       userFeedback.pushObject(feedbackObj);

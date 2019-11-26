@@ -53,7 +53,6 @@ export default Ember.Component.extend({
       component.updateSelfReport();
       Ember.run.later(function() {
         component.set('isShowActivityFeedback', true);
-        component.set('format', 'collection-external');
       }, 5000);
     },
 

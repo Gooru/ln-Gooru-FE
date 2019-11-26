@@ -57,7 +57,6 @@ export default Ember.Component.extend({
       component.updateSelfReport();
       Ember.run.later(function() {
         component.set('isShowActivityFeedback', true);
-        component.set('format', 'assessment-external');
       }, 5000);
     },
 

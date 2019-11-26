@@ -8,37 +8,12 @@ export default Ember.Component.extend({
   classNames: ['gru-activity-feedback'],
 
   // -------------------------------------------------------------------------
-  // Events
-  didInsertElement() {
-    const component = this;
-    let format = component.get('format');
-    let resourceList;
-    if (format === 'offline-activity') {
-      resourceList = component.get('collection.tasks');
-    } else {
-      resourceList = component.get('collection.children');
-    }
-    if (resourceList.length) {
-      component.set('resourceInfo', resourceList.get('firstObject'));
-    } else {
-      component.set('resourceInfo', component.get('collection'));
-    }
-  },
-
-  // -------------------------------------------------------------------------
   // Actions
 
   actions: {
     onNext: function() {
       const component = this;
-      let resourceList;
-      let format = component.get('format');
-      if (format === 'offline-activity') {
-        resourceList = component.get('collection.tasks');
-      } else {
-        resourceList = component.get('collection.children');
-      }
-
+      let resourceList = component.get('resourceList');
       let nextIndex = component.get('currentIndex') + 1;
       component.set('currentIndex', nextIndex);
       let nextContent = resourceList.objectAt(nextIndex);
@@ -78,6 +53,25 @@ export default Ember.Component.extend({
       });
       return TaxonomyTag.getTaxonomyTags(standards);
     }
+  }),
+
+  /**
+   * @property {ResourceList[]} List of resource list
+   */
+  resourceList: Ember.computed('collection', function() {
+    let component = this;
+    let format = component.get('format');
+    return format === 'offline-activity'
+      ? component.get('collection.tasks')
+      : component.get('collection.children');
+  }),
+
+  resourceInfo: Ember.computed('resourceList', 'collection', function() {
+    let component = this;
+    let resourceList = component.get('resourceList');
+    return resourceList.length
+      ? resourceList.get('firstObject')
+      : component.get('collection');
   }),
 
   isPlayNextContent: false,

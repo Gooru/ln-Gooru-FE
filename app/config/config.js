@@ -480,8 +480,13 @@ export const PLAYER_EVENT_MESSAGE = {
   GRU_LOADING_COMPLETED: 'gru_loading_completed'
 };
 
-export const USER_CATEGORY_ID = {
+export const FEEDBACK_USER_CATEGORY = {
   teacher: 1,
   student: 2,
   other: 3
+};
+export const FEEDBACK_RATING_TYPE = {
+  quantitative: 1,
+  qualitative: 2,
+  both: 3
 };
