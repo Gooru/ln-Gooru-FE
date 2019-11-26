@@ -38,6 +38,13 @@ export default Ember.Controller.extend({
    */
   rubricService: Ember.inject.service('api-sdk/rubric'),
 
+  actions: {
+    activityAdded(newlyAddedActivity) {
+      const controller = this;
+      controller.set('newlyAddedActivity', newlyAddedActivity);
+    }
+  },
+
   // -------------------------------------------------------------------------
   // Properties
   /**

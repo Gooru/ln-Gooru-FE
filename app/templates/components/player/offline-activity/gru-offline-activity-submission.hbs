@@ -64,7 +64,6 @@
       <div class="complete-submission-container {{if isShowCompletionConfirmation 'hidden'}} {{unless isEnableCompletionButton 'disable-event'}}">
         <div class="complete-submit-btn" {{action "onShowCompletionConfirmation"}}>{{t 'oa-player.mark-complete'}}</div>
       </div>
-      <div class="complete-submit-btn" {{action "activityFeedback"}} >Active feedback</div>
       {{#if isShowCompletionConfirmation}}
         <div class="completion-confirmation-popup">
           <div class="info-container">

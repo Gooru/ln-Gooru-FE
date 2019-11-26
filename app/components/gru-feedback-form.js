@@ -41,7 +41,7 @@ export default Ember.Component.extend({
 
     onNext: function() {
       const component = this;
-      let learningFeedback = component.feedbackObj();
+      let learningFeedback = component.getFeedbackObject();
       component
         .get('activityFeedbackService')
         .submitUserFeedback(learningFeedback)
@@ -99,8 +99,7 @@ export default Ember.Component.extend({
     let contentType = component.get('contentType');
     let contentId = component.get('contentId');
     let role = component.get('session.role');
-    let userCategoryId =
-      USER_CATEGORY_ID[`${role}`] || USER_CATEGORY_ID.other;
+    let userCategoryId = USER_CATEGORY_ID[`${role}`] || USER_CATEGORY_ID.other;
     Ember.RSVP.hash({
       categoryLists: component
         .get('activityFeedbackService')
@@ -129,16 +128,15 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function feedbackObj
+   * @function getFeedbackObject
    * Method to return feedback objective
    */
 
-  feedbackObj() {
+  getFeedbackObject() {
     const component = this;
     let userId = component.get('session.userId');
     let role = component.get('session.role');
-    let userCategoryId =
-      USER_CATEGORY_ID[`${role}`] || USER_CATEGORY_ID.other;
+    let userCategoryId = USER_CATEGORY_ID[`${role}`] || USER_CATEGORY_ID.other;
     let userFeedback = Ember.A([]);
     let categoryLists = component.get('categoryLists');
     categoryLists.map(category => {

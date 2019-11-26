@@ -1,4 +1,4 @@
-<div class="content-search-container">
+<div class="content-search-container {{unless isShowContentSelector 'disable-content-selector'}}">
   <div class="content-source-container">
     {{#each contentSources as |contentSource|}}
       <div class="content-source {{if (eq activeContentSource contentSource.value) 'active'}}" {{action "onSelectContentSource" contentSource}}>

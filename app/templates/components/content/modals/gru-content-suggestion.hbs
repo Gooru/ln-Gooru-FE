@@ -1,13 +1,25 @@
 <div class="modal-header">
-  <span class="suggestion-title">{{t 'reroute.suggestion'}}</span>
+  <span class="suggestion-title">
+    {{#if isAssessment}}
+      {{t 'reroute.show-mastery'}}
+    {{else}}
+      {{t 'reroute.suggestion'}}
+    {{/if}}
+  </span>
 </div>
 <div class="modal-body">
   <div class="image-container">
     <i class="suggestion-img"></i>
   </div>
   <div class="suggestion-details">
-    <div class="title">{{t 'reroute.suggestion.title'}}</div>
-    <div class="description">{{ t 'reroute.suggestion.desc' suggestionType = (t (concat 'common.signature-' suggestedContentType))}}</div>
+    <div class="title {{if isAssessment 'hidden'}}">{{t 'reroute.suggestion.title'}}</div>
+    <div class="description">
+      {{#if isAssessment}}
+        {{t 'reroute.take-assessment'}}
+      {{else}}
+        {{t 'reroute.suggestion.desc' suggestionType = (t (concat 'common.signature-' suggestedContentType))}}
+      {{/if}}
+    </div>
     <div class="taxonomy">
       {{#if tags.length}}
         {{taxonomy.gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
@@ -49,7 +61,7 @@
       <span>{{t 'gru-suggest-test.no'}}</span>
     </div>
     <div class="accept" {{action "onAcceptSuggestion"}}>
-      {{t 'common.study-now'}}
+      {{t 'gru-assessment-confirmation.continue'}}
     </div>
   </div>
   <!-- <div class="deviation">

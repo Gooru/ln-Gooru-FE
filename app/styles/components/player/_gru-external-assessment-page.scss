@@ -26,6 +26,17 @@
       background-color: $white;
       width: 45%;
       border: 1px solid #868585;
+      max-height: calc(100vh - 160px);
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        height: 6px;
+        width: 8px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: $gray-light;
+        border: 1px solid $gray-light;
+        border-radius: 5px;
+      }
       .card-container {
         display: grid;
         grid-template-rows: 100px auto;
@@ -35,7 +46,19 @@
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center;
-          padding: 15px 20px;
+          &:after {
+            display: block;
+            z-index: 9;
+            margin-top: -100px;
+            height: 100%;
+            width: 100%;
+            content: "";
+            background-image: linear-gradient(
+              to bottom,
+              rgba(255, 255, 255, 0) 0,
+              $kbd-bg 100%
+            );
+          }
           .header-content {
             display: grid;
             height: 100%;
@@ -44,6 +67,7 @@
               align-items: center;
               display: flex;
               font-weight: 600;
+              padding: 10px;
             }
           }
         }

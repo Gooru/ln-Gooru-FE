@@ -2653,6 +2653,12 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'محدد موقع الطالب',
   'teacher-landing.class.learning-journey': 'رحلة التعلم',
   'search-by': 'البحث بواسطة',
+
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
   'common.feedback-note':
     'Please take a minute to rate the collection and its resources. It really helps!',
   'common.skip-feedback': 'Skip Feedback',
