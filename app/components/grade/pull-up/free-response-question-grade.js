@@ -706,6 +706,7 @@ export default Ember.Component.extend({
         .get('rubricService')
         .setStudentRubricGrades(userGrade)
         .then(() => {
+          component.sendAction('getGradeListItem');
           component.slideToNextUser();
         });
     }

@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  formatDate
-} from 'gooru-web/utils/utils';
+import { formatDate } from 'gooru-web/utils/utils';
 
 /**
  * Adapter to support the class activity CRUD operations
@@ -64,12 +62,7 @@ export default Ember.Object.extend({
    * @param {Date} endDate
    * @returns {Promise}
    */
-  scheduleClassActivity: function(
-    classId,
-    contentId,
-    addedDate,
-    endDate
-  ) {
+  scheduleClassActivity: function(classId, contentId, addedDate, endDate) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/${classId}/contents/${contentId}/schedule`;
@@ -225,7 +218,6 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
-
   /**
    * get a completed list of offlne activities from class
    *
@@ -354,6 +346,32 @@ export default Ember.Object.extend({
       data: JSON.stringify({
         allow_mastery_accrual
       })
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  getScheduledActivitiesByDate(classId, requestBody = {}) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/scheduled`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: requestBody
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  getUnScheduledActivitiesByMonthYear(classId, requestBody = {}) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/${classId}/contents/all/unscheduled`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: requestBody
     };
     return Ember.$.ajax(url, options);
   },

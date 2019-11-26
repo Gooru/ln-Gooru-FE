@@ -100,6 +100,53 @@
           </div>
         </div>
       </div>
+      {{#if (and isPremiumClass (gt multipleClassList.length  0))}}
+      <div class="view-mulitple-class-layout">
+        <div class="view-multiple-class-label">
+           {{t 'common.multi-grade-class-setting'}}
+        </div>
+        <div class="view-mulitple-class-panel">
+          <div class="multiple-class-panel-header">
+            <div class="class-panel-header-title">
+              {{t 'common.select-your-other-classes-from-below'}}
+            </div>
+            <div class="class-panel-header-action">
+              <div class="class-save-btn {{if isEnableSave '' 'disabled'}}" {{action 'saveMultipleClass'}}>
+                 {{t 'common.save'}}
+              </div>
+            </div>
+          </div>
+          <div class="multiple-class-section">
+            <div class="class-section-header">
+                <div class="class-action-header">
+
+                </div>
+                <div class="class-code-header">
+                   {{t 'student-landing.class-code'}}
+                </div>
+                <div class="class-name-header">
+                  {{t 'common.class-name'}}
+                </div>
+            </div>
+            <div class="class-section-body">
+              {{#each multipleClassList as | class classIndex |}}
+              <div class="class-section-content">
+                <div class="class-action-content class-{{if class.isChecked "checked" "unchecked"}}" {{action 'toggleCheckbox' class}}>
+                      {{gru-icon name=(if class.isChecked 'radio_button_checked' 'radio_button_unchecked')}}
+                </div>
+                <div class="class-code-content">
+                  {{class.code}}
+                </div>
+                <div class="class-name-content">
+                  {{class.title}}
+                </div>
+              </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/if}}
       <div class="assessment-template-layout">
         <div class="template-sec-cont">
           <div class="assessment-template-label">

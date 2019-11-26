@@ -40,16 +40,22 @@
     {{#if navTitle}}
       <div class="studyplayer-title">
         <span>{{navTitle}}</span>
+        {{#unless isPrimaryClass}}
+        <span class="secondary-class">{{t 'common.multi-grade-view'}} {{selectedSecondaryClass.title}}</span>
+        {{/unless}}
       </div>
     {{/if}}
     <div class="notification-tab">
       {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' isTeacher=true classId=class.id }}
     </div>
     {{#if isPremiumClass}}
-      <div class="performance-summary {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
-        {{#if class.competencyStats}}
+      <div class="performance-summary {{if (or (and class.competencyStats isPrimaryClass) (and selectedSecondaryClass.competencyStats (not isPrimaryClass))) 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
+        {{#if (and class.competencyStats isPrimaryClass)}}
           <span class="numerator">{{class.competencyStats.completedCompetencies}}</span>
           <span class="denominator">{{class.competencyStats.totalCompetencies}}</span>
+        {{else if (and selectedSecondaryClass.competencyStats (not isPrimaryClass))}}
+          <span class="numerator">{{selectedSecondaryClass.competencyStats.completedCompetencies}}</span>
+          <span class="denominator">{{selectedSecondaryClass.competencyStats.totalCompetencies}}</span>
         {{else}}
           <span class="no-completion-score">--</span>
         {{/if}}

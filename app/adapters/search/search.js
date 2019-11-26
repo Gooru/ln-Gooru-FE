@@ -1,9 +1,7 @@
 import Ember from 'ember';
 import ResourceModel from 'gooru-web/models/content/resource';
 import QuestionModel from 'gooru-web/models/content/question';
-import {
-  DEFAULT_SEARCH_PAGE_SIZE
-} from 'gooru-web/config/config';
+import { DEFAULT_SEARCH_PAGE_SIZE } from 'gooru-web/config/config';
 
 /**
  * Adapter to support the Search for Collections, Assessments, Resources and Questions
@@ -347,7 +345,6 @@ export default Ember.Object.extend({
     adapter.appendFilters(params, options);
     return Ember.$.ajax(url, options);
   },
-
 
   /**
    * Fetches results that match with the term

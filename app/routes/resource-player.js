@@ -91,7 +91,7 @@ export default QuizzesResourcePlayer.extend(PrivateRouteMixin, {
    */
   model(params) {
     const route = this;
-    const { classId, courseId, collectionUrl } = params;
+    const { classId, courseId, collectionUrl, isIframeMode } = params;
     const navigateMapService = this.get('navigateMapService');
     return navigateMapService.getMapLocation(params).then(currentContext => {
       const unitId = currentContext.get('context.unitId');
@@ -143,7 +143,8 @@ export default QuizzesResourcePlayer.extend(PrivateRouteMixin, {
             lesson,
             collection,
             classId,
-            collectionUrl
+            collectionUrl,
+            isIframeMode
           })
         );
       });
@@ -157,7 +158,8 @@ export default QuizzesResourcePlayer.extend(PrivateRouteMixin, {
       lesson: model.lesson,
       classId: model.classId,
       collection: model.collection,
-      collectionUrl: model.collectionUrl
+      collectionUrl: model.collectionUrl,
+      isIframeMode: model.isIframeMode
     });
     this._super(...arguments);
   },

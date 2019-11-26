@@ -15,18 +15,43 @@ export default Ember.Component.extend({
    * @description constants display css mapping
    */
   displayConstants: {
-    notificationType: [
-      { type: 'teacher.suggestion', iconClass: 'account_circle' },
-      { type: 'teacher.override', iconClass: 'iconperformance' },
-      { type: 'teacher.grading.complete', iconClass: 'iconperformance' },
-      { type: 'student.self.report', iconClass: 'iconperformance' },
-      { type: 'student.gradable.submission', iconClass: 'iconperformance' }
+    notificationType: [{
+      type: 'teacher.suggestion',
+      iconClass: 'account_circle'
+    },
+    {
+      type: 'teacher.override',
+      iconClass: 'iconperformance'
+    },
+    {
+      type: 'teacher.grading.complete',
+      iconClass: 'iconperformance'
+    },
+    {
+      type: 'student.self.report',
+      iconClass: 'iconperformance'
+    },
+    {
+      type: 'student.gradable.submission',
+      iconClass: 'iconperformance'
+    }
     ],
-    currentItemType: [
-      { type: 'assessment', iconClass: 'grucount' },
-      { type: 'collection', iconClass: 'view_comfy' },
-      { type: 'assessment-external', iconClass: 'grucount' },
-      { type: 'collection-external', iconClass: 'view_comfy' }
+    currentItemType: [{
+      type: 'assessment',
+      iconClass: 'grucount'
+    },
+    {
+      type: 'collection',
+      iconClass: 'view_comfy'
+    },
+    {
+      type: 'assessment-external',
+      iconClass: 'grucount'
+    },
+    {
+      type: 'collection-external',
+      iconClass: 'view_comfy'
+    }
     ]
     /* ,'notificationTypeCurrentItem' : [ { '' } ] //TBD if required*/
   },
@@ -47,9 +72,9 @@ export default Ember.Component.extend({
   notificationTypeTitle: Ember.computed('', function() {
     const component = this;
     let titleType = component.model.notificationType.replace(/\./g, '-'),
-      rawTitle = component.inClass
-        ? `notifications.typeinclass.${titleType}-title`
-        : `notifications.type.${titleType}-title`,
+      rawTitle = component.inClass ?
+        `notifications.typeinclass.${titleType}-title` :
+        `notifications.type.${titleType}-title`,
       classTitle = component.model.ctxClassCode,
       count = component.model.occurrence;
     let itemTitle = component.get('i18n').t(rawTitle, {

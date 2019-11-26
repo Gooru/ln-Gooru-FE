@@ -113,6 +113,23 @@ export default Ember.Controller.extend(StudentLearnerProficiency, {
           .removeClass('fullscreen-exit')
           .addClass('fullscreen');
       }
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
+    },
+
+    playContent(queryParams, contentId, content) {
+      const component = this;
+      component.set(
+        'playerUrl',
+        component.target
+          .get('router')
+          .generate('player', contentId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', content);
     }
   },
 
@@ -338,7 +355,8 @@ export default Ember.Controller.extend(StudentLearnerProficiency, {
     const context = this.get('mapLocation.context');
     let queryParams = {
       role: ROLES.STUDENT,
-      source: this.get('source')
+      source: this.get('source'),
+      isIframeMode: this.get('isIframeMode')
     };
     let classId = context.get('classId');
     if (classId) {

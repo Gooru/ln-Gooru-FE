@@ -335,6 +335,10 @@
               }
             }
           }
+          @media screen and (max-width: $screen-xs) {
+            grid-row-start: 4;
+            grid-column-start: 2;
+          }
         }
       }
     }

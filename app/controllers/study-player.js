@@ -26,7 +26,8 @@ export default PlayerController.extend({
     'pathType',
     'itemId',
     'isNotification',
-    'milestoneId'
+    'milestoneId',
+    'isIframeMode'
   ],
 
   // -------------------------------------------------------------------------
@@ -148,6 +149,8 @@ export default PlayerController.extend({
 
   isNotification: false,
 
+  isIframeMode: false,
+
   /**
    * Resets to default values
    */
@@ -163,7 +166,8 @@ export default PlayerController.extend({
       resourceId: null,
       type: null,
       isStudyPlayer: true,
-      isNotification: false
+      isNotification: false,
+      isIframeMode: false
     });
   },
 

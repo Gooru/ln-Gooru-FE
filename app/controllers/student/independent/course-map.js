@@ -16,6 +16,11 @@ export default Ember.Controller.extend({
    */
   session: Ember.inject.service(),
 
+  /**
+   * @requires service:api-sdk/learner
+   */
+  learnerService: Ember.inject.service('api-sdk/learner'),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -57,6 +62,12 @@ export default Ember.Controller.extend({
     locateMe: function(location) {
       this.set('location', location);
       this.set('showLocation', true);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
+      component.getUserCurrentLocation();
     }
   },
 
@@ -133,5 +144,27 @@ export default Ember.Controller.extend({
       loadUnitsPerformance: true
     });
     controller.set('studentCourseReportContext', params);
+  },
+
+  getUserCurrentLocation() {
+    const controller = this;
+    const userId = controller.get('session.userId');
+    const course = controller.get('course');
+
+    controller
+      .get('learnerService')
+      .fetchLocationCourse(course.get('id'), userId)
+      .then(userLocationObj => {
+        let userLocation = '';
+        if (userLocationObj) {
+          let unitId = userLocationObj.get('unitId');
+          let lessonId = userLocationObj.get('lessonId');
+          let collectionId = userLocationObj.get('collectionId');
+          userLocation = `${unitId}+${lessonId}+${collectionId}`;
+          controller.set('userLocation', userLocation);
+          controller.set('location', userLocation);
+          controller.set('showLocation', true);
+        }
+      });
   }
 });

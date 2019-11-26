@@ -1,7 +1,7 @@
 //eslint-disable-next-line
 window.i18ln = {
   en: 'English',
-  sp: 'Español',
+  es: 'Español',
   ar: 'عربى',
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
@@ -89,6 +89,7 @@ window.i18ln = {
   'common.no-collection-info-message': 'इस पाठ में कोई संकलन नहीं है।',
   'common.gooru-suggestions': 'Gooru सुझाव',
   'common.gooru-catalog': 'Gooru सूची',
+  'common.suggest-to-student': 'Suggest to student',
   'common.suggestion-made-to': 'सुझाव दिया गया',
   'common.student-selected': 'चुना गया छात्र',
   'self-grade.not-required': 'छात्र के स्वयं-वर्गीकरण की आवश्यकता नहीं है',
@@ -283,6 +284,8 @@ window.i18ln = {
   'common.depth-of-knowledge': 'ज्ञान की गहराई',
   'common.description': 'विवरण',
   'common.destination': 'गंतव्य',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.disappear-after-login':
     'यह {{loginnumber}} लॉगिन के बाद गायब हो जाएगा',
   'common.disappear-next-login': 'यह अगले लॉगिन पर दिखाई नहीं देगा',
@@ -2737,7 +2740,7 @@ window.i18ln = {
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
   'common.no-lesson-plan-info-message':
-    'This lesson does have any lesson plan.',
+    'There is no lesson plan for this lesson.',
   'student-resource': 'Student Resources',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
@@ -2798,7 +2801,13 @@ window.i18ln = {
     'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'custom-range': 'Custom Date Range',
   'common.choose-lang': 'Choose Language',
-  'common-show': 'Show',
+  'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
-    'At least one task is required for activity activation'
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class'
 };

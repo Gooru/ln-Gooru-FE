@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { isNumeric } from 'gooru-web/utils/math';
+import {
+  isNumeric
+} from 'gooru-web/utils/math';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -26,19 +28,27 @@ export default Ember.Component.extend({
   actions: {
     /**
      *
+     * Triggered when an suggestion icon is clicked
+     */
+    toogleSuggestionContainer() {
+      const component = this;
+      component.toggleProperty('showSuggestionContainer');
+    },
+    /**
+     *
      * Triggered when an menu item is selected
      * @param item
      */
     selectItem: function(item) {
       let component = this;
+      component.set('showSuggestionContainer', false);
       if (component.get('onItemSelected')) {
         component.selectItem(item);
         if (item === 'class-info') {
-          Ember.$('.classroom-information').toggle(
-            {
-              direction: 'left'
-            },
-            1000
+          Ember.$('.classroom-information').toggle({
+            direction: 'left'
+          },
+          1000
           );
         } else {
           component.sendAction('onItemSelected', item);
@@ -92,7 +102,9 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     this._super(...arguments);
 
-    const { getOwner } = Ember;
+    const {
+      getOwner
+    } = Ember;
     let currentPath = getOwner(this).lookup('controller:application')
       .currentPath;
 
@@ -323,7 +335,9 @@ export default Ember.Component.extend({
           route.transitionTo('student-independent-learning');
         } else {
           route.transitionTo('student-home', {
-            queryParams: { refresh: true }
+            queryParams: {
+              refresh: true
+            }
           });
         }
       }

@@ -171,6 +171,7 @@ export default Ember.Service.extend({
       params.courseId = context.courseId;
       params.unitId = context.unitId;
       params.lessonId = context.lessonId;
+      params.pathId = context.pathId;
     }
     return new Ember.RSVP.Promise(function(resolve) {
       return service
@@ -1244,6 +1245,22 @@ export default Ember.Service.extend({
         } else {
           return activities;
         }
+      });
+  },
+
+  /**
+   * Get performance of suggestion
+   * @returns {Promise.<[]>}
+   */
+  fecthSuggestionPerformance: function(context) {
+    const service = this;
+    return service
+      .get('performanceAdapter')
+      .getSuggestionPerformance(context)
+      .then(data => {
+        return service
+          .get('collectionPerformanceSummarySerializer')
+          .normalizeAllCollectionPerformanceSummary(data);
       });
   }
 });

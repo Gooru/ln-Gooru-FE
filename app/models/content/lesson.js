@@ -59,6 +59,10 @@ export default Ember.Object.extend(Validations, {
   title: '',
 
   /**
+   * @property {LessonPlanModel} lessonPlan
+   */
+  lessonPlan: null,
+  /**
    * @property {Number} membersCount - number of members in the lesson (for analytics)
    */
   membersCount: 0,

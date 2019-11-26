@@ -161,14 +161,18 @@
       .buttons-container {
         height: 36px;
         border-bottom: 1px solid #f2f2f2;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-        .play-btn {
+        .play-btn,
+        .suggest-btn {
           width: 45px;
           border-right: 1px solid #f2f2f2;
+          display: flex;
+          justify-content: center;
 
           i {
-            margin-left: -62px;
-            margin-top: 7px;
             color: #0072bc;
             cursor: pointer;
           }

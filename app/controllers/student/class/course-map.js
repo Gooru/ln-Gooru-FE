@@ -24,6 +24,16 @@ export default Ember.Controller.extend({
   rubricService: Ember.inject.service('api-sdk/rubric'),
 
   /**
+   * @requires service:api-sdk/analytics
+   */
+  analyticsService: Ember.inject.service('api-sdk/analytics'),
+
+  /**
+   * @type {PerformanceService} Service to retrieve class performance summary
+   */
+  performanceService: Ember.inject.service('api-sdk/performance'),
+
+  /**
    * Logged in user session object
    * @type {Session}
    */
@@ -57,13 +67,15 @@ export default Ember.Controller.extend({
 
   isFirstLoad: true,
 
+  resetPerformance: false,
+
   demo: false,
 
   mileStone: Ember.computed(function() {
     return {
       iconClass: 'msaddonTop',
       offset: {
-        left: '-20px',
+        left: '-30px',
         top: '9px'
       }
     };
@@ -141,6 +153,7 @@ export default Ember.Controller.extend({
     onClearCustomizeMsg() {
       Ember.$('.custom-msg').hide(800);
     },
+
     courseRouteSuggestAction: function(action) {
       let controller = this;
       let currentClass = controller.get('currentClass');
@@ -161,6 +174,14 @@ export default Ember.Controller.extend({
     studyCoursePlayer: function(type, unitId, lessonId, item) {
       let controller = this;
       controller.send('studyPlayer', type, unitId, lessonId, item);
+    },
+
+    closePullUp() {
+      const component = this;
+      component.set('isOpenPlayer', false);
+      component.set('resetPerformance', true);
+      component.getUserCurrentLocation();
+      component.get('studentClassController').send('reloadData');
     }
   },
 
@@ -338,10 +359,9 @@ export default Ember.Controller.extend({
     let skippedContentsPromise = Ember.RSVP.resolve(
       controller.get('rescopeService').getSkippedContents(filter)
     );
-    return Ember.RSVP
-      .hash({
-        skippedContents: skippedContentsPromise
-      })
+    return Ember.RSVP.hash({
+      skippedContents: skippedContentsPromise
+    })
       .then(function(hash) {
         controller.set('skippedContents', hash.skippedContents);
         return hash.skippedContents;
@@ -473,5 +493,58 @@ export default Ember.Controller.extend({
     controller.fetchOaItemsToGradeByStudent().then(function(selfGradeItems) {
       controller.set('selfGradeItems', selfGradeItems.get('gradeItems'));
     });
+  },
+
+  getUserCurrentLocation() {
+    const controller = this;
+    let currentClass = controller.get('currentClass');
+    let classId = currentClass.get('id');
+    let userId = controller.get('userId');
+    let courseId = currentClass.get('courseId');
+    let units = controller.get('units');
+    controller.fetchUnitsPerformance(userId, classId, courseId, units);
+    let locationQueryParam = {
+      courseId
+    };
+    if (
+      currentClass.milestoneViewApplicable &&
+      currentClass.milestoneViewApplicable === true &&
+      currentClass.preference &&
+      currentClass.preference.framework
+    ) {
+      locationQueryParam.fwCode = currentClass.preference.framework;
+    }
+
+    controller
+      .get('analyticsService')
+      .getUserCurrentLocation(classId, userId, locationQueryParam)
+      .then(userLocationObj => {
+        let userLocation = '';
+        if (userLocationObj) {
+          let unitId = userLocationObj.get('unitId');
+          let lessonId = userLocationObj.get('lessonId');
+          let collectionId = userLocationObj.get('collectionId');
+          userLocation = `${unitId}+${lessonId}+${collectionId}`;
+          controller.set('userLocation', userLocation);
+          controller.set('location', userLocation);
+          controller.set('showLocation', true);
+          controller.set('toggleLocation', !controller.get('toggleLocation'));
+        }
+      });
+  },
+
+  fetchUnitsPerformance(userId, classId, courseId, units) {
+    let route = this;
+    route
+      .get('performanceService')
+      .findStudentPerformanceByCourse(userId, classId, courseId, units)
+      .then(unitsPerformance => {
+        units.forEach(unit => {
+          let unitPerformance = unitsPerformance.findBy('id', unit.get('id'));
+          if (unitPerformance) {
+            unit.set('performance', unitPerformance);
+          }
+        });
+      });
   }
 });

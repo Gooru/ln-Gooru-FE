@@ -1,5 +1,8 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  PLAYER_EVENT_SOURCE,
+  SUGGESTION_TYPE
+} from 'gooru-web/config/config';
 
 /**
  * Student Class Activity Panel
@@ -48,6 +51,81 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
+    showSuggestions() {
+      let component = this;
+      let panelContainerEle = component.$('.suggestions');
+      if (!panelContainerEle.hasClass('active')) {
+        panelContainerEle.slideDown({
+          start: function() {
+            component.$(this).addClass('active');
+            component.$(this).css('display', 'grid');
+            let classActivity = component.get('classActivity');
+            classActivity.set('isSuggestionFetched', false);
+            component.sendAction('onShowSuggestion', classActivity);
+          }
+        });
+      } else {
+        panelContainerEle.slideUp({
+          start: function() {
+            component.$(this).removeClass('active');
+          }
+        });
+      }
+    },
+    /**
+     * Action triggered when the user play collection
+     */
+    onPlaySuggestionContent(suggestionContent) {
+      const component = this;
+      const contentId = suggestionContent.get('suggestedContentId');
+      const collectionType = suggestionContent.get('suggestedContentType');
+      const classData = component.get('class');
+      const classId = classData.get('id');
+      const caContentId = component.get('classActivity.id');
+      const pathId = suggestionContent.get('suggestedToContext.firstObject.id');
+      const pathType = component.get('suggestionPathType');
+      let playerUrl;
+      let queryParams = {
+        collectionId: contentId,
+        classId,
+        role: 'student',
+        source: component.get('source'),
+        type: collectionType,
+        caContentId,
+        pathId,
+        pathType,
+        isIframeMode: true
+      };
+      if (
+        collectionType === 'assessment-external' ||
+        collectionType === 'collection-external'
+      ) {
+        playerUrl = component
+          .get('router')
+          .generate('player-external', {
+            queryParams
+          });
+      } else if (collectionType === 'offlineactivity') {
+        queryParams.offlineActivityId = contentId;
+        playerUrl = component
+          .get('router')
+          .generate('player-offline-activity', contentId, {
+            queryParams
+          });
+      } else {
+        playerUrl = component
+          .get('router')
+          .generate('player', contentId, {
+            queryParams
+          });
+      }
+      component.sendAction('playContent', playerUrl, Ember.Object.create({
+        format: collectionType,
+        title: suggestionContent.get('title'),
+        thumbnailUrl: suggestionContent.get('url'),
+        isSuggestedContentPlay: true
+      }));
+    },
     /**
      * Action triggred when dca report action invoke
      */
@@ -58,7 +136,21 @@ export default Ember.Component.extend({
         assessment,
         studentPerformance,
         activityDate,
-        classActivity
+        classActivity,
+        false
+      );
+    },
+
+    studentSuggestionReport(suggestion) {
+      let classActivity = this.get('classActivity');
+      const activityDate = this.get('activityDate');
+      this.sendAction(
+        'studentDcaReport',
+        suggestion,
+        suggestion.get('performance'),
+        activityDate,
+        classActivity,
+        true
       );
     },
 
@@ -79,26 +171,34 @@ export default Ember.Component.extend({
         role: 'student',
         source: component.get('source'),
         type: collectionType,
-        caContentId
+        caContentId,
+        isIframeMode: true
       };
       if (
         collectionType === 'assessment-external' ||
         collectionType === 'collection-external'
       ) {
-        component.get('router').transitionTo('player-external', {
-          queryParams
-        });
-      } else if (collectionType === 'offline-activity') {
-        queryParams.offlineActivityId = contentId;
-        component
+        let playerUrl = component
           .get('router')
-          .transitionTo('player-offline-activity', contentId, {
+          .generate('player-external', {
             queryParams
           });
+        component.sendAction('playContent', playerUrl, content);
+      } else if (collectionType === 'offline-activity') {
+        queryParams.offlineActivityId = contentId;
+        let playerUrl = component
+          .get('router')
+          .generate('player-offline-activity', contentId, {
+            queryParams
+          });
+        component.sendAction('playContent', playerUrl, content);
       } else {
-        component.get('router').transitionTo('player', contentId, {
-          queryParams
-        });
+        let playerUrl = component
+          .get('router')
+          .generate('player', contentId, {
+            queryParams
+          });
+        component.sendAction('playContent', playerUrl, content);
       }
     }
   },
@@ -127,6 +227,11 @@ export default Ember.Component.extend({
   class: null,
 
   /**
+   * @property {Number} suggestionCount
+   */
+  suggestionCount: Ember.computed.alias('classActivity.suggestionCount'),
+
+  /**
    * @property {Collection/Assessment} item
    */
   item: Ember.computed.alias('classActivity.collection'),
@@ -153,6 +258,8 @@ export default Ember.Component.extend({
     PLAYER_EVENT_SOURCE.OFFLINE_CLASS
   ),
 
+  suggestionPathType: SUGGESTION_TYPE.CA_TEACHER,
+
   /**
    * Class activity date
    * @type {Date}
@@ -177,5 +284,7 @@ export default Ember.Component.extend({
     let activityDate = this.get('activityDate');
     let currentDate = moment().format('YYYY-MM-DD');
     return moment(activityDate).isAfter(currentDate);
-  })
+  }),
+
+  suggestions: Ember.computed.alias('classActivity.suggestions')
 });

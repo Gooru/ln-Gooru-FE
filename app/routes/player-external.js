@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { PLAYER_EVENT_MESSAGE } from 'gooru-web/config/config';
 
 /**
  * External Assessment Player Route
@@ -58,6 +59,7 @@ export default Ember.Route.extend({
   },
 
   setupController(controller, model) {
+    window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_LOADING_COMPLETED, '*');
     controller.set('mapLocation', model.mapLocation);
     controller.set('source', model.source);
     controller.set('resourceType', model.itemType);
