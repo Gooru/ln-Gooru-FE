@@ -119,6 +119,7 @@ export default Ember.Component.extend({
      */
     toggleLessonItems(selectedUnit, selectedLesson) {
       let component = this;
+      selectedLesson.set('isFetchingContent', true);
       let classId = selectedUnit.get('classId');
       let unitId = selectedUnit.get('id');
       let lessonId = selectedLesson.get('id');
@@ -139,28 +140,33 @@ export default Ember.Component.extend({
         .getLessonInfo(classId, courseId, unitId, lessonId, true)
         .then(lesson => {
           if (!component.isDestroyed) {
-            let lessonItems = lesson.get('children');
-            let collections = Ember.A();
-            lessonItems.forEach(collection => {
-              let id = collection.get('id');
-              if (collectionIds.includes(id)) {
-                collection.set('isAdded', true);
-              }
-              let isExternalContent = collection
-                .get('format')
-                .includes('external');
-              if (
-                isExternalContent ||
-                collection.get('resourceCount') > 0 ||
-                collection.get('questionCount') > 0 ||
-                collection.get('isOfflineActivity')
-              ) {
-                collections.pushObject(collection);
-              }
-            });
-            selectedLesson.set('children', collections);
-            selectedLesson.set('hasCollectionFetched', true);
+            if (component.get('isShowLessonPlan')) {
+              selectedLesson.set('lessonPlan', lesson.get('lessonPlan'));
+            } else {
+              let lessonItems = lesson.get('children');
+              let collections = Ember.A();
+              lessonItems.forEach(collection => {
+                let id = collection.get('id');
+                if (collectionIds.includes(id)) {
+                  collection.set('isAdded', true);
+                }
+                let isExternalContent = collection
+                  .get('format')
+                  .includes('external');
+                if (
+                  isExternalContent ||
+                  collection.get('resourceCount') > 0 ||
+                  collection.get('questionCount') > 0 ||
+                  collection.get('isOfflineActivity')
+                ) {
+                  collections.pushObject(collection);
+                }
+              });
+              selectedLesson.set('children', collections);
+              selectedLesson.set('hasCollectionFetched', true);
+            }
           }
+          selectedLesson.set('isFetchingContent', false);
         });
     },
 
@@ -198,6 +204,14 @@ export default Ember.Component.extend({
      */
     onScheduleContentToDCA(content, event) {
       this.sendAction('onScheduleContentToDCA', content, event);
+    },
+
+    onAddActivity(content) {
+      this.sendAction('onAddActivity', content);
+    },
+
+    onScheduleActivity(content) {
+      this.sendAction('onScheduleActivity', content);
     }
   },
 

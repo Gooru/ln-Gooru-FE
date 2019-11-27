@@ -157,6 +157,7 @@
 @import "components/class/overview/gru-accordion-course";
 @import "components/class/overview/gru-accordion-unit";
 @import "components/class/overview/gru-accordion-lesson";
+@import "components/class/overview/gru-lesson-plan";
 @import "components/class/gru-report-panel";
 @import "components/class/learner/gru-learner-accordion-unit";
 @import "components/class/learner/gru-learner-accordion-lesson";
@@ -235,6 +236,7 @@
 @import "components/new-cards/gru-teacher-class-card";
 @import "components/new-cards/gru-new-class-card";
 @import "components/new-cards/gru-offline-activity-card";
+@import "components/new-cards/activities/gru-add-content-card";
 @import "components/player/gru-navigation";
 @import "components/player/gru-navigator";
 @import "components/player/gru-viewer";
@@ -499,3 +501,6 @@
 @import "controllers/teacher/class/class-activities-new";
 @import "components/class/activities/gru-class-activities-listing";
 @import "components/new-cards/gru-class-activity-card";
+@import "components/new-cards/gru-activity-grading-card";
+@import "components/class/activities/gru-class-activities-adding";
+@import "components/class/activities/gru-content-search";

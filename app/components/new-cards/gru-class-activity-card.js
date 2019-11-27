@@ -22,6 +22,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.loadClassData();
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
   },
 
   actions: {
@@ -55,6 +56,18 @@ export default Ember.Component.extend({
     onRescheduleActivity() {
       const component = this;
       component.sendAction('onRescheduleActivity', component.get('activity'));
+    },
+
+    onEnableMastery() {
+      const component = this;
+      const classActivity = component.get('activity');
+      component.sendAction('onEnableMastery', classActivity);
+    },
+
+    onShowContentPreview() {
+      const component = this;
+      const classActivity = component.get('activity');
+      component.sendAction('onShowContentPreview', classActivity);
     }
   },
 
@@ -81,6 +94,21 @@ export default Ember.Component.extend({
 
   selectedClassData: {},
 
+  contentDescription: Ember.computed('activityContent', function() {
+    const component = this;
+    const activityContent = component.get('activityContent');
+    return activityContent.get('description') ||
+      activityContent.get('standards').length
+      ? activityContent.get('standards').objectAt(0).title
+      : '';
+  }),
+
+  isShowMasteryAccrual: Ember.computed('activity', function() {
+    const component = this;
+    const isUnScheduledActivity = component.get('isUnscheduledActivity');
+    return !isUnScheduledActivity;
+  }),
+
   /**
    * Toggle Options
    * @property {Ember.Array}
@@ -100,8 +128,9 @@ export default Ember.Component.extend({
    * It is used to find activity is past or not
    * @return {Boolean}
    */
-  isActivityPast: Ember.computed('activityDate', function() {
-    let activityDate = this.get('activityDate');
+  isActivityPast: Ember.computed('activity', function() {
+    let activityDate =
+      this.get('activity.end_date') || this.get('activity.added_date');
     let currentDate = moment().format('YYYY-MM-DD');
     return moment(activityDate).isBefore(currentDate);
   }),
@@ -109,17 +138,22 @@ export default Ember.Component.extend({
   loadClassData() {
     const component = this;
     const activityClasses = component.get('activityClasses');
+    const allowCachedData = true;
     activityClasses.map(activityClass => {
       const classId = activityClass.get('id');
       return Ember.RSVP.hash({
-        classData: component.get('classService').readClassInfo(classId),
+        classData: component
+          .get('classService')
+          .readClassInfo(classId, allowCachedData),
         classMembers:
           activityClass.get('members') ||
-          component.get('classService').readClassMembers(classId)
+          component
+            .get('classService')
+            .readClassMembers(classId, allowCachedData)
       }).then(({ classData, classMembers }) => {
         component
           .get('courseService')
-          .fetchById(classData.get('courseId'))
+          .fetchById(classData.get('courseId'), allowCachedData)
           .then(function(courseData) {
             activityClass.setProperties({
               course: courseData,

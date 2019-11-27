@@ -900,6 +900,7 @@ window.i18ln = {
   'class.info.add-students': 'ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ಸೇರಿಸಿ',
   'class.info.class-code': 'ತರಗತಿಯ ಕೋಡ್',
   'class.info.delete': 'ತರಗತಿಯನ್ನು ಅಳಿಸಿ',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'ನಿಯೋಜಿಸಲಾದ ಕೋರ್ಸ್',
   'class.edit.basic-info': 'ಮೂಲ ಮಾಹಿತಿ',
   'class.edit.class-name': 'ತರಗತಿಯ ಹೆಸರು',

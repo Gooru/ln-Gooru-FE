@@ -1,0 +1,45 @@
+<div class="add-content-card-container">
+  <div class="content-info-container">
+    <div class="content-type {{content.format}}">
+    </div>
+    <div class="content-title">
+      {{content.title}}
+    </div>
+    <div class="content-counts">
+      {{#if isOfflineActivity}}
+        <div class="task-count content-count">
+          <span class="content-value">{{content.taskCount}}</span>
+          <span class="content-icon"></span>
+        </div>
+      {{else}}
+        <div class="resource-count content-count {{if isAssessment 'hidden'}}">
+          <span class="content-value">{{content.resourceCount}}</span>
+          <span class="content-icon"></span>
+        </div>
+        <div class="question-count content-count">
+          <span class="content-value">{{content.questionCount}}</span>
+          <span class="content-icon"></span>
+        </div>
+      {{/if}}
+    </div>
+    <div class="add-activity" {{action "onAddActivity"}}>
+      {{gru-icon name="add"}}
+    </div>
+    <div class="schedule-activity" {{action "onShowDaterangePicker"}}>
+      {{gru-icon name="update"}}
+    </div>
+    <div class="content-thumbnail" style="background-image: url({{content.thumbnailUrl}})">
+    </div>
+  </div>
+</div>
+
+{{#if isShowDaterangePicker}}
+  <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
+    {{ca-daterange-datepicker
+      closeDatePicker='onCloseDaterangePicker'
+      onScheduleForDate='onScheduleByDate'
+      onScheduleForMonth='onScheduleByMonth'
+      endDate=endDate
+      allowTwoDateRangePicker=allowTwoDateRangePicker}}
+  </div>
+{{/if}}

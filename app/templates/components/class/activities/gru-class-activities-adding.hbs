@@ -1,0 +1,54 @@
+<div class="class-activities-source-container">
+  <div class="header-container">
+    {{class/activities/gru-content-search
+      onSelectExternalActivity = "onSelectExternalActivity"
+      onShowTenantLibraries = "onShowTenantLibraries"
+      onShowFilteredContents = "onShowFilteredContents"
+      onShowLessonPlan = "onShowLessonPlan"
+      activeTenantLibrary = activeTenantLibrary
+      course = primaryClass.course
+      class = primaryClass}}
+  </div>
+  <div class="body-container">
+    {{#if isShowTenantLibraries}}
+      {{#each tenantLibraries as |tenantLibrary|}}
+        {{library/gru-partner-library-card onSelectLibrary='onSelectTenantLibrary' content=tenantLibrary}}
+      {{/each}}
+    {{else if isShowLessonPlan}}
+      <div class="lesson-plan-activities-container">
+        {{teacher/class/ca-course-map
+          onAddActivity="onAddActivity"
+          onScheduleActivity="onShowDateRangePicker"
+          classId=primaryClass.id
+          courseId=primaryClass.courseId
+          isShowLessonPlan = true
+        }}
+      </div>
+    {{else}}
+      {{#each filteredContents as |filteredContent|}}
+        {{new-cards/activities/gru-add-content-card
+          content = filteredContent
+          onAddActivity = "onAddActivity"}}
+      {{/each}}
+    {{/if}}
+  </div>
+</div>
+
+{{#if isEnableExternalActivity}}
+  {{activity/gru-new-offline-activity
+    isShowPullUp=isEnableExternalActivity
+    classPreference=classPreference
+    classId=primaryClass.id
+    onAddExternalCollectionToDCA="onAddExternalActivity"}}
+{{/if}}
+
+{{#if isShowDateRangePicker}}
+  <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
+    {{ca-daterange-datepicker
+        closeDatePicker='onCloseDateRangePicker'
+        onScheduleForDate='scheduleContentForDate'
+        onScheduleForMonth='scheduleContentForMonth'
+        endDate=endDate
+        allowTwoDateRangePicker=false}}
+  </div>
+{{/if}}
