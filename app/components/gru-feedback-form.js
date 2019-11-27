@@ -117,7 +117,7 @@ export default Ember.Component.extend({
             feedback.categoryId
           );
           if (category) {
-            if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.quantitative) {
+            if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.QUANTITATIVE) {
               category.rating = feedback.rating;
             } else {
               category.comments = feedback.comments;
@@ -146,9 +146,9 @@ export default Ember.Component.extend({
       let feedbackObj = {
         feeback_category_id: category.categoryId
       };
-      if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.quantitative) {
+      if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.QUANTITATIVE) {
         feedbackObj.user_feedback_quantitative = category.rating;
-      } else if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.both) {
+      } else if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.BOTH) {
         feedbackObj.user_feedback_qualitative = category.comments;
       }
       userFeedback.pushObject(feedbackObj);

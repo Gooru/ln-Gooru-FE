@@ -109,9 +109,9 @@ export default Ember.Component.extend({
   isShowActivityFeedback: false,
 
   /**
-   * @property {String} format
+   * @property {String} contentType
    */
-  format: '',
+  contentType: 'assessment-external',
 
   /**
    * @property {Boolean} isValidScore

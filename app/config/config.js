@@ -486,7 +486,7 @@ export const FEEDBACK_USER_CATEGORY = {
   other: 3
 };
 export const FEEDBACK_RATING_TYPE = {
-  quantitative: 1,
-  qualitative: 2,
-  both: 3
+  QUANTITATIVE: 1,
+  QUALITATIVE: 2,
+  BOTH: 3
 };
