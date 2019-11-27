@@ -232,7 +232,6 @@ export default Ember.Component.extend({
     component.set('isDisableTimeEditor', true);
     component.set('isValidtime', false);
     component.set('isShowActivityFeedback', false);
-    component.set('format', '');
   },
 
   /**
