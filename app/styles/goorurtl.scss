@@ -115,6 +115,7 @@ $box-shadow: -1px 0px;
 @import "components/gru-teacher-featured-courses";
 @import "components/gru-confetti";
 @import "components/gru-status-switch";
+@import "components/gru-feedback-form";
 
 @import "components/cards/gru-class-card";
 @import "components/cards/gru-student-class-card";
@@ -240,6 +241,7 @@ $box-shadow: -1px 0px;
 @import "components/player/gru-suggest-test";
 @import "components/player/gru-player-done";
 @import "components/player/gru-player-summary-footer.scss";
+@import "components/player/gru-activity-feedback";
 
 @import "components/reports/gru-assessment-report";
 @import "components/reports/assessment/gru-questions";

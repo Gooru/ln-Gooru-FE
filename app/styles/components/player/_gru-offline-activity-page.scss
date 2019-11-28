@@ -1,5 +1,11 @@
 .player-container.offline-activity {
   .player {
     padding-top: 0;
+    .oa-study-player.gru-offline-activity-page {
+      height: 100%;
+      .oa-study-player-container {
+        height: 100%;
+      }
+    }
   }
 }
