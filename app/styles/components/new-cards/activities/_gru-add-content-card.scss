@@ -2,32 +2,52 @@
   .add-content-card-container {
     .content-info-container {
       display: grid;
-      grid-template-columns: 30px 1fr auto 30px 30px 50px;
+      grid-template-columns: 1fr auto 30px 30px 50px;
       align-items: center;
       box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
       background-color: $white;
       padding-left: 8px;
-      height: 45px;
-      .content-type {
-        width: 20px;
-        height: 20px;
-        background-repeat: no-repeat;
-        background-size: 20px 20px;
-        &.collection,
-        &.collection-external {
-          background-image: url("../assets/gooru/images/add_collection.svg");
+      .content-title {
+        .taxonomy-container {
+          height: 35px;
+          display: grid;
+          align-items: center;
+          .gru-taxonomy-tag-list {
+            .gru-taxonomy-tag {
+              min-width: 90px;
+              max-width: 100px;
+              height: 23px;
+              border-radius: 12px;
+              background-color: #2d2d2d;
+              .standard-tag {
+                text-align: center;
+                padding: 0;
+                .tag-label {
+                  font-size: 12px;
+                  font-weight: bold;
+                  color: $white;
+                  line-height: 21px;
+                }
+                .tag-caption {
+                  display: none;
+                }
+              }
+            }
+            .non-visible-tags {
+              width: 81px;
+              height: 23px;
+              border-radius: 12px;
+              background-color: #2d2d2d;
+              color: $white;
+              padding: 0;
+              span {
+                font-weight: bold;
+                font-size: 14px;
+                margin-left: 10px;
+              }
+            }
+          }
         }
-
-        &.offline-activity {
-          background-image: url("../assets/gooru/images/offline.svg");
-        }
-
-        &.assessment,
-        &.assessment-external {
-          background-image: url("../assets/gooru/images/add_assessment.svg");
-        }
-      }
-      .content-titile {
       }
       .content-counts {
         display: grid;
@@ -66,12 +86,12 @@
           font-size: 18px;
         }
       }
-
       .content-thumbnail {
         width: 50px;
-        height: 45px;
+        height: 55px;
         background-size: 50px 45px;
         background-position: center;
+        background-repeat: no-repeat;
       }
     }
   }

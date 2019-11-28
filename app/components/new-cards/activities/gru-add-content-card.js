@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
+import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
+import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 
 export default Ember.Component.extend({
   classNames: ['new-cards', 'gru-add-content-card'],
@@ -52,5 +54,19 @@ export default Ember.Component.extend({
   isOfflineActivity: Ember.computed.equal(
     'contentType',
     CONTENT_TYPES.OFFLINE_ACTIVITY
-  )
+  ),
+
+  /**
+   * @property {TaxonomyTag[]} List of taxonomy tags
+   */
+  taxonomyTags: Ember.computed('content.standards.[]', function() {
+    var standards = this.get('content.standards');
+    if (standards) {
+      standards = standards.filter(function(standard) {
+        // Filter out learning targets (they're too long for the card)
+        return !TaxonomyTagData.isMicroStandardId(standard.get('id'));
+      });
+    }
+    return TaxonomyTag.getTaxonomyTags(standards);
+  })
 });

@@ -87,6 +87,20 @@ export default Ember.Component.extend({
         .slideToggle();
     },
 
+    onToggleSelector(component = this) {
+      component.set('isShowItemsToGrade', false);
+      component.set('isShowUnscheduledActivities', false);
+      component.set('isShowScheduledActivities', true);
+      component.get('contentTypes').map(content => {
+        content.set('isActive', true);
+      });
+      component.$('.activities-content').slideToggle();
+      let bodyPanel = component.$('.body-container');
+      bodyPanel.hasClass('openSelecter')
+        ? bodyPanel.removeClass('openSelecter')
+        : bodyPanel.addClass('openSelecter');
+    },
+
     showPreviousMonth(date) {
       const component = this;
       let forMonth = moment(date).format('MM');

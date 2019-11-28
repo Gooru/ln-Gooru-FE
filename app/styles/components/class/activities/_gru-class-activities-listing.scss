@@ -6,16 +6,14 @@
     grid-row-gap: 3px;
     .header-container {
       display: grid;
-      grid-template-columns: auto 50px 1fr 50px;
-      column-gap: 8px;
+      grid-template-columns: auto 50px 1fr 65px;
       justify-items: center;
       align-items: center;
-      height: 45px;
       border-radius: 4px;
       align-items: center;
       background-color: $white;
       position: relative;
-      padding: 0 5px;
+      padding: 5px;
       box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
 
       .activity-date-range-selector {
@@ -24,10 +22,9 @@
         align-items: center;
         column-gap: 5px;
         cursor: pointer;
-        border: 1px solid;
-        border-radius: 4px;
+        border-right: 2px solid #777575;
         height: 35px;
-        padding: 0 5px;
+        padding: 0 15px 0 20px;
         .schedule-icon {
           height: inherit;
           i {
@@ -51,34 +48,19 @@
         }
       }
 
-      .contents-selector {
+      .activities {
         display: grid;
-        grid-template-columns: auto auto auto;
-        justify-content: center;
-        column-gap: 15px;
-        .content-selector {
-          opacity: 0.6;
-          .icon {
-            width: 22px;
-            height: 22px;
-            background-size: 22px;
-            display: block;
-            background-position: center;
-            background-repeat: no-repeat;
-            cursor: pointer;
-            &.assessment-icon {
-              background-image: url("../assets/gooru/images/add_assessment.svg");
-            }
-            &.collection-icon {
-              background-image: url("../assets/gooru/images/add_collection.svg");
-            }
-            &.offline-activity-icon {
-              background-image: url("../assets/gooru/images/offline.svg");
-            }
-          }
-          &.active {
-            opacity: 1;
-          }
+        width: 100%;
+        justify-content: flex-end;
+        align-items: center;
+        color: #35424b;
+        padding: 5px 15px;
+        border-right: 2px solid #777575;
+        height: 35px;
+        cursor: pointer;
+        opacity: 0.6;
+        &.active {
+          opacity: 1;
         }
       }
       .items-to-grade-selector {
@@ -306,18 +288,56 @@
         }
       }
     }
+    .activities-content {
+      display: none;
+      background-color: #fff;
+      border-radius: 4px;
+      padding: 15px;
+      .contents-selector {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        justify-content: center;
+        column-gap: 15px;
+        .content-selector {
+          opacity: 0.6;
+          .icon {
+            width: 22px;
+            height: 22px;
+            background-size: 22px;
+            display: block;
+            background-position: center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            &.assessment-icon {
+              background-image: url("../assets/gooru/images/add_assessment.svg");
+            }
+            &.collection-icon {
+              background-image: url("../assets/gooru/images/add_collection.svg");
+            }
+            &.offline-activity-icon {
+              background-image: url("../assets/gooru/images/offline.svg");
+            }
+          }
+          &.active {
+            opacity: 1;
+          }
+        }
+      }
+    }
     .body-container {
       background-color: $white;
       box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
       border-radius: 4px;
-      max-height: calc(100vh - 120px);
+      height: calc(100vh - 125px);
       overflow-y: auto;
+      &.openSelecter {
+        height: calc(100vh - 180px);
+      }
       .activities-cards-container {
         display: flex;
         flex-flow: wrap row;
         > div {
           width: 50%;
-          margin: auto;
           display: grid;
           justify-content: center;
         }

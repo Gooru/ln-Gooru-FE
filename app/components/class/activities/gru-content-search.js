@@ -35,6 +35,14 @@ export default Ember.Component.extend(ConfigurationMixin, {
   },
 
   actions: {
+    onClearSearch() {
+      const component = this;
+      if (component.get('contentSearchTerm') !== '') {
+        component.set('contentSearchTerm', '');
+        component.loadCotents();
+      }
+    },
+
     onSelectExternalActivity() {
       const component = this;
       component.sendAction('onSelectExternalActivity');
