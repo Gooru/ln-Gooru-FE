@@ -99,11 +99,17 @@ export default Ember.Component.extend({
    * @type {Boolean}
    */
   allowToPlay: true,
+  isOpenPlayer: false,
 
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
+    closePullUp() {
+      this.set('isOpenPlayer', false);
+      this.loadData();
+    },
+
     /**
      * Handle toggle functionality of hide/show milestone items
      * @return {Object}
@@ -439,7 +445,8 @@ export default Ember.Component.extend({
       minScore,
       collectionSource: collection.source || 'course_map',
       isStudyPlayer: true,
-      pathType
+      pathType,
+      isIframeMode: true
     };
 
     let suggestionPromise = null;
@@ -472,10 +479,16 @@ export default Ember.Component.extend({
           pathType
         );
     }
-    suggestionPromise.then(() =>
-      component.get('router').transitionTo('study-player', courseId, {
-        queryParams
-      })
-    );
+
+    suggestionPromise.then(function() {
+      component.set(
+        'playerUrl',
+        component
+          .get('router')
+          .generate('study-player', courseId, { queryParams })
+      );
+      component.set('isOpenPlayer', true);
+      component.set('playerContent', collection);
+    });
   }
 });
