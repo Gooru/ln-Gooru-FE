@@ -6,6 +6,13 @@ import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 export default Ember.Component.extend({
   classNames: ['new-cards', 'gru-add-content-card'],
 
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
+  },
+
   actions: {
     onAddActivity() {
       const component = this;

@@ -260,6 +260,11 @@ export default Ember.Component.extend({
       component.get('contentTypes').map(content => {
         content.set('isActive', false);
       });
+      let bodyPanel = component.$('.body-container');
+      if (bodyPanel.hasClass('openSelecter')) {
+        component.$('.activities-content').slideToggle();
+        bodyPanel.removeClass('openSelecter');
+      }
     },
 
     onGradeItem(gradingObject) {
