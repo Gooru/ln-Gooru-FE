@@ -96,9 +96,9 @@ export default Ember.Component.extend({
       });
       component.$('.activities-content').slideToggle();
       let bodyPanel = component.$('.body-container');
-      bodyPanel.hasClass('openSelecter')
-        ? bodyPanel.removeClass('openSelecter')
-        : bodyPanel.addClass('openSelecter');
+      bodyPanel.hasClass('open-selecter')
+        ? bodyPanel.removeClass('open-selecter')
+        : bodyPanel.addClass('open-selecter');
     },
 
     showPreviousMonth(date) {
@@ -261,9 +261,9 @@ export default Ember.Component.extend({
         content.set('isActive', false);
       });
       let bodyPanel = component.$('.body-container');
-      if (bodyPanel.hasClass('openSelecter')) {
+      if (bodyPanel.hasClass('open-selecter')) {
         component.$('.activities-content').slideToggle();
-        bodyPanel.removeClass('openSelecter');
+        bodyPanel.removeClass('open-selecter');
       }
     },
 
