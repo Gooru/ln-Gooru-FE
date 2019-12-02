@@ -113,7 +113,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
                   .readExternalAssessment(params.collectionId)
         }).then(function(hash) {
           //setting query params using the map location
-
           params.type =
             params.type ||
             mapLocation.get('context.itemType') ||

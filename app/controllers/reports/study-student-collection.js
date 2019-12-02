@@ -183,6 +183,10 @@ export default StudentCollection.extend({
     onExit(rouet, id) {
       const controller = this;
       controller.transitionToRoute(rouet, id);
+    },
+
+    OnFeedbackCapture: function() {
+      this.set('isShowActivityFeedback', true);
     }
   },
 
@@ -379,6 +383,8 @@ export default StudentCollection.extend({
     return !!frQuesitons.length;
   }),
 
+  isShowActivityFeedback: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -412,10 +418,12 @@ export default StudentCollection.extend({
           ? 'signature-collection'
           : 'signature-assessment';
       queryParams.pathType = 'system';
+      this.set('isShowActivityFeedback', false);
       this.transitionToRoute('study-player', context.get('courseId'), {
         queryParams
       });
     } else {
+      this.set('isShowActivityFeedback', false);
       queryParams.type = context.itemType || null; //Type is important to decide whether next item is external or normal
       queryParams.pathId = context.pathId || 0;
       queryParams.pathType = context.pathType || null;
@@ -452,6 +460,7 @@ export default StudentCollection.extend({
     if (status !== 'done') {
       this.toPlayer();
     } else {
+      this.set('isShowActivityFeedback', false);
       this.set('mapLocation.context.status', 'done');
       this.set('hasSignatureCollectionSuggestions', false);
       this.set('hasSignatureCollectionSuggestions', false);

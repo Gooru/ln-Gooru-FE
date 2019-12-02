@@ -209,12 +209,12 @@ export default Ember.Component.extend({
       if (component.get('sortByScoreEnabled')) {
         assessmentStudentReportData = component
           .get('assessmentStudentReportData')
-          .sortBy('score-use-for-sort')
+          .sortBy('score')
           .reverse();
       } else {
         assessmentStudentReportData = component
           .get('assessmentStudentReportData')
-          .sortBy('score-use-for-sort');
+          .sortBy('score');
       }
       component.set('assessmentStudentReportData', assessmentStudentReportData);
     },
@@ -1012,7 +1012,16 @@ export default Ember.Component.extend({
           'totalTimeSpent',
           parsedUserCollectionsPerformance.totalTimeSpent
         );
+        if (!parsedUserCollectionsPerformance.hasStarted) {
+          userContext.set('score-use-for-sort', -1);
+        } else {
+          userContext.set(
+            'score-use-for-sort',
+            parsedUserCollectionsPerformance.averageScore
+          );
+        }
         userContext.set('score', parsedUserCollectionsPerformance.averageScore);
+
         usersCollectionsPerformanceSummary.pushObject(userContext);
       });
     }

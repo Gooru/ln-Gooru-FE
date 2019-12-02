@@ -1,0 +1,106 @@
+.gru-feedback-form {
+  padding: 10px;
+  background-color: #fff;
+  color: #737373;
+  font-size: 15px;
+  text-transform: initial;
+  .feedback-container {
+    display: grid;
+    grid-template-rows: auto auto 50px;
+    .feedback-header-panel {
+      display: grid;
+      grid-template-rows: auto auto auto;
+      align-items: center;
+      .header-info {
+        .title {
+          font-size: 20px;
+          font-weight: 500;
+          text-transform: capitalize;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+        }
+      }
+      .description {
+        display: none;
+      }
+      .note p {
+        margin-bottom: 5px;
+      }
+    }
+    .feedback-body-panel {
+      text-transform: capitalize;
+      padding: 10px;
+      .category-panel {
+        grid-template-columns: 100px auto;
+        display: grid;
+        .category {
+          padding: 10px 5px;
+          justify-content: center;
+        }
+        .category-rating {
+          padding: 10px 5px;
+          justify-content: flex-end;
+          display: flex;
+          .row {
+            margin: 0px;
+            ul {
+              margin: 0px;
+              li {
+                border-bottom: 0px;
+                line-height: 1;
+                padding: 5px;
+              }
+            }
+          }
+          .number-stars-label {
+            display: none;
+          }
+        }
+      }
+      .feedback-comments {
+        padding: 5px;
+        label {
+          width: 100%;
+          .form-group {
+            margin-bottom: 0px;
+          }
+        }
+      }
+    }
+    .feedback-fooder-panel {
+      display: inline-flex;
+      justify-content: flex-end;
+      align-items: center;
+      .next,
+      .skip {
+        padding: 10px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+      }
+      .next {
+        background-color: #0072bc;
+        width: 100px;
+      }
+      .skip {
+        background-color: #b8bfc4;
+        margin-right: 15px;
+        width: 150px;
+      }
+      @media screen and (max-width: $screen-320) {
+        .next,
+        .skip {
+          padding: 5px 10px;
+        }
+        .skip {
+          margin-right: 10px;
+          width: 130px;
+        }
+        .next {
+          width: 90px;
+        }
+      }
+    }
+  }
+}

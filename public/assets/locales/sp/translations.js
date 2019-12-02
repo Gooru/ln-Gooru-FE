@@ -2831,5 +2831,12 @@ window.i18ln = {
   'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
   'common.select-your-other-classes-from-below':
     'Select your other classes from below to manage in this class',
-  'common.multi-grade-view': 'Multi-grade view. Viewing class'
+  'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.feedback-note':
+    'Please take a minute to rate the collection and its resources. It really helps!',
+  'common.skip-feedback': 'Skip Feedback',
+  'common.external-collection.index-message':
+    'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
+  'common.external-assessment.index-message':
+    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here'
 };

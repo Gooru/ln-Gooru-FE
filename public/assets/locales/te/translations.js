@@ -14,88 +14,80 @@ window.i18ln = {
   pa: 'ਪੰਜਾਬੀ',
   ta: 'தமிழ்',
   te: 'తెలుగు',
-  'errors.description': 'ఈ ఫీల్డ్',
-  'common.sub-filter': 'Sub-Filter',
-  'errors.inclusion': '{{వివరణ}} జాబితాలో చేర్చబడలేదు',
-  'errors.exclusion': '{{వివరణ}} రిజర్వ్ చేయబడింది',
-  'errors.invalid': '{{వివరణ}} చెల్లనిది',
-  'errors.confirmation': '{{వివరణ}} సరిపోలడం లేదు {{on}}',
-  'errors.accepted': '{{వివరణ}} అంగీకరించాలి',
-  'errors.empty': '{{వివరణ}} ఖాళీగా వుండదు',
-  'errors.blank': '{{వివరణ}} ఖాళీగా ఉండకూడదు',
-  'errors.present': '{{వివరణ}} ఖాళీగా ఉండాలి',
-  'my-content': 'My Content',
-  'featured-libraries': 'featured libraries',
-  'errors.collection': '{{వివరణ}} తప్పనిసరిగా సేకరణ అయి ఉండాలి',
-  'errors.singular': '{{వివరణ}} ఒక సేకరణ కాదు',
-  'errors.tooLong': '{{వివరణ}} చాలా పొడవుగా ఉంది (గరిష్టంగా {{max}} అక్షరాలు)',
-  'errors.tooShort': '{{వివరణ}} చాలా తక్కువగా ఉంది (కనీసం {{min}} అక్షరాలను)',
-  'errors.before': '{{వివరణ}} ముందు {{ముందు}} ముందు ఉండాలి',
-  'errors.after': '{{వివరణ}} {{తర్వాత}} తర్వాత ఉండాలి',
-  'errors.wrongDateFormat': '{{వివరణ}} {{format}} యొక్క ఆకృతిలో ఉండాలి',
-  'errors.wrongLength': '{{వివరణ}} తప్పు పొడవు ({{is}} అక్షరాలు ఉండాలి)',
-  'errors.notANumber': '{{వివరణ}} ఒక సంఖ్య అయి ఉండాలి',
-  'errors.notAnInteger': '{{వివరణ}} పూర్ణాంకం అయి ఉండాలి',
-  'errors.greaterThan': '{{వివరణ}} {{gt}} కన్నా ఎక్కువ ఉండాలి',
+  'errors.description': 'ఈ ఖాళీ',
+  'errors.inclusion': '{{description}} ఆ జాబితాలో చేర్చ లేదు',
+  'errors.exclusion': '{{description}} రిజర్వు చేయబడినది',
+  'my-content': 'నాయొక్క ఇష్టం',
+  'common.tasks': 'పనులు',
+  'common.sub-filter': 'సగం- వడపోత',
+  'featured-libraries': 'ఫీచర్ గ్రంధాలయములు',
+  'errors.invalid': '{{description}} చెల్లదు',
+  'errors.confirmation': '{{description}}సరి అవలేదు  {{on}}',
+  'errors.accepted': '{{description}} తప్పక అంగీకరించాలి',
+  'errors.empty': '{{description}} కాళీ గా లేదు',
+  'errors.blank': '{{description}} కాళీ గా లేదు',
+  'errors.present': '{{description}} తప్పగా కాళీ గా ఉంచాలి',
+  'errors.collection': '{{description}} తప్పక ఒక సేకరణ గా వుండాలి',
+  'errors.singular': '{{description}} ఒక సేకరణ గా వుందా కూడదు',
+  'errors.tooLong':
+    '{{description}} చాల పొడుగు గా వుంది (గరిష్టం  {{max}} అక్షరాలు ఉన్నాయి)',
+  'errors.tooShort':
+    '{{description}} చల్లగా పొట్టిగా (తక్కువలో  {{min}}అక్షరాలు ఉన్నాయి)',
+  'errors.before': '{{description}} తప్పగా ముందు వుండాలి  {{before}}',
+  'errors.after': '{{description}} తప్పగా తర్వాత వుండాలి  {{after}}',
+  'errors.wrongDateFormat':
+    '{{description}తప్పకుండా  ఫార్మాట్ యొక్క  {{format}} ఉండాలి',
+  'errors.wrongLength':
+    '{{description}} పొడుగు తప్పు ఉంది (అక్షరాలు లో {{is}}వుండాలి',
+  'errors.notANumber': '{{description}} సంఖ్యలో ఉండాలి',
+  'errors.notAnInteger': '{{description}} పూర్ణ  సంఖ్యా రూపం లో వుండాలి',
+  'errors.greaterThan': '{{description}}గొప్పగా వుండడం కంటే {{gt}}',
   'errors.greaterThanOrEqualTo':
-    '{{వివరణ}} తప్పక {{gte}} కంటే ఎక్కువ లేదా సమానంగా ఉండాలి',
-  'errors.equalTo': '{{వివరణ}} {{is}} కి సమానంగా ఉండాలి',
-  'errors.lessThan': '{{వివరణ}} తప్పక {{lt}} కంటే తక్కువగా ఉండాలి',
+    '{{description}}తప్పక గొప్పగా వుడాలి లేదా సమానం గా  {{gte}} కు',
+  'errors.equalTo': '{{description}} సమానంగా ఉండాలి {{is}}',
+  'errors.lessThan': '{{description}}  {{lt}} కంటే తక్కువుగా ఉండాలి',
   'errors.lessThanOrEqualTo':
-    '{{వివరణ}} తప్పక {{lte}} కంటే తక్కువగా లేదా సమానంగా ఉండాలి',
-  'errors.otherThan': '{{వివరణ}} తప్పనిసరిగా {{విలువ}} కంటే తప్పక',
-  'errors.odd': '{{వివరణ}} తప్పనిసరిగా సరికాదు',
-  'errors.even': '{{వివరణ}} తప్పక కూడా ఉండాలి',
-  'errors.positive': '{{వివరణ}} సానుకూలంగా ఉండాలి',
-  'errors.date': '{{వివరణ}} చెల్లుబాటు అయ్యే తేదీ అయి ఉండాలి',
-  'errors.email': '{{వివరణ}} చెల్లుబాటు అయ్యే ఇమెయిల్ చిరునామా అయి ఉండాలి',
-  'errors.phone': '{{వివరణ}} చెల్లుబాటు అయ్యే ఫోన్ నంబర్ అయి ఉండాలి',
-  'errors.url': '{{వివరణ}} చెల్లుబాటు అయ్యే url అయి ఉండాలి',
-  'rubric-details': 'Rubric Details',
-  'common.no-users-to-grade-oa':
-    'There are no users to grade for this Offline Activity.',
+    '{{description}}   {{lte}} కంటే తక్కువైనా లేక సమానంగా ఉండాలి',
+  'errors.otherThan': '{{description}}  {{value}} కంటే వేరే ది  గా ఉండాలి',
+  'errors.odd': '{{description}}  అసమానంగా  గా ఉండాలి',
+  'errors.even': '{{description}} సమానంగా ఉండాలి',
+  'errors.positive': '{{description}}  తప్పక అనుకూలం గా ఉండాలి',
+  'errors.date': '{{description}} తప్పగా చెల్లుబాటు అయ్యే తేది ఉండాలి',
+  'errors.email': '{{description}}  విలువగల ఈ మెయిల్ చిరునామా కలిగి వుండాలి',
+  'errors.phone': '{{description}} విలువయిన ఫోన్ నెంబర్ కలిగి వుండాలి',
+  'errors.url': '{{ description}}విలుయిఅన యు ఆర్ యల్ ఉండాలి',
   'common.relevance': 'ఔచిత్యం',
   'common.engagement': 'నిశ్చితార్థం',
   'common.efficacy': 'సమర్ధతకు',
   'self-grade.not-required': 'Student self-grading not required',
   'common.grid': 'గ్రిడ్',
   'common.list': 'జాబితా',
-  'common.tenantLibrary': 'Tenant Library',
-  'common.first': 'ప్రధమ',
-  'common.add-data-choice-title': 'How do you want to enter the data?',
-  'common.take-photo': 'take photo',
-  'not-covered-in-fw-msg':
-    'Note: This competency is not covered by the {{framework}} framework',
+  'common.first': 'మొదటి',
+  'common.last': 'చివర',
+  'common.name': 'నామము',
+  'common.add-data-choice-title': 'మీరు ఏవిధంగా డేటా నమోదు చేస్తారు ?',
+  'common.take-photo': 'ఫోటో తీవుకోండి',
+  'common.upload-image': 'ప్రతిబింబం అప్లోడ్',
   'tooltip.check-items-to-grade':
-    'Check the Items to Grade panel below to grade this activity',
-  'common.upload-image': 'upload image',
-  'common.by-question': 'question-by-question',
-  'reroute.suggestion': 'reroute suggestion',
-  'common.suggest-to-student': 'Suggest to student',
-  'reroute.suggestion.title': 'Having difficult with the concepts?',
-  'reroute.suggestion.desc':
-    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
-  'i2d.new-upload-msg':
-    'Please click on Confirm & Continue button to upload your images',
+    'ఈ కార్యాచరణను గ్రేడ్ చేయడానికి దిగువ గ్రేడ్ ప్యానెల్‌కు అంశాలను తనిఖీ చేయండి',
+  'common.by-question': 'ప్రశ్న-ద్వారా-ప్రశ్న',
   'i2d.conversion-progress':
-    'The uploaded image(s) are being processed. Please check back later',
+    'అప్‌లోడ్ చేసిన ప్రతిబిబం  (లు) ప్రాసెస్ చేయబడుతున్నాయి. దయచేసి తరువాత తనిఖీ చేయండి',
   'i2d.conversion-error':
-    'There was an error when trying to convert the image. Please resubmit the image',
-  'file-picker-placeholder': 'Choose a file or drag it here',
-  'no-preview-available': 'no preview available',
-  'common.success': 'Success',
+    'ప్రతిబిబం  మార్చడానికి ప్రయత్నిస్తున్నప్పుడు లోపం ఉంది. దయచేసి ప్రతిబింబం తిరిగి  సమర్పించండి',
+  'file-picker-placeholder':
+    'ఫైల్‌ను ఎంచుకోండి లేదా  దాన్ని ఇక్కడ కి డ్రాగ్ చెయ్యండి',
+  'no-preview-available': 'ప్రివ్యూ అందుబాటులో లేదు',
+  'common.success': 'విజయం',
   'i2d-successfully-image-upload':
-    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
-  'common.dialog-close': 'Do you want to close ?',
-  're-upload': 'Re-Upload',
-  'upload-success': 'Uploaded Successfully',
-  'mobile-camera-placeholder': 'Tap for image upload',
-  'i2d.mobile-upload-failed': 'There was a error',
+    'ప్రతి బిమ్బాలను   విజయవంతంగా అప్‌లోడ్ చేసేరు . ప్రతి బింబం ల   నుండి డేటా బయటకు తీయడానికి కొంత సమయం పడుతుంది. దయచేసి సమీక్ష కోసం తరువాత తనిఖీ చేయండి',
+  'common.dialog-close': 'మీరు మూసివేయాలనుకుంటున్నారా?',
+  'upload-success': 'విజయవంతంగా అప్‌లోడ్ చేయబడింది',
+  'mobile-camera-placeholder': 'ప్రతి బింబం  అప్‌లోడ్ కోసం నొక్కండి',
+  'i2d.mobile-upload-failed': 'అక్కడ  లోపం  ఉంది',
   'i2d.upload-failed':
-    'There was an error while uploading this image. Re-upload?',
-  'common.last': 'గత',
-  'common.name': 'పేరు',
-  'common.for': 'for',
+    'ఈ ప్రతి బిబం ను  అప్‌లోడ్ చేస్తున్నప్పుడు  లోపం ఉంది. తిరిగి అప్లోడ్ చెయ్యండి ?',
+  're-upload': 'తిరిగి అప్లోడ్',
   'common.user': 'యూజర్',
   'common.content-name': 'కంటెంట్ పేరు',
   'common.day': 'day',
@@ -116,19 +108,23 @@ window.i18ln = {
   'common.frq': 'frq',
   'common.schedule': 'షెడ్యూల్',
   'common.responses': 'స్పందనలు',
-  'common.no-lesson-info-message': 'ఈ యూనిట్ ఏ పాఠాలు కలిగి ఉంది.',
-  'common.no-collection-info-message': 'ఈ పాఠం ఏ సేకరణలు కలిగి ఉంది.',
-  'common.gooru-suggestions': 'గోరు సూచనలు',
-  'common.gooru-catalog': 'gooru కేటలాగ్',
-  'common.no-suggestion-message':
-    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
-  'common.suggestion-made-to': 'చేసిన సూచన',
-  'common.student-selected': 'విద్యార్థి ఎంపిక',
-  'common.no-suggest-result-message': ' సరిపోలే కంటెంట్ కనుగొనబడలేదు',
+  'ca.student.no-content':
+    'ఉపాధ్యాయుడు  ఆ రోజుకు ఎటువంటి కార్యకలాపాలను కేటాయించ లేదు',
+  'oa.student.no-active-content':
+    'ప్రస్తుతం మీకు కేటాయించిన ఆఫ్‌లైన్ కార్యకలాపాలు ఏమీ లేవు',
+  'oa.student.no-completed-content': 'ఇంకా పూర్తయిన ఆఫ్‌లైన్ కార్యకలాపాలు లేవు',
+  'common.no-lesson-info-message': 'ఈ యూనిట్‌కు ఏదైనా పాఠాలు ఉన్నాయి.',
+  'common.no-collection-info-message': 'ఈ పాఠానికి ఏవైనా సేకరణలు ఉన్నాయి.',
+  'common.gooru-suggestions': 'గూరు సూచనలు',
+  'common.gooru-catalog': 'గూరు జాబితా',
+  'common.suggestion-made-to': 'సూచన',
+  'common.student-selected': 'ఎంపికయిన విద్యార్థి',
+  'self-grade.not-required': 'విద్యార్థి స్వీయ-గ్రేడింగ్ అవసరం లేదు',
+  'common.no-suggest-result-message': 'సరిపోయే  కంటెంట్ కనుగొనబడలేదు',
   'common.no-suggest-results-message':
-    'మీరు సంబంధిత కంటెంట్ను శోధించవచ్చు మరియు కనుగొనవచ్చు.',
+    'మీరు సంబంధిత కంటెంట్‌ను సోధించి మరియు కనుగొనవచ్చు.',
   'common.no-suggest-search-results-message':
-    'మీ అక్షరక్రమాన్ని తనిఖీ చేయండి. మేము అన్ని తప్పులు చేస్తాము! లేదా బదులుగా ఒకే పదాన్ని శోధించడానికి ప్రయత్నించండి.',
+    'మీ స్పెల్లింగ్‌ను తనిఖీ చేయండి. మనమందరం తప్పులు చేస్తున్నాం! లేదా బదులుగా ఇలాంటి పదం కోసం శోధించడానికి ప్రయత్నిస్తున్నాం.',
   'common.a-collection': 'సేకరణ',
   'common.a-course': 'ఒక శిక్షణ',
   'common.offline-activites': 'offline activites',
@@ -153,28 +149,22 @@ window.i18ln = {
   'common.ignore': 'పట్టించుకోకుండా',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.add': 'జోడించడానికి',
-  'common.plan': 'plan',
-  'offline-activities.no-completed-content':
-    'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content':
-    'There are no projects or other offline activities that the students are currently working on',
-  'common.a-offline-activity': 'a offline activity',
-  'common.plan-an-activities': 'Plan your activities',
-  'common.plan-activities': 'Plan Activities',
+  'common.plan-an-activities': 'మీ కార్యకలాపాలను ప్రణాళిక చెయ్యండి',
+  'common.plan-activities': 'ప్రణాళిక కార్యకలాపాలు',
   'common.plan-an-activities-msg':
-    'Add activities to conduct in class. Click on the collection or assessment icon above to Plan your activities',
-  'common.Reschedule': 'వాయిదా',
-  'common.no-unschedule-items': 'మీకు షెడ్యూల్ అవసరం ఏ కార్యకలాపాలు లేదు',
-  'common.repeat-activity': 'పునరావృత చర్య',
+    'తరగతిలో నిర్వహించడానికి కార్యకలాపాలను జోడించండి. మీ కార్యకలాపాలను  పధకం  చేయడానికి పై సేకరణ లేదా అంచనా చిహ్నంపై క్లిక్ చేయండి',
+  'common.Reschedule': 'రీషెడ్యులు',
+  'common.no-unschedule-items': 'మీకు షెడ్యూల్ చేయాల్సిన కార్యకలాపాలు ఏమి లేవు',
+  'common.repeat-activity': 'పునరావృత కార్యాచరణ',
   'common.add-assessment': 'క్రొత్త అంచనాను సృష్టించండి',
   'common.add-century-skills': '21 వ శతాబ్దపు నైపుణ్యాలను జోడించండి',
   'common.add-collaborator': 'సహకారిని జోడించండి',
   'common.add-collection': 'కొత్త సేకరణను సృష్టించండి',
   'common.add-collection-item': 'వనరు లేదా ప్రశ్నను సృష్టించండి',
-  'common.add-competency': 'యోగ్యతని జోడించండి',
+  'common.add-competency': 'సామర్థ్యాన్ని జోడించండి',
   'common.add-content-prompt':
-    'మీరు [1] {{type}} [2] ఇంకా సృష్టించలేరు. వెళ్ళి, బోల్డ్.',
-  'common.add-course': 'కొత్త కోర్సు సృష్టించండి',
+    'మీరు ఇంకా <span> {{type}} </span> ను సృష్టించలేదు. వెళ్ళండి, ధైర్యంగా ఉండండి.',
+  'common.add-course': 'క్రొత్త కోర్సును సృష్టించండి',
   'common.add-coruse-to-class': 'కోర్సును జోడించండి',
   'common.add-domains-to-unit': 'యూనిట్లకు డొమైన్లను జోడించండి',
   'common.add-url': 'url ను జోడించు',
@@ -194,11 +184,11 @@ window.i18ln = {
   'common.add-to-classroom': 'తరగతిలో జోడించండి',
   'common.add-to-daily-class': 'తరగతి కార్యకలాపాలకు జోడించండి',
   'common.add-to-collection-success':
-    'మీరు {{collectiontitle}} కు {{contenttitle}} ను జోడించాము. మీరు {{సేకరణ రకం}} ను సవరించాలనుకుంటున్నారా?',
+    'మీరు {{content Title}}  కు  {{collection Title}}. కు జోడించారు . మీరు {{collection Type}} ను సవరించాలనుకుంటున్నారా?',
   'common.add-to-lesson-success':
-    'మీరు {{సేకరణటైటిల్}} {{lessontitle}} కు జోడించాము. మీరు {{సేకరణ రకం}} ను సవరించాలనుకుంటున్నారా?',
-  'common.add-type-question': 'ఏ రకమైన ప్రశ్న మీరు జోడించాలనుకుంటున్నారు?',
-  'common.add-type-resource': 'వనరు ఏ రకమైనది?',
+    'మీరు {{ lesson Title}}కు {{collection Title}}   ను జోడించారు . మీరు {{collection Typ}} ను సవరించాలనుకుంటున్నారా?',
+  'common.add-type-question': 'మీరు ఏ రకమైన ప్రశ్నను జోడించాలనుకుంటున్నారు?',
+  'common.add-type-resource': 'ఇది ఏ రకమైన వనరు?',
   'common.add-units': 'యూనిట్లను జోడించండి',
   'common.added': 'జోడించారు',
   'common.advanced-editing': 'ఆధునిక ఎడిటింగ్',
@@ -237,12 +227,12 @@ window.i18ln = {
   'common.beta': 'బేటా',
   'common.big-ideas': 'పెద్ద ఆలోచనలు',
   'common.biography': 'జీవిత చరిత్ర',
-  'common.bookmark': 'బుక్మార్క్',
-  'common.bookmarks': 'బుక్మార్క్లు',
+  'common.bookmark': 'పుస్తక గుర్తు',
+  'common.bookmarks': 'పుస్తక గుర్తులు',
   'common.bookmarked-content-success':
-    'ఈ బుక్మార్క్ చేసిన {{contenttype}} మీ స్వతంత్ర అభ్యసన పేజీకు చేర్చబడుతుంది.',
+    'ఈ బుక్‌మార్క్ చేసిన {{ content Type}}  మీ స్వతంత్ర అభ్యాస పేజీకి జోడించబడుతుంది.',
   'common.bookmarked-success':
-    'అన్ని బుక్మార్క్ చేసిన కంటెంట్ స్వతంత్ర అభ్యాస పేజీకి చేర్చబడుతుంది.',
+    'అన్ని పుస్తక గుర్తు  చేసిన కంటెంట్ స్వతంత్ర అభ్యాస పేజీకి జోడించబడింది.',
   'common.builder': 'ఎడిటర్',
   'common.cancel': 'రద్దు',
   'common.categories': 'వర్గాలు',
@@ -277,9 +267,9 @@ window.i18ln = {
   'common.content-manager': 'కంటెంట్ మేనేజర్',
   'common.contentUnavailable': 'కంటెంట్ అందుబాటులో లేదు',
   'common.contentUnavailabletoday':
-    'ప్రస్తుత కార్యకలాపాలు లేవు. కోర్సు మ్యాప్ లేదా నా కంటెంట్ నుండి తరగతి కార్యాచరణలను జోడించండి.',
-  'common.contentUnavailableyesterday': 'ఏ చర్యలు చేర్చబడలేదు.',
-  'common.contributed-by': 'దోహదపడింది',
+    'ప్రస్తుత కార్యకలాపాలు లేవు. కోర్సు మ్యాప్ లేదా నా కంటెంట్ నుండి తరగతి కార్యకలాపాలను జోడించండి.',
+  'common.contentUnavailableyesterday': 'ఎటువంటి కార్యకలాపాలు జోడించబడలేదు.',
+  'common.contributed-by': 'రచన',
   'common.copy': 'కాపీని',
   'common.copy-to': 'కు కాపీ చేయి',
   'common.correct': 'సరైన',
@@ -290,15 +280,25 @@ window.i18ln = {
   'common.self-graded': 'స్వీయ శ్రేణీకృత',
   'common.rubric-grade': 'రూబీ గ్రేడ్',
   'common.brief': 'క్లుప్తంగా',
-  'common.update-grade-score': 'మీ frq పూర్తి గ్రేడ్ గ్రేడ్ స్కోరు అప్డేట్.',
+  'common.update-grade-score':
+    'మీ యఫ్ ఆర్ క్యు  ని పూర్తి చేయడానికి గ్రేడ్ స్కోర్‌ను నవీకరించండి.',
   'common.answer-this-rubric':
-    'మీ frq ని పూర్తి చేయడానికి ఈ రూబిక్కు సమాధానం ఇవ్వండి.',
-  'common.all-caught-up': 'మీరు అన్ని పట్టుబడ్డారు!',
-  'common.no-users-to-grade': 'ఈ frq కోసం గ్రేడ్ వినియోగదారులకు లేరు.',
-  'common.rubric-needs-grading': 'రూబీకి గ్రేడింగ్ అవసరం',
-  'common.not-answered': 'సమాధానం లేదు',
-  'common.rubric-not-answered': 'రూబీకి సమాధానం ఇవ్వలేదు',
+    'మీ యఫ్ ఆర్ క్యు ని పూర్తి చేయడానికి ఈ రుబ్రిక్‌కు సమాధానం ఇవ్వండి.',
+  'common.answer-this-activity':
+    'మీ కార్యాచరణను పూర్తి చేయడానికి ఈ రుబ్రిక్‌కు సమాధానం ఇవ్వండి.',
+  'common.all-caught-up': 'మీరు అందరూ పట్టుబడ్డారు!',
+  'common.no-users-to-grade':
+    'ఈ యఫ్ ఆర్ క్యు  కోసం గ్రేడ్ చేయడానికి వినియోగదారులు లేరు.',
+  'common.no-users-to-grade-oa':
+    'ఈ ఆఫ్‌లైన్ కార్యాచరణ కోసం గ్రేడ్ చేయడానికి వినియోగదారులు లేరు.',
+  'common.rubric-needs-grading': 'రుబ్రిక్ గ్రేడింగ్ అవసరం',
+  'common.not-answered': 'సమాధానం ఇవ్వలేదు',
+  'common.rubric-not-answered': 'రుబ్రిక్ సమాధానం ఇవ్వలేదు',
   'common.country': 'దేశంలో',
+  'reroute.suggestion': 'రీరౌట్ సలహా',
+  'reroute.suggestion.title': 'భావనలతో కష్టంగా ఉందా?',
+  'reroute.suggestion.desc':
+    'మీరు పరీక్షించిన అంశాలపై మంచి అవగాహన పొందడానికి మా <span> సంతకం సేకరణలలో ఒకటి </span> ఎందుకు వెళ్లకూడదు?',
   'common.course-map': 'కోర్సు మ్యాప్',
   'common.course': 'కోర్సు',
   'common.course-title': 'కోర్సు శీర్షిక',
@@ -318,23 +318,23 @@ window.i18ln = {
   'common.date': 'Date',
   'common.delete': 'తొలగించండి',
   'common.delete-instructions.links-inaccessible':
-    'అన్ని వాటా లింకులు అందుబాటులో ఉండవు',
+    'అన్ని షేర్  లింక్‌లు అసాధ్యమైనవి',
   'common.delete-instructions.content-inaccessible':
-    'అన్ని విషయాలు అది జతచేయబడిన తరగతులకు అందుబాటులో ఉండవు',
+    'అన్ని కంటెంట్ దానితో ముడిపడి ఉన్న తరగతి గదులకు అందుబాటులో ఉండదు',
   'common.depth-of-knowledge': 'జ్ఞానం యొక్క లోతు',
   'common.description': 'వివరణ',
-  'common.destination': 'Destination',
+  'common.destination': 'గమ్యం',
   'common.disappear-after-login':
-    'ఇది {{loginnumber}} లాగిన్ తర్వాత అదృశ్యమవుతుంది',
-  'common.disappear-next-login': 'ఇది తదుపరి లాగిన్లో కనిపించదు',
+    '{{login Number}}  లాగిన్‌ల తర్వాత ఇది కనిపించదు',
+  'common.disappear-next-login': 'ఇది తదుపరి లాగిన్‌లో కనిపించదు',
   'common.district': 'జిల్లా',
   'common.domain': 'డొమైన్',
   'common.domains': 'డొమైన్',
   'common.download': 'డౌన్లోడ్',
-  'common.template': 'Template',
+  'common.template': 'టెంప్లేట్',
   'assessment-template-msg':
-    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
-  'common.code': 'Code',
+    'ఒకవేళ మీ విద్యార్థులు అసెస్‌మెంట్‌లను ఆఫ్‌లైన్‌లో పూర్తి చేస్తే, అసెస్‌మెంట్‌ల కోసం స్కోర్‌లను నమోదు చేయడానికి ఈ టెంప్లేట్‌ను డౌన్‌లోడ్ చేసి ప్రింట్ చేయండి',
+  'common.code': 'కోడ్',
   'common.download-print': 'డౌన్లోడ్ / ముద్రణ',
   'common.drag-drop-suggestions': 'లేదా సలహాలు డ్రాగ్ మరియు డ్రాప్ ...',
   'common.download-report': 'నివేదికను డౌన్లోడ్ చేయండి',
@@ -357,147 +357,158 @@ window.i18ln = {
   'common.emotions.emotion-3': 'నాకు ...',
   'common.emotions.emotion-4': 'నాకు అర్థమైనది',
   'common.emotions.emotion-5': 'నేను వివరించగలను',
-  'common.enter-url': 'url ను నమోదు చేయండి',
-  'common.enrolled-students': 'చేరాడు విద్యార్థులు',
-  'common.errors.join-class-code': 'దయచేసి తరగతి గది కోడ్ని ఎంటర్ చెయ్యండి.',
+  'common.enter-url': 'యు ఆర్ యల్  నమోదు చేయండి',
+  'common.enrolled-students': 'విద్యార్థులను చేర్చుకున్నారు',
+  'common.errors.join-class-code': 'దయచేసి తరగతి గది కోడ్‌ను నమోదు చేయండి.',
   'common.errors.answer-has-no-image':
-    'దయచేసి ఒక జవాబు చిత్రాన్ని అప్లోడ్ చేయండి.',
-  'common.errors.add-username': 'దయచేసి ఒక యూజర్ పేరును నమోదు చేయండి.',
-  'common.errors.add-course-title': 'దయచేసి కోర్సు శీర్షికని నమోదు చేయండి.',
+    'దయచేసి జవాబు ప్రతి బింబం  అప్‌లోడ్ చేయండి.',
+  'common.errors.add-username': 'దయచేసి యూజర్  పేరును నమోదు చేయండి.',
+  'common.errors.add-course-title': 'దయచేసి కోర్సు శీర్షికను నమోదు చేయండి.',
   'common.errors.add-question-answer-text':
-    'దయచేసి సమాధానం ఎంపిక టెక్స్ట్ని నమోదు చేయండి.',
-  'common.errors.add-question-description': 'దయచేసి ప్రశ్నను ఎంటర్ చెయ్యండి.',
-  'common.errors.add-question-title': 'దయచేసి ప్రశ్న శీర్షికని నమోదు చేయండి.',
+    'దయచేసి జవాబు ఎంపిక వచనాన్ని నమోదు చేయండి.',
+  'common.errors.add-question-description': 'దయచేసి ప్రశ్నను నమోదు చేయండి.',
+  'common.errors.add-question-title': 'దయచేసి ప్రశ్న శీర్షికను నమోదు చేయండి.',
   'common.errors.assessment-title-presence':
-    'దయచేసి అంచనా శీర్షికని నమోదు చేయండి.',
+    'దయచేసి అంచనా శీర్షికను నమోదు చేయండి.',
   'common.errors.can-not-join-class':
-    'అయ్యో! తరగతిలో చేరలేరు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! తరగతి గదిలో చేరలేకపోయారు. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.assessment-not-added-to':
-    'అయ్యో! ప్రస్తుతం పాఠాన్ని అంచనా వేయడం సాధ్యం కాలేదు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం పాఠానికి అంచనాను జోడించలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.assessment-not-copied':
-    'అయ్యో! ప్రస్తుతం అంచనా వేయడం సాధ్యం కాలేదు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం అంచనాను కాపీ చేయలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.assessment-not-created':
-    'అయ్యో! ప్రస్తుతం అంచనా వేయడం సాధ్యం కాలేదు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం అంచనాను సృష్టించడం సాధ్యం కాలేదు. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.assessment-not-updated':
-    'అయ్యో! ప్రస్తుతం అంచనా వేయడం సాధ్యం కాలేదు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం అంచనాను నవీకరించలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.category-title-presence':
     'దయచేసి వర్గం శీర్షికను నమోదు చేయండి.',
-  'common.errors.class-min-score': 'కనీస స్కోరు 1 మరియు 100 మధ్య సంఖ్య ఉండాలి',
+  'common.errors.class-min-score':
+    'కనిష్ట స్కోరు 1 మరియు 100 మధ్య సంఖ్యగా ఉండాలి',
   'common.errors.class-not-created':
-    'అయ్యో! ఇప్పుడే తరగతి గదిని సృష్టించలేరు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
-  'common.errors.class-title-presence': 'దయచేసి మీ తరగతిలో ఒక పేరు ఇవ్వండి.',
+    'అయ్యో! ప్రస్తుతం తరగతి గదిని సృష్టించలేకపోయాము. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
+  'common.errors.class-title-presence':
+    'దయచేసి మీ తరగతి గదికి  ఒక పేరు పెట్టండి .',
   'common.errors.collection-not-added-to':
-    'అయ్యో! ప్రస్తుతం పాఠాన్ని సేకరణకు జోడించలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం పాఠానికి సేకరణను జోడించలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.collection-not-copied':
-    'అయ్యో! ప్రస్తుతం సేకరణను కాపీ చేయలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం  కాపీ సేకరణను  చేయలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.collection-not-created':
-    'అయ్యో! ప్రస్తుతం సేకరణను సృష్టించలేకపోయింది. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం సేకరణను సృష్టించడం సాధ్యం కాలేదు. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.collection-not-updated':
-    'అయ్యో! ప్రస్తుతం సేకరణను నవీకరించలేరు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం సేకరణను నవీకరించలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.collection-title-presence':
-    'దయచేసి సేకరణ శీర్షికని నమోదు చేయండి.',
+    'దయచేసి సేకరణ శీర్షికను నమోదు చేయండి.',
   'common.errors.correct-answer-presence': 'దయచేసి సరైన సమాధానం సూచించండి.',
   'common.errors.course-not-copied':
-    'అయ్యో! ప్రస్తుతం కోర్సును కాపీ చేయలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం కోర్సును కాపీ చేయలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.course-not-created':
-    'అయ్యో! కోర్సు ఇప్పుడు సృష్టించలేరు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం కోర్సును సృష్టించలేకపోయాము. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.course-not-updated':
-    'అయ్యో! ప్రస్తుతం కోర్సును నవీకరించలేరు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం కోర్సును నవీకరించలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.highlight-text-not-selected': 'దయచేసి సరైన సమాధానం సూచించండి.',
-  'common.errors.highlight-text-wrong-format': 'తప్పు ప్రశ్న ఫార్మాట్.',
+  'common.errors.highlight-text-wrong-format': 'తప్పు ప్రశ్న ఆకృతి.',
   'common.errors.hotspot-text-max-choices':
-    'మీరు సమాధానం ఎంపికల పరిమితిని చేరుకున్నారు.',
+    'మీరు జవాబు ఎంపికల పరిమితిని చేరుకున్నారు.',
   'common.errors.file-max-size':
-    '5mb కన్నా తక్కువ పరిమాణం గల ఫైల్స్ మాత్రమే మద్దతిస్తాయి',
+    '5 యం బి  కంటే చిన్న పరిమాణంలోని ఫైల్‌లు మాత్రమే మద్దతిస్తాయి',
   'common.errors.file-upload-missing':
-    'దయచేసి క్రింది పొడిగింపులతో ఏదైనా ఒక ఫైల్ను ఎంచుకోండి: {{extensions}}',
+    'దయచేసి కింది ఏదైనా పొడిగింపులతో ఫైల్‌ను ఎంచుకోండి:{{extensions}}',
   'common.errors.getting-next-resource':
-    'మీ జవాబును సమర్పించడంలో లోపం ఉంది. దయచేసి మళ్లీ ప్రయత్నించండి.',
+    'మీ జవాబును సమర్పించడంలో లోపం ఉంది. దయచేసి మళ్ళీ ప్రయత్నించండి.',
   'common.errors.lesson-not-copied':
-    'అయ్యో! ఇప్పుడు పాఠాన్ని కాపీ చేయలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం పాఠాన్ని కాపీ చేయలేకపోయాము. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.lesson-not-created':
-    'అయ్యో! ప్రస్తుతం పాఠం సృష్టించడం సాధ్యం కాలేదు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం పాఠాన్ని సృష్టించలేకపోయాము. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.lesson-not-loaded':
-    'అయ్యో! ప్రస్తుతం పాఠాన్ని లోడ్ చేయలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
-  'common.errors.lesson-title-required': 'దయచేసి పాఠ్య శీర్షికని నమోదు చేయండి.',
-  'common.errors.password-confirm': 'దయచేసి మీ పాస్వర్డ్ను నిర్ధారించండి.',
+    'అయ్యో! ప్రస్తుతం పాఠాన్ని లోడ్ చేయలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
+  'common.errors.lesson-title-required': 'దయచేసి పాఠ శీర్షికను నమోదు చేయండి.',
+  'common.errors.password-confirm': 'దయచేసి మీ పాస్‌వర్డ్‌ను నిర్ధారించండి.',
   'common.errors.password-length':
-    'పాస్వర్డ్ తప్పనిసరిగా 5 మరియు 14 అక్షరాల మధ్య ఉండాలి.',
-  'common.errors.password-not-match': 'గుత్త పదములు సరి పోవట్లేదు.',
-  'common.errors.password-required': 'దయచేసి పాస్వర్డ్ను నమోదు చేయండి.',
+    'పాస్ వర్డ్  5 మరియు 14 అక్షరాల మధ్య ఉండాలి.',
+  'common.errors.password-not-match': 'పాస్ వర్డ్స్  సరి పోవట్లేదు.',
+  'common.errors.password-required': 'దయచేసి పాస్‌వర్డ్‌ను నమోదు చేయండి.',
   'common.errors.password-special-characters':
     'దయచేసి ప్రత్యేక అక్షరాలను ఉపయోగించవద్దు.',
   'common.errors.profile-not-updated':
-    'అయ్యో! ప్రొఫైల్ని నవీకరించలేరు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం ప్రొఫైల్‌ను నవీకరించలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.question-not-added-to':
-    'అయ్యో! ప్రస్తుతం {{సేకరణ రకం}} కు ప్రశ్నని జోడించలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం {{collection Type}}  కు ప్రశ్నను జోడించడం సాధ్యం కాలేదు. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.question-not-copied':
-    'అయ్యో! ప్రశ్న ఇప్పుడు కాపీ చేయలేకపోయింది. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం ప్రశ్నను కాపీ చేయలేకపోయాము. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.question-not-created':
-    'అయ్యో! ప్రశ్న ఇప్పుడు సృష్టించలేరు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం ప్రశ్నను సృష్టించడం సాధ్యం కాలేదు. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.question-not-updated':
-    'అయ్యో! ప్రస్తుతం ప్రశ్న అప్డేట్ చెయ్యలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం ప్రశ్నను నవీకరించలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.reset-password-error':
-    'ఓ హో! ఏదో సరైనది కాదు. పాస్వర్డ్ను రీసెట్ చేయలేకపోతున్నాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'ఓ హో! ఏదో సరైనది కాదు. పాస్‌వర్డ్‌ను రీసెట్ చేయలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.reset-google-account-exists':
-    'మీ ఇమెయిల్ లాగిన్ Google ఖాతాతో సృష్టించబడింది మరియు మేము గూగుల్ పాస్ వర్డ్ రీసెట్ చేయలేము. మీరు మీ గూగుల్ పాస్ వర్డ్ ను మరచిపోయినట్లయితే, మీ గూగుల్ అనువర్తనాల ద్వారా దానిని రీసెట్ చేయాలి.',
+    'మీ ఇమెయిల్ లాగిన్ గూగుల్ ఖాతాతో సృష్టించబడింది మరియు మేము గూగుల్ పాస్వర్డ్ను రీసెట్ చేయలేము. మీరు మీ గూగుల్ పాస్‌వర్డ్‌ను మరచిపోతే, మీరు దాన్ని మీ గూగుల్ అనువర్తనాల ద్వారా రీసెట్ చేయాలి.',
   'common.errors.resource-description-length':
-    'వివరణ 500 అక్షరాల కంటే ఎక్కువ పొడవు ఉండకూడదు.',
-  'common.errors.resource-invalid-url': 'చెల్లని URL.',
+    'వివరణ 500 అక్షరాల కంటే ఎక్కువ ఉండకూడదు.',
+  'common.errors.resource-invalid-url': 'చెల్లని  యు ఆర్ యల్',
   'common.errors.resource-missing-title': 'దయచేసి వనరు శీర్షికను నమోదు చేయండి.',
   'common.errors.resource-missing-type': 'దయచేసి వనరు రకాన్ని ఎంచుకోండి.',
   'common.errors.resource-missing-url':
-    'దయచేసి చెల్లుబాటు అయ్యే url ను నమోదు చేయండి.',
+    'దయచేసి చెల్లుబాటు అయ్యే యు ఆర్ యల్  ని నమోదు చేయండి.',
   'common.errors.resource-not-added-to-collection':
-    'అయ్యో! ప్రస్తుతం సేకరణకు వనరును జోడించలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం సేకరణకు వనరును జోడించలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.resource-not-copied':
-    'అయ్యో! ప్రస్తుతం వనరును కాపీ చేయలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం వనరును కాపీ చేయలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.resource-not-created':
-    'అయ్యో! ప్రస్తుతం వనరును సృష్టించడం సాధ్యం కాలేదు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం వనరును సృష్టించడం సాధ్యం కాలేదు. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.resource-not-updated':
-    'అయ్యో! ఇప్పుడు వనరును నవీకరించలేరు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
-  'common.errors.resource-same-host-url': 'వనరులు gooru URL లు ఉండవు.',
+    'అయ్యో! ప్రస్తుతం వనరును నవీకరించలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
+  'common.errors.resource-same-host-url': 'వనరులు గూరు యు ఆర్ యల్ లు  కాదు.',
   'common.errors.resource-title-length':
-    'శీర్షిక 50 అక్షరాలు కంటే ఎక్కువ ఉండకూడదు.',
-  'common.errors.rubric-title-presence': 'దయచేసి రబ్బర్ టైటిల్ నమోదు చేయండి.',
-  'common.errors.rubric-url-presence': 'దయచేసి రూబ్రిక్ url ను ఎంటర్ చెయ్యండి.',
+    'శీర్షిక 50 అక్షరాల కంటే ఎక్కువ ఉండకూడదు.',
+  'common.errors.rubric-title-presence':
+    'దయచేసి రుబ్రిక్ శీర్షికను నమోదు చేయండి.',
+  'common.errors.rubric-url-presence':
+    'దయచేసి రుబ్రిక్ యు ఆర్ యల్  ని నమోదు చేయండి.',
   'common.errors.select-correct-answer': 'దయచేసి సరైన సమాధానం ఎంచుకోండి.',
   'common.errors.search-collections-length':
     'దయచేసి కనీసం 3 అక్షరాలను నమోదు చేయండి.',
   'common.errors.sign-in-credentials-not-valid':
-    'ఓ హో! ఏదో సరైనది కాదు. దయచేసి మీ యూజర్పేరు మరియు పాస్వర్డ్ను తనిఖీ చేసి మళ్ళీ ప్రయత్నించండి.',
+    'ఓ హో! ఏదో సరైనది కాదు. దయచేసి మీ యూజర్ పేరు మరియు పాస్‌వర్డ్‌ను రెండుసార్లు తనిఖీ చేసి, మళ్లీ ప్రయత్నించండి.',
   'common.errors.sign-in-google-account-exists':
-    'దయచేసి Google సైన్ ఇన్ ను ఉపయోగించండి. మేము మీ పాస్వర్డ్ను రీసెట్ చేయలేము.',
+    'దయచేసి గూగుల్ సైన్ ఇన్ ఉపయోగించండి. మేము మీ పాస్‌వర్డ్‌ను రీసెట్ చేయలేము.',
   'common.errors.sign-up-error':
-    'అయ్యో! ప్రస్తుతం సైన్ అప్ చేయడం సాధ్యం కాలేదు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
-  'common.errors.sign-up-first-name': 'దయచేసి మీ మొదటి పేరు నమోదు చేయండి.',
-  'common.errors.sign-up-last-name': 'దయచేసి మీ చివరి పేరుని నమోదు చేయండి.',
-  'common.errors.sign-up-name-length': 'చివరి పేరుకు కనీసం 2 అక్షరాలు ఉండాలి.',
+    'అయ్యో! ప్రస్తుతం సైన్ అప్ చేయలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
+  'common.errors.sign-up-first-name': 'దయచేసి మీ మొదటి పేరును నమోదు చేయండి.',
+  'common.errors.sign-up-last-name': 'దయచేసి మీ చివరి పేరును నమోదు చేయండి.',
+  'common.errors.sign-up-name-length': 'చివరి పేరులో కనీసం 2 అక్షరాలు ఉండాలి.',
   'common.errors.sign-up-name-only-letters':
-    'దయచేసి అక్షరాలు మాత్రమే నమోదు చేయండి.',
+    'దయచేసి అక్షరాలను మాత్రమే నమోదు చేయండి.',
   'common.errors.sign-up-valid-email':
     'దయచేసి చెల్లుబాటు అయ్యే ఇమెయిల్ చిరునామాను నమోదు చేయండి.',
   'common.errors.special-characters':
-    'మీరు ప్రత్యేక అక్షరాలు లేదా ఖాళీలు ఉపయోగించలేరు.',
+    'మీరు ప్రత్యేక అక్షరాలు లేదా ఖాళీలను ఉపయోగించలేరు.',
   'common.errors.unit-not-copied':
-    'అయ్యో! ప్రస్తుతం యూనిట్ను కాపీ చేయలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం యూనిట్‌ను కాపీ చేయలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.unit-not-created':
-    'అయ్యో! ప్రస్తుతం యూనిట్ సృష్టించడం సాధ్యం కాలేదు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం యూనిట్‌ను సృష్టించడం సాధ్యం కాలేదు. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.unit-not-loaded':
-    'అయ్యో! ప్రస్తుతం యూనిట్ని లోడ్ చేయలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం యూనిట్‌ను లోడ్ చేయలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'common.errors.unit-title-required': 'దయచేసి యూనిట్ శీర్షికను నమోదు చేయండి.',
   'common.errors.user-email-presence': 'దయచేసి సరైన ఈమెయిల్ ఇవ్వండి.',
   'common.errors.username-length':
-    'వినియోగదారు పేరు తప్పనిసరిగా 4 మరియు 254 అక్షరాల మధ్య ఉండాలి.',
+    'యూజర్ పేరు 4 మరియు 254 అక్షరాల మధ్య ఉండాలి.',
   'common.errors.forgot-password-gmail':
-    'దయచేసి Google సైన్ ఇన్ ను ఉపయోగించండి. మేము మీ పాస్వర్డ్ను రీసెట్ చేయలేము.',
+    'దయచేసి గూగుల్ సైన్ ఇన్ ఉపయోగించండి. మేము మీ పాస్‌వర్డ్‌ను రీసెట్ చేయలేము.',
   'common.errors.no-studymaterial':
-    'ఈ తరగతికి కేటాయించిన కోర్సులో ఎటువంటి అధ్యయన సామగ్రి లేదు. దీన్ని పరిష్కరించడానికి మీ ఉపాధ్యాయుని సంప్రదించండి',
+    'ఈ తరగతికి కేటాయించిన కోర్సులో ఎటువంటి అధ్యయన సామగ్రి లేదు. దీన్ని పరిష్కరించడానికి దయచేసి మీ గురువును సంప్రదించండి',
   'common.essential-questions': 'అవసరమైన ప్రశ్నలు',
   'common.example': 'ఉదాహరణ:',
   'common.exit': 'నిష్క్రమణ',
+  'common.no-search-result':
+    'శోధన పదం మరియు వడపోత సెట్టింగ్‌ల కోసం సరిపోయే {{ content Type}} కనుగొనబడలేదు. శోధన పదం లేదా ఫిల్టర్ సెట్టింగులన  సవరించడానికి ప్రయత్నించండి',
   'common.external-collection': 'బాహ్య సేకరణ',
   'common.explanation': 'వివరణ',
+  'common.plan': 'ప్రణాళిక',
+  'offline-activities.no-completed-content':
+    'ఇంకా పూర్తయిన ప్రాజెక్టులు లేదా ఇతర ఆఫ్‌లైన్ కార్యకలాపాలు లేవు',
+  'offline-activities.no-active-content':
+    'విద్యార్థులు ప్రస్తుతం పనిచేస్తున్న ప్రాజెక్టులు లేదా ఇతర ఆఫ్‌లైన్ కార్యకలాపాలు లేవు',
   'common.explore': 'అన్వేషించడానికి',
   'common.false': 'తప్పుడు',
   'common.featured-courses': 'ఫీచర్ & ensp; కోర్సులు',
@@ -540,18 +551,18 @@ window.i18ln = {
   'common.link': 'లింక్',
   'common.link-out': 'లింక్ అవుట్',
   'common.link-out-message':
-    '* ఎగువన ప్రివ్యూలో మీ వనరు ఖాళీగా కనిపిస్తున్నట్లయితే, కంటెంట్ను వీక్షించడానికి మరొక పేజీకు "లింక్ అవుట్" అవసరం కావచ్చు.',
+    '* పై పరిదృశ్యంలో మీ వనరు ఖాళీగా కనిపిస్తుంటే, కంటెంట్‌ను చూడటానికి దీనికి మరొక పేజీకి “లింక్-అవుట్” అవసరం కావచ్చు.',
   'common.live-assessments': 'ప్రత్యక్ష అంచనాలు',
   'common.loading': 'లోడ్ ...',
   'common.login': 'లాగిన్ అవ్వండి',
-  'common.logout': 'లాగ్అవుట్',
-  'common.logout.head_1': 'Learning Navigator: ',
-  'common.logout.head_2': 'Every Student',
-  'common.logout.head_3': 'Achieves Mastery',
+  'common.logout': 'లాగ్అవుట్ అవ్వండి',
+  'common.logout.head_1': 'లెర్నింగ్ నావిగేటర్:',
+  'common.logout.head_2': 'ప్రతి విద్యార్థి',
+  'common.logout.head_3': 'పాండిత్యం సాధిస్తుంది',
   'common.logout.description':
-    'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
-  'common.logout.logout-btn-msg1': 'You have been logout.',
-  'common.logout.logout-btn-msg2': 'Click here to login.',
+    'లెర్నింగ్ నావిగేటర్ “నేర్చుకోవడం కోసం జిపిఎస్” గా రూపొందించబడింది - ప్రతి విద్యార్థి పాండిత్యానికి వారి స్వంత మార్గాన్ని అనుసరించే మార్గం. పాఠశాలలు ప్రతి విద్యార్థిని ఒకే స్థాయి నైపుణ్యాన్ని సాధించమని అడుగుతాయి, కాని ప్రతి విద్యార్థి భిన్నమైన జ్ఞానం మరియు నైపుణ్యాలతో ప్రారంభమవుతుంది. లెర్నింగ్ నావిగేటర్ ప్రతి విద్యార్థిని వారు ఉన్న చోట కలుస్తుంది మరియు వారి అభ్యాస లక్ష్యాలకు నావిగేట్ చేస్తుంది.',
+  'common.logout.logout-btn-msg1': 'మీరు లాగ్ అవుట్ అయ్యారు.',
+  'common.logout.logout-btn-msg2': 'లాగిన్ అవ్వడానికి ఇక్కడ క్లిక్ చేయండి.',
   'common.mastery': 'పాండిత్యం',
   'common.menu': 'మెను',
   'common.more-details': 'మరిన్ని వివరాలు',
@@ -573,28 +584,36 @@ window.i18ln = {
   'common.no-archived': 'మీకు ఆర్కైవ్ చేసిన తరగతి గదులు లేవు.',
   'common.no-content': 'కంటెంట్ అందుబాటులో లేదు',
   'common.no-content-my-report':
-    'నివేదికలు ఏవీ అందుబాటులో లేవు. ఒకసారి మీరు చదువుతుంటే, మీ నివేదికలు అందుబాటులోకి వస్తాయి.',
-  'common.no-assessments-to-display': 'సంఖ్య [1] ప్రదర్శించడానికి [2].',
-  'common.no-collections-to-display': 'ప్రదర్శించడానికి ఏ [1] సేకరణలు [2].',
-  'common.no-courses-to-display': 'ప్రదర్శించడానికి [1] కోర్సులు [2].',
-  'common.no-questions-to-display': 'ప్రదర్శించడానికి ఏ [1] ప్రశ్నలు [2].',
-  'common.no-resources-to-display': 'ప్రదర్శించడానికి [1] వనరులు [2].',
-  'common.no-rubrics-to-display': 'సంఖ్య [1] ప్రదర్శించడానికి [2].',
+    'ఇంకా నివేదికలు అందుబాటులో లేవు. మీరు అధ్యయనం ప్రారంభించిన తర్వాత, మీ నివేదికలు అందుబాటులోకి వస్తాయి.',
+  'common.no-assessments-to-display':
+    'అంచనాలులేవు <span>ప్రదర్శించడానికి  </span> .',
+  'common.no-collections-to-display':
+    'సేకరణలు లేవు  <span> ప్రదర్శించడానికి  </span>.',
+  'common.no-courses-to-display':
+    'ప్రదర్శించడానికి <span> కోర్సులు </span> లేవు.',
+  'common.no-questions-to-display':
+    'ప్రదర్శించడానికి <span> ప్రశ్నలు </span> లేవు.',
+  'common.no-resources-to-display':
+    'ప్రదర్శించడానికి <span> వనరులు </span> లేవు.',
+  'common.no-rubrics-to-display':
+    'ప్రదర్శించడానికి <span> రుబ్రిక్స్ </span> లేవు.',
   'common.no-offline-activitys-to-display':
-    'No <span>offline activities</span> to display.',
-  'common.no-followers': 'మీరు ఇంకా అనుచరులను కలిగి లేరు.',
+    'ప్రదర్శించడానికి <span> ఆఫ్‌లైన్ కార్యకలాపాలు లేవు.',
+  'common.no-followers': 'మీకు ఇంకా అనుచరులు లేరు.',
   'common.no-independent-results':
-    'మీరు మీ బుక్మార్క్ చేసిన {{contenttype}} ను అన్వేషించడం ప్రారంభించినప్పుడు, అవి ఇక్కడ కనిపిస్తాయి.',
+    'మీరు మీ బుక్‌మార్క్ చేసిన {{content Type}} , ను అన్వేషించడం ప్రారంభించినప్పుడు, అవి ఇక్కడ కనిపిస్తాయి.',
   'common.no-results': 'ఎటువంటి ఫలితాలు లభించలేదు',
-  'common.no-available-results': 'అందుబాటులో లేదు ఫలితాలు',
+  'common.no-available-results': 'ఫలితాలు అందుబాటులో లేవు',
   'common.no-results-message':
-    'మీ అక్షరక్రమాన్ని తనిఖీ చేయండి. మేము అన్ని తప్పులు చేస్తాం! [1] విస్తరించడానికి మరియు కొన్ని ఫిల్టర్లను తొలగించండి. [2] లేదా బదులుగా ఒకే పదాన్ని శోధించడానికి ప్రయత్నించండి.',
+    'మీ స్పెల్లింగ్‌ను తనిఖీ చేయండి. మనమందరం తప్పులు చేస్తాము! <br/> విస్తృతంగా వెళ్లి కొన్ని ఫిల్టర్లను తొలగించండి. <br/> లేదా బదులుగా ఇలాంటి పదం కోసం శోధించడానికి ప్రయత్నించండి.',
   'common.no-more-attempts': 'ఎక్కువ ప్రయత్నాలు లేవు',
   'common.no-dca-student':
-    'మీ ఉపాధ్యాయుడు ఇంకా ఏవైనా సేకరణలు లేదా తరగతి కార్యకలాపాలకు అంచనా వేయలేదు.',
+    'మీ ఉపాధ్యాయుడు తరగతి కార్యకలాపాలకు ఇంకా సేకరణలు లేదా మదింపులను కేటాయించలేదు.',
   'common.no-dca-teacher':
     'ప్రస్తుత కార్యకలాపాలు లేవు. కోర్సు మ్యాప్ లేదా కంటెంట్ కేటలాగ్ నుండి తరగతి కార్యకలాపాలను జోడించండి.',
-  'common.notScored': 'స్కోర్ లేని సందేశం',
+  'common.no-content-for-week':
+    'ఎంచుకున్న కాలానికి తరగతి కార్యకలాపాలు షెడ్యూల్ చేయబడలేదు',
+  'common.notScored': 'స్కోర్ లేదు',
   'common.notStarted': 'మొదలవలేదు',
   'common.not-added': 'జోడించలేదు',
   'common.not-applicable': 'n / a',
@@ -658,33 +677,35 @@ window.i18ln = {
   'common.remix-assessment': 'రీమిక్స్ అంచనా',
   'common.remix-assessment-lead': 'మీరు ఒక అంచనాను రీమిక్స్ చేయబోతున్నారు.',
   'common.remix-assessment-success':
-    'మీరు ఒక అంచనాను {{assessmenttitle}} రీమిక్స్ చేసారు. ఆ అంచనాను మీరు సవరించాలనుకుంటున్నారా?',
+    'మీరు ఒక అంచనాను రీమిక్స్ చేసారు {{assessment Title}}. మీరు ఆ అంచనాను సవరించాలనుకుంటున్నారా?',
   'common.remix-collection': 'రీమిక్స్ సేకరణ',
   'common.remix-collection-lead': 'మీరు సేకరణను రీమిక్స్ చేయబోతున్నారు.',
   'common.remix-collection-success':
-    'మీరు {{collectiontitle}} అనే సేకరణని రీమిక్స్ చేసారు. మీరు ఆ సేకరణను సవరించాలనుకుంటున్నారా?',
+    'మీరు సేకరణ {{collection Title}}  ను రీమిక్స్ చేసారు. మీరు ఆ సేకరణను సవరించాలనుకుంటున్నారా?',
   'common.remix-course': 'రీమిక్స్ కోర్సు',
-  'common.remix-course-lead': 'మీరు కోర్సును రీమిక్స్ చేయబోతున్నారు.',
+  'common.remix-course-lead': 'మీరు ఒక కోర్సును రీమిక్స్ చేయబోతున్నారు.',
   'common.remix-course-success':
-    'మీరు ఒక కోర్సు {{coursetitle}} రీమిక్స్ చేసారు. మీరు ఆ కోర్సును సవరించాలనుకుంటున్నారా?',
+    'మీరు కోర్సును రీమిక్స్ చేసారు {{course Title}}.  మీరు ఆ కోర్సును సవరించాలనుకుంటున్నారా?',
   'common.remix-lesson': 'రీమిక్స్ పాఠం',
   'common.remix-lesson-lead': 'మీరు పాఠం రీమిక్స్ చేయబోతున్నారు.',
-  'common.remix-lesson-success': 'మీరు {{lessontitle}} పాఠం రీమిక్స్ చేసారు.',
+  'common.remix-lesson-success':
+    'మీరు ఒక పాఠాన్ని రీమిక్స్ చేసారు {{lesson Title}}.',
   'common.remix-question': 'రీమిక్స్ ప్రశ్న',
-  'common.remix-question-lead': 'మీరు ఒక ప్రశ్నను రీమిక్స్ చేయబోతున్నారు.',
+  'common.remix-question-lead': 'మీరు ప్రశ్నను రీమిక్స్ చేయబోతున్నారు.',
   'common.remix-question-success':
-    'మీరు ఒక ప్రశ్న {{questiontitle}} ను రీమిక్స్ చేసారు. మీరు ఆ ప్రశ్నని సవరించాలనుకుంటున్నారా?',
+    'మీరు question  {{question Title}}.  ప్రశ్నను రీమిక్స్ చేసారు. మీరు ఆ ప్రశ్నను సవరించాలనుకుంటున్నారా?',
   'common.remix-resource': 'రీమిక్స్ వనరు',
-  'common.remix-resource-lead': 'మీరు రిసోర్స్ రీమిక్స్ చేయబోతున్నారు.',
+  'common.remix-resource-lead': 'మీరు వనరును రీమిక్స్ చేయబోతున్నారు.',
   'common.remix-resource-success':
-    'మీరు వనరును {{resourcetitle}} రీమిక్స్ చేసారు. మీరు ఆ వనరుని సవరించాలనుకుంటున్నారా?',
+    'మీరు వనరును రీమిక్స్ చేసారు  {{resource Title}}.  మీరు ఆ వనరును సవరించాలనుకుంటున్నారా?',
   'common.remix-unit': 'రీమిక్స్ యూనిట్',
   'common.remix-unit-lead': 'మీరు యూనిట్ రీమిక్స్ చేయబోతున్నారు.',
-  'common.remix-unit-success': 'మీరు యూనిట్ {{unittitle}} ను రీమిక్స్ చేసారు.',
-  'common.remixed-by': 'రీమిక్స్ చేశాడు',
+  'common.remix-unit-success':
+    'మీరు యూనిట్   {{unit Title}} ను రీమిక్స్ చేసారు.',
+  'common.remixed-by': 'ద్వారా రీమిక్స్ చేయబడింది',
   'common.remix-warning':
-    'తలలు ఈ కోర్సులో అద్భుతమైన కంటెంట్ చాలా ఉన్నాయి మరియు కాపీని తీయడానికి సమయం పడుతుంది. మీరు ప్రక్రియను ప్రారంభించాలనుకుంటున్నారని నిర్ధారించుకోండి మరియు 15 నిమిషాల్లో మీ [1] ప్రొఫైల్లో ఈ కోర్సు యొక్క మీ కాపీని కనుగొంటారు. [2]',
-  'common.remove': 'తొలగించడానికి',
+    'హెడ్స్ అప్! ఈ కోర్సులో చాలా అద్భుతమైన కంటెంట్ ఉంది మరియు కాపీ చేయడానికి సమయం పడుతుంది. మీరు ప్రక్రియను ప్రారంభించాలనుకుంటున్నారని నిర్ధారించండి మరియు 15 నిమిషాల్లో ఈ కోర్సు యొక్క మీ కాపీని మీ <b> ప్రొఫైల్‌లో కనుగొంటారు. </b>',
+  'common.remove': 'తొలిగించండి',
   'common.report': 'నివేదిక',
   'common.report-in-progress': 'నివేదిక ప్రోగ్రెస్లో ఉంది',
   'common.request-to': 'బ్యాడ్జ్ కోసం సమీక్షించవలసిన అభ్యర్థన',
@@ -727,7 +748,7 @@ window.i18ln = {
   'common.score': 'స్కోరు',
   'common.select': 'ఎంచుకోండి',
   'common.select-a-framework':
-    'దయచేసి మొదట కోర్సు సమాచారం విభాగంలో ప్రమాణాల ఫ్రేమ్ను ఎంచుకోండి.',
+    'దయచేసి మొదట పైన ఉన్న కోర్సు సమాచార విభాగంలో ప్రమాణాల ఫ్రేమ్‌వర్క్‌ను ఎంచుకోండి.',
   'common.sentence': 'వాక్యం',
   'common.settings': 'సెట్టింగులను',
   'common.search': 'శోధన',
@@ -736,7 +757,7 @@ window.i18ln = {
   'common.search-error-message': 'శోధన పదాలు కనీసం 3 అక్షరాలు ఉండాలి.',
   'common.search-400-error-message':
     'దయచేసి చెల్లుబాటు అయ్యే శోధన పదాన్ని నమోదు చేయండి',
-  'common.search-competency': 'శోధన యోగ్యత',
+  'common.search-competency': 'శోధన సామర్థ్యం',
   'common.search-standards': 'శోధన ప్రమాణాలు',
   'common.select-question-type': 'ప్రశ్న రకం ఎంచుకోండి',
   'common.select-resource-type': 'వనరు రకాన్ని ఎంచుకోండి',
@@ -759,9 +780,9 @@ window.i18ln = {
   'common.study-now': 'ఇప్పుడు అధ్యయనము',
   'common.student': 'విద్యార్ధి',
   'common.students': 'విద్యార్థులు',
-  'common.student-id': 'విద్యార్థి ID (ప్రొఫైల్లో ప్రదర్శించబడదు)',
+  'common.student-id': 'విద్యార్థి ఐడి (ప్రొఫైల్‌లో ప్రదర్శించబడదు)',
   'common.studen-id-display':
-    'విద్యార్థి ID (ప్రొఫైల్ లో ప్రదర్శించబడదు, అనామక రీతిలో ప్రదర్శించబడుతుంది)',
+    'విద్యార్థి ఐడి (ప్రొఫైల్‌లో ప్రదర్శించబడదు, అనామక మోడ్‌లో ప్రదర్శించబడుతుంది)',
   'common.subject-and-framework': 'విషయం మరియు చట్రం',
   'common.subject': 'విషయం',
   'common.submit': 'submit',
@@ -782,12 +803,12 @@ window.i18ln = {
   'common.tools': 'టూల్స్',
   'common.true': 'నిజమైన',
   'common.type': 'రకం',
-  'common.title': 'టైటిల్',
-  'common.unBookmark': 'unbookmark',
+  'common.title': 'శీర్షిక',
+  'common.unBookmark': 'అన్ బుక్ మార్క్',
   'common.unexpectedError':
-    'ఊహించని లోపం సంభవించింది మరియు నివేదించబడింది. మేము అసౌకర్యానికి క్షమించండి!',
+    'ఊ హించని లోపం సంభవించింది మరియు నివేదించబడింది. అసౌకర్యానికి చింతిస్తున్నాము !',
   'common.networkError':
-    'Network disconnected. This may be a temporary issue. Retry later or check your internet connection.',
+    'నెట్‌వర్క్ వేరు  చేయబడింది. ఇది తాత్కాలిక సమస్య కావచ్చు. తరువాత మళ్లీ ప్రయత్నించండి లేదా మీ ఇంటర్నెట్ కనెక్షన్‌ను తనిఖీ చేయండి.',
   'common.unfollow': 'అనుసరించవద్దు',
   'common.unit': 'యూనిట్',
   'common.unit-title': 'యూనిట్ శీర్షిక',
@@ -813,57 +834,57 @@ window.i18ln = {
   'common.visibility-tooltip': 'ఇతరులకు కనిపించదు',
   'common.visibility-available': 'ఇతరులకు కనిపిస్తుంది',
   'common.warnings.on-air-connection-lost':
-    'గో ప్రత్యక్ష డాష్బోర్డ్ కనెక్షన్ కోల్పోయింది మరియు స్వయంచాలకంగా మళ్లీ ప్రయత్నిస్తోంది. ఇది ఉత్సాహం అయితే, మీ స్క్రీన్ ను రిఫ్రెష్ చేయవద్దు!',
+    'గో లైవ్ డాష్‌బోర్డ్ కనెక్షన్‌ను కోల్పోయింది మరియు స్వయంచాలకంగా మళ్లీ ప్రయత్నిస్తోంది. ఇది టెంప్ట్ చేస్తుంది , కానీ దయచేసి మీ స్క్రీన్‌ను రిఫ్రెష్ చేయవద్దు!',
   'common.warnings.character-limit': 'మీరు అక్షర పరిమితిని చేరుకున్నారు.',
   'common.word': 'పదం',
   'common.yes': 'అవును',
-  'common.change-score': 'స్కోరు మార్చండి',
+  'common.change-score': 'స్కోరు మార్పు',
   'not-found.tenant.login-not-found-msg-1':
-    'gooru అద్దెకు లాగిన్ దొరకలేదు, పేజీ స్వయంచాలకంగా మళ్ళించబడుతుంది ఉంటుంది',
+    'గూరు అద్దెదారు లాగిన్ కనుగొనబడలేదు, పేజీ స్వయంచాలకంగా మళ్ళించబడుతుంది',
   'not-found.tenant.login-not-found-msg-2': 'లాగిన్ పేజీ',
   'not-found.tenant.login-not-found-msg-3':
-    'సెకను లేదా లాగిన్ అవ్వడానికి క్రింది బటన్ను క్లిక్ చేయండి',
-  'index.joinUs': '[2] [2] విద్యకు మానవ హక్కును గౌరవించటానికి మాకు చేరండి',
-  'index.browseContent.title': 'హాయ్ అక్కడ! నువ్వు ఏం వెతుకుతున్నావు?',
-  'index.browseContent.description_1': 'నేను చుస్తునది',
-  'index.browseContent.description_2': 'లో నేర్చుకోవడం పదార్థాలు',
+    'లాగిన్ అవ్వడానికి సెకను లేదా క్రింద బటన్ క్లిక్ చేయండి',
+  'index.joinUs': '<br/> విద్యపై మానవ హక్కును గౌరవించటానికి మాతో చేరండి',
+  'index.browseContent.title': 'హాయ్! మీరు ఏమి చూస్తున్నారు?',
+  'index.browseContent.description_1': 'నేను చూస్తున్న దాని కొరకు',
+  'index.browseContent.description_2': 'నేర్చుకునే సామగ్రి లో',
   'index.browseContent.description_3': 'లేదా',
   'index.browseContent.button': 'కంటెంట్ను బ్రౌజ్ చెయ్యండి',
   'index.browseContent.footer.description_1': 'ఖాతా కలిగి ఉన్నారా?',
   'index.browseContent.footer.description_2': ' ఇక్కడ.',
   'index.browseContent.footer.login': 'లాగిన్',
   'index.browseContent.grades_missing_message':
-    'దయచేసి గ్రేడ్ మరియు విషయాన్ని ఎంచుకోండి.',
-  'index.browseContent.subjects_missing_message': 'దయచేసి విషయం ఎంచుకోండి.',
-  'index.gettingStarted.title': 'గోరుతో ప్రారంభించండి',
-  'index.gettingStarted.toolkit.title': 'ఉపకరణపట్టీని ప్రారంభించడం',
+    'దయచేసి గ్రేడ్ మరియు సబ్జెక్టును ఎంచుకోండి.',
+  'index.browseContent.subjects_missing_message': 'దయచేసి విషయాన్ని ఎంచుకోండి.',
+  'index.gettingStarted.title': 'గూరుతో ప్రారంభించడం',
+  'index.gettingStarted.toolkit.title': 'టూల్కిట్ ప్రారంభించడం',
   'index.gettingStarted.toolkit.description':
-    'గోరు స్వాగతం! మీరు gooru తో ఏమి చెయ్యగలరు తెలుసుకోవడానికి ఈ వనరులను తనిఖీ మరియు త్వరగా ప్రారంభించడానికి.',
+    'గూరుకు స్వాగతం! గూరుతో మీరు ఏమి చేయగలరో తెలుసుకోవడానికి ఈ వనరులను చూడండి మరియు త్వరగా ప్రారంభించండి.',
   'index.gettingStarted.classroom.title': 'తరగతి గది నుండి కథలు',
   'index.gettingStarted.classroom.description':
-    'gooru వారి తరగతిలో ఒక తేడా చేసింది చెప్పే ఉపాధ్యాయుల కథలు ద్వారా ఉదాహరణకు ద్వారా తెలుసుకోండి.',
-  'index.gettingStarted.events.title': 'మా సంఘటనలను పరిశీలించండి!',
+    'గూరు వారి తరగతి గదిలో తేడాలు తెచ్చిందని చెప్పే ఉపాధ్యాయుల కథల ద్వారా ఉదాహరణ ద్వారా తెలుసుకోండి.',
+  'index.gettingStarted.events.title': 'మా సంఘటనలను చూడండి!',
   'index.gettingStarted.events.description':
-    'మేము మీరు gooru తో ప్రారంభించడానికి సహాయం ఉచిత webinars మరియు శిక్షణలు అందించే.',
+    'గూరుతో ప్రారంభించడంలో మీకు సహాయపడటానికి మేము ఉచిత వెబ్‌నార్లు మరియు శిక్షణలను అందిస్తున్నాము.',
   'index.empowerStudents.title':
-    'వారి మార్గాన్ని తెలుసుకోవడానికి విద్యార్థులకు అధికారం ఇవ్వండి',
+    'విద్యార్థులను వారి మార్గం తెలుసుకోవడానికి అధికారం ఇవ్వండి',
   'index.empowerStudents.find': 'కనుగొనేందుకు',
   'index.empowerStudents.remix': 'రీమిక్స్',
   'index.empowerStudents.share': 'వాటా',
   'index.empowerStudents.monitor': 'మానిటర్',
   'index.findDescription':
-    'ఉపాధ్యాయులు చేసిన వేలకొలది k-12 సేకరణలను బ్రౌజ్ చేయండి లేదా 16m వనరులను శోధించండి',
+    'ఉపాధ్యాయులు చేసిన వేలాది కె-12 సేకరణలను బ్రౌజ్ చేయండి లేదా 16యం వనరులను శోధించండి',
   'index.remixDescription':
-    'రీమిక్స్ సేకరణలు మరియు మీ విద్యార్థుల అవసరాలను తీర్చడానికి కంటెంట్ను అనుకూలీకరించండి.',
+    'మీ విద్యార్థుల అవసరాలను తీర్చడానికి సేకరణలను రీమిక్స్ చేయండి మరియు కంటెంట్‌ను అనుకూలీకరించండి.',
   'index.shareDescription':
-    'గూగు తరగతి గదుల ద్వారా విద్యార్ధులతో వాటా సేకరణలు. లాగిన్ యాక్సెస్ అవసరం లేదు.',
+    'గూరు తరగతి గదుల ద్వారా విద్యార్థులతో సేకరణలను పంచుకోండి. ప్రాప్యత చేయడానికి లాగిన్ అవసరం లేదు.',
   'index.monitorDescription':
-    'మీ విద్యార్థులు \'నిశ్చితార్థం మరియు నిజ సమయంలో జోక్యం పురోగతిని కొలిచేందుకు.',
-  'index.freeAndOpen.title': 'ఉచిత మరియు ఓపెన్. [1] ఎల్లప్పుడూ.',
+    'నిజ సమయంలో జోక్యం చేసుకోవడానికి మీ విద్యార్థుల నిశ్చితార్థం మరియు పురోగతిని కొలవండి.',
+  'index.freeAndOpen.title': 'ఉచిత మరియు బహిరంగ. <br/> ఎల్లప్పుడూ.',
   'index.freeAndOpen.description':
-    'విద్య మానవ హక్కు అని నమ్ముతున్నాం. gooru ఎల్లప్పుడూ ప్రపంచవ్యాప్తంగా అధ్యాపకులు మరియు విద్యార్థులకు ఉచితంగా మరియు వ్యయం అవుతుంది.',
-  'index.freeAndOpen.button': 'మా విధానం గురించి మరింత తెలుసుకోండి',
-  'class.info.class-info': 'తరగతిలో సమాచారం',
+    'విద్య మానవ హక్కు అని మేము నమ్ముతున్నాము. ప్రపంచవ్యాప్తంగా విద్యావంతులు మరియు విద్యార్థుల కోసం గూరు ఎల్లప్పుడూ ఖర్చు లేకుండా మరియు ప్రకటనలు లేకుండా ఉంటుంది.',
+  'index.freeAndOpen.button': 'మా అనువర్తనం గురించి మరింత తెలుసుకోండి',
+  'class.info.class-info': 'తరగతి గది సమాచారం',
   'class.info.teachers': 'ఉపాధ్యాయులు',
   'class.info.students': 'విద్యార్థులు',
   'class.info.subject': 'విషయం',
@@ -880,47 +901,46 @@ window.i18ln = {
   'class.edit.class-name': 'తరగతిలో పేరు',
   'class.edit.class-greetings': 'తరగతి గది ప్రకటనలు',
   'class.edit.class-greetings-placeholder':
-    'మీ విద్యార్థులకు శుభాకాంక్షలు తెలియజేయండి, వారిని ప్రోత్సహిస్తుంది, లేదా ప్రకటన చేయండి, మొదలైనవి చేయండి.',
-  'class.edit.class-minscore': 'ట్రోఫీల కోసం అంచనా కనీస స్కోరు (1-100%)',
+    'మీ విద్యార్థులను పలకరించండి, వారిని ప్రేరేపించండి లేదా ప్రకటనలు మొదలయినవి చేయండి.',
+  'class.edit.class-minscore': 'ట్రోఫీలకు కనీస స్కోరు అంచనా (1-100%)',
   'class.edit.course-map': 'కోర్సు మ్యాప్',
   'class.edit.edit-class': 'తరగతి గది అమరికలను సవరించండి',
   'class.overview.title': 'కోర్సు మ్యాప్',
-  'class.overview.locate': 'నన్ను గుర్తించడం',
-  'class.overview.edit-content': 'కంటెంట్ను సవరించండి',
+  'class.overview.locate': 'నన్ను గుర్తించండి',
+  'class.overview.edit-content': 'కంటెంట్‌ను సవరించండి',
   'class.overview.add-to-daily-class-activities':
     'తరగతి కార్యకలాపాలకు జోడించండి',
-  'class.overview.assigned-course': 'మీ కేటాయించిన కోర్సు',
-  'class.overview.pre-study-title': 'మీ కోర్సు కోసం ముందు అధ్యయనం',
+  'class.overview.assigned-course': 'మీకు కేటాయించిన కోర్సు',
+  'class.overview.pre-study-title': 'మీ కోర్సు కోసం ముందస్తు అధ్యయనం',
   'class.overview.course-map.rescope-toggle': 'పూర్తి కోర్సు చూపించు',
   'class.overview.course-map.rescope-info':
-    'ఈ నావిగేటర్ కోర్సు అనేది బహుళ తరగతులు అంతటా ప్రమాణాలను కలుపుతూ వ్యక్తిగతీకరించిన కోర్సు. ప్రతి విద్యార్ధికి అంతరాయాలను పూరించడానికి, భావనలను మరియు అభ్యాసాలను బలపరిచేందుకు మరియు వారి అభ్యాసాన్ని వేగవంతం చేయడానికి ఒక ప్రత్యేకమైన కోర్సును అందిస్తుంది. వ్యక్తిగత మార్గాలు రూపొందిస్తారు మరియు ప్రతి విద్యార్థి యొక్క అభ్యాస సామర్ధ్యాన్ని గరిష్టంగా పెంచడానికి మరియు వారి సెట్ గమ్యానికి నావిగేట్ చెయ్యడానికి రియల్ టైమ్లో విద్యార్థులను మళ్లీ వెనక్కి తీసుకుంటారు.',
+    'ఈ నావిగేటర్ కోర్సు బహుళ తరగతులలో ప్రమాణాలను కలిగి ఉన్న వ్యక్తిగతీకరించిన కోర్సు. ప్రతి విద్యార్థికి ఖాళీలను పూరించడానికి, భావనలు మరియు అభ్యాసాలను బలోపేతం చేయడానికి మరియు వారి అభ్యాసాన్ని వేగవంతం చేయడానికి ఒక ప్రత్యేకమైన కోర్సు అందించబడుతుంది. వ్యక్తిగతీకరించిన మార్గాలు రూపొందించబడ్డాయి మరియు ప్రతి విద్యార్థి యొక్క అభ్యాస సామర్థ్యాన్ని పెంచడానికి మరియు వారి సెట్ గమ్యస్థానానికి నావిగేట్ చేయడానికి విద్యార్థులను నిజ సమయంలో తిరిగి నడిపిస్తారు.',
   'class.overview.course-map.learning-path':
-    'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
+    'మీ గమ్యస్థానానికి మీ నైపుణ్యం యొక్క అంతరాలను కవర్ చేయడానికి మీ అభ్యాస మార్గంలో పాఠాలు ఉన్నాయి. మీ క్లాస్ గ్రేడ్ స్థాయి మైలురాయి ఇప్పటికే స్వాధీనం చేసుకున్న సామర్థ్యాలను చూపిస్తుంది (లేత బూడిదరంగు నేపథ్యంలో ఇటాలిక్స్‌లో చూపబడింది), అయితే నైపుణ్యం కలిగినవి ఇతర మైలురాళ్ల కోసం దాచబడతాయి. ఇతర మైలురాళ్ళలో నైపుణ్యం కలిగిన నైపుణ్యాల కోసం పాఠాలను వీక్షించడానికి ఈ స్విచ్‌ను ఆన్ చేయండి.',
   'class.overview.course-map.custom-msg':
-    'మీ నైపుణ్యత ఆధారంగా మేము ప్రత్యేకంగా ఈ కోర్సును వ్యక్తిగతీకరించాము. దయచేసి వ్యక్తిగతీకరించిన కోర్సు మ్యాప్ను చూడడానికి కొద్దిసేపట్లో మళ్లీ తనిఖీ చేయండి.',
+    'మీ నైపుణ్యం ఆధారంగా మేము మీ కోసం ప్రత్యేకంగా ఈ కోర్సును వ్యక్తిగతీకరిస్తున్నాము. వ్యక్తిగతీకరించిన కోర్సు మ్యాప్‌ను చూడటానికి దయచేసి కొద్దిసేపట్లో తిరిగి తనిఖీ చేయండి.',
   'class.overview.course-map.route0-bannerdesc':
-    'మీ యోగ్యత ప్రొఫైల్ ప్రకారం, మీరు ఈ కోర్సులో బాగా చేయగలిగేలా మీరు నైపుణ్యం పొందవలసిన కొన్ని సామర్థ్యాలు ఉన్నాయి. మేము ఈ సామర్ధ్యాలను నిర్వహించమని మేము మీకు సిఫార్సు చేస్తున్న మార్గాన్ని కలిగి ఉన్నాము. వివరాలను చూడడానికి ఇక్కడ క్లిక్ చేయండి.',
-  'class.analytics.performance.title': 'పనితీరును వీక్షించండి',
+    'మీ సామర్థ్య ప్రొఫైల్ ప్రకారం, మీరు ఈ కోర్సులో బాగా రాణించటానికి కొన్ని నైపుణ్యాలు ఉన్నాయి. ఈ సామర్థ్యాలను నేర్చుకోవటానికి మీరు సిఫార్సు చేస్తున్న మార్గం మాకు ఉంది. వివరాలను చూడటానికి ఇక్కడ క్లిక్ చేయండి.',
+  'class.analytics.performance.title': 'పనితీరును చూడండి',
   'class.analytics.performance.better-experience-message':
-    'మంచి గోరు అనుభవం కోసం, టాబ్లెట్ లేదా డెస్క్టాప్లో పూర్తి తరగతి గది విశ్లేషణలను వీక్షించండి.',
+    'మంచి గూరు అనుభవం కోసం, టాబ్లెట్ లేదా డెస్క్‌టాప్‌లో పూర్తి తరగతి గది విశ్లేషణలను చూడండి.',
   'class.analytics.performance.no-content':
-    'మీ విద్యార్థులు ఇంకా కోర్సును చదవడం ప్రారంభించలేదు.',
-  'class.analytics.performance.actions.share': 'వాటా',
-  'class.analytics.performance.actions.edit': 'కంటెంట్ను సవరించండి',
+    'మీ విద్యార్థులు ఇంకా కోర్సు అధ్యయనం ప్రారంభించలేదు.',
+  'class.analytics.performance.actions.share': 'షేర్',
+  'class.analytics.performance.actions.edit': 'కంటెంట్‌ను సవరించండి',
   'class.analytics.performance.actions.download': 'డౌన్లోడ్',
-  'class.analytics.performance.actions.fullScreen':
-    'పూర్తి స్క్రీన్ని వీక్షించండి',
+  'class.analytics.performance.actions.fullScreen': 'పూర్తి స్క్రీన్ చూడండి',
   'class.analytics.performance.actions.exitFullScreen':
     'పూర్తి స్క్రీన్ నుండి నిష్క్రమించండి',
-  'class.analytics.performance.actions.assessment': 'వీక్షణ అంచనా',
-  'class.analytics.performance.actions.collection': 'సేకరణను వీక్షించండి',
-  'class.analytics.performance.actions.both': 'రెండు చూడవచ్చు',
+  'class.analytics.performance.actions.assessment': 'అంచనాను వీక్షించండి',
+  'class.analytics.performance.actions.collection': 'సేకరణను చూడండి',
+  'class.analytics.performance.actions.both': 'రెండింటినీ చూడండి',
   'class.analytics.performance.teacher.metricsTable.average': 'సగటు',
   'class.analytics.performance.teacher.metricsTable.class-average':
     'తరగతి సగటు',
-  'class.analytics.performance.grade-items': 'గ్రేడ్కు అంశాలు',
+  'class.analytics.performance.grade-items': 'గ్రేడ్‌కు అంశాలు',
   'class.analytics.performance.no-grade-items':
-    'మీరు అందరినీ ఆకర్షించినట్లు కనిపిస్తోంది!',
+    'మీరందరూ పట్టుబడినట్లు కనిపిస్తోంది!',
   'class.analytics.performance.gru-grade-items.students.zero':
     '{{count}} విద్యార్థులు',
   'class.analytics.performance.gru-grade-items.students.one':
@@ -929,214 +949,223 @@ window.i18ln = {
     '{{count}} విద్యార్థులు',
   'class.analytics.performance.gru-grade-items.students.not-started':
     'మొదలవలేదు',
-  'class.analytics.mastery.title': 'స్వావలంబనను వీక్షించండి',
-  'class.quick-start.title': 'ఈ తరగతిలో కంటెంట్ను కేటాయించండి.',
-  'class.quick-start.new-course': 'ఒక కొత్త కోర్సు శీఘ్రంగా ప్రారంభించండి',
+  'class.analytics.mastery.title': 'పాండిత్యం చూడండి',
+  'class.quick-start.title': 'ఈ తరగతి గదికి కంటెంట్‌ను కేటాయించండి.',
+  'class.quick-start.new-course': 'క్రొత్త కోర్సును శీఘ్రంగా ప్రారంభించండి',
   'class.quick-start.new-course-desc':
-    'క్రొత్త కోర్సు, సేకరణ లేదా అంచనా వేయడం ద్వారా ప్రారంభించండి',
+    'క్రొత్త కోర్సు, సేకరణ లేదా అంచనాను సృష్టించడం ద్వారా ప్రారంభించండి',
   'class.quick-start.course': 'కొత్త కోర్సు',
   'class.quick-start.new-collection': 'సరికొత్త సేకరణ',
   'class.quick-start.new-assessment': 'కొత్త అంచనా',
-  'class.quick-start.remix-a-sample': 'రీమిక్స్ నమూనా',
+  'class.quick-start.remix-a-sample': 'నమూనాను రీమిక్స్ చేయండి',
   'class.quick-start.add-existing-course':
-    'మీ లైబ్రరీ నుండి కోర్సును జోడించండి',
+    'మీ లైబ్రరీ నుండి ఒక కోర్సును జోడించండి',
   'class.quick-start.existing-course-desc':
-    'తరగతిని ప్రారంభించడానికి వేగవంతమైన మార్గం',
-  'class.quick-start.choose-course': 'కోర్సు ఎంచుకోండి',
-  'class.quick-start.remix-from-course': 'రీమిక్స్ ఫీచర్ చేసిన కోర్సు',
-  'class.quick-start.featured-course': 'వీక్షించండి కోర్సులు',
+    'తరగతి గదిని ప్రారంభించడానికి శీఘ్ర మార్గం',
+  'class.quick-start.choose-course': 'కోర్సును ఎంచుకోండి',
+  'class.quick-start.remix-from-course': 'ఫీచర్ చేసిన కోర్సును రీమిక్స్ చేయండి',
+  'class.quick-start.featured-course': 'ఫీచర్ చేసిన కోర్సులను చూడండి',
   'class.quick-start.remix-desc':
-    'మీ విద్యార్థులకు ఒక ప్రత్యేక కోర్సును కాపీ చేసి, అనుకూలీకరించండి',
+    'మీ విద్యార్థుల కోసం ఫీచర్ చేసిన కోర్సును కాపీ చేసి అనుకూలీకరించండి',
   'class.quick-start.browse-content':
-    'లేదా మా కంటెంట్ జాబితాలను బ్రౌజ్ చేయండి.',
-  'classes.classesJoined': 'నేను చేరిన తరగతి గదులు',
-  'classes.classesTaught': 'నేను బోధించే తరగతి గదులు',
-  'classes.noClassesJoined': 'మీరు తరగతి గదుల్లో చేరలేదు',
-  'classes.noClassesTaught': 'మీకు ఏవైనా తరగతి తరగతి గదులు లేవు',
+    'లేదా మా కంటెంట్ కేటలాగ్‌లను బ్రౌజ్ చేయండి.',
+  'classes.classesJoined': 'తరగతి గదులు నేను చేరాను',
+  'classes.classesTaught': 'నేను బోధిస్తున్న తరగతి  గదులు',
+  'classes.noClassesJoined': 'మీరు ఏ తరగతి గదుల్లో చేరలేదు',
+  'classes.noClassesTaught': 'మీకు సృష్టించబడిన తరగతి గదులు లేవు',
   'content.assessments.edit.best-practices':
-    '[1] మీ అంచనాలో మీరు మరియు మీ విద్యార్థులు అవగాహన మరియు పనితీరును పర్యవేక్షించడానికి ఉపయోగించే స్కోర్ల సమితి. [2] [3] మీ అంచనాలో వివిధ రకాల ప్రశ్న రకాలు (sbac పై ఆధారపడి ఉంటాయి) వివిధ మార్గాల్లో అవగాహనను ప్రదర్శిస్తుంది. ప్రమాణాలు, సూక్ష్మ-ప్రమాణాలు మరియు వెబ్ యొక్క లోతు జ్ఞానానికి ప్రతి ప్రశ్నకు టాగింగ్ చేయాలని మేము సిఫార్సు చేస్తున్నాము. [4]',
-  'content.classes.create.title': 'ఒక తరగతి గదిని సృష్టించండి',
-  'content.classes.create.content': 'విద్యార్థులు కంటెంట్తో పాలుపంచుకుంటారు.',
-  'content.classes.create.class-name-input': 'మీ తరగతిలో పేరు పెట్టండి',
+    '<p> ఒక అంచనా అనేది మీరు మరియు మీ విద్యార్థులు అవగాహన మరియు పనితీరును పర్యవేక్షించడానికి ఉపయోగించే స్కోర్ చేసిన ప్రశ్నల సమితి. వివిధ మార్గాల్లో అవగాహనను ప్రదర్శించండి. ప్రతి ప్రశ్నను ప్రమాణాలు, సూక్ష్మ ప్రమాణాలు మరియు వెబ్ యొక్క జ్ఞానం యొక్క లోతుకు ట్యాగ్ చేయాలని మేము సిఫార్సు చేస్తున్నాము. </p>',
+  'content.classes.create.title': 'తరగతి గదిని సృష్టించండి',
+  'content.classes.create.content': 'విద్యార్థులు కంటెంట్‌తో మునిగి తేలుతారు.',
+  'content.classes.create.class-name-input': 'మీ తరగతి గదికి పేరు పెట్టండి',
   'content.classes.create.condition-prompt':
-    'ఎలా విద్యార్థులు మీ తరగతిలో చేరతారు?',
-  'content.classes.create.condition-prompt-code': 'తరగతిలో కోడ్ ఉన్న ఎవరైనా',
-  'content.classes.create.condition-prompt-invite': 'మాత్రమే ఆహ్వానించండి',
+    'విద్యార్థులు మీ తరగతి గదిలో ఎలా చేరతారు?',
+  'content.classes.create.condition-prompt-code':
+    'ఎవరయినా తరగతి కోడ్త తో వున్రనారా',
+  'content.classes.create.condition-prompt-invite': 'ఆహ్వానించండి',
   'content.classes.create.get-started': 'ప్రారంభించడానికి',
   'content.classes.join.title': 'ఒక కొత్త తరగతిలో చేరండి',
   'content.classes.join.join-a-classroom': 'తరగతిలో చేరండి',
   'content.classes.join.content': 'ఇక్కడ ప్రయాణం ప్రారంభమవుతుంది.',
   'content.classes.join.not-now': 'ఇప్పుడు కాదు',
-  'content.classes.join.class-code-input': 'తరగతిలో కోడ్ని ఎంటర్ చెయ్యండి',
+  'content.classes.join.class-code-input': 'తరగతి గది కోడ్‌ను నమోదు చేయండి',
   'content.classes.join.class-not-found':
-    'తరగతిలో దొరకలేదు. మీరు సరైన తరగతి గది కోడ్ను ఎంటర్ చేసారని నిర్ధారించుకోండి',
-  'content.classes.join.invalid-code': 'చెల్లని తరగతిలో కోడ్.',
+    'తరగతి గది కనుగొనబడలేదు. మీరు సరైన తరగతి గది కోడ్‌ను నమోదు చేశారని నిర్ధారించుకోండి',
+  'content.classes.join.invalid-code': 'చెల్లని తరగతి గది కోడ్.',
   'content.classes.join.join-not-allowed':
-    'మీరు చేరడానికి ప్రయత్నిస్తున్న తరగతి ఇకపై చురుకుగా లేదు. దయచేసి సరైన తరగతి కోడ్ కోసం మీ గురువుని సంప్రదించండి.',
-  'content.classes.join.already-member': 'మీరు ఇప్పటికే ఈ తరగతిలో సభ్యుడు.',
-  'content.classes.join.join-class': 'తరగతిలో చేరండి',
+    'మీరు చేరడానికి ప్రయత్నిస్తున్న తరగతి ఎప్పుడు  చురుకుగా ఉండదు. సరైన తరగతి కోడ్ కోసం దయచేసి మీ గురువును సంప్రదించండి.',
+  'content.classes.join.already-member': 'మీరు ఇప్పటికే ఈ తరగతి గదిలో సభ్యులే.',
+  'content.classes.join.join-class': 'తరగతి గదిలో చేరండి',
   'content.classes.join.terms-and-conditions':
-    'తరగతిలో చేరడానికి క్లిక్ చేయడం ద్వారా, ఈ తరగతిలో గురువు (లు) తో ఈ గోరు తరగతి గదిని అధ్యయనం చెయ్యటం ద్వారా సృష్టించబడిన నా అంచనా మరియు సేకరణ పురోగతి డేటాను భాగస్వామ్యం చేయడానికి నేను అంగీకరిస్తున్నాను.',
-  'content.collections.edit.assign-to-course': 'కోర్సును కేటాయించండి',
+    'తరగతి గదిలో చేరడం క్లిక్ చేయడం ద్వారా, ఈ గూరు తరగతి గదిని అధ్యయనం చేయడం ద్వారా ఉత్పన్నమైన నా అంచనా మరియు సేకరణ పురోగతి డేటాను ఈ తరగతి గదిలోని ఉపాధ్యాయులతో (ల) పంచుకునేందుకు అంగీకరిస్తున్నాను.',
+  'content.collections.edit.assign-to-course': 'కోర్సుకు కేటాయించండి',
   'content.collections.edit.best-practices':
-    '[1] విద్యార్ధులు సేకరణ విషయంలో మీ కంటెంట్తో పరస్పర చర్య చేస్తారు. జ్ఞానార్జన సేకరణను సృష్టించేటప్పుడు, నేర్చుకోవలసిన లక్ష్యాలను చేర్చడం, మరియు పలు రకాలుగా భావనలకు విద్యార్థులను బహిర్గతం చేసేందుకు వనరుల రకాన్ని ఉపయోగించడాన్ని నిర్ధారించుకోండి. [2] [3] భావనలపై నిర్మించడానికి వనరుల శ్రేణిని ఉపయోగించండి. సేకరణ ద్వారా పురోగతి తార్కిక పద్ధతిలో ప్రవహిస్తుంది మరియు ఉద్దేశిత ప్రేక్షకులను ఒక సాధారణ నుండి మరింత క్లిష్టమైన స్థాయి అవగాహనతో, లేదా విద్యార్థి అన్వేషణ కోసం తగినంతగా అనుమతిస్తాయి. [4] [5] మా గోరు ద్వారా మార్గం వెంట అవగాహన కోసం తనిఖీలు ప్రశ్నలు లేదా ఇతర సంకర్షణలు. సేకరణలో లక్ష్యాలను నెరవేర్చడానికి మరియు ప్రతి వనరుకు ఒక పాత్ర మరియు ప్రయోజనం ఉందని నిర్ధారించడానికి తగినంత వనరులను మరియు / లేదా తగినంత వనరులను మేము సిఫార్సు చేస్తున్నాము. [6]',
+    '<p> విద్యార్థులు మీ కంటెంట్‌తో సేకరణ స్థాయిలో సంకర్షణ చెందుతారు. అభ్యాస సేకరణను సృష్టించేటప్పుడు, అభ్యాస లక్ష్యాలను చేర్చాలని నిర్ధారించుకోండి మరియు విద్యార్థులను అనేక విధాలుగా భావనలకు గురిచేయడానికి వివిధ రకాల వనరులను ఉపయోగించడాన్ని పరిగణించండి. </p> <p> భావనలను రూపొందించడానికి వనరుల క్రమాన్ని ఉపయోగించండి. సేకరణ ద్వారా పురోగతి తార్కిక పద్ధతిలో ప్రవహించాలి మరియు ఉద్దేశించిన ప్రేక్షకులను సముచితమైనట్లయితే సాధారణ నుండి మరింత క్లిష్టమైన స్థాయికి తీసుకెళ్లాలి, లేదా విద్యార్థుల అన్వేషణకు తగినంతగా అనుమతించాలి. </p> <p> మా గూరు ద్వారా మార్గం వెంట అర్థం చేసుకోవడానికి తనిఖీలు ఉన్నాయి ప్రశ్నలు లేదా ఇతర ఇంటరాక్టివ్‌లు. సేకరణలో లక్ష్యాలను నెరవేర్చడానికి మరియు ప్రతి వనరుకు పాత్ర మరియు ఉద్దేశ్యం ఉందని నిర్ధారించడానికి తగినంత వనరులు మరియు / లేదా తగినంత రకాల వనరులను మేము సిఫార్సు చేస్తున్నాము. </p>',
   'content.courses.edit.assign-to-class': 'తరగతి గదికి కేటాయించండి',
   'content.courses.edit.best-practices':
-    '[1] ఒక కోర్సు మీరు మీ అభ్యాస విషయాలను యూనిట్లు మరియు పాఠాలుగా నిర్వహించడానికి అనుమతించే ఫోల్డర్. కోర్సును సృష్టించినప్పుడు, మీరు ప్రస్తావించే ముఖ్యమైన ప్రశ్నలు, అభ్యాస లక్ష్యాలు మరియు మీ కంటెంట్ యొక్క సంస్థలను పరిగణలోకి తీసుకోవాలి. [2] [3] మీ విద్యార్థి జనాభా కోసం విభిన్న అనుభవాన్ని సృష్టించేందుకు పాఠాలు కలిసి ఉండవచ్చు (ఉదాహరణకు, మీరు క్రమంలో మీ విభాగాలను కాలానుక్రమంగా, అంశం ద్వారా లేదా ప్రామాణిక ద్వారా). [4]',
+    '<p> కోర్సు అనేది మీ అభ్యాస విషయాలను యూనిట్లు మరియు పాఠాలుగా నిర్వహించడానికి అనుమతించే ఫోల్డర్. ఒక కోర్సును సృష్టించేటప్పుడు మీరు ప్రసంగించే ముఖ్యమైన ప్రశ్నలు, అభ్యాస లక్ష్యాలు మరియు మీ కంటెంట్ యొక్క సంస్థను పరిగణించండి. </p> <p> మీ విద్యార్థి జనాభాకు విభిన్న అనుభవాన్ని సృష్టించడానికి మీరు కలిసి పాఠాలను ముక్కలు చేయవచ్చు (ఉదాహరణకు, మీరు క్రమం చేయవచ్చు మీ యూనిట్లు కాలక్రమానుసారం, అంశం ద్వారా లేదా ప్రామాణికంగా). </p>',
   'content.courses.edit.information.course-title': 'కోర్సు శీర్షిక',
   'content.courses.edit.information.description': 'వివరణ',
   'content.questions.edit.add-to': 'జోడించండి',
   'content.questions.edit.best-practices':
-    '[1] ప్రశ్న ఒక విద్యార్ధికి సమాధానాన్ని కోరుకునే వనరు మరియు మీ విద్యార్ధులు sbac, parcc మరియు ఇతర అంచనాలపై చూసే ప్రశ్నలకు మద్దతు ఇచ్చే వివిధ రకాలైన ప్రశ్న రకాలను అందిస్తాము. [2] [3] ఈ ప్రశ్నల రకాలైన విద్యార్థులను బహిర్గతం చేయడానికి మరియు విజ్ఞానాన్ని ప్రదర్శించడానికి పలు ఫార్మాట్లను అందించడానికి మీరు ఉపయోగించే ప్రశ్నల ప్రశ్నలు. [4] [5] మీ ప్రశ్నలను ప్రమాణాలు, సూక్ష్మ-ప్రమాణాలు మరియు వెబ్ యొక్క లోతైన పరిజ్ఞానంతో వివరించండి. ఉపాధ్యాయుల డాష్ బోర్డ్ ద్వారా మీ విద్యార్థులు ప్రశ్నలతో పరస్పర చర్య చేస్తున్నారని మీరు చూడవచ్చు. [6]',
+    '<p> ప్రశ్న అనేది విద్యార్థి నుండి సమాధానం అవసరమయ్యే వనరు, మరియు మీ విద్యార్థులు యస్ బి ఎ సి , పి ఎ ఆర్ సి సి  మరియు ఇతర మదింపులపై చూసే ప్రశ్నలకు మద్దతు ఇవ్వడానికి మేము అనేక రకాల ప్రశ్న రకాలను అందిస్తున్నాము. </p> <p> ప్రత్యామ్నాయంగా పరిగణించండి ఈ ప్రశ్న రకాలను విద్యార్థులకు బహిర్గతం చేయడానికి మరియు జ్ఞానాన్ని ప్రదర్శించడానికి బహుళ ఆకృతులను అందించడానికి మీరు ఉపయోగించే ప్రశ్నలు. </p> <p> మీ ప్రశ్నలను ప్రమాణాలు, సూక్ష్మ ప్రమాణాలు మరియు వెబ్ యొక్క జ్ఞానం యొక్క లోతుకు ట్యాగ్ చేయండి. ఉపాధ్యాయ డాష్‌బోర్డ్ ద్వారా మీ విద్యార్థులు ప్రశ్నలతో ఎలా వ్యవహరిస్తున్నారో మీరు చూడవచ్చు. </p>',
   'content.questions.edit.information.question-title': 'ప్రశ్న శీర్షిక',
   'content.questions.edit.information.question-type': 'ప్రశ్న రకం',
   'content.questions.edit.builder.add-answer-choice':
-    '+ సమాధానం ఎంపికను జోడించండి',
-  'content.questions.edit.builder.add-hint': 'సూచనలను జోడించండి',
+    '+ జవాబు ఎంపికను జోడించండి',
+  'content.questions.edit.builder.add-hint': 'సూచనలు జోడించండి',
   'content.questions.edit.builder.add-explanation': 'వివరణ జోడించండి',
   'content.questions.edit.builder.answer': 'సమాధానం',
   'content.questions.edit.builder.answer-instructions.FIB':
-    'సమాధానం మరియు వివరణ కోసం 5 సూచనలు వరకు జోడించవచ్చు.',
+    'సమాధానం మరియు వివరణ కోసం 5 సూచనలు వరకు జోడించండి.',
   'content.questions.edit.builder.answer-instructions.HS_IMG':
-    'మీరు పది జవాబు చిత్రాలను జోడించవచ్చు మరియు ఒకటి లేదా ఎక్కువ సరైన సమాధానాలను ఎంచుకోవచ్చు.',
+    'మీరు పది జవాబు ప్రతి బిమ్బాలను  జోడించవచ్చు మరియు ఒకటి లేదా అంతకంటే ఎక్కువ సరైన సమాధానాలను ఎంచుకోవచ్చు.',
   'content.questions.edit.builder.answer-instructions.HS_TXT':
-    'మీరు పది జవాబు ఎంపికలు వరకు జోడించవచ్చు మరియు ఒకటి లేదా ఎక్కువ సరైన సమాధానాలను ఎంచుకోవచ్చు.',
+    'మీరు పది జవాబు ఎంపికలను జోడించవచ్చు మరియు ఒకటి లేదా అంతకంటే ఎక్కువ సరైన సమాధానాలను ఎంచుకోవచ్చు.',
   'content.questions.edit.builder.answer-instructions.HT_HL_ST':
-    'మీరు ప్రశ్న వ్రాసేటప్పుడు, హైలైట్ చేసిన వాక్యాలను సూచించడానికి బ్రాకెట్లను ఉపయోగించండి. ఒక బ్రాకెట్టు ఒక సమయంలో ఒక వాక్యాన్ని మాత్రమే కలిగి ఉంటుంది, బ్రాకెట్ లోపల ఒక వ్యవధిని ఉపయోగిస్తుంది. ఉదాహరణకు, మొట్టమొదటి పంది తన గడ్డిని నిర్మించింది. [పెద్ద దుష్ట తోడేలు ఇల్లు పడగొట్టాడు.] రెండవ పిగ్ కలప ఇల్లు నిర్మించాడు. పాత్ర పరిమితి: 5000.',
+    'మీరు ప్రశ్న వ్రాస్తున్నప్పుడు, హైలైట్ చేసిన వాక్యాలను సూచించడానికి బ్రాకెట్లను ఉపయోగించండి. ఒక బ్రాకెట్ బ్రాకెట్ లోపల ఒక కాలాన్ని ఉపయోగించి ఒకేసారి ఒక వాక్యాన్ని మాత్రమే కలిగి ఉంటుంది. ఉదాహరణకు, మొదటి చిన్న పంది తన ఇంటి గడ్డినతో  నిర్మించింది. [పెద్ద చెడ్డ తోడేలు ఇంటిని పేల్చివేసింది.] రెండవ పంది తన చెక్క ఇంటిని నిర్మించింది. అక్షర పరిమితి: 5000.',
   'content.questions.edit.builder.answer-instructions.HT_HL_WD':
-    'మీరు ప్రశ్న వ్రాసేటప్పుడు, హైలైట్ చేసిన పదాలు కోసం బ్రాకెట్లను ఉపయోగించండి. ఒక బ్రాకెట్టు ఒక సమయంలో ఒక పదం మాత్రమే కలిగి ఉంటుంది. ఉదాహరణకు, [పెద్ద] చెడ్డ తోడేలు ఇల్లు పడగొట్టాడు. పాత్ర పరిమితి: 5000.',
+    'మీరు ప్రశ్న వ్రాస్తున్నప్పుడు, హైలైట్ చేసిన పదాల కోసం బ్రాకెట్లను ఉపయోగించండి. ఒక బ్రాకెట్ ఒక సమయంలో ఒక పదాన్ని మాత్రమే కలిగి ఉంటుంది. ఉదాహరణకు, [పెద్ద] చెడ్డ తోడేలు ఇంటిని పేల్చివేసింది. అక్షర పరిమితి: 5000.',
   'content.questions.edit.builder.answer-instructions.HT_RO':
-    'మీరు సరైన క్రమంలో పది సమాధానం ఎంపికలు వరకు జోడించవచ్చు. ఆర్డర్ విద్యార్థులు కోసం గిలకొట్టిన ఉంటుంది.',
+    'మీరు సరైన క్రమంలో పది జవాబు ఎంపికలను జోడించవచ్చు. ఆర్డర్ విద్యార్థుల కోసం ప్రోగు చేయ బడుతుంది .',
   'content.questions.edit.builder.answer-instructions.MA':
-    'మీరు పది సమాధానాలు, ఒక చిత్రం, వివరణ, మరియు ఐదు సూచనలు వరకు జోడించవచ్చు.',
+    'మీరు పది సమాధానాలు, ఒక ప్రతి బింబం , వివరణ మరియు ఐదు సూచనలు వరకు జోడించవచ్చు.',
   'content.questions.edit.builder.answer-instructions.MC':
-    'మీరు పది సమాధానం ఎంపికలు వరకు జోడించవచ్చు మరియు ఒక సరైన జవాబును సూచించవచ్చు. పాత్ర పరిమితి: 200.',
+    'మీరు పది జవాబు ఎంపికలను జోడించవచ్చు మరియు ఒక సరైన జవాబును సూచించవచ్చు. అక్షర పరిమితి: 200.',
   'content.questions.edit.builder.answer-instructions.OE':
-    'సరైన ప్రతిస్పందన వ్రాయండి. పాత్ర పరిమితి: 5000.',
+    'సరైన ప్రతిస్పందన రాయండి. అక్షర పరిమితి: 5000.',
   'content.questions.edit.builder.answer-instructions.T/F':
     'సరైన సమాధానం ఎంచుకోండి.',
   'content.questions.edit.builder.question-instructions.FIB':
-    'మీరు ప్రశ్న వ్రాస్తున్నప్పుడు, మీ పూరక-లో-ఖాళీ సమాధానాల కోసం బ్రాకెట్లను ఉపయోగించండి. ఉదాహరణకు: "పెద్ద చెడ్డ [తోడేలు] పడగొట్టాడు." మీరు ఒక చిత్రాన్ని కూడా జోడించవచ్చు.',
+    'మీరు ప్రశ్న వ్రాసేటప్పుడు, మీ ఖాళీ సమాధానాల కోసం బ్రాకెట్లను ఉపయోగించండి. ఉదాహరణకు: “పెద్ద చెడు [తోడేలు] [ఇంటిని] పేల్చివేసింది.” మీరు ఒక చిత్రాన్ని కూడా జోడించవచ్చు.',
   'content.questions.edit.builder.question-instructions.HS_TXT':
-    'మీ ప్రశ్న వ్రాయండి.',
+    'మీ ప్రశ్న రాయండి.',
   'content.questions.edit.builder.question-instructions.HS_IMG':
-    'మీ ప్రశ్న వ్రాయండి.',
+    'మీ ప్రశ్న రాయండి.',
   'content.questions.edit.builder.question-instructions.HT_RO':
-    'మీ ప్రశ్న వ్రాయండి.',
+    'మీ ప్రశ్న రాయండి.',
   'content.questions.edit.builder.question-instructions.HT_HL':
-    'మీ ప్రశ్న ప్రాంప్ట్ వ్రాయండి.',
+    'మీ ప్రశ్న సరిగ్గా  వ్రాయండి',
   'content.questions.edit.builder.question-instructions.MC':
-    'మీ ప్రశ్న వ్రాయండి.',
+    'మీ ప్రశ్న రాయండి.',
   'content.questions.edit.builder.question-instructions.MA':
-    'మీ ప్రశ్న వ్రాయండి.',
+    'మీ ప్రశ్న రాయండి.',
   'content.questions.edit.builder.question-instructions.OE':
-    'మీ ప్రశ్న వ్రాయండి.',
+    'మీ ప్రశ్న రాయండి.',
   'content.questions.edit.builder.question-instructions.T/F':
-    'మీ ప్రశ్న వ్రాయండి.',
+    'మీ ప్రశ్న రాయండి.',
   'content.questions.edit.builder.submission-format.title':
-    'విద్యార్థి సమర్పణ ఆకృతి',
+    'విద్యార్థి  ఫార్మేట్ సమర్పణ',
   'content.questions.edit.builder.submission-format.answer-type.text-box':
     'టెక్స్ట్ బాక్స్',
   'content.questions.edit.builder.feedback-grading.title':
-    'అభిప్రాయం మరియు శ్రేణి',
+    'ఫీడ్ బ్యాక్  మరియు గ్రేడింగ్',
   'content.questions.edit.builder.feedback-grading.from-existing-rubric':
-    'ఉన్న రబ్బర్ నుండి',
+    'ఇప్పటికే ఉన్న రుబ్రిక్ నుండి',
   'content.questions.edit.builder.feedback-grading.scoring': 'స్కోరింగ్',
   'content.questions.edit.builder.feedback-grading.maximum-points':
     'గరిష్ట పాయింట్లు',
   'content.questions.edit.builder.feedback-grading.increment': 'ఇంక్రిమెంట్',
   'content.questions.edit.builder.feedback-grading.rubric-error':
-    'దయచేసి ఒక రబ్రిక్ను జోడించండి',
+    'దయచేసి రుబ్రిక్ జోడించండి',
   'content.modals.delete-bookmark.confirmation':
-    'మీరు ఈ {{type}} unbookmark ను చేయాలనుకుంటున్నారా?',
+    'మీరు ఈ {{type}  ను అన్‌బుక్ మార్క్  చేయాలనుకుంటున్నారా?',
   'content.modals.delete-bookmark.delete-error':
-    'అయ్యో! ప్రస్తుతం ఈ {{type}} unbook మార్క్ చేయడం సాధ్యం కాలేదు. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం ఈ {{type} ను అన్‌బుక్ చేయలేరు. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'content.modals.remove-class-activity.confirmation':
-    'మీ తరగతి కార్యక్రమాల నుండి ఈ {{type}} ను తొలగించాలని నిశ్చయించుకున్నారా?',
+    'మీ తరగతి కార్యకలాపాల నుండి ఈ {{type}}  తొలగించాలనుకుంటున్నారా?',
   'content.modals.remove-class-activity.delete-error':
-    'అయ్యో! ఇప్పుడే ఈ {{type}} ను తొలగించలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
-  'content.modals.delete-class.legend': 'మీరు మీ తరగతిని తొలగించబోతున్నారు',
+    'అయ్యో! ఈ {{type} remove ను ఇప్పుడు తొలగించలేకపోయాము. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
+  'content.modals.delete-class.legend': 'మీరు మీ తరగతి గదిని తొలగించబోతున్నారు',
   'content.modals.delete-class.student-access':
-    'విద్యార్థులు తరగతిని యాక్సెస్ చేయలేరు',
+    'విద్యార్థులు తరగతి గదిని ప్రేవేసించ లేక పోతున్నారు',
   'content.modals.delete-class.student-data-deleted':
-    'అన్ని విద్యార్థి డేటా తొలగించబడుతుంది',
-  'content.modals.archive-class.title': 'ఆర్కైవ్ తరగతిలో',
+    'అందరి  విద్యార్థుల డేటా తొలగించబడుతుంది',
+  'content.modals.archive-class.title': 'ఆర్కైవ్ తరగతి గది',
   'content.modals.archive-class.legend':
-    'మీరు మీ తరగతిని ఆర్కైవ్ చేయబోతున్నారు',
+    'మీరు మీ తరగతి గదిని ఆర్కైవ్ చేయబోతున్నారు',
   'content.modals.archive-class.links-not-accessible':
-    'అన్ని భాగస్వామ్య లింక్లు అందుబాటులో ఉండవు',
+    'అన్ని భాగస్వామ్య లింక్‌లు ప్రాప్యత చేయబడవు',
   'content.modals.archive-class.students-no-access':
-    'విద్యార్థులు తరగతిని యాక్సెస్ చేయలేరు',
+    'విద్యార్థులు తరగతి గదిని ప్రవేశం చెయ్యలేదు',
   'content.modals.archive-class.not-add-students':
-    'మీరు తరగతికి మరిన్ని విద్యార్థులను జోడించలేరు',
+    'మీరు తరగతికి ఎక్కువ మంది విద్యార్థులను చేర్చలేరు',
   'content.modals.archive-class.confirmation':
     'మీరు ఖచ్చితంగా ఆర్కైవ్ చేయాలనుకుంటున్నారా?',
   'content.modals.delete-content.legend': 'మీరు తొలగించబోతున్నారు',
   'content.modals.delete-content.content-legend':
-    '{{రకం}} [2] {{ఇండెక్స్}} - {{పేరెంట్ పేరు} నుండి {{title}}',
+    '<span>{{type}}</span> {{index}} - {{title}} నుండి  {{parent Name}}',
   'content.modals.delete-content.content-legend-header':
-    '{{parentname}} నుండి {{title}}',
+    '{{title}} from {{parent Name}} నుండి {{title}}',
   'content.modals.delete-content.delete-warning':
     'ఈ {{type}} లోని మొత్తం కంటెంట్ తొలగించబడుతుంది',
   'content.modals.delete-content.delete-error':
-    'అయ్యో! ఇప్పుడు {{type}} ను తొలగించలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం {{type} ను తొలగించలేకపోయాము. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'content.modals.delete-content.confirmation':
-    'మీరు ఖచ్చితంగా కొనసాగించాలనుకుంటున్నారా? దయచేసి "తొలగించు" అని టైప్ చేసి "తొలగించు" క్లిక్ చేయండి.',
-  'content.modals.delete-resource.legend': 'మీరు శాశ్వతంగా [1] {{title}} [2]',
+    'మీరు ఖచ్చితంగా కొనసాగించాలనుకుంటున్నారా? దయచేసి దిగువ “తొలగించు” అని టైప్ చేసి “తొలగించు” క్లిక్ చేయండి.',
+  'content.modals.delete-resource.legend':
+    'మీరు శాశ్వతంగా తొలగించాలనుకుంటున్నారని నిర్ధారించండి <b>{{title}} </b>',
   'content.modals.delete-resource.delete-warning':
     'ఈ {{type}} లోని మొత్తం కంటెంట్ తొలగించబడుతుంది',
   'content.modals.delete-resource.delete-error':
-    'అయ్యో! ఇప్పుడు {{type}} ను తొలగించలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం {{type} ను తొలగించలేకపోయాము. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'content.modals.delete-resource.confirmation':
-    'మీరు ఖచ్చితంగా కొనసాగించాలనుకుంటున్నారా? దయచేసి "శాశ్వతంగా తొలగించు" క్లిక్ చేయండి.',
+    'మీరు ఖచ్చితంగా కొనసాగించాలనుకుంటున్నారా? దయచేసి “శాశ్వతంగా తొలగించు” క్లిక్ చేయండి.',
   'content.modals.delete-resource.first-check':
     'ఇది శాశ్వత తొలగింపు మరియు రద్దు చేయబడదు',
   'content.modals.delete-resource.second-check':
-    'ఈ వనరు యొక్క కాపీలు, మీ సేకరణలలో మరియు కమ్యూనిటీలోని ఇతర యూజర్లచే ఏ సేకరణ అయినా తొలగించబడుతుంది',
-  'content.modals.delete-rubric.legend': 'మీరు శాశ్వతంగా [1] {{title}} [2]',
+    'ఈ వనరు యొక్క కాపీలు, మీ సేకరణలలో మరియు సంఘంలోని ఇతర వినియోగదారుల సేకరణ ఏదైనా తొలగించబడతాయి',
+  'content.modals.delete-rubric.legend':
+    'మీరు శాశ్వతంగా తొలగించాలనుకుంటున్నారని నిర్ధారించండి <b>{{title}} </b>',
   'content.modals.delete-rubric.delete-warning':
-    'ఈ రసీదులోని మొత్తం కంటెంట్ తొలగించబడుతుంది',
+    'ఈ రుబ్రిక్‌లోని మొత్తం కంటెంట్ తొలగించబడుతుంది',
   'content.modals.delete-rubric.delete-error':
-    'అయ్యో! ఇప్పుడు రబ్రిక్ తొలగించలేక పోయింది. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం రుబ్రిక్‌ను తొలగించలేకపోయాము. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'content.modals.delete-rubric.confirmation':
-    'మీరు ఖచ్చితంగా కొనసాగించాలనుకుంటున్నారా? దయచేసి "శాశ్వతంగా తొలగించు" క్లిక్ చేయండి.',
+    'మీరు ఖచ్చితంగా కొనసాగించాలనుకుంటున్నారా? దయచేసి “శాశ్వతంగా తొలగించు” క్లిక్ చేయండి.',
   'content.modals.delete-rubric.first-check':
     'ఇది శాశ్వత తొలగింపు మరియు రద్దు చేయబడదు',
   'content.modals.remove-content.legend':
-    'మీరు [3] {{parentname}} [4] నుండి [1] {{title}} [2]',
+    'మీరు <b>]{{parent Name}}  </b> నుండి <b>{{title}}  </b> ను తొలగించబోతున్నారు.',
   'content.modals.remove-content.remove-error':
-    'అయ్యో! ఇప్పుడు {{type}} ను తొలగించలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం {{type}  ను తీసివేయలేకపోయాము. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'content.modals.remove-content.confirmation':
-    'మీరు ఖచ్చితంగా కొనసాగించాలనుకుంటున్నారా? దయచేసి క్రింద ఉన్న "తీసివేయి" అని టైప్ చేసి "తొలగించు" క్లిక్ చేయండి.',
+    'మీరు ఖచ్చితంగా కొనసాగించాలనుకుంటున్నారా? దయచేసి దిగువ “తొలగించు” అని టైప్ చేసి “తొలగించు” క్లిక్ చేయండి.',
   'content.modals.remove-student.title':
-    'విద్యార్థిని తొలగించి, వారి డేటాను తొలగించండి',
+    'విద్యార్థిని తీసివేసి వారి డేటాను తొలగించండి',
   'content.modals.remove-student.legend':
-    'మీరు ఈ తరగతి గది నుండి {{studentname}} ను తీసివేసి, వారి మొత్తం డేటాను తొలగించబోతున్నారు.',
+    'మీరు ఈ తరగతి గది నుండి {{student Name}}  ను తొలగించి వారి మొత్తం డేటాను తొలగించబోతున్నారు.',
   'content.modals.remove-student.data-inaccessible':
-    'వారి డేటా తొలగించబడుతుంది మరియు మీరు లేదా వారిచే ప్రాప్యత చేయబడవు',
+    'వారి డేటా మొత్తం తొలగించబడుతుంది మరియు మీరు లేదా వారు యాక్సెస్ చేయలేరు',
   'content.modals.remove-student.classroom-access':
-    'వారు తరగతిలో లేదా కంటెంట్కు ప్రాప్యతను కలిగి ఉండరు',
+    'వారికి తరగతి గది లేదా కంటెంట్‌కు ప్రాప్యత ఉండదు',
   'content.modals.remove-student.data-lost':
-    'వారు తిరిగి తరగతికి చేరితే, అన్ని గత డేటాను కోల్పోతారు',
+    'వారు తరగతిలో తిరిగి చేరితే, గత డేటా అంతా పోతుంది',
   'content.modals.remove-student.remove-error':
-    'అయ్యో! ఇప్పుడే ఈ విద్యార్థిని తొలగించలేకపోయాము. త్వరలో మళ్ళీ ప్రయత్నించండి.',
+    'అయ్యో! ప్రస్తుతం ఈ విద్యార్థిని తొలగించలేకపోయారు. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
   'content.modals.remove-student.confirmation':
-    'మీరు ఖచ్చితంగా కొనసాగించాలనుకుంటున్నారా? దయచేసి "తొలగించు" అని టైప్ చేసి "తొలగించు" క్లిక్ చేయండి.',
+    'మీరు ఖచ్చితంగా కొనసాగించాలనుకుంటున్నారా? దయచేసి దిగువ “తొలగించు” అని టైప్ చేసి “తొలగించు” క్లిక్ చేయండి.',
   'content.modals.quick-remove-content.legend':
-    'మీరు [3] {{parentname}} [4] నుండి [1] {{title}} [2] ను తొలగించాలని నిర్థారించండి.',
+    '<b>{{parent Name}} </b> నుండి <b> {{title}}  </b> ను తొలగించాలని మీరు నిర్ధారించండి.',
   'content.modals.quick-delete-content.legend':
-    'మీరు [3] {{parentname}} [1] నుండి శాశ్వతంగా [1] {{title}} [2] ను తొలగించాలని నిర్థారించుకోండి.',
-  'content.modals.quick-delete-content.delete': 'శాశ్వతంగా తొలగించు',
+    '<b> {{parent Name}}  </b> నుండి <b> {{title}} </b> ను మీరు శాశ్వతంగా తొలగించాలనుకుంటున్నారని నిర్ధారించండి.',
+  'content.modals.quick-delete-content.delete': 'శాశ్వతంగా తొలగించండి',
   'content.resources.edit.best-practices':
-    '[1] వనరులు వీడియోలను, ఇంటరాక్టివ్లు, వెబ్సైట్లు, చిత్రాలు, గూగుల్ డాక్స్ మరియు మరిన్ని వంటి ఫార్మాట్లలో మల్టీమీడియా కంటెంట్ను కలిగి ఉంటాయి. సృజనాత్మకత పొందండి మరియు మీ సొంత వనరులను ఉపయోగించుకోండి లేదా "resourceful" ను పొందండి మరియు gooru లో మా సమృద్ధ సరఫరాను శోధించండి. [2] [3] వనరులు ద్వారా మీ విద్యార్ధులకు మార్గనిర్దేశం చేయటానికి మీ విద్యార్థులను నిమగ్నం చేయడానికి మరియు కథనాన్ని చేర్చడానికి వివిధ వనరుల రకాలను ఉపయోగించండి. [4] [5] ప్రమాణాలు, సూక్ష్మ-ప్రమాణాలు మరియు 21 వ శతాబ్దపు నైపుణ్యాలకు ప్రతి ప్రశ్నకు టాగింగ్ను మేము సిఫార్సు చేస్తున్నాము. గురువు డాష్ బోర్డు ద్వారా మీ విద్యార్థులు వనరులతో ఎలా పరస్పర చర్య చేస్తున్నారో మీరు చూడవచ్చు. [6]',
+    '<p> వనరులు వీడియోలు, ఇంటరాక్టివ్‌లు, వెబ్‌సైట్‌లు, చిత్రాలు, గూగుల్ డాక్స్ మరియు మరిన్ని వంటి వివిధ ఫార్మాట్లలో మల్టీమీడియా కంటెంట్. సృజనాత్మకంగా ఉండండి మరియు మీ స్వంత వనరులను ఉపయోగించుకోండి లేదా “వనరు” పొందండి మరియు గూరులో మా పుష్కలంగా సరఫరాను శోధించండి. </p> <p> మీ విద్యార్థులను నిమగ్నం చేయడానికి మరియు కథనాన్ని చేర్చడానికి వివిధ రకాల వనరులను ఉపయోగించండి, తద్వారా మీరు మీ విద్యార్థులను వనరుల ద్వారా మార్గనిర్దేశం చేయడంలో సహాయపడగలరు. </p> <p> ప్రతి ప్రశ్నను ప్రమాణాలు, సూక్ష్మ ప్రమాణాలు మరియు 21 వ శతాబ్దపు నైపుణ్యాలకు ట్యాగ్ చేయాలని మేము సిఫార్సు చేస్తున్నాము. ఉపాధ్యాయ డాష్‌బోర్డ్ ద్వారా మీ విద్యార్థులు వనరులతో ఎలా వ్యవహరిస్తున్నారో మీరు చూడవచ్చు. </p>',
   'content.resources.edit.placeholder-message':
-    'దీనిని [1] వనరును ఇక్కడ ప్రివ్యూ చేయండి. [2]',
+    '<span> దీన్ని ఇక్కడ పరిదృశ్యం చేయడానికి వనరును జోడించండి. </span>',
   'content.resources.edit.not-implemented':
-    'వనరుల ఫార్మాట్ ప్రివ్యూ [1] ఇంకా అమలు కాలేదు. [2]',
-  'content.resources.edit.information.im-publisher': 'నేను ప్రచురణకర్తని',
+    'వనరుల ఫార్పమేట్ పరిదృశ్యం  <span> ఇంకా అమలు కాలేదు. </span>',
+  'content.resources.edit.information.im-publisher': 'నేను ప్రచురణకర్త',
   'content.resources.edit.information.select-a-license':
-    'దయచేసి లైసెన్స్ని ఎంచుకోండి',
-  'user.active-classrooms': 'చురుకుగా తరగతి గదులు',
+    'దయచేసి లైసెన్స్ ఎంచుకోండి',
+  'content.oa.reference.uploaded': 'అప్లోడ్',
+  'content.oa.reference.image': 'ప్రతిబింబం',
+  'content.oa.reference.pdf': 'పి డి యఫ్',
+  'content.oa.reference.presentation': 'ప్రదర్శన',
+  'content.oa.reference.document': 'పత్రం',
+  'content.oa.reference.others': 'ఇతరులు',
+  'user.active-classrooms': 'క్రియాశీల తరగతి గదులు',
   'user.archived-classrooms': 'ఆర్కైవ్ చేసిన తరగతి గదులు',
   'user.classrooms': 'తరగతి గదులు',
   'user.rgo': 'rgo',
@@ -1153,20 +1182,22 @@ window.i18ln = {
   'user.manage-goals': 'లక్ష్యాలను నిర్వహించండి',
   'user.my-classes': 'నా తరగతులు',
   'user.teaching-classes.zero':
-    'మీరు ప్రస్తుతం {{లెక్కింపు}} తరగతులను బోధిస్తున్నారు',
-  'user.teaching-classes.one': 'మీరు ప్రస్తుతం 1 తరగతిని బోధిస్తున్నారు',
+    'మీరు ప్రస్తుతం {{count}} తరగతి గదులను బోధిస్తున్నారు',
+  'user.teaching-classes.one': 'మీరు ప్రస్తుతం 1 తరగతి గదిని బోధిస్తున్నారు',
   'user.teaching-classes.other':
-    'మీరు ప్రస్తుతం {{లెక్కింపు}} తరగతులను బోధిస్తున్నారు',
+    'మీరు ప్రస్తుతం {{count}} తరగతి గదులను బోధిస్తున్నారు',
   'student-landing.announcement': 'ప్రకటన',
-  'student-landing.browse-featured-courses': 'మా ప్రత్యేక కోర్సులు బ్రౌజ్',
-  'student-landing.browse-our': 'మా బ్రౌజ్',
+  'student-landing.browse-featured-courses':
+    'మా ఫీచర్ చేసిన కోర్సులను బ్రౌజ్ చేయండి',
+  'student-landing.browse-our': 'మా యొక్క  బ్రౌజ్',
   'student-landing.class-code': 'తరగతి కోడ్',
   'student-landing.featured-courses': 'ఫీచర్ కోర్సులు',
   'student-landing.class.assigned-course': 'కేటాయించిన కోర్సు',
-  'student-landing.class.back-to': 'తిరిగి తరగతులకు',
-  'student-landing.class.no-course': 'ఈ తరగతిలో సంబంధిత కోర్సు లేదు.',
-  'student-landing.class.no-course-assigned': 'కోర్సు కేటాయించిన లేదు',
-  'student-landing.class.back-to-independent': 'తిరిగి స్వతంత్ర అభ్యాసం',
+  'student-landing.class.back-to': 'తిరిగి తరగతి గదులకు',
+  'student-landing.class.no-course': 'ఈ తరగతి గదికి సంబంధిత కోర్సు లేదు.',
+  'student-landing.class.no-course-assigned': 'కోర్సు కేటాయించబడలేదు',
+  'student-landing.class.back-to-independent':
+    'స్వతంత్ర అభ్యాసానికి తిరిగి వెళ్ళు',
   'student-landing.class.report': 'నివేదిక',
   'student-landing.class.performance': 'ప్రదర్శన',
   'student-landing.class.course-map': 'కోర్సు మ్యాప్',
@@ -1178,33 +1209,34 @@ window.i18ln = {
     'గత కార్యకలాపాలు',
   'student-landing.class.my-report': 'నా నివేదిక',
   'student-landing.class.my-location': 'నా స్థానం',
-  'student-landing.class.my-proficiency': 'My Proficiency',
-  'student-landing.class.establish-skyline': 'Let\'s Establish your Skyline',
+  'student-landing.class.my-proficiency': 'నా నైపుణ్యం',
+  'student-landing.class.establish-skyline': 'మీ స్కైలైన్‌ను స్థాపించనివ్వండి',
   'student-landing.class.waiting-establish-skyline':
-    'Waiting for your teacher to complete setting up the class.',
+    'మీ గురువు తరగతి ఏర్పాటును పూర్తి చేసే వరకు వేచి ఉన్నారు.',
   'student-landing.class.setup-in-complete-desc1':
-    'It looks like your teacher has not',
-  'student-landing.class.setup-in-complete-desc2': 'updated class settings',
+    'మీ గురువు లేనట్లు కనిపిస్తోంది',
+  'student-landing.class.setup-in-complete-desc2':
+    'నవీకరించబడిన తరగతి సెట్టింగ్‌లు',
   'student-landing.class.setup-in-complete-desc3':
-    'Please get in touch with her to resolve the matter. Once everything is correctly set up, refresh this page.',
+    'దయచేసి సమస్యను పరిష్కరించడానికి ఆమెతో సన్నిహితంగా ఉండండి. ప్రతిదీ సరిగ్గా అమర్చబడిన తర్వాత, ఈ పేజీని రిఫ్రెష్ చేయండి.',
   'student-landing.course.to-report': 'వినియోగ సారాంశం',
   'student-landing.course.total-time-spent': 'గడిపిన మొత్తం సమయం',
   'student-landing.current-activity': 'ప్రస్తుత కార్యాచరణ',
   'student-landing.resume-current-activity':
-    'ప్రస్తుత కార్యాచరణను మళ్ళీ ప్రారంభించండి',
-  'student-landing.last-activity': 'చివరి చర్య',
-  'student-landing.start-studying': 'చదవడం ప్రారంభించండి',
-  'student-landing.not-available': '-na-',
+    'ప్రస్తుత కార్యాచరణను తిరిగి ప్రారంభించండి',
+  'student-landing.last-activity': 'చివరి కార్యాచరణ',
+  'student-landing.start-studying': 'అధ్యయనం ప్రారంభించండి',
+  'student-landing.not-available': '-యన్ ఎ -',
   'student-landing.join-classroom':
-    'నేర్చుకోవడం ప్రారంభించడానికి మీ గురువు యొక్క తరగతిలో చేరండి',
-  'student-landing.learn': 'ఒక gooru తరగతిలో తెలుసుకోండి',
+    'నేర్చుకోవడం ప్రారంభించడానికి మీ గురువు తరగతి గదిలో చేరండి',
+  'student-landing.learn': 'గూరు తరగతి గదితో నేర్చుకోండి',
   'student-landing.my-performance.activity': 'కార్యకలాపాలు',
   'student-landing.my-performance.activities.study': 'అధ్యయనం',
   'student-landing.my-performance.assessments': 'లెక్కింపులు',
   'student-landing.my-performance.collections': 'సేకరణలు',
   'student-landing.my-performance.filter': 'వడపోత',
   'student-landing.my-performance.primary-text':
-    'మీరు విశ్లేషించాలనుకుంటున్న విషయాలను ఎంచుకోండి మరియు మేము అనుకూలీకరించిన పనితీరు నివేదికను రూపొందిస్తాము.',
+    'మీరు విశ్లేషించదలిచిన వాటిని ఎంచుకోండి మరియు మేము అనుకూలీకరించిన పనితీరు నివేదికను రూపొందిస్తాము.',
   'student-landing.my-performance.subject': 'విషయం',
   'student-landing.my-performance.title': 'మీ పనితీరును విశ్లేషించండి',
   'student-landing.my-performance.time-period': 'సమయ వ్యవధి',
@@ -1212,45 +1244,45 @@ window.i18ln = {
   'student-landing.study-player': 'అధ్యయనం ఆటగాడు',
   'student-landing.my-study': 'నా అధ్యయనం',
   'student-landing.no-classrooms':
-    'మీరు ఇంకా తరగతి గదుల్లో చేరలేదు. మీ గురువు యొక్క తరగతిని జోడించడానికి "తరగతిలో చేరండి" పై క్లిక్ చేయండి. మీరు లైబ్రరీ ట్యాబ్లో ఒక ప్రత్యేక కోర్సు [2] కోసం కూడా శోధించవచ్చు.',
+    'మీరు ఇంకా ఏ తరగతి గదుల్లో చేరలేదు. మీ గురువు తరగతిని జోడించడానికి “చేరండి </br> తరగతి గది” పై క్లిక్ చేయండి. మీరు లైబ్రరీ టాబ్ క్రింద </br> ఫీచర్ చేసిన కోర్సు కోసం కూడా శోధించవచ్చు.',
   'student-landing.no-content-classrooms':
-    'ప్రస్తుతం ఈ తరగతి గది అందుబాటులో లేదు',
-  'student-landing.welcome': 'గోరు స్వాగతం.',
+    'ఈ తరగతి గదికి ప్రస్తుతం కంటెంట్ అందుబాటులో లేదు',
+  'student-landing.welcome': 'గూరుకు స్వాగతం.',
   'student-landing.no-course-assigned':
-    'ఇంకా కోర్సు ఈ తరగతికి కేటాయించబడలేదు. దయచేసి మీ గురువుని సంప్రదించండి.',
+    'ఈ తరగతికి ఇంకా కోర్సు కేటాయించబడలేదు. దయచేసి మీ గురువును సంప్రదించండి.',
   'student-independent-learning.show-more': 'ఇంకా చూపించు',
   'student-independent-learning.show-less': 'తక్కువ చూపించు',
   'student-independent-learning.no-courses':
-    'మీరు మీ బుక్మార్క్ చేసిన కోర్సులను అన్వేషించడం ప్రారంభించినప్పుడు, అవి ఇక్కడ కనిపిస్తాయి.',
+    'మీరు మీ బుక్‌మార్క్ చేసిన కోర్సులను అన్వేషించడం ప్రారంభించినప్పుడు, అవి ఇక్కడ కనిపిస్తాయి.',
   'student-independent-learning.no-collections':
-    'మీరు మీ బుక్మార్క్ చేసిన సేకరణలను అన్వేషించడం ప్రారంభించినప్పుడు, అవి ఇక్కడ కనిపిస్తాయి.',
+    'మీరు మీ బుక్‌మార్క్ చేసిన సేకరణలను అన్వేషించడం ప్రారంభించినప్పుడు, అవి ఇక్కడ కనిపిస్తాయి.',
   'student-independent-learning.no-assessments':
-    'మీరు మీ బుక్మార్క్ చేసిన మదింపులను అన్వేషించడం ప్రారంభించినప్పుడు, అవి ఇక్కడ కనిపిస్తాయి.',
+    'మీరు మీ బుక్‌మార్క్ చేసిన మదింపులను అన్వేషించడం ప్రారంభించినప్పుడు, అవి ఇక్కడ కనిపిస్తాయి.',
   'student-independent-learning.no-independent-results':
-    'కొత్త ఏదో తెలుసుకోవడానికి లైబ్రరీని అన్వేషించండి.',
+    'క్రొత్తదాన్ని తెలుసుకోవడానికి లైబ్రరీని అన్వేషించండి.',
   'student-independent-learning.no-bookmarks':
-    'మీరు బుక్ మార్కింగ్ కోర్సులు, సేకరణలు మరియు లెక్కింపులు ప్రారంభించినప్పుడు, అవి ఇక్కడ కనిపిస్తాయి.',
-  'student-independent-learning.add-bookmark': 'బుక్ మార్క్ ను జోడించు',
+    'మీరు బుక్‌మార్కింగ్ కోర్సులు, సేకరణలు మరియు మదింపులను ప్రారంభించినప్పుడు, అవి ఇక్కడ కనిపిస్తాయి.',
+  'student-independent-learning.add-bookmark': 'బుక్‌మార్క్‌ను జోడించండి',
   'teacher-landing.latest-announcement': 'తాజా ప్రకటన',
   'teacher-landing.latest-assessment': 'తాజా అంచనా',
   'teacher-landing.create-classroom':
-    'తరగతిని సృష్టించండి, విషయాలను కేటాయించండి, విద్యార్థులను ఆహ్వానించండి',
+    'తరగతి గదిని సృష్టించండి, విషయాలను కేటాయించండి, విద్యార్థులను ఆహ్వానించండి',
   'teacher-landing.dca-create-info':
-    'క్రింద ఉన్న చిహ్నాలపై క్లిక్ చేసి, గోరు లైబ్రరీలోని కంటెంట్ కోసం క్లాస్ కార్యాచరణను రూపొందించడానికి శోధించండి. కోర్సు మాప్ పై క్లిక్ చేయడం ద్వారా మీరు మీ కోర్సు మ్యాప్ నుండి క్లాస్ కార్యాచరణకు కూడా కంటెంట్ను జోడించవచ్చు.',
-  'teacher-landing.schedule-for-later': 'తరువాత షెడ్యూల్',
+    'తరగతి కార్యాచరణను సృష్టించడానికి క్రింది చిహ్నాలపై క్లిక్ చేసి, గూరు లైబ్రరీ నుండి కంటెంట్ కోసం శోధించండి. మీరు కోర్సు మ్యాప్‌లో క్లిక్ చేయడం ద్వారా మీ కోర్సు మ్యాప్ నుండి తరగతి కార్యాచరణకు కంటెంట్‌ను జోడించవచ్చు.',
+  'teacher-landing.schedule-for-later': 'తరువాత షెడ్యూల్ చేయండి',
   'teacher-landing.teach-this-activity-later':
-    'తరువాత ఈ కార్యకలాపాలను dca వద్ద బోధిస్తారు',
+    'ఈ కార్యాచరణను తరువాత డి సి ఎ  వద్ద నేర్పండి',
   'teacher-landing.schedule-dca-instruction-1':
-    'ఈ కార్యాచరణను నేర్పించడానికి తరువాతి తేదీని ఎంచుకోండి.',
+    'ఈ కార్యాచరణను నేర్పడానికి తరువాతి తేదీని ఎంచుకోండి.',
   'teacher-landing.schedule-dca-instruction-2':
-    'ఎంచుకున్న తేదీ కోసం ఈ కార్యాచరణ DCA లో కనిపిస్తుంది.',
-  'teacher-landing.navigator-banner.title': 'గణిత కోసం నావికుడు',
+    'ఎంచుకున్న తేదీ కోసం ఈ కార్యాచరణ డి సి ఎ  వద్ద కనిపిస్తుంది.',
+  'teacher-landing.navigator-banner.title': 'గణితానికి నావిగేటర్',
   'teacher-landing.navigator-banner.description':
-    'నేర్చుకోవడం సాంకేతికత కోసం ఈ GPS లను ఉపయోగించుకుంటూ, ప్రతి విద్యార్థికి విశ్వాసం పొందడానికి మరియు గణితంలో వారి అభ్యాసాన్ని వేగవంతం చేయగలగడానికి మేము మాధ్యమానికి నావిగేటర్ను రూపకల్పన చేసాము. [1] గణిత కోసం నావిగేటర్ అనేది తరగతులు 2-12 నుండి అన్ని గణిత భావనలను అధ్యయనం చేసే ఒక కోర్సు. విద్యార్థులు వారి ప్రస్తుత పరిజ్ఞానం మీద నిర్మించటానికి రూపకల్పన చేయబడిన ఒక వ్యక్తిగత మార్గం ద్వారా, మరియు వారి అవగాహనలో నింపబడిన ఖాళీలు ద్వారా మళ్ళించారు. ఈ సమగ్రమైన మరియు వ్యక్తిగతీకరించిన అభ్యాస అనుభవం ద్వారా, ప్రతి విద్యార్థి మరింత ఆధునిక గణితానికి పూర్తిగా సిద్ధపడవచ్చు.',
-  'teacher-landing.navigator-banner.join': 'డెమో తరగతి చేరండి',
+    'సాంకేతిక పరిజ్ఞానం కోసం ఈ జిపిఎస్‌ను ఉపయోగించడం ద్వారా, ప్రతి విద్యార్థి విశ్వాసం పొందగలరని మరియు గణితంలో వారి అభ్యాసాన్ని వేగవంతం చేయగలరని నిర్ధారించడానికి మేము గణితానికి నావిగేటర్‌ను రూపొందించాము. <br/> గణితానికి నావిగేటర్ 2-12 తరగతుల నుండి అన్ని గణిత అంశాలను కవర్ చేసే అధ్యయన కోర్సు. విద్యార్ధులు వారి ప్రస్తుత పరిజ్ఞానాన్ని పెంపొందించడానికి రూపొందించబడిన వ్యక్తిగతీకరించిన మార్గం ద్వారా మళ్ళించబడతారు మరియు వారి అవగాహనలో అంతరాలను పూరిస్తారు. ఈ సమగ్ర మరియు వ్యక్తిగతీకరించిన అభ్యాస అనుభవం ద్వారా, ప్రతి విద్యార్థి మరింత ఆధునిక గణితానికి పూర్తిగా సిద్ధం కావచ్చు.',
+  'teacher-landing.navigator-banner.join': 'డెమో క్లాస్‌లో చేరండి',
   'teacher-landing.navigator-banner.success-message':
-    'నావిగేటర్ క్లాస్ యొక్క సహ-గురువుగా మీరు విజయవంతంగా చేరారు',
-  'teacher-landing.navigator-banner.error-message': 'తరగతి చేరడం సమస్య',
+    'మీరు నావిగేటర్ తరగతి సహ ఉపాధ్యాయునిగా విజయవంతంగా చేరారు',
+  'teacher-landing.navigator-banner.error-message': 'తరగతిలో చేరడంలో సమస్య',
   'teacher-landing.class.manage': 'నిర్వహించడానికి',
   'teacher-landing.class.reports': 'నివేదికలు',
   'teacher-landing.class.daily-activites': 'రోజువారీ కార్యకలాపాలు',
@@ -1263,28 +1295,29 @@ window.i18ln = {
   'teacher-landing.class.student-proficiency': 'Student Proficiency',
   'teacher-landing.class.class-management-tab.actions': 'చర్యలు',
   'teacher-landing.class.class-management-tab.assessment-min-score':
-    'ట్రోఫీలకు అంచనా కనీస స్కోరు',
+    'ట్రోఫీలకు కనీస స్కోరు అంచనా',
   'teacher-landing.class.class-management-tab.assigned-course':
     'కేటాయించిన కోర్సు',
-  'teacher-landing.class.class-management-tab.archive': 'ఆర్కైవ్',
+  'teacher-landing.class.class-management-tab.archive': 'ఆర్కైవ్',
   'teacher-landing.class.class-management-tab.archive-class': 'ఆర్కైవ్ తరగతి',
   'teacher-landing.class.class-management-tab.archive-classroom':
-    'ఆర్కైవ్ తరగతిలో',
+    'ఆర్కైవ్ తరగతి గది',
   'teacher-landing.class.class-management-tab.attend-class-with-code':
-    'కోడ్తో తరగతికి హాజరు అవ్వండి',
+    'కోడ్‌తో తరగతికి హాజరు',
   'teacher-landing.class.class-management-tab.class-information':
     'తరగతి సమాచారం',
-  'teacher-landing.class.class-management-tab.class-name': 'తరగతిలో పేరు',
+  'teacher-landing.class.class-management-tab.class-name': 'తరగతి గది పేరు',
   'teacher-landing.class.class-management-tab.class-code': 'తరగతి కోడ్',
   'teacher-landing.class.class-management-tab.click-to-copy-class-code':
-    'తరగతి కోడ్ను కాపీ చేయడానికి క్లిక్ చేయండి',
+    'తరగతి కోడ్‌ను కాపీ చేయడానికి క్లిక్ చేయండి',
   'teacher-landing.class.class-management-tab.course-information':
     'కోర్సు సమాచారం',
   'teacher-landing.class.class-management-tab.delete': 'తొలగించండి',
-  'teacher-landing.class.class-management-tab.delete-class': 'తరగతి తొలగించండి',
+  'teacher-landing.class.class-management-tab.delete-class':
+    'తరగతిని తొలగించండి',
   'teacher-landing.class.class-management-tab.download-roster':
-    'డౌన్లోడ్ జాబితా',
-  'teacher-landing.class.class-management-tab.edit': 'మార్చు',
+    'డౌన్‌లోడ్ రోస్టర్',
+  'teacher-landing.class.class-management-tab.edit': 'కూర్పు',
   'teacher-landing.class.class-management-tab.email-address':
     'ఇమెయిల్ చిరునామా',
   'teacher-landing.class.class-management-tab.first-name': 'మొదటి పేరు',
@@ -1300,116 +1333,119 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.view-report':
     'నివేదికను వీక్షించండి',
   'teacher-landing.class.class-management-tab.course-null':
-    'తరగతిలో ఇంకా కేటాయించబడలేదు.',
+    'తరగతి గదికి ఇంకా కోర్సు కేటాయించబడలేదు.',
   'teacher-landing.class.class-management-tab.course-subject-null':
-    'తరగతిలో కేటాయించిన కోర్సు చెల్లుబాటు అయ్యే విషయానికి ట్యాగ్ చేయబడలేదు.',
+    'తరగతి గదికి కేటాయించిన కోర్సు చెల్లుబాటు అయ్యే విషయానికి ట్యాగ్ చేయబడలేదు.',
   'teacher-landing.class.class-management-tab.students-null':
-    'తరగతిలో చేరడానికి మీ విద్యార్థులతో తరగతి కోడ్ను పంచుకుంటారు.',
+    'తరగతి గదిలో చేరడానికి మీ విద్యార్థులతో తరగతి కోడ్‌ను భాగస్వామ్యం చేయండి.',
   'teacher-landing.class.students-tab.last-name': 'చివరి పేరు',
   'teacher-landing.class.students-tab.first-name': 'మొదటి పేరు',
   'teacher-landing.class.students-tab.performance': 'ప్రదర్శన',
   'teacher-landing.class.students-tab.proficiency': 'నైపుణ్యత',
-  'teacher-landing.class.students-tab.location': 'నగర',
+  'teacher-landing.class.students-tab.location': 'ప్రాంతం',
   'teacher-landing.class.students-tab.currently-studying':
-    'ప్రస్తుతం చదువుతున్నారు',
-  'teacher-landing.class.students-tab.student-id': 'studentid',
-  'teacher-landing.class.students-tab.remove': 'తొలగించడానికి',
+    'ప్రస్తుతం చదువుతున్నాడు',
+  'teacher-landing.class.students-tab.student-id': 'విద్యార్ధి ఐ డి',
+  'teacher-landing.class.students-tab.remove': 'తొలిగించండి',
   'teacher-landing.class.students-tab.mastered': 'స్వావలంబన',
   'teacher-landing.class.students-tab.in-progress': 'పురోగతిలో ఉంది',
   'teacher-landing.class.students-tab.not-started': 'మొదలవలేదు',
   'teacher-landing.class.students-tab.course-coverage': 'కోర్సు కవరేజ్',
   'teacher-landing.class.students-tab.class-statistics': 'తరగతి గణాంకాలు',
-  'teacher-landing.class.students-tab.proficiency-in': 'నైపుణ్యం',
+  'teacher-landing.class.students-tab.proficiency-in': 'నైపుణ్యం లో',
   'teacher-landing.class.students-tab.data-not-available':
     'డేటా అందుబాటులో లేదు',
   'teacher-landing.class.students-tab.course-coverage-label':
-    'తరగతిలోని అన్ని విద్యార్థుల కోసం సంభావ్యత యొక్క సంచిత సంఖ్యలు',
+    'తరగతిలోని విద్యార్థులందరికీ సామర్థ్యాల యొక్క సంచిత సంఖ్య',
   'teacher-landing.class.students-tab.error-message':
-    'తరగతి కేటాయించిన కోర్సు లేదు లేదా ఇంకా తరగతి లోకి rostered విద్యార్థులు లేదు. కోర్సుకు తరగతికి కేటాయించబడి, విద్యార్ధులు చదివేటప్పుడు, తరగతి యోగ్యతా నివేదిక ఇక్కడ చూపబడుతుంది',
-  'teacher-landing.class.atc-view.domains-reviewed': 'Domains to be reviewed',
+    'తరగతికి కోర్సు కేటాయించబడలేదు లేదా విద్యార్థులను ఇంకా తరగతికి చేర్చలేదు. కోర్సును తరగతికి కేటాయించి, విద్యార్థులను రోస్టర్ చేసిన తర్వాత, తరగతి సామర్థ్య నివేదిక ఇక్కడ చూపబడుతుంది',
+  'teacher-landing.class.atc-view.domains-reviewed': 'డొమైన్లు సమీక్షించబడతాయి',
   'teacher-landing.class.atc-view.class-activities-completed':
-    'Class Activities Completed',
+    'తరగతి కార్యకలాపాలు పూర్తయ్యాయి',
   'teacher-landing.class.atc-view.class-activities-pending':
-    'Class Activities Pending',
-  'teacher-landing.class.atc-view.show-all': 'Show All',
-  'teacher-landing.class.atc-view.collapse': 'Collapse',
+    'తరగతి కార్యకలాపాలు పెండింగ్‌లో ఉన్నాయి',
+  'teacher-landing.class.atc-view.show-all': 'అన్నీ చూపండి',
+  'teacher-landing.class.atc-view.collapse': 'పతనం',
   'teacher-landing.class.atc-view.total-competencies-gained':
-    'Total Competencies Gained',
-  'teacher-landing.class.atc-view.progress-label':
-    'Progress (# of competencies)',
+    'మొత్తం సామర్థ్యాలు పొందాయి',
+  'teacher-landing.class.atc-view.progress-label': 'పురోగతి (# సామర్థ్యాలు)',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'గమ్యస్థానానికి పురోగతి',
   'teacher-landing.class.class-activities': 'తరగతి కార్యకలాపాలు',
-  'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
+  'teacher-landing.class.class-activities.input-timespent':
+    'ఇన్పుట్ సమయం గడిపింది',
   'teacher-landing.class.class-activities.warning-message':
-    'You have not entered data for {{questionCount}} questions for {{studentName}}. Selecting another student will discard <student name>\'s data. Do you want to continue?',
+    'మీరు {{student Name}}  కోసం  {{question Count}}   ప్రశ్నలకు డేటాను నమోదు చేయలేదు. మరొక విద్యార్థిని ఎంచుకోవడం <విద్యార్థి పేరు> యొక్క డేటాను విస్మరిస్తుంది. మీరు కొనసాగించాలనుకుంటున్నారా?',
   'teacher-landing.class.class-activities.info-message':
-    'You have entered data for {{studentName}}, but have not saved it. Do you want to save before continuing?',
+    'మీరు   {{student Name}} కోసం డేటాను నమోదు చేసారు, కానీ దాన్ని సేవ్ చేయలేదు. కొనసాగడానికి ముందు మీరు సేవ్ చేయాలనుకుంటున్నారా?',
   'teacher-landing.class.offline-class-report.class-report': 'తరగతి నివేదిక',
   'teacher-landing.class.offline-class-report.class-activity-report':
-    'Class Activity Report',
+    'తరగతి కార్యాచరణ నివేదిక',
   'teacher-landing.class.offline-class-report.activity-report':
     'కార్యాచరణ నివేదిక',
-  'teacher-landing.class.offline-class-report.conducted-on': 'నిర్వహించిన',
+  'teacher-landing.class.offline-class-report.conducted-on': 'నిర్వహించారు',
   'teacher-landing.class.offline-class-report.not-started': 'మొదలవలేదు',
-  'teacher-landing.class.back-to-class-activities': 'తిరిగి తరగతి కార్యకలాపాలు',
+  'teacher-landing.class.back-to-class-activities':
+    'తిరిగి తరగతి కార్యకలాపాలకు',
   'teacher-landing.class.class-activities-tab.today': 'నేడు:',
   'teacher-landing.class.class-activities-tab.yesterday': 'నిన్న:',
   'teacher-landing.class.class-activities-tab.month': 'నెల:',
   'teacher-landing.class.class-activities-tab.add-from-course-map':
-    'కోర్సు మ్యాప్ నుండి జోడించు',
+    'కోర్సు మ్యాప్ నుండి జోడించండి',
   'teacher-landing.class.class-activities-tab.add-from-my-content':
-    'నా కంటెంట్ నుండి జోడించు',
+    'నా కంటెంట్ నుండి జోడించండి',
   'teacher-landing.class.class-activities-tab.welcome-dca':
-    'మీ తరగతి కార్యక్రమాలకు స్వాగతం పలుకుతారు, ఇక్కడ మీరు విద్యార్థులకు సేకరణలు మరియు లెక్కలను కేటాయించవచ్చు. దయచేసి గమనించండి: సృష్టించిన ఏవైనా నివేదికలు అత్యంత ఇటీవలి ప్రయత్నం కోసం మాత్రమే అందుబాటులో ఉంటాయి.',
+    'ఈ రోజు పూర్తి చేయడానికి విద్యార్థుల కోసం సేకరణలు మరియు మదింపులను కేటాయించగల మీ తరగతి కార్యకలాపాలకు స్వాగతం. దయచేసి గమనించండి: ఉత్పత్తి చేయబడిన ఏవైనా నివేదికలు ఇటీవలి ప్రయత్నం కోసం ఈ రోజు మాత్రమే అందుబాటులో ఉంటాయి.',
   'teacher-landing.class.class-activities-tab.enter-max-timespent':
-    'అంచనా కోసం గరిష్ట సమయపాఠాన్ని నమోదు చేయండి',
+    'అంచనా కోసం గరిష్ట సమయ వ్యవధిని నమోదు చేయండి',
   'teacher-landing.class.class-activities-tab.enter-max-assessment-time-spent':
-    'అంచనా వేయడంలో గడిపిన సమయాన్ని నమోదు చేయండి',
+    'అంచనాను పూర్తి చేయడానికి గడిపిన సమయాన్ని నమోదు చేయండి',
   'teacher-landing.class.class-activities-tab.enter-max-score':
-    'అంచనా కోసం గరిష్ట స్కోర్ నమోదు చేయండి',
-  'teacher-landing.class.class-activities-tab.hour': 'h',
-  'teacher-landing.class.class-activities-tab.min': 'm',
-  'teacher-landing.class.class-activities-tab.question-score': 'ప్రశ్న స్కోర్',
-  'teacher-landing.class.class-activities-tab.max-score': 'గరిష్ట స్కోర్',
-  'teacher-landing.class.class-activities-tab.assessment-score': 'అంచనా స్కోరు',
+    'అంచనా కోసం గరిష్ట స్కోరును నమోదు చేయండి',
+  'teacher-landing.class.class-activities-tab.hour': 'హచ్',
+  'teacher-landing.class.class-activities-tab.min': 'యం',
+  'teacher-landing.class.class-activities-tab.question-score': 'ప్రశ్న స్కోరు',
+  'teacher-landing.class.class-activities-tab.max-score': 'గరిష్ట స్కోరు',
+  'teacher-landing.class.class-activities-tab.assessment-score': 'అంచనా స్కోర్',
   'teacher-landing.class.class-activities-tab.assessment-max-score':
     'అంచనా గరిష్టంగా. స్కోరు',
   'teacher-landing.class.class-activities-tab.enter-valid-timespent':
-    'గడిపిన సమయాన్ని నమోదు చేయండి',
+    'గడిపిన చెల్లుబాటు అయ్యే సమయాన్ని నమోదు చేయండి',
   'teacher-landing.class.class-activities-tab.create-activity':
     'కార్యాచరణను సృష్టించండి',
   'teacher-landing.class.class-activities-tab.schedule-activity':
     'షెడ్యూల్ కార్యాచరణ',
   'teacher-landing.class.class-activities-tab.add-subject-framework':
-    'తరగతి సెట్టింగులు వద్ద ఒక విషయం మరియు ఫ్రేమ్ ఎంచుకోండి',
+    'దయచేసి తరగతి సెట్టింగులలో ఒక విషయం మరియు ఫ్రేమ్‌వర్క్‌ను ఎంచుకోండి',
   'teacher-landing.class.class-activities-tab.create-external-collection':
     'బాహ్య సేకరణను సృష్టించండి',
   'teacher-landing.class.click-to-copy':
-    'తరగతి కోడ్ను కాపీ చేయడానికి క్లిక్ చేయండి',
+    'తరగతి కోడ్‌ను కాపీ చేయడానికి క్లిక్ చేయండి',
   'teacher-landing.class.course-map': 'కోర్సు మ్యాప్',
   'teacher-landing.class.management': 'రోస్టర్ నిర్వహణ',
   'teacher-landing.class.report': 'నివేదిక',
   'teacher-landing.class.performance': 'ప్రదర్శన',
   'teacher-landing.class.performance-tab.assessments': 'లెక్కింపులు',
   'teacher-landing.class.performance-tab.collections': 'సేకరణలు',
-  'teacher-landing.class.view-more': 'మరింత వీక్షించండి',
+  'teacher-landing.class.view-more': 'మరింత చూడండి',
   'teacher-landing.class.class-settings.class-settings-sec.generate-pathway':
-    'నేర్చుకోవడం మార్గం వ్యక్తిగతీకరించండి',
+    'అభ్యాస మార్గాన్ని వ్యక్తిగతీకరించండి',
   'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-head':
     'తరగతి సెట్టింగులు',
   'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-desc':
-    'కనీస ప్రదర్శన ట్రోఫీని సంపాదించడానికి',
+    'ట్రోఫీని సంపాదించడానికి కనీస ప్రదర్శన',
   'teacher-landing.class.class-settings.class-settings-sec.class-code':
     'తరగతి కోడ్',
   'teacher-landing.class.class-settings.class-settings-sec.subject': 'విషయం',
   'teacher-landing.class.class-settings.class-settings-sec.framework': 'ఫ్రేమ్',
   'teacher-landing.class.class-settings.class-settings-sec.grade-level':
-    'హోదా స్థాయి',
+    'హోదా  స్థాయి',
   'teacher-landing.class.class-settings.class-settings-sec.option-choose-one':
     'ఒకటి ఎంచుకోండి',
   'teacher-landing.class.class-settings.class-settings-sec.co-teachers':
     'సహ ఉపాధ్యాయులు',
   'teacher-landing.class.class-settings.class-settings-sec.add-coteacher':
-    'మరో ఉపాధ్యాయుడిని చేర్చండి',
+    'మరొక గురువును జోడించండి',
   'teacher-landing.class.class-settings.class-settings-sec.language':
     'బోధనా భాష',
   'teacher-landing.class.class-settings.student-settings-sec.student-settings-sec-head':
@@ -1419,25 +1455,31 @@ window.i18ln = {
   'teacher-landing.class.class-settings.course-settings-sec.course-settings-sec-head':
     'కోర్సు సెట్టింగులు',
   'teacher-landing.class.class-settings.course-settings-sec.is-route0-applicable':
-    'వ్యక్తిగతీకరించడం నేర్చుకోవడం మార్గం ప్రొఫైల్ వద్ద ఖాళీలను కవర్ చేయాలి?',
+    'వ్యక్తిగతీకరించిన అభ్యాస మార్గం ప్రొఫైల్‌లో అంతరాలను కవర్ చేయాలా?',
   'teacher-landing.class.class-settings.course-settings-sec.apply-settings':
-    'సెట్టింగులు వర్తిస్తాయి',
+    'సెట్టింగులను వర్తించండి',
   'teacher-landing.class.class-settings.course-settings-sec.origin-info':
-    'మీ విద్యార్థులు చదవాల్సిన అత్యల్ప గ్రేడ్ స్థాయి కంటెంట్ ఏమిటి?',
+    'మీ విద్యార్థులు అధ్యయనం చేయవలసిన అత్యల్ప హోదా  స్థాయి కంటెంట్ ఏమిటి?',
   'teacher-landing.class.class-settings.course-settings-sec.current-grade-info':
-    'మీ తరగతి గ్రేడ్ స్థాయి ఏమిటి?',
+    'మీ తరగతి హోదా  స్థాయి ఏమిటి?',
   'teacher-landing.class.class-settings.origin': 'మూలం',
   'teacher-landing.class.class-settings.destination': 'గమ్యం',
   'teacher-landing.class.class-settings.students': 'విద్యార్థులు',
   'teacher-landing.class.class-settings.student-id': 'విద్యార్ధి-id',
   'teacher-landing.class.class-settings.joined-on': 'చేరారు',
-  'teacher-landing.class.class-settings.action-lable-add-student': 'మరొక విద్యార్థిని జోడించండి',
-  'teacher-landing.no-classrooms': 'మీరు ఇంకా తరగతి గదులను సృష్టించలేదు. లైబ్రరీ టాబ్ క్రింద ఫీచర్ చేసిన కోర్సు కోసం “తరగతి గదిని సృష్టించండి” పై క్లిక్ చేయండి లేదా శోధించండి </br>.',
-  'teacher-landing.no-course': 'మీరు ఇంకా ఈ </br> తరగతి గదికి ఒక కోర్సును కేటాయించలేదు.',
+  'teacher-landing.class.class-settings.action-lable-add-student':
+    'మరొక విద్యార్థిని జోడించండి',
+  'teacher-landing.no-classrooms':
+    'మీరు ఇంకా తరగతి గదులను సృష్టించలేదు. లైబ్రరీ టాబ్ క్రింద ఫీచర్ చేసిన కోర్సు కోసం “తరగతి గదిని సృష్టించండి” పై క్లిక్ చేయండి లేదా శోధించండి </br>.',
+  'teacher-landing.no-course':
+    'మీరు ఇంకా ఈ </br> తరగతి గదికి ఒక కోర్సును కేటాయించలేదు.',
   'teacher-landing.teach': 'గూరు తరగతి గదితో నేర్పండి',
-  'teacher-landing.welcome-course-map': 'ఇది మీ కోర్సు మ్యాప్, ఇక్కడ మీరు కోర్సు కంటెంట్‌ను చూడవచ్చు, అసెస్‌మెంట్‌లను ఆన్ లేదా ఆఫ్ చేయవచ్చు మరియు అసలైన సమయంలో అసెస్‌మెంట్‌లను ప్రారంభించవచ్చు. మీరు మొత్తం తరగతి పనితీరు మరియు పూర్తి చేయడాన్ని  కూడా చూడవచ్చు. తరగతి పనితీరు యొక్క వివరణాత్మక వీక్షణ కోసం, మీ తరగతి గది నివేదిక టాబ్‌ను సందర్శించండి.',
-  'teacher-landing.welcome-rescoped-course-map': '("->") పై క్లిక్ చేయడం ద్వారా తరగతి నిర్వహణ పేజీలో ప్రతి విద్యార్థి కోర్సు మ్యాప్‌ను చూడవచ్చు."  ఈ కోర్సు తరగతిలోని ప్రతి విద్యార్థికి వ్యక్తిగతీకరించబడింది.',
-  'teacher-landing.welcome-premium-course-map': 'ఈ నావిగేటర్ కోర్సు బహుళ తరగతులలో ప్రమాణాలను కలిగి ఉన్న వ్యక్తిగతీకరించిన కోర్సు. ప్రతి విద్యార్థికి ఖాళీలను పూరించడానికి, భావనలు మరియు అభ్యాసాలను బలోపేతం చేయడానికి మరియు వారి అభ్యాసాన్ని వేగవంతం చేయడానికి ఒక ప్రత్యేకమైన కోర్సు అందించబడుతుంది. వ్యక్తిగతీకరించిన మార్గాలు రూపొందించబడ్డాయి మరియు ప్రతి విద్యార్థి యొక్క అభ్యాస సామర్థ్యాన్ని పెంచడానికి మరియు వారి సెట్ గమ్యస్థానానికి నావిగేట్ చేయడానికి విద్యార్థులను నిజ సమయంలో తిరిగి నడిపిస్తారు.',
+  'teacher-landing.welcome-course-map':
+    'ఇది మీ కోర్సు మ్యాప్, ఇక్కడ మీరు కోర్సు కంటెంట్‌ను చూడవచ్చు, అసెస్‌మెంట్‌లను ఆన్ లేదా ఆఫ్ చేయవచ్చు మరియు అసలైన సమయంలో అసెస్‌మెంట్‌లను ప్రారంభించవచ్చు. మీరు మొత్తం తరగతి పనితీరు మరియు పూర్తి చేయడాన్ని  కూడా చూడవచ్చు. తరగతి పనితీరు యొక్క వివరణాత్మక వీక్షణ కోసం, మీ తరగతి గది నివేదిక టాబ్‌ను సందర్శించండి.',
+  'teacher-landing.welcome-rescoped-course-map':
+    '("->") పై క్లిక్ చేయడం ద్వారా తరగతి నిర్వహణ పేజీలో ప్రతి విద్యార్థి కోర్సు మ్యాప్‌ను చూడవచ్చు."  ఈ కోర్సు తరగతిలోని ప్రతి విద్యార్థికి వ్యక్తిగతీకరించబడింది.',
+  'teacher-landing.welcome-premium-course-map':
+    'ఈ నావిగేటర్ కోర్సు బహుళ తరగతులలో ప్రమాణాలను కలిగి ఉన్న వ్యక్తిగతీకరించిన కోర్సు. ప్రతి విద్యార్థికి ఖాళీలను పూరించడానికి, భావనలు మరియు అభ్యాసాలను బలోపేతం చేయడానికి మరియు వారి అభ్యాసాన్ని వేగవంతం చేయడానికి ఒక ప్రత్యేకమైన కోర్సు అందించబడుతుంది. వ్యక్తిగతీకరించిన మార్గాలు రూపొందించబడ్డాయి మరియు ప్రతి విద్యార్థి యొక్క అభ్యాస సామర్థ్యాన్ని పెంచడానికి మరియు వారి సెట్ గమ్యస్థానానికి నావిగేట్ చేయడానికి విద్యార్థులను నిజ సమయంలో తిరిగి నడిపిస్తారు.',
   'goals.manage.title': 'నా లక్ష్యాలు!',
   'goals.manage.add-goal': 'గోల్ చేర్చండి',
   'goals.manage.goal-label': 'లక్ష్యం',
@@ -1452,114 +1494,128 @@ window.i18ln = {
   'goals.manage.reflection-label': 'ప్రతిబింబం',
   'goals.manage.save': 'సేవ్',
   'goals.manage.update': 'నవీకరణ',
-  'goals.manage.goals-not-found': 'మీరు ఇంకా లక్ష్యాలను నిర్దేశించలేదు. పై "లక్ష్యాన్ని జోడించు" బటన్‌ను క్లిక్ చేయడం ద్వారా మీరు లక్ష్యాన్ని జోడించవచ్చు.',
+  'goals.manage.goals-not-found':
+    'మీరు ఇంకా లక్ష్యాలను నిర్దేశించలేదు. పై "లక్ష్యాన్ని జోడించు" బటన్‌ను క్లిక్ చేయడం ద్వారా మీరు లక్ష్యాన్ని జోడించవచ్చు.',
   'goals.create.error-add-title': 'దయచేసి లక్ష్యాన్ని నమోదు చేయండి',
-  'goals.create.error-length-title': 'లక్ష్యం గరిష్టంగా 200 అక్షరాలను కలిగి ఉండాలి',
+  'goals.create.error-length-title':
+    'లక్ష్యం గరిష్టంగా 200 అక్షరాలను కలిగి ఉండాలి',
   'goals.create.error-add-start-date': 'దయచేసి ప్రారంభ తేదీని నమోదు చేయండి',
   'goals.create.error-add-end-date': 'దయచేసి ముగింపు తేదీని నమోదు చేయండి',
   'goals.create.error-greater-end-date':
-    'ప్రారంభ తేదీ కంటే ముగింపు తేదీ ఎక్కువగా ఉండాలి',
-  'goals.create.error-add-status': 'దయచేసి గోల్ స్థితిని ఎంచుకోండి',
+    'ముగింపు తేదీ ప్రారంభ తేదీ కంటే ఎక్కువగా ఉండాలి',
+  'goals.create.error-add-status': 'దయచేసి లక్ష్య స్థితిని ఎంచుకోండి',
   'goals.create.error-length-reflection':
-    'ప్రతిబింబం మాక్స్లో 2000 అక్షరాలు ఉండాలి',
-  'goals.create.created-success-msg': 'మీరు గోల్ సృష్టించిన {{goaltitle}}',
+    'ప్రతిబింబం గరిష్టంగా 2000 అక్షరాలను కలిగి ఉండాలి',
+  'goals.create.created-success-msg':
+    'మీరు లక్ష్యాన్ని సృష్టించారు {{గోల్ టైటిల్}}',
   'goals.delete.deleted-success-msg': 'మీరు లక్ష్యాన్ని తొలగించారు',
   'goals.update.updated-success-msg': 'మీరు లక్ష్యాన్ని నవీకరించారు',
-  'gru-add-to.add-assessment-to-lesson': 'నా లెక్కల నుండి చేర్చండి',
+  'gru-add-to.add-assessment-to-lesson': 'నా అంచనాల  నుండి జోడించండి',
   'gru-add-to.add-assessment-to-lesson-lead':
-    'ఈ పాఠానికి జోడించడానికి అంచనా వేయండి.',
-  'gru-add-to.add-collection-to-lesson': 'నా సేకరణల నుండి జోడించు',
+    'ఈ పాఠానికి జోడించడానికి ఒక అంచనాను ఎంచుకోండి.',
+  'gru-add-to.add-collection-to-lesson': 'నా సేకరణల నుండి జోడించండి',
   'gru-add-to.add-collection-to-lesson-lead':
-    'ఈ పాఠాన్ని జోడించడానికి సేకరణను ఎంచుకోండి.',
+    'ఈ పాఠానికి జోడించడానికి సేకరణను ఎంచుకోండి.',
+  'gru-add-to.add-OA-to-lesson': 'నా కార్యకలాపాల నుండి జోడించండి',
+  'gru-add-to.OA-info':
+    'ఇక్కడ జాబితా చేయబడిన కార్యకలాపాలు <b>  కాకా పోయి వుండాలి (2)మరొక పాఠం లేదా కోర్సుకు చెందినవి కావు',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'ఈ పాఠానికి జోడించడానికి ఒక కార్యాచరణను ఎంచుకోండి.',
   'gru-add-to.add-to-collection': 'సేకరణకు జోడించండి',
   'gru-add-to.add-to-collection-lead':
-    'మీరు {{కంటెంట్టైటిల్}} ను చేర్చాలనుకుంటున్న సేకరణను ఎంచుకోండి',
-  'gru-add-to.add-to-existing-classroom': 'ఇప్పటికే ఉన్న తరగతిలో జోడించండి',
+    'మీరు {{content title}}  ను జోడించదలిచిన సేకరణను ఎంచుకోండి',
+  'gru-add-to.add-to-existing-classroom': 'ఇప్పటికే ఉన్న తరగతి గదికి జోడించండి',
   'gru-add-to.add-to-existing-classroom-lead':
-    'మీరు జోడించదలిచిన తరగతిలో ఎంచుకోండి',
+    'మీరు జోడించదలిచిన తరగతి గదిని ఎంచుకోండి',
   'gru-add-to.add-to-assessment': 'అంచనా లేదా సేకరణకు జోడించండి',
   'gru-add-to.add-to-assessment-lead':
-    'మీరు {{కంటెంట్ టైటిల్}} ను జోడించాలనుకుంటున్న అంచనాను ఎంచుకోండి',
+    'మీరు {{content title}}  ను జోడించాలనుకుంటున్న అంచనాను ఎంచుకోండి',
   'gru-add-to.assessments-info':
-    'ఇక్కడ ఇవ్వబడిన అంచనాలు [1] మరొక పాఠం లేదా కోర్సుకు చెందవు',
+    'ఇక్కడ జాబితా చేయబడిన అంచనాలు <b> కాకా పోయి వుండాలి (2) మరొక పాఠం లేదా కోర్సుకు చెందినవి కావు',
   'gru-add-to.collections-info':
-    'ఇక్కడ ఇవ్వబడిన సేకరణలు [1] మరొక పాఠం లేదా కోర్సుకు చెందవు',
-  'gru-add-rubric-to-question.title': 'నా రూబిక్స్ నుండి జోడించు',
+    'ఇక్కడ జాబితా చేయబడిన సేకరణలు <b> కాకా పోయి వుండాలి (2) మరొక పాఠం లేదా కోర్సుకు చెందినవి కావు',
+  'gru-add-rubric-to-question.title': 'నా రుబ్రిక్స్ నుండి జోడించండి',
   'gru-add-rubric-to-question.lead':
-    'ఈ ప్రశ్నకు జోడించడానికి ఒక రూబ్రిక్ను ఎంచుకోండి.',
+    'ఈ ప్రశ్నకు జోడించడానికి రుబ్రిక్ ఎంచుకోండి.',
   'gru-add-rubric-to-question.no-rubrics':
-    'మీరు ఈ ఉచిత ప్రతిస్పందన ప్రశ్నకు జోడించగలిగే ఏ రబ్బీలను ఇంకా సృష్టించలేదు. మీరు మీ కంటెంట్ నుండి ఆక్సెస్ చెయ్యగల నా కంటెంట్ క్రింద రబ్బీలు సృష్టించవచ్చు.',
-  'gru-add-rubric-to-question.go-to-content': 'నా కంటెంట్కు వెళ్లండి',
-  'gru-assessment-confirmation.title': 'మీరు అంచనా వేయబోతున్నారు ...',
+    'ఈ ఉచిత ప్రతిస్పందన ప్రశ్నకు జతచేయగల ఏ రుబ్రిక్‌లను మీరు ఇంకా సృష్టించలేదు. మీరు మీ ప్రొఫైల్ నుండి యాక్సెస్ చేయగల నా కంటెంట్ క్రింద రుబ్రిక్‌లను సృష్టించవచ్చు.',
+  'gru-add-rubric-to-question.go-to-content': 'నా కంటెంట్‌కు వెళ్లండి',
+  'gru-assessment-confirmation.title':
+    'మీరు ఒక అంచనాను ప్రారంభించబోతున్నారు ...',
   'gru-assessment-confirmation.description': 'ఈ అంచనాలో, {{model.title}}',
   'gru-assessment-confirmation.setting-forward':
-    'మీరు మాత్రమే ముందుకు నావిగేట్ చేయవచ్చు',
+    'మీరు ముందుకు మాత్రమే నావిగేట్ చేయవచ్చు',
   'gru-assessment-confirmation.setting-forward-backward':
-    'మీరు ప్రశ్నలకు సమాధానం ఇవ్వడానికి ముందుకు మరియు వెనుకకు నావిగేట్ చేయవచ్చు',
+    'ప్రశ్నలకు సమాధానం ఇవ్వడానికి మీరు ముందుకు మరియు వెనుకకు నావిగేట్ చేయవచ్చు',
   'gru-assessment-confirmation.unlimited-attempts-left':
     'మీకు అపరిమిత ప్రయత్నాలు ఉన్నాయి',
   'gru-assessment-confirmation.setting-forward-teacher':
-    'Student can navigate forward only',
+    'విద్యార్థి ముందుకు మాత్రమే నావిగేట్ చేయవచ్చు',
   'gru-assessment-confirmation.setting-forward-backward-teacher':
-    'Student can navigate forward and backwards to answer questions',
+    'ప్రశ్నలకు సమాధానం ఇవ్వడానికి విద్యార్థి ముందుకు మరియు వెనుకకు నావిగేట్ చేయవచ్చు',
   'gru-assessment-confirmation.unlimited-attempts-left-teacher':
-    'Student have unlimited attempts',
+    'విద్యార్థికి అపరిమిత ప్రయత్నాలు ఉన్నాయి',
   'gru-assessment-confirmation.attempts-left.zero':
-    'మీరు {{count}} ప్రయత్నాలను కలిగి ఉన్నారు',
+    'మీకు {{count}} ప్రయత్నాలు ఉన్నాయి',
   'gru-assessment-confirmation.attempts-left.one':
     'మీకు 1 ప్రయత్నం మిగిలి ఉంది',
   'gru-assessment-confirmation.attempts-left.other':
-    'మీరు {{count}} ప్రయత్నాలను కలిగి ఉన్నారు',
+    'మీకు {{count}} ప్రయత్నాలు ఉన్నాయి',
   'gru-assessment-confirmation.attempts-left.other-teacher':
-    'Student have {{count}} attempts',
+    'విద్యార్థికి {{count}} ప్రయత్నాలు  కలిగి ఉన్నాయి',
   'gru-assessment-confirmation.unlimited-attempts':
     'మీకు అపరిమిత ప్రయత్నాలు ఉన్నాయి',
   'gru-assessment-confirmation.cancel': 'రద్దు',
-  'gru-assessment-confirmation.continue': 'కొనసాగించడానికి',
-  'gru-assessment-confirmation.start': 'ప్రారంభం',
-  'gru-assessment-confirmation.submit': 'submit',
-  'gru-submit-confirmation.title': 'ఈ క్విజ్ పూర్తి చేసి అందరికీ సమర్పించండి',
+  'gru-assessment-confirmation.continue': 'కొనసాగించండి',
+  'gru-assessment-confirmation.start': 'ప్రారంభించండి',
+  'gru-assessment-confirmation.submit': 'సమర్పించు',
+  'gru-submit-confirmation.title':
+    'ఈ క్విజ్ పూర్తి చేసి అన్నింటినీ సమర్పించండి',
   'gru-submit-confirmation.description':
-    'మీరు ఈ ప్రయత్నాన్ని ముగించడానికి మరియు అన్ని ప్రతిస్పందనలను సమర్పించబోతున్నారు. ఏదైనా దాటవేయబడిన ప్రశ్నలు తప్పుగా పరిగణించబడతాయి.',
+    'మీరు ఈ ప్రయత్నాన్ని ముగించి అన్ని ప్రతిస్పందనలను సమర్పించబోతున్నారు. దాటవేయబడిన ఏవైనా ప్రశ్నలు తప్పుగా లెక్కించబడతాయి.',
   'gru-submit-confirmation.cancel': 'రద్దు',
   'gru-submit-confirmation.ok': 'అలాగే',
-  'gru-submit-confirmation.confirm': 'క్విజ్ ముగించండి',
+  'gru-submit-confirmation.confirm': 'క్విజ్ పూర్తి చేయండి',
   'gru-submit-confirmation.finish-description':
-    'మీ ప్రతిస్పందనలను సమర్పించడానికి "ముగించు క్విజ్" క్లిక్ చేయండి.',
+    'మీ ప్రతిస్పందనలను సమర్పించడానికి “క్విజ్ పూర్తి” క్లిక్ చేయండి.',
   'gru-quick-course-search.add-from-course':
     'ఇప్పటికే ఉన్న కోర్సు నుండి జోడించండి',
-  'gru-quick-course-search.view-featured-courses': 'వీక్షించండి కోర్సులు',
-  'gru-quick-course-search.assign': 'కేటాయించవచ్చు',
+  'gru-quick-course-search.view-featured-courses':
+    'ఫీచర్ చేసిన కోర్సులను చూడండి',
+  'gru-quick-course-search.assign': 'కేటాయించు',
   'gru-share-pop-over.copy': 'కాపీని',
   'gru-share-pop-over.ios-tooltip': 'కాపీ చేయడానికి నొక్కండి!',
-  'gru-share-pop-over.multiarch-tooltip': 'కాపీ చేయడానికి ctrl + c నొక్కండి!',
-  'gru-share-pop-over.safari-osx-tooltip': 'కాపీ చేయడానికి cmd + c నొక్కండి!',
-  'gru-share-pop-over.share-course': 'లింక్తో మీ కోర్సును భాగస్వామ్యం చేయండి',
-  'gru-share-pop-over.share-question': 'లింక్తో మీ ప్రశ్నను భాగస్వామ్యం చేయండి',
-  'gru-share-pop-over.share-resource': 'లింక్తో మీ వనరుని భాగస్వామ్యం చెయ్యండి',
-  'gru-share-pop-over.share-assessment':
-    'లింక్తో మీ అంచనాను భాగస్వామ్యం చేయండి',
-  'gru-share-pop-over.share-rubric': 'లింక్ తో మీ రూబీరిక్ భాగస్వామ్యం',
+  'gru-share-pop-over.multiarch-tooltip':
+    'కాపీ చేయడానికి సి టి ఆర్ యల్  + c నొక్కండి!',
+  'gru-share-pop-over.safari-osx-tooltip':
+    'కాపీ చేయడానికి సి యమడి  + c నొక్కండి!',
+  'gru-share-pop-over.share-course': 'మీ కోర్సును లింక్‌తో షేర్ చేసు కొండి',
+  'gru-share-pop-over.share-question': 'మీ ప్రశ్నను లింక్‌తో  షేర్ చేసు కొండి',
+  'gru-share-pop-over.share-resource': 'మీ వనరును లింక్‌తో  షేర్ చేసు కొండి',
+  'gru-share-pop-over.share-assessment': 'మీ అంచనాను లింక్‌తో  షేర్ చేసు కొండి',
+  'gru-share-pop-over.share-rubric': 'మీ రుబ్రిక్‌ను లింక్‌తో  షేర్ చేసు కొండి',
   'gru-share-pop-over.share-collection':
-    'లింక్తో మీ సేకరణను భాగస్వామ్యం చేయండి',
+    'మీ సేకరణను లింక్‌తో భాగస్వామ్యం చేయండి',
+  'gru-share-pop-over.share-OA': 'ఆఫ్‌లైన్ కార్యాచరణ',
   'gru-category-panel.teacher.title': 'ఉపాధ్యాయుల కోసం',
   'gru-category-panel.teacher.body':
-    'డేటా విశ్లేషణల ద్వారా ప్రమాణాల-సమలేఖనమైన కంటెంట్ను కనుగొనడం, కంటెంట్ను అనుకూలీకరించడం మరియు విద్యార్థి ప్రోగ్రెస్ను ట్రాక్ చేయండి.',
-  'gru-category-panel.teacher.cta': 'కథలను చూడండి',
-  'gru-category-panel.student.title': 'విద్యార్థులకు',
+    'ప్రమాణాలు-సమలేఖనం చేయబడిన కంటెంట్‌ను కనుగొనండి, కంటెంట్‌ను అనుకూలీకరించండి మరియు డేటా అనలిటిక్స్ ద్వారా విద్యార్థుల పురోగతిని ట్రాక్ చేయండి.',
+  'gru-category-panel.teacher.cta': 'కథలు చూడండి',
+  'gru-category-panel.student.title': 'విద్యార్థుల కోసం',
   'gru-category-panel.student.body':
-    'అభిరుచులను అన్వేషించండి, అభ్యాస పదార్థాల ద్వారా పురోగతిని మరియు పర్యవేక్షణను పర్యవేక్షించండి.',
+    'అభ్యాస సామగ్రి ద్వారా ఆశక్తులను అన్వేషించండి, నిర్మించండి మరియు పురోగతిని పర్యవేక్షించండి.',
   'gru-category-panel.student.cta': 'నమోదు',
-  'gru-category-panel.student.text-placeholder': 'తరగతిలో కోడ్ నమోదు చేయండి',
-  'gru-category-panel.district.title': 'జిల్లాలు',
+  'gru-category-panel.student.text-placeholder':
+    'తరగతి గది కోడ్‌ను నమోదు చేయండి',
+  'gru-category-panel.district.title': 'జిల్లాల కోసం',
   'gru-category-panel.district.body':
-    'వ్యక్తిగతీకరించిన అభ్యాసాన్ని నిర్లక్ష్యం చేయటానికి మరియు జిల్లా-వెటరైన పాఠ్యప్రణాళికను పంచుకోవడానికి గోరుతో సహకరించండి.',
-  'gru-category-panel.district.cta': 'మా ప్రభావం చూడండి',
-  'gru-category-panel.partner.title': 'భాగస్వాములకు',
+    'వ్యక్తిగతీకరించిన అభ్యాసాన్ని విడదీయడానికి మరియు జిల్లా-పరిశీలించిన పాఠ్యాంశాలను పంచుకోవడానికి గూరుతో సహకరించండి.',
+  'gru-category-panel.district.cta': 'మా ప్రభావాన్ని చూడండి',
+  'gru-category-panel.partner.title': 'భాగస్వాముల కోసం',
   'gru-category-panel.partner.body':
-    'విద్య పర్యావరణ వ్యవస్థపై మా సానుకూల ప్రభావాన్ని పెంచడానికి మిషన్-సమైక్య భాగస్వాములతో సహకరించండి.',
-  'gru-category-panel.partner.cta': 'ఇంకా నేర్చుకో',
-  'class.gru-class-navigation.active': 'క్రియాశీల:',
+    'విద్య పర్యావరణ వ్యవస్థపై మా సామూహిక ప్రభావాన్ని పెంచడానికి యంత్ర -సమలేఖన భాగస్వాములతో సహకరించండి.',
+  'gru-category-panel.partner.cta': 'ఇంకా నేర్చుకోండి',
+  'class.gru-class-navigation.active': 'చ్రుకుగా :',
   'class.gru-class-navigation.members': 'సభ్యులు',
   'class.gru-class-navigation.greetings': 'ప్రకటనలు',
   'class.gru-class-navigation.overview': 'కోర్సు మ్యాప్',
@@ -1572,45 +1628,47 @@ window.i18ln = {
   'class.gru-class-statistics.completion': 'పూర్తి',
   'class.gru-class-statistics.time-spent': 'గడిపిన సమయం',
   'class.gru-class-statistics.no-performance': '-',
-  'gru-user-registration.joinTitle': 'గోరు సంఘంలో చేరండి!',
+  'gru-user-registration.joinTitle': 'గూరు సంఘంలో చేరండి!',
   'gru-user-registration.joinDescription':
-    'కనుగొని, రీమిక్స్, మరియు ఉత్తమ ఉచిత k-12 నేర్చుకోవడం వనరులు పంచుకోండి.',
-  'gru-user-registration.googleButton': 'Google తో సైన్ అప్ చేయండి',
-  'gru-user-registration.whyGoogle': 'ఎందుకు గూగుల్తో సైన్ అప్ చేయండి',
+    'ఉత్తమ ఉచిత k-12 అభ్యాస వనరులను కనుగొనండి, రీమిక్స్ చేయండి మరియు భాగస్వామ్యం చేయండి.',
+  'gru-user-registration.googleButton': 'గూగుల్  తో సైన్ అప్ చేయండి',
+  'gru-user-registration.whyGoogle': 'గూగుల్  తో ఎందుకు సైన్ అప్ చెయ్యాలి',
   'gru-user-registration.descriptionWhyGoogle':
-    'అది వేగంగా మరియు సులభంగా ఉంటుంది. పాస్వర్డ్ లేకుండా సైన్ ఇన్ చేయడానికి ఇప్పటికే ఉన్న మీ Google ఖాతాను ఉపయోగించండి.',
+    'ఇది వేగంగా మరియు సులభం. పాస్వర్డ్ లేకుండా సైన్ ఇన్ చేయడానికి మీ ప్రస్తుత గూగుల్ ఖాతాను ఉపయోగించండి.',
   'gru-user-registration.or': 'లేదా',
   'gru-user-registration.noGoogleAccount': 'మీకు Google ఖాతా లేదు?',
   'gru-user-registration.signUpEmail': 'మీ ఇమెయిల్ చిరునామాతో సైన్ అప్ చేయండి',
   'gru-user-registration.haveAccount': 'ఖాతా కలిగి ఉన్నారా?',
-  'gru-user-registration.clickLogIn': 'లాగిన్ చేయడానికి ఇక్కడ క్లిక్ చేయండి.',
-  'gru-welcome-message.title': 'గోరు \'s లెర్నింగ్ నావిగేటర్కు స్వాగతం!',
+  'gru-user-registration.clickLogIn': 'లాగిన్ అవ్వడానికి ఇక్కడ క్లిక్ చేయండి.',
+  'gru-welcome-message.title': 'గూరు నేర్చుకునే నావిగేటర్‌కు స్వాగతం!',
   'gru-welcome-message.text-temporary-one':
-    'నేర్చుకోగలిగిన నావికుడు అంతటా మీరు కదిలిపోతున్నప్పుడు, మీ ప్రయాణానికి మద్దతుగా మేము సంతోషిస్తున్నాము. పర్యటన చిహ్నాన్ని తీసుకోవటానికి చూడండి',
+    'మీరు అభ్యాస నావిగేటర్ అంతటా కదులుతున్నప్పుడు, మీ ప్రయాణానికి మద్దతు ఇవ్వడం మాకు సంతోషంగా ఉంది. టేక్ టూర్ చిహ్నం కోసం చూడండి',
   'gru-welcome-message.text-temporary-two':
-    ' మా ఫీచర్లను ఎలా ఉపయోగించాలో గైడెడ్ పర్యటనలకు.',
+    'మా లక్షణాలను ఎలా ఉపయోగించాలో మార్గదర్శక పర్యటనల కోసం.',
   'gru-welcome-message.text-one':
-    'నేర్చుకోగలిగిన నావిగేటర్ అంతటా మీరు కదులుతున్నప్పుడు, ఈ క్రింది విధాలుగా మీ ప్రయాణాన్ని సమర్ధించటానికి సంతోషిస్తున్నాము:',
-  'gru-welcome-message.text-two.subtitle': 'పర్యటించు',
+    'మీరు అభ్యాస నావిగేటర్ అంతటా కదులుతున్నప్పుడు, మీ ప్రయాణానికి ఈ క్రింది మార్గాల్లో మద్దతు ఇవ్వడం మాకు సంతోషంగా ఉంది:',
+  'gru-welcome-message.text-two.subtitle': 'పర్యటించండి',
   'gru-welcome-message.text-two.text':
-    ': మా ఫీచర్లను ఎలా ఉపయోగించాలో గైడెడ్ పర్యటనలను అందిస్తుంది.',
+    ': మా లక్షణాలను ఎలా ఉపయోగించాలో మార్గదర్శక పర్యటనలను అందిస్తుంది.',
   'gru-welcome-message.text-three.subtitle': 'సహాయం',
   'gru-welcome-message.text-three.text':
-    ': మీ-చేతివేళ్లు అదనపు ప్రశ్నలకు మద్దతు.',
+    ': అదనపు ప్రశ్నలకుమద్దతు  మీ చేతివేళ్ల వద్ద .',
   'gru-welcome-message.text-four.subtitle': 'కొత్త',
   'gru-welcome-message.text-four.text':
-    ': మీరు ప్రయత్నించండి కోసం కొత్త లక్షణాలను గుర్తిస్తుంది.',
+    ': మీరు క్రొత్త లక్షణాలను గురించి  ప్రయత్నించడాన్ని  గుర్తుస్త్తుంది .',
   'gru-welcome-message.text-five':
-    'ఎప్పుడైనా మీరు మీ హోమ్ పేజీకి తిరిగి రావాలని అనుకుంటే, క్లిక్ చేయండి',
-  'gru-welcome-message.dont-show-again': 'మళ్ళీ చూపించు లేదు',
+    'ఎప్పుడైనా మీరు మీ హోమ్ పేజీకి తిరిగి రావాలని కోరుకుంటే, దానిపై క్లిక్ చేయండి',
+  'gru-welcome-message.dont-show-again': 'మళ్ళీ చూపించవద్దు',
   'sign-up.step-1-title': 'హలో!',
-  'sign-up.step-1-description': 'మాకు \'మాకు చేరడానికి నిశ్చయించాము.',
+  'sign-up.step-1-description':
+    'మీరు మాతో చేరాలని నిర్ణయించుకున్నందుకు మేము సంతోషిస్తున్నాము.',
   'sign-up.step-child-title': 'అంత వేగంగా కాదు!',
   'sign-up.step-child-subtitle': 'మేము మీ నమోదును పూర్తి చేయలేము.',
-  'sign-up.step-child-description-1': 'మా కారణంగా మీ ఖాతాను సృష్టించలేకపోయాము',
+  'sign-up.step-child-description-1':
+    'మా కారణంగా గూరు మీ ఖాతాను సృష్టించలేకపోయారు',
   'sign-up.step-child-age-requirements': 'నిబంధనలు & షరతులు',
   'sign-up.step-child-description-2':
-    '. నేర్చుకోవడం మరియు కొన్ని సంవత్సరాలలో మీరు చూసుకోండి!',
+    '. నేర్చుకోవడం కొనసాగించండి మరియు కొన్ని సంవత్సరాలలో మిమ్మల్ని చూస్తాము!',
   'sign-up.step-2-title': 'ప్రాథమిక సమాచారం',
   'sign-up.step-2-description': 'మీరు \'ప్రాథమిక కాదు, కానీ ఈ సమాచారం ఉంది.',
   'sign-up.log-in': 'లాగిన్ అవ్వండి',
@@ -1640,16 +1698,17 @@ window.i18ln = {
   'sign-up.state': 'రాష్ట్ర లేదా భూభాగం',
   'sign-up.district': 'జిల్లా లేదా చార్టర్ సంస్థ',
   'sign-up.error-username-taken':
-    'అన్నీ, ఈ యూజర్ పేరు తీసుకోబడింది. మరొకదాన్ని ప్రయత్నించండి.',
+    'ఎ డబ్ల్యు డబ్ల్యు , ఈ వినియోగదారు పేరు తీసుకోబడింది. మరొకదాన్ని ప్రయత్నించండి.',
   'sign-up.error-email-taken':
     'ఈ ఇమెయిల్ తీసుకోబడింది. మరొకదాన్ని ప్రయత్నించండి.',
-  'sign-up.error-role-message': 'దయచేసి పాత్రను ఎంచుకోండి.',
+  'sign-up.error-role-message': 'దయచేసి  ఒక పాత్రను ఎంచుకోండి.',
   'sign-up.error-country-message': 'దయచేసి మీ దేశాన్ని ఎంచుకోండి.',
-  'sign-up.error-state-message': 'దయచేసి మీ రాష్ట్ర లేదా భూభాగాన్ని ఎంచుకోండి.',
+  'sign-up.error-state-message':
+    'దయచేసి మీ రాష్ట్రం లేదా ప్రాంతాన్ని  ఎంచుకోండి.',
   'sign-up.error-district-message':
-    'దయచేసి మీ జిల్లా / చార్టర్ను జాబితా నుండి ఎంచుకోండి లేదా "ఇతర" లో అందించండి.',
-  'gru-user-sign-up-cancel.title': 'రిజిస్ట్రేషన్ వదిలివేయాలా',
-  'gru-user-sign-up-cancel.exit?': 'మీరు నిష్క్రమించాలనుకుంటున్నారా?',
+    'దయచేసి జాబితా నుండి మీ జిల్లా / చార్టర్‌ను ఎంచుకోండి లేదా /"ఇతర " లో అందించండి.',
+  'gru-user-sign-up-cancel.title': 'రిజిస్ట్రేషన్ వదిలి వేశార ?',
+  'gru-user-sign-up-cancel.exit?': 'మీరు ఖచ్చితంగా నిష్క్రమించాలనుకుంటున్నారా?',
   'gru-user-sign-up-cancel.registration_incomplete': 'మీ నమోదు పూర్తి కాలేదు.',
   'gru-user-sign-up-cancel.leave': 'రిజిస్ట్రేషన్ వదిలివేయండి',
   'gru-user-sign-up-cancel.continue': 'రిజిస్ట్రేషన్తో కొనసాగించండి',
@@ -1666,36 +1725,36 @@ window.i18ln = {
   'login.password': 'పాస్వర్డ్',
   'login.usernameOrEmail': 'వాడుకపేరు లేదా ఈమెయిల్',
   'login.log-in': 'లాగిన్ అవ్వండి',
-  'forgot-password.description': 'ఇది మాకు అన్ని జరుగుతుంది.',
-  'forgot-password.usernameOrEmail': 'దయచేసి మీ ఇమెయిల్ను నమోదు చేయండి',
+  'forgot-password.description': 'ఇది  మా అందరికి జరుగుతుంది.',
+  'forgot-password.usernameOrEmail': 'దయచేసి మీ ఇమెయిల్‌ను నమోదు చేయండి',
   'forgot-password.footer-google-description-1':
-    '[1] \'గూగుల్తో సైన్ ఇన్ చేయి \' నొక్కడం ద్వారా మళ్ళీ లాగింగ్ చేయడాన్ని ప్రయత్నించండి. [2]',
+    '<a href=\'/sign-in\'>నొక్కడం ద్వార  \'గూగుల్‌తో  మళ్లీ లాగిన్ అవ్వడానికి ప్రయత్నించండి. \' </a>',
   'forgot-password.footer-description-1':
-    'మీరు మీ పాస్ వర్డ్ ను తిరిగి మార్చడానికి లింక్తో ఒక ఇమెయిల్ను అందుకుంటారు.',
+    'మీ పాస్‌వర్డ్‌ను రీసెట్ చేయడానికి మీకు ఒక  లింక్‌తో ఇమెయిల్ వస్తుంది.',
   'forgot-password.footer-description-2':
     'మీకు ఏవైనా ప్రశ్నలు ఉంటే, దయచేసి సంప్రదించండి',
-  'forgot-password.mail': 'support@gooru.org',
+  'forgot-password.mail': 'సప్పోర్ట్ @గోరు.ఒ ఆర్జి',
   'forgot-password.error-email-not-exists':
-    'క్షమించండి, మేము ఈ ఇమెయిల్ని గుర్తించము.',
-  'forgot-password.secondStepTitle': 'మీ ఈమెయిలు చూసుకోండి',
+    'క్షమించండి, మేము ఈ ఇమెయిల్‌ను గుర్తించలేము.',
+  'forgot-password.secondStepTitle': 'మీ ఈమెయిలు టానికి చేసుకోండి',
   'forgot-password.secondStepDescription-1':
-    'మేము మీ పాస్ వర్డ్ ను రీసెట్ చేసేందుకు లింక్తో మీకు ఇమెయిల్ పంపాము.',
+    'మీ పాస్‌వర్డ్‌ను రీసెట్ చేయడానికి మేము మీకు  ఒక లింక్‌తో ఇమెయిల్ పంపేము.',
   'forgot-password.secondStepDescription-2':
     'మీకు ఏవైనా ప్రశ్నలు ఉంటే, దయచేసి సంప్రదించండి',
-  'reset-password.new-password': 'మీ క్రొత్త పాస్వర్డ్ను నమోదు చేయండి',
-  'reset-password.new-password-confirm': 'మీ గుత్త పదమును ధృవీకరించండి',
-  'reset-password.title': 'రహస్యపదాన్ని మార్చుకోండి',
-  'change-password.change-password': 'పాస్వర్డ్ లింక్ని మార్చండి',
-  'change-password.title': 'పాస్ వర్డ్ ను మార్చండి',
+  'reset-password.new-password': 'మీ క్రొత్త పాస్‌వర్డ్‌ను నమోదు చేయండి',
+  'reset-password.new-password-confirm': 'మీ పాస్ వర్డ్  ధృవీకరించండి',
+  'reset-password.title': 'పాస్ర వర్హడ్స్య ణి రీసెట్ప చేసుకోండి',
+  'change-password.change-password': 'పాస్వర్డ్ లింక్ మార్చండి',
+  'change-password.title': 'పాస్వర్డ్ మార్చండి',
   'change-password.current-password-label':
     'మీ ప్రస్తుత పాస్వర్డ్ ను ఎంటర్ చేయండి',
   'change-password.change-success': 'పాస్వర్డ్ విజయవంతంగా మార్చబడింది !!',
   'change-password.new-password-required':
-    'దయచేసి మీ కొత్త పాస్వర్డ్ను నమోదు చేయండి.',
+    'దయచేసి మీ క్రొత్త పాస్‌వర్డ్‌ను నమోదు చేయండి.',
   'change-password.change-password-error':
-    'ఓ హో! ఏదో సరైనది కాదు. పాస్వర్డ్ను మార్చలేరు. దయచేసి మళ్లీ ప్రయత్నించండి.',
+    'ఓ హో! పాస్ వర్దోడ్ మార్చ లేకపోవడానికి ఏదో జరిగింది. దయచేసి మళ్ళీ ప్రయత్నించండి.',
   'footer.footerDescription':
-    'గోరు దాని వేదిక ఓపెన్ సోర్స్ మరియు కమ్యూనిటీ సృష్టించిన కంటెంట్ cc0 ను ఉంచడానికి కట్టుబడి ఉంది.',
+    'గూరు కట్టుబడి వుంది  తన ప్లాట్‌ఫామ్‌ను ఓపెన్ సోర్స్ మరియు కమ్యూనిటీ సృష్టించిన కంటెంట్ సి సి ఒ  గా ఉంచడానికి .',
   'footer.company': 'కంపెనీ',
   'footer.community': 'సంఘం',
   'footer.legal': 'చట్టపరమైన',
@@ -1734,15 +1793,16 @@ window.i18ln = {
   'grade-selector.placeholder': 'Hi-line',
   'standard-dropdown.placeholder': 'ప్రామాణిక ద్వారా బ్రౌజ్ చేయండి',
   'subject-dropdown.placeholder': 'విషయం (లు)',
-  'subject-dropdown.prompt': 'ఒక విషయం ఎంచుకోండి',
-  'search-filter.input-placeholder': 'Type {{type}} name here...',
+  'subject-dropdown.prompt': 'ఒక విషయాన్ని ఎంచుకోండి',
+  'search-filter.input-placeholder':
+    'టైప్  పేరు  ఇక్కడ {{type}}  ఇక్కడ  చేయండి ...',
   'search-filter.courses': 'కోర్సులు',
   'search-filter.collections': 'సేకరణలు',
   'search-filter.resources': 'వనరులు',
   'search-filter.assessments': 'లెక్కింపులు',
   'search-filter.questions': 'ప్రశ్నలు',
-  'search-filter.rubrics': 'rubrics',
-  'search-filter.authors': 'Authors',
+  'search-filter.rubrics': 'రుబ్రిక్ లు',
+  'search-filter.authors': 'రచయితలు',
   'search-filter.question-types.MC':
     'సరైన సమాదానం ఉన్న జవాబుల్లో నుంచి గుర్తించు',
   'search-filter.question-types.FIB': 'ఖాళీలు పూరింపుము',
@@ -1775,89 +1835,104 @@ window.i18ln = {
   'search-result.in-this-collection': 'ఈ సేకరణలో',
   'search-result.search-results-for': 'ఫలితాలు కోసం శోధన',
   'gru-image-picker.chooseFile': 'ఒక ఫైల్‌ను ఎంచుకోండి ...',
-  'gru-image-picker.instruction': 'మీ కంప్యూటర్‌లోని ఒక  ఫైల్ నుండి చిత్రాన్ని అప్‌లోడ్ చేయండి.',
-  'gru-image-picker.restriction': 'చిత్రం తప్పనిసరిగా 5 బియం కన్నా చిన్న  జెపిజి , జిఐయఫ్   లేదా పియయన్ జి    ఫైల్ అయి ఉండాలి.',
+  'gru-image-picker.instruction':
+    'మీ కంప్యూటర్‌లోని ఒక  ఫైల్ నుండి చిత్రాన్ని అప్‌లోడ్ చేయండి.',
+  'gru-image-picker.restriction':
+    'చిత్రం తప్పనిసరిగా 5 బియం కన్నా చిన్న  జెపిజి , జిఐయఫ్   లేదా పియయన్ జి    ఫైల్ అయి ఉండాలి.',
   'gru-image-picker.submit': 'చిత్రాన్ని ఉపయోగించండి',
-  'gru-fib.instructions': 'దయచేసి మీ సమాధానం (ల) ను ఖాళీ (ల) లో టైప్ చేసి, "{{action}}/" క్లిక్ చేయండి.',
-  'gru-hs-image.instructions': 'దయచేసి సరైన చిత్రం (ల) ను ఎంచుకుని, "{{action}}/" క్లిక్ చేయండి.',
-  'gru-hs-text.instructions': 'దయచేసి సరైన సమాధానం (ల) ను ఎంచుకుని, "{{action}} /" క్లిక్ చేయండి.',
-  'gru-hot-text.instructions': 'దయచేసి సరైన సమాధానం ఎంచుకుని, "{{action}}/" క్లిక్ చేయండి.',
+  'gru-fib.instructions':
+    'దయచేసి మీ సమాధానం (ల) ను ఖాళీ (ల) లో టైప్ చేసి, "{{action}}/" క్లిక్ చేయండి.',
+  'gru-hs-image.instructions':
+    'దయచేసి సరైన చిత్రం (ల) ను ఎంచుకుని, "{{action}}/" క్లిక్ చేయండి.',
+  'gru-hs-text.instructions':
+    'దయచేసి సరైన సమాధానం (ల) ను ఎంచుకుని, "{{action}} /" క్లిక్ చేయండి.',
+  'gru-hot-text.instructions':
+    'దయచేసి సరైన సమాధానం ఎంచుకుని, "{{action}}/" క్లిక్ చేయండి.',
   'gru-login-prompt.title': 'గూరుకు స్వాగతం!',
-  'gru-login-prompt.instructions': 'ఆ చర్యను పూర్తి చేయడానికి మీరు సైన్ ఇన్ అవ్వాలి.',
+  'gru-login-prompt.instructions':
+    'ఆ చర్యను పూర్తి చేయడానికి మీరు సైన్ ఇన్ అవ్వాలి.',
   'gru-login-prompt.existing-user': 'ఖాతా కలిగి ఉన్నారా?',
   'gru-login-prompt.new-user': 'ఇక్కడ కొత్తది?',
   'gru-login-prompt.not-now': 'ఇప్పుడు కాదు',
   'gru-login-prompt.sign-in': 'సైన్ ఇన్ అవ్వండి',
-  'gru-multiple-answer.instructions': 'దయచేసి సరైన సమాధానం ఎంచుకుని, "{{action}}/" క్లిక్ చేయండి.',
-  'gru-multiple-choice.instructions': 'దయచేసి సరైన సమాధానం ఎంచుకుని, "{{action}}/" క్లిక్ చేయండి.',
-  'gru-open-ended.instructions': 'దయచేసి దిగువ ఫీల్డ్‌లో మీ జవాబును టైప్ చేసి, మీరు పూర్తి చేసినప్పుడు మీ ప్రతిస్పందనను సేవ్ చేయడానికి "/{{action}}/" బటన్‌ను క్లిక్ చేయండి.',
+  'gru-multiple-answer.instructions':
+    'దయచేసి సరైన సమాధానం ఎంచుకుని, "{{action}}/" క్లిక్ చేయండి.',
+  'gru-multiple-choice.instructions':
+    'దయచేసి సరైన సమాధానం ఎంచుకుని, "{{action}}/" క్లిక్ చేయండి.',
+  'gru-open-ended.instructions':
+    'దయచేసి దిగువ ఫీల్డ్‌లో మీ జవాబును టైప్ చేసి, మీరు పూర్తి చేసినప్పుడు మీ ప్రతిస్పందనను సేవ్ చేయడానికి "/{{action}}/" బటన్‌ను క్లిక్ చేయండి.',
   'gru-open-ended.characterLimit': 'అక్షర పరిమితి',
   'gru-question-viewer.answer': 'సమాధానం',
   'gru-question-viewer.question': 'ప్రశ్న',
-  'gru-true-false.instructions': 'దయచేసి సరైన సమాధానం ఎంచుకుని, "{{action}}/" క్లిక్ చేయండి.',
+  'gru-true-false.instructions':
+    'దయచేసి సరైన సమాధానం ఎంచుకుని, "{{action}}/" క్లిక్ చేయండి.',
   'gru-true-false.true': 'నిజమైన',
   'gru-true-false.false': 'తప్పుడు',
-  'gru-reorder.instructions': 'దయచేసి సమాధానాలను సరైన క్రమంలో క్రమాన్ని మార్చండి మరియు "/{{action}}/" క్లిక్ చేయండి.',
-  'student-first-experience.preStudyTitle': '{{title} for కోసం ముందస్తు అధ్యయనం',
-  'student-first-experience.lp-compute-inprogress': 'మేము మీ ప్రారంభ నైపుణ్యం ప్రొఫైల్‌ను {{title}} లో గణించాము.',
+  'gru-reorder.instructions':
+    'దయచేసి సమాధానాలను సరైన క్రమంలో క్రమాన్ని మార్చండి మరియు "/{{action}}/" క్లిక్ చేయండి.',
+  'student-first-experience.preStudyTitle':
+    '{{title} for కోసం ముందస్తు అధ్యయనం',
+  'student-first-experience.lp-compute-inprogress':
+    'మేము మీ ప్రారంభ నైపుణ్యం ప్రొఫైల్‌ను {{title}} లో గణించాము.',
   'student-first-experience.route0-action.accept': 'అంగీకరించాలి',
   'student-first-experience.route0-action.ignore': 'పట్టించుకోకుండా',
-  'student-first-experience.competency.popover.title': '{{title}} సరిహద్దు',
+  'student-first-experience.competency.popover.title': 'line {{title}} హైలైన్',
   'student-first-experience.competency.popover.content':
-    'మీరు మీ స్కైలైన్ మరియు మీ గమ్యాన్ని చేరుకోవడానికి ఈ గ్రేడ్ లైన్ మధ్య అన్ని ప్రమాణాలను అధ్యయనం చేయాలి.',
+    'మీ గమ్యాన్ని చేరుకోవడానికి మీరు మీ స్కైలైన్ మరియు ఈ గ్రేడ్ లైన్ మధ్య ఉన్న అన్ని ప్రమాణాలను అధ్యయనం చేయాలి.',
   'student-first-experience.assigned-course-title':
-    '{{title}} కోసం కేటాయించిన కోర్సు',
-  'student-first-experience.start-studying': 'Start Studying',
-  'student-first-experience.show-route': 'Show Route',
-  'student-first-experience.review-destination': 'Review Destination',
-  'student-first-experience.competency-level.title': 'మీ నైపుణ్యత ప్రొఫైల్',
+    '{title} కోసం కేటాయించిన కోర్సు',
+  'student-first-experience.start-studying': 'అధ్యయనం ప్రారంభించండి',
+  'student-first-experience.show-route': 'మార్గాన్ని చూపించు',
+  'student-first-experience.review-destination': 'గమ్యాన్ని సమీక్షించండి',
+  'student-first-experience.competency-level.title': 'మీ నైపుణ్యం ప్రొఫైల్',
   'student-first-experience.competency-level.mastery':
-    '{{count}} ప్రమాణాలు స్వావలంబన',
+    '{{count}} ప్రమాణాలు ప్రావీణ్యం పొందాయి',
   'student-first-experience.competency-level.in-progress':
-    '{{count}} ప్రమాణాలు పురోగతిలో ఉన్నాయి',
+    '{{count}}ప్రమాణాలు పురోగతిలో ఉన్నాయి',
   'student-first-experience.competency-level.not-started':
     '{{count}} ప్రమాణాలు ప్రారంభించబడలేదు',
-  'student-first-experience.competency-level.your-skyline': 'మీ స్కైలైన్',
+  'student-first-experience.competency-level.your-skyline':
+    'మీ  యొక్క  స్కై లైన్',
   'student-first-experience.explanatory.master.title': 'స్వావలంబన',
   'student-first-experience.explanatory.master.desc':
-    'మీరు ప్రమాణాలను విజయవంతంగా స్వాధీనం చేసుకున్నారని సాక్ష్యాలు ఉన్నాయి',
-  'student-first-experience.explanatory.in-progress.title': 'పురోగతిలో ఉంది',
+    'మీరు ప్రమాణాలను విజయవంతంగా స్వాధీనం చేసుకున్నట్లు ఆధారాలు ఉన్నాయని సూచిస్తుంది',
+  'student-first-experience.explanatory.in-progress.title': 'పురోగతి లో ఉంది',
   'student-first-experience.explanatory.in-progress.desc':
-    'మీరు ప్రమాణాలను అధ్యయనం చేయటం మొదలుపెట్టి, సామర్ధ్యము సాధించే దిశగా ముందుకు సాగుతున్నారని సాక్ష్యాలు ఉన్నాయి',
+    'మీరు ప్రమాణాలను అధ్యయనం చేయడం ప్రారంభించినట్లు మరియు నైపుణ్యం సాధించే దిశగా పురోగతి లో ఉన్నట్లు ఆధారాలు ఉన్నాయని సూచిస్తుంది',
   'student-first-experience.explanatory.not-started.title': 'మొదలవలేదు',
   'student-first-experience.explanatory.not-started.desc':
-    'ఎటువంటి ఆధారం లేదని సూచిస్తుంది మరియు మీరు ప్రమాణాలను అధ్యయనం చెయ్యటం మొదలుపెట్టలేదు',
+    'ఎటువంటి ఆధారాలు లేవని సూచిస్తుంది మరియు మీరు ఇంకా ప్రమాణాలను అధ్యయనం చేయడం ప్రారంభించలేదు',
   'student-first-experience.competency-level-partial.desc1':
-    'మీరు ప్రస్తుతం ఉన్నారు',
+    'ప్రస్తుతం మీరు ఉన్నారు',
   'student-first-experience.competency-level-partial.desc2':
-    'గణిత కోసం మీ స్కైలైన్ మ్యాప్కు స్వాగతం. స్కైలైన్ (మందపాటి తెల్లని గీత) మీరు ప్రతి డొమైన్లో స్వావలంబించిన అత్యధిక ప్రమాణాన్ని చూపిస్తుంది. ఒక డొమైన్ అనేది సంఖ్యా వ్యవస్థలు మరియు వ్యక్తీకరణలు & సమీకరణాలు వంటి మీరు అధ్యయనం చేసే గణిత ప్రాంతం. ప్రతి కాలమ్ ఒక గణిత డొమైన్ను సూచిస్తుంది. మరియు నిలువు వరుసలోని ప్రతి పెట్టె డొమైన్లోని ప్రామాణికతను సూచిస్తుంది. ఒకసారి మీరు ప్రమాణాలు నేర్చుకోవడం మరియు మాస్టరింగ్ చేయడం మొదలుపెట్టినప్పుడు, మీ స్కైలైన్ నిరంతరం బంప్ అవుతుంది.',
+    'ఇది మీ {{title}} ప్రావీణ్యం ప్రొఫైల్. ఇది  {{title}}  మీరు  (అకా డొమైన్‌లు) లోని విభిన్న దృష్టి ప్రాంతాలలో ప్రమాణాలలో (అకా సామర్థ్యాలు) మీ నైపుణ్యాన్ని చూపుతుంది. నిలువు వరుసలు డొమైన్‌లను చూపుతాయి మరియు బాక్స్‌లు ప్రతి {{title}} డొమైన్‌లోని ప్రమాణాలను చూపుతున్నాయీ .',
   'student-first-experience.competency-level-partial.desc3':
-    'As you master each of the competencies, the corresponding box is updated to dark blue.',
+    'మీరు ప్రతి సామర్థ్యంలో నైపుణ్యం సాధించినప్పుడు, సంబంధిత పెట్టె ముదురు నీలం రంగులోకి నవీకరించబడుతుంది.',
   'student-first-experience.competency-level-partial.desc4':
-    'The skyline is the thick white line that shows the highest competencies that you have mastered in each math domain.',
+    'స్కైలైన్ అనేది ప్రతి గణిత డొమైన్‌లో మీరు ప్రావీణ్యం పొందిన అత్యధిక సామర్థ్యాలను చూపించే మందపాటి తెల్లని గీత.',
   'student-first-experience.competency-level-partial.desc5':
-    'If the skyline is at the bottom of a domain, it means the system needs more information to be able to locate you in that topic. As soon as you start on the lessons and check for understandings, your skyline will bump up and update your proficiency in each domain.',
-  'student-first-experience.units.other': '{{count}} యూనిట్లు',
+    'స్కైలైన్ డొమైన్ దిగువన ఉంటే, ఆ అంశంలో మిమ్మల్ని గుర్తించగలిగేలా సిస్టమ్‌కు మరింత సమాచారం అవసరం. మీరు పాఠాలను ప్రారంభించి, అవగాహనల కోసం తనిఖీ చేసిన వెంటనే, మీ స్కైలైన్ ప్రతి డొమైన్‌లో మీ నైపుణ్యాన్ని పెంచుతుంది.',
+  'student-first-experience.units.other': '{{count} యూనిట్లు',
   'player.gru-navigation.view-report': 'నివేదికను వీక్షించండి',
-  'player.gru-navigator.see-usage-report': 'ఉపయోగ నివేదికను చూడండి',
-  'player.gru-viewer.not-iframe-url.header_1': 'ఈ వనరు గోరులో వీక్షించబడదు.',
+  'player.gru-navigator.see-usage-report': 'వినియోగ నివేదిక చూడండి',
+  'player.gru-viewer.not-iframe-url.header_1': 'ఈ వనరును గూరులో చూడలేము.',
   'player.gru-viewer.not-iframe-url.header_external_assessment_1':
-    'ఈ అంచనా Gooru లోపల చూడలేము.',
+    'ఈ అంచనాను గూరులో చూడలేము.',
   'player.gru-viewer.not-iframe-url.header_2':
-    'క్రొత్త ట్యాబ్లో వనరును తెరవడానికి దిగువ బటన్ను క్లిక్ చేయండి.',
-  'player.gru-viewer.not-iframe-url.view-resource': 'వనరును వీక్షించండి',
+    'క్రొత్త ట్యాబ్‌లో వనరును తెరవడానికి క్రింది బటన్‌ను క్లిక్ చేయండి.',
+  'player.gru-viewer.not-iframe-url.view-resource': 'వనరును చూడండి',
   'player.gru-viewer.not-iframe-url.https_external':
-    'ఈ లింక్ గోరులో వీక్షించబడదు.',
+    'ఈ లింక్‌ను గూరులో చూడలేము.',
   'player.gru-viewer.not-iframe-url.https_new_tab':
-    'క్రొత్త ట్యాబ్లో తెరవడానికి దిగువ లింక్ని క్లిక్ చేయండి.',
+    'క్రొత్త ట్యాబ్‌లో తెరవడానికి క్రింది లింక్‌ను క్లిక్ చేయండి.',
   'player.gru-viewer.not-iframe-url.footer_1':
-    'నేను ఎందుకు ఈ ఖాళీ పేజీని చూస్తున్నాను?',
+    'నేను ఈ ఖాళీ పేజీని ఎందుకు చూస్తున్నాను?',
   'player.gru-viewer.not-iframe-url.footer_2':
-    'గోరులో జోడించిన వనరులు వేర్వేరు ప్రచురణకర్తల నుండి వచ్చినవి',
+    'గూరులో జోడించిన వనరులు వేలాది మంది వేర్వేరు ప్రచురణకర్తల నుండి వచ్చాయి',
   'player.gru-viewer.not-iframe-url.footer_3':
-    'వారి కంటెంట్ను సృష్టించండి మరియు భాగస్వామ్యం చేయండి. వనరులు వివిధ రకాల అమర్పులను కలిగి ఉంటాయి',
+    'వారి కంటెంట్‌ను సృష్టించండి మరియు భాగస్వామ్యం చేయండి. వనరులతో సహా వివిధ రకాల సెట్టింగులు ఉన్నాయి',
   'player.gru-viewer.not-iframe-url.footer_4':
-    'కంటెంట్ను వీక్షించడానికి మరొక పేజీకి మిమ్మల్ని తీసుకెళ్లే అవసరాలు.',
+    'కంటెంట్‌ను చూడటానికి మిమ్మల్ని మరొక పేజీకి తీసుకెళ్లే అవసరాలు.',
   'grading-player.answer': 'సమర్పించిన పని',
   'grading-player.back-to': 'తిరిగి',
   'grading-player.current-response': 'ప్రస్తుత స్పందన',
@@ -1890,31 +1965,27 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'నైపుణ్యత',
   'profile.gru-navigation.preference.preference': 'ప్రాధాన్యత',
   'profile.edit.select-district': 'జిల్లాను ఎంచుకోండి ...',
-  'counts-based-on-gut':
-    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
-  'show-gut-competencies': 'Show GUT competencies',
-  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
-    'ఇంకా సమాచారం అందుబాటులో లేదు. మీరు చదువుతున్నప్పుడు, మీ డేటా అందుబాటులోకి వస్తుంది.',
-  'profile.proficiency.expand-chart': 'చార్ట్ను విస్తరించండి',
+    'ఇంకా డేటా అందుబాటులో లేదు. మీరు అధ్యయనం ప్రారంభించిన తర్వాత, మీ డేటా అందుబాటులోకి వస్తుంది.',
+  'profile.proficiency.expand-chart': 'చార్ట్ విస్తరించండి',
   'profile.proficiency.mastered': 'స్వావలంబన',
   'profile.proficiency.in-progress': 'పురోగతిలో ఉంది',
   'profile.proficiency.not-started': 'మొదలవలేదు',
   'profile.proficiency.skyline': 'స్కైలైన్',
-  'profile.proficiency.baseline': 'ఆధార',
-  'profile.proficiency.grade-line': 'Other Grade',
-  'profile.proficiency.class-grade-line': 'Class Hi-line',
+  'profile.proficiency.baseline': 'ఆధార లైన్',
+  'profile.proficiency.grade-line': 'ఇతర గ్రేడ్',
+  'profile.proficiency.class-grade-line': 'తరగతి హై-లైన్',
   'profile.proficiency.not-tagged':
-    'తరగతి కేటాయించిన కోర్సు లేదు లేదా కోర్సు చెల్లుబాటు అయ్యే విషయం లేదా ప్రమాణాలకు ట్యాగ్ చేయబడలేదు.',
-  'profile.proficiency.show-compressed-chart': 'సంపీడన చార్ట్ చూపించు',
-  'profile.proficiency.show-expanded-chart': 'విస్తరించిన చార్ట్ చూపించు',
+    'తరగతికి కోర్సు కేటాయించబడలేదు లేదా కోర్సు చెల్లుబాటు అయ్యే విషయం లేదా ప్రమాణాలకు ట్యాగ్ చేయబడలేదు.',
+  'profile.proficiency.show-compressed-chart': 'కుదించబడిన  చార్ట్ చూపించండి',
+  'profile.proficiency.show-expanded-chart': 'విస్తరించిన చార్ట్ చూపించండి',
   'profile.preference.language-preference': 'భాష ప్రాధాన్యత',
   'profile.preference.choose-language': 'భాషను ఎంచుకోండి',
   'profile.preference.choose-sec-language': 'ఎంచుకోండి',
   'profile.preference.choose-preferred-language':
-    'ప్రాధమిక ప్రొఫైల్ భాషను ఎంచుకోండి',
+    'ప్రాథమిక ప్రొఫైల్ భాషను ఎంచుకోండి',
   'profile.preference.choose-preferred-other-languages':
-    'ఇతర ప్రాధాన్య భాషలను ఎంచుకోండి',
+    'ఇతర ఇష్టపడే భాషలను ఎంచుకోండి',
   'profile.preference.language': 'భాష',
   'profile.preference.select-category-label': 'క్రొత్త వర్గాన్ని జోడించండి',
   'profile.preference.choose-category': 'వర్గం ఎంచుకోండి',
@@ -1962,24 +2033,24 @@ window.i18ln = {
   'gru-resource-new.resource-already-exist': 'ఈ వనరు ఇప్పటికే గోరులో ఉంది!',
   'gru-assessment-report.gru-summary.total-time-spent': 'గడిపిన మొత్తం సమయం',
   'gru-assessment-report.hidden-report':
-    'ఈ అంచనా కోసం మీ సారాంశం నివేదికను దాచడానికి మీ గురువు ఎంచుకున్నారు.',
+    'ఈ అంచనా కోసం మీ సారాంశ నివేదికను దాచడానికి మీ గురువు ఎంచుకున్నారు.',
   'cards.gru-class-card.student.zero': '{{count}} విద్యార్థి',
   'cards.gru-class-card.student.one': '{{count}} విద్యార్థి',
   'cards.gru-class-card.student.other': '{{count}} విద్యార్థులు',
   'cards.gru-class-card.student.not-started': 'మొదలవలేదు',
   'cards.gru-class-card.unit.zero': 'కోర్సు లేదు',
   'cards.gru-class-card.unit.one': '{{count}} యూనిట్',
-  'cards.gru-class-card.unit.other': '{{count}} యూనిట్లు',
+  'cards.gru-class-card.unit.other': '{{count} యూనిట్లు',
   'cards.gru-class-card.archived.request-report':
-    'ఈ తరగతి ఆర్కైవ్ చెయ్యబడింది మరియు సవరించబడదు. ఉన్న తరగతి డేటా నివేదిక ద్వారా ప్రాప్తి చేయవచ్చు.',
+    'ఈ తరగతి ఆర్కైవ్ చేయబడింది మరియు సవరించబడదు. ఇప్పటికే ఉన్న తరగతి  రిపోర్ట్ ద్వారా యాక్సెస్ చేయవచ్చు.',
   'cards.gru-class-card.archived.report-in-progress':
-    'నివేదిక తరం 20 నిమిషాలు పట్టవచ్చు. దయచేసి తిరిగి తనిఖీ చేయండి.',
+    'నివేదిక ఉత్పత్తికి 20 నిమిషాలు పట్టవచ్చు. దయచేసి తిరిగి తనిఖీ చేయండి.',
   'cards.gru-class-card.archived.download-report':
-    'ఈ తరగతికి మీ డేటాను డౌన్లోడ్ చేయండి.',
+    'ఈ తరగతి కోసం మీ డేటాను డౌన్‌లోడ్ చేయండి.',
   'cards.gru-class-card.archived.no-report-available':
     'ఈ తరగతికి కేటాయించిన కోర్సు కంటెంట్ లేదు.',
-  'cards.gru-course-card.in': 'లో',
-  'cards.gru-course-card.units.zero': '{{count}} యూనిట్లు',
+  'cards.gru-course-card.in': 'లోపల',
+  'cards.gru-course-card.units.zero': '{{count} యూనిట్లు',
   'cards.gru-course-card.units.one': '{{count}} యూనిట్',
   'cards.gru-course-card.units.other': '{{count}} యూనిట్లు',
   'cards.gru-course-card.resource.zero': '{{count}} వనరులు',
@@ -2018,67 +2089,67 @@ window.i18ln = {
   'reports.gru-table-view.time': 'సమయం',
   'reports.gru-table-view.time-spent': 'గడిపిన సమయం',
   'reports.gru-table-view.totals': 'మొత్తం',
-  'gru-emotion-picker.react-to-resource': 'ఈ వనరుకు ప్రతిస్పందించండి',
-  'home.no-classes-found.create-class.title': 'ఒక gooru తరగతిలో బోధిస్తాయి',
+  'gru-emotion-picker.react-to-resource': 'ఈ వనరుపై ప్రతి స్పందన',
+  'home.no-classes-found.create-class.title': 'గూరు తరగతి గదితో నేర్పండి',
   'home.no-classes-found.create-class.description':
-    'తరగతిని సృష్టించడం, కంటెంట్ను కేటాయించడం మరియు విద్యార్థులను ఆహ్వానించడం.',
-  'home.no-classes-found.create-class.button-text': 'తరగతిని సృష్టించండి',
-  'home.no-classes-found.join-class.title': 'ఒక gooru తరగతిలో తెలుసుకోండి',
+    'తరగతి గదిని సృష్టించారు, కంటెంట్‌ను కేటాయించండి మరియు విద్యార్థులను ఆహ్వానించండి.',
+  'home.no-classes-found.create-class.button-text': 'తరగతి గదిని సృష్టించండి',
+  'home.no-classes-found.join-class.title': 'గూరు తరగతి గదితో నేర్చుకోండి',
   'home.no-classes-found.join-class.description':
-    'నేర్చుకోవడం ప్రారంభించడానికి మీ గురువు యొక్క తరగతిలో చేరండి.',
-  'home.no-classes-found.join-class.button-text': 'తరగతిలో కోడ్ నమోదు చేయండి',
-  'home.no-classes-found.featured-courses.title': 'ఫీచర్ కోర్సులు',
+    'నేర్చుకోవడం ప్రారంభించడానికి మీ గురువు /\'యొక్తక రగతి గదిలో చేరండి.',
+  'home.no-classes-found.join-class.button-text':
+    'తరగతి గది కోడ్‌ను నమోదు చేయండి',
+  'home.no-classes-found.featured-courses.title': 'ఫీచర్ చేసిన కోర్సులు',
   'home.no-classes-found.featured-courses.description':
-    'గణిత శాస్త్రం, విజ్ఞానశాస్త్రం, సాంఘిక అధ్యయనాలు, మరియు కోర్సులను బ్రౌజ్ చేయండి.',
-  'home.no-classes-found.featured-courses.button-text': 'ఫీచర్ కోర్సులు',
-  'home.no-classes-found.teacher-toolkit.title': 'గురువు టూల్కిట్',
+    'గణిత, సైన్స్, సామాజిక అధ్యయనాలు మరియు ఇయల్ఎ  కోర్సులు బ్రౌజ్ చేయండి.',
+  'home.no-classes-found.featured-courses.button-text': 'ఫీచర్ చేసిన కోర్సులు',
+  'home.no-classes-found.teacher-toolkit.title': 'ఉపాధ్యాయ టూల్ కిట్',
   'home.no-classes-found.teacher-toolkit.description':
-    'ఈ ఉపకరణపట్టీ మీకు ప్రారంభించడానికి వనరులను కలిగి ఉంది.',
-  'home.no-classes-found.teacher-toolkit.button-text': 'గురువు టూల్కిట్',
-  'taxonomy.grades': 'Grades',
-  'taxonomy.gru-taxonomy-selector.add-secondary': 'సెకండరీ జోడించండి',
+    'ఈ టూల్‌కిట్ మీకు ప్రారంభించడానికి సహాయపడే వనరులను కలిగి ఉంది.',
+  'home.no-classes-found.teacher-toolkit.button-text': 'ఉపాధ్యాయ టూల్ కిట్',
+  'taxonomy.grades': 'శ్రేణులు',
+  'taxonomy.gru-taxonomy-selector.add-secondary': 'మాధ్యమాన్ని  జోడించు',
   'taxonomy.gru-taxonomy-selector.choose-subject': 'విషయం ఎంచుకోండి',
   'taxonomy.gru-taxonomy-selector.competency-subject-and-course':
-    'సామర్థ్యాలు ఫ్రేమ్ మరియు కోర్సు',
+    'సామర్థ్యాల ఫ్రేమ్‌వర్క్ మరియు కోర్సు',
   'taxonomy.gru-taxonomy-selector.primary-subject-and-course':
-    'ప్రమాణాలు ఫ్రేమ్ మరియు కోర్సు',
+    'ప్రమాణాల ఫ్రేమ్‌వర్క్ మరియు కోర్సు',
   'validations.unsavedChanges':
-    'మీ మార్పులు హెవెన్ ఇంకా సేవ్ చేయబడలేదు. మీరు ఈ పేజీని వదిలివేయాలనుకుంటున్నారా?',
-  'featured.featured-title': 'ఫీచర్ కోర్సులు',
+    'మీ మార్పులు ఇంకా సేవ్ చేయబడలేదు. మీరు ఈ పేజీని వదిలివేయాలనుకుంటున్నారా?',
+  'featured.featured-title': 'ఫీచర్ చేసిన కోర్సులు',
   'featured.featured-description':
-    'ఫీచర్ కోర్సులు వినూత్న ఉపాధ్యాయులు, వెటరైన మరియు కంటెంట్ నిపుణులచే సమీక్షించబడి, తరగతులలో విద్యార్థులతో అమలు చేయబడతాయి. అభ్యాసం వ్యక్తిగతీకరించడానికి మరియు విద్యార్థి నిశ్చితార్థం పెంచడానికి కోర్సులు అనుకూలపరచండి, రీమిక్స్ చేయండి మరియు అనుకూలీకరించండి! [1] ఈ కోర్సులు అభివృద్ధి గురించి మరింత తెలుసుకోవడానికి [2].',
+    'ఫీచర్ చేసిన కోర్సులు వినూత్న ఉపాధ్యాయులచే నిర్వహించబడతాయి, కంటెంట్ నిపుణులచే పరిశీలించబడతాయి మరియు సమీక్షించబడతాయి మరియు విద్యార్థులతో తరగతి గదులలో అమలు చేయబడతాయి. అభ్యాసాన్ని వ్యక్తిగతీకరించడానికి మరియు విద్యార్థుల నిశ్చితార్థాన్ని పెంచడానికి కోర్సులను కనుగొనండి, రీమిక్స్ చేయండి మరియు అనుకూలీకరించండి! <a href=\'http://about.gooru.org/courses\' target=\'_blank\'> ఈ కోర్సుల అభివృద్ధి గురించి మరింత తెలుసుకోండి </a>.',
   'locateme.score': 'స్కోరు',
   'locateme.timespent': 'గడిపిన సమయం',
   'locateme.view': 'వీక్షణ',
   'locateme.attempt': 'ప్రయత్నం',
-  'locateme.lastAcessesed': 'చివరిగా ప్రాప్తి చేసింది',
+  'locateme.lastAcessesed': 'చివరిగా ప్రాప్యత చేయబడింది',
   'taxonomy.modals.gru-domain-picker.browseSelectorText':
-    'ఈ యూనిట్ కవర్ ఏ డొమైన్ లలో ఉంటుంది?',
+    'ఈ యూనిట్ ఏ డొమైన్‌లను కవర్ చేస్తుంది?',
   'taxonomy.modals.gru-domain-picker.selectedText.zero':
-    '{{count}} డొమైన్లు ఎంచుకోబడ్డాయి',
+    '{{count}} డొమైన్‌లు ఎంచుకోబడ్డాయి',
   'taxonomy.modals.gru-domain-picker.selectedText.one':
     '{{count}} డొమైన్ ఎంచుకోబడింది',
   'taxonomy.modals.gru-domain-picker.selectedText.other':
-    '{{count}} డొమైన్లు ఎంచుకోబడ్డాయి',
-  'taxonomy.modals.gru-domain-picker.shortcutText': 'కోర్సు ఉంది',
+    '{{count}} డొమైన్‌లు ఎంచుకోబడ్డాయి',
+  'taxonomy.modals.gru-domain-picker.shortcutText': 'కోర్సు  లోపల ఉంది',
   'taxonomy.modals.gru-standard-picker.browseSelectorText':
-    'ఏ ప్రమాణాలను కవర్ చేయాలి?',
+    'ఏ ప్రమాణాలు ఉంటాయి?',
   'taxonomy.modals.gru-standard-picker.browseCompetencySelectorText':
-    'ఏ సామర్ధ్యాలు కవర్ చేయబడతాయి?',
+    'ఏ సామర్థ్యాలు ఉంటాయి?',
   'taxonomy.modals.gru-standard-picker.selectedText.zero':
     '{{count}} ప్రమాణాలు ఎంచుకోబడ్డాయి',
   'taxonomy.modals.gru-standard-picker.selectedText.one':
-    '{{count}} ప్రామాణిక ఎంపిక',
+    '{{count}} ప్రమాణం ఎంచుకోబడింది',
   'taxonomy.modals.gru-standard-picker.selectedText.other':
     '{{count}} ప్రమాణాలు ఎంచుకోబడ్డాయి',
   'taxonomy.modals.gru-standard-picker.selectedCompetencyText.zero':
-    '{{count}} సామర్థ్యాలు ఎంచుకోబడ్డాయి',
+    '{{count}}సామర్థ్యాలు ఎంచుకోబడ్డాయి',
   'taxonomy.modals.gru-standard-picker.selectedCompetencyText.one':
-    '{{count}} యోగ్యత ఎంపికైంది',
+    '{{count}} సామర్థ్యం ఎంచుకోబడింది',
   'taxonomy.modals.gru-standard-picker.selectedCompetencyText.other':
-    '{{count}} సామర్థ్యాలు ఎంచుకోబడ్డాయి',
-  'taxonomy.modals.gru-standard-picker.shortcutText':
-    'యూనిట్ ట్యాగ్ చేయబడుతుంది',
+    '{{count}}సామర్థ్యాలు ఎంచుకోబడ్డాయి',
+  'taxonomy.modals.gru-standard-picker.shortcutText': 'యూనిట్ ట్యాగ్ చేయబడింది',
   'account-settings.title': 'ఖాతా సెట్టింగులు',
   'account-settings.account-info': 'ఖాతా సమాచారం',
   'account-settings.private-info': 'ప్రైవేట్ సమాచారం',
@@ -2092,12 +2163,13 @@ window.i18ln = {
   'gru-rich-text-editor.superscript': 'స్క్రిప్ట్',
   'gru-rich-text-editor.underline': 'అండర్లైన్',
   'gru-rich-text-editor.bullets': 'బులెట్లు',
-  'gru-rich-text-editor.expressions-panel.tabs.calculus': 'కలన',
+  'gru-rich-text-editor.expressions-panel.tabs.calculus': 'కాలిక్యులస్',
   'gru-rich-text-editor.expressions-panel.tabs.greek-letters':
-    'గ్రీక్ అక్షరాలు',
+    'గ్రీకు అక్షరాలు',
   'gru-rich-text-editor.expressions-panel.tabs.layout': 'లేఅవుట్',
   'gru-rich-text-editor.expressions-panel.tabs.relation': 'సంబంధించి',
-  'gru-rich-text-editor.expressions-panel.tabs.set-theory': 'సెట్ సిద్ధాంతం',
+  'gru-rich-text-editor.expressions-panel.tabs.set-theory':
+    'సిధాంతాన్ని  సరయిన స్తితి లో వుచండి',
   'gru-rich-text-editor.expressions-panel.tabs.symbols': 'చిహ్నాలు',
   'gru-rich-text-editor.expressions-panel.tabs.trigonometry': 'త్రికోణమితి',
   'gru-rich-text-editor.expressions-panel.insert-expression': 'ఇన్సర్ట్',
@@ -2105,295 +2177,304 @@ window.i18ln = {
   'gru-rich-text-editor.expressions-panel.create-expression':
     'వ్యక్తీకరణను సృష్టించండి',
   'gru-settings-edit.answerkey-attempts': 'సమాధానం కీ మరియు ప్రయత్నాలు',
-  'gru-settings-edit.answer-key': 'విద్యార్థులు ముగింపులో సమాధానం కీ చూడగలరు',
+  'gru-settings-edit.answer-key':
+    'విద్యార్థులు జవాబుణి చివరి  కీ వద్ద  చూడవచ్చు',
   'gru-settings-edit.attempts': 'ప్రయత్నాలు',
   'gru-settings-edit.attempts-unlimited': 'అపరిమిత',
   'gru-settings-edit.backwards':
     'విద్యార్థులు వెనుకకు నావిగేట్ చేయవచ్చు మరియు ప్రతిస్పందనలను మార్చవచ్చు',
-  'gru-settings-edit.feedback':
-    'వారు సరియైనవి / తప్పు అని విద్యార్థులు చూస్తారు',
-  'gru-settings-edit.feedback-immediate': 'ప్రశ్నకు & చివరికి',
-  'gru-settings-edit.feedback-never': 'ఎప్పుడూ',
+  'gru-settings-edit.feedback': 'విద్యార్థులు అవి సరైనవా / తప్పా  అని చూస్తారు',
+  'gru-settings-edit.feedback-immediate': 'ప్రతి ప్రశ్నకు & చివరిలో',
+  'gru-settings-edit.feedback-never': 'ఎప్పుడూ కాదు',
   'gru-settings-edit.feedback-summary': 'చివరలో',
-  'gru-settings-edit.navigation-scoring':
-    'పేజీకి సంబంధించిన లింకులు మరియు స్కోరింగ్',
-  'gru-settings-edit.disable-heading': 'కోర్సు మ్యాప్లో అంచనాను సక్రియం చేయండి',
+  'gru-settings-edit.navigation-scoring': 'నావిగేషన్ మరియు స్కోరింగ్',
+  'gru-settings-edit.disable-heading':
+    'కోర్సు మ్యాప్‌లో అంచనాను సక్రియం చేయండి',
   'gru-settings-edit.disable-legend':
-    'విద్యార్ధులు వారి కోర్సు మ్యాప్ నుండి అంచనా వేయవచ్చు',
+    'విద్యార్థులు వారి కోర్సు మ్యాప్ నుండి అంచనాను ప్లే చేయవచ్చు',
   'gru-icon-popover.settings-visibility-title': 'మీ కంటెంట్ కనిపించేలా చేయండి',
   'gru-icon-popover.settings-visibility-content':
-    'ఈ సెట్టింగ్ మీ కంటెంట్ను మీ వినియోగదారు ప్రొఫైల్ ద్వారా కనిపించేలా చేస్తుంది. మీరు సహోద్యోగులతో సృష్టించే కోర్సులు, సేకరణలు, అంచనాలు, వనరులు మరియు / లేదా ప్రశ్నలను భాగస్వామ్యం చేయాలనుకుంటే, మీరు ఈ లక్షణాన్ని ప్రారంభించమని మేము సూచిస్తున్నాము.',
+    'ఈ సెట్టింగ్ మీ యూజర్ ప్రొఫైల్ ద్వారా మీ కంటెంట్ కనిపించేలా చేస్తుంది. మీరు సృష్టించిన కోర్సులు, సేకరణలు, అంచనాలు, వనరులు మరియు / లేదా ప్రశ్నలను సహోద్యోగులతో పంచుకోవాలనుకుంటే, ఈ లక్షణాన్ని ప్రారంభించమని మేము సూచిస్తున్నాము.',
   'gru-take-tour.text': 'పర్యటన',
-  'gru-take-tour.teacher-home.stepOne.title': 'పర్యటించు',
+  'gru-take-tour.teacher-home.stepOne.title': 'పర్యటించండి',
   'gru-take-tour.teacher-home.stepOne.description':
-    'పర్యటన మరియు మీ హోమ్పేజీని స్వీకరించడానికి స్వాగతం! ఇప్పుడే ప్రారంభించండి!',
+    'పర్యటన మరియు మీ హోమ్‌పేజీకి స్వాగతం! ఇప్పుడు ప్రారంభిద్దాం!',
   'gru-take-tour.teacher-home.stepTwo.title': 'లోగో',
   'gru-take-tour.teacher-home.stepTwo.description':
-    'లోగోపై క్లిక్ చేయడం మిమ్మల్ని మీ హోమ్పేజీకి అందిస్తుంది.',
+    'లోగోపై క్లిక్ చేస్తే మీ హోమ్‌పేజీకి తిరిగి వస్తుంది.',
   'gru-take-tour.teacher-home.stepThree.title': 'శోధన పట్టీ',
   'gru-take-tour.teacher-home.stepThree.description':
-    'మీకు ఆసక్తి ఉన్న విషయాల కోసం మా కంటెంట్ కేటలాగ్ను శోధించండి.',
+    'మీకు ఆసక్తి ఉన్న అంశాల కోసం మా కంటెంట్ కేటలాగ్‌ను శోధించండి.',
   'gru-take-tour.teacher-home.stepFour.title': 'తరగతి గదులు',
   'gru-take-tour.teacher-home.stepFour.description':
-    'మీ హోమ్పేజీకి తిరిగి వెళ్ళు.',
+    'మీ హోమ్‌పేజీకి తిరిగి వెళ్ళండి .',
   'gru-take-tour.teacher-home.stepFive.title': 'కంటెంట్ మేనేజర్',
   'gru-take-tour.teacher-home.stepFive.description':
-    'మీ కంటెంట్ను సృష్టించడానికి మరియు ఆక్సెస్ చేయడానికి శీఘ్ర లింక్.',
-  'gru-take-tour.teacher-home.stepSix.title': 'లైబ్రరీ',
+    'మీ కంటెంట్‌ను సృష్టించడానికి మరియు ప్రాప్యత చేయడానికి వెంటనే లింక్ చెయ్యండి .',
+  'gru-take-tour.teacher-home.stepSix.title': 'గ్రంధాలయం',
   'gru-take-tour.teacher-home.stepSix.description':
-    'మా ప్రత్యేక కోర్సులు బ్రౌజ్.',
+    'మా ఫీచర్ చేసిన కోర్సులను బ్రౌజ్ చేయండి.',
   'gru-take-tour.teacher-home.stepSeven.title': 'మీ ప్రొఫైల్',
   'gru-take-tour.teacher-home.stepSeven.description':
-    'మీ కంటెంట్, వినియోగదారు ప్రొఫైల్ మరియు సెట్టింగ్లను ప్రాప్యత చేయండి మరియు నవీకరించండి.',
+    'మీ కంటెంట్, యూజర్  ప్రొఫైల్ మరియు సెట్టింగ్‌లను ప్రాప్యత చేయండి మరియు నవీకరించండి.',
   'gru-take-tour.teacher-home.stepEight.title': 'మద్దతు',
   'gru-take-tour.teacher-home.stepEight.description':
-    'మద్దతు కేంద్రం లేదా లాగ్అవుట్ను ప్రాప్యత చేయండి.',
+    'మద్దతు కేంద్రం లేదా లాగ్అవుట్ యాక్సెస్.',
   'gru-take-tour.teacher-home.stepNine.title': 'తరగతి గదులు',
   'gru-take-tour.teacher-home.stepNine.description':
-    'మీరు ప్రస్తుతం బోధిస్తున్న తరగతుల జాబితాను వీక్షించండి.',
-  'gru-take-tour.teacher-home.stepTen.title': 'ఆర్కైవ్డ్ క్లాసులు',
+    'మీరు ప్రస్తుతం బోధిస్తున్న తరగతుల జాబితాను చూడండి.',
+  'gru-take-tour.teacher-home.stepTen.title': 'ఆర్కైవ్ చేసిన తరగతులు',
   'gru-take-tour.teacher-home.stepTen.description':
-    'మీరు గతంలో బోధించిన తరగతుల జాబితాను వీక్షించండి.',
-  'gru-take-tour.teacher-home.stepEleven.title': 'తరగతిని సృష్టించండి',
+    'మీరు గతంలో బోధించిన తరగతుల జాబితాను చూడండి.',
+  'gru-take-tour.teacher-home.stepEleven.title': 'తరగతి గదిని సృష్టించండి',
   'gru-take-tour.teacher-home.stepEleven.description':
-    'మీ తరగతిలో పేరు పెట్టండి మరియు కొత్త తరగతిని సృష్టించడానికి బటన్ను క్లిక్ చేయండి.',
-  'gru-take-tour.student-home.stepOne.title': 'పర్యటించు',
+    'మీ తరగతి గదికి పేరు పెట్టండి మరియు క్రొత్త తరగతి గదిని సృష్టించడానికి బటన్‌ను క్లిక్ చేయండి.',
+  'gru-take-tour.student-home.stepOne.title': 'పర్యటించండి',
   'gru-take-tour.student-home.stepOne.description':
-    'పర్యటన మరియు మీ హోమ్పేజీని స్వీకరించడానికి స్వాగతం! మీ హోమ్పేజీలో మీకు అందుబాటులో ఉన్న లక్షణాల ద్వారా నడకండి.',
-  'gru-take-tour.student-home.stepFeaturedCourses.title': 'ఫీచర్ కోర్సులు',
+    'పర్యటన మరియు మీ హోమ్‌పేజీకి స్వాగతం! మీ హోమ్‌పేజీలో మీకు అందుబాటులో ఉన్న లక్షణాల ద్వారా నడవనివ్వండి.',
+  'gru-take-tour.student-home.stepFeaturedCourses.title':
+    'ఫీచర్ చేసిన కోర్సులు',
   'gru-take-tour.student-home.stepFeaturedCourses.description':
-    'మీకు ఆసక్తి కలిగించే విషయాల కోసం నేర్చుకునే నావిగేటర్ యొక్క కంటెంట్ జాబితాలో ఫీచర్ చేసిన కోర్సులు బ్రౌజ్ చేయండి.',
+    'మీకు ఆసక్తి ఉన్న అంశాల కోసం లెర్నింగ్ నావిగేటర్ యొక్క కంటెంట్ కేటలాగ్‌లో ఫీచర్ చేసిన కోర్సులను బ్రౌజ్ చేయండి.',
   'gru-take-tour.student-home.stepTwo.title': 'లోగో',
   'gru-take-tour.student-home.stepTwo.description':
-    'లోగోపై క్లిక్ చేయడం మిమ్మల్ని మీ హోమ్పేజీకి అందిస్తుంది.',
+    'లోగోపై క్లిక్ చేస్తే మీ హోమ్‌పేజీకి తిరిగి వస్తుంది.',
   'gru-take-tour.student-home.stepThree.title': 'శోధన పట్టీ',
   'gru-take-tour.student-home.stepThree.description':
-    'మీకు ఆసక్తి ఉన్న విషయాల కోసం మా కంటెంట్ కేటలాగ్ను శోధించండి.',
+    'మీకు ఆసక్తి ఉన్న అంశాల కోసం మా కంటెంట్ కేటలాగ్‌ను శోధించండి.',
   'gru-take-tour.student-home.stepFour.title': 'నా అధ్యయనం',
   'gru-take-tour.student-home.stepFour.description':
-    'మీ హోమ్పేజీకి తిరిగి వస్తుంది.',
-  'gru-take-tour.student-home.stepFive.title': 'లైబ్రరీ',
+    'మీ హోమ్‌పేజీకి తిరిగి వస్తుంది.',
+  'gru-take-tour.student-home.stepFive.title': 'గ్రంధాలయం',
   'gru-take-tour.student-home.stepFive.description':
-    'మీకు ఆసక్తి కలిగించే విషయాల కోసం లెర్నింగ్ నావిగేటర్ యొక్క ప్రత్యేక కోర్సులు మరియు భాగస్వామ్య గ్రంథాలయాలను బ్రౌజ్ చేయండి.',
+    'మీకు ఆసక్తి ఉన్న అంశాల కోసం లెర్నింగ్ నావిగేటర్/\' యొక్క ఫీచర్ చేసిన కోర్సులు మరియు భాగస్వామి గ్రంధాలయాలను  బ్రౌజ్ చేయండి.',
   'gru-take-tour.student-home.stepSix.title': 'ప్రదర్శన',
   'gru-take-tour.student-home.stepSix.description':
-    'మీరు నమోదు చేసుకున్న కోర్సుల్లో మీ పనితీరు సారాంశాన్ని చూడండి.',
+    'మీరు చేరిన కోర్సులలో మీ పనితీరు యొక్క సారాంశాన్ని చూడండి.',
   'gru-take-tour.student-home.stepSeven.title': 'మీ ప్రొఫైల్',
   'gru-take-tour.student-home.stepSeven.description':
-    'మీ కంటెంట్ మరియు వినియోగదారు ప్రొఫైల్ను ప్రాప్యత చేయండి మరియు నవీకరించండి.',
+    'మీ కంటెంట్ మరియు యూజర్  ప్రొఫైల్‌ను ప్రాప్యత చేయండి మరియు నవీకరించండి.',
   'gru-take-tour.student-home.stepEight.title': 'మద్దతు',
   'gru-take-tour.student-home.stepEight.description':
-    'మద్దతు కేంద్రం లేదా లాగ్అవుట్ను ప్రాప్యత చేయండి.',
+    'మద్దతు కేంద్రం లేదా లాగ్అవుట్ యాక్సెస్.',
   'gru-take-tour.student-home.stepNine.title': 'ప్రకటనలు',
   'gru-take-tour.student-home.stepNine.description':
-    'ఇక్కడ మీ ఉపాధ్యాయుడు లేదా పాఠశాల మీకు తెలుసని ప్రకటించిన ప్రకటనలను చూస్తారు.',
+    'మీ గురువు లేదా పాఠశాల మీరు తెలుసుకోవాలనుకునే ప్రకటనలను ఇక్కడ మీరు చూస్తారు.',
   'gru-take-tour.student-home.stepTen.title': 'తరగతి గదులు',
   'gru-take-tour.student-home.stepTen.description':
-    'మీరు నమోదు చేసిన అన్ని తరగతులను చూడండి.',
+    'మీరు చేరిన అన్ని తరగతి గదులను చూడండి.',
   'gru-take-tour.student-home.stepEleven.title': 'స్వతంత్ర అభ్యాసం',
   'gru-take-tour.student-home.stepEleven.description':
-    'మీరు బుక్ మార్క్ చేసిన అంశాలని అన్వేషించండి మరియు మీరు గురించి మరింత తెలుసుకోవాలనుకుంటున్నారా.',
-  'gru-take-tour.student-home.stepTwelve.title': 'తరగతిలో చేరండి',
+    'మీరు బుక్‌మార్క్ చేసిన విషయాలను అన్వేషించండి మరియు మీరు దాని గురించి మరింత తెలుసుకోవాలనుకుంటున్నారు.',
+  'gru-take-tour.student-home.stepTwelve.title': 'తరగతి గదిలో చేరండి',
   'gru-take-tour.student-home.stepTwelve.description':
-    'తరగతిలో చేరడానికి తరగతిలో కోడ్ను ఎంటర్ చెయ్యండి.',
-  'gru-take-tour.student-home.stepThirteen.title': 'పూర్తి!',
+    'తరగతి గదిలో చేరడానికి తరగతి గది కోడ్‌ను నమోదు చేయండి.',
+  'gru-take-tour.student-home.stepThirteen.title': 'పూర్తి అయింది !',
   'gru-take-tour.student-home.stepThirteen.description':
-    'ఇప్పుడు ముందుకు సాగండి మరియు మీరు నమోదు చేసుకున్న కోర్సుపై క్లిక్ చేయండి, తరగతిలో చేరండి లేదా మీకు ఆసక్తి ఉన్న కంటెంట్ కోసం శోధించండి.',
+    'ఇప్పుడు ముందుకు సాగండి మరియు మీరు చేరిన కోర్సుపై క్లిక్ చేయండి, తరగతి గదిలో చేరండి లేదా మీకు ఆసక్తి ఉన్న కంటెంట్ కోసం శోధించండి.',
   'gru-take-tour.student-performance.stepOne.title': 'స్వాగతం!',
   'gru-take-tour.student-performance.stepOne.description':
-    'మీ ప్రదర్శన డాష్బోర్డ్కు స్వాగతం. మీరు అన్ని తరగతులలో మరియు కోర్సులు ఎలా చేస్తున్నారో చూడవచ్చు.',
+    'మీ  డాష్‌బోర్డ్‌ పనితీరు కు స్వాగతం. మీరు అన్ని తరగతులు మరియు కోర్సులలో ఎలా పని చేస్తున్నారో చూడవచ్చు.',
   'gru-take-tour.student-performance.stepTwo.title': 'ఫిల్టర్ టాబ్',
   'gru-take-tour.student-performance.stepTwo.description':
-    'సూచించే, సమయ వ్యవధి, విషయం మరియు కోర్సు ద్వారా మీ పనితీరును ఫిల్టర్ చేయడానికి బాణం క్లిక్ చేయండి.',
-  'gru-take-tour.student-performance.stepThree.title': 'రిపోర్ట్ రిపోర్ట్',
+    'కార్యాచరణ, సమయ వ్యవధి, విషయం మరియు కోర్సు ద్వారా మీ పనితీరును ఫిల్టర్ చేయడానికి బాణంపై క్లిక్ చేయండి.',
+  'gru-take-tour.student-performance.stepThree.title': 'నవీకరణ నివేదిక',
   'gru-take-tour.student-performance.stepThree.description':
-    'మీరు మీ ఫిల్టర్లను ఎంచుకున్న తర్వాత, ఫలితాలను ప్రదర్శించడానికి నవీకరణ నివేదికపై క్లిక్ చేయండి.',
+    'మీరు మీ ఫిల్టర్‌లను ఎంచుకున్న తర్వాత, ఫలితాలను ప్రదర్శించడానికి నవీకరణ నివేదికపై క్లిక్ చేయండి.',
   'gru-take-tour.student-performance.stepFour.title': 'డౌన్లోడ్ / ముద్రణ',
   'gru-take-tour.student-performance.stepFour.description':
-    'మీ నివేదికను డౌన్లోడ్ చేయండి.',
-  'gru-take-tour.student-performance.stepFive.title': 'పూర్తి!',
+    'మీ నివేదికను డౌన్‌లోడ్ చేయండి.',
+  'gru-take-tour.student-performance.stepFive.title': 'పూర్తి అయింది !',
   'gru-take-tour.student-performance.stepFive.description':
-    'ముందుకు సాగండి మరియు మీ పనితీరు విశ్లేషించండి!',
+    'ముందుకు సాగండి మరియు మీ పనితీరును విశ్లేషించండి!',
   'gru-take-tour.student-class.stepOne.title': 'స్వాగతం!',
   'gru-take-tour.student-class.stepOne.description':
-    'మీ తరగతిలో స్వాగతం. ఇక్కడ మీరు మీ తరగతి కార్యకలాపాలు, కోర్సు మ్యాప్ మరియు పనితీరు డేటాను కనుగొంటారు. లెట్ యొక్క ప్రారంభించండి!',
-  'gru-take-tour.student-class.stepTopBar.title':
-    'కోర్సు, ప్రదర్శన, పూర్తయింది',
+    'మీ తరగతి గదికి స్వాగతం. ఇక్కడ మీరు మీ తరగతి కార్యకలాపాలు, కోర్సు మ్యాప్ మరియు పనితీరు డేటాను కనుగొంటారు. ప్రారంభిద్దాం!',
+  'gru-take-tour.student-class.stepTopBar.title': 'కోర్సు, పనితీరు, పూర్తి',
   'gru-take-tour.student-class.stepTopBar.description':
-    'ఇప్పటివరకు మీ కోర్సు యొక్క సారాంశం మరియు మొత్తం పనితీరును చూడండి.',
+    'ఇప్పటివరకు మీ కోర్సు మరియు మొత్తం పనితీరు యొక్క సారాంశాన్ని చూడండి.',
   'gru-take-tour.student-class.stepTwo.title': 'తరగతి కార్యకలాపాలు',
   'gru-take-tour.student-class.stepTwo.description':
-    'మీ ఉపాధ్యాయునిచే కేటాయించబడిన నేటి కార్యకలాపాలను యాక్సెస్ చేసుకోండి.',
+    'మీ గురువు కేటాయించిన నేటి కార్యకలాపాలను ప్రాప్యత చేయండి మరియు అధ్యయనం చేయండి.',
   'gru-take-tour.student-class.stepThree.title': 'కోర్సు మ్యాప్',
   'gru-take-tour.student-class.stepThree.description':
-    'కోర్సులో సేకరణలు మరియు అంచనాలను పూర్తి చేయడానికి యూనిట్లు మరియు పాఠాలు క్లిక్ చేయండి.',
+    'కోర్సులో సేకరణలు మరియు మదింపులను పూర్తి చేయడానికి యూనిట్లు మరియు పాఠాలపై క్లిక్ చేయండి.',
   'gru-take-tour.student-class.stepFour.title': 'నా నివేదిక',
   'gru-take-tour.student-class.stepFour.description':
     'మీ మొత్తం తరగతి పనితీరును సమీక్షించండి.',
-  'gru-take-tour.student-class.stepFive.title': 'పూర్తి!',
+  'gru-take-tour.student-class.stepFive.title': 'పూర్తి అయింది !',
   'gru-take-tour.student-class.stepFive.description':
-    'కోర్సు మ్యాప్ లేదా రోజువారీ కార్యకలాపాలను క్లిక్ చేయడం ద్వారా కోర్సును చదవడం ప్రారంభించండి.',
+    'కోర్సు మ్యాప్ లేదా రోజువారీ కార్యకలాపాలపై క్లిక్ చేయడం ద్వారా కోర్సును అధ్యయనం చేయడం ప్రారంభించండి.',
   'gru-take-tour.teacher-class.stepOne.title': 'స్వాగతం!',
   'gru-take-tour.teacher-class.stepOne.description':
-    'మీ తరగతిలో స్వాగతం. ఇక్కడ మీరు మీ రోజువారీ తరగతి కార్యకలాపాలు, కోర్సు మ్యాప్, అప్డేట్ క్లాస్ ఇన్ఫర్మేషన్ మరియు రివ్యూ విద్యార్థి పనితీరు డేటాను వీక్షించగలుగుతారు. లెట్ యొక్క ప్రారంభించండి!',
-  'gru-take-tour.teacher-class.stepTopBar.title':
-    'కోర్సు, ప్రదర్శన, పూర్తయింది',
+    'మీ తరగతి గదికి స్వాగతం. ఇక్కడ మీరు మీ రోజువారీ తరగతి కార్యకలాపాలు, కోర్సు మ్యాప్, తరగతి సమాచారాన్ని నవీకరించడం మరియు విద్యార్థుల పనితీరు డేటాను సమీక్షించగలరు. ప్రారంభిద్దాం!',
+  'gru-take-tour.teacher-class.stepTopBar.title': 'కోర్సు, పనితీరు, పూర్తి',
   'gru-take-tour.teacher-class.stepTopBar.description':
-    'ఇప్పటివరకు మీ కోర్సు యొక్క సారాంశం మరియు మొత్తం విద్యార్థి పనితీరును చూడండి.',
+    'ఇప్పటివరకు మీ కోర్సు మరియు మొత్తం విద్యార్థుల పనితీరు యొక్క సారాంశాన్ని చూడండి.',
   'gru-take-tour.teacher-class.stepTwo.title': 'రోజువారీ తరగతి కార్యకలాపాలు',
   'gru-take-tour.teacher-class.stepTwo.description':
-    'మీ విద్యార్థులకు నేటి కార్యకలాపాలను వీక్షించండి మరియు కేటాయించండి.',
+    'ఈ రోజు కార్యకలాపాలను మీ విద్యార్థులకు వీక్షించండి మరియు కేటాయించండి.',
   'gru-take-tour.teacher-class.stepThree.title': 'కోర్సు మ్యాప్',
   'gru-take-tour.teacher-class.stepThree.description':
     'కోర్సులో కేటాయించిన యూనిట్లు, పాఠాలు, సేకరణలు లేదా మదింపులను వీక్షించండి లేదా సవరించండి.',
   'gru-take-tour.teacher-class.stepFour.title': 'నా నివేదిక',
   'gru-take-tour.teacher-class.stepFour.description':
-    'కోర్సులో మీ విద్యార్థులు ఎలా పనిచేస్తున్నారో వారి సారాంశాన్ని వీక్షించండి మరియు వారి నివేదికలను ప్రాప్యత చేయండి.',
+    'మీ విద్యార్థులు కోర్సులో ఎలా పని చేస్తున్నారో సారాంశాన్ని చూడండి మరియు వారి నివేదికలను యాక్సెస్ చేయండి.',
   'gru-take-tour.teacher-class.stepClassManagement.title': 'తరగతి నిర్వహణ',
   'gru-take-tour.teacher-class.stepClassManagement.description':
-    'మీ తరగతి సమాచారాన్ని మరియు తరగతిలో నమోదు చేసుకున్న విద్యార్థులను కేటాయించండి లేదా నవీకరించండి.',
-  'gru-take-tour.teacher-class.stepFive.title': 'పూర్తి!',
+    'మీ తరగతి సమాచారాన్ని మరియు తరగతిలో చేరిన విద్యార్థులను కేటాయించండి లేదా నవీకరించండి.',
+  'gru-take-tour.teacher-class.stepFive.title': 'పూర్తి అయింది !',
   'gru-take-tour.teacher-class.stepFive.description':
-    'ఇప్పుడు మీ విద్యార్థులతో తరగతిలో పాల్గొనండి.',
+    'ఇప్పుడు ముందుకు సాగండి మరియు తరగతి గదిని మీ విద్యార్థులతో పంచుకోండి.',
   'gru-take-tour.study-player.stepOne.title': 'స్వాగతం!',
   'gru-take-tour.study-player.stepOne.description':
-    'ఈ మీ అధ్యయనం ఆటగాడు. మీకు అందుబాటులో ఉన్న లక్షణాలు ద్వారా నడకండి.',
+    'ఇది మీ స్టడీ ప్లేయర్. మీకు అందుబాటులో ఉన్న లక్షణాల ద్వారా దాన్నని డవనివ్వండి.',
   'gru-take-tour.study-player.stepTwo.title': 'కోర్సు మ్యాప్',
   'gru-take-tour.study-player.stepTwo.description':
-    'మీ కోర్సు మ్యాప్కు తిరిగి రావడానికి ఎప్పుడైనా చిహ్నంపై క్లిక్ చేయండి.',
+    'మీ కోర్సు మ్యాప్‌కు తిరిగి రావడానికి ఎప్పుడైనా చిహ్నంపై క్లిక్ చేయండి.',
   'gru-take-tour.study-player.stepThree.title': 'కోర్సు పేరు',
   'gru-take-tour.study-player.stepThree.description':
     'మీరు పనిచేస్తున్న కోర్సును సూచిస్తుంది.',
   'gru-take-tour.study-player.stepFour.title': 'సూచనలు',
   'gru-take-tour.study-player.stepFour.description':
-    'మీరు ప్రస్తుతం అధ్యయనం చేస్తున్న దాని ఆధారంగా మీరు అన్వేషించదలిచిన అదనపు వనరులు.',
-  'gru-take-tour.study-player.stepFive.title': 'పూర్తి',
+    'మీరు ప్రస్తుతం చదువుతున్న దాని ఆధారంగా అన్వేషించాలనుకునే అదనపు వనరులు.',
+  'gru-take-tour.study-player.stepFive.title': 'పూర్తిగా',
   'gru-take-tour.study-player.stepFive.nuTitle': 'సామర్ధ్యాలు',
   'gru-take-tour.study-player.stepFive.description':
-    'ఎంత పూర్తి చేశావు అని సూచిస్తుంది.',
+    'మీరు ఎంత కోర్సు పూర్తి చేశారో సూచిస్తుంది.',
   'gru-take-tour.study-player.stepSix.title': 'ప్రదర్శన',
   'gru-take-tour.study-player.stepSix.description':
-    'మీరు కోర్సులో ఎలా చేస్తున్నారో సూచిస్తుంది.',
-  'gru-take-tour.study-player.stepSeven.title': 'రిసోర్స్ కి స్పందించండి',
+    'మీరు కోర్సులో ఎలా పని చేస్తున్నారో సూచిస్తుంది.',
+  'gru-take-tour.study-player.stepSeven.title': 'వనరుల కు ప్రతిస్పందించండి',
   'gru-take-tour.study-player.stepSeven.description':
-    'మీరు ఈ వనరు గురించి మీ గురించే ఏమనుకుంటున్నారో తెలియజేయండి.',
-  'gru-take-tour.study-player.stepEight.title': 'పూర్తి!',
-  'gru-take-tour.study-player.stepEight.description': 'చదవడం ప్రారంభించండి!',
-  'gru-take-tour.study-player.stepNine.title': 'తిరిగి సేకరణకు',
+    'ఈ వనరు గురించి మీరు ఏమనుకుంటున్నారో మీ గురువుకు తెలియజేయండి.',
+  'gru-take-tour.study-player.stepEight.title': 'పూర్తి అయింది !',
+  'gru-take-tour.study-player.stepEight.description': 'అధ్యయనం ప్రారంభించండి!',
+  'gru-take-tour.study-player.stepNine.title': 'తిరిగి సేకరణ కు',
   'gru-take-tour.study-player.stepNine.description':
-    'మీ సేకరణకు లేదా అంచనాకు తిరిగి రావడానికి ఏ సమయంలో అయినా చిహ్నంపై క్లిక్ చేయండి.',
+    'మీ సేకరణ లేదా అంచనాకు తిరిగి రావడానికి ఎప్పుడైనా చిహ్నంపై క్లిక్ చేయండి.',
   'gru-take-tour.library.stepOne.title': 'స్వాగతం!',
   'gru-take-tour.library.stepOne.description':
-    'అభ్యాస నావికుడులో లైబ్రరీలకు స్వాగతం.',
-  'gru-take-tour.library.stepTwo.title': 'ఫీచర్ కోర్సులు',
+    'అభ్యాస నావిగేటర్‌లోని లైబ్రరీలకు స్వాగతం.',
+  'gru-take-tour.library.stepTwo.title': 'ఫీచర్ చేసిన కోర్సులు',
   'gru-take-tour.library.stepTwo.description':
-    'విద్యావేత్తలు తరగతి గదిలో అభివృద్ధి మరియు అమలు కోర్సులు అన్వేషించండి.',
-  'gru-take-tour.library.stepThree.title': 'ఇతర గ్రంధాలయాలు',
+    'అధ్యాపకులు తరగతి గదులలో అభివృద్ధి చేసిన మరియు అమలు చేసిన కోర్సులను అన్వేషించండి.',
+  'gru-take-tour.library.stepThree.title': 'ఇతర గ్రంథాలయాలు',
   'gru-take-tour.library.stepThree.description':
-    'gooru యొక్క భాగస్వాములు అభివృద్ధి కంటెంట్ అన్వేషించండి.',
+    'గూరు/\' యొక్క  భాగస్వాములు అభివృద్ధి చేసిన కంటెంట్‌ను అన్వేషించండి.',
   'gru-take-tour.library.stepFour.title': 'ప్రివ్యూ',
   'gru-take-tour.library.stepFour.description':
-    'మీకు ఆసక్తి ఉన్నట్లయితే చూడటానికి కోర్సును ప్రివ్యూ చేయండి.',
-  'gru-take-tour.library.stepFive.title': 'వాటా',
-  'gru-take-tour.library.stepFive.description':
-    'ఈ కోర్సును ఇతరులతో పంచుకునేందుకు.',
-  'gru-take-tour.library.stepSix.title': 'బుక్మార్క్',
+    'మీకు ఆసక్తి ఉందో లేదో తెలుసుకోవడానికి కోర్సును ప్రివ్యూ చేయండి.',
+  'gru-take-tour.library.stepFive.title': 'షేర్',
+  'gru-take-tour.library.stepFive.description': 'ఈ కోర్సును ఇతరులతో పంచుకోండి.',
+  'gru-take-tour.library.stepSix.title': 'పుస్తక గుర్తు',
   'gru-take-tour.library.stepSix.description':
-    'దీన్ని తర్వాత సమీక్షించడానికి ఈ కోర్సును బుక్మార్క్ చేయండి.',
+    'ఈ కోర్సును తరువాత సమీక్షించడానికి బుక్‌మార్క్ చేయండి.',
   'gru-take-tour.profile.stepOne.title': 'స్వాగతం!',
   'gru-take-tour.profile.stepOne.description':
-    'మీ ప్రొఫైల్కు స్వాగతం. ఇక్కడ మీరు మీ కంటెంట్, వ్యక్తిగత సమాచారం మరియు అనుచరులను యాక్సెస్ చేయవచ్చు.',
-  'gru-take-tour.profile.stepTwo.title': 'నా కంటెంట్',
+    'మీ ప్రొఫైల్‌కు స్వాగతం. ఇక్కడ మీరు మీ కంటెంట్, వ్యక్తిగత సమాచారం మరియు అనుచరులను యాక్సెస్ చేయవచ్చు.',
+  'gru-take-tour.profile.stepTwo.title': 'నాయొక్క ఇష్టం',
   'gru-take-tour.profile.stepTwo.description':
-    'క్రొత్త కంటెంట్ను సృష్టించండి మరియు మీరు రీమిక్స్ చేసిన కంటెంట్ను వీక్షించండి.',
+    'క్రొత్త కంటెంట్‌ను సృష్టించండి మరియు మీరు రీమిక్స్ చేసిన కంటెంట్‌ను చూడండి.',
   'gru-take-tour.profile.stepThree.title': 'నా గురించి',
   'gru-take-tour.profile.stepThree.description':
     'మీ వ్యక్తిగత సమాచారం, పాఠశాల సమాచారం మరియు మీ ప్రొఫైల్ చిత్రాన్ని నవీకరించండి.',
-  'gru-take-tour.profile.stepFour.title': 'గోల్స్',
+  'gru-take-tour.profile.stepFour.title': 'లక్ష్యాలు',
   'gru-take-tour.profile.stepFour.description':
-    'సెట్ మరియు మీరు మీ నేర్చుకోవడం మైలురాళ్ళు సాధించడానికి సహాయం గోల్స్ ట్రాక్.',
+    'మీ అభ్యాస మైలురాళ్లను సాధించడంలో మీకు సహాయపడటానికి లక్ష్యాలను సెట్ చేయండి మరియు ట్రాక్ చేయండి.',
   'gru-take-tour.profile.stepFive.title': 'అనుచరులు',
   'gru-take-tour.profile.stepFive.description':
-    'మీరు ఇతరుల కంటెంట్ను ఇష్టపడితే, మీరు వాటిని అనుసరించవచ్చు. మీరు ఎవరు అనుసరించారో కూడా చూడవచ్చు.',
+    'మీరు ఒకరి కంటెంట్‌ను ఇష్టపడితే, మీరు వారిని అనుసరించవచ్చు. మిమ్మల్ని ఎవరు అనుసరిస్తున్నారో కూడా మీరు చూడవచ్చు.',
   'gru-take-tour.profile.stepSix.title': 'బ్యాడ్జ్లు',
   'gru-take-tour.profile.stepSix.description':
-    'మీరు అందుకున్న బ్యాడ్జ్లను సమీక్షించండి. మీ గురువు కేటాయించిన బెంచ్మార్క్ అంచనాను పూర్తి చేస్తే మీరు బ్యాడ్జ్ను స్వీకరిస్తారు.',
-  'gru-tour.assessments-settings.stepOne.title':
-    'పేజీకి సంబంధించిన లింకులు మరియు స్కోరింగ్',
+    'మీరు అందుకున్న బ్యాడ్జ్‌లను సమీక్షించండి. మీరు మీ గురువు కేటాయించి ప్రమాణం  అంచనాను పూర్తి చేస్తే మీకు బ్యాడ్జ్ అందుతుంది.',
+  'gru-tour.assessments-settings.stepOne.title': 'నావిగేషన్ మరియు స్కోరింగ్',
   'gru-tour.assessments-settings.stepOne.description':
-    'ఈ సెట్టింగు విద్యార్థులు ఎలా అంచనా వేయగలరో నిర్ణయిస్తుంది మరియు వారి సమాధానాలు సరియైన లేదా తప్పుగా ఉన్నాయని చూపిస్తుంది. అది వారికి జవాబు కీని చూపదు.',
+    'ఈ సెట్టింగ్ విద్యార్థులు అంచనా ద్వారా ఎలా కదలగలదో నిర్ణయిస్తుంది మరియు వారి సమాధానాలు సరైనవి లేదా తప్పు కాదా అని చూపిస్తుంది. ఇది వారికి జవాబు కీని చూపించదు.',
   'gru-tour.assessments-settings.stepTwo.title':
-    'సమాధానం కీ మరియు ప్రయత్నాలు సంఖ్య',
+    'జవాబు కీ మరియు ఎన్ని సార్లు  ప్రయత్నాలు చేసేరో',
   'gru-tour.assessments-settings.stepTwo.description':
-    'ఈ సెట్టింగ్ ఒక జవాబు కీని వెల్లడి చేయడానికి అనుమతిస్తుంది మరియు అంచనా పై ఉన్న విద్యార్థుల ప్రయత్నాల సంఖ్యను అమర్చుతుంది.',
+    'ఈ సెట్టింగ్ జవాబు కీ ని బహిర్గతం చేయడానికి అనుమతిస్తుంది మరియు అంచనాపై విద్యార్థులు ఎన్ని ప్రయత్నాలు చేస్తారో సెట్ చేస్తుంది.',
   'gru-tour.overview.stepOne.title': 'కోర్సు మ్యాప్',
   'gru-tour.overview.stepOne.description':
-    'కోర్సు మ్యాప్ మీ విద్యార్థులకు మీరు వారికి కేటాయించే అన్ని మదింపులను మరియు సేకరణలను యాక్సెస్ అందిస్తుంది.',
+    'కోర్సు మ్యాప్ మీ విద్యార్థులకు మీరు కేటాయించిన అన్ని మదింపులకు మరియు సేకరణలకు ప్రాప్తిని అందిస్తుంది.',
   'gru-tour.overview.stepTwo.title': 'తరగతి కోడ్',
-  'gru-tour.overview.stepTwo.description': 'మీరు సృష్టించిన ప్రతి తరగతి గదికి అసాధారణ మయన  తరగతి కోడ్ ఉంటుంది. మీ తరగతి గదిలో చేరడానికి మరియు మీ కంటెంట్‌ను యాక్సెస్ చేయడానికి మీరు సిద్ధంగా ఉన్నప్పుడు మీరు ఈ కోడ్‌ను విద్యార్థులకు ఇస్తారు.',
-  'gru-tour.overview.stepThree.title': 'విద్యార్థి మరియు తరగతి డేటాను పర్యవేక్షించండి',
-  'gru-tour.overview.stepThree.description': 'విద్యార్థులు కోర్సులో భాగమైన మదింపులను పూర్తి చేసినప్పుడు తరగతి మరియు వ్యక్తిగత విద్యార్థుల అంచనా డేటాను చూడటానికి ఇది మీకు  అనుమతిస్తుంది.',
+  'gru-tour.overview.stepTwo.description':
+    'మీరు సృష్టించిన ప్రతి తరగతి గదికి అసాధారణ మయన  తరగతి కోడ్ ఉంటుంది. మీ తరగతి గదిలో చేరడానికి మరియు మీ కంటెంట్‌ను యాక్సెస్ చేయడానికి మీరు సిద్ధంగా ఉన్నప్పుడు మీరు ఈ కోడ్‌ను విద్యార్థులకు ఇస్తారు.',
+  'gru-tour.overview.stepThree.title':
+    'విద్యార్థి మరియు తరగతి డేటాను పర్యవేక్షించండి',
+  'gru-tour.overview.stepThree.description':
+    'విద్యార్థులు కోర్సులో భాగమైన మదింపులను పూర్తి చేసినప్పుడు తరగతి మరియు వ్యక్తిగత విద్యార్థుల అంచనా డేటాను చూడటానికి ఇది మీకు  అనుమతిస్తుంది.',
   'gru-tour.overview.stepFour.title': 'తరగతి గది సమాచారం',
-  'gru-tour.overview.stepFour.description': 'ఇక్కడ మీరు మీ తరగతి గది పేరును సవరించవచ్చు, మీ విద్యార్థుల కోసం ప్రకటనలను పోస్ట్ చేయవచ్చు, మీ తరగతిలో చేరిన విద్యార్థుల పేర్లను చూడవచ్చు మరియు మీ తరగతి గదిని తొలగించవచ్చు.',
+  'gru-tour.overview.stepFour.description':
+    'ఇక్కడ మీరు మీ తరగతి గది పేరును సవరించవచ్చు, మీ విద్యార్థుల కోసం ప్రకటనలను పోస్ట్ చేయవచ్చు, మీ తరగతిలో చేరిన విద్యార్థుల పేర్లను చూడవచ్చు మరియు మీ తరగతి గదిని తొలగించవచ్చు.',
   'gru-tour.overview.stepFive.title': 'మీ కోర్సు కంటెంట్‌ను సవరించడం',
-  'gru-tour.overview.stepFive.description': 'మీరు తరగతి గదిలో ఉన్నప్పుడు, మీ విద్యార్థులకు కేటాయించిన ఏదైనా కోర్సు కంటెంట్‌ను సవరించడానికి ఇక్కడ క్లిక్ చేయండి.',
+  'gru-tour.overview.stepFive.description':
+    'మీరు తరగతి గదిలో ఉన్నప్పుడు, మీ విద్యార్థులకు కేటాయించిన ఏదైనా కోర్సు కంటెంట్‌ను సవరించడానికి ఇక్కడ క్లిక్ చేయండి.',
   'gru-tour.overview.stepSix.title': 'నిజ సమయంలో పురోగతిని పర్యవేక్షించండి!',
-  'gru-tour.overview.stepSix.description': 'నిజ సమయంలో ఒక అంచనాపై తరగతి పురోగతిని పర్యవేక్షించడానికి రియల్ టైమ్ డాష్‌బోర్డ్‌ను ఉపయోగించండి. <br> <br> విద్యార్థుల కోసం రియల్ టైమ్ అసెస్‌మెంట్‌ను ప్రారంభించడానికి ప్రతి అసెస్‌మెంట్ యొక్క ఎడమ వైపున ఉన్న  "గో లైవ్ " చిహ్నంపై క్లిక్ చేయండి. . <br> <br>',
+  'gru-tour.overview.stepSix.description':
+    'నిజ సమయంలో ఒక అంచనాపై తరగతి పురోగతిని పర్యవేక్షించడానికి రియల్ టైమ్ డాష్‌బోర్డ్‌ను ఉపయోగించండి. <br> <br> విద్యార్థుల కోసం రియల్ టైమ్ అసెస్‌మెంట్‌ను ప్రారంభించడానికి ప్రతి అసెస్‌మెంట్ యొక్క ఎడమ వైపున ఉన్న  "గో లైవ్ " చిహ్నంపై క్లిక్ చేయండి. . <br> <br>',
   'gru-tour.quick-start.stepOne.title': 'మీ తరగతి గదులను నావిగేట్ చేస్తుంది',
-  'gru-tour.quick-start.stepOne.description': 'ఇది కొత్తగా సృష్టించబడిన తరగతి గది యొక్క దృశ్యం. ఎప్పుడైనా తరగతి గదికి తిరిగి రావడానికి,  "తరగతి గదులు " పై క్లిక్ చేసి, మీరు ప్రవేశించాలనుకుంటున్న తరగతి గదిని ఎంచుకోవడానికి డ్రాప్ డౌన్ మెనుని ఉపయోగించండి.',
-  'gru-tour.quick-start.stepTwo.title': 'మొదలు పెట్టండి ? ఒక అంచనాను సృష్టించండి!',
-  'gru-tour.quick-start.stepTwo.description': 'గూరుతో ప్రారంభించడానికి మరియు మీ తరగతిలో విద్యార్థుల అవగాహన స్థాయిలను అంచనా వేయడానికి ఒక మార్గంగా ఒక అంచనాను సృష్టించమని మేము సూచిస్తున్నాము.',
+  'gru-tour.quick-start.stepOne.description':
+    'ఇది కొత్తగా సృష్టించబడిన తరగతి గది యొక్క దృశ్యం. ఎప్పుడైనా తరగతి గదికి తిరిగి రావడానికి,  "తరగతి గదులు " పై క్లిక్ చేసి, మీరు ప్రవేశించాలనుకుంటున్న తరగతి గదిని ఎంచుకోవడానికి డ్రాప్ డౌన్ మెనుని ఉపయోగించండి.',
+  'gru-tour.quick-start.stepTwo.title':
+    'మొదలు పెట్టండి ? ఒక అంచనాను సృష్టించండి!',
+  'gru-tour.quick-start.stepTwo.description':
+    'గూరుతో ప్రారంభించడానికి మరియు మీ తరగతిలో విద్యార్థుల అవగాహన స్థాయిలను అంచనా వేయడానికి ఒక మార్గంగా ఒక అంచనాను సృష్టించమని మేము సూచిస్తున్నాము.',
   'gru-tour.real-time.stepOne.title': 'ప్రతిస్పందనల  యొక్క వైఫల్యం',
-  'gru-tour.real-time.stepOne.description': 'విద్యార్థులు వైఫల్యం గురించి  ఎలా సమాధానం ఇచ్చారు అనేదానిని చూడటానికి ప్రతి ప్రశ్నపై క్లిక్ చేయండి.',
+  'gru-tour.real-time.stepOne.description':
+    'విద్యార్థులు వైఫల్యం గురించి  ఎలా సమాధానం ఇచ్చారు అనేదానిని చూడటానికి ప్రతి ప్రశ్నపై క్లిక్ చేయండి.',
   'gru-tour.real-time.stepTwo.title': 'విద్యార్ధి   వ్యక్తిగత డేటా',
-  'gru-tour.real-time.stepTwo.description': 'వ్యక్తిగత విద్యార్థి డేటా నివేదికలను చూడటానికి ప్రతి విద్యార్థి టైల్ ఎంచుకోండి.',
+  'gru-tour.real-time.stepTwo.description':
+    'వ్యక్తిగత విద్యార్థి డేటా నివేదికలను చూడటానికి ప్రతి విద్యార్థి టైల్ ఎంచుకోండి.',
   'gru-tour.real-time.stepThree.title': 'వీక్షణను ఎంచుకోండి',
-  'gru-tour.real-time.stepThree.description': 'డేటాను ప్రదర్శించడానికి ఎంపికలను చూడటానికి "శీర్షిక వీక్షణ " లేదా "జాబితా వీక్షణ " ఎంచుకోండి.',
+  'gru-tour.real-time.stepThree.description':
+    'డేటాను ప్రదర్శించడానికి ఎంపికలను చూడటానికి "శీర్షిక వీక్షణ " లేదా "జాబితా వీక్షణ " ఎంచుకోండి.',
   'gru-tour.real-time.stepFour.title': 'సగటు స్కోరు',
   'gru-tour.real-time.stepFour.description':
-    'అన్ని ప్రతిస్పందనల కోసం నిజ-సమయములో క్లాస్ సరాసరిని లెక్కించుట చూడండి.',
+    'అన్ని ప్రతిస్పందనల కోసం సరయిన  సమయంలో లెక్కించిన తరగతి సగటు చూడండి.',
   'gru-tour.real-time.stepFive.title': 'ప్రాజెక్ట్ అనామక డేటా',
   'gru-tour.real-time.stepFive.description':
-    'విద్యార్థి డేటా యొక్క అనామక వీక్షణను రూపొందించడానికి ఈ ఎంపికను ఉపయోగించండి.',
-  'gru-course-play.hide-unit-details': 'యూనిట్ మెటాడేటాని దాచండి',
-  'gru-course-play.view-unit-details': 'యూనిట్ మెటాడేటాను వీక్షించండి',
+    'విద్యార్థుల డేటా యొక్క అనామక వీక్షణను ప్రదర్శించడానికి ఈ ఎంపికను ఉపయోగించండి.',
+  'gru-course-play.hide-unit-details': 'యూనిట్ మెటాడేటాను దాచు',
+  'gru-course-play.view-unit-details': 'యూనిట్ మెటాడేటాను చూడండి',
   'gru-course-play.performance': 'ప్రదర్శన',
-  'gru-century-skills.legends.hewlett': 'హేవ్లెట్ డీపెర్ లెర్నింగ్ మోడల్',
-  'gru-century-skills.legends.conley': 'నాలుగు కీలు',
-  'gru-century-skills.legends.framework': 'p21 చట్రం',
+  'gru-century-skills.legends.hewlett': 'హ్యూలెట్ లోతైన నేర్పించే  నమూనా',
+  'gru-century-skills.legends.conley': 'కోన్లీ నాలుగు కీలు',
+  'gru-century-skills.legends.framework': 'p21 ఫ్రేమ్‌వర్క్',
   'gru-century-skills.legends.national':
-    'జీవితం మరియు పని కోసం జాతీయ పరిశోధన కేంద్రం',
+    'జీవితం మరియు పని కోసం జాతీయ పరిశోధనా కేంద్రం',
   'gru-century-skills.content.groups.cognitive':
     'కీ అభిజ్ఞా నైపుణ్యాలు మరియు వ్యూహాలు',
-  'gru-century-skills.content.groups.content': 'కీ కంటెంట్ జ్ఞానం',
+  'gru-century-skills.content.groups.content': 'కీ కంటెంట్ పరిజ్ఞానం',
   'gru-century-skills.content.groups.learning':
     'కీ అభ్యాస నైపుణ్యాలు మరియు పద్ధతులు',
-  'gru-rubric-edit.upload-rubric': 'రూబ్రిక్ అప్లోడ్',
+  'gru-rubric-edit.upload-rubric': 'అప్‌లోడ్ రుబ్రిక్',
   'gru-rubric-edit.copy.success-message':
-    'మీరు రూబ్రిక్ {{title}} ను కాపీ చేసారు. మీరు ఆ కూర్పును సవరించాలనుకుంటున్నారా?',
-  'gru-rubric-creation.url': 'url',
-  'gru-rubric-creation.upload-file': 'ఫైల్ను అప్లోడ్ చేయండి',
+    'మీరు రుబ్రిక్  {{title}}  ను కాపీ చేసారు. మీరు ఆ రుబ్రిక్‌ను సవరించాలనుకుంటున్నారా?',
+  'gru-rubric-creation.url': 'యు ఆర్ యల్',
+  'gru-rubric-creation.upload-file': 'ఫైల్‌ను అప్‌లోడ్ చేయండి',
   'gru-rubric-creation.add-category': 'క్రొత్త వర్గాన్ని జోడించండి',
   'gru-rubric-creation.gru-preview-url.preview':
-    'పైన రబ్రిక్ జోడించడానికి మరియు ఇక్కడ ప్రివ్యూ',
-  'gru-rubric-creation.overall-narrative': 'మొత్తం కథనం చూడు',
-  'gru-rubric-creation.feedback-guidance': 'చూడు మార్గదర్శిని',
+    'పైన రుబ్రిక్ జోడించండి మరియు ఇక్కడ ప్రివ్యూ చేయండి',
+  'gru-rubric-creation.overall-narrative': 'మొత్తం కథనం అభిప్రాయం',
+  'gru-rubric-creation.feedback-guidance': 'మార్గదర్శకత్వం అభిప్రాయం',
   'gru-rubric-creation.required-feedback': 'అభిప్రాయం అవసరం',
   'gru-rubric-creation.feedback-guidance-placeholder':
-    'మొత్తంగా వ్యాసంలో మీ అభిప్రాయాన్ని సంగ్రహించండి.',
+    'వ్యాసంపై మీ అభిప్రాయాన్ని సంగ్రహించండి.',
   'gru-rubric-creation.gru-category.category-title': 'వర్గం శీర్షిక',
   'gru-rubric-creation.gru-category.category-feedback':
-    'మాజీ. మీరు ఈ వర్గాన్ని సమీక్షిస్తున్నందున, రచయిత యొక్క ప్రయోజనానికి జాగ్రత్తగా శ్రద్ధ వహించండి.',
+    'మాజీ. మీరు ఈ వర్గాన్ని సమీక్షిస్తున్నప్పుడు, రచయిత యొక్క ఉద్దేశ్యంపై జాగ్రత్తగా శ్రద్ధ వహించండి.',
   'gru-rubric-creation.gru-category.gru-scoring-levels.0':
-    'ఉదాహరణకు: నైపుణ్యానికి మించిపోయింది',
+    'ఉదాహరణ: నైపుణ్యాన్ని మించిపోయింది',
   'gru-rubric-creation.gru-category.gru-scoring-levels.1':
-    'ఉదాహరణకు: సమావేశం నైపుణ్యం',
+    'ఉదాహరణ: సమావేశ నైపుణ్యం',
   'gru-rubric-creation.gru-category.gru-scoring-levels.2':
-    'ఉదాహరణకు: ప్రావీణ్యతను చేరుకోవడం',
+    'ఉదాహరణ: నైపుణ్యాన్ని సమీపించడం',
   'gru-rubric-creation.gru-category.gru-scoring-levels.3':
-    'ఉదాహరణకు: ప్రారంభ నైపుణ్యం',
+    'ఉదాహరణ: ప్రారంభ నైపుణ్యం',
   'gru-rubric-creation.gru-category.gru-scoring-levels.4':
-    'ఉదాహరణ: నైపుణ్యానికి ఎటువంటి ఆధారం లేదు',
+    'ఉదాహరణ: నైపుణ్యం యొక్క సాక్ష్యం లేదు',
   'gru-rubric-creation.gru-category.gru-scoring-levels.best': 'ఉత్తమ',
   'gru-rubric-creation.gru-category.gru-scoring-levels.levels': 'స్థాయి',
   'gru-rubric-creation.gru-category.gru-scoring-levels.new-level':
@@ -2403,7 +2484,7 @@ window.i18ln = {
   'gru-rubric-creation.gru-category.gru-scoring-levels.name-error':
     'దయచేసి స్థాయి శీర్షికను నమోదు చేయండి.',
   'gru-rubric-creation.gru-category.gru-scoring-levels.score-error':
-    'దయచేసి స్కోర్ విలువను నమోదు చేయండి.',
+    'దయచేసి స్కోరు విలువను నమోదు చేయండి.',
   'gru-rubric-creation.gru-category.gru-scoring-levels.no-levels-error':
     'దయచేసి కనీసం ఒక స్థాయికి విలువను సెట్ చేయండి.',
   'library.browse-library': 'లైబ్రరీని బ్రౌజ్ చేయండి',
@@ -2435,7 +2516,7 @@ window.i18ln = {
   'gru-study-header.check-summary': 'మీ సారాంశం నివేదికను తనిఖీ చేయండి',
   'gru-study-header.check-usage': 'మీ వినియోగ నివేదికను తనిఖీ చేయండి',
   'gru-study-header.no-suggestions':
-    'మేము మీ అభ్యాసకులకు మద్దతు ఇచ్చే ఉత్తమ సలహాలను చేస్తున్నాము',
+    'మేము మీ అభ్యాసానికి మద్దతు ఇవ్వడానికి ఉత్తమ సూచనలపై పని చేస్తున్నాము',
   'gru-study-header.resource.zero': 'వనరు',
   'gru-study-header.resource.one': 'వనరు',
   'gru-study-header.resource.other': 'వనరులు',
@@ -2443,28 +2524,28 @@ window.i18ln = {
   'gru-study-header.question.one': 'ప్రశ్న',
   'gru-study-header.question.other': 'ప్రశ్నలు',
   'gru-study-header.suggestions-legend':
-    'మరింత తెలుసుకోవడానికి, ఈ వనరులను చూడండి.',
-  'gru-suggest-test.pre-test-header': 'ముందు పరీక్ష (ఐచ్ఛికం)',
-  'gru-suggest-test.post-test-header': 'పోస్ట్-పరీక్ష (ఐచ్ఛికం)',
+    'మరింత నేర్చుకోవడానికి , ఈ వనరులను చూడండి.',
+  'gru-suggest-test.pre-test-header': 'జరిగిన-పరీక్ష  (ఐచ్ఛికం)',
+  'gru-suggest-test.post-test-header': 'జరగా బోయే -పరీక్ష  (ఐచ్ఛికం)',
   'gru-suggest-test.backfill-header': 'సూచించిన సేకరణ (ఐచ్ఛికం)',
   'gru-suggest-test.benchmark-header': 'బెంచ్మార్క్-పరీక్ష (ఐచ్ఛికం)',
   'gru-suggest-test.resource-header': 'సూచించిన వనరు (ఐచ్ఛికం)',
   'gru-suggest-test.signature_collection-header': 'సూచించిన సేకరణ (ఐచ్ఛికం)',
   'gru-suggest-test.signature_collection-lead':
-    'ఈ కోర్సులో మీ పనితీరు ఆధారంగా, ఈ క్రింది సేకరణ మీ అవగాహనను పెంచుతుంది.',
+    'ఈ కోర్సులో మీ పనితీరు ఆధారంగా, కింది సేకరణ మీ అవగాహనను పెంచుతుంది.',
   'gru-suggest-test.signature_assessment-header': 'సూచించిన అంచనా (ఐచ్ఛికం)',
   'gru-suggest-test.signature_assessment-lead':
-    'ఈ కోర్సులో మీ పనితీరు ఆధారంగా, క్రింది అంచనా మీ అవగాహన పెంచుతుంది.',
-  'gru-suggest-test.pre-test-lead':
-    'ఈ పాఠంలో భావనలు మీ ప్రస్తుత అవగాహనను కొలవడానికి ముందుగా పరీక్షను సూచించారు. ముందు పరీక్షలో పాఠంలోని పాఠ్యాంశాలకు మీరు సిద్ధం చేయడంలో సహాయపడుతుంది. ముందు పరీక్ష మీ కోర్సు పనితీరు స్కోర్ను ప్రభావితం చేయదు.',
+    'ఈ కోర్సులో మీ పనితీరు ఆధారంగా, కింది అంచనా మీ అవగాహనను పెంచుతుంది.',
+  'gru-suggest-test.pre-tessignaturet-lead':
+    'ఈ పాఠంలోని భావనలపై మీ ప్రస్తుత అవగాహనను కొలవడానికి ముందస్తు పరీక్ష సూచించబడింది. ముందస్తు పరీక్ష పాఠంలోని కంటెంట్ కోసం మిమ్మల్ని సిద్ధం చేయడంలో సహాయపడుతుంది. జరిగిన -పరీక్ష  మీ కోర్సు పనితీరు స్కోర్‌ను ప్రభావితం చేయదు.',
   'gru-suggest-test.post-test-lead':
-    'అందించిన సమాచారం యొక్క మీ అవగాహనను కొలవడానికి క్రింది పోస్ట్-పరీక్ష సూచించబడింది. పోస్ట్-పరీక్ష మీ కోర్సు పనితీరు స్కోర్ను ప్రభావితం చేయదు.',
+    'సమర్పించిన సమాచారంపై మీ అవగాహనను కొలవడానికి క్రింది జరగ బోయే -పరీక్ష . జరగ బోయే -పరీక్ష  మీ కోర్సు పనితీరు స్కోర్‌ను ప్రభావితం చేయదు.',
   'gru-suggest-test.backfill-lead':
-    'మీ పూర్వ పరీక్ష నుండి వచ్చిన ప్రతిస్పందనల ఆధారంగా, పాఠం ప్రారంభించే ముందు అదనపు సమాచారాన్ని సమీక్షించడంలో ఇది సహాయపడుతుంది. సహాయక సామగ్రిని సమీక్షిస్తూ కొత్త అంశాన్ని నేర్చుకోవడానికి విద్యార్థులను సిద్ధం చేయవచ్చు.',
+    'మీ ముందస్తు పరీక్ష నుండి వచ్చిన ప్రతిస్పందనల ఆధారంగా, పాఠాన్ని ప్రారంభించే ముందు అదనపు విషయాలను సమీక్షించడం సహాయపడుతుంది. సహాయక సామగ్రిని సమీక్షించడం కొత్త విషయాలను నేర్చుకోవడానికి విద్యార్థులను సిద్ధం చేయడంలో సహాయపడుతుంది.',
   'gru-suggest-test.benchmark-lead':
-    'మీరు ఇప్పుడు బెంచ్మార్క్ అంచనాను తీసుకోవడం ద్వారా మీ అవగాహనను ప్రదర్శించడానికి సిద్ధంగా ఉన్నాము. మీరు బెంచ్మార్క్ను విజయవంతంగా పూర్తి చేయడానికి బ్యాడ్జ్ను సంపాదిస్తారు. బెంచ్మార్క్ మీ కోర్సు పనితీరు స్కోర్ను ప్రభావితం చేయదు.',
+    'బెంచ్ మార్క్ అంచనా వేయడం ద్వారా మీ అవగాహనను ప్రదర్శించడానికి మీరు ఇప్పుడు సిద్ధంగా ఉన్నారు. బెంచ్‌మార్క్‌ను విజయవంతంగా పూర్తి చేసినందుకు మీరు బ్యాడ్జ్ సంపాదిస్తారు. బెంచ్ మార్క్ మీ కోర్సు పనితీరు స్కోర్‌ను ప్రభావితం చేయదు.',
   'gru-suggest-test.resource-lead':
-    'ఈ కోర్సులో మీ పనితీరు ఆధారంగా, క్రింది వనరు మీ అవగాహనను పెంచుతుంది.',
+    'ఈ కోర్సులో మీ పనితీరు ఆధారంగా, కింది వనరు మీ అవగాహనను పెంచుతుంది.',
   'gru-suggest-test.no': 'లేదు, ధన్యవాదాలు',
   'gru-suggest-test.no-suggestions': 'మీ పనితీరు సారాంశం ఇక్కడ ఉంది.',
   'gru-suggest-test.take': '{{type}} తీసుకోండి',
@@ -2472,75 +2553,74 @@ window.i18ln = {
   'gru-suggest-test.take-signature-assessment': 'అధ్యయనం అంచనాను సూచించింది',
   'gru-suggest-test.take-backfill-pretest': 'అధ్యయనం సూచించిన సేకరణ',
   'gru-suggest-test.take-resource': 'అధ్యయనం వనరు',
-  'gru-suggest-test.end-of-course': 'మీరు కోర్సు ముగిసిన చేరుకున్నారు.',
-  'gru-content-suggestion.header': 'మాకు మీ కోసం సలహా ఉంది!',
+  'gru-suggest-test.end-of-course': 'మీరు కోర్సు ముగింపుకు చేరుకున్నారు.',
+  'gru-content-suggestion.header': 'మీ కోసం మా సలహా !',
   'gru-content-suggestion.suggestion-text.collection':
-    'ఈ అంశంపై మీ పనితీరుపై ఆధారపడిన, మీరు పాండిత్యం పొందడంలో సహాయపడటానికి మా సూచించిన సేకరణ ద్వారా వెళ్ళాలని మేము సిఫార్సు చేస్తున్నాము.',
+    'ఈ అంశంపై మీ పనితీరు ఆధారంగా, మీరు పాండిత్యం పొందడంలో సహాయపడటానికి మా సూచించిన సేకరణ ద్వారా వెళ్లాలని మేము సిఫార్సు చేస్తున్నాము.',
   'gru-content-suggestion.suggestion-text.assessment':
-    'ఈ అంశంపై మీ పనితీరుపై ఆధారపడి, మీరు పాండిత్యం పొందడంలో సహాయపడటానికి మా సూచించిన అంచనా ద్వారా వెళ్ళాలని మేము సిఫార్సు చేస్తున్నాము.',
-  'student-open-ended-summary.overall-comment': 'మొత్తం వ్యాఖ్య',
+    'ఈ అంశంపై మీ పనితీరు ఆధారంగా, మీరు పాండిత్యం పొందడంలో సహాయపడటానికి మా సూచించిన అంచనా ద్వారా వెళ్లాలని మేము సిఫార్సు చేస్తున్నాము.',
+  'student-open-ended-summary.overall-comment': 'మొత్తం మీద  వ్యాఖ్య',
   'student-open-ended-summary.overall-score': 'మొత్తం స్కోర్',
-  'student-open-ended-summary.prompt': 'ప్రశ్న ప్రాంప్ట్',
+  'student-open-ended-summary.prompt': 'సరియిన ప్రశ్న',
   'gru-performance-chart.teacher-tooltip':
-    'మీ విద్యార్థులు ఈ పాఠం లో అన్ని అంచనాలు పూర్తి',
+    'మీ విద్యార్థులలో ఈ పాఠంలోని అన్ని మదింపులను పూర్తి చేశారు',
   'report.external-assessment-report.note':
-    'ఇది విద్యార్ధులకు అంచనా వేసిన స్కోర్లను తెలియజేసిన బాహ్య అంచనా. వ్యక్తిగత ప్రశ్న స్థాయి డేటా అందుబాటులో లేదు.',
-  'report.external-assessment-report.wish': 'అభినందనలు! మీరు స్కోర్ చేశారు',
+    'ఇది అంచనా కోసం విద్యార్థి నివేదించిన స్కోర్‌లతో బాహ్య అంచనా. వ్యక్తిగత ప్రశ్న స్థాయి డేటా అందుబాటులో లేదు.',
+  'report.external-assessment-report.wish': 'అభినందనలు! మీరు స్కోర్ చేసారు',
   'report.external-assessment-report.reference':
-    'ఈ బాహ్య అంచనాను ఆక్సెస్ చెయ్యవచ్చు',
+    'ఈ బాహ్య అంచనాను యాక్సెస్ చేయవచ్చు',
   'report.external-collection-report.note':
-    'ఈ సేకరణ కోసం స్కోర్లు స్కోర్ చేసిన విద్యార్థితో బాహ్య సేకరణ. వ్యక్తిగత ప్రశ్న స్థాయి డేటా అందుబాటులో లేదు.',
-  'report.external-collection-report.wish': 'అభినందనలు! మీరు స్కోర్ చేశారు',
+    'ఇది సేకరణ కోసం విద్యార్థుల నివేదించిన స్కోర్‌లతో బాహ్య సేకరణ. వ్యక్తిగత ప్రశ్న స్థాయి డేటా అందుబాటులో లేదు.',
+  'report.external-collection-report.wish': 'అభినందనలు! మీరు స్కోర్ చేసారు',
   'report.external-collection-report.reference':
-    'ఈ బాహ్య సేకరణను ఆక్సెస్ చెయ్యవచ్చు',
-  'report.competency-report.title': 'యోగ్యతా నివేదిక',
-  'report.competency-report.no-subject': 'విషయం కేటాయించబడలేదు',
+    'ఈ బాహ్య సేకరణను యాక్సెస్ చేయవచ్చు',
+  'report.competency-report.title': 'సామర్థ్య నివేదిక',
+  'report.competency-report.no-subject': 'ఏ విషయం కేటాయించబడలేదు',
   'report.competency-report.prerequisites': 'కనీసావసరాలు',
   'report.competency-report.signature-assessments': 'సంతకం లెక్కింపులు',
   'report.competency-report.signature-collections': 'సంతకం సేకరణలు',
-  'report.competency-report.show-global-data': 'ప్రపంచ డేటాను చూపించు',
-  'report.competency-report.show-student-data': 'విద్యార్థి డేటాను చూపించు',
-  'report.competency-report.show-learning-map': 'మ్యాప్ నేర్చుకోవడం చూపించు',
+  'report.competency-report.show-global-data': 'ప్రపంచ డేటాను చూపించండి',
+  'report.competency-report.show-student-data': 'విద్యార్థుల డేటాను  చూపించండి',
+  'report.competency-report.show-learning-map': 'అభ్యాస పటాన్ని  చూపించండి',
   'report.competency-report.note':
-    'Score 80% or more in our signature assessment and show your mastery',
-  'report.domain-report': 'డొమైన్ రిపోర్ట్',
-  'competency-info-content.portfolio': 'PORTFOLIO',
-  'competency-info-content.metadata': 'METADATA',
-  'competency-info-content.learning-map': 'LEARNING MAP',
-  'competency-meta-data.title': 'ALT-CONCEPTS',
-  'competency-meta-data.heading.micro': 'MICRO COMPETENCIES',
-  'competency-meta-data.heading.prequisite': 'PREQUISITE COMPETENCIES',
+    'మా సంతకం అంచనాలో 80% లేదా అంతకంటే ఎక్కువ స్కోర్ చేయండి మరియు మీ పాండిత్యాన్ని చూపించండి',
+  'report.domain-report': 'డొమైన్ నివేదిక',
+  'competency-info-content.portfolio': 'పోర్ట్ఫోలియో',
+  'competency-info-content.metadata': 'మెటాడేటా',
+  'competency-info-content.learning-map': 'అభ్యాస పటం',
+  'competency-meta-data.title': 'ఎ యల్ టి -భావనలు',
+  'competency-meta-data.heading.micro': 'సూక్ష్మ సామర్థ్యాలు',
+  'competency-meta-data.heading.prequisite': 'ముందస్తు సామర్థ్యాలు',
   'competency-meta-data.nodata.micro':
-    'There are no micro-competencies defined for this competency',
+    'ఈ సామర్థ్యం కోసం సూక్ష్మ సామర్థ్యాలు నిర్వచించబడలేదు',
   'competency-meta-data.nodata.prequisite':
-    'There are no prerequisite-competencies defined for this competency',
+    'ఈ యోగ్యత కోసం ముందస్తు-సామర్థ్యాలు నిర్వచించబడలేదు',
   'competency-meta-data.nodata.competency':
-    'There are no alt-concepts defined for this competency',
-  'student-journey.heading': 'YOUR JOURNEY',
-  'student-journey.teacher-heading': 'STUDENT JOURNEY',
+    'ఈ సామర్థ్యం కోసం ఆల్ట్-కాన్సెప్ట్స్ నిర్వచించబడలేదు',
+  'student-journey.heading': 'మీ ప్రయాణం',
+  'student-journey.teacher-heading': 'విద్యార్థి ప్రయాణం',
   'student-journey.nodata':
-    'You are yet to start your journey for this competency',
+    'మీరు నావిగేటర్‌లో ఈ సామర్థ్యాన్ని అధ్యయనం చేయడం ఇంకా ప్రారంభించలేదు',
   'student-journey.no-data-teacher':
-    'Student are yet to start journey for this competency',
+    'విద్యార్థి నావిగేటర్‌పై ఈ సామర్థ్యాన్ని అధ్యయనం చేయడం ఇంకా ప్రారంభించలేదు',
   'student-journey.student-status-3':
-    'You have asserted that you know this competency and you have not studied any learning activity on the Navigator for this competency.',
+    'ఈ సామర్థ్యం మీకు తెలుసని మీరు నొక్కిచెప్పారు మరియు ఈ సామర్థ్యం కోసం నావిగేటర్‌పై మీరు ఎటువంటి అభ్యాస కార్యకలాపాలను అధ్యయనం చేయలేదు.',
   'student-journey.student-status-2':
-    'You have not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+    'ఈ సామర్థ్యానికి స్థితి డొమైన్‌లోని మరొక సామర్థ్యంలో పాండిత్యం యొక్క సాక్ష్యం ఆధారంగా పాండిత్యం  ఊహించబడుతుంది. ఈ సామర్థ్యం కోసం మీరు నావిగేటర్‌లో ఎటువంటి అభ్యాస విషయాలను ఇంకా అధ్యయనం చేయలేదు.',
   'student-journey.teacher-status-2':
-    'The student has not studied any learning activity on the Navigator for this competency. The status for this competency is inferred mastery based on evidence of mastery in another competency',
+    'ఈ సామర్థ్యానికి స్థితి డొమైన్‌లోని మరొక సామర్థ్యంలో పాండిత్యం యొక్క సాక్ష్యం ఆధారంగా పాండిత్యం ఊహించబడుతుంది. ఈ సామర్థ్యం కోసం విద్యార్థి నావిగేటర్‌లో ఇంకా నేర్చుకునే విషయాలను అధ్యయనం చేయలేదు.',
   'student-journey.teacher-status-3':
-    'The student has asserted mastery in the competency and has not studied any learning activity on the Navigator for this competency.',
-  'learning-map.practice-question': 'practice questions',
-  'learning-map.no-practice-questions':
-    'There are no practice questions for this competency',
-  'learning-map.solved-examples': 'solved examples',
+    'విద్యార్ధి సమర్థతలో పాండిత్యం కలిగి ఉన్నాడు మరియు ఈ సామర్థ్యం కోసం నావిగేటర్‌పై ఎటువంటి అభ్యాస కార్యకలాపాలను అధ్యయనం చేయలేదు.',
+  'learning-map.practice-question': 'ప్రశ్నలను సాధన  చేయండి',
+  'learning-map.no-practice-questions': 'ఈ సామర్థ్యానికి సాధన  ప్రశ్నలు లేవు',
+  'learning-map.solved-examples': 'పరిష్కరించిన ఉదాహరణలు',
   'learning-map.no-solved-examples':
-    'There are no solved examples for this competency',
-  'learning-map.challenging-questions': 'challenging questions',
+    'ఈ సామర్థ్యానికి పరిష్కరించబడిన ఉదాహరణలు లేవు',
+  'learning-map.challenging-questions': 'సవాలు ప్రశ్నలు',
   'learning-map.no-challenging-questions':
-    'There are no challenging questions for this competency',
-  'student-card.message': 'This {{type}} has been deleted',
-  'self-report.your-score': 'మీ స్కోర్',
+    'ఈ సామర్థ్యానికి సవాలు ప్రశ్నలు లేవు',
+  'student-card.message': 'ఈ  {{type}}  తొలగించబడింది',
+  'self-report.your-score': 'మీ  యొక్క స్కోరు',
   'self-report.time_spent': 'గడిపిన సమయం',
   'self-report.update-error': 'స్కోర్ నవీకరించుటకు సమస్య',
   'self-report.validation-error': 'చెల్లుబాటు అయ్యే స్కోర్ నమోదు చేయండి',
@@ -2548,175 +2628,174 @@ window.i18ln = {
   'self-report.enter-timeSpent': 'ఇక్కడ గడిపిన మీ సమయాన్ని నమోదు చేయండి',
   'self-report.validation-error-time': 'చెల్లుబాటు అయ్యే సమయాన్ని నమోదు చేయండి',
   'notifications.notificationlist-header-title': 'ప్రకటనలను',
-  'notifications.show-more': 'ఇంకా చూపించు',
+  'notifications.show-more': 'ఇంకా చూపించండి',
   'notifications.type.teacher-suggestion-title':
-    'మీకు తరగతి లో కొత్త గురువు సూచన ఉంది: {{classtitle}}',
+    'మీకు తరగతిలో క్రొత్త ఉపాధ్యాయ సూచన ఉంది:{{ class Title }}',
   'notifications.type.student-gradable-submission-title':
-    'తరగతికి తరగతికి మీరు {{occurrence}} అంశం (లు) ఉన్నాయి: {{classtitle}}',
+    'మీకు తరగతిలో గ్రేడ్‌కు  {{occurrence}} అంశం (లు) ఉన్నాయి: {{ class Title }}',
   'notifications.type.student-self-report-title':
-    '{{occurrence}} విద్యార్థి (లు) తరగతి వద్ద నివేదించిన పనితీరు: {{classtitle}}',
+    '{{occurrence}} విద్యార్థి (లు) తరగతిలో పనితీరును నివేదించారు: {{ class Title }}',
   'notifications.type.teacher-override-title':
-    'తరగతి మీ సమర్పణను సరిదిద్దింది: {{classtitle}}',
+    'ఉపాధ్యాయుడు తరగతిలో మీ సమర్పణను సరిదిద్దారు: {{ class Title }}',
   'notifications.type.teacher-grading-complete-title':
-    'ఉపాధ్యాయుడు తరగతిలోని మీ సమర్పణను వర్గీకరించాడు: {{classtitle}}',
+    'ఉపాధ్యాయుడు మీ సమర్పణను తరగతిలో గ్రేడ్ చేసారు:{{ class Title }}',
   'notifications.typeinclass.teacher-suggestion-title':
-    'మీకు క్రొత్త గురువు సలహా ఉంది',
+    'మీకు   ఒక క్రొత్త ఉపాధ్యాయ సూచన ఉంది',
   'notifications.typeinclass.student-gradable-submission-title':
-    'మీరు తరగతికి {{occurrence} విద్యార్థి అంశం (లు) ను కలిగి ఉన్నారు',
+    'మీకు  {{occurrence}} విద్యార్థి అంశం (లు) గ్రేడ్‌కు ఉన్నాయి',
   'notifications.typeinclass.student-self-report-title':
-    '{{occurrence}} విద్యార్థి (లు) నివేదించారు పనితీరు',
+    '{{occurrence}}  విద్యార్థి (లు) పనితీరును నివేదించారు',
   'notifications.typeinclass.teacher-override-title':
     'గురువు మీ సమర్పణను సరిదిద్దారు',
   'notifications.typeinclass.teacher-grading-complete-title':
-    'గురువు తరగతి వద్ద మీ సమర్పణ శ్రేణీకృత ఉంది',
-  'goahead.add.something': 'Go ahead, add something.',
+    'ఉపాధ్యాయుడు మీ సమర్పణను తరగతిలో వర్గీకరణ  చేసారు',
+  'goahead.add.something': 'ముందుకు సాగండి, ఏదో జోడించండి.',
   'present.diagnostic.determine.not.know':
-    'Present a diagnostic to determine the student\'s current location, if not known?',
+    'తెలియకపోతే విద్యార్థి ప్రస్తుత స్థానాన్ని నిర్ణయించడానికి విశ్లేషణను ప్రదర్శించాలా?',
   'present.diagnostic.determine.know':
-    '(If you select No, the {{subject}} level will be used to approximate the student\'s location)',
-  'add.to.todays.class': 'Add to Today\'s Class',
-  warning: 'warning',
+    '(మీరు నో  ఎంచుకుంటే, విద్యార్థి స్థానాన్ని అంచనా వేయడానికి {{subject}} స్థాయి ఉపయోగించబడుతుంది)',
+  'add.to.todays.class': 'ఈ రోజు  తరగతికి జోడించండి',
+  warning: 'హెచ్చరిక',
   'ca.warn.turn-on.multiple-competencies':
-    'This assessment is tagged to multiple competencies. Turning ON mastery will mean students can acquire mastery against all the competencies tagged to this assessment.',
+    'ఈ అంచనా బహుళ సామర్థ్యాలకు ట్యాగ్ చేయబడింది. పాండిత్యం ప్రారంభించడం అంటే విద్యార్థులు ఈ అంచనాకు ట్యాగ్ చేయబడిన అన్ని సామర్థ్యాలకు వ్యతిరేకంగా పాండిత్యం పొందవచ్చు.',
   'ca.warn.turn-on.multiple-competencies.question':
-    'Do you want to allow multiple competencies to be mastered via single assessment ?',
+    'సింగిల్ అసెస్‌మెంట్ ద్వారా బహుళ సామర్థ్యాలను స్వాధీనం చేసుకోవడానికి మీరు అనుమతించాలనుకుంటున్నారా?',
   'ca.warn.turn-on.multiple-competencies.note':
-    'Note: You can remix (copy) any assessment and tag the right competency intended for students to gain mastery, before adding it at class acitivities.',
+    'గమనిక: మీరు తరగతి మదింపులలో చేర్చే ముందు, ఏదైనా అంచనాను రీమిక్స్ చేయవచ్చు (కాపీ చేయవచ్చు) మరియు విద్యార్థులు పాండిత్యం పొందటానికి ఉద్దేశించిన సరైన సామర్థ్యాన్ని ట్యాగ్ చేయవచ్చు.',
   'ca.warn.trun-off.mastery-accrual':
-    'Turning OFF mastery will not revert any existing student data. Students who have already accrued mastery against competencies tagged to this assessment will have their data continue to reflect so.',
+    'పాండిత్యం ఆపివేయడం ఇప్పటికే ఉన్న విద్యార్థుల డేటాను తిరిగి ఇవ్వదు. ఈ అంచనాకు ట్యాగ్ చేయబడిన సామర్థ్యాలకు వ్యతిరేకంగా ఇప్పటికే పాండిత్యం సాధించిన విద్యార్థులు వారి డేటాను ప్రతిబింబిస్తూనే ఉంటారు కాబట్టి .',
   'ca.warn.trun-on.mastery-accrual':
-    'Turning ON mastery accrual  will not update mastery status for students who have already completed the assessment.',
+    'మాస్టరీ అక్రూవల్‌ను ఆన్ చేయడం ద్వారా ఇప్పటికే అసెస్‌మెంట్ పూర్తి చేసిన విద్యార్థుల కోసం పాండిత్య స్థితిని నవీకరించదు.',
   'ca.mastery-accrual.update.error':
-    'Oops! Unable to update class activity content mastery accrual right now. Please try again shortly.',
-  'want.to.proceed': 'Do you want to proceed ?',
-  proceed: 'Proceed',
-  'enter-student-score': 'Enter Student Score',
-  'enter-assessment-max-score': 'Enter Assessment Max Score',
-  'student-score': 'Student Score',
-  'search-resource-question': 'Search Resource/Question',
-  'enter-resource-timespent': 'Enter Resource Time Spent',
-  'enter-collection-timespent': 'Enter Collection Time Spent',
-  'suggested-lessons': 'Suggested Lessons',
-  'created-by-kangoorus': 'Created by Kangoorus',
-  'preparatory-material': 'Preparatory Material',
-  milestones: 'Milestones',
-  'show-course-map': 'Show course Map',
-  'show-milestones': 'Show Milestones',
+    'అయ్యో! ప్రస్తుతం తరగతి కార్యాచరణ కంటెంట్ పాండిత్య సంకలనాన్ని నవీకరించలేకపోయింది. దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
+  'want.to.proceed': 'మీరు కొనసాగాలనుకుంటున్నారా?',
+  proceed: 'కొనసాగండి',
+  'enter-student-score': 'విద్యార్థుల స్కోర్‌ను నమోదు చేయండి',
+  'enter-assessment-max-score': 'అసెస్‌మెంట్ గరిష్ట స్కోర్‌ను నమోదు చేయండి',
+  'student-score': 'విద్యార్థుల స్కోరు',
+  'search-resource-question': 'వనరు శోధన / ప్రశ్న',
+  'enter-resource-timespent': 'గడిపిన వనరుల సమయాన్ని నమోదు చేయండి',
+  'enter-collection-timespent': 'సేకరణ సమయాన్ని నమోదు చేయండి',
+  'suggested-lessons': 'సూచించిన పాఠాలు',
+  'created-by-kangoorus': 'కంగూరస్ చేత సృష్టించబడింది',
+  'preparatory-material': 'సన్నాహక సామాగ్రి',
+  milestones: 'మైలురాళ్ళు',
+  'show-course-map': 'కోర్సు మ్యాప్ చూపించండి',
+  'show-milestones': 'మైలురాళ్లను  చూపించండి',
   'warn.class-destination-not-setup':
-    'Class setup is not complete unless the class destination is set. Go to Class Settings and complete setup. Otherwise, students will not be able to access content for this class.',
+    'తరగతి గమ్యం సెట్ చేయకపోతే తరగతి సెటప్ పూర్తి కాదు. తరగతి సెట్టింగులకు వెళ్లి సెటప్ పూర్తి చేయండి. లేకపోతే, విద్యార్థులు ఈ తరగతి కోసం కంటెంట్‌ను యాక్సెస్ చేయలేరు.',
   'milestone-rescoped':
-    'This milestone is available due to your {{subject}} level setup by teacher, but you seem to have caught up on all relevant competencies.',
+    'గురువు మీ  {{subject}}   స్థాయి సెటప్ కారణంగా ఈ మైలురాయి అందుబాటులో ఉంది, కానీ మీరు అన్ని సంబంధిత సామర్థ్యాలను పట్టుకున్నట్లు అనిపిస్తుంది.',
   'student-milestone-not-ready':
-    'Personalized learning pathway is not fully setup yet. Please contact your teacher to help with content access.',
+    'వ్యక్తిగతీకరించిన అభ్యాస మార్గం ఇంకా పూర్తిగా సెటప్ కాలేదు. కంటెంట్ ప్రాప్యతకు సహాయం చేయడానికి దయచేసి మీ గురువును సంప్రదించండి.',
   'warn.teacher-milestone-not-ready':
-    'Milestone view for the course used at class is not ready yet. Unless milestone view is ready, students will have trouble accessing content at class. Check if class setup is complete with origin and destination values.',
-  'pre-study': 'Pre-Study',
-  'course-map.your-learning-path': 'Your Learning Path',
+    'తరగతిలో ఉపయోగించిన కోర్సు కోసం మైలురాయి వీక్షణ ఇంకా సిద్ధంగా లేదు. మైలురాయి వీక్షణ సిద్ధంగా లేకపోతే, విద్యార్థులకు తరగతిలో కంటెంట్‌ను యాక్సెస్ చేయడంలో ఇబ్బంది ఉంటుంది. మూలం మరియు గమ్యం విలువలతో తరగతి సెటప్ పూర్తయిందో లేదో తనిఖీ చేయండి.',
+  'pre-study': 'ముందు అధ్యయనం',
+  'course-map.your-learning-path': 'మీ అభ్యాస మార్గం',
   'mastery-greeting-msg':
-    'You’ve earned a Mastery Badge! Would you like to see the improvement in your competency skyline?',
-  'show-me': 'Show Me',
-  'common.subtask.oa.project.poster': 'Project Poster',
-  'common.subtask.oa.project.presentation': 'Project Presentation',
-  'common.subtask.oa.project.video': ' Project Video',
-  'common.subtask.oa.project.diorama': 'Project Diorama',
-  'common.subtask.oa.project.brochure': 'Project Brochure',
-  'common.subtask.oa.project.model': 'Project Model',
-  'common.subtask.oa.seminar': 'Seminar',
-  'common.subtask.oa.short_answer': 'Short Answer',
-  'common.subtask.oa.extended_response': 'Extended Response',
-  'common.subtask.oa.research_paper': 'Research Paper',
-  'common.subtask.oa.position_paper': 'Position Paper',
-  'common.subtask.oa.lab_report': 'Lab Report',
-  'common.subtask.oa.explanation_argument': 'Explanation Argument',
-  'common.subtask.oa.debate': 'Debate',
-  'common.subtask.oa.others': 'Others',
-  project: 'Project',
-  'oa.others': 'Others',
-  'oa.project.poster': 'Poster',
-  'oa.project.presentation': 'Presentation',
-  'oa.project.video': 'Video',
-  'oa.project.diorama': 'Diorama',
-  'oa.project.brochure': 'Brochure',
-  'oa.project.model': 'Model',
-  'oa.seminar': 'seminar',
-  'oa.short_answer': 'Short Answer',
-  'oa.extended_response': 'Extended Response',
-  'oa.research_paper': 'Research Paper',
-  'oa.position_paper': 'Position Paper',
-  'oa.lab_report': 'Report',
-  'oa.explanation_argument': 'Explanation Argument',
-  'oa.debate': 'Debate',
-  'oa.format': 'Activity Type',
-  'oa.tasks.label': 'Tasks',
-  'oa.references.label': 'References',
-  'oa.references.artifacts': 'Reference Artifacts',
-  'oa.references.urls': 'Reference URLs',
-  'oa.references.exemplar': 'Exemplar Answer',
-  'oa.references.uploads': 'Uploads',
-  'oa.submissions.type': 'Type of Submission',
-  'oa.edit_activity': 'Edit Activity',
-  'oa.add_activity': 'Add Activity',
-  'oa.remix': 'Remix Offline Activity',
-  'oa.remix.lead': 'You are about to remix an offline activity.',
+    'మీరు పాండిత్య బ్యాడ్జ్ సంపాదించారు! మీ సామర్థ్య స్కైలైన్‌లో మెరుగుదల చూడాలనుకుంటున్నారా?',
+  'show-me': 'నాకు చూపించండి',
+  'common.subtask.oa.project.poster': 'ప్రాజెక్ట్ పోస్టర్',
+  'common.subtask.oa.project.presentation': 'ప్రాజెక్ట్ ప్రదర్శన',
+  'common.subtask.oa.project.video': 'ప్రాజెక్ట్ వీడియో',
+  'common.subtask.oa.project.diorama': 'ప్రాజెక్ట్ డయోరమా',
+  'common.subtask.oa.project.brochure': 'ప్రాజెక్ట్ కర పత్రం',
+  'common.subtask.oa.project.model': 'ప్రాజెక్ట్ నమూనా',
+  'common.subtask.oa.seminar': 'సదస్సు',
+  'common.subtask.oa.short_answer': 'సంక్షిప్త సమాధానం',
+  'common.subtask.oa.extended_response': 'పొడిగించిన ప్రతిస్పందన',
+  'common.subtask.oa.research_paper': 'పరిశోధనా పత్రము',
+  'common.subtask.oa.position_paper': 'స్థానం పత్రం',
+  'common.subtask.oa.lab_report': 'ప్రయోగశాల నివేదిక',
+  'common.subtask.oa.explanation_argument': 'వివరణ వాదన',
+  'common.subtask.oa.debate': 'చర్చ',
+  'common.subtask.oa.others': 'ఇతరులు',
+  project: 'ప్రాజెక్ట్',
+  'oa.project.poster': 'పోస్టర్',
+  'oa.project.presentation': 'ప్రదర్శన',
+  'oa.project.video': 'వీడియో',
+  'oa.project.diorama': 'డయోరమ',
+  'oa.project.brochure': 'కరపత్రం',
+  'oa.project.model': 'నమూనా',
+  'oa.seminar': 'సదస్సు',
+  'oa.short_answer': 'సంక్షిప్త సమాధానం',
+  'oa.extended_response': 'పొడిగించిన ప్రతిస్పందన',
+  'oa.research_paper': 'పరిశోధనా పత్రము',
+  'oa.position_paper': 'స్థానం పత్రం',
+  'oa.lab_report': 'నివేదిక',
+  'oa.explanation_argument': 'వివరణ వాదన',
+  'oa.debate': 'చర్చ',
+  'oa.format': 'కార్యాచరణ రకం',
+  'oa.tasks.label': 'పనులు',
+  'oa.references.label': 'ప్రస్తావనలు',
+  'oa.references.artifacts': 'సూచన కళాఖండాలు',
+  'oa.references.urls': 'యు ఆర్ యల్  సూచనలు',
+  'oa.references.exemplar': 'ఉదాహరణ సమాధానం',
+  'oa.references.uploads': 'ఫైల్లను అప్లోడ్ చేయండి',
+  'oa.submissions.type': 'సమర్పణ  యొక్క రకం',
+  'oa.edit_activity': 'కార్యాచరణను సవరించండి',
+  'oa.add_activity': 'కార్యాచరణను జోడించండి',
+  'oa.remix': 'ఆఫ్‌లైన్ కార్యాచరణను రీమిక్స్ చేయండి',
+  'oa.remix.lead': 'మీరు ఆఫ్‌లైన్ కార్యాచరణను రీమిక్స్ చేయబోతున్నారు.',
   'oa.remix.success':
-    'You\'ve remixed an offline activity {{title}}. Do you want to edit that offline activity?',
-  'oa.title': 'Offline Activity Title',
+    'మీరు ఆఫ్‌లైన్ కార్యాచరణను రీమిక్స్ చేసారు {{title}}. మీరు ఆ ఆఫ్‌లైన్ కార్యాచరణను సవరించాలనుకుంటున్నారా?',
+  'oa.title': 'ఆఫ్‌లైన్ కార్యాచరణ శీర్షిక',
   'errors.oa-not-copied':
-    'Oops! Unable to copy offline activity right now. Please try again shortly.',
-  'common.self': 'Self',
+    'అయ్యో! ప్రస్తుతం ఆఫ్‌లైన్ కార్యాచరణను కాపీ చేయలేకపోయేరు . దయచేసి త్వరలో మళ్ళీ ప్రయత్నించండి.',
+  'common.self': 'స్వీయ',
   'oa.enter-timespent-label':
-    'Please enter the total time spent on the activity',
-  'no-task-available': 'No Task Available',
-  'your-answer': 'Your Answer',
-  'common.saving': 'Saving',
-  'oa.offline_activity.label': 'Offline Activity',
-  'common.oa.offline_activity.label': 'Offline Activity',
-  'oa.pending-submissions': 'Pending Submissions',
-  'oa.rubrics.switch.label': 'Teacher will grade the activity using a rubric?',
-  'oa.rubrics.label': 'Associate a rubric',
-  'oa.max-score.label': 'Enter maximum score',
-  'oa.teacher-rubric': 'Teacher rubric',
-  'oa.references.available-uploads': 'Available uploads',
-  'oa.task.task-title-required': 'Please enter the task title.',
-  task: 'Task',
+    'దయచేసి కార్యాచరణ కోసం గడిపిన మొత్తం సమయాన్ని నమోదు చేయండి',
+  'no-task-available': 'ఏ పని అందుబాటులో లేదు',
+  'your-answer': 'మీ సమాధానం',
+  'common.saving': 'సేవ్',
+  'oa.offline_activity.label': 'ఆఫ్‌లైన్ కార్యాచరణ',
+  'common.oa.offline_activity.label': 'ఆఫ్‌లైన్ కార్యాచరణ',
+  'oa.pending-submissions': 'సమర్పణలు పెండింగ్‌లో ఉన్నాయి',
+  'oa.rubrics.switch.label':
+    'ఉపాధ్యాయుడు రుబ్రిక్ ఉపయోగించి కార్యాచరణను గ్రేడ్ చేస్తారా?',
+  'oa.rubrics.label': 'ఒక రుబ్రిక్ అనుబంధించండి',
+  'oa.max-score.label': 'గరిష్ట స్కోరును నమోదు చేయండి',
+  'oa.teacher-rubric': 'గురువు రుబ్రిక్',
+  'oa.references.available-uploads': 'అందుబాటులో ఉన్న అప్‌లోడ్‌లు',
+  'oa.task.task-title-required': 'దయచేసి పని  శీర్షికను నమోదు చేయండి.',
+  task: 'పని',
   'oa.errors.activity-title-presence':
-    'Please enter the offline activity title.',
-  'oa.errors.standards-presence': 'Please select a standard.',
-  'oa.errors.subformat-presence': 'Please select a format.',
-  'oa.task.submissions.frs-label': 'Free form text',
-  'oa.task.submissions.label': 'Submissions',
-  'oa.student-rubric': 'Student rubric',
-  'oa.rubrics.student-associate-label': 'Associate a student rubric',
-  'oa.task.submissions.head': 'Task Submissions',
-  'common.uploads': 'Uploads',
-  'common.urls': 'URLs',
-  'oa.info.duration-hrs': 'Expected time to complete',
-  'oa.info.hrs': ' hrs',
-  'class.add-teachers': 'Enter the email of other teachers',
-  'common.collaborators': 'Collaborators',
+    'దయచేసి ఆఫ్‌లైన్ కార్యాచరణ శీర్షికను నమోదు చేయండి.',
+  'oa.errors.standards-presence': 'దయచేసి ప్రమాణాన్ని ఎంచుకోండి.',
+  'oa.errors.subformat-presence': 'దయచేసి ఒక ఫార్మేట్  ఎంచుకోండి.',
+  'oa.task.submissions.frs-label': 'ఉచిత ఫారమ్ టెక్స్ట్',
+  'oa.task.submissions.label': 'సమర్పణలు',
+  'oa.student-rubric': 'విద్యార్థి రుబ్రిక్',
+  'oa.rubrics.student-associate-label': 'విద్యార్థి రుబ్రిక్‌ను అనుబంధించండి',
+  'oa.task.submissions.head': 'అవసరమైన సమర్పణలు',
+  'common.uploads': 'అప్ లోడ్ లు',
+  'common.urls': 'యు ఆర్ యల్   లు',
+  'oa.info.duration-hrs': 'పూర్తయ్యే సమయం',
+  'oa.info.hrs': 'గంటలు',
+  'class.add-teachers': 'ఇతర ఉపాధ్యాయుల ఇమెయిల్‌ను నమోదు చేయండి',
+  'common.collaborators': 'సహకారులు',
   'common.no-collaborators':
-    'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
-  'class.add-co-teachers': 'Add Co-teachers',
-  'common.gained': 'Gained',
-  'badges-earned': 'Badges Earned',
-  'suggestion-taken': 'Suggestions Taken',
-  'this-week': 'This Week',
-  'previous-week': 'Previous Week',
-  'custom-range': 'Custom',
-  'beginning-till-now': 'Beginning Till Now',
-  'report.class-proficiency-report': 'Class Proficiency Report',
-  'report.domain-proficiency-report': 'Domain Competency Report',
-  'report.class-weekly-report': 'Class Progress Report',
-  'no-teacher-found': 'No teacher with that email id found!',
+    'ఈ కోర్సు కోసం సహకారులు లేరు. సహకారులను జోడించడానికి దయచేసి కుడి ఎగువ + బటన్ క్లిక్ చేయండి.',
+  'class.add-co-teachers': 'సహ ఉపాధ్యాయులను జోడించండి',
+  'common.gained': 'పొందింది',
+  'badges-earned': 'బ్యాడ్జ్‌లు సంపాదించారు',
+  'suggestion-taken': 'సూచనలు తీసుకోబడ్డాయి',
+  'this-week': 'ఈ వారం',
+  'previous-week': 'పోయిన వారం వారం',
+  'beginning-till-now': 'ఇప్పటి వరకు ప్రారంభమయింది',
+  'report.class-proficiency-report': 'తరగతి నైపుణ్యం నివేదిక',
+  'report.domain-proficiency-report': 'డొమైన్ సామర్థ్య నివేదిక',
+  'report.class-weekly-report': 'తరగతి పురోగతి నివేదిక',
+  'no-teacher-found': 'ఆ ఇమెయిల్ ఐడి ఉన్న గురువు ఎవరూ కనుగొనబడలేదు!',
   'oa-player.complete-confirm':
-    'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
-  'oa-player.mark-complete': 'Mark Complete',
-  'no.content.assoc.fw': 'Currently no content associated with this framework.',
+    'మీరు దాన్ని పూర్తి చేసినట్లు గుర్తించిన తర్వాత, సమర్పణలో మార్పులకు ఇది అందుబాటులో ఉండదు! <br> మీరు కొనసాగించాలనుకుంటున్నారా?',
+  'oa-player.mark-complete': 'గుర్తు పూర్తయింది',
+  'no.content.assoc.fw': 'ప్రస్తుతం ఈ ఫ్రేమ్‌వర్క్‌తో సంబంధం లేని కంటెంట్ .',
   'report.offline-activity-report.note':
-    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
-  'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey',
-  'search-by': 'Search By',
+    'ఇది ఆఫ్‌లైన్ కార్యాచరణ మరియు విద్యార్థులకు కార్యాచరణకు మొత్తం స్కోరు ఇవ్వబడుతుంది లేదా రుబ్రిక్ ఆధారంగా గ్రేడ్ చేయబడుతుంది. వ్యక్తిగత పని స్థాయి డేటా అందుబాటులో లేదు.',
+  'teacher-landing.class.student-locator': 'విద్యార్థి లొకేటర్',
+  'teacher-landing.class.learning-journey': 'అభ్యాస ప్రయాణం',
+  'search-by': 'ద్వారా శోధించండి',
   'common.content-owner': 'Content Owner',
   'oa.self-grading.comment-label':
     'Please share your thoughts on how you performed in this activity',
@@ -2762,5 +2841,12 @@ window.i18ln = {
     'Select your other classes from below to manage in this class',
   'common.multi-grade-view': 'Multi-grade view. Viewing class',
   'common.struggling-competencies': 'Struggling Competencies',
-  'common.suggested': 'Suggested'
+  'common.suggested': 'Suggested',
+  'common.feedback-note':
+    'Please take a minute to rate the collection and its resources. It really helps!',
+  'common.skip-feedback': 'Skip Feedback',
+  'common.external-collection.index-message':
+    'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
+  'common.external-assessment.index-message':
+    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here'
 };
