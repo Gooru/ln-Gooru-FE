@@ -61,6 +61,7 @@
         opacity: 0.6;
         &.active {
           opacity: 1;
+          pointer-events: none;
         }
       }
       .items-to-grade-selector {
@@ -289,7 +290,6 @@
       }
     }
     .activities-content {
-      display: none;
       background-color: #fff;
       border-radius: 4px;
       padding: 15px;
@@ -330,7 +330,7 @@
       border-radius: 4px;
       height: calc(100vh - 125px);
       overflow-y: auto;
-      &.open-selecter {
+      &.content-selecter {
         height: calc(100vh - 180px);
       }
       .activities-cards-container {

@@ -87,18 +87,15 @@ export default Ember.Component.extend({
         .slideToggle();
     },
 
-    onToggleSelector(component = this) {
+    onSelectContentSelector(component = this) {
+      component.$('.activities-content').slideDown();
+      component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', false);
-      component.set('isShowScheduledActivities', true);
       component.get('contentTypes').map(content => {
         content.set('isActive', true);
       });
-      component.$('.activities-content').slideToggle();
-      let bodyPanel = component.$('.body-container');
-      bodyPanel.hasClass('open-selecter')
-        ? bodyPanel.removeClass('open-selecter')
-        : bodyPanel.addClass('open-selecter');
+      component.loadActivitiesByActiveContentType();
     },
 
     showPreviousMonth(date) {
@@ -248,6 +245,7 @@ export default Ember.Component.extend({
       component.get('contentTypes').map(content => {
         content.set('isActive', false);
       });
+      component.$('.activities-content').slideUp();
       component.loadUnScheduledActivities();
     },
 
@@ -260,11 +258,7 @@ export default Ember.Component.extend({
       component.get('contentTypes').map(content => {
         content.set('isActive', false);
       });
-      let bodyPanel = component.$('.body-container');
-      if (bodyPanel.hasClass('open-selecter')) {
-        component.$('.activities-content').slideToggle();
-        bodyPanel.removeClass('open-selecter');
-      }
+      component.$('.activities-content').slideUp();
     },
 
     onGradeItem(gradingObject) {
