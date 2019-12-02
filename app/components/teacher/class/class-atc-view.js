@@ -52,10 +52,12 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     const component = this;
-    if (component.get('class') && component.get('course')) {
-      component.loadData();
-    } else {
-      component.loadClassData();
+    if (component.get('isShowAtcView')) {
+      if (component.get('class') && component.get('course')) {
+        component.loadData();
+      } else {
+        component.loadClassData();
+      }
     }
   },
 
