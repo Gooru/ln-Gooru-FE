@@ -35,6 +35,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
   },
 
   actions: {
+    onClearSearch() {
+      const component = this;
+      component.set('contentSearchTerm', '');
+      if (component.get('isSearchTermApplied')) {
+        component.loadCotents();
+        component.set('isSearchTermApplied', false);
+      }
+    },
+
     onSelectExternalActivity() {
       const component = this;
       component.sendAction('onSelectExternalActivity');
@@ -269,6 +278,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
       const contentSearchTerm = component.get('contentSearchTerm');
       if (e.which === KEY_CODES.ENTER && contentSearchTerm.length >= 3) {
         component.loadCotents();
+        component.set('isSearchTermApplied', true);
       }
     });
 
@@ -276,6 +286,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
       const contentSearchTerm = component.get('contentSearchTerm');
       if (contentSearchTerm.length >= 3) {
         component.loadCotents();
+        component.set('isSearchTermApplied', true);
       }
     });
   },

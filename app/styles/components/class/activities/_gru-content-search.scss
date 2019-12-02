@@ -2,19 +2,24 @@
   .content-search-container {
     .content-source-container {
       display: grid;
-      grid-template-columns: repeat(4, auto);
+      grid-template-columns: auto auto auto auto;
       column-gap: 8px;
-      justify-content: space-around;
       align-items: center;
-      height: 45px;
+      text-align: center;
       border-bottom: 1px solid #666;
+      padding: 0px 40px;
       .content-source {
         font-size: 13px;
         color: #666;
+        padding: 10px 0px;
         cursor: pointer;
         &.active,
         &:hover {
           font-weight: bold;
+        }
+        &.active {
+          background-color: #2196f3;
+          color: #ffffff;
         }
       }
     }
@@ -28,17 +33,35 @@
       .content-types-container {
         display: grid;
         grid-template-columns: auto auto auto auto;
-        column-gap: 8px;
+        column-gap: 15px;
         align-items: center;
         .content-type {
           cursor: pointer;
+          opacity: 0.6;
+          .icon {
+            width: 22px;
+            height: 22px;
+            background-size: 22px;
+            display: block;
+            background-position: center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            &.assessment-icon {
+              background-image: url("../assets/gooru/images/add_assessment.svg");
+            }
+            &.collection-icon {
+              background-image: url("../assets/gooru/images/add_collection.svg");
+            }
+            &.offline-activity-icon {
+              background-image: url("../assets/gooru/images/offline.svg");
+            }
+          }
           .type-label {
             font-size: 13px;
             color: #666;
           }
-          &.active .type-label,
-          &:hover .type-label {
-            font-weight: bold;
+          &.active {
+            opacity: 1;
           }
 
           &.add-external-activity {
@@ -52,19 +75,27 @@
 
       .search-content-container {
         display: grid;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr auto auto;
         input#search-content {
           font-size: 15px;
-
           &:focus,
           &:active {
             border: none;
             outline: none;
           }
         }
+        .clear-icon {
+          display: flex;
+          align-items: center;
+          position: relative;
+          right: 15px;
+          i.close {
+            font-size: 15px;
+          }
+        }
         .search-icon {
           display: grid;
-          text-align: center;
+          align-items: center;
           cursor: pointer;
           i.search {
             font-size: 20px;

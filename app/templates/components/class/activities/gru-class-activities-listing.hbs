@@ -2,18 +2,12 @@
   <div class="header-container">
     <div class="activity-date-range-selector" {{action "onToggleDatePicker"}}>
       <span class="schedule-icon">{{gru-icon name="event"}}</span>
-      <span class="schedule-date">{{format-date startDate 'DD MMM YYYY'}} - {{format-date endDate 'DD MMM YYYY'}}</span>
+      <span class="schedule-date"><span>{{format-date startDate 'DD MMM YYYY'}}</span><span class="{{if isDaily 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}</span></span>
     </div>
     <div class="unscheduled-activity-selector {{if isShowUnscheduledActivities 'active'}}" {{action "onLoadUnscheduledActivities"}}>
       {{gru-icon name="event_busy"}}
     </div>
-    <div class="contents-selector">
-      {{#each contentTypes as |content|}}
-        <div class="content-selector {{if content.isActive 'active'}}" {{action "onToggleContent" content}}>
-          <i class="icon {{content.type}}-icon"></i>
-        </div>
-      {{/each}}
-    </div>
+    <div class="activities {{if isShowScheduledActivities 'active'}}" {{action "onSelectContentSelector"}}> Activities</div>
     <div class="items-to-grade-selector {{if isShowItemsToGrade 'active'}}" {{action "onShowItemsToGrade"}}>
       <i class="grading-icon"></i>
       ({{gradingItemsList.length}})
@@ -61,7 +55,16 @@
       {{/if}}
     </div>
   </div>
-  <div class="body-container">
+  <div class="activities-content">
+    <div class="contents-selector">
+      {{#each contentTypes as |content|}}
+        <div class="content-selector {{if content.isActive 'active'}}" {{action "onToggleContent" content}}>
+          <i class="icon {{content.type}}-icon"></i>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+  <div class="body-container {{if isShowScheduledActivities 'content-selecter'}}">
     <div class="activities-cards-container">
       {{#if isShowUnscheduledActivities}}
         {{#each unScheduledActivities as |unScheduledActivity|}}

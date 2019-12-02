@@ -87,6 +87,17 @@ export default Ember.Component.extend({
         .slideToggle();
     },
 
+    onSelectContentSelector(component = this) {
+      component.$('.activities-content').slideDown();
+      component.set('isShowScheduledActivities', true);
+      component.set('isShowItemsToGrade', false);
+      component.set('isShowUnscheduledActivities', false);
+      component.get('contentTypes').map(content => {
+        content.set('isActive', true);
+      });
+      component.loadActivitiesByActiveContentType();
+    },
+
     showPreviousMonth(date) {
       const component = this;
       let forMonth = moment(date).format('MM');
@@ -234,6 +245,7 @@ export default Ember.Component.extend({
       component.get('contentTypes').map(content => {
         content.set('isActive', false);
       });
+      component.$('.activities-content').slideUp();
       component.loadUnScheduledActivities();
     },
 
@@ -246,6 +258,7 @@ export default Ember.Component.extend({
       component.get('contentTypes').map(content => {
         content.set('isActive', false);
       });
+      component.$('.activities-content').slideUp();
     },
 
     onGradeItem(gradingObject) {
