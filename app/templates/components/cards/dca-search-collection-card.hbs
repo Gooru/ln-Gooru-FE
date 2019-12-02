@@ -53,10 +53,15 @@
 
   </div>
   <div class="card-panel-footer">
-    <div class="buttons-container">
+    <div class="buttons-container {{if showSuggestionBtn 'has-suggestion'}}">
       <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="bottom" {{action "onPlayCollection" collection}}>
         {{gru-icon name="ic_play_arrow"}}
       </div>
+      {{#if showSuggestionBtn}}
+      <div class="dca-suggested-content {{if collection.isSuggested 'has-suggested'}}" title="{{t 'common.suggest-to-student'}}" data-toggle="tooltip" data-placement="bottom" {{action "onSuggestContent" collection}}>
+        {{gru-icon name="explore"}}
+      </div>
+      {{/if}}
       <div class="schedule-dca-content ca-datepicker-popover {{if collection.isScheduled 'has-scheduled'}}" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-placement="bottom" onclick= {{action 'onScheduleContentToDCA' collection}}>
         {{gru-icon name="update"}}
       </div>

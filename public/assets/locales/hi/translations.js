@@ -1,7 +1,7 @@
 //eslint-disable-next-line
 window.i18ln = {
   en: 'English',
-  es: 'Español',
+  sp: 'Español',
   ar: 'عربى',
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
@@ -850,7 +850,6 @@ window.i18ln = {
   'class.edit.class-minscore': 'ट्रॉफी के लिए न्यूनतम स्कोर मूल्यांकन (1-100%)',
   'class.edit.course-map': 'पाठ्यक्रम मानचित्र',
   'class.edit.edit-class': 'कक्षा सेटिंग्स संपादित करें',
-  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.overview.title': 'पाठ्यक्रम मानचित्र',
   'class.overview.locate': 'मेरी स्थिति दर्शाएं ',
   'class.overview.edit-content': 'विषयवस्तु संपादित करें',
@@ -2741,7 +2740,7 @@ window.i18ln = {
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
   'common.no-lesson-plan-info-message':
-    'There is no lesson plan for this lesson.',
+    'This lesson does have any lesson plan.',
   'student-resource': 'Student Resources',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
@@ -2811,6 +2810,8 @@ window.i18ln = {
   'common.select-your-other-classes-from-below':
     'Select your other classes from below to manage in this class',
   'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.feedback-note':
     'Please take a minute to rate the collection and its resources. It really helps!',
   'common.skip-feedback': 'Skip Feedback',
