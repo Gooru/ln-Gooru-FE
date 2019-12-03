@@ -61,7 +61,7 @@ export default Ember.Component.extend({
      */
     onSkipFeedback() {
       const component = this;
-      component.sendAction('onSkipFeedback');
+      component.set('isShowActivityFeedback', false);
     },
 
     /**
