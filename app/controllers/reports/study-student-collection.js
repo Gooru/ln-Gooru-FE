@@ -34,9 +34,6 @@ export default StudentCollection.extend({
     ) {
       Ember.run.later(function() {
         controller.set('enableConfetti', false);
-        if (controller.get('isLoadProficiencyProgress')) {
-          controller.set('isShowMasteryGreeting', true);
-        }
       }, 5400);
       controller.set('enableConfetti', true);
     }
@@ -79,20 +76,20 @@ export default StudentCollection.extend({
     /**
      * Action triggered for the next button
      */
-    next: function() {
-      let controller = this;
+    next: function(controller = this) {
       let contextId = controller.get('contextId');
       let profileId = controller.get('session.userData.gooruUId');
       const navigateMapService = controller.get('navigateMapService');
+      controller.set('isFeedbackCaptureCompleted', false);
       controller
         .get('quizzesAttemptService')
         .getAttemptIds(contextId, profileId)
         .then(attemptIds =>
           !attemptIds || !attemptIds.length
             ? {}
-            : this.get('quizzesAttemptService').getAttemptData(
-              attemptIds[attemptIds.length - 1]
-            )
+            : controller
+              .get('quizzesAttemptService')
+              .getAttemptData(attemptIds[attemptIds.length - 1])
         )
         .then(attemptData =>
           Ember.RSVP.hash({
@@ -121,6 +118,15 @@ export default StudentCollection.extend({
           controller.toggleScreenMode();
           controller.set('isShowMasteryGreeting', false);
         });
+    },
+
+    OnShowMastery() {
+      const component = this;
+      component.set('isShowActivityFeedback', false);
+      component.set('isFeedbackCaptureCompleted', true);
+      if (component.get('isLoadProficiencyProgress')) {
+        component.set('isShowMasteryGreeting', true);
+      }
     },
 
     playSignatureAssessmentSuggestions: function() {
@@ -384,6 +390,7 @@ export default StudentCollection.extend({
   }),
 
   isShowActivityFeedback: false,
+  isFeedbackCaptureCompleted: false,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -418,12 +425,10 @@ export default StudentCollection.extend({
           ? 'signature-collection'
           : 'signature-assessment';
       queryParams.pathType = 'system';
-      this.set('isShowActivityFeedback', false);
       this.transitionToRoute('study-player', context.get('courseId'), {
         queryParams
       });
     } else {
-      this.set('isShowActivityFeedback', false);
       queryParams.type = context.itemType || null; //Type is important to decide whether next item is external or normal
       queryParams.pathId = context.pathId || 0;
       queryParams.pathType = context.pathType || null;
@@ -460,10 +465,10 @@ export default StudentCollection.extend({
     if (status !== 'done') {
       this.toPlayer();
     } else {
-      this.set('isShowActivityFeedback', false);
       this.set('mapLocation.context.status', 'done');
       this.set('hasSignatureCollectionSuggestions', false);
       this.set('hasSignatureCollectionSuggestions', false);
+      this.set('isDone', true);
     }
   },
 
