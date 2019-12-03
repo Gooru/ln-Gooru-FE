@@ -34,9 +34,6 @@ export default StudentCollection.extend({
     ) {
       Ember.run.later(function() {
         controller.set('enableConfetti', false);
-        if (controller.get('isLoadProficiencyProgress')) {
-          controller.set('isShowMasteryGreeting', true);
-        }
       }, 5400);
       controller.set('enableConfetti', true);
     }
@@ -79,8 +76,7 @@ export default StudentCollection.extend({
     /**
      * Action triggered for the next button
      */
-    next: function() {
-      let controller = this;
+    next: function(controller = this) {
       let contextId = controller.get('contextId');
       let profileId = controller.get('session.userData.gooruUId');
       const navigateMapService = controller.get('navigateMapService');
@@ -90,9 +86,9 @@ export default StudentCollection.extend({
         .then(attemptIds =>
           !attemptIds || !attemptIds.length
             ? {}
-            : this.get('quizzesAttemptService').getAttemptData(
-              attemptIds[attemptIds.length - 1]
-            )
+            : controller
+              .get('quizzesAttemptService')
+              .getAttemptData(attemptIds[attemptIds.length - 1])
         )
         .then(attemptData =>
           Ember.RSVP.hash({
@@ -121,6 +117,16 @@ export default StudentCollection.extend({
           controller.toggleScreenMode();
           controller.set('isShowMasteryGreeting', false);
         });
+    },
+
+    OnShowMasteryOrNext() {
+      const component = this;
+      component.set('isShowActivityFeedback', false);
+      if (component.get('isLoadProficiencyProgress')) {
+        component.set('isShowMasteryGreeting', true);
+      } else {
+        component.actions.next(component);
+      }
     },
 
     playSignatureAssessmentSuggestions: function() {
@@ -464,6 +470,7 @@ export default StudentCollection.extend({
       this.set('mapLocation.context.status', 'done');
       this.set('hasSignatureCollectionSuggestions', false);
       this.set('hasSignatureCollectionSuggestions', false);
+      this.set('isDone', true);
     }
   },
 
