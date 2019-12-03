@@ -167,7 +167,7 @@ export default Ember.Component.extend({
    */
   multiClassList: Ember.A([]),
 
-  students: Ember.computed('class.[]', function() {
+  students: Ember.computed('class', function() {
     return this.get('class.members');
   }),
 
@@ -252,7 +252,7 @@ export default Ember.Component.extend({
   /**
    * @property {Array} memberGradeBounds
    */
-  memberGradeBounds: Ember.computed('class.[]', function() {
+  memberGradeBounds: Ember.computed('class', function() {
     return this.get('class.memberGradeBounds');
   }),
 
