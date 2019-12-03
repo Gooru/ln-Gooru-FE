@@ -167,7 +167,9 @@ export default Ember.Component.extend({
    */
   multiClassList: Ember.A([]),
 
-  students: Ember.computed.alias('class.members'),
+  students: Ember.computed('class.[]', function() {
+    return this.get('class.members');
+  }),
 
   /**
    * @property {Boolean} isShowStrugglingCompetencyReport
@@ -250,7 +252,9 @@ export default Ember.Component.extend({
   /**
    * @property {Array} memberGradeBounds
    */
-  memberGradeBounds: Ember.computed.alias('class.memberGradeBounds'),
+  memberGradeBounds: Ember.computed('class.[]', function() {
+    return this.get('class.memberGradeBounds');
+  }),
 
   /**
    * @property {Object} gradeRange
@@ -505,6 +509,10 @@ export default Ember.Component.extend({
     }).then(({ classData, classMembers }) => {
       component.set('class', classData);
       component.set('class.members', classMembers.get('members'));
+      component.set(
+        'class.memberGradeBounds',
+        classMembers.get('memberGradeBounds')
+      );
       component
         .get('courseService')
         .fetchById(classData.get('courseId'))
@@ -636,7 +644,7 @@ export default Ember.Component.extend({
     let fwk = component.get('class.preference.framework');
     let filters = {
       subject,
-      fw_code: fwk
+      fw_code: fwk || 'GUT'
     };
     taxonomyService.fetchGradesBySubject(filters).then(grades => {
       let gradeRange = component.get('gradeRange');
