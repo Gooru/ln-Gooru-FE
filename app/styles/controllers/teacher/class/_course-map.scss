@@ -309,10 +309,20 @@
                 position: absolute;
                 width: 100%;
                 left: 0;
-                z-index: 2;
+                z-index: 3;
                 background: $white;
                 border: 1px solid $gray-80;
                 display: none;
+
+                .back-drop {
+                  position: fixed;
+                  left: 0;
+                  top: 0;
+                  height: 100%;
+                  width: 100%;
+                  z-index: -1;
+                  background-color: transparent;
+                }
 
                 .class-name {
                   padding: 10px;

@@ -106,6 +106,7 @@
                     <span class="toggle-icon">{{gru-icon name="arrow_drop_down"}}</span>
                   </div>
                   <div class="class-list-container">
+                    <div class="back-drop" {{action "onToggleClassListContainer"}}></div>
                     {{#each selectedClassList as |classes|}}
                       <div class="class-name  {{if (or (and classes.isPrimaryClass (not isSecondaryClass)) classes.isSelected) 'active-class'}}" {{action 'addSecondaryClass' classes}}>
                           {{classes.title}}

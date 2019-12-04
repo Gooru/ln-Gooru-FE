@@ -52,12 +52,10 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     const component = this;
-    if (component.get('isShowAtcView')) {
-      if (component.get('class') && component.get('course')) {
-        component.loadData();
-      } else {
-        component.loadClassData();
-      }
+    if (component.get('class') && component.get('course')) {
+      component.loadData();
+    } else {
+      component.loadClassData();
     }
   },
 
@@ -509,20 +507,22 @@ export default Ember.Component.extend({
       classData: component.get('classService').readClassInfo(classId),
       classMembers: component.get('classService').readClassMembers(classId)
     }).then(({ classData, classMembers }) => {
-      component.set('class', classData);
-      component.set('class.members', classMembers.get('members'));
-      component.set(
-        'class.memberGradeBounds',
-        classMembers.get('memberGradeBounds')
-      );
-      component
-        .get('courseService')
-        .fetchById(classData.get('courseId'))
-        .then(function(courseData) {
-          component.set('class.course', courseData);
-          component.set('course', courseData);
-          component.loadData();
-        });
+      if (!component.get('isDestroyed')) {
+        component.set('class', classData);
+        component.set('class.members', classMembers.get('members'));
+        component.set(
+          'class.memberGradeBounds',
+          classMembers.get('memberGradeBounds')
+        );
+        component
+          .get('courseService')
+          .fetchById(classData.get('courseId'))
+          .then(function(courseData) {
+            component.set('class.course', courseData);
+            component.set('course', courseData);
+            component.loadData();
+          });
+      }
     });
   },
 
@@ -533,10 +533,12 @@ export default Ember.Component.extend({
     component
       .fetchDomainsCompletionReport()
       .then(function(domainsCompletionReport) {
-        component.set('domainsCompletionReport', domainsCompletionReport);
-        component.getDomainListToShow(domainsCompletionReport);
-        component.set('isLoading', false);
-        component.getStudentsGradeRange();
+        if (!component.get('isDestroyed')) {
+          component.set('domainsCompletionReport', domainsCompletionReport);
+          component.getDomainListToShow(domainsCompletionReport);
+          component.set('isLoading', false);
+          component.getStudentsGradeRange();
+        }
       });
   },
 
@@ -675,48 +677,54 @@ export default Ember.Component.extend({
       };
       otherGradeParams.grade = otherGradeList.toString();
       Ember.RSVP.hash({
-        gradeLevelCompetency: component
-          .get('strugglingCompetencyService')
-          .fetchStrugglingCompetency(params),
-        otherGradeLevelCompetency: component
-          .get('strugglingCompetencyService')
-          .fetchStrugglingCompetency(otherGradeParams)
+        gradeLevelCompetency: component.get('class.gradeCurrent')
+          ? component
+            .get('strugglingCompetencyService')
+            .fetchStrugglingCompetency(params)
+          : [],
+        otherGradeLevelCompetency: otherGradeList.length
+          ? component
+            .get('strugglingCompetencyService')
+            .fetchStrugglingCompetency(otherGradeParams)
+          : []
       }).then(({ gradeLevelCompetency, otherGradeLevelCompetency }) => {
-        if (gradeLevelCompetency && gradeLevelCompetency.length) {
-          component.set(
-            'gradeDomainsList',
-            gradeLevelCompetency[0].get('domains')
-          );
-        }
-        if (otherGradeLevelCompetency && otherGradeLevelCompetency.length) {
-          let otherGradeTopComp = [];
-          let cloneOtherGrade = getObjectsDeepCopy(otherGradeLevelCompetency);
-          cloneOtherGrade
-            .map(grade => grade.domains)
-            .map((domains, gradeIndex) => {
-              let competencyList = [];
-              domains.forEach((domain, domainIndex) => {
-                domain.competencies[0].domainIndex = domainIndex;
-                domain.competencies[0].domainName = domain.domainName;
-                competencyList.pushObject(domain.competencies[0]);
-              });
-              if (competencyList && competencyList.length) {
-                let gradeLevelTopCompetency = competencyList.reduce(
-                  (prevCompetency, currentCompetency) => {
-                    return prevCompetency.studentsCount <
-                      currentCompetency.studentsCount
-                      ? currentCompetency
-                      : prevCompetency;
+        if (!component.get('isDestroyed')) {
+          if (gradeLevelCompetency && gradeLevelCompetency.length) {
+            component.set(
+              'gradeDomainsList',
+              gradeLevelCompetency[0].get('domains')
+            );
+          }
+          if (otherGradeLevelCompetency && otherGradeLevelCompetency.length) {
+            let otherGradeTopComp = [];
+            let cloneOtherGrade = getObjectsDeepCopy(otherGradeLevelCompetency);
+            cloneOtherGrade
+              .map(grade => grade.domains)
+              .map((domains, gradeIndex) => {
+                let competencyList = [];
+                domains.forEach((domain, domainIndex) => {
+                  domain.competencies[0].domainIndex = domainIndex;
+                  domain.competencies[0].domainName = domain.domainName;
+                  competencyList.pushObject(domain.competencies[0]);
+                });
+                if (competencyList && competencyList.length) {
+                  let gradeLevelTopCompetency = competencyList.reduce(
+                    (prevCompetency, currentCompetency) => {
+                      return prevCompetency.studentsCount <
+                        currentCompetency.studentsCount
+                        ? currentCompetency
+                        : prevCompetency;
+                    }
+                  );
+                  if (gradeLevelTopCompetency) {
+                    gradeLevelTopCompetency.gradeIndex = gradeIndex;
+                    otherGradeTopComp.pushObject(gradeLevelTopCompetency);
                   }
-                );
-                if (gradeLevelTopCompetency) {
-                  gradeLevelTopCompetency.gradeIndex = gradeIndex;
-                  otherGradeTopComp.pushObject(gradeLevelTopCompetency);
                 }
-              }
-            });
-          component.set('otherGradeTopComp', otherGradeTopComp);
-          component.set('otherGradeCompetency', otherGradeLevelCompetency);
+              });
+            component.set('otherGradeTopComp', otherGradeTopComp);
+            component.set('otherGradeCompetency', otherGradeLevelCompetency);
+          }
         }
       });
     });
