@@ -11,19 +11,7 @@
       display: grid;
       grid-template-rows: auto auto auto;
       align-items: center;
-      .header-info {
-        .title {
-          font-size: 20px;
-          font-weight: 500;
-          text-transform: capitalize;
-          display: flex;
-          align-items: center;
-          cursor: pointer;
-        }
-      }
-      .description {
-        display: none;
-      }
+      padding: 0px 10px;
       .note p {
         margin-bottom: 5px;
       }

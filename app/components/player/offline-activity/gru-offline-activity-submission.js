@@ -39,7 +39,7 @@ export default Ember.Component.extend({
 
   actions: {
     onSkipFeedback() {
-      this.set('isShowActivityFeedback', false);
+      this.sendAction('onSkipFeedback');
     },
 
     //Action triggered when toggle timespent entry container

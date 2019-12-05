@@ -15,10 +15,11 @@
     width: 100%;
     .external-collection-card {
       background-color: $white;
-      width: 45%;
+      width: 33%;
       border: 1px solid #868585;
-      max-height: calc(100vh - 160px);
+      max-height: calc(100vh - 140px);
       overflow-y: auto;
+      margin-left: 7%;
       &::-webkit-scrollbar {
         height: 6px;
         width: 8px;
@@ -37,7 +38,6 @@
           background-repeat: no-repeat;
           background-size: cover;
           background-position: center;
-          // padding: 15px 20px;
           &:after {
             display: block;
             z-index: 9;
@@ -48,15 +48,16 @@
             background-image: linear-gradient(
               to bottom,
               rgba(255, 255, 255, 0) 0,
-              $kbd-bg 100%
+              #111 100%
             );
           }
           .header-content {
             display: grid;
             height: 100%;
+            position: relative;
             .title {
-              font-size: 20px;
-              align-items: center;
+              font-size: 18px;
+              align-items: flex-end;
               display: flex;
               font-weight: 600;
               padding: 10px;
@@ -75,14 +76,16 @@
               padding: 10px 15px;
               .description p {
                 color: #576ca2;
-                font-size: 15px;
+                font-size: 13px;
                 margin-bottom: 10px;
-                line-height: 1.6;
+                line-height: 1.2;
               }
               .details {
                 display: grid;
                 grid-template-columns: auto 100px;
                 .taxonomy {
+                  align-items: center;
+                  margin-top: 1px;
                   .gru-taxonomy-tag-list {
                     .gru-taxonomy-tag {
                       background-color: $charcoal-grey;
@@ -106,11 +109,12 @@
                     background-color: #00c451;
                     padding: 7px 5px;
                     text-align: center;
-                    font-size: 16px;
+                    font-size: 14px;
                     width: 100%;
                     text-transform: uppercase;
                     font-weight: 500;
                     cursor: pointer;
+                    line-height: 32px;
                     &.disabled {
                       pointer-events: none;
                       opacity: 0.5;

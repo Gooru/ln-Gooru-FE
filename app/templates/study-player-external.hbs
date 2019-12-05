@@ -21,6 +21,7 @@
           mapLocation = mapLocation
           isStudyPlayer = true
           isIframeMode=isIframeMode
+          onSkipFeedback="playNext"
         }}
       {{else if isAsssessment}}
         {{player/gru-external-assessment-page
@@ -29,6 +30,7 @@
         source=source
         isNewPlayer=isNewPlayer
         dataParams=dataParams
+        onSkipFeedback="playNext"
       }}
       {{else}}
         {{player/gru-external-collection-page
@@ -36,6 +38,7 @@
         mapLocation=mapLocation
         source=source
         isNewPlayer=isNewPlayer
+        onSkipFeedback="playNext"
       }}
       {{/if}}
     {{/if}}
