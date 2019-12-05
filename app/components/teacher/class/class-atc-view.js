@@ -53,9 +53,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     if (component.get('class') && component.get('course')) {
-      if (component.get('isShowAtcView')) {
-        component.loadData();
-      }
+      component.loadData();
     } else {
       component.loadClassData();
     }
@@ -530,18 +528,20 @@ export default Ember.Component.extend({
 
   loadData() {
     const component = this;
-    component.set('isLoading', true);
-    component.fetchClassActivitiesCount();
-    component
-      .fetchDomainsCompletionReport()
-      .then(function(domainsCompletionReport) {
-        if (!component.get('isDestroyed')) {
-          component.set('domainsCompletionReport', domainsCompletionReport);
-          component.getDomainListToShow(domainsCompletionReport);
-          component.set('isLoading', false);
-          component.getStudentsGradeRange();
-        }
-      });
+    if (component.get('isShowAtcView')) {
+      component.set('isLoading', true);
+      component.fetchClassActivitiesCount();
+      component
+        .fetchDomainsCompletionReport()
+        .then(function(domainsCompletionReport) {
+          if (!component.get('isDestroyed')) {
+            component.set('domainsCompletionReport', domainsCompletionReport);
+            component.getDomainListToShow(domainsCompletionReport);
+            component.set('isLoading', false);
+            component.getStudentsGradeRange();
+          }
+        });
+    }
   },
 
   /**
