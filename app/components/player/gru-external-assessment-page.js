@@ -65,7 +65,7 @@ export default Ember.Component.extend({
      */
     onSkipFeedback() {
       const component = this;
-      component.set('isShowActivityFeedback', false);
+      component.sendAction('onSkipFeedback');
     },
 
     /**
@@ -242,6 +242,7 @@ export default Ember.Component.extend({
     let component = this;
     let analyticsService = component.get('analyticsService');
     let dataParams = component.getDataParams();
+    component.set('percentScore', dataParams.percent_score);
     let selfReportedPromise = analyticsService.studentSelfReporting(dataParams);
     component.set('score', '');
     Ember.RSVP.hash({

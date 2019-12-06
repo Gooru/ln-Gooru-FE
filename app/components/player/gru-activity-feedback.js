@@ -14,19 +14,30 @@ export default Ember.Component.extend({
     onNext: function() {
       const component = this;
       let resourceList = component.get('resourceList');
-      let nextIndex = component.get('currentIndex') + 1;
-      component.set('currentIndex', nextIndex);
-      let nextContent = resourceList.objectAt(nextIndex);
+      let currentIndex = component.get('currentIndex');
+      let nextContent = resourceList.objectAt(currentIndex);
       if (nextContent) {
-        component.set('resourceInfo', nextContent);
+        let resource = nextContent.get('resource');
+        let content_format = resource.isResource ? 'resource' : 'question';
+        component.set('isSkipped', nextContent.get('skipped'));
+        component.set('contentScore', nextContent.get('score'));
+        component.set('timeSpent', nextContent.get('savedTime'));
+        component.set('contentFormat', content_format);
+        component.set('resourceInfo', resource);
       } else {
         component.set('isPlayNextContent', true);
       }
+      component.incrementProperty('currentIndex');
     },
 
     onSkipFeedback: function() {
       const component = this;
       component.sendAction('onSkipFeedback');
+    },
+
+    onExit: function() {
+      const component = this;
+      component.sendAction('onExit');
     }
   },
 
@@ -42,10 +53,27 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * @property {ResourceList[]} List of resource list
+   */
+  resourceList: Ember.computed('collection', function() {
+    let component = this;
+    let resourcesResult = component.get('collection.resourcesResult');
+    return resourcesResult || [];
+  }),
+
+  /**
+   * @property {resourceInfo{}} object
+   */
+  resourceInfo: Ember.computed('collection', function() {
+    let component = this;
+    return component.get('collection');
+  }),
+
+  /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
-  tags: Ember.computed('collection', function() {
-    let standards = this.get('collection.standards');
+  tags: Ember.computed('resourceInfo', function() {
+    let standards = this.get('resourceInfo.standards');
     if (standards) {
       standards = standards.filter(function(standard) {
         // Filter out learning targets (they're too long for the card)
@@ -56,22 +84,16 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * @property {ResourceList[]} List of resource list
+   * @property {contentFormat} String
    */
-  resourceList: Ember.computed('collection', function() {
+  contentFormat: Ember.computed('collection', function() {
     let component = this;
     let format = component.get('format');
-    return format === 'offline-activity'
-      ? component.get('collection.tasks')
-      : component.get('collection.children');
-  }),
-
-  resourceInfo: Ember.computed('resourceList', 'collection', function() {
-    let component = this;
-    let resourceList = component.get('resourceList');
-    return resourceList.length
-      ? resourceList.get('firstObject')
-      : component.get('collection');
+    return format
+      ? format
+      : component.get('isCollection')
+        ? 'collection'
+        : 'assessment';
   }),
 
   isPlayNextContent: false,

@@ -25,7 +25,7 @@ export default Ember.Component.extend({
      * Action triggered for the next button
      */
     parentNext: function() {
-      if (this.isPlayerProficiency || this.isFeedbackCaptureCompleted) {
+      if (this.isPlayerProficiency) {
         this.sendAction('parents');
       } else {
         this.sendAction('OnFeedbackCapture');

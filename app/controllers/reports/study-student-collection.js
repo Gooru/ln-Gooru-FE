@@ -4,9 +4,11 @@ import {
   ASSESSMENT_SUB_TYPES,
   ROLES,
   CONTENT_TYPES,
-  SCORES
+  SCORES,
+  PLAYER_EVENT_MESSAGE
 } from 'gooru-web/config/config';
 import { getDomainCode } from 'gooru-web/utils/taxonomy';
+import { getObjectCopy } from 'gooru-web/utils/utils';
 
 /**
  *
@@ -80,7 +82,6 @@ export default StudentCollection.extend({
       let contextId = controller.get('contextId');
       let profileId = controller.get('session.userData.gooruUId');
       const navigateMapService = controller.get('navigateMapService');
-      controller.set('isFeedbackCaptureCompleted', false);
       controller
         .get('quizzesAttemptService')
         .getAttemptIds(contextId, profileId)
@@ -120,12 +121,13 @@ export default StudentCollection.extend({
         });
     },
 
-    OnShowMastery() {
+    OnShowMasteryOrNext() {
       const component = this;
-      component.set('isShowActivityFeedback', false);
-      component.set('isFeedbackCaptureCompleted', true);
       if (component.get('isLoadProficiencyProgress')) {
+        component.set('isShowActivityFeedback', false);
         component.set('isShowMasteryGreeting', true);
+      } else {
+        component.actions.next(component);
       }
     },
 
@@ -188,11 +190,24 @@ export default StudentCollection.extend({
 
     onExit(rouet, id) {
       const controller = this;
-      controller.transitionToRoute(rouet, id);
+      let isIframeMode = controller.get('isIframeMode');
+      if (isIframeMode) {
+        window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
+      } else {
+        controller.transitionToRoute(rouet, id);
+      }
     },
 
     OnFeedbackCapture: function() {
+      const controller = this;
+      let feedbackObj = getObjectCopy(controller.get('collectionObj'));
+      feedbackObj.isCollection = controller.get('collection.isCollection');
+      feedbackObj.resourcesResult = controller.get(
+        'attemptData.resourceResults'
+      );
+      controller.set('feedbackObj', feedbackObj);
       this.set('isShowActivityFeedback', true);
+      this.set('isStatusDone', false);
     }
   },
 
@@ -390,7 +405,6 @@ export default StudentCollection.extend({
   }),
 
   isShowActivityFeedback: false,
-  isFeedbackCaptureCompleted: false,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -425,10 +439,12 @@ export default StudentCollection.extend({
           ? 'signature-collection'
           : 'signature-assessment';
       queryParams.pathType = 'system';
+      this.set('isShowActivityFeedback', false);
       this.transitionToRoute('study-player', context.get('courseId'), {
         queryParams
       });
     } else {
+      this.set('isShowActivityFeedback', false);
       queryParams.type = context.itemType || null; //Type is important to decide whether next item is external or normal
       queryParams.pathId = context.pathId || 0;
       queryParams.pathType = context.pathType || null;
@@ -468,7 +484,7 @@ export default StudentCollection.extend({
       this.set('mapLocation.context.status', 'done');
       this.set('hasSignatureCollectionSuggestions', false);
       this.set('hasSignatureCollectionSuggestions', false);
-      this.set('isDone', true);
+      this.set('isStatusDone', true);
     }
   },
 

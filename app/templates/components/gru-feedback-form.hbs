@@ -1,12 +1,6 @@
 <div class="gru-feedback-form">
   <div class="feedback-container">
     <div class="feedback-header-panel">
-      <div class="header-info">
-        <span class="title" {{action 'showDescription'}}>{{resourceInfo.title}}</span>
-      </div>
-      <div class="description">
-        <span>{{resourceInfo.description}}</span>
-      </div>
       <div class="note">
         <p>{{t 'common.feedback-note'}}</p>
       </div>
@@ -30,11 +24,15 @@
       {{/each}}
     </div>
     <div class="feedback-fooder-panel">
-      <div class="skip" {{action onSkipFeedback}}>{{t 'common.skip-feedback'}}</div>
-      {{#if isPlayNextContent}}
-        <div class="next" {{action onSkipFeedback}}>Thanks</div>
+      {{#if isStatusDone}}
+        <div class="next" {{action onExit}}>{{t 'common.exit'}}</div>
       {{else}}
-        <div class="next" {{action onNext}}>{{t 'common.next'}}</div>
+        <div class="skip" {{action onSkipFeedback}}>{{t 'common.skip-feedback'}}</div>
+        {{#if isPlayNextContent}}
+          <div class="next" {{action onSkipFeedback}}>Thanks</div>
+        {{else}}
+          <div class="next" {{action onNext}}>{{t 'common.next'}}</div>
+        {{/if}}
       {{/if}}
     </div>
   </div>

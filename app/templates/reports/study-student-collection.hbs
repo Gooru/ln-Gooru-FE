@@ -13,7 +13,7 @@
 }}
 
 {{#if isShowActivityFeedback}}
-  {{player/gru-activity-feedback collection=collectionObj timeSpent=attemptData.totalTimeSpent onSkipFeedback="OnShowMastery"}}
+  {{player/gru-activity-feedback collection=feedbackObj timeSpent=attemptData.totalTimeSpent score=attemptData.averageScore onSkipFeedback="OnShowMasteryOrNext" isStatusDone=isStatusDone onExit="onExit"}}
 {{else}}
   <div class="report-container {{if isShowSuggestion 'show-suggestion'}}">
     <div class="summary-reset">
@@ -22,7 +22,7 @@
       {{/if}}
       {{reports/qz-student-report attemptData=attemptData profile=profile isIframeMode=isIframeMode}}
     </div>
-    {{player/gru-player-summary-footer isDone=isDone classId=classId parents="next" OnFeedbackCapture="OnFeedbackCapture" isFeedbackCaptureCompleted=isFeedbackCaptureCompleted courseId=courseId collection=collection isFullScreen=isFullScreen onToggleScreen="onToggleScreen" isIframeMode=isIframeMode onExit="onExit"}}
+    {{player/gru-player-summary-footer isDone=isDone classId=classId parents="next" OnFeedbackCapture="OnFeedbackCapture" courseId=courseId collection=collection isFullScreen=isFullScreen onToggleScreen="onToggleScreen" isIframeMode=isIframeMode onExit="onExit"}}
   </div>
 
   {{#if isShowSuggestion}}

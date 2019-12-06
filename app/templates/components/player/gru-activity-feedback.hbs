@@ -4,13 +4,19 @@
       <div class="card-container">
         <div class="header-panel" style="background-image: url({{collection.thumbnailUrl}})">
           <div class="header-content">
-            <div class="title">{{safe-html collection.title}}</div>
+            <div class="title">{{safe-html resourceInfo.title}}</div>
           </div>
         </div>
         <div class="body-panel">
           <div class="body-content">
             <div class="description-panel">
-              <div class="description"><p>{{safe-html collection.learningObjectives}}</p></div>
+              <div class="description">
+                {{#if resourceInfo.learningObjectives}}
+                  <p>{{safe-html resourceInfo.learningObjectives}}</p>
+                {{else}}
+                  <p>{{safe-html resourceInfo.description}}</p>
+                {{/if}}
+              </div>
               <div class="details">
                 <div class="taxonomy">
                   {{#if tags.length}}
@@ -18,26 +24,44 @@
                   {{/if}}
                 </div>
                 <div class="resource">
-                  {{#if (and isCollection (gt collection.resourceCount 0))}}
+                  {{#if (and isCollection (gt resourceInfo.resourceCount 0))}}
                     <span class="icon" data-toggle="tooltip" title="{{t 'common.resource'}}"></span>
-                    <span>{{collection.resourceCount}}</span>
+                    <span>{{resourceInfo.resourceCount}}</span>
                   {{/if}}
                 </div>
                 <div class="question">
-                  {{#if (gt collection.questionCount 0)}}
+                  {{#if (gt resourceInfo.questionCount 0)}}
                     <span class="icon" data-toggle="tooltip" title="{{t 'common.question'}}"></span>
-                    <span>{{collection.questionCount}}</span>
+                    <span>{{resourceInfo.questionCount}}</span>
                   {{/if}}
                 </div>
                 <div class="time-spent">
-                  <span>{{format-time timeSpent}}</span>
+                  {{#if (eq contentFormat 'question') }}
+                    {{#unless isSkipped}}
+                      {{#if (gt contentScore 0)}}
+                        <span class="correct"><i class="icon"> </i></span>
+                      {{else}}
+                        <span class="incorrect"><i class="icon"> </i></span>
+                      {{/if}}
+                    {{/unless}}
+                  {{else}}
+                    {{#if (or isCollection (eq contentFormat 'resource'))}}
+                      <span>{{format-time timeSpent}}</span>
+                    {{else}}
+                      {{#if score}}
+                        <span>{{round-number score}}%</span>
+                      {{else}}
+                        <span> -- </span>
+                      {{/if}}
+                    {{/if}}
+                  {{/if}}
                 </div>
               </div>
             </div>
             <div class="content-panel">
               <div class="content-body">
                 {{#if resourceInfo}}
-                  {{gru-feedback-form resourceInfo=resourceInfo format=format onNext='onNext' onSkipFeedback="onSkipFeedback" isPlayNextContent=isPlayNextContent}}
+                  {{gru-feedback-form resourceInfo=resourceInfo format=contentFormat onNext='onNext' onSkipFeedback="onSkipFeedback" isPlayNextContent=isPlayNextContent isStatusDone=isStatusDone onExit="onExit"}}
                 {{/if}}
               </div>
             </div>

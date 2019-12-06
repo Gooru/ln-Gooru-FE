@@ -56,6 +56,11 @@ export default Ember.Component.extend({
     onSkipFeedback: function() {
       const component = this;
       component.sendAction('onSkipFeedback');
+    },
+
+    onExit: function() {
+      const component = this;
+      component.sendAction('onExit');
     }
   },
 
@@ -78,13 +83,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  contentId: Ember.computed('resourceInfo', function() {
-    let component = this;
-    let format = component.get('format');
-    return format === 'offline-activity'
-      ? component.get('resourceInfo.oaId')
-      : component.get('resourceInfo.id');
-  }),
+  contentId: Ember.computed.alias('resourceInfo.id'),
 
   // -------------------------------------------------------------------------
   // Methods
