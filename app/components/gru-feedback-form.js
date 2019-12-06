@@ -83,10 +83,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  contentId: Ember.computed('resourceInfo', function() {
-    let component = this;
-    return component.get('resourceInfo.id');
-  }),
+  contentId: Ember.computed.alias('resourceInfo.id'),
 
   // -------------------------------------------------------------------------
   // Methods

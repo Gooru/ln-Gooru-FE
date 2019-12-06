@@ -8,6 +8,7 @@ import {
   PLAYER_EVENT_MESSAGE
 } from 'gooru-web/config/config';
 import { getDomainCode } from 'gooru-web/utils/taxonomy';
+import { getObjectCopy } from 'gooru-web/utils/utils';
 
 /**
  *
@@ -199,10 +200,8 @@ export default StudentCollection.extend({
 
     OnFeedbackCapture: function() {
       const controller = this;
-      let feedbackObj = Object.assign(
-        Ember.Object.create({}),
-        controller.get('collectionObj')
-      );
+      let feedbackObj = getObjectCopy(controller.get('collectionObj'));
+      feedbackObj.isCollection = controller.get('collection.isCollection');
       feedbackObj.resourcesResult = controller.get(
         'attemptData.resourceResults'
       );

@@ -181,6 +181,7 @@ export default Ember.Component.extend({
     let component = this;
     let analyticsService = component.get('analyticsService');
     let dataParams = component.getDataParams();
+    component.set('timeSpent', dataParams.time_spent);
     let selfReportedPromise = analyticsService.studentSelfReporting(dataParams);
     component.set('time', '');
     Ember.RSVP.hash({

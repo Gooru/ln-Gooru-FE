@@ -27,8 +27,7 @@ export default Ember.Component.extend({
       } else {
         component.set('isPlayNextContent', true);
       }
-      let nextIndex = component.get('currentIndex') + 1;
-      component.set('currentIndex', nextIndex);
+      component.incrementProperty('currentIndex');
     },
 
     onSkipFeedback: function() {
@@ -59,7 +58,7 @@ export default Ember.Component.extend({
   resourceList: Ember.computed('collection', function() {
     let component = this;
     let resourcesResult = component.get('collection.resourcesResult');
-    return resourcesResult ? component.get('collection.resourcesResult') : [];
+    return resourcesResult || [];
   }),
 
   /**
