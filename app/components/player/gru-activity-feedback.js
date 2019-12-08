@@ -17,13 +17,14 @@ export default Ember.Component.extend({
       let currentIndex = component.get('currentIndex');
       let nextContent = resourceList.objectAt(currentIndex);
       if (nextContent) {
-        let resource = nextContent.get('resource');
-        let content_format = resource.isResource ? 'resource' : 'question';
+        let content_format = nextContent.get('content_format')
+          ? nextContent.get('content_format')
+          : 'question';
         component.set('isSkipped', nextContent.get('skipped'));
         component.set('contentScore', nextContent.get('score'));
         component.set('timeSpent', nextContent.get('savedTime'));
         component.set('contentFormat', content_format);
-        component.set('resourceInfo', resource);
+        component.set('resourceInfo', nextContent);
       } else {
         component.set('isPlayNextContent', true);
       }
@@ -57,7 +58,7 @@ export default Ember.Component.extend({
    */
   resourceList: Ember.computed('collection', function() {
     let component = this;
-    let resourcesResult = component.get('collection.resourcesResult');
+    let resourcesResult = component.get('collection.children');
     return resourcesResult || [];
   }),
 

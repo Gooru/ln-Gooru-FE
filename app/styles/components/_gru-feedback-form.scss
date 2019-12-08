@@ -1,5 +1,4 @@
 .gru-feedback-form {
-  padding: 10px;
   background-color: #fff;
   color: #737373;
   font-size: 15px;
@@ -11,9 +10,14 @@
       display: grid;
       grid-template-rows: auto auto auto;
       align-items: center;
-      padding: 0px 10px;
-      .note p {
-        margin-bottom: 5px;
+      padding: 10px;
+      padding-bottom: 0px;
+      .note {
+        line-height: 1.2;
+        font-size: 13px;
+        p {
+          margin-bottom: 5px;
+        }
       }
     }
     .feedback-body-panel {
@@ -23,11 +27,11 @@
         grid-template-columns: 100px auto;
         display: grid;
         .category {
-          padding: 10px 5px;
+          padding: 5px;
           justify-content: center;
         }
         .category-rating {
-          padding: 10px 5px;
+          padding: 5px;
           justify-content: flex-end;
           display: flex;
           .row {
@@ -50,16 +54,18 @@
         padding: 5px;
         label {
           width: 100%;
+          font-weight: bold;
           .form-group {
             margin-bottom: 0px;
+            font-weight: normal;
           }
         }
       }
     }
     .feedback-fooder-panel {
-      display: inline-flex;
-      justify-content: flex-end;
       align-items: center;
+      display: grid;
+      grid-template-columns: 50% 50%;
       .next,
       .skip {
         padding: 10px;
@@ -69,24 +75,14 @@
       }
       .next {
         background-color: #0072bc;
-        width: 100px;
       }
       .skip {
         background-color: #b8bfc4;
-        margin-right: 15px;
-        width: 150px;
       }
       @media screen and (max-width: $screen-320) {
         .next,
         .skip {
           padding: 5px 10px;
-        }
-        .skip {
-          margin-right: 10px;
-          width: 130px;
-        }
-        .next {
-          width: 90px;
         }
       }
     }

@@ -2,7 +2,7 @@
   <div class="feedback-container">
     <div class="feedback-header-panel">
       <div class="note">
-        <p>{{t 'common.feedback-note'}}</p>
+        <p>{{t (concat 'common.feedback-' format '-note') }}</p>
       </div>
     </div>
     <div class="feedback-body-panel">
@@ -17,7 +17,7 @@
           <div class="feedback-comments">
             <label for="commentsId">
               <span>{{category.categoryName}}</span>
-              {{validation/gru-textarea model=category valuePath='comments' inputId='commentsId' isRequired=false}}
+              {{validation/gru-textarea model=category valuePath='comments' placeholder=(t 'common.feedback-review-placeholder') inputId='commentsId' isRequired=false}}
             </label>
           </div>
         {{/if}}

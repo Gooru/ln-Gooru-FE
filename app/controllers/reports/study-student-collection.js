@@ -8,7 +8,7 @@ import {
   PLAYER_EVENT_MESSAGE
 } from 'gooru-web/config/config';
 import { getDomainCode } from 'gooru-web/utils/taxonomy';
-import { getObjectCopy } from 'gooru-web/utils/utils';
+import { getObjectCopy, getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
 /**
  *
@@ -202,9 +202,18 @@ export default StudentCollection.extend({
       const controller = this;
       let feedbackObj = getObjectCopy(controller.get('collectionObj'));
       feedbackObj.isCollection = controller.get('collection.isCollection');
-      feedbackObj.resourcesResult = controller.get(
-        'attemptData.resourceResults'
+      feedbackObj.children = getObjectsDeepCopy(
+        controller.get('collectionObj.children')
       );
+      let resourcesResult = controller.get('attemptData.resourceResults');
+      let resourceList = feedbackObj.get('children');
+      resourceList.map(resource => {
+        let result = resourcesResult.findBy('resourceId', resource.id);
+        resource.reaction = result.reaction;
+        resource.savedTime = result.savedTime;
+        resource.score = result.score;
+        resource.skipped = result.skipped;
+      });
       controller.set('feedbackObj', feedbackObj);
       this.set('isShowActivityFeedback', true);
       this.set('isStatusDone', false);
