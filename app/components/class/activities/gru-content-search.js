@@ -166,6 +166,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   observeLibraryChange: Ember.observer('activeTenantLibrary', function() {
     const component = this;
+    component.set('isShowContentSelector', true);
     component.fetchLibraryContentByType().then(function(libraryContents) {
       component.sendAction('onShowFilteredContents', libraryContents);
     });

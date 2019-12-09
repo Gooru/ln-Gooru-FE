@@ -4,6 +4,11 @@
       .class-activities-ctrl-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
+
+        .ca-datepicker-schedule-container {
+          position: absolute;
+          z-index: 1000;
+        }
       }
     }
   }

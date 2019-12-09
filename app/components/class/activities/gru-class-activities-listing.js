@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
+import ModalMixin from 'gooru-web/mixins/modal';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(ModalMixin, {
   classNames: ['class-activities', 'gru-class-activities-listing'],
 
   /**
@@ -34,6 +35,34 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    /**
+     *
+     * @function actions:removeClassActivity
+     */
+    removeClassActivity(classActivity) {
+      let component = this;
+      let currentClassId = component.get('classId');
+      let classActivityId = classActivity.get('id');
+      let classActivityType = classActivity.get('collection.collectionType');
+      var model = {
+        type: classActivityType,
+        deleteMethod: function() {
+          return component
+            .get('classActivityService')
+            .removeClassActivity(currentClassId, classActivityId);
+        },
+        callback: {
+          success: function() {
+            component.removeClassActivity(classActivity);
+          }
+        }
+      };
+      this.actions.showModal.call(
+        this,
+        'content.modals.gru-remove-class-activity',
+        model
+      );
+    },
     onShowStudentsList(activityClass) {
       const component = this;
       component.set('selectedActivityClass', activityClass);
@@ -88,7 +117,6 @@ export default Ember.Component.extend({
     },
 
     onSelectContentSelector(component = this) {
-      component.$('.activities-content').slideDown();
       component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', false);
@@ -245,7 +273,6 @@ export default Ember.Component.extend({
       component.get('contentTypes').map(content => {
         content.set('isActive', false);
       });
-      component.$('.activities-content').slideUp();
       component.loadUnScheduledActivities();
     },
 
@@ -258,7 +285,6 @@ export default Ember.Component.extend({
       component.get('contentTypes').map(content => {
         content.set('isActive', false);
       });
-      component.$('.activities-content').slideUp();
     },
 
     onGradeItem(gradingObject) {
@@ -405,6 +431,15 @@ export default Ember.Component.extend({
       }
       return groupedClassActivities;
     });
+  },
+
+  /**
+   * Removes a class activity from a list of classActivities
+   * @param {classActivity} classActivity
+   */
+  removeClassActivity(classActivity) {
+    const component = this;
+    component.get('scheduledActivitiesList').removeObject(classActivity);
   },
 
   loadUnScheduledActivities() {

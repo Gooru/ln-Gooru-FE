@@ -1,15 +1,16 @@
 <div class="class-activities-source-container">
   <div class="header-container">
     {{class/activities/gru-content-search
-      onSelectExternalActivity = "onSelectExternalActivity"
-      onShowTenantLibraries = "onShowTenantLibraries"
-      onShowFilteredContents = "onShowFilteredContents"
-      onShowLessonPlan = "onShowLessonPlan"
-      activeTenantLibrary = activeTenantLibrary
-      course = primaryClass.course
-      class = primaryClass}}
+      onSelectExternalActivity="onSelectExternalActivity"
+      onShowTenantLibraries="onShowTenantLibraries"
+      onShowFilteredContents="onShowFilteredContents"
+      onShowLessonPlan="onShowLessonPlan"
+      activeTenantLibrary=activeTenantLibrary
+      course=primaryClass.course
+      class=primaryClass
+    }}
   </div>
-  <div class="body-container">
+  <div class="body-container {{if isShowTenantLibraries 'grid-view'}}">
     {{#if isShowTenantLibraries}}
       {{#each tenantLibraries as |tenantLibrary|}}
         {{library/gru-partner-library-card onSelectLibrary='onSelectTenantLibrary' content=tenantLibrary}}
@@ -27,8 +28,8 @@
     {{else}}
       {{#each filteredContents as |filteredContent|}}
         {{new-cards/activities/gru-add-content-card
-          content = filteredContent
-          onAddActivity = "onAddActivity"}}
+          content=filteredContent
+          onAddActivity="onAddActivity"}}
       {{/each}}
     {{/if}}
   </div>

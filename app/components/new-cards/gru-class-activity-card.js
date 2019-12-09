@@ -22,7 +22,10 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.loadClassData();
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
+    this.setupTooltip();
   },
 
   actions: {
@@ -68,8 +71,62 @@ export default Ember.Component.extend({
       const component = this;
       const classActivity = component.get('activity');
       component.sendAction('onShowContentPreview', classActivity);
+    },
+
+    /**
+     * @function removeClassActivity
+     */
+    removeClassActivity() {
+      const component = this;
+      const classActivity = component.get('activity');
+      this.sendAction('onRemoveClassActivity', classActivity);
     }
   },
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  setupTooltip: function() {
+    let component = this;
+    let $anchor = this.$('.content');
+    let isMobile = window.matchMedia('only screen and (max-width: 768px)');
+    let tagPopoverDefaultPosition = this.get('tagPopoverDefaultPosition');
+    $anchor.attr('data-html', 'true');
+    $anchor.popover({
+      placement: tagPopoverDefaultPosition,
+      content: function() {
+        return component.$('.tag-tooltip').html();
+      },
+      trigger: 'manual',
+      container: 'body'
+    });
+
+    if (isMobile.matches) {
+      $anchor.on('click', function() {
+        let $this = $(this);
+        if (!$this.hasClass('list-open')) {
+          // Close all tag tooltips by simulating a click on them
+          $('.gru-class-activity-card > .content.list-open').click();
+          $this.addClass('list-open').popover('show');
+        } else {
+          $this.removeClass('list-open').popover('hide');
+        }
+      });
+    } else {
+      $anchor.on('mouseenter', function() {
+        $(this).popover('show');
+      });
+
+      $anchor.on('mouseleave', function() {
+        $(this).popover('hide');
+      });
+    }
+  },
+  /**
+   * Maintains the value of popover position
+   * @type {String}
+   */
+  tagPopoverDefaultPosition: 'bottom',
 
   activityContent: Ember.computed.alias('activity.collection'),
 
