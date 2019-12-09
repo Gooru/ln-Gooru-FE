@@ -58,8 +58,6 @@ window.i18ln = {
   'errors.url': '{{description}} একটা বৈধ ইউআরএল হতে হবে',
   'common.relevance': 'প্রাসঙ্গিকতা',
   'common.engagement': 'প্রবৃত্তি',
-  'common.no-content-for-week':
-    'No class activities scheduled for the selected period',
   'common.efficacy': 'কার্যক্ষমতা',
   'common.grid': 'গ্রিড',
   'common.list': 'তালিকা',
@@ -67,7 +65,6 @@ window.i18ln = {
   'common.last': 'গত',
   'not-covered-in-fw-msg':
     'Note: This competency is not covered by the {{framework}} framework',
-  'self-grade.not-required': 'Student self-grading not required',
   'common.name': 'নাম',
   'common.add-data-choice-title': 'আপনি ডেটা কিভাবে  লিখতে চান?',
   'common.take-photo': 'ছবি তুলুন',
@@ -2784,11 +2781,25 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'স্টুডেন্ট লোকেটার ',
   'teacher-landing.class.learning-journey': 'শেখার সফর ',
   'search-by': 'দিয়ে অনুসন্ধান করুন ',
-  'common.feedback-note':
-    'Please take a minute to rate the collection and its resources. It really helps!',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
   'common.external-assessment.index-message':
-    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here'
+    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here',
+  'common.feedback-review-placeholder':
+    'We appreciate your review of the content',
+  'common.feedback-collection-note':
+    'Please take a few seconds to give feedback about the collection you just studied. It helps!',
+  'common.feedback-assessment-note':
+    'Please take a few seconds to give feedback about the assessment you just took. It helps!',
+  'common.feedback-collection-external-note':
+    'Please take a few seconds to give feedback about the external collection you just studied. It helps!',
+  'common.feedback-assessment-external-note':
+    'Please take a few seconds to give feedback about the external assessment you just took. It helps!',
+  'common.feedback-question-note':
+    'Please take a few second to provide feedback on the question. It really helps!',
+  'common.feedback-resource-note':
+    'Please take a few seconds give your feedback on the resource. It really helps!',
+  'common.feedback-offline-activity-note':
+    ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!'
 };

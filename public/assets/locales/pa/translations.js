@@ -65,44 +65,11 @@ window.i18ln = {
   'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
   'common.first': 'ਪਹਿਲਾ',
-  'common.day': 'day',
   'common.tenantLibrary': 'Tenant Library',
-  'rubric-details': 'Rubric Details',
-  'common.add-data-choice-title': 'How do you want to enter the data?',
-  'tooltip.check-items-to-grade':
-    'Check the Items to Grade panel below to grade this activity',
-  'common.take-photo': 'take photo',
-  'common.upload-image': 'upload image',
-  'reroute.suggestion': 'reroute suggestion',
-  'reroute.suggestion.title': 'Having difficult with the concepts?',
-  'reroute.suggestion.desc':
-    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
-  'common.by-question': 'question-by-question',
   'i2d.new-upload-msg':
     'Please click on Confirm & Continue button to upload your images',
-  'i2d.conversion-progress':
-    'The uploaded image(s) are being processed. Please check back later',
-  'i2d.conversion-error':
-    'There was an error when trying to convert the image. Please resubmit the image',
-  'file-picker-placeholder': 'Choose a file or drag it here',
-  'no-preview-available': 'no preview available',
-  'common.success': 'Success',
-  'i2d-successfully-image-upload':
-    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
-  'common.dialog-close': 'Do you want to close ?',
-  're-upload': 'Re-Upload',
-  'upload-success': 'Uploaded Successfully',
   'common.suggest-to-student': 'Suggest to student',
-  'mobile-camera-placeholder': 'Tap for image upload',
-  'i2d.mobile-upload-failed': 'There was a error',
-  'i2d.upload-failed':
-    'There was an error while uploading this image. Re-upload?',
-  'common.no-content-for-week':
-    'No class activities scheduled for the selected period',
-  'common.week': 'week',
-  'common.month': 'month',
   'common.last': 'ਆਖਰੀ',
-  'common.tasks': 'tasks',
   'common.name': 'ਨਾਮ',
   'common.add-data-choice-title': 'ਤੁਸੀਂ ਡਾਟਾ ਕਿਵੇਂ ਭਰਨਾ ਚਾਹੁੰਦੇ ਹੋ ?',
   'common.take-photo': 'ਫੋਟੋ ਲਓ',
@@ -159,16 +126,12 @@ window.i18ln = {
     'ਆਪਣੇ ਸਪੈੱਲਿੰਗ ਜਾਂਚੋ। ਅਸੀਂ ਸਭ ਗਲਤੀਆਂ ਕਰਦੇ ਹਾਂ! ਜਾਂ ਫਿਰ ਸਮਾਨ ਸ਼ਬਦ ਨੂੰ ਖੋਜਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ',
   'common.a-collection': 'ਇੱਕ ਸੰਗ੍ਰਹਿ',
   'common.a-course': 'ਇੱਕ ਕੋਰਸ',
-  'common.no-search-result':
-    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.a-question': 'ਇੱਕ ਸਵਾਲ',
   'common.a-resource': 'ਇੱਕ ਸਰੋਤ',
   'common.a-rubric': 'ਇੱਕ ਚਰਬੀਕਾਰ',
   'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'ਸਭ ਨੂੰ ਪੂਰਾ ਕੀਤਾ',
   'common.a-assessment': 'ਇੱਕ ਮੁਲਾਂਕਣ',
-  'common.answer-this-activity':
-    'Answer this rubric to complete your activity.',
   'common.about': 'ਬਾਰੇ',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.about-you': 'ਤੁਹਾਡੇ ਬਾਰੇ',
@@ -2758,11 +2721,25 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'ਵਿਦਿਆਰਥੀ ਲੋਕੇਟਰ',
   'teacher-landing.class.learning-journey': 'ਲਰਨਿੰਗ ਯਾਤਰਾ',
   'search-by': 'ਦੁਆਰਾ ਖੋਜੋ',
-  'common.feedback-note':
-    'Please take a minute to rate the collection and its resources. It really helps!',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
   'common.external-assessment.index-message':
-    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here'
+    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here',
+  'common.feedback-review-placeholder':
+    'We appreciate your review of the content',
+  'common.feedback-collection-note':
+    'Please take a few seconds to give feedback about the collection you just studied. It helps!',
+  'common.feedback-assessment-note':
+    'Please take a few seconds to give feedback about the assessment you just took. It helps!',
+  'common.feedback-collection-external-note':
+    'Please take a few seconds to give feedback about the external collection you just studied. It helps!',
+  'common.feedback-assessment-external-note':
+    'Please take a few seconds to give feedback about the external assessment you just took. It helps!',
+  'common.feedback-question-note':
+    'Please take a few second to provide feedback on the question. It really helps!',
+  'common.feedback-resource-note':
+    'Please take a few seconds give your feedback on the resource. It really helps!',
+  'common.feedback-offline-activity-note':
+    ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!'
 };

@@ -59,7 +59,6 @@ window.i18ln = {
   'common.relevance': 'ఔచిత్యం',
   'common.engagement': 'నిశ్చితార్థం',
   'common.efficacy': 'సమర్ధతకు',
-  'self-grade.not-required': 'Student self-grading not required',
   'common.grid': 'గ్రిడ్',
   'common.list': 'జాబితా',
   'common.first': 'మొదటి',
@@ -97,11 +96,6 @@ window.i18ln = {
   'common.firstName': 'మొదటి పేరు',
   'common.filter-by': 'ద్వారా వడపోత',
   'common.more': 'మరింత',
-  'common.tasks': 'tasks',
-  'common.no-content-for-week':
-    'No class activities scheduled for the selected period',
-  'common.no-search-result':
-    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.apply-filter': 'apply filter',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'సగటు స్కోర్',
@@ -134,14 +128,6 @@ window.i18ln = {
   'common.a-rubric': 'ఒక రంధ్రం',
   'common.all-completed': 'అన్ని పూర్తయింది',
   'common.a-assessment': 'ఒక అంచనా',
-  'common.answer-this-activity':
-    'Answer this rubric to complete your activity.',
-  'ca.student.no-content':
-    'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content':
-    'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content':
-    'There are no offline activities that are completed yet',
   'common.about': 'గురించి',
   'common.about-you': 'నీ గురించి',
   'common.about-me': 'నా గురించి',
@@ -2814,22 +2800,6 @@ window.i18ln = {
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
   'common.activity': 'Activity Title',
-  'content.oa.reference.uploaded': 'Uploaded',
-  'content.oa.reference.image': 'Image',
-  'content.oa.reference.pdf': 'Pdf',
-  'content.oa.reference.presentation': 'Presentation',
-  'content.oa.reference.document': 'Document',
-  'content.oa.reference.others': 'Others',
-  'teacher-landing.class.atc-view.progress-to-destination':
-    'progress to destination',
-  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
-  'gru-add-to.OA-info':
-    'The activities listed here <b>do not</b> belong to another lesson or course',
-  'gru-add-to.add-oa-to-lesson-lead':
-    'Select a activity to add to this lesson.',
-  'gru-share-pop-over.share-OA': 'Offline Activity',
-  'gru-suggest-test.pre-tessignaturet-lead':
-    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'common.choose-lang': 'Choose Language',
   'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
@@ -2842,11 +2812,25 @@ window.i18ln = {
   'common.multi-grade-view': 'Multi-grade view. Viewing class',
   'common.struggling-competencies': 'Struggling Competencies',
   'common.suggested': 'Suggested',
-  'common.feedback-note':
-    'Please take a minute to rate the collection and its resources. It really helps!',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
   'common.external-assessment.index-message':
-    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here'
+    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here',
+  'common.feedback-review-placeholder':
+    'We appreciate your review of the content',
+  'common.feedback-collection-note':
+    'Please take a few seconds to give feedback about the collection you just studied. It helps!',
+  'common.feedback-assessment-note':
+    'Please take a few seconds to give feedback about the assessment you just took. It helps!',
+  'common.feedback-collection-external-note':
+    'Please take a few seconds to give feedback about the external collection you just studied. It helps!',
+  'common.feedback-assessment-external-note':
+    'Please take a few seconds to give feedback about the external assessment you just took. It helps!',
+  'common.feedback-question-note':
+    'Please take a few second to provide feedback on the question. It really helps!',
+  'common.feedback-resource-note':
+    'Please take a few seconds give your feedback on the resource. It really helps!',
+  'common.feedback-offline-activity-note':
+    ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!'
 };

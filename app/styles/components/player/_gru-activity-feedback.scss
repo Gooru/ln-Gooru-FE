@@ -9,6 +9,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    display: flex;
+    align-items: center;
     &.assessment {
       background-image: url("gooru/assessment-start-page.jpg");
     }
@@ -36,7 +38,6 @@
           display: grid;
           grid-template-rows: 130px auto;
           color: $white;
-          text-transform: capitalize;
           .header-panel {
             background-repeat: no-repeat;
             background-size: cover;
@@ -51,19 +52,63 @@
               background-image: linear-gradient(
                 to bottom,
                 rgba(255, 255, 255, 0) 0,
-                $kbd-bg 100%
+                $gray-base 100%
               );
             }
             .header-content {
               display: grid;
               height: 100%;
               position: relative;
-              .title {
-                font-size: 18px;
+              grid-template-columns: 30px auto;
+              padding: 10px;
+              column-gap: 5px;
+              span {
                 align-items: flex-end;
                 display: flex;
+              }
+              i {
+                width: 22px;
+                height: 22px;
+                background-size: 22px;
+                display: block;
+                background-position: center;
+                background-repeat: no-repeat;
+                &.collection-icon,
+                &.collection-external-icon {
+                  background-image: url("../assets/gooru/images/collection-white.svg");
+                }
+                &.assessment-icon,
+                &.assessment-external-icon {
+                  background-image: url("../assets/gooru/images/assessment-white.svg");
+                }
+                &.offline-activity-icon {
+                  background-image: url("../assets/gooru/images/offline-white.svg");
+                }
+                &.question-icon {
+                  background-image: url("gooru/images/question-white.svg");
+                }
+                &.resource-icon.interactive {
+                  background-image: url("gooru/images/interactive-resource-white.svg");
+                }
+                &.resource-icon.video {
+                  background-image: url("gooru/images/video-resource-white.svg");
+                }
+                &.resource-icon.webpage {
+                  background-image: url("gooru/images/website-resource-white.svg");
+                }
+                &.resource-icon.image {
+                  background-image: url("gooru/images/image-resource-white.svg");
+                }
+                &.resource-icon.audio {
+                  background-image: url("gooru/images/audio-resource-white.svg");
+                }
+                &.resource-icon.text {
+                  background-image: url("gooru/images/text-resource-white.svg");
+                }
+              }
+              .title {
+                font-size: 18px;
                 font-weight: 600;
-                padding: 10px;
                 line-height: 1.2;
               }
             }
@@ -141,28 +186,33 @@
                     background-image: url("gooru/images/add_resource_icon.svg");
                   }
                   .time-spent {
-                    align-items: center;
-                    display: flex;
-                    justify-content: center;
-                    font-size: 14px;
-                    color: $dark-400;
-                    background-color: #b8bfc4;
-                    span.correct {
-                      color: $brand-success;
+                    span {
+                      align-items: center;
+                      display: flex;
+                      justify-content: center;
+                      font-size: 14px;
+                      color: $dark-400;
+                      background-color: #b8bfc4;
+                      height: 100%;
                       i {
-                        background: url("gooru/images/correct-answer.svg");
-                        width: 24px;
                         height: 14px;
                         display: inline-flex;
                       }
-                    }
-                    span.incorrect {
-                      color: $brand-incorrect;
-                      i {
-                        background: url("gooru/images/wrong-answer.svg");
-                        width: 14px;
-                        height: 14px;
-                        display: inline-flex;
+                      &.correct {
+                        color: $brand-success;
+                        background-color: rgba(184, 191, 196, 0.66);
+                        i {
+                          background: url("gooru/images/correct-answer.svg");
+                          width: 24px;
+                        }
+                      }
+                      &.incorrect {
+                        color: $brand-incorrect;
+                        background-color: rgba(184, 191, 196, 0.66);
+                        i {
+                          background: url("gooru/images/wrong-answer.svg");
+                          width: 14px;
+                        }
                       }
                     }
                   }

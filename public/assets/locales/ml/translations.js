@@ -93,41 +93,15 @@ window.i18ln = {
   'common.tasks': 'tasks',
   'common.filter-by': 'ഫിൽട്ടർ ചെയ്യുക',
   'common.more': 'കൂടുതൽ',
-  'common.add-data-choice-title': 'How do you want to enter the data?',
-  'common.take-photo': 'take photo',
-  'common.upload-image': 'upload image',
-  'common.by-question': 'question-by-question',
   'i2d.new-upload-msg':
     'Please click on Confirm & Continue button to upload your images',
-  'i2d.conversion-progress':
-    'The uploaded image(s) are being processed. Please check back later',
-  'i2d.conversion-error':
-    'There was an error when trying to convert the image. Please resubmit the image',
-  'file-picker-placeholder': 'Choose a file or drag it here',
-  'no-preview-available': 'no preview available',
-  'common.success': 'Success',
-  'i2d-successfully-image-upload':
-    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
-  'common.dialog-close': 'Do you want to close ?',
-  're-upload': 'Re-Upload',
-  'upload-success': 'Uploaded Successfully',
-  'mobile-camera-placeholder': 'Tap for image upload',
-  'i2d.mobile-upload-failed': 'There was a error',
-  'i2d.upload-failed':
-    'There was an error while uploading this image. Re-upload?',
   'common.apply-filter': 'apply filter',
   'search-help-message': 'Choose filters to apply',
   'library-search-placeholder': 'Search for anything within the library…',
   'common.avg-score': 'ശരാശരി സ്കോർ',
   'common.frq': 'frq',
-  'common.plan': 'plan',
   'common.no-suggestion-message':
     'Looks like you are doing very well! There are no suggestions at this time for you to study!',
-  'self-grade.not-required': 'Student self-grading not required',
-  'offline-activities.no-completed-content':
-    'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content':
-    'There are no projects or other offline activities that the students are currently working on',
   'common.schedule': 'പട്ടിക',
   'common.responses': 'പ്രതികരണങ്ങൾ',
   'ca.student.no-content':
@@ -159,12 +133,6 @@ window.i18ln = {
   'common.about': 'കുറിച്ച്',
   'common.about-you': 'നിന്നേക്കുറിച്ച്',
   'common.about-me': 'എന്നെ പറ്റി',
-  'ca.student.no-content':
-    'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content':
-    'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content':
-    'There are no offline activities that are completed yet',
   'common.accept': 'സ്വീകരിക്കൂ',
   'common.ignore': 'അവഗണിക്കുക',
   'common.add': 'ചേർക്കുക',
@@ -2850,11 +2818,25 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'വിദ്യാർത്ഥി ലൊക്കേറ്റർ',
   'teacher-landing.class.learning-journey': 'പഠന യാത്ര',
   'search-by': 'എന്നത് ഉപയോഗിച്ച് തിരയുക',
-  'common.feedback-note':
-    'Please take a minute to rate the collection and its resources. It really helps!',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
   'common.external-assessment.index-message':
-    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here'
+    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here',
+  'common.feedback-review-placeholder':
+    'We appreciate your review of the content',
+  'common.feedback-collection-note':
+    'Please take a few seconds to give feedback about the collection you just studied. It helps!',
+  'common.feedback-assessment-note':
+    'Please take a few seconds to give feedback about the assessment you just took. It helps!',
+  'common.feedback-collection-external-note':
+    'Please take a few seconds to give feedback about the external collection you just studied. It helps!',
+  'common.feedback-assessment-external-note':
+    'Please take a few seconds to give feedback about the external assessment you just took. It helps!',
+  'common.feedback-question-note':
+    'Please take a few second to provide feedback on the question. It really helps!',
+  'common.feedback-resource-note':
+    'Please take a few seconds give your feedback on the resource. It really helps!',
+  'common.feedback-offline-activity-note':
+    ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!'
 };

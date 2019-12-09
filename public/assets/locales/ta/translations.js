@@ -23,7 +23,6 @@ window.i18ln = {
   'my-content': 'My Content',
   'featured-libraries': 'featured libraries',
   'errors.accepted': '{{விளக்கம்}} ஏற்றுக்கொள்ளப்பட வேண்டும்',
-  'library-search-placeholder': 'Search for anything within the library…',
   'errors.empty': '{{description}} காலியாக இருக்க முடியாது',
   'errors.blank': '{{description}} முடியாது',
   'errors.present': '{{description}} வெற்று இருக்க வேண்டும்',
@@ -63,15 +62,10 @@ window.i18ln = {
     '{{description}} ஏற்றுக் கொள்ளப்படக் கூடிய url  ஆக இருக்க வேண்டும்.',
   'common.relevance': 'சம்பந்தம்',
   'common.engagement': 'நிச்சயதார்த்தம்',
-  'common.no-users-to-grade-oa':
-    'There are no users to grade for this Offline Activity.',
   'common.efficacy': 'பலாபலன்',
   'common.grid': 'கட்டம்',
-  'common.no-content-for-week':
-    'No class activities scheduled for the selected period',
   'common.list': 'பட்டியலில்',
   'common.for': 'for',
-  'self-grade.not-required': 'Student self-grading not required',
   'common.first': 'முதல்',
   'common.last': 'கடந்த',
   'common.name': 'பெயர்',
@@ -142,30 +136,13 @@ window.i18ln = {
   'common.a-question': 'ஒரு கேள்வி',
   'common.a-resource': 'ஒரு வள',
   'common.a-rubric': 'ஒரு ரூபிக்',
-  'common.no-search-result':
-    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.all-completed': 'எல்லாம் முடிந்தது',
   'common.a-assessment': 'மதிப்பீடு',
   'common.about': 'பற்றி',
-  'common.plan': 'plan',
-  'tooltip.check-items-to-grade':
-    'Check the Items to Grade panel below to grade this activity',
-  'offline-activities.no-completed-content':
-    'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content':
-    'There are no projects or other offline activities that the students are currently working on',
   'common.about-you': 'உன்னை பற்றி',
   'common.about-me': 'என்னை பற்றி',
   'common.accept': 'ஏற்க',
   'common.ignore': 'புறக்கணிக்க',
-  'common.answer-this-activity':
-    'Answer this rubric to complete your activity.',
-  'ca.student.no-content':
-    'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content':
-    'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content':
-    'There are no offline activities that are completed yet',
   'common.add': 'கூட்டு',
   'common.plan-an-activities': 'உன் செயல்களைத் திட்டமிடு',
   'common.plan-activities': 'செயல்களைத் திட்டமிடு',
@@ -2900,11 +2877,25 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'மாணவர் லோக்கேடர்',
   'teacher-landing.class.learning-journey': 'கற்றலின் பயணம்',
   'search-by': 'மூலம் தேடுங்கள்',
-  'common.feedback-note':
-    'Please take a minute to rate the collection and its resources. It really helps!',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
   'common.external-assessment.index-message':
-    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here'
+    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here',
+  'common.feedback-review-placeholder':
+    'We appreciate your review of the content',
+  'common.feedback-collection-note':
+    'Please take a few seconds to give feedback about the collection you just studied. It helps!',
+  'common.feedback-assessment-note':
+    'Please take a few seconds to give feedback about the assessment you just took. It helps!',
+  'common.feedback-collection-external-note':
+    'Please take a few seconds to give feedback about the external collection you just studied. It helps!',
+  'common.feedback-assessment-external-note':
+    'Please take a few seconds to give feedback about the external assessment you just took. It helps!',
+  'common.feedback-question-note':
+    'Please take a few second to provide feedback on the question. It really helps!',
+  'common.feedback-resource-note':
+    'Please take a few seconds give your feedback on the resource. It really helps!',
+  'common.feedback-offline-activity-note':
+    ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!'
 };

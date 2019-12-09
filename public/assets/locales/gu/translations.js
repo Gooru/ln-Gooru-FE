@@ -59,23 +59,12 @@ window.i18ln = {
   'common.engagement': 'એંગેજમેન્ટ',
   'common.efficacy': 'અસરકારકતા',
   'common.tenantLibrary': 'Tenant Library',
-  'common.day': 'day',
-  'common.week': 'week',
-  'common.month': 'month',
   'common.grid': 'ગ્રીડ',
-  'self-grade.not-required': 'Student self-grading not required',
   'common.list': 'યાદી',
   'common.first': 'પ્રથમ',
   'common.last': 'છેલ્લા',
   'common.suggest-to-student': 'Suggest to student',
   'rubric-details': 'Rubric Details',
-  'reroute.suggestion': 'reroute suggestion',
-  'reroute.suggestion.title': 'Having difficult with the concepts?',
-  'reroute.suggestion.desc':
-    'Why not go through one of our <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ? ',
-  'common.for': 'for',
-  'tooltip.check-items-to-grade':
-    'Check the Items to Grade panel below to grade this activity',
   'common.name': 'નામ',
   'common.add-data-choice-title': 'તમે તમારી વિગતો કેવી રીતે જોડવા માંગો છો?',
   'common.take-photo': 'ફોટો લો',
@@ -111,8 +100,6 @@ window.i18ln = {
   'common.apply-filter': 'apply filter',
   'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
-  'common.offline-activites': 'offline activites',
-  'common.offline-activity': 'offline activity',
   'common.no-suggestion-message':
     'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.avg-score': 'સરેરાશ સ્કોર',
@@ -142,11 +129,6 @@ window.i18ln = {
   'common.a-course': 'એક કોર્ષ',
   'common.a-question': 'એક પ્રશ્ન',
   'common.a-resource': 'એક સાધન',
-  'common.plan': 'plan',
-  'offline-activities.no-completed-content':
-    'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content':
-    'There are no projects or other offline activities that the students are currently working on',
   'common.a-rubric': 'રુબ્રિક',
   'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'બધું પૂરું થયું',
@@ -2757,11 +2739,25 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'સ્ટુડન્ટ લોકેટર',
   'teacher-landing.class.learning-journey': 'લર્નિંગ જર્ની',
   'search-by': 'દ્વારા સર્ચ કરાયેલ',
-  'common.feedback-note':
-    'Please take a minute to rate the collection and its resources. It really helps!',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
   'common.external-assessment.index-message':
-    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here'
+    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here',
+  'common.feedback-review-placeholder':
+    'We appreciate your review of the content',
+  'common.feedback-collection-note':
+    'Please take a few seconds to give feedback about the collection you just studied. It helps!',
+  'common.feedback-assessment-note':
+    'Please take a few seconds to give feedback about the assessment you just took. It helps!',
+  'common.feedback-collection-external-note':
+    'Please take a few seconds to give feedback about the external collection you just studied. It helps!',
+  'common.feedback-assessment-external-note':
+    'Please take a few seconds to give feedback about the external assessment you just took. It helps!',
+  'common.feedback-question-note':
+    'Please take a few second to provide feedback on the question. It really helps!',
+  'common.feedback-resource-note':
+    'Please take a few seconds give your feedback on the resource. It really helps!',
+  'common.feedback-offline-activity-note':
+    ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!'
 };
