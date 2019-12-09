@@ -2798,6 +2798,8 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'Localizador de Estudiante',
   'teacher-landing.class.learning-journey': 'Recorrido de Aprendizaje',
   'search-by': 'Buscar Por',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.feedback-note':
     'Please take a minute to rate the collection and its resources. It really helps!',
   'common.skip-feedback': 'Skip Feedback',

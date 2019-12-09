@@ -1,6 +1,6 @@
 window.i18ln = {
   en: 'English',
-  es: 'Español',
+  sp: 'Español',
   ar: 'عربى',
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
@@ -2769,7 +2769,7 @@ window.i18ln = {
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
   'common.no-lesson-plan-info-message':
-    'There is no lesson plan for this lesson.',
+    'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Study Material',
   'common.choose-lang': 'Choose Language',
@@ -2782,7 +2782,8 @@ window.i18ln = {
   'common.select-your-other-classes-from-below':
     'Select your other classes from below to manage in this class',
   'common.multi-grade-view': 'Multi-grade view. Viewing class',
-
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',

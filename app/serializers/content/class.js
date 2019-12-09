@@ -70,14 +70,16 @@ export default Ember.Object.extend({
 
   serializeClass: function(classModel, update = false) {
     let setting = classModel.get('setting');
-    let maValue = setting.mastery_applicable;
-    setting['mastery.applicable'] = maValue.toString();
-    delete setting.mastery_applicable;
+    let maValue = setting ? setting.mastery_applicable : null;
+    if (setting) {
+      setting['mastery.applicable'] = maValue.toString();
+      delete setting.mastery_applicable;
+    }
     let data = {
       title: classModel.get('title'),
       class_sharing: classModel.get('classSharing'),
       min_score: classModel.get('minScore') || 0,
-      setting: setting
+      setting: setting || null
     };
 
     if (!update) {

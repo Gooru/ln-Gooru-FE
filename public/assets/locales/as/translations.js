@@ -1,7 +1,7 @@
 //eslint-disable-next-line
 window.i18ln = {
   en: 'English',
-  es: 'Español',
+  sp: 'Español',
   ar: 'عربى',
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
@@ -901,7 +901,6 @@ window.i18ln = {
   'class.info.add-students': 'ছাত্ৰ-ছাত্ৰীসকলক লগ লগাওক',
   'class.info.class-code': 'শ্ৰেণীকোঠাৰ সংকেত',
   'class.info.delete': 'শ্ৰেণীকোঠা গুচুৱা',
-  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'ক\'ৰ্চৰ অনুমোদন',
   'class.edit.basic-info': 'প্ৰাথমিক তথ্য',
   'class.edit.class-name': 'শ্ৰেণীকোঠাৰ নাম',
@@ -2803,7 +2802,7 @@ window.i18ln = {
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
   'common.no-lesson-plan-info-message':
-    'There is no lesson plan for this lesson.',
+    'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
   'common.activity': 'Activity Title',
@@ -2831,6 +2830,8 @@ window.i18ln = {
   'common.select-your-other-classes-from-below':
     'Select your other classes from below to manage in this class',
   'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',

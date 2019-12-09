@@ -10,8 +10,7 @@
     <div class="content-types-container">
       {{#each contentTypes as |contentType|}}
         <div class="content-type {{if (eq activeContentType contentType.value) 'active'}}" {{action "onSelectContentType" contentType}}>
-          <span class="icon {{contentType.value}}"></span>
-          <span class="type-label">{{contentType.label}}</span>
+          <span class="icon {{contentType.value}}-icon"></span>
         </div>
       {{/each}}
       <div class="content-type add-external-activity" {{action "onSelectExternalActivity"}}>
@@ -24,6 +23,7 @@
         id="search-content"
         class="search-content"
         value=contentSearchTerm}}
+      <span class="clear-icon" {{action "onClearSearch"}}>{{gru-icon name="close"}}</span>
       <span class="search-icon">{{gru-icon name="search"}}</span>
     </div>
     <div class="filter-container" {{action "onClickFilterIcon"}}>

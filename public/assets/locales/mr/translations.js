@@ -1,7 +1,7 @@
 //eslint-disable-next-line
 window.i18ln = {
   en: 'English',
-  es: 'Español',
+  sp: 'Español',
   ar: 'عربى',
   mr: 'मराठी',
   kn: 'ಕನ್ನಡ',
@@ -853,7 +853,6 @@ window.i18ln = {
   'class.info.add-students': 'विद्यार्थी जोडा',
   'class.info.class-code': 'वर्ग संकेतांक',
   'class.info.delete': 'वर्ग डिलीट करा',
-  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'नेमून दिलेला अभ्यासक्रम',
   'class.edit.basic-info': 'मुलभूत माहिती',
   'class.edit.class-name': 'वर्गाचे नाव',
@@ -2746,7 +2745,7 @@ window.i18ln = {
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
   'common.no-lesson-plan-info-message':
-    'There is no lesson plan for this lesson.',
+    'This lesson does have any lesson plan.',
   'student-resource': 'Student Resources',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
@@ -2817,6 +2816,8 @@ window.i18ln = {
   'common.select-your-other-classes-from-below':
     'Select your other classes from below to manage in this class',
   'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
