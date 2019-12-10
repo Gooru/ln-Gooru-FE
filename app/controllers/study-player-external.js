@@ -1,5 +1,9 @@
 import Ember from 'ember';
-import { ROLES, CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  ROLES,
+  CONTENT_TYPES,
+  PLAYER_EVENT_MESSAGE
+} from 'gooru-web/config/config';
 import { roundFloat } from 'gooru-web/utils/math';
 
 /**
@@ -103,7 +107,12 @@ export default Ember.Controller.extend({
 
     onExit(rouet, id) {
       const controller = this;
-      controller.transitionToRoute(rouet, id);
+      let isIframeMode = controller.get('isIframeMode');
+      if (isIframeMode) {
+        window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
+      } else {
+        controller.transitionToRoute(rouet, id);
+      }
     }
   },
 

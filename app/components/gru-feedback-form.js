@@ -3,6 +3,7 @@ import {
   FEEDBACK_USER_CATEGORY,
   FEEDBACK_RATING_TYPE
 } from 'gooru-web/config/config';
+import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -30,7 +31,7 @@ export default Ember.Component.extend({
   // Events
   didInsertElement() {
     const component = this;
-    component.fetchLearningActivityFeedback();
+    component.fetchActivityFeedbackCateory();
   },
 
   // -------------------------------------------------------------------------
@@ -89,6 +90,26 @@ export default Ember.Component.extend({
   // Methods
 
   /**
+   * @function fetchActivityFeedbackCateory
+   * Method to fetch activity feedback category
+   */
+
+  fetchActivityFeedbackCateory() {
+    const component = this;
+    let contentType = component.get('contentType');
+    let role = component.get('session.role');
+    let userCategoryId =
+      FEEDBACK_USER_CATEGORY[`${role}`] || FEEDBACK_USER_CATEGORY.other;
+    component
+      .get('activityFeedbackService')
+      .getFeedbackCategory(contentType, userCategoryId)
+      .then(categoryLists => {
+        component.set('feedbackCategoryLists', categoryLists);
+        component.fetchLearningActivityFeedback();
+      });
+  },
+
+  /**
    * @function fetchLearningActivityFeedback
    * Method to fetch learning activity feedback
    */
@@ -96,15 +117,12 @@ export default Ember.Component.extend({
   fetchLearningActivityFeedback() {
     const component = this;
     let userId = component.get('session.userId');
-    let contentType = component.get('contentType');
     let contentId = component.get('contentId');
-    let role = component.get('session.role');
-    let userCategoryId =
-      FEEDBACK_USER_CATEGORY[`${role}`] || FEEDBACK_USER_CATEGORY.other;
+    let listOfCategory = getObjectsDeepCopy(
+      component.get('feedbackCategoryLists')
+    );
     Ember.RSVP.hash({
-      categoryLists: component
-        .get('activityFeedbackService')
-        .getFeedbackCategory(contentType, userCategoryId),
+      categoryLists: listOfCategory,
       activityFeedback: component
         .get('activityFeedbackService')
         .fetchActivityFeedback(contentId, userId)
@@ -117,9 +135,9 @@ export default Ember.Component.extend({
           );
           if (category) {
             if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.QUANTITATIVE) {
-              category.rating = feedback.rating;
+              category.set('rating', feedback.rating);
             } else {
-              category.comments = feedback.comments;
+              category.set('comments', feedback.comments);
             }
           }
         });

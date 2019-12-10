@@ -27,10 +27,10 @@
       {{#if isStatusDone}}
         <div class="next" {{action onExit}}>{{t 'common.exit'}}</div>
       {{else}}
-        <div class="skip" {{action onSkipFeedback}}>{{t 'common.skip-feedback'}}</div>
         {{#if isPlayNextContent}}
           <div class="next" {{action onSkipFeedback}}>Thanks</div>
         {{else}}
+          <div class="skip" {{action onSkipFeedback}}>{{t 'common.skip-feedback'}}</div>
           <div class="next" {{action onNext}}>{{t 'common.next'}}</div>
         {{/if}}
       {{/if}}

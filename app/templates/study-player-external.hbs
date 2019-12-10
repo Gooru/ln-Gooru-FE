@@ -22,6 +22,8 @@
           isStudyPlayer = true
           isIframeMode=isIframeMode
           onSkipFeedback="playNext"
+          isDone=isDone
+          onExit="onExit"
         }}
       {{else if isAsssessment}}
         {{player/gru-external-assessment-page
@@ -31,6 +33,8 @@
         isNewPlayer=isNewPlayer
         dataParams=dataParams
         onSkipFeedback="playNext"
+        isDone=isDone
+        onExit="onExit"
       }}
       {{else}}
         {{player/gru-external-collection-page
@@ -39,6 +43,8 @@
         source=source
         isNewPlayer=isNewPlayer
         onSkipFeedback="playNext"
+        isDone=isDone
+        onExit="onExit"
       }}
       {{/if}}
     {{/if}}

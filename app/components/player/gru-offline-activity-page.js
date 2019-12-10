@@ -31,6 +31,10 @@ export default Ember.Component.extend({
       this.sendAction('onSkipFeedback');
     },
 
+    onExit: function() {
+      this.sendAction('onExit');
+    },
+
     //Action triggered when click on start button
     onStartPlayer() {
       const component = this;
