@@ -7,7 +7,7 @@ moduleForService(
   'service:api-sdk/assessment',
   'Unit | Service | api-sdk/assessment',
   {
-    needs: ['service:api-sdk/assessment']
+    needs: ['service:api-sdk/profile']
   }
 );
 
@@ -61,14 +61,18 @@ test('createAssessment', function(assert) {
 test('readAssessment', function(assert) {
   const service = this.subject();
   const expectedAssessmentId = 'assessment-id';
-  assert.expect(2);
+  const expectedProfileId = 'profile-id';
+  assert.expect(3);
 
   service.set(
     'assessmentAdapter',
     Ember.Object.create({
       readAssessment: function(assessmentId) {
         assert.equal(assessmentId, expectedAssessmentId, 'Wrong Assessment id');
-        return Ember.RSVP.resolve({ id: assessmentId });
+        return Ember.RSVP.resolve({
+          id: assessmentId,
+          ownerId: expectedProfileId
+        });
       }
     })
   );
@@ -78,10 +82,22 @@ test('readAssessment', function(assert) {
       normalizeReadAssessment: function(assessmentData) {
         assert.deepEqual(
           assessmentData,
-          { id: expectedAssessmentId },
+          { id: expectedAssessmentId, ownerId: expectedProfileId },
           'Wrong Assessment data'
         );
-        return {};
+        return Ember.Object.create(assessmentData);
+      }
+    })
+  );
+
+  service.set(
+    'profileService',
+    Ember.Object.create({
+      readUserProfile: function(profileId) {
+        assert.equal(profileId, expectedProfileId, 'Wrong Profile id');
+        return Ember.RSVP.resolve(
+          Ember.Object.create({ id: expectedProfileId })
+        );
       }
     })
   );
