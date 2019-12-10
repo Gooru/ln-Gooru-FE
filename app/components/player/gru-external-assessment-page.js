@@ -68,6 +68,10 @@ export default Ember.Component.extend({
       component.sendAction('onSkipFeedback');
     },
 
+    onExit: function() {
+      this.sendAction('onExit');
+    },
+
     /**
      * Action triggered when change score type
      */

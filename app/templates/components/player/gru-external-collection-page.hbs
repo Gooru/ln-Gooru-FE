@@ -1,5 +1,5 @@
 {{#if isShowActivityFeedback}}
-  {{player/gru-activity-feedback collection=assessment timeSpent=timeSpent format=contentType onSkipFeedback="onSkipFeedback"}}
+  {{player/gru-activity-feedback collection=assessment timeSpent=timeSpent format=contentType onSkipFeedback="onSkipFeedback" isStatusDone=isDone onExit="onExit"}}
 {{else}}
   <div class="external-collection-landing-page">
     <div class="external-collection-card">
@@ -7,6 +7,7 @@
         <div class="header-panel" style="background-image: url({{assessment.thumbnailUrl}})">
           <div class="header-content">
             <div class="title">{{safe-html assessment.title}}</div>
+            <div class="author-name">{{assessment.owner.fullName}}</div>
           </div>
         </div>
         <div class="body-panel">
