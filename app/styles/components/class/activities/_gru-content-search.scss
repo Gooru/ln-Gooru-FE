@@ -1,4 +1,10 @@
 .class-activities.gru-content-search {
+  position: relative;
+
+  .search-by-filter {
+    position: absolute;
+  }
+
   .content-search-container {
     .content-source-container {
       display: grid;
@@ -7,22 +13,26 @@
       align-items: center;
       text-align: center;
       border-bottom: 1px solid #666;
-      padding: 0px 40px;
+      padding: 0 40px;
+
       .content-source {
         font-size: 13px;
         color: #666;
-        padding: 10px 0px;
+        padding: 10px 0;
         cursor: pointer;
+
         &.active,
         &:hover {
           font-weight: bold;
         }
+
         &.active {
           background-color: #2196f3;
           color: #ffffff;
         }
       }
     }
+
     .content-selector-container {
       display: grid;
       grid-template-columns: auto 1fr auto;
@@ -30,14 +40,17 @@
       padding: 0 5px;
       height: 40px;
       align-items: center;
+
       .content-types-container {
         display: grid;
         grid-template-columns: auto auto auto auto;
         column-gap: 15px;
         align-items: center;
+
         .content-type {
           cursor: pointer;
           opacity: 0.6;
+
           .icon {
             width: 22px;
             height: 22px;
@@ -46,26 +59,32 @@
             background-position: center;
             background-repeat: no-repeat;
             cursor: pointer;
+
             &.assessment-icon {
               background-image: url("../assets/gooru/images/add_assessment.svg");
             }
+
             &.collection-icon {
               background-image: url("../assets/gooru/images/add_collection.svg");
             }
+
             &.offline-activity-icon {
               background-image: url("../assets/gooru/images/offline.svg");
             }
           }
+
           .type-label {
             font-size: 13px;
             color: #666;
           }
+
           &.active {
             opacity: 1;
           }
 
           &.add-external-activity {
             display: grid;
+
             i.add {
               font-size: 20px;
             }
@@ -76,27 +95,33 @@
       .search-content-container {
         display: grid;
         grid-template-columns: 1fr auto auto;
+
         input#search-content {
           font-size: 15px;
-          &:focus,
-          &:active {
+
+          &:active,
+          &:focus {
             border: none;
             outline: none;
           }
         }
+
         .clear-icon {
           display: flex;
           align-items: center;
           position: relative;
           right: 15px;
+
           i.close {
             font-size: 15px;
           }
         }
+
         .search-icon {
           display: grid;
           align-items: center;
           cursor: pointer;
+
           i.search {
             font-size: 20px;
           }
@@ -107,6 +132,7 @@
         display: grid;
         align-items: center;
         cursor: pointer;
+
         i.filter_list {
           font-size: 20px;
         }
@@ -117,6 +143,7 @@
       .content-source-container {
         border: none;
       }
+
       .content-selector-container {
         display: none;
       }

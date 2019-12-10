@@ -28,13 +28,13 @@
       </div>
     {{/if}}
   </div>
-  <div class="content-info">
-    {{contentDescription}}
+  <div class="content content-info">
+    <span class="tag-tooltip">{{contentDescription}}</span>
   </div>
   <div class="class-info">
     {{#each activityClasses as |activityClass|}}
       <div class="assigned-class">
-        <div class="class-title ellipsis">
+        <div class="class-title ellipsis" title="{{activityClass.title}}" data-toggle="tooltip">
           {{activityClass.title}}
         </div>
         <div class="activity-action student-count {{if isUnscheduledActivity 'hidden'}}" {{action "onShowStudentsList" activityClass}}>
@@ -48,7 +48,7 @@
         </div>
         {{#unless isUnscheduledActivity}}
           {{#if activityClass.content.performance.hasStarted}}
-            <div class="add-data performed-activity {{if isCollection 'collection-performance'}} grade-range-{{grade-range activityClass.content.performance.score}}"  {{action "onOpenPerformanceEntry" activityClass}}>
+            <div class="add-data performed-activity {{if isCollection 'collection-performance'}} grade-range-{{grade-range activityClass.content.performance.score}}" {{action "onOpenPerformanceEntry" activityClass}}>
               <span class="activity-score">
                 {{activityClass.content.performance.score}}%
               </span>
@@ -57,9 +57,15 @@
               </span>
             </div>
           {{else}}
-            <div class="add-data not-started {{unless activity.isActive 'disable-performance'}}" {{action "onOpenPerformanceEntry" activityClass}}>
-              Add Data
-            </div>
+            {{#if activity.isActive}}
+              <div class="add-data not-started {{unless activity.isActive 'disable-performance'}}" {{action "onOpenPerformanceEntry" activityClass}}>
+                Add Data
+              </div>
+            {{else}}
+              <div class="delete" data-toggle="tooltip" data-html="true" data-placement="top" title="{{t "common.remove"}}" {{action 'removeClassActivity'}}>
+                {{gru-icon name="delete_outline"}}
+              </div>
+            {{/if}}
           {{/if}}
         {{/unless}}
 

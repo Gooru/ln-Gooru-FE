@@ -1,25 +1,35 @@
 .class-activities.gru-clas-activities-adding {
   width: 95%;
   margin: 8px auto;
+
   .class-activities-source-container {
     display: grid;
     grid-row-gap: 3px;
+
     .header-container {
       display: grid;
       align-items: center;
       background-color: $white;
-      padding: 0 5px;
       box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
       border-radius: 4px;
     }
+
     .body-container {
-      max-height: calc(100vh - 155px);
+      max-height: calc(100vh - 150px);
       overflow-y: auto;
+      display: grid;
+
+      &.grid-view {
+        grid-template-columns: repeat(2, auto);
+        max-height: calc(100vh - 125px);
+      }
+
       .lesson-plan-activities-container {
         .teacher-class-ca-course-map {
           .dca-course-map-unit-container {
             padding: 0;
             overflow: unset;
+
             .dca-course-map-unit-panel {
               .dca-course-map-lesson-container {
                 padding: 8px;

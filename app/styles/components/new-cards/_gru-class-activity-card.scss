@@ -1,14 +1,15 @@
 .class-activities.gru-class-activity-card {
   .class-activity-card {
     display: grid;
-    background-color: $white;
-    width: 220px;
-    box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
+    background-color: #fff;
+    width: 240px;
+    box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.3);
     border-radius: 4px;
-    margin: 8px 8px;
+    margin: 16px;
+
     .content-thumbnail {
-      width: 220px;
-      height: 130px;
+      width: 240px;
+      height: 160px;
       object-fit: contain;
       background-color: transparent;
       background-size: cover;
@@ -17,6 +18,8 @@
       position: relative;
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
+      background-position: center center;
+
       &:after {
         display: block;
         position: absolute;
@@ -27,51 +30,59 @@
           #000 100%
         );
         margin-top: 52px;
-        height: 60%;
+        height: 68%;
         width: 100%;
         content: "";
       }
+
       .content-title {
         position: absolute;
         bottom: 5px;
         left: 8px;
-        color: $white;
+        color: #fff;
         z-index: 10;
         font-size: 13px;
-        font-weight: bold;
+        font-weight: 700;
+        line-height: 1.2;
       }
     }
 
     .activity-info {
       display: grid;
       grid-template-columns: auto 1fr;
-      height: 30px;
+      height: 40px;
       align-items: center;
       border-bottom: 1px solid rgba(151, 151, 151, 0.4);
       padding: 0 5px;
+
       .content-counts {
         display: grid;
         grid-template-columns: auto auto;
         column-gap: 5px;
+
         .count-container {
           display: grid;
           grid-template-columns: auto auto;
           column-gap: 3px;
+
           .icon-style {
             width: 20px;
             height: 20px;
             background-size: 20px;
           }
+
           &.task-count {
             .task-icon {
               background-image: url("../assets/gooru/images/text-resource-dark.svg");
             }
           }
+
           &.question-count {
             .question-icon {
               background-image: url("../assets/gooru/images/add_question.svg");
             }
           }
+
           &.resource-count {
             .resource-icon {
               background-image: url("../assets/gooru/images/add_resource_icon.svg");
@@ -79,6 +90,7 @@
           }
         }
       }
+
       .activity-date {
         justify-self: center;
         color: #37424b;
@@ -90,27 +102,37 @@
       padding: 3px 5px;
       min-height: 30px;
       @include ellipsis($font-size: 12px, $line-height: 1.3, $lines-to-show: 3);
-      max-height: 51.8px;
+      background: 0 0;
+      display: block;
+      max-height: 50px;
       border-bottom: 1px solid rgba(151, 151, 151, 0.4);
     }
 
     .class-info {
       max-height: 105px;
       overflow-y: auto;
+
       .assigned-class {
         display: grid;
-        grid-template-columns: 1fr auto auto;
-        height: 35px;
+        grid-template-columns: 1fr 40px auto;
+        height: 40px;
         line-height: 35px;
         border-bottom: 1px solid rgba(151, 151, 151, 0.4);
+        align-items: center;
+
         .class-title {
           color: #37424b;
           padding-left: 5px;
-          font-size: 14px;
+          font-size: 13px;
           text-transform: capitalize;
+          line-height: 1.2;
+          white-space: normal;
         }
+
         .activity-action {
           height: inherit;
+          text-align: center;
+
           .icon-style {
             height: inherit;
             display: grid;
@@ -118,16 +140,28 @@
             align-items: center;
           }
         }
+
         .student-count {
+          cursor: pointer;
+
           i.account_circle {
             color: #1ba9eb;
           }
         }
+
         .suggestion-count {
+          cursor: pointer;
+
           i.check_circle {
             color: $orange-400;
           }
         }
+
+        .delete {
+          display: flex;
+          cursor: pointer;
+        }
+
         .add-data {
           height: inherit;
           width: 50px;
@@ -142,13 +176,17 @@
           font-weight: bold;
           opacity: 1;
           cursor: pointer;
+
           &.performed-activity {
             grid-template-rows: 1fr 1fr;
+
             .activity-score {
               font-size: 13px;
             }
+
             &.collection-performance {
               grid-template-rows: 1fr;
+
               .activity-score {
                 display: none;
               }
@@ -158,11 +196,13 @@
           &.grade-range-not-started {
             background-color: #4e5e67;
           }
+
           &.not-started {
             background-color: #4e5e67;
             font-size: 10px;
             text-transform: uppercase;
           }
+
           &.disable-performance {
             opacity: 0.6;
             font-weight: normal;
@@ -171,24 +211,30 @@
         }
       }
     }
+
     .activity-actions {
       display: grid;
       grid-template-columns: repeat(4, 25%);
       justify-content: space-between;
       align-items: center;
-      height: 35px;
+      height: 40px;
+
       > div {
         display: grid;
         align-items: center;
+        text-align: center;
       }
+
       .play-activity {
         color: #1ba9eb;
         cursor: pointer;
+        text-align: center;
       }
+
       .reschedule-activity {
         cursor: pointer;
-        justify-self: right;
       }
+
       .mastery-accrual {
         cursor: pointer;
 
@@ -206,6 +252,7 @@
           }
         }
       }
+
       .activate-activity {
         .gru-switch {
           padding: 0;
