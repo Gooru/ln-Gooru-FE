@@ -53,12 +53,17 @@
             display: grid;
             height: 100%;
             position: relative;
+            grid-template-rows: auto 25px;
+            padding: 10px;
             .title {
               font-size: 18px;
               align-items: flex-end;
               display: flex;
               font-weight: 600;
-              padding: 10px;
+            }
+            .author-name {
+              font-size: 12px;
+              font-style: italic;
             }
           }
         }
