@@ -89,11 +89,11 @@ export default Ember.Component.extend({
     var performanceId = this.get('performance.id');
     var attempts = this.get('performance.attempts');
     if (isAssessment) {
-      if (!component.get('isDestroyed')) {
-        component
-          .get('assessmentService')
-          .readAssessment(performanceId)
-          .then(function(performanceData) {
+      component
+        .get('assessmentService')
+        .readAssessment(performanceId)
+        .then(function(performanceData) {
+          if (!component.get('isDestroyed')) {
             var attemptsSetting = performanceData.get('attempts');
             if (attemptsSetting) {
               component.set(
@@ -104,8 +104,8 @@ export default Ember.Component.extend({
                   attempts >= attemptsSetting
               );
             }
-          });
-      }
+          }
+        });
     }
     if (isAssessment || isExternalAssessment) {
       const contentVisibility = component.get('contentVisibility');
