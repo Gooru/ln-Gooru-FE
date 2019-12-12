@@ -86,6 +86,19 @@ export default Ember.Component.extend(ConfigurationMixin, {
     onApplyFilter() {
       const component = this;
       component.loadCotents();
+    },
+
+    /**
+     * Action get triggered when clear button is clicked
+     */
+    clearFilter(item) {
+      const component = this;
+      if (item.get('filter') === 'flt.standard') {
+        component.set('unCheckedItem', item);
+      }
+      component.get('selectedFilters').removeObject(item);
+      component.send('onApplyFilter');
+      component.set('isShowFilter', false);
     }
   },
 
@@ -115,6 +128,24 @@ export default Ember.Component.extend(ConfigurationMixin, {
    * @property {Array} selectedFilters
    */
   selectedFilters: Ember.A([]),
+
+  /**
+   * @property {Observe} onSelectFilter
+   */
+  onSelectFilter: Ember.observer('selectedFilters.[]', function() {
+    let component = this;
+    let selectedFilters = component.get('selectedFilters');
+    let selectedFiltersLimit = component.get('selectedFiltersLimit');
+    if (selectedFilters.length < selectedFiltersLimit) {
+      component.set('filters', selectedFilters);
+    } else {
+      component.set('filters', selectedFilters.slice(0, selectedFiltersLimit));
+      component.set(
+        'moreFilters',
+        selectedFilters.slice(selectedFiltersLimit, selectedFilters.length)
+      );
+    }
+  }),
 
   contentSearchTerm: '',
 
@@ -175,10 +206,18 @@ export default Ember.Component.extend(ConfigurationMixin, {
   loadCotents() {
     const component = this;
     const activeContentSource = component.get('activeContentSource');
-    const filteredContentPromise =
-      activeContentSource === 'gooru-catalog'
-        ? component.fetchCatalogContentByType()
-        : component.fetchMyContentByType();
+    let filteredContentPromise;
+    if (
+      activeContentSource === 'gooru-catalog' ||
+      component.get('selectedFilters').length > 0 ||
+      component.getSearchTerm()
+    ) {
+      filteredContentPromise = component.fetchCatalogContentByType();
+    } else if (activeContentSource === 'tenant-library') {
+      filteredContentPromise = component.fetchLibraryContentByType();
+    } else {
+      filteredContentPromise = component.fetchMyContentByType();
+    }
     Ember.RSVP.hash({
       filteredContentList: filteredContentPromise
     }).then(({ filteredContentList }) => {
@@ -200,7 +239,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
     let component = this;
     let activeContentType = component.get('activeContentType');
     let queryParams = component.getSearchRequestBody();
-    let term = component.getSearchTerm();
+    let term = component.getSearchTerm() ? component.getSearchTerm() : '*';
     if (activeContentType === CONTENT_TYPES.COLLECTION) {
       return component
         .get('searchService')
@@ -270,7 +309,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
   getSearchTerm() {
     const component = this;
     const contentSearchTerm = component.get('contentSearchTerm');
-    return contentSearchTerm !== '' ? contentSearchTerm : '*';
+    return contentSearchTerm;
   },
 
   searchHandler() {
@@ -307,9 +346,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
       filters['flt.publishStatus'] = 'published,unpublished';
     } else if (activeContentSource === 'tenant-library') {
       filters.scopeKey = 'open-library';
-      filters.scopeTargetNames = component.get(
-        'selectedTenantLibrary.shortName'
-      );
+      filters.scopeTargetNames = component.get('activeTenantLibrary.shortName');
       filters['flt.publishStatus'] = 'published,unpublished';
     } else {
       filters.scopeKey = 'open-all';

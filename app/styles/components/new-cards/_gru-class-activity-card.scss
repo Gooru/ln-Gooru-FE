@@ -99,12 +99,16 @@
     }
 
     .content-info {
-      padding: 3px 5px;
+      padding: 5px 5px;
       min-height: 30px;
       @include ellipsis($font-size: 12px, $line-height: 1.3, $lines-to-show: 3);
       background: 0 0;
-      display: block;
-      max-height: 50px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 56px;
       border-bottom: 1px solid rgba(151, 151, 151, 0.4);
     }
 
@@ -114,7 +118,7 @@
 
       .assigned-class {
         display: grid;
-        grid-template-columns: 1fr 40px auto;
+        grid-template-columns: 1fr 40px auto auto;
         height: 40px;
         line-height: 35px;
         border-bottom: 1px solid rgba(151, 151, 151, 0.4);

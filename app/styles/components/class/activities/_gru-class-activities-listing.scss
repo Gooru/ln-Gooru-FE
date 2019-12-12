@@ -8,7 +8,7 @@
 
     .header-container {
       display: grid;
-      grid-template-columns: auto 50px 1fr 65px;
+      grid-template-columns: auto 50px 50px 1fr 65px;
       justify-items: center;
       border-radius: 4px;
       align-items: center;
@@ -22,33 +22,50 @@
         align-items: center;
         column-gap: 5px;
         cursor: pointer;
-        border-right: 2px solid #777575;
-        height: 35px;
-        padding: 0 15px 0 20px;
-
-        .schedule-icon {
-          height: inherit;
-
-          i {
-            height: 35px;
-            line-height: 35px;
-          }
+        padding: 0 10px 0 20px;
+        .dropdown-icon {
+          display: flex;
         }
       }
 
+      .schedule-icon {
+        height: 100%;
+        width: 100%;
+        border-right: 2px solid #777575;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        opacity: 0.6;
+        i {
+          height: 35px;
+          line-height: 35px;
+        }
+        &.active {
+          background-color: #2196f3;
+          color: #fff;
+          opacity: 1;
+        }
+      }
       .unscheduled-activity-selector {
-        height: inherit;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
         opacity: 0.6;
         cursor: pointer;
+        align-items: center;
+        display: flex;
 
+        cursor: pointer;
         i {
           height: 45px;
           line-height: 45px;
         }
 
-        &.active,
-        &:hover {
+        &.active {
           opacity: 1;
+          background-color: #2196f3;
+          color: #fff;
         }
       }
 
@@ -317,12 +334,12 @@
         display: grid;
         grid-template-columns: auto auto auto;
         justify-content: center;
-        column-gap: 15px;
+        column-gap: 1px;
         height: 100%;
 
         .content-selector {
+          opacity: 0.6;
           padding: 10px;
-
           .icon {
             width: 20px;
             height: 20px;
@@ -348,7 +365,7 @@
 
           &.active {
             background-color: #2196f3;
-
+            opacity: 1;
             i {
               &.assessment-icon {
                 background-image: url("../assets/gooru/images/assessment-white.svg");
@@ -396,6 +413,27 @@
           text-align: center;
           font-size: 18px;
           line-height: 1.2;
+        }
+
+        .month-view {
+          width: 100%;
+          justify-content: normal;
+          display: grid;
+          margin-bottom: 5px;
+          .added-date {
+            font-size: 15px;
+            font-weight: bold;
+            padding: 0 10px;
+            display: grid;
+            grid-template-columns: max-content auto;
+            align-items: center;
+            grid-gap: 10px;
+            background-color: #eeeeee;
+            hr {
+              border-top: 1px solid #4e5e67;
+              width: 100%;
+            }
+          }
         }
       }
     }

@@ -63,6 +63,7 @@ export default Ember.Component.extend(ModalMixin, {
         model
       );
     },
+
     onShowStudentsList(activityClass) {
       const component = this;
       component.set('selectedActivityClass', activityClass);
@@ -117,6 +118,7 @@ export default Ember.Component.extend(ModalMixin, {
     },
 
     onSelectContentSelector(component = this) {
+      component.$('.header-container .date-range-picker-container').slideUp();
       component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', false);
@@ -182,6 +184,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('startDate', startDate);
       component.set('endDate', endDate);
       component.loadActivitiesByActiveContentType();
+
       component.actions.onToggleDatePicker(component);
     },
 
@@ -265,8 +268,21 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isShowUnscheduledActivities', false);
     },
 
+    onloadScheduledClassActivities() {
+      const component = this;
+      component.$('.header-container .date-range-picker-container').slideUp();
+      component.set('isShowScheduledActivities', true);
+      component.set('isShowItemsToGrade', false);
+      component.set('isShowUnscheduledActivities', false);
+      component.get('contentTypes').map(content => {
+        content.set('isActive', true);
+      });
+      component.loadActivitiesByActiveContentType();
+    },
+
     onLoadUnscheduledActivities() {
       const component = this;
+      component.$('.header-container .date-range-picker-container').slideUp();
       component.set('isShowScheduledActivities', false);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', true);
@@ -279,6 +295,7 @@ export default Ember.Component.extend(ModalMixin, {
     onShowItemsToGrade() {
       const component = this;
       component.groupGradingItems();
+      component.$('.header-container .date-range-picker-container').slideUp();
       component.set('isShowScheduledActivities', false);
       component.set('isShowItemsToGrade', true);
       component.set('isShowUnscheduledActivities', false);
@@ -614,8 +631,12 @@ export default Ember.Component.extend(ModalMixin, {
     const classActivityService = component.get('classActivityService');
     const classId = activityClass.get('id');
     const classActivity = activityClass.get('activity');
-    const startDate = classActivity.get('activation_date');
-    const endDate = classActivity.get('activation_date');
+    const startDate = classActivity.get('activation_date')
+      ? classActivity.get('activation_date')
+      : moment();
+    const endDate = classActivity.get('activation_date')
+      ? classActivity.get('activation_date')
+      : moment();
     return Ember.RSVP.hash({
       activityPerformance: classActivityService.findClassActivitiesPerformanceSummary(
         classId,

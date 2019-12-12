@@ -2,8 +2,9 @@
   <div class="header-container">
     <div class="activity-date-range-selector" {{action "onToggleDatePicker"}}>
       <span class="schedule-date"><span>{{format-date startDate 'DD MMM YYYY'}}</span><span class="{{if isDaily 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}</span></span>
-      <span class="schedule-icon">{{gru-icon name="event"}}</span>
+      <span class="dropdown-icon">{{gru-icon name="arrow_drop_down"}}</span>
     </div>
+    <div class="schedule-icon {{if isShowScheduledActivities 'active'}}" {{action "onloadScheduledClassActivities"}}>{{gru-icon name="event"}}</div>
     <div class="unscheduled-activity-selector {{if isShowUnscheduledActivities 'active'}}" {{action "onLoadUnscheduledActivities"}}>
       {{gru-icon name="event_busy"}}
     </div>
@@ -82,23 +83,22 @@
       {{/if}}
 
       {{#if isShowScheduledActivities}}
-        {{#each scheduledActivitiesList as |scheduledActivity|}}
-          {{new-cards/gru-class-activity-card
-            activity = scheduledActivity
-            onRemoveClassActivity='removeClassActivity'
-            onShowStudentsList = "onShowStudentsList"
-            onOpenPerformanceEntry = "onOpenPerformanceEntry"
-            onClosePerformanceEntry = "onClosePerformanceEntry"
-            onRescheduleActivity = "onRescheduleActivity"
-            onEnableMastery = "onEnableMastery"
-            onShowContentPreview = "onShowContentPreview"}}
-        {{else}}
-          <div class="plan-activities-msg">
-            Add activities to conduct in class.
-          </div>
-        {{/each}}
+          {{#each scheduledActivitiesList as |scheduledActivity|}}
+            {{new-cards/gru-class-activity-card
+              activity = scheduledActivity
+              onRemoveClassActivity='removeClassActivity'
+              onShowStudentsList = "onShowStudentsList"
+              onOpenPerformanceEntry = "onOpenPerformanceEntry"
+              onClosePerformanceEntry = "onClosePerformanceEntry"
+              onRescheduleActivity = "onRescheduleActivity"
+              onEnableMastery = "onEnableMastery"
+              onShowContentPreview = "onShowContentPreview"}}
+          {{else}}
+            <div class="plan-activities-msg">
+              Add activities to conduct in class.
+            </div>
+          {{/each}}
       {{/if}}
-
       {{#if isShowItemsToGrade}}
         {{#each gradingItems as |gradingItem|}}
           {{new-cards/gru-activity-grading-card
