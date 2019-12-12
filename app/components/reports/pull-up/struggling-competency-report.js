@@ -184,14 +184,16 @@ export default Ember.Component.extend({
      */
     onAddContentToDCA(collection) {
       const component = this;
-      component.sendAction('onAddContentToDCA', collection);
+      let studentList = component.get('studentsPerformanceList');
+      component.sendAction('onAddContentToDCA', collection, studentList);
     },
 
     /**
      * Action get triggered when schedule content to CA got clicked
      */
-    onScheduleContentToDCA(content, event) {
-      this.sendAction('onScheduleContentToDCA', content, event);
+    onScheduleContentToDCA(content) {
+      let studentList = this.get('studentsPerformanceList');
+      this.sendAction('onScheduleContentToDCA', content, studentList);
     },
 
     /*

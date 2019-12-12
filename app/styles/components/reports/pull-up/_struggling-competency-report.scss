@@ -138,6 +138,9 @@
       }
       .sc-student-dropdown-list-container {
         display: none;
+        &.active {
+          display: block;
+        }
         .sc-student-dropdown-list {
           display: grid;
           grid-template-columns: 70px 1fr 70px;

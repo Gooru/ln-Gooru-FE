@@ -44,10 +44,10 @@
         <div class="competency-card-container">
           <div class="title-container">{{t 'common.struggling-competencies'}}</div>
           {{#each gradeDomainsList as |domain domainIndex|}}
-          <div class="competency-struggling-container" {{action "onSelectGrade" domainIndex}}>
+          <div class="competency-struggling-container">
             {{#each domain.competencies as |competency competencyIndex|}}
             {{#if (eq competencyIndex 0) }}
-            <div class="competency-heading">
+            <div class="competency-heading" {{action "onSelectGrade" domainIndex}}>
              <div class="competency-heading-title">{{competency.name}}</div>
             <ul class="competency-sub-heading">
               <li>{{domain.domainName}}</li>
@@ -55,7 +55,7 @@
 
             </ul>
             </div>
-            <div class="competency-icon">
+            <div class="competency-icon" {{action "onSelectCompetency" competency}}>
               {{gru-icon name="explore"}}
             </div>
             <div class="competency-count">
@@ -71,8 +71,8 @@
         <div class="competency-card-container other-grade">
           <div class="title-container">{{t 'common.struggling-competencies'}}({{t 'profile.proficiency.grade-line'}})</div>
           {{#each otherGradeTopComp as |competency competencyIndex|}}
-          <div class="competency-struggling-container" {{action "onSelectOtherGrade" competency.gradeIndex competency.domainIndex}}>
-            <div class="competency-heading">
+          <div class="competency-struggling-container">
+            <div class="competency-heading" {{action "onSelectOtherGrade" competency.gradeIndex competency.domainIndex}}>
              <div class="competency-heading-title">{{competency.name}}</div>
             <ul class="competency-sub-heading">
               <li>{{competency.domainName}}</li>
@@ -80,7 +80,7 @@
 
             </ul>
             </div>
-            <div class="competency-icon">
+            <div class="competency-icon" {{action "onSelectCompetency" competency}}>
               {{gru-icon name="explore"}}
             </div>
             <div class="competency-count">
