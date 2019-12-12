@@ -14,6 +14,7 @@
     </div>
   </div>
   <div class="struggling-competency-report-student-list-container">
+    {{#if (gt studentsPerformanceList.length  1)}}
     <div class="struggling-competency-report-student-list-panel" {{action "showStudentList"}}>
       <div class="sc-report-student-list">
          <ul class="sc-report-student-profile">
@@ -33,7 +34,8 @@
         {{gru-icon name="arrow_drop_down"}}
       </div>
     </div>
-    <div class="sc-student-dropdown-list-container">
+    {{/if}}
+    <div class="sc-student-dropdown-list-container {{if (eq studentsPerformanceList.length  1) 'active' ''}}">
       {{#each studentsPerformanceList as |student|}}
       <div class="sc-student-dropdown-list">
           <div class="sc-student-profile-thumbnail-container">

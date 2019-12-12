@@ -28,6 +28,11 @@ export default Ember.Component.extend({
   classActivitiesService: Ember.inject.service('api-sdk/class-activity'),
 
   /**
+   * @requires service:api-sdk/class-activity
+   */
+  classActivityService: Ember.inject.service('api-sdk/class-activity'),
+
+  /**
    * Competency Service
    */
   competencyService: Ember.inject.service('api-sdk/competency'),
@@ -261,6 +266,11 @@ export default Ember.Component.extend({
    */
   gradeRange: null,
 
+  /**
+   * @property {Array} studentsPerformanceList
+   */
+  studentsPerformanceList: [],
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -407,7 +417,7 @@ export default Ember.Component.extend({
     },
 
     // Action trigger when click add to class activity
-    onAddCollectionToDCA(content) {
+    onAddCollectionToDCA(content, studentList) {
       let component = this;
       let classId = component.get('classId');
       let contentType = content.get('format');
@@ -416,7 +426,8 @@ export default Ember.Component.extend({
       component
         .get('classActivitiesService')
         .addActivityToClass(classId, contentId, contentType, date)
-        .then(() => {
+        .then(newContentId => {
+          component.saveUsersToCA(newContentId, studentList);
           content.set('isAdded', true);
         });
     },
@@ -445,7 +456,9 @@ export default Ember.Component.extend({
           forYear,
           scheduleEndDate
         )
-        .then(() => {
+        .then(newContentId => {
+          let studentList = component.get('studentsPerformanceList');
+          component.saveUsersToCA(newContentId, studentList);
           component.set('selectedContentForSchedule.isScheduled', true);
         });
     },
@@ -472,7 +485,9 @@ export default Ember.Component.extend({
           forMonth,
           forYear
         )
-        .then(() => {
+        .then(newContentId => {
+          let studentList = component.get('studentsPerformanceList');
+          component.saveUsersToCA(newContentId, studentList);
           component.set('selectedContentForSchedule.isScheduled', true);
         });
     },
@@ -480,8 +495,9 @@ export default Ember.Component.extend({
     /**
      * Action get triggered when schedule content to CA got clicked
      */
-    onScheduleContentToDCA(content) {
+    onScheduleContentToDCA(content, studentList) {
       let component = this;
+      component.set('studentsPerformanceList', studentList);
       let datepickerEle = component.$('.ca-datepicker-schedule-container');
       datepickerEle.show();
       component.set('selectedContentForSchedule', content);
@@ -665,6 +681,12 @@ export default Ember.Component.extend({
           otherGradeList.push(grade.get('id'));
         });
       }
+      var currentGradeIndex = otherGradeList.indexOf(
+        component.get('class.gradeCurrent')
+      );
+      if (currentGradeIndex !== -1) {
+        otherGradeList.splice(currentGradeIndex, 1);
+      }
       let params = {
         grade: component.get('class.gradeCurrent'),
         classId: component.get('class.id'),
@@ -773,5 +795,18 @@ export default Ember.Component.extend({
         component.fetchStrugglingCompetency();
       }
     }
+  },
+
+  saveUsersToCA(newContentId, studentList) {
+    let component = this;
+    let classId = component.get('classId');
+    let contentId = newContentId;
+    let students = studentList;
+    let users = students.map(student => {
+      return student.get('id');
+    });
+    component
+      .get('classActivityService')
+      .addUsersToActivity(classId, contentId, users);
   }
 });
