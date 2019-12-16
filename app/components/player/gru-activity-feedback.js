@@ -9,7 +9,7 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-  didRender() {
+  didInsertElement() {
     var component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'

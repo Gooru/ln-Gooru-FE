@@ -1,13 +1,14 @@
 import Ember from 'ember';
 import PlayerController from 'gooru-web/controllers/player';
 import { ROLES } from 'gooru-web/config/config';
+import studyPlayer from 'gooru-web/mixins/study-player';
 /**
  * Study Player Controller
  *
  * @module
  * @augments ember/PlayerController
  */
-export default PlayerController.extend({
+export default PlayerController.extend(studyPlayer, {
   queryParams: [
     'resourceId',
     'role',
@@ -227,40 +228,6 @@ export default PlayerController.extend({
       Ember.$('body').addClass('fullscreen');
     } else {
       Ember.$('body').removeClass('fullscreen');
-    }
-  },
-
-  /**
-   * Removing dependency on local storage and  bypassing next call when dont have a suggestion
-   */
-  checknPlayNext: function() {
-    if (this.get('hasAnySuggestion')) {
-      this.playNextContent();
-    } else {
-      const context = this.get('mapLocation.context'); //Already having contex
-      this.playGivenContent(context);
-    }
-  },
-
-  playNextContent: function() {
-    const component = this;
-    const navigateMapService = this.get('navigateMapService');
-    const context = this.get('mapLocation.context');
-    navigateMapService.next(context).then(nextContext => {
-      component.set('mapLocation', nextContext);
-      component.playGivenContent(nextContext.context);
-    });
-  },
-
-  playGivenContent: function(context) {
-    let status = (context.get('status') || '').toLowerCase();
-    if (status !== 'done') {
-      this.toPlayer();
-    } else {
-      this.set('mapLocation.context.status', 'done');
-      this.set('hasSignatureCollectionSuggestions', false);
-      this.set('hasSignatureCollectionSuggestions', false);
-      this.set('isDone', true);
     }
   },
 
