@@ -28,6 +28,12 @@ export default Ember.Component.extend({
     let component = this;
     component.timeValidator();
   },
+
+  didInsertElement() {
+    let component = this;
+    component.$('[data-toggle="tooltip"]').tooltip();
+  },
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -51,9 +57,7 @@ export default Ember.Component.extend({
       let component = this;
       component.set('isTimeEntered', true);
       component.updateSelfReport();
-      Ember.run.later(function() {
-        component.set('isShowActivityFeedback', true);
-      }, 5000);
+      component.set('isShowActivityFeedback', true);
     },
 
     /**

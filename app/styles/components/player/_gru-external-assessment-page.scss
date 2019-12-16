@@ -75,7 +75,7 @@
             grid-template-rows: auto;
             .description-panel {
               display: grid;
-              grid-template-rows: auto 50px;
+              grid-template-rows: auto auto;
               padding: 10px 15px;
               .description p {
                 color: #576ca2;
@@ -89,6 +89,7 @@
                 .taxonomy {
                   align-items: center;
                   margin-top: 1px;
+                  display: flex;
                   .gru-taxonomy-tag-list {
                     .gru-taxonomy-tag {
                       background-color: $charcoal-grey;
@@ -102,6 +103,21 @@
                         color: $pre-bg;
                       }
                     }
+                  }
+                  .no-competency {
+                    background-color: $charcoal-grey;
+                    border: 1px solid #bbb;
+                    padding: 0 3px 2px;
+                    border-radius: 4px;
+                    width: 75px;
+                    height: 45px;
+                    text-align: center;
+                    font-size: 14px;
+                    display: flex;
+                    align-items: center;
+                    color: $white;
+                    justify-content: center;
+                    cursor: pointer;
                   }
                 }
                 .start-button {
@@ -118,6 +134,7 @@
                     font-weight: 500;
                     cursor: pointer;
                     line-height: 32px;
+                    border-radius: 3px;
                     &.disabled {
                       pointer-events: none;
                       opacity: 0.5;
@@ -130,6 +147,7 @@
               padding: 10px 15px;
               color: $charcoal-grey-two;
               font-size: 15px;
+              line-height: 1.5;
               .score-type-selector {
                 display: flex;
                 padding: 8px 0;
@@ -227,6 +245,7 @@
       justify-content: center;
       .external-assessment-card {
         width: 75%;
+        margin-left: 0px;
       }
     }
   }
@@ -238,6 +257,7 @@
       justify-content: center;
       .external-assessment-card {
         width: 100%;
+        margin-left: 0px;
       }
     }
   }

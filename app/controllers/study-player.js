@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import PlayerController from 'gooru-web/controllers/player';
-
+import { ROLES } from 'gooru-web/config/config';
 /**
  * Study Player Controller
  *
@@ -44,6 +44,14 @@ export default PlayerController.extend({
   navigateMapService: Ember.inject.service('api-sdk/navigate-map'),
 
   /**
+   * @type {AttemptService} attemptService
+   * @property {Ember.Service} Service to send attempt related events
+   */
+  quizzesAttemptService: Ember.inject.service('quizzes/attempt'),
+
+  session: Ember.inject.service('session'),
+
+  /**
    * @dependency {i18nService} Service to retrieve translations information
    */
   i18n: Ember.inject.service(),
@@ -64,6 +72,43 @@ export default PlayerController.extend({
 
     updateModel(option) {
       this.send('updateModelM', option);
+    },
+
+    onPlayNext: function() {
+      const controller = this;
+      let contextId = controller.get('contextResult.context.id');
+      let profileId = controller.get('session.userData.gooruUId');
+      const navigateMapService = controller.get('navigateMapService');
+      controller
+        .get('quizzesAttemptService')
+        .getAttemptIds(contextId, profileId)
+        .then(attemptIds =>
+          !attemptIds || !attemptIds.length
+            ? {}
+            : controller
+              .get('quizzesAttemptService')
+              .getAttemptData(attemptIds[attemptIds.length - 1])
+        )
+        .then(attemptData =>
+          Ember.RSVP.hash({
+            attemptData,
+            mapLocationNxt: navigateMapService.getStoredNext()
+          })
+        )
+        .then(({ mapLocationNxt, attemptData }) => {
+          if (controller.get('hasSuggestion')) {
+            mapLocationNxt.context.set('status', 'content-served');
+          }
+
+          mapLocationNxt.context.set('score', attemptData.get('averageScore'));
+          return navigateMapService.next(mapLocationNxt.context);
+        })
+        .then(({ context, suggestions, hasContent }) => {
+          controller.set('mapLocation.context', context);
+          controller.set('mapLocation.suggestions', suggestions);
+          controller.set('mapLocation.hasContent', hasContent);
+          controller.checknPlayNext();
+        });
     }
   },
 
@@ -182,6 +227,87 @@ export default PlayerController.extend({
       Ember.$('body').addClass('fullscreen');
     } else {
       Ember.$('body').removeClass('fullscreen');
+    }
+  },
+
+  /**
+   * Removing dependency on local storage and  bypassing next call when dont have a suggestion
+   */
+  checknPlayNext: function() {
+    if (this.get('hasAnySuggestion')) {
+      this.playNextContent();
+    } else {
+      const context = this.get('mapLocation.context'); //Already having contex
+      this.playGivenContent(context);
+    }
+  },
+
+  playNextContent: function() {
+    const component = this;
+    const navigateMapService = this.get('navigateMapService');
+    const context = this.get('mapLocation.context');
+    navigateMapService.next(context).then(nextContext => {
+      component.set('mapLocation', nextContext);
+      component.playGivenContent(nextContext.context);
+    });
+  },
+
+  playGivenContent: function(context) {
+    let status = (context.get('status') || '').toLowerCase();
+    if (status !== 'done') {
+      this.toPlayer();
+    } else {
+      this.set('mapLocation.context.status', 'done');
+      this.set('hasSignatureCollectionSuggestions', false);
+      this.set('hasSignatureCollectionSuggestions', false);
+      this.set('isDone', true);
+    }
+  },
+
+  /**
+   * Navigate to study player to play next collection/assessment
+   */
+  toPlayer: function(suggestion) {
+    const context = this.get('mapLocation.context');
+    let queryParams = {
+      role: ROLES.STUDENT,
+      source: this.get('source'),
+      isIframeMode: this.get('isIframeMode')
+    };
+    let classId = context.get('classId');
+    if (classId) {
+      queryParams.classId = classId;
+    }
+    let milestoneId = context.get('milestoneId');
+    if (milestoneId) {
+      queryParams.milestoneId = milestoneId;
+    }
+    if (suggestion) {
+      queryParams.courseId = context.courseId;
+      queryParams.milestoneId = context.get('milestoneId');
+      queryParams.unitId = context.get('unitId');
+      queryParams.lessonId = context.lessonId;
+      queryParams.collectionId = suggestion.get('id');
+      queryParams.pathId = suggestion.pathId;
+      queryParams.subtype =
+        suggestion.subType === 'signature_collection'
+          ? 'signature-collection'
+          : 'signature-assessment';
+      queryParams.pathType = 'system';
+      this.set('isShowActivityFeedback', false);
+      this.transitionToRoute('study-player', context.get('courseId'), {
+        queryParams
+      });
+      this.get('target').send('reloadPlayer');
+    } else {
+      this.set('isShowActivityFeedback', false);
+      queryParams.type = context.itemType || null; //Type is important to decide whether next item is external or normal
+      queryParams.pathId = context.pathId || 0;
+      queryParams.pathType = context.pathType || null;
+      this.transitionToRoute('study-player', context.get('courseId'), {
+        queryParams
+      });
+      this.get('target').send('reloadPlayer');
     }
   }
 });

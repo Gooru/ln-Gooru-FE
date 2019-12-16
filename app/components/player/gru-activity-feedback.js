@@ -8,6 +8,15 @@ export default Ember.Component.extend({
   classNames: ['gru-activity-feedback'],
 
   // -------------------------------------------------------------------------
+  // Events
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
+  },
+
+  // -------------------------------------------------------------------------
   // Actions
 
   actions: {

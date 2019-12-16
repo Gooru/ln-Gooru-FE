@@ -105,6 +105,10 @@ export default PlayerRoute.extend(PrivateRouteMixin, {
     updateModelM(option) {
       var mdl = this.modelFor(this.routeName);
       Object.assign(mdl, option);
+    },
+
+    reloadPlayer() {
+      this.refresh();
     }
   },
   /**
