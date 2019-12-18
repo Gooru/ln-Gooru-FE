@@ -19,18 +19,18 @@
         <div class="body-panel">
           <div class="body-content">
             <div class="description-panel">
-              <div class="description">
-                {{#if resourceInfo.learningObjectives}}
-                  <p>{{safe-html resourceInfo.learningObjectives}}</p>
-                {{else}}
-                  <p>{{safe-html resourceInfo.description}}</p>
-                {{/if}}
-              </div>
+              {{#if description}}
+                <div class="description">
+                  <p>{{safe-html description}}</p>
+                </div>
+              {{/if}}
               <div class="details">
                 <div class="taxonomy">
                   {{#if tags.length}}
                     {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
-                  {{/if}}
+                    {{else}}
+                      <div class="no-competency"  data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t 'common.no-competency'}}" > -- </div>
+                    {{/if}}
                 </div>
                 <div class="resource">
                   {{#if (and isCollection (gt resourceInfo.resourceCount 0))}}

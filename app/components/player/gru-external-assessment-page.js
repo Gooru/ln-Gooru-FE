@@ -55,9 +55,7 @@ export default Ember.Component.extend({
       component.set('isScoreEntered', true);
       component.set('stopTime', new Date().getTime());
       component.updateSelfReport();
-      Ember.run.later(function() {
-        component.set('isShowActivityFeedback', true);
-      }, 5000);
+      component.set('isShowActivityFeedback', true);
     },
 
     /**

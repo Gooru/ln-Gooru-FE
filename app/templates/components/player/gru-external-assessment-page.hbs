@@ -13,12 +13,14 @@
       <div class="body-panel">
         <div class="body-content">
           <div class="description-panel">
-            <div class="description"><p>{{assessment.learningObjectives}}</p></div>
+            <div class="description {{if assessment.learningObjectives 'show' 'hidden'}}"><p>{{assessment.learningObjectives}}</p></div>
             <div class="details">
               <div class="taxonomy">
                 {{#if tags.length}}
                   {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
-                {{/if}}
+                  {{else}}
+                    <div class="no-competency"  data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t 'common.no-competency'}}" > -- </div>
+                  {{/if}}
               </div>
               <div class="start-button">
                 {{#if (not isScoreEntered)}}

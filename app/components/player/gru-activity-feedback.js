@@ -8,6 +8,15 @@ export default Ember.Component.extend({
   classNames: ['gru-activity-feedback'],
 
   // -------------------------------------------------------------------------
+  // Events
+  didInsertElement() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
+  },
+
+  // -------------------------------------------------------------------------
   // Actions
 
   actions: {
@@ -82,6 +91,14 @@ export default Ember.Component.extend({
       });
       return TaxonomyTag.getTaxonomyTags(standards);
     }
+  }),
+
+  /**
+   * @property {description} String
+   */
+  description: Ember.computed('resourceInfo', function() {
+    let resourceInfo = this.get('resourceInfo');
+    return resourceInfo.description || resourceInfo.learningObjectives || null;
   }),
 
   /**

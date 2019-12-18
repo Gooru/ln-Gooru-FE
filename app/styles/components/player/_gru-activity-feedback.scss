@@ -129,7 +129,7 @@
               grid-template-rows: auto;
               .description-panel {
                 display: grid;
-                grid-template-rows: auto 50px;
+                grid-template-rows: auto auto;
                 .description {
                   padding: 10px;
                   padding-bottom: 5px;
@@ -153,6 +153,7 @@
                   .taxonomy {
                     align-items: center;
                     margin-top: 1px;
+                    display: flex;
                     .gru-taxonomy-tag-list {
                       padding-left: 10px;
                       .gru-taxonomy-tag {
@@ -167,6 +168,22 @@
                           color: $pre-bg;
                         }
                       }
+                    }
+                    .no-competency {
+                      background-color: $charcoal-grey;
+                      border: 1px solid #bbb;
+                      margin-left: 10px;
+                      padding: 0 3px 2px;
+                      border-radius: 4px;
+                      width: 75px;
+                      height: 45px;
+                      text-align: center;
+                      font-size: 14px;
+                      display: flex;
+                      align-items: center;
+                      color: $white;
+                      justify-content: center;
+                      cursor: pointer;
                     }
                   }
                   .icon {
@@ -275,6 +292,7 @@
         justify-content: center;
         .gru-activity-feedback-card {
           width: 75%;
+          margin-left: 0px;
         }
       }
     }
@@ -288,6 +306,7 @@
         justify-content: center;
         .gru-activity-feedback-card {
           width: 100%;
+          margin-left: 0px;
         }
       }
     }

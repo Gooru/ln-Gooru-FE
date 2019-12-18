@@ -2685,5 +2685,6 @@ window.i18ln = {
   'common.feedback-resource-note':
     'Please take a few seconds give your feedback on the resource. It really helps!',
   'common.feedback-offline-activity-note':
-    ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!'
+    ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!',
+  'common.no-competency': 'Not aligned to any competency'
 };
