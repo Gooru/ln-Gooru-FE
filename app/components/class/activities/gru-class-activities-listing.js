@@ -383,11 +383,27 @@ export default Ember.Component.extend(ModalMixin, {
       const assessmentActivities = component.get('assessmentActivities');
       const collectionActivities = component.get('collectionActivities');
       const offlineActivities = component.get('offlineActivities');
-      return scheduledActivitiesList.concat(
+      let scheduledActivitiesLists = scheduledActivitiesList.concat(
         assessmentActivities,
         collectionActivities,
         offlineActivities
       );
+      scheduledActivitiesLists.forEach(data => {
+        let addedDate = data.get('added_date');
+        let classActivity = scheduledActivitiesList.findBy(
+          'added_date',
+          addedDate
+        );
+        if (!classActivity) {
+          classActivity = Ember.Object.create({
+            added_date: addedDate,
+            scheduledActivities: Ember.A([])
+          });
+          scheduledActivitiesList.pushObject(classActivity);
+        }
+        classActivity.get('scheduledActivities').pushObject(data);
+      });
+      return scheduledActivitiesList.sortBy('added_date').reverse();
     }
   ),
 

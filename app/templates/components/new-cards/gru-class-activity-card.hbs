@@ -1,5 +1,8 @@
 <div class="class-activity-card">
-  <div class="content-thumbnail" style="background-image: url({{activityContent.thumbnailUrl}})">
+  <div class="content-thumbnail" style="background-image: url({{activityContent.thumbnailUrl}})" {{action "onShowMultiClass"}}>
+    <div class="icon">
+      <i class="{{activityContent.format}}-icon" />
+    </div>
     <div class="content-title">
       {{activityContent.title}}
     </div>
@@ -27,6 +30,12 @@
         {{format-date activity.added_date 'DD MMM'}} - {{format-date activity.end_date 'DD MMM'}}
       </div>
     {{/if}}
+    <div class="more">
+      <span {{action 'expandMore'}}>
+        {{gru-icon name="more_vert"}}
+      </span>
+    </div>
+    <div class="card-thumbnail" style="background-image: url({{activityContent.thumbnailUrl}})"></div>
   </div>
   <div class="content content-info">
     <span class="tag-tooltip">{{contentDescription}}</span>
@@ -39,6 +48,13 @@
         </div>
         <div class="activity-action student-count {{if isUnscheduledActivity 'hidden'}}" {{action "onShowStudentsList" activityClass}}>
           {{gru-icon name="account_circle" class="icon-style"}}
+          {{#if (eq activityClass.activity.usersCount -1)}}
+            <span class="hidden-xs">{{t 'common.all'}}</span>
+          {{else if (eq activityClass.activity.usersCount 0)}}
+            <span class="hidden-xs">{{t 'common.none'}}</span>
+          {{else}}
+            <span class="hidden-xs"> {{activityClass.activity.usersCount}}</span>
+          {{/if}}
         </div>
         <div class="activity-action suggestion-count hidden" {{action "onShowSuggestionList" activityClass}}>
           {{gru-icon name="check_circle" class="icon-style"}}

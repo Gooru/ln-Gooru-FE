@@ -80,6 +80,16 @@ export default Ember.Component.extend({
       const component = this;
       const classActivity = component.get('activity');
       this.sendAction('onRemoveClassActivity', classActivity);
+    },
+
+    onShowMultiClass() {
+      const component = this;
+      component.$('.class-info').slideToggle();
+    },
+
+    expandMore() {
+      const component = this;
+      component.$('.activity-actions').slideToggle();
     }
   },
 
