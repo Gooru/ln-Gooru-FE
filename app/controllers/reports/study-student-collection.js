@@ -9,7 +9,7 @@ import {
 } from 'gooru-web/config/config';
 import { getDomainCode } from 'gooru-web/utils/taxonomy';
 import { getObjectCopy, getObjectsDeepCopy } from 'gooru-web/utils/utils';
-import studyPlayer from 'gooru-web/mixins/study-player';
+import StudyPlayer from 'gooru-web/mixins/study-player';
 
 /**
  *
@@ -18,7 +18,7 @@ import studyPlayer from 'gooru-web/mixins/study-player';
  *
  */
 
-export default StudentCollection.extend(studyPlayer, {
+export default StudentCollection.extend(StudyPlayer, {
   /**
    * Confetti Initialize once Component Initialize
    */
@@ -379,51 +379,6 @@ export default StudentCollection.extend(studyPlayer, {
 
   // -------------------------------------------------------------------------
   // Methods
-
-  /**
-   * Navigate to study player to play next collection/assessment
-   */
-  toPlayer: function(suggestion) {
-    const context = this.get('mapLocation.context');
-    let queryParams = {
-      role: ROLES.STUDENT,
-      source: this.get('source'),
-      isIframeMode: this.get('isIframeMode')
-    };
-    let classId = context.get('classId');
-    if (classId) {
-      queryParams.classId = classId;
-    }
-    let milestoneId = context.get('milestoneId');
-    if (milestoneId) {
-      queryParams.milestoneId = milestoneId;
-    }
-    if (suggestion) {
-      queryParams.courseId = context.courseId;
-      queryParams.milestoneId = context.get('milestoneId');
-      queryParams.unitId = context.get('unitId');
-      queryParams.lessonId = context.lessonId;
-      queryParams.collectionId = suggestion.get('id');
-      queryParams.pathId = suggestion.pathId;
-      queryParams.subtype =
-        suggestion.subType === 'signature_collection'
-          ? 'signature-collection'
-          : 'signature-assessment';
-      queryParams.pathType = 'system';
-      this.set('isShowActivityFeedback', false);
-      this.transitionToRoute('study-player', context.get('courseId'), {
-        queryParams
-      });
-    } else {
-      this.set('isShowActivityFeedback', false);
-      queryParams.type = context.itemType || null; //Type is important to decide whether next item is external or normal
-      queryParams.pathId = context.pathId || 0;
-      queryParams.pathType = context.pathType || null;
-      this.transitionToRoute('study-player', context.get('courseId'), {
-        queryParams
-      });
-    }
-  },
 
   /**
    * Resets to default values

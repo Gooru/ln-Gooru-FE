@@ -20,11 +20,7 @@
           <div class="body-content">
             <div class="description-panel">
               <div class="description {{if (or resourceInfo.learningObjectives resourceInfo.description) 'show' 'hidden'}}">
-                {{#if resourceInfo.learningObjectives}}
-                  <p>{{safe-html resourceInfo.learningObjectives}}</p>
-                {{else if  resourceInfo.description}}
-                  <p>{{safe-html resourceInfo.description}}</p>
-                {{/if}}
+                <p>{{safe-html description}}</p>
               </div>
               <div class="details">
                 <div class="taxonomy">

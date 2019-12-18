@@ -1,14 +1,13 @@
 import Ember from 'ember';
 import PlayerController from 'gooru-web/controllers/player';
-import { ROLES } from 'gooru-web/config/config';
-import studyPlayer from 'gooru-web/mixins/study-player';
+import StudyPlayer from 'gooru-web/mixins/study-player';
 /**
  * Study Player Controller
  *
  * @module
  * @augments ember/PlayerController
  */
-export default PlayerController.extend(studyPlayer, {
+export default PlayerController.extend(StudyPlayer, {
   queryParams: [
     'resourceId',
     'role',
@@ -228,53 +227,6 @@ export default PlayerController.extend(studyPlayer, {
       Ember.$('body').addClass('fullscreen');
     } else {
       Ember.$('body').removeClass('fullscreen');
-    }
-  },
-
-  /**
-   * Navigate to study player to play next collection/assessment
-   */
-  toPlayer: function(suggestion) {
-    const context = this.get('mapLocation.context');
-    let queryParams = {
-      role: ROLES.STUDENT,
-      source: this.get('source'),
-      isIframeMode: this.get('isIframeMode')
-    };
-    let classId = context.get('classId');
-    if (classId) {
-      queryParams.classId = classId;
-    }
-    let milestoneId = context.get('milestoneId');
-    if (milestoneId) {
-      queryParams.milestoneId = milestoneId;
-    }
-    if (suggestion) {
-      queryParams.courseId = context.courseId;
-      queryParams.milestoneId = context.get('milestoneId');
-      queryParams.unitId = context.get('unitId');
-      queryParams.lessonId = context.lessonId;
-      queryParams.collectionId = suggestion.get('id');
-      queryParams.pathId = suggestion.pathId;
-      queryParams.subtype =
-        suggestion.subType === 'signature_collection'
-          ? 'signature-collection'
-          : 'signature-assessment';
-      queryParams.pathType = 'system';
-      this.set('isShowActivityFeedback', false);
-      this.transitionToRoute('study-player', context.get('courseId'), {
-        queryParams
-      });
-      this.get('target').send('reloadPlayer');
-    } else {
-      this.set('isShowActivityFeedback', false);
-      queryParams.type = context.itemType || null; //Type is important to decide whether next item is external or normal
-      queryParams.pathId = context.pathId || 0;
-      queryParams.pathType = context.pathType || null;
-      this.transitionToRoute('study-player', context.get('courseId'), {
-        queryParams
-      });
-      this.get('target').send('reloadPlayer');
     }
   }
 });
