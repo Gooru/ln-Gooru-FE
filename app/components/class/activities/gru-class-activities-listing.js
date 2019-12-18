@@ -117,17 +117,6 @@ export default Ember.Component.extend(ModalMixin, {
         .slideToggle();
     },
 
-    onSelectContentSelector(component = this) {
-      component.$('.header-container .date-range-picker-container').slideUp();
-      component.set('isShowScheduledActivities', true);
-      component.set('isShowItemsToGrade', false);
-      component.set('isShowUnscheduledActivities', false);
-      component.get('contentTypes').map(content => {
-        content.set('isActive', true);
-      });
-      component.loadActivitiesByActiveContentType();
-    },
-
     showPreviousMonth(date) {
       const component = this;
       let forMonth = moment(date).format('MM');
@@ -169,7 +158,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('forYear', forYear);
       component.loadActivitiesByActiveContentType();
       component.set('selectedDate', date);
-      component.actions.onToggleDatePicker(component);
+      component.$('.header-container .date-range-picker-container').slideUp();
     },
 
     onSelectWeek(startDate, endDate) {
@@ -184,8 +173,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('startDate', startDate);
       component.set('endDate', endDate);
       component.loadActivitiesByActiveContentType();
-
-      component.actions.onToggleDatePicker(component);
+      component.$('.header-container .date-range-picker-container').slideUp();
     },
 
     onSelectMonth(date) {
@@ -201,8 +189,8 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('selectedMonth', date);
       component.set('startDate', startDate);
       component.set('endDate', endDate);
+      component.$('.header-container .date-range-picker-container').slideUp();
       component.loadActivitiesByActiveContentType();
-      component.actions.onToggleDatePicker(component);
     },
 
     onSelectToday(date) {
@@ -215,7 +203,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
       component.loadActivitiesByActiveContentType();
-      component.actions.onToggleDatePicker(component);
+      component.$('.header-container .date-range-picker-container').slideUp();
     },
 
     onRescheduleActivity(classActivity) {
@@ -271,6 +259,12 @@ export default Ember.Component.extend(ModalMixin, {
     onloadScheduledClassActivities() {
       const component = this;
       component.$('.header-container .date-range-picker-container').slideUp();
+      let currentDate = moment().format('YYYY-MM-DD');
+      component.set('isDaily', true);
+      component.set('isWeekly', false);
+      component.set('isMonthly', false);
+      component.set('selectedDate', currentDate);
+      component.set('startDate', currentDate);
       component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', false);
@@ -282,7 +276,18 @@ export default Ember.Component.extend(ModalMixin, {
 
     onLoadUnscheduledActivities() {
       const component = this;
+      let currentMonth = moment().format('YYYY-MM');
+      let startDate = `${currentMonth}-01`;
+      let endDate = moment(startDate)
+        .endOf('month')
+        .format('YYYY-MM-DD');
+      component.set('isDaily', false);
+      component.set('isWeekly', false);
+      component.set('isMonthly', true);
       component.$('.header-container .date-range-picker-container').slideUp();
+      component.set('selectedMonth', currentMonth);
+      component.set('startDate', startDate);
+      component.set('endDate', endDate);
       component.set('isShowScheduledActivities', false);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', true);
@@ -295,6 +300,12 @@ export default Ember.Component.extend(ModalMixin, {
     onShowItemsToGrade() {
       const component = this;
       component.groupGradingItems();
+      let currentDate = moment().format('YYYY-MM-DD');
+      component.set('isDaily', true);
+      component.set('isWeekly', false);
+      component.set('isMonthly', false);
+      component.set('selectedDate', currentDate);
+      component.set('startDate', currentDate);
       component.$('.header-container .date-range-picker-container').slideUp();
       component.set('isShowScheduledActivities', false);
       component.set('isShowItemsToGrade', true);
