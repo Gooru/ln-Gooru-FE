@@ -98,7 +98,7 @@ export default Ember.Component.extend({
    */
   description: Ember.computed('resourceInfo', function() {
     let resourceInfo = this.get('resourceInfo');
-    return resourceInfo.description || resourceInfo.learningObjectives || '';
+    return resourceInfo.description || resourceInfo.learningObjectives || null;
   }),
 
   /**

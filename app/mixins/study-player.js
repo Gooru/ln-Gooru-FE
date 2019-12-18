@@ -156,19 +156,15 @@ export default Ember.Mixin.create({
           ? 'signature-collection'
           : 'signature-assessment';
       queryParams.pathType = 'system';
-      this.set('isShowActivityFeedback', false);
-      this.transitionToRoute('study-player', context.get('courseId'), {
-        queryParams
-      });
     } else {
-      this.set('isShowActivityFeedback', false);
       queryParams.type = context.itemType || null; //Type is important to decide whether next item is external or normal
       queryParams.pathId = context.pathId || 0;
       queryParams.pathType = context.pathType || null;
       queryParams.collectionId = context.collectionId;
-      this.transitionToRoute('study-player', context.get('courseId'), {
-        queryParams
-      });
     }
+    this.set('isShowActivityFeedback', false);
+    this.transitionToRoute('study-player', context.get('courseId'), {
+      queryParams
+    });
   }
 });

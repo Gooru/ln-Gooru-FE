@@ -19,9 +19,11 @@
         <div class="body-panel">
           <div class="body-content">
             <div class="description-panel">
-              <div class="description {{if (or resourceInfo.learningObjectives resourceInfo.description) 'show' 'hidden'}}">
-                <p>{{safe-html description}}</p>
-              </div>
+              {{#if description}}
+                <div class="description">
+                  <p>{{safe-html description}}</p>
+                </div>
+              {{/if}}
               <div class="details">
                 <div class="taxonomy">
                   {{#if tags.length}}
