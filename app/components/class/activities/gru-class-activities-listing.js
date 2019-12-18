@@ -258,13 +258,6 @@ export default Ember.Component.extend(ModalMixin, {
 
     onloadScheduledClassActivities() {
       const component = this;
-      component.$('.header-container .date-range-picker-container').slideUp();
-      let currentDate = moment().format('YYYY-MM-DD');
-      component.set('isDaily', true);
-      component.set('isWeekly', false);
-      component.set('isMonthly', false);
-      component.set('selectedDate', currentDate);
-      component.set('startDate', currentDate);
       component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', false);
@@ -300,13 +293,6 @@ export default Ember.Component.extend(ModalMixin, {
     onShowItemsToGrade() {
       const component = this;
       component.groupGradingItems();
-      let currentDate = moment().format('YYYY-MM-DD');
-      component.set('isDaily', true);
-      component.set('isWeekly', false);
-      component.set('isMonthly', false);
-      component.set('selectedDate', currentDate);
-      component.set('startDate', currentDate);
-      component.$('.header-container .date-range-picker-container').slideUp();
       component.set('isShowScheduledActivities', false);
       component.set('isShowItemsToGrade', true);
       component.set('isShowUnscheduledActivities', false);
@@ -660,10 +646,10 @@ export default Ember.Component.extend(ModalMixin, {
     const classActivity = activityClass.get('activity');
     const startDate = classActivity.get('activation_date')
       ? classActivity.get('activation_date')
-      : moment();
+      : moment().format('YYYY-MM-DD');
     const endDate = classActivity.get('activation_date')
       ? classActivity.get('activation_date')
-      : moment();
+      : moment().format('YYYY-MM-DD');
     return Ember.RSVP.hash({
       activityPerformance: classActivityService.findClassActivitiesPerformanceSummary(
         classId,

@@ -364,17 +364,16 @@
       background-color: $white;
       box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
       border-radius: 4px;
-      height: calc(100vh - 125px);
+      height: calc(100vh - 120px);
       overflow-y: auto;
 
       &.content-selecter {
-        height: calc(100vh - 112px);
+        height: calc(100vh - 160px);
       }
 
       .activities-cards-container {
         display: flex;
         flex-flow: wrap row;
-
         &.card-view {
           .class-activities {
             width: 50%;

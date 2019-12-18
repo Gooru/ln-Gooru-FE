@@ -1,5 +1,5 @@
 <div class="class-activity-card">
-  <div class="content-thumbnail" style="background-image: url({{activityContent.thumbnailUrl}})" {{action "onShowMultiClass"}}>
+  <div class="content-thumbnail" style="background-image: url({{activityContent.thumbnailUrl}})" {{action "onToggleContent" 'class-info'}}>
     <div class="icon">
       <i class="{{activityContent.format}}-icon" />
     </div>
@@ -31,7 +31,7 @@
       </div>
     {{/if}}
     <div class="more">
-      <span {{action 'expandMore'}}>
+      <span {{action "onToggleContent" 'activity-actions'}}>
         {{gru-icon name="more_vert"}}
       </span>
     </div>

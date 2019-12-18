@@ -93,9 +93,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     clearFilter(item) {
       const component = this;
-      if (item.get('filter') === 'flt.standard') {
-        component.set('unCheckedItem', item);
-      }
       component.get('selectedFilters').removeObject(item);
       component.send('onApplyFilter');
       component.set('isShowFilter', false);
