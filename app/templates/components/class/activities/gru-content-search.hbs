@@ -6,6 +6,12 @@
       </div>
     {{/each}}
   </div>
+  {{#if ( and isShowContentSelector (eq activeContentSource 'tenant-library'))}}
+    <div class="library-info">
+      <div class="library-icon" style="background-image: url({{activeTenantLibrary.image}})"></div>
+      <div class="library-name">{{activeTenantLibrary.name}}</div>
+    </div>
+  {{/if}}
   <div class="content-selector-container">
     <div class="content-types-container">
       {{#each contentTypes as |contentType|}}
@@ -23,7 +29,26 @@
         id="search-content"
         class="search-content"
         value=contentSearchTerm}}
-      <span class="clear-icon" {{action "onClearSearch"}}>{{gru-icon name="close"}}</span>
+        <div class="filter-items">
+          {{#each filters as |selectedFilter index|}}
+            <div class="filter-item">
+              <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
+              <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
+            </div>
+          {{/each}}
+          {{#if moreFilters}}
+            <span class="more-pointer">+{{moreFilters.length}}</span>
+          {{/if}}
+          <div class="more-filters hidden">
+            {{#each moreFilters as |moreFilter|}}
+              <div class="filter-item">
+                <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+                <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      <span class="clear-icon {{unless filters 'show' 'hidden'}}" {{action "onClearSearch"}}>{{gru-icon name="close"}}</span>
       <span class="search-icon">{{gru-icon name="search"}}</span>
     </div>
     <div class="filter-container" {{action "onClickFilterIcon"}}>
@@ -31,7 +56,6 @@
     </div>
   </div>
 </div>
-
 {{#if isFilterEnabled}}
   {{search/search-by-filter
   isShow=isShowFilter

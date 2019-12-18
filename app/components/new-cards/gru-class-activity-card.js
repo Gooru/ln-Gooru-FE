@@ -80,6 +80,11 @@ export default Ember.Component.extend({
       const component = this;
       const classActivity = component.get('activity');
       this.sendAction('onRemoveClassActivity', classActivity);
+    },
+
+    onToggleContent(className) {
+      const component = this;
+      component.$(`.${className}`).slideToggle();
     }
   },
 
