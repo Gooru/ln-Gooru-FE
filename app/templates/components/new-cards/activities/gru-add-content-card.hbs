@@ -28,9 +28,11 @@
         </div>
       {{/if}}
     </div>
-    <div class="add-activity" title="{{t 'add.to.todays.class'}}" data-toggle="tooltip" data-placement="bottom" {{action "onAddActivity"}} >
-        {{gru-icon name="add"}}
-    </div>
+    {{#unless isOfflineActivity}}
+      <div class="add-activity" title="{{t 'add.to.todays.class'}}" data-toggle="tooltip" data-placement="bottom" {{action "onAddActivity"}} >
+          {{gru-icon name="add"}}
+      </div>
+    {{/unless}}
     <div class="schedule-activity" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-placement="bottom" {{action "onShowDaterangePicker"}} >
       {{gru-icon name="update"}}
     </div>

@@ -19,6 +19,13 @@ export default Ember.Component.extend({
    */
   courseService: Ember.inject.service('api-sdk/course'),
 
+  /**
+   * @requires service:api-sdk/offline-activity
+   */
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
+
   didInsertElement() {
     const component = this;
     component.loadClassData();
@@ -85,6 +92,33 @@ export default Ember.Component.extend({
     onToggleContent(className) {
       const component = this;
       component.$(`.${className}`).slideToggle();
+    },
+
+    onMarkOaCompleted() {
+      const component = this;
+      component.markOfflineActivityAsComplete();
+    },
+
+    //Action triggered when click on grading icon at the activity card
+    onEnableOaGrading(activityClass) {
+      const component = this;
+      const classActivity = component.get('activity');
+      if (classActivity.get('isCompleted')) {
+        const gradingItemObject = Ember.Object.create({
+          classId: activityClass.get('id'),
+          dcaContentId: activityClass.get('activity.id'),
+          contentType: CONTENT_TYPES.OFFLINE_ACTIVITY,
+          studentCount: activityClass.get('activity.usersCount'),
+          activityDate: activityClass.get('activity.activation_date')
+        });
+        component
+          .getOfflineActivity(activityClass.get('content.id'))
+          .then(offlineActivity => {
+            gradingItemObject.set('content', offlineActivity);
+            gradingItemObject.set('collection', offlineActivity);
+            component.sendAction('onGradeItem', gradingItemObject);
+          });
+      }
     }
   },
 
@@ -246,5 +280,28 @@ export default Ember.Component.extend({
           component.set('activity.activation_date', activityDate);
         });
     });
+  },
+
+  markOfflineActivityAsComplete() {
+    const component = this;
+    const classActivity = component.get('activity');
+    const activityClasses = classActivity.get('activityClasses');
+    activityClasses.map(activityClass => {
+      const classId = activityClass.get('id');
+      const activityId = activityClass.get('activity.id');
+      component
+        .get('classActivityService')
+        .completeOfflineActivity(classId, activityId)
+        .then(() => {
+          classActivity.set('isCompleted', true);
+        });
+    });
+  },
+
+  getOfflineActivity(offlineActivityId) {
+    const component = this;
+    return component
+      .get('offlineActivityService')
+      .readActivity(offlineActivityId);
   }
 });
