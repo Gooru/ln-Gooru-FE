@@ -116,7 +116,11 @@ export default Ember.Component.extend({
           .then(offlineActivity => {
             gradingItemObject.set('content', offlineActivity);
             gradingItemObject.set('collection', offlineActivity);
-            component.sendAction('onGradeItem', gradingItemObject);
+            component.sendAction(
+              'onGradeItem',
+              gradingItemObject,
+              activityClass
+            );
           });
       }
     }
