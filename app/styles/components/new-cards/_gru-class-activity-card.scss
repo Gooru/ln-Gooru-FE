@@ -52,7 +52,6 @@
             white-space: normal;
           }
           .activity-action {
-            height: inherit;
             text-align: center;
             .icon-style {
               height: inherit;
@@ -97,8 +96,8 @@
             }
           }
           .add-data {
-            height: inherit;
             width: 50px;
+            height: 45px;
             border: 1px solid rgba(151, 151, 151, 0.4);
             font-size: 11px;
             line-height: 1;
@@ -110,6 +109,7 @@
             font-weight: bold;
             opacity: 1;
             cursor: pointer;
+            padding: 11px 0px;
             &.performed-activity {
               grid-template-rows: 1fr 1fr;
               .activity-score {
@@ -178,9 +178,8 @@
             background-size: contain;
             border: none;
             display: block;
-            width: 18px;
             height: 18px;
-
+            width: 100%;
             i {
               visibility: hidden;
             }
@@ -289,7 +288,8 @@
           border-bottom: 1px solid rgba(151, 151, 151, 0.4);
           padding: 0 5px;
           .card-thumbnail,
-          .more {
+          .more,
+          .class-list {
             display: none;
           }
           .activity-date {
@@ -312,7 +312,7 @@
           -webkit-box-orient: vertical;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-height: 56px;
+          max-height: 54px;
           border-bottom: 1px solid rgba(151, 151, 151, 0.4);
         }
         .class-info {
@@ -320,7 +320,7 @@
           overflow-y: auto;
           .assigned-class {
             grid-template-columns: 1fr 40px auto auto;
-            height: 40px;
+            height: 46px;
             line-height: 35px;
             .student-count {
               cursor: pointer;
@@ -344,7 +344,7 @@
       .class-activity-card {
         height: auto;
         width: 100%;
-        grid-template-columns: auto 180px;
+        grid-template-columns: auto 200px;
         border-bottom: 2px solid rgba(151, 151, 151, 0.4);
         .content-info,
         .class-info,
@@ -392,6 +392,18 @@
         }
         .activity-info {
           grid-template-columns: auto 35px 50px;
+          .content-counts {
+            grid-template-columns: auto auto auto;
+            .class-list {
+              justify-content: center;
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              span {
+                height: 23px;
+              }
+            }
+          }
           .activity-date {
             display: none;
           }
@@ -421,7 +433,7 @@
             background-color: #fff;
             margin-left: 10px;
             grid-template-columns: 1fr 70px auto auto;
-            height: 45px;
+            height: 46px;
             .student-count {
               padding-left: 10px;
               display: flex;

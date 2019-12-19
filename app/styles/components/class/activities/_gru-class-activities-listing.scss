@@ -34,6 +34,7 @@
             background-color: #2196f3;
             color: #fff;
             opacity: 1;
+            pointer-events: none;
           }
         }
         .unscheduled-activity-selector {
@@ -54,6 +55,7 @@
             opacity: 1;
             background-color: #2196f3;
             color: #fff;
+            pointer-events: none;
           }
         }
         .items-to-grade-selector {
@@ -77,6 +79,7 @@
             background-color: #2196f3;
             color: white;
             opacity: 1;
+            pointer-events: none;
             .grading-icon {
               background-image: url("../assets/gooru/images/add_rubric_white.svg");
             }
@@ -369,6 +372,9 @@
 
       &.content-selecter {
         height: calc(100vh - 160px);
+        .list-view {
+          display: grid;
+        }
       }
 
       .activities-cards-container {
@@ -385,7 +391,6 @@
         &.list-view {
           width: 100%;
           justify-content: normal;
-          display: grid;
           margin-bottom: 5px;
           .added-date {
             font-size: 15px;

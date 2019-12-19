@@ -299,6 +299,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
           : activeContentType === 'collection'
             ? libraryContents.get('collections')
             : libraryContents.get('offline_activities');
+      contents.map(content => {
+        content.format = activeContentType;
+      });
       return contents;
     });
   },
