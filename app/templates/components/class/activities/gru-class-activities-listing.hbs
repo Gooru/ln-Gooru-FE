@@ -174,7 +174,8 @@
     isDCAContext=true
     showPullUp=isShowQuestionGrading
     context=gradingObject
-    itemsToGrade=gradingItemsList}}
+    itemsToGrade=gradingItemsList
+    onClosePullUp="onClosePerformanceEntry"}}
 {{/if}}
 {{#if isShowOaGrading}}
   {{activity/offline/grading-report
@@ -182,7 +183,8 @@
     context=gradingObject
     itemsToGrade=gradingItemsList
     isTeacher=true
-    refreshItem='onRefreshItem'
+    refreshItem='onClosePerformanceEntry'
+    onClosePullUp="onClosePerformanceEntry"
   }}
 {{/if}}
 

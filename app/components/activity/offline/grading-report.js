@@ -789,6 +789,7 @@ export default Ember.Component.extend({
       },
       400,
       function() {
+        component.sendAction('onClosePullUp');
         component.set('showPullUp', false);
       }
     );

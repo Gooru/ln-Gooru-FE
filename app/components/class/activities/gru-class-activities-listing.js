@@ -305,7 +305,7 @@ export default Ember.Component.extend(ModalMixin, {
       });
     },
 
-    onGradeItem(gradingObject) {
+    onGradeItem(gradingObject, activityClass) {
       const component = this;
       component.set('gradingObject', gradingObject);
       component.set('isShowGrading', true);
@@ -313,6 +313,9 @@ export default Ember.Component.extend(ModalMixin, {
         component.set('isShowQuestionGrading', true);
       } else {
         component.set('isShowOaGrading', true);
+      }
+      if (activityClass) {
+        component.set('selectedClassData', activityClass);
       }
     },
 
@@ -654,6 +657,11 @@ export default Ember.Component.extend(ModalMixin, {
     const endDate = classActivity.get('activation_date')
       ? classActivity.get('activation_date')
       : moment().format('YYYY-MM-DD');
+    classActivity.set(
+      'contentType',
+      activityClass.get('content.collectionType')
+    );
+    classActivity.set('collection', activityClass.get('content'));
     return Ember.RSVP.hash({
       activityPerformance: classActivityService.findClassActivitiesPerformanceSummary(
         classId,

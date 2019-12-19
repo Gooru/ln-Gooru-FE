@@ -121,6 +121,9 @@
                   display: none;
                 }
               }
+              &.only-score {
+                grid-template-rows: 1fr;
+              }
             }
             &.grade-range-not-started {
               background-color: #4e5e67;
