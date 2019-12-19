@@ -671,12 +671,17 @@ export default Ember.Component.extend({
           domainCode
         );
         let firstCompetency = domainCompetencyData.objectAt(0);
-        let curDomainHighLineCompetency = curDomainBoundaryData
+        let curDomainHighLineCompetency = firstCompetency;
+        let highlineCompetency = curDomainBoundaryData
           ? domainCompetencyData.findBy(
             'competencyCode',
             curDomainBoundaryData.highline
-          ) || firstCompetency
-          : firstCompetency;
+          )
+          : null;
+        if (highlineCompetency) {
+          highlineCompetency.set('highlineCompetency', true);
+          curDomainHighLineCompetency = highlineCompetency;
+        }
         let className = curDomainHighLineCompetency.boundaryClass
           ? curDomainHighLineCompetency.boundaryClass
           : '';
@@ -753,6 +758,9 @@ export default Ember.Component.extend({
         let domainBoundaryCompetency = d.isDomainBoundaryCompetency
           ? 'domain-boundary'
           : '';
+        let highlineCompetencyClassName = d.highlineCompetency
+          ? 'highline-competency'
+          : '';
         let noFrameWorkClass = !d.isMappedWithFramework ? 'no-framework' : '';
         return `competency ${noFrameWorkClass} ${skylineClassName} competency-${
           d.xAxisSeq
@@ -760,7 +768,7 @@ export default Ember.Component.extend({
           d.yAxisSeq
         } fillArea${d.status.toString()} ${domainBoundaryCompetency} ${
           d.boundaryClass
-        } ${masteredCompetencyClassName}`;
+        } ${masteredCompetencyClassName} ${highlineCompetencyClassName}`;
       })
       .on('click', function(d) {
         component.selectCompetency(d);
@@ -1100,7 +1108,10 @@ export default Ember.Component.extend({
         let y1 = parseInt(
           component.$(boundaryLineElements[boundaryLineSeq]).attr('y')
         );
-        y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight + 3;
+        let isHighlineCompetency = component
+          .$(boundaryLineElements[boundaryLineSeq])
+          .hasClass('highline-competency');
+        y1 = y1 === 0 && !isHighlineCompetency ? y1 + 3 : y1 + cellHeight + 3;
         let x2 = x1 + cellWidth;
         let y2 = y1;
         let linePoint = {
