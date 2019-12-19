@@ -30,7 +30,7 @@ export default Ember.Component.extend(ModalMixin, {
 
   didInsertElement() {
     const component = this;
-    component.loadActivitiesByActiveContentType();
+    component.loadActivitiesByActiveContentType(true);
     component.loadItemsToGrade();
   },
 
@@ -258,6 +258,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', false);
+      component.$('.header-container .date-range-picker-container').slideUp();
     },
 
     onloadScheduledClassActivities() {
@@ -268,6 +269,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.get('contentTypes').map(content => {
         content.set('isActive', true);
       });
+      component.$('.header-container .date-range-picker-container').slideUp();
       component.loadActivitiesByActiveContentType();
     },
 
@@ -303,6 +305,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.get('contentTypes').map(content => {
         content.set('isActive', false);
       });
+      component.$('.header-container .date-range-picker-container').slideUp();
     },
 
     onGradeItem(gradingObject, activityClass) {
@@ -419,27 +422,32 @@ export default Ember.Component.extend(ModalMixin, {
 
   datewiseActivities: Ember.A([]),
 
+  groupActivities: Ember.A([]),
+
   observeNewlyAddedActivity: Ember.observer('newlyAddedActivity', function() {
     const component = this;
     const activity = component.get('newlyAddedActivity');
     if (activity.get('isScheduledActivity')) {
-      component.loadActivitiesByActiveContentType(activity.get('format'));
+      component.loadScheduledClassActivities(activity.get('format'), true);
     } else {
       component.loadUnScheduledActivities();
     }
   }),
 
-  loadActivitiesByActiveContentType() {
+  loadActivitiesByActiveContentType(isInitialLoad) {
     const component = this;
     const activeContentTypes = component
       .get('contentTypes')
       .filterBy('isActive', true);
     activeContentTypes.map(content => {
-      component.loadScheduledClassActivities(content.get('type'));
+      component.loadScheduledClassActivities(
+        content.get('type'),
+        isInitialLoad
+      );
     });
   },
 
-  loadScheduledClassActivities(contentType) {
+  loadScheduledClassActivities(contentType, isInitialLoad) {
     const component = this;
     const classId = component.get('classId');
     const secondaryClasses = component.get('secondaryClasses');
@@ -465,6 +473,15 @@ export default Ember.Component.extend(ModalMixin, {
       component.set(`${contentType}Activities`, groupedClassActivities);
       if (contentType !== 'collection') {
         component.fetchMasteryAccrualContents(groupedClassActivities);
+      }
+      if (isInitialLoad) {
+        let activitiesList = component.get('scheduledActivitiesList');
+        let todayDate = moment().format('YYYY-MM-DD');
+        let todayActivityList = activitiesList.findBy('added_date', todayDate);
+        component.set(
+          'todaysActivities',
+          todayActivityList.get('scheduledActivities')
+        );
       }
       return groupedClassActivities;
     });
@@ -787,6 +804,7 @@ export default Ember.Component.extend(ModalMixin, {
           activityClass.set('allowMasteryAccrual', allowMasteryAccrual);
         });
     });
+    classActivity.set('allowMasteryAccrual', true);
   },
 
   markOfflineActivityStatus(classActivity) {
