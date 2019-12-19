@@ -72,6 +72,30 @@
             display: flex;
             cursor: pointer;
           }
+          .oa-grading {
+            height: inherit;
+            width: 50px;
+            border-left: 1px solid rgba(151, 151, 151, 0.4);
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            .rubric-icon {
+              width: 25px;
+              height: 25px;
+              background-size: 25px;
+              display: block;
+              background-position: center;
+              background-repeat: no-repeat;
+              background-image: url("../assets/gooru/images/rubric-green.svg");
+            }
+            &.not-completed {
+              cursor: default;
+              .rubric-icon {
+                background-image: url("../assets/gooru/images/add_rubric.svg");
+              }
+            }
+          }
           .add-data {
             height: inherit;
             width: 50px;
@@ -123,6 +147,16 @@
           display: grid;
           align-items: center;
           text-align: center;
+        }
+        .mark-completed {
+          cursor: pointer;
+          &.completed {
+            color: #1ba9eb;
+            cursor: default;
+          }
+          &.in-active {
+            cursor: not-allowed;
+          }
         }
         .play-activity {
           color: #1ba9eb;

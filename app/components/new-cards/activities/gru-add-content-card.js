@@ -22,6 +22,10 @@ export default Ember.Component.extend({
 
     onShowDaterangePicker() {
       const component = this;
+      component.set(
+        'allowTwoDateRangePicker',
+        component.get('isOfflineActivity')
+      );
       component.set('isShowDaterangePicker', true);
     },
 
@@ -62,6 +66,8 @@ export default Ember.Component.extend({
     'contentType',
     CONTENT_TYPES.OFFLINE_ACTIVITY
   ),
+
+  allowTwoDateRangePicker: false,
 
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags

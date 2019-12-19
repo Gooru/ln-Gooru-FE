@@ -209,6 +209,10 @@ export default Ember.Component.extend(ModalMixin, {
     onRescheduleActivity(classActivity) {
       const component = this;
       component.set('selectedClassActivity', classActivity);
+      component.set(
+        'allowTwoDateRangePicker',
+        classActivity.get('contentType') === CONTENT_TYPES.OFFLINE_ACTIVITY
+      );
       component.set('isShowDaterangePicker', true);
     },
 
