@@ -50,6 +50,10 @@ export default Ember.Component.extend({
 
     onShowFilteredContents(filteredContents) {
       const component = this;
+      let todaysActivities = component.get('todaysActivities');
+      filteredContents.map(content => {
+        content.isAdded = !!todaysActivities.findBy('contentId', content.id);
+      });
       component.set('filteredContents', filteredContents);
       component.set('isShowTenantLibraries', false);
       component.set('isShowLessonPlan', false);
@@ -153,6 +157,7 @@ export default Ember.Component.extend({
             })
           );
           content.set('activityClasses', activityClasses);
+          content.set('isAdded', true);
         });
     });
     component.sendAction('activityAdded', content);

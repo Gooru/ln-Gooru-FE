@@ -103,5 +103,7 @@ export default Ember.Controller.extend({
 
   isMultiClassEnabled: Ember.computed.alias(
     'classController.isMultiClassEnabled'
-  )
+  ),
+
+  todaysActivities: Ember.A([])
 });
