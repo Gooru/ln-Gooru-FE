@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import { CONTENT_TYPES, SCREEN_SIZES } from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 import ModalMixin from 'gooru-web/mixins/modal';
 
 export default Ember.Component.extend(ModalMixin, {
@@ -423,6 +424,13 @@ export default Ember.Component.extend(ModalMixin, {
   datewiseActivities: Ember.A([]),
 
   groupActivities: Ember.A([]),
+
+  isShowListCard: Ember.computed(function() {
+    const component = this;
+    return isCompatibleVW(SCREEN_SIZES.MEDIUM)
+      ? true
+      : !component.get('isDaily');
+  }),
 
   observeNewlyAddedActivity: Ember.observer('newlyAddedActivity', function() {
     const component = this;

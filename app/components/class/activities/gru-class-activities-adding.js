@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-clas-activities-adding'],
@@ -114,10 +116,30 @@ export default Ember.Component.extend({
         month,
         year
       );
+    },
+
+    onTogglePanel() {
+      const component = this;
+      let position = { position: 'absolute' };
+      let top = isCompatibleVW(SCREEN_SIZES.EXTRA_SMALL) ? '102px' : '50px';
+      if (component.get('isShowFullView')) {
+        top = '85%';
+        position = { position: 'unset' };
+      }
+      component.$().css(position);
+      component.$().animate(
+        {
+          top
+        },
+        400
+      );
+      component.toggleProperty('isShowFullView');
     }
   },
 
   activeTenantLibrary: {},
+
+  isShowFullView: false,
 
   assignActivityToMultipleClass(
     content,

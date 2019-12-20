@@ -418,4 +418,40 @@
       }
     }
   }
+
+  @media screen and (max-width: $screen-sm) {
+    height: inherit;
+    .class-activities-container {
+      height: inherit;
+      .header-container {
+        .activity-tab {
+          padding: 0;
+          column-gap: 0;
+          .items-to-grade-selector {
+            .grading-icon {
+              display: none;
+            }
+          }
+          i {
+            display: none;
+          }
+        }
+        .filters {
+          .activities > span {
+            display: none;
+          }
+        }
+      }
+      .body-container {
+        &.content-selecter {
+          height: calc(100% - 2px);
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $screen-xs) {
+    width: 100%;
+    margin: 0;
+  }
 }
