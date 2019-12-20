@@ -251,15 +251,17 @@ export default Ember.Component.extend({
             .get('classService')
             .readClassMembers(classId, allowCachedData)
       }).then(({ classData, classMembers }) => {
-        component
-          .get('courseService')
-          .fetchById(classData.get('courseId'), allowCachedData)
-          .then(function(courseData) {
-            activityClass.setProperties({
-              course: courseData,
-              members: classMembers.get('members') || classMembers
+        if (classData.get('courseId')) {
+          component
+            .get('courseService')
+            .fetchById(classData.get('courseId'), allowCachedData)
+            .then(function(courseData) {
+              activityClass.setProperties({
+                course: courseData,
+                members: classMembers.get('members') || classMembers
+              });
             });
-          });
+        }
       });
     });
   },

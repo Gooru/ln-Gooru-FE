@@ -478,10 +478,12 @@ export default Ember.Component.extend(ModalMixin, {
         let activitiesList = component.get('scheduledActivitiesList');
         let todayDate = moment().format('YYYY-MM-DD');
         let todayActivityList = activitiesList.findBy('added_date', todayDate);
-        component.set(
-          'todaysActivities',
-          todayActivityList.get('scheduledActivities')
-        );
+        if (todayActivityList) {
+          component.set(
+            'todaysActivities',
+            todayActivityList.get('scheduledActivities')
+          );
+        }
       }
       return groupedClassActivities;
     });
