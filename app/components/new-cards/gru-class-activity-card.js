@@ -83,10 +83,17 @@ export default Ember.Component.extend({
     /**
      * @function removeClassActivity
      */
-    removeClassActivity() {
+    removeClassActivity(activityClass) {
       const component = this;
       const classActivity = component.get('activity');
-      this.sendAction('onRemoveClassActivity', classActivity);
+      let activityClassesLength = classActivity.get('activityClasses').length;
+      let isRemoveClassActivity = activityClassesLength === 1;
+      this.sendAction(
+        'onRemoveActivityClass',
+        classActivity,
+        activityClass,
+        isRemoveClassActivity
+      );
     },
 
     onToggleContent(className) {
