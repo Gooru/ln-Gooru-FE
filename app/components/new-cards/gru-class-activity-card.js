@@ -278,7 +278,8 @@ export default Ember.Component.extend({
   updateActivityVisibility() {
     const component = this;
     const classActivity = component.get('activity');
-    const activityDate = classActivity.get('activation_date');
+    const activityDate =
+      classActivity.get('activation_date') || moment().format('YYYY-MM-DD');
     const activityClasses = classActivity.get('activityClasses');
     const activityState = classActivity.get('isActive');
     activityClasses.map(activityClass => {
@@ -293,7 +294,7 @@ export default Ember.Component.extend({
         )
         .then(function() {
           if (!component.get('isDestroyed')) {
-            component.set('activity.activation_date', activityDate);
+            activityClass.set('activity.activation_date', activityDate);
           }
         });
     });
