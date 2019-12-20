@@ -5,6 +5,11 @@
         {{contentSource.label}}
       </div>
     {{/each}}
+    {{#if isShowListView}}
+      <div class="toggle-panel" {{action "onTogglePanel"}}>
+        {{gru-icon name=(if isToggleIcon 'keyboard_arrow_down' 'keyboard_arrow_up')}}
+      </div>
+    {{/if}}
   </div>
   {{#if ( and isShowContentSelector (eq activeContentSource 'tenant-library'))}}
     <div class="library-info">

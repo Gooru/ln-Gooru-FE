@@ -78,7 +78,7 @@
     </div>
   </div>
   <div class="body-container {{unless isShowItemsToGrade 'content-selecter'}}">
-    <div class="activities-cards-container {{unless isDaily 'list-view' 'card-view'}}">
+    <div class="activities-cards-container {{if isShowListCard 'list-view' 'card-view'}}">
       {{#if isShowUnscheduledActivities}}
         {{#each unScheduledActivities as |unScheduledActivity|}}
           {{new-cards/gru-class-activity-card
@@ -86,6 +86,7 @@
             isUnscheduledActivity = true
             onRescheduleActivity = "onRescheduleActivity"
             onShowContentPreview = "onShowContentPreview"
+            isShowListView = isShowListCard
           }}
         {{else}}
         <div class="plan-activities-msg">
@@ -111,7 +112,8 @@
                 onRescheduleActivity = "onRescheduleActivity"
                 onEnableMastery = "onEnableMastery"
                 onShowContentPreview = "onShowContentPreview"
-                onGradeItem="onGradeItem"}}
+                onGradeItem="onGradeItem"
+                isShowListView = isShowListCard}}
             {{/each}}
           {{else}}
             <div class="plan-activities-msg">

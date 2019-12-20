@@ -4,6 +4,8 @@ import { CONTENT_TYPES } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-class-activity-card'],
 
+  classNameBindings: ['isShowListView:list-view:card-view'],
+
   /**
    * @requires service:api-sdk/class-activity
    */
@@ -241,6 +243,8 @@ export default Ember.Component.extend({
     let currentDate = moment().format('YYYY-MM-DD');
     return moment(activityDate).isBefore(currentDate);
   }),
+
+  isShowListView: false,
 
   loadClassData() {
     const component = this;
