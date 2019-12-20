@@ -39,11 +39,11 @@ export default Ember.Component.extend(ModalMixin, {
      *
      * @function actions:removeClassActivity
      */
-    removeClassActivity(classActivity) {
+    removeActivityClass(classActivity, activityClass, isRemoveClassActivity) {
       let component = this;
-      let currentClassId = component.get('classId');
-      let classActivityId = classActivity.get('id');
-      let classActivityType = classActivity.get('collection.collectionType');
+      let currentClassId = activityClass.get('id');
+      let classActivityId = activityClass.get('activity.id');
+      let classActivityType = activityClass.get('content.collectionType');
       var model = {
         type: classActivityType,
         deleteMethod: function() {
@@ -53,7 +53,12 @@ export default Ember.Component.extend(ModalMixin, {
         },
         callback: {
           success: function() {
-            component.removeClassActivity(classActivity);
+            if (isRemoveClassActivity) {
+              component.removeClassActivity(classActivity);
+            } else {
+              let activityClasses = classActivity.get('activityClasses');
+              activityClasses.removeObject(activityClass);
+            }
           }
         }
       };
@@ -428,7 +433,7 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     const activity = component.get('newlyAddedActivity');
     if (activity.get('isScheduledActivity')) {
-      component.loadScheduledClassActivities(activity.get('format'), true);
+      component.loadActivitiesByActiveContentType(true);
     } else {
       component.loadUnScheduledActivities();
     }
@@ -495,7 +500,10 @@ export default Ember.Component.extend(ModalMixin, {
    */
   removeClassActivity(classActivity) {
     const component = this;
-    component.get('scheduledActivitiesList').removeObject(classActivity);
+    let addedDate = classActivity.get('added_date');
+    let scheduledActivity = component.get('scheduledActivitiesList');
+    let activityList = scheduledActivity.findBy('added_date', addedDate);
+    activityList.get('scheduledActivities').removeObject(classActivity);
   },
 
   loadUnScheduledActivities() {

@@ -86,9 +86,13 @@ export default Ember.Component.extend({
       offlineActivity: component
         .get('offlineActivityService')
         .readActivity(offlineActivityId)
-    }).then(({ offlineActivity }) => {
-      component.set('gradingContent', offlineActivity);
-      component.set('content', offlineActivity);
-    });
+    })
+      .then(({ offlineActivity }) => {
+        component.set('gradingContent', offlineActivity);
+        component.set('content', offlineActivity);
+      })
+      .catch(function() {
+        component.$('.activity-grading-card').addClass('content-not-found');
+      });
   }
 });
