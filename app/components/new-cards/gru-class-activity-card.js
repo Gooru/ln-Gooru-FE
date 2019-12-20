@@ -204,10 +204,12 @@ export default Ember.Component.extend({
   contentDescription: Ember.computed('activityContent', function() {
     const component = this;
     const activityContent = component.get('activityContent');
-    return activityContent.get('description') ||
-      activityContent.get('standards').length
-      ? activityContent.get('standards').objectAt(0).title
-      : '';
+    return (
+      activityContent.get('description') ||
+      (activityContent.get('standards').length
+        ? activityContent.get('standards').objectAt(0).title
+        : '')
+    );
   }),
 
   isShowMasteryAccrual: Ember.computed('activity', function() {
@@ -290,7 +292,9 @@ export default Ember.Component.extend({
           activityState
         )
         .then(function() {
-          component.set('activity.activation_date', activityDate);
+          if (!component.get('isDestroyed')) {
+            component.set('activity.activation_date', activityDate);
+          }
         });
     });
   },

@@ -37,6 +37,7 @@ export default Ember.Component.extend({
     onScheduleByDate(startDate, endDate) {
       const component = this;
       const content = component.get('content');
+      component.set('isShowDaterangePicker', false);
       component.sendAction('onAddActivity', content, startDate, endDate);
     },
 
@@ -44,6 +45,7 @@ export default Ember.Component.extend({
       const component = this;
       const content = component.get('content');
       const isScheduleByMonth = true;
+      component.set('isShowDaterangePicker', false);
       component.sendAction(
         'onAddActivity',
         content,
