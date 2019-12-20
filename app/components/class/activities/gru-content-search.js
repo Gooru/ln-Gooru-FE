@@ -100,11 +100,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     onTogglePanel() {
       this.sendAction('onTogglePanel');
-      this.toggleProperty('isToggleIcon');
+      this.toggleProperty('isShowFullView');
     }
   },
 
-  isToggleIcon: false,
+  isShowFullView: false,
 
   isShowContentSelector: true,
 
