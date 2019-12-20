@@ -154,6 +154,13 @@ export default Ember.Controller.extend(ModalMixin, {
         editedClass = controller.get('tempClass'),
         setting = editedClass.get('setting');
       setting.set('mastery_applicable', mastery);
+      let secondaryclass = this.get('multipleClassList');
+      let selectedSecondaryClass = secondaryclass.filter(
+        checkedClass => checkedClass.isChecked === true
+      );
+      if (selectedSecondaryClass.length) {
+        this.saveSecodaryClass(selectedSecondaryClass, mastery);
+      }
       this.saveClass();
     },
 
@@ -769,6 +776,20 @@ export default Ember.Controller.extend(ModalMixin, {
         this.set('didValidate', true);
       }.bind(this)
     );
+  },
+
+  saveSecodaryClass(secondaryClassList, mastery) {
+    let controller = this;
+    secondaryClassList.forEach(secondaryClass => {
+      controller
+        .get('classService')
+        .readClassInfo(secondaryClass.id)
+        .then(classDetails => {
+          let setting = classDetails.get('setting');
+          setting.set('mastery_applicable', mastery);
+          controller.get('classService').updateClass(classDetails);
+        });
+    });
   },
 
   updateBoundValuesToStudent() {
