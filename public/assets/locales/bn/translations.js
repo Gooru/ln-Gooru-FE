@@ -2802,5 +2802,7 @@ window.i18ln = {
     'Please take a few seconds give your feedback on the resource. It really helps!',
   'common.feedback-offline-activity-note':
     ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!',
-  'common.no-competency': 'Not aligned to any competency'
+  'common.no-competency': 'Not aligned to any competency',
+  'common.class-activities-info-icon':
+    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class'
 };

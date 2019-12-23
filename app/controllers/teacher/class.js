@@ -31,6 +31,26 @@ export default Ember.Controller.extend({
    */
   multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
 
+  /**
+   * atc controller injection
+   * @type {Object}
+   */
+  atcController: Ember.inject.controller('teacher.class.atc'),
+
+  /**
+   * course map controller injection
+   * @type {Object}
+   */
+  coruseMapController: Ember.inject.controller('teacher.class.course-map'),
+
+  /**
+   *students proficiency controller injection
+   * @type {Object}
+   */
+  studentsProficencyController: Ember.inject.controller(
+    'teacher.class.students-proficiency'
+  ),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -133,7 +153,24 @@ export default Ember.Controller.extend({
 
     onSelectSecondaryClass(secondaryClass) {
       this.set('pullUpSecondaryClass', secondaryClass);
-      this.set('selectedSecondaryClass', secondaryClass);
+      this.set('secondaryClass', secondaryClass);
+    },
+
+    onChangeSecondaryClass(secondaryClass) {
+      let menuItem = this.get('menuItem');
+      let isPremiumClass = this.get('isPremiumClass');
+      menuItem === 'atc' && isPremiumClass
+        ? this.set('atcController.selectedSecondary', secondaryClass)
+        : '';
+      menuItem === 'course-map' && isPremiumClass
+        ? this.set('coruseMapController.selectedClassList', secondaryClass)
+        : '';
+      menuItem === 'students' && isPremiumClass
+        ? this.set(
+          'studentsProficencyController.selectedClassList',
+          secondaryClass
+        )
+        : '';
     }
   },
 
@@ -240,7 +277,17 @@ export default Ember.Controller.extend({
 
   selectedSecondaryClass: null,
 
+  secondaryClass: null,
+
   pullUpSecondaryClass: null,
+
+  secondaryClassDropdown: Ember.computed('secondaryClasses', function() {
+    let secondaryClass = this.get('secondaryClasses');
+    return secondaryClass.length
+      ? this.serializeSecondaryClass(secondaryClass)
+      : [];
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 

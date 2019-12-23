@@ -128,19 +128,6 @@ export default Ember.Controller.extend({
       $(
         '.students-proficiency-container .class-selector .class-list-container'
       ).slideToggle();
-    },
-
-    // Action triggered when click class dropdown
-    onSelectClass(selectedClass) {
-      let secondaryClassList = this.get('selectedClassList');
-      let secondaryClass = secondaryClassList.findBy('isSelected', true);
-      if (secondaryClass) {
-        secondaryClass.set('isSelected', false);
-      }
-      selectedClass.set('isSelected', true);
-      this.set('isSecondaryClass', true);
-      this.actions.onToggleClassListContainer();
-      this.send('onSelectSecondaryClass', selectedClass.get('id'));
     }
   },
 
@@ -571,28 +558,12 @@ export default Ember.Controller.extend({
   fwDomains: null,
 
   /**
-   * @property {Object} secondaryClasses
-   */
-  secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
-
-  /**
    * Maintain secondary class list
    */
   selectedClassList: null,
 
-  watchingSecondaryClass: Ember.observer('class', function() {
-    if (!this.get('class.isSecondaryClass')) {
-      this.set('isSecondaryClass', false);
-      const secondaryClass = this.get(
-        'classController'
-      ).serializeSecondaryClass(this.get('secondaryClasses'));
-      this.set('selectedClassList', secondaryClass);
-    }
-  }),
-  /**
-   * checking class is Primary or secondary class
-   */
-  isSecondaryClass: Ember.computed('class', function() {
-    return this.get('class.isSecondaryClass') || false;
+  watchSeletectClassList: Ember.observer('selectedClassList', function() {
+    let selectedClass = this.get('selectedClassList');
+    this.send('onSelectSecondaryClass', selectedClass.get('id'));
   })
 });
