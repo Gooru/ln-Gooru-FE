@@ -540,10 +540,12 @@ export default Ember.Component.extend({
             .getCompetencyCompletionStats([classId])
           : Ember.RSVP.resolve(Ember.A());
         competencyCompletionStats.then(competencyStats => {
-          classData.set(
-            'competencyStats',
-            competencyStats.findBy('classId', classId)
-          );
+          if (!component.isDestroyed) {
+            classData.set(
+              'competencyStats',
+              competencyStats.findBy('classId', classId)
+            );
+          }
         });
         component.set('class', classData);
         component.set('class.members', classMembers.get('members'));
