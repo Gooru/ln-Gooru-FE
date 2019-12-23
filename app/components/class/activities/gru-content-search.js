@@ -96,8 +96,15 @@ export default Ember.Component.extend(ConfigurationMixin, {
       component.get('selectedFilters').removeObject(item);
       component.send('onApplyFilter');
       component.set('isShowFilter', false);
+    },
+
+    onTogglePanel() {
+      this.sendAction('onTogglePanel');
+      this.toggleProperty('isShowFullView');
     }
   },
+
+  isShowFullView: false,
 
   isShowContentSelector: true,
 

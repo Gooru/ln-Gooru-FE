@@ -9,6 +9,21 @@
           position: absolute;
           z-index: 1000;
         }
+
+        @media screen and (max-width: $screen-sm) {
+          width: 100vw;
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto;
+          .left-panel {
+            height: calc(100vh - 145px);
+          }
+        }
+
+        @media screen and (max-width: $screen-xs) {
+          .left-panel {
+            width: inherit;
+          }
+        }
       }
     }
   }
