@@ -98,23 +98,7 @@
               {{/if}}
               {{#if isLessonPlanShow}}
               <div class="current-class-view">
-              {{#if (gt secondaryClasses.length 0)}}
-                {{t 'locateme.view'}} {{t 'common.view-class-course-map'}}
-                <div class="class-selector">
-                  <div class="selected-class-name" {{action "onToggleClassListContainer"}}>
-                    <span class="active-class-text">{{class.title}}</span>
-                    <span class="toggle-icon">{{gru-icon name="arrow_drop_down"}}</span>
-                  </div>
-                  <div class="class-list-container">
-                    <div class="back-drop" {{action "onToggleClassListContainer"}}></div>
-                    {{#each selectedClassList as |classes|}}
-                      <div class="class-name  {{if (or (and classes.isPrimaryClass (not isSecondaryClass)) classes.isSelected) 'active-class'}}" {{action 'addSecondaryClass' classes}}>
-                          {{classes.title}}
-                      </div>
-                    {{/each}}
-                  </div>
-                </div>
-              {{/if}}
+
               </div>
               <div class="ms-cm-view-lesson-plan" {{action 'viewSwitcher' 'lesson-plan'}}>
                 {{t 'common.show'}} <br>

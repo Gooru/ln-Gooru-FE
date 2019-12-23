@@ -25,6 +25,7 @@ export default Ember.Route.extend({
 
   resetController(controller) {
     controller.set('activeMonth', moment().format('MM'));
+    controller.set('selectedSecondary', null);
     controller.set('activeYear', moment().format('YYYY'));
   }
 });

@@ -3,8 +3,6 @@ import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['class-atc-view'],
-
-  classNameBindings: ['isMultiClassView:multi-class-view'],
   // -------------------------------------------------------------------------
   // Dependencies
   /**
@@ -271,6 +269,16 @@ export default Ember.Component.extend({
    */
   studentsPerformanceList: [],
 
+  /**
+   * watchingSecondaryClass
+   */
+  watchingSecondaryClass: Ember.observer('classInfo', function() {
+    const component = this;
+    if (this.get('classInfo')) {
+      component.loadClassData();
+    }
+  }),
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -524,6 +532,19 @@ export default Ember.Component.extend({
       classMembers: component.get('classService').readClassMembers(classId)
     }).then(({ classData, classMembers }) => {
       if (!component.get('isDestroyed')) {
+        const setting = classData.get('setting');
+        const isPremiumClass = setting != null && setting['course.premium'];
+        const competencyCompletionStats = isPremiumClass
+          ? component
+            .get('competencyService')
+            .getCompetencyCompletionStats([classId])
+          : Ember.RSVP.resolve(Ember.A());
+        competencyCompletionStats.then(competencyStats => {
+          classData.set(
+            'competencyStats',
+            competencyStats.findBy('classId', classId)
+          );
+        });
         component.set('class', classData);
         component.set('class.members', classMembers.get('members'));
         component.set(
@@ -536,6 +557,7 @@ export default Ember.Component.extend({
           .then(function(courseData) {
             component.set('class.course', courseData);
             component.set('course', courseData);
+            component.set('class.isSecondaryClass', true);
             component.loadData();
           });
       }
@@ -554,6 +576,10 @@ export default Ember.Component.extend({
             component.set('domainsCompletionReport', domainsCompletionReport);
             component.getDomainListToShow(domainsCompletionReport);
             component.set('isLoading', false);
+            component.sendAction(
+              'onSelectSecondaryClass',
+              component.get('class')
+            );
             component.getStudentsGradeRange();
           }
         });
@@ -713,6 +739,9 @@ export default Ember.Component.extend({
           : []
       }).then(({ gradeLevelCompetency, otherGradeLevelCompetency }) => {
         if (!component.get('isDestroyed')) {
+          component.set('otherGradeCompetency', []);
+          component.set('otherGradeTopComp', []);
+          component.set('gradeDomainsList', []);
           if (gradeLevelCompetency && gradeLevelCompetency.length) {
             component.set(
               'gradeDomainsList',

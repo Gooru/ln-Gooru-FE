@@ -332,11 +332,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   isMobileView: isCompatibleVW(SCREEN_SIZES.SMALL),
 
   /**
-   * @property {Object} secondaryClasses
-   */
-  secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
-
-  /**
    * Maintain secondary class list
    */
   selectedClassList: null,
@@ -345,14 +340,14 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    * checking class is Primary or secondary class
    */
 
-  isSecondaryClass: Ember.computed('class', function() {
-    return this.get('class.isSecondaryClass') || false;
-  }),
-
   isLessonPlanShow: Ember.computed.alias(
     'configuration.GRU_FEATURE_FLAG.isLessonPlanShow'
   ),
 
+  watchSecondaryClass: Ember.observer('selectedClassList', function() {
+    let secondaryClass = this.get('selectedClassList');
+    this.loadSecondaryClassInfo(secondaryClass.get('id'));
+  }),
   // -------------------------------------------------------------------------
   // Actions
 
@@ -673,9 +668,9 @@ export default Ember.Controller.extend(ConfigurationMixin, {
       }
     },
 
-    onToggleClassListContainer() {
-      Ember.$('.class-selector .class-list-container').slideToggle(500);
-    },
+    // onToggleClassListContainer() {
+    //   Ember.$('.class-selector .class-list-container').slideToggle(500);
+    // },
 
     //Action triggered when click on student toggle list container
     onToggleStudentList(controller = this) {
@@ -683,18 +678,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
       Ember.$(
         '.students-dropdown-list-container .student-list-container'
       ).slideToggle(1000);
-    },
-
-    //Action trigged when click secondary class dropdown
-    addSecondaryClass(secondaryClass) {
-      let secondaryClassList = this.get('selectedClassList');
-      let selectedClass = secondaryClassList.findBy('isSelected', true);
-      if (selectedClass) {
-        selectedClass.set('isSelected', false);
-      }
-      secondaryClass.set('isSelected', true);
-      this.actions.onToggleClassListContainer();
-      this.loadSecondaryClassInfo(secondaryClass.get('id'));
     }
   },
 
@@ -704,15 +687,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   init() {
     const controller = this;
     controller._super(...arguments);
-    if (
-      !this.get('isSecondaryClass') ||
-      controller.get('classController.class.isUpdatedSecondaryClass')
-    ) {
-      const secondaryClass = this.get(
-        'classController'
-      ).serializeSecondaryClass(this.get('secondaryClasses'));
-      this.set('selectedClassList', secondaryClass);
-    }
     let milestoneViewApplicable = controller.get(
       'currentClass.milestoneViewApplicable'
     );
@@ -1367,17 +1341,19 @@ export default Ember.Controller.extend(ConfigurationMixin, {
             'competencyStats',
             hash.competencyStats.findBy('classId', classId)
           );
-          controller
-            .get('classController')
-            .send('onSelectSecondaryClass', aClass);
-          controller.send('onSelectedClass', {
-            class: aClass,
-            course,
-            members,
-            contentVisibility,
-            crossWalkFWC,
-            secondaryClassList
-          });
+          if (!controller.isDestroyed) {
+            controller
+              .get('classController')
+              .send('onSelectSecondaryClass', aClass);
+            controller.send('onSelectedClass', {
+              class: aClass,
+              course,
+              members,
+              contentVisibility,
+              crossWalkFWC,
+              secondaryClassList
+            });
+          }
         });
       });
     });

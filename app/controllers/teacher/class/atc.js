@@ -179,11 +179,23 @@ export default Ember.Controller.extend({
     }
   ),
 
-  selectedSecondaryClassList: Ember.A([]),
+  selectedSecondary: null,
+
+  watchSecondaryClass: Ember.observer('selectedSecondary', function() {
+    this.set('isShowSecondaryClass', false);
+    if (
+      this.get('selectedSecondary') &&
+      !this.get('selectedSecondary.isPrimaryClass')
+    ) {
+      this.set('isShowSecondaryClass', true);
+    }
+  }),
 
   isMultiClassEnabled: Ember.computed.alias(
     'classController.isMultiClassEnabled'
   ),
+
+  isShowSecondaryClass: false,
 
   // -------------------------------------------------------------------------
   // Events
@@ -201,11 +213,10 @@ export default Ember.Controller.extend({
   // Actions
   actions: {
     onSelectSecondaryClass(secondaryClass) {
-      const controller = this;
-      controller.get('selectedSecondaryClassList').pushObject(secondaryClass);
-      controller
-        .get('secondaryClassToBeShownList')
-        .removeObject(secondaryClass);
+      this.get('classController').send(
+        'onSelectSecondaryClass',
+        secondaryClass
+      );
     },
 
     onRemoveClassView(secondaryClass) {
