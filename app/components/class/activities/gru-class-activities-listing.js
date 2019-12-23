@@ -246,7 +246,7 @@ export default Ember.Component.extend(ModalMixin, {
 
     onEnableMastery(classActivity) {
       const component = this;
-      component.enableMasteryAccrual(classActivity);
+      component.onUpdateMasteryAccrual(classActivity);
     },
 
     onToggleContent(content) {
@@ -486,6 +486,21 @@ export default Ember.Component.extend(ModalMixin, {
       component.set(`${contentType}Activities`, groupedClassActivities);
       if (contentType !== 'collection') {
         component.fetchMasteryAccrualContents(groupedClassActivities);
+        if (
+          component.get('newlyAddedActivity') &&
+          component.get('newlyAddedActivity.format') !== 'collection'
+        ) {
+          const content = component.get('newlyAddedActivity');
+          const newlyAdded = groupedClassActivities.findBy(
+            'contentId',
+            content.get('id')
+          );
+          const setting = component.get('primaryClass.setting');
+          const isMastery = setting['mastery.applicable'];
+          if (newlyAdded && isMastery) {
+            component.onUpdateMasteryAccrual(newlyAdded);
+          }
+        }
       }
       if (isInitialLoad) {
         let activitiesList = component.get('scheduledActivitiesList');
@@ -802,27 +817,50 @@ export default Ember.Component.extend(ModalMixin, {
     }
   },
 
-  enableMasteryAccrual(classActivity) {
-    const component = this;
+  onUpdateMasteryAccrual(classActivity) {
+    let component = this;
+    let collection = classActivity.get('collection');
     const activityClasses = classActivity.get('activityClasses');
-    activityClasses.map(activityClass => {
-      const classId = activityClass.get('id');
-      const contentId = activityClass.get('activity.id');
-      const allowMasteryAccrual = !activityClass.get(
-        'activity.allowMasteryAccrual'
-      );
-      component
-        .get('classActivityService')
-        .updateMasteryAccrualClassActivity(
-          classId,
-          contentId,
-          allowMasteryAccrual
-        )
-        .then(function() {
-          activityClass.set('allowMasteryAccrual', allowMasteryAccrual);
+    let model = {
+      hasMultipleCompetencies:
+        collection.get('masteryAccrualCompetencies.length') > 1,
+      allowMasteryAccrual: classActivity.get('allowMasteryAccrual'),
+      onConfirm: function() {
+        const activityClassMap = activityClasses.map(activityClass => {
+          const classId = activityClass.get('id');
+          const contentId = activityClass.get('activity.id');
+          const allowMasteryAccrual = !activityClass.get(
+            'activity.allowMasteryAccrual'
+          );
+          return new Ember.RSVP.Promise((resolve, reject) => {
+            component
+              .get('classActivityService')
+              .updateMasteryAccrualClassActivity(
+                classId,
+                contentId,
+                allowMasteryAccrual
+              )
+              .then(() => {
+                resolve();
+              }, reject);
+          });
         });
-    });
-    classActivity.set('allowMasteryAccrual', true);
+        return Ember.RSVP.all(activityClassMap);
+      },
+      callback: {
+        success: function() {
+          classActivity.set(
+            'allowMasteryAccrual',
+            !classActivity.get('allowMasteryAccrual')
+          );
+        }
+      }
+    };
+    this.actions.showModal.call(
+      this,
+      'content.modals.ca-mastery-accrual-confirmation',
+      model
+    );
   },
 
   markOfflineActivityStatus(classActivity) {
