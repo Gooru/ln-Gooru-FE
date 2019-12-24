@@ -4,9 +4,7 @@ import {
   KEY_CODES,
   SCREEN_SIZES
 } from 'gooru-web/config/config';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
@@ -232,9 +230,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
     }
     Ember.RSVP.hash({
       filteredContentList: filteredContentPromise
-    }).then(({
-      filteredContentList
-    }) => {
+    }).then(({ filteredContentList }) => {
       component.sendAction('onShowFilteredContents', filteredContentList);
     });
   },
@@ -308,16 +304,14 @@ export default Ember.Component.extend(ConfigurationMixin, {
           activeContentType,
           pagination
         )
-    }).then(({
-      libraryData
-    }) => {
+    }).then(({ libraryData }) => {
       const libraryContents = libraryData.get('libraryContent');
       const contents =
-        activeContentType === 'assessment' ?
-        libraryContents.get('assessments') :
-        activeContentType === 'collection' ?
-        libraryContents.get('collections') :
-        libraryContents.get('offline_activities');
+        activeContentType === 'assessment'
+          ? libraryContents.get('assessments')
+          : activeContentType === 'collection'
+            ? libraryContents.get('collections')
+            : libraryContents.get('offline_activities');
       contents.map(content => {
         content.format = activeContentType;
       });

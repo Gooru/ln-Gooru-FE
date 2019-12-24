@@ -11,7 +11,8 @@ export const I2D_SUPPORTED_IMAGE_TYPES = {
   validTypes: ['image/png', 'image/jpg', 'image/jpeg']
 };
 
-export const UPLOADABLE_TYPES = [{
+export const UPLOADABLE_TYPES = [
+  {
     value: 'image',
     validExtensions: '.jpg, .jpeg, .gif, .png',
     validType: 'image/*'
@@ -115,7 +116,8 @@ export const VIEW_LAYOUT_PICKER_OPTIONS = {
   THUMBNAILS: 'thumbnails'
 };
 
-export const EMOTION_VALUES = [{
+export const EMOTION_VALUES = [
+  {
     value: 5,
     unicode: '1f601'
   },
@@ -160,7 +162,8 @@ export const SCORES = {
   EXCELLENT: 90
 };
 
-export const GRADING_SCALE = [{
+export const GRADING_SCALE = [
+  {
     LOWER_LIMIT: 0,
     COLOR: '#F46360',
     RANGE: '0-59'
@@ -187,7 +190,8 @@ export const GRADING_SCALE = [{
   }
 ];
 
-export const BARS_GRADING_SCALE = [{
+export const BARS_GRADING_SCALE = [
+  {
     LOWER_LIMIT: 0,
     COLOR: '#D82100'
   },
@@ -322,7 +326,8 @@ export const RUBRIC_TYPE = {
 
 export const RUBRIC_OFF_OPTIONS = {
   MAX_SCORE: 200,
-  INCREMENT: [{
+  INCREMENT: [
+    {
       id: 0.5,
       name: 0.5
     },
@@ -364,7 +369,8 @@ export const PROFILE_NAV_MENU_ITEMS = [
   'preference'
 ];
 
-export const SUGGESTION_FILTER_BY_CONTENT_TYPES = [{
+export const SUGGESTION_FILTER_BY_CONTENT_TYPES = [
+  {
     format: 'collection',
     label: 'search-filter.collections'
   },
@@ -374,7 +380,8 @@ export const SUGGESTION_FILTER_BY_CONTENT_TYPES = [{
   }
 ];
 
-export const SEARCH_FILTER_BY_CONTENT_TYPES = [{
+export const SEARCH_FILTER_BY_CONTENT_TYPES = [
+  {
     format: 'collection',
     label: 'search-filter.collections'
   },
@@ -430,7 +437,8 @@ export const SEARCH_CONTEXT = {
   MY_CONTENT: 'my-content'
 };
 
-export const OA_TASK_SUBMISSION_TYPES = [{
+export const OA_TASK_SUBMISSION_TYPES = [
+  {
     value: 'image',
     submissionType: 'uploaded',
     validExtensions: '.jpg, .jpeg, .gif, .png',

@@ -1,10 +1,6 @@
 import Ember from 'ember';
-import {
-  SCREEN_SIZES
-} from 'gooru-web/config/config';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { SCREEN_SIZES } from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-clas-activities-adding'],
@@ -74,9 +70,9 @@ export default Ember.Component.extend({
       isScheduleByMonth = false
     ) {
       const component = this;
-      scheduleDate = isScheduleByMonth ?
-        null :
-        scheduleDate || moment().format('YYYY-MM-DD');
+      scheduleDate = isScheduleByMonth
+        ? null
+        : scheduleDate || moment().format('YYYY-MM-DD');
       component.assignActivityToMultipleClass(
         content,
         scheduleDate,
@@ -139,7 +135,8 @@ export default Ember.Component.extend({
       }
 
       component.$().css(position);
-      component.$().animate({
+      component.$().animate(
+        {
           top
         },
         400
