@@ -273,8 +273,8 @@ export default Ember.Component.extend(ModalMixin, {
       if (content.get('isActive')) {
         const contentType =
           content.get('type') === 'offline-activity' ?
-          'offline' :
-          content.get('type');
+            'offline' :
+            content.get('type');
         component.set(`${contentType}Activities`, Ember.A([]));
       } else {
         component.loadScheduledClassActivities(content.get('type'));

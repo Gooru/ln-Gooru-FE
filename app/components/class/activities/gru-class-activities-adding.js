@@ -127,16 +127,16 @@ export default Ember.Component.extend({
       let top = isCompatibleVW(SCREEN_SIZES.EXTRA_SMALL) ? '102px' : '50px';
       if (component.get('isShowFullView')) {
         component.$().css({
-            top: 'unset'
-          },
-          400
+          top: 'unset'
+        },
+        400
         );
         component.$().removeClass('open');
       } else {
         component.$().animate({
-            top
-          },
-          400
+          top
+        },
+        400
         );
         component.$().addClass('open');
       }
