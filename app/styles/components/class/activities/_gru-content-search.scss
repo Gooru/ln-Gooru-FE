@@ -8,12 +8,53 @@
   .content-search-container {
     .content-source-container {
       display: grid;
-      grid-template-columns: auto auto auto auto auto;
+      grid-template-columns: repeat(5,auto);
       column-gap: 8px;
       align-items: center;
       text-align: center;
       border-bottom: 1px solid #666;
       padding: 0 40px;
+
+      &.show-dropdown {
+        grid-template-columns: 1fr 50px;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+        width: max-content;
+        margin: auto;
+
+        &.open {
+          .dropdown-menu {
+            display: grid;
+          }
+        }
+
+        .btn-dropdown {
+          background-color: #fff;
+          color: black;
+          padding: 3px;
+          font-size: 16px;
+          text-transform: capitalize;
+          border: none;
+        }
+
+        .source-list {
+          min-width: max-content;
+          left: 50%;
+          transform: translate(-50%, -125%);
+          padding: 0;
+
+          .list-item {
+            padding: 10px;
+
+            &.active {
+              background-color: #e3e5ea;
+            }
+          }
+        }
+      }
 
       .content-source {
         font-size: 13px;
@@ -39,6 +80,7 @@
       padding: 5px;
       border-bottom: 1px solid #666;
       align-items: center;
+
       .library-icon {
         background-repeat: no-repeat;
         width: 35px;
@@ -47,6 +89,7 @@
         background-size: 35px;
         background-position: center;
       }
+
       .library-name {
         font-weight: bold;
         font-size: 14px;
@@ -107,6 +150,7 @@
           &.active {
             opacity: 1;
             background-color: #2196f3;
+
             .icon {
               &.assessment-icon {
                 background-image: url("../assets/gooru/images/assessment-white.svg");
