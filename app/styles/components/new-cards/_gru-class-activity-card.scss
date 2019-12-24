@@ -158,6 +158,7 @@
         }
         &.in-active {
           cursor: not-allowed;
+          pointer-events: none;
         }
       }
       .play-activity {
