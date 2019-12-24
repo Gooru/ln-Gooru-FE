@@ -1,6 +1,10 @@
 import Ember from 'ember';
-import { SCREEN_SIZES } from 'gooru-web/config/config';
-import { isCompatibleVW } from 'gooru-web/utils/utils';
+import {
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-clas-activities-adding'],
@@ -70,9 +74,9 @@ export default Ember.Component.extend({
       isScheduleByMonth = false
     ) {
       const component = this;
-      scheduleDate = isScheduleByMonth
-        ? null
-        : scheduleDate || moment().format('YYYY-MM-DD');
+      scheduleDate = isScheduleByMonth ?
+        null :
+        scheduleDate || moment().format('YYYY-MM-DD');
       component.assignActivityToMultipleClass(
         content,
         scheduleDate,
@@ -120,15 +124,22 @@ export default Ember.Component.extend({
 
     onTogglePanel() {
       const component = this;
-      let position = { position: 'absolute' };
+      let position = {
+        position: 'absolute'
+      };
       let top = isCompatibleVW(SCREEN_SIZES.EXTRA_SMALL) ? '102px' : '50px';
       if (component.get('isShowFullView')) {
         top = '85%';
-        position = { position: 'unset' };
+        position = {
+          position: 'unset'
+        };
+        component.$().removeClass('open');
+      } else {
+        component.$().addClass('open');
       }
+
       component.$().css(position);
-      component.$().animate(
-        {
+      component.$().animate({
           top
         },
         400
@@ -140,6 +151,8 @@ export default Ember.Component.extend({
   activeTenantLibrary: {},
 
   isShowFullView: false,
+
+  isMobileView: isCompatibleVW(SCREEN_SIZES.SMALL),
 
   assignActivityToMultipleClass(
     content,
