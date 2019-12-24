@@ -173,6 +173,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('selectedDate', date);
       component.set('isShowListCard', false);
       component.$('.header-container .date-range-picker-container').slideUp();
+      component.set('selectedFilter', 'day');
     },
 
     onSelectWeek(startDate, endDate) {
@@ -189,6 +190,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.loadActivitiesByActiveContentType();
       component.set('isShowListCard', true);
       component.$('.header-container .date-range-picker-container').slideUp();
+      component.set('selectedFilter', 'week');
     },
 
     onSelectMonth(date) {
@@ -207,6 +209,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isShowListCard', true);
       component.$('.header-container .date-range-picker-container').slideUp();
       component.loadActivitiesByActiveContentType();
+      component.set('selectedFilter', 'month');
     },
 
     onSelectToday(date) {
@@ -351,6 +354,8 @@ export default Ember.Component.extend(ModalMixin, {
 
   isDaily: true,
 
+  selectedFilter: 'day',
+
   isShowItemsToGrade: false,
 
   isShowUnscheduledActivities: false,
@@ -478,6 +483,10 @@ export default Ember.Component.extend(ModalMixin, {
     return isCompatibleVW(SCREEN_SIZES.MEDIUM)
       ? true
       : !component.get('isDaily');
+  }),
+
+  isMobileView: Ember.computed(function() {
+    return isCompatibleVW(SCREEN_SIZES.SMALL);
   }),
 
   observeNewlyAddedActivity: Ember.observer('newlyAddedActivity', function() {
