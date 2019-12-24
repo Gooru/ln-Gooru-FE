@@ -1,6 +1,7 @@
 .class-activities.gru-class-activities-listing {
   width: 95%;
   margin: 8px auto;
+
   .class-activities-container {
     display: grid;
     grid-row-gap: 3px;
@@ -10,6 +11,7 @@
       background-color: #fff;
       box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
       position: relative;
+
       .activity-tab {
         display: grid;
         grid-template-columns: auto auto auto;
@@ -17,6 +19,7 @@
         align-items: center;
         text-align: center;
         padding: 0 40px;
+
         .schedule-icon {
           height: 100%;
           width: 100%;
@@ -31,6 +34,7 @@
             line-height: 35px;
             padding-left: 10px;
           }
+
           &.active {
             background-color: #2196f3;
             color: #fff;
@@ -38,6 +42,7 @@
             pointer-events: none;
           }
         }
+
         .unscheduled-activity-selector {
           justify-content: center;
           height: 100%;
@@ -46,12 +51,14 @@
           cursor: pointer;
           align-items: center;
           display: flex;
-          padding: 5px;
+          cursor: pointer;
+
           i {
             height: 45px;
             line-height: 45px;
             padding-left: 10px;
           }
+
           &.active {
             opacity: 1;
             background-color: #2196f3;
@@ -59,6 +66,7 @@
             pointer-events: none;
           }
         }
+
         .items-to-grade-selector {
           display: flex;
           opacity: 0.6;
@@ -79,36 +87,43 @@
             background-image: url("../assets/gooru/images/add_rubric.svg");
             margin-left: 10px;
           }
+
           &.active {
             background-color: #2196f3;
             color: white;
             opacity: 1;
             pointer-events: none;
+
             .grading-icon {
               background-image: url("../assets/gooru/images/add_rubric_white.svg");
             }
           }
         }
       }
+
       .filters {
         display: grid;
         grid-template-columns: auto auto;
-        padding: 0px 10px;
+        padding: 0 10px;
         border-top: 1px solid #666;
+
         .activities {
           display: flex;
           width: 100%;
           align-items: center;
           color: #35424b;
           height: 100%;
+
           span {
             cursor: pointer;
           }
+
           &.active {
             opacity: 1;
             pointer-events: none;
           }
         }
+
         .activity-date-range-selector {
           display: flex;
           justify-content: center;
@@ -116,11 +131,13 @@
           column-gap: 5px;
           cursor: pointer;
           padding: 0 10px 0 20px;
+
           .dropdown-icon {
             display: flex;
           }
         }
       }
+
       .date-range-picker-container {
         display: none;
         position: absolute;
@@ -129,21 +146,26 @@
         background-color: #fff;
         display: none;
         width: 100%;
+
         .date-range-selector {
           display: grid;
-          grid-template-columns: auto auto auto;
+          grid-template-columns: repeat(3, auto);
           justify-content: space-around;
+          padding: 5px;
+
           span {
             &.active,
             &:hover {
               color: #000;
               cursor: pointer;
             }
+
             &.disabled {
               pointer-events: none;
             }
           }
         }
+
         .backdrop {
           position: fixed;
           width: 100%;
@@ -157,63 +179,78 @@
           opacity: 0.8;
           background-color: #000;
         }
+
         &.open {
           display: block;
         }
+
         .ca-month-picker {
           background-color: #fff;
         }
+
         .ca-date-picker-container,
+        .ca-month-picker,
         .ca-week-picker-container {
-          box-shadow: none;
-          border-top: 1px solid #bbb;
+          box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.13),
+            -2px 2px 3px rgba(0, 0, 0, 0.13);
+
           .ca-date-nav-container,
           .ca-week-nav-container {
             height: 40px;
             z-index: 2;
             background-color: #fff;
+
             .ca-date-picker-toggle {
               pointer-events: none;
               font-size: 20px;
+
               i {
                 display: none;
               }
             }
           }
+
           .ca-datepicker-container,
           .ca-weekpicker-container {
             display: grid;
             padding-bottom: 0;
+
             .ca-datepicker-today {
               height: 40px;
               box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
               background-color: #3486f7;
             }
+
             #ca-datepicker,
             #ca-weekpicker {
               grid-row-start: 1;
               padding: 10px 20px 20px;
               //NOTE overwritting style for enabling all days to be clickable
               .datepicker .table-condensed tr td.no-activities {
-                pointer-events: auto;
+                pointer-events: none;
               }
+
               &.weekly {
                 .datepicker {
                   .table-condensed {
                     tbody tr {
                       &.no-activities {
-                        // pointer-events: none;
+                        pointer-events: none;
                       }
+
                       &.week-active,
                       &:hover {
                         border-radius: 50px;
                         background-color: #d2e3fc;
+
                         td {
                           color: #3486f7;
+
                           &.active {
                             background: none;
                             width: auto;
                             height: auto;
+
                             &:before {
                               content: "";
                             }
@@ -224,6 +261,7 @@
                   }
                 }
               }
+
               .datepicker-inline {
                 .datepicker-days {
                   .table-condensed {
@@ -233,6 +271,7 @@
                         width: 100%;
                         justify-content: center;
                         grid-template-columns: repeat(7, 1fr);
+
                         th.dow {
                           height: 40px;
                           width: 40px;
@@ -240,22 +279,26 @@
                         }
                       }
                     }
+
                     tbody {
                       tr {
                         display: grid;
                         width: 100%;
                         justify-content: center;
                         grid-template-columns: repeat(7, 1fr);
+
                         td {
                           height: 36px;
                           width: auto;
                           justify-self: center;
                           margin: auto;
+
                           &.has-activities:before {
                             position: relative;
                             left: 50%;
                             transform: translateX(-50%);
                           }
+
                           &.active {
                             background-color: #d2e3fc;
                             background-image: -webkit-linear-gradient(
@@ -271,10 +314,12 @@
                             color: #3486f7;
                             width: 40px;
                             height: 40px;
+
                             &:before {
                               content: none;
                             }
                           }
+
                           &.today {
                             background-color: #3486f7;
                             background-image: -webkit-linear-gradient(
@@ -291,6 +336,7 @@
                             width: 40px;
                             height: 40px;
                             pointer-events: auto;
+
                             &:before {
                               content: none;
                             }
@@ -306,6 +352,7 @@
         }
       }
     }
+
     .activities-content {
       background-color: #fff;
       border-radius: 4px;
@@ -321,6 +368,7 @@
         .content-selector {
           opacity: 0.6;
           padding: 10px;
+
           .icon {
             width: 20px;
             height: 20px;
@@ -347,6 +395,7 @@
           &.active {
             background-color: #2196f3;
             opacity: 1;
+
             i {
               &.assessment-icon {
                 background-image: url("../assets/gooru/images/assessment-white.svg");
@@ -376,6 +425,7 @@
 
       &.content-selecter {
         height: calc(100vh - 160px);
+
         .list-view {
           display: grid;
         }
@@ -384,6 +434,7 @@
       .activities-cards-container {
         display: flex;
         flex-flow: wrap row;
+
         &.card-view {
           .class-activities {
             width: 50%;
@@ -396,6 +447,7 @@
           width: 100%;
           justify-content: normal;
           margin-bottom: 5px;
+
           .added-date {
             font-size: 15px;
             font-weight: bold;
@@ -405,6 +457,7 @@
             align-items: center;
             grid-gap: 10px;
             background-color: #eeeeee;
+
             hr {
               border-top: 1px solid #4e5e67;
               width: 100%;

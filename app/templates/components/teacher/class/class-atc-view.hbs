@@ -4,23 +4,6 @@
 {{#if isShowAtcView}}
   {{#if isPremiumClass}}
       <div class="performance-overview-header">
-        <div class="class-grade {{unless isMultiClassView 'hidden'}}">
-          <div class="clear-class {{if isPrimaryClass 'hidden'}}" {{action "onRemoveClassView" classInfo}}>{{gru-icon name="clear"}}</div>
-          <div class="class-title">{{class.title}}</div>
-        </div>
-          <div class="class-selector {{unless isMultiClassView 'hidden'}} {{unless (and isPrimaryClass isMultiClassView) 'disable-event'}}">
-            <div class="view-class-label {{unless (and isPrimaryClass isMultiClassView) 'hidden'}}" {{action "onToggleMultiClassSelector"}}>
-              <span>View Other Classess</span>
-              <span class="toggle-icon">{{gru-icon name="keyboard_arrow_down"}}</span>
-            </div>
-            <div class="multi-class-list {{unless (gt secondaryClassToBeShownList.length 0) 'hidden'}}">
-              {{#each secondaryClassToBeShownList as |secondaryClass|}}
-                <div class="multi-class-info" {{action "onSelectSecondaryClass" secondaryClass}}>
-                  {{secondaryClass.title}}
-                </div>
-              {{/each}}
-            </div>
-          </div>
         <div class="month-picker {{if isCurrentMonth 'current-month'}}">
           {{ca-date-picker
             showToday=true

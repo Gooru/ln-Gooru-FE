@@ -6,13 +6,6 @@
     z-index: 1000;
     display: none;
   }
-
-  &.multi-class-view {
-    .performance-overview-header {
-      grid-template-columns: auto 1fr auto;
-    }
-  }
-
   .performance-overview-header {
     display: grid;
     grid-template-columns: auto;

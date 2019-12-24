@@ -33,6 +33,7 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     component.loadActivitiesByActiveContentType(true);
     component.loadItemsToGrade();
+    component.loadActivitiesForMonth(this.get('forMonth'), this.get('forYear'));
   },
 
   actions: {
@@ -133,6 +134,7 @@ export default Ember.Component.extend(ModalMixin, {
       let forYear = moment(date).format('YYYY');
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
+      component.loadActivitiesForMonth(forMonth, forYear);
     },
 
     showNextMonth(date) {
@@ -141,6 +143,7 @@ export default Ember.Component.extend(ModalMixin, {
       let forYear = moment(date).format('YYYY');
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
+      component.loadActivitiesForMonth(forMonth, forYear);
     },
 
     onSelectRangeType(rangeType) {
@@ -253,7 +256,7 @@ export default Ember.Component.extend(ModalMixin, {
 
     onEnableMastery(classActivity) {
       const component = this;
-      component.enableMasteryAccrual(classActivity);
+      component.onUpdateMasteryAccrual(classActivity);
     },
 
     onToggleContent(content) {
@@ -393,6 +396,39 @@ export default Ember.Component.extend(ModalMixin, {
    */
   selectedDate: null,
 
+  /**
+   * It Maintains the list of class activities for a month
+   * @property {Array}
+   */
+  classActivitiesOfMonth: Ember.A([]),
+
+  /**
+   * It Maintains the list of scheduled class activities datewise.
+   * @type {Array}
+   */
+  scheduledClassActivitiesDatewise: Ember.computed(
+    'classActivitiesOfMonth.[]',
+    function() {
+      let component = this;
+      let activities = Ember.A();
+      component.get('classActivitiesOfMonth').forEach(classActivity => {
+        let addedDate = classActivity.get('added_date');
+        if (addedDate) {
+          let isToday =
+            moment(addedDate).format('YYYY-MM-DD') ===
+            moment().format('YYYY-MM-DD');
+          let activity = Ember.Object.create({
+            day: moment(addedDate).format('DD'),
+            hasActivity: true,
+            isToday
+          });
+          activities.pushObject(activity);
+        }
+      });
+      return activities;
+    }
+  ),
+
   scheduledActivitiesList: Ember.computed(
     'assessmentActivities.@each',
     'collectionActivities.@each',
@@ -500,6 +536,21 @@ export default Ember.Component.extend(ModalMixin, {
       component.set(`${contentType}Activities`, groupedClassActivities);
       if (contentType !== 'collection') {
         component.fetchMasteryAccrualContents(groupedClassActivities);
+        if (
+          component.get('newlyAddedActivity') &&
+          component.get('newlyAddedActivity.format') !== 'collection'
+        ) {
+          const content = component.get('newlyAddedActivity');
+          const newlyAdded = groupedClassActivities.findBy(
+            'contentId',
+            content.get('id')
+          );
+          const setting = component.get('primaryClass.setting');
+          const isMastery = setting['mastery.applicable'];
+          if (newlyAdded && isMastery) {
+            component.onUpdateMasteryAccrual(newlyAdded);
+          }
+        }
       }
       if (isInitialLoad) {
         let activitiesList = component.get('scheduledActivitiesList');
@@ -553,6 +604,21 @@ export default Ember.Component.extend(ModalMixin, {
         component.groupActivitiesByClass(unScheduledActivities)
       );
     });
+  },
+
+  loadActivitiesForMonth(forMonth, forYear) {
+    const component = this;
+    const classId = component.get('classId');
+    const startDate = `${forYear}-${forMonth}-01`;
+    const endDate = moment(startDate)
+      .endOf('month')
+      .format('YYYY-MM-DD');
+    component
+      .get('classActivityService')
+      .getScheduledClassActivitiesForMonth(classId, startDate, endDate)
+      .then(classActivities => {
+        component.set('classActivitiesOfMonth', classActivities);
+      });
   },
 
   loadItemsToGrade() {
@@ -816,27 +882,50 @@ export default Ember.Component.extend(ModalMixin, {
     }
   },
 
-  enableMasteryAccrual(classActivity) {
-    const component = this;
+  onUpdateMasteryAccrual(classActivity) {
+    let component = this;
+    let collection = classActivity.get('collection');
     const activityClasses = classActivity.get('activityClasses');
-    activityClasses.map(activityClass => {
-      const classId = activityClass.get('id');
-      const contentId = activityClass.get('activity.id');
-      const allowMasteryAccrual = !activityClass.get(
-        'activity.allowMasteryAccrual'
-      );
-      component
-        .get('classActivityService')
-        .updateMasteryAccrualClassActivity(
-          classId,
-          contentId,
-          allowMasteryAccrual
-        )
-        .then(function() {
-          activityClass.set('allowMasteryAccrual', allowMasteryAccrual);
+    let model = {
+      hasMultipleCompetencies:
+        collection.get('masteryAccrualCompetencies.length') > 1,
+      allowMasteryAccrual: classActivity.get('allowMasteryAccrual'),
+      onConfirm: function() {
+        const activityClassMap = activityClasses.map(activityClass => {
+          const classId = activityClass.get('id');
+          const contentId = activityClass.get('activity.id');
+          const allowMasteryAccrual = !activityClass.get(
+            'activity.allowMasteryAccrual'
+          );
+          return new Ember.RSVP.Promise((resolve, reject) => {
+            component
+              .get('classActivityService')
+              .updateMasteryAccrualClassActivity(
+                classId,
+                contentId,
+                allowMasteryAccrual
+              )
+              .then(() => {
+                resolve();
+              }, reject);
+          });
         });
-    });
-    classActivity.set('allowMasteryAccrual', true);
+        return Ember.RSVP.all(activityClassMap);
+      },
+      callback: {
+        success: function() {
+          classActivity.set(
+            'allowMasteryAccrual',
+            !classActivity.get('allowMasteryAccrual')
+          );
+        }
+      }
+    };
+    this.actions.showModal.call(
+      this,
+      'content.modals.ca-mastery-accrual-confirmation',
+      model
+    );
   },
 
   markOfflineActivityStatus(classActivity) {
