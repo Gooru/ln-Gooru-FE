@@ -1,10 +1,24 @@
 <div class="content-search-container {{unless isShowContentSelector 'disable-content-selector'}}">
-  <div class="content-source-container">
-    {{#each contentSources as |contentSource|}}
-      <div class="content-source {{if (eq activeContentSource contentSource.value) 'active'}}" {{action "onSelectContentSource" contentSource}}>
-        {{contentSource.label}}
+  <div class="content-source-container {{if showAsDropdown 'show-dropdown'}}">
+    {{#if showAsDropdown}}
+      <div class="dropdown sources">
+        <button class="dropbtn btn-dropdown" type="button" data-toggle="dropdown">{{activeContentSource}}
+          <span class="caret"></span></button>
+        <ul class="dropdown-menu source-list">
+          {{#each contentSources as |contentSource|}}
+            <div class="list-item source {{if (eq activeContentSource contentSource.value) 'active'}}" {{action "onSelectContentSource" contentSource}}>
+              {{contentSource.label}}
+            </div>
+          {{/each}}
+        </ul>
       </div>
-    {{/each}}
+    {{else}}
+      {{#each contentSources as |contentSource|}}
+        <div class="content-source {{if (eq activeContentSource contentSource.value) 'active'}}" {{action "onSelectContentSource" contentSource}}>
+          {{contentSource.label}}
+        </div>
+      {{/each}}
+    {{/if}}
     {{#if isShowListView}}
       <div class="toggle-panel" {{action "onTogglePanel"}}>
         {{gru-icon name=(if isShowFullView 'keyboard_arrow_down' 'keyboard_arrow_up')}}
@@ -34,25 +48,25 @@
         id="search-content"
         class="search-content"
         value=contentSearchTerm}}
-        <div class="filter-items">
-          {{#each filters as |selectedFilter index|}}
+      <div class="filter-items">
+        {{#each filters as |selectedFilter index|}}
+          <div class="filter-item">
+            <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
+            <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
+          </div>
+        {{/each}}
+        {{#if moreFilters}}
+          <span class="more-pointer">+{{moreFilters.length}}</span>
+        {{/if}}
+        <div class="more-filters hidden">
+          {{#each moreFilters as |moreFilter|}}
             <div class="filter-item">
-              <span class="name ellipsis" data-toggle="tooltip" title={{selectedFilter.name}}>{{selectedFilter.name}}</span>
-              <span class="clear" {{action 'clearFilter' selectedFilter}}> {{gru-icon name="close"}}</span>
+              <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
+              <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
             </div>
           {{/each}}
-          {{#if moreFilters}}
-            <span class="more-pointer">+{{moreFilters.length}}</span>
-          {{/if}}
-          <div class="more-filters hidden">
-            {{#each moreFilters as |moreFilter|}}
-              <div class="filter-item">
-                <span class="name ellipsis" data-toggle="tooltip" title={{moreFilter.name}}>{{moreFilter.name}}</span>
-                <span class="clear" {{action 'clearFilter' moreFilter}}> {{gru-icon name="close"}}</span>
-              </div>
-            {{/each}}
-          </div>
         </div>
+      </div>
       <span class="clear-icon {{unless filters 'show' 'hidden'}}" {{action "onClearSearch"}}>{{gru-icon name="close"}}</span>
       <span class="search-icon">{{gru-icon name="search"}}</span>
     </div>

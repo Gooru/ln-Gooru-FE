@@ -240,14 +240,14 @@ export default Ember.Component.extend(ModalMixin, {
       } else {
         component.scheduleActivityToClass(classActivity, startDate, endDate);
       }
-      component.actions.onCloseDaterangePicker();
+      component.send('onCloseDaterangePicker');
     },
 
     onScheduleByMonth(month, year) {
       const component = this;
       const classActivity = component.get('selectedClassActivity');
       component.addActivityToClass(classActivity, null, null, month, year);
-      component.actions.onCloseDaterangePicker();
+      component.send('onCloseDaterangePicker');
     },
 
     onCloseDaterangePicker() {
