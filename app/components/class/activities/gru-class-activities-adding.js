@@ -151,8 +151,6 @@ export default Ember.Component.extend({
     const component = this;
     content.set('isScheduledActivity', !!scheduleDate);
     content.set('isUnscheduledActivity', month && year);
-    const setting = component.get('primaryClass.setting');
-    const isMastery = setting['mastery.applicable'];
     const secondaryClasses = component.get('secondaryClasses');
     const classesToBeAdded = Ember.A([component.get('primaryClass.id')]).concat(
       secondaryClasses.mapBy('id')
@@ -183,42 +181,12 @@ export default Ember.Component.extend({
             activityClasses.pushObject(activityClass);
             content.set('activityClasses', activityClasses);
             content.set('isAdded', true);
-            if (
-              isMastery === 'true' &&
-              content.get('format') !== 'collection'
-            ) {
-              content.set('allowMasteryAccrual', true);
-              resolve(component.enableMasteryAccrual(activityClass));
-            } else {
-              resolve();
-            }
+            resolve();
           }, reject);
       });
     });
     Ember.RSVP.all(promiseList).then(() => {
       component.sendAction('activityAdded', content);
-    });
-  },
-
-  enableMasteryAccrual(activityClass) {
-    const component = this;
-    const classId = activityClass.get('id');
-    const contentId = activityClass.get('activity.id');
-    const allowMasteryAccrual = !activityClass.get(
-      'activity.allowMasteryAccrual'
-    );
-    return new Ember.RSVP.Promise((resolve, reject) => {
-      component
-        .get('classActivityService')
-        .updateMasteryAccrualClassActivity(
-          classId,
-          contentId,
-          allowMasteryAccrual
-        )
-        .then(function() {
-          activityClass.set('allowMasteryAccrual', allowMasteryAccrual);
-          resolve();
-        }, reject);
     });
   },
 

@@ -216,8 +216,12 @@ export default Ember.Component.extend({
 
   isShowMasteryAccrual: Ember.computed('activity', function() {
     const component = this;
+    const activity = component.get('activity');
     const isUnScheduledActivity = component.get('isUnscheduledActivity');
-    return !isUnScheduledActivity;
+    return (
+      !isUnScheduledActivity &&
+      activity.get('collection.format') !== 'collection'
+    );
   }),
 
   /**
