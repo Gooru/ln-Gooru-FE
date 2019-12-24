@@ -100,14 +100,14 @@
       {{/if}}
 
       {{#if isShowScheduledActivities}}
-          {{#each scheduledActivitiesList as |scheduledActivity|}}
-            {{#unless isDaily}}
-              <div class="added-date">{{format-date scheduledActivity.added_date 'DD MMM YYYY'}}
-                <hr />
-              </div>
-            {{/unless}}
-            {{#each scheduledActivity.scheduledActivities as |activity|}}
-              {{new-cards/gru-class-activity-card
+        {{#each scheduledActivitiesList as |scheduledActivity|}}
+          {{#unless isDaily}}
+            <div class="added-date">{{format-date scheduledActivity.added_date 'DD MMM YYYY'}}
+              <hr />
+            </div>
+          {{/unless}}
+          {{#each scheduledActivity.scheduledActivities as |activity|}}
+            {{new-cards/gru-class-activity-card
                 activity = activity
                 onRemoveActivityClass='removeActivityClass'
                 onShowStudentsList = "onShowStudentsList"
@@ -117,24 +117,24 @@
                 onEnableMastery = "onEnableMastery"
                 onShowContentPreview = "onShowContentPreview"
                 onGradeItem="onGradeItem"
-                isShowListView = isShowListCard}}
-            {{/each}}
-          {{else}}
-            <div class="plan-activities-msg">
-              {{#if isMobileView}}
-                {{t 'class-activity.no-activity-scheduled-message-mobile' selectedItem=selectedFilter}}
-              {{else}}
-                {{t 'class-activity.no-activity-scheduled-message-desktop' selectedItem=selectedFilter}}
-              {{/if}}
-            </div>
+                isShowListView=isShowListCard}}
           {{/each}}
+        {{else}}
+          <div class="plan-activities-msg">
+            {{#if isMobileView}}
+              {{t 'class-activity.no-activity-scheduled-message-mobile' selectedItem=selectedFilter}}
+            {{else}}
+              {{t 'class-activity.no-activity-scheduled-message-desktop' selectedItem=selectedFilter}}
+            {{/if}}
+          </div>
+        {{/each}}
       {{/if}}
 
       {{#if isShowItemsToGrade}}
         {{#each gradingItems as |gradingItem|}}
           {{new-cards/gru-activity-grading-card
-            gradingItem = gradingItem
-            onGradeItem = "onGradeItem"}}
+            gradingItem=gradingItem
+            onGradeItem="onGradeItem"}}
         {{else}}
           <div class="plan-activities-msg">
             {{#if isMobileView}}
@@ -203,7 +203,7 @@
     context=gradingObject
     itemsToGrade=gradingItemsList
     isTeacher=true
-    refreshItem='onClosePerformanceEntry'
+    refreshItem='onRefreshItemsToGrade'
     onClosePullUp="onClosePerformanceEntry"
   }}
 {{/if}}

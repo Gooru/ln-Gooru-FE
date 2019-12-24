@@ -1,6 +1,11 @@
 import Ember from 'ember';
-import { CONTENT_TYPES, SCREEN_SIZES } from 'gooru-web/config/config';
-import { isCompatibleVW } from 'gooru-web/utils/utils';
+import {
+  CONTENT_TYPES,
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
+import {
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
 import ModalMixin from 'gooru-web/mixins/modal';
 
 export default Ember.Component.extend(ModalMixin, {
@@ -122,6 +127,20 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isShowAddData', false);
     },
 
+    onRefreshItemsToGrade(item) {
+      const component = this;
+      const dcaContentId = item.get('dcaContentId');
+      let gradingItemsList = component.get('gradingItemsList');
+      const classId = item.get('classId');
+      const gradedContent = gradingItemsList.filterBy('classId', classId)
+        .findBy('dcaContentId', dcaContentId);
+      if (gradedContent) {
+        gradingItemsList.removeObject(gradedContent);
+        const activityClass = component.get('selectedClassData');
+        component.fetchActivityPerformanceSummary(activityClass);
+      }
+    },
+
     onToggleDatePicker(component = this) {
       component
         .$('.header-container .date-range-picker-container')
@@ -171,7 +190,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('forYear', forYear);
       component.loadActivitiesByActiveContentType();
       component.set('selectedDate', date);
-      component.set('isShowListCard', false);
+      component.set('isShowListCard', component.get('isMobileView'));
       component.$('.header-container .date-range-picker-container').slideUp();
       component.set('selectedFilter', 'day');
     },
@@ -270,9 +289,9 @@ export default Ember.Component.extend(ModalMixin, {
       const component = this;
       if (content.get('isActive')) {
         const contentType =
-          content.get('type') === 'offline-activity'
-            ? 'offline'
-            : content.get('type');
+          content.get('type') === 'offline-activity' ?
+            'offline' :
+            content.get('type');
         component.set(`${contentType}Activities`, Ember.A([]));
       } else {
         component.loadScheduledClassActivities(content.get('type'));
@@ -321,7 +340,7 @@ export default Ember.Component.extend(ModalMixin, {
 
     onShowItemsToGrade() {
       const component = this;
-      component.groupGradingItems();
+      // component.groupGradingItems();
       component.set('isShowScheduledActivities', false);
       component.set('isShowItemsToGrade', true);
       component.set('isShowUnscheduledActivities', false);
@@ -484,13 +503,13 @@ export default Ember.Component.extend(ModalMixin, {
 
   isShowListCard: Ember.computed(function() {
     const component = this;
-    return isCompatibleVW(SCREEN_SIZES.MEDIUM)
-      ? true
-      : !component.get('isDaily');
+    return isCompatibleVW(SCREEN_SIZES.MEDIUM) ?
+      true :
+      !component.get('isDaily');
   }),
 
   isMobileView: Ember.computed(function() {
-    return isCompatibleVW(SCREEN_SIZES.SMALL);
+    return isCompatibleVW(SCREEN_SIZES.MEDIUM);
   }),
 
   observeNewlyAddedActivity: Ember.observer('newlyAddedActivity', function() {
@@ -503,7 +522,7 @@ export default Ember.Component.extend(ModalMixin, {
     }
   }),
 
-  gradingObserver: Ember.observer('gradingItemsList', function() {
+  gradingObserver: Ember.observer('gradingItemsList.[]', function() {
     const component = this;
     if (component.get('gradingItemsList').length) {
       component.groupGradingItems();
@@ -540,7 +559,9 @@ export default Ember.Component.extend(ModalMixin, {
       scheduledActivities: component
         .get('classActivityService')
         .getScheduledActivitiesByDate(classId, requestBody)
-    }).then(({ scheduledActivities }) => {
+    }).then(({
+      scheduledActivities
+    }) => {
       contentType =
         contentType === 'offline-activity' ? 'offline' : contentType;
       const groupedClassActivities = component.groupActivitiesByClass(
@@ -611,7 +632,9 @@ export default Ember.Component.extend(ModalMixin, {
       unScheduledActivities: component
         .get('classActivityService')
         .getUnScheduledActivitiesByMonthYear(classId, requestBody)
-    }).then(({ unScheduledActivities }) => {
+    }).then(({
+      unScheduledActivities
+    }) => {
       component.set(
         'unScheduledActivities',
         component.groupActivitiesByClass(unScheduledActivities)
@@ -725,11 +748,11 @@ export default Ember.Component.extend(ModalMixin, {
         return (
           (groupedGradingItem.get('contentType') === CONTENT_TYPES.ASSESSMENT &&
             groupedGradingItem.get('resourceId') ===
-              gradingItem.get('resourceId')) ||
+            gradingItem.get('resourceId')) ||
           (groupedGradingItem.get('contentType') ===
             CONTENT_TYPES.OFFLINE_ACTIVITY &&
             groupedGradingItem.get('contentId') ===
-              gradingItem.get('collectionId'))
+            gradingItem.get('collectionId'))
         );
       });
       const classData =
@@ -765,7 +788,9 @@ export default Ember.Component.extend(ModalMixin, {
       activityMembers: component
         .get('classActivityService')
         .fetchUsersForClassActivity(classId, activityId)
-    }).then(({ activityMembers }) => {
+    }).then(({
+      activityMembers
+    }) => {
       return activityMembers;
     });
   },
@@ -782,12 +807,12 @@ export default Ember.Component.extend(ModalMixin, {
     const contentType =
       activityClass.get('content.collectionType') ||
       activityClass.get('content.format');
-    const startDate = classActivity.get('activation_date')
-      ? classActivity.get('activation_date')
-      : moment().format('YYYY-MM-DD');
-    const endDate = classActivity.get('activation_date')
-      ? classActivity.get('activation_date')
-      : moment().format('YYYY-MM-DD');
+    const startDate = classActivity.get('activation_date') ?
+      classActivity.get('activation_date') :
+      moment().format('YYYY-MM-DD');
+    const endDate = classActivity.get('activation_date') ?
+      classActivity.get('activation_date') :
+      moment().format('YYYY-MM-DD');
     classActivity.set('contentType', contentType);
     classActivity.set('collection', activityClass.get('content'));
     return Ember.RSVP.hash({
@@ -797,7 +822,9 @@ export default Ember.Component.extend(ModalMixin, {
         startDate,
         endDate
       )
-    }).then(({ activityPerformance }) => {
+    }).then(({
+      activityPerformance
+    }) => {
       return activityPerformance;
     });
   },
@@ -866,7 +893,9 @@ export default Ember.Component.extend(ModalMixin, {
             year,
             endDate
           )
-      }).then(({ addedActivity }) => {
+      }).then(({
+        addedActivity
+      }) => {
         return addedActivity;
       });
     });
@@ -881,7 +910,9 @@ export default Ember.Component.extend(ModalMixin, {
         masteryAccrualContents: component
           .get('assessmentService')
           .assessmentsMasteryAccrual(contentIds)
-      }).then(({ masteryAccrualContents }) => {
+      }).then(({
+        masteryAccrualContents
+      }) => {
         masteryAccrualContents.map(masteryAccrualContent => {
           let masteryAccrualContentId = Object.keys(masteryAccrualContent);
           const contentId = masteryAccrualContentId.objectAt(0);
@@ -900,8 +931,7 @@ export default Ember.Component.extend(ModalMixin, {
     let collection = classActivity.get('collection');
     const activityClasses = classActivity.get('activityClasses');
     let model = {
-      hasMultipleCompetencies:
-        collection.get('masteryAccrualCompetencies.length') > 1,
+      hasMultipleCompetencies: collection.get('masteryAccrualCompetencies.length') > 1,
       allowMasteryAccrual: classActivity.get('allowMasteryAccrual'),
       onConfirm: function() {
         const activityClassMap = activityClasses.map(activityClass => {
