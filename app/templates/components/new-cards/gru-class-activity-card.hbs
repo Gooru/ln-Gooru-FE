@@ -64,9 +64,11 @@
         <div class="activity-action suggestion-count hidden" {{action "onShowSuggestionList" activityClass}}>
           {{gru-icon name="check_circle" class="icon-style"}}
         </div>
-        <div class="activity-action delete-activity {{unless (eq activityClass.activity.usersCount 0) 'hidden'}}" {{action "onDeleteActivity" activityClass}}>
-          {{gru-icon name="delete_outline" class="icon-style"}}
-        </div>
+        {{#if activity.isActive}}
+          <div class="activity-action delete-activity {{unless (eq activityClass.activity.usersCount 0) 'hidden'}}" {{action 'removeClassActivity' activityClass}}>
+            {{gru-icon name="delete_outline" class="icon-style"}}
+          </div>
+        {{/if}}
         {{#unless isUnscheduledActivity}}
           {{#if activityClass.content.performance.hasStarted}}
             <div class="add-data performed-activity {{unless activityClass.content.performance.timeSpent 'only-score'}} {{if isCollection 'collection-performance'}} grade-range-{{grade-range activityClass.content.performance.score}}" {{action "onOpenPerformanceEntry" activityClass}}>

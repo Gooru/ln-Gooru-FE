@@ -36,6 +36,10 @@ export default Ember.Component.extend(ModalMixin, {
   },
 
   actions: {
+    loadGradingData() {
+      const component = this;
+      component.loadItemsToGrade();
+    },
     /**
      *
      * @function actions:removeClassActivity
@@ -164,6 +168,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('forYear', forYear);
       component.loadActivitiesByActiveContentType();
       component.set('selectedDate', date);
+      component.set('isShowListCard', false);
       component.$('.header-container .date-range-picker-container').slideUp();
     },
 
@@ -179,6 +184,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('startDate', startDate);
       component.set('endDate', endDate);
       component.loadActivitiesByActiveContentType();
+      component.set('isShowListCard', true);
       component.$('.header-container .date-range-picker-container').slideUp();
     },
 
@@ -195,6 +201,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('selectedMonth', date);
       component.set('startDate', startDate);
       component.set('endDate', endDate);
+      component.set('isShowListCard', true);
       component.$('.header-container .date-range-picker-container').slideUp();
       component.loadActivitiesByActiveContentType();
     },
@@ -447,6 +454,13 @@ export default Ember.Component.extend(ModalMixin, {
     }
   }),
 
+  gradingObserver: Ember.observer('gradingItemsList', function() {
+    const component = this;
+    if (component.get('gradingItemsList').length) {
+      component.groupGradingItems();
+    }
+  }),
+
   loadActivitiesByActiveContentType(isInitialLoad) {
     const component = this;
     const activeContentTypes = component
@@ -686,16 +700,16 @@ export default Ember.Component.extend(ModalMixin, {
     const classActivityService = component.get('classActivityService');
     const classId = activityClass.get('id');
     const classActivity = activityClass.get('activity');
+    const contentType =
+      activityClass.get('content.collectionType') ||
+      activityClass.get('content.format');
     const startDate = classActivity.get('activation_date')
       ? classActivity.get('activation_date')
       : moment().format('YYYY-MM-DD');
     const endDate = classActivity.get('activation_date')
       ? classActivity.get('activation_date')
       : moment().format('YYYY-MM-DD');
-    classActivity.set(
-      'contentType',
-      activityClass.get('content.collectionType')
-    );
+    classActivity.set('contentType', contentType);
     classActivity.set('collection', activityClass.get('content'));
     return Ember.RSVP.hash({
       activityPerformance: classActivityService.findClassActivitiesPerformanceSummary(

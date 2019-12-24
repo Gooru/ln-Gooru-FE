@@ -70,8 +70,8 @@
         <div class="answer-type-label type-label">{{t 'common.correct-answer'}}</div>
       {{/if}}
       <div class="answer-value-container">
-        {{#if (or isShowCorrectAnswer isShowReportCorrectAnswer)}}
-          {{{component (question-config question.type 'component.answer') question=question showCorrect=true}}}
+        {{#if (and isShowCorrectAnswer isShowReportCorrectAnswer)}}
+          {{{component (question-config question.type 'component.answer') question=question showCorrect = true}}}
         {{else}}
           {{{component (question-config question.type 'component.player') question=question readOnly=true}}}
         {{/if}}
