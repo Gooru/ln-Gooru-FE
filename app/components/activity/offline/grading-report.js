@@ -428,8 +428,8 @@ export default Ember.Component.extend({
   initialize() {
     let component = this;
     return Ember.RSVP.hash({
-        users: component.get('isTeacher') ? component.getGradingStudentList() : []
-      })
+      users: component.get('isTeacher') ? component.getGradingStudentList() : []
+    })
       .then(({
         users
       }) => {
@@ -639,8 +639,8 @@ export default Ember.Component.extend({
     let maxScore = isTeacher ?
       component.get('content.maxScore') :
       userGrade ?
-      userGrade.get('maxScore') :
-      null;
+        userGrade.get('maxScore') :
+        null;
     userGrade.set('maxScore', maxScore);
     let categoriesScore = Ember.A([]);
     userGrade.set('classId', context.get('classId'));
@@ -775,22 +775,22 @@ export default Ember.Component.extend({
   openPullUp() {
     let component = this;
     component.$().animate({
-        top: '10%'
-      },
-      400
+      top: '10%'
+    },
+    400
     );
   },
 
   closePullUp() {
     let component = this;
     component.$().animate({
-        top: '100%'
-      },
-      400,
-      function() {
-        component.sendAction('onClosePullUp');
-        component.set('showPullUp', false);
-      }
+      top: '100%'
+    },
+    400,
+    function() {
+      component.sendAction('onClosePullUp');
+      component.set('showPullUp', false);
+    }
     );
   },
 
