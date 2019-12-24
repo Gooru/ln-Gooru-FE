@@ -146,7 +146,7 @@ export default Ember.Component.extend({
 
   isShowFullView: false,
 
-  isMobileView: isCompatibleVW(SCREEN_SIZES.SMALL),
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
   assignActivityToMultipleClass(
     content,
