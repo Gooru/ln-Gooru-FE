@@ -208,8 +208,12 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('endDate', endDate);
       component.set('isShowListCard', true);
       component.$('.header-container .date-range-picker-container').slideUp();
-      component.loadActivitiesByActiveContentType();
       component.set('selectedFilter', 'month');
+      if (component.get('isShowUnscheduledActivities')) {
+        component.loadUnScheduledActivities();
+      } else {
+        component.loadActivitiesByActiveContentType();
+      }
     },
 
     onSelectToday(date) {

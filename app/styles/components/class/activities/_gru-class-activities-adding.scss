@@ -23,6 +23,7 @@
 
       .body-container {
         display: block;
+        height: calc(100vh - 150px);
       }
     }
   }
@@ -82,9 +83,10 @@
     }
   }
   @media screen and (max-width: $screen-sm) {
-    height: calc(100% - 70px);
     margin: auto;
     width: 100%;
+    position: absolute;
+    bottom: 0;
 
     .class-activities-source-container {
       .header-container {
@@ -105,8 +107,5 @@
         }
       }
     }
-  }
-  @media screen and (max-width: $screen-xs) {
-    height: calc(100% - 105px);
   }
 }
