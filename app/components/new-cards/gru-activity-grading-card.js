@@ -34,7 +34,15 @@ export default Ember.Component.extend({
         studentCount: gradingClass.get('studentCount'),
         activityDate: gradingClass.get('activityDate')
       });
-      component.sendAction('onGradeItem', gradingItemObject);
+      let activity = Ember.Object.create({
+        activation_date: gradingClass.get('activityDate')
+      });
+      const classActivity = Ember.Object.create({
+        id: gradingClass.get('id'),
+        activity: activity,
+        content: component.get('gradingContent')
+      });
+      component.sendAction('onGradeItem', gradingItemObject, classActivity);
     }
   },
 
