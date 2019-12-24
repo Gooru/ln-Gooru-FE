@@ -89,9 +89,13 @@
             isShowListView = isShowListCard
           }}
         {{else}}
-        <div class="plan-activities-msg">
-          You don't have any activities.
-        </div>
+          <div class="plan-activities-msg">
+            {{#if isMobileView}}
+              {{t 'class-activity.no-activity-unscheduled-message-mobile' selectedItem=selectedFilter}}
+            {{else}}
+              {{t 'class-activity.no-activity-unscheduled-message-desktop' selectedItem=selectedFilter}}
+            {{/if}}
+          </div>
         {{/each}}
       {{/if}}
 
@@ -117,7 +121,11 @@
             {{/each}}
           {{else}}
             <div class="plan-activities-msg">
-              Add activities to conduct in class.
+              {{#if isMobileView}}
+                {{t 'class-activity.no-activity-scheduled-message-mobile' selectedItem=selectedFilter}}
+              {{else}}
+                {{t 'class-activity.no-activity-scheduled-message-desktop' selectedItem=selectedFilter}}
+              {{/if}}
             </div>
           {{/each}}
       {{/if}}
@@ -127,6 +135,14 @@
           {{new-cards/gru-activity-grading-card
             gradingItem = gradingItem
             onGradeItem = "onGradeItem"}}
+        {{else}}
+          <div class="plan-activities-msg">
+            {{#if isMobileView}}
+              {{t 'class-activity.no-activity-items-to-grade-message-mobile' selectedItem=selectedFilter}}
+            {{else}}
+              {{t 'class-activity.no-activity-items-to-grade-message-desktop' selectedItem=selectedFilter}}
+            {{/if}}
+          </div>
         {{/each}}
       {{/if}}
     </div>
