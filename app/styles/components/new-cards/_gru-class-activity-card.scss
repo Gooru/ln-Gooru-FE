@@ -156,6 +156,7 @@
         &.completed {
           color: #1ba9eb;
           cursor: default;
+          pointer-events: none;
         }
         &.in-active {
           cursor: not-allowed;
