@@ -1,28 +1,29 @@
 <div class="activity-grading-card {{if isAssessmentGrading 'question-grading' 'offline-activity-grading'}}">
   <div class="grading-header-container">
-    <div class="content-thumbnail" style="background-image: url({{if isAssessmentGrading content.thumbnailUrl gradingContent.thumbnailUrl}})">
-      <div class="content-title">
-        {{if isAssessmentGrading content.title gradingContent.title}}
+    <div class="content-icon"><div class="grading-icon"></div></div>
+    <div class="content-title">{{if isAssessmentGrading content.title gradingContent.title}}</div>
+    <div class="grading-info">
+      <div class="class-list">
+        <span {{action "onToggleContent" 'grading-body-container'}}>
+          {{gru-icon name="group"}}
+        </span>
       </div>
+      <div class="content-info">
+        {{#if isAssessmentGrading}}
+          <div class="question-info">
+            <div class="grading-thumbnail" title="{{gradingContent.title}}" data-toggle="tooltip"></div>
+          </div>
+        {{else}}
+          <div class="task-info">
+            <div class="task-thumbnail"></div>
+            <div class="task-count">{{content.taskCount}}</div>
+          </div>
+        {{/if}}
+      </div>
+      <div class="content-thumbnail" style="background-image: url({{if isAssessmentGrading content.thumbnailUrl gradingContent.thumbnailUrl}})"></div>
     </div>
   </div>
   <div class="grading-body-container">
-    <div class="content-info">
-      {{#if isAssessmentGrading}}
-        <div class="question-info">
-          <div class="grading-thumbnail"></div>
-          <div class="content-title">{{gradingContent.title}}</div>
-        </div>
-      {{else}}
-        <div class="task-info">
-          <div class="task-thumbnail"></div>
-          <div class="task-count">{{content.taskCount}}</div>
-        </div>
-      {{/if}}
-    </div>
-    <div class="content-description">
-      {{content.learningObjectives}}
-    </div>
     <div class="grading-classes-container">
       {{#each gradingClasses as |gradingClass|}}
         <div class="grading-class-container" {{action "onGradeItem" gradingClass}}>
@@ -31,7 +32,7 @@
             {{gru-icon name="account_circle"}}
             <span class="count-value">{{gradingClass.studentCount}}</span>
           </div>
-          <div class="grading-icon"></div>
+          <div class="grading-thumbnail"></div>
         </div>
       {{/each}}
     </div>

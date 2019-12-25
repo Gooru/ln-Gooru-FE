@@ -424,6 +424,7 @@ export const CLASS_SKYLINE_INITIAL_DESTINATION = {
 };
 
 export const SCREEN_SIZES = {
+  XS_SMALL: 380,
   EXTRA_SMALL: 480,
   SMALL: 768,
   MEDIUM: 992,

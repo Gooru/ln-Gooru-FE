@@ -2118,4 +2118,115 @@ window.i18ln = {
   'report.domain-proficiency-report': 'क्षेत्रनिहाय प्रगती अहवाल',
   'report.class-weekly-report': 'वर्ग साप्ताहिक अहवाल',
   'no-teacher-found': 'या ईमेल आय डी शी संबंधित कोणतेही शिक्षक सापडले नाहीत!'
+  'gru-tour.home.stepOne.title': 'आपले मुख्यपृष्ठ',
+  'gru-tour.home.stepOne.description':
+    'आपल्या गुरु मुख्यपृष्ठावर आपले स्वागत आहे! येथे आपण गुरुमध्ये तयार केलेल्या वर्गांच्या सूची पाहू शकता. क्लासरूम आपल्याला विद्यार्थ्यांसह थेट आशय सामायिक करण्यास अनुमती देतात. आपण गोरू चिन्हावर क्लिक करून नेहमी आपल्या मुख्यपृष्ठावर परत येऊ शकता.',
+  'gru-tour.home.stepTwo.title': 'आपण शिकवतो किंवा सामील होणारे वर्ग',
+  'gru-tour.home.stepTwo.description':
+    'आपण या शाळेत शिकविलेल्या कोणत्याही शाखेमध्ये किंवा वर्गांमध्ये सक्रिय वर्गांमध्ये येथे दिसून येतील.',
+  'gru-tour.home.stepThree.title': 'मागील वर्ग',
+  'gru-tour.home.stepThree.description':
+    'गेल्या शालेय वर्षात आपण तयार केलेले किंवा न जुळलेले कोणतेही वर्ग, संग्रहित कक्षांमध्ये पाहू शकतील. या वर्गांमध्ये वापरलेली आशय आपल्या प्रोफाइलमध्ये आढळू शकते आणि या शाळेच्या वर्षासाठी नवीन वर्गांना पुन: नेमून दिले जाऊ शकते.',
+  'gru-tour.home.stepFour.title': 'वर्ग तयार करा',
+  'gru-tour.home.stepFour.description':
+    'नवीन वर्ग तयार करण्यासाठी येथे क्लिक करा एकदा आपल्याकडे विद्यार्थ्यांबरोबर सामायिक करण्याची आशय असल्यास, आपण त्यांना कक्षा द्वारे नियुक्त कराल.',
+  'gru-tour.home.stepFive.title': 'आपले प्रोफाइल',
+  'gru-tour.home.stepFive.description':
+    'हे आपले प्रोफाइल आहे आपण तयार केलेल्या किंवा गूरुमध्ये रिमिक्स असलेल्या सामग्रीवर प्रवेश करण्यासाठी आपल्या प्रोफाईलवर कोणत्याही वेळी क्लिक करा',
+  'assign-students.assessment-settings': 'मूल्यमापन सेटिंग्ज',
+  'assign-students.assign-assessment-modal-title':
+    'विद्यार्थ्यांना मूल्यमापन नेमून द्या',
+  'assign-students.available-from': 'पासून उपलब्ध:',
+  'assign-students.date': 'तारीख',
+  'assign-students.due-date': 'निहित तारीख:',
+  'assign-students.time': 'वेळ',
+  'assign-students.title': 'शीर्षक: {{शीर्षक}}',
+  'assign-students.search-by-name': 'नावानुसार शोधा',
+  'assign-students.select-all': 'सर्व ({{count}} निवडा',
+  'assign-students.select-students': 'विद्यार्थी निवडा',
+  'assign-students.selected-count': '{{total}} पैकी {{selected}} निवडले',
+  'assign-students.students-roster': 'विद्यार्थी रोस्टर',
+  'assignments-view.actions': 'क्रिया',
+  'assignments-view.attempts': 'प्रयत्न बाकी',
+  'assignments-view.date': 'नेमून दिलेली तारीख',
+  'assignments-view.dateModified': 'तारीख सुधारित केली',
+  'assignments-view.dueDate': 'देय तारीख',
+  'assignments-view.search': 'शोधा ...',
+  'assignments-view.standards': 'क्षमता',
+  'assignments-view.studentsAssigned': 'नेमून दिलेला विद्यार्थी',
+  'assignments-view.title': 'शीर्षक',
+  'assignment-details.assign': 'नेमून द्या',
+  'assignment-details.answer-key': 'उत्तर की',
+  'assignment-details.attempts': 'प्रयत्न',
+  'assignment-details.attempts-left':
+    '<b> प्रयत्न बाकी: {2} {{count}} {{प्रयत्न}}',
+  'assignment-details.lastAttempt': '<b> शेवटचा प्रयत्न: </b>',
+  'assignment-details.launch': 'लाँच करा',
+  'assignment-details.learningObjective': 'शिकण्याचे उद्दिष्ट',
+  'assignment-details.navigation': 'नेव्हिगेशन',
+  'assignment-details.no-attempts': 'कोणतेही प्रयत्न शिल्लक नाहीत',
+  'assignment-details.off': 'बंद',
+  'assignment-details.on': 'चालू',
+  'assignment-details.preview': 'पूर्वावलोकन',
+  'assignment-details.questions': 'प्रश्न',
+  'assignment-details.redo': 'पुन्हा करा',
+  'assignment-details.show-score': 'शो स्कोर',
+  'assignment-details.view-report': 'अहवाल पहा',
+  'qz-submission-format.textbox': 'मजकूर बॉक्स',
+  'qz-submission-format.upload': 'अपलोड (URL(लिंक) किंवा file)',
+  'qz-rubric-creation.from-web': 'वेबवरून',
+  'qz-rubric-creation.from-computer': 'आपल्या संगणकावरून',
+  'qz-rubric-creation.url': 'URL(लिंक)',
+  'qz-rubric-creation.qz-preview-url.add': 'वर एक निकष जोडा',
+  'qz-rubric-creation.qz-category.feedback-guidance': 'प्रतिक्रिया मार्गदर्शन',
+  'qz-rubric-creation.qz-category.feedback-guidance-placeholder':
+    'माजी आपण या श्रेणीचे पुनरावलोकन करत असताना, लेखकाचे उद्देशावर लक्षपूर्वक लक्ष द्या',
+  'qz-rubric-creation.qz-category.required-feedback': 'आवश्यक फीडबॅक',
+  'qz-rubric-creation.qz-category.scoring': 'स्कोअरिंग',
+  'qz-rubric-creation.qz-category.title': 'श्रेणी शीर्षक',
+  'qz-rubric-creation.qz-category.title-placeholder':
+    'माजी व्याकरण, कल्पना, प्रबंध',
+  'qz-rubric-creation.qz-category.new-category': 'नवीन श्रेणी जोडा',
+  'qz-rubric-creation.qz-category.qz-scoring-levels.basic': 'माजी मूलभूत',
+  'qz-rubric-creation.qz-category.qz-scoring-levels.below-basic':
+    'माजी खाली मूलभूत',
+  'qz-rubric-creation.qz-category.qz-scoring-levels.best': 'सर्वोत्कृष्ट',
+  'qz-rubric-creation.qz-category.qz-scoring-levels.exemplary': 'माजी अनुकरणीय',
+  'qz-rubric-creation.qz-category.qz-scoring-levels.levels': 'पातळी',
+  'qz-rubric-creation.qz-category.qz-scoring-levels.new-level':
+    'नवीन स्तर जोडा',
+  'qz-rubric-creation.qz-category.qz-scoring-levels.points': 'गुण',
+  'qz-rubric-creation.qz-category.qz-scoring-levels.proficient': 'माजी कुशल',
+  'qz-rubric-creation.qz-category.qz-scoring-levels.worst': 'सर्वात वाईट',
+  'over-all-score.title': 'एकूण धावसंख्या आणि अभिप्राय',
+  'over-all-score.total-points': 'शक्य सर्व गुण',
+  'over-all-score.points': 'अंक',
+  'over-all-score.feedback-guidance-placeholder':
+    'माजी आपण संपूर्णपणे या निबंधाचे पुनरावलोकन करीत असताना, लेखकाच्या आवाजातील सुसंगतता, सुरुवातीपासून शेवटपर्यंत कळवा',
+  'qz-player.resource-format.image_resource': 'फोटो',
+  'qz-player.resource-format.text_resource': 'मजकूर',
+  'qz-player.resource-format.video_resource': 'व्हिडिओ',
+  'qz-player.resource-format.interactive_resource': 'परस्परसंवादी',
+  'qz-player.resource-format.webpage_resource': 'वेब पृष्ठ',
+  'qz-player.resource-format.audio_resource': 'ऑडिओ',
+  'qz-player.resource-format.question': 'प्रश्न',
+  'qz-free-response-viewer.prompt': 'कार्य प्रॉम्प्ट',
+  'qz-free-response-viewer.preview-submission': 'सबमिशनचे पूर्वावलोकन करा',
+  'qz-free-response-viewer.full-rubric': 'पूर्ण निकष',
+  'qz-free-response-viewer.total-score': 'एकूण गुण',
+  'qz-free-response-viewer.points': 'अंक',
+  'common.class-activities-info-icon':
+    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class',
+  'class-activity.no-activity-scheduled-message-mobile':
+    'You have no activities scheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-scheduled-message-desktop':
+    'You have no activities scheduled for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.no-activity-unscheduled-message-mobile':
+    'You have no activities unscheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-unscheduled-message-desktop':
+    'You have no activities unscheduled for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.no-activity-items-to-grade-message-mobile':
+    'You have no activities items to grade for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-items-to-grade-message-desktop':
+    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule'
 };

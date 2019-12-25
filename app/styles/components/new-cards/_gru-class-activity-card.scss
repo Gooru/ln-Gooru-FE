@@ -156,6 +156,7 @@
         &.completed {
           color: #1ba9eb;
           cursor: default;
+          pointer-events: none;
         }
         &.in-active {
           cursor: not-allowed;
@@ -347,7 +348,6 @@
       grid-template-columns: auto 200px;
       border-bottom: 2px solid rgba(151, 151, 151, 0.4);
       .content-info,
-      .class-info,
       .activity-actions {
         display: none;
       }

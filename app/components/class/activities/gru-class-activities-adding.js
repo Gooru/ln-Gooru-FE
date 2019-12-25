@@ -120,19 +120,24 @@ export default Ember.Component.extend({
 
     onTogglePanel() {
       const component = this;
-      let position = { position: 'absolute' };
       let top = isCompatibleVW(SCREEN_SIZES.EXTRA_SMALL) ? '102px' : '50px';
       if (component.get('isShowFullView')) {
-        top = '85%';
-        position = { position: 'unset' };
+        component.$().css(
+          {
+            top: 'unset'
+          },
+          400
+        );
+        component.$().removeClass('open');
+      } else {
+        component.$().animate(
+          {
+            top
+          },
+          400
+        );
+        component.$().addClass('open');
       }
-      component.$().css(position);
-      component.$().animate(
-        {
-          top
-        },
-        400
-      );
       component.toggleProperty('isShowFullView');
     }
   },
@@ -140,6 +145,8 @@ export default Ember.Component.extend({
   activeTenantLibrary: {},
 
   isShowFullView: false,
+
+  isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
 
   assignActivityToMultipleClass(
     content,

@@ -100,11 +100,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     onTogglePanel() {
       this.sendAction('onTogglePanel');
-      this.toggleProperty('isShowFullView');
     }
   },
-
-  isShowFullView: false,
 
   isShowContentSelector: true,
 
@@ -119,6 +116,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
    * Property to toggle between list/grid view
    */
   isShowListView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+  /**
+   * @property {Boolean} showAsDropdown
+   * Property to show content sources as dropdown or not
+   */
+  showAsDropdown: isCompatibleVW(SCREEN_SIZES.XS_SMALL),
 
   /**
    * @property {Number} selectedFiltersLimit
