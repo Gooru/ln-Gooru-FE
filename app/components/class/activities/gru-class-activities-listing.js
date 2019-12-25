@@ -513,9 +513,12 @@ export default Ember.Component.extend(ModalMixin, {
 
   isLoading: false,
 
+  isAdded: false,
+
   observeNewlyAddedActivity: Ember.observer('newlyAddedActivity', function() {
     const component = this;
     const activity = component.get('newlyAddedActivity');
+    component.set('isAdded', true);
     if (activity.get('isScheduledActivity')) {
       component.loadActivitiesByActiveContentType(true);
     } else {
@@ -585,8 +588,9 @@ export default Ember.Component.extend(ModalMixin, {
           );
           const setting = component.get('primaryClass.setting');
           const isMastery = setting['mastery.applicable'];
-          if (newlyAdded && isMastery) {
+          if (newlyAdded && isMastery && component.get('isAdded')) {
             component.onUpdateMasteryAccrual(newlyAdded);
+            component.set('isAdded', false);
           }
         }
       }
