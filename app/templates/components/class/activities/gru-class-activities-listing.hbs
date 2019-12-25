@@ -195,7 +195,9 @@
     showPullUp=isShowQuestionGrading
     context=gradingObject
     itemsToGrade=gradingItemsList
-    onClosePullUp="onClosePerformanceEntry"}}
+    onClosePullUp="onClosePerformanceEntry"
+    refreshItem="onRefreshItemsToGrade"
+  }}
 {{/if}}
 {{#if isShowOaGrading}}
   {{activity/offline/grading-report

@@ -4,115 +4,117 @@
     {{gru-icon name="arrow_back"}}
     <div class="struggling-competency-report-header-panel">
       <div class="struggling-competency-report-title">
-          <span>{{selectedCompetency.name}}</span>
+        <span>{{selectedCompetency.name}}</span>
       </div>
-       <ul class="struggling-competency-report-sub-titles">
-          <li>{{selectedCompetency.domainName}}</li>
-          <li>{{selectedCompetency.displayCode}}</li>
-
-       </ul>
+      <ul class="struggling-competency-report-sub-titles">
+        <li>{{selectedCompetency.domainName}}</li>
+        <li>{{selectedCompetency.displayCode}}</li>
+      </ul>
     </div>
   </div>
   <div class="struggling-competency-report-student-list-container">
     {{#if (gt studentsPerformanceList.length  1)}}
-    <div class="struggling-competency-report-student-list-panel" {{action "showStudentList"}}>
-      <div class="sc-report-student-list">
-         <ul class="sc-report-student-profile">
-           {{#each studentsPerformanceList as |student studentIndex|}}
-           {{# if (lt studentIndex 5)}}
-             <li><img src="{{student.thumbnail}}"></li>
-          {{/if}}
-           {{/each}}
-         </ul>
-      </div>
-      <div class="sc-report-student-count">
-        {{# if (gt studentsPerformanceList.length 5)}}
-          {{studentsCount}}+
-        {{/if}}
-      </div>
-      <div class="sc-report-student-list-icon">
-        {{gru-icon name="arrow_drop_down"}}
-      </div>
-    </div>
+      <div class="struggling-competency-report-student-list-panel" {{action "showStudentList"}}>
+        <div class="sc-report-student-list">
+          <ul class="sc-report-student-profile">
+            {{#each studentsPerformanceList as |student studentIndex|}}
+              {{#if (lt studentIndex 5)}}
+                <li>
+                  <img src="{{student.thumbnail}}">
+                </li>
+              {{/if}}
+            {{/each}}
+          </ul>
+        </div>
+        <div class="sc-report-student-count">
+          {{# if (gt studentsPerformanceList.length 5)}}
+            {{studentsCount}}+
     {{/if}}
-    <div class="sc-student-dropdown-list-container {{if (eq studentsPerformanceList.length  1) 'active' ''}}">
-      {{#each studentsPerformanceList as |student|}}
-      <div class="sc-student-dropdown-list">
-          <div class="sc-student-profile-thumbnail-container">
-           <div class="sc-student-thumbnail">
-             <img src="{{student.thumbnail}}">
-           </div>
-          </div>
-          <div class="sc-student-name">
-            {{student.firstName}} {{student.lastName}}
-          </div>
-          <div class="sc-student-performance-container">
-            <div class="sc-student-performance">
-              {{student.performanceScore}}%
-            </div>
-          </div>
+  </div>
+  <div class="sc-report-student-list-icon">
+    {{gru-icon name="arrow_drop_down"}}
+  </div>
+</div>
+{{/if}}
+<div class="sc-student-dropdown-list-container {{if (eq studentsPerformanceList.length  1) 'active' ''}}">
+  {{#each studentsPerformanceList as |student|}}
+    <div class="sc-student-dropdown-list">
+      <div class="sc-student-profile-thumbnail-container">
+        <div class="sc-student-thumbnail">
+          <img src="{{student.thumbnail}}">
+        </div>
       </div>
-      {{/each}}
-    </div>
-    <div class="sc-student-content-section-container">
-    <div class="search-container">
-      <div class="search-filter-container">
-        <span class="ellipsis" {{action "onSelectDropdown"}}>{{t selectedMenuItem.label }}</span>
-        <span {{action "onSelectDropdown"}}>{{gru-icon name="arrow_drop_down"}}</span>
-        <div class="search-filter-container-list">
-          {{#each menuItems as |item|}}
-            <p class="{{if item.isSelected 'selected'}}" {{action "onSelectMenuItems" item}}>{{t item.label}}</p>
-          {{/each}}
+      <div class="sc-student-name">
+        {{student.firstName}} {{student.lastName}}
+      </div>
+      <div class="sc-student-performance-container">
+        <div class="sc-student-performance">
+          {{student.performanceScore}}%
         </div>
       </div>
     </div>
-    {{#if showLibraryCollection}}
-        <div class="sc-library-title">
-          <span {{action "backToLibrary"}}>{{gru-icon name="arrow_back"}}</span>
-          <span >{{selectedLibrary.name}}</span>
-        </div>
-    {{/if}}
-    <div class="sc-student-content-section-container">
-      <div class="sc-student-content-section {{if  hasCollectionContent 'no-content' }}">
-        {{#unless (and showTenantLibraries (not showLibraryCollection))}}
-        {{#if collectionContents}}
-        {{#each collectionContents as |content|}}
-        {{cards/dca-search-collection-card
-        onPreviewContent="onPlayCollection"
-        onScheduleContentToDCA='onScheduleContentToDCA'
-        collection=content contentType='collection'
-        onAddContentToDCA="onAddContentToDCA"
-        onSuggestContent = "onSuggestContent"
-        showSuggestionBtn = true
-        addedScheduleContentToDCA='addedScheduleContentToDCA'
-        classId=classId}}
+  {{/each}}
+</div>
+<div class="sc-student-content-section-container">
+  <div class="search-container">
+    <div class="search-filter-container">
+      <span class="ellipsis" {{action "onSelectDropdown"}}>{{t selectedMenuItem.label }}</span>
+      <span {{action "onSelectDropdown"}}>{{gru-icon name="arrow_drop_down"}}</span>
+      <div class="search-filter-container-list">
+        {{#each menuItems as |item|}}
+          <p class="{{if item.isSelected 'selected'}}" {{action "onSelectMenuItems" item}}>{{t item.label}}</p>
         {{/each}}
+      </div>
+    </div>
+  </div>
+  {{#if showLibraryCollection}}
+    <div class="sc-library-title">
+      <span {{action "backToLibrary"}}>{{gru-icon name="arrow_back"}}</span>
+      <span>{{selectedLibrary.name}}</span>
+    </div>
+  {{/if}}
+  <div class="sc-student-content-section-container">
+    <div class="sc-student-content-section {{if  hasCollectionContent 'no-content' }}">
+      {{#unless (and showTenantLibraries (not showLibraryCollection))}}
+        {{#if collectionContents}}
+          {{#each collectionContents as |content|}}
+            {{cards/dca-search-collection-card
+              onPreviewContent="onPlayCollection"
+              onScheduleContentToDCA='onScheduleContentToDCA'
+              collection=content contentType='collection'
+              onAddContentToDCA="onAddContentToDCA"
+              onSuggestContent = "onSuggestContent"
+              showSuggestionBtn = true
+              addedScheduleContentToDCA='addedScheduleContentToDCA'
+              classId=classId
+            }}
+          {{/each}}
         {{else}}
           {{#unless isLoading}}
             {{cards/no-suggest-result-found isFromSearch=true}}
           {{/unless}}
         {{/if}}
-        {{/unless}}
+      {{/unless}}
 
-        {{#if (and showTenantLibraries (not showLibraryCollection))}}
+      {{#if (and showTenantLibraries (not showLibraryCollection))}}
         {{#each libraries as |library|}}
           {{library/gru-partner-library-card onSelectLibrary='onSelectLibrary' content=library}}
         {{/each}}
-        {{/if}}
-        {{#if isLoading}}
-          <div class="loading-spinner">
-            {{three-bounce-spinner}}
-          </div>
-        {{/if}}
-      </div>
-     {{#if isShowMoreButton}}
-      <div class="sc-show-more">
-          <span {{action "onShowMore"}}>Show More</span>
-      </div>
+      {{/if}}
+      {{#if isLoading}}
+        <div class="loading-spinner">
+          {{three-bounce-spinner}}
+        </div>
       {{/if}}
     </div>
-    </div>
+    {{#if isShowMoreButton}}
+      <div class="sc-show-more">
+        <span {{action "onShowMore"}}>Show More</span>
+      </div>
+    {{/if}}
   </div>
+</div>
+</div>
 </div>
 
 {{#if showSuggestConfirmation}}
