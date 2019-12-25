@@ -79,6 +79,7 @@
   </div>
   <div class="body-container {{unless isShowItemsToGrade 'content-selecter'}}">
     <div class="activities-cards-container {{if isShowListCard 'list-view' 'card-view'}}">
+    {{#unless isLoading}}
       {{#if isShowUnscheduledActivities}}
         {{#each unScheduledActivities as |unScheduledActivity|}}
           {{new-cards/gru-class-activity-card
@@ -144,6 +145,10 @@
             {{/if}}
           </div>
         {{/each}}
+      {{/if}}
+      {{/unless}}
+      {{#if isLoading}}
+      {{three-bounce-spinner}}
       {{/if}}
     </div>
   </div>

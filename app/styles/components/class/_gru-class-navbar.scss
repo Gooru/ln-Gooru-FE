@@ -475,6 +475,9 @@
             align-items: center;
             i {
               font-size: 20px;
+              @media screen and (max-width: $screen-md) {
+                display: none;
+              }
             }
           }
         }
