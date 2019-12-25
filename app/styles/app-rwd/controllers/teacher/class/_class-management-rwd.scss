@@ -64,6 +64,7 @@
 
             .student-info-container {
               padding-left: 10px;
+              overflow: hidden;
               .student-name {
                 padding-right: 5px;
 
@@ -91,20 +92,15 @@
               .actions-btn {
                 position: absolute;
                 background: #fff;
-                width: 100px;
                 border-radius: 4px;
                 box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
                 padding: 5px;
-                right: -102px;
                 z-index: 1;
-
+                display: none;
+                width: fit-content;
                 &.active {
-                  animation: slide 0.5s forwards;
-                }
-              }
-              @keyframes slide {
-                100% {
                   right: 0;
+                  display: block;
                 }
               }
             }
