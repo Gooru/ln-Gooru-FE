@@ -2118,7 +2118,7 @@ window.i18ln = {
   'report.class-proficiency-report': 'कक्षा की प्रवीणता रिपोर्ट',
   'report.domain-proficiency-report': 'डोमेन आधारित दक्षता रिपोर्ट',
   'report.class-weekly-report': 'कक्षा की साप्ताहिक रिपोर्ट',
-  'no-teacher-found': 'इस ईमेल आईडी वाला कोई शिक्षक नहीं मिला है!'
+  'no-teacher-found': 'इस ईमेल आईडी वाला कोई शिक्षक नहीं मिला है!',
   'gru-tour.home.stepOne.title': 'आपका मुखपृष्ठ',
   'gru-tour.home.stepOne.description':
     'अपने gooru होमपेज में आपका स्वागत है! यहां आप gooru में बनाए गए कक्षाओं की एक सूची पा सकते हैं। कक्षाएं आपको सीधे छात्रों के साथ सामग्री साझा करने की अनुमति देती हैं। आप gooru आइकन पर क्लिक करके हमेशा अपने होमपेज पर वापस आ सकते हैं।',
