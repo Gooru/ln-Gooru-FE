@@ -471,9 +471,6 @@
           align-items: center;
           cursor: pointer;
           overflow: hidden;
-          @media screen and (max-width: $screen-md) {
-            grid-template-columns: auto;
-          }
           span {
             display: grid;
             align-items: center;
