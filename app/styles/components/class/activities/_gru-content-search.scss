@@ -8,7 +8,7 @@
   .content-search-container {
     .content-source-container {
       display: grid;
-      grid-template-columns: repeat(5,auto);
+      grid-template-columns: repeat(5, auto);
       column-gap: 8px;
       align-items: center;
       text-align: center;
@@ -59,8 +59,11 @@
       .content-source {
         font-size: 13px;
         color: #666;
-        padding: 10px 0;
         cursor: pointer;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        height: 100%;
 
         &.active,
         &:hover {
@@ -270,7 +273,7 @@
         display: grid;
         align-items: center;
         cursor: pointer;
-
+        justify-content: center;
         i.filter_list {
           font-size: 20px;
         }
