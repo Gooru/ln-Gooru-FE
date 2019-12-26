@@ -128,11 +128,17 @@
       &.left-panel {
         margin-left: 30px;
         margin-right: 15px;
+        @media screen and (max-width: $screen-md) {
+          margin-left: 15px;
+        }
       }
 
       &.right-panel {
         margin-right: 30px;
         margin-left: 15px;
+        @media screen and (max-width: $screen-md) {
+          margin-right: 15px;
+        }
       }
 
       .template-sec-cont {
@@ -338,6 +344,7 @@
           .language-row {
             display: flex;
             align-items: center;
+            justify-content: space-between;
 
             .row-label {
               height: 16px;
@@ -346,6 +353,7 @@
 
             .row-value {
               padding-right: 20px;
+              min-width: 90px;
             }
           }
 

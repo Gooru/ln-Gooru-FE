@@ -449,20 +449,59 @@
 
       .studyplayer-title {
         display: grid;
-        margin: auto;
+        grid-template-columns: 1fr;
         font-size: 16px;
         font-weight: 700;
         padding: 10px;
         height: 51px;
         align-items: center;
-        pointer-events: none;
         color: $dark-600;
         text-align: center;
+        position: relative;
 
         span {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+        }
+        .nav-title {
+          justify-self: center;
+          display: grid;
+          grid-template-columns: auto auto;
+          align-items: center;
+          cursor: pointer;
+          span {
+            display: grid;
+            align-items: center;
+            i {
+              font-size: 20px;
+              @media screen and (max-width: $screen-md) {
+                display: none;
+              }
+            }
+          }
+        }
+        .nav-class-drop-down {
+          position: absolute;
+          top: 50px;
+          z-index: 3;
+          width: 100%;
+          left: 0;
+          background-color: $white;
+          padding: 5px;
+          font-weight: normal;
+          display: none;
+          font-size: 15px;
+
+          span {
+            cursor: pointer;
+            padding: 5px;
+            width: 100%;
+            display: block;
+            &.active {
+              background-color: $light-100;
+            }
+          }
         }
         .secondary-class {
           padding-top: 10px;

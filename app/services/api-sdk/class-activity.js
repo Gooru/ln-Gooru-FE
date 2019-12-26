@@ -624,6 +624,9 @@ export default Ember.Service.extend({
         .filterBy('collection.isExternalAssessment')
         .mapBy('collection.id');
       assessmentIds = assessmentIds.concat(externalAssessmentIds);
+      let offlineActivityIds = classActivities
+        .filterBy('contentType', 'offline-activity')
+        .mapBy('id');
       const performanceService = service.get('performanceService');
       Ember.RSVP.hash({
         activityCollectionPerformanceSummaryItems: collectionIds.length
@@ -643,10 +646,17 @@ export default Ember.Service.extend({
             startDate,
             endDate
           )
+          : [],
+        activityOfflineActivityPerformanceSummaryItems: offlineActivityIds.length
+          ? performanceService.findOfflineClassActivityPerformanceSummaryByIds(
+            classId,
+            offlineActivityIds
+          )
           : []
       }).then(function(hash) {
         let performances = hash.activityCollectionPerformanceSummaryItems.concat(
-          hash.activityAssessmentPerformanceSummaryItems
+          hash.activityAssessmentPerformanceSummaryItems,
+          hash.activityOfflineActivityPerformanceSummaryItems
         );
         performances.forEach(performance => {
           let classActivity = classActivities
@@ -656,6 +666,10 @@ export default Ember.Service.extend({
               performance.get('collectionPerformanceSummary.collectionId')
             )
             .objectAt(0);
+          classActivity =
+            classActivity ||
+            classActivities.findBy('id', performance.dcaContentId) ||
+            null;
           if (classActivity) {
             let classActivityIndex = classActivities.indexOf(classActivity);
             let performanceData = performance.get(

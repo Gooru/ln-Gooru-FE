@@ -190,7 +190,7 @@ export default ApplicationAdapter.extend({
   fetchInClassSuggestionsByCode(userId, code, params) {
     const adapter = this;
     const namespace = adapter.get('namespaceST');
-    const url = `${namespace}/user/${userId}/code/${code}`;
+    const url = `${namespace}/user/${userId}/code/${code}/codetype/competency`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',

@@ -234,11 +234,16 @@ export default Ember.Service.extend({
         .get('collectionAdapter')
         .readExternalCollection(collectionId)
         .then(function(responseData) {
-          resolve(
-            service
-              .get('collectionSerializer')
-              .normalizeReadCollection(responseData)
-          );
+          let collection = service
+            .get('collectionSerializer')
+            .normalizeReadCollection(responseData);
+          let profileService = service.get('profileService');
+          profileService
+            .readUserProfile(collection.get('ownerId'))
+            .then(function(profile) {
+              collection.set('owner', profile);
+              resolve(collection);
+            });
         }, reject);
     });
   },

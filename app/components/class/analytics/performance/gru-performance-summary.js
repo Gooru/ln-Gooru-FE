@@ -93,15 +93,17 @@ export default Ember.Component.extend({
         .get('assessmentService')
         .readAssessment(performanceId)
         .then(function(performanceData) {
-          var attemptsSetting = performanceData.get('attempts');
-          if (attemptsSetting) {
-            component.set(
-              'noMoreAttempts',
-              isAssessment &&
-                attemptsSetting > 0 &&
-                attempts &&
-                attempts >= attemptsSetting
-            );
+          if (!component.get('isDestroyed')) {
+            var attemptsSetting = performanceData.get('attempts');
+            if (attemptsSetting) {
+              component.set(
+                'noMoreAttempts',
+                isAssessment &&
+                  attemptsSetting > 0 &&
+                  attempts &&
+                  attempts >= attemptsSetting
+              );
+            }
           }
         });
     }

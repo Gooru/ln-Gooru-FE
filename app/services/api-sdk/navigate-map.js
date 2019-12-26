@@ -205,6 +205,7 @@ export default Ember.Service.extend({
     collectionSubType,
     pathId,
     classId,
+    pathType,
     milestoneId
   ) {
     const service = this;
@@ -227,7 +228,6 @@ export default Ember.Service.extend({
       status: 'start',
       milestoneId
     });
-
     return service.next(mapContext);
   },
 

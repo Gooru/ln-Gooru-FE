@@ -76,6 +76,11 @@ export default Ember.Component.extend({
     return SCREEN_SIZES.MEDIUM >= screen.width;
   }),
 
+  /**
+   * @property {Boolean} showSuggestionBtn
+   */
+  showSuggestionBtn: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -102,6 +107,11 @@ export default Ember.Component.extend({
      */
     onScheduleContentToDCA(content, event) {
       this.sendAction('onScheduleContentToDCA', content, event);
+    },
+
+    // Action triggered when click suggestion button
+    onSuggestContent(collection) {
+      this.sendAction('onSuggestContent', collection);
     }
   },
 

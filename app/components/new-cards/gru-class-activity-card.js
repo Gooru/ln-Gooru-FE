@@ -4,6 +4,8 @@ import { CONTENT_TYPES } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-class-activity-card'],
 
+  classNameBindings: ['isShowListView:list-view:card-view'],
+
   /**
    * @requires service:api-sdk/class-activity
    */
@@ -19,9 +21,20 @@ export default Ember.Component.extend({
    */
   courseService: Ember.inject.service('api-sdk/course'),
 
+  /**
+   * @requires service:api-sdk/offline-activity
+   */
+  offlineActivityService: Ember.inject.service(
+    'api-sdk/offline-activity/offline-activity'
+  ),
+
   didInsertElement() {
     const component = this;
     component.loadClassData();
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
+    this.setupTooltip();
   },
 
   actions: {
@@ -55,8 +68,117 @@ export default Ember.Component.extend({
     onRescheduleActivity() {
       const component = this;
       component.sendAction('onRescheduleActivity', component.get('activity'));
+    },
+
+    onEnableMastery() {
+      const component = this;
+      const classActivity = component.get('activity');
+      component.sendAction('onEnableMastery', classActivity);
+    },
+
+    onShowContentPreview() {
+      const component = this;
+      const classActivity = component.get('activity');
+      component.sendAction('onShowContentPreview', classActivity);
+    },
+
+    /**
+     * @function removeClassActivity
+     */
+    removeClassActivity(activityClass) {
+      const component = this;
+      const classActivity = component.get('activity');
+      let activityClassesLength = classActivity.get('activityClasses').length;
+      let isRemoveClassActivity = activityClassesLength === 1;
+      this.sendAction(
+        'onRemoveActivityClass',
+        classActivity,
+        activityClass,
+        isRemoveClassActivity
+      );
+    },
+
+    onToggleContent(className) {
+      const component = this;
+      component.$(`.${className}`).slideToggle();
+    },
+
+    onMarkOaCompleted() {
+      const component = this;
+      component.markOfflineActivityAsComplete();
+    },
+
+    //Action triggered when click on grading icon at the activity card
+    onEnableOaGrading(activityClass) {
+      const component = this;
+      const classActivity = component.get('activity');
+      if (classActivity.get('isCompleted')) {
+        const gradingItemObject = Ember.Object.create({
+          classId: activityClass.get('id'),
+          dcaContentId: activityClass.get('activity.id'),
+          contentType: CONTENT_TYPES.OFFLINE_ACTIVITY,
+          studentCount: activityClass.get('activity.usersCount'),
+          activityDate: activityClass.get('activity.activation_date')
+        });
+        component
+          .getOfflineActivity(activityClass.get('content.id'))
+          .then(offlineActivity => {
+            gradingItemObject.set('content', offlineActivity);
+            gradingItemObject.set('collection', offlineActivity);
+            component.sendAction(
+              'onGradeItem',
+              gradingItemObject,
+              activityClass
+            );
+          });
+      }
     }
   },
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  setupTooltip: function() {
+    let component = this;
+    let $anchor = this.$('.content');
+    let isMobile = window.matchMedia('only screen and (max-width: 768px)');
+    let tagPopoverDefaultPosition = this.get('tagPopoverDefaultPosition');
+    $anchor.attr('data-html', 'true');
+    $anchor.popover({
+      placement: tagPopoverDefaultPosition,
+      content: function() {
+        return component.$('.tag-tooltip').html();
+      },
+      trigger: 'manual',
+      container: 'body'
+    });
+
+    if (isMobile.matches) {
+      $anchor.on('click', function() {
+        let $this = $(this);
+        if (!$this.hasClass('list-open')) {
+          // Close all tag tooltips by simulating a click on them
+          $('.gru-class-activity-card > .content.list-open').click();
+          $this.addClass('list-open').popover('show');
+        } else {
+          $this.removeClass('list-open').popover('hide');
+        }
+      });
+    } else {
+      $anchor.on('mouseenter', function() {
+        $(this).popover('show');
+      });
+
+      $anchor.on('mouseleave', function() {
+        $(this).popover('hide');
+      });
+    }
+  },
+  /**
+   * Maintains the value of popover position
+   * @type {String}
+   */
+  tagPopoverDefaultPosition: 'bottom',
 
   activityContent: Ember.computed.alias('activity.collection'),
 
@@ -81,6 +203,27 @@ export default Ember.Component.extend({
 
   selectedClassData: {},
 
+  contentDescription: Ember.computed('activityContent', function() {
+    const component = this;
+    const activityContent = component.get('activityContent');
+    return (
+      activityContent.get('description') ||
+      (activityContent.get('standards').length
+        ? activityContent.get('standards').objectAt(0).title
+        : '')
+    );
+  }),
+
+  isShowMasteryAccrual: Ember.computed('activity', function() {
+    const component = this;
+    const activity = component.get('activity');
+    const isUnScheduledActivity = component.get('isUnscheduledActivity');
+    return (
+      !isUnScheduledActivity &&
+      activity.get('collection.format') !== 'collection'
+    );
+  }),
+
   /**
    * Toggle Options
    * @property {Ember.Array}
@@ -100,32 +243,42 @@ export default Ember.Component.extend({
    * It is used to find activity is past or not
    * @return {Boolean}
    */
-  isActivityPast: Ember.computed('activityDate', function() {
-    let activityDate = this.get('activityDate');
+  isActivityPast: Ember.computed('activity', function() {
+    let activityDate =
+      this.get('activity.end_date') || this.get('activity.added_date');
     let currentDate = moment().format('YYYY-MM-DD');
     return moment(activityDate).isBefore(currentDate);
   }),
 
+  isShowListView: false,
+
   loadClassData() {
     const component = this;
     const activityClasses = component.get('activityClasses');
+    const allowCachedData = true;
     activityClasses.map(activityClass => {
       const classId = activityClass.get('id');
       return Ember.RSVP.hash({
-        classData: component.get('classService').readClassInfo(classId),
+        classData: component
+          .get('classService')
+          .readClassInfo(classId, allowCachedData),
         classMembers:
           activityClass.get('members') ||
-          component.get('classService').readClassMembers(classId)
+          component
+            .get('classService')
+            .readClassMembers(classId, allowCachedData)
       }).then(({ classData, classMembers }) => {
-        component
-          .get('courseService')
-          .fetchById(classData.get('courseId'))
-          .then(function(courseData) {
-            activityClass.setProperties({
-              course: courseData,
-              members: classMembers.get('members') || classMembers
+        if (classData.get('courseId')) {
+          component
+            .get('courseService')
+            .fetchById(classData.get('courseId'), allowCachedData)
+            .then(function(courseData) {
+              activityClass.setProperties({
+                course: courseData,
+                members: classMembers.get('members') || classMembers
+              });
             });
-          });
+        }
       });
     });
   },
@@ -133,7 +286,8 @@ export default Ember.Component.extend({
   updateActivityVisibility() {
     const component = this;
     const classActivity = component.get('activity');
-    const activityDate = classActivity.get('activation_date');
+    const activityDate =
+      classActivity.get('activation_date') || moment().format('YYYY-MM-DD');
     const activityClasses = classActivity.get('activityClasses');
     const activityState = classActivity.get('isActive');
     activityClasses.map(activityClass => {
@@ -147,8 +301,33 @@ export default Ember.Component.extend({
           activityState
         )
         .then(function() {
-          component.set('activity.activation_date', activityDate);
+          if (!component.get('isDestroyed')) {
+            activityClass.set('activity.activation_date', activityDate);
+          }
         });
     });
+  },
+
+  markOfflineActivityAsComplete() {
+    const component = this;
+    const classActivity = component.get('activity');
+    const activityClasses = classActivity.get('activityClasses');
+    activityClasses.map(activityClass => {
+      const classId = activityClass.get('id');
+      const activityId = activityClass.get('activity.id');
+      component
+        .get('classActivityService')
+        .completeOfflineActivity(classId, activityId)
+        .then(() => {
+          classActivity.set('isCompleted', true);
+        });
+    });
+  },
+
+  getOfflineActivity(offlineActivityId) {
+    const component = this;
+    return component
+      .get('offlineActivityService')
+      .readActivity(offlineActivityId);
   }
 });

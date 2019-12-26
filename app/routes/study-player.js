@@ -17,6 +17,11 @@ import {
  */
 export default PlayerRoute.extend(PrivateRouteMixin, {
   templateName: 'study-player',
+  queryParams: {
+    collectionId: {
+      refreshModel: true
+    }
+  },
 
   // -------------------------------------------------------------------------
   // Dependencies

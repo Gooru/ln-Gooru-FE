@@ -1,13 +1,13 @@
 import Ember from 'ember';
 import PlayerController from 'gooru-web/controllers/player';
-
+import StudyPlayer from 'gooru-web/mixins/study-player';
 /**
  * Study Player Controller
  *
  * @module
  * @augments ember/PlayerController
  */
-export default PlayerController.extend({
+export default PlayerController.extend(StudyPlayer, {
   queryParams: [
     'resourceId',
     'role',
@@ -44,6 +44,14 @@ export default PlayerController.extend({
   navigateMapService: Ember.inject.service('api-sdk/navigate-map'),
 
   /**
+   * @type {AttemptService} attemptService
+   * @property {Ember.Service} Service to send attempt related events
+   */
+  quizzesAttemptService: Ember.inject.service('quizzes/attempt'),
+
+  session: Ember.inject.service('session'),
+
+  /**
    * @dependency {i18nService} Service to retrieve translations information
    */
   i18n: Ember.inject.service(),
@@ -64,6 +72,43 @@ export default PlayerController.extend({
 
     updateModel(option) {
       this.send('updateModelM', option);
+    },
+
+    onPlayNext: function() {
+      const controller = this;
+      let contextId = controller.get('contextResult.context.id');
+      let profileId = controller.get('session.userData.gooruUId');
+      const navigateMapService = controller.get('navigateMapService');
+      controller
+        .get('quizzesAttemptService')
+        .getAttemptIds(contextId, profileId)
+        .then(attemptIds =>
+          !attemptIds || !attemptIds.length
+            ? {}
+            : controller
+              .get('quizzesAttemptService')
+              .getAttemptData(attemptIds[attemptIds.length - 1])
+        )
+        .then(attemptData =>
+          Ember.RSVP.hash({
+            attemptData,
+            mapLocationNxt: navigateMapService.getStoredNext()
+          })
+        )
+        .then(({ mapLocationNxt, attemptData }) => {
+          if (controller.get('hasSuggestion')) {
+            mapLocationNxt.context.set('status', 'content-served');
+          }
+
+          mapLocationNxt.context.set('score', attemptData.get('averageScore'));
+          return navigateMapService.next(mapLocationNxt.context);
+        })
+        .then(({ context, suggestions, hasContent }) => {
+          controller.set('mapLocation.context', context);
+          controller.set('mapLocation.suggestions', suggestions);
+          controller.set('mapLocation.hasContent', hasContent);
+          controller.checknPlayNext();
+        });
     }
   },
 

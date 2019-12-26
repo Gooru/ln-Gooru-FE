@@ -1,0 +1,38 @@
+<div class="backdrop" {{action "onClosePullUp"}}></div>
+<div class="struggling-competency-domain-level-container">
+  <div class="struggling-competency-title" {{action "onClosePullUp"}}>
+    {{gru-icon name="arrow_back"}}<span>Struggling Competency</span>
+  </div>
+  <div class="struggling-competency-domain-level-content">
+     {{#each gradeDomainsList as |domain domainIndex|}}
+     <div class="competency-domain-level-panel">
+         <div class="grade-domain-name-accordion" {{action "toggleDomain" domainIndex}}>
+            <span>{{domain.domainName}}</span>
+             {{gru-icon name="arrow_drop_down"}}
+         </div>
+         <div class="grade-domain-competency-list-container {{if (eq domainIndex gradeDomainIndex) 'first-child'}} domain-accordion-{{domainIndex}}">
+           {{#each domain.competencies as |competency competencyIndex|}}
+           <div class="grade-domain-competency-list-panel" {{action "onSelectCompetency" competency domain}}>
+             <div class="grade-domain-competency-heading">
+              <span>{{competency.name}}</span>
+             <span>
+               <ul class="grade-domain-competency-sub-heading">
+                 <li>{{competency.displayCode}}</li>
+
+               </ul>
+             </span>
+             </div>
+             <div class="grade-domain-competency-icon">
+               {{gru-icon name="explore"}}
+             </div>
+             <div class="grade-domain-competency-count">
+               {{competency.studentsCount}}
+             </div>
+           </div>
+          {{/each}}
+         </div>
+
+     </div>
+     {{/each}}
+  </div>
+</div>

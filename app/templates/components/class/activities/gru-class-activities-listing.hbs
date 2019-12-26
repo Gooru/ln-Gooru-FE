@@ -1,64 +1,154 @@
 <div class="class-activities-container">
   <div class="header-container">
-    <div class="activity-date-range-selector" {{action "onToggleDatePicker"}}>
-      <span class="schedule-icon">{{gru-icon name="event"}}</span>
-      <span class="schedule-date">{{format-date startDate 'DD MMM YYYY'}} - {{format-date endDate 'DD MMM YYYY'}}</span>
+    <div class="activity-tab">
+      <div class="schedule-icon {{if isShowScheduledActivities 'active'}}" {{action "onloadScheduledClassActivities"}}>
+        <span> Class Activities</span>
+        {{gru-icon name="event"}}
+      </div>
+      <div class="unscheduled-activity-selector {{if isShowUnscheduledActivities 'active'}}" {{action "onLoadUnscheduledActivities"}}>
+        <span> Unscheduled Activities</span>
+        {{gru-icon name="event_busy"}}
+      </div>
+      <div class="items-to-grade-selector {{if isShowItemsToGrade 'active'}}" {{action "onShowItemsToGrade"}}>
+        <span> Items to Grade({{gradingItemsList.length}})</span>
+        <i class="grading-icon"></i>
+      </div>
     </div>
-    <div class="unscheduled-activity-selector {{if isShowUnscheduledActivities 'active'}}" {{action "onLoadUnscheduledActivities"}}>
-      {{gru-icon name="event_busy"}}
-    </div>
-    <div class="contents-selector">
-      {{#each contentTypes as |content|}}
-        <div class="content-selector {{if content.isActive 'active'}}" {{action "onToggleContent" content}}>
-          <i class="icon {{content.type}}-icon"></i>
+    {{#unless isShowItemsToGrade}}
+      <div class="filters">
+        <div class="activities">
+          <span>Filter by type &nbsp;</span>
+          <div class="activities-content">
+            <div class="contents-selector">
+              {{#each contentTypes as |content|}}
+                <div class="content-selector {{if content.isActive 'active'}}" {{action "onToggleContent" content bubbles=false}}>
+                  <i class="icon {{content.type}}-icon"></i>
+                </div>
+              {{/each}}
+            </div>
+          </div>
         </div>
-      {{/each}}
-    </div>
-    <div class="items-to-grade-selector">
-      <i class="grading-icon"></i>
-    </div>
+        <div class="activity-date-range-selector" {{action "onToggleDatePicker"}}>
+          <span class="schedule-date"><span>{{format-date startDate 'DD MMM YYYY'}}</span><span class="{{if isDaily 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}</span></span>
+          <span class="dropdown-icon">{{gru-icon name="arrow_drop_down"}}</span>
+        </div>
+      </div>
+    {{/unless}}
     <div class="date-range-picker-container">
-      {{ca-date-picker
-        showPreviousMonth="showPreviousMonth"
-        showNextMonth="showNextMonth"
-        forMonth=forMonth
-        forYear=forYear
-        onSelectDate="onSelectDate"
-        updateMonthAndYear=false
-        highlightFirstDayOfMonth=false
-        onSelectToday="onSelectToday"
-        showToday=true
-        selectedDate=selectedDate
-        activities=datewiseActivities
-        highlightActivities=true
-      }}
+      <div class="date-range-selector">
+        <span class="{{if isDaily 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'daily'}}>Daily</span>
+        <span class="{{if isWeekly 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'weekly'}}>Weekly</span>
+        <span class="{{if isMonthly 'active'}}" {{action "onSelectRangeType" 'monthly'}}>Monthly</span>
+      </div>
+      {{#if isDaily}}
+        {{ca-date-picker
+          showPreviousMonth="showPreviousMonth"
+          showNextMonth="showNextMonth"
+          forMonth=forMonth
+          forYear=forYear
+          onSelectDate="onSelectDate"
+          updateMonthAndYear=false
+          highlightFirstDayOfMonth=false
+          onSelectToday="onSelectToday"
+          showToday=true
+          selectedDate=selectedDate
+          activities=scheduledClassActivitiesDatewise
+          highlightActivities=true
+        }}
+      {{else if isWeekly}}
+        {{ca-week-picker
+          forMonth=forMonth
+          forYear=forYear
+          onSelectWeek="onSelectWeek"
+          showPreviousMonth="showPreviousMonth"
+          showNextMonth="showNextMonth"
+          selectedWeekDate=selectedWeekDate
+          activities=scheduledClassActivitiesDatewise
+          highlightActivities=true
+          }}
+      {{else}}
+        {{ca-month-picker
+          forMonth=forMonth
+          forYear=forYear
+          showCalendarView=true
+          onSelectMonth="onSelectMonth"
+          selectedMonth=selectedMonth
+        }}
+      {{/if}}
     </div>
   </div>
-  <div class="body-container">
-    <div class="activities-cards-container">
+  <div class="body-container {{unless isShowItemsToGrade 'content-selecter'}}">
+    <div class="activities-cards-container {{if isShowListCard 'list-view' 'card-view'}}">
+    {{#unless isLoading}}
       {{#if isShowUnscheduledActivities}}
         {{#each unScheduledActivities as |unScheduledActivity|}}
           {{new-cards/gru-class-activity-card
             activity = unScheduledActivity
             isUnscheduledActivity = true
             onRescheduleActivity = "onRescheduleActivity"
+            onShowContentPreview = "onShowContentPreview"
+            isShowListView = isShowListCard
           }}
         {{else}}
-          You don't have any activities
-        {{/each}}
-      {{else}}
-        {{#each scheduledActivitiesList as |scheduledActivity|}}
-          {{new-cards/gru-class-activity-card
-            activity = scheduledActivity
-            onShowStudentsList = "onShowStudentsList"
-            onOpenPerformanceEntry = "onOpenPerformanceEntry"
-            onClosePerformanceEntry = "onClosePerformanceEntry"
-            onRescheduleActivity = "onRescheduleActivity"}}
-        {{else}}
           <div class="plan-activities-msg">
-            Add activities to conduct in class.
+            {{#if isMobileView}}
+              {{t 'class-activity.no-activity-unscheduled-message-mobile' selectedItem=selectedFilter}}
+            {{else}}
+              {{t 'class-activity.no-activity-unscheduled-message-desktop' selectedItem=selectedFilter}}
+            {{/if}}
           </div>
         {{/each}}
+      {{/if}}
+
+      {{#if isShowScheduledActivities}}
+        {{#each scheduledActivitiesList as |scheduledActivity|}}
+          {{#unless isDaily}}
+            <div class="added-date">{{format-date scheduledActivity.added_date 'DD MMM YYYY'}}
+              <hr />
+            </div>
+          {{/unless}}
+          {{#each scheduledActivity.scheduledActivities as |activity|}}
+            {{new-cards/gru-class-activity-card
+                activity = activity
+                onRemoveActivityClass='removeActivityClass'
+                onShowStudentsList = "onShowStudentsList"
+                onOpenPerformanceEntry = "onOpenPerformanceEntry"
+                onClosePerformanceEntry = "onClosePerformanceEntry"
+                onRescheduleActivity = "onRescheduleActivity"
+                onEnableMastery = "onEnableMastery"
+                onShowContentPreview = "onShowContentPreview"
+                onGradeItem="onGradeItem"
+                isShowListView=isShowListCard}}
+          {{/each}}
+        {{else}}
+          <div class="plan-activities-msg">
+            {{#if isMobileView}}
+              {{t 'class-activity.no-activity-scheduled-message-mobile' selectedItem=selectedFilter}}
+            {{else}}
+              {{t 'class-activity.no-activity-scheduled-message-desktop' selectedItem=selectedFilter}}
+            {{/if}}
+          </div>
+        {{/each}}
+      {{/if}}
+
+      {{#if isShowItemsToGrade}}
+        {{#each gradingItems as |gradingItem|}}
+          {{new-cards/gru-activity-grading-card
+            gradingItem=gradingItem
+            onGradeItem="onGradeItem"}}
+        {{else}}
+          <div class="plan-activities-msg">
+            {{#if isMobileView}}
+              {{t 'class-activity.no-activity-items-to-grade-message-mobile' selectedItem=selectedFilter}}
+            {{else}}
+              {{t 'class-activity.no-activity-items-to-grade-message-desktop' selectedItem=selectedFilter}}
+            {{/if}}
+          </div>
+        {{/each}}
+      {{/if}}
+      {{/unless}}
+      {{#if isLoading}}
+      {{three-bounce-spinner}}
       {{/if}}
     </div>
   </div>
@@ -102,4 +192,41 @@
       contentType = selectedActivityContent.collectionType
     }}
   {{/reports/pull-up/activity/add-performance-data}}
+{{/if}}
+
+{{#if isShowQuestionGrading}}
+  {{grade/pull-up/free-response-question-grade
+    isDCAContext=true
+    showPullUp=isShowQuestionGrading
+    context=gradingObject
+    itemsToGrade=gradingItemsList
+    onClosePullUp="onClosePerformanceEntry"
+    refreshItem="onRefreshItemsToGrade"
+  }}
+{{/if}}
+{{#if isShowOaGrading}}
+  {{activity/offline/grading-report
+    showPullUp=isShowOaGrading
+    context=gradingObject
+    itemsToGrade=gradingItemsList
+    isTeacher=true
+    refreshItem='onRefreshItemsToGrade'
+    onClosePullUp="onClosePerformanceEntry"
+  }}
+{{/if}}
+
+<!-- Preview -->
+{{#if isShowContentPreview}}
+  {{reports/pull-up/gru-collection-preview
+    showPullUp=isShowContentPreview
+    previewContentId=previewContent.contentId
+    previewContentType=previewContent.contentType}}
+{{/if}}
+
+{{#if isShowOfflineActivityPreview}}
+  {{reports/pull-up/oa-preview
+    showPullUp=isShowOfflineActivityPreview
+    oaId=previewContent.contentId
+    isReportView=false
+  }}
 {{/if}}

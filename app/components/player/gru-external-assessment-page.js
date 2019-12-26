@@ -55,6 +55,19 @@ export default Ember.Component.extend({
       component.set('isScoreEntered', true);
       component.set('stopTime', new Date().getTime());
       component.updateSelfReport();
+      component.set('isShowActivityFeedback', true);
+    },
+
+    /**
+     * Action triggered when click on skip feedback
+     */
+    onSkipFeedback() {
+      const component = this;
+      component.sendAction('onSkipFeedback');
+    },
+
+    onExit: function() {
+      this.sendAction('onExit');
     },
 
     /**
@@ -91,6 +104,16 @@ export default Ember.Component.extend({
    * @property {Boolean} isScoreEntered
    */
   isScoreEntered: false,
+
+  /**
+   * @property {Boolean} isShowActivityFeedback
+   */
+  isShowActivityFeedback: false,
+
+  /**
+   * @property {String} contentType
+   */
+  contentType: 'assessment-external',
 
   /**
    * @property {Boolean} isValidScore
@@ -221,6 +244,7 @@ export default Ember.Component.extend({
     let component = this;
     let analyticsService = component.get('analyticsService');
     let dataParams = component.getDataParams();
+    component.set('percentScore', dataParams.percent_score);
     let selfReportedPromise = analyticsService.studentSelfReporting(dataParams);
     component.set('score', '');
     Ember.RSVP.hash({

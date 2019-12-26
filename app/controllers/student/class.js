@@ -75,6 +75,7 @@ export default Ember.Controller.extend(ConfigurationMixin, {
           performanceSummaryForDCA: caClassPerfSummaryPromise
         }).then(function(hash) {
           const aClass = hash.class;
+          const members = hash.members;
           const classPerformanceSummaryItems =
             hash.classPerformanceSummaryItems;
           let classPerformanceSummary = classPerformanceSummaryItems
@@ -85,6 +86,8 @@ export default Ember.Controller.extend(ConfigurationMixin, {
             ? hash.performanceSummaryForDCA.objectAt(0)
             : null;
           aClass.set('performanceSummaryForDCA', performanceSummaryForDCA);
+          aClass.set('members', members.get('members'));
+          aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
           route.set('class', aClass);
         });
       });
@@ -111,8 +114,8 @@ export default Ember.Controller.extend(ConfigurationMixin, {
     },
 
     closePullUp() {
-      const component = this;
-      component.set('isOpenPlayer', false);
+      const controller = this;
+      controller.set('isOpenPlayer', false);
     }
   },
 
