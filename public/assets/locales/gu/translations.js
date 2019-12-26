@@ -2774,5 +2774,14 @@ window.i18ln = {
   'class-activity.no-activity-items-to-grade-message-mobile':
     'You have no activities items to grade for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
   'class-activity.no-activity-items-to-grade-message-desktop':
-    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule'
+    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.scheduled-activities': 'Class Activities',
+  'class-activity.unscheduled-activities': 'Unscheduled Activities',
+  'class-activity.items-to-grade': 'Items to Grade',
+  'class-activity.filter': 'Filter by type',
+  'common.monthly': 'Monthly',
+  'common.daily': 'Daily',
+  'common.weekly': 'Weekly',
+  'class-activity.no-learning-activities':
+    'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term'
 };

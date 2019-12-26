@@ -150,8 +150,7 @@
         width: 100%;
 
         .date-range-selector {
-          display: grid;
-          grid-template-columns: repeat(3, auto);
+          display: flex;
           justify-content: space-around;
           padding: 5px;
 
@@ -467,7 +466,6 @@
           width: 100%;
           justify-content: normal;
           margin-bottom: 5px;
-
           .added-date {
             font-size: 15px;
             font-weight: bold;
@@ -483,8 +481,14 @@
               width: 100%;
             }
           }
+          &:last-child {
+            box-shadow: -3px 3px 10px 0px rgba(0, 0, 0, 0.3);
+            border-bottom: 0px;
+          }
+          &:first-child {
+            box-shadow: 0 -1px 10px 0px rgba(0, 0, 0, 0.3);
+          }
         }
-
         .plan-activities-msg {
           padding: 15px;
           width: 100%;
@@ -495,9 +499,20 @@
       }
     }
   }
+  @media screen and (max-width: $screen-md) {
+    .body-container {
+      .activities-cards-container {
+        &.card-view {
+          .class-activities {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
   @media screen and (max-width: $screen-sm) {
+    width: 100%;
     height: inherit;
-
     .class-activities-container {
       height: inherit;
       grid-template-rows: max-content 1fr;

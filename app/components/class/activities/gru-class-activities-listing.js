@@ -864,7 +864,11 @@ export default Ember.Component.extend(ModalMixin, {
           );
       }
     });
-    component.loadUnScheduledActivities();
+    if (component.get('isShowUnscheduledActivities')) {
+      component.loadUnScheduledActivities();
+    } else {
+      component.loadScheduledClassActivities(contentType);
+    }
   },
 
   addActivityToClass(
@@ -900,7 +904,11 @@ export default Ember.Component.extend(ModalMixin, {
         return addedActivity;
       });
     });
-    component.loadScheduledClassActivities(contentType);
+    if (component.get('isShowUnscheduledActivities')) {
+      component.loadUnScheduledActivities();
+    } else {
+      component.loadScheduledClassActivities(contentType);
+    }
   },
 
   fetchMasteryAccrualContents(classActivities = Ember.A([])) {

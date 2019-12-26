@@ -15,6 +15,10 @@
     {{#if isShowTenantLibraries}}
       {{#each tenantLibraries as |tenantLibrary|}}
         {{library/gru-partner-library-card onSelectLibrary='onSelectTenantLibrary' content=tenantLibrary}}
+      {{else}}
+        <div class="plan-activities-msg">
+          {{t 'class-activity.no-learning-activities'}}
+        </div>
       {{/each}}
     {{else if isShowLessonPlan}}
       <div class="lesson-plan-activities-container">
@@ -31,6 +35,10 @@
         {{new-cards/activities/gru-add-content-card
           content=filteredContent
           onAddActivity="onAddActivity"}}
+      {{else}}
+        <div class="plan-activities-msg">
+          {{t 'class-activity.no-learning-activities'}}
+        </div>
       {{/each}}
     {{/if}}
   </div>

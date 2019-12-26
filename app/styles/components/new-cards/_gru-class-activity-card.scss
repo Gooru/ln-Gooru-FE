@@ -142,8 +142,8 @@
       }
     }
     .activity-actions {
-      display: grid;
-      grid-template-columns: repeat(4, 25%);
+      display: flex;
+      padding: 0px 10px;
       justify-content: space-between;
       align-items: center;
       > div {
@@ -181,7 +181,6 @@
           border: none;
           display: block;
           height: 18px;
-          width: 100%;
           i {
             visibility: hidden;
           }
@@ -342,11 +341,12 @@
   }
 
   &.list-view {
+    border-bottom: 2px solid rgba(151, 151, 151, 0.4);
     .class-activity-card {
       height: auto;
       width: 100%;
       grid-template-columns: auto 200px;
-      border-bottom: 2px solid rgba(151, 151, 151, 0.4);
+      box-shadow: none;
       .content-info,
       .activity-actions {
         display: none;
@@ -452,7 +452,7 @@
         }
       }
       .activity-actions {
-        display: grid;
+        display: flex;
         grid-column-start: 1;
         grid-column-end: 3;
         padding: 10px;
