@@ -17,6 +17,10 @@ window.i18ln = {
   'errors.description': 'এই ক্ষেত্ৰখন',
   'errors.inclusion': '{{description}} তালিকাত অন্তৰ্গত কৰা নাই',
   'errors.exclusion': '{{description}} সঞ্চয় কৰা আছে',
+  'my-content': 'My Content',
+  'common.tasks': 'tasks',
+  'common.sub-filter': 'Sub-Filter',
+  'featured-libraries': 'featured libraries',
   'errors.invalid': '{{description}} বৈধ নহয়',
   'errors.confirmation': '{{description}} {{on}}ত মিলা নাই',
   'errors.accepted': '{{description}} গ্ৰহণ কৰিব লাগিব',
@@ -52,61 +56,23 @@ window.i18ln = {
   'errors.phone': '{{description}} এটা বৈধ ফোন নম্বৰ হ\'ব লাগিব',
   'errors.url': '{{description}} এটা বৈধ url হ\'ব লাগিব',
   'common.relevance': 'প্ৰাসংগিকতা',
-  'common.suggest-to-student': 'Suggest to student',
   'common.engagement': 'কাম',
   'common.efficacy': 'দক্ষতা',
   'common.grid': 'গ্ৰিড',
-  'not-covered-in-fw-msg':
-    'Note: This competency is not covered by the {{framework}} framework',
   'common.list': 'তালিকা',
-  'self-grade.not-required': 'Student self-grading not required',
   'common.first': 'প্ৰথম',
   'common.last': 'শেষ',
-  'reroute.suggestion': 'reroute suggestion',
-  'reroute.show-mastery': 'Show Your Mastery',
-  'reroute.take-assessment':
-    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
-  'reroute.suggestion.title': 'Having difficulty with the concepts?',
-  'reroute.suggestion.desc':
-    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.name': 'নাম',
-  'common.user': 'ব্যৱহাৰকাৰী',
-  'common.content-name': 'বিষয়বস্তুৰ নাম',
-  'my-content': 'My Content',
-  'library-search-placeholder': 'Search for anything within the library…',
-  'featured-libraries': 'featured libraries',
-  'common.answer-this-activity':
-    'Answer this rubric to complete your activity.',
-  'tooltip.check-items-to-grade':
-    'Check the Items to Grade panel below to grade this activity',
-  'common.for': 'for',
-  'common.lastName': 'শেষ নাম',
-  'common.firstName': 'প্ৰথম নাম',
-  'common.tasks': 'tasks',
-  'common.no-content-for-week':
-    'No class activities scheduled for the selected period',
-  'common.filter-by': 'ইয়াৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে',
-  'common.more': 'আৰু ',
-  'rubric-details': 'Rubric Details',
-  'common.day': 'day',
-  'common.week': 'week',
-  'common.month': 'month',
-  'common.tenantLibrary': 'Tenant Library',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
-  'common.no-suggestion-message':
-    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.by-question': 'question-by-question',
-  'upload-success': 'Uploaded Successfully',
-  'mobile-camera-placeholder': 'Tap for image upload',
-  'i2d.new-upload-msg':
-    'Please click on Confirm & Continue button to upload your images',
-  'i2d.mobile-upload-failed': 'There was a error',
-  'i2d.upload-failed':
-    'There was an error while uploading this image. Re-upload?',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'There was an error when trying to convert the image. Please resubmit the image',
   'file-picker-placeholder': 'Choose a file or drag it here',
@@ -115,35 +81,45 @@ window.i18ln = {
   'i2d-successfully-image-upload':
     'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
   'common.dialog-close': 'Do you want to close ?',
+  'upload-success': 'Uploaded Successfully',
+  'mobile-camera-placeholder': 'Tap for image upload',
+  'i2d.mobile-upload-failed': 'There was a error',
+  'i2d.upload-failed':
+    'There was an error while uploading this image. Re-upload?',
   're-upload': 'Re-Upload',
+  'common.user': 'ব্যৱহাৰকাৰী',
+  'common.content-name': 'বিষয়বস্তুৰ নাম',
+  'common.lastName': 'শেষ নাম',
+  'common.firstName': 'প্ৰথম নাম',
+  'common.filter-by': 'ইয়াৰ দ্বাৰা ফিল্টাৰ কৰা হৈছে',
+  'common.day': 'day',
+  'common.week': 'week',
+  'common.month': 'month',
+  'common.more': 'আৰু ',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'apply filter',
-  'common.sub-filter': 'Sub-Filter',
+  'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
+  'common.avg-score': 'মাধ্য স্কোৰ',
   'common.offline-activites': 'offline activites',
   'common.offline-activity': 'offline activity',
-  'common.avg-score': 'মাধ্য স্কোৰ',
-  'common.no-search-result':
-    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.frq': 'FRQ',
   'common.schedule': 'কাৰ্যক্ৰম',
-  'common.plan': 'plan',
+  'common.responses': 'উত্তৰ',
   'ca.student.no-content':
     'The teacher has not assigned any activities for the day',
   'oa.student.no-active-content':
     'Currently there are no offline activities assigned to you that are active',
   'oa.student.no-completed-content':
     'There are no offline activities that are completed yet',
-  'offline-activities.no-completed-content':
-    'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content':
-    'There are no projects or other offline activities that the students are currently working on',
-  'common.responses': 'উত্তৰ',
   'common.no-lesson-info-message': 'এই য়ুনিটটোত কোনো পাঠ নাই',
   'common.no-collection-info-message': 'এই পাঠটোত কোনো সংকলন নাই',
   'common.gooru-suggestions': 'গুৰুৰ পৰামৰ্শসমূহ',
   'common.gooru-catalog': 'গুৰু কেটালগ',
   'common.suggestion-made-to': 'ইয়াৰ বাবে পৰামৰ্শ দিয়া হৈছে',
   'common.student-selected': 'নিৰ্বাচিত ছাত্ৰ',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.no-suggest-result-message': 'মিল থকা কোনো বিষয়বস্তু পোৱা নগ\'ল',
   'common.no-suggest-results-message':
     'আপুনি জড়িত বিষয়বস্তু সন্ধান কৰিৰ আৰু বিচাৰিব পাৰিব',
@@ -211,6 +187,8 @@ window.i18ln = {
   'common.anonymous_mode': 'বেনামী প্ৰক্ৰম',
   'common.answer': 'আপোনাৰ উত্তৰ',
   'common.answer-correct': 'আপুনি শুদ্ধ!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'আপুনি অশুদ্ধ......',
   'common.answer-key-was-hidden':
     'টোকা: আপোনাৰ শিক্ষকে মূল উত্তৰটো লুকুৱাই থলে।',
@@ -224,6 +202,7 @@ window.i18ln = {
   'common.assessment-pl.other': 'মূল্যাংকনবোৰ',
   'common.assessment-title': 'মূল্যাংকনৰ শিৰোনাম',
   'common.activity-title': 'Activity Title',
+  'common.activity': 'Activity Title',
   'common.assessmentInitial': 'A',
   'common.assessments': 'মূল্যাংকনবোৰ',
   'common.assign': 'অনুমোদন',
@@ -234,6 +213,7 @@ window.i18ln = {
   'common.avatarFor': 'অৱতাৰৰ নিমিত্তে',
   'common.averageScore': 'গড় সংখ্যা',
   'common.back': 'পাছফাল',
+  'common.for': 'for',
   'common.back-to-assessment': 'মূল্যায়নলৈ প্ৰত্যাৱৰ্তন',
   'common.back-to-collection': 'সংগৃহীতলৈ প্ৰত্যাৱৰ্তন',
   'common.back-to-course-map': 'পাঠ্যক্ৰম মেপলৈ প্ৰত্যাৱৰ্তন',
@@ -300,6 +280,8 @@ window.i18ln = {
     'আপোনাৰ FRQ সম্পূৰ্ণ কৰিবলৈ গ্ৰেড নম্বৰ ঊৰ্ধ্বমুখী কৰক।',
   'common.answer-this-rubric':
     'আপোনাৰ FRQ সম্পূৰ্ণ কৰিবলৈ এই নিৰ্দেশনাটোৰ উত্তৰ দিয়ক।',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.all-caught-up': 'আপোনালোক সকলোকে আৱদ্ধ কৰা হ\'ল!',
   'common.no-users-to-grade':
     'এই FRQ ৰ কাৰণে গ্ৰেডৰ বাবে কোনো ৱ্যৱহাৰকাৰী নাই।',
@@ -309,6 +291,13 @@ window.i18ln = {
   'common.not-answered': 'উত্তৰ দিয়া হোৱা নাই',
   'common.rubric-not-answered': 'ৰিউব্ৰিকৰ উত্তৰ দিয়া হোৱা নাই',
   'common.country': 'দেশ',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.course-map': 'ক\'ৰ্চ মেপ',
   'common.course': 'ক\'ৰ্চ',
   'common.course-title': 'ক\'ৰ্চৰ শিৰোনাম',
@@ -521,8 +510,15 @@ window.i18ln = {
   'common.essential-questions': 'প্ৰয়োজনীয় প্ৰশ্নসমূহ',
   'common.example': 'উদাহৰণ:',
   'common.exit': 'প্ৰস্থান',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.external-collection': 'বাহিৰা সংগ্ৰহ',
   'common.explanation': 'বাখ্যা',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.explore': 'অনুসন্ধান কৰক ',
   'common.false': 'অশুদ্ধ ',
   'common.featured-courses': 'বিশেষ মান থকা কাৰ্যক্ৰম',
@@ -579,10 +575,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'পাৰদৰ্শিতা',
   'common.menu': 'তালিকা',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'অধিক বিৱৰণ',
   'common.move': 'গতি কৰক ',
   'common.myContent': 'মোৰ বিষয়বস্তু ',
   'common.myProfile': 'মোৰ অৱস্থান ',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'পুথিভঁৰাল ',
   'common.myPerformance': 'মোৰ কাৰ্য্যকাৰিতা ',
   'common.edit-narration': 'বৃত্তান্ত সম্পাদনা কৰক ',
@@ -620,6 +618,8 @@ window.i18ln = {
     'আপোনাৰ শিক্ষকে এতিয়ালৈকে কোনো চয়ন নাইবা মূল্যায়ন শ্ৰেণীৰ কাৰ্য্যকলাপৰ বাবে অনুমোদন জনোৱা নাই।',
   'common.no-dca-teacher':
     'বৰ্তমান কোনো কাৰ্য্যকলাপ নাই। শ্ৰেণী কাৰ্য্যকলাপ ক\'ৰ্চ মেপ নাইবা বিষয়বস্তৰ সুবিন্যস্ত তালিকাৰ পৰা যোগ কৰক।',
+  'common.no-content-for-week':
+    'No class activities scheduled for the selected period',
   'common.notScored': 'অসাংখ্যিক',
   'common.notStarted': 'আৰম্ভ হোৱা নাই',
   'common.not-added': 'যোগ কৰা নাই',
@@ -901,6 +901,7 @@ window.i18ln = {
   'class.info.add-students': 'ছাত্ৰ-ছাত্ৰীসকলক লগ লগাওক',
   'class.info.class-code': 'শ্ৰেণীকোঠাৰ সংকেত',
   'class.info.delete': 'শ্ৰেণীকোঠা গুচুৱা',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'ক\'ৰ্চৰ অনুমোদন',
   'class.edit.basic-info': 'প্ৰাথমিক তথ্য',
   'class.edit.class-name': 'শ্ৰেণীকোঠাৰ নাম',
@@ -1164,6 +1165,12 @@ window.i18ln = {
   'content.resources.edit.information.im-publisher': 'ময়েই প্ৰকাশক',
   'content.resources.edit.information.select-a-license':
     'অনুগ্ৰহ কৰি অনুজ্ঞাপত্ৰ এখন নিৰ্বাচন কৰক',
+  'content.oa.reference.uploaded': 'Uploaded',
+  'content.oa.reference.image': 'Image',
+  'content.oa.reference.pdf': 'Pdf',
+  'content.oa.reference.presentation': 'Presentation',
+  'content.oa.reference.document': 'Document',
+  'content.oa.reference.others': 'Others',
   'user.active-classrooms': 'সক্ৰিয় শ্ৰেণীকোঠা',
   'user.archived-classrooms': 'গুদাম শ্ৰেণীকোঠাসমূহ',
   'user.classrooms': 'শ্ৰেণীকোঠাসমূহ',
@@ -1280,8 +1287,6 @@ window.i18ln = {
   'teacher-landing.navigator-banner.success-message':
     'আপুনি সফলতাপূৰ্বক নেভিগেতৰ শ্ৰেণীৰ সহ-শিক্ষক হিচাপে যোগদান কৰিছে',
   'teacher-landing.navigator-banner.error-message': 'শ্ৰেণী যোগদান কৰাত সমস্যা',
-  'teacher-landing.class.atc-view.progress-to-destination':
-    'progress to destination',
   'teacher-landing.class.manage': 'প্ৰবন্ধন কৰক',
   'teacher-landing.class.reports': 'প্ৰতিবেদনবোৰ',
   'teacher-landing.class.daily-activites': 'দৈনন্দিন কাৰ্যকলাপ সমূহ',
@@ -1368,6 +1373,8 @@ window.i18ln = {
     'Total Competencies Gained',
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.class-activities': 'শ্ৰেণী কাৰ্যকলাপ',
   'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
   'teacher-landing.class.class-activities.warning-message':
@@ -1513,6 +1520,11 @@ window.i18ln = {
   'gru-add-to.add-collection-to-lesson': 'মোৰ সংগ্ৰহৰ পৰা যোগ কৰক',
   'gru-add-to.add-collection-to-lesson-lead':
     'এই পাঠটোত যোগ কৰিবৰ বাবে এটা সংগ্ৰহ বাচনি কৰক',
+  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.OA-info':
+    'The activities listed here <b>do not</b> belong to another lesson or course',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'Select a activity to add to this lesson.',
   'gru-add-to.add-to-collection': 'সংগ্ৰহত যোগ কৰক',
   'gru-add-to.add-to-collection-lead':
     'এটা সংগ্ৰহ বাচনি কৰক য\'ত আপুনি {{contentTitle}} যোগ কৰিব বিচাৰে',
@@ -1581,6 +1593,7 @@ window.i18ln = {
     'আপোনাৰ মূল্যায়ন লিংকৰ লগত শ্বেয়াৰ কৰক',
   'gru-share-pop-over.share-rubric': 'আপোনাৰ ৰুব্ৰিক লিংকৰ লগত শ্বেয়াৰ কৰক',
   'gru-share-pop-over.share-collection': 'আপোনাৰ সংগ্ৰহ লিংকৰ লগত শ্বেয়াৰ কৰক',
+  'gru-share-pop-over.share-OA': 'Offline Activity',
   'gru-category-panel.teacher.title': 'শিক্ষকৰ বাবে',
   'gru-category-panel.teacher.body':
     'মানকৰ লগত শ্ৰেণীবদ্ধ কৰা বিষয়বস্তু আৱিস্কাৰ কৰক, বিষয়বস্তু নিজাকৃত কৰক আৰু ডাটা এনেলাইটইকৰ দ্বাৰা ছাত্ৰৰ প্ৰগতিৰ ওপৰত চকু ৰাখক।',
@@ -2513,6 +2526,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'প্ৰশ্ন',
   'gru-study-header.question.one': 'প্ৰশ্ন',
   'gru-study-header.question.other': 'প্ৰশ্নসমূহ',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'অধিক জানিবলৈ এই সামগ্ৰীসমূহ নিৰীক্ষণ কৰক।',
   'gru-suggest-test.pre-test-header': 'পূৰ্ব-পৰীক্ষা(বৈকল্পিক)',
@@ -2527,8 +2541,8 @@ window.i18ln = {
     'প্ৰস্তাৱিত মুল্যায়ন (ঐচ্ছিক)',
   'gru-suggest-test.signature_assessment-lead':
     'এই কাৰ্যক্ৰমটোত আপোনাৰ প্ৰদৰ্শনৰ ওপৰত ভিত্তি কৰি, তলত দিয়া মূল্যায়নটোৱে আপোনাৰ বুজাৰ মাত্ৰা বঢ়াব পাৰে।',
-  'gru-suggest-test.pre-test-lead':
-    'এই পাঠটো মূল কথাবোৰৰ বিষয়ে আপোনাৰ বৰ্তমান বুজাৰ ক্ষমতাৰ মাপ ল\'বলৈ এটা প্ৰি-টেষ্টৰ প্ৰস্তাৱিত কৰা হৈছে। প্ৰি-টেষ্টটোৱে আপোনাক পাঠটোৰ বিষয়বস্তুৰ বাবে সাজু কৰিব। প্ৰি-টেষ্টটোৱে আপোনাৰ প্ৰদৰ্শন স্কোৰৰ ওপৰত কোনো প্ৰভাৱ নেপেলায়।',
+  'gru-suggest-test.pre-tessignaturet-lead':
+    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'gru-suggest-test.post-test-lead':
     'পৰিৱেশন কৰা তথ্যখিনিৰ ওপৰত আপোনাৰ বুজাৰ মাপ ল\'বলৈ এই পোষ্ট-টেষ্টটো প্ৰস্তাৱিত কৰা হৈছে। পোষ্ট-টেষ্টটোৱে আপোনাক প্ৰদৰ্শন স্কোৰৰ ওপৰত কোনো প্ৰভাৱ নেপেলায়।',
   'gru-suggest-test.backfill-lead':
@@ -2805,21 +2819,6 @@ window.i18ln = {
     'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
-  'common.activity': 'Activity Title',
-  'content.oa.reference.uploaded': 'Uploaded',
-  'content.oa.reference.image': 'Image',
-  'content.oa.reference.pdf': 'Pdf',
-  'content.oa.reference.presentation': 'Presentation',
-  'content.oa.reference.document': 'Document',
-  'content.oa.reference.others': 'Others',
-  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
-  'gru-add-to.OA-info':
-    'The activities listed here <b>do not</b> belong to another lesson or course',
-  'gru-add-to.add-oa-to-lesson-lead':
-    'Select a activity to add to this lesson.',
-  'gru-share-pop-over.share-OA': 'Offline Activity',
-  'gru-suggest-test.pre-tessignaturet-lead':
-    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'common.choose-lang': 'Choose Language',
   'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':

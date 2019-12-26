@@ -60,15 +60,7 @@ window.i18ln = {
   'common.efficacy': 'ਸਮਰੱਥਾ',
   'common.grid': 'ਗਰਿੱਡ',
   'common.list': 'ਸੂਚੀ',
-  'not-covered-in-fw-msg':
-    'Note: This competency is not covered by the {{framework}} framework',
-  'common.offline-activites': 'offline activites',
-  'common.offline-activity': 'offline activity',
   'common.first': 'ਪਹਿਲਾ',
-  'common.tenantLibrary': 'Tenant Library',
-  'i2d.new-upload-msg':
-    'Please click on Confirm & Continue button to upload your images',
-  'common.suggest-to-student': 'Suggest to student',
   'common.last': 'ਆਖਰੀ',
   'common.name': 'ਨਾਮ',
   'common.add-data-choice-title': 'ਤੁਸੀਂ ਡਾਟਾ ਕਿਵੇਂ ਭਰਨਾ ਚਾਹੁੰਦੇ ਹੋ ?',
@@ -79,6 +71,8 @@ window.i18ln = {
   'common.by-question': 'ਸਵਾਲ ਦਰ ਸਵਾਲ',
   'i2d.conversion-progress':
     'ਅੱਪਲੋਡ ਕੀਤੀਆਂ ਫੋਟੋਆਂ ਪ੍ਰਕਿਰਿਆ ਵਿੱਚ ਹਨ। ਕੁੱਝ ਸਮੇਂ ਬਾਅਦ ਚੈੱਕ ਕਰੋ',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'ਫੋਟੋ \'ਚ ਬਦਲਾਅ ਸਮੇਂ ਕੋਈ ਐਰਰ ਆਇਆ। ਕਿਰਪਾ ਕਰਕੇ ਫੋਟੋ ਦੋਬਾਰਾ ਸਬਮਿਟ ਕਰੋ',
   'file-picker-placeholder': 'ਫਾਇਲ ਚੁਣੋ ਜਾਂ ਖਿੱਚ ਕੇ ਇੱਥੇ ਲਿਆਓ',
@@ -101,9 +95,14 @@ window.i18ln = {
   'common.week': 'ਹਫਤਾ',
   'common.month': 'ਮਹੀਨਾ',
   'common.more': 'ਹੋਰ',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'apply filter',
+  'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'ਔਸਤ ਸਕੋਰ',
+  'common.offline-activites': 'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.frq': 'frq',
   'common.schedule': 'ਸਮਾਸੂਚੀ, ਕਾਰਜ - ਕ੍ਰਮ',
   'common.responses': 'ਜਵਾਬ',
@@ -133,7 +132,6 @@ window.i18ln = {
   'common.all-completed': 'ਸਭ ਨੂੰ ਪੂਰਾ ਕੀਤਾ',
   'common.a-assessment': 'ਇੱਕ ਮੁਲਾਂਕਣ',
   'common.about': 'ਬਾਰੇ',
-  'library-search-placeholder': 'Search for anything within the library…',
   'common.about-you': 'ਤੁਹਾਡੇ ਬਾਰੇ',
   'common.about-me': 'ਮੇਰੇ ਬਾਰੇ ਵਿੱਚ',
   'common.accept': 'ਸਵੀਕਾਰ ਕਰੋ',
@@ -187,6 +185,8 @@ window.i18ln = {
   'common.anonymous_mode': 'ਅਗਿਆਤ ਮੋਡ',
   'common.answer': 'ਤੁਹਾਡਾ ਜਵਾਬ',
   'common.answer-correct': 'ਤੁਸੀਂ ਸਹੀ ਹੋ!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'ਤੁਸੀਂ ਸਹੀ ਨਹੀਂ ਹੋ!',
   'common.answer-key-was-hidden':
     'ਨੋਟ: ਤੁਹਾਡੇ ਅਧਿਆਪਕ ਨੇ ਉੱਤਰ ਕੁੰਜੀ ਲੁਕਾ ਦਿੱਤੀ ਹੈ।',
@@ -286,6 +286,9 @@ window.i18ln = {
   'common.rubric-not-answered': 'ਰੁਬਰਿਕ ਨੇ ਜਵਾਬ ਨਹੀਂ ਦਿੱਤਾ',
   'common.country': 'ਦੇਸ਼',
   'reroute.suggestion': 'ਦੋਬਾਰਾ ਸੁਝਾਅ ਦੇਣਾ',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
   'reroute.suggestion.title': 'ਸੰਕਲਪ ਸੰਬੰਧੀ ਕੋਈ ਸਮੱਸਿਆ ਹੈ?',
   'reroute.suggestion.desc':
     'ਤੁਹਾਡੇ ਦੁਆਰਾ ਦਿੱਤੇ ਟੈਸਟ ਦੇ ਸੰਕਲਪ ਨੂੰ ਬਿਹਤਰ ਤਰੀਕੇ ਨਾਲ ਜਾਣਨ ਲਈ ਕਿਉਂ ਨਾ ਸਾਡੇ <span>ਦਸਤਖਤ ਸੰਗ੍ਰਹਿ</span> ਨੂੰ ਦੇਖੋ ?',
@@ -549,6 +552,7 @@ window.i18ln = {
   'common.move': 'Move',
   'common.myContent': 'ਮੇਰੀ ਸਮੱਗਰੀ',
   'common.myProfile': 'ਮੇਰੇ ਸਥਾਨ',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'ਲਾਇਬਰੇਰੀ',
   'common.myPerformance': 'ਮੇਰੇ ਪ੍ਰਦਰਸ਼ਨ',
   'common.edit-narration': 'ਨ੍ਰਿਵੇਸ਼ਨ ਸੰਪਾਦਨ ਕਰੋ',
@@ -871,6 +875,7 @@ window.i18ln = {
   'class.info.add-students': 'ਵਿਦਿਆਰਥੀ ਸ਼ਾਮਿਲ',
   'class.info.class-code': 'ਕਲਾਸਰੂਮ ਕੋਡ',
   'class.info.delete': 'ਕਲਾਸਰੂਮ ਡਿਲੀਟ ਕਰੋ',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'ਕੋਰਸ ਅਸਾਈਨ ਕਰੋ',
   'class.edit.basic-info': 'ਮੁੱਢਲੀ ਜਾਣਕਾਰੀ',
   'class.edit.class-name': 'ਕਲਾਸਰੂਮ ਦਾ ਨਾਮ',
@@ -1904,6 +1909,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'ਮੁਹਾਰਤ',
   'profile.gru-navigation.preference.preference': 'ਤਰਜੀਹ',
   'profile.edit.select-district': 'ਜ਼ਿਲ੍ਹਾ ਸਿਲੈਕਟ ਕਰੋ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'ਅਜੇ ਡਾਟਾ ਉਪਲੱਬਧ ਨਹੀਂ ਹੈ। ਇੱਕ ਵਾਰ ਜਦੋਂ ਤੁਸੀਂ ਅਧਿਐਨ ਸ਼ੁਰੂ ਕਰੋਗੇ ਤਾਂ ਡਾਟਾ ਉਪਲੱਬਧ ਹੋ ਜਾਵੇਗਾ',
   'profile.proficiency.expand-chart': 'ਚਾਰਟ ਖੋਲੋ',
@@ -2453,6 +2462,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'ਸਵਾਲ',
   'gru-study-header.question.one': 'ਸਵਾਲ',
   'gru-study-header.question.other': 'ਸਵਾਲ',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend': 'ਹੋਰ ਸਿੱਖਣ ਲਈ, ਇਹ ਸ੍ਰੋਤ ਚੈੱਕ ਕਰੋ',
   'gru-suggest-test.pre-test-header': 'ਪ੍ਰੀ-ਟੈੱਸਟ (ਵਿਕਲਪੀ)',
   'gru-suggest-test.post-test-header': 'ਪੋਸਟ-ਟੈੱਸਟ (ਵਿਕਲਪੀ)',
@@ -2638,6 +2648,7 @@ window.i18ln = {
   'common.subtask.oa.debate': 'ਬਹਿਸ',
   'common.subtask.oa.others': 'ਹੋਰ',
   project: 'ਪ੍ਰੋਜੈੱਕਟ',
+  'oa.others': 'Others',
   'oa.project.poster': 'ਪੋਸਟਰ',
   'oa.project.presentation': 'ਪ੍ਰਦਰਸ਼ਨ',
   'oa.project.video': 'ਵੀਡੀਓ',
@@ -2707,6 +2718,7 @@ window.i18ln = {
   'suggestion-taken': 'ਸੁਝਾਅ ਲਏ ਗਏ',
   'this-week': 'ਇਸ ਹਫਤੇ',
   'previous-week': 'ਪਿਛਲਾ ਹਫਤਾ',
+  'custom-range': 'Custom Date Range',
   'beginning-till-now': 'ਸ਼ੁਰੂ ਤੋਂ ਹੁਣ ਤੱਕ',
   'report.class-proficiency-report': 'ਕਲਾਸ ਦੀ ਮੁਹਾਰਤ ਰਿਪੋਰਟ',
   'report.domain-proficiency-report': 'ਡੋਮੇਨ ਯੋਗਤਾ ਰਿਪੋਰਟ',
@@ -2721,6 +2733,35 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'ਵਿਦਿਆਰਥੀ ਲੋਕੇਟਰ',
   'teacher-landing.class.learning-journey': 'ਲਰਨਿੰਗ ਯਾਤਰਾ',
   'search-by': 'ਦੁਆਰਾ ਖੋਜੋ',
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts',
+  'common.lesson-plan': 'Lesson Plan',
+  'lesson-plan.sessions': 'sessions',
+  'common.session': 'Session',
+  'prior-knowledge': 'Prior Knowledge',
+  'guiding-question': 'Guiding Questions',
+  'anticipated-struggle': 'Aniticipated Struggles',
+  'teacher-resource': 'Teacher Resources',
+  'content.anticipated-struggles':
+    'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
+  'common.no-lesson-plan-info-message':
+    'This lesson does have any lesson plan.',
+  'common.email.error': 'Duplicate email',
+  'student-resource': 'Student Study Material',
+  'common.choose-lang': 'Choose Language',
+  'common.show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
