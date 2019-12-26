@@ -107,7 +107,12 @@ export default PlayerController.extend(StudyPlayer, {
           controller.set('mapLocation.context', context);
           controller.set('mapLocation.suggestions', suggestions);
           controller.set('mapLocation.hasContent', hasContent);
-          controller.checknPlayNext();
+          let suggestedContent = controller.get('suggestedContent');
+          if (suggestedContent) {
+            controller.set('isShowSuggestion', true);
+          } else {
+            controller.checknPlayNext();
+          }
         });
     }
   },
@@ -119,6 +124,22 @@ export default PlayerController.extend(StudyPlayer, {
    * @property {string}
    */
   classId: null,
+
+  /**
+   * @property {Boolean}
+   * Property to show/hide suggestion component
+   */
+  isShowSuggestion: false,
+
+  /**
+   * @property {Json}
+   * Computed property to store suggestedContent
+   */
+  suggestedContent: Ember.computed('mapLocation', function() {
+    let controller = this;
+    let suggestions = controller.get('mapLocation.suggestions');
+    return suggestions ? suggestions[0] : null;
+  }),
 
   /**
    * @property {string}

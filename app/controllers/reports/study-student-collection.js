@@ -113,6 +113,7 @@ export default StudentCollection.extend(StudyPlayer, {
           controller.set('mapLocation.hasContent', hasContent);
           let suggestedContent = controller.get('suggestedContent');
           if (suggestedContent) {
+            controller.set('isShowActivityFeedback', false);
             controller.set('isShowSuggestion', true);
           } else {
             controller.checknPlayNext();
