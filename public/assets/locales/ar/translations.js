@@ -70,6 +70,8 @@ window.i18ln = {
   'common.by-question': 'سؤال بسؤال',
   'i2d.conversion-progress':
     'تتم معالجة الصور/ الصورة المحملة.يرجى التأكيد مرة اخرى فى وقت لاحق',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'كان هناك خطأ عند محاولة تحويل الصورة. يرجى اعادة رفع الصورة',
   'file-picker-placeholder': 'اختر مجلداً او قم بسحبها هنا',
@@ -92,6 +94,8 @@ window.i18ln = {
   'common.week': 'اسبوع',
   'common.month': 'شهر',
   'common.more': 'اكثر',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'تطبيق المرشح',
   'library-search-placeholder': 'ابحث عن اي شيء من خلال المكتبة...',
   'search-help-message': 'اختر مرشحات لتطبيقها',
@@ -178,6 +182,8 @@ window.i18ln = {
   'common.anonymous_mode': 'أسلوب تقييم المجهول',
   'common.answer': 'إجابتك',
   'common.answer-correct': 'إجابتك صحيحة',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'إجابتك خاطئة',
   'common.answer-key-was-hidden': 'ملاحظة: قام المعلم بإخفاء مفتاح الإجابة.',
   'common.approved': 'ُمعتمَد',
@@ -190,6 +196,7 @@ window.i18ln = {
   'common.assessment-pl.other': 'التقييمات',
   'common.assessment-title': 'عنوان التقييم',
   'common.activity-title': 'Activity Title',
+  'common.activity': 'Activity Title',
   'common.assessmentInitial': 'ت',
   'common.assessments': 'التقييمات',
   'common.assign': 'تعيين',
@@ -200,6 +207,7 @@ window.i18ln = {
   'common.avatarFor': 'صورة رمزية لـ',
   'common.averageScore': 'متوسط العلامات',
   'common.back': 'عودة',
+  'common.for': 'for',
   'common.back-to-assessment': 'العودة إلى التقييم',
   'common.back-to-collection': 'العودة إلى المجموعة',
   'common.back-to-course-map': 'العودة إلى خريطة المساق الدراسي',
@@ -274,6 +282,9 @@ window.i18ln = {
   'common.rubric-not-answered': 'العنوان بلا جواب',
   'common.country': 'البلد',
   'reroute.suggestion': 'اعادة توجيه الاقتراح',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
   'reroute.suggestion.title': 'هل لديك صعوبة فى فهم المفاهيم؟',
   'reroute.suggestion.desc':
     'لماذا لا تخوض واحدة من <span> حملاتنا لجمع التوقيعات </span> للحصول على فهم أفضل للمفاهيم التي تم اختيارك عليها؟',
@@ -328,7 +339,7 @@ window.i18ln = {
   'common.edit-question': 'تعديل السؤال',
   'common.edit-resource': 'تعديل المصدر',
   'common.edit-rubric': 'تعديل العنوان',
-  'common.email_support': 'support@gooru.org	',
+  'common.email_support': 'support@gooru.org ',
   'common.emotions.emotion-1': 'انا احتاج المساعدة',
   'common.emotions.emotion-2': 'انا لا أفهم',
   'common.emotions.emotion-3': 'مه...',
@@ -528,10 +539,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'اضغط هنا لتسجيل الدخول.',
   'common.mastery': 'التمكن',
   'common.menu': 'القائمة',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'مزيد من التفاصيل',
   'common.move': 'نقل',
   'common.myContent': 'المحتوى الخاص بي',
   'common.myProfile': 'My Location',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'المكتبة',
   'common.myPerformance': 'آدائي',
   'common.edit-narration': 'تعديل السرد',
@@ -573,7 +586,7 @@ window.i18ln = {
   'common.notScored': 'بدون نتيجة',
   'common.notStarted': 'لم يبدأ',
   'common.not-added': 'لم يتم اضافته',
-  'common.not-applicable': 'N/A	',
+  'common.not-applicable': 'N/A ',
   'common.not-following': 'انت لست متابعاً',
   'common.not-provided': 'غير مزود',
   'common.not-specified': 'عير محدد',
@@ -628,7 +641,7 @@ window.i18ln = {
   'common.question-type.HT_RO': 'سحب ووضع طلب',
   'common.question-type.HT_HL': 'تسليط الضوء على النص',
   'common.reaction': 'رد فعل',
-  'common.read-first': '<b>Read this first!</b>	',
+  'common.read-first': '<b>Read this first!</b> ',
   'common.remaining': '{{number}}يساراً',
   'common.remix': 'تعديل',
   'common.remix-assessment': 'تعديل التقييم',
@@ -848,6 +861,7 @@ window.i18ln = {
   'class.info.add-students': 'اضافة طلاب',
   'class.info.class-code': 'كود الفصل الدراسي',
   'class.info.delete': 'حذف الفصل الدراسي',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'تعيين دورة تعليمية',
   'class.edit.basic-info': 'المعلومات الاساسية',
   'class.edit.class-name': 'اسم الفصل الدراسي',
@@ -1062,7 +1076,7 @@ window.i18ln = {
   'content.modals.delete-rubric.first-check':
     'هذا حذف دائم ولا يمكن الرجوع فيه',
   'content.modals.remove-content.legend':
-    'انت على وشك حذف    م <b>{{title}}</b> from <b>{{parentName}}</b>	',
+    'انت على وشك حذف    م <b>{{title}}</b> from <b>{{parentName}}</b> ',
   'content.modals.remove-content.remove-error':
     'اوبس! غيلر قادر على حذف{{type}}الان.يرجى المحاوله مرة اخرى بعد قليل.',
   'content.modals.remove-content.confirmation':
@@ -1095,14 +1109,14 @@ window.i18ln = {
   'content.resources.edit.information.select-a-license': 'يرجىاختيار رخصة',
   'content.oa.reference.uploaded': 'تنزيل',
   'content.oa.reference.image': 'صورة',
-  'content.oa.reference.pdf': 'Pdf	',
+  'content.oa.reference.pdf': 'Pdf ',
   'content.oa.reference.presentation': 'العرض',
   'content.oa.reference.document': 'مستند',
   'content.oa.reference.others': 'اخرون',
   'user.active-classrooms': 'فصول دراسية متاحة',
   'user.archived-classrooms': 'فصول دراسية مأرشفة',
   'user.classrooms': 'فصورل دراسية',
-  'user.rgo': 'RGO	',
+  'user.rgo': 'RGO ',
   'user.create-class': 'انشاء فصل دراسي',
   'user.hello': 'مرحباً،{{name}}!',
   'user.independent-learning': 'التعلم المستقل',
@@ -1218,7 +1232,7 @@ window.i18ln = {
   'teacher-landing.class.back-to-archived':
     'العودة إلى الفصول الدراسية المؤرشفة',
   'teacher-landing.class.class-management': 'ادارة الفصل',
-  'teacher-landing.class.atc': 'ATC	',
+  'teacher-landing.class.atc': 'ATC ',
   'teacher-landing.class.performance-overview': 'نظرة عامة على الأداء',
   'teacher-landing.class.student-proficiency': 'اجادة الطالب',
   'teacher-landing.class.class-management-tab.actions': 'افعال',
@@ -1625,7 +1639,7 @@ window.i18ln = {
   'forgot-password.footer-description-1':
     'ستتلقى رسالة بريد إلكتروني بها رابط لإعادة تعيين كلمة المرور الخاصة بك.',
   'forgot-password.footer-description-2': 'لو لديك اي ، يرجى التواصل معنا',
-  'forgot-password.mail': 'support@gooru.org	',
+  'forgot-password.mail': 'support@gooru.org ',
   'forgot-password.error-email-not-exists':
     'عذرًا ، لا نتعرف على هذا البريد الإلكتروني.',
   'forgot-password.secondStepTitle': 'تحقق من بريدك الالكتروني',
@@ -1850,6 +1864,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'الاجادة',
   'profile.gru-navigation.preference.preference': 'تفضيل',
   'profile.edit.select-district': 'اختر منطقة...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'لا يوجد بيانات متاحة بعد. بمجرد ان تبدأ الدراسة، سوف تصبح بياناتك متاحه.',
   'profile.proficiency.expand-chart': 'توسيع المخطط',
@@ -2391,6 +2409,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'سؤال',
   'gru-study-header.question.one': 'سؤال',
   'gru-study-header.question.other': 'أسئلة',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend': 'لمعرفة المزيد، تحقق من هذه المصادر.',
   'gru-suggest-test.pre-test-header': 'اختبار مسبق للدرس (اختياري)',
   'gru-suggest-test.post-test-header': 'اختباربعد الانتهاء من الدرس (اختياري)',
@@ -2455,7 +2474,7 @@ window.i18ln = {
   'competency-info-content.portfolio': 'حافظة',
   'competency-info-content.metadata': 'البيانات الوصفية',
   'competency-info-content.learning-map': 'خريطة التعلم',
-  'competency-meta-data.title': 'ALT-CONCEPTS	',
+  'competency-meta-data.title': 'ALT-CONCEPTS ',
   'competency-meta-data.heading.micro': 'الاختصاصات الصغيرة',
   'competency-meta-data.heading.prequisite': 'الكفاءات المطلوبة',
   'competency-meta-data.nodata.micro':
@@ -2575,6 +2594,7 @@ window.i18ln = {
   'common.subtask.oa.debate': 'النقاش',
   'common.subtask.oa.others': 'اخرون',
   project: 'المشروع',
+  'oa.others': 'Others',
   'oa.project.poster': 'ملصق',
   'oa.project.presentation': 'العرض',
   'oa.project.video': 'فيديو',
@@ -2645,6 +2665,7 @@ window.i18ln = {
   'suggestion-taken': 'الاقتراحات المأخوذه',
   'this-week': 'هذا الاسبوع',
   'previous-week': 'الاسبوع السابق',
+  'custom-range': 'Custom Date Range',
   'beginning-till-now': 'من الداية حتى الان',
   'report.class-proficiency-report': 'تقرير كفائة الفصل',
   'report.domain-proficiency-report': 'تقرير كفاءة المجال',
@@ -2659,12 +2680,35 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'محدد موقع الطالب',
   'teacher-landing.class.learning-journey': 'رحلة التعلم',
   'search-by': 'البحث بواسطة',
-
-  'i2d.new-upload-msg':
-    'Please click on Confirm & Continue button to upload your images',
-  'reroute.show-mastery': 'Show Your Mastery',
-  'reroute.take-assessment':
-    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts',
+  'common.lesson-plan': 'Lesson Plan',
+  'lesson-plan.sessions': 'sessions',
+  'common.session': 'Session',
+  'prior-knowledge': 'Prior Knowledge',
+  'guiding-question': 'Guiding Questions',
+  'anticipated-struggle': 'Aniticipated Struggles',
+  'teacher-resource': 'Teacher Resources',
+  'content.anticipated-struggles':
+    'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
+  'common.no-lesson-plan-info-message':
+    'This lesson does have any lesson plan.',
+  'common.email.error': 'Duplicate email',
+  'student-resource': 'Student Study Material',
+  'common.choose-lang': 'Choose Language',
+  'common.show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',

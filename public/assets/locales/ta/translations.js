@@ -15,13 +15,14 @@ window.i18ln = {
   ta: 'தமிழ்',
   te: 'తెలుగు',
   'errors.description': 'இந்த புலம்',
-  'common.sub-filter': 'Sub-Filter',
   'errors.inclusion': '{{description}} பட்டியலில் சேர்க்கப்படவில்லை',
   'errors.exclusion': '{{விளக்கம்}} ஒதுக்கப்பட்டுள்ளது',
+  'my-content': 'My Content',
+  'common.tasks': 'tasks',
+  'common.sub-filter': 'Sub-Filter',
+  'featured-libraries': 'featured libraries',
   'errors.invalid': '{{description}} செல்லாதது',
   'errors.confirmation': '{{description}} பொருந்தவில்லை {{on}}',
-  'my-content': 'My Content',
-  'featured-libraries': 'featured libraries',
   'errors.accepted': '{{விளக்கம்}} ஏற்றுக்கொள்ளப்பட வேண்டும்',
   'errors.empty': '{{description}} காலியாக இருக்க முடியாது',
   'errors.blank': '{{description}} முடியாது',
@@ -65,7 +66,6 @@ window.i18ln = {
   'common.efficacy': 'பலாபலன்',
   'common.grid': 'கட்டம்',
   'common.list': 'பட்டியலில்',
-  'common.for': 'for',
   'common.first': 'முதல்',
   'common.last': 'கடந்த',
   'common.name': 'பெயர்',
@@ -78,6 +78,8 @@ window.i18ln = {
   'common.by-question': 'கேள்வி மேல் கேள்வியாக',
   'i2d.conversion-progress':
     'அப்லோட் செய்யப்பட்டப்  படங்கள் செயல்பாட்டில் உள்ளன. தயவு செய்து சிறிது நேரம் கழித்து சரி பார்க்கவும்',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'படத்தினை மாற்றும் போது ஒரு தவறு ஏற்பட்டுவிட்டது. எனவே திரும்பவும் படத்தை சமர்ப்பிக்கவும்',
   'file-picker-placeholder':
@@ -102,6 +104,8 @@ window.i18ln = {
   'common.week': 'வாரம்',
   'common.month': 'மாதம்',
   'common.more': 'அதிகம்',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'வடிகட்டியை உபயோகி',
   'library-search-placeholder': 'இந்த நூலகத்திற்குள் எதற்காகவும் தேடலாம்...',
   'search-help-message': 'சல்லடைகளைச் செயல்படுத்த தெரிந்தெடு',
@@ -136,6 +140,7 @@ window.i18ln = {
   'common.a-question': 'ஒரு கேள்வி',
   'common.a-resource': 'ஒரு வள',
   'common.a-rubric': 'ஒரு ரூபிக்',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'எல்லாம் முடிந்தது',
   'common.a-assessment': 'மதிப்பீடு',
   'common.about': 'பற்றி',
@@ -194,6 +199,8 @@ window.i18ln = {
   'common.anonymous_mode': 'அநாமதேய முறை',
   'common.answer': 'உங்கள் பதில்',
   'common.answer-correct': 'நீங்கள் சொன்னது சரி!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'நீங்கள் சொன்னது  தவறு...',
   'common.answer-key-was-hidden':
     'குறிப்பு : உங்கள் ஆசிரியர் பதிலை மறைத்து வைத்துள்ளார்.',
@@ -207,6 +214,7 @@ window.i18ln = {
   'common.assessment-pl.other': 'மதிப்பீடுகளை',
   'common.assessment-title': 'மதிப்பீடு தலைப்பு',
   'common.activity-title': 'Activity Title',
+  'common.activity': 'Activity Title',
   'common.assessmentInitial': 'ஒரு',
   'common.assessments': 'மதிப்பீடுகளை',
   'common.assign': 'ஒதுக்க',
@@ -217,6 +225,7 @@ window.i18ln = {
   'common.avatarFor': 'சின்னம்',
   'common.averageScore': 'சராசரி மதிப்பெண்',
   'common.back': 'மீண்டும்',
+  'common.for': 'for',
   'common.back-to-assessment': 'மதிப்பீட்டிற்கு திரும்பவும்',
   'common.back-to-collection': 'மீண்டும் சேகரிப்பில்',
   'common.back-to-course-map': 'நிச்சயமாக வரைபடத்தில்',
@@ -295,6 +304,9 @@ window.i18ln = {
   'common.rubric-not-answered': 'கட்டளை வரிக்கு பதில் தரப்படவில்லை',
   'common.country': 'நாடு',
   'reroute.suggestion': 'ஆலோசனையை திரும்ப தாருங்கள்',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
   'reroute.suggestion.title':
     'இந்த பொது கருத்துக்களில் ஏதேனும் இடர்பாடுகள் உள்ளதா?',
   'reroute.suggestion.desc':
@@ -396,6 +408,8 @@ window.i18ln = {
     'ஓ! தொகுப்பை தற்போது நகலெடுக்க முடியவில்லை.தயவுசெய்து சிறிது நேரம் கழித்து  முயற்சி செய்யவும்.',
   'common.errors.collection-not-created':
     'தொகுப்பை தற்பொழுது உருவாக்க முடியவில்லை.தயவுசெய்து சிறிது நேரம் கழித்து  முயற்சி செய்யவும்.',
+  'common.errors.collection-not-updated':
+    'Oops! Unable to update collection right now. Please try again shortly.',
   'common.errors.collection-title-presence': 'தொகுப்பின் தலைப்பை உள்ளிடவும்.',
   'common.errors.correct-answer-presence': 'தயவுசெய்து சரியான பதிலை காண்பி.',
   'common.errors.course-not-copied':
@@ -789,6 +803,8 @@ window.i18ln = {
   'common.show-more-results': 'இன்னும் அதிகமான முடிவுகளைக் காட்டு',
   'common.show-results': 'முடிவுகளைக் காட்டு',
   'common.signUp': 'பதிவு செய்',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'எழுத்து வரிசையில் வரிசையாக்கு',
   'common.sortAverage': 'சராசரியின்படி வரிசையாக்கு',
   'common.sort-most-recently':
@@ -923,6 +939,7 @@ window.i18ln = {
   'class.info.add-students': 'மாணவர்கள் சேர்க்க',
   'class.info.class-code': 'வகுப்பறை குறியீடு',
   'class.info.delete': 'வகுப்பறை நீக்க',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'ஒதுக்கப்பட்டுள்ள பாடநெறி',
   'class.edit.basic-info': 'அடிப்படை தகவல்',
   'class.edit.class-name': 'வகுப்பறையின் பெயர்',
@@ -1375,6 +1392,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.student-name': 'மாணவரின் பெயர்',
   'teacher-landing.class.class-management-tab.student-id':
     'மாணவரின் அடையாள அட்டை',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'ஆசிரியர்கள்',
   'teacher-landing.class.class-management-tab.view-report': 'அறிக்கையை பார்',
   'teacher-landing.class.class-management-tab.course-null':
@@ -1680,6 +1698,7 @@ window.i18ln = {
   'class.gru-class-statistics.performance': 'செயல்திறன்',
   'class.gru-class-statistics.completion': 'நிறைவேற்றல்',
   'class.gru-class-statistics.time-spent': 'செலவழித்த நேரம்',
+  'class.gru-class-statistics.no-performance': '--',
   'gru-user-registration.joinTitle': 'குரு சமூகத்தில் இணையுங்கள்.',
   'gru-user-registration.joinDescription': 'கண்டுபிடி,ரீமிக்ஸ்',
   'gru-user-registration.googleButton': 'கூகுளுடன் பதிவு பெருக.',
@@ -2017,6 +2036,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'திறமை',
   'profile.gru-navigation.preference.preference': 'தேர்வு',
   'profile.edit.select-district': 'மாவட்டத்தை தேர்ந்தெடுங்கள் ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'இதற்கான விபரங்கள் இன்று வரை இல்லை.நீங்கள் கற்க அராம்பிதால், உங்களின் விபரங்கள் கிடைக்கப் பெறும்',
   'profile.proficiency.expand-chart': 'வரைபடத்தை விரிவாக்கு',
@@ -2591,6 +2614,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'கேள்வி',
   'gru-study-header.question.one': 'கேள்வி',
   'gru-study-header.question.other': 'கேள்விகள்',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'மேலும் கற்க,இந்தவாய்ப்பு  வளமைகள கண்டு எடுங்கள்.',
   'gru-suggest-test.pre-test-header': 'முன்-சோதனை (விருப்ப)',
@@ -2790,6 +2814,7 @@ window.i18ln = {
   'common.subtask.oa.debate': 'விவாதம்',
   'common.subtask.oa.others': 'மற்றவை',
   project: 'திட்டம்',
+  'oa.others': 'Others',
   'oa.project.poster': 'சுவரொட்டி',
   'oa.project.presentation': 'அறிமுகம் செய்தல்',
   'oa.project.video': 'வீடியோ',
@@ -2862,6 +2887,7 @@ window.i18ln = {
   'suggestion-taken': 'ஆலோசனைகள் ஏற்க்கப்பட்டன',
   'this-week': 'இந்த வாரம்',
   'previous-week': 'கடந்த  வாரம்',
+  'custom-range': 'Custom Date Range',
   'beginning-till-now': 'இப்பொழுது வரை ஆரம்பிக்க உள்ளது',
   'report.class-proficiency-report': 'வகுப்பு தேர்ச்சி அறிக்கை',
   'report.domain-proficiency-report': 'டொமைன் தேர்ச்சி அறிக்கை',
@@ -2877,6 +2903,35 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'மாணவர் லோக்கேடர்',
   'teacher-landing.class.learning-journey': 'கற்றலின் பயணம்',
   'search-by': 'மூலம் தேடுங்கள்',
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts',
+  'common.lesson-plan': 'Lesson Plan',
+  'lesson-plan.sessions': 'sessions',
+  'common.session': 'Session',
+  'prior-knowledge': 'Prior Knowledge',
+  'guiding-question': 'Guiding Questions',
+  'anticipated-struggle': 'Aniticipated Struggles',
+  'teacher-resource': 'Teacher Resources',
+  'content.anticipated-struggles':
+    'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
+  'common.no-lesson-plan-info-message':
+    'This lesson does have any lesson plan.',
+  'common.email.error': 'Duplicate email',
+  'student-resource': 'Student Study Material',
+  'common.choose-lang': 'Choose Language',
+  'common.show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',

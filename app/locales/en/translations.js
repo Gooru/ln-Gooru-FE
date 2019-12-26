@@ -1,3 +1,4 @@
+//eslint-disable-next-line
 window.i18ln = {
   en: 'English',
   sp: 'Español',
@@ -187,6 +188,8 @@ window.i18ln = {
   'common.anonymous_mode': 'Anonymous Mode',
   'common.answer': 'Your Answer',
   'common.answer-correct': 'You are correct!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'You are incorrect...',
   'common.answer-key-was-hidden':
     'Note: Your teacher has hidden the answer key.',
@@ -201,7 +204,6 @@ window.i18ln = {
   'common.assessment-title': 'Assessment Title',
   'common.activity-title': 'Activity Title',
   'common.activity': 'Activity Title',
-
   'common.assessmentInitial': 'A',
   'common.assessments': 'Assessments',
   'common.assign': 'Assign',
@@ -877,6 +879,7 @@ window.i18ln = {
   'class.info.add-students': 'Add Students',
   'class.info.class-code': 'Classroom Code',
   'class.info.delete': 'Delete Classroom',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'Assigned course',
   'class.edit.basic-info': 'Basic Information',
   'class.edit.class-name': 'Classroom Name',
@@ -897,7 +900,6 @@ window.i18ln = {
     'This Navigator course is a personalized course covering standards across multiple grades. Each student is provided a unique course to help fill gaps, reinforce concepts and practices, and accelerate their learning. Personalized routes are designed and students are re-routed in real-time to maximize each student\'s learning potential and to navigate to their set destination.',
   'class.overview.course-map.learning-path':
     'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
-
   'class.overview.course-map.custom-msg':
     'We are personalizing this course specifically for you based on your proficiency. Please check back in a little while to see the personalized course map.',
   'class.overview.course-map.route0-bannerdesc':
@@ -1141,7 +1143,6 @@ window.i18ln = {
   'content.oa.reference.presentation': 'Presentation',
   'content.oa.reference.document': 'Document',
   'content.oa.reference.others': 'Others',
-
   'user.active-classrooms': 'Active Classrooms',
   'user.archived-classrooms': 'Archived Classrooms',
   'user.classrooms': 'Classrooms',
@@ -2475,6 +2476,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'Question',
   'gru-study-header.question.one': 'Question',
   'gru-study-header.question.other': 'Questions',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'To learn more, check out these resources.',
   'gru-suggest-test.pre-test-header': 'Pre-Test (Optional)',
@@ -2766,11 +2768,13 @@ window.i18ln = {
   'content.anticipated-struggles':
     'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
   'common.no-lesson-plan-info-message':
-    'There is no lesson plan for this lesson.',
+    'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Study Material',
   'common.choose-lang': 'Choose Language',
   'common.show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation',
   'common.class-name': 'Class Name',
   'common.view-class-course-map': 'Class',
   'common.multi-grade-class-setting': 'Multi-Grade Class Settings',

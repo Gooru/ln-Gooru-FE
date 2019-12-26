@@ -15,13 +15,14 @@ window.i18ln = {
   ta: 'தமிழ்',
   te: 'తెలుగు',
   'errors.description': 'ଏହି କ୍ଷେତ୍ର',
-  'common.sub-filter': 'Sub-Filter',
   'errors.inclusion': '{{description}} ତାଲିକାରେ ଅନ୍ତର୍ଭୁକ୍ତ ନାହିଁ',
   'errors.exclusion': '{{description}} ସଂରକ୍ଷିତ ଅଛି',
+  'my-content': 'My Content',
+  'common.tasks': 'tasks',
+  'common.sub-filter': 'Sub-Filter',
+  'featured-libraries': 'featured libraries',
   'errors.invalid': '{{description}}ଅମାନ୍ୟ ଅଛି',
   'errors.confirmation': '{{description}}ମେଳ ହେଉନାହିଁ{{on}}',
-  'my-content': 'My Content',
-  'featured-libraries': 'featured libraries',
   'errors.accepted': '{{description}} ଗ୍ରହଣ କରିବାକୁ ହେବ',
   'errors.empty': '{{description}} ଶୂନ୍ୟ ରଖାଯିବ ନାହିଁ',
   'errors.blank': '{{description}} ଖାଲି ରଖାଯିବ ନାହିଁ',
@@ -35,7 +36,6 @@ window.i18ln = {
   'errors.after': '{{description}} ନିଶ୍ଚିତ ରୂପେ {{after}}ପରେ',
   'errors.wrongDateFormat':
     '{{description}} ନିଶ୍ଚିତ ରୂପେ {{format}} ଫର୍ମାଟରେ ହେବ',
-  'common.for': 'for',
   'errors.wrongLength':
     '{{description}} ଭୁଲ ଦୈର୍ଘ୍ୟ ବିଶିଷ୍ଟ ଅଟେ ({{is}} ବର୍ଣ୍ଣ ହେବା ଉଚିତ)',
   'errors.notANumber': '{{description}} ନିଶ୍ଚିତ ରୂପେ ଏକ ସଂଖ୍ୟା ହେବା ଆବଶ୍ୟକ',
@@ -63,46 +63,20 @@ window.i18ln = {
   'common.engagement': 'ଜଡ଼ିତ ରଖିବା',
   'common.efficacy': 'ସାମର୍ଥ୍ୟ',
   'common.grid': 'ଗ୍ରୀଡ୍',
-  'common.no-users-to-grade-oa':
-    'There are no users to grade for this Offline Activity.',
   'common.list': 'ତାଲିକା',
   'common.first': 'ପ୍ରଥମ',
-  'common.tenantLibrary': 'Tenant Library',
   'common.last': 'ଶେଷ',
   'common.name': 'ନାମ',
-  'common.day': 'day',
-  'common.week': 'week',
-  'rubric-details': 'Rubric Details',
-  'not-covered-in-fw-msg':
-    'Note: This competency is not covered by the {{framework}} framework',
-  'reroute.suggestion': 'reroute suggestion',
-  'reroute.show-mastery': 'Show Your Mastery',
-  'reroute.take-assessment':
-    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
-  'reroute.suggestion.title': 'Having difficulty with the concepts?',
-  'reroute.suggestion.desc':
-    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
-  'common.month': 'month',
-  'common.no-content-for-week':
-    'No class activities scheduled for the selected period',
-  'common.user': 'ଉପଭୋକ୍ତା',
-  'common.content-name': 'ବିଷୟ ନାମ',
-  'common.lastName': 'ଅନ୍ତିମ ନାମ',
-  'common.firstName': 'ପ୍ରଥମ ନାମ',
-  'common.suggest-to-student': 'Suggest to student',
-  'common.filter-by': 'ଦ୍ୱାରା ଫିଲ୍ଟର ହୋଇଛି',
-  'common.tasks': 'tasks',
-  'common.more': 'ଅଧିକ',
   'common.add-data-choice-title': 'How do you want to enter the data?',
-  'tooltip.check-items-to-grade':
-    'Check the Items to Grade panel below to grade this activity',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.by-question': 'question-by-question',
-  'i2d.new-upload-msg':
-    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'There was an error when trying to convert the image. Please resubmit the image',
   'file-picker-placeholder': 'Choose a file or drag it here',
@@ -111,43 +85,45 @@ window.i18ln = {
   'i2d-successfully-image-upload':
     'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
   'common.dialog-close': 'Do you want to close ?',
-  're-upload': 'Re-Upload',
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
   'i2d.mobile-upload-failed': 'There was a error',
-  'common.no-suggestion-message':
-    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'i2d.upload-failed':
     'There was an error while uploading this image. Re-upload?',
+  're-upload': 'Re-Upload',
+  'common.user': 'ଉପଭୋକ୍ତା',
+  'common.content-name': 'ବିଷୟ ନାମ',
+  'common.lastName': 'ଅନ୍ତିମ ନାମ',
+  'common.firstName': 'ପ୍ରଥମ ନାମ',
+  'common.filter-by': 'ଦ୍ୱାରା ଫିଲ୍ଟର ହୋଇଛି',
+  'common.day': 'day',
+  'common.week': 'week',
+  'common.month': 'month',
+  'common.more': 'ଅଧିକ',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'apply filter',
+  'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'ହାରାହାରି ସ୍କୋର୍',
+  'common.offline-activites': 'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.frq': 'FRQ',
-  'self-grade.not-required': 'Student self-grading not required',
   'common.schedule': 'ସୂଚୀ',
-  'common.answer-this-activity':
-    'Answer this rubric to complete your activity.',
+  'common.responses': 'ଉତ୍ତରଗୁଡ଼ିକ',
   'ca.student.no-content':
     'The teacher has not assigned any activities for the day',
   'oa.student.no-active-content':
     'Currently there are no offline activities assigned to you that are active',
   'oa.student.no-completed-content':
     'There are no offline activities that are completed yet',
-  'common.plan': 'plan',
-  'offline-activities.no-completed-content':
-    'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content':
-    'There are no projects or other offline activities that the students are currently working on',
-  'common.no-search-result':
-    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
-  'common.responses': 'ଉତ୍ତରଗୁଡ଼ିକ',
   'common.no-lesson-info-message': 'ଏହି ୟୁନିଟରେ କୌଣସି ଅଧ୍ୟାୟ ନାହିଁ ।',
   'common.no-collection-info-message': 'ଏହି ୟୁନିଟରେ କୌଣସି ସଂଗ୍ରହ ନାହିଁ ।',
   'common.gooru-suggestions': 'Gooru ପରାମର୍ଶଗୁଡ଼ିକ',
-  'library-search-placeholder': 'Search for anything within the library…',
   'common.gooru-catalog': 'Gooru ସୂଚୀ',
   'common.suggestion-made-to': 'କୁ ପରାମର୍ଶ ଦିଆଯାଇଛି',
   'common.student-selected': 'ନିର୍ବାଚିତ ବିଦ୍ୟାର୍ଥୀ',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.no-suggest-result-message': 'କୌଣସି ମେଳ ଖାଇଥିବା ବିଷୟ ନାହିଁ',
   'common.no-suggest-results-message':
     'ଆପଣ ପ୍ରାସଙ୍ଗିକ ବିଷୟକୁ ସନ୍ଧାନ କରିି ପାଇପାରିବେ ।',
@@ -155,8 +131,6 @@ window.i18ln = {
     'ଆପଣଙ୍କ ବନାନ ଦେଖନ୍ତୁ । ଆମେ ସବୁ ଭୁଲ କରିଛେ ! କିମ୍ୱା ଏହା ବଦଳରେ ଅନୁରୂପ ଶବ୍ଦ ପାଇଁ ସନ୍ଧାନ କରନ୍ତୁ ।',
   'common.a-collection': 'ଏକ ସଂଗ୍ରହ',
   'common.a-course': 'ଏକ ପାଠ୍ୟକ୍ରମ',
-  'common.offline-activity': 'offline activity',
-  'common.offline-activites': 'offline activites',
   'common.a-question': 'ଏକ ପ୍ରଶ୍ନ',
   'common.a-resource': 'ଏକ ଉତ୍ସ',
   'common.a-rubric': 'ଏକ ଶୀର୍ଷକ',
@@ -218,6 +192,8 @@ window.i18ln = {
   'common.anonymous_mode': 'ଅଜ୍ଞାତ ପଦ୍ଧତି',
   'common.answer': 'ଆପଣଙ୍କ ଉତ୍ତର',
   'common.answer-correct': 'ଆପଣ ଠିକ୍ !',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'ଆପଣ ଭୁଲ୍...',
   'common.answer-key-was-hidden':
     'ଟିପ୍ପଣୀ:ଆପଣଙ୍କ ଶିକ୍ଷକ ଉତ୍ତର କୁଞ୍ଜିକୁ ଲୁଚାଇଛନ୍ତି ।',
@@ -232,6 +208,7 @@ window.i18ln = {
   'common.assessment-pl.other': 'ମୂଲ୍ୟାଙ୍କନ ଗୁଡ଼ିକ',
   'common.assessment-title': 'ମୂଲ୍ୟାଙ୍କନ ଶୀର୍ଷକ',
   'common.activity-title': 'Activity Title',
+  'common.activity': 'Activity Title',
   'common.assessmentInitial': 'A',
   'common.assessments': 'ମୂଲ୍ୟାଙ୍କନ ଗୁଡ଼ିକ',
   'common.assign': 'ନ୍ୟସ୍ତ କରିବା (ଆସାଇନ୍)',
@@ -242,6 +219,7 @@ window.i18ln = {
   'common.avatarFor': 'ପାଇଁ ଅବତାର',
   'common.averageScore': 'ହାରାହାରି ସ୍କୋର୍',
   'common.back': 'ଫେରନ୍ତୁ',
+  'common.for': 'for',
   'common.back-to-assessment': 'ମୂଲ୍ୟାଙ୍କନକୁ ଫେରନ୍ତୁ',
   'common.back-to-collection': 'ସଂଗ୍ରହକୁ ଫେରନ୍ତୁ',
   'common.back-to-course-map': 'ପାଠ୍ୟକ୍ରମ ମାନଚିତ୍ରକୁ ଫେରନ୍ତୁ',
@@ -308,13 +286,24 @@ window.i18ln = {
     'ଆପଣଙ୍କ  FRQ ସଂପୂର୍ଣ୍ଣ କରିବା ପାଇଁ ଗ୍ରେଡ୍ ସ୍କୋର୍ ଅଦ୍ୟତନ କରନ୍ତୁ ।',
   'common.answer-this-rubric':
     'ଆପଣଙ୍କ  FRQ ସଂପୂର୍ଣ୍ଣ କରିବା ପାଇଁ ଏହି ଶୀର୍ଷକର ଉତ୍ତର ଦିଅନ୍ତୁ ।',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.all-caught-up': 'ଆପଣ ପୂରା ଜଡ଼ିତ ହୋଇଛନ୍ତି !',
   'common.no-users-to-grade':
     'ଏହି FRQ କୁ ଗ୍ରେଡ୍ କରିବା ପାଇଁ କୌଣସି ଉପଭୋକ୍ତା ନାହାନ୍ତି ।',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.rubric-needs-grading': 'ଶୀର୍ଷକ ଗ୍ରେଡିଂ ଆବଶ୍ୟକ କରନ୍ତି',
   'common.not-answered': 'ଉତ୍ତର ଦିଆଯାଇ ନାହିଁ',
   'common.rubric-not-answered': 'ଶୀର୍ଷକର ଉତ୍ତର ଦିଆଯାଇ ନାହିଁ',
   'common.country': 'ଦେଶ',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.course-map': 'ପାଠ୍ୟକ୍ରମ ମାନଚିତ୍ର',
   'common.course': 'ପାଠ୍ୟକ୍ରମ ',
   'common.course-title': 'ପାଠ୍ୟକ୍ରମ ଶୀର୍ଷକ',
@@ -516,8 +505,15 @@ window.i18ln = {
   'common.essential-questions': 'ଅନିବାର୍ଯ୍ୟ ପ୍ରଶ୍ନଗୁଡ଼ିକ',
   'common.example': 'ଉହାଦରଣ:',
   'common.exit': 'ପ୍ରସ୍ଥାନ',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.external-collection': 'ବାହ୍ୟ ସଂଗ୍ରହ',
   'common.explanation': 'ସ୍ପଷ୍ଟୀକରଣ',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.explore': 'ଅନ୍ୱେଷଣ',
   'common.false': 'ମିଥ୍ୟା',
   'common.featured-courses': 'ବିଶେଷ ପାଠ୍ୟକ୍ରମ',
@@ -574,10 +570,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'ମାଷ୍ଟ୍ରି',
   'common.menu': 'ମେନୁ',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'ଅଧିକ ସୂଚନା',
   'common.move': 'ଘୁଞ୍ଚାନ୍ତୁ',
   'common.myContent': 'ମୋର ବିଷୟବସ୍ତୁ',
   'common.myProfile': 'ମୋର ଅବସ୍ଥିତି',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'ଲାଇବ୍ରେରୀ',
   'common.myPerformance': 'ମୋର ପ୍ରଦର୍ଶନ',
   'common.edit-narration': 'ବ୍ୟାଖ୍ୟାନ ସଂପାଦନା କରନ୍ତୁ',
@@ -619,6 +617,8 @@ window.i18ln = {
     'ଆପଣଙ୍କ ଶିକ୍ଷକ କ୍ଲାସ୍ କାର୍ଯ୍ୟକଳାପକୁ କୌଣସି ସଂଗ୍ରହ କିମ୍ୱା ମୂଲ୍ୟାଙ୍କନଗୁଡ଼ିକ ଏ ପର୍ଯ୍ୟନ୍ତ ନ୍ୟସ୍ତ କରିନାହାନ୍ତି ।',
   'common.no-dca-teacher':
     'ବର୍ତ୍ତମାନ କୌଣସି କାର୍ଯ୍ୟକଳାପ ନାହିଁ । ପାଠ୍ୟକ୍ରମ ମାନଚିତ୍ର କିମ୍ୱା ବିଷୟବସ୍ତୁ ବର୍ଗରୁ ଶ୍ରେଣୀ କାର୍ଯ୍ୟକଳାପ ଯୋଗ କରନ୍ତୁ ।',
+  'common.no-content-for-week':
+    'No class activities scheduled for the selected period',
   'common.notScored': 'ସ୍କୋର୍ କରିନାହାନ୍ତି',
   'common.notStarted': 'ଆରମ୍ଭ କରିନାହାନ୍ତି',
   'common.not-added': 'ଯୋଗ କରିନାହାନ୍ତି',
@@ -904,6 +904,7 @@ window.i18ln = {
   'class.info.add-students': 'ବିଦ୍ୟାର୍ଥୀମାନଙ୍କୁ ଯୋଗ କରନ୍ତୁ',
   'class.info.class-code': 'କ୍ଲାସରୁମ୍ କୋଡ୍',
   'class.info.delete': 'କ୍ଲାସରୁମ୍ ବିଲୋପ କରନ୍ତୁ',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'ନ୍ୟସ୍ତ ପାଠ୍ୟକ୍ରମ',
   'class.edit.basic-info': 'ମୌଳିକ ସୂଚନା',
   'class.edit.class-name': 'କ୍ଲାସରୁମ୍ ନାମ',
@@ -1170,6 +1171,12 @@ window.i18ln = {
   'content.resources.edit.information.im-publisher': 'ମୁଁ ହେଉଛି ପବ୍ଲିସର୍',
   'content.resources.edit.information.select-a-license':
     'ଦୟାକରି ଏକ ଲାଇସେନ୍ସ ଚୟନ କରନ୍ତୁ',
+  'content.oa.reference.uploaded': 'Uploaded',
+  'content.oa.reference.image': 'Image',
+  'content.oa.reference.pdf': 'Pdf',
+  'content.oa.reference.presentation': 'Presentation',
+  'content.oa.reference.document': 'Document',
+  'content.oa.reference.others': 'Others',
   'user.active-classrooms': 'କ୍ଲାସରୁମ୍ ଅଭିଲେଖ',
   'user.archived-classrooms': 'ଅଭିଲେଖ ହୋଇଥିବା କ୍ଲାସରୁମ୍ ଗୁଡ଼ିକ',
   'user.classrooms': 'କ୍ଲାସରୁମ୍ ଗୁଡ଼ିକ',
@@ -1268,8 +1275,6 @@ window.i18ln = {
   'student-independent-learning.no-bookmarks':
     'ଯେତେବେଳେ ଆପଣ ପାଠ୍ୟକ୍ରମ, ସଂଗ୍ରହ ଓ  ମୂଲ୍ୟାଙ୍କନ ଗୁଡ଼ିକୁ ବୁକମାର୍କ କରିବା ଆରମ୍ଭ କରୁଛନ୍ତି, ତାହା ଏଠାରେ ଦେଖାଯିବ ।',
   'student-independent-learning.add-bookmark': 'ବୁକମାର୍କ ଯୋଗ କରନ୍ତୁ',
-  'teacher-landing.class.atc-view.progress-to-destination':
-    'progress to destination',
   'teacher-landing.latest-announcement': 'ସଦ୍ୟତମ ଘୋଷଣା',
   'teacher-landing.latest-assessment': 'ସଦ୍ୟତମ ମୂଲ୍ୟାଙ୍କନ',
   'teacher-landing.create-classroom':
@@ -1373,6 +1378,8 @@ window.i18ln = {
     'Total Competencies Gained',
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.class-activities': 'କ୍ଲାସ୍ କାର୍ଯ୍ୟକଳାପ',
   'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
   'teacher-landing.class.class-activities.warning-message':
@@ -1520,6 +1527,11 @@ window.i18ln = {
   'gru-add-to.add-collection-to-lesson': 'ମୋର ସଂଗ୍ରହରୁ ଯୋଗ କରନ୍ତୁ',
   'gru-add-to.add-collection-to-lesson-lead':
     'ଏହି ଅଧ୍ୟାୟରେ ଯୋଗ କରିବା ପାଇଁ ଏକ ସଂଗ୍ରହ ଚୟନ କରନ୍ତୁ',
+  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.OA-info':
+    'The activities listed here <b>do not</b> belong to another lesson or course',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'Select a activity to add to this lesson.',
   'gru-add-to.add-to-collection': 'ସଂଗ୍ରହରେ ଯୋଗ କରନ୍ତୁ',
   'gru-add-to.add-to-collection-lead':
     'ଆପଣ ଏଥିରେ {{contentTitle}} ଯୋଗ କରିବାକୁ ଚାହୁଁଥିବା ସଂଗ୍ରହକୁ ଚୟନ କରନ୍ତୁ',
@@ -1597,6 +1609,7 @@ window.i18ln = {
     'ଲିଙ୍କ୍ ସହିତ ଆପଣଙ୍କ ରୁବ୍ରିକ୍ କୁ ଶେୟାର୍ କରନ୍ତୁ ',
   'gru-share-pop-over.share-collection':
     'ଲିଙ୍କ୍ ସହିତ ଆପଣଙ୍କ ସଂଗ୍ରହକୁ ଶେୟାର୍ କରନ୍ତୁ ',
+  'gru-share-pop-over.share-OA': 'Offline Activity',
   'gru-category-panel.teacher.title': 'ଶିକ୍ଷକମାନଙ୍କ ପାଇଁ',
   'gru-category-panel.teacher.body':
     'ଷ୍ଟାଣ୍ଡାର୍ଡ-ବ୍ୟବସ୍ଥିତ ବିଷୟବସ୍ତୁ ଆବିଷ୍କାର କରିବା ପାଇଁ, ବିଷୟବସ୍ତୁକୁ ଅନୁକୂଳିତ କରନ୍ତୁ ଓ ତଥ୍ୟ ବିଶ୍ଲେଷକ ଦ୍ୱାରା ବିଦ୍ୟାର୍ଥୀଙ୍କ ପ୍ରଗତିକୁ ଟ୍ରାକ୍ କରନ୍ତୁ ।',
@@ -2530,6 +2543,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'ପ୍ରଶ୍ନ',
   'gru-study-header.question.one': 'ପ୍ରଶ୍ନ',
   'gru-study-header.question.other': 'ପ୍ରଶ୍ନଗୁଡ଼ିକ',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'ଅଧିକ ଜାଣିବା ପାଇଁ, ଏହି ସମ୍ୱଳଗୁଡ଼ିକୁ ଯାଞ୍ଚ କରନ୍ତୁ ।',
   'gru-suggest-test.pre-test-header': 'ପ୍ରି-ଟେଷ୍ଟ (ଇଚ୍ଛାଧୀନ)',
@@ -2544,8 +2558,8 @@ window.i18ln = {
     'ପରାମର୍ଶିତ ମୂଲ୍ୟାଙ୍କନ (ଇଚ୍ଛାଧୀନ)',
   'gru-suggest-test.signature_assessment-lead':
     'ଏହି ପାଠ୍ୟକ୍ରମରେ ଆପଣଙ୍କ ପ୍ରଦର୍ଶନ ଆଧାରରେ, ନିମ୍ନଲିଖିତ ମୂଲ୍ୟାଙ୍କନ ଆପଣଙ୍କ ବୋଧଶକ୍ତିକୁ ବଢ଼ାଇ ପାରେ ।',
-  'gru-suggest-test.pre-test-lead':
-    'ଏହି ଅଧ୍ୟାୟରେ ବିଷୟବସ୍ତୁ ପ୍ରତି ଆପଣଙ୍କର ବର୍ତ୍ତମାନର ବୋଧଶକ୍ତିକୁ ନିର୍ଣ୍ଣୟ କରିବା ପାଇଁ ଏକ ପ୍ରି-ଟେଷ୍ଟ ପାଇଁ ପରାମର୍ଶ ଦିଆଯାଇଛି । ଏହି ପ୍ରି-ଟେଷ୍ଟ ଅଧ୍ୟାୟରେ ବିଷୟବସ୍ତୁ ପାଇଁ ଆପଣଙ୍କୁ ପ୍ରସ୍ତୁତ କରିବ । ପ୍ରି-ଟେଷ୍ଟ ଆପଣଙ୍କର ପାଠ୍ୟକ୍ରମ ପ୍ରଦର୍ଶନ ସ୍କୋରକୁ ପ୍ରଭାବିତ କରିବ ନାହିଁ ।',
+  'gru-suggest-test.pre-tessignaturet-lead':
+    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'gru-suggest-test.post-test-lead':
     'ନିମ୍ନଲିଖିତ ପୋଷ୍ଟ-ଟେଷ୍ଟ ଉପସ୍ଥାପିତ ତଥ୍ୟକୁ ବୁଝିବାର ନିର୍ଣ୍ଣୟ କରିବା ପାଇଁ ପରାମର୍ଶ ଦିଆଯାଇଛି । ପୋଷ୍ଟ-ଟେଷ୍ଟ ଆପଣଙ୍କର ପାଠ୍ୟକ୍ରମ ପ୍ରଦର୍ଶନ ସ୍କୋରକୁ ପ୍ରଭାବିତ କରିବ ନାହିଁ ।',
   'gru-suggest-test.backfill-lead':
@@ -2825,21 +2839,6 @@ window.i18ln = {
     'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
-  'common.activity': 'Activity Title',
-  'content.oa.reference.uploaded': 'Uploaded',
-  'content.oa.reference.image': 'Image',
-  'content.oa.reference.pdf': 'Pdf',
-  'content.oa.reference.presentation': 'Presentation',
-  'content.oa.reference.document': 'Document',
-  'content.oa.reference.others': 'Others',
-  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
-  'gru-add-to.OA-info':
-    'The activities listed here <b>do not</b> belong to another lesson or course',
-  'gru-add-to.add-oa-to-lesson-lead':
-    'Select a activity to add to this lesson.',
-  'gru-share-pop-over.share-OA': 'Offline Activity',
-  'gru-suggest-test.pre-tessignaturet-lead':
-    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'common.choose-lang': 'Choose Language',
   'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
