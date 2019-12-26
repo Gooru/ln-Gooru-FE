@@ -339,7 +339,7 @@ window.i18ln = {
   'common.edit-question': 'تعديل السؤال',
   'common.edit-resource': 'تعديل المصدر',
   'common.edit-rubric': 'تعديل العنوان',
-  'common.email_support': 'support@gooru.org\t',
+  'common.email_support': 'support@gooru.org ',
   'common.emotions.emotion-1': 'انا احتاج المساعدة',
   'common.emotions.emotion-2': 'انا لا أفهم',
   'common.emotions.emotion-3': 'مه...',
@@ -586,7 +586,7 @@ window.i18ln = {
   'common.notScored': 'بدون نتيجة',
   'common.notStarted': 'لم يبدأ',
   'common.not-added': 'لم يتم اضافته',
-  'common.not-applicable': 'N/A\t',
+  'common.not-applicable': 'N/A ',
   'common.not-following': 'انت لست متابعاً',
   'common.not-provided': 'غير مزود',
   'common.not-specified': 'عير محدد',
@@ -641,7 +641,7 @@ window.i18ln = {
   'common.question-type.HT_RO': 'سحب ووضع طلب',
   'common.question-type.HT_HL': 'تسليط الضوء على النص',
   'common.reaction': 'رد فعل',
-  'common.read-first': '<b>Read this first!</b>\t',
+  'common.read-first': '<b>Read this first!</b> ',
   'common.remaining': '{{number}}يساراً',
   'common.remix': 'تعديل',
   'common.remix-assessment': 'تعديل التقييم',
@@ -1076,7 +1076,7 @@ window.i18ln = {
   'content.modals.delete-rubric.first-check':
     'هذا حذف دائم ولا يمكن الرجوع فيه',
   'content.modals.remove-content.legend':
-    'انت على وشك حذف    م <b>{{title}}</b> from <b>{{parentName}}</b>\t',
+    'انت على وشك حذف    م <b>{{title}}</b> from <b>{{parentName}}</b> ',
   'content.modals.remove-content.remove-error':
     'اوبس! غيلر قادر على حذف{{type}}الان.يرجى المحاوله مرة اخرى بعد قليل.',
   'content.modals.remove-content.confirmation':
@@ -1109,14 +1109,14 @@ window.i18ln = {
   'content.resources.edit.information.select-a-license': 'يرجىاختيار رخصة',
   'content.oa.reference.uploaded': 'تنزيل',
   'content.oa.reference.image': 'صورة',
-  'content.oa.reference.pdf': 'Pdf\t',
+  'content.oa.reference.pdf': 'Pdf ',
   'content.oa.reference.presentation': 'العرض',
   'content.oa.reference.document': 'مستند',
   'content.oa.reference.others': 'اخرون',
   'user.active-classrooms': 'فصول دراسية متاحة',
   'user.archived-classrooms': 'فصول دراسية مأرشفة',
   'user.classrooms': 'فصورل دراسية',
-  'user.rgo': 'RGO\t',
+  'user.rgo': 'RGO ',
   'user.create-class': 'انشاء فصل دراسي',
   'user.hello': 'مرحباً،{{name}}!',
   'user.independent-learning': 'التعلم المستقل',
@@ -1232,7 +1232,7 @@ window.i18ln = {
   'teacher-landing.class.back-to-archived':
     'العودة إلى الفصول الدراسية المؤرشفة',
   'teacher-landing.class.class-management': 'ادارة الفصل',
-  'teacher-landing.class.atc': 'ATC\t',
+  'teacher-landing.class.atc': 'ATC ',
   'teacher-landing.class.performance-overview': 'نظرة عامة على الأداء',
   'teacher-landing.class.student-proficiency': 'اجادة الطالب',
   'teacher-landing.class.class-management-tab.actions': 'افعال',
@@ -1639,7 +1639,7 @@ window.i18ln = {
   'forgot-password.footer-description-1':
     'ستتلقى رسالة بريد إلكتروني بها رابط لإعادة تعيين كلمة المرور الخاصة بك.',
   'forgot-password.footer-description-2': 'لو لديك اي ، يرجى التواصل معنا',
-  'forgot-password.mail': 'support@gooru.org\t',
+  'forgot-password.mail': 'support@gooru.org ',
   'forgot-password.error-email-not-exists':
     'عذرًا ، لا نتعرف على هذا البريد الإلكتروني.',
   'forgot-password.secondStepTitle': 'تحقق من بريدك الالكتروني',
@@ -2474,7 +2474,7 @@ window.i18ln = {
   'competency-info-content.portfolio': 'حافظة',
   'competency-info-content.metadata': 'البيانات الوصفية',
   'competency-info-content.learning-map': 'خريطة التعلم',
-  'competency-meta-data.title': 'ALT-CONCEPTS\t',
+  'competency-meta-data.title': 'ALT-CONCEPTS ',
   'competency-meta-data.heading.micro': 'الاختصاصات الصغيرة',
   'competency-meta-data.heading.prequisite': 'الكفاءات المطلوبة',
   'competency-meta-data.nodata.micro':

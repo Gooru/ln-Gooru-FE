@@ -251,7 +251,7 @@ window.i18ln = {
   'common.collection-pl.other': 'সংগৃহীতসমূহ',
   'common.collection-title': 'সংগৃহীত শিৰোনাম',
   'common.collections': 'সংগৃহীতসমূহ',
-  'common.collectionInitial': '\tC',
+  'common.collectionInitial': ' C',
   'common.competency': 'পাৰদৰ্শিতা',
   'common.competencies': 'সামৰ্থ্যসমূহ',
   'common.completed': 'সম্পূৰ্ণ  হোৱা',
@@ -678,7 +678,7 @@ window.i18ln = {
   'common.question-type.HT_RO': 'ড্ৰেদ আৰু ড্ৰ\'প অৰ্ডাৰ',
   'common.question-type.HT_HL': 'হাইলাইটিং টেক্স',
   'common.reaction': 'প্ৰতিক্ৰিয়া',
-  'common.read-first': '\t<b>এইটো প্ৰথমতে পঢ়ক!</b>',
+  'common.read-first': ' <b>এইটো প্ৰথমতে পঢ়ক!</b>',
   'common.remaining': '{{number}} বাঁও',
   'common.remix': 'ৰিমিক্স',
   'common.remix-assessment': 'ৰিমিক্স মূল্যাংকন',
@@ -2454,7 +2454,7 @@ window.i18ln = {
   'gru-rubric-edit.upload-rubric': 'নিৰ্দেশনাৱলী আপল\'ড কৰক',
   'gru-rubric-edit.copy.success-message':
     'আপুনি নিৰ্দেশনাৱলীখন নকল কৰিলে{{title}}।আপুনি সেই নিৰ্দেশনাৱলীখন সম্পাদন কৰিব বিছাৰেনেকি?',
-  'gru-rubric-creation.url': '\tURL',
+  'gru-rubric-creation.url': ' URL',
   'gru-rubric-creation.upload-file': 'ফাইল আপল\'ড কৰক',
   'gru-rubric-creation.add-category': 'এক নতুন বৰ্গ অৰ্ন্তভূক্ত কৰক',
   'gru-rubric-creation.gru-preview-url.preview':

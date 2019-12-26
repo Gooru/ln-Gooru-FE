@@ -1117,7 +1117,7 @@ window.i18ln = {
   'content.modals.delete-rubric.first-check':
     'આ કાયમી ડિલીટ છે અને તેને પરત નહી લાવી શકાય',
   'content.modals.remove-content.legend':
-    'તમે  <b>{{title}}</b> માંથી <b>{{parentName}}</b>\tદૂર કરવા જઈ રહ્યા છો.',
+    'તમે  <b>{{title}}</b> માંથી <b>{{parentName}}</b> દૂર કરવા જઈ રહ્યા છો.',
   'content.modals.remove-content.remove-error':
     'ઓહહ અત્યારે {{type}} ડીલીટ કરી શકતા નથી. કૃપા કરી થોડીવાર પછી ફરી પ્રયાસ કરો.',
   'content.modals.remove-content.confirmation':

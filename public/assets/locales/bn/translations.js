@@ -2262,7 +2262,7 @@ window.i18ln = {
   'gru-take-tour.student-home.stepTwelve.title': 'শ্রেণীকক্ষে যোগ দিন ',
   'gru-take-tour.student-home.stepTwelve.description':
     'শ্রেণিকক্ষে যোগদানের জন্য শ্রেণিকক্ষের কোডটি প্রবেশ করান।',
-  'gru-take-tour.student-home.stepThirteen.title': 'সমাপ্ত!\t  ',
+  'gru-take-tour.student-home.stepThirteen.title': 'সমাপ্ত!   ',
   'gru-take-tour.student-home.stepThirteen.description':
     'এখন এগিয়ে যান এবং আপনি যে কোর্সে ভর্তি হয়েছেন, সেখানে ক্লিক করুন, শ্রেণিকক্ষে যোগদান করুন, বা আপনার পছন্দের বিষয়বস্তু সন্ধান করুন।  ',
   'gru-take-tour.student-performance.stepOne.title': 'স্বাগতম! ',
@@ -2277,7 +2277,7 @@ window.i18ln = {
   'gru-take-tour.student-performance.stepFour.title': ' ডাউনলোড / প্রিন্ট ',
   'gru-take-tour.student-performance.stepFour.description':
     'আপনার রিপোর্টটিকে ডাউনলোড করুন। ',
-  'gru-take-tour.student-performance.stepFive.title': 'সমাপ্ত!\t  ',
+  'gru-take-tour.student-performance.stepFive.title': 'সমাপ্ত!   ',
   'gru-take-tour.student-performance.stepFive.description':
     'এগিয়ে যান এবং আপনার কর্মক্ষমতাকে বিশ্লেষণ করুন!  ',
   'gru-take-tour.student-class.stepOne.title': 'স্বাগতম! ',
@@ -2296,7 +2296,7 @@ window.i18ln = {
   'gru-take-tour.student-class.stepFour.title': 'আমার রিপোর্ট',
   'gru-take-tour.student-class.stepFour.description':
     'আপনার সামগ্রিক শ্রেণির কার্যকারিতা পরীক্ষা করুন। ',
-  'gru-take-tour.student-class.stepFive.title': 'সমাপ্ত!\t  ',
+  'gru-take-tour.student-class.stepFive.title': 'সমাপ্ত!   ',
   'gru-take-tour.student-class.stepFive.description':
     'কোর্সের মানচিত্রে বা প্রতিদিনের ক্রিয়াকলাপগুলিতে ক্লিক করে কোর্স অধ্যয়ন শুরু করুন।',
   'gru-take-tour.teacher-class.stepOne.title': 'স্বাগতম! ',
@@ -2320,7 +2320,7 @@ window.i18ln = {
     'শ্রেণীকক্ষ পরিচালনা',
   'gru-take-tour.teacher-class.stepClassManagement.description':
     'আপনার শ্রেণীর তথ্য এবং শ্রেনীর তালিকাভুক্ত শিক্ষার্থীদের নিয়োগ বা আপডেট করুন। ',
-  'gru-take-tour.teacher-class.stepFive.title': 'সমাপ্ত!\t  ',
+  'gru-take-tour.teacher-class.stepFive.title': 'সমাপ্ত!   ',
   'gru-take-tour.teacher-class.stepFive.description':
     'এখন এগিয়ে যান এবং আপনার শিক্ষার্থীদের সাথে শ্রেণিকক্ষ ভাগ করে নিন।  ',
   'gru-take-tour.study-player.stepOne.title': 'স্বাগতম! ',
@@ -2345,7 +2345,7 @@ window.i18ln = {
   'gru-take-tour.study-player.stepSeven.title': ' রিসোর্সগুলির প্রতিক্রিয়া  ',
   'gru-take-tour.study-player.stepSeven.description':
     'এই উৎসগুলির  সম্পর্কে আপনার মতামতটি আপনার শিক্ষককে জানান।  ',
-  'gru-take-tour.study-player.stepEight.title': 'সমাপ্ত!\t  ',
+  'gru-take-tour.study-player.stepEight.title': 'সমাপ্ত!   ',
   'gru-take-tour.study-player.stepEight.description': 'অধ্যয়ন শুরু করুন ! ',
   'gru-take-tour.study-player.stepNine.title': 'সংগ্রহে ফিরে যেতে হবে',
   'gru-take-tour.study-player.stepNine.description':
