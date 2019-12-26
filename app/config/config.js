@@ -26,6 +26,10 @@ export const UPLOADABLE_TYPES = [
 
 export const VIDEO_RESOURCE_TYPE = 'video';
 
+export const SUGGESTION_SCOPE_TYPE = {
+  'class-activity': 'dca'
+};
+
 export const RESOURCE_TYPES = [
   'webpage',
   VIDEO_RESOURCE_TYPE,
@@ -68,6 +72,11 @@ export const TAXONOMY_CATEGORIES = [
   EDUCATION_CATEGORY,
   LEARNING_CATEGORY
 ];
+
+export const SUGGESTION_TYPE = {
+  CA_TEACHER: 'ca.teacher',
+  PROFICIENY_TEACHER: 'proficiency.teacher'
+};
 
 export const CONTENT_CATEGORIES = [K12_CATEGORY, EDUCATION_CATEGORY];
 
@@ -336,7 +345,14 @@ export const PLAYER_EVENT_SOURCE = {
   INDEPENDENT_ACTIVITY: 'ILActivity',
   RGO: 'rgo',
   DIAGNOSTIC: 'diagnostic',
-  MASTER_COMPETENCY: 'competencyMastery'
+  MASTER_COMPETENCY: 'competencyMastery',
+  CLASS_ACTIVITY: 'class-activity'
+};
+
+export const NOTIFICATION_PLAYER_EVENT_SOURCE = {
+  'course-map': 'coursemap',
+  'class-activity': 'dailyclassactivity',
+  proficiency: 'competencyMastery'
 };
 
 export const DCA_CALENDAR_VIEWS = {
@@ -408,6 +424,7 @@ export const CLASS_SKYLINE_INITIAL_DESTINATION = {
 };
 
 export const SCREEN_SIZES = {
+  XS_SMALL: 380,
   EXTRA_SMALL: 480,
   SMALL: 768,
   MEDIUM: 992,
@@ -458,3 +475,19 @@ export const OA_TASK_SUBMISSION_TYPES = [
     icon: 'fa-link'
   }
 ];
+
+export const PLAYER_EVENT_MESSAGE = {
+  GRU_PUllUP_CLOSE: 'gru_pullup_close',
+  GRU_LOADING_COMPLETED: 'gru_loading_completed'
+};
+
+export const FEEDBACK_USER_CATEGORY = {
+  teacher: 1,
+  student: 2,
+  other: 3
+};
+export const FEEDBACK_RATING_TYPE = {
+  QUANTITATIVE: 1,
+  QUALITATIVE: 2,
+  BOTH: 3
+};

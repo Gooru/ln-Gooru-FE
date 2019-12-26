@@ -139,7 +139,8 @@ export default Ember.Service.extend({
     classId,
     userId,
     collectionType,
-    dateVal
+    dateVal,
+    pathId
   ) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -151,7 +152,8 @@ export default Ember.Service.extend({
           classId: classId,
           userId: userId,
           date: dateVal,
-          collectionType: collectionType
+          collectionType: collectionType,
+          pathId: pathId
         })
         .then(
           function(payload) {
@@ -267,12 +269,15 @@ export default Ember.Service.extend({
         }
       }
       Ember.RSVP.hash({
-        course: courseId ?
-          service.get('courseService').fetchByIdWithOutProfile(courseId) : undefined,
-        unit: unitId ?
-          service.get('unitService').fetchById(courseId, unitId) : undefined,
-        lesson: lessonId ?
-          service.get('lessonService').fetchById(courseId, unitId, lessonId) : undefined,
+        course: courseId
+          ? service.get('courseService').fetchByIdWithOutProfile(courseId)
+          : undefined,
+        unit: unitId
+          ? service.get('unitService').fetchById(courseId, unitId)
+          : undefined,
+        lesson: lessonId
+          ? service.get('lessonService').fetchById(courseId, unitId, lessonId)
+          : undefined,
         collection: collection
       }).then(
         function(hash) {

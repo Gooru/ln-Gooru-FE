@@ -60,7 +60,7 @@
         }
 
         .grade-rubric-levels {
-          width: 290px;
+          width: 50%;
           background-color: #5d666f;
           border-radius: 16px;
           display: flex;
@@ -124,6 +124,10 @@
               text-align: center;
               background-color: #fff;
             }
+          }
+
+          @media screen and (max-width: $screen-xs) {
+            width: 75%;
           }
         }
 

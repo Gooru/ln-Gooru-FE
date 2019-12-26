@@ -706,6 +706,7 @@ export default Ember.Component.extend({
         .get('rubricService')
         .setStudentRubricGrades(userGrade)
         .then(() => {
+          component.sendAction('getGradeListItem');
           component.slideToNextUser();
         });
     }
@@ -749,6 +750,7 @@ export default Ember.Component.extend({
         }
         component.$().fadeOut(5000, function() {
           component.set('showPullUp', false);
+          component.sendAction('refreshItem');
         });
       });
     }

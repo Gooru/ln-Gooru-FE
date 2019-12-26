@@ -1,5 +1,9 @@
 import Ember from 'ember';
-import { ROLES, CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  ROLES,
+  CONTENT_TYPES,
+  PLAYER_EVENT_MESSAGE
+} from 'gooru-web/config/config';
 import { roundFloat } from 'gooru-web/utils/math';
 
 /**
@@ -19,7 +23,8 @@ export default Ember.Controller.extend({
     'unitId',
     'lessonId',
     'milestoneId',
-    'source'
+    'source',
+    'isIframeMode'
   ],
 
   // -------------------------------------------------------------------------
@@ -97,6 +102,16 @@ export default Ember.Controller.extend({
         Ember.$('body')
           .removeClass('fullscreen-exit')
           .addClass('fullscreen');
+      }
+    },
+
+    onExit(rouet, id) {
+      const controller = this;
+      let isIframeMode = controller.get('isIframeMode');
+      if (isIframeMode) {
+        window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
+      } else {
+        controller.transitionToRoute(rouet, id);
       }
     }
   },
@@ -202,7 +217,8 @@ export default Ember.Controller.extend({
     const context = this.get('mapLocation.context');
     let queryParams = {
       role: ROLES.STUDENT,
-      source: this.get('source')
+      source: this.get('source'),
+      isIframeMode: this.get('isIframeMode')
     };
     let classId = context.get('classId');
     if (classId) {

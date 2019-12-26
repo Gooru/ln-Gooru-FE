@@ -44,7 +44,7 @@
     </span>
   </div>
   <div class="list">
-    {{#each collections as |collection|}}
+    {{#each filteredCollections as |collection|}}
       <div class="{{collection.id}} collection" {{action "selectCollection" collection}}>
         {{cards/gru-collection-card
         collection=collection

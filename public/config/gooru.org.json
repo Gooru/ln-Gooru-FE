@@ -53,7 +53,9 @@
   "GRU_FEATURE_FLAG": {
     "searchFilter": true,
     "i2dFlow": false,
-    "enableCollectionLiveLearning": false
+    "enableCollectionLiveLearning": false,
+    "isLessonPlanShow": true,
+    "isShowSecondaryClass": false
   },
 
   "marketingSiteUrl": "/about"

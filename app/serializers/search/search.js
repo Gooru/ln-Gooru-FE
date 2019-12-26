@@ -87,6 +87,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       remixCount: collectionData.scollectionRemixCount || 0,
       course: course.title,
       courseId: course.id,
+      relevance: collectionData.relevance,
+      efficacy: collectionData.efficacy,
+      engagement: collectionData.engagement,
       isVisibleOnProfile: collectionData.profileUserVisibility,
       owner: ProfileModel.create({
         id: collectionData.gooruUId,
@@ -226,6 +229,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       remixCount: assessmentData.scollectionRemixCount || 0,
       course: course.title,
       courseId: course.id,
+      relevance: assessmentData.relevance,
+      efficacy: assessmentData.efficacy,
+      engagement: assessmentData.engagement,
       isVisibleOnProfile: assessmentData.profileUserVisibility,
       owner: ProfileModel.create({
         id: assessmentData.gooruUId,

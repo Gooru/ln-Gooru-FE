@@ -19,6 +19,26 @@ export default Ember.Controller.extend({
 
   i18n: Ember.inject.service(),
 
+  /**
+   * @type {UnitService} Service to retrieve unit information
+   */
+  unitService: Ember.inject.service('api-sdk/unit'),
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
+
+  /**
+   * @type {Service} performance service
+   */
+  performanceService: Ember.inject.service('api-sdk/performance'),
+
+  /**
+   * @type {CourseService}
+   */
+  courseService: Ember.inject.service('api-sdk/course'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -101,6 +121,12 @@ export default Ember.Controller.extend({
     onToggleReportTypeContainer() {
       $(
         '.students-proficiency-container .report-selector .report-types-container'
+      ).slideToggle();
+    },
+
+    onToggleClassListContainer() {
+      $(
+        '.students-proficiency-container .class-selector .class-list-container'
       ).slideToggle();
     }
   },
@@ -346,17 +372,17 @@ export default Ember.Controller.extend({
   /**
    * @property {Class}
    */
-  class: Ember.computed.alias('classController.class'),
+  class: null,
 
   /**
    * @property {Course}
    */
-  course: Ember.computed.alias('classController.course'),
+  course: null,
 
   /**
    * @property {classMembers}
    */
-  classMembers: Ember.computed.alias('classController.members.members'),
+  classMembers: Ember.computed.alias('members.members'),
 
   /**
    * @property {classId}
@@ -524,10 +550,20 @@ export default Ember.Controller.extend({
   /**
    * @property {Array} fwCompetencies
    */
-  fwCompetencies: Ember.computed.alias('classController.fwCompetencies'),
+  fwCompetencies: null,
 
   /**
    * @property {Array} fwDomains
    */
-  fwDomains: Ember.computed.alias('classController.fwDomains')
+  fwDomains: null,
+
+  /**
+   * Maintain secondary class list
+   */
+  selectedClassList: null,
+
+  watchSeletectClassList: Ember.observer('selectedClassList', function() {
+    let selectedClass = this.get('selectedClassList');
+    this.send('onSelectSecondaryClass', selectedClass.get('id'));
+  })
 });

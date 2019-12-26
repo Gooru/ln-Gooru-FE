@@ -239,3 +239,12 @@
     reportContext = studentCollectionReportContext
   }}
 {{/if}}
+
+{{#if isOpenPlayer}}
+  {{reports/pull-up/player-pull-up
+    showPullUp=isOpenPlayer
+    playerUrl=playerUrl
+    playerContent=playerContent
+    onclosePullUp="closePullUp"
+  }}
+{{/if}}

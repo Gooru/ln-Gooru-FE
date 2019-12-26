@@ -28,6 +28,12 @@ export default Ember.Component.extend({
     let component = this;
     component.timeValidator();
   },
+
+  didInsertElement() {
+    let component = this;
+    component.$('[data-toggle="tooltip"]').tooltip();
+  },
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -51,18 +57,32 @@ export default Ember.Component.extend({
       let component = this;
       component.set('isTimeEntered', true);
       component.updateSelfReport();
+      component.set('isShowActivityFeedback', true);
     },
 
     /**
-     * Action triggered when change score type
+     * Action triggered when click on skip feedback
      */
+    onSkipFeedback() {
+      const component = this;
+      component.sendAction('onSkipFeedback');
+    },
+
+    onExit: function() {
+      this.sendAction('onExit');
+    },
 
     /**
      * Action triggered when click cancel
      */
     onCancel() {
       let component = this;
-      component.redirectTo();
+      let isIframeMode = component.get('isIframeMode');
+      if (isIframeMode) {
+        component.sendAction('onClosePlayer');
+      } else {
+        component.redirectTo();
+      }
     }
   },
 
@@ -110,6 +130,16 @@ export default Ember.Component.extend({
   timeZone: Ember.computed(function() {
     return moment.tz.guess() || null;
   }),
+
+  /**
+   * @property {Boolean} isShowActivityFeedback
+   */
+  isShowActivityFeedback: false,
+
+  /**
+   * @property {String} contentType
+   */
+  contentType: 'collection-external',
 
   // -------------------------------------------------------------------------
   // Methods
@@ -159,6 +189,7 @@ export default Ember.Component.extend({
     let component = this;
     let analyticsService = component.get('analyticsService');
     let dataParams = component.getDataParams();
+    component.set('timeSpent', dataParams.time_spent);
     let selfReportedPromise = analyticsService.studentSelfReporting(dataParams);
     component.set('time', '');
     Ember.RSVP.hash({
@@ -209,6 +240,7 @@ export default Ember.Component.extend({
     component.set('isStarted', false);
     component.set('isDisableTimeEditor', true);
     component.set('isValidtime', false);
+    component.set('isShowActivityFeedback', false);
   },
 
   /**

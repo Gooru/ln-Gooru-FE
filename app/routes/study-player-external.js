@@ -2,7 +2,8 @@ import Ember from 'ember';
 import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
 import {
   CLASS_SKYLINE_INITIAL_DESTINATION,
-  CONTENT_TYPES
+  CONTENT_TYPES,
+  PLAYER_EVENT_MESSAGE
 } from 'gooru-web/config/config';
 
 export default Ember.Route.extend(PrivateRouteMixin, {
@@ -112,7 +113,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
                   .readExternalAssessment(params.collectionId)
         }).then(function(hash) {
           //setting query params using the map location
-
           params.type =
             params.type ||
             mapLocation.get('context.itemType') ||
@@ -158,6 +158,7 @@ export default Ember.Route.extend(PrivateRouteMixin, {
   },
 
   setupController(controller, model) {
+    window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_LOADING_COMPLETED, '*');
     this._super(...arguments);
     const isAnonymous = model.isAnonymous;
     const mapLocation = model.mapLocation;

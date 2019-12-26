@@ -624,6 +624,9 @@ export default Ember.Service.extend({
         .filterBy('collection.isExternalAssessment')
         .mapBy('collection.id');
       assessmentIds = assessmentIds.concat(externalAssessmentIds);
+      let offlineActivityIds = classActivities
+        .filterBy('contentType', 'offline-activity')
+        .mapBy('id');
       const performanceService = service.get('performanceService');
       Ember.RSVP.hash({
         activityCollectionPerformanceSummaryItems: collectionIds.length
@@ -643,10 +646,17 @@ export default Ember.Service.extend({
             startDate,
             endDate
           )
+          : [],
+        activityOfflineActivityPerformanceSummaryItems: offlineActivityIds.length
+          ? performanceService.findOfflineClassActivityPerformanceSummaryByIds(
+            classId,
+            offlineActivityIds
+          )
           : []
       }).then(function(hash) {
         let performances = hash.activityCollectionPerformanceSummaryItems.concat(
-          hash.activityAssessmentPerformanceSummaryItems
+          hash.activityAssessmentPerformanceSummaryItems,
+          hash.activityOfflineActivityPerformanceSummaryItems
         );
         performances.forEach(performance => {
           let classActivity = classActivities
@@ -656,6 +666,10 @@ export default Ember.Service.extend({
               performance.get('collectionPerformanceSummary.collectionId')
             )
             .objectAt(0);
+          classActivity =
+            classActivity ||
+            classActivities.findBy('id', performance.dcaContentId) ||
+            null;
           if (classActivity) {
             let classActivityIndex = classActivities.indexOf(classActivity);
             let performanceData = performance.get(
@@ -806,6 +820,52 @@ export default Ember.Service.extend({
         )
         .then(function() {
           resolve(true);
+        }, reject);
+    });
+  },
+
+  getScheduledActivitiesByDate(classId, requestBody) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .getScheduledActivitiesByDate(classId, requestBody)
+        .then(function(scheduledActivities) {
+          const classActivities = service
+            .get('classActivitySerializer')
+            .normalizeFindClassActivities(scheduledActivities);
+          let uniqueClassIds = classActivities
+            .uniqBy('classId')
+            .mapBy('classId');
+          uniqueClassIds.map(classId => {
+            let activitiesByClass = classActivities.filterBy(
+              'classId',
+              classId
+            );
+            service.findClassActivitiesPerformanceSummary(
+              classId,
+              activitiesByClass,
+              requestBody.start_date,
+              requestBody.end_date
+            );
+          });
+          resolve(classActivities);
+        }, reject);
+    });
+  },
+
+  getUnScheduledActivitiesByMonthYear(classId, requestBody) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classActivityAdapter')
+        .getUnScheduledActivitiesByMonthYear(classId, requestBody)
+        .then(function(unScheduledActivities) {
+          resolve(
+            service
+              .get('classActivitySerializer')
+              .normalizeFindClassActivities(unScheduledActivities)
+          );
         }, reject);
     });
   }

@@ -24,7 +24,7 @@
                   false
                   true
                }}
-             </div>
+              </div>
             </div>
             <div class="competency-completion-performance">
               <div class="completion-percentage">{{competencyData.completionPercentage}}%</div>
@@ -66,7 +66,6 @@
     </div>
   </div>
 </div>
-
 {{#if activeCompetency.isExpanded}}
   <div class="trigger-suggestion {{unless activeCompetency.suggestionContentCount 'empty-suggestion'}}">
     <div class="clear-suggestion" {{action "onClearStudents"}}>
@@ -82,6 +81,11 @@
         </span>
       </div>
     {{else}}
+      <div class="selected-all" {{action "onSelectAllStudent"}}>
+        <span class="selected-icon unselect">
+          {{gru-icon name="done_all" class="tick-icon"}}
+        </span>
+      </div>
       <div class="selected-student-count">
         {{selectedUserIds.length}} {{t (if (lt selectedUserIds.length 2) 'common.student' 'common.students')}}
       </div>

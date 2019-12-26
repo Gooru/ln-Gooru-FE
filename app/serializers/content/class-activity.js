@@ -61,6 +61,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const basePath = serializer.get('session.cdnUrls.content');
     return ClassActivity.create(Ember.getOwner(this).ownerInjection(), {
       id: data.id,
+      classId: data.class_id,
       date: data.activation_date
         ? parseDate(data.activation_date, 'YYYY-MM-DD')
         : null,
@@ -75,8 +76,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       contentType: data.content_type,
       forMonth: data.for_month,
       isCompleted: data.is_completed,
-      questionCount: data.question_count || null,
-      resourceCount: data.resource_count || null,
+      questionCount: data.question_count || 0,
+      resourceCount: data.resource_count || 0,
       taskCount: data.task_count || 0,
       url: data.url,
       title: data.title,
@@ -107,13 +108,15 @@ export default Ember.Object.extend(ConfigurationMixin, {
       content = Assessment.create({
         id: data.content_id,
         title: data.title,
-        resourceCount: data.resource_count,
-        questionCount: data.question_count,
-        oeQuestionCount: data.oe_question_count,
+        description: data.learning_objective,
+        resourceCount: data.resource_count || 0,
+        questionCount: data.question_count || 0,
+        oeQuestionCount: data.oe_question_count || 0,
         collectionType: data.content_type,
         format: data.content_type,
-        thumbnailUrl: thumbnailUrl,
-        standards: taxonomySerializer.normalizeTaxonomyObject(data.taxonomy)
+        thumbnailUrl,
+        standards: taxonomySerializer.normalizeTaxonomyObject(data.taxonomy),
+        taskCount: data.task_count
       });
     }
 

@@ -1,7 +1,4 @@
 <div class="card-panel-container">
-  {{#if isMediumScreen}}
-    <img src="{{collection.thumbnailUrl}}" class="md-collection-thumbnail" />
-  {{/if}}
   <div class="card-panel-header" style="background-image: url({{collection.thumbnailUrl}})">
     <div class="info">
       <div class="title">{{collection.title}}</div>
@@ -53,11 +50,17 @@
 
   </div>
   <div class="card-panel-footer">
-    <div class="buttons-container">
+    <div class="buttons-container {{if showSuggestionBtn 'has-suggestion'}}">
       <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="bottom" {{action "onPlayCollection" collection}}>
         {{gru-icon name="ic_play_arrow"}}
       </div>
-      <div class="schedule-dca-content ca-datepicker-popover {{if collection.isScheduled 'has-scheduled'}}" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-placement="bottom" onclick= {{action 'onScheduleContentToDCA' collection}}>
+      {{#if showSuggestionBtn}}
+        <div class="dca-suggested-content {{if collection.isSuggested 'has-suggested'}}" title="{{t 'common.suggest-to-student'}}" data-toggle="tooltip" data-placement="bottom" {{action "onSuggestContent" collection}}>
+          {{gru-icon name="explore"}}
+        </div>
+      {{/if}}
+      <div class="schedule-dca-content ca-datepicker-popover {{if collection.isScheduled 'has-scheduled'}}" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-placement="bottom"
+        onclick={{action 'onScheduleContentToDCA' collection}}>
         {{gru-icon name="update"}}
       </div>
       <div class="dca-add-btn {{if collection.isAdded 'added'}}" title="{{t 'add.to.todays.class'}}" data-toggle="tooltip" data-placement="bottom" {{action "onAddCollectionToDCA" collection}}>

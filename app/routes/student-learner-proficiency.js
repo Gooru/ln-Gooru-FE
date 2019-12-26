@@ -26,7 +26,8 @@ export default Ember.Route.extend({
     pathId: null,
     pathType: null,
     milestoneId: null,
-    collectionId: null
+    collectionId: null,
+    isIframeMode: false
   },
   // -------------------------------------------------------------------------
   // Dependencies
@@ -70,6 +71,7 @@ export default Ember.Route.extend({
     const classId = params.classId;
     const courseId = params.courseId;
     const contextId = params.contextId || null;
+    const isIframeMode = params.isIframeMode;
     return route
       .get('classService')
       .readClassInfo(classId)
@@ -100,7 +102,8 @@ export default Ember.Route.extend({
             mapLocation: hash.mapLocation,
             userPreference: hash.userPreference,
             crossWalkFWC: hash.crossWalkFWC,
-            contextId
+            contextId,
+            isIframeMode
           });
         });
       });
@@ -117,6 +120,7 @@ export default Ember.Route.extend({
       model.get('userPreference.standard_preference')
     );
     controller.set('contextId', model.get('contextId'));
+    controller.set('isIframeMode', model.get('isIframeMode'));
     if (model.crossWalkFWC) {
       controller.set(
         'fwCompetencies',

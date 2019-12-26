@@ -1,0 +1,39 @@
+<div class="gru-feedback-form">
+  <div class="feedback-container">
+    <div class="feedback-header-panel">
+      <div class="note">
+        <p>{{t (concat 'common.feedback-' format '-note') }}</p>
+      </div>
+    </div>
+    <div class="feedback-body-panel">
+      {{#each categoryLists as |category|}}
+        {{#if (eq category.feedbackTypeId 1)}}
+          <div class="category-panel">
+              <div class="category">{{category.categoryName}}</div>
+              <div class="category-rating">{{rating-stars rating = category.rating}}</div>
+          </div>
+        {{/if}}
+        {{#if (eq category.feedbackTypeId 3 )}}
+          <div class="feedback-comments">
+            <label for="commentsId">
+              <span>{{category.categoryName}}</span>
+              {{validation/gru-textarea model=category valuePath='comments' placeholder=(t 'common.feedback-review-placeholder') inputId='commentsId' isRequired=false}}
+            </label>
+          </div>
+        {{/if}}
+      {{/each}}
+    </div>
+    <div class="feedback-fooder-panel">
+      {{#if isStatusDone}}
+        <div class="next" {{action onExit}}>{{t 'common.exit'}}</div>
+      {{else}}
+        {{#if isPlayNextContent}}
+          <div class="next" {{action onSkipFeedback}}>Thanks</div>
+        {{else}}
+          <div class="skip" {{action onSkipFeedback}}>{{t 'common.skip-feedback'}}</div>
+          <div class="next" {{action onNext}}>{{t 'common.next'}}</div>
+        {{/if}}
+      {{/if}}
+    </div>
+  </div>
+</div>

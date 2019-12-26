@@ -129,6 +129,7 @@ window.i18ln = {
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
   'i2d.mobile-upload-failed': 'There was a error',
+  'common.suggest-to-student': 'Suggest to student',
   'i2d.upload-failed':
     'There was an error while uploading this image. Re-upload?',
   'common.a-collection': 'ಸಂಗ್ರಹ',
@@ -190,6 +191,8 @@ window.i18ln = {
   'common.advanced-editing': 'ಸುಧಾರಿತ ಸಂಪಾದನೆ',
   'common.announcements': 'ಪ್ರಕಟಣೆಗಳು',
   'common.anonymous_mode': 'ಅನಾಮಧೇಯ ಮೋಡ್',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer': 'ನಿಮ್ಮ ಉತ್ತರ',
   'common.answer-correct': 'ನೀವು ಸರಿಯಾಗಿದ್ದೀರಿ!',
   'common.answer-incorrect': 'ನೀವು ತಪ್ಪಾಗಿರುವಿರಿ ...',
@@ -2826,7 +2829,51 @@ window.i18ln = {
   'common.no-collaborators':
     'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'common.choose-lang': 'Choose Language',
-  'common-show': 'Show',
+  'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
-    'At least one task is required for activity activation'
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
+  'common.skip-feedback': 'Skip Feedback',
+  'common.external-collection.index-message':
+    'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
+  'common.external-assessment.index-message':
+    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here',
+  'common.feedback-review-placeholder':
+    'We appreciate your review of the content',
+  'common.feedback-collection-note':
+    'Please take a few seconds to give feedback about the collection you just studied. It helps!',
+  'common.feedback-assessment-note':
+    'Please take a few seconds to give feedback about the assessment you just took. It helps!',
+  'common.feedback-collection-external-note':
+    'Please take a few seconds to give feedback about the external collection you just studied. It helps!',
+  'common.feedback-assessment-external-note':
+    'Please take a few seconds to give feedback about the external assessment you just took. It helps!',
+  'common.feedback-question-note':
+    'Please take a few second to provide feedback on the question. It really helps!',
+  'common.feedback-resource-note':
+    'Please take a few seconds give your feedback on the resource. It really helps!',
+  'common.feedback-offline-activity-note':
+    ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!',
+  'common.no-competency': 'Not aligned to any competency',
+  'common.class-activities-info-icon':
+    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class',
+  'class-activity.no-activity-scheduled-message-mobile':
+    'You have no activities scheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-scheduled-message-desktop':
+    'You have no activities scheduled for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.no-activity-unscheduled-message-mobile':
+    'You have no activities unscheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-unscheduled-message-desktop':
+    'You have no activities unscheduled for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.no-activity-items-to-grade-message-mobile':
+    'You have no activities items to grade for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-items-to-grade-message-desktop':
+    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule'
 };

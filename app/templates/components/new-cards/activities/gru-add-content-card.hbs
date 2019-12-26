@@ -1,0 +1,51 @@
+<div class="add-content-card-container">
+  <div class="content-info-container">
+    <div class="content-thumbnail" style="background-image: url({{content.thumbnailUrl}})"></div>
+    <div class="content-title">
+      <div class="title">{{content.title}}</div>
+      <div class="collection-info">
+        {{#if taxonomyTags.length}}
+          <div class="taxonomy-container">
+            {{taxonomy/gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=1 isInCard=true}}
+          </div>
+        {{/if}}
+      </div>
+    </div>
+    <div class="content-counts">
+      {{#if isOfflineActivity}}
+        <div class="task-count content-count">
+          <span class="content-value">{{content.taskCount}}</span>
+          <span class="content-icon"></span>
+        </div>
+      {{else}}
+        <div class="resource-count content-count {{if isAssessment 'hidden'}}">
+          <span class="content-value">{{content.resourceCount}}</span>
+          <span class="content-icon"></span>
+        </div>
+        <div class="question-count content-count">
+          <span class="content-value">{{content.questionCount}}</span>
+          <span class="content-icon"></span>
+        </div>
+      {{/if}}
+    </div>
+    {{#unless isOfflineActivity}}
+      <div class="add-activity {{if content.isAdded 'added'}}" title="{{t 'add.to.todays.class'}}" data-toggle="tooltip" data-placement="bottom" {{action "onAddActivity"}} >
+          {{gru-icon name="add"}}  {{gru-icon name="done"}}
+      </div>
+    {{/unless}}
+    <div class="schedule-activity" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-placement="bottom" {{action "onShowDaterangePicker"}} >
+      {{gru-icon name="update"}}
+    </div>
+  </div>
+</div>
+
+{{#if isShowDaterangePicker}}
+  <div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
+    {{ca-daterange-datepicker
+      closeDatePicker='onCloseDaterangePicker'
+      onScheduleForDate='onScheduleByDate'
+      onScheduleForMonth='onScheduleByMonth'
+      endDate=endDate
+      allowTwoDateRangePicker=allowTwoDateRangePicker}}
+  </div>
+{{/if}}

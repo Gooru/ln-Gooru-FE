@@ -7,6 +7,10 @@ import AssessmentAdapter from 'gooru-web/adapters/content/assessment';
  */
 export default Ember.Service.extend({
   /**
+   * @property {Profile} Profile service
+   */
+  profileService: Ember.inject.service('api-sdk/profile'),
+  /**
    * @property {AssessmentSerializer} assessmentSerializer
    */
   assessmentSerializer: null,
@@ -75,11 +79,16 @@ export default Ember.Service.extend({
         .get('assessmentAdapter')
         .readAssessment(assessmentId)
         .then(function(responseData) {
-          resolve(
-            service
-              .get('assessmentSerializer')
-              .normalizeReadAssessment(responseData)
-          );
+          let assessment = service
+            .get('assessmentSerializer')
+            .normalizeReadAssessment(responseData);
+          let profileService = service.get('profileService');
+          profileService
+            .readUserProfile(assessment.get('ownerId'))
+            .then(function(profile) {
+              assessment.set('owner', profile);
+              resolve(assessment);
+            });
         }, reject);
     });
   },
@@ -116,11 +125,16 @@ export default Ember.Service.extend({
         .get('assessmentAdapter')
         .readExternalAssessment(assessmentId)
         .then(function(responseData) {
-          resolve(
-            service
-              .get('assessmentSerializer')
-              .normalizeReadAssessment(responseData)
-          );
+          let assessment = service
+            .get('assessmentSerializer')
+            .normalizeReadAssessment(responseData);
+          let profileService = service.get('profileService');
+          profileService
+            .readUserProfile(assessment.get('ownerId'))
+            .then(function(profile) {
+              assessment.set('owner', profile);
+              resolve(assessment);
+            });
         }, reject);
     });
   },

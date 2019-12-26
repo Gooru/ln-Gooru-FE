@@ -1,0 +1,144 @@
+.player-pull-up {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 1050;
+  background: $white;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: inherit;
+  &.assessment {
+    background-image: url("gooru/assessment-start-page.jpg");
+  }
+
+  &.collection {
+    background-image: url("gooru/collection-start-page.jpg");
+  }
+
+  .iframe-player-container {
+    height: 100%;
+    .iframe-container {
+      display: none;
+      &.not-loading {
+        display: block;
+      }
+      width: 100%;
+      height: 100vh;
+      iframe {
+        width: 100%;
+        height: 100vh;
+        border: 0;
+      }
+    }
+
+    .loading-container {
+      display: grid;
+      grid-template-rows: 35px auto;
+      height: 100%;
+
+      .close-player-container {
+        i {
+          float: right;
+          padding: 5px;
+          color: #fffcfc;
+          cursor: pointer;
+        }
+      }
+
+      .player-container {
+        height: 100%;
+        .loading-panel {
+          left: 75px;
+          top: 175px;
+          position: absolute;
+
+          .loading-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 500px;
+            border-radius: 35px;
+            background-color: $white;
+            box-shadow: 0 2px 13px 6px $heathered-gray;
+            opacity: 0.9;
+            padding: 15px 30px 15px 31px;
+            color: $dark-500;
+            min-height: 375px;
+            .loading-title {
+              text-transform: capitalize;
+              font-size: 18px;
+            }
+            img {
+              width: 200px;
+              height: 150px;
+              margin-bottom: 20px;
+            }
+            .loading-icon {
+              background: url(gooru/loader.svg) no-repeat center;
+              display: inline-block;
+              width: 180px;
+              height: 60px;
+            }
+            span {
+              font-weight: 600;
+              font-size: 24px;
+              text-align: center;
+              padding: 5px;
+            }
+            .thumbnail {
+              width: 200px;
+              height: 150px;
+              margin-bottom: 20px;
+              background-color: #e9ebed00;
+              border: 0px;
+              &.assessment {
+                background-image: url("/assets/gooru/assessment-default.png");
+              }
+
+              &.collection {
+                background-image: url("/assets/gooru/collection-default.png");
+              }
+              &.offline-activity {
+                background-image: url("/assets/gooru/offline-activity-default.png");
+              }
+            }
+          }
+        }
+        @media screen and (min-width: $screen-568) and(max-width: $screen-1024) {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .loading-panel {
+            top: 0;
+            left: 0;
+            position: relative;
+          }
+        }
+        @media screen and (min-width: $screen-320) and(max-width: $screen-568) {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .loading-panel {
+            left: 0;
+            top: 0;
+            position: relative;
+            .loading-content {
+              width: 270px;
+              margin: auto;
+              img {
+                width: 125px;
+                height: 75px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

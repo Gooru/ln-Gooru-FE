@@ -1,0 +1,314 @@
+.gru-activity-feedback {
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+  .activity-feedback-container {
+    width: 100%;
+    height: 100%;
+    background-image: url("gooru/collection-start-page.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    &.assessment {
+      background-image: url("gooru/assessment-start-page.jpg");
+    }
+    .feedback-contaioner {
+      padding: 30px;
+      align-items: center;
+      width: 100%;
+      .gru-activity-feedback-card {
+        background-color: $white;
+        width: 33%;
+        border: 1px solid #868585;
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        margin-left: 7%;
+        &::-webkit-scrollbar {
+          height: 6px;
+          width: 8px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: $gray-light;
+          border: 1px solid $gray-light;
+          border-radius: 5px;
+        }
+        .card-container {
+          display: grid;
+          grid-template-rows: 130px auto;
+          color: $white;
+          .header-panel {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            &:after {
+              display: block;
+              z-index: 9;
+              margin-top: -100px;
+              height: 100%;
+              width: 100%;
+              content: "";
+              background-image: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0) 0,
+                $gray-base 100%
+              );
+            }
+            .header-content {
+              display: grid;
+              height: 100%;
+              position: relative;
+              padding: 10px;
+              grid-template-rows: auto 25px;
+              .content-details {
+                display: grid;
+                grid-template-columns: 30px auto;
+                column-gap: 5px;
+                span {
+                  align-items: flex-end;
+                  display: flex;
+                }
+                i {
+                  width: 22px;
+                  height: 22px;
+                  background-size: 22px;
+                  display: block;
+                  background-position: center;
+                  background-repeat: no-repeat;
+                  &.collection-icon,
+                  &.collection-external-icon {
+                    background-image: url("../assets/gooru/images/collection-white.svg");
+                  }
+                  &.assessment-icon,
+                  &.assessment-external-icon {
+                    background-image: url("../assets/gooru/images/assessment-white.svg");
+                  }
+                  &.offline-activity-icon {
+                    background-image: url("../assets/gooru/images/offline-white.svg");
+                  }
+                  &.question-icon {
+                    background-image: url("gooru/images/question-white.svg");
+                  }
+                  &.resource-icon.interactive {
+                    background-image: url("gooru/images/interactive-resource-white.svg");
+                  }
+                  &.resource-icon.video {
+                    background-image: url("gooru/images/video-resource-white.svg");
+                  }
+                  &.resource-icon.webpage {
+                    background-image: url("gooru/images/website-resource-white.svg");
+                  }
+                  &.resource-icon.image {
+                    background-image: url("gooru/images/image-resource-white.svg");
+                  }
+                  &.resource-icon.audio {
+                    background-image: url("gooru/images/audio-resource-white.svg");
+                  }
+                  &.resource-icon.text {
+                    background-image: url("gooru/images/text-resource-white.svg");
+                  }
+                }
+                .title {
+                  font-size: 18px;
+                  font-weight: 600;
+                  line-height: 1.2;
+                }
+              }
+              .author-name {
+                font-size: 12px;
+                font-style: italic;
+              }
+            }
+          }
+          .body-panel {
+            height: 100%;
+            background-color: $white;
+            .body-content {
+              display: grid;
+              grid-template-rows: auto;
+              .description-panel {
+                display: grid;
+                grid-template-rows: auto auto;
+                .description {
+                  padding: 10px;
+                  padding-bottom: 5px;
+                  border-bottom: 1px solid #ccc;
+                  p {
+                    color: #576ca2;
+                    margin-bottom: 5px;
+                    $font-size: 13px;
+                    $line-height: 1.2;
+                    $lines-to-show: 3;
+                    @include ellipsis(
+                      $font-size: $font-size,
+                      $line-height: $line-height,
+                      $lines-to-show: $lines-to-show
+                    );
+                  }
+                }
+                .details {
+                  display: grid;
+                  grid-template-columns: auto 60px 50px 100px;
+                  .taxonomy {
+                    align-items: center;
+                    margin-top: 1px;
+                    display: flex;
+                    .gru-taxonomy-tag-list {
+                      padding-left: 10px;
+                      .gru-taxonomy-tag {
+                        background-color: $charcoal-grey;
+                        padding: 5px;
+                        .tag-label {
+                          color: $white;
+                          font-size: 12px;
+                          font-weight: bold;
+                        }
+                        .tag-caption {
+                          color: $pre-bg;
+                        }
+                      }
+                    }
+                    .no-competency {
+                      background-color: $charcoal-grey;
+                      border: 1px solid #bbb;
+                      margin-left: 10px;
+                      padding: 0 3px 2px;
+                      border-radius: 4px;
+                      width: 75px;
+                      height: 45px;
+                      text-align: center;
+                      font-size: 14px;
+                      display: flex;
+                      align-items: center;
+                      color: $white;
+                      justify-content: center;
+                      cursor: pointer;
+                    }
+                  }
+                  .icon {
+                    height: 22px;
+                    width: 22px;
+                    display: block;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    margin-right: 5px;
+                  }
+                  .question,
+                  .resource {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    span {
+                      color: #6e6e6e;
+                      font-size: 14px;
+                    }
+                  }
+                  .question .icon {
+                    background-image: url("gooru/images/add_question.svg");
+                  }
+                  .resource .icon {
+                    background-image: url("gooru/images/add_resource_icon.svg");
+                  }
+                  .time-spent {
+                    span {
+                      align-items: center;
+                      display: flex;
+                      justify-content: center;
+                      font-size: 14px;
+                      color: $dark-400;
+                      background-color: #b8bfc4;
+                      height: 100%;
+                      i {
+                        height: 14px;
+                        display: inline-flex;
+                      }
+                      &.correct {
+                        color: $brand-success;
+                        background-color: rgba(184, 191, 196, 0.66);
+                        i {
+                          background: url("gooru/images/correct-answer.svg");
+                          width: 24px;
+                        }
+                      }
+                      &.incorrect {
+                        color: $brand-incorrect;
+                        background-color: rgba(184, 191, 196, 0.66);
+                        i {
+                          background: url("gooru/images/wrong-answer.svg");
+                          width: 14px;
+                        }
+                      }
+                    }
+                  }
+                }
+                @media screen and (max-width: $screen-380) {
+                  grid-template-rows: auto auto;
+                  .details {
+                    grid-auto-rows: 50px;
+                    grid-template-columns: auto 60px 50px;
+                    .time-spent {
+                      grid-row-start: 2;
+                      display: grid;
+                      grid-column-start: 1;
+                      grid-column-end: 4;
+                      justify-content: flex-end;
+                    }
+                  }
+                }
+              }
+              .content-panel {
+                background-color: #e2eaf9;
+                padding-top: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.gru-external-collection-page,
+.gru-external-assessment-page,
+.offline-activity-player.gru-offline-activity-submission.oa-completed {
+  .gru-activity-feedback {
+    padding-top: 0px;
+    .activity-feedback-container {
+      .feedback-contaioner {
+        .gru-activity-feedback-card {
+          max-height: calc(100vh - 160px);
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: $screen-1024) and (min-width: $screen-sm) {
+  .gru-activity-feedback {
+    .activity-feedback-container {
+      display: flex;
+      background-position: inherit;
+      .feedback-contaioner {
+        display: flex;
+        justify-content: center;
+        .gru-activity-feedback-card {
+          width: 75%;
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: $screen-sm - 1) {
+  .gru-activity-feedback {
+    .activity-feedback-container {
+      background-position: inherit;
+      .feedback-contaioner {
+        justify-content: center;
+        .gru-activity-feedback-card {
+          width: 100%;
+          margin-left: 0px;
+        }
+      }
+    }
+  }
+}

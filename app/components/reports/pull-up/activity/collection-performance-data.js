@@ -296,24 +296,24 @@ export default Ember.Component.extend({
     const component = this;
     const analyticsService = component.get('analyticsService');
     const activityData = component.get('activityData');
-    const activityDate = activityData.get('activation_date');
+    const activityDate = activityData.get('activation_date')
+      ? activityData.get('activation_date')
+      : moment().format('YYYY-MM-DD');
     const collectionId = activityData.get('collection.id');
     const collectionType = 'collection';
     const classId = component.get('classId');
-    return Ember.RSVP
-      .hash({
-        studentsActivityPerformance: analyticsService.getDCAPerformance(
-          classId,
-          collectionId,
-          collectionType,
-          activityDate
-        )
-      })
-      .then(({ studentsActivityPerformance }) => {
-        component.parseStudentsActivityPerformanceData(
-          studentsActivityPerformance
-        );
-      });
+    return Ember.RSVP.hash({
+      studentsActivityPerformance: analyticsService.getDCAPerformance(
+        classId,
+        collectionId,
+        collectionType,
+        activityDate
+      )
+    }).then(({ studentsActivityPerformance }) => {
+      component.parseStudentsActivityPerformanceData(
+        studentsActivityPerformance
+      );
+    });
   },
 
   /**

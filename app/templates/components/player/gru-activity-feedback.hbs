@@ -1,0 +1,86 @@
+<div class="activity-feedback-container {{unless isCollection 'assessment'}}">
+  <div class="feedback-contaioner">
+    <div class="gru-activity-feedback-card">
+      <div class="card-container">
+        <div class="header-panel" style="background-image: url({{collection.thumbnailUrl}})">
+          <div class="header-content">
+            <div class="content-details">
+              <span><i class="{{contentFormat}}-icon {{resourceInfo.format}}"></i></span>
+              <span class="title">
+                {{#if resourceInfo.order}}
+                  {{resourceInfo.order}}.
+                {{/if}}
+                {{safe-html resourceInfo.title}}
+              </span>
+            </div>
+            <div class="author-name">{{collection.owner.fullName}}</div>
+          </div>
+        </div>
+        <div class="body-panel">
+          <div class="body-content">
+            <div class="description-panel">
+              {{#if description}}
+                <div class="description">
+                  <p>{{safe-html description}}</p>
+                </div>
+              {{/if}}
+              <div class="details">
+                <div class="taxonomy">
+                  {{#if tags.length}}
+                    {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+                    {{else}}
+                      <div class="no-competency"  data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t 'common.no-competency'}}" > -- </div>
+                    {{/if}}
+                </div>
+                <div class="resource">
+                  {{#if (and isCollection (gt resourceInfo.resourceCount 0))}}
+                    <span class="icon" data-toggle="tooltip" title="{{t 'common.resource'}}"></span>
+                    <span>{{resourceInfo.resourceCount}}</span>
+                  {{/if}}
+                </div>
+                <div class="question">
+                  {{#if (gt resourceInfo.questionCount 0)}}
+                    <span class="icon" data-toggle="tooltip" title="{{t 'common.question'}}"></span>
+                    <span>{{resourceInfo.questionCount}}</span>
+                  {{/if}}
+                </div>
+                <div class="time-spent">
+                  {{#if (eq contentFormat 'question')}}
+                    {{#unless isSkipped}}
+                      {{#if (gt contentScore 0)}}
+                        <span class="correct"><i class="icon"> </i></span>
+                      {{else}}
+                        <span class="incorrect"><i class="icon"> </i></span>
+                      {{/if}}
+                    {{/unless}}
+                  {{else}}
+                    {{#if isCollection}}
+                      {{#if (and timeSpent (or isCollection (eq contentFormat 'resource')))}}
+                        <span>{{format-time timeSpent}}</span>
+                      {{else}}
+                        <span> -- </span>
+                      {{/if}}
+                    {{else}}
+                      {{#if score}}
+                        <span>{{round-number score}}%</span>
+                      {{else}}
+                        <span> -- </span>
+                      {{/if}}
+                    {{/if}}
+                  {{/if}}
+                </div>
+              </div>
+            </div>
+            <div class="content-panel">
+              <div class="content-body">
+                {{#if resourceInfo}}
+                  {{gru-feedback-form resourceInfo=resourceInfo format=contentFormat onNext='onNext' onSkipFeedback="onSkipFeedback" isPlayNextContent=isPlayNextContent isStatusDone=isStatusDone onExit="onExit"}}
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

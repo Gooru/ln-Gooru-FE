@@ -39,17 +39,32 @@
     {{/unless}}
     {{#if navTitle}}
       <div class="studyplayer-title">
-        <span>{{navTitle}}</span>
+        {{#if (and secondaryClasses.length  (not-eq selectedMenuItem 'class-management')  (not-eq selectedMenuItem 'class-activities'))}}
+        <span class="nav-title" {{action 'toggleNavClass'}}>{{if selectedSecondaryClass.title selectedSecondaryClass.title navTitle}} {{gru-icon name="arrow_drop_down"}}</span>
+        <div class="nav-class-drop-down">
+          {{#each secondaryClasses as | secondaryClass|}}
+           <span class="{{if (or (and (not isPrimaryClass) secondaryClass.isActive) (and isPrimaryClass secondaryClass.isPrimaryClass)) 'active' ''}}" {{action 'onChangeSecondaryClass' secondaryClass}} >{{secondaryClass.title}}</span>
+          {{/each}}
+        </div>
+        {{else}}
+          <div class="nav-title">{{navTitle}} {{#if (and (eq selectedMenuItem 'class-activities') secondaryClasses.length )}}
+          <span class="nav-title-info-icon" title="{{t 'common.class-activities-info-icon'}}" data-toggle="tooltip" data-placement="bottom auto" data-trigger="hover">
+            {{gru-icon name="info"}}</span>
+          {{/if}}</div>
+        {{/if}}
       </div>
     {{/if}}
     <div class="notification-tab">
       {{notification/notification-indicator displayNotificationList=displayNotificationList accessorClass='class' isTeacher=true classId=class.id }}
     </div>
     {{#if isPremiumClass}}
-      <div class="performance-summary {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
-        {{#if class.competencyStats}}
+      <div class="performance-summary {{if (or (and class.competencyStats isPrimaryClass) (and secondaryClass.competencyStats (not isPrimaryClass))) 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
+        {{#if (and class.competencyStats isPrimaryClass)}}
           <span class="numerator">{{class.competencyStats.completedCompetencies}}</span>
           <span class="denominator">{{class.competencyStats.totalCompetencies}}</span>
+        {{else if (and secondaryClass.competencyStats (not isPrimaryClass))}}
+          <span class="numerator">{{secondaryClass.competencyStats.completedCompetencies}}</span>
+          <span class="denominator">{{secondaryClass.competencyStats.totalCompetencies}}</span>
         {{else}}
           <span class="no-completion-score">--</span>
         {{/if}}

@@ -1,7 +1,7 @@
 .offline-activity-player.gru-offline-activity-submission {
-  padding: 30px;
-
+  height: 100%;
   .offline-activity-submission-container {
+    padding: 30px;
     .left-panel {
       .offline-activity-info-container {
         background-color: $white;
@@ -119,6 +119,10 @@
             &.disable-event {
               opacity: 0.5;
             }
+          }
+          @media screen and (max-width: $screen-xs) {
+            display: grid;
+            grid-template-columns: 100%;
           }
         }
       }

@@ -53,6 +53,19 @@ export default Ember.Component.extend(ConfigurationMixin, {
         });
       }
     },
+
+    showSuggestions() {
+      const component = this;
+      component.set('showStudentSuggestionPullUp', true);
+      component.set('selectedActivity', component.get('classActivity'));
+    },
+
+    onClosePullUp() {
+      const component = this;
+      component.set('showStudentSuggestionPullUp', false);
+      component.set('selectedActivity', null);
+    },
+
     /**
      * Action triggered when the user play collection
      */
@@ -67,7 +80,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
      * @param  {Object} collection
      */
     openDcaContentReport(selectedClassActivity) {
-      let component = this;
+      const component = this;
       let format =
         selectedClassActivity.get('collection.format') ||
         selectedClassActivity.get('collection.collectionType');
@@ -132,28 +145,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
       );
     },
 
-    onPullUpClose(closeAll) {
-      this.closePullUp(closeAll);
-    },
-
     onUpdateMasteryAccrual() {
       let classActivity = this.get('classActivity');
       this.sendAction('onUpdateMasteryAccrual', classActivity);
     }
-  },
-
-  closePullUp(closeAll) {
-    let component = this;
-    component.$().animate(
-      {
-        top: '100%'
-      },
-      400,
-      function() {
-        component.set('showPullUp', false);
-        component.sendAction('onClosePullUp', closeAll);
-      }
-    );
   },
 
   // -------------------------------------------------------------------------
@@ -329,5 +324,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
       });
       return TaxonomyTag.getTaxonomyTags(standards);
     }
-  })
+  }),
+
+  /**
+   * @property {Number} suggestionCount
+   */
+  suggestionCount: Ember.computed.alias('classActivity.suggestionCount')
 });

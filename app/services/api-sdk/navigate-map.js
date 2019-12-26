@@ -205,6 +205,7 @@ export default Ember.Service.extend({
     collectionSubType,
     pathId,
     classId,
+    pathType,
     milestoneId
   ) {
     const service = this;
@@ -227,7 +228,6 @@ export default Ember.Service.extend({
       status: 'start',
       milestoneId
     });
-
     return service.next(mapContext);
   },
 
@@ -411,8 +411,9 @@ export default Ember.Service.extend({
     const collectionSubType = params.subtype;
     const collectionUrl = params.collectionUrl;
     const resourceId = params.resourceId;
-    const continueCourse = !unitId || !milestoneId;
+    const continueCourse = !lessonId && (!unitId || !milestoneId);
     const startLesson = lessonId && !collectionId;
+
     const pathType =
       params.pathType === 'null' ? null : params.pathType || null;
     const navigateMapService = this;
@@ -479,6 +480,12 @@ export default Ember.Service.extend({
     return mapLocationPromise;
   },
 
+  removeItem: function() {
+    const navigateMapService = this;
+    navigateMapService
+      .getLocalStorage()
+      .removeItem(navigateMapService.generateKey());
+  },
   /**
    * Teacher suggestions
    * @param  context as  params

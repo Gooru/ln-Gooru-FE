@@ -1,5 +1,8 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  PLAYER_EVENT_SOURCE,
+  PLAYER_EVENT_MESSAGE
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -24,6 +27,14 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
+    onSkipFeedback() {
+      this.sendAction('onSkipFeedback');
+    },
+
+    onExit: function() {
+      this.sendAction('onExit');
+    },
+
     //Action triggered when click on start button
     onStartPlayer() {
       const component = this;
@@ -35,7 +46,10 @@ export default Ember.Component.extend({
       const component = this;
       const classId = component.get('classId');
       const source = component.get('source');
-      if (classId && source === PLAYER_EVENT_SOURCE.COURSE_MAP) {
+      const isIframeMode = component.get('isIframeMode');
+      if (isIframeMode) {
+        window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
+      } else if (classId && source === PLAYER_EVENT_SOURCE.COURSE_MAP) {
         component
           .get('router')
           .transitionTo('student.class.course-map', classId, {

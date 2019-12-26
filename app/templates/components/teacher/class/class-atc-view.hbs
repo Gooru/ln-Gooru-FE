@@ -1,0 +1,150 @@
+{{#if isLoading}}
+  <div class="loading-spinner">{{three-bounce-spinner}}</div>
+{{/if}}
+{{#if isShowAtcView}}
+  {{#if isPremiumClass}}
+      <div class="performance-overview-header">
+        <div class="month-picker {{if isCurrentMonth 'current-month'}}">
+          {{ca-date-picker
+            showToday=true
+            forMonth=activeMonth
+            allowDateSelectorToggle=true
+            forYear=activeYear
+            showPreviousMonth="onChangeMonth"
+            showNextMonth="onChangeMonth"
+          }}
+        </div>
+      </div>
+
+    <div class="data-view-container navigator-class">
+      <div class="chart-container">
+        <div class="chart-area">
+          {{teacher/class/navigator-atc-view classData=class month=activeMonth year=activeYear}}
+        </div>
+      </div>
+      <div class="data-analysis-cards-container">
+        {{#if gradeDomainsList }}
+        <div class="competency-card-container">
+          <div class="title-container">{{t 'common.struggling-competencies'}}</div>
+          {{#each gradeDomainsList as |domain domainIndex|}}
+          <div class="competency-struggling-container">
+            {{#each domain.competencies as |competency competencyIndex|}}
+            {{#if (eq competencyIndex 0) }}
+            <div class="competency-heading" {{action "onSelectGrade" domainIndex}}>
+             <div class="competency-heading-title">{{competency.name}}</div>
+            <ul class="competency-sub-heading">
+              <li>{{domain.domainName}}</li>
+              <li>{{competency.displayCode}}</li>
+
+            </ul>
+            </div>
+            <div class="competency-icon" {{action "onSelectCompetency" competency}}>
+              {{gru-icon name="explore"}}
+            </div>
+            <div class="competency-count">
+              {{competency.studentsCount}}
+            </div>
+            {{/if}}
+            {{/each}}
+          </div>
+          {{/each}}
+        </div>
+        {{/if}}
+        {{#if otherGradeTopComp.length}}
+        <div class="competency-card-container other-grade">
+          <div class="title-container">{{t 'common.struggling-competencies'}}({{t 'profile.proficiency.grade-line'}})</div>
+          {{#each otherGradeTopComp as |competency competencyIndex|}}
+          <div class="competency-struggling-container">
+            <div class="competency-heading" {{action "onSelectOtherGrade" competency.gradeIndex competency.domainIndex}}>
+             <div class="competency-heading-title">{{competency.name}}</div>
+            <ul class="competency-sub-heading">
+              <li>{{competency.domainName}}</li>
+              <li>{{competency.displayCode}}</li>
+
+            </ul>
+            </div>
+            <div class="competency-icon" {{action "onSelectCompetency" competency}}>
+              {{gru-icon name="explore"}}
+            </div>
+            <div class="competency-count">
+              {{competency.studentsCount}}
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        {{/if}}
+        <div class="activities-count-container" {{action "onRedirectToCA"}}>
+          <div class="activities-container completed">
+            <div class="activity-count">{{activitiesCount.scheduled}}</div>
+            <div class="activities-info"><span><i class="pin-icon"></i></span>{{t 'teacher-landing.class.atc-view.class-activities-completed'}}</div>
+          </div>
+          <div class="activities-container pending">
+            <div class="activity-count">{{activitiesCount.unscheduled}}</div>
+            <div class="activities-info"><span><i class="pin-icon"></i></span>{{t 'teacher-landing.class.atc-view.class-activities-pending'}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <div class="data-view-container regular-class">
+      <div class="chart-container">
+        {{teacher/class/atc-chart classData=class isPremiumClass=isPremiumClass}}
+      </div>
+    </div>
+  {{/if}}
+{{else}}
+  <div class="data-not-available"> {{t 'teacher-landing.class.students-tab.data-not-available'}}</div>
+{{/if}}
+
+{{#if isShowCompetencyCompletionReport}}
+  {{reports/pull-up/competency-completion-report fwCompetencies=fwCompetencies showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency" maxLimitToSuggestContent=maxLimitToSuggestContent}}
+{{/if}}
+{{#if isShowGradeCompetency}}
+  {{reports/pull-up/struggling-competency-domain-level selectCompetency="onSelectCompetency" gradeDomainIndex = gradeDomainIndex gradeDomainsList=gradeDomainsList closePullUp="onCloseGradePullUp"}}
+{{/if}}
+
+{{#if isShowOtherGradeCompetency}}
+ {{reports/pull-up/struggling-competency-other-grade-level selectCompetency="onSelectCompetency" gradeDomainIndex = gradeDomainIndex otherGradeCompetency = otherGradeCompetency closePullUp="onCloseOtherGrade"}}
+{{/if}}
+
+{{#if isShowStrugglingCompetencyReport}}
+   {{reports/pull-up/struggling-competency-report
+     class=class
+     onPreviewContent='onPreviewContent'
+     onAddContentToDCA ='onAddCollectionToDCA'
+     onScheduleContentToDCA = 'onScheduleContentToDCA'
+     selectedCompetency = selectedCompetency
+     closePullUp="onClosePullUp"}}
+{{/if}}
+
+<!-- Preview -->
+{{#if isShowContentPreview}}
+  {{reports/pull-up/gru-collection-preview
+    showPullUp=isShowContentPreview
+    showAssessmentCode=true
+    previewContentId=previewContent.id
+    previewContentType=previewContentType}}
+{{/if}}
+
+{{#if isShowActivitySearchContentPullup}}
+  {{teacher/class/ca-search-content-pull-up
+    showPullUp=isShowActivitySearchContentPullup
+    addedContentToDCA="addedContentToDCA"
+    context=contextParams
+    selectedSearchContentType=selectedContentType
+    classPreference=classPreference
+    classId=classId
+    competencyData=selectedCompetencyData
+    defaultSearchPageSize=maxLimitToSuggestContent
+    isShowMoreEnabled=false
+  }}
+{{/if}}
+
+<div class="ca-datepicker-schedule-container ca-datepicker-popover-container">
+  {{ca-daterange-datepicker
+      closeDatePicker='onCloseDatePicker'
+      onScheduleForDate='onScheduleDate'
+      onScheduleForMonth='onScheduleForMonth'
+      endDate=endDate
+      allowTwoDateRangePicker=false}}
+</div>

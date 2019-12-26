@@ -38,6 +38,14 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    onSkipFeedback() {
+      this.sendAction('onSkipFeedback');
+    },
+
+    onExit: function() {
+      this.sendAction('onExit');
+    },
+
     //Action triggered when toggle timespent entry container
     onToggleTimespent() {
       const component = this;
@@ -141,6 +149,8 @@ export default Ember.Component.extend({
    * @property {Boolean} isTimespentExpanded
    */
   isTimespentExpanded: true,
+
+  isShowActivityFeedback: false,
 
   /**
    * @property {Number} timespentInMilliSec

@@ -33,6 +33,16 @@ export default Ember.Component.extend(ConfigurationMixin, {
   class: null,
 
   /**
+   * @property {selectedSecondaryClass} selectedSecondaryClass
+   */
+  selectedSecondaryClass: null,
+
+  /**
+   * @property {SecondaryClass} secondaryClass
+   */
+  secondaryClass: null,
+
+  /**
    * @property {String|Function} onItemSelected - event handler for when an menu item is selected
    */
   onItemSelected: null,
@@ -80,6 +90,18 @@ export default Ember.Component.extend(ConfigurationMixin, {
     return scorePercentage !== null && isNumeric(scorePercentage);
   }),
 
+  isPrimaryClass: Ember.computed('secondaryClass', 'class', function() {
+    let secondaryClass = this.get('secondaryClass.isSecondaryClass')
+      ? this.get('secondaryClass')
+      : null;
+    let primaryClass = secondaryClass
+      ? secondaryClass.get('id') === this.get('class.id')
+      : true;
+    return primaryClass;
+  }),
+
+  secondaryClasses: Ember.A([]),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -109,6 +131,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     selectItem: function(item) {
       let isPremiumClass = this.get('isPremiumClass');
+      if (item !== this.get('selectedMenuItem')) {
+        this.set('selectedSecondaryClass', null);
+        this.set('secondaryClass', null);
+        this.$('.nav-class-drop-down').slideUp(400);
+      }
       if (this.get('onItemSelected')) {
         if (!(item === 'performance' && isPremiumClass)) {
           this.selectItem(item);
@@ -129,6 +156,21 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     closeNotificationList() {
       this.set('displayNotificationList', false);
+    },
+
+    toggleNavClass(component = this) {
+      component.$('.nav-class-drop-down').slideToggle(400);
+    },
+
+    onChangeSecondaryClass(secondaryClass) {
+      let secondaryClasses = this.get('secondaryClasses');
+      secondaryClasses.map(secondary => {
+        secondary.set('isActive', false);
+      });
+      secondaryClass.set('isActive', true);
+      this.set('selectedSecondaryClass', secondaryClass);
+      this.actions.toggleNavClass(this);
+      this.sendAction('onChangeSecondaryClass', secondaryClass);
     }
   },
 
@@ -151,7 +193,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
     } else if (currentPath === 'teacher.class.class-activities') {
       component.set('selectedMenuItem', 'class-activities');
     }
-
     var item = this.get('selectedMenuItem');
     this.selectItem(item);
     Ember.$('header.gru-header').hide();
@@ -176,6 +217,10 @@ export default Ember.Component.extend(ConfigurationMixin, {
    * Refreshes the left navigation with the selected menu item
    */
   refreshSelectedMenuItem: function() {
+    let secondaryClasses = this.get('secondaryClasses');
+    secondaryClasses.map(secondary => {
+      secondary.set('isActive', false);
+    });
     var item = this.get('selectedMenuItem');
     this.selectItem(item);
   }.observes('selectedMenuItem'),

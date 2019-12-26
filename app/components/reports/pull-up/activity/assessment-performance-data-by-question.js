@@ -563,7 +563,9 @@ export default Ember.Component.extend({
     const component = this;
     const classActivityService = component.get('classActivityService');
     const activityData = component.get('activityData');
-    const activityDate = activityData.get('activation_date');
+    const activityDate = activityData.get('activation_date')
+      ? activityData.get('activation_date')
+      : moment().format('YYYY-MM-DD');
     const classId = component.get('classId');
     return Ember.RSVP.hash({
       studentsActivityPerformanceData: classActivityService.fetchStudentsActivityPerformance(

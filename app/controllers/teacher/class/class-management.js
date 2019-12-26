@@ -147,6 +147,25 @@ export default Ember.Controller.extend(ModalMixin, {
 
     /**
      *
+     * Triggered when a setting mastery
+     */
+    updateMastery: function(mastery = false) {
+      let controller = this,
+        editedClass = controller.get('tempClass'),
+        setting = editedClass.get('setting');
+      setting.set('mastery_applicable', mastery);
+      let secondaryclass = this.get('multipleClassList');
+      let selectedSecondaryClass = secondaryclass.filter(
+        checkedClass => checkedClass.isChecked === true
+      );
+      if (selectedSecondaryClass.length) {
+        this.saveSecodaryClass(selectedSecondaryClass, mastery);
+      }
+      this.saveClass();
+    },
+
+    /**
+     *
      * Triggered when a edit min score class option is selected
      */
     editScore: function() {
@@ -439,6 +458,19 @@ export default Ember.Controller.extend(ModalMixin, {
         controller.reloadClassMembers();
       });
       controller.actions.onToggleAddStudent();
+    },
+
+    // Action trigger when click checkbox on view multiple class
+    toggleCheckbox(selectedClass) {
+      let controller = this;
+      controller.set('isEnableSave', true);
+      selectedClass.toggleProperty('isChecked', true);
+    },
+
+    // Action trigger when click save button in multiple class
+    saveMultipleClass() {
+      let controller = this;
+      controller.updateSecondaryClass();
     }
   },
 
@@ -479,6 +511,20 @@ export default Ember.Controller.extend(ModalMixin, {
     return setting ? setting['course.premium'] : false;
   }),
 
+  isMasteryApplicable: Ember.computed('tempClass', function() {
+    let controller = this;
+    let isMasteryApplicable = false;
+    const currentClass = controller.get('tempClass');
+    let setting = currentClass.get('setting');
+    if (setting) {
+      isMasteryApplicable =
+        setting['mastery.applicable'] === true ||
+        setting['mastery.applicable'] === 'true' ||
+        setting.mastery_applicable === 'true' ||
+        setting.mastery_applicable === true;
+    }
+    return isMasteryApplicable;
+  }),
   subject: Ember.computed.alias('class.preference.subject'),
 
   /**
@@ -582,6 +628,17 @@ export default Ember.Controller.extend(ModalMixin, {
     })
   ]),
 
+  switchOptionsMastery: Ember.A([
+    Ember.Object.create({
+      label: 'Yes',
+      value: false
+    }),
+    Ember.Object.create({
+      label: 'No',
+      value: true
+    })
+  ]),
+
   /**
    * Copy of the class model used for editing.
    * @property {Class}
@@ -597,6 +654,42 @@ export default Ember.Controller.extend(ModalMixin, {
    * Property for list of class collaborators
    */
   collaborators: Ember.computed.alias('class.collaborators'),
+
+  /**
+   * @property {Object} secondaryclass
+   */
+  secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
+
+  /**
+   * @property {Object} secondaryclassList
+   */
+  secondaryClassList: Ember.computed.alias(
+    'classController.secondaryClassList'
+  ),
+  /**
+   * @property {Object} multipleClass
+   * property for list of class in class settigns
+   */
+  multipleClassList: Ember.computed('secondaryClassList.[]', function() {
+    let multipleClasses = this.get('secondaryClassList');
+    let secondaryClasses = this.get('secondaryClasses');
+    if (secondaryClasses && multipleClasses) {
+      secondaryClasses.map(classes => {
+        let checkedClass = multipleClasses.findBy('id', classes.id);
+        if (checkedClass) {
+          checkedClass.set('isChecked', true);
+        }
+      });
+    }
+    return multipleClasses
+      ? multipleClasses.sortBy('isChecked').reverse()
+      : null;
+  }),
+
+  /**
+   * @property {Boolean} isEnableSave
+   */
+  isEnableSave: false,
 
   /**
    * @function fetchTaxonomyGrades
@@ -669,7 +762,12 @@ export default Ember.Controller.extend(ModalMixin, {
               controller.send('updateUserClasses');
               controller
                 .get('class')
-                .merge(editedClass, ['title', 'minScore', 'classSharing']);
+                .merge(editedClass, [
+                  'title',
+                  'minScore',
+                  'classSharing',
+                  'setting'
+                ]);
             });
         } else {
           var classForEditing = controller.get('class').copy();
@@ -678,6 +776,20 @@ export default Ember.Controller.extend(ModalMixin, {
         this.set('didValidate', true);
       }.bind(this)
     );
+  },
+
+  saveSecodaryClass(secondaryClassList, mastery) {
+    let controller = this;
+    secondaryClassList.forEach(secondaryClass => {
+      controller
+        .get('classService')
+        .readClassInfo(secondaryClass.id)
+        .then(classDetails => {
+          let setting = classDetails.get('setting');
+          setting.set('mastery_applicable', mastery);
+          controller.get('classService').updateClass(classDetails);
+        });
+    });
   },
 
   updateBoundValuesToStudent() {
@@ -849,6 +961,37 @@ export default Ember.Controller.extend(ModalMixin, {
           classMembers.get('memberGradeBounds')
         );
         controller.updateBoundValuesToStudent();
+      });
+  },
+
+  updateSecondaryClass() {
+    let controller = this;
+    let classId = controller.get('class.id');
+    let multipleClassList = controller.get('multipleClassList');
+    let checkedClassIdList = [];
+    if (multipleClassList) {
+      multipleClassList.map(checkedClass => {
+        if (checkedClass.isChecked === true) {
+          checkedClassIdList.push(checkedClass.id);
+        }
+      });
+    }
+    let classSetting = {
+      setting: {
+        'secondary.classes': {
+          list: checkedClassIdList,
+          confirmation: true
+        }
+      }
+    };
+    controller
+      .get('classController.multipleClassService')
+      .updateMultipleClass(classId, classSetting)
+      .then(() => {
+        const primaryClass = controller.get('class');
+        primaryClass.set('isUpdatedSecondaryClass', true);
+        primaryClass.set('setting', classSetting.setting);
+        controller.set('isEnableSave', false);
       });
   }
 });

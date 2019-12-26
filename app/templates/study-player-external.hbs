@@ -7,8 +7,9 @@
   sourceType= source
   showConfirmation=(if isOfflineActivity false true)
   isStudyPlayer=true
+  isIframeMode=isIframeMode
 }}
-<div class="player-container  {{type}}">
+<div class="player-container {{type}} {{if isIframeMode 'iframe-player-container' ''}}">
   <div class="player">
     {{#if isLoading}}
       {{three-bounce-spinner}}
@@ -19,6 +20,10 @@
           source = source
           mapLocation = mapLocation
           isStudyPlayer = true
+          isIframeMode=isIframeMode
+          onSkipFeedback="playNext"
+          isDone=isDone
+          onExit="onExit"
         }}
       {{else if isAsssessment}}
         {{player/gru-external-assessment-page
@@ -26,25 +31,34 @@
         mapLocation=mapLocation
         source=source
         isNewPlayer=isNewPlayer
-        dataParams=dataParams}}
+        dataParams=dataParams
+        onSkipFeedback="playNext"
+        isDone=isDone
+        onExit="onExit"
+      }}
       {{else}}
         {{player/gru-external-collection-page
-        assessment=collection
+        collection=collection
         mapLocation=mapLocation
         source=source
-        isNewPlayer=isNewPlayer}}
+        isNewPlayer=isNewPlayer
+        onSkipFeedback="playNext"
+        isDone=isDone
+        onExit="onExit"
+      }}
       {{/if}}
     {{/if}}
   </div>
-  <div class="footer">
-    {{player/gru-external-assessment-footer
-      assessment=collection
-      playNext="playNext"
-      isFullScreen=isFullScreen
-      onToggleScreen="onToggleScreen"
-      isDone=isDone
-      classId=classId
-      courseId=courseId
-    }}
-  </div>
+</div>
+<div class="footer">
+  {{player/gru-external-assessment-footer
+    assessment=collection
+    playNext="playNext"
+    isFullScreen=isFullScreen
+    onToggleScreen="onToggleScreen"
+    isDone=isDone
+    classId=classId
+    courseId=courseId
+    onExit="onExit"
+  }}
 </div>

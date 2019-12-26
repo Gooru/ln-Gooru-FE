@@ -55,6 +55,19 @@ export default Ember.Component.extend({
       component.set('isScoreEntered', true);
       component.set('stopTime', new Date().getTime());
       component.updateSelfReport();
+      component.set('isShowActivityFeedback', true);
+    },
+
+    /**
+     * Action triggered when click on skip feedback
+     */
+    onSkipFeedback() {
+      const component = this;
+      component.sendAction('onSkipFeedback');
+    },
+
+    onExit: function() {
+      this.sendAction('onExit');
     },
 
     /**
@@ -70,7 +83,12 @@ export default Ember.Component.extend({
      */
     onCancel() {
       let component = this;
-      component.redirectTo();
+      let isIframeMode = component.get('isIframeMode');
+      if (isIframeMode) {
+        component.sendAction('onClosePlayer');
+      } else {
+        component.redirectTo();
+      }
     }
   },
 
@@ -86,6 +104,16 @@ export default Ember.Component.extend({
    * @property {Boolean} isScoreEntered
    */
   isScoreEntered: false,
+
+  /**
+   * @property {Boolean} isShowActivityFeedback
+   */
+  isShowActivityFeedback: false,
+
+  /**
+   * @property {String} contentType
+   */
+  contentType: 'assessment-external',
 
   /**
    * @property {Boolean} isValidScore
@@ -216,12 +244,12 @@ export default Ember.Component.extend({
     let component = this;
     let analyticsService = component.get('analyticsService');
     let dataParams = component.getDataParams();
+    component.set('percentScore', dataParams.percent_score);
     let selfReportedPromise = analyticsService.studentSelfReporting(dataParams);
     component.set('score', '');
-    Ember.RSVP
-      .hash({
-        selfReport: selfReportedPromise
-      })
+    Ember.RSVP.hash({
+      selfReport: selfReportedPromise
+    })
       .then(function() {
         component.set('score', component.getEnteredScore(dataParams));
         component.set('dataParams', dataParams);
@@ -264,7 +292,7 @@ export default Ember.Component.extend({
    * Method to round milliseconds
    */
   roundMilliseconds(milliseconds) {
-    return milliseconds - milliseconds % 1000;
+    return milliseconds - (milliseconds % 1000);
   },
 
   /**

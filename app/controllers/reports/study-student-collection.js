@@ -4,9 +4,12 @@ import {
   ASSESSMENT_SUB_TYPES,
   ROLES,
   CONTENT_TYPES,
-  SCORES
+  SCORES,
+  PLAYER_EVENT_MESSAGE
 } from 'gooru-web/config/config';
 import { getDomainCode } from 'gooru-web/utils/taxonomy';
+import { getObjectCopy, getObjectsDeepCopy } from 'gooru-web/utils/utils';
+import StudyPlayer from 'gooru-web/mixins/study-player';
 
 /**
  *
@@ -15,7 +18,7 @@ import { getDomainCode } from 'gooru-web/utils/taxonomy';
  *
  */
 
-export default StudentCollection.extend({
+export default StudentCollection.extend(StudyPlayer, {
   /**
    * Confetti Initialize once Component Initialize
    */
@@ -34,9 +37,6 @@ export default StudentCollection.extend({
     ) {
       Ember.run.later(function() {
         controller.set('enableConfetti', false);
-        if (controller.get('isLoadProficiencyProgress')) {
-          controller.set('isShowMasteryGreeting', true);
-        }
       }, 5400);
       controller.set('enableConfetti', true);
     }
@@ -79,8 +79,7 @@ export default StudentCollection.extend({
     /**
      * Action triggered for the next button
      */
-    next: function() {
-      let controller = this;
+    next: function(controller = this) {
       let contextId = controller.get('contextId');
       let profileId = controller.get('session.userData.gooruUId');
       const navigateMapService = controller.get('navigateMapService');
@@ -90,9 +89,9 @@ export default StudentCollection.extend({
         .then(attemptIds =>
           !attemptIds || !attemptIds.length
             ? {}
-            : this.get('quizzesAttemptService').getAttemptData(
-              attemptIds[attemptIds.length - 1]
-            )
+            : controller
+              .get('quizzesAttemptService')
+              .getAttemptData(attemptIds[attemptIds.length - 1])
         )
         .then(attemptData =>
           Ember.RSVP.hash({
@@ -123,6 +122,16 @@ export default StudentCollection.extend({
         });
     },
 
+    OnShowMasteryOrNext() {
+      const component = this;
+      if (component.get('isLoadProficiencyProgress')) {
+        component.set('isShowActivityFeedback', false);
+        component.set('isShowMasteryGreeting', true);
+      } else {
+        component.actions.next(component);
+      }
+    },
+
     playSignatureAssessmentSuggestions: function() {
       this.playSuggestedContent(
         this.get('mapLocation.signatureAssessmentSuggestions')
@@ -135,49 +144,41 @@ export default StudentCollection.extend({
       );
     },
 
-    /**
-     * Action triggered when the user accept a suggestion
-     */
-    onAcceptSuggestion() {
-      let controller = this;
-      let suggestedContent = controller.get('suggestedContent');
-      controller.playSuggestedContent(suggestedContent);
-      controller.set('isShowSuggestion', false);
-    },
-
-    /**
-     * Action triggered when the user ignore a suggestion
-     */
-    onIgnoreSuggestion() {
-      let controller = this;
-      controller.playNextContent();
-      controller.set('isShowSuggestion', false);
-    },
-
-    /**
-     * Action triggered when toggle screen mode
-     */
-    onToggleScreen() {
-      let controller = this;
-      let studyPlayerController = controller.get('studyPlayerController');
-      let isFullScreen = studyPlayerController.get('isFullScreen');
-      studyPlayerController.set('isFullScreen', !isFullScreen);
-      controller.set('isFullScreen', !isFullScreen);
-      if (isFullScreen) {
-        Ember.$('body')
-          .removeClass('fullscreen')
-          .addClass('fullscreen-exit');
-      } else {
-        Ember.$('body')
-          .removeClass('fullscreen-exit')
-          .addClass('fullscreen');
-      }
-    },
-
     onRedirectToProfiencyProgress() {
       const controller = this;
       controller.showStudentProficiencyProgress();
       controller.set('isShowMasteryGreeting', false);
+    },
+
+    onExit(rouet, id) {
+      const controller = this;
+      let isIframeMode = controller.get('isIframeMode');
+      if (isIframeMode) {
+        window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
+      } else {
+        controller.transitionToRoute(rouet, id);
+      }
+    },
+
+    OnFeedbackCapture: function() {
+      const controller = this;
+      let feedbackObj = getObjectCopy(controller.get('collectionObj'));
+      feedbackObj.isCollection = controller.get('collection.isCollection');
+      feedbackObj.children = getObjectsDeepCopy(
+        controller.get('collectionObj.children')
+      );
+      let resourcesResult = controller.get('attemptData.resourceResults');
+      let resourceList = feedbackObj.get('children');
+      resourceList.map(resource => {
+        let result = resourcesResult.findBy('resourceId', resource.id);
+        resource.reaction = result.reaction;
+        resource.savedTime = result.savedTime;
+        resource.score = result.score;
+        resource.skipped = result.skipped;
+      });
+      controller.set('feedbackObj', feedbackObj);
+      this.set('isShowActivityFeedback', true);
+      this.set('isStatusDone', false);
     }
   },
 
@@ -374,120 +375,10 @@ export default StudentCollection.extend({
     return !!frQuesitons.length;
   }),
 
+  isShowActivityFeedback: false,
+
   // -------------------------------------------------------------------------
   // Methods
-
-  /**
-   * Navigate to study player to play next collection/assessment
-   */
-  toPlayer: function(suggestion) {
-    const context = this.get('mapLocation.context');
-    let queryParams = {
-      role: ROLES.STUDENT,
-      source: this.get('source')
-    };
-    let classId = context.get('classId');
-    if (classId) {
-      queryParams.classId = classId;
-    }
-    let milestoneId = context.get('milestoneId');
-    if (milestoneId) {
-      queryParams.milestoneId = milestoneId;
-    }
-    if (suggestion) {
-      queryParams.courseId = context.courseId;
-      queryParams.milestoneId = context.get('milestoneId');
-      queryParams.unitId = context.get('unitId');
-      queryParams.lessonId = context.lessonId;
-      queryParams.collectionId = suggestion.get('id');
-      queryParams.pathId = suggestion.pathId;
-      queryParams.subtype =
-        suggestion.subType === 'signature_collection'
-          ? 'signature-collection'
-          : 'signature-assessment';
-      queryParams.pathType = 'system';
-      this.transitionToRoute('study-player', context.get('courseId'), {
-        queryParams
-      });
-    } else {
-      queryParams.type = context.itemType || null; //Type is important to decide whether next item is external or normal
-      queryParams.pathId = context.pathId || 0;
-      queryParams.pathType = context.pathType || null;
-      this.transitionToRoute('study-player', context.get('courseId'), {
-        queryParams
-      });
-    }
-  },
-
-  /**
-   * Removing dependency on local storage and  bypassing next call when dont have a suggestion
-   */
-  checknPlayNext: function() {
-    if (this.get('hasAnySuggestion')) {
-      this.playNextContent();
-    } else {
-      const context = this.get('mapLocation.context'); //Already having contex
-      this.playGivenContent(context);
-    }
-  },
-
-  playNextContent: function() {
-    const component = this;
-    const navigateMapService = this.get('navigateMapService');
-    const context = this.get('mapLocation.context');
-    navigateMapService.next(context).then(nextContext => {
-      component.set('mapLocation', nextContext);
-      component.playGivenContent(nextContext.context);
-    });
-  },
-
-  playGivenContent: function(context) {
-    let status = (context.get('status') || '').toLowerCase();
-    if (status !== 'done') {
-      this.toPlayer();
-    } else {
-      this.set('mapLocation.context.status', 'done');
-      this.set('hasSignatureCollectionSuggestions', false);
-      this.set('hasSignatureCollectionSuggestions', false);
-    }
-  },
-
-  playSuggestedContent: function(suggestion) {
-    const navigateMapService = this.get('navigateMapService');
-    const courseMapService = this.get('courseMapService');
-    navigateMapService
-      .getStoredNext()
-      .then(mapstoredloc => {
-        let mapContext = mapstoredloc.get('context');
-        var mapcontextloc = mapstoredloc.get('context');
-        mapContext.ctx_user_id = this.get('session.userId');
-        mapContext.ctx_class_id = mapContext.classId;
-        mapContext.ctx_course_id = mapContext.courseId;
-        mapContext.ctx_lesson_id = mapContext.lessonId;
-        mapContext.ctx_collection_id = mapContext.collectionId;
-        mapContext.ctx_milestone_id = mapContext.milestoneId;
-        mapContext.ctx_unit_id = mapContext.unitId;
-        mapContext.milestone_id = mapContext.milestoneId;
-        mapContext.suggested_content_type = suggestion.type;
-        mapContext.suggested_content_id = suggestion.id;
-        mapContext.suggested_content_subtype =
-          suggestion.subType === 'signature_collection'
-            ? 'signature-collection'
-            : 'signature-assessment';
-        return Ember.RSVP.hash({
-          context: mapcontextloc,
-          pathId: courseMapService.addSuggestedPath(mapContext)
-        });
-      })
-      .then(({ context, pathId }) => {
-        context.collectionId = suggestion.id; // Setting new collection id
-        context.pathId = pathId;
-        //context.pathtype = "system"; //set system path only if required
-        suggestion.pathId = pathId;
-        return navigateMapService.startAlternatePathSuggestion(context);
-      })
-      .then(() => this.toPlayer(suggestion));
-  },
 
   /**
    * Resets to default values
@@ -541,7 +432,8 @@ export default StudentCollection.extend({
       unitId: context.get('unitId'),
       lessonId: context.get('lessonId'),
       pathId: context.get('pathId') || 0,
-      pathType: context.get('pathType') || null
+      pathType: context.get('pathType') || null,
+      isIframeMode: controller.get('isIframeMode')
     };
     controller.updateStudentMasteredCompetencies();
     controller.transitionToRoute('student-learner-proficiency', profileId, {

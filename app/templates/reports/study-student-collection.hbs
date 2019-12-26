@@ -1,3 +1,4 @@
+
 {{player/gru-study-header
   classId=classId
   collection=collection
@@ -8,44 +9,50 @@
   class=class
   sourceType=source
   isStudyPlayer=true
+  isIframeMode=isIframeMode
 }}
 
-<div class="report-container {{if isShowSuggestion 'show-suggestion'}}">
-  <div class="summary-reset">
-    {{#if enableConfetti }}
-      {{gru-confetti}}
-    {{/if}}
-    {{reports/qz-student-report attemptData=attemptData profile=profile}}
+{{#if isShowActivityFeedback}}
+  {{player/gru-activity-feedback collection=feedbackObj timeSpent=attemptData.totalTimeSpent score=attemptData.averageScore onSkipFeedback="OnShowMasteryOrNext" isStatusDone=isStatusDone onExit="onExit"}}
+{{else}}
+  <div class="report-container {{if isShowSuggestion 'show-suggestion'}}">
+    <div class="summary-reset">
+      {{#if enableConfetti }}
+        {{gru-confetti}}
+      {{/if}}
+      {{reports/qz-student-report attemptData=attemptData profile=profile isIframeMode=isIframeMode}}
+    </div>
+    {{player/gru-player-summary-footer isDone=isDone classId=classId parents="next" OnFeedbackCapture="OnFeedbackCapture" courseId=courseId collection=collection isFullScreen=isFullScreen onToggleScreen="onToggleScreen" isIframeMode=isIframeMode onExit="onExit"}}
   </div>
-  {{player/gru-player-summary-footer isDone=isDone classId=classId parents="next" courseId=courseId collection=collection isFullScreen=isFullScreen onToggleScreen="onToggleScreen"}}
-</div>
 
-{{#if isShowSuggestion}}
-  {{content/modals/gru-content-suggestion mapLocation=mapLocation onAcceptSuggestion="onAcceptSuggestion" onIgnoreSuggestion="onIgnoreSuggestion"}}
-{{/if}}
+  {{#if isShowSuggestion}}
+    {{content/modals/gru-content-suggestion mapLocation=mapLocation onAcceptSuggestion="onAcceptSuggestion" onIgnoreSuggestion="onIgnoreSuggestion"}}
+  {{/if}}
 
-{{#if isShowMasteryGreeting}}
-  <div class="mastery-confirmation-popup">
-    <div class="mastery-greeting-container">
-      <div class="mastery-info-container">
-        <div class="greeting-images">
-          <div class="animal-img">
+  {{#if isShowMasteryGreeting}}
+    <div class="mastery-confirmation-popup">
+      <div class="mastery-greeting-container">
+        <div class="mastery-info-container">
+          <div class="greeting-images">
+            <div class="animal-img">
+            </div>
+            <div class="text-img">
+            </div>
           </div>
-          <div class="text-img">
+          <div class="greeting-message">
+            {{t 'mastery-greeting-msg'}}
           </div>
         </div>
-        <div class="greeting-message">
-          {{t 'mastery-greeting-msg'}}
-        </div>
-      </div>
-      <div class="mastery-action-container">
-        <div class="no-thanks" {{action "next"}}>
-          {{t 'gru-suggest-test.no'}}
-        </div>
-        <div class="show-me" {{action "onRedirectToProfiencyProgress"}}>
-          {{t 'show-me'}}
+        <div class="mastery-action-container">
+          <div class="no-thanks" {{action "next"}}>
+            {{t 'gru-suggest-test.no'}}
+          </div>
+          <div class="show-me" {{action "onRedirectToProfiencyProgress"}}>
+            {{t 'show-me'}}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  {{/if}}
+
 {{/if}}

@@ -61,6 +61,17 @@
               </div>
             </div>
             {{!-- language  ends--}}
+            <div class="sub-sec language-row">
+              <div class='row-label'>
+                {{t 'class.setting.mastery'}}
+              </div>
+              <div class="row-value">
+                <div class='action-button-slide-yes'>
+                  {{gru-switch switchOptions=switchOptionsMastery onOptionSwitch='updateMastery'
+                              isChecked=(if isMasteryApplicable  true false)}}
+                </div>
+              </div>
+            </div>
             <div class="sub-sec-teach">
               <div class='sub-sec-head'>{{t 'class.info.teachers'}}</div>
               <div class="sub-sec-row">
@@ -76,20 +87,20 @@
                     <div class='teacher-icon' style="background-image: url({{coteacher.avatarUrl}})"></div>
                     <div class='co-teacher-label'> {{coteacher.lastName}} {{coteacher.firstName}}</div>
                     {{#if (eq selfId class.owner.id)}}
-                    <div class='delete-co-teacher' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
+                      <div class='delete-co-teacher' {{action 'removeCoteacher' coteacher}} title="{{t 'common.remove'}}" data-toggle="tooltip"> {{gru-icon name='delete'}}</div>
                     {{/if}}
                   </div>
                 {{/each}}
               {{/if}}
               {{#if (eq selfId class.owner.id)}}
-              <div class="trigger-add-coteacher" {{action "onToggleAddCollaborator"}}>
-                <div class="add-co-teacher-icon">
-                  {{gru-icon name="add_circle_outline"}}
+                <div class="trigger-add-coteacher" {{action "onToggleAddCollaborator"}}>
+                  <div class="add-co-teacher-icon">
+                    {{gru-icon name="add_circle_outline"}}
+                  </div>
+                  <div class="add-co-teacher-label">
+                    {{t 'common.add'}}
+                  </div>
                 </div>
-                <div class="add-co-teacher-label">
-                  {{t 'common.add'}}
-                </div>
-              </div>
               {{/if}}
               <div class="add-collaborator-panel">
                 {{teacher/class/gru-add-collaborator
@@ -100,6 +111,52 @@
           </div>
         </div>
       </div>
+      {{#if (and isPremiumClass (gt multipleClassList.length  0))}}
+        <div class="view-mulitple-class-layout">
+          <div class="view-multiple-class-label">
+            {{t 'common.multi-grade-class-setting'}}
+          </div>
+          <div class="view-mulitple-class-panel">
+            <div class="multiple-class-panel-header">
+              <div class="class-panel-header-title">
+                {{t 'common.select-your-other-classes-from-below'}}
+              </div>
+              <div class="class-panel-header-action">
+                <div class="class-save-btn {{if isEnableSave '' 'disabled'}}" {{action 'saveMultipleClass'}}>
+                  {{t 'common.save'}}
+                </div>
+              </div>
+            </div>
+            <div class="multiple-class-section">
+              <div class="class-section-header">
+                <div class="class-action-header">
+                </div>
+                <div class="class-code-header">
+                  {{t 'student-landing.class-code'}}
+                </div>
+                <div class="class-name-header">
+                  {{t 'common.class-name'}}
+                </div>
+              </div>
+              <div class="class-section-body">
+                {{#each multipleClassList as | class classIndex |}}
+                  <div class="class-section-content">
+                    <div class="class-action-content class-{{if class.isChecked "checked" "unchecked"}}" {{action 'toggleCheckbox' class}}>
+                      {{gru-icon name=(if class.isChecked 'radio_button_checked' 'radio_button_unchecked')}}
+                    </div>
+                    <div class="class-code-content">
+                      {{class.code}}
+                    </div>
+                    <div class="class-name-content">
+                      {{class.title}}
+                    </div>
+                  </div>
+                {{/each}}
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/if}}
       <div class="assessment-template-layout">
         <div class="template-sec-cont">
           <div class="assessment-template-label">
@@ -117,18 +174,17 @@
         </div>
       </div>
       {{#if (eq selfId class.owner.id)}}
-      <div class="class-layout-btn">
-        <div class="btn-panel">
-          <div class='class-btn delete-btn' {{action 'deleteClass'}}>
-            {{t 'class.info.delete'}} {{gru-icon name='delete'}}
-          </div>
-          <div class='class-btn archive-btn' {{action 'archiveClass'}}>
-            {{t 'teacher-landing.class.class-management-tab.archive-classroom'}} {{gru-icon name="archive"}}
+        <div class="class-layout-btn">
+          <div class="btn-panel">
+            <div class='class-btn delete-btn' {{action 'deleteClass'}}>
+              {{t 'class.info.delete'}} {{gru-icon name='delete'}}
+            </div>
+            <div class='class-btn archive-btn' {{action 'archiveClass'}}>
+              {{t 'teacher-landing.class.class-management-tab.archive-classroom'}} {{gru-icon name="archive"}}
+            </div>
           </div>
         </div>
-      </div>
       {{/if}}
-
     </div>
     {{!-- two col layout ends --}}
     <div class='sec-rows-layout right-panel'>

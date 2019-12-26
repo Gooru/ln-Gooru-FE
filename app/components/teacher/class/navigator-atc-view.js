@@ -340,6 +340,8 @@ export default Ember.Component.extend({
         let clientX = d3.event.clientX;
         let top = clientY > 420 ? clientY - 185 : clientY;
         let left = clientX > 600 ? clientX - 225 : clientX;
+        top = d3.event.pageY;
+        left = d3.event.pageX;
         let tooltipPos = {
           top: `${top}px`,
           left: `${left}px`
@@ -402,7 +404,7 @@ export default Ember.Component.extend({
   cleanUpChart() {
     const axes = ['y'];
     axes.map(axis => {
-      var axisContainer = d3.selectAll(`.${axis}.axis .tick`);
+      var axisContainer = d3.selectAll(this.$(`.${axis}.axis .tick`));
       axisContainer.attr('style', function() {
         var curAxisElement = d3.select(this);
         var curAxisText = curAxisElement.select('text');
@@ -420,7 +422,7 @@ export default Ember.Component.extend({
     component.set('studentData', studentData);
     let tooltip = component.$('.navigator-atc-tooltip');
     return Ember.run.later(function() {
-      let tooltipHtml = Ember.$('.tooltip-html-container').html();
+      let tooltipHtml = component.$('.tooltip-html-container').html();
       tooltip.html(tooltipHtml);
       if (tooltipPos) {
         tooltip.css(tooltipPos);
