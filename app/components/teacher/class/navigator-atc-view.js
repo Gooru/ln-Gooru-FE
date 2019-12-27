@@ -275,9 +275,9 @@ export default Ember.Component.extend({
       .attr('class', 'navigator-atc-chart')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
-      .call(d3.behavior.zoom().scaleExtent([1, 3]).on("zoom", () => {
+      .call(d3.behavior.zoom().scaleExtent([1, 3]).on('zoom', () => {
         const translatePoints = d3.event.scale > 1 ? d3.event.translate : `${margin.left},${margin.top}`;
-        svg.attr("transform", `translate(${translatePoints}) scale(${d3.event.scale})`)
+        svg.attr('transform', `translate(${translatePoints}) scale(${d3.event.scale})`);
       }))
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
@@ -302,8 +302,8 @@ export default Ember.Component.extend({
       .attr('y', '445')
       .text(
         component
-        .get('i18n')
-        .t('teacher-landing.class.class-management-tab.performance').string
+          .get('i18n')
+          .t('teacher-landing.class.class-management-tab.performance').string
       );
 
     svg
@@ -315,7 +315,7 @@ export default Ember.Component.extend({
       .attr('y', '415')
       .text(
         component.get('i18n').t('teacher-landing.class.atc-view.progress-label')
-        .string
+          .string
       );
 
     let tooltipInterval = null;
