@@ -24,10 +24,13 @@
       <div class="lesson-plan-activities-container">
         {{teacher/class/ca-course-map
           onAddActivity="onAddActivity"
+          onAddContentToDCA="onAddActivity"
           onScheduleActivity="onShowDateRangePicker"
+          onScheduleContentToDCA="onShowDateRangePicker"
           classId=primaryClass.id
           courseId=primaryClass.courseId
-          isShowLessonPlan = true
+          isShowLessonPlan = false
+          todaysClassActivities = todaysActivities
         }}
       </div>
     {{else}}
@@ -59,6 +62,6 @@
         onScheduleForDate='scheduleContentForDate'
         onScheduleForMonth='scheduleContentForMonth'
         endDate=endDate
-        allowTwoDateRangePicker=false}}
+        allowTwoDateRangePicker=isShowStartEndDatePicker}}
   </div>
 {{/if}}

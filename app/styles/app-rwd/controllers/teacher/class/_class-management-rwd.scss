@@ -97,14 +97,11 @@
                 padding: 5px;
                 right: -102px;
                 z-index: 1;
+                display: none;
 
                 &.active {
-                  animation: slide 0.5s forwards;
-                }
-              }
-              @keyframes slide {
-                100% {
                   right: 0;
+                  display: grid;
                 }
               }
             }

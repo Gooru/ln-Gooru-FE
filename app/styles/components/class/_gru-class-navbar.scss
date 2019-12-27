@@ -470,6 +470,7 @@
           grid-template-columns: auto auto;
           align-items: center;
           cursor: pointer;
+          overflow: hidden;
           span {
             display: grid;
             align-items: center;

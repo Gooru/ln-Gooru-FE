@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { SCREEN_SIZES } from 'gooru-web/config/config';
+import { SCREEN_SIZES, CONTENT_TYPES } from 'gooru-web/config/config';
 import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
@@ -90,8 +90,13 @@ export default Ember.Component.extend({
 
     onShowDateRangePicker(content) {
       const component = this;
+      const contentFormat = content.get('format') || content.get('contentType');
       component.set('contentToSchedule', content);
       component.set('isShowDateRangePicker', true);
+      component.set(
+        'isShowStartEndDatePicker',
+        contentFormat === CONTENT_TYPES.OFFLINE_ACTIVITY
+      );
     },
 
     onCloseDateRangePicker() {
@@ -102,6 +107,7 @@ export default Ember.Component.extend({
       const component = this;
       const content = component.get('contentToSchedule');
       component.assignActivityToMultipleClass(content, scheduleDate, endDate);
+      component.set('isShowDateRangePicker', false);
     },
 
     scheduleContentForMonth(month, year) {
@@ -116,6 +122,7 @@ export default Ember.Component.extend({
         month,
         year
       );
+      component.set('isShowDateRangePicker', false);
     },
 
     onTogglePanel() {
@@ -147,6 +154,8 @@ export default Ember.Component.extend({
   isShowFullView: false,
 
   isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+  isShowStartEndDatePicker: false,
 
   assignActivityToMultipleClass(
     content,
@@ -187,12 +196,16 @@ export default Ember.Component.extend({
             });
             activityClasses.pushObject(activityClass);
             content.set('activityClasses', activityClasses);
-            content.set('isAdded', true);
             resolve();
           }, reject);
       });
     });
     Ember.RSVP.all(promiseList).then(() => {
+      if (scheduleDate) {
+        content.set('isAdded', true);
+      } else {
+        content.set('isScheduled', true);
+      }
       component.sendAction('activityAdded', content);
     });
   },

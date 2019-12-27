@@ -1,3 +1,4 @@
+//eslint-disable-next-line
 window.i18ln = {
   en: 'English',
   sp: 'Español',
@@ -899,7 +900,6 @@ window.i18ln = {
     'This Navigator course is a personalized course covering standards across multiple grades. Each student is provided a unique course to help fill gaps, reinforce concepts and practices, and accelerate their learning. Personalized routes are designed and students are re-routed in real-time to maximize each student\'s learning potential and to navigate to their set destination.',
   'class.overview.course-map.learning-path':
     'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
-
   'class.overview.course-map.custom-msg':
     'We are personalizing this course specifically for you based on your proficiency. Please check back in a little while to see the personalized course map.',
   'class.overview.course-map.route0-bannerdesc':
@@ -1143,7 +1143,6 @@ window.i18ln = {
   'content.oa.reference.presentation': 'Presentation',
   'content.oa.reference.document': 'Document',
   'content.oa.reference.others': 'Others',
-
   'user.active-classrooms': 'Active Classrooms',
   'user.archived-classrooms': 'Archived Classrooms',
   'user.classrooms': 'Classrooms',
@@ -2831,4 +2830,3 @@ window.i18ln = {
   'common.activate': 'Activate',
   'common.mark-as-completed': 'Mark as Completed'
 };
-//export default window.i18ln;

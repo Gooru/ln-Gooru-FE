@@ -73,7 +73,9 @@ export default Ember.Component.extend({
       let collectionIds = Ember.A([]);
       if (classActivities) {
         collectionIds = classActivities.map(classActivity => {
-          return classActivity.get('collection.id');
+          return (
+            classActivity.get('collection.id') || classActivity.get('contentId')
+          );
         });
       }
       return collectionIds;

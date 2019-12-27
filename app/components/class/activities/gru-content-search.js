@@ -177,10 +177,14 @@ export default Ember.Component.extend(ConfigurationMixin, {
     ]);
   }),
 
+  /**
+   * TODO lesson plan replaced with course map until LP content get ready
+   */
+
   contentSources: Ember.computed(function() {
     return Ember.A([
       Ember.Object.create({
-        label: 'Lesson Plan',
+        label: 'Course Map',
         value: 'lesson-plan'
       }),
       Ember.Object.create({

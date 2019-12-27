@@ -15,15 +15,16 @@ window.i18ln = {
   ta: 'தமிழ்',
   te: 'తెలుగు',
   'errors.description': 'Este campo',
-  'common.sub-filter': 'Sub-Filter',
   'errors.inclusion': '{{description}} no está incluido en la lista',
   'errors.exclusion': '{{description}} está reservado',
+  'my-content': 'My Content',
+  'common.tasks': 'tasks',
+  'common.sub-filter': 'Sub-Filter',
+  'featured-libraries': 'featured libraries',
   'errors.invalid': '{{description}} no es válido',
   'errors.confirmation': '{{description}} no coincide {{on}}',
   'errors.accepted': 'Se debe aceptar {{description}}',
   'errors.empty': '{{description}} no puede estar vacío',
-  'my-content': 'My Content',
-  'featured-libraries': 'featured libraries',
   'errors.blank': '{{description}} no puede estar en blanco',
   'errors.present': '{{description}} debe estar en blanco',
   'errors.collection': '{{description}} debe ser una colección',
@@ -44,8 +45,6 @@ window.i18ln = {
     '{{Description}} debe ser mayor o igual que {{gte}}',
   'errors.equalTo': '{{description}} debe ser igual a {{is}}',
   'errors.lessThan': '{{description}} debe ser menor que {{lt}}',
-  'not-covered-in-fw-msg':
-    'Note: This competency is not covered by the {{framework}} framework',
   'errors.lessThanOrEqualTo':
     '{{description}} debe ser menor o igual que {{lte}}',
   'errors.otherThan': '{{description}} debe ser distinto de {{value}}',
@@ -62,78 +61,66 @@ window.i18ln = {
   'common.efficacy': 'Efficacy',
   'common.grid': 'Grid',
   'common.list': 'List',
-  'common.suggest-to-student': 'Suggest to student',
-  'common.tenantLibrary': 'Tenant Library',
-  'common.no-suggestion-message':
-    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
-  'common.day': 'day',
-  'common.week': 'week',
-  'common.month': 'month',
-  'common.for': 'for',
   'common.first': 'First',
+  'common.last': 'Last',
+  'common.name': 'Name',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
-  'reroute.suggestion': 'reroute suggestion',
-  'reroute.show-mastery': 'Show Your Mastery',
-  'reroute.take-assessment':
-    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
-  'reroute.suggestion.title': 'Having difficulty with the concepts?',
-  'reroute.suggestion.desc':
-    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.upload-image': 'upload image',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
   'common.by-question': 'question-by-question',
-  'rubric-details': 'Rubric Details',
-  'i2d.new-upload-msg':
-    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'There was an error when trying to convert the image. Please resubmit the image',
   'file-picker-placeholder': 'Choose a file or drag it here',
   'no-preview-available': 'no preview available',
-  'tooltip.check-items-to-grade':
-    'Check the Items to Grade panel below to grade this activity',
   'common.success': 'Success',
   'i2d-successfully-image-upload':
     'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
   'common.dialog-close': 'Do you want to close ?',
-  're-upload': 'Re-Upload',
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
   'i2d.mobile-upload-failed': 'There was a error',
   'i2d.upload-failed':
     'There was an error while uploading this image. Re-upload?',
-  'common.last': 'Last',
-  'common.no-users-to-grade-oa':
-    'There are no users to grade for this Offline Activity.',
-  'common.name': 'Name',
-  'self-grade.not-required': 'Student self-grading not required',
+  're-upload': 'Re-Upload',
   'common.user': 'user',
-  'common.offline-activites': 'offline activites',
-  'common.offline-activity': 'offline activity',
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',
   'common.filter-by': 'Filter By',
+  'common.day': 'day',
+  'common.week': 'week',
+  'common.month': 'month',
   'common.more': 'more',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'apply filter',
   'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'Avg Score',
-  'common.tasks': 'tasks',
+  'common.offline-activites': 'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.frq': 'FRQ',
-  'common.no-content-for-week':
-    'No class activities scheduled for the selected period',
-  'common.answer-this-activity':
-    'Answer this rubric to complete your activity.',
   'common.schedule': 'Schedule',
   'common.responses': 'Responses',
+  'ca.student.no-content':
+    'The teacher has not assigned any activities for the day',
+  'oa.student.no-active-content':
+    'Currently there are no offline activities assigned to you that are active',
+  'oa.student.no-completed-content':
+    'There are no offline activities that are completed yet',
   'common.no-lesson-info-message': 'This unit does have any lessons.',
   'common.no-collection-info-message': 'This lesson does have any collections.',
   'common.gooru-suggestions': 'Gooru Suggestions',
   'common.gooru-catalog': 'Gooru Catalog',
   'common.suggestion-made-to': 'Suggestion made to',
   'common.student-selected': 'Student Selected',
+  'self-grade.not-required': 'Student self-grading not required',
   'common.no-suggest-result-message': ' No matching content found',
   'common.no-suggest-results-message':
     'You can search and  find the related content.',
@@ -148,23 +135,10 @@ window.i18ln = {
   'common.all-completed': 'Todo completado',
   'common.a-assessment': 'Una evaluación',
   'common.about': 'Acerca de',
-  'common.plan': 'plan',
-  'offline-activities.no-completed-content':
-    'There are no projects or other offline activities that have been completed yet',
-  'offline-activities.no-active-content':
-    'There are no projects or other offline activities that the students are currently working on',
   'common.about-you': 'Acerca de ti',
   'common.about-me': 'About Me',
-  'ca.student.no-content':
-    'The teacher has not assigned any activities for the day',
-  'oa.student.no-active-content':
-    'Currently there are no offline activities assigned to you that are active',
-  'oa.student.no-completed-content':
-    'There are no offline activities that are completed yet',
   'common.accept': 'Accept',
   'common.ignore': 'Ignore',
-  'common.no-search-result':
-    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.add': 'Añadir',
   'common.plan-an-activities': 'Plan your activities',
   'common.plan-activities': 'Plan Activities',
@@ -214,6 +188,8 @@ window.i18ln = {
   'common.anonymous_mode': 'Modo anónimo',
   'common.answer': 'Tu respuesta',
   'common.answer-correct': '¡Estás en lo correcto!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'Eres incorrecto ...',
   'common.answer-key-was-hidden':
     'Nota: Su profesor ha ocultado la tecla de respuesta.',
@@ -227,6 +203,7 @@ window.i18ln = {
   'common.assessment-pl.other': 'Evaluaciones',
   'common.assessment-title': 'Título de la evaluación',
   'common.activity-title': 'Activity Title',
+  'common.activity': 'Activity Title',
   'common.assessmentInitial': 'UN',
   'common.assessments': 'Evaluaciones',
   'common.assign': 'Asignar',
@@ -237,6 +214,7 @@ window.i18ln = {
   'common.avatarFor': 'Avatar para',
   'common.averageScore': 'Puntuación media',
   'common.back': 'Espalda',
+  'common.for': 'for',
   'common.back-to-assessment': 'Volver a la evaluación',
   'common.back-to-collection': 'Volver a la colección',
   'common.back-to-course-map': 'Volver al Mapa del Curso',
@@ -301,12 +279,23 @@ window.i18ln = {
   'common.brief': 'Brief',
   'common.update-grade-score': 'Update grade score to complete your FRQ.',
   'common.answer-this-rubric': 'Answer this rubric to complete your FRQ.',
+  'common.answer-this-activity':
+    'Answer this rubric to complete your activity.',
   'common.all-caught-up': 'You are all caught up!',
   'common.no-users-to-grade': 'There are no users to grade for this FRQ.',
+  'common.no-users-to-grade-oa':
+    'There are no users to grade for this Offline Activity.',
   'common.rubric-needs-grading': 'Rubric Needs Grading',
   'common.not-answered': 'Not Answered',
   'common.rubric-not-answered': 'Rubric Not Answered',
   'common.country': 'País',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.course-map': 'Mapa del curso',
   'common.course': 'Curso',
   'common.course-title': 'Título del curso',
@@ -509,8 +498,15 @@ window.i18ln = {
   'common.essential-questions': 'Preguntas esenciales',
   'common.example': 'example: ',
   'common.exit': 'Salida',
+  'common.no-search-result':
+    'No matching {{contentType}} were found for the search term and the filter settings. Try modifying the search term or filter parameters',
   'common.external-collection': 'External Collection',
   'common.explanation': 'Explicación',
+  'common.plan': 'plan',
+  'offline-activities.no-completed-content':
+    'There are no projects or other offline activities that have been completed yet',
+  'offline-activities.no-active-content':
+    'There are no projects or other offline activities that the students are currently working on',
   'common.explore': 'Explorar',
   'common.false': 'Falso',
   'common.featured-courses': 'Cursos destacados',
@@ -567,10 +563,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'Maestría',
   'common.menu': 'Menú',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'Más detalles',
   'common.move': 'Movimiento',
   'common.myContent': 'Mi contenido',
   'common.myProfile': 'My Location',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'Biblioteca',
   'common.myPerformance': 'Mi rendimiento',
   'common.edit-narration': 'Editar Narración',
@@ -611,6 +609,8 @@ window.i18ln = {
     'Your teacher has not yet assigned any collections or assessments to Class Activities.',
   'common.no-dca-teacher':
     'No current activities. Add  Class Activities from the Course Map or Content Catalog.',
+  'common.no-content-for-week':
+    'No class activities scheduled for the selected period',
   'common.notScored': 'Unscored',
   'common.notStarted': 'No empezado',
   'common.not-added': 'No añadido',
@@ -894,6 +894,7 @@ window.i18ln = {
   'class.info.add-students': 'Añadir Estudiantes',
   'class.info.class-code': 'Código de aula',
   'class.info.delete': 'Eliminar sala de clase',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'Curso asignado',
   'class.edit.basic-info': 'Información básica',
   'class.edit.class-name': 'Nombre del aula',
@@ -1158,6 +1159,12 @@ window.i18ln = {
   'content.resources.edit.information.im-publisher': 'Soy el editor',
   'content.resources.edit.information.select-a-license':
     'Seleccione una licencia',
+  'content.oa.reference.uploaded': 'Uploaded',
+  'content.oa.reference.image': 'Image',
+  'content.oa.reference.pdf': 'Pdf',
+  'content.oa.reference.presentation': 'Presentation',
+  'content.oa.reference.document': 'Document',
+  'content.oa.reference.others': 'Others',
   'user.active-classrooms': 'Aulas Activas',
   'user.archived-classrooms': 'Aulas archivadas',
   'user.classrooms': 'Aulas',
@@ -1276,8 +1283,6 @@ window.i18ln = {
     'You have successfully joined as a co-teacher of the Navigator class',
   'teacher-landing.navigator-banner.error-message':
     'Problem with joining class',
-  'teacher-landing.class.atc-view.progress-to-destination':
-    'progress to destination',
   'teacher-landing.class.manage': 'Manage',
   'teacher-landing.class.reports': 'Reports',
   'teacher-landing.class.daily-activites': 'Daily Activites',
@@ -1365,6 +1370,8 @@ window.i18ln = {
     'Total Competencies Gained',
   'teacher-landing.class.atc-view.progress-label':
     'Progress (# of competencies)',
+  'teacher-landing.class.atc-view.progress-to-destination':
+    'progress to destination',
   'teacher-landing.class.class-activities': 'Actividades de Clases Diarias',
   'teacher-landing.class.class-activities.input-timespent': 'Input Time Spent',
   'teacher-landing.class.class-activities.warning-message':
@@ -1509,6 +1516,11 @@ window.i18ln = {
   'gru-add-to.add-collection-to-lesson': 'Añadir de mis colecciones',
   'gru-add-to.add-collection-to-lesson-lead':
     'Seleccione una colección para agregar a esta lección.',
+  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.OA-info':
+    'The activities listed here <b>do not</b> belong to another lesson or course',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'Select a activity to add to this lesson.',
   'gru-add-to.add-to-collection': 'Añadir a la colección',
   'gru-add-to.add-to-collection-lead':
     'Elige una colección que quieras agregar {{contentTitle}} a',
@@ -1578,6 +1590,7 @@ window.i18ln = {
   'gru-share-pop-over.share-assessment': 'Comparta su evaluación con el enlace',
   'gru-share-pop-over.share-rubric': 'Share your rubric with link',
   'gru-share-pop-over.share-collection': 'Comparte tu colección con el enlace',
+  'gru-share-pop-over.share-OA': 'Offline Activity',
   'gru-category-panel.teacher.title': 'Para maestros',
   'gru-category-panel.teacher.body':
     'Descubra el contenido alineado con las normas, personalice el contenido y realice el seguimiento del progreso de los estudiantes a través del análisis de datos.',
@@ -2513,6 +2526,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'Pregunta',
   'gru-study-header.question.one': 'Pregunta',
   'gru-study-header.question.other': 'Preguntas',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'Para obtener más información, consulte estos recursos.',
   'gru-suggest-test.pre-test-header': 'Pre-prueba (opcional)',
@@ -2528,8 +2542,8 @@ window.i18ln = {
     'Suggested Assessment (Optional)',
   'gru-suggest-test.signature_assessment-lead':
     'Based on your performance on this course, the following assessment may enhance your understanding.',
-  'gru-suggest-test.pre-test-lead':
-    'Se sugiere una pre-prueba para medir su comprensión actual de los conceptos de esta lección. El pre-test puede ayudarlo a prepararse para el contenido de la lección. El pre-test no afectará la puntuación de rendimiento de su curso.',
+  'gru-suggest-test.pre-tessignaturet-lead':
+    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'gru-suggest-test.post-test-lead':
     'Se sugiere el siguiente post-test para medir su comprensión de la información presentada. La post-prueba no afectará la puntuación de rendimiento de su curso.',
   'gru-suggest-test.backfill-lead':
@@ -2807,21 +2821,6 @@ window.i18ln = {
     'There is no lesson plan for this lesson.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
-  'common.activity': 'Activity Title',
-  'content.oa.reference.uploaded': 'Uploaded',
-  'content.oa.reference.image': 'Image',
-  'content.oa.reference.pdf': 'Pdf',
-  'content.oa.reference.presentation': 'Presentation',
-  'content.oa.reference.document': 'Document',
-  'content.oa.reference.others': 'Others',
-  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
-  'gru-add-to.OA-info':
-    'The activities listed here <b>do not</b> belong to another lesson or course',
-  'gru-add-to.add-oa-to-lesson-lead':
-    'Select a activity to add to this lesson.',
-  'gru-share-pop-over.share-OA': 'Offline Activity',
-  'gru-suggest-test.pre-tessignaturet-lead':
-    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'common.choose-lang': 'Choose Language',
   'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
@@ -2832,6 +2831,8 @@ window.i18ln = {
   'common.select-your-other-classes-from-below':
     'Select your other classes from below to manage in this class',
   'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',

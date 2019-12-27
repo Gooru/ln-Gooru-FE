@@ -195,6 +195,16 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
    */
   supportSiteUrl: Ember.computed(function() {
     return Env.supportSiteUrl;
+  }),
+
+  /**
+   * @property isTenantUrl
+   * Property to check whether accessing gooru's internal tenant
+   * Tenant token appended to the URL with query param of 'nonce'
+   */
+  isTenantUrl: Ember.computed(function() {
+    const queryParamsString = window.location.search;
+    return queryParamsString.includes('nonce');
   })
 
   // -------------------------------------------------------------------------

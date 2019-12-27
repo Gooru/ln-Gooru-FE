@@ -33,7 +33,7 @@
           {{gru-icon name="add"}}  {{gru-icon name="done"}}
       </div>
     {{/unless}}
-    <div class="schedule-activity" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-placement="bottom" {{action "onShowDaterangePicker"}} >
+    <div class="schedule-activity {{if content.isScheduled 'scheduled'}}" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-placement="bottom" {{action "onShowDaterangePicker"}} >
       {{gru-icon name="update"}}
     </div>
   </div>

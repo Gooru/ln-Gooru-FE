@@ -21,7 +21,7 @@
 
         @media screen and (max-width: $screen-xs) {
           .left-panel {
-            width: inherit;
+            width: 100vw;
           }
         }
       }
