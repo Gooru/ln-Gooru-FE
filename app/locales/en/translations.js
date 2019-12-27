@@ -2822,6 +2822,8 @@ window.i18ln = {
   'common.daily': 'Daily',
   'common.weekly': 'Weekly',
   'class-activity.no-learning-activities':
-    'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term'
+    'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
+  'common.activate': 'Activate',
+  'common.mark-as-completed': 'Mark as Completed'
 };
 export default window.i18ln;

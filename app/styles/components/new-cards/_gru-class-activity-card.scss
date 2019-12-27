@@ -154,7 +154,6 @@
       .mark-completed {
         cursor: pointer;
         &.completed {
-          color: #1ba9eb;
           cursor: default;
           pointer-events: none;
         }

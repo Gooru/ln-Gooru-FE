@@ -42,7 +42,7 @@
           <span class="{{if isDaily 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'daily'}}>{{t 'common.daily'}}</span>
           <span class="{{if isWeekly 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'weekly'}}>{{t 'common.weekly'}}</span>
         {{/unless}}
-        <span class="{{if isMonthly 'active'}}" {{action "onSelectRangeType" 'monthly'}}>{{t 'common.monthly'}}{{isDatepicker}}</span>
+        <span class="{{if isMonthly 'active'}}" {{action "onSelectRangeType" 'monthly'}}>{{t 'common.monthly'}}</span>
       </div>
       {{#if isDaily}}
         {{ca-date-picker
