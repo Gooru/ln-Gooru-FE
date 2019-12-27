@@ -31,7 +31,14 @@
                 'frameworkCompetencyDisplayCode'
                 showGutCompetency
                 true
-                }}
+              }}
+              {{competency-lo-transform
+                fwCompetencies
+                competency.competencyCode
+                'loCode'
+                false
+                '|'
+              }}
             </div>
             <div class="competency-status status-{{competency.status}}"></div>
           </div>
