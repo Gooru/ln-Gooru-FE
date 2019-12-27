@@ -38,10 +38,6 @@ export default Ember.Component.extend(ModalMixin, {
   },
 
   actions: {
-    loadGradingData() {
-      const component = this;
-      component.loadItemsToGrade();
-    },
     /**
      *
      * @function actions:removeClassActivity
