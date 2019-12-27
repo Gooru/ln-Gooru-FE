@@ -3,14 +3,14 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   // Actions
   actions: {
-    didTransition() {
+    willTransition() {
       const viewport = Ember.$('head meta[name="viewport"]');
       viewport.attr(
         'content',
-        'width=device-width, initial-scale=1, maximum-scale=4'
+        'width=device-width, initial-scale=1, maximum-scale=12, user-scalable=1'
       );
     },
-    willTransition() {
+    didTransition() {
       const viewport = Ember.$('head meta[name="viewport"]');
       viewport.attr(
         'content',

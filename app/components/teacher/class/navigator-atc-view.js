@@ -1,7 +1,12 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import { getGradeColor, isCompatibleVW } from 'gooru-web/utils/utils';
-import { SCREEN_SIZES } from 'gooru-web/config/config';
+import {
+  getGradeColor,
+  isCompatibleVW
+} from 'gooru-web/utils/utils';
+import {
+  SCREEN_SIZES
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -52,7 +57,9 @@ export default Ember.Component.extend({
       }
       component
         .get('router')
-        .transitionTo(`teacher.class.${redirectTo}`, classId, { queryParams });
+        .transitionTo(`teacher.class.${redirectTo}`, classId, {
+          queryParams
+        });
     }
   },
 
@@ -268,6 +275,10 @@ export default Ember.Component.extend({
       .attr('class', 'navigator-atc-chart')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
+      .call(d3.behavior.zoom().scaleExtent([1, 3]).on('zoom', () => {
+        const translatePoints = d3.event.scale > 1 ? d3.event.translate : `${margin.left},${margin.top}`;
+        svg.attr('transform', `translate(${translatePoints}) scale(${d3.event.scale})`);
+      }))
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
