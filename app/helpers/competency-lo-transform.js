@@ -1,5 +1,9 @@
 import Ember from 'ember';
 
+/**
+ * @function competencyLoTransform
+ * Method to return lo info or gut based on params
+ */
 export function competencyLoTransform(params /*, hash*/ ) {
   const fwCompetencies = params[0] || [];
   const gutCode = params[1];
