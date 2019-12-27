@@ -2760,7 +2760,6 @@ window.i18ln = {
   'class-activity.scheduled-activities': 'Class Activities',
   'class-activity.unscheduled-activities': 'Unscheduled Activities',
   'class-activity.items-to-grade': 'Items to Grade',
-  'class-activity.filter': 'Filter by type',
   'common.monthly': 'Monthly',
   'common.daily': 'Daily',
   'common.weekly': 'Weekly',

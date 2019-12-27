@@ -153,6 +153,7 @@
           display: flex;
           justify-content: space-around;
           padding: 5px;
+          background-color: #fff;
 
           span {
             &.active,
@@ -538,7 +539,9 @@
         }
 
         .filters {
-          .activities > span {
+          padding: 8px;
+          justify-content: center;
+          .activities {
             display: none;
           }
         }

@@ -135,6 +135,7 @@ export default Ember.Component.extend(ModalMixin, {
     },
 
     onToggleDatePicker(component = this) {
+      component.toggleProperty('isDatepicker');
       component
         .$('.header-container .date-range-picker-container')
         .slideToggle();
@@ -184,6 +185,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.loadActivitiesByActiveContentType();
       component.set('selectedDate', date);
       component.set('isShowListCard', component.get('isMobileView'));
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
       component.set('selectedFilter', 'day');
     },
@@ -201,6 +203,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('endDate', endDate);
       component.loadActivitiesByActiveContentType();
       component.set('isShowListCard', true);
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
       component.set('selectedFilter', 'week');
     },
@@ -219,6 +222,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('startDate', startDate);
       component.set('endDate', endDate);
       component.set('isShowListCard', true);
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
       component.set('selectedFilter', 'month');
       if (component.get('isShowUnscheduledActivities')) {
@@ -238,6 +242,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
       component.loadActivitiesByActiveContentType();
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
     },
 
@@ -293,6 +298,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', false);
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
     },
 
@@ -305,6 +311,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.get('contentTypes').map(content => {
         content.set('isActive', true);
       });
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
       component.loadActivitiesByActiveContentType();
     },
@@ -320,6 +327,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isDaily', false);
       component.set('isWeekly', false);
       component.set('isMonthly', true);
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
       component.set('selectedMonth', currentMonth);
       component.set('startDate', startDate);
@@ -342,6 +350,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.get('contentTypes').map(content => {
         content.set('isActive', false);
       });
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
     },
 
@@ -379,6 +388,8 @@ export default Ember.Component.extend(ModalMixin, {
   isShowUnscheduledActivities: false,
 
   isShowScheduledActivities: true,
+
+  isDatepicker: false,
 
   classId: Ember.computed.alias('primaryClass.id'),
 

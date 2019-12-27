@@ -17,7 +17,6 @@
     {{#unless isShowItemsToGrade}}
       <div class="filters">
         <div class="activities">
-          <span>{{t 'class-activity.filter'}} &nbsp;</span>
           <div class="activities-content">
             <div class="contents-selector">
               {{#each contentTypes as |content|}}
@@ -34,13 +33,16 @@
         </div>
       </div>
     {{/unless}}
-    <div class="date-range-picker-container">
+    <div class="date-range-picker-container ">
+      {{#if isDatepicker}}
+        <div class="backdrop" {{action 'onToggleDatePicker'}}></div>
+      {{/if}}
       <div class="date-range-selector">
         {{#unless isShowUnscheduledActivities}}
           <span class="{{if isDaily 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'daily'}}>{{t 'common.daily'}}</span>
           <span class="{{if isWeekly 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'weekly'}}>{{t 'common.weekly'}}</span>
         {{/unless}}
-        <span class="{{if isMonthly 'active'}}" {{action "onSelectRangeType" 'monthly'}}>{{t 'common.monthly'}}</span>
+        <span class="{{if isMonthly 'active'}}" {{action "onSelectRangeType" 'monthly'}}>{{t 'common.monthly'}}{{isDatepicker}}</span>
       </div>
       {{#if isDaily}}
         {{ca-date-picker

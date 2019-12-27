@@ -1,5 +1,5 @@
 <div class="class-activity-card">
-  <div class="content-thumbnail" style="background-image: url({{activityContent.thumbnailUrl}})">
+  <div class="content-thumbnail" style="background-image: url({{activityContent.thumbnailUrl}})" {{action "onShowContentPreview"}}>
     <div class="icon">
       <i class="{{activityContent.format}}-icon" />
     </div>
@@ -102,29 +102,36 @@
     {{/each}}
   </div>
   <div class="activity-actions">
-    <div class="play-activity" title="Play" data-toggle="tooltip" {{action "onShowContentPreview"}}>
-      {{gru-icon name="play_arrow"}}
-    </div>
-    {{#if isOfflineActivity}}
-      <div class="mark-completed {{if activity.isCompleted 'completed'}} {{unless activity.isActive 'in-active'}}" {{action "onMarkOaCompleted"}}  title="{{if activity.isCompleted 'Completed' 'Mark Completed'}}" data-toggle="tooltip">
-        {{gru-icon name=(if activity.isCompleted 'check_circle' 'check_circle_outline')}}
-      </div>
-    {{/if}}
     {{#unless isUnscheduledActivity}}
       <div class="activate-activity {{if activity.isActive 'disable-event'}}" title="Assign" data-toggle="tooltip">
         {{gru-switch
           isChecked = activity.isActive
           switchOptions = switchOptions
           onOptionSwitch = "onToggleActivityVisibility"}}
+        {{#if activity.isActive}}
+          <label>Enable</label>
+        {{else}}
+          <label>Activate</label>
+        {{/if}}
       </div>
     {{/unless}}
-    {{#if isShowMasteryAccrual}}
-      <div class="mastery-accrual {{if activity.allowMasteryAccrual 'checked'}} {{if isActivityPast 'disable-event'}}" title="Mastery" data-toggle="tooltip" {{action "onEnableMastery"}}>
-        {{gru-icon name=(if activity.allowMasteryAccrual 'radio_button_checked' 'radio_button_unchecked')}}
-      </div>
-    {{/if}}
     <div class="reschedule-activity" title="Reschedule" data-toggle="tooltip" {{action "onRescheduleActivity"}}>
       {{gru-icon name="update"}}
+      <label>Reschedule</label>
     </div>
+    {{#if isShowMasteryAccrual}}
+      <div  class="mastery">
+        <div class="mastery-accrual {{if activity.allowMasteryAccrual 'checked'}} {{if isActivityPast 'disable-event'}}" title="Mastery" data-toggle="tooltip" {{action "onEnableMastery"}}>
+          {{gru-icon name=(if activity.allowMasteryAccrual 'radio_button_checked' 'radio_button_unchecked')}}
+        </div>
+        <label>Mastery</label>
+      </div>
+    {{/if}}
+    {{#if isOfflineActivity}}
+      <div class="mark-completed {{if activity.isCompleted 'completed'}} {{unless activity.isActive 'in-active'}}" {{action "onMarkOaCompleted"}}  title="{{if activity.isCompleted 'Completed' 'Mark Completed'}}" data-toggle="tooltip">
+        {{gru-icon name=(if activity.isCompleted 'check_circle' 'check_circle_outline')}}
+        <label>Mark as Completed</label>
+      </div>
+    {{/if}}
   </div>
 </div>
