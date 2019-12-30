@@ -56,22 +56,36 @@ window.i18ln = {
   'errors.url': '{{description}} ಒಂದು ಮಾನ್ಯವಾದ url ಆಗಿರಬೇಕು',
   'common.relevance': 'ಪ್ರಸ್ತುತತೆ',
   'common.engagement': 'ನಿಶ್ಚಿತಾರ್ಥ',
-  'common.tenantLibrary': 'Tenant Library',
   'common.efficacy': 'ಪರಿಣಾಮಕಾರಿತ್ವ',
   'common.grid': 'ಗ್ರಿಡ್ ',
   'common.list': 'ಪಟ್ಟಿ ',
   'common.first': 'ಮೊದಲ ',
-  'not-covered-in-fw-msg':
-    'Note: This competency is not covered by the {{framework}} framework',
-  'reroute.suggestion': 'reroute suggestion',
-  'reroute.show-mastery': 'Show Your Mastery',
-  'reroute.take-assessment':
-    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
-  'reroute.suggestion.title': 'Having difficulty with the concepts?',
-  'reroute.suggestion.desc':
-    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.last': 'ಕೊನೆಯ',
   'common.name': 'ಹೆಸರು',
+  'common.add-data-choice-title': 'How do you want to enter the data?',
+  'common.take-photo': 'take photo',
+  'common.upload-image': 'upload image',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
+  'common.by-question': 'question-by-question',
+  'i2d.conversion-progress':
+    'The uploaded image(s) are being processed. Please check back later',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
+  'i2d.conversion-error':
+    'There was an error when trying to convert the image. Please resubmit the image',
+  'file-picker-placeholder': 'Choose a file or drag it here',
+  'no-preview-available': 'no preview available',
+  'common.success': 'Success',
+  'i2d-successfully-image-upload':
+    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
+  'common.dialog-close': 'Do you want to close ?',
+  'upload-success': 'Uploaded Successfully',
+  'mobile-camera-placeholder': 'Tap for image upload',
+  'i2d.mobile-upload-failed': 'There was a error',
+  'i2d.upload-failed':
+    'There was an error while uploading this image. Re-upload?',
+  're-upload': 'Re-Upload',
   'common.user': 'ಬಳಕೆದಾರ ',
   'common.content-name': 'ವಿಷಯದ ಹೆಸರು',
   'common.lastName': 'ಕೊನೆಯ ಹೆಸರು',
@@ -81,6 +95,8 @@ window.i18ln = {
   'common.week': 'ವಾರ ',
   'common.month': 'ತಿಂಗಳು ',
   'common.more': 'ಹೆಚ್ಚು ',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'ಫಿಲ್ಟರ್ ಅನ್ವಯಿಸಿ',
   'library-search-placeholder': 'ಗ್ರಂಥಾಲಯದೊಳಗೆ ಯಾವುದನ್ನಾದರೂ ಹುಡುಕಿ',
   'search-help-message': 'ಅನ್ವಯಿಸಲು ಫಿಲ್ಟರ್‌ಗಳನ್ನು ಆರಿಸಿ',
@@ -89,7 +105,6 @@ window.i18ln = {
   'common.offline-activity': 'ಆಫ್‌ಲೈನ್ ಚಟುವಟಿಕೆ',
   'common.frq': 'ಎಫ್ ಆರ್ ಕ್ಯೂ ',
   'common.schedule': 'ವೇಳಾಪಟ್ಟಿ',
-  'rubric-details': 'Rubric Details',
   'common.responses': 'ಪ್ರತಿಕ್ರಿಯೆಗಳು',
   'ca.student.no-content':
     'ಶಿಕ್ಷಕರು  ಈ ದಿನಕ್ಕೆ ಯಾವುದೇ ಚಟುವಟಿಕೆಗಳನ್ನು ನಿಯೋಜಿಸಿಲ್ಲ',
@@ -109,34 +124,12 @@ window.i18ln = {
   'common.no-suggest-results-message': 'ಸಂಬಂಧಿತ ವಿಷಯವನ್ನು ನೀವು ಹುಡುಕಬಹುದು.',
   'common.no-suggest-search-results-message':
     'ನಿಮ್ಮ ಕಾಗುಣಿತವನ್ನು ಪರಿಶೀಲಿಸಿ. ನಾವೆಲ್ಲರೂ ತಪ್ಪುಗಳನ್ನು ಮಾಡುತ್ತೇವೆ! ಅಥವಾ ಬದಲಾಗಿ  ಅದೇ ರೀತಿಯ ಪದವನ್ನು ಹುಡುಕಲು ಪ್ರಯತ್ನಿಸಿ.',
-  'common.add-data-choice-title': 'How do you want to enter the data?',
-  'common.take-photo': 'take photo',
-  'common.upload-image': 'upload image',
-  'common.by-question': 'question-by-question',
-  'i2d.new-upload-msg':
-    'Please click on Confirm & Continue button to upload your images',
-  'i2d.conversion-progress':
-    'The uploaded image(s) are being processed. Please check back later',
-  'i2d.conversion-error':
-    'There was an error when trying to convert the image. Please resubmit the image',
-  'file-picker-placeholder': 'Choose a file or drag it here',
-  'no-preview-available': 'no preview available',
-  'common.success': 'Success',
-  'i2d-successfully-image-upload':
-    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
-  'common.dialog-close': 'Do you want to close ?',
-  're-upload': 'Re-Upload',
-  'upload-success': 'Uploaded Successfully',
-  'mobile-camera-placeholder': 'Tap for image upload',
-  'i2d.mobile-upload-failed': 'There was a error',
-  'common.suggest-to-student': 'Suggest to student',
-  'i2d.upload-failed':
-    'There was an error while uploading this image. Re-upload?',
   'common.a-collection': 'ಸಂಗ್ರಹ',
   'common.a-course': 'ಒಂದು ಕೋರ್ಸ್',
   'common.a-question': 'ಒಂದು ಪ್ರಶ್ನೆ',
   'common.a-resource': 'ಒಂದು ಸಂಪನ್ಮೂಲ',
   'common.a-rubric': 'ಒಂದು ರಬ್ರಿಕ್',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'ಎಲ್ಲಾ ಪೂರ್ಣಗೊಂಡಿದೆ',
   'common.a-assessment': 'ಒಂದು ಮೌಲ್ಯಮಾಪನ',
   'common.about': 'ಸುಮಾರು',
@@ -149,7 +142,6 @@ window.i18ln = {
   'common.plan-activities': 'ಯೋಜಿತ ಚಟುವಟಿಕೆಗಳು ',
   'common.plan-an-activities-msg': 'ನಿಮ್ಮ ಚಟುವಟಿಕೆಗಳನ್ನು ಯೋಜಿಸಿ',
   'common.Reschedule': 'ಮರುಹೊಂದಿಸಿ',
-  'common.a-offline-activity': 'a offline activity',
   'common.no-unschedule-items':
     'ನೀವು ವೇಳಾಪಟ್ಟಿ ಅಗತ್ಯವಿರುವ ಯಾವುದೇ ಚಟುವಟಿಕೆಗಳನ್ನು ಹೊಂದಿಲ್ಲ',
   'common.repeat-activity': 'ಚಟುವಟಿಕೆಯನ್ನು ಪುನರಾವರ್ತಿಸಿ',
@@ -191,10 +183,10 @@ window.i18ln = {
   'common.advanced-editing': 'ಸುಧಾರಿತ ಸಂಪಾದನೆ',
   'common.announcements': 'ಪ್ರಕಟಣೆಗಳು',
   'common.anonymous_mode': 'ಅನಾಮಧೇಯ ಮೋಡ್',
-  'common.no-suggestion-message':
-    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer': 'ನಿಮ್ಮ ಉತ್ತರ',
   'common.answer-correct': 'ನೀವು ಸರಿಯಾಗಿದ್ದೀರಿ!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'ನೀವು ತಪ್ಪಾಗಿರುವಿರಿ ...',
   'common.answer-key-was-hidden':
     'ಗಮನಿಸಿ: ನಿಮ್ಮ ಶಿಕ್ಷಕ ಉತ್ತರ ಕೀಲಿಯನ್ನು ಮರೆಮಾಡಿದ್ದಾರೆ.',
@@ -296,6 +288,13 @@ window.i18ln = {
   'common.not-answered': 'ಉತ್ತರಿಸಲಾಗಿಲ್ಲ',
   'common.rubric-not-answered': 'ರಬ್ರಿಕ್   ಉತ್ತರಿಸಲಾಗಿಲ್ಲ',
   'common.country': 'ದೇಶ',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.course-map': 'ಕೋರ್ಸ್ ಮ್ಯಾಪ್',
   'common.course': 'ಕೋರ್ಸ್',
   'common.course-title': 'ಪಠ್ಯ ಶೀರ್ಷಿಕೆ',
@@ -565,10 +564,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'ಲಾಗಿನ್ ಮಾಡಲು ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ.',
   'common.mastery': 'ಪಾಂಡಿತ್ಯ',
   'common.menu': 'ಮೆನು',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'ಹೆಚ್ಚಿನ ವಿವರಗಳಿಗಾಗಿ',
   'common.move': 'ಸರಿಸಲು',
   'common.myContent': 'ನನ್ನ ವಿಷಯ',
   'common.myProfile': 'ನನ್ನ ಸ್ಥಳ',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'ಗ್ರಂಥಾಲಯ',
   'common.myPerformance': 'ನನ್ನ ಅಭಿನಯ',
   'common.edit-narration': 'ಸಂಪಾದನೆ ನಿರೂಪಣೆ',
@@ -900,6 +901,7 @@ window.i18ln = {
   'class.info.add-students': 'ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ಸೇರಿಸಿ',
   'class.info.class-code': 'ತರಗತಿಯ ಕೋಡ್',
   'class.info.delete': 'ತರಗತಿಯನ್ನು ಅಳಿಸಿ',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'ನಿಯೋಜಿಸಲಾದ ಕೋರ್ಸ್',
   'class.edit.basic-info': 'ಮೂಲ ಮಾಹಿತಿ',
   'class.edit.class-name': 'ತರಗತಿಯ ಹೆಸರು',
@@ -1512,6 +1514,11 @@ window.i18ln = {
   'gru-add-to.add-collection-to-lesson': 'ನನ್ನ ಸಂಗ್ರಹಣೆಯಿಂದ ಸೇರಿಸಿ',
   'gru-add-to.add-collection-to-lesson-lead':
     'ಈ ಪಾಠಕ್ಕೆ ಸೇರಿಸಲು ಸಂಗ್ರಹವನ್ನು ಆಯ್ಕೆಮಾಡಿ.',
+  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.OA-info':
+    'The activities listed here <b>do not</b> belong to another lesson or course',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'Select a activity to add to this lesson.',
   'gru-add-to.add-to-collection': 'ಸಂಗ್ರಹಕ್ಕೆ ಸೇರಿಸಿ',
   'gru-add-to.add-to-collection-lead':
     'ನೀವು {{contentTitle}} ಅನ್ನು ಸೇರಿಸಲು ಬಯಸುವ ಸಂಗ್ರಹವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ',
@@ -2525,6 +2532,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'ಪ್ರಶ್ನೆ',
   'gru-study-header.question.one': 'ಪ್ರಶ್ನೆ',
   'gru-study-header.question.other': 'ಪ್ರಶ್ನೆಗಳು',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'ಇನ್ನಷ್ಟು ತಿಳಿದುಕೊಳ್ಳಲು, ಈ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.',
   'gru-suggest-test.pre-test-header': 'ಪೂರ್ವ ಪರೀಕ್ಷೆ (Optional)',
@@ -2539,8 +2547,8 @@ window.i18ln = {
     'ಸೂಚಿಸಿದ ಮೌಲ್ಯಮಾಪನ (Optional)',
   'gru-suggest-test.signature_assessment-lead':
     'ಈ ಕೋರ್ಸ್ನಲ್ಲಿನ ನಿಮ್ಮ ಕಾರ್ಯಕ್ಷಮತೆಯನ್ನು ಆಧರಿಸಿ, ಕೆಳಗಿನ ಮೌಲ್ಯಮಾಪನವು ನಿಮ್ಮ ತಿಳುವಳಿಕೆಯನ್ನು ಹೆಚ್ಚಿಸಬಹುದು.',
-  'gru-suggest-test.pre-test-lead':
-    'ಈ ಪಾಠದಲ್ಲಿನ ಪರಿಕಲ್ಪನೆಗಳ ಕುರಿತು ನಿಮ್ಮ ಪ್ರಸ್ತುತ ತಿಳುವಳಿಕೆಯನ್ನು ಅಳೆಯಲು ಪೂರ್ವ ಪರೀಕ್ಷೆಯು ಸೂಚಿಸಲಾಗಿದೆ. ಪೂರ್ವ ಪರೀಕ್ಷೆಯು ಪಾಠದಲ್ಲಿರುವ ವಿಷಯಕ್ಕಾಗಿ ನಿಮ್ಮನ್ನು ಸಿದ್ಧಗೊಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಪೂರ್ವ ಪರೀಕ್ಷೆಯು ನಿಮ್ಮ ಕೋರ್ಸ್ ಕಾರ್ಯಕ್ಷಮತೆ ಸ್ಕೋರ್ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರುವುದಿಲ್ಲ.',
+  'gru-suggest-test.pre-tessignaturet-lead':
+    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'gru-suggest-test.post-test-lead':
     'ಕೆಳಗಿನ ಪೋಸ್ಟ್-ಪರೀಕ್ಷೆಯು ಪ್ರಸ್ತುತಪಡಿಸಿದ ಮಾಹಿತಿಯನ್ನು ನಿಮ್ಮ ತಿಳುವಳಿಕೆಯನ್ನು ಅಳೆಯಲು ಸೂಚಿಸಲಾಗಿದೆ. ಪೋಸ್ಟ್-ಟೆಸ್ಟ್ ನಿಮ್ಮ ಕೋರ್ಸ್ ಕಾರ್ಯಕ್ಷಮತೆ ಸ್ಕೋರ್ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರುವುದಿಲ್ಲ.',
   'gru-suggest-test.backfill-lead':
@@ -2778,6 +2786,9 @@ window.i18ln = {
   'oa.info.duration-hrs': 'ಪೂರ್ಣಗೊಳ್ಳುವ ನಿರೀಕ್ಷಿತ ಸಮಯ',
   'oa.info.hrs': ' ಗಂಟೆಗಳು',
   'class.add-teachers': 'Enter the email of other teachers',
+  'common.collaborators': 'Collaborators',
+  'common.no-collaborators':
+    'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'class.add-co-teachers': 'ಸಹ ಶಿಕ್ಷಕರನ್ನು ಸೇರಿಸಿ',
   'common.gained': 'ಗಳಿಸಿದೆ',
   'badges-earned': 'ಬ್ಯಾಡ್ಜ್ ಗಳಿಕೆ',
@@ -2816,18 +2827,6 @@ window.i18ln = {
     'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
-  'tooltip.check-items-to-grade':
-    'Check the Items to Grade panel below to grade this activity',
-  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
-  'gru-add-to.OA-info':
-    'The activities listed here <b>do not</b> belong to another lesson or course',
-  'gru-add-to.add-oa-to-lesson-lead':
-    'Select a activity to add to this lesson.',
-  'gru-suggest-test.pre-tessignaturet-lead':
-    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
-  'common.collaborators': 'Collaborators',
-  'common.no-collaborators':
-    'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'common.choose-lang': 'Choose Language',
   'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
@@ -2863,5 +2862,27 @@ window.i18ln = {
     ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!',
   'common.no-competency': 'Not aligned to any competency',
   'common.class-activities-info-icon':
-    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class'
+    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class',
+  'class-activity.no-activity-scheduled-message-mobile':
+    'You have no activities scheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-scheduled-message-desktop':
+    'You have no activities scheduled for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.no-activity-unscheduled-message-mobile':
+    'You have no activities unscheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-unscheduled-message-desktop':
+    'You have no activities unscheduled for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.no-activity-items-to-grade-message-mobile':
+    'You have no activities items to grade for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-items-to-grade-message-desktop':
+    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.scheduled-activities': 'Class Activities',
+  'class-activity.unscheduled-activities': 'Unscheduled Activities',
+  'class-activity.items-to-grade': 'Items to Grade',
+  'common.monthly': 'Monthly',
+  'common.daily': 'Daily',
+  'common.weekly': 'Weekly',
+  'class-activity.no-learning-activities':
+    'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
+  'common.activate': 'Activate',
+  'common.mark-as-completed': 'Mark as Completed'
 };

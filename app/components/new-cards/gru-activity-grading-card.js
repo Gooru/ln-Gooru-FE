@@ -19,9 +19,17 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.loadGradingData();
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   actions: {
+    onToggleContent(className) {
+      const component = this;
+      component.$(`.${className}`).slideToggle();
+    },
+
     onGradeItem(gradingClass) {
       const component = this;
       const gradingItem = component.get('gradingItem');

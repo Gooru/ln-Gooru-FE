@@ -31,16 +31,13 @@ export default Ember.Component.extend(ModalMixin, {
 
   didInsertElement() {
     const component = this;
+    component.set('isLoading', true);
     component.loadActivitiesByActiveContentType(true);
     component.loadItemsToGrade();
     component.loadActivitiesForMonth(this.get('forMonth'), this.get('forYear'));
   },
 
   actions: {
-    loadGradingData() {
-      const component = this;
-      component.loadItemsToGrade();
-    },
     /**
      *
      * @function actions:removeClassActivity
@@ -122,7 +119,23 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isShowAddData', false);
     },
 
+    onRefreshItemsToGrade(item) {
+      const component = this;
+      const dcaContentId = item.get('dcaContentId');
+      let gradingItemsList = component.get('gradingItemsList');
+      const classId = item.get('classId');
+      const gradedContent = gradingItemsList
+        .filterBy('classId', classId)
+        .findBy('dcaContentId', dcaContentId);
+      if (gradedContent) {
+        gradingItemsList.removeObject(gradedContent);
+        const activityClass = component.get('selectedClassData');
+        component.fetchActivityPerformanceSummary(activityClass);
+      }
+    },
+
     onToggleDatePicker(component = this) {
+      component.toggleProperty('isDatepicker');
       component
         .$('.header-container .date-range-picker-container')
         .slideToggle();
@@ -171,8 +184,10 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('forYear', forYear);
       component.loadActivitiesByActiveContentType();
       component.set('selectedDate', date);
-      component.set('isShowListCard', false);
+      component.set('isShowListCard', component.get('isMobileView'));
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
+      component.set('selectedFilter', 'day');
     },
 
     onSelectWeek(startDate, endDate) {
@@ -188,7 +203,9 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('endDate', endDate);
       component.loadActivitiesByActiveContentType();
       component.set('isShowListCard', true);
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
+      component.set('selectedFilter', 'week');
     },
 
     onSelectMonth(date) {
@@ -205,8 +222,14 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('startDate', startDate);
       component.set('endDate', endDate);
       component.set('isShowListCard', true);
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
-      component.loadActivitiesByActiveContentType();
+      component.set('selectedFilter', 'month');
+      if (component.get('isShowUnscheduledActivities')) {
+        component.loadUnScheduledActivities();
+      } else {
+        component.loadActivitiesByActiveContentType();
+      }
     },
 
     onSelectToday(date) {
@@ -219,6 +242,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
       component.loadActivitiesByActiveContentType();
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
     },
 
@@ -240,14 +264,14 @@ export default Ember.Component.extend(ModalMixin, {
       } else {
         component.scheduleActivityToClass(classActivity, startDate, endDate);
       }
-      component.actions.onCloseDaterangePicker();
+      component.send('onCloseDaterangePicker');
     },
 
     onScheduleByMonth(month, year) {
       const component = this;
       const classActivity = component.get('selectedClassActivity');
       component.addActivityToClass(classActivity, null, null, month, year);
-      component.actions.onCloseDaterangePicker();
+      component.send('onCloseDaterangePicker');
     },
 
     onCloseDaterangePicker() {
@@ -274,17 +298,20 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', false);
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
     },
 
     onloadScheduledClassActivities() {
       const component = this;
+      component.set('isLoading', true);
       component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', false);
       component.get('contentTypes').map(content => {
         content.set('isActive', true);
       });
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
       component.loadActivitiesByActiveContentType();
     },
@@ -296,9 +323,11 @@ export default Ember.Component.extend(ModalMixin, {
       let endDate = moment(startDate)
         .endOf('month')
         .format('YYYY-MM-DD');
+      component.set('isLoading', true);
       component.set('isDaily', false);
       component.set('isWeekly', false);
       component.set('isMonthly', true);
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
       component.set('selectedMonth', currentMonth);
       component.set('startDate', startDate);
@@ -314,13 +343,14 @@ export default Ember.Component.extend(ModalMixin, {
 
     onShowItemsToGrade() {
       const component = this;
-      component.groupGradingItems();
+      // component.groupGradingItems();
       component.set('isShowScheduledActivities', false);
       component.set('isShowItemsToGrade', true);
       component.set('isShowUnscheduledActivities', false);
       component.get('contentTypes').map(content => {
         content.set('isActive', false);
       });
+      component.set('isDatepicker', false);
       component.$('.header-container .date-range-picker-container').slideUp();
     },
 
@@ -351,11 +381,15 @@ export default Ember.Component.extend(ModalMixin, {
 
   isDaily: true,
 
+  selectedFilter: 'day',
+
   isShowItemsToGrade: false,
 
   isShowUnscheduledActivities: false,
 
   isShowScheduledActivities: true,
+
+  isDatepicker: false,
 
   classId: Ember.computed.alias('primaryClass.id'),
 
@@ -480,9 +514,18 @@ export default Ember.Component.extend(ModalMixin, {
       : !component.get('isDaily');
   }),
 
+  isMobileView: Ember.computed(function() {
+    return isCompatibleVW(SCREEN_SIZES.MEDIUM);
+  }),
+
+  isLoading: false,
+
+  isAdded: false,
+
   observeNewlyAddedActivity: Ember.observer('newlyAddedActivity', function() {
     const component = this;
     const activity = component.get('newlyAddedActivity');
+    component.set('isAdded', true);
     if (activity.get('isScheduledActivity')) {
       component.loadActivitiesByActiveContentType(true);
     } else {
@@ -490,7 +533,7 @@ export default Ember.Component.extend(ModalMixin, {
     }
   }),
 
-  gradingObserver: Ember.observer('gradingItemsList', function() {
+  gradingObserver: Ember.observer('gradingItemsList.[]', function() {
     const component = this;
     if (component.get('gradingItemsList').length) {
       component.groupGradingItems();
@@ -502,11 +545,16 @@ export default Ember.Component.extend(ModalMixin, {
     const activeContentTypes = component
       .get('contentTypes')
       .filterBy('isActive', true);
-    activeContentTypes.map(content => {
-      component.loadScheduledClassActivities(
-        content.get('type'),
-        isInitialLoad
+    const promiseMap = activeContentTypes.map(content => {
+      return Ember.RSVP.resolve(
+        component.loadScheduledClassActivities(
+          content.get('type'),
+          isInitialLoad
+        )
       );
+    });
+    Ember.RSVP.all(promiseMap).then(() => {
+      component.set('isLoading', false);
     });
   },
 
@@ -547,8 +595,9 @@ export default Ember.Component.extend(ModalMixin, {
           );
           const setting = component.get('primaryClass.setting');
           const isMastery = setting['mastery.applicable'];
-          if (newlyAdded && isMastery) {
+          if (newlyAdded && isMastery && component.get('isAdded')) {
             component.onUpdateMasteryAccrual(newlyAdded);
+            component.set('isAdded', false);
           }
         }
       }
@@ -603,6 +652,7 @@ export default Ember.Component.extend(ModalMixin, {
         'unScheduledActivities',
         component.groupActivitiesByClass(unScheduledActivities)
       );
+      component.set('isLoading', false);
     });
   },
 
@@ -821,7 +871,11 @@ export default Ember.Component.extend(ModalMixin, {
           );
       }
     });
-    component.loadUnScheduledActivities();
+    if (component.get('isShowUnscheduledActivities')) {
+      component.loadUnScheduledActivities();
+    } else {
+      component.loadScheduledClassActivities(contentType);
+    }
   },
 
   addActivityToClass(
@@ -857,7 +911,11 @@ export default Ember.Component.extend(ModalMixin, {
         return addedActivity;
       });
     });
-    component.loadScheduledClassActivities(contentType);
+    if (component.get('isShowUnscheduledActivities')) {
+      component.loadUnScheduledActivities();
+    } else {
+      component.loadScheduledClassActivities(contentType);
+    }
   },
 
   fetchMasteryAccrualContents(classActivities = Ember.A([])) {

@@ -134,6 +134,10 @@
             display: block;
           }
         }
+
+        &.scheduled i.update {
+          color: #4d9840;
+        }
       }
 
       .content-thumbnail {

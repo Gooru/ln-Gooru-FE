@@ -17,6 +17,10 @@ window.i18ln = {
   'errors.description': 'ഈ ഫീൽഡ്',
   'errors.inclusion': '{{description}} പട്ടികയിൽ ഉൾപ്പെടുത്തിയിട്ടില്ല',
   'errors.exclusion': '{{വിവരണം}} സംവരണം ചെയ്തിരിക്കുന്നു',
+  'my-content': 'My Content',
+  'common.tasks': 'tasks',
+  'common.sub-filter': 'Sub-Filter',
+  'featured-libraries': 'featured libraries',
   'errors.invalid': '{{description}} അസാധുവാണ്',
   'errors.confirmation':
     '{{description}}, {{on}} എന്നതുമായി പൊരുത്തപ്പെടുന്നില്ല',
@@ -70,6 +74,8 @@ window.i18ln = {
   'common.by-question': 'ചോദ്യങ്ങൾ ഒന്നൊന്നായി',
   'i2d.conversion-progress':
     'അപ്‌ലോഡ് ചെയ്‍ത ചിത്രം(ങ്ങൾ) പ്രോസസ് ചെയ്യുകയാണ്. പിന്നീട് പരിശോധിക്കുക',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'ചിത്രം കൺവേർട്ട് ചെയ്യാൻ ശ്രമിച്ചപ്പോൾ പിശകുണ്ടായി. ചിത്രം വീണ്ടും സമർപ്പിക്കുക',
   'file-picker-placeholder':
@@ -89,19 +95,20 @@ window.i18ln = {
   'common.content-name': 'ഉള്ളടക്കത്തിന്റെ പേര്',
   'common.lastName': 'പേരിന്റെ അവസാന ഭാഗം',
   'common.firstName': 'പേരിന്റെ ആദ്യഭാഗം',
-  'rubric-details': 'Rubric Details',
-  'common.tasks': 'tasks',
   'common.filter-by': 'ഫിൽട്ടർ ചെയ്യുക',
+  'common.day': 'day',
+  'common.week': 'week',
+  'common.month': 'month',
   'common.more': 'കൂടുതൽ',
-  'i2d.new-upload-msg':
-    'Please click on Confirm & Continue button to upload your images',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'apply filter',
-  'search-help-message': 'Choose filters to apply',
   'library-search-placeholder': 'Search for anything within the library…',
+  'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'ശരാശരി സ്കോർ',
+  'common.offline-activites': 'Offline Activities',
+  'common.offline-activity': 'Offline Activity',
   'common.frq': 'frq',
-  'common.no-suggestion-message':
-    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.schedule': 'പട്ടിക',
   'common.responses': 'പ്രതികരണങ്ങൾ',
   'ca.student.no-content':
@@ -128,6 +135,7 @@ window.i18ln = {
   'common.a-question': 'ഒരു ചോദ്യം',
   'common.a-resource': 'ഒരു വിഭവം',
   'common.a-rubric': 'ഒരു റബ്രിക്ക്',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'എല്ലാം പൂർത്തിയായി',
   'common.a-assessment': 'ഒരു വിലയിരുത്തൽ',
   'common.about': 'കുറിച്ച്',
@@ -152,6 +160,7 @@ window.i18ln = {
   'common.add-competency': 'കാര്യക്ഷമത ചേർക്കുക',
   'common.add-content-prompt':
     '<span>{{type}}</span> നിങ്ങളിത് വരെ സൃഷ്ടിച്ചിട്ടില്ല, ധൈര്യമായി മുന്നോട്ട് പോവുക.',
+  'common.add-course': 'Create New Course',
   'common.add-coruse-to-class': 'കോഴ്‌സ് ചേർക്കുക',
   'common.add-domains-to-unit': 'യൂണിറ്റിലേക്ക് ഡൊമെയ്‌നുകൾ ചേർക്കുക',
   'common.add-url': 'യുആർഎൽ ചേർക്കുക',
@@ -183,6 +192,8 @@ window.i18ln = {
   'common.anonymous_mode': 'അജ്ഞാത മോഡ്',
   'common.answer': 'നിങ്ങളുടെ ഉത്തരം',
   'common.answer-correct': 'ശരിയാണ്!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'തെറ്റാണ്....',
   'common.answer-key-was-hidden':
     'ശ്രദ്ധിക്കുക: നിങ്ങളുടെ ടീച്ചർ ഉത്തര സൂചന മറച്ചിരിക്കുകയാണ്.',
@@ -197,6 +208,7 @@ window.i18ln = {
   'common.assessment-pl.other': 'വിലയിരുത്തലുകൾ',
   'common.assessment-title': 'വിലയിരുത്തൽ ശീർഷകം',
   'common.activity-title': 'Activity Title',
+  'common.activity': 'Activity Title',
   'common.assessmentInitial': 'a',
   'common.assessments': 'വിലയിരുത്തലുകൾ',
   'common.assign': 'നിയമിക്കുക',
@@ -207,6 +219,7 @@ window.i18ln = {
   'common.avatarFor': 'എന്നതിനായുള്ള അവതാർ',
   'common.averageScore': 'ശരാശരി സ്കോർ',
   'common.back': 'തിരികെ',
+  'common.for': 'for',
   'common.back-to-assessment': 'തിരികെ വിലയിരുത്തൽ',
   'common.back-to-collection': 'തിരികെ ശേഖരത്തിലേക്ക്',
   'common.back-to-course-map': 'തിരികെ പോകാൻ മാപ്പ്',
@@ -286,6 +299,9 @@ window.i18ln = {
   'common.rubric-not-answered': 'റൂബ്രിക്കിന് ഉത്തരം നൽകിയിട്ടില്ല',
   'common.country': 'രാജ്യം',
   'reroute.suggestion': 'നിർദ്ദേശം വഴിതിരിച്ച് വിടുക',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
   'reroute.suggestion.title': 'ആശയങ്ങൾ മനസ്സിലാക്കാൻ ബുദ്ധിമുട്ടുണ്ടോ?',
   'reroute.suggestion.desc':
     'നിങ്ങളിൽ പരിശോധിക്കുന്ന ആശയങ്ങളെക്കുറിച്ച് മനസ്സിലാക്കാൻ, ഞങ്ങളുടെ <span> സിഗ്‌നേച്ചർ കളക്ഷനുകൾ</span> കണ്ട് മനസ്സിലാക്കുക.',
@@ -546,10 +562,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'ലോഗ് ഇൻ ചെയ്യാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക.',
   'common.mastery': 'വൈദഗ്ദ്ധ്യം',
   'common.menu': 'മെനു',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'കൂടുതൽ വിശദാംശങ്ങൾ',
   'common.move': 'നീങ്ങുക',
   'common.myContent': 'എന്റെ ഉള്ളടക്കം',
   'common.myProfile': 'എന്റെ ലൊക്കേഷൻ',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'ലൈബ്രറി',
   'common.myPerformance': 'എന്റെ പ്രകടനം',
   'common.edit-narration': 'വിവരണം വിവരിക്കുന്നു',
@@ -751,6 +769,8 @@ window.i18ln = {
   'common.show-more-results': 'കൂടുതൽ ഫലങ്ങൾ കാണിക്കുക',
   'common.show-results': 'ഫലങ്ങൾ കാണിക്കുക',
   'common.signUp': 'സൈൻ അപ്പ്',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'ആൽഫബെറ്റിക്കായി അടുക്കുക',
   'common.sortAverage': 'ശരാശരി അടിസ്ഥാനത്തിൽ അടുക്കുക',
   'common.sort-most-recently':
@@ -881,6 +901,7 @@ window.i18ln = {
   'class.info.add-students': 'വിദ്യാർത്ഥികളെ ചേർക്കുക',
   'class.info.class-code': 'ക്ലാസ്റൂം കോഡ്',
   'class.info.delete': 'ക്ലാസ്റൂം ഇല്ലാതാക്കുക',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'അസൈൻ ചെയ്ത കോഴ്‍സ്',
   'class.edit.basic-info': 'അടിസ്ഥാന വിവരം',
   'class.edit.class-name': 'ക്ലാസ്റൂമിന്‍റെ പേര്',
@@ -1059,6 +1080,8 @@ window.i18ln = {
   'content.modals.delete-bookmark.confirmation':
     '{{type}} എന്നതിന്‍റെ ബുക്ക്മാർക്ക് നിങ്ങൾക്ക് ഒഴിവാക്കണോ?',
   'content.modals.delete-bookmark.delete-error': 'ക്ഷമിക്കണം!',
+  'content.modals.remove-class-activity.confirmation':
+    'Are you sure you want to remove this {{type}} from your  Class Activities?',
   'content.modals.remove-class-activity.delete-error':
     'ക്ഷമിക്കണം! {{type}} എന്ന വിഭാഗം ഇപ്പോൾ നീക്കം ചെയ്യാനാവുന്നില്ല. പിന്നീട് വീണ്ടും ശ്രമിക്കുക.',
   'content.modals.delete-class.legend':
@@ -1325,6 +1348,7 @@ window.i18ln = {
     'വിദ്യാർത്ഥിയുടെ പേര്',
   'teacher-landing.class.class-management-tab.student-id':
     'വിദ്യാർത്ഥിയുടെ ഐഡി',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'അദ്ധ്യാപകർ',
   'teacher-landing.class.class-management-tab.view-report': 'റിപ്പോർട്ട് കാണുക',
   'teacher-landing.class.class-management-tab.course-null':
@@ -1965,6 +1989,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'യോഗ്യത',
   'profile.gru-navigation.preference.preference': 'മുൻഗണന',
   'profile.edit.select-district': 'ജില്ല തിരഞ്ഞെടുക്കുക....',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'ഡാറ്റയൊന്നും ഇതുവരെ ലഭ്യമല്ല. നിങ്ങൾ പഠനം ആരംഭിക്കുമ്പോൾ, ഡാറ്റ ലഭ്യമാകും.',
   'profile.proficiency.expand-chart': 'ചാർട്ട് വികസിപ്പിക്കുക',
@@ -2538,6 +2566,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'ചോദ്യം',
   'gru-study-header.question.one': 'ചോദ്യം',
   'gru-study-header.question.other': 'ചോദ്യങ്ങൾ',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'കൂടുതൽ അറിയാൻ, ഈ വിഭവങ്ങൾ പരിശോധിക്കുക.',
   'gru-suggest-test.pre-test-header': 'പ്രീ-ടെസ്റ്റ് (ഓപ്ഷണൽ)',
@@ -2732,6 +2761,7 @@ window.i18ln = {
   'common.subtask.oa.debate': 'ചർച്ച',
   'common.subtask.oa.others': 'മറ്റുള്ളവർ',
   project: 'പ്രോജക്റ്റ്',
+  'oa.others': 'Others',
   'oa.project.poster': 'പോസ്റ്റർ',
   'oa.project.presentation': 'പ്രസന്‍റേഷൻ',
   'oa.project.video': 'വീഡിയോ',
@@ -2803,6 +2833,7 @@ window.i18ln = {
   'suggestion-taken': 'എടുത്ത നിർദ്ദേശങ്ങൾ',
   'this-week': 'ഈ ആഴ്ച്ച',
   'previous-week': 'കഴിഞ്ഞ ആഴ്ച്ച',
+  'custom-range': 'Custom Date Range',
   'beginning-till-now': 'തുടങ്ങുന്നു',
   'report.class-proficiency-report': 'ക്ലാസ് കഴിവ് റിപ്പോർട്ട്',
   'report.domain-proficiency-report': 'ഡൊമെയ്ൻ കാര്യക്ഷമതാ റിപ്പോർട്ട്',
@@ -2818,6 +2849,35 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'വിദ്യാർത്ഥി ലൊക്കേറ്റർ',
   'teacher-landing.class.learning-journey': 'പഠന യാത്ര',
   'search-by': 'എന്നത് ഉപയോഗിച്ച് തിരയുക',
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts',
+  'common.lesson-plan': 'Lesson Plan',
+  'lesson-plan.sessions': 'sessions',
+  'common.session': 'Session',
+  'prior-knowledge': 'Prior Knowledge',
+  'guiding-question': 'Guiding Questions',
+  'anticipated-struggle': 'Aniticipated Struggles',
+  'teacher-resource': 'Teacher Resources',
+  'content.anticipated-struggles':
+    'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
+  'common.no-lesson-plan-info-message':
+    'This lesson does have any lesson plan.',
+  'common.email.error': 'Duplicate email',
+  'student-resource': 'Student Study Material',
+  'common.choose-lang': 'Choose Language',
+  'common.show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
@@ -2841,5 +2901,27 @@ window.i18ln = {
     ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!',
   'common.no-competency': 'Not aligned to any competency',
   'common.class-activities-info-icon':
-    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class'
+    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class',
+  'class-activity.no-activity-scheduled-message-mobile':
+    'You have no activities scheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-scheduled-message-desktop':
+    'You have no activities scheduled for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.no-activity-unscheduled-message-mobile':
+    'You have no activities unscheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-unscheduled-message-desktop':
+    'You have no activities unscheduled for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.no-activity-items-to-grade-message-mobile':
+    'You have no activities items to grade for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-items-to-grade-message-desktop':
+    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.scheduled-activities': 'Class Activities',
+  'class-activity.unscheduled-activities': 'Unscheduled Activities',
+  'class-activity.items-to-grade': 'Items to Grade',
+  'common.monthly': 'Monthly',
+  'common.daily': 'Daily',
+  'common.weekly': 'Weekly',
+  'class-activity.no-learning-activities':
+    'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
+  'common.activate': 'Activate',
+  'common.mark-as-completed': 'Mark as Completed'
 };

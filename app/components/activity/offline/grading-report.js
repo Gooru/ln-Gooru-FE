@@ -295,6 +295,12 @@ export default Ember.Component.extend({
     }
   ),
 
+  /**
+   * @property {Boolean} isRightPanelExpanded
+   * Property to check whether the right panel is in expanded state or not
+   */
+  isRightPanelExpanded: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -373,6 +379,25 @@ export default Ember.Component.extend({
 
     saveGrade() {
       this.saveUserGrade();
+    },
+
+    //Action triggered when clicking on the right panel header
+    // It's only enabled for mobile view
+    onTogglePanel() {
+      // NOTE pixel values are hard coded based on current implementation.
+      const component = this;
+      let top = '125px';
+      if (component.get('isRightPanelExpanded')) {
+        // 10px padding top
+        top = `${component.$('.oa-grading-section').height() - 80 + 10  }px`;
+      }
+      component.$('.right-panel').animate(
+        {
+          top
+        },
+        400
+      );
+      component.toggleProperty('isRightPanelExpanded');
     }
   },
 
@@ -848,7 +873,7 @@ export default Ember.Component.extend({
         }
         component.$().fadeOut(5000, function() {
           component.set('showPullUp', false);
-          component.sendAction('refreshItem');
+          component.sendAction('refreshItem', component.get('context'));
         });
       });
     }

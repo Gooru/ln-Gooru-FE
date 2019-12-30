@@ -1,4 +1,4 @@
-<div class="class-activities-source-container">
+<div class="class-activities-source-container {{if isMobileView 'mobile-view'}}">
   <div class="header-container">
     {{class/activities/gru-content-search
       onSelectExternalActivity="onSelectExternalActivity"
@@ -15,15 +15,22 @@
     {{#if isShowTenantLibraries}}
       {{#each tenantLibraries as |tenantLibrary|}}
         {{library/gru-partner-library-card onSelectLibrary='onSelectTenantLibrary' content=tenantLibrary}}
+      {{else}}
+        <div class="plan-activities-msg">
+          {{t 'class-activity.no-learning-activities'}}
+        </div>
       {{/each}}
     {{else if isShowLessonPlan}}
       <div class="lesson-plan-activities-container">
         {{teacher/class/ca-course-map
           onAddActivity="onAddActivity"
+          onAddContentToDCA="onAddActivity"
           onScheduleActivity="onShowDateRangePicker"
+          onScheduleContentToDCA="onShowDateRangePicker"
           classId=primaryClass.id
           courseId=primaryClass.courseId
-          isShowLessonPlan = true
+          isShowLessonPlan = false
+          todaysClassActivities = todaysActivities
         }}
       </div>
     {{else}}
@@ -31,6 +38,10 @@
         {{new-cards/activities/gru-add-content-card
           content=filteredContent
           onAddActivity="onAddActivity"}}
+      {{else}}
+        <div class="plan-activities-msg">
+          {{t 'class-activity.no-learning-activities'}}
+        </div>
       {{/each}}
     {{/if}}
   </div>
@@ -51,6 +62,6 @@
         onScheduleForDate='scheduleContentForDate'
         onScheduleForMonth='scheduleContentForMonth'
         endDate=endDate
-        allowTwoDateRangePicker=false}}
+        allowTwoDateRangePicker=isShowStartEndDatePicker}}
   </div>
 {{/if}}
