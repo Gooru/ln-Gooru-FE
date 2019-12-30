@@ -86,7 +86,7 @@ export default Ember.Component.extend({
       component.showTodayActivity();
     },
 
-    OnCloseDatePicker() {
+    onCloseDatePicker() {
       this.sendAction('closeDatePicker');
     }
   },

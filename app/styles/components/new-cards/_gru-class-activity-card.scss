@@ -464,7 +464,7 @@
         display: grid;
         grid-column-start: 1;
         grid-column-end: 3;
-        padding: 8px 10px 8px 10px;
+        padding: 4px 10px 0px 10px;
         border-top: 1px solid #ccc;
         > div {
           grid-template-columns: auto auto;

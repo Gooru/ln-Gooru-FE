@@ -55,6 +55,12 @@ export default Ember.Component.extend({
         year,
         isScheduleByMonth
       );
+    },
+
+    onShowContentPreview() {
+      const component = this;
+      const content = component.get('content');
+      component.sendAction('onShowContentPreview', content);
     }
   },
 
