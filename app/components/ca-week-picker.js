@@ -100,7 +100,7 @@ export default Ember.Component.extend({
       component.sendAction('showNextMonth', parsedDate);
     },
 
-    onClosePullUp() {
+    OnCloseDatePicker() {
       this.sendAction('closeDatePicker');
     }
   },

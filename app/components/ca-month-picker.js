@@ -101,7 +101,7 @@ export default Ember.Component.extend({
       component.resetMonth();
     },
 
-    onClosePullUp() {
+    OnCloseDatePicker() {
       this.sendAction('closeDatePicker');
     }
   },
