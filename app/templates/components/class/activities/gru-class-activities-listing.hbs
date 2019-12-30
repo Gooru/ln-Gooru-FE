@@ -34,9 +34,6 @@
       </div>
     {{/unless}}
     <div class="date-range-picker-container ">
-      {{#if isDatepicker}}
-        <div class="backdrop" {{action 'onToggleDatePicker'}}></div>
-      {{/if}}
       <div class="date-range-selector">
         {{#unless isShowUnscheduledActivities}}
           <span class="{{if isDaily 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'daily'}}>{{t 'common.daily'}}</span>
@@ -58,6 +55,7 @@
           selectedDate=selectedDate
           activities=scheduledClassActivitiesDatewise
           highlightActivities=true
+          closeDatePicker = "closeDatePicker"
         }}
       {{else if isWeekly}}
         {{ca-week-picker
@@ -69,6 +67,7 @@
           selectedWeekDate=selectedWeekDate
           activities=scheduledClassActivitiesDatewise
           highlightActivities=true
+          closeDatePicker = "closeDatePicker"
           }}
       {{else}}
         {{ca-month-picker
@@ -77,6 +76,7 @@
           showCalendarView=true
           onSelectMonth="onSelectMonth"
           selectedMonth=selectedMonth
+          closeDatePicker = "closeDatePicker"
         }}
       {{/if}}
     </div>
