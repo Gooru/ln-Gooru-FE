@@ -146,6 +146,16 @@ export default Ember.Component.extend({
         component.$().addClass('open');
       }
       component.toggleProperty('isShowFullView');
+    },
+
+    onShowContentPreview(previewContent) {
+      const component = this;
+      component.set('previewContent', previewContent);
+      if (previewContent.get('format') === 'offline-activity') {
+        component.set('isShowOfflineActivityPreview', true);
+      } else {
+        component.set('isShowContentPreview', true);
+      }
     }
   },
 
