@@ -83,7 +83,6 @@
           }
 
           li {
-            border-right: 1px solid $gray-80;
             padding: 0 5px;
 
             &:last-child {
@@ -91,6 +90,7 @@
             }
 
             &:first-child {
+              border-right: 1px solid $gray-80;
               padding-left: 0;
             }
           }

@@ -60,7 +60,13 @@
             <ul class="competency-sub-heading">
               <li>{{competency.domainName}}</li>
               <li>{{competency.displayCode}}</li>
-
+              <li>{{competency-lo-transform
+                fwCompetencies
+                competency.competencyCode
+                'loCode'
+                false
+                '|'
+              }}</li>
             </ul>
             </div>
             <div class="competency-icon" {{action "onSelectCompetency" competency}}>
@@ -100,16 +106,17 @@
   {{reports/pull-up/competency-completion-report fwCompetencies=fwCompetencies showPullUp=isShowCompetencyCompletionReport classId=classId activeMonth=activeMonth activeYear=activeYear domainData=selectedDomain competencyCompletionReport=competencyCompletionReport userAgent=userAgent onSuggestAtCompetency="onSuggestAtCompetency" maxLimitToSuggestContent=maxLimitToSuggestContent}}
 {{/if}}
 {{#if isShowGradeCompetency}}
-  {{reports/pull-up/struggling-competency-domain-level selectCompetency="onSelectCompetency" gradeDomainIndex = gradeDomainIndex gradeDomainsList=gradeDomainsList closePullUp="onCloseGradePullUp"}}
+  {{reports/pull-up/struggling-competency-domain-level fwCompetencies=fwCompetencies selectCompetency="onSelectCompetency" gradeDomainIndex = gradeDomainIndex gradeDomainsList=gradeDomainsList closePullUp="onCloseGradePullUp"}}
 {{/if}}
 
 {{#if isShowOtherGradeCompetency}}
- {{reports/pull-up/struggling-competency-other-grade-level selectCompetency="onSelectCompetency" gradeDomainIndex = gradeDomainIndex otherGradeCompetency = otherGradeCompetency closePullUp="onCloseOtherGrade"}}
+ {{reports/pull-up/struggling-competency-other-grade-level fwCompetencies=fwCompetencies selectCompetency="onSelectCompetency" gradeDomainIndex = gradeDomainIndex otherGradeCompetency = otherGradeCompetency closePullUp="onCloseOtherGrade"}}
 {{/if}}
 
 {{#if isShowStrugglingCompetencyReport}}
    {{reports/pull-up/struggling-competency-report
      class=class
+     fwCompetencies=fwCompetencies
      onPreviewContent='onPreviewContent'
      onAddContentToDCA ='onAddCollectionToDCA'
      onScheduleContentToDCA = 'onScheduleContentToDCA'

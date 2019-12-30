@@ -16,6 +16,7 @@ export function competencyLoTransform(params /*, hash*/ ) {
   if (!showGutCompetency && fwCompetency) {
     return `${delimiterText} ${fwCompetency[gutCode][`${lookupKeyName}`]}`;
   }
+  return '';
 }
 
 export default Ember.Helper.helper(competencyLoTransform);
