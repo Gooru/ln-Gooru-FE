@@ -9,11 +9,6 @@
   </div>
   <div class="activity-info">
     <div class="content-counts">
-        <div class="class-list">
-          <span {{action "onToggleContent" 'class-info'}}>
-            {{gru-icon name="group"}}
-          </span>
-        </div>
       {{#if isOfflineActivity}}
         <div class="task-count count-container">
           <span class="task-icon icon-style"></span>
@@ -48,6 +43,11 @@
   <div class="class-info">
     {{#each activityClasses as |activityClass|}}
       <div class="assigned-class">
+        <div class="class-list">
+         <span>
+           {{gru-icon name="group"}}
+         </span>
+       </div>
         <div class="class-title ellipsis" title="{{activityClass.title}}" data-toggle="tooltip">
           {{activityClass.title}}
         </div>

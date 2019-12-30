@@ -172,6 +172,11 @@
                 .content-source {
                   pointer-events: unset;
                 }
+                &.show-dropdown {
+                  .dropdown {
+                    pointer-events: unset;
+                  }
+                }
               }
             }
           }
@@ -184,6 +189,12 @@
           .content-search-container {
             .content-source-container {
               grid-template-columns: repeat(5, auto);
+              &.show-dropdown {
+                grid-template-columns: 1fr 50px;
+                .dropdown {
+                  pointer-events: none;
+                }
+              }
               .content-source {
                 pointer-events: none;
               }
@@ -203,6 +214,8 @@
       }
       &.mobile-view {
         .header-container {
+          border-top: 1px solid gray;
+          box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.3);
           .class-activities.gru-content-search {
             .content-search-container {
               .content-selector-container {
