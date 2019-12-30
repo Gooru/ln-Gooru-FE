@@ -9,7 +9,14 @@
        <ul class="struggling-competency-report-sub-titles">
           <li>{{selectedCompetency.domainName}}</li>
           <li>{{selectedCompetency.displayCode}}</li>
-
+          <li>{{competency-lo-transform
+            fwCompetencies
+            selectedCompetency.competencyCode
+            'loCode'
+            false
+            '|'
+          }}
+        </li>
        </ul>
     </div>
   </div>
