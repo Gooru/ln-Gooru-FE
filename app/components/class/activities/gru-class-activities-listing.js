@@ -184,7 +184,9 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('selectedDate', date);
       component.set('isShowListCard', component.get('isMobileView'));
       component.set('selectedFilter', 'day');
-      component.send('closeDatePicker', isDateChange);
+      if (isDateChange) {
+        component.send('closeDatePicker', isDateChange);
+      }
     },
 
     onSelectWeek(startDate, endDate, isDateChange) {
@@ -200,7 +202,9 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('endDate', endDate);
       component.set('isShowListCard', true);
       component.set('selectedFilter', 'week');
-      component.send('closeDatePicker', isDateChange);
+      if (isDateChange) {
+        component.send('closeDatePicker', isDateChange);
+      }
     },
 
     onSelectMonth(date, isDateChange) {
@@ -218,19 +222,20 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('endDate', endDate);
       component.set('isShowListCard', true);
       component.set('selectedFilter', 'month');
-      component.send('closeDatePicker', isDateChange);
+      if (isDateChange) {
+        component.send('closeDatePicker', isDateChange);
+      }
     },
 
     onSelectToday(date) {
       let component = this;
-      component.send('onSelectDate', date);
+      component.send('onSelectDate', date, true);
       component.set('startDate', date);
       component.set('endDate', date);
       let forMonth = moment(date).format('MM');
       let forYear = moment(date).format('YYYY');
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
-      component.send('closeDatePicker', true);
     },
 
     onRescheduleActivity(classActivity) {
@@ -359,8 +364,8 @@ export default Ember.Component.extend(ModalMixin, {
 
     closeDatePicker(isDateChange) {
       const component = this;
+      component.$('.header-container .date-range-picker-container').slideUp();
       if (isDateChange) {
-        component.$('.header-container .date-range-picker-container').slideUp();
         if (component.get('isShowUnscheduledActivities')) {
           component.loadUnScheduledActivities();
         } else {

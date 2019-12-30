@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="activity-date-range-selector" {{action "onToggleDatePicker"}}>
-          <span class="schedule-date"><span>{{format-date startDate 'DD MMM YYYY'}}</span><span class="{{if isDaily 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}</span></span>
+          <span class="schedule-date"><span>{{format-date startDate 'DD MMM YYYY'}}</span><span class="{{unless isShowListCard 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}</span></span>
           <span class="dropdown-icon">{{gru-icon name="arrow_drop_down"}}</span>
         </div>
       </div>
@@ -106,11 +106,11 @@
 
       {{#if isShowScheduledActivities}}
         {{#each scheduledActivitiesList as |scheduledActivity|}}
-          {{#unless isDaily}}
+          {{#if isShowListCard}}
             <div class="added-date">{{format-date scheduledActivity.added_date 'DD MMM YYYY'}}
               <hr />
             </div>
-          {{/unless}}
+          {{/if}}
           {{#each scheduledActivity.scheduledActivities as |activity|}}
             {{new-cards/gru-class-activity-card
                 activity = activity

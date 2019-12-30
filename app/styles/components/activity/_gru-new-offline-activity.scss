@@ -126,6 +126,9 @@
       .scheduler-container {
         margin-bottom: 16px;
         .date-picker-container {
+          .backdrop {
+            display: none;
+          }
           .ca-date-picker-container {
             @media (min-width: $screen-phone) {
               padding-right: 20%;
