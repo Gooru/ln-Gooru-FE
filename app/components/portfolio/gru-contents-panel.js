@@ -282,7 +282,7 @@ export default Ember.Component.extend({
       );
       component.set(
         'isFetchedAllContent',
-        totalFetchedActitivities.length < component.get('limit')
+        totalFetchedActitivities < component.get('limit')
       );
       component.set('isLoading', false);
       component.set('isLoadingMore', false);
