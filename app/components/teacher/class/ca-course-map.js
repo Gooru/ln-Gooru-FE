@@ -214,6 +214,10 @@ export default Ember.Component.extend({
 
     onScheduleActivity(content) {
       this.sendAction('onScheduleActivity', content);
+    },
+
+    onShowContentPreview(content) {
+      this.sendAction('onShowContentPreview', content);
     }
   },
 

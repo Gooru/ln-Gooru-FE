@@ -26,7 +26,7 @@
   </div>
   <div class="ca-student-list-select-ctn">
     {{#if (eq usersCount -1)}}
-      <button class="btn btn-primary de-select" {{action 'onDeSelect'}}>{{t 'common.de-select'}}</button>
+      <button class="btn btn-primary de-select {{if classActivity.isCompleted 'disable-event'}}" {{action 'onDeSelect'}}>{{t 'common.de-select'}}</button>
     {{else}}
       <button class="btn btn-primary select-all" {{action 'onSelectAll'}}>{{t 'common.select-all'}}</button>
     {{/if}}
@@ -34,7 +34,7 @@
   <div class="student-list-container">
     {{#each studentSearchResults as |student| }}
       <div class="user-profile-details">
-        <div class="user-profile-img">
+        <div class="user-profile-img {{if classActivity.isCompleted 'disable-event'}}">
           {{#if student.isSelected}}
             <div class="selected-user-for-class-activity" {{action 'onDeSelectUser' student}}>
               {{gru-icon name="done_all"}}
@@ -54,7 +54,7 @@
   </div>
   <div class="action-buttons">
     <button class="btn" {{action 'onPullUpClose'}}>{{t 'common.cancel'}}</button>
-    <button class="btn btn-primary save-users" {{action 'saveUsersToClassActivityContent'}}>{{t 'common.save'}}</button>
+    <button class="btn btn-primary save-users {{if classActivity.isCompleted 'disable-event'}}" {{action 'saveUsersToClassActivityContent'}}>{{t 'common.save'}}</button>
   </div>
 </div>
 {{#if isLoading}}
