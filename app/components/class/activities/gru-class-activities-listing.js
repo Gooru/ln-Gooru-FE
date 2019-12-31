@@ -373,11 +373,21 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('previewContent', previewContent);
       if (previewContent.get('contentType') === 'offline-activity') {
         component.set('isShowOfflineActivityPreview', true);
+        component.set('isReportView', false);
       } else {
         component.set('isShowContentPreview', true);
       }
+    },
+
+    onShowReport(classActivity) {
+      const component = this;
+      component.set('previewContent', classActivity);
+      component.set('isShowOfflineActivityPreview', true);
+      component.set('isReportView', true);
     }
   },
+
+  isReportView: false,
 
   isDaily: true,
 

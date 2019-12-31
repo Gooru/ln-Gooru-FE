@@ -132,6 +132,18 @@ export default Ember.Component.extend({
             );
           });
       }
+    },
+
+    onShowReport(activityClass) {
+      const component = this;
+      const classActivity = Ember.Object.create({
+        classId: activityClass.get('id'),
+        id: activityClass.get('activity.id'),
+        collection: activityClass.get('content'),
+        contentId: activityClass.get('content.id'),
+        contentType: activityClass.get('content.collectionType')
+      });
+      component.sendAction('onShowReport', classActivity);
     }
   },
 
