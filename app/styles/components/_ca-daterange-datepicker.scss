@@ -78,6 +78,10 @@
       display: flex;
       padding: 0 10px 10px;
 
+      .backdrop {
+        display: none;
+      }
+
       .end-date-picker {
         margin-left: 10px;
       }
@@ -141,6 +145,9 @@
 
     .month-picker {
       padding-bottom: 10px;
+      .backdrop {
+        display: none;
+      }
     }
   }
 }

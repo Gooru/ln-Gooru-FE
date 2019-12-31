@@ -37,7 +37,9 @@
       {{#each filteredContents as |filteredContent|}}
         {{new-cards/activities/gru-add-content-card
           content=filteredContent
-          onAddActivity="onAddActivity"}}
+          onAddActivity="onAddActivity"
+          onShowContentPreview = "onShowContentPreview"
+        }}
       {{else}}
         <div class="plan-activities-msg">
           {{t 'class-activity.no-learning-activities'}}
@@ -64,4 +66,20 @@
         endDate=endDate
         allowTwoDateRangePicker=isShowStartEndDatePicker}}
   </div>
+{{/if}}
+
+<!-- Preview -->
+{{#if isShowContentPreview}}
+  {{reports/pull-up/gru-collection-preview
+    showPullUp=isShowContentPreview
+    previewContentId=previewContent.id
+    previewContentType=previewContent.format}}
+{{/if}}
+
+{{#if isShowOfflineActivityPreview}}
+  {{reports/pull-up/oa-preview
+    showPullUp=isShowOfflineActivityPreview
+    oaId=previewContent.id
+    isReportView=false
+  }}
 {{/if}}
