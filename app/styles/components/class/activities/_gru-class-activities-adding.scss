@@ -163,6 +163,7 @@
     width: 100%;
     position: fixed;
     bottom: 0;
+    z-index: 9999;
     &.open {
       .class-activities-source-container {
         .header-container {
