@@ -82,6 +82,20 @@ export default Ember.Component.extend({
       component.sendAction('onShowContentPreview', classActivity);
     },
 
+    onShowContentReport(activityClass) {
+      const component = this;
+      const classActivity = Ember.Object.create({
+        classId: activityClass.get('id'),
+        id: activityClass.get('activity.id'),
+        collection: activityClass.get('content'),
+        contentId: activityClass.get('content.id'),
+        contentType: activityClass.get('content.collectionType'),
+        activation_date: activityClass.get('activity.activation_date'),
+        activityClass
+      });
+      component.sendAction('onShowContentReport', classActivity);
+    },
+
     /**
      * @function removeClassActivity
      */
@@ -132,18 +146,6 @@ export default Ember.Component.extend({
             );
           });
       }
-    },
-
-    onShowReport(activityClass) {
-      const component = this;
-      const classActivity = Ember.Object.create({
-        classId: activityClass.get('id'),
-        id: activityClass.get('activity.id'),
-        collection: activityClass.get('content'),
-        contentId: activityClass.get('content.id'),
-        contentType: activityClass.get('content.collectionType')
-      });
-      component.sendAction('onShowReport', classActivity);
     }
   },
 
