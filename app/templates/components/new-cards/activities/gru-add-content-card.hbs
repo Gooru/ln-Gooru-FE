@@ -2,7 +2,7 @@
   <div class="content-info-container">
     <div class="content-thumbnail" style="background-image: url({{content.thumbnailUrl}})"  {{action "onShowContentPreview"}}></div>
     <div class="content-title">
-      <div class="title">{{content.title}}</div>
+      <div class="title" {{action "onShowContentPreview"}}>{{content.title}}</div>
       <div class="collection-info">
         {{#if taxonomyTags.length}}
           <div class="taxonomy-container">

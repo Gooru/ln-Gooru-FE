@@ -536,6 +536,7 @@
       .body-container {
         &.content-selecter {
           height: calc(100% - 2px);
+          padding-bottom: 50px;
         }
       }
     }

@@ -51,7 +51,7 @@
         <div class="class-title ellipsis" title="{{activityClass.title}}" data-toggle="tooltip">
           {{activityClass.title}}
         </div>
-        <div class="activity-action {{if activity.isCompleted 'disable-event'}} student-count {{if isUnscheduledActivity 'hidden'}}" {{action "onShowStudentsList" activityClass}}>
+        <div class="activity-action student-count {{if isUnscheduledActivity 'hidden'}}" {{action "onShowStudentsList" activityClass}}>
           {{gru-icon name="account_circle" class="icon-style"}}
           {{#if (eq activityClass.activity.usersCount -1)}}
             <span class="hidden-xs">{{t 'common.all'}}</span>

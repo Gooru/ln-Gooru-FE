@@ -37,7 +37,7 @@
                       {{#each lesson.children as | collection |}}
                         <div class="dca-course-map-collection">
                           <div class="dca-course-map-collection-panel">
-                            <div class="collection-img-container">
+                            <div class="collection-img-container" {{action 'onShowContentPreview' collection}}>
                               <img src="{{collection.thumbnailUrl}}" />
                             </div>
                             <div class="collection-title-container {{if collection.isOfflineActivity 'disable-event'}}" {{action 'playContent' unit.id lesson.id collection}}>
