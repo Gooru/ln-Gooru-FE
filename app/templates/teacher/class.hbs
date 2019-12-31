@@ -66,5 +66,10 @@
   {{reports/pull-up/collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp isShowMilestoneReport = isShowMilestoneReport gradeSubject = gradeSubject}}
 {{/if}}
 {{#if isShowOCASummaryReportPullUp}}
-  {{teacher/offline-class/oca-summary-report-pull-up classId=class.id performanceSummary=performanceSummaryForDCA onClosePullUp="onClosePullUp"}}
+  {{teacher/offline-class/oca-summary-report-pull-up
+    classId=class.id
+    performanceSummary=performanceSummaryForDCA
+    onClosePullUp="onClosePullUp"
+    isMultiClassEnabled = isMultiClassEnabled
+    secondaryClasses = secondaryClassDropdown}}
 {{/if}}

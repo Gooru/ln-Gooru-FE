@@ -48,6 +48,78 @@ export default Ember.Component.extend({
    */
   selectedMonthSummary: null,
 
+  /**
+   * @property {Array} secondaryClasses
+   * Property for list of secondary classes
+   */
+  secondaryClasses: Ember.A([]),
+
+  /**
+   * @property {Object} activeClass
+   * Property for active class object
+   */
+  activeClass: Ember.computed('secondaryClasses', function() {
+    const component = this;
+    let activeClass = null;
+    const secondaryClasses = component.get('secondaryClasses');
+    if (component.get('isMultiClassEnabled') && secondaryClasses.length) {
+      activeClass = secondaryClasses.findBy('isPrimaryClass', true);
+    }
+    return activeClass;
+  }),
+
+  /**
+   * @property {UUID} activeClassId
+   * Property for active class id
+   */
+  activeClassId: Ember.computed.alias('activeClass.id'),
+
+  /**
+   * @property {Boolean} isPrimaryClassActive
+   * Property to check whether primary class is active or not
+   */
+  isPrimaryClassActive: Ember.computed('activeClass', function() {
+    return this.get('isMultiClassEnabled')
+      ? this.get('activeClass.isPrimaryClass')
+      : true;
+  }),
+
+  /**
+   * @property {Object} secondaryClassPerformanceSummary
+   * Propery for active secondary class performance summary
+   */
+  secondaryClassPerformanceSummary: Ember.computed('reportData', function() {
+    const component = this;
+    const reportData = component.get('reportData');
+    const performanceSummary = Ember.Object.create({
+      performance: Ember.Object.create({
+        scoreInPercentage: null
+      })
+    });
+    if (reportData && reportData.length) {
+      let score = 0;
+      reportData.map(monthlyReportSummary => {
+        score += monthlyReportSummary.get('scoreInPercentage');
+      });
+      performanceSummary.set('performance.scoreInPercentage', score);
+    }
+    return performanceSummary;
+  }),
+
+  /**
+   * @property {Object} classPerformanceSummary
+   * Property for active class peroformance summary
+   */
+  classPerformanceSummary: Ember.computed(
+    'isPrimaryClassActive',
+    'secondaryClassPerformanceSummary',
+    function() {
+      return this.get('isPrimaryClassActive')
+        ? this.get('performanceSummary')
+        : this.get('secondaryClassPerformanceSummary');
+    }
+  ),
+
   actions: {
     onPullUpClose() {
       let component = this;
@@ -66,6 +138,17 @@ export default Ember.Component.extend({
       let component = this;
       component.set('selectedMonthSummary', selectedSummaryItem);
       component.set('isShowOCAMonthReportPullUp', true);
+    },
+
+    onToggleClassListContainer() {
+      const component = this;
+      component.$('.secondary-classes .class-container').slideToggle();
+    },
+
+    onSelectClass(selectedClass) {
+      const component = this;
+      component.set('activeClass', selectedClass);
+      component.getYearlySummaryData();
     }
   },
 
@@ -136,7 +219,7 @@ export default Ember.Component.extend({
    */
   getYearlySummaryData() {
     let component = this;
-    const classId = component.get('classId');
+    const classId = component.get('activeClassId') || component.get('classId');
     let dcaYearlySummaryPromise = component
       .get('analyticsService')
       .getDCAYearlySummary(classId);
