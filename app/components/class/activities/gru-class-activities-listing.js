@@ -379,11 +379,14 @@ export default Ember.Component.extend(ModalMixin, {
       }
     },
 
+    // Action triggered when clicking performance from the class activity card
     onShowReport(classActivity) {
       const component = this;
-      component.set('previewContent', classActivity);
-      component.set('isShowOfflineActivityPreview', true);
-      component.set('isReportView', true);
+      if (classActivity.get('contentType') === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        component.set('previewContent', classActivity);
+        component.set('isShowOfflineActivityPreview', true);
+        component.set('isReportView', true);
+      }
     }
   },
 
