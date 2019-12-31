@@ -230,11 +230,12 @@
 {{/if}}
 
 {{#if isShowStudentsSummaryReport}}
-  {{teacher/offline-class/oca-students-summary-report-pull-up
+{{teacher/offline-class/oca-students-summary-report-pull-up
     context=selectedActivity
     classActivities=reportActivityList
     onOpenPerformanceEntry='onOpenPerformanceEntry'
     classId=selectedActivity.classId
+    isShowAddData=isShowAddData
     showPullUp=isShowStudentsSummaryReport}}
 {{/if}}
 
