@@ -181,7 +181,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
 
     const metadata = activityData.metadata || {};
     const settings = activityData.setting || {};
-
+    const rubric = serializer.normalizeActivityRubric(activityData.rubrics);
+    const teacherRubric = rubric ? rubric.findBy('gradeType', 'teacher') : null;
+    const maxScore = teacherRubric ? teacherRubric.get('maxScore') : 0;
     let normalizedActivity = ActivityModel.create(
       Ember.getOwner(this).ownerInjection(),
       {
@@ -218,7 +220,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
         reference: activityData.reference,
         exemplar: activityData.exemplar,
         references: serializer.normalizeReferences(activityData.oa_references),
-        rubric: serializer.normalizeActivityRubric(activityData.rubrics),
+        rubric,
         url: activityData.url,
         ownerId: activityData.owner_id,
         metadata: metadata,
@@ -255,7 +257,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
             ? metadata['21_century_skills']
             : [],
         durationHours: activityData.duration_hours || 0,
-        maxScore: activityData.max_score || 1
+        maxScore: maxScore || activityData.max_score || 1
       }
     );
     return normalizedActivity;
