@@ -24,9 +24,9 @@
       </div>
     </div>
   </div>
-  <div class="ca-student-list-select-ctn">
+  <div class="ca-student-list-select-ctn {{if classActivity.isCompleted 'hidden'}}">
     {{#if (eq usersCount -1)}}
-      <button class="btn btn-primary de-select {{if classActivity.isCompleted 'disable-event'}}" {{action 'onDeSelect'}}>{{t 'common.de-select'}}</button>
+      <button class="btn btn-primary de-select " {{action 'onDeSelect'}}>{{t 'common.de-select'}}</button>
     {{else}}
       <button class="btn btn-primary select-all" {{action 'onSelectAll'}}>{{t 'common.select-all'}}</button>
     {{/if}}
