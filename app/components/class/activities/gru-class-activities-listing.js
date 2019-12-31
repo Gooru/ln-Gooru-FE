@@ -362,7 +362,6 @@ export default Ember.Component.extend(ModalMixin, {
         component.set('isShowContentPreview', true);
       }
     },
-
     closeDatePicker(isDateChange) {
       const component = this;
       component.$('.header-container .date-range-picker-container').slideUp();
@@ -375,12 +374,15 @@ export default Ember.Component.extend(ModalMixin, {
       }
     },
     // Action triggered when clicking performance from the class activity card
-    onShowReport(classActivity) {
+    onShowContentReport(classActivity) {
       const component = this;
       if (classActivity.get('contentType') === CONTENT_TYPES.OFFLINE_ACTIVITY) {
         component.set('previewContent', classActivity);
         component.set('isShowOfflineActivityPreview', true);
         component.set('isReportView', true);
+      } else {
+        component.set('selectedActivity', classActivity);
+        component.set('isShowStudentsSummaryReport', true);
       }
     }
   },
@@ -527,6 +529,12 @@ export default Ember.Component.extend(ModalMixin, {
   isLoading: false,
 
   isAdded: false,
+
+  isShowStudentsSummaryReport: false,
+
+  reportActivityList: Ember.A([]),
+
+  selectedActivity: null,
 
   observeNewlyAddedActivity: Ember.observer('newlyAddedActivity', function() {
     const component = this;

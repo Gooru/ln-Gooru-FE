@@ -202,8 +202,9 @@
 
     .activity-info {
       display: grid;
-      grid-template-columns: 56px 1fr 100px;
+      grid-template-columns: 56px 1fr 100px 100px;
       height: 48px;
+      align-items: center;
 
       .circle-img {
         width: 29px;
@@ -230,6 +231,17 @@
 
       .students-count {
         align-self: center;
+      }
+
+      .student-performance-update {
+        background-color: $dark-500;
+        color: $white;
+        font-size: 13px;
+        padding: 10px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        text-transform: capitalize;
       }
 
       .suggest-bar {
