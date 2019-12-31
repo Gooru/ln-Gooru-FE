@@ -357,6 +357,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('previewContent', previewContent);
       if (previewContent.get('contentType') === 'offline-activity') {
         component.set('isShowOfflineActivityPreview', true);
+        component.set('isReportView', false);
       } else {
         component.set('isShowContentPreview', true);
       }
@@ -372,8 +373,19 @@ export default Ember.Component.extend(ModalMixin, {
           component.loadActivitiesByActiveContentType();
         }
       }
+    },
+    // Action triggered when clicking performance from the class activity card
+    onShowReport(classActivity) {
+      const component = this;
+      if (classActivity.get('contentType') === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        component.set('previewContent', classActivity);
+        component.set('isShowOfflineActivityPreview', true);
+        component.set('isReportView', true);
+      }
     }
   },
+
+  isReportView: false,
 
   isDaily: true,
 

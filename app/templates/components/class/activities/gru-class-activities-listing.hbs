@@ -122,7 +122,8 @@
                 onEnableMastery = "onEnableMastery"
                 onShowContentPreview = "onShowContentPreview"
                 onGradeItem="onGradeItem"
-                isShowListView=isShowListCard}}
+                isShowListView=isShowListCard
+                onShowReport = "onShowReport"}}
           {{/each}}
         {{else}}
           <div class="plan-activities-msg">
@@ -231,6 +232,8 @@
   {{reports/pull-up/oa-preview
     showPullUp=isShowOfflineActivityPreview
     oaId=previewContent.contentId
-    isReportView=false
+    classActivity=previewContent
+    classId=previewContent.classId
+    isReportView=isReportView
   }}
 {{/if}}
