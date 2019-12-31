@@ -96,6 +96,10 @@
         grid-template-columns: max-content 1fr max-content;
         color: $white;
 
+        &.not-show-carousal {
+          grid-template-columns: 1fr;
+        }
+
         .left,
         .right {
           align-self: center;
@@ -156,6 +160,10 @@
         z-index: 1;
         grid-template-columns: max-content 1fr max-content;
         height: 240px;
+
+        &.not-show-carousal {
+          grid-template-columns: 1fr;
+        }
 
         .left,
         .right {
