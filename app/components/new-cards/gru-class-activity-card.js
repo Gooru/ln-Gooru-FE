@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-class-activity-card'],
@@ -38,6 +40,17 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    /**
+     * @function goLive
+     */
+    goLive(content) {
+      let options = {
+        collectionId: content.get('contentId'),
+        collectionType: content.get('contentType')
+      };
+      this.sendAction('onGoLive', options);
+    },
+
     onShowStudentsList(classData) {
       const component = this;
       component.sendAction('onShowStudentsList', classData);
@@ -222,9 +235,9 @@ export default Ember.Component.extend({
     const activityContent = component.get('activityContent');
     return (
       activityContent.get('description') ||
-      (activityContent.get('standards').length
-        ? activityContent.get('standards').objectAt(0).title
-        : '')
+      (activityContent.get('standards').length ?
+        activityContent.get('standards').objectAt(0).title :
+        '')
     );
   }),
 
@@ -253,6 +266,26 @@ export default Ember.Component.extend({
     })
   ]),
 
+  enableCollectionLiveLearning: true,
+
+  /**
+   * It is used to find activity is today or not
+   * @return {Boolean}
+   */
+  isToday: Ember.computed('activity', function() {
+    let activityDate = this.get('activity.added_date');
+    let currentDate = moment().format('YYYY-MM-DD');
+    return currentDate === activityDate;
+  }),
+
+  /**
+   * Maintains the flag to show go live or not
+   * @type {Boolean}
+   */
+  showGolive: Ember.computed('isToday', function() {
+    return this.get('isToday');
+  }),
+
   /**
    * It is used to find activity is past or not
    * @return {Boolean}
@@ -276,12 +309,14 @@ export default Ember.Component.extend({
         classData: component
           .get('classService')
           .readClassInfo(classId, allowCachedData),
-        classMembers:
-          activityClass.get('members') ||
+        classMembers: activityClass.get('members') ||
           component
             .get('classService')
             .readClassMembers(classId, allowCachedData)
-      }).then(({ classData, classMembers }) => {
+      }).then(({
+        classData,
+        classMembers
+      }) => {
         if (classData.get('courseId')) {
           component
             .get('courseService')
