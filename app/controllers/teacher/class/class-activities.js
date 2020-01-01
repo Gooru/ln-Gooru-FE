@@ -1,4 +1,7 @@
 import Ember from 'ember';
+import {
+  PLAYER_EVENT_SOURCE
+} from 'gooru-web/config/config';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
@@ -39,6 +42,29 @@ export default Ember.Controller.extend({
   rubricService: Ember.inject.service('api-sdk/rubric'),
 
   actions: {
+    /**
+     * Launch an assessment on-air
+     *
+     * @function actions:goLive
+     */
+    goLive(options) {
+      const controller = this;
+      const currentClass = controller.get('class');
+      const classId = currentClass.get('id');
+      const queryParams = {
+        queryParams: {
+          source: PLAYER_EVENT_SOURCE.DAILY_CLASS,
+          collectionType: options.collectionType
+        }
+      };
+      this.transitionToRoute(
+        'reports.collection',
+        classId,
+        options.collectionId,
+        queryParams
+      );
+    },
+
     activityAdded(newlyAddedActivity) {
       const controller = this;
       controller.set('newlyAddedActivity', newlyAddedActivity);
@@ -95,6 +121,8 @@ export default Ember.Controller.extend({
   secondaryClassList: Ember.computed.alias(
     'classController.secondaryClassList'
   ),
+
+  isSecondaryClass: Ember.computed.gt('secondaryClasses.length', 0),
 
   /*
    * @property {Json} classPreference
