@@ -72,6 +72,7 @@
       }
 
       .lesson-plan-activities-container {
+        display: grid;
         .teacher-class-ca-course-map {
           .dca-course-map-unit-container {
             padding: 0;
@@ -83,6 +84,10 @@
               }
             }
           }
+        }
+        .no-course-map {
+          text-align: center;
+          padding: 15px;
         }
       }
     }

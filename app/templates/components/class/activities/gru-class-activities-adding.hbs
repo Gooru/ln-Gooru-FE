@@ -22,17 +22,21 @@
       {{/each}}
     {{else if isShowLessonPlan}}
       <div class="lesson-plan-activities-container">
-        {{teacher/class/ca-course-map
-          onAddActivity="onAddActivity"
-          onAddContentToDCA="onAddActivity"
-          onScheduleActivity="onShowDateRangePicker"
-          onScheduleContentToDCA="onShowDateRangePicker"
-          classId=primaryClass.id
-          courseId=primaryClass.courseId
-          isShowLessonPlan = false
-          todaysClassActivities = todaysActivities
-          onShowContentPreview = "onShowContentPreview"
-        }}
+        {{#if isCourseAttached}}
+          {{teacher/class/ca-course-map
+            onAddActivity="onAddActivity"
+            onAddContentToDCA="onAddActivity"
+            onScheduleActivity="onShowDateRangePicker"
+            onScheduleContentToDCA="onShowDateRangePicker"
+            classId=primaryClass.id
+            courseId=primaryClass.courseId
+            isShowLessonPlan = false
+            todaysClassActivities = todaysActivities
+            onShowContentPreview = "onShowContentPreview"
+          }}
+        {{else}}
+          <span class="no-course-map">No Course Map Attached</span>
+        {{/if}}
       </div>
     {{else}}
       {{#each filteredContents as |filteredContent|}}
