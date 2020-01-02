@@ -138,6 +138,10 @@
             font-weight: normal;
             pointer-events: none;
           }
+          &.no-student {
+            pointer-events: none;
+            opacity: 0.6;
+          }
         }
       }
     }
