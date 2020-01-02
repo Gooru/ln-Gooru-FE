@@ -167,6 +167,14 @@ export default Ember.Component.extend({
 
   isShowStartEndDatePicker: false,
 
+  /**
+   * @property {Boolean} isCourseAttached
+   * Property to check whether Class has attached with a course or not
+   */
+  isCourseAttached: Ember.computed('primaryClass', function() {
+    return !!this.get('primaryClass.courseId');
+  }),
+
   assignActivityToMultipleClass(
     content,
     scheduleDate,
