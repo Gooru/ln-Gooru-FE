@@ -690,7 +690,7 @@ export default Ember.Component.extend({
   fetchStrugglingCompetency() {
     let component = this;
     let taxonomyService = component.get('taxonomyService');
-    let subject = component.get('subjectCode');
+    let subject = component.get('class.preference.subject');
     let fwk = component.get('class.preference.framework');
     let filters = {
       subject,
