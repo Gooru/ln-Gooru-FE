@@ -313,8 +313,8 @@ export default Ember.Component.extend({
           .readClassInfo(classId, allowCachedData),
         classMembers: activityClass.get('members') ||
           component
-          .get('classService')
-          .readClassMembers(classId, allowCachedData)
+            .get('classService')
+            .readClassMembers(classId, allowCachedData)
       }).then(({
         classData,
         classMembers
