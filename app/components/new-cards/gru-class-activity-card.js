@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  CONTENT_TYPES
-} from 'gooru-web/config/config';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-class-activity-card'],
@@ -235,9 +233,9 @@ export default Ember.Component.extend({
     const activityContent = component.get('activityContent');
     return (
       activityContent.get('description') ||
-      (activityContent.get('standards').length ?
-        activityContent.get('standards').objectAt(0).title :
-        '')
+      (activityContent.get('standards').length
+        ? activityContent.get('standards').objectAt(0).title
+        : '')
     );
   }),
 
@@ -309,14 +307,12 @@ export default Ember.Component.extend({
         classData: component
           .get('classService')
           .readClassInfo(classId, allowCachedData),
-        classMembers: activityClass.get('members') ||
+        classMembers:
+          activityClass.get('members') ||
           component
             .get('classService')
             .readClassMembers(classId, allowCachedData)
-      }).then(({
-        classData,
-        classMembers
-      }) => {
+      }).then(({ classData, classMembers }) => {
         if (classData.get('courseId')) {
           component
             .get('courseService')
