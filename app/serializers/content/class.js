@@ -71,7 +71,7 @@ export default Ember.Object.extend({
   serializeClass: function(classModel, update = false) {
     let setting = classModel.get('setting');
     let maValue = setting ? setting.mastery_applicable : null;
-    if (setting) {
+    if (setting && maValue) {
       setting['mastery.applicable'] = maValue.toString();
       delete setting.mastery_applicable;
     }
