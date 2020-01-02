@@ -69,6 +69,7 @@ window.i18ln = {
   'common.first': 'முதல்',
   'common.last': 'கடந்த',
   'common.name': 'பெயர்',
+  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title':
     'நீங்கள் டேட்டாவை எப்படி உள்ளிடப் போகிறீர்கள்?',
   'common.take-photo': 'போட்டோ எடு',

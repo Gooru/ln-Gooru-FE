@@ -61,6 +61,7 @@ window.i18ln = {
   'common.efficacy': 'Eficacia',
   'common.grid': 'Red',
   'common.list': 'Lista',
+  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
   'common.first': 'Primer',
   'common.last': 'Último',
   'common.name': 'Nombre',

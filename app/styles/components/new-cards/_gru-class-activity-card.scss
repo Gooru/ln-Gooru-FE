@@ -185,6 +185,16 @@
         cursor: pointer;
         height: 45px;
 
+        &.disable {
+          .golive-icon {
+            opacity: 0.5;
+          }
+
+          label {
+            opacity: 0.5;
+          }
+        }
+
         .golive-icon {
           width: 24px;
           height: 24px;

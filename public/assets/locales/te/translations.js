@@ -64,6 +64,7 @@ window.i18ln = {
   'common.first': 'మొదటి',
   'common.last': 'చివర',
   'common.name': 'నామము',
+  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'మీరు ఏవిధంగా డేటా నమోదు చేస్తారు ?',
   'common.take-photo': 'ఫోటో తీవుకోండి',
   'common.upload-image': 'ప్రతిబింబం అప్లోడ్',

@@ -63,6 +63,7 @@ window.i18ln = {
   'common.list': 'তালিকা',
   'common.first': 'প্রথম',
   'common.last': 'গত',
+  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
   'common.name': 'নাম',
   'common.add-data-choice-title': 'আপনি ডেটা কিভাবে  লিখতে চান?',
   'common.take-photo': 'ছবি তুলুন',

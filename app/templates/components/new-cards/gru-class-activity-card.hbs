@@ -124,10 +124,10 @@
         <label>{{t 'common.mastery'}}</label>
       </div>
     {{/if}}
-    {{#if (and enableCollectionLiveLearning (not isSecondaryClass) activity.isActive)}}
+    {{#if (and enableCollectionLiveLearning activity.isActive)}}
       {{#if (and showGolive (or (eq activity.contentType 'assessment') (eq activity.contentType 'collection'))) }}
-        <div class="go-live">
-          <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t "common.launch-on-air"}}" class="golive-icon" {{action 'goLive' activity}}></i>
+        <div class="go-live {{if isSecondaryClass 'disable'}}">
+          <i data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t (if isSecondaryClass "message-go-live-multigrade" "common.launch-on-air")}}" class="golive-icon" {{action 'goLive' activity}}></i>
           <label>{{t 'common.launch-on-air'}}</label>
         </div>
       {{/if}}

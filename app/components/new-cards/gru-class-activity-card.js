@@ -44,11 +44,13 @@ export default Ember.Component.extend({
      * @function goLive
      */
     goLive(content) {
-      let options = {
-        collectionId: content.get('contentId'),
-        collectionType: content.get('contentType')
-      };
-      this.sendAction('onGoLive', options);
+      if (!this.get('isSecondaryClass')) {
+        let options = {
+          collectionId: content.get('contentId'),
+          collectionType: content.get('contentType')
+        };
+        this.sendAction('onGoLive', options);
+      }
     },
 
     onShowStudentsList(classData) {
@@ -311,8 +313,8 @@ export default Ember.Component.extend({
           .readClassInfo(classId, allowCachedData),
         classMembers: activityClass.get('members') ||
           component
-            .get('classService')
-            .readClassMembers(classId, allowCachedData)
+          .get('classService')
+          .readClassMembers(classId, allowCachedData)
       }).then(({
         classData,
         classMembers
