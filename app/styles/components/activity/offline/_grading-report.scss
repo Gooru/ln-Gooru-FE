@@ -391,6 +391,8 @@
           display: grid;
           align-items: center;
           justify-items: center;
+          // Pointer events required only at the mobile view
+          pointer-events: none;
 
           .oa-grade-info {
             .oa-grade-info-title {
@@ -600,6 +602,23 @@
                 box-shadow: none;
               }
             }
+          }
+        }
+      }
+
+      @media screen and (max-width: $screen-sm) {
+        .left-panel {
+          height: calc(100% - 140px);
+        }
+        .right-panel {
+          background-color: #35424b;
+          position: absolute;
+          top: calc(100% - 80px);
+          .oa-grade-right-panel-header {
+            pointer-events: all;
+          }
+          .oa-grade-right-panel-body {
+            height: calc(100% - 205px);
           }
         }
       }

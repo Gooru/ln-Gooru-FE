@@ -6,10 +6,18 @@
       <div class="struggling-competency-report-title">
         <span>{{selectedCompetency.name}}</span>
       </div>
-      <ul class="struggling-competency-report-sub-titles">
-        <li>{{selectedCompetency.domainName}}</li>
-        <li>{{selectedCompetency.displayCode}}</li>
-      </ul>
+       <ul class="struggling-competency-report-sub-titles">
+          <li>{{selectedCompetency.domainName}}</li>
+          <li>{{selectedCompetency.displayCode}}</li>
+          <li>{{competency-lo-transform
+            fwCompetencies
+            selectedCompetency.competencyCode
+            'loCode'
+            false
+            '|'
+          }}
+        </li>
+       </ul>
     </div>
   </div>
   <div class="struggling-competency-report-student-list-container">

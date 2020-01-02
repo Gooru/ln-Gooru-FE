@@ -3,14 +3,15 @@
     display: grid;
     background-color: #fff;
     box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.3);
-    grid-template-rows: 160px 40px auto 93px 50px;
     .activity-info {
       display: grid;
       align-items: center;
+
       .content-counts {
         display: grid;
         grid-template-columns: auto auto;
         column-gap: 5px;
+
         .count-container {
           display: grid;
           grid-template-columns: auto auto;
@@ -21,16 +22,19 @@
             height: 20px;
             background-size: 20px;
           }
+
           &.task-count {
             .task-icon {
               background-image: url("../assets/gooru/images/text-resource-dark.svg");
             }
           }
+
           &.question-count {
             .question-icon {
               background-image: url("../assets/gooru/images/add_question.svg");
             }
           }
+
           &.resource-count {
             .resource-icon {
               background-image: url("../assets/gooru/images/add_resource_icon.svg");
@@ -39,11 +43,13 @@
         }
       }
     }
+
     .class-info {
       .assigned-class {
         display: grid;
         border: 1px solid rgba(151, 151, 151, 0.4);
         align-items: center;
+
         .class-title {
           color: #37424b;
           padding-left: 10px;
@@ -52,9 +58,11 @@
           line-height: 1.2;
           white-space: normal;
         }
+
         .activity-action {
           text-align: center;
           padding: 3px;
+
           .icon-style {
             height: inherit;
             display: grid;
@@ -63,16 +71,20 @@
             cursor: pointer;
           }
         }
+
         .suggestion-count {
           cursor: pointer;
+
           i.check_circle {
             color: $orange-400;
           }
         }
+
         .delete {
           display: flex;
           cursor: pointer;
         }
+
         .oa-grading {
           height: inherit;
           width: 50px;
@@ -81,6 +93,7 @@
           justify-content: center;
           align-items: center;
           cursor: pointer;
+
           .rubric-icon {
             width: 25px;
             height: 25px;
@@ -90,13 +103,16 @@
             background-repeat: no-repeat;
             background-image: url("../assets/gooru/images/rubric-green.svg");
           }
+
           &.not-completed {
             cursor: default;
+
             .rubric-icon {
               background-image: url("../assets/gooru/images/add_rubric.svg");
             }
           }
         }
+
         .add-data {
           width: 50px;
           height: 45px;
@@ -111,30 +127,38 @@
           font-weight: bold;
           opacity: 1;
           cursor: pointer;
-          padding: 11px 0px;
+          padding: 11px 0;
+
           &.performed-activity {
             grid-template-rows: 1fr 1fr;
+
             .activity-score {
               font-size: 13px;
             }
+
             &.collection-performance {
               grid-template-rows: 1fr;
+
               .activity-score {
                 display: none;
               }
             }
+
             &.only-score {
               grid-template-rows: 1fr;
             }
           }
+
           &.grade-range-not-started {
             background-color: #4e5e67;
           }
+
           &.not-started {
             background-color: #4e5e67;
             font-size: 10px;
             text-transform: uppercase;
           }
+
           &.disable-performance {
             opacity: 0.6;
             font-weight: normal;
@@ -143,35 +167,60 @@
         }
       }
     }
+
     .activity-actions {
       align-items: center;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       padding: 0 5px;
+
       > div {
         display: grid;
         align-items: center;
         text-align: center;
       }
+
+      .go-live {
+        cursor: pointer;
+        height: 45px;
+
+        .golive-icon {
+          width: 24px;
+          height: 24px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          background-image: url("../assets/gooru/on-air-icon.png");
+          cursor: pointer;
+          background-position: center;
+          display: block;
+          margin: auto;
+        }
+      }
+
       .mark-completed {
         cursor: pointer;
+
         &.completed {
           cursor: default;
           pointer-events: none;
         }
+
         &.in-active {
           cursor: not-allowed;
           pointer-events: none;
         }
       }
+
       .play-activity {
         color: #1ba9eb;
         cursor: pointer;
         text-align: center;
       }
+
       .reschedule-activity {
         cursor: pointer;
       }
+
       .mastery-accrual {
         height: 22px;
         cursor: pointer;
@@ -183,44 +232,54 @@
           border: none;
           display: block;
           height: 18px;
+
           i {
             visibility: hidden;
           }
         }
       }
+
       .activate-activity {
         .gru-switch {
           padding: 0;
+
           &.assigned {
             pointer-events: none;
           }
+
           .toggle.btn {
             width: 40px !important;
             height: 20px !important;
             border-radius: 20px;
+
             .toggle-group {
               .toggle-handle,
               .toggle-off,
               .toggle-on {
                 border-radius: 20px;
               }
-              .toggle-on,
-              .toggle-off {
+
+              .toggle-off,
+              .toggle-on {
                 font-style: italic;
                 font-size: $font-size-xxsmall;
                 line-height: 4px !important;
               }
+
               .toggle-on {
                 left: -13px;
               }
+
               .toggle-off {
                 left: 33px;
               }
+
               .toggle-handle {
                 top: -5px;
                 left: -2px;
               }
             }
+
             &.off {
               .toggle-group {
                 .toggle-handle {
@@ -241,6 +300,7 @@
       width: 240px;
       border-radius: 4px;
       margin: 16px;
+      grid-template-rows: 160px 40px auto 93px 50px;
       .content-thumbnail {
         width: 240px;
         height: 160px;
@@ -285,23 +345,27 @@
           line-height: 1.2;
         }
       }
+
       .activity-info {
         grid-template-columns: auto 1fr;
         height: 40px;
         border-bottom: 1px solid rgba(151, 151, 151, 0.4);
         padding: 0 5px;
+
         .card-thumbnail,
         .more {
           display: none;
         }
+
         .activity-date {
           justify-self: center;
           color: #37424b;
           font-size: 12px;
         }
       }
+
       .content-info {
-        padding: 5px 5px;
+        padding: 5px;
         min-height: 30px;
         @include ellipsis(
           $font-size: 12px,
@@ -317,30 +381,38 @@
         max-height: 54px;
         border-bottom: 1px solid rgba(151, 151, 151, 0.4);
       }
+
       .class-info {
         max-height: 93px;
         overflow-y: auto;
+
         .assigned-class {
           grid-template-columns: 1fr 40px auto auto;
           height: 46px;
           line-height: 35px;
+
           .class-list {
             display: none;
           }
+
           .student-count {
             cursor: pointer;
+
             i.account_circle {
               color: #1ba9eb;
             }
+
             span {
               display: none;
             }
           }
         }
       }
+
       .activity-actions {
         font-size: 9px;
         height: 60px;
+
         .mastery {
           label {
             margin-top: 2px;
@@ -352,28 +424,33 @@
 
   &.list-view {
     border-bottom: 2px solid rgba(151, 151, 151, 0.4);
+
     .class-activity-card {
       height: auto;
       width: 100%;
       grid-template-columns: auto 175px;
       box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.3);
       border: 1px solid gray;
-      .content-info,
-      .activity-actions {
+      .activity-actions,
+      .content-info {
         display: none;
       }
+
       .content-thumbnail {
         background-image: unset !important;
         display: grid;
         grid-template-columns: 40px auto;
         cursor: pointer;
+
         .content-title {
           display: flex;
           justify-content: right;
           align-items: center;
         }
+
         .icon {
           display: flex;
+
           %icon-content {
             width: 20px;
             height: 20px;
@@ -385,15 +462,18 @@
             margin: auto;
             cursor: pointer;
           }
+
           .offline-activity-icon {
             background-image: url("../assets/gooru/images/offline.svg");
             @extend %icon-content;
           }
+
           .collection-external-icon,
           .collection-icon {
             @extend %icon-content;
             background-image: url("../assets/gooru/images/add_collection.svg");
           }
+
           .assessment-external-icon,
           .assessment-icon {
             @extend %icon-content;
@@ -401,33 +481,41 @@
           }
         }
       }
+
       .activity-info {
         grid-template-columns: auto 35px 50px;
+
         .content-counts {
           grid-template-columns: auto auto;
+
           .class-list {
             justify-content: center;
             display: flex;
             align-items: center;
             cursor: pointer;
+
             span {
               height: 23px;
             }
           }
         }
+
         .activity-date {
           display: none;
         }
+
         .more {
           display: flex;
           margin: auto;
           cursor: pointer;
+
           span {
             width: 24px;
             height: 24px;
             display: block;
           }
         }
+
         .card-thumbnail {
           width: 50px;
           height: 50px;
@@ -436,20 +524,24 @@
           background-position: center center;
         }
       }
+
       .class-info {
         grid-column-start: 1;
         grid-column-end: 3;
         background-color: #d9d9d9;
+
         .assigned-class {
           background-color: #fff;
           grid-template-columns: 32px 1fr 70px auto auto;
           height: 46px;
           padding-left: 10px;
+
           .student-count {
             padding-left: 10px;
             display: flex;
             align-items: center;
             color: #1aa9eb;
+
             span {
               cursor: pointer;
               display: block;
@@ -462,40 +554,45 @@
           }
         }
       }
+
       .activity-actions {
         display: grid;
         grid-column-start: 1;
         grid-column-end: 3;
-        padding: 4px 10px 0px 10px;
+        padding: 4px 10px 0;
         border-top: 1px solid #ccc;
+
         > div {
           grid-template-columns: auto auto;
           grid-column-gap: 5px;
           text-align: right;
+
           label {
             display: inline-block;
-            margin-bottom: 0px;
+            margin-bottom: 0;
             text-align: left;
           }
         }
+
         .mastery {
           label {
-            margin-bottom: 0px;
+            margin-bottom: 0;
             margin-top: 2px;
           }
         }
       }
     }
   }
-
   @media screen and (max-width: $screen-sm) {
     &.list-view {
       .class-activity-card {
         margin-bottom: 4px;
+
         .activity-actions {
           > div {
             grid-template-columns: none;
             text-align: center;
+
             label {
               text-align: center;
             }

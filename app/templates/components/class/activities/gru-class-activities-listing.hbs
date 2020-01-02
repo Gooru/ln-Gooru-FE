@@ -120,9 +120,12 @@
                 onClosePerformanceEntry = "onClosePerformanceEntry"
                 onRescheduleActivity = "onRescheduleActivity"
                 onEnableMastery = "onEnableMastery"
+                onGoLive="onGoLive"
+                isSecondaryClass=isSecondaryClass
                 onShowContentPreview = "onShowContentPreview"
                 onGradeItem="onGradeItem"
-                isShowListView=isShowListCard}}
+                isShowListView=isShowListCard
+                onShowContentReport='onShowContentReport'}}
           {{/each}}
         {{else}}
           <div class="plan-activities-msg">
@@ -224,13 +227,26 @@
   {{reports/pull-up/gru-collection-preview
     showPullUp=isShowContentPreview
     previewContentId=previewContent.contentId
-    previewContentType=previewContent.contentType}}
+    previewContentType=previewContent.contentType
+    isReportView=isReportView}}
+{{/if}}
+
+{{#if isShowStudentsSummaryReport}}
+{{teacher/offline-class/oca-students-summary-report-pull-up
+    context=selectedActivity
+    classActivities=reportActivityList
+    onOpenPerformanceEntry='onOpenPerformanceEntry'
+    classId=selectedActivity.classId
+    isShowAddData=isShowAddData
+    showPullUp=isShowStudentsSummaryReport}}
 {{/if}}
 
 {{#if isShowOfflineActivityPreview}}
   {{reports/pull-up/oa-preview
     showPullUp=isShowOfflineActivityPreview
     oaId=previewContent.contentId
-    isReportView=false
+    classActivity=previewContent
+    classId=previewContent.classId
+    isReportView=isReportView
   }}
 {{/if}}

@@ -210,6 +210,7 @@
 
               li {
                 &:first-child {
+                  border-right: 1px solid;
                   padding-left: 0;
                 }
 
@@ -217,7 +218,6 @@
                   border: none;
                 }
                 padding: 0 5px;
-                border-right: 1px solid;
                 line-height: 1;
                 overflow: hidden;
                 text-overflow: ellipsis;

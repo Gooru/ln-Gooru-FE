@@ -18,7 +18,14 @@
              <span>
                <ul class="grade-domain-competency-sub-heading">
                  <li>{{competency.displayCode}}</li>
-
+                 <li>{{competency-lo-transform
+                   fwCompetencies
+                   competency.competencyCode
+                   'loCode'
+                   false
+                   '|'
+                 }}
+               </li>
                </ul>
              </span>
              </div>
@@ -31,7 +38,6 @@
            </div>
           {{/each}}
          </div>
-
      </div>
      {{/each}}
   </div>

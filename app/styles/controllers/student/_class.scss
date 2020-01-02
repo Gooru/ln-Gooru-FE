@@ -110,6 +110,10 @@
       display: flex;
       justify-content: center;
       font-family: "Open Sans";
+
+      @media screen and (max-width: $screen-md) {
+        color: $white;
+      }
     }
   }
 

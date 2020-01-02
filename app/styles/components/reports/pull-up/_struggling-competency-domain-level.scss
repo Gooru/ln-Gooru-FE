@@ -9,7 +9,6 @@
   right: 0;
   margin: 0 auto;
   display: none;
-
   @media screen and (max-width: $screen-md) {
     width: 70%;
   }
@@ -60,9 +59,11 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     .struggling-competency-domain-level-content {
       height: calc(100vh - 18vh);
       overflow-y: auto;
+
       .grade-domain-name-accordion {
         font-size: 15px;
         display: grid;
@@ -80,11 +81,14 @@
           white-space: nowrap;
         }
       }
+
       .grade-domain-competency-list-container {
         display: none;
+
         &.first-child {
           display: block;
         }
+
         .grade-domain-competency-list-panel {
           display: grid;
           grid-template-columns: 1fr 50px 50px;
@@ -95,12 +99,14 @@
           .grade-domain-competency-heading {
             display: grid;
             grid-template-columns: auto;
+
             span {
               font-size: 15px;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
             }
+
             .grade-domain-competency-sub-heading {
               display: inline-flex;
               list-style: none;
@@ -109,7 +115,6 @@
 
               li {
                 padding-right: 10px;
-                border-right: 1px solid $gray-80;
                 line-height: 1;
 
                 &:last-child {
@@ -119,19 +124,23 @@
               }
             }
           }
+
           .grade-domain-competency-icon {
             display: grid;
             align-items: center;
             text-align: center;
             color: $orange-500;
           }
+
           .grade-domain-competency-count {
             text-align: center;
           }
         }
+
         .domain-show-more-btn {
           text-align: end;
           padding: 10px 20px;
+
           span {
             width: max-content;
             padding: 5px;

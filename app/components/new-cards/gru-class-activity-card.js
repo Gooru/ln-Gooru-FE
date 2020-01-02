@@ -38,6 +38,17 @@ export default Ember.Component.extend({
   },
 
   actions: {
+    /**
+     * @function goLive
+     */
+    goLive(content) {
+      let options = {
+        collectionId: content.get('contentId'),
+        collectionType: content.get('contentType')
+      };
+      this.sendAction('onGoLive', options);
+    },
+
     onShowStudentsList(classData) {
       const component = this;
       component.sendAction('onShowStudentsList', classData);
@@ -80,6 +91,20 @@ export default Ember.Component.extend({
       const component = this;
       const classActivity = component.get('activity');
       component.sendAction('onShowContentPreview', classActivity);
+    },
+
+    onShowContentReport(activityClass) {
+      const component = this;
+      const classActivity = Ember.Object.create({
+        classId: activityClass.get('id'),
+        id: activityClass.get('activity.id'),
+        collection: activityClass.get('content'),
+        contentId: activityClass.get('content.id'),
+        contentType: activityClass.get('content.collectionType'),
+        activation_date: activityClass.get('activity.activation_date'),
+        activityClass
+      });
+      component.sendAction('onShowContentReport', classActivity);
     },
 
     /**
@@ -238,6 +263,26 @@ export default Ember.Component.extend({
       value: false
     })
   ]),
+
+  enableCollectionLiveLearning: true,
+
+  /**
+   * It is used to find activity is today or not
+   * @return {Boolean}
+   */
+  isToday: Ember.computed('activity', function() {
+    let activityDate = this.get('activity.added_date');
+    let currentDate = moment().format('YYYY-MM-DD');
+    return currentDate === activityDate;
+  }),
+
+  /**
+   * Maintains the flag to show go live or not
+   * @type {Boolean}
+   */
+  showGolive: Ember.computed('isToday', function() {
+    return this.get('isToday');
+  }),
 
   /**
    * It is used to find activity is past or not

@@ -38,6 +38,9 @@ export default Ember.Component.extend(ModalMixin, {
   },
 
   actions: {
+    onGoLive(params) {
+      this.sendAction('onGoLive', params);
+    },
     /**
      *
      * @function actions:removeClassActivity
@@ -357,11 +360,11 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('previewContent', previewContent);
       if (previewContent.get('contentType') === 'offline-activity') {
         component.set('isShowOfflineActivityPreview', true);
+        component.set('isReportView', false);
       } else {
         component.set('isShowContentPreview', true);
       }
     },
-
     closeDatePicker(isDateChange) {
       const component = this;
       component.$('.header-container .date-range-picker-container').slideUp();
@@ -372,8 +375,22 @@ export default Ember.Component.extend(ModalMixin, {
           component.loadActivitiesByActiveContentType();
         }
       }
+    },
+    // Action triggered when clicking performance from the class activity card
+    onShowContentReport(classActivity) {
+      const component = this;
+      if (classActivity.get('contentType') === CONTENT_TYPES.OFFLINE_ACTIVITY) {
+        component.set('previewContent', classActivity);
+        component.set('isShowOfflineActivityPreview', true);
+        component.set('isReportView', true);
+      } else {
+        component.set('selectedActivity', classActivity);
+        component.set('isShowStudentsSummaryReport', true);
+      }
     }
   },
+
+  isReportView: false,
 
   isDaily: true,
 
@@ -515,6 +532,12 @@ export default Ember.Component.extend(ModalMixin, {
   isLoading: false,
 
   isAdded: false,
+
+  isShowStudentsSummaryReport: false,
+
+  reportActivityList: Ember.A([]),
+
+  selectedActivity: null,
 
   observeNewlyAddedActivity: Ember.observer('newlyAddedActivity', function() {
     const component = this;
