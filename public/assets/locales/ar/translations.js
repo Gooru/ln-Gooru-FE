@@ -62,6 +62,7 @@ window.i18ln = {
   'common.first': 'الأول',
   'common.last': 'الأخير',
   'common.name': 'الأسم',
+  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'كيف تود ادخال البيانات؟',
   'common.take-photo': 'التقط صورة',
   'common.upload-image': 'حمل صورة',

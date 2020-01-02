@@ -58,6 +58,7 @@ window.i18ln = {
   'common.relevance': 'સબંધિત',
   'common.engagement': 'એંગેજમેન્ટ',
   'common.efficacy': 'અસરકારકતા',
+  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
   'common.grid': 'ગ્રીડ',
   'common.list': 'યાદી',
   'common.first': 'પ્રથમ',

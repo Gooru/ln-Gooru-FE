@@ -62,6 +62,7 @@ window.i18ln = {
   'common.efficacy': 'കാര്യക്ഷമത',
   'common.grid': 'ഗ്രിഡ്',
   'common.list': 'ലിസ്റ്റ്',
+  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
   'common.first': 'ഫസ്റ്റ്',
   'common.last': 'ലാസ്റ്റ്',
   'common.name': 'നെയിം',
