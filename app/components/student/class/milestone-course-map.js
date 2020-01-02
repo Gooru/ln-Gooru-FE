@@ -639,6 +639,7 @@ export default Ember.Component.extend({
     let component = this;
     let milestoneId = selectedMilestone.get('milestone_id');
     component.set('selectedMilestone', selectedMilestone);
+    component.$('.milestone-course-map-lesson-container').slideUp(400);
     let element = `#milestone-${milestoneId}`;
     let courseId = component.get('courseId');
     let nextMilestone = component
