@@ -71,7 +71,7 @@
         {{/if}}
         {{#unless isUnscheduledActivity}}
           {{#if activityClass.content.performance.hasStarted}}
-            <div class="add-data performed-activity {{unless activityClass.content.performance.timeSpent 'only-score'}} {{if isCollection 'collection-performance'}} grade-range-{{grade-range activityClass.content.performance.score}}"
+            <div class="add-data performed-activity {{unless activityClass.content.performance.timeSpent 'only-score'}} {{if (or isCollection isExternalCollection) 'collection-performance'}} grade-range-{{grade-range activityClass.content.performance.score}} "
               {{action "onShowContentReport" activityClass}}>
               <span class="activity-score">
                 {{activityClass.content.performance.score}}%
