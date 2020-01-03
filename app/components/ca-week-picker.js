@@ -98,6 +98,10 @@ export default Ember.Component.extend({
       let parsedDate = moment(date).format('YYYY-MM-DD');
       component.set('firstDateOfMonth', parsedDate);
       component.sendAction('showNextMonth', parsedDate);
+    },
+
+    onCloseDatePicker() {
+      this.sendAction('closeDatePicker');
     }
   },
 

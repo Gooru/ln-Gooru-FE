@@ -133,7 +133,13 @@
                                   {{#if (or (eq collection.format 'assessment') (eq collection.format 'offline-activity') (eq collection.format 'assessment-external'))}}
                                     {{collection.performance.scoreInPercentage}}%
                                   {{else}}
-                                    {{format-time collection.performance.timeSpent}}
+                                      {{#if collection.performance.timeSpent}}
+                                        {{format-time collection.performance.timeSpent}}
+                                      {{else}}
+                                      <div class="collection-img-container">
+                                        <img src="{{collection.thumbnailUrl}}" />
+                                      </div>
+                                      {{/if}}
                                   {{/if}}
                                 {{else}}
                                   --

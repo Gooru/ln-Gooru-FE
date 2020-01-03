@@ -470,11 +470,15 @@
           grid-template-columns: auto auto;
           align-items: center;
           cursor: pointer;
+          overflow: hidden;
           span {
             display: grid;
             align-items: center;
             i {
               font-size: 20px;
+              @media screen and (max-width: $screen-md) {
+                display: none;
+              }
             }
           }
         }

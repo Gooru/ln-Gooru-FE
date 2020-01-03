@@ -63,8 +63,7 @@ window.i18ln = {
   'common.list': 'তালিকা',
   'common.first': 'প্রথম',
   'common.last': 'গত',
-  'not-covered-in-fw-msg':
-    'Note: This competency is not covered by the {{framework}} framework',
+  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
   'common.name': 'নাম',
   'common.add-data-choice-title': 'আপনি ডেটা কিভাবে  লিখতে চান?',
   'common.take-photo': 'ছবি তুলুন',
@@ -74,6 +73,8 @@ window.i18ln = {
   'common.by-question': 'প্রশ্ন-থেকে-প্রশ্ন',
   'i2d.conversion-progress':
     'ছবি(গুলো)র আপলোড করা চলছে। দয়া করে আবার পরে চেক করুন',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'ছবিটা রূপান্তর করার সময় ত্রুটি দেখা দেয়। দয়াকরে ছবিটি আবার দিন',
   'file-picker-placeholder': 'এখান থেকে একটা ফাইল বাছুন বা এখানে টেনে আনুন',
@@ -97,6 +98,8 @@ window.i18ln = {
   'common.week': 'সপ্তাহ',
   'common.month': 'মাস',
   'common.more': 'আরও',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'ফিল্টার প্রয়োগ করুন',
   'library-search-placeholder':
     'লাইব্রেরীর মধ্যে থাকা যেকোনো কিছুর জন্য সার্চ করুন...',
@@ -186,6 +189,8 @@ window.i18ln = {
   'common.anonymous_mode': 'অজ্ঞাতনামা মোড',
   'common.answer': 'আপনার উত্তর ',
   'common.answer-correct': 'আপনি ঠিক!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'আপনি ভুল...',
   'common.answer-key-was-hidden':
     'নোটঃ আপনার শিক্ষক উত্তরের চাবি গুলো লুকিয়ে রেখেছেন।',
@@ -199,6 +204,7 @@ window.i18ln = {
   'common.assessment-pl.other': 'মূল্যায়ন',
   'common.assessment-title': 'মূল্যায়ন শিরোনাম',
   'common.activity-title': 'Activity Title',
+  'common.activity': 'Activity Title',
   'common.assessmentInitial': 'একটি',
   'common.assessments': 'মূল্যায়ন',
   'common.assign': 'দায়িত্ব অর্পণ করা',
@@ -209,6 +215,7 @@ window.i18ln = {
   'common.avatarFor': 'জন্য অবতার',
   'common.averageScore': 'গড় স্কোর',
   'common.back': 'পিছনে',
+  'common.for': 'for',
   'common.back-to-assessment': 'মূল্যায়ন ফিরে',
   'common.back-to-collection': 'সংগ্রহ ফিরে',
   'common.back-to-course-map': 'অবশ্যই মানচিত্র ফিরে',
@@ -286,6 +293,9 @@ window.i18ln = {
   'common.rubric-not-answered': 'বিধির দেওয়া নেই',
   'common.country': 'দেশ ',
   'reroute.suggestion': 'পুনরায়রুটের পরামর্শ',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
   'reroute.suggestion.title': 'ধারণাগুলো নিয়ে অসুবিধা হচ্ছে?',
   'reroute.suggestion.desc':
     'আপনার পরীক্ষা করা ধারণাগুলিকে আরও ভালভাবে উপলব্ধি করতে আমাদের <span> বিশেষ সংগ্রহের </span> ব্যাবহার করবেন না কেন?',
@@ -550,10 +560,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'লগইন করার জন্য এখানে ক্লিক করুন ',
   'common.mastery': 'কর্তৃত্ব',
   'common.menu': 'মেনু',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'আরো বিস্তারিত',
   'common.move': 'পদক্ষেপ',
   'common.myContent': 'আমার কন্টেন্ট',
   'common.myProfile': 'আমার অবস্থান',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'গ্রন্থাগার',
   'common.myPerformance': 'আমার কর্মক্ষমতা',
   'common.edit-narration': 'বর্ণনা সম্পাদনা করুন',
@@ -751,6 +763,8 @@ window.i18ln = {
   'common.show-more-results': 'আরও ফলাফল দেখান',
   'common.show-results': 'ফলাফল দেখান',
   'common.signUp': 'সাইন আপ',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'বর্ণানুক্রমিকভাবে বাছুন ',
   'common.sortAverage': 'গড় অনুসারে বাছুন ',
   'common.sort-most-recently': 'সর্বাধিক আপডেট হওয়া অনুসারে বাছুন ',
@@ -880,6 +894,7 @@ window.i18ln = {
   'class.info.add-students': 'ছাত্র যোগ করুন',
   'class.info.class-code': 'শ্রেণীকক্ষ কোড',
   'class.info.delete': 'শ্রেণীকক্ষ মুছে দিন',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'নির্ধারিত কোর্স',
   'class.edit.basic-info': 'মৌলিক তথ্য',
   'class.edit.class-name': 'শ্রেণিকক্ষের নাম ',
@@ -1309,6 +1324,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'শিক্ষার্থীরা',
   'teacher-landing.class.class-management-tab.student-name': 'শিক্ষার্থীর নাম',
   'teacher-landing.class.class-management-tab.student-id': ' শিক্ষার্থীর আইডি',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'শিক্ষকরা',
   'teacher-landing.class.class-management-tab.view-report': 'রিপোর্ট  দেখুন ',
   'teacher-landing.class.class-management-tab.course-null':
@@ -1937,6 +1953,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'পারদর্শিতা ',
   'profile.gru-navigation.preference.preference': 'পক্ষপাতিত্ব ',
   'profile.edit.select-district': 'একটি জেলার নির্বাচন করুন ... ',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'এখনও কোন তথ্য উপলব্ধ নেই। আপনি অধ্যয়ন শুরু করার পরে, আপনার ডেটা উপলব্ধ হয়ে যাবে। ',
   'profile.proficiency.expand-chart': 'চার্ট প্রসারিত করতে হবে ',
@@ -2243,7 +2263,7 @@ window.i18ln = {
   'gru-take-tour.student-home.stepTwelve.title': 'শ্রেণীকক্ষে যোগ দিন ',
   'gru-take-tour.student-home.stepTwelve.description':
     'শ্রেণিকক্ষে যোগদানের জন্য শ্রেণিকক্ষের কোডটি প্রবেশ করান।',
-  'gru-take-tour.student-home.stepThirteen.title': 'সমাপ্ত!	  ',
+  'gru-take-tour.student-home.stepThirteen.title': 'সমাপ্ত!   ',
   'gru-take-tour.student-home.stepThirteen.description':
     'এখন এগিয়ে যান এবং আপনি যে কোর্সে ভর্তি হয়েছেন, সেখানে ক্লিক করুন, শ্রেণিকক্ষে যোগদান করুন, বা আপনার পছন্দের বিষয়বস্তু সন্ধান করুন।  ',
   'gru-take-tour.student-performance.stepOne.title': 'স্বাগতম! ',
@@ -2258,7 +2278,7 @@ window.i18ln = {
   'gru-take-tour.student-performance.stepFour.title': ' ডাউনলোড / প্রিন্ট ',
   'gru-take-tour.student-performance.stepFour.description':
     'আপনার রিপোর্টটিকে ডাউনলোড করুন। ',
-  'gru-take-tour.student-performance.stepFive.title': 'সমাপ্ত!	  ',
+  'gru-take-tour.student-performance.stepFive.title': 'সমাপ্ত!   ',
   'gru-take-tour.student-performance.stepFive.description':
     'এগিয়ে যান এবং আপনার কর্মক্ষমতাকে বিশ্লেষণ করুন!  ',
   'gru-take-tour.student-class.stepOne.title': 'স্বাগতম! ',
@@ -2277,7 +2297,7 @@ window.i18ln = {
   'gru-take-tour.student-class.stepFour.title': 'আমার রিপোর্ট',
   'gru-take-tour.student-class.stepFour.description':
     'আপনার সামগ্রিক শ্রেণির কার্যকারিতা পরীক্ষা করুন। ',
-  'gru-take-tour.student-class.stepFive.title': 'সমাপ্ত!	  ',
+  'gru-take-tour.student-class.stepFive.title': 'সমাপ্ত!   ',
   'gru-take-tour.student-class.stepFive.description':
     'কোর্সের মানচিত্রে বা প্রতিদিনের ক্রিয়াকলাপগুলিতে ক্লিক করে কোর্স অধ্যয়ন শুরু করুন।',
   'gru-take-tour.teacher-class.stepOne.title': 'স্বাগতম! ',
@@ -2301,7 +2321,7 @@ window.i18ln = {
     'শ্রেণীকক্ষ পরিচালনা',
   'gru-take-tour.teacher-class.stepClassManagement.description':
     'আপনার শ্রেণীর তথ্য এবং শ্রেনীর তালিকাভুক্ত শিক্ষার্থীদের নিয়োগ বা আপডেট করুন। ',
-  'gru-take-tour.teacher-class.stepFive.title': 'সমাপ্ত!	  ',
+  'gru-take-tour.teacher-class.stepFive.title': 'সমাপ্ত!   ',
   'gru-take-tour.teacher-class.stepFive.description':
     'এখন এগিয়ে যান এবং আপনার শিক্ষার্থীদের সাথে শ্রেণিকক্ষ ভাগ করে নিন।  ',
   'gru-take-tour.study-player.stepOne.title': 'স্বাগতম! ',
@@ -2326,7 +2346,7 @@ window.i18ln = {
   'gru-take-tour.study-player.stepSeven.title': ' রিসোর্সগুলির প্রতিক্রিয়া  ',
   'gru-take-tour.study-player.stepSeven.description':
     'এই উৎসগুলির  সম্পর্কে আপনার মতামতটি আপনার শিক্ষককে জানান।  ',
-  'gru-take-tour.study-player.stepEight.title': 'সমাপ্ত!	  ',
+  'gru-take-tour.study-player.stepEight.title': 'সমাপ্ত!   ',
   'gru-take-tour.study-player.stepEight.description': 'অধ্যয়ন শুরু করুন ! ',
   'gru-take-tour.study-player.stepNine.title': 'সংগ্রহে ফিরে যেতে হবে',
   'gru-take-tour.study-player.stepNine.description':
@@ -2508,6 +2528,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'প্রশ্ন',
   'gru-study-header.question.one': 'প্রশ্ন',
   'gru-study-header.question.other': 'প্রশ্নগুলি',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'আরও জানার জন্য, এই সংস্থানগুলি পরীক্ষা করে দেখুন।',
   'gru-suggest-test.pre-test-header': 'পরীক্ষা - পূর্ববর্তী ( ঐচ্ছিক)',
@@ -2699,6 +2720,7 @@ window.i18ln = {
   'common.subtask.oa.debate': 'তর্ক।',
   'common.subtask.oa.others': ' অন্যান্য',
   project: 'প্রকল্প',
+  'oa.others': 'Others',
   'oa.project.poster': 'পোস্টার',
   'oa.project.presentation': ' উপস্থাপিত বস্তু',
   'oa.project.video': 'ভিডিও',
@@ -2767,6 +2789,7 @@ window.i18ln = {
   'suggestion-taken': 'পরামর্শগুলি নেওয়া হয়েছে',
   'this-week': 'এই সপ্তাহ ',
   'previous-week': 'আগের সপ্তাহ',
+  'custom-range': 'Custom Date Range',
   'beginning-till-now': 'এখনও শুরু হচ্ছে।',
   'report.class-proficiency-report': 'ক্লাস এর দক্ষতা রিপোর্ট',
   'report.domain-proficiency-report': 'ডোমেন এর দক্ষতা রিপোর্ট।',
@@ -2781,6 +2804,35 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'স্টুডেন্ট লোকেটার ',
   'teacher-landing.class.learning-journey': 'শেখার সফর ',
   'search-by': 'দিয়ে অনুসন্ধান করুন ',
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts',
+  'common.lesson-plan': 'Lesson Plan',
+  'lesson-plan.sessions': 'sessions',
+  'common.session': 'Session',
+  'prior-knowledge': 'Prior Knowledge',
+  'guiding-question': 'Guiding Questions',
+  'anticipated-struggle': 'Aniticipated Struggles',
+  'teacher-resource': 'Teacher Resources',
+  'content.anticipated-struggles':
+    'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
+  'common.no-lesson-plan-info-message':
+    'This lesson does have any lesson plan.',
+  'common.email.error': 'Duplicate email',
+  'student-resource': 'Student Study Material',
+  'common.choose-lang': 'Choose Language',
+  'common.show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
@@ -2804,5 +2856,27 @@ window.i18ln = {
     ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!',
   'common.no-competency': 'Not aligned to any competency',
   'common.class-activities-info-icon':
-    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class'
+    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class',
+  'class-activity.no-activity-scheduled-message-mobile':
+    'You have no activities scheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-scheduled-message-desktop':
+    'You have no activities scheduled for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.no-activity-unscheduled-message-mobile':
+    'You have no activities unscheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-unscheduled-message-desktop':
+    'You have no activities unscheduled for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.no-activity-items-to-grade-message-mobile':
+    'You have no activities items to grade for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+  'class-activity.no-activity-items-to-grade-message-desktop':
+    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.scheduled-activities': 'Class Activities',
+  'class-activity.unscheduled-activities': 'Unscheduled Activities',
+  'class-activity.items-to-grade': 'Items to Grade',
+  'common.monthly': 'Monthly',
+  'common.daily': 'Daily',
+  'common.weekly': 'Weekly',
+  'class-activity.no-learning-activities':
+    'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
+  'common.activate': 'Activate',
+  'common.mark-as-completed': 'Mark Closed'
 };

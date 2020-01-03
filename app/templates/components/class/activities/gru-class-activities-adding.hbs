@@ -1,4 +1,4 @@
-<div class="class-activities-source-container">
+<div class="class-activities-source-container {{if isMobileView 'mobile-view'}}">
   <div class="header-container">
     {{class/activities/gru-content-search
       onSelectExternalActivity="onSelectExternalActivity"
@@ -15,22 +15,40 @@
     {{#if isShowTenantLibraries}}
       {{#each tenantLibraries as |tenantLibrary|}}
         {{library/gru-partner-library-card onSelectLibrary='onSelectTenantLibrary' content=tenantLibrary}}
+      {{else}}
+        <div class="plan-activities-msg">
+          {{t 'class-activity.no-learning-activities'}}
+        </div>
       {{/each}}
     {{else if isShowLessonPlan}}
       <div class="lesson-plan-activities-container">
-        {{teacher/class/ca-course-map
-          onAddActivity="onAddActivity"
-          onScheduleActivity="onShowDateRangePicker"
-          classId=primaryClass.id
-          courseId=primaryClass.courseId
-          isShowLessonPlan = true
-        }}
+        {{#if isCourseAttached}}
+          {{teacher/class/ca-course-map
+            onAddActivity="onAddActivity"
+            onAddContentToDCA="onAddActivity"
+            onScheduleActivity="onShowDateRangePicker"
+            onScheduleContentToDCA="onShowDateRangePicker"
+            classId=primaryClass.id
+            courseId=primaryClass.courseId
+            isShowLessonPlan = false
+            todaysClassActivities = todaysActivities
+            onShowContentPreview = "onShowContentPreview"
+          }}
+        {{else}}
+          <span class="no-course-map">No Course Map Attached</span>
+        {{/if}}
       </div>
     {{else}}
       {{#each filteredContents as |filteredContent|}}
         {{new-cards/activities/gru-add-content-card
           content=filteredContent
-          onAddActivity="onAddActivity"}}
+          onAddActivity="onAddActivity"
+          onShowContentPreview = "onShowContentPreview"
+        }}
+      {{else}}
+        <div class="plan-activities-msg">
+          {{t 'class-activity.no-learning-activities'}}
+        </div>
       {{/each}}
     {{/if}}
   </div>
@@ -51,6 +69,22 @@
         onScheduleForDate='scheduleContentForDate'
         onScheduleForMonth='scheduleContentForMonth'
         endDate=endDate
-        allowTwoDateRangePicker=false}}
+        allowTwoDateRangePicker=isShowStartEndDatePicker}}
   </div>
+{{/if}}
+
+<!-- Preview -->
+{{#if isShowContentPreview}}
+  {{reports/pull-up/gru-collection-preview
+    showPullUp=isShowContentPreview
+    previewContentId=previewContent.id
+    previewContentType=previewContent.format}}
+{{/if}}
+
+{{#if isShowOfflineActivityPreview}}
+  {{reports/pull-up/oa-preview
+    showPullUp=isShowOfflineActivityPreview
+    oaId=previewContent.id
+    isReportView=false
+  }}
 {{/if}}

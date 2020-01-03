@@ -71,6 +71,10 @@
     }
 
     .month-picker {
+      //in atc view hide the datepicker backdrop
+      .backdrop {
+        display: none;
+      }
       .ca-date-nav-container {
         background-color: $white;
         margin: auto;
