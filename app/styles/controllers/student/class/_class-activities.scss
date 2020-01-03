@@ -95,6 +95,10 @@
       .ca-week-picker-container {
         box-shadow: unset;
 
+        .backdrop {
+          display: none;
+        }
+
         .ca-date-nav-container,
         .ca-week-nav-container {
           height: 40px;
