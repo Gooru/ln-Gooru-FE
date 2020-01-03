@@ -63,7 +63,8 @@ window.i18ln = {
   'common.list': 'তালিকা',
   'common.first': 'প্রথম',
   'common.last': 'গত',
-  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.name': 'নাম',
   'common.add-data-choice-title': 'আপনি ডেটা কিভাবে  লিখতে চান?',
   'common.take-photo': 'ছবি তুলুন',
@@ -2878,5 +2879,7 @@ window.i18ln = {
   'class-activity.no-learning-activities':
     'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
   'common.activate': 'Activate',
-  'common.mark-as-completed': 'Mark Closed'
+  'common.mark-as-completed': 'Mark Closed',
+  'common.no-struggling-competencies':
+    'Yay! Looks like all your students are doing well!'
 };

@@ -64,7 +64,8 @@ window.i18ln = {
   'common.first': 'మొదటి',
   'common.last': 'చివర',
   'common.name': 'నామము',
-  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'మీరు ఏవిధంగా డేటా నమోదు చేస్తారు ?',
   'common.take-photo': 'ఫోటో తీవుకోండి',
   'common.upload-image': 'ప్రతిబింబం అప్లోడ్',
@@ -2879,5 +2880,7 @@ window.i18ln = {
   'class-activity.no-learning-activities':
     'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
   'common.activate': 'Activate',
-  'common.mark-as-completed': 'Mark Closed'
+  'common.mark-as-completed': 'Mark Closed',
+  'common.no-struggling-competencies':
+    'Yay! Looks like all your students are doing well!'
 };

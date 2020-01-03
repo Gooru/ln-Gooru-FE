@@ -62,6 +62,11 @@ export default Ember.Component.extend({
     }
   },
 
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -268,6 +273,11 @@ export default Ember.Component.extend({
    * @property {Array} studentsPerformanceList
    */
   studentsPerformanceList: [],
+
+  /**
+   * @property {String} currentGradeName
+   */
+  currentGradeName: '',
 
   /**
    * watchingSecondaryClass
@@ -746,6 +756,10 @@ export default Ember.Component.extend({
           component.set('gradeDomainsList', []);
           if (gradeLevelCompetency && gradeLevelCompetency.length) {
             component.set(
+              'currentGradeName',
+              gradeLevelCompetency[0].get('grade')
+            );
+            component.set(
               'gradeDomainsList',
               gradeLevelCompetency[0].get('domains')
             );
@@ -777,7 +791,10 @@ export default Ember.Component.extend({
                   }
                 }
               });
-            component.set('otherGradeTopComp', otherGradeTopComp);
+            let sortedOtherCompetency = otherGradeTopComp.length
+              ? otherGradeTopComp.sortBy('studentsCount').reverse()
+              : otherGradeTopComp;
+            component.set('otherGradeTopComp', sortedOtherCompetency);
             component.set('otherGradeCompetency', otherGradeLevelCompetency);
           }
         }
