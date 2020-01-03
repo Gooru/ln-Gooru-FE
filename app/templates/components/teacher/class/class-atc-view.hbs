@@ -32,16 +32,16 @@
             {{#if (eq competencyIndex 0) }}
             <div class="competency-heading" {{action "onSelectGrade" domainIndex}}>
              <div class="competency-heading-title">{{competency.name}}</div>
-            <ul class="competency-sub-heading" title="{{domain.domainName}}  {{competency.displayCode}}  {{competency-lo-transform
-              fwCompetencies
-              competency.competencyCode
-              'loCode'
-              false
-              '|'
-            }}" data-toggle="tooltip">
-              <li>{{domain.domainName}}</li>
-              <li>{{competency.displayCode}}</li>
-              <li>{{competency-lo-transform
+            <ul class="competency-sub-heading">
+              <li title="{{domain.domainName}}" data-toggle="tooltip">{{domain.domainName}}</li>
+              <li title="{{competency.displayCode}}" data-toggle="tooltip">{{competency.displayCode}}</li>
+              <li title="{{competency-lo-transform
+                fwCompetencies
+                competency.competencyCode
+                'loCode'
+                false
+                '|'
+              }}" data-toggle="tooltip">{{competency-lo-transform
                 fwCompetencies
                 competency.code
                 'loCode'
@@ -74,16 +74,16 @@
           <div class="competency-struggling-container">
             <div class="competency-heading" {{action "onSelectOtherGrade" competency.gradeIndex competency.domainIndex}}>
              <div class="competency-heading-title">{{competency.name}}</div>
-            <ul class="competency-sub-heading" title="{{competency.domainName}}  {{competency.displayCode}}  {{competency-lo-transform
-              fwCompetencies
-              competency.competencyCode
-              'loCode'
-              false
-              '|'
-            }}" data-toggle="tooltip">
-              <li>{{competency.domainName}}</li>
-              <li>{{competency.displayCode}}</li>
-              <li>{{competency-lo-transform
+            <ul class="competency-sub-heading">
+              <li title="{{competency.domainName}}" data-toggle="tooltip">{{competency.domainName}}</li>
+              <li title="{{competency.displayCode}}" data-toggle="tooltip">{{competency.displayCode}}</li>
+              <li title="{{competency-lo-transform
+                fwCompetencies
+                competency.competencyCode
+                'loCode'
+                false
+                '|'
+              }}" data-toggle="tooltip">{{competency-lo-transform
                 fwCompetencies
                 competency.code
                 'loCode'
