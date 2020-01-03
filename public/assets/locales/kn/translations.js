@@ -62,7 +62,8 @@ window.i18ln = {
   'common.first': 'ಮೊದಲ ',
   'common.last': 'ಕೊನೆಯ',
   'common.name': 'ಹೆಸರು',
-  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
@@ -2885,5 +2886,7 @@ window.i18ln = {
   'class-activity.no-learning-activities':
     'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
   'common.activate': 'Activate',
-  'common.mark-as-completed': 'Mark Closed'
+  'common.mark-as-completed': 'Mark Closed',
+  'common.no-struggling-competencies':
+    'Yay! Looks like all your students are doing well!'
 };

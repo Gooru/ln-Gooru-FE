@@ -62,7 +62,8 @@ window.i18ln = {
   'common.first': 'الأول',
   'common.last': 'الأخير',
   'common.name': 'الأسم',
-  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'كيف تود ادخال البيانات؟',
   'common.take-photo': 'التقط صورة',
   'common.upload-image': 'حمل صورة',
@@ -2755,5 +2756,7 @@ window.i18ln = {
   'class-activity.no-learning-activities':
     'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
   'common.activate': 'Activate',
-  'common.mark-as-completed': 'Mark Closed'
+  'common.mark-as-completed': 'Mark Closed',
+  'common.no-struggling-competencies':
+    'Yay! Looks like all your students are doing well!'
 };

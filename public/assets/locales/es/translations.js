@@ -61,7 +61,8 @@ window.i18ln = {
   'common.efficacy': 'Eficacia',
   'common.grid': 'Red',
   'common.list': 'Lista',
-  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.first': 'Primer',
   'common.last': 'Último',
   'common.name': 'Nombre',
@@ -2809,5 +2810,7 @@ window.i18ln = {
   'common.external-assessment.index-message':
     'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here',
   'common.class-activities-info-icon':
-    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class'
+    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class',
+  'common.no-struggling-competencies':
+    'Yay! Looks like all your students are doing well!'
 };
