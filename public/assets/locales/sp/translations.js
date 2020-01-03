@@ -64,6 +64,7 @@ window.i18ln = {
   'common.first': 'First',
   'common.last': 'Last',
   'common.name': 'Name',
+  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',

@@ -389,7 +389,7 @@ export default Ember.Component.extend({
       let top = '125px';
       if (component.get('isRightPanelExpanded')) {
         // 10px padding top
-        top = `${component.$('.oa-grading-section').height() - 80 + 10  }px`;
+        top = `${component.$('.oa-grading-section').height() - 80 + 10}px`;
       }
       component.$('.right-panel').animate(
         {

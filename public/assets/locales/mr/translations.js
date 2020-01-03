@@ -99,6 +99,7 @@ window.i18ln = {
   'common.week': 'आठवडा',
   'common.month': 'महिना',
   'common.more': 'अधिक',
+  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
   'not-covered-in-fw-msg':
     'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'फिल्टर लागू करा',
