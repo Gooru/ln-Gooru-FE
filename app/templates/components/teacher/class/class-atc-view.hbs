@@ -23,16 +23,22 @@
         </div>
       </div>
       <div class="data-analysis-cards-container">
-        {{#if gradeDomainsList }}
         <div class="competency-card-container">
-          <div class="title-container">{{t 'common.struggling-competencies'}}</div>
+          <div class="title-container">{{t 'common.struggling-competencies'}}({{currentGradeName}})</div>
+          {{#if gradeDomainsList }}
           {{#each gradeDomainsList as |domain domainIndex|}}
           <div class="competency-struggling-container">
             {{#each domain.competencies as |competency competencyIndex|}}
             {{#if (eq competencyIndex 0) }}
             <div class="competency-heading" {{action "onSelectGrade" domainIndex}}>
              <div class="competency-heading-title">{{competency.name}}</div>
-            <ul class="competency-sub-heading">
+            <ul class="competency-sub-heading" title="{{domain.domainName}}  {{competency.displayCode}}  {{competency-lo-transform
+              fwCompetencies
+              competency.competencyCode
+              'loCode'
+              false
+              '|'
+            }}" data-toggle="tooltip">
               <li>{{domain.domainName}}</li>
               <li>{{competency.displayCode}}</li>
               <li>{{competency-lo-transform
@@ -48,22 +54,33 @@
               {{gru-icon name="explore"}}
             </div>
             <div class="competency-count">
+              <span class="student-count">
               {{competency.studentsCount}}
+              </span>
+              {{gru-icon name="person"}}
             </div>
             {{/if}}
             {{/each}}
           </div>
           {{/each}}
+          {{else}}
+              <span>{{t 'common.no-struggling-competencies'}}</span>
+          {{/if}}
         </div>
-        {{/if}}
-        {{#if otherGradeTopComp.length}}
         <div class="competency-card-container other-grade">
           <div class="title-container">{{t 'common.struggling-competencies'}}({{t 'profile.proficiency.grade-line'}})</div>
+          {{#if otherGradeTopComp.length}}
           {{#each otherGradeTopComp as |competency competencyIndex|}}
           <div class="competency-struggling-container">
             <div class="competency-heading" {{action "onSelectOtherGrade" competency.gradeIndex competency.domainIndex}}>
              <div class="competency-heading-title">{{competency.name}}</div>
-            <ul class="competency-sub-heading">
+            <ul class="competency-sub-heading" title="{{competency.domainName}}  {{competency.displayCode}}  {{competency-lo-transform
+              fwCompetencies
+              competency.competencyCode
+              'loCode'
+              false
+              '|'
+            }}" data-toggle="tooltip">
               <li>{{competency.domainName}}</li>
               <li>{{competency.displayCode}}</li>
               <li>{{competency-lo-transform
@@ -79,12 +96,17 @@
               {{gru-icon name="explore"}}
             </div>
             <div class="competency-count">
+              <span class="student-count">
               {{competency.studentsCount}}
+              </span>
+              {{gru-icon name="person"}}
             </div>
           </div>
           {{/each}}
+          {{else}}
+              <span>{{t 'common.no-struggling-competencies'}}</span>
+          {{/if}}
         </div>
-        {{/if}}
         <div class="activities-count-container" {{action "onRedirectToCA"}}>
           <div class="activities-container completed">
             <div class="activity-count">{{activitiesCount.scheduled}}</div>

@@ -31,7 +31,6 @@
                <div class="grade-domain-competency-list-panel" {{action "onSelectCompetency" competency domain}}>
                  <div class="grade-domain-competency-heading">
                   <span>{{competency.name}}</span>
-                 <span>
                    <ul class="grade-domain-competency-sub-heading">
                    <li>{{competency.displayCode}}</li>
                    <li>{{competency-lo-transform
@@ -42,13 +41,16 @@
                      '|'
                    }}
                  </li>
-                 </ul></span>
+                 </ul>
                  </div>
                  <div class="grade-domain-competency-icon">
                    {{gru-icon name="explore"}}
                  </div>
                  <div class="grade-domain-competency-count">
+                   <span class="student-count">
                    {{competency.studentsCount}}
+                   </span>
+                   {{gru-icon name="person"}}
                  </div>
                </div>
               {{/each}}

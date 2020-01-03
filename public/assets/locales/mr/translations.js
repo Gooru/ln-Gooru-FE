@@ -99,7 +99,8 @@ window.i18ln = {
   'common.week': 'आठवडा',
   'common.month': 'महिना',
   'common.more': 'अधिक',
-  'message-go-live-multigrade': 'Go Live is available only for non multi-grade classes',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'not-covered-in-fw-msg':
     'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'फिल्टर लागू करा',
@@ -2846,5 +2847,7 @@ window.i18ln = {
   'class-activity.no-learning-activities':
     'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
   'common.activate': 'Activate',
-  'common.mark-as-completed': 'Mark Closed'
+  'common.mark-as-completed': 'Mark Closed',
+  'common.no-struggling-competencies':
+    'Yay! Looks like all your students are doing well!'
 };

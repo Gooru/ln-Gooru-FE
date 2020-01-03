@@ -60,7 +60,7 @@
     }
 
     .sc-other-grade-panel-container {
-      height: 100%;
+      height: 85%;
       overflow-y: auto;
 
       .sc-other-grade-panel {
@@ -71,8 +71,6 @@
           padding: 10px;
           font-size: 16px;
           font-weight: bold;
-          background-color: $navy-blue;
-          color: $white;
           cursor: pointer;
           border-bottom: 1px solid $gray-80;
 
@@ -98,7 +96,8 @@
                 padding: 10px;
                 font-size: 14px;
                 font-weight: bold;
-                border-bottom: 1px solid #ccc;
+                background-color: $light-100;
+                border-bottom: 1px solid $light-200;
                 cursor: pointer;
 
                 span {
@@ -138,14 +137,11 @@
                       list-style: none;
                       margin: 0;
                       padding: 0;
+                      font-size: 12px;
 
                       li {
                         padding-right: 10px;
                         line-height: 1;
-
-                        &:first-child {
-                          border-right: 1px solid $gray-80;
-                        }
 
                         &:last-child {
                           padding-left: 10px;
@@ -164,6 +160,22 @@
 
                   .grade-domain-competency-count {
                     text-align: center;
+                    position: relative;
+
+                    .student-count {
+                      position: absolute;
+                      width: 15px;
+                      height: 15px;
+                      top: -6px;
+                      background-color: $white;
+                      border-radius: 50%;
+                      border: 1px solid $gray-80;
+                      right: 10px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 10px;
+                    }
                   }
                 }
 

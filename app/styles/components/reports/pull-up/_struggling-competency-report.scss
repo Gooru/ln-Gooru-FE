@@ -59,13 +59,13 @@
       .struggling-competency-report-header-panel {
         .struggling-competency-report-title {
           font-size: 15px;
-          width: 15%;
           font-weight: bold;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          @media screen and (max-width: $screen-sm) {
-            width: 10%;
+          display: grid;
+          grid-template-columns: 1fr;
+          span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
 
@@ -75,15 +75,12 @@
           margin: 0;
           line-height: 1;
           padding: 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          @media screen and (max-width: $screen-sm) {
-            width: 10%;
-          }
 
           li {
             padding: 0 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             &:last-child {
               border: none;
