@@ -341,7 +341,7 @@ export default Ember.Component.extend({
         studentCollectionPerformanceData
       );
     });
-    Promise.all(studentPerformanceData).then(() => {
+    Ember.RSVP.Promise.all(studentPerformanceData).then(() => {
       component.sendAction('onClosePullUp');
     });
   },
