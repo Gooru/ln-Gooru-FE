@@ -35,7 +35,13 @@
             <ul class="competency-sub-heading">
               <li>{{domain.domainName}}</li>
               <li>{{competency.displayCode}}</li>
-
+              <li>{{competency-lo-transform
+                fwCompetencies
+                competency.code
+                'loCode'
+                false
+                '|'
+              }}</li>
             </ul>
             </div>
             <div class="competency-icon" {{action "onSelectCompetency" competency}}>
@@ -62,7 +68,7 @@
               <li>{{competency.displayCode}}</li>
               <li>{{competency-lo-transform
                 fwCompetencies
-                competency.competencyCode
+                competency.code
                 'loCode'
                 false
                 '|'
