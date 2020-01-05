@@ -20,8 +20,23 @@
 
       .dca-content-list-container {
         .gru-student-class-activity-panel {
+          .suggestions {
+            .suggestion-panel {
+              grid-template-columns: 65px auto 60px 60px;
+
+              .content-counts {
+                display: none;
+              }
+            }
+          }
+
           .ca-panel-container {
             grid-template-columns: unset;
+
+            .dca-panel-actions-performance {
+              width: 60px;
+              margin: 0 0 0 auto;
+            }
           }
         }
       }
