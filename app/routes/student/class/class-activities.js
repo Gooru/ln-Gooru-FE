@@ -61,6 +61,7 @@ export default Ember.Route.extend({
     controller.set('isDaily', true);
     controller.set('isMonthly', false);
     controller.set('isWeekly', false);
+    controller.set('isActive', false);
     controller.set('showItemsToGrade', false);
     controller.set('forMonth', todayDate.format('MM'));
     controller.set('forYear', todayDate.format('YYYY'));

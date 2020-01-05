@@ -609,6 +609,20 @@
       }
     }
 
+    .no-rubric-content {
+      margin-top: 10px;
+      width: 100%;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+      background-color: #fff;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      font-size: 18px;
+      font-style: italic;
+    }
+
     .items-to-grade-list {
       .gru-grade-items {
         width: 100%;
