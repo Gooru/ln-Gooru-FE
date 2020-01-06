@@ -137,7 +137,7 @@
         </div>
       {{/if}}
     {{else}}
-      <div class="dca-content-list-container {{if isActive 'backdrop'}} {{if isToday 'dca-content-list-container-today'}}">
+      <div class="dca-content-list-container {{if isToday 'dca-content-list-container-today'}}">
         {{#each scheduledActivitiesList as |scheduledActivity|}}
           {{#if (not isDaily isActive)}}
             <div class="added-date">{{format-date scheduledActivity.added_date 'DD MMM YYYY'}}
