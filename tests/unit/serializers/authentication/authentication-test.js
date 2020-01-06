@@ -31,7 +31,8 @@ test('normalizeResponse for anonymous account', function(assert) {
     tenant: {
       tenant_id: 1
     },
-    partner_id: 2
+    partner_id: 2,
+    tenantSetting: null
   };
   const expected = {
     token: Env['API-3.0']['anonymous-token-api-2.0'],
@@ -50,6 +51,7 @@ test('normalizeResponse for anonymous account', function(assert) {
       content: 'content-url'
     },
     isAnonymous: true,
+    tenantSetting: null,
     tenant: {
       tenantId: 1
     },
@@ -74,6 +76,7 @@ test('normalizeResponse for normal account', function(assert) {
     tenant: {
       tenant_id: 1
     },
+    tenantSetting: null,
     partner_id: 2
   };
   const expected = {
@@ -96,6 +99,7 @@ test('normalizeResponse for normal account', function(assert) {
     tenant: {
       tenantId: 1
     },
+    tenantSetting: null,
     partnerId: 2
   };
   const response = serializer.normalizeResponse(payload, false);
@@ -117,6 +121,7 @@ test('normalizeResponse for google account', function(assert) {
     tenant: {
       tenant_id: 1
     },
+    tenantSetting: null,
     partner_id: 2
   };
   const expected = {
@@ -139,6 +144,7 @@ test('normalizeResponse for google account', function(assert) {
     tenant: {
       tenantId: 1
     },
+    tenantSetting: null,
     partnerId: 2
   };
   const response = serializer.normalizeResponse(
@@ -165,6 +171,7 @@ test('normalizeResponse for google account containing user category', function(a
     tenant: {
       tenant_id: 1
     },
+    tenantSetting: null,
     partner_id: 2
   };
   const expected = {
@@ -187,6 +194,7 @@ test('normalizeResponse for google account containing user category', function(a
     tenant: {
       tenantId: 1
     },
+    tenantSetting: null,
     partnerId: 2
   };
   const response = serializer.normalizeResponse(
