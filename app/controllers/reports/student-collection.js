@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
+import { getObjectCopy, getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
 /**
  *
@@ -32,8 +33,32 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
+  session: Ember.inject.service('session'),
+
   // -------------------------------------------------------------------------
   // Actions
+
+  actions: {
+    captureFeedback: function() {
+      const controller = this;
+      let feedbackObj = getObjectCopy(controller.get('collectionObj'));
+      feedbackObj.isCollection = controller.get('collection.isCollection');
+      feedbackObj.children = getObjectsDeepCopy(
+        controller.get('collectionObj.children')
+      );
+      let resourcesResult = controller.get('attemptData.resourceResults');
+      let resourceList = feedbackObj.get('children');
+      resourceList.map(resource => {
+        let result = resourcesResult.findBy('resourceId', resource.id);
+        resource.reaction = result.reaction;
+        resource.savedTime = result.savedTime;
+        resource.score = result.score;
+        resource.skipped = result.skipped;
+      });
+      controller.set('feedbackObj', feedbackObj);
+      controller.set('isShowActivityFeedback', true);
+    }
+  },
 
   // -------------------------------------------------------------------------
   // Events
@@ -57,7 +82,14 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    */
   source: null,
 
+  /**
+   * @property {Boolean} isAnonymous
+   */
+  isAnonymous: Ember.computed.alias('session.isAnonymous'),
+
   isIframeMode: false,
+
+  isShowActivityFeedback: false,
 
   // -------------------------------------------------------------------------
   // Observers

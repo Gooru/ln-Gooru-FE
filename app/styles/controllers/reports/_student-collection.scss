@@ -9,6 +9,9 @@
     background-color: #0072bc;
     margin: 0 181px 0 180px;
     color: $white;
+    display: grid;
+    grid-template-columns: 75px auto;
+
     .back-to-collection {
       width: 75px;
       height: 64px;
@@ -25,8 +28,23 @@
     }
 
     .content-title {
-      width: calc(100% - 200px);
-      height: 64px;
+      display: grid;
+      grid-template-columns: 1fr 150px;
+
+      .feedback-btn {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        .caputure-feedback {
+          background-color: $white;
+          border: 1px solid $blue-400;
+          padding: 5px 11px;
+          color: $gray-base;
+          font-size: 12px;
+          border-radius: 3px;
+        }
+      }
+
       .title-info {
         height: 64px;
       }
@@ -96,5 +114,17 @@
 .iframe-panel {
   .app-container {
     overflow-y: auto;
+  }
+  &.reports_student-collection {
+    .gru-activity-feedback {
+      padding-top: 0px;
+      .activity-feedback-container {
+        .feedback-contaioner {
+          .gru-activity-feedback-card {
+            max-height: calc(100vh - 60px);
+          }
+        }
+      }
+    }
   }
 }

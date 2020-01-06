@@ -1,5 +1,5 @@
 {{#if isShowActivityFeedback}}
-  {{player/gru-activity-feedback collection=offlineActivity format=offlineActivity.format timeSpent=timespentInMilliSec onSkipFeedback=onSkipFeedback isStatusDone=isDone onExit="onExit"}}
+  {{player/gru-activity-feedback collection=offlineActivity format=offlineActivity.format timeSpent=timespentInMilliSec onSkipFeedback="onSkipFeedback" isStatusDone=isDone onExit="onExit"}}
 {{else}}
   <div class="offline-activity-submission-container {{if isOaCompleted 'grading-enabled'}}">
     <div class="left-panel">
