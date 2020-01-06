@@ -649,7 +649,7 @@
 
     .dca-content-list-container {
       margin-top: 10px;
-      height: 70%;
+      max-height: 70%;
       overflow-y: auto;
       width: 100%;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
