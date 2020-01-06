@@ -33,6 +33,8 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    */
   taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
+  session: Ember.inject.service('session'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -79,6 +81,11 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    * @property {String} source
    */
   source: null,
+
+  /**
+   * @property {Boolean} isAnonymous
+   */
+  isAnonymous: Ember.computed.alias('session.isAnonymous'),
 
   isIframeMode: false,
 

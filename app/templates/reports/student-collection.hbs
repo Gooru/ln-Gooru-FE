@@ -14,9 +14,11 @@
             <i class="icon pull-left"></i>
             <p class="title pull-left">{{collection.title}}</p>
           </div>
-          <div class="feedback-btn">
-            <button class="caputure-feedback" {{action 'captureFeedback'}}>{{t 'common.next'}}</button>
-          </div>
+          {{#unless isAnonymous}}
+            <div class="feedback-btn">
+              <button class="caputure-feedback" {{action 'captureFeedback'}}>{{t 'common.next'}}</button>
+            </div>
+          {{/unless}}
         </div>
       </div>
     {{else}}
