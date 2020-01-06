@@ -15,6 +15,7 @@
   display: grid;
   grid-template-columns: 30% 70%;
   width: 100%;
+  overflow: auto;
 
   .loading-spinner {
     position: absolute;
@@ -78,7 +79,7 @@
                   tr {
                     td {
                       span.month {
-                        width: 35px;
+                        width: 50px;
                         min-width: auto;
                       }
                     }
@@ -206,11 +207,7 @@
 
                         &.active {
                           background-color: #d2e3fc;
-                          background-image: -webkit-linear-gradient(
-                            top,
-                            #d2e3fc,
-                            #d2e3fc
-                          );
+                          background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
                           border-radius: 50%;
                           display: flex;
                           margin: auto;
@@ -227,11 +224,7 @@
 
                         &.today {
                           background-color: #3486f7;
-                          background-image: -webkit-linear-gradient(
-                            top,
-                            #3486f7,
-                            #3486f7
-                          );
+                          background-image: -webkit-linear-gradient(top, #3486f7, #3486f7);
                           border-radius: 50%;
                           display: flex;
                           margin: auto;
@@ -453,8 +446,7 @@
             .ca-date-picker-container,
             .ca-month-picker,
             .ca-week-picker-container {
-              box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.13),
-                -2px 2px 3px rgba(0, 0, 0, 0.13);
+              box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.13), -2px 2px 3px rgba(0, 0, 0, 0.13);
 
               .ca-date-nav-container,
               .ca-week-nav-container {
@@ -563,11 +555,7 @@
 
                               &.active {
                                 background-color: #d2e3fc;
-                                background-image: -webkit-linear-gradient(
-                                  top,
-                                  #d2e3fc,
-                                  #d2e3fc
-                                );
+                                background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
                                 border-radius: 50%;
                                 display: flex;
                                 margin: auto;
@@ -584,11 +572,7 @@
 
                               &.today {
                                 background-color: #3486f7;
-                                background-image: -webkit-linear-gradient(
-                                  top,
-                                  #3486f7,
-                                  #3486f7
-                                );
+                                background-image: -webkit-linear-gradient(top, #3486f7, #3486f7);
                                 border-radius: 50%;
                                 display: flex;
                                 margin: auto;
@@ -649,8 +633,6 @@
 
     .dca-content-list-container {
       margin-top: 10px;
-      max-height: calc(100vh - 115px);
-      overflow-y: auto;
       width: 100%;
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
       background-color: #fff;

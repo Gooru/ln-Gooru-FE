@@ -1,16 +1,20 @@
 <div class="controller student class class-activities">
-  <!-- <div class="loading-spinner {{if isLoading 'active'}}">
+  <div class="loading-spinner {{if isLoading 'active'}}">
     {{three-bounce-spinner}}
-  </div> -->
+  </div>
   <div class="activity-date-range-selector hidden-xs">
     <div class="date-section" {{action "toggleDatePicker"}}>
-      <span class="schedule-date"><span>{{format-date startDate 'DD MMM YYYY'}}</span><span class="{{if isDaily 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}</span></span>
+      <span class="schedule-date">
+        <span>{{format-date startDate 'DD MMM YYYY'}}</span>
+        <span class="{{if (or isDaily (not endDate)) 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}
+        </span>
+      </span>
     </div>
     <div class="date-range-picker-container">
       <div class="date-range-selector">
-        <span class="{{if isDaily 'active'}}" {{action "onSelectRangeType" 'daily'}}>Daily</span>
-        <span class="{{if isWeekly 'active'}}" {{action "onSelectRangeType" 'weekly'}}>Weekly</span>
-        <span class="{{if isMonthly 'active'}}" {{action "onSelectRangeType" 'monthly'}}>Monthly</span>
+        <span class="{{if isDaily 'active'}}" {{action "onSelectRangeType" 'daily'}}>{{t 'common.daily'}}</span>
+        <span class="{{if isWeekly 'active'}}" {{action "onSelectRangeType" 'weekly'}}>{{t 'common.weekly'}}</span>
+        <span class="{{if isMonthly 'active'}}" {{action "onSelectRangeType" 'monthly'}}>{{t 'common.monthly'}}</span>
       </div>
       {{#if isDaily}}
         {{ca-date-picker
@@ -62,15 +66,6 @@
       </div>
       {{#unless showItemsToGrade}}
         <div class="filters hidden visible-xs">
-          <!-- <div class="activities">
-            <div class="contents-selector">
-              {{#each contentTypes as |content|}}
-                <div class="content-selector {{if content.isActive 'active'}}" {{action "onToggleContent" content bubbles=false}}>
-                  <i class="icon {{content.type}}-icon"></i>
-                </div>
-              {{/each}}
-            </div>
-          </div> -->
           <div class="activity-date-range-selector">
             {{#if isActive}}
               <div class="backdrop" {{action 'toggleDatePicker'}}></div>
@@ -139,11 +134,9 @@
     {{else}}
       <div class="dca-content-list-container {{if isToday 'dca-content-list-container-today'}}">
         {{#each scheduledActivitiesList as |scheduledActivity|}}
-          {{#if (not isDaily isActive)}}
-            <div class="added-date">{{format-date scheduledActivity.added_date 'DD MMM YYYY'}}
-              <hr />
-            </div>
-          {{/if}}
+          <div class="added-date {{if (or isDaily (not endDate)) 'hidden'}}">{{format-date scheduledActivity.added_date 'DD MMM YYYY'}}
+            <hr />
+          </div>
           {{#each scheduledActivity.scheduledActivities as |activity|}}
             {{class/gru-student-class-activity-panel
              class=class
