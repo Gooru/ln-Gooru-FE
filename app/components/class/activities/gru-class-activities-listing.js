@@ -297,6 +297,14 @@ export default Ember.Component.extend(ModalMixin, {
 
     onloadScheduledClassActivities() {
       const component = this;
+      let currentDate = moment().format('YYYY-MM-DD');
+      component.set('selectedDate', currentDate);
+      component.set('startDate', currentDate);
+      component.set('endDate', currentDate);
+      component.set('isDaily', true);
+      component.set('isWeekly', false);
+      component.set('isMonthly', false);
+      component.set('isShowListCard', component.get('isMobileView'));
       component.set('isLoading', true);
       component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
@@ -319,6 +327,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isWeekly', false);
       component.set('isMonthly', true);
       component.set('selectedMonth', currentMonth);
+      component.set('isShowListCard', true);
       component.set('startDate', startDate);
       component.set('endDate', endDate);
       component.set('isShowScheduledActivities', false);
@@ -387,6 +396,11 @@ export default Ember.Component.extend(ModalMixin, {
         component.set('selectedActivity', classActivity);
         component.set('isShowStudentsSummaryReport', true);
       }
+    },
+
+    // Action triggered when clicking OA mark completed from the class activity card
+    onMarkOACompleted() {
+      this.loadItemsToGrade();
     }
   },
 

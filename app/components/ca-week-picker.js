@@ -181,7 +181,9 @@ export default Ember.Component.extend({
               }
             }
           } else {
-            parentDateEle.addClass('disable-event');
+            if (parentDateEle.attr('class') !== 'has-activities') {
+              parentDateEle.addClass('disable-event');
+            }
           }
         });
       }
