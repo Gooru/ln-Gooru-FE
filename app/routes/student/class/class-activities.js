@@ -55,8 +55,8 @@ export default Ember.Route.extend({
     const todayDate = moment();
     controller.set('classActivities', Ember.A([]));
     controller.set('classActivitiesOfMonth', Ember.A([]));
-    controller.set('startDate', todayDate);
-    controller.set('endDate', todayDate);
+    controller.set('startDate', todayDate.format('YYYY-MM-DD'));
+    controller.set('endDate', todayDate.format('YYYY-MM-DD'));
     controller.set('isToday', true);
     controller.set('isDaily', true);
     controller.set('isMonthly', false);
