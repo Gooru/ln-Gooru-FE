@@ -41,6 +41,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
         user: basePath,
         content: payload.cdn_urls.content_cdn_url
       },
+      tenantSetting: payload.tenant_setting
+        ? this.normalizeTenantSettings(payload.tenant_setting)
+        : null,
       isAnonymous: isAnonymous,
       tenant: {
         tenantId: payload.tenant ? payload.tenant.tenant_id : undefined
@@ -79,6 +82,16 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return {
       statusCode: payload.status_code,
       redirectUrl: payload.redirect_url
+    };
+  },
+
+  /**
+   * @param payload is the response of tenat settings from the endpoint
+   * @function normalizeTenantSettings
+   */
+  normalizeTenantSettings(payload) {
+    return {
+      classMultiGradeVisibility: payload.class_multi_grade_visibility || null
     };
   }
 });
