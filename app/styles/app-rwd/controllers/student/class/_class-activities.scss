@@ -1,98 +1,42 @@
 .controller.student.class.class-activities {
   @media only screen and (max-width: $screen-767) {
-    .ca-panel {
-      flex-direction: column;
+    grid-template-columns: unset;
 
-      .left-panel,
-      .right-panel {
-        width: 100%;
+    .ca-container {
+      width: 100%;
+      padding: 5px;
 
-        .offline-container {
-          height: auto;
-          width: 100%;
-          z-index: 1;
-          background: none;
-          padding: 0;
-          position: absolute;
-          top: calc(100% - 50px);
-          left: 0;
-          right: 0;
-
-          &.toggle {
-            height: 100%;
-            width: 100%;
-            background-color: #fff;
-            z-index: 10;
-
-            .offline-activity-contents {
-              display: block;
-            }
-
-            .offline-activity-items-header {
-              .icons {
-                .arrow_drop_up {
-                  display: none !important;
-                }
-
-                .arrow_drop_down {
-                  display: block !important;
-                }
-              }
-            }
-          }
-
-          .offline-activity-items-header {
-            pointer-events: all;
-
-            .icons {
-              .arrow_drop_up {
-                display: block !important;
-              }
-
-              .arrow_drop_down {
-                display: none !important;
-              }
-            }
-          }
-
-          .offline-activity-contents {
-            display: none;
-
-            .panel-group {
-              padding: 0;
-
-              .oa-active-header,
-              .oa-completed-header {
-                span {
-                  padding: 0 0 0 10px;
-                }
-              }
-            }
+      .header-container {
+        .activity-date-range-selector {
+          .date-range-picker-container {
+            top: 35px;
           }
         }
 
-        .item-to-grade-container {
-          height: auto;
-          width: 100%;
-          z-index: 1;
-          background: none;
+        .activity-tab {
           padding: 0;
-          position: absolute;
-          top: calc(100% - 100px);
-          right: 0;
-          left: 0;
+        }
+      }
 
-          &.active {
-            height: 100%;
-            width: 100%;
-            background-color: #fff;
-            z-index: 10;
+      .dca-content-list-container {
+        .gru-student-class-activity-panel {
+          .suggestions {
+            .suggestion-panel {
+              grid-template-columns: 65px auto 60px 60px;
+
+              .content-counts {
+                display: none;
+              }
+            }
           }
 
-          .ca-grade-items-header {
-            box-shadow: none;
-            border: 0;
-            border-bottom: 1px solid #ccc;
+          .ca-panel-container {
+            grid-template-columns: unset;
+
+            .dca-panel-actions-performance {
+              width: 60px;
+              margin: 0 0 0 auto;
+            }
           }
         }
       }
