@@ -15,6 +15,11 @@ export default Ember.Component.extend({
    */
   courseService: Ember.inject.service('api-sdk/course'),
 
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
   actions: {
     onSelectExternalActivity() {
       const component = this;
@@ -164,9 +169,13 @@ export default Ember.Component.extend({
       component.toggleProperty('isMultiClassListExpanded');
     },
 
+    //Action triggered when selecting a class from dropdown
     onSelectCmClass(classInfo) {
       const component = this;
       component.set('activeCmClass', classInfo);
+      component.getClassInfo(classInfo.get('id')).then(classData => {
+        component.set('activeCmClass', classData);
+      });
     }
   },
 
@@ -188,6 +197,10 @@ export default Ember.Component.extend({
 
   defaultTab: Ember.Object.create({}),
 
+  /**
+   * @property {Object} activeCmClass
+   * Property for the active class object
+   */
   activeCmClass: Ember.computed(function() {
     return this.get('primaryClass');
   }),
@@ -262,5 +275,18 @@ export default Ember.Component.extend({
         year,
         endDate
       );
+  },
+
+  /**
+   * @function getClassInfo
+   * @param {UUID} classId
+   * @return Promise classdata
+   */
+  getClassInfo(classId) {
+    const component = this;
+    const fetchCachedData = true;
+    return component
+      .get('classService')
+      .readClassInfo(classId, fetchCachedData);
   }
 });

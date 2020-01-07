@@ -11,6 +11,18 @@
       onTogglePanel="onTogglePanel"
       defaultContentSource = defaultTab.id
     }}
+    {{#if isShowCourseMap}}
+      <div class="course-map-activities-container">
+        <div class="multi-class-course-map">
+          <div class="active-class" {{action "onToggleMultiClassPanel"}}>{{activeCmClass.title}} {{gru-icon name=(if isMultiClassListExpanded 'arrow_drop_up' 'arrow_drop_down')}}</div>
+          <div class="multi-class-list">
+            {{#each secondaryClassDropdown as |secondaryClass|}}
+              <div class="class-info {{if (eq activeCmClass.id secondaryClass.id) 'active'}}" {{action "onSelectCmClass" secondaryClass}}>{{secondaryClass.title}}</div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
   </div>
   <div class="body-container {{if isShowTenantLibraries 'grid-view'}}">
     {{#if isShowTenantLibraries}}
@@ -22,15 +34,6 @@
         </div>
       {{/each}}
     {{else if isShowCourseMap}}
-      <div class="course-map-activities-container">
-        <div class="multi-class-course-map hidden">
-          <div class="active-class" {{action "onToggleMultiClassPanel"}}>{{activeCmClass.title}} {{gru-icon name=(if isMultiClassListExpanded 'arrow_drop_up' 'arrow_drop_down')}}</div>
-          <div class="multi-class-list">
-            {{#each secondaryClassDropdown as |secondaryClass|}}
-              <div class="class-info" {{action "onSelectCmClass" secondaryClass}}>{{secondaryClass.title}}</div>
-            {{/each}}
-          </div>
-        </div>
         <div class="course-map-container">
           {{#if isCourseAttached}}
             {{teacher/class/ca-course-map
@@ -48,7 +51,6 @@
             <span class="no-course-map">No Course Map Attached</span>
           {{/if}}
         </div>
-      </div>
     {{else}}
       {{#each filteredContents as |filteredContent|}}
         {{new-cards/activities/gru-add-content-card
