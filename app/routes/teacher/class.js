@@ -124,8 +124,8 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     const isEnableSecondaryClass = route.get(
       'configuration.GRU_FEATURE_FLAG.isShowSecondaryClass'
     );
-    const isSupportMultigrade =
-      route.get('session.tenantSetting.classMultiGradeVisibility') || null;
+    const isAllowMultiGradeClass =
+      route.get('session.tenantSetting.allowMultiGradeClass') || null;
     const classPromise = route.get('classService').readClassInfo(classId);
     const membersPromise = route.get('classService').readClassMembers(classId);
     return classPromise.then(function(classData) {
@@ -175,7 +175,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
         const frameworkId = aClass.get('preference.framework');
         const subjectId = aClass.get('preference.subject');
         let secondaryClassListPromise = null;
-        if (isEnableSecondaryClass && isSupportMultigrade) {
+        if (isEnableSecondaryClass && isAllowMultiGradeClass) {
           secondaryClassListPromise = subjectId
             ? route.get('multipleClassService').fetchMultipleClassList(classId)
             : Ember.RSVP.resolve(null);

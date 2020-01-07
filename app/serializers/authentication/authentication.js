@@ -91,7 +91,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
    */
   normalizeTenantSettings(payload) {
     return {
-      classMultiGradeVisibility: payload.class_multi_grade_visibility || null
+      allowMultiGradeClass: payload.allow_multi_grade_class || null
     };
   }
 });
