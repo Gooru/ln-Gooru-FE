@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import ClassActivityAdapter from 'gooru-web/adapters/content/class-activity';
 import ClassActivitySerializer from 'gooru-web/serializers/content/class-activity';
-
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 /**
  * @typedef {Object} ClassActivityService
  */
@@ -841,6 +843,12 @@ export default Ember.Service.extend({
                 classId
               );
               if (userId) {
+                let offlineClassActivities = activitiesByClass
+                  .filterBy('contentType', CONTENT_TYPES.OFFLINE_ACTIVITY)
+                  .filterBy('isCompleted', true);
+                service.findStudentOfflineActivitiesPerformanceSummary(classId,
+                  offlineClassActivities,
+                  userId);
                 service
                   .findStudentActivitiesPerformanceSummary(
                     userId,

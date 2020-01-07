@@ -86,17 +86,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('showOAGrade', true);
     },
 
-    onToggleContent(content) {
-      const controller = this;
-      content.set('isActive', !content.get('isActive'));
-      if (content.get('isActive')) {
-        controller.loadActivities(controller.get('startDate'),
-          controller.get('endDate'));
-      } else {
-        controller.filterActivitiesByContent();
-      }
-    },
-
     toggleDatePicker() {
       let controller = this;
       controller.toggleProperty('isActive');
@@ -114,25 +103,13 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('forYear', forYear);
       if (rangeType === 'daily') {
         controller.set('isDaily', true);
+        controller.set('endDate', null);
       } else if (rangeType === 'weekly') {
         controller.set('isWeekly', true);
       } else {
         controller.set('isMonthly', true);
       }
       controller.loadActivitiesForMonth();
-    },
-
-    /**
-     * Action triggered when items to grade section item got clicked.
-     */
-    toggleItemsToGrade() {
-      let controller = this;
-      let isMobileView = controller.get('isMobileView');
-      if (isMobileView) {
-        controller.animateItemsToGradeForMobile();
-      } else {
-        controller.animateItemsToGradeForDesktop();
-      }
     },
 
     studentDcaReport(
@@ -249,6 +226,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       } else {
         const startDate = controller.get('startDate');
         controller.loadActivities(startDate);
+        controller.loadItemsToGrade();
       }
       controller.set('isOpenPlayer', false);
       controller.get('classController').send('reloadData');
@@ -257,7 +235,11 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
-
+  /**
+   * @property {String} endDate
+   * Property to handle endDate
+   */
+  endDate: null,
   /**
    * @property {Boolean} isMobileView
    * Property to handle is mobile view
@@ -477,7 +459,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       });
     }
   },
-
+  // Note: This method is used to support for content type filter
   filterActivitiesByContent() {
     const controller = this;
     const filteredContentTypes = controller.get('contentTypes')
@@ -645,109 +627,5 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           resolve(itemObject);
         }, reject);
     });
-  },
-
-  /**
-   * Animate a items to grade section for mobile
-   */
-  animateItemsToGradeForMobile() {
-    let itemToGradeEle = Ember.$(
-      '.ca-panel .right-panel .item-to-grade-container'
-    );
-    let windowHeight = $(window).height();
-    if (itemToGradeEle.hasClass('active')) {
-      itemToGradeEle.animate({
-        top: windowHeight - 100
-      },
-      400,
-      function() {
-        itemToGradeEle.removeClass('active');
-      }
-      );
-    } else {
-      itemToGradeEle.addClass('active');
-      itemToGradeEle.animate({
-        top: 100
-      },
-      400
-      );
-    }
-  },
-
-  /**
-   * Animate a items to grade section for desktop
-   */
-  animateItemsToGradeForDesktop() {
-    let offlineActivityContainer = Ember.$(
-      '.ca-panel .right-panel .offline-container'
-    );
-    let itemToGradeContainer = Ember.$(
-      '.ca-panel .right-panel .item-to-grade-container'
-    );
-    if (!itemToGradeContainer.hasClass('active')) {
-      let offlineActivityEle = offlineActivityContainer.children(
-        '.offline-activity-contents'
-      );
-      let itemToGradeEle = itemToGradeContainer.children(
-        '.ca-grade-content-items'
-      );
-      offlineActivityContainer.removeClass('active');
-      offlineActivityEle.slideUp(400);
-      itemToGradeEle.slideDown(400, function() {
-        itemToGradeContainer.addClass('active');
-      });
-    }
-  },
-
-  /**
-   * Animate a items to grade section for desktop
-   */
-  animateOfflineActivityForDesktop() {
-    let offlineActivityContainer = Ember.$(
-      '.ca-panel .right-panel .offline-container'
-    );
-    let itemToGradeContainer = Ember.$(
-      '.ca-panel .right-panel .item-to-grade-container'
-    );
-    if (!offlineActivityContainer.hasClass('active')) {
-      let offlineActivityEle = offlineActivityContainer.children(
-        '.offline-activity-contents'
-      );
-      let itemToGradeEle = itemToGradeContainer.children(
-        '.ca-grade-content-items'
-      );
-      itemToGradeContainer.removeClass('active');
-      itemToGradeEle.slideUp(400);
-      offlineActivityEle.slideDown(400, function() {
-        offlineActivityContainer.addClass('active');
-      });
-    }
-  },
-
-  /**
-   * Animate a offline activity for desktop
-   */
-  animateOfflineActivityForMobile() {
-    let offlineActivityEle = Ember.$(
-      '.ca-panel .right-panel .offline-container'
-    );
-    let windowHeight = $(window).height();
-    if (offlineActivityEle.hasClass('toggle')) {
-      offlineActivityEle.animate({
-        top: windowHeight - 50
-      },
-      400,
-      function() {
-        offlineActivityEle.removeClass('toggle');
-      }
-      );
-    } else {
-      offlineActivityEle.addClass('toggle');
-      offlineActivityEle.animate({
-        top: 100
-      },
-      400
-      );
-    }
   }
 });

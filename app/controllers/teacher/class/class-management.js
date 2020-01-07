@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
+import { CLASS_ACTIVITIES_SEARCH_TABS } from 'gooru-web/config/config';
+import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
 /**
  * Class management controller
  *
@@ -471,6 +473,18 @@ export default Ember.Controller.extend(ModalMixin, {
     saveMultipleClass() {
       let controller = this;
       controller.updateSecondaryClass();
+    },
+
+    //Action triggered when updating default ca tab setting
+    onUpdateActiveCaTab(caTab) {
+      const controller = this;
+      const tempClass = controller.get('tempClass');
+      const tempClassSetting =
+        tempClass.get('setting') || Ember.Object.create({});
+      tempClassSetting['ca.search.default.view'] = caTab.get('id');
+      tempClass.set('setting', tempClassSetting);
+      controller.set('defaultCaTabKey', caTab.get('id'));
+      controller.saveClass();
     }
   },
 
@@ -690,6 +704,25 @@ export default Ember.Controller.extend(ModalMixin, {
    * @property {Boolean} isEnableSave
    */
   isEnableSave: false,
+
+  classActivitiesTabs: Ember.computed(function() {
+    return getObjectsDeepCopy(CLASS_ACTIVITIES_SEARCH_TABS);
+  }),
+
+  activeClassActivitiesTab: Ember.computed(
+    'classActivitiesTabs',
+    'defaultCaTabKey',
+    function() {
+      return this.get('classActivitiesTabs').findBy(
+        'id',
+        this.get('defaultCaTabKey')
+      );
+    }
+  ),
+
+  defaultCaTabKey: Ember.computed.alias(
+    'classController.classActivitiesDefaultTabKey'
+  ),
 
   /**
    * @function fetchTaxonomyGrades

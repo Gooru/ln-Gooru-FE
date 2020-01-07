@@ -5,6 +5,8 @@ import { isCompatibleVW } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-clas-activities-adding'],
 
+  classNameBindings: ['isShowCourseMap:cm-view'],
+
   /**
    * @requires service:api-sdk/class-activity
    */
@@ -14,6 +16,11 @@ export default Ember.Component.extend({
    * @type {CourseService} Service to retrieve course information
    */
   courseService: Ember.inject.service('api-sdk/course'),
+
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
 
   actions: {
     onSelectExternalActivity() {
@@ -42,7 +49,7 @@ export default Ember.Component.extend({
       const component = this;
       component.set('tenantLibraries', tenantLibraries);
       component.set('isShowTenantLibraries', true);
-      component.set('isShowLessonPlan', false);
+      component.set('isShowCourseMap', false);
     },
 
     onSelectTenantLibrary(tenantLibrary) {
@@ -58,7 +65,7 @@ export default Ember.Component.extend({
       });
       component.set('filteredContents', filteredContents);
       component.set('isShowTenantLibraries', false);
-      component.set('isShowLessonPlan', false);
+      component.set('isShowCourseMap', false);
     },
 
     onAddActivity(
@@ -82,9 +89,9 @@ export default Ember.Component.extend({
       );
     },
 
-    onShowLessonPlan() {
+    onShowCourseMap() {
       const component = this;
-      component.set('isShowLessonPlan', true);
+      component.set('isShowCourseMap', true);
       component.set('isShowTenantLibraries', false);
     },
 
@@ -156,6 +163,21 @@ export default Ember.Component.extend({
       } else {
         component.set('isShowContentPreview', true);
       }
+    },
+
+    onToggleMultiClassPanel(component = this) {
+      component.$('.multi-class-list').slideToggle();
+      component.toggleProperty('isMultiClassListExpanded');
+    },
+
+    //Action triggered when selecting a class from dropdown
+    onSelectCmClass(classInfo) {
+      const component = this;
+      component.set('activeCmClass', classInfo);
+      component.getClassInfo(classInfo.get('id')).then(classData => {
+        component.set('activeCmClass', classData);
+      });
+      component.actions.onToggleMultiClassPanel(component);
     }
   },
 
@@ -171,9 +193,21 @@ export default Ember.Component.extend({
    * @property {Boolean} isCourseAttached
    * Property to check whether Class has attached with a course or not
    */
-  isCourseAttached: Ember.computed('primaryClass', function() {
-    return !!this.get('primaryClass.courseId');
+  isCourseAttached: Ember.computed('activeCmClass', function() {
+    return !!this.get('activeCmClass.courseId');
   }),
+
+  defaultTab: Ember.Object.create({}),
+
+  /**
+   * @property {Object} activeCmClass
+   * Property for the active class object
+   */
+  activeCmClass: Ember.computed(function() {
+    return this.get('primaryClass');
+  }),
+
+  isMultiClassListExpanded: false,
 
   assignActivityToMultipleClass(
     content,
@@ -243,5 +277,18 @@ export default Ember.Component.extend({
         year,
         endDate
       );
+  },
+
+  /**
+   * @function getClassInfo
+   * @param {UUID} classId
+   * @return Promise classdata
+   */
+  getClassInfo(classId) {
+    const component = this;
+    const fetchCachedData = true;
+    return component
+      .get('classService')
+      .readClassInfo(classId, fetchCachedData);
   }
 });

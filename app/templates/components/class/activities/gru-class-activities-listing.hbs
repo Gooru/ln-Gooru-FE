@@ -16,17 +16,6 @@
     </div>
     {{#unless isShowItemsToGrade}}
       <div class="filters">
-        <div class="activities">
-          <div class="activities-content">
-            <div class="contents-selector">
-              {{#each contentTypes as |content|}}
-                <div class="content-selector {{if content.isActive 'active'}}" {{action "onToggleContent" content bubbles=false}}>
-                  <i class="icon {{content.type}}-icon"></i>
-                </div>
-              {{/each}}
-            </div>
-          </div>
-        </div>
         <div class="activity-date-range-selector" {{action "onToggleDatePicker"}}>
           <span class="schedule-date"><span>{{format-date startDate 'DD MMM YYYY'}}</span><span class="{{unless isShowListCard 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}</span></span>
           <span class="dropdown-icon">{{gru-icon name="arrow_drop_down"}}</span>

@@ -2,9 +2,10 @@ import Ember from 'ember';
 import {
   CONTENT_TYPES,
   KEY_CODES,
-  SCREEN_SIZES
+  SCREEN_SIZES,
+  CLASS_ACTIVITIES_SEARCH_TABS
 } from 'gooru-web/config/config';
-import { isCompatibleVW } from 'gooru-web/utils/utils';
+import { isCompatibleVW, getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
@@ -30,7 +31,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   didInsertElement() {
     const component = this;
-    component.loadCotents();
+    component.send(
+      'onSelectContentSource',
+      component
+        .get('contentSources')
+        .findBy('id', component.get('activeContentSource'))
+    );
     component.searchHandler();
   },
 
@@ -51,22 +57,23 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     onSelectContentSource(contentSource) {
       const component = this;
-      component.set('activeContentSource', contentSource.get('value'));
+      const contentSourceKey = contentSource.get('id');
+      component.set('activeContentSource', contentSourceKey);
       let isShowContentSelector = true;
       let contentSearchTerm = component.get('contentSearchTerm');
-      if (contentSource.get('value') === 'tenant-library') {
+      if (contentSourceKey === 'tenant-library') {
         isShowContentSelector = false;
         contentSearchTerm = null;
         component.loadTenantLibraries();
       } else if (
-        contentSource.get('value') === 'my-content' ||
-        contentSource.get('value') === 'gooru-catalog'
+        contentSourceKey === 'my-content' ||
+        contentSourceKey === 'gooru-catalog'
       ) {
         component.loadCotents();
       } else {
         contentSearchTerm = null;
         isShowContentSelector = false;
-        component.sendAction('onShowLessonPlan');
+        component.sendAction('onShowCourseMap');
       }
       component.set('contentSearchTerm', contentSearchTerm);
       component.set('isShowContentSelector', isShowContentSelector);
@@ -158,7 +165,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   activeContentType: 'collection',
 
-  activeContentSource: 'gooru-catalog',
+  activeContentSource: Ember.computed(function() {
+    return this.get('defaultContentSource') || 'gooru-catalog';
+  }),
 
   contentTypes: Ember.computed(function() {
     return Ember.A([
@@ -182,24 +191,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
    */
 
   contentSources: Ember.computed(function() {
-    return Ember.A([
-      Ember.Object.create({
-        label: 'Course Map',
-        value: 'lesson-plan'
-      }),
-      Ember.Object.create({
-        label: 'My Content',
-        value: 'my-content'
-      }),
-      Ember.Object.create({
-        label: 'Tenant Library',
-        value: 'tenant-library'
-      }),
-      Ember.Object.create({
-        label: 'Gooru Catalog',
-        value: 'gooru-catalog'
-      })
-    ]);
+    return getObjectsDeepCopy(CLASS_ACTIVITIES_SEARCH_TABS);
   }),
 
   page: 0,
