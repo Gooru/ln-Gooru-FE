@@ -72,7 +72,7 @@ export function initialize(application) {
     partnerId: Ember.computed.alias('data.authenticated.partnerId'),
 
     /**
-     * @property {Object} tenantSetting hold tenant settings key for multi grade
+     * @property {Object} tenantSetting hold the tenant settings details
      */
     tenantSetting: Ember.computed.alias('data.authenticated.tenant.settings'),
 

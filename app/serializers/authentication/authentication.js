@@ -86,7 +86,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
-   * @param payload is the response of tenat settings from the endpoint
+   * @param payload tenant settings from the response
    * @function normalizeTenantSettings
    */
   normalizeTenantSettings(payload) {
