@@ -99,13 +99,12 @@
       display: grid;
       grid-template-columns: auto 1fr auto;
       column-gap: 8px;
-      padding: 0 5px;
       height: 40px;
       align-items: center;
 
       .content-types-container {
         display: grid;
-        grid-template-columns: 30px 30px 30px 30px;
+        grid-template-columns: repeat(4, 40px);
         column-gap: 1px;
         width: 100%;
         height: 100%;

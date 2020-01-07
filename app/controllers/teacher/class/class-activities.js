@@ -1,5 +1,9 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import {
+  PLAYER_EVENT_SOURCE,
+  CLASS_ACTIVITIES_SEARCH_TABS
+} from 'gooru-web/config/config';
+import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
@@ -116,6 +120,10 @@ export default Ember.Controller.extend({
 
   secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
 
+  secondaryClassDropdown: Ember.computed.alias(
+    'classController.secondaryClassDropdown'
+  ),
+
   secondaryClassList: Ember.computed.alias(
     'classController.secondaryClassList'
   ),
@@ -131,5 +139,31 @@ export default Ember.Controller.extend({
     'classController.isMultiClassEnabled'
   ),
 
-  todaysActivities: Ember.A([])
+  todaysActivities: Ember.A([]),
+
+  /**
+   * @property {String} classActivitiesDefaultTabKey
+   * Property for the default tab key set at Settigns
+   */
+  classActivitiesDefaultTabKey: Ember.computed.alias(
+    'classController.classActivitiesDefaultTabKey'
+  ),
+
+  /**
+   * @property {Object} defaultTab
+   * Property for the default tab object
+   */
+  defaultTab: Ember.computed('classActivitiesDefaultTabKey', function() {
+    const controller = this;
+    const classActivitiesTabs = getObjectsDeepCopy(
+      CLASS_ACTIVITIES_SEARCH_TABS
+    );
+    const defaultTabKey = controller.get('classActivitiesDefaultTabKey');
+    return classActivitiesTabs.findBy('id', defaultTabKey);
+  }),
+
+  resetProperties() {
+    const controller = this;
+    controller.set('defaultTabKey', Ember.Object.create({}));
+  }
 });

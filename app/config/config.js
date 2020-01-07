@@ -491,3 +491,22 @@ export const FEEDBACK_RATING_TYPE = {
   QUALITATIVE: 2,
   BOTH: 3
 };
+
+export const CLASS_ACTIVITIES_SEARCH_TABS = [
+  {
+    label: 'Course Map',
+    id: 'course-map'
+  },
+  {
+    label: 'Tenant Library',
+    id: 'tenant-library'
+  },
+  {
+    label: 'My Content',
+    id: 'my-content'
+  },
+  {
+    label: 'Gooru Catalog',
+    id: 'gooru-catalog'
+  }
+];

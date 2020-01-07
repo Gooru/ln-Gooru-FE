@@ -4,13 +4,12 @@ export default Ember.Route.extend({
   // -------------------------------------------------------------------------
   // Dependencies
 
-  /**
-   * @type {Service} session service
-   */
-  session: Ember.inject.service('session'),
+  setupController(controller) {
+    controller.get('classController').selectMenuItem('class-activities');
+  },
 
-  /**
-   * @requires service:api-sdk/class-activity
-   */
-  classActivityService: Ember.inject.service('api-sdk/class-activity')
+  // Reset controller properties
+  resetController(controller) {
+    controller.resetProperties();
+  }
 });

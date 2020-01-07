@@ -6,7 +6,7 @@
           <span class="caret"></span></button>
         <ul class="dropdown-menu source-list">
           {{#each contentSources as |contentSource|}}
-            <div class="list-item source {{if (eq activeContentSource contentSource.value) 'active'}}" {{action "onSelectContentSource" contentSource}}>
+            <div class="list-item source {{if (eq activeContentSource contentSource.id) 'active'}}" {{action "onSelectContentSource" contentSource}}>
               {{contentSource.label}}
             </div>
           {{/each}}
@@ -14,7 +14,7 @@
       </div>
     {{else}}
       {{#each contentSources as |contentSource|}}
-        <div class="content-source {{if (eq activeContentSource contentSource.value) 'active'}}" {{action "onSelectContentSource" contentSource}}>
+        <div class="content-source {{if (eq activeContentSource contentSource.id) 'active'}}" {{action "onSelectContentSource" contentSource}}>
           {{contentSource.label}}
         </div>
       {{/each}}

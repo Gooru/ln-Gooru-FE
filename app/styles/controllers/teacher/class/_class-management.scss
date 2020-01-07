@@ -357,6 +357,20 @@
             }
           }
 
+          .default-ca-tab {
+            display: grid;
+            grid-template-columns: auto auto;
+            height: 16px;
+            align-items: center;
+            .default-tab-label {
+              font-size: 13px;
+            }
+            .default-tab-selector {
+              justify-self: right;
+              padding-right: 20px;
+            }
+          }
+
           .sub-sec-coteach,
           .sub-sec-teach {
             margin-top: 5px;
