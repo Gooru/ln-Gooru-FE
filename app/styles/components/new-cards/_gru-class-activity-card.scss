@@ -351,12 +351,19 @@
         .content-title {
           position: absolute;
           bottom: 5px;
-          left: 8px;
+          padding: 0px 8px;
           color: #fff;
           z-index: 10;
-          font-size: 13px;
           font-weight: 700;
           line-height: 1.2;
+          $font-size: 13px;
+          $line-height: 1.2;
+          $lines-to-show: 2;
+          @include ellipsis(
+            $font-size: $font-size,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show
+          );
         }
       }
 
@@ -460,6 +467,16 @@
           display: flex;
           justify-content: right;
           align-items: center;
+          span {
+            $font-size: 13px;
+            $line-height: 1.2;
+            $lines-to-show: 1;
+            @include ellipsis(
+              $font-size: $font-size,
+              $line-height: $line-height,
+              $lines-to-show: $lines-to-show
+            );
+          }
         }
 
         .icon {
