@@ -418,7 +418,6 @@ export default Ember.Component.extend({
   willDestroyElement() {
     const component = this;
     component.set('isInlineGrading', false);
-    component.set('offlineActivitySubmissions', null);
   },
 
   didDestroyElement() {

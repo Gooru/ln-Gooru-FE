@@ -207,7 +207,11 @@
 
                         &.active {
                           background-color: #d2e3fc;
-                          background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
+                          background-image: -webkit-linear-gradient(
+                            top,
+                            #d2e3fc,
+                            #d2e3fc
+                          );
                           border-radius: 50%;
                           display: flex;
                           margin: auto;
@@ -224,7 +228,11 @@
 
                         &.today {
                           background-color: #3486f7;
-                          background-image: -webkit-linear-gradient(top, #3486f7, #3486f7);
+                          background-image: -webkit-linear-gradient(
+                            top,
+                            #3486f7,
+                            #3486f7
+                          );
                           border-radius: 50%;
                           display: flex;
                           margin: auto;
@@ -260,7 +268,7 @@
   }
 
   .ca-container {
-    width: 70%;
+    width: 85%;
     height: 100%;
     display: flex;
     margin: auto;
@@ -446,7 +454,8 @@
             .ca-date-picker-container,
             .ca-month-picker,
             .ca-week-picker-container {
-              box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.13), -2px 2px 3px rgba(0, 0, 0, 0.13);
+              box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.13),
+                -2px 2px 3px rgba(0, 0, 0, 0.13);
 
               .ca-date-nav-container,
               .ca-week-nav-container {
@@ -555,7 +564,11 @@
 
                               &.active {
                                 background-color: #d2e3fc;
-                                background-image: -webkit-linear-gradient(top, #d2e3fc, #d2e3fc);
+                                background-image: -webkit-linear-gradient(
+                                  top,
+                                  #d2e3fc,
+                                  #d2e3fc
+                                );
                                 border-radius: 50%;
                                 display: flex;
                                 margin: auto;
@@ -572,7 +585,11 @@
 
                               &.today {
                                 background-color: #3486f7;
-                                background-image: -webkit-linear-gradient(top, #3486f7, #3486f7);
+                                background-image: -webkit-linear-gradient(
+                                  top,
+                                  #3486f7,
+                                  #3486f7
+                                );
                                 border-radius: 50%;
                                 display: flex;
                                 margin: auto;
