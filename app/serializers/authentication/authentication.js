@@ -91,7 +91,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
    */
   normalizeTenantSettings(payload) {
     return {
-      allowMultiGradeClass: payload.allow_multi_grade_class || null
+      allowMultiGradeClass: payload.allow_multi_grade_class
+        ? payload.allow_multi_grade_class.toLowerCase()
+        : 'off'
     };
   }
 });
