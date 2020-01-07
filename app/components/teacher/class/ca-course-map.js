@@ -239,6 +239,10 @@ export default Ember.Component.extend({
     });
   },
 
+  observerClassChanges: Ember.observer('classId', function() {
+    this.loadData();
+  }),
+
   //--------------------------------------------------------------------------
   // Methods
 
