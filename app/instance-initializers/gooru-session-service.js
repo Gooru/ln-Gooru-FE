@@ -74,7 +74,7 @@ export function initialize(application) {
     /**
      * @property {Object} tenantSetting hold tenant settings key for multi grade
      */
-    tenantSetting: Ember.computed.alias('data.authenticated.tenantSetting'),
+    tenantSetting: Ember.computed.alias('data.authenticated.tenant.settings'),
 
     /**
      * This method authenticates using the default authenticator for an anonymous user

@@ -41,12 +41,12 @@ export default Ember.Object.extend(ConfigurationMixin, {
         user: basePath,
         content: payload.cdn_urls.content_cdn_url
       },
-      tenantSetting: payload.tenant_setting
-        ? this.normalizeTenantSettings(payload.tenant_setting)
-        : null,
       isAnonymous: isAnonymous,
       tenant: {
-        tenantId: payload.tenant ? payload.tenant.tenant_id : undefined
+        tenantId: payload.tenant ? payload.tenant.tenant_id : undefined,
+        settings: payload.tenant.settings
+          ? this.normalizeTenantSettings(payload.tenant.settings)
+          : null
       },
       partnerId: payload.partner_id
     };
