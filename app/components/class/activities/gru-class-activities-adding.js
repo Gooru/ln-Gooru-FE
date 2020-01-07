@@ -5,6 +5,8 @@ import { isCompatibleVW } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-clas-activities-adding'],
 
+  classNameBindings: ['isShowCourseMap:cm-view'],
+
   /**
    * @requires service:api-sdk/class-activity
    */
@@ -163,8 +165,7 @@ export default Ember.Component.extend({
       }
     },
 
-    onToggleMultiClassPanel() {
-      const component = this;
+    onToggleMultiClassPanel(component = this) {
       component.$('.multi-class-list').slideToggle();
       component.toggleProperty('isMultiClassListExpanded');
     },
@@ -176,6 +177,7 @@ export default Ember.Component.extend({
       component.getClassInfo(classInfo.get('id')).then(classData => {
         component.set('activeCmClass', classData);
       });
+      component.actions.onToggleMultiClassPanel(component);
     }
   },
 
