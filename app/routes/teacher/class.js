@@ -125,7 +125,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       'configuration.GRU_FEATURE_FLAG.isShowSecondaryClass'
     );
     const isAllowMultiGradeClass =
-      route.get('session.tenantSetting.allowMultiGradeClass') || null;
+      route.get('session.tenantSetting.allowMultiGradeClass') === 'on';
     const classPromise = route.get('classService').readClassInfo(classId);
     const membersPromise = route.get('classService').readClassMembers(classId);
     return classPromise.then(function(classData) {
