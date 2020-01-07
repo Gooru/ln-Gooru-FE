@@ -4,11 +4,12 @@
       onSelectExternalActivity="onSelectExternalActivity"
       onShowTenantLibraries="onShowTenantLibraries"
       onShowFilteredContents="onShowFilteredContents"
-      onShowLessonPlan="onShowLessonPlan"
+      onShowCourseMap="onShowCourseMap"
       activeTenantLibrary=activeTenantLibrary
       course=primaryClass.course
       class=primaryClass
       onTogglePanel="onTogglePanel"
+      defaultContentSource = defaultTab.id
     }}
   </div>
   <div class="body-container {{if isShowTenantLibraries 'grid-view'}}">
@@ -20,23 +21,33 @@
           {{t 'class-activity.no-learning-activities'}}
         </div>
       {{/each}}
-    {{else if isShowLessonPlan}}
-      <div class="lesson-plan-activities-container">
-        {{#if isCourseAttached}}
-          {{teacher/class/ca-course-map
-            onAddActivity="onAddActivity"
-            onAddContentToDCA="onAddActivity"
-            onScheduleActivity="onShowDateRangePicker"
-            onScheduleContentToDCA="onShowDateRangePicker"
-            classId=primaryClass.id
-            courseId=primaryClass.courseId
-            isShowLessonPlan = false
-            todaysClassActivities = todaysActivities
-            onShowContentPreview = "onShowContentPreview"
-          }}
-        {{else}}
-          <span class="no-course-map">No Course Map Attached</span>
-        {{/if}}
+    {{else if isShowCourseMap}}
+      <div class="course-map-activities-container">
+        <div class="multi-class-course-map hidden">
+          <div class="active-class" {{action "onToggleMultiClassPanel"}}>{{activeCmClass.title}} {{gru-icon name=(if isMultiClassListExpanded 'arrow_drop_up' 'arrow_drop_down')}}</div>
+          <div class="multi-class-list">
+            {{#each secondaryClassDropdown as |secondaryClass|}}
+              <div class="class-info" {{action "onSelectCmClass" secondaryClass}}>{{secondaryClass.title}}</div>
+            {{/each}}
+          </div>
+        </div>
+        <div class="course-map-container">
+          {{#if isCourseAttached}}
+            {{teacher/class/ca-course-map
+              onAddActivity="onAddActivity"
+              onAddContentToDCA="onAddActivity"
+              onScheduleActivity="onShowDateRangePicker"
+              onScheduleContentToDCA="onShowDateRangePicker"
+              classId=activeCmClass.id
+              courseId=activeCmClass.courseId
+              isShowLessonPlan = false
+              todaysClassActivities = todaysActivities
+              onShowContentPreview = "onShowContentPreview"
+            }}
+          {{else}}
+            <span class="no-course-map">No Course Map Attached</span>
+          {{/if}}
+        </div>
       </div>
     {{else}}
       {{#each filteredContents as |filteredContent|}}

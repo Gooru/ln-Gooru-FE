@@ -105,7 +105,6 @@
 
       .filters {
         display: grid;
-        grid-template-columns: auto auto;
         padding: 0 10px;
         border-top: 1px solid #666;
 
@@ -133,6 +132,8 @@
           column-gap: 5px;
           cursor: pointer;
           padding: 0 10px 0 20px;
+          height: 35px;
+          line-height: 35px;
 
           .dropdown-icon {
             display: flex;

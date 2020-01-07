@@ -71,23 +71,60 @@
         max-height: calc(100vh - 125px);
       }
 
-      .lesson-plan-activities-container {
+      .course-map-activities-container {
         display: grid;
-        .teacher-class-ca-course-map {
-          .dca-course-map-unit-container {
-            padding: 0;
-            overflow: unset;
-
-            .dca-course-map-unit-panel {
-              .dca-course-map-lesson-container {
-                padding: 8px;
+        .multi-class-course-map {
+          position: relative;
+          justify-self: center;
+          .active-class {
+            height: 35px;
+            display: grid;
+            grid-template-columns: auto auto;
+            justify-content: center;
+            align-items: center;
+            text-transform: capitalize;
+            cursor: pointer;
+          }
+          .multi-class-list {
+            display: none;
+            position: absolute;
+            top: 35px;
+            background-color: $white;
+            z-index: 99;
+            width: max-content;
+            padding: 0 8px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+            .class-info {
+              text-align: left;
+              height: 35px;
+              line-height: 35px;
+              text-transform: capitalize;
+              cursor: pointer;
+              border-bottom: 1px solid $light-100;
+              &.active,
+              &:hover {
+                background-color: $light-200;
               }
             }
           }
         }
-        .no-course-map {
-          text-align: center;
-          padding: 15px;
+        .course-map-container {
+          .teacher-class-ca-course-map {
+            .dca-course-map-unit-container {
+              padding: 0;
+              overflow: unset;
+
+              .dca-course-map-unit-panel {
+                .dca-course-map-lesson-container {
+                  padding: 8px;
+                }
+              }
+            }
+          }
+          .no-course-map {
+            text-align: center;
+            padding: 15px;
+          }
         }
       }
     }

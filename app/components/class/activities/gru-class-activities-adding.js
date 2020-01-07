@@ -42,7 +42,7 @@ export default Ember.Component.extend({
       const component = this;
       component.set('tenantLibraries', tenantLibraries);
       component.set('isShowTenantLibraries', true);
-      component.set('isShowLessonPlan', false);
+      component.set('isShowCourseMap', false);
     },
 
     onSelectTenantLibrary(tenantLibrary) {
@@ -58,7 +58,7 @@ export default Ember.Component.extend({
       });
       component.set('filteredContents', filteredContents);
       component.set('isShowTenantLibraries', false);
-      component.set('isShowLessonPlan', false);
+      component.set('isShowCourseMap', false);
     },
 
     onAddActivity(
@@ -82,9 +82,9 @@ export default Ember.Component.extend({
       );
     },
 
-    onShowLessonPlan() {
+    onShowCourseMap() {
       const component = this;
-      component.set('isShowLessonPlan', true);
+      component.set('isShowCourseMap', true);
       component.set('isShowTenantLibraries', false);
     },
 
@@ -156,6 +156,17 @@ export default Ember.Component.extend({
       } else {
         component.set('isShowContentPreview', true);
       }
+    },
+
+    onToggleMultiClassPanel() {
+      const component = this;
+      component.$('.multi-class-list').slideToggle();
+      component.toggleProperty('isMultiClassListExpanded');
+    },
+
+    onSelectCmClass(classInfo) {
+      const component = this;
+      component.set('activeCmClass', classInfo);
     }
   },
 
@@ -171,9 +182,17 @@ export default Ember.Component.extend({
    * @property {Boolean} isCourseAttached
    * Property to check whether Class has attached with a course or not
    */
-  isCourseAttached: Ember.computed('primaryClass', function() {
-    return !!this.get('primaryClass.courseId');
+  isCourseAttached: Ember.computed('activeCmClass', function() {
+    return !!this.get('activeCmClass.courseId');
   }),
+
+  defaultTab: Ember.Object.create({}),
+
+  activeCmClass: Ember.computed(function() {
+    return this.get('primaryClass');
+  }),
+
+  isMultiClassListExpanded: false,
 
   assignActivityToMultipleClass(
     content,
