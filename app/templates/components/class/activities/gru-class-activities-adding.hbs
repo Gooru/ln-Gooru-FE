@@ -11,7 +11,7 @@
       onTogglePanel="onTogglePanel"
       defaultContentSource = defaultTab.id
     }}
-    {{#if isShowCourseMap}}
+    {{#if (and isShowCourseMap isMultiClassEnabled)}}
       <div class="course-map-activities-container">
         <div class="multi-class-course-map">
           <div class="active-class" {{action "onToggleMultiClassPanel"}}>{{activeCmClass.title}} {{gru-icon name=(if isMultiClassListExpanded 'arrow_drop_up' 'arrow_drop_down')}}</div>
