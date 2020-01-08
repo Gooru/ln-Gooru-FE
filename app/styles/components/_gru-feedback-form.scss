@@ -88,4 +88,19 @@
       }
     }
   }
+  @media screen and (max-width: $screen-380) {
+    .feedback-container {
+      .feedback-body-panel {
+        .category-panel {
+          .category-rating {
+            .row {
+              ul {
+                padding: 0px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

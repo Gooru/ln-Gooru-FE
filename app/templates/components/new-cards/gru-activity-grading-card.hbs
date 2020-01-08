@@ -3,11 +3,6 @@
     <div class="content-icon"><div class="grading-icon"></div></div>
     <div class="content-title">{{if isAssessmentGrading content.title gradingContent.title}}</div>
     <div class="grading-info">
-      <div class="class-list">
-        <span {{action "onToggleContent" 'grading-body-container'}}>
-          {{gru-icon name="group"}}
-        </span>
-      </div>
       <div class="content-info">
         {{#if isAssessmentGrading}}
           <div class="question-info">

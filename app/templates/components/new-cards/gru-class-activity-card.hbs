@@ -3,8 +3,8 @@
     <div class="icon">
       <i class="{{activityContent.format}}-icon" />
     </div>
-    <div class="content-title ellipsis">
-      <span class="ellipsis">{{activityContent.title}}</span>
+    <div class="content-title">
+      <span>{{activityContent.title}}</span>
     </div>
   </div>
   <div class="activity-info">
@@ -133,7 +133,7 @@
       {{/if}}
     {{/if}}
     {{#if isOfflineActivity}}
-      <div class="mark-completed {{if activity.isCompleted 'completed'}} {{unless activity.isActive 'in-active'}}" {{action "onMarkOaCompleted"}} title="{{if activity.isCompleted 'Completed' 'Mark Completed'}}" data-toggle="tooltip">
+      <div class="mark-completed {{if activity.isCompleted 'completed'}} {{unless activity.isActive 'in-active'}}" {{action "onMarkOaCompleted"}} title="{{if activity.isCompleted (t 'common.completed') (t 'common.mark-as-completed')}}" data-toggle="tooltip">
         {{gru-icon name=(if activity.isCompleted 'check_circle' 'check_circle_outline')}}
         {{#if activity.isCompleted}}
           <label>{{t 'common.completed'}}</label>

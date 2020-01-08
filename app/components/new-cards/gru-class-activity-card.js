@@ -373,6 +373,7 @@ export default Ember.Component.extend({
         .completeOfflineActivity(classId, activityId)
         .then(() => {
           classActivity.set('isCompleted', true);
+          component.sendAction('markOACompleted');
         });
     });
   },

@@ -145,7 +145,6 @@ export default Ember.Component.extend({
 
     // observe load Event
     editor.on('load', function() {
-      editor.focus();
       onLoad();
     });
 

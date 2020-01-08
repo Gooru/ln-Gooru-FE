@@ -189,6 +189,9 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('selectedFilter', 'day');
       if (isDateChange) {
         component.send('closeDatePicker', isDateChange);
+        if (component.get('isShowScheduledActivities')) {
+          component.changeScheduledActivitiesContext('daily', date, date);
+        }
       }
     },
 
@@ -207,6 +210,13 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('selectedFilter', 'week');
       if (isDateChange) {
         component.send('closeDatePicker', isDateChange);
+        if (component.get('isShowScheduledActivities')) {
+          component.changeScheduledActivitiesContext(
+            'weekly',
+            startDate,
+            endDate
+          );
+        }
       }
     },
 
@@ -227,6 +237,13 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('selectedFilter', 'month');
       if (isDateChange) {
         component.send('closeDatePicker', isDateChange);
+        if (component.get('isShowScheduledActivities')) {
+          component.changeScheduledActivitiesContext(
+            'monthly',
+            startDate,
+            endDate
+          );
+        }
       }
     },
 
@@ -239,6 +256,9 @@ export default Ember.Component.extend(ModalMixin, {
       let forYear = moment(date).format('YYYY');
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
+      if (component.get('isShowScheduledActivities')) {
+        component.changeScheduledActivitiesContext('daily', date, date);
+      }
     },
 
     onRescheduleActivity(classActivity) {
@@ -297,6 +317,13 @@ export default Ember.Component.extend(ModalMixin, {
 
     onloadScheduledClassActivities() {
       const component = this;
+      let contextObj = component.get('scheduledActivitiesContext');
+      component.set('startDate', contextObj.get('startDate'));
+      component.set('endDate', contextObj.get('endDate'));
+      component.set('isDaily', contextObj.get('isDaily'));
+      component.set('isWeekly', contextObj.get('isWeekly'));
+      component.set('isMonthly', contextObj.get('isMonthly'));
+      component.set('isShowListCard', component.get('isMobileView'));
       component.set('isLoading', true);
       component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
@@ -319,6 +346,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isWeekly', false);
       component.set('isMonthly', true);
       component.set('selectedMonth', currentMonth);
+      component.set('isShowListCard', true);
       component.set('startDate', startDate);
       component.set('endDate', endDate);
       component.set('isShowScheduledActivities', false);
@@ -387,6 +415,11 @@ export default Ember.Component.extend(ModalMixin, {
         component.set('selectedActivity', classActivity);
         component.set('isShowStudentsSummaryReport', true);
       }
+    },
+
+    // Action triggered when clicking OA mark completed from the class activity card
+    onMarkOACompleted() {
+      this.loadItemsToGrade();
     }
   },
 
@@ -527,6 +560,18 @@ export default Ember.Component.extend(ModalMixin, {
 
   isMobileView: Ember.computed(function() {
     return isCompatibleVW(SCREEN_SIZES.MEDIUM);
+  }),
+
+  scheduledActivitiesContext: Ember.computed(function() {
+    let currentDate = moment().format('YYYY-MM-DD');
+    let contextObj = Ember.Object.create({
+      isDaily: true,
+      isWeekly: false,
+      isMonthly: false,
+      startDate: currentDate,
+      endDate: currentDate
+    });
+    return contextObj;
   }),
 
   isLoading: false,
@@ -1016,5 +1061,16 @@ export default Ember.Component.extend(ModalMixin, {
           activityClass.set('activity.isCompleted', true);
         });
     });
+  },
+
+  changeScheduledActivitiesContext(daterange, startDate, endDate) {
+    let contextObj = this.get('scheduledActivitiesContext');
+    contextObj.set('startDate', startDate);
+    contextObj.set('endDate', endDate);
+    contextObj.set('isDaily', false);
+    contextObj.set('isWeekly', false);
+    contextObj.set('isMonthly', false);
+    let range = daterange.capitalize();
+    contextObj.set(`is${range}`, true);
   }
 });

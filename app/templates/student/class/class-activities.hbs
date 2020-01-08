@@ -6,7 +6,7 @@
     <div class="date-section" {{action "toggleDatePicker"}}>
       <span class="schedule-date">
         <span>{{format-date startDate 'DD MMM YYYY'}}</span>
-        <span class="{{if (or isDaily (not endDate)) 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}
+        <span class="{{if (not endDate) 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}
         </span>
       </span>
     </div>
@@ -134,7 +134,7 @@
     {{else}}
       <div class="dca-content-list-container {{if isToday 'dca-content-list-container-today'}}">
         {{#each scheduledActivitiesList as |scheduledActivity|}}
-          <div class="added-date {{if (or isDaily (not endDate)) 'hidden'}}">{{format-date scheduledActivity.added_date 'DD MMM YYYY'}}
+          <div class="added-date {{if (not endDate) 'hidden'}}">{{format-date scheduledActivity.added_date 'DD MMM YYYY'}}
             <hr />
           </div>
           {{#each scheduledActivity.scheduledActivities as |activity|}}

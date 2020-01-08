@@ -1,13 +1,8 @@
 import Ember from 'ember';
 import SessionMixin from 'gooru-web/mixins/session';
 import ModalMixin from 'gooru-web/mixins/modal';
-import {
-  PLAYER_EVENT_SOURCE,
-  SCREEN_SIZES
-} from 'gooru-web/config/config';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { PLAYER_EVENT_SOURCE, SCREEN_SIZES } from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 /**
  * Class activities controller
@@ -51,7 +46,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Actions
 
   actions: {
-
     onShowClassActivities() {
       const controller = this;
       controller.set('showItemsToGrade', false);
@@ -103,7 +97,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('forYear', forYear);
       if (rangeType === 'daily') {
         controller.set('isDaily', true);
-        controller.set('endDate', null);
       } else if (rangeType === 'weekly') {
         controller.set('isWeekly', true);
       } else {
@@ -125,8 +118,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let params = {
         userId: userId,
         classId: controller.get('class.id'),
-        collectionId: collection.get('id') || collection.get('suggestedContentId'),
-        type: collection.get('format') || collection.get('suggestedContentType'),
+        collectionId:
+          collection.get('id') || collection.get('suggestedContentId'),
+        type:
+          collection.get('format') || collection.get('suggestedContentType'),
         isStudent: true,
         collection,
         activityDate,
@@ -198,6 +193,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     onSelectDate(date) {
       let controller = this;
       controller.set('startDate', date);
+      controller.set('endDate', null);
       controller.loadActivities(date);
       controller.send('toggleDatePicker');
     },
@@ -205,6 +201,7 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     onSelectToday(date) {
       let controller = this;
       controller.send('onSelectDate', date);
+      controller.set('endDate', null);
     },
 
     playContent(playerUrl, content) {
@@ -212,8 +209,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('playerUrl', playerUrl);
       controller.set('isOpenPlayer', true);
       controller.set('playerContent', content);
-      controller.set('isSuggestedContentPlay',
-        content.get('isSuggestedContentPlay'));
+      controller.set(
+        'isSuggestedContentPlay',
+        content.get('isSuggestedContentPlay')
+      );
     },
 
     closePullUp() {
@@ -355,30 +354,27 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   showItemsToGrade: false,
 
-  scheduledActivitiesList: Ember.computed(
-    'classActivities.[]',
-    function() {
-      const component = this;
-      const scheduledActivitiesList = Ember.A([]);
-      const classActivities = component.get('classActivities');
-      classActivities.forEach(data => {
-        let addedDate = data.get('added_date');
-        let classActivity = scheduledActivitiesList.findBy(
-          'added_date',
-          addedDate
-        );
-        if (!classActivity) {
-          classActivity = Ember.Object.create({
-            added_date: addedDate,
-            scheduledActivities: Ember.A([])
-          });
-          scheduledActivitiesList.pushObject(classActivity);
-        }
-        classActivity.get('scheduledActivities').pushObject(data);
-      });
-      return scheduledActivitiesList.sortBy('added_date').reverse();
-    }
-  ),
+  scheduledActivitiesList: Ember.computed('classActivities.[]', function() {
+    const component = this;
+    const scheduledActivitiesList = Ember.A([]);
+    const classActivities = component.get('classActivities');
+    classActivities.forEach(data => {
+      let addedDate = data.get('added_date');
+      let classActivity = scheduledActivitiesList.findBy(
+        'added_date',
+        addedDate
+      );
+      if (!classActivity) {
+        classActivity = Ember.Object.create({
+          added_date: addedDate,
+          scheduledActivities: Ember.A([])
+        });
+        scheduledActivitiesList.pushObject(classActivity);
+      }
+      classActivity.get('scheduledActivities').pushObject(data);
+    });
+    return scheduledActivitiesList.sortBy('added_date').reverse();
+  }),
 
   /**
    * It Maintains the list of scheduled class activities datewise.
@@ -446,7 +442,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    */
   animateDatePicker() {
     let element = Ember.$('.header-container .date-range-picker-container');
-    let dateDisplayEle = Ember.$('.date-range-picker-container .ca-date-picker-container');
+    let dateDisplayEle = Ember.$(
+      '.date-range-picker-container .ca-date-picker-container'
+    );
     if (!element.hasClass('active')) {
       element.slideDown(400, function() {
         element.addClass('active');
@@ -462,21 +460,25 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Note: This method is used to support for content type filter
   filterActivitiesByContent() {
     const controller = this;
-    const filteredContentTypes = controller.get('contentTypes')
-      .filterBy('isActive', true).map((content) => {
+    const filteredContentTypes = controller
+      .get('contentTypes')
+      .filterBy('isActive', true)
+      .map(content => {
         return content.get('type');
       });
     let classActivities = controller.get('classActivities');
-    let filteredActivites = classActivities.filter((classActivity) => {
+    let filteredActivites = classActivities.filter(classActivity => {
       let contentType = classActivity.get('contentType');
-      contentType = contentType === 'assessment-external' ?
-        'assessment' : contentType === 'collection-external' ?
-          'collection' : contentType;
+      contentType =
+        contentType === 'assessment-external'
+          ? 'assessment'
+          : contentType === 'collection-external'
+            ? 'collection'
+            : contentType;
       return filteredContentTypes.includes(contentType);
     });
     controller.set('classActivities', filteredActivites);
   },
-
 
   loadActivities(startDate, endDate) {
     const controller = this;
@@ -485,16 +487,18 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     }
     controller.set('isLoading', true);
     const userId = controller.get('session.userId');
-    const filteredContentTypes =
-      controller.get('contentTypes').filterBy('isActive', true);
-    const contentPromises = filteredContentTypes.map((content) => {
+    const filteredContentTypes = controller
+      .get('contentTypes')
+      .filterBy('isActive', true);
+    const contentPromises = filteredContentTypes.map(content => {
       const classId = controller.get('classId');
       const requestBody = {
         content_type: content.get('type'),
         start_date: startDate,
         end_date: endDate
       };
-      return controller.get('classActivityService')
+      return controller
+        .get('classActivityService')
         .getScheduledActivitiesByDate(classId, requestBody, userId);
     });
     Ember.RSVP.all(contentPromises).then(function(response) {
