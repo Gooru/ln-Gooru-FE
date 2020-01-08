@@ -31,13 +31,30 @@
             {{#each domain.competencies as |competency competencyIndex|}}
             {{#if (eq competencyIndex 0) }}
             <div class="competency-heading" {{action "onSelectGrade" domainIndex}}>
-             <div class="competency-heading-title">{{competency.name}}</div>
+             <div class="competency-heading-title">{{competency-gut-to-fw-transform
+               fwCompetencies
+               competency.code
+               competency.name
+               'frameworkCompetencyName'
+               showGutCompetency
+               true
+              }}</div>
             <ul class="competency-sub-heading">
-              <li title="{{domain.domainName}}" data-toggle="tooltip">{{domain.domainName}}</li>
+              <li title="{{domain-gut-to-fw-transform
+                fwDomains
+                domain.domainCode
+                domain.domainName
+                'fwDomainName' true}}" data-toggle="tooltip">
+              {{domain-gut-to-fw-transform
+                fwDomains
+                domain.domainCode
+                domain.domainName
+                'fwDomainName' true}}
+             </li>
               <li title="{{competency.displayCode}}" data-toggle="tooltip">{{competency.displayCode}}</li>
               <li title="{{competency-lo-transform
                 fwCompetencies
-                competency.competencyCode
+                competency.code
                 'loCode'
                 false
                 '|'
@@ -50,7 +67,7 @@
               }}</li>
             </ul>
             </div>
-            <div class="competency-icon" {{action "onSelectCompetency" competency}}>
+            <div class="competency-icon" {{action "onSelectCompetency" competency domain}}>
               {{gru-icon name="explore"}}
             </div>
             <div class="competency-count">
@@ -73,13 +90,28 @@
           {{#each otherGradeTopComp as |competency competencyIndex|}}
           <div class="competency-struggling-container">
             <div class="competency-heading" {{action "onSelectOtherGrade" competency.gradeIndex competency.domainIndex}}>
-             <div class="competency-heading-title">{{competency.name}}</div>
+             <div class="competency-heading-title">{{competency-gut-to-fw-transform
+               fwCompetencies
+               competency.code
+               competency.name
+               'frameworkCompetencyName'
+               showGutCompetency
+               true
+              }}</div>
             <ul class="competency-sub-heading">
-              <li title="{{competency.domainName}}" data-toggle="tooltip">{{competency.domainName}}</li>
+              <li title="{{domain-gut-to-fw-transform
+                fwDomains
+                competency.domainCode
+                competency.domainName
+                'fwDomainName' true}}" data-toggle="tooltip">{{domain-gut-to-fw-transform
+                  fwDomains
+                  competency.domainCode
+                  competency.domainName
+                  'fwDomainName' true}}</li>
               <li title="{{competency.displayCode}}" data-toggle="tooltip">{{competency.displayCode}}</li>
               <li title="{{competency-lo-transform
                 fwCompetencies
-                competency.competencyCode
+                competency.code
                 'loCode'
                 false
                 '|'

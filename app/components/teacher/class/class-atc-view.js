@@ -313,8 +313,12 @@ export default Ember.Component.extend({
     },
 
     //Action triggered when click a competency
-    onSelectCompetency(selectedCompetency) {
+    onSelectCompetency(selectedCompetency, domain = null) {
       let component = this;
+      if (domain) {
+        selectedCompetency.set('domainName', domain.get('domainName'));
+        selectedCompetency.set('domainCode', domain.get('domainCode'));
+      }
       component.set('selectedCompetency', selectedCompetency);
       component.set('isShowStrugglingCompetencyReport', true);
     },
