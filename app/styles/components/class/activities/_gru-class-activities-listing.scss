@@ -535,6 +535,7 @@
       }
 
       .body-container {
+        height: calc(100vh - 190px);
         &.content-selecter {
           height: calc(100% - 2px);
           padding-bottom: 50px;
