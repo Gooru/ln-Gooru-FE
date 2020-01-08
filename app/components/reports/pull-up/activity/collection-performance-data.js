@@ -352,14 +352,13 @@ export default Ember.Component.extend({
    */
   submitExternalCollectionPerformanceData() {
     const component = this;
-    let externalCollectionPerformance = component.saveStudentCollectionPerformanceData(
-      component.getExternalCollectionDataParams()
-    );
-    return Ember.RSVP.hash({
-      externalCollectionPerformance: externalCollectionPerformance
-    }).then(() => {
-      component.sendAction('onClosePullUp');
-    });
+    component
+      .saveStudentCollectionPerformanceData(
+        component.getExternalCollectionDataParams()
+      )
+      .then(() => {
+        component.sendAction('onClosePullUp');
+      });
   },
 
   /**
