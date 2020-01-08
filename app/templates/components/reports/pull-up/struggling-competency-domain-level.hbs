@@ -7,14 +7,25 @@
      {{#each gradeDomainsList as |domain domainIndex|}}
      <div class="competency-domain-level-panel">
          <div class="grade-domain-name-accordion" {{action "toggleDomain" domainIndex}}>
-            <span>{{domain.domainName}}</span>
+            <span>{{domain-gut-to-fw-transform
+              fwDomains
+              domain.domainCode
+              domain.domainName
+              'fwDomainName' true}}</span>
              {{gru-icon name="arrow_drop_down"}}
          </div>
          <div class="grade-domain-competency-list-container {{if (eq domainIndex gradeDomainIndex) 'first-child'}} domain-accordion-{{domainIndex}}">
            {{#each domain.competencies as |competency competencyIndex|}}
            <div class="grade-domain-competency-list-panel" {{action "onSelectCompetency" competency domain}}>
              <div class="grade-domain-competency-heading">
-              <span>{{competency.name}}</span>
+              <span>{{competency-gut-to-fw-transform
+                fwCompetencies
+                competency.code
+                competency.name
+                'frameworkCompetencyName'
+                showGutCompetency
+                true
+               }}</span>
                <ul class="grade-domain-competency-sub-heading">
                  <li>{{competency.displayCode}}</li>
                  <li>{{competency-lo-transform
