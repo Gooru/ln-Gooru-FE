@@ -27,7 +27,6 @@
 
   .class-activities-source-container {
     display: grid;
-    grid-row-gap: 3px;
 
     &.mobile-view {
       .header-container {
@@ -206,9 +205,6 @@
     position: fixed;
     bottom: 0;
     z-index: 99;
-    &.cm-view {
-      bottom: -35px;
-    }
     &.open {
       .class-activities-source-container {
         .header-container {
