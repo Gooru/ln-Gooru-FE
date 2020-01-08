@@ -305,16 +305,11 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} isEnableCreateActivity
    */
-  isEnableCreateActivity: Ember.computed(
-    'activityTitle',
-    function() {
-      const component = this;
-      let activityTitle = component.get('activityTitle');
-      return (
-        activityTitle !== null && activityTitle.trim() !== ''
-      );
-    }
-  ),
+  isEnableCreateActivity: Ember.computed('activityTitle', function() {
+    const component = this;
+    let activityTitle = component.get('activityTitle');
+    return activityTitle !== null && activityTitle.trim() !== '';
+  }),
 
   /**
    * @property {String} course
@@ -379,7 +374,7 @@ export default Ember.Component.extend({
     let component = this;
     component.$().animate(
       {
-        top: '5%'
+        top: '15%'
       },
       400
     );

@@ -12,12 +12,15 @@
         .left-panel {
           .tasks-section {
             max-height: none;
+            height: auto;
+            overflow: inherit;
           }
         }
 
         .right-panel {
           .oa-grade-right-panel-body {
             max-height: none;
+            height: auto;
           }
         }
       }

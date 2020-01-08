@@ -5,7 +5,7 @@ import { isCompatibleVW } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-clas-activities-adding'],
 
-  classNameBindings: ['isShowCourseMap:cm-view'],
+  classNameBindings: ['isShowCourseMap:cm-view', 'isShowFullView:open'],
 
   /**
    * @requires service:api-sdk/class-activity
