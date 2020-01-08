@@ -205,6 +205,9 @@
     position: fixed;
     bottom: 0;
     z-index: 99;
+    &.cm-view {
+      bottom: -35px;
+    }
     &.open {
       .class-activities-source-container {
         .header-container {
