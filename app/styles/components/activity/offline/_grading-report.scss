@@ -289,6 +289,10 @@
                     font-size: 12px;
                     font-weight: bold;
                     color: #5d5d5d;
+
+                    @media screen and (max-width: $screen-xs) {
+                      color: $white;
+                    }
                   }
                 }
 
@@ -309,6 +313,9 @@
                     i {
                       line-height: 50px;
                       color: #000;
+                      @media screen and (max-width: $screen-xs) {
+                        color: $white;
+                      }
                     }
                   }
 
@@ -320,6 +327,9 @@
                     i {
                       line-height: 50px;
                       color: #000;
+                      @media screen and (max-width: $screen-xs) {
+                        color: $white;
+                      }
                     }
                   }
                 }
