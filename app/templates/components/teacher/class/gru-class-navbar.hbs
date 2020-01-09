@@ -40,7 +40,12 @@
     {{#if navTitle}}
       <div class="studyplayer-title">
         {{#if (and secondaryClasses.length  (not-eq selectedMenuItem 'class-management')  (not-eq selectedMenuItem 'class-activities'))}}
-        <span class="nav-title" {{action 'toggleNavClass'}}>{{if selectedSecondaryClass.title selectedSecondaryClass.title navTitle}} {{gru-icon name="arrow_drop_down"}}</span>
+        <span class="nav-title {{if isDisableMultiClassDropdown 'no-action'}}" {{action 'toggleNavClass'}}>
+          {{if selectedSecondaryClass.title selectedSecondaryClass.title navTitle}}
+          {{#unless isDisableMultiClassDropdown}}
+            {{gru-icon name='arrow_drop_down'}}
+          {{/unless}}
+        </span>
         <div class="nav-class-drop-down">
           {{#each secondaryClasses as | secondaryClass|}}
            <span class="{{if (or (and (not isPrimaryClass) secondaryClass.isActive) (and isPrimaryClass secondaryClass.isPrimaryClass)) 'active' ''}}" {{action 'onChangeSecondaryClass' secondaryClass}} >{{secondaryClass.title}}</span>

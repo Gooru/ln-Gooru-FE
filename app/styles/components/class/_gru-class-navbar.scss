@@ -471,6 +471,9 @@
           align-items: center;
           cursor: pointer;
           overflow: hidden;
+          &.no-action {
+            pointer-events: none;
+          }
           span {
             display: grid;
             align-items: center;
