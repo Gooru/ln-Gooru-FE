@@ -385,6 +385,10 @@ export default Ember.Component.extend(ModalMixin, {
 
     onShowContentPreview(previewContent) {
       const component = this;
+      const assessmentCode = `${component.get(
+        'primaryClass.code'
+      )}${previewContent.get('id')}`;
+      component.set('assessmentCode', assessmentCode);
       component.set('previewContent', previewContent);
       if (previewContent.get('contentType') === 'offline-activity') {
         component.set('isShowOfflineActivityPreview', true);

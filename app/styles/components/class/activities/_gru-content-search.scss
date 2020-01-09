@@ -75,10 +75,16 @@
 
     .library-info {
       display: grid;
-      grid-template-columns: 40px auto;
+      grid-template-columns: 40px 40px auto;
       padding: 5px;
       border-bottom: 1px solid #666;
       align-items: center;
+
+      .back {
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+      }
 
       .library-icon {
         background-repeat: no-repeat;

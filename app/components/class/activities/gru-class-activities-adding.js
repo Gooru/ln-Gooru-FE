@@ -23,6 +23,9 @@ export default Ember.Component.extend({
   classService: Ember.inject.service('api-sdk/class'),
 
   actions: {
+    goBackToTenantLibraries() {
+      this.set('isShowTenantLibraries', true);
+    },
     onSelectExternalActivity() {
       const component = this;
       component.set('isEnableExternalActivity', true);
