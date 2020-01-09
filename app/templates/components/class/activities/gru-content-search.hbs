@@ -27,6 +27,9 @@
   </div>
   {{#if ( and isShowContentSelector (eq activeContentSource 'tenant-library'))}}
     <div class="library-info">
+      <div class="back" {{action 'goBackToTenantLibraries'}}>
+        {{gru-icon name="arrow_back"}}
+      </div>
       <div class="library-icon" style="background-image: url({{activeTenantLibrary.image}})"></div>
       <div class="library-name">{{activeTenantLibrary.name}}</div>
     </div>

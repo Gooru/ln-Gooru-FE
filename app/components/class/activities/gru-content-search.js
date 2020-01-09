@@ -41,6 +41,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
   },
 
   actions: {
+    goBackToTenantLibraries() {
+      this.set('isShowContentSelector', false);
+      this.sendAction('goBackToTenantLibraries');
+    },
+
     onClearSearch() {
       const component = this;
       component.set('contentSearchTerm', '');
