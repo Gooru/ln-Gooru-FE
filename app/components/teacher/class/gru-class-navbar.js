@@ -102,19 +102,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   secondaryClasses: Ember.A([]),
 
-  /**
-   * @property {Boolean} isDisableMultiClassDropdown used to disable multi class dropdown
-   */
-  isDisableMultiClassDropdown: Ember.computed('router.currentPath', function() {
-    if (
-      this.get('router.currentPath') ===
-      'teacher.class.student-learner-proficiency'
-    ) {
-      return true;
-    }
-    return false;
-  }),
-
   // -------------------------------------------------------------------------
   // Actions
   actions: {
