@@ -15,7 +15,7 @@
       background-image: url("gooru/assessment-start-page.jpg");
     }
     .feedback-contaioner {
-      padding: 30px;
+      padding: 10px;
       align-items: center;
       width: 100%;
       .gru-activity-feedback-card {
@@ -23,7 +23,6 @@
         width: 33%;
         border: 1px solid #868585;
         max-height: calc(100vh - 100px);
-        overflow-y: auto;
         margin-left: 7%;
         &::-webkit-scrollbar {
           height: 6px;
@@ -296,10 +295,14 @@
 .offline-activity-player.gru-offline-activity-submission.oa-completed {
   .gru-activity-feedback {
     padding-top: 0px;
+  }
+}
+.reports_study-student-collection {
+  .gru-activity-feedback {
     .activity-feedback-container {
       .feedback-contaioner {
         .gru-activity-feedback-card {
-          max-height: calc(100vh - 160px);
+          max-height: 100%;
         }
       }
     }
@@ -335,7 +338,6 @@
     }
   }
 }
-
 @media screen and (max-width: $screen-380) {
   .gru-activity-feedback {
     .activity-feedback-container {

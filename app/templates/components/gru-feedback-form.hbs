@@ -23,17 +23,17 @@
         {{/if}}
       {{/each}}
     </div>
-    <div class="feedback-fooder-panel">
-      {{#if isStatusDone}}
-        <div class="next" {{action onExit}}>{{t 'common.exit'}}</div>
+  </div>
+  <div class="feedback-fooder-panel">
+    {{#if isStatusDone}}
+      <div class="next" {{action onExit}}>{{t 'common.exit'}}</div>
+    {{else}}
+      {{#if isPlayNextContent}}
+        <div class="next" {{action onSkipFeedback}}>Thanks</div>
       {{else}}
-        {{#if isPlayNextContent}}
-          <div class="next" {{action onSkipFeedback}}>Thanks</div>
-        {{else}}
-          <div class="skip" {{action onSkipFeedback}}>{{t 'common.skip-feedback'}}</div>
-          <div class="next" {{action onNext}}>{{t 'common.next'}}</div>
-        {{/if}}
+        <div class="skip" {{action onSkipFeedback}}>{{t 'common.skip-feedback'}}</div>
+        <div class="next" {{action onNext}}>{{t 'common.next'}}</div>
       {{/if}}
-    </div>
+    {{/if}}
   </div>
 </div>
