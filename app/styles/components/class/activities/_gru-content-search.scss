@@ -3,6 +3,9 @@
 
   .search-by-filter {
     position: absolute;
+    &.active {
+      height: calc(100vh - 250px);
+    }
   }
 
   .content-search-container {
