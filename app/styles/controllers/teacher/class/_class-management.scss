@@ -187,6 +187,7 @@
 
           .info-msg {
             grid-area: info;
+            padding-right: 5px;
           }
         }
       }
@@ -208,7 +209,7 @@
 
           .class-head-row-wrap {
             display: grid;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             grid-template-columns: 1fr 140px;
 
             .sec-head-class-name {
@@ -345,6 +346,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            height: 33px;
 
             .row-label {
               height: 16px;
@@ -354,6 +356,20 @@
             .row-value {
               padding-right: 20px;
               min-width: 90px;
+            }
+          }
+
+          .default-ca-tab {
+            display: grid;
+            grid-template-columns: auto auto;
+            height: 35px;
+            align-items: center;
+            .default-tab-label {
+              font-size: 13px;
+            }
+            .default-tab-selector {
+              justify-self: right;
+              padding-right: 20px;
             }
           }
 

@@ -58,13 +58,12 @@ window.i18ln = {
   'common.relevance': 'સબંધિત',
   'common.engagement': 'એંગેજમેન્ટ',
   'common.efficacy': 'અસરકારકતા',
-  'common.tenantLibrary': 'Tenant Library',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.grid': 'ગ્રીડ',
   'common.list': 'યાદી',
   'common.first': 'પ્રથમ',
   'common.last': 'છેલ્લા',
-  'common.suggest-to-student': 'Suggest to student',
-  'rubric-details': 'Rubric Details',
   'common.name': 'નામ',
   'common.add-data-choice-title': 'તમે તમારી વિગતો કેવી રીતે જોડવા માંગો છો?',
   'common.take-photo': 'ફોટો લો',
@@ -74,6 +73,8 @@ window.i18ln = {
   'common.by-question': 'પ્રશ્ન બાદ પ્રશ્ન',
   'i2d.conversion-progress':
     'અપલોડ કરવામાં આવેલી ઇમેજ પ્રોસેસ થઇ રહી છે. કૃપા કરી થોડીવાર પછી ચકાસો.',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'ઇમેજ કન્વર્ટ કરતો વખતે એરર આવી રહી છે . મહેરબાની કરી ફરી સબમીટ કરો.',
   'file-picker-placeholder':
@@ -97,11 +98,11 @@ window.i18ln = {
   'common.week': 'અઠવાડીયું',
   'common.month': 'મહીનો',
   'common.more': 'વધુ',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'apply filter',
   'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
-  'common.no-suggestion-message':
-    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.avg-score': 'સરેરાશ સ્કોર',
   'common.offline-activites': 'ઓફલાઈન એકટીવીટીઑ',
   'common.offline-activity': 'ઓફલાઈન એકટીવીટી',
@@ -187,6 +188,8 @@ window.i18ln = {
   'common.anonymous_mode': 'અનામિક(એનોનીમસ) મોડ',
   'common.answer': 'તમારો જવાબ',
   'common.answer-correct': 'તમે સાચા છો!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'તમે ખોટા છો ...',
   'common.answer-key-was-hidden':
     'નોંધ : તમારા શિક્ષકે આન્સર કી છુપાવી રાખી છે,',
@@ -200,6 +203,7 @@ window.i18ln = {
   'common.assessment-pl.other': 'મૂલ્યાંકન',
   'common.assessment-title': 'મૂલ્યાંકન શીર્ષક',
   'common.activity-title': 'Activity Title',
+  'common.activity': 'Activity Title',
   'common.assessmentInitial': 'એ',
   'common.assessments': 'મૂલ્યાંકન',
   'common.assign': 'સોંપી',
@@ -288,6 +292,9 @@ window.i18ln = {
   'common.rubric-not-answered': 'સમજૂતી નો જવાબ આપેલ નથી',
   'common.country': 'દેશ',
   'reroute.suggestion': 'ફરીથી સૂચન આપો',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
   'reroute.suggestion.title': 'શું આ કોન્સેપ્ટ અઘરો લાગી રહ્યો છે?',
   'reroute.suggestion.desc':
     'તમે જે કોન્સેપ્ટની ટેસટા આપી છે તેની વધુ સારી સમજૂતી મેળવવા માટે  અમારા <span> સિગ્નેચર કલેક્શન </span> ની મુલાકાત શા માટે ના લેવી?',
@@ -550,10 +557,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'લૉગઇન કરવા માટે અંહી ક્લિક કરો.',
   'common.mastery': 'નિપુણતા',
   'common.menu': 'મેનૂ',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'વધુ વિગતો',
   'common.move': 'ખસેડો',
   'common.myContent': 'મારી સામગ્રી',
   'common.myProfile': 'મારું સ્થાન',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'પુસ્તકાલય',
   'common.myPerformance': 'મારું પ્રદર્શન',
   'common.edit-narration': 'વર્ણન સંપાદિત કરો',
@@ -750,6 +759,8 @@ window.i18ln = {
   'common.show-more-results': 'વધુ પરિણામ બતાવો',
   'common.show-results': 'પરિણામ બતાવો',
   'common.signUp': 'સાઈન અપ',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'મૂળાક્ષરના આધારે ક્રમાંકિત કરો',
   'common.sortAverage': 'સરેરાશ ના આધારે ક્રમાંકિત કરો',
   'common.sort-most-recently':
@@ -881,6 +892,7 @@ window.i18ln = {
   'class.info.add-students': 'વિદ્યાર્થીઓને જોડો.',
   'class.info.class-code': 'ક્લાસરૂમ કોડ',
   'class.info.delete': 'ડીલીટ ક્લાસરૂમ',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'અસાઈન કરેલ કોર્ષ',
   'class.edit.basic-info': 'સામાન્ય માહીતી',
   'class.edit.class-name': 'ક્લાસરૂમનુ નામ',
@@ -1107,7 +1119,7 @@ window.i18ln = {
   'content.modals.delete-rubric.first-check':
     'આ કાયમી ડિલીટ છે અને તેને પરત નહી લાવી શકાય',
   'content.modals.remove-content.legend':
-    'તમે  <b>{{title}}</b> માંથી <b>{{parentName}}</b>	દૂર કરવા જઈ રહ્યા છો.',
+    'તમે  <b>{{title}}</b> માંથી <b>{{parentName}}</b> દૂર કરવા જઈ રહ્યા છો.',
   'content.modals.remove-content.remove-error':
     'ઓહહ અત્યારે {{type}} ડીલીટ કરી શકતા નથી. કૃપા કરી થોડીવાર પછી ફરી પ્રયાસ કરો.',
   'content.modals.remove-content.confirmation':
@@ -1305,6 +1317,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.student-name':
     'વિદ્યાર્થીનું નામ',
   'teacher-landing.class.class-management-tab.student-id': 'સ્ટુડન્ટ આઈડી',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'શિક્ષકો',
   'teacher-landing.class.class-management-tab.view-report': 'રીપોર્ટ જુઓ',
   'teacher-landing.class.class-management-tab.course-null':
@@ -1920,6 +1933,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'આવડત',
   'profile.gru-navigation.preference.preference': 'પ્રાથમિકતા',
   'profile.edit.select-district': 'જીલ્લો પસંદ કરો',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'અત્યારે કોઈ ડેટા ઉપલબ્ધ નથી.  તમે એકવાર અભ્યાસ શરૂ કરો ત્યારબાદ તમારો ડેટા ઉપલબ્ધ થશે.',
   'profile.proficiency.expand-chart': 'ચાર્ટ વિસ્તરણ',
@@ -2470,6 +2487,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'પ્રશ્ન',
   'gru-study-header.question.one': 'પ્રશ્ન',
   'gru-study-header.question.other': 'પ્રશ્નો',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend': 'વધુ જાણવા માટે, આ સ્ત્રોતો ચકાસો.',
   'gru-suggest-test.pre-test-header': 'પ્રિ-ટેસ્ટ (વૈકલ્પિક)',
   'gru-suggest-test.post-test-header': 'પોસ્ટ ટેસ્ટ (વૈકલ્પિક )',
@@ -2657,6 +2675,7 @@ window.i18ln = {
   'common.subtask.oa.debate': 'ચર્ચા',
   'common.subtask.oa.others': 'અન્ય',
   project: 'પ્રોજેકટ',
+  'oa.others': 'Others',
   'oa.project.poster': 'પોસ્ટર',
   'oa.project.presentation': 'રજૂઆત',
   'oa.project.video': 'વિડીયો',
@@ -2725,6 +2744,7 @@ window.i18ln = {
   'suggestion-taken': 'મેળવેલ સૂચનાઓ',
   'this-week': 'આ અઠવાડીએ',
   'previous-week': 'ગયા અઠવાડીએ',
+  'custom-range': 'Custom Date Range',
   'beginning-till-now': 'શરૂઆતથી અત્યાર સુધી',
   'report.class-proficiency-report': 'ક્લાસ પ્રોફીસીયન્સી રીપોર્ટ',
   'report.domain-proficiency-report': 'ડોમેઈન કંપીટન્સી રીપોર્ટ',
@@ -2739,6 +2759,35 @@ window.i18ln = {
   'teacher-landing.class.student-locator': 'સ્ટુડન્ટ લોકેટર',
   'teacher-landing.class.learning-journey': 'લર્નિંગ જર્ની',
   'search-by': 'દ્વારા સર્ચ કરાયેલ',
+  'common.content-owner': 'Content Owner',
+  'oa.self-grading.comment-label':
+    'Please share your thoughts on how you performed in this activity',
+  'common.your-thoughts': 'Your Thoughts',
+  'common.lesson-plan': 'Lesson Plan',
+  'lesson-plan.sessions': 'sessions',
+  'common.session': 'Session',
+  'prior-knowledge': 'Prior Knowledge',
+  'guiding-question': 'Guiding Questions',
+  'anticipated-struggle': 'Aniticipated Struggles',
+  'teacher-resource': 'Teacher Resources',
+  'content.anticipated-struggles':
+    'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
+  'common.no-lesson-plan-info-message':
+    'This lesson does have any lesson plan.',
+  'common.email.error': 'Duplicate email',
+  'student-resource': 'Student Study Material',
+  'common.choose-lang': 'Choose Language',
+  'common.show': 'Show',
+  'oa.teacher-task.tooltip.disable-msg':
+    'At least one task is required for activity activation',
+  'common.class-name': 'Class Name',
+  'common.view-class-course-map': 'Class',
+  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+  'common.select-your-other-classes-from-below':
+    'Select your other classes from below to manage in this class',
+  'common.multi-grade-view': 'Multi-grade view. Viewing class',
+  'common.struggling-competencies': 'Struggling Competencies',
+  'common.suggested': 'Suggested',
   'common.skip-feedback': 'Skip Feedback',
   'common.external-collection.index-message':
     'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
@@ -2774,5 +2823,17 @@ window.i18ln = {
   'class-activity.no-activity-items-to-grade-message-mobile':
     'You have no activities items to grade for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
   'class-activity.no-activity-items-to-grade-message-desktop':
-    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule'
+    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.scheduled-activities': 'Class Activities',
+  'class-activity.unscheduled-activities': 'Unscheduled Activities',
+  'class-activity.items-to-grade': 'Items to Grade',
+  'common.monthly': 'Monthly',
+  'common.daily': 'Daily',
+  'common.weekly': 'Weekly',
+  'class-activity.no-learning-activities':
+    'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
+  'common.activate': 'Activate',
+  'common.mark-as-completed': 'Mark Closed',
+  'common.no-struggling-competencies':
+    'Yay! Looks like all your students are doing well!'
 };

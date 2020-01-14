@@ -2,43 +2,33 @@
   <div class="header-container">
     <div class="activity-tab">
       <div class="schedule-icon {{if isShowScheduledActivities 'active'}}" {{action "onloadScheduledClassActivities"}}>
-        <span> Class Activities</span>
+        <span>{{t 'class-activity.scheduled-activities'}}</span>
         {{gru-icon name="event"}}
       </div>
       <div class="unscheduled-activity-selector {{if isShowUnscheduledActivities 'active'}}" {{action "onLoadUnscheduledActivities"}}>
-        <span> Unscheduled Activities</span>
+        <span> {{t 'class-activity.unscheduled-activities'}}</span>
         {{gru-icon name="event_busy"}}
       </div>
       <div class="items-to-grade-selector {{if isShowItemsToGrade 'active'}}" {{action "onShowItemsToGrade"}}>
-        <span> Items to Grade({{gradingItemsList.length}})</span>
+        <span> {{t 'class-activity.items-to-grade'}}({{gradingItemsList.length}})</span>
         <i class="grading-icon"></i>
       </div>
     </div>
     {{#unless isShowItemsToGrade}}
       <div class="filters">
-        <div class="activities">
-          <span>Filter by type &nbsp;</span>
-          <div class="activities-content">
-            <div class="contents-selector">
-              {{#each contentTypes as |content|}}
-                <div class="content-selector {{if content.isActive 'active'}}" {{action "onToggleContent" content bubbles=false}}>
-                  <i class="icon {{content.type}}-icon"></i>
-                </div>
-              {{/each}}
-            </div>
-          </div>
-        </div>
         <div class="activity-date-range-selector" {{action "onToggleDatePicker"}}>
-          <span class="schedule-date"><span>{{format-date startDate 'DD MMM YYYY'}}</span><span class="{{if isDaily 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}</span></span>
+          <span class="schedule-date"><span>{{format-date startDate 'DD MMM YYYY'}}</span><span class="{{unless isShowListCard 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}</span></span>
           <span class="dropdown-icon">{{gru-icon name="arrow_drop_down"}}</span>
         </div>
       </div>
     {{/unless}}
-    <div class="date-range-picker-container">
+    <div class="date-range-picker-container ">
       <div class="date-range-selector">
-        <span class="{{if isDaily 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'daily'}}>Daily</span>
-        <span class="{{if isWeekly 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'weekly'}}>Weekly</span>
-        <span class="{{if isMonthly 'active'}}" {{action "onSelectRangeType" 'monthly'}}>Monthly</span>
+        {{#unless isShowUnscheduledActivities}}
+          <span class="{{if isDaily 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'daily'}}>{{t 'common.daily'}}</span>
+          <span class="{{if isWeekly 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'weekly'}}>{{t 'common.weekly'}}</span>
+        {{/unless}}
+        <span class="{{if isMonthly 'active'}}" {{action "onSelectRangeType" 'monthly'}}>{{t 'common.monthly'}}</span>
       </div>
       {{#if isDaily}}
         {{ca-date-picker
@@ -54,6 +44,7 @@
           selectedDate=selectedDate
           activities=scheduledClassActivitiesDatewise
           highlightActivities=true
+          closeDatePicker = "closeDatePicker"
         }}
       {{else if isWeekly}}
         {{ca-week-picker
@@ -65,6 +56,7 @@
           selectedWeekDate=selectedWeekDate
           activities=scheduledClassActivitiesDatewise
           highlightActivities=true
+          closeDatePicker = "closeDatePicker"
           }}
       {{else}}
         {{ca-month-picker
@@ -73,6 +65,7 @@
           showCalendarView=true
           onSelectMonth="onSelectMonth"
           selectedMonth=selectedMonth
+          closeDatePicker = "closeDatePicker"
         }}
       {{/if}}
     </div>
@@ -102,11 +95,11 @@
 
       {{#if isShowScheduledActivities}}
         {{#each scheduledActivitiesList as |scheduledActivity|}}
-          {{#unless isDaily}}
+          {{#if isShowListCard}}
             <div class="added-date">{{format-date scheduledActivity.added_date 'DD MMM YYYY'}}
               <hr />
             </div>
-          {{/unless}}
+          {{/if}}
           {{#each scheduledActivity.scheduledActivities as |activity|}}
             {{new-cards/gru-class-activity-card
                 activity = activity
@@ -116,9 +109,14 @@
                 onClosePerformanceEntry = "onClosePerformanceEntry"
                 onRescheduleActivity = "onRescheduleActivity"
                 onEnableMastery = "onEnableMastery"
+                onGoLive="onGoLive"
+                isSecondaryClass=isSecondaryClass
                 onShowContentPreview = "onShowContentPreview"
                 onGradeItem="onGradeItem"
-                isShowListView=isShowListCard}}
+                isShowListView=isShowListCard
+                onShowContentReport='onShowContentReport'
+                markOACompleted = 'onMarkOACompleted'
+              }}
           {{/each}}
         {{else}}
           <div class="plan-activities-msg">
@@ -220,13 +218,28 @@
   {{reports/pull-up/gru-collection-preview
     showPullUp=isShowContentPreview
     previewContentId=previewContent.contentId
-    previewContentType=previewContent.contentType}}
+    previewContentType=previewContent.contentType
+    showAssessmentCode=true
+    assessmentCode=assessmentCode
+    isReportView=isReportView}}
+{{/if}}
+
+{{#if isShowStudentsSummaryReport}}
+{{teacher/offline-class/oca-students-summary-report-pull-up
+    context=selectedActivity
+    classActivities=reportActivityList
+    onOpenPerformanceEntry='onOpenPerformanceEntry'
+    classId=selectedActivity.classId
+    isShowAddData=isShowAddData
+    showPullUp=isShowStudentsSummaryReport}}
 {{/if}}
 
 {{#if isShowOfflineActivityPreview}}
   {{reports/pull-up/oa-preview
     showPullUp=isShowOfflineActivityPreview
     oaId=previewContent.contentId
-    isReportView=false
+    classActivity=previewContent
+    classId=previewContent.classId
+    isReportView=isReportView
   }}
 {{/if}}

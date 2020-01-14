@@ -49,7 +49,7 @@
 
     .body-container {
       padding: 16px 8px;
-      max-height: 78vh;
+      max-height: calc(100vh - 200px);
       overflow-y: auto;
       min-height: 45vh;
 
@@ -126,6 +126,9 @@
       .scheduler-container {
         margin-bottom: 16px;
         .date-picker-container {
+          .backdrop {
+            display: none;
+          }
           .ca-date-picker-container {
             @media (min-width: $screen-phone) {
               padding-right: 20%;

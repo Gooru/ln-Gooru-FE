@@ -124,6 +124,20 @@
             display: grid;
             grid-template-columns: 100%;
           }
+          @media screen and (max-width: $screen-380) {
+            .gru-timepicker-card {
+              .timepicker-container {
+                .hour-picker,
+                .minute-picker {
+                  .value-container {
+                    input.time-value {
+                      max-width: 89px;
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
       .complete-submission-container,

@@ -4,12 +4,31 @@
     {{gru-icon name="arrow_back"}}
     <div class="struggling-competency-report-header-panel">
       <div class="struggling-competency-report-title">
-        <span>{{selectedCompetency.name}}</span>
+        <span>{{competency-gut-to-fw-transform
+          fwCompetencies
+          selectedCompetency.code
+          selectedCompetency.name
+          'frameworkCompetencyName'
+          showGutCompetency
+          true
+         }}</span>
       </div>
-      <ul class="struggling-competency-report-sub-titles">
-        <li>{{selectedCompetency.domainName}}</li>
-        <li>{{selectedCompetency.displayCode}}</li>
-      </ul>
+       <ul class="struggling-competency-report-sub-titles">
+          <li>{{domain-gut-to-fw-transform
+            fwDomains
+            selectedCompetency.domainCode
+            selectedCompetency.domainName
+            'fwDomainName' true}}</li>
+          <li>{{selectedCompetency.displayCode}}</li>
+          <li>{{competency-lo-transform
+            fwCompetencies
+            selectedCompetency.code
+            'loCode'
+            false
+            '|'
+          }}
+        </li>
+       </ul>
     </div>
   </div>
   <div class="struggling-competency-report-student-list-container">

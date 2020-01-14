@@ -73,7 +73,9 @@ export default Ember.Component.extend({
       let collectionIds = Ember.A([]);
       if (classActivities) {
         collectionIds = classActivities.map(classActivity => {
-          return classActivity.get('collection.id');
+          return (
+            classActivity.get('collection.id') || classActivity.get('contentId')
+          );
         });
       }
       return collectionIds;
@@ -212,6 +214,10 @@ export default Ember.Component.extend({
 
     onScheduleActivity(content) {
       this.sendAction('onScheduleActivity', content);
+    },
+
+    onShowContentPreview(content) {
+      this.sendAction('onShowContentPreview', content);
     }
   },
 
@@ -232,6 +238,10 @@ export default Ember.Component.extend({
       trigger: 'hover'
     });
   },
+
+  observerClassChanges: Ember.observer('classId', function() {
+    this.loadData();
+  }),
 
   //--------------------------------------------------------------------------
   // Methods

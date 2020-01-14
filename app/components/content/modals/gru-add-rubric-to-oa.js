@@ -87,9 +87,12 @@ export default Ember.Component.extend({
     goToContent: function() {
       let component = this;
       const model = component.get('model');
-      component
-        .get('router')
-        .transitionTo('profile.content.rubrics', model.userId);
+      let queryParams = {
+        profileId: model.userId,
+        type: 'my-content',
+        activeContentType: 'rubric'
+      };
+      component.get('router').transitionTo('library-search', { queryParams });
       component.triggerAction({ action: 'closeModal' });
     }
   },

@@ -5,7 +5,17 @@
   text-transform: initial;
   .feedback-container {
     display: grid;
-    grid-template-rows: auto auto 50px;
+    grid-template-rows: auto 135px;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      height: 6px;
+      width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: $gray-light;
+      border: 1px solid $gray-light;
+      border-radius: 5px;
+    }
     .feedback-header-panel {
       display: grid;
       grid-template-rows: auto auto auto;
@@ -62,28 +72,43 @@
         }
       }
     }
-    .feedback-fooder-panel {
-      align-items: center;
-      display: grid;
-      grid-template-columns: 50% 50%;
+  }
+  .feedback-fooder-panel {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    .next,
+    .skip {
+      padding: 10px;
+      color: #fff;
+      text-align: center;
+      cursor: pointer;
+    }
+    .next {
+      background-color: #0072bc;
+      grid-column-start: 2;
+    }
+    .skip {
+      background-color: #b8bfc4;
+    }
+    @media screen and (max-width: $screen-320) {
       .next,
       .skip {
-        padding: 10px;
-        color: #fff;
-        text-align: center;
-        cursor: pointer;
+        padding: 5px 10px;
       }
-      .next {
-        background-color: #0072bc;
-        grid-column-start: 2;
-      }
-      .skip {
-        background-color: #b8bfc4;
-      }
-      @media screen and (max-width: $screen-320) {
-        .next,
-        .skip {
-          padding: 5px 10px;
+    }
+  }
+  @media screen and (max-width: $screen-380) {
+    .feedback-container {
+      .feedback-body-panel {
+        .category-panel {
+          .category-rating {
+            .row {
+              ul {
+                padding: 0px;
+              }
+            }
+          }
         }
       }
     }

@@ -64,6 +64,8 @@ window.i18ln = {
   'common.first': 'మొదటి',
   'common.last': 'చివర',
   'common.name': 'నామము',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'మీరు ఏవిధంగా డేటా నమోదు చేస్తారు ?',
   'common.take-photo': 'ఫోటో తీవుకోండి',
   'common.upload-image': 'ప్రతిబింబం అప్లోడ్',
@@ -72,6 +74,8 @@ window.i18ln = {
   'common.by-question': 'ప్రశ్న-ద్వారా-ప్రశ్న',
   'i2d.conversion-progress':
     'అప్‌లోడ్ చేసిన ప్రతిబిబం  (లు) ప్రాసెస్ చేయబడుతున్నాయి. దయచేసి తరువాత తనిఖీ చేయండి',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
   'i2d.conversion-error':
     'ప్రతిబిబం  మార్చడానికి ప్రయత్నిస్తున్నప్పుడు లోపం ఉంది. దయచేసి ప్రతిబింబం తిరిగి  సమర్పించండి',
   'file-picker-placeholder':
@@ -89,16 +93,21 @@ window.i18ln = {
   're-upload': 'తిరిగి అప్లోడ్',
   'common.user': 'యూజర్',
   'common.content-name': 'కంటెంట్ పేరు',
-  'common.day': 'day',
-  'common.week': 'week',
-  'common.month': 'month',
   'common.lastName': 'చివరి పేరు',
   'common.firstName': 'మొదటి పేరు',
   'common.filter-by': 'ద్వారా వడపోత',
+  'common.day': 'day',
+  'common.week': 'week',
+  'common.month': 'month',
   'common.more': 'మరింత',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'apply filter',
+  'library-search-placeholder': 'Search for anything within the library…',
   'search-help-message': 'Choose filters to apply',
   'common.avg-score': 'సగటు స్కోర్',
+  'common.offline-activites': 'offline activites',
+  'common.offline-activity': 'offline activity',
   'common.frq': 'frq',
   'common.schedule': 'షెడ్యూల్',
   'common.responses': 'స్పందనలు',
@@ -121,11 +130,10 @@ window.i18ln = {
     'మీ స్పెల్లింగ్‌ను తనిఖీ చేయండి. మనమందరం తప్పులు చేస్తున్నాం! లేదా బదులుగా ఇలాంటి పదం కోసం శోధించడానికి ప్రయత్నిస్తున్నాం.',
   'common.a-collection': 'సేకరణ',
   'common.a-course': 'ఒక శిక్షణ',
-  'common.offline-activites': 'offline activites',
-  'common.offline-activity': 'offline activity',
   'common.a-question': 'ఒక ప్రశ్న',
   'common.a-resource': 'ఒక వనరు',
   'common.a-rubric': 'ఒక రంధ్రం',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'అన్ని పూర్తయింది',
   'common.a-assessment': 'ఒక అంచనా',
   'common.about': 'గురించి',
@@ -133,7 +141,6 @@ window.i18ln = {
   'common.about-me': 'నా గురించి',
   'common.accept': 'అంగీకరించాలి',
   'common.ignore': 'పట్టించుకోకుండా',
-  'library-search-placeholder': 'Search for anything within the library…',
   'common.add': 'జోడించడానికి',
   'common.plan-an-activities': 'మీ కార్యకలాపాలను ప్రణాళిక చెయ్యండి',
   'common.plan-activities': 'ప్రణాళిక కార్యకలాపాలు',
@@ -182,6 +189,8 @@ window.i18ln = {
   'common.anonymous_mode': 'అనామక మోడ్',
   'common.answer': 'మీ సమాధానం',
   'common.answer-correct': 'మీరు సరైనవారు!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'మీరు తప్పు ...',
   'common.answer-key-was-hidden': 'గమనిక: మీ గురువు జవాబు కీని దాచిపెట్టాడు.',
   'common.approved': 'ఆమోదం',
@@ -194,6 +203,7 @@ window.i18ln = {
   'common.assessment-pl.other': 'లెక్కింపులు',
   'common.assessment-title': 'అంచనా శీర్షిక',
   'common.activity-title': 'Activity Title',
+  'common.activity': 'Activity Title',
   'common.assessmentInitial': 'ఒక',
   'common.assessments': 'లెక్కింపులు',
   'common.assign': 'కేటాయించవచ్చు',
@@ -204,6 +214,7 @@ window.i18ln = {
   'common.avatarFor': 'కోసం అవతార్',
   'common.averageScore': 'సగటు స్కోరు',
   'common.back': 'తిరిగి',
+  'common.for': 'for',
   'common.back-to-assessment': 'తిరిగి అంచనా',
   'common.back-to-collection': 'తిరిగి సేకరణకు',
   'common.back-to-course-map': 'తిరిగి మ్యాప్ తిరిగి',
@@ -282,6 +293,9 @@ window.i18ln = {
   'common.rubric-not-answered': 'రుబ్రిక్ సమాధానం ఇవ్వలేదు',
   'common.country': 'దేశంలో',
   'reroute.suggestion': 'రీరౌట్ సలహా',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
   'reroute.suggestion.title': 'భావనలతో కష్టంగా ఉందా?',
   'reroute.suggestion.desc':
     'మీరు పరీక్షించిన అంశాలపై మంచి అవగాహన పొందడానికి మా <span> సంతకం సేకరణలలో ఒకటి </span> ఎందుకు వెళ్లకూడదు?',
@@ -551,10 +565,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'లాగిన్ అవ్వడానికి ఇక్కడ క్లిక్ చేయండి.',
   'common.mastery': 'పాండిత్యం',
   'common.menu': 'మెను',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'మరిన్ని వివరాలు',
   'common.move': 'కదలిక',
   'common.myContent': 'నా కంటెంట్',
   'common.myProfile': 'నా స్థానం',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'లైబ్రరీ',
   'common.myPerformance': 'నా ప్రదర్శన',
   'common.edit-narration': 'కథనాన్ని సవరించండి',
@@ -882,6 +898,7 @@ window.i18ln = {
   'class.info.add-students': 'విద్యార్థులు చేర్చండి',
   'class.info.class-code': 'తరగతిలో కోడ్',
   'class.info.delete': 'తరగతి గదిని తొలగించండి',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'కేటాయించిన కోర్సు',
   'class.edit.basic-info': 'ప్రాథమిక సమాచారం',
   'class.edit.class-name': 'తరగతిలో పేరు',
@@ -1951,6 +1968,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'నైపుణ్యత',
   'profile.gru-navigation.preference.preference': 'ప్రాధాన్యత',
   'profile.edit.select-district': 'జిల్లాను ఎంచుకోండి ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'ఇంకా డేటా అందుబాటులో లేదు. మీరు అధ్యయనం ప్రారంభించిన తర్వాత, మీ డేటా అందుబాటులోకి వస్తుంది.',
   'profile.proficiency.expand-chart': 'చార్ట్ విస్తరించండి',
@@ -2509,6 +2530,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'ప్రశ్న',
   'gru-study-header.question.one': 'ప్రశ్న',
   'gru-study-header.question.other': 'ప్రశ్నలు',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'మరింత నేర్చుకోవడానికి , ఈ వనరులను చూడండి.',
   'gru-suggest-test.pre-test-header': 'జరిగిన-పరీక్ష  (ఐచ్ఛికం)',
@@ -2697,6 +2719,7 @@ window.i18ln = {
   'common.subtask.oa.debate': 'చర్చ',
   'common.subtask.oa.others': 'ఇతరులు',
   project: 'ప్రాజెక్ట్',
+  'oa.others': 'Others',
   'oa.project.poster': 'పోస్టర్',
   'oa.project.presentation': 'ప్రదర్శన',
   'oa.project.video': 'వీడియో',
@@ -2768,6 +2791,7 @@ window.i18ln = {
   'suggestion-taken': 'సూచనలు తీసుకోబడ్డాయి',
   'this-week': 'ఈ వారం',
   'previous-week': 'పోయిన వారం వారం',
+  'custom-range': 'Custom Date Range',
   'beginning-till-now': 'ఇప్పటి వరకు ప్రారంభమయింది',
   'report.class-proficiency-report': 'తరగతి నైపుణ్యం నివేదిక',
   'report.domain-proficiency-report': 'డొమైన్ సామర్థ్య నివేదిక',
@@ -2799,7 +2823,6 @@ window.i18ln = {
     'This lesson does have any lesson plan.',
   'common.email.error': 'Duplicate email',
   'student-resource': 'Student Resources',
-  'common.activity': 'Activity Title',
   'common.choose-lang': 'Choose Language',
   'common.show': 'Show',
   'oa.teacher-task.tooltip.disable-msg':
@@ -2847,5 +2870,17 @@ window.i18ln = {
   'class-activity.no-activity-items-to-grade-message-mobile':
     'You have no activities items to grade for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
   'class-activity.no-activity-items-to-grade-message-desktop':
-    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule'
+    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.scheduled-activities': 'Class Activities',
+  'class-activity.unscheduled-activities': 'Unscheduled Activities',
+  'class-activity.items-to-grade': 'Items to Grade',
+  'common.monthly': 'Monthly',
+  'common.daily': 'Daily',
+  'common.weekly': 'Weekly',
+  'class-activity.no-learning-activities':
+    'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
+  'common.activate': 'Activate',
+  'common.mark-as-completed': 'Mark Closed',
+  'common.no-struggling-competencies':
+    'Yay! Looks like all your students are doing well!'
 };

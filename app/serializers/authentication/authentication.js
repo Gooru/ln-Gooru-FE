@@ -43,7 +43,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
       },
       isAnonymous: isAnonymous,
       tenant: {
-        tenantId: payload.tenant ? payload.tenant.tenant_id : undefined
+        tenantId: payload.tenant ? payload.tenant.tenant_id : undefined,
+        settings: payload.tenant.settings
+          ? this.normalizeTenantSettings(payload.tenant.settings)
+          : null
       },
       partnerId: payload.partner_id
     };
@@ -79,6 +82,18 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return {
       statusCode: payload.status_code,
       redirectUrl: payload.redirect_url
+    };
+  },
+
+  /**
+   * @param payload tenant settings from the response
+   * @function normalizeTenantSettings
+   */
+  normalizeTenantSettings(payload) {
+    return {
+      allowMultiGradeClass: payload.allow_multi_grade_class
+        ? payload.allow_multi_grade_class.toLowerCase()
+        : 'off'
     };
   }
 });

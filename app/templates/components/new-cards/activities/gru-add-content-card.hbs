@@ -1,8 +1,8 @@
 <div class="add-content-card-container">
   <div class="content-info-container">
-    <div class="content-thumbnail" style="background-image: url({{content.thumbnailUrl}})"></div>
+    <div class="content-thumbnail" style="background-image: url({{content.thumbnailUrl}})"  {{action "onShowContentPreview"}}></div>
     <div class="content-title">
-      <div class="title">{{content.title}}</div>
+      <div class="title" {{action "onShowContentPreview"}}>{{content.title}}</div>
       <div class="collection-info">
         {{#if taxonomyTags.length}}
           <div class="taxonomy-container">
@@ -33,7 +33,7 @@
           {{gru-icon name="add"}}  {{gru-icon name="done"}}
       </div>
     {{/unless}}
-    <div class="schedule-activity" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-placement="bottom" {{action "onShowDaterangePicker"}} >
+    <div class="schedule-activity {{if content.isScheduled 'scheduled'}}" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-placement="bottom" {{action "onShowDaterangePicker"}} >
       {{gru-icon name="update"}}
     </div>
   </div>

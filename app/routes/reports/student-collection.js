@@ -39,8 +39,9 @@ export default QuizzesReport.extend(PublicRouteMixin, ContextMixin, {
       route.transitionTo(toRoute);
     },
     closePlayer: function() {
-      const component = this;
-      const controller = component.get('controller');
+      const route = this;
+      const controller = route.get('controller');
+      controller.set('isShowActivityFeedback', false);
       let isIframeMode = controller.get('isIframeMode');
       if (isIframeMode) {
         window.parent.postMessage(PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE, '*');
@@ -122,6 +123,7 @@ export default QuizzesReport.extend(PublicRouteMixin, ContextMixin, {
       let collection = model.collection;
       collection.set('thumbnailUrl', collectionObj.get('thumbnailUrl'));
       controller.set('collection', collection);
+      controller.set('collectionObj', collectionObj);
     }
   }
 });

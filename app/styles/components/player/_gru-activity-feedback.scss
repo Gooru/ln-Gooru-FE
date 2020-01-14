@@ -15,7 +15,7 @@
       background-image: url("gooru/assessment-start-page.jpg");
     }
     .feedback-contaioner {
-      padding: 30px;
+      padding: 10px;
       align-items: center;
       width: 100%;
       .gru-activity-feedback-card {
@@ -23,7 +23,6 @@
         width: 33%;
         border: 1px solid #868585;
         max-height: calc(100vh - 100px);
-        overflow-y: auto;
         margin-left: 7%;
         &::-webkit-scrollbar {
           height: 6px;
@@ -110,9 +109,19 @@
                   }
                 }
                 .title {
-                  font-size: 18px;
-                  font-weight: 600;
-                  line-height: 1.2;
+                  display: flex;
+                  p {
+                    margin-bottom: 0px;
+                    font-weight: 600;
+                    $font-size: 18px;
+                    $line-height: 1.2;
+                    $lines-to-show: 4;
+                    @include ellipsis(
+                      $font-size: $font-size,
+                      $line-height: $line-height,
+                      $lines-to-show: $lines-to-show
+                    );
+                  }
                 }
               }
               .author-name {
@@ -245,14 +254,27 @@
                 @media screen and (max-width: $screen-380) {
                   grid-template-rows: auto auto;
                   .details {
-                    grid-auto-rows: 50px;
-                    grid-template-columns: auto 60px 50px;
-                    .time-spent {
-                      grid-row-start: 2;
-                      display: grid;
-                      grid-column-start: 1;
-                      grid-column-end: 4;
-                      justify-content: flex-end;
+                    &.collection,
+                    &.assessment {
+                      grid-auto-rows: 50px;
+                      grid-template-columns: auto 60px 50px;
+                      .time-spent {
+                        grid-row-start: 2;
+                        display: grid;
+                        grid-column-start: 1;
+                        grid-column-end: 4;
+                        justify-content: flex-end;
+                        span {
+                          width: 100px;
+                        }
+                      }
+                    }
+                    &.resource,
+                    &.question,
+                    &.collection-external,
+                    &.assessment-external,
+                    &.offline-activity {
+                      grid-template-columns: auto 10px 10px 100px;
                     }
                   }
                 }
@@ -273,10 +295,14 @@
 .offline-activity-player.gru-offline-activity-submission.oa-completed {
   .gru-activity-feedback {
     padding-top: 0px;
+  }
+}
+.reports_study-student-collection {
+  .gru-activity-feedback {
     .activity-feedback-container {
       .feedback-contaioner {
         .gru-activity-feedback-card {
-          max-height: calc(100vh - 160px);
+          max-height: 100%;
         }
       }
     }
@@ -308,6 +334,15 @@
           width: 100%;
           margin-left: 0px;
         }
+      }
+    }
+  }
+}
+@media screen and (max-width: $screen-380) {
+  .gru-activity-feedback {
+    .activity-feedback-container {
+      .feedback-contaioner {
+        padding: 7px;
       }
     }
   }

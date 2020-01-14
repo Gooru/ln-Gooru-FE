@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import ClassActivityAdapter from 'gooru-web/adapters/content/class-activity';
 import ClassActivitySerializer from 'gooru-web/serializers/content/class-activity';
-
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
 /**
  * @typedef {Object} ClassActivityService
  */
@@ -547,26 +549,24 @@ export default Ember.Service.extend({
       assessmentIds = assessmentIds.concat(externalAssessmentIds);
       const performanceService = service.get('performanceService');
       Ember.RSVP.hash({
-        activityCollectionPerformanceSummaryItems: collectionIds.length
-          ? performanceService.findStudentActivityPerformanceSummaryByIds(
+        activityCollectionPerformanceSummaryItems: collectionIds.length ?
+          performanceService.findStudentActivityPerformanceSummaryByIds(
             userId,
             classId,
             collectionIds,
             'collection',
             startDate,
             endDate
-          )
-          : [],
-        activityAssessmentPerformanceSummaryItems: assessmentIds.length
-          ? performanceService.findStudentActivityPerformanceSummaryByIds(
+          ) : [],
+        activityAssessmentPerformanceSummaryItems: assessmentIds.length ?
+          performanceService.findStudentActivityPerformanceSummaryByIds(
             userId,
             classId,
             assessmentIds,
             'assessment',
             startDate,
             endDate
-          )
-          : []
+          ) : []
       }).then(function(hash) {
         let performances = hash.activityCollectionPerformanceSummaryItems.concat(
           hash.activityAssessmentPerformanceSummaryItems
@@ -629,30 +629,27 @@ export default Ember.Service.extend({
         .mapBy('id');
       const performanceService = service.get('performanceService');
       Ember.RSVP.hash({
-        activityCollectionPerformanceSummaryItems: collectionIds.length
-          ? performanceService.findClassActivityPerformanceSummaryByIds(
+        activityCollectionPerformanceSummaryItems: collectionIds.length ?
+          performanceService.findClassActivityPerformanceSummaryByIds(
             classId,
             collectionIds,
             'collection',
             startDate,
             endDate
-          )
-          : [],
-        activityAssessmentPerformanceSummaryItems: assessmentIds.length
-          ? performanceService.findClassActivityPerformanceSummaryByIds(
+          ) : [],
+        activityAssessmentPerformanceSummaryItems: assessmentIds.length ?
+          performanceService.findClassActivityPerformanceSummaryByIds(
             classId,
             assessmentIds,
             'assessment',
             startDate,
             endDate
-          )
-          : [],
-        activityOfflineActivityPerformanceSummaryItems: offlineActivityIds.length
-          ? performanceService.findOfflineClassActivityPerformanceSummaryByIds(
+          ) : [],
+        activityOfflineActivityPerformanceSummaryItems: offlineActivityIds.length ?
+          performanceService.findOfflineClassActivityPerformanceSummaryByIds(
             classId,
             offlineActivityIds
-          )
-          : []
+          ) : []
       }).then(function(hash) {
         let performances = hash.activityCollectionPerformanceSummaryItems.concat(
           hash.activityAssessmentPerformanceSummaryItems,
@@ -697,9 +694,9 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       let activityType =
         classActivity.get('collection.isAssessment') ||
-        classActivity.get('collection.isExternalAssessment')
-          ? 'assessment'
-          : 'collection';
+        classActivity.get('collection.isExternalAssessment') ?
+          'assessment' :
+          'collection';
       let activityId = Ember.A([classActivity.get('collection.id')]);
       Ember.RSVP.hash({
         activityStudentsPerformanceData: performanceService.fetchStudentsActivityPerformance(
@@ -709,7 +706,9 @@ export default Ember.Service.extend({
           startDate,
           endDate
         )
-      }).then(({ activityStudentsPerformanceData }) => {
+      }).then(({
+        activityStudentsPerformanceData
+      }) => {
         resolve(activityStudentsPerformanceData);
       }, reject);
     });
@@ -824,7 +823,7 @@ export default Ember.Service.extend({
     });
   },
 
-  getScheduledActivitiesByDate(classId, requestBody) {
+  getScheduledActivitiesByDate(classId, requestBody, userId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
@@ -833,21 +832,41 @@ export default Ember.Service.extend({
         .then(function(scheduledActivities) {
           const classActivities = service
             .get('classActivitySerializer')
-            .normalizeFindClassActivities(scheduledActivities);
+            .normalizeFindClassActivities(scheduledActivities, classId);
           let uniqueClassIds = classActivities
             .uniqBy('classId')
             .mapBy('classId');
           uniqueClassIds.map(classId => {
-            let activitiesByClass = classActivities.filterBy(
-              'classId',
-              classId
-            );
-            service.findClassActivitiesPerformanceSummary(
-              classId,
-              activitiesByClass,
-              requestBody.start_date,
-              requestBody.end_date
-            );
+            if (classId) {
+              let activitiesByClass = classActivities.filterBy(
+                'classId',
+                classId
+              );
+              if (userId) {
+                let offlineClassActivities = activitiesByClass
+                  .filterBy('contentType', CONTENT_TYPES.OFFLINE_ACTIVITY)
+                  .filterBy('isCompleted', true);
+                service.findStudentOfflineActivitiesPerformanceSummary(classId,
+                  offlineClassActivities,
+                  userId);
+                service
+                  .findStudentActivitiesPerformanceSummary(
+                    userId,
+                    classId,
+                    activitiesByClass,
+                    requestBody.start_date,
+                    requestBody.end_date
+                  )
+                  .then(resolve, reject);
+              } else {
+                service.findClassActivitiesPerformanceSummary(
+                  classId,
+                  activitiesByClass,
+                  requestBody.start_date,
+                  requestBody.end_date
+                );
+              }
+            }
           });
           resolve(classActivities);
         }, reject);

@@ -62,6 +62,11 @@ export default Ember.Component.extend({
     }
   },
 
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -270,6 +275,11 @@ export default Ember.Component.extend({
   studentsPerformanceList: [],
 
   /**
+   * @property {String} currentGradeName
+   */
+  currentGradeName: '',
+
+  /**
    * watchingSecondaryClass
    */
   watchingSecondaryClass: Ember.observer('classInfo', function() {
@@ -303,8 +313,12 @@ export default Ember.Component.extend({
     },
 
     //Action triggered when click a competency
-    onSelectCompetency(selectedCompetency) {
+    onSelectCompetency(selectedCompetency, domain = null) {
       let component = this;
+      if (domain) {
+        selectedCompetency.set('domainName', domain.get('domainName'));
+        selectedCompetency.set('domainCode', domain.get('domainCode'));
+      }
       component.set('selectedCompetency', selectedCompetency);
       component.set('isShowStrugglingCompetencyReport', true);
     },
@@ -690,7 +704,7 @@ export default Ember.Component.extend({
   fetchStrugglingCompetency() {
     let component = this;
     let taxonomyService = component.get('taxonomyService');
-    let subject = component.get('subjectCode');
+    let subject = component.get('class.preference.subject');
     let fwk = component.get('class.preference.framework');
     let filters = {
       subject,
@@ -746,6 +760,10 @@ export default Ember.Component.extend({
           component.set('gradeDomainsList', []);
           if (gradeLevelCompetency && gradeLevelCompetency.length) {
             component.set(
+              'currentGradeName',
+              gradeLevelCompetency[0].get('grade')
+            );
+            component.set(
               'gradeDomainsList',
               gradeLevelCompetency[0].get('domains')
             );
@@ -777,7 +795,10 @@ export default Ember.Component.extend({
                   }
                 }
               });
-            component.set('otherGradeTopComp', otherGradeTopComp);
+            let sortedOtherCompetency = otherGradeTopComp.length
+              ? otherGradeTopComp.sortBy('studentsCount').reverse()
+              : otherGradeTopComp;
+            component.set('otherGradeTopComp', sortedOtherCompetency);
             component.set('otherGradeCompetency', otherGradeLevelCompetency);
           }
         }

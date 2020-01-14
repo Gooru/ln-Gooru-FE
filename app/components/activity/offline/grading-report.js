@@ -1,10 +1,7 @@
 import Ember from 'ember';
 import RubricGrade from 'gooru-web/models/rubric/rubric-grade';
 import RubricCategoryScore from 'gooru-web/models/rubric/grade-category-score';
-import {
-  PLAYER_EVENT_SOURCE,
-  CONTENT_TYPES
-} from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE, CONTENT_TYPES } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -113,8 +110,9 @@ export default Ember.Component.extend({
    * @return {Object}
    */
   teacherRubricCategories: Ember.computed('teacherRubric', function() {
-    return this.get('teacherRubric.categories') ?
-      this.get('teacherRubric.categories') : [];
+    return this.get('teacherRubric.categories')
+      ? this.get('teacherRubric.categories')
+      : [];
   }),
 
   /**
@@ -122,8 +120,9 @@ export default Ember.Component.extend({
    * @return {Object}
    */
   studentRubricCategories: Ember.computed('studentRubric', function() {
-    return this.get('studentRubric.categories') ?
-      this.get('studentRubric.categories') : [];
+    return this.get('studentRubric.categories')
+      ? this.get('studentRubric.categories')
+      : [];
   }),
 
   /**
@@ -136,9 +135,9 @@ export default Ember.Component.extend({
     function() {
       let component = this;
       let totalRubricPoints = 0;
-      let categories = component.get('isTeacher') ?
-        component.get('teacherRubricCategories') :
-        component.get('studentRubricCategories');
+      let categories = component.get('isTeacher')
+        ? component.get('teacherRubricCategories')
+        : component.get('studentRubricCategories');
       if (categories) {
         categories.forEach(category => {
           if (category.get('allowsLevels') && category.get('allowsScoring')) {
@@ -163,9 +162,9 @@ export default Ember.Component.extend({
     function() {
       let component = this;
       let totalUserRubricPoints = 0;
-      let categories = component.get('isTeacher') ?
-        component.get('teacherRubricCategories') :
-        component.get('studentRubricCategories');
+      let categories = component.get('isTeacher')
+        ? component.get('teacherRubricCategories')
+        : component.get('studentRubricCategories');
       if (categories) {
         categories.forEach(category => {
           if (category.get('allowsLevels') && category.get('allowsScoring')) {
@@ -209,9 +208,9 @@ export default Ember.Component.extend({
       let score = -1;
       let component = this;
       let gradeMaxScore = component.get('content.maxScore');
-      let studentScore = component.get('isTeacher') ?
-        component.get('teacherRubric.studentScore') :
-        component.get('studentRubric.studentScore');
+      let studentScore = component.get('isTeacher')
+        ? component.get('teacherRubric.studentScore')
+        : component.get('studentRubric.studentScore');
       if (studentScore > 0) {
         score = Math.floor((studentScore / gradeMaxScore) * 100);
       }
@@ -243,11 +242,11 @@ export default Ember.Component.extend({
    */
   isScoring: Ember.computed('teacherRubric', 'studentRubric', function() {
     let component = this;
-    return component.get('isTeacher') ?
-      component.get('teacherRubric.scoring') &&
-      component.get('content.maxScore') :
-      component.get('studentRubric.scoring') &&
-      component.get('content.maxScore');
+    return component.get('isTeacher')
+      ? component.get('teacherRubric.scoring') &&
+          component.get('content.maxScore')
+      : component.get('studentRubric.scoring') &&
+          component.get('content.maxScore');
   }),
 
   /**
@@ -273,9 +272,9 @@ export default Ember.Component.extend({
       const offlineActivitySubmissions = component.get(
         'offlineActivitySubmissions'
       );
-      return offlineActivitySubmissions ?
-        !!offlineActivitySubmissions.get('oaRubrics.teacherGrades') :
-        false;
+      return offlineActivitySubmissions
+        ? !!offlineActivitySubmissions.get('oaRubrics.teacherGrades')
+        : false;
     }
   ),
 
@@ -290,11 +289,17 @@ export default Ember.Component.extend({
       const offlineActivitySubmissions = component.get(
         'offlineActivitySubmissions'
       );
-      return offlineActivitySubmissions ?
-        !!offlineActivitySubmissions.get('oaRubrics.studentGrades.grader') :
-        false;
+      return offlineActivitySubmissions
+        ? !!offlineActivitySubmissions.get('oaRubrics.studentGrades.grader')
+        : false;
     }
   ),
+
+  /**
+   * @property {Boolean} isRightPanelExpanded
+   * Property to check whether the right panel is in expanded state or not
+   */
+  isRightPanelExpanded: false,
 
   // -------------------------------------------------------------------------
   // Actions
@@ -374,6 +379,25 @@ export default Ember.Component.extend({
 
     saveGrade() {
       this.saveUserGrade();
+    },
+
+    //Action triggered when clicking on the right panel header
+    // It's only enabled for mobile view
+    onTogglePanel() {
+      // NOTE pixel values are hard coded based on current implementation.
+      const component = this;
+      let top = '125px';
+      if (component.get('isRightPanelExpanded')) {
+        // 10px padding top
+        top = `${component.$('.oa-grading-section').height() - 80 + 10}px`;
+      }
+      component.$('.right-panel').animate(
+        {
+          top
+        },
+        400
+      );
+      component.toggleProperty('isRightPanelExpanded');
     }
   },
 
@@ -394,7 +418,6 @@ export default Ember.Component.extend({
   willDestroyElement() {
     const component = this;
     component.set('isInlineGrading', false);
-    component.set('offlineActivitySubmissions', null);
   },
 
   didDestroyElement() {
@@ -430,9 +453,7 @@ export default Ember.Component.extend({
     return Ember.RSVP.hash({
       users: component.get('isTeacher') ? component.getGradingStudentList() : []
     })
-      .then(({
-        users
-      }) => {
+      .then(({ users }) => {
         if (!component.isDestroyed) {
           let studentId = component.get('studentId');
           if (!studentId) {
@@ -445,25 +466,23 @@ export default Ember.Component.extend({
             users.pushObject(student);
           }
           return Ember.RSVP.hash({
-            submission: component.get('offlineActivitySubmissions') ?
-              component.get('offlineActivitySubmissions') : component.fetchStudentSubmissions(),
+            submission: component.get('offlineActivitySubmissions')
+              ? component.get('offlineActivitySubmissions')
+              : component.fetchStudentSubmissions(),
             users
           });
         }
       })
-      .then(({
-        submission,
-        users
-      }) => {
+      .then(({ submission, users }) => {
         if (!component.get('isDestroyed')) {
           users.map(user => {
             user.set('isGraded', false);
             let studentRubric = component
               .get('rubric')
               .findBy('isTeacherRubric', false);
-            let newStudentRubric = studentRubric ?
-              studentRubric.copy() :
-              studentRubric;
+            let newStudentRubric = studentRubric
+              ? studentRubric.copy()
+              : studentRubric;
             user.set(
               'studentRubric',
               component.createRubricGrade(newStudentRubric, user)
@@ -471,9 +490,9 @@ export default Ember.Component.extend({
             let teacherRubric = component
               .get('rubric')
               .findBy('isTeacherRubric', true);
-            let newTeacherRubric = teacherRubric ?
-              teacherRubric.copy() :
-              teacherRubric;
+            let newTeacherRubric = teacherRubric
+              ? teacherRubric.copy()
+              : teacherRubric;
             user.set(
               'teacherRubric',
               component.createRubricGrade(newTeacherRubric, user)
@@ -522,8 +541,9 @@ export default Ember.Component.extend({
 
   parseRubricCategories(grade, rubric) {
     let categories = rubric.get('categories') ? rubric.get('categories') : [];
-    let gradedCategories = grade.get('categoryGrade') ?
-      grade.get('categoryGrade') : [];
+    let gradedCategories = grade.get('categoryGrade')
+      ? grade.get('categoryGrade')
+      : [];
     if (grade && gradedCategories.length > 0) {
       categories.map((category, index) => {
         let gradedCategory = gradedCategories.objectAt(index);
@@ -602,15 +622,17 @@ export default Ember.Component.extend({
       id: task.get('id'),
       description: task.get('description'),
       submissionCount: task.get('submissionCount'),
-      oaTaskSubmissions: task.get('oaTaskSubmissions').length > 0 ?
-        task.get('oaTaskSubmissions').map(item => {
-          return Ember.Object.create({
-            id: item.id,
-            taskSubmissionSubType: item.taskSubmissionSubType,
-            taskSubmissionType: item.taskSubmissionType,
-            oaTaskId: item.oaTaskId
-          });
-        }) : []
+      oaTaskSubmissions:
+        task.get('oaTaskSubmissions').length > 0
+          ? task.get('oaTaskSubmissions').map(item => {
+            return Ember.Object.create({
+              id: item.id,
+              taskSubmissionSubType: item.taskSubmissionSubType,
+              taskSubmissionType: item.taskSubmissionType,
+              oaTaskId: item.oaTaskId
+            });
+          })
+          : []
     });
   },
 
@@ -620,27 +642,27 @@ export default Ember.Component.extend({
   saveUserGrade() {
     let component = this;
     const isTeacher = component.get('isTeacher');
-    let userGrade = isTeacher ?
-      component.get('teacherRubric') :
-      component.get('studentRubric');
+    let userGrade = isTeacher
+      ? component.get('teacherRubric')
+      : component.get('studentRubric');
     let grader = isTeacher ? 'teacher' : 'self';
-    let categories = isTeacher ?
-      component.get('teacherRubricCategories') :
-      component.get('studentRubricCategories');
+    let categories = isTeacher
+      ? component.get('teacherRubricCategories')
+      : component.get('studentRubricCategories');
     let context = component.get('context');
     let currentStudent = component.get('student');
-    let contentSource = component.get('isCourseMapGrading') ?
-      PLAYER_EVENT_SOURCE.COURSE_MAP :
-      PLAYER_EVENT_SOURCE.DAILY_CLASS;
+    let contentSource = component.get('isCourseMapGrading')
+      ? PLAYER_EVENT_SOURCE.COURSE_MAP
+      : PLAYER_EVENT_SOURCE.DAILY_CLASS;
     if (isTeacher) {
       userGrade.set('sessionId', currentStudent.get('sessionId'));
       userGrade.set('graderId', component.get('session.userId'));
     }
-    let maxScore = isTeacher ?
-      component.get('content.maxScore') :
-      userGrade ?
-        userGrade.get('maxScore') :
-        null;
+    let maxScore = isTeacher
+      ? component.get('content.maxScore')
+      : userGrade
+        ? userGrade.get('maxScore')
+        : null;
     userGrade.set('maxScore', maxScore);
     let categoriesScore = Ember.A([]);
     userGrade.set('classId', context.get('classId'));
@@ -687,7 +709,8 @@ export default Ember.Component.extend({
    */
   createRubricCategory(category, level) {
     let rubricCategory = RubricCategoryScore.create(
-      Ember.getOwner(this).ownerInjection(), {
+      Ember.getOwner(this).ownerInjection(),
+      {
         title: category.get('title')
       }
     );
@@ -774,23 +797,25 @@ export default Ember.Component.extend({
    */
   openPullUp() {
     let component = this;
-    component.$().animate({
-      top: '10%'
-    },
-    400
+    component.$().animate(
+      {
+        top: '10%'
+      },
+      400
     );
   },
 
   closePullUp() {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.sendAction('onClosePullUp');
-      component.set('showPullUp', false);
-    }
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.sendAction('onClosePullUp');
+        component.set('showPullUp', false);
+      }
     );
   },
 
@@ -923,9 +948,7 @@ export default Ember.Component.extend({
       studentIds: component
         .get('rubricService')
         .getOaGradingStudents(contentId, requestParam)
-    }).then(({
-      studentIds
-    }) => {
+    }).then(({ studentIds }) => {
       return component
         .get('profileService')
         .readMultipleProfiles(studentIds.students);

@@ -1,13 +1,8 @@
 import Ember from 'ember';
 import SessionMixin from 'gooru-web/mixins/session';
 import ModalMixin from 'gooru-web/mixins/modal';
-import {
-  PLAYER_EVENT_SOURCE,
-  SCREEN_SIZES
-} from 'gooru-web/config/config';
-import {
-  isCompatibleVW
-} from 'gooru-web/utils/utils';
+import { PLAYER_EVENT_SOURCE, SCREEN_SIZES } from 'gooru-web/config/config';
+import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 /**
  * Class activities controller
@@ -51,11 +46,34 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   // Actions
 
   actions: {
+    onShowClassActivities() {
+      const controller = this;
+      controller.set('showItemsToGrade', false);
+    },
+
+    onShowItemsToGrade() {
+      const controller = this;
+      controller.set('showItemsToGrade', true);
+    },
+
+    onSelectWeek(startDate, endDate) {
+      let controller = this;
+      let forMonth = moment(endDate).format('MM');
+      let forYear = moment(endDate).format('YYYY');
+      controller.set('forMonth', forMonth);
+      controller.set('forYear', forYear);
+      controller.set('startDate', startDate);
+      controller.set('endDate', endDate);
+      controller.loadActivities(startDate, endDate);
+      controller.send('toggleDatePicker');
+    },
+
     onShowSuggestion(classActivity) {
       const controller = this;
       controller.set('selectedClassActivity', classActivity);
       controller.fetchSuggestionContent(classActivity);
     },
+
     onOpenReportGrade(itemToGrade) {
       let controller = this;
       controller.set('itemToGradeContextData', itemToGrade);
@@ -68,17 +86,23 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.animateDatePicker();
     },
 
-    /**
-     * Action triggered when items to grade section item got clicked.
-     */
-    toggleItemsToGrade() {
-      let controller = this;
-      let isMobileView = controller.get('isMobileView');
-      if (isMobileView) {
-        controller.animateItemsToGradeForMobile();
+    onSelectRangeType(rangeType) {
+      const controller = this;
+      let forMonth = moment().format('MM');
+      let forYear = moment().format('YYYY');
+      controller.set('isDaily', false);
+      controller.set('isMonthly', false);
+      controller.set('isWeekly', false);
+      controller.set('forMonth', forMonth);
+      controller.set('forYear', forYear);
+      if (rangeType === 'daily') {
+        controller.set('isDaily', true);
+      } else if (rangeType === 'weekly') {
+        controller.set('isWeekly', true);
       } else {
-        controller.animateItemsToGradeForDesktop();
+        controller.set('isMonthly', true);
       }
+      controller.loadActivitiesForMonth();
     },
 
     studentDcaReport(
@@ -94,8 +118,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       let params = {
         userId: userId,
         classId: controller.get('class.id'),
-        collectionId: collection.get('id') || collection.get('suggestedContentId'),
-        type: collection.get('format') || collection.get('suggestedContentType'),
+        collectionId:
+          collection.get('id') || collection.get('suggestedContentId'),
+        type:
+          collection.get('format') || collection.get('suggestedContentType'),
         isStudent: true,
         collection,
         activityDate,
@@ -132,36 +158,50 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
     showPreviousMonth(date) {
       let controller = this;
+      let forMonth = moment(date).format('MM');
+      let forYear = moment(date).format('YYYY');
+      controller.set('forMonth', forMonth);
+      controller.set('forYear', forYear);
       controller.loadActivitiesForMonth();
-      controller.loadActivityForDate(date);
+    },
+
+    onSelectMonth(date) {
+      let controller = this;
+      let startDate = `${date}-01`;
+      let endDate = moment(startDate)
+        .endOf('month')
+        .format('YYYY-MM-DD');
+      let forMonth = moment(startDate).format('MM');
+      let forYear = moment(startDate).format('YYYY');
+      controller.set('forMonth', forMonth);
+      controller.set('forYear', forYear);
+      controller.set('startDate', startDate);
+      controller.set('endDate', endDate);
+      controller.loadActivities(startDate, endDate);
+      controller.send('toggleDatePicker');
     },
 
     showNextMonth(date) {
       let controller = this;
+      let forMonth = moment(date).format('MM');
+      let forYear = moment(date).format('YYYY');
+      controller.set('forMonth', forMonth);
+      controller.set('forYear', forYear);
       controller.loadActivitiesForMonth();
-      controller.loadActivityForDate(date);
     },
 
     onSelectDate(date) {
       let controller = this;
-      controller.set('selectedDate', date);
-      controller.loadActivityForDate(date);
+      controller.set('startDate', date);
+      controller.set('endDate', null);
+      controller.loadActivities(date);
       controller.send('toggleDatePicker');
     },
 
     onSelectToday(date) {
       let controller = this;
       controller.send('onSelectDate', date);
-    },
-
-    toggleOffineActivity() {
-      let controller = this;
-      let isMobileView = controller.get('isMobileView');
-      if (isMobileView) {
-        controller.animateOfflineActivityForMobile();
-      } else {
-        controller.animateOfflineActivityForDesktop();
-      }
+      controller.set('endDate', null);
     },
 
     playContent(playerUrl, content) {
@@ -169,8 +209,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       controller.set('playerUrl', playerUrl);
       controller.set('isOpenPlayer', true);
       controller.set('playerContent', content);
-      controller.set('isSuggestedContentPlay',
-        content.get('isSuggestedContentPlay'));
+      controller.set(
+        'isSuggestedContentPlay',
+        content.get('isSuggestedContentPlay')
+      );
     },
 
     closePullUp() {
@@ -181,8 +223,9 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
         classActivity.set('suggestions', false);
         controller.fetchSuggestionContent(classActivity);
       } else {
-        const selectedDate = controller.get('selectedDate');
-        controller.loadActivityForDate(selectedDate);
+        const startDate = controller.get('startDate');
+        controller.loadActivities(startDate);
+        controller.loadItemsToGrade();
       }
       controller.set('isOpenPlayer', false);
       controller.get('classController').send('reloadData');
@@ -191,12 +234,34 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
 
   // -------------------------------------------------------------------------
   // Properties
-
+  /**
+   * @property {String} endDate
+   * Property to handle endDate
+   */
+  endDate: null,
   /**
    * @property {Boolean} isMobileView
    * Property to handle is mobile view
    */
   isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+  /**
+   * @property {Boolean} isDaily
+   * Property to handle daily view
+   */
+  isDaily: true,
+
+  /**
+   * @property {Boolean} isWeekly
+   * Property to handle weekly view
+   */
+  isWeekly: false,
+
+  /**
+   * @property {Boolean} isMonthly
+   * Property to handle montly view
+   */
+  isMonthly: false,
 
   queryParams: ['tab'],
 
@@ -241,18 +306,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
   studentDcaReport: false,
 
   /**
-   * it maintains data for active offline activities
-   * @property {Array}
-   */
-  activeOfflineActivities: Ember.A([]),
-
-  /**
-   * it maintains data for completed offline activities
-   * @property {Array}
-   */
-  completedOfflineActivities: Ember.A([]),
-
-  /**
    * Class id
    * @property {String}
    */
@@ -283,15 +336,45 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Maintains the value of date is today or not
    * @type {Integer}
    */
-  isToday: Ember.computed('selectedDate', function() {
-    return this.get('selectedDate') === moment().format('YYYY-MM-DD');
+  isToday: Ember.computed('startDate', function() {
+    return this.get('startDate') === moment().format('YYYY-MM-DD');
   }),
 
   /**
    * Maintains the value of selected date of the user
-   * @type {Integer}
+   * @type {String}
    */
-  selectedDate: null,
+  startDate: Ember.computed(function() {
+    return moment().format('YYYY-MM-DD');
+  }),
+
+  /**
+   * Maintains the value to show items to grade
+   * @type {Boolean}
+   */
+  showItemsToGrade: false,
+
+  scheduledActivitiesList: Ember.computed('classActivities.[]', function() {
+    const component = this;
+    const scheduledActivitiesList = Ember.A([]);
+    const classActivities = component.get('classActivities');
+    classActivities.forEach(data => {
+      let addedDate = data.get('added_date');
+      let classActivity = scheduledActivitiesList.findBy(
+        'added_date',
+        addedDate
+      );
+      if (!classActivity) {
+        classActivity = Ember.Object.create({
+          added_date: addedDate,
+          scheduledActivities: Ember.A([])
+        });
+        scheduledActivitiesList.pushObject(classActivity);
+      }
+      classActivity.get('scheduledActivities').pushObject(data);
+    });
+    return scheduledActivitiesList.sortBy('added_date').reverse();
+  }),
 
   /**
    * It Maintains the list of scheduled class activities datewise.
@@ -327,6 +410,21 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     return controller.get('session.userId');
   }),
 
+  contentTypes: Ember.A([
+    Ember.Object.create({
+      type: 'collection',
+      isActive: true
+    }),
+    Ember.Object.create({
+      type: 'assessment',
+      isActive: true
+    }),
+    Ember.Object.create({
+      type: 'offline-activity',
+      isActive: true
+    })
+  ]),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -334,10 +432,8 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
     let controller = this;
     controller._super(...arguments);
     let todayDate = moment().format('YYYY-MM-DD');
-    controller.loadActivityForDate(todayDate);
-    controller.loadActiveOfflineActivities();
-    controller.loadCompeltedOfflineActivities();
     controller.loadItemsToGrade();
+    controller.loadActivities(todayDate);
   },
 
   /**
@@ -345,8 +441,10 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
    * Method to slide up and down date picker
    */
   animateDatePicker() {
-    let element = Ember.$('.ca-schedule-items-header .ca-date-selector');
-    let dateDisplayEle = Ember.$('.ca-date-selector .ca-date-picker-container');
+    let element = Ember.$('.header-container .date-range-picker-container');
+    let dateDisplayEle = Ember.$(
+      '.date-range-picker-container .ca-date-picker-container'
+    );
     if (!element.hasClass('active')) {
       element.slideDown(400, function() {
         element.addClass('active');
@@ -359,27 +457,58 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       });
     }
   },
-
-  /**
-   * @function loadActivityForDate
-   * Method to fetch activity for specific date
-   * @params {string} Date
-   */
-  loadActivityForDate(date) {
+  // Note: This method is used to support for content type filter
+  filterActivitiesByContent() {
     const controller = this;
-    const userId = controller.get('session.userId');
-    const classId = controller.get('classId');
-    controller.set('isLoading', true);
-    controller
-      .get('classActivityService')
-      .getStudentScheduledActivities(userId, classId, date)
-      .then(function(classActivities) {
-        controller.set('classActivities', classActivities);
-        if (classActivities.length) {
-          controller.getSuggestionCounts(classActivities);
-        }
-        controller.set('isLoading', false);
+    const filteredContentTypes = controller
+      .get('contentTypes')
+      .filterBy('isActive', true)
+      .map(content => {
+        return content.get('type');
       });
+    let classActivities = controller.get('classActivities');
+    let filteredActivites = classActivities.filter(classActivity => {
+      let contentType = classActivity.get('contentType');
+      contentType =
+        contentType === 'assessment-external'
+          ? 'assessment'
+          : contentType === 'collection-external'
+            ? 'collection'
+            : contentType;
+      return filteredContentTypes.includes(contentType);
+    });
+    controller.set('classActivities', filteredActivites);
+  },
+
+  loadActivities(startDate, endDate) {
+    const controller = this;
+    if (!endDate) {
+      endDate = startDate;
+    }
+    controller.set('isLoading', true);
+    const userId = controller.get('session.userId');
+    const filteredContentTypes = controller
+      .get('contentTypes')
+      .filterBy('isActive', true);
+    const contentPromises = filteredContentTypes.map(content => {
+      const classId = controller.get('classId');
+      const requestBody = {
+        content_type: content.get('type'),
+        start_date: startDate,
+        end_date: endDate
+      };
+      return controller
+        .get('classActivityService')
+        .getScheduledActivitiesByDate(classId, requestBody, userId);
+    });
+    Ember.RSVP.all(contentPromises).then(function(response) {
+      const classActivities = [].concat.apply([], response);
+      if (classActivities.length) {
+        controller.getSuggestionCounts(classActivities);
+      }
+      controller.set('classActivities', classActivities);
+      controller.set('isLoading', false);
+    });
   },
 
   getSuggestionCounts(classActivities) {
@@ -415,7 +544,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       detail: true,
       userId
     };
-
     if (!classActivity.get('suggestions')) {
       controller
         .get('suggestService')
@@ -449,40 +577,6 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
       .then(classActivities => {
         controller.set('classActivitiesOfMonth', classActivities);
         controller.set('isLoading', false);
-      });
-  },
-
-  /**
-   * @function loadActiveOfflineActivities
-   * Method to fetch active offline activities
-   */
-  loadActiveOfflineActivities() {
-    const controller = this;
-    const classId = controller.get('classId');
-    controller
-      .get('classActivityService')
-      .fetchActiveOfflineActivities(classId)
-      .then(activeOfflineActivities => {
-        controller.set('activeOfflineActivities', activeOfflineActivities);
-      });
-  },
-
-  /**
-   * @function loadCompeltedOfflineActivities
-   * Method to fetch completed offline activities
-   */
-  loadCompeltedOfflineActivities() {
-    const controller = this;
-    const classId = controller.get('classId');
-    const userId = controller.get('session.userId');
-    controller
-      .get('classActivityService')
-      .fetchCompletedOfflineActivities(classId, userId)
-      .then(completedOfflineActivities => {
-        controller.set(
-          'completedOfflineActivities',
-          completedOfflineActivities
-        );
       });
   },
 
@@ -537,109 +631,5 @@ export default Ember.Controller.extend(SessionMixin, ModalMixin, {
           resolve(itemObject);
         }, reject);
     });
-  },
-
-  /**
-   * Animate a items to grade section for mobile
-   */
-  animateItemsToGradeForMobile() {
-    let itemToGradeEle = Ember.$(
-      '.ca-panel .right-panel .item-to-grade-container'
-    );
-    let windowHeight = $(window).height();
-    if (itemToGradeEle.hasClass('active')) {
-      itemToGradeEle.animate({
-        top: windowHeight - 100
-      },
-      400,
-      function() {
-        itemToGradeEle.removeClass('active');
-      }
-      );
-    } else {
-      itemToGradeEle.addClass('active');
-      itemToGradeEle.animate({
-        top: 100
-      },
-      400
-      );
-    }
-  },
-
-  /**
-   * Animate a items to grade section for desktop
-   */
-  animateItemsToGradeForDesktop() {
-    let offlineActivityContainer = Ember.$(
-      '.ca-panel .right-panel .offline-container'
-    );
-    let itemToGradeContainer = Ember.$(
-      '.ca-panel .right-panel .item-to-grade-container'
-    );
-    if (!itemToGradeContainer.hasClass('active')) {
-      let offlineActivityEle = offlineActivityContainer.children(
-        '.offline-activity-contents'
-      );
-      let itemToGradeEle = itemToGradeContainer.children(
-        '.ca-grade-content-items'
-      );
-      offlineActivityContainer.removeClass('active');
-      offlineActivityEle.slideUp(400);
-      itemToGradeEle.slideDown(400, function() {
-        itemToGradeContainer.addClass('active');
-      });
-    }
-  },
-
-  /**
-   * Animate a items to grade section for desktop
-   */
-  animateOfflineActivityForDesktop() {
-    let offlineActivityContainer = Ember.$(
-      '.ca-panel .right-panel .offline-container'
-    );
-    let itemToGradeContainer = Ember.$(
-      '.ca-panel .right-panel .item-to-grade-container'
-    );
-    if (!offlineActivityContainer.hasClass('active')) {
-      let offlineActivityEle = offlineActivityContainer.children(
-        '.offline-activity-contents'
-      );
-      let itemToGradeEle = itemToGradeContainer.children(
-        '.ca-grade-content-items'
-      );
-      itemToGradeContainer.removeClass('active');
-      itemToGradeEle.slideUp(400);
-      offlineActivityEle.slideDown(400, function() {
-        offlineActivityContainer.addClass('active');
-      });
-    }
-  },
-
-  /**
-   * Animate a offline activity for desktop
-   */
-  animateOfflineActivityForMobile() {
-    let offlineActivityEle = Ember.$(
-      '.ca-panel .right-panel .offline-container'
-    );
-    let windowHeight = $(window).height();
-    if (offlineActivityEle.hasClass('toggle')) {
-      offlineActivityEle.animate({
-        top: windowHeight - 50
-      },
-      400,
-      function() {
-        offlineActivityEle.removeClass('toggle');
-      }
-      );
-    } else {
-      offlineActivityEle.addClass('toggle');
-      offlineActivityEle.animate({
-        top: 100
-      },
-      400
-      );
-    }
   }
 });

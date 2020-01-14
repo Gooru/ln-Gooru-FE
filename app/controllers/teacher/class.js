@@ -288,6 +288,19 @@ export default Ember.Controller.extend({
       : [];
   }),
 
+  /**
+   * @property {String} classActivitiesDefaultTabKey
+   * Property to get default default tab for CA
+   */
+  classActivitiesDefaultTabKey: Ember.computed('class', function() {
+    const controller = this;
+    const classSetting = controller.get('class.setting');
+    const caDefaultView = classSetting
+      ? classSetting['ca.search.default.view']
+      : null;
+    return caDefaultView || 'gooru-catalog';
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 

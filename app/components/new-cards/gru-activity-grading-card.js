@@ -25,11 +25,6 @@ export default Ember.Component.extend({
   },
 
   actions: {
-    onToggleContent(className) {
-      const component = this;
-      component.$(`.${className}`).slideToggle();
-    },
-
     onGradeItem(gradingClass) {
       const component = this;
       const gradingItem = component.get('gradingItem');

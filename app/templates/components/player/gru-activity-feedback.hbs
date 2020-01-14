@@ -7,10 +7,12 @@
             <div class="content-details">
               <span><i class="{{contentFormat}}-icon {{resourceInfo.format}}"></i></span>
               <span class="title">
-                {{#if resourceInfo.order}}
-                  {{resourceInfo.order}}.
-                {{/if}}
-                {{safe-html resourceInfo.title}}
+                <p>
+                  {{#if resourceInfo.order}}
+                    {{resourceInfo.order}}.
+                  {{/if}}
+                  {{safe-html resourceInfo.title}}
+                </p>
               </span>
             </div>
             <div class="author-name">{{collection.owner.fullName}}</div>
@@ -24,7 +26,7 @@
                   <p>{{safe-html description}}</p>
                 </div>
               {{/if}}
-              <div class="details">
+              <div class="details {{contentFormat}}">
                 <div class="taxonomy">
                   {{#if tags.length}}
                     {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}

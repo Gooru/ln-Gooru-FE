@@ -99,6 +99,10 @@ export default Ember.Component.extend({
         .format('YYYY');
       component.set('selectedYear', nextYear);
       component.resetMonth();
+    },
+
+    onCloseDatePicker() {
+      this.sendAction('closeDatePicker');
     }
   },
 

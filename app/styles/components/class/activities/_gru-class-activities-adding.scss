@@ -1,8 +1,6 @@
 .class-activities.gru-clas-activities-adding {
   width: 95%;
   margin: 8px auto;
-  background-color: $white;
-
   &.open {
     .class-activities-source-container.mobile-view {
       .header-container {
@@ -13,7 +11,6 @@
                 transform: translate(-50%, 0);
               }
             }
-
             .content-selector-container {
               display: grid;
             }
@@ -30,7 +27,6 @@
 
   .class-activities-source-container {
     display: grid;
-    grid-row-gap: 3px;
 
     &.mobile-view {
       .header-container {
@@ -54,23 +50,69 @@
       background-color: $white;
       box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
       border-radius: 4px;
+      position: relative;
+      .multi-class-course-map {
+        border-top: 1px solid #666;
+        position: relative;
+        display: grid;
+        .active-class {
+          height: 35px;
+          display: grid;
+          grid-template-columns: auto auto;
+          justify-content: center;
+          align-items: center;
+          text-transform: capitalize;
+          cursor: pointer;
+        }
+        .multi-class-list {
+          display: none;
+          position: absolute;
+          top: 35px;
+          background-color: $white;
+          z-index: 99;
+          width: max-content;
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+          justify-self: center;
+          .class-info {
+            text-align: left;
+            height: 35px;
+            line-height: 35px;
+            text-transform: capitalize;
+            cursor: pointer;
+            border-bottom: 1px solid $light-100;
+            padding: 0 8px;
+            &.active,
+            &:hover {
+              background-color: $light-200;
+            }
+          }
+        }
+      }
     }
 
     .body-container {
       max-height: calc(100vh - 150px);
       overflow-y: auto;
       display: grid;
-
+      background-color: $white;
+      .plan-activities-msg {
+        padding: 15px;
+        width: 100%;
+        text-align: center;
+        font-size: 18px;
+        line-height: 1.2;
+      }
       &.grid-view {
         grid-template-columns: repeat(2, auto);
         max-height: calc(100vh - 125px);
       }
 
-      .lesson-plan-activities-container {
+      .course-map-container {
         .teacher-class-ca-course-map {
           .dca-course-map-unit-container {
             padding: 0;
             overflow: unset;
+            height: auto;
 
             .dca-course-map-unit-panel {
               .dca-course-map-lesson-container {
@@ -78,6 +120,10 @@
               }
             }
           }
+        }
+        .no-course-map {
+          text-align: center;
+          padding: 15px;
         }
       }
     }
@@ -91,6 +137,11 @@
             .content-search-container {
               .content-selector-container {
                 display: grid;
+              }
+              &.disable-content-selector {
+                .content-selector-container {
+                  display: none;
+                }
               }
             }
           }
@@ -151,21 +202,58 @@
   @media screen and (max-width: $screen-sm) {
     margin: auto;
     width: 100%;
-    position: absolute;
+    position: fixed;
     bottom: 0;
-
+    z-index: 99;
+    &.cm-view {
+      bottom: -35px;
+    }
+    &.open {
+      .class-activities-source-container {
+        .header-container {
+          .class-activities.gru-content-search {
+            .content-search-container {
+              .content-source-container {
+                .content-source {
+                  pointer-events: unset;
+                }
+                &.show-dropdown {
+                  .dropdown {
+                    pointer-events: unset;
+                  }
+                }
+                .toggle-panel {
+                  position: relative;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     .class-activities-source-container {
       .header-container {
         .class-activities.gru-content-search {
           .content-search-container {
             .content-source-container {
-              grid-template-columns: repeat(5, auto);
+              grid-template-columns: repeat(4, auto) 70px;
+              &.show-dropdown {
+                grid-template-columns: 1fr 50px;
+                .dropdown {
+                  pointer-events: none;
+                }
+              }
+              .content-source {
+                pointer-events: none;
+              }
               .toggle-panel {
                 width: 100%;
                 height: 100%;
-                justify-content: center;
+                justify-content: flex-end;
                 display: grid;
                 align-items: center;
+                position: absolute;
+                padding-right: 20px;
               }
               column-gap: 0;
               padding: 0;
@@ -176,6 +264,8 @@
       }
       &.mobile-view {
         .header-container {
+          border-top: 1px solid gray;
+          box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.3);
           .class-activities.gru-content-search {
             .content-search-container {
               .content-selector-container {

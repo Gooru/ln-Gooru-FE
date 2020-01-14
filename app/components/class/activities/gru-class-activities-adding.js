@@ -1,9 +1,11 @@
 import Ember from 'ember';
-import { SCREEN_SIZES } from 'gooru-web/config/config';
+import { SCREEN_SIZES, CONTENT_TYPES } from 'gooru-web/config/config';
 import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-clas-activities-adding'],
+
+  classNameBindings: ['isShowCourseMap:cm-view', 'isShowFullView:open'],
 
   /**
    * @requires service:api-sdk/class-activity
@@ -15,7 +17,15 @@ export default Ember.Component.extend({
    */
   courseService: Ember.inject.service('api-sdk/course'),
 
+  /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
   actions: {
+    goBackToTenantLibraries() {
+      this.set('isShowTenantLibraries', true);
+    },
     onSelectExternalActivity() {
       const component = this;
       component.set('isEnableExternalActivity', true);
@@ -42,7 +52,7 @@ export default Ember.Component.extend({
       const component = this;
       component.set('tenantLibraries', tenantLibraries);
       component.set('isShowTenantLibraries', true);
-      component.set('isShowLessonPlan', false);
+      component.set('isShowCourseMap', false);
     },
 
     onSelectTenantLibrary(tenantLibrary) {
@@ -58,7 +68,7 @@ export default Ember.Component.extend({
       });
       component.set('filteredContents', filteredContents);
       component.set('isShowTenantLibraries', false);
-      component.set('isShowLessonPlan', false);
+      component.set('isShowCourseMap', false);
     },
 
     onAddActivity(
@@ -82,16 +92,21 @@ export default Ember.Component.extend({
       );
     },
 
-    onShowLessonPlan() {
+    onShowCourseMap() {
       const component = this;
-      component.set('isShowLessonPlan', true);
+      component.set('isShowCourseMap', true);
       component.set('isShowTenantLibraries', false);
     },
 
     onShowDateRangePicker(content) {
       const component = this;
+      const contentFormat = content.get('format') || content.get('contentType');
       component.set('contentToSchedule', content);
       component.set('isShowDateRangePicker', true);
+      component.set(
+        'isShowStartEndDatePicker',
+        contentFormat === CONTENT_TYPES.OFFLINE_ACTIVITY
+      );
     },
 
     onCloseDateRangePicker() {
@@ -102,6 +117,7 @@ export default Ember.Component.extend({
       const component = this;
       const content = component.get('contentToSchedule');
       component.assignActivityToMultipleClass(content, scheduleDate, endDate);
+      component.set('isShowDateRangePicker', false);
     },
 
     scheduleContentForMonth(month, year) {
@@ -116,6 +132,7 @@ export default Ember.Component.extend({
         month,
         year
       );
+      component.set('isShowDateRangePicker', false);
     },
 
     onTogglePanel() {
@@ -139,6 +156,31 @@ export default Ember.Component.extend({
         component.$().addClass('open');
       }
       component.toggleProperty('isShowFullView');
+    },
+
+    onShowContentPreview(previewContent) {
+      const component = this;
+      component.set('previewContent', previewContent);
+      if (previewContent.get('format') === 'offline-activity') {
+        component.set('isShowOfflineActivityPreview', true);
+      } else {
+        component.set('isShowContentPreview', true);
+      }
+    },
+
+    onToggleMultiClassPanel(component = this) {
+      component.$('.multi-class-list').slideToggle();
+      component.toggleProperty('isMultiClassListExpanded');
+    },
+
+    //Action triggered when selecting a class from dropdown
+    onSelectCmClass(classInfo) {
+      const component = this;
+      component.set('activeCmClass', classInfo);
+      component.getClassInfo(classInfo.get('id')).then(classData => {
+        component.set('activeCmClass', classData);
+      });
+      component.actions.onToggleMultiClassPanel(component);
     }
   },
 
@@ -147,6 +189,28 @@ export default Ember.Component.extend({
   isShowFullView: false,
 
   isMobileView: isCompatibleVW(SCREEN_SIZES.MEDIUM),
+
+  isShowStartEndDatePicker: false,
+
+  /**
+   * @property {Boolean} isCourseAttached
+   * Property to check whether Class has attached with a course or not
+   */
+  isCourseAttached: Ember.computed('activeCmClass', function() {
+    return !!this.get('activeCmClass.courseId');
+  }),
+
+  defaultTab: Ember.Object.create({}),
+
+  /**
+   * @property {Object} activeCmClass
+   * Property for the active class object
+   */
+  activeCmClass: Ember.computed(function() {
+    return this.get('primaryClass');
+  }),
+
+  isMultiClassListExpanded: false,
 
   assignActivityToMultipleClass(
     content,
@@ -187,12 +251,16 @@ export default Ember.Component.extend({
             });
             activityClasses.pushObject(activityClass);
             content.set('activityClasses', activityClasses);
-            content.set('isAdded', true);
             resolve();
           }, reject);
       });
     });
     Ember.RSVP.all(promiseList).then(() => {
+      if (scheduleDate) {
+        content.set('isAdded', true);
+      } else {
+        content.set('isScheduled', true);
+      }
       component.sendAction('activityAdded', content);
     });
   },
@@ -212,5 +280,18 @@ export default Ember.Component.extend({
         year,
         endDate
       );
+  },
+
+  /**
+   * @function getClassInfo
+   * @param {UUID} classId
+   * @return Promise classdata
+   */
+  getClassInfo(classId) {
+    const component = this;
+    const fetchCachedData = true;
+    return component
+      .get('classService')
+      .readClassInfo(classId, fetchCachedData);
   }
 });

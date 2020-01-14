@@ -72,6 +72,22 @@
                 </div>
               </div>
             </div>
+            <div class="sub-sec default-ca-tab">
+              <div class="default-tab-label">
+                Default search tab in Class Activities
+              </div>
+              <div class="default-tab-selector">
+                <div class='row-value'>
+                  {{gru-dropdown
+                    selectedItemId=activeClassActivitiesTab.id
+                    placeholder="Select default tab"
+                    items=classActivitiesTabs
+                    displayLabelFieldKey="label"
+                    onChangeAction="onUpdateActiveCaTab"
+                    btn-group-size=btn-group-size}}
+                </div>
+              </div>
+            </div>
             <div class="sub-sec-teach">
               <div class='sub-sec-head'>{{t 'class.info.teachers'}}</div>
               <div class="sub-sec-row">

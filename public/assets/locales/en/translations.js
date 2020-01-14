@@ -1,3 +1,4 @@
+//eslint-disable-next-line
 window.i18ln = {
   en: 'English',
   sp: 'Español',
@@ -88,6 +89,8 @@ window.i18ln = {
     'There was an error while uploading this image. Re-upload?',
   're-upload': 'Re-Upload',
   'common.user': 'user',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',
@@ -899,7 +902,6 @@ window.i18ln = {
     'This Navigator course is a personalized course covering standards across multiple grades. Each student is provided a unique course to help fill gaps, reinforce concepts and practices, and accelerate their learning. Personalized routes are designed and students are re-routed in real-time to maximize each student\'s learning potential and to navigate to their set destination.',
   'class.overview.course-map.learning-path':
     'Your learning path has lessons to cover the gaps in your proficiency to your destination. Your class grade level milestone shows competencies already mastered (shown in italics in a light grey background), while the mastered ones are hidden for other milestones. Turn on this switch to view the lessons for mastered competencies in the other milestones.',
-
   'class.overview.course-map.custom-msg':
     'We are personalizing this course specifically for you based on your proficiency. Please check back in a little while to see the personalized course map.',
   'class.overview.course-map.route0-bannerdesc':
@@ -1143,7 +1145,6 @@ window.i18ln = {
   'content.oa.reference.presentation': 'Presentation',
   'content.oa.reference.document': 'Document',
   'content.oa.reference.others': 'Others',
-
   'user.active-classrooms': 'Active Classrooms',
   'user.archived-classrooms': 'Archived Classrooms',
   'user.classrooms': 'Classrooms',
@@ -2819,6 +2820,17 @@ window.i18ln = {
   'class-activity.no-activity-items-to-grade-message-mobile':
     'You have no activities items to grade for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
   'class-activity.no-activity-items-to-grade-message-desktop':
-    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule'
+    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule',
+  'class-activity.scheduled-activities': 'Class Activities',
+  'class-activity.unscheduled-activities': 'Unscheduled Activities',
+  'class-activity.items-to-grade': 'Items to Grade',
+  'common.monthly': 'Monthly',
+  'common.daily': 'Daily',
+  'common.weekly': 'Weekly',
+  'class-activity.no-learning-activities':
+    'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
+  'common.activate': 'Activate',
+  'common.mark-as-completed': 'Mark Closed',
+  'common.no-struggling-competencies':
+    'Yay! Looks like all your students are doing well!'
 };
-//export default window.i18ln;

@@ -52,11 +52,19 @@ export default Ember.Route.extend({
    * @param controller
    */
   resetController(controller) {
+    const todayDate = moment();
     controller.set('classActivities', Ember.A([]));
     controller.set('classActivitiesOfMonth', Ember.A([]));
-    controller.set('activeOfflineActivities', Ember.A([]));
-    controller.set('completedOfflineActivities', Ember.A([]));
-    controller.set('selectedDate', null);
+    controller.set('startDate', todayDate.format('YYYY-MM-DD'));
+    controller.set('endDate', todayDate.format('YYYY-MM-DD'));
+    controller.set('isToday', true);
+    controller.set('isDaily', true);
+    controller.set('isMonthly', false);
+    controller.set('isWeekly', false);
+    controller.set('isActive', false);
+    controller.set('showItemsToGrade', false);
+    controller.set('forMonth', todayDate.format('MM'));
+    controller.set('forYear', todayDate.format('YYYY'));
     controller.set('tab', null);
   }
 });

@@ -1,3 +1,15 @@
+.teacher_class_student-learner-proficiency {
+  .gru-class-navbar.teacher {
+    .studyplayer-title {
+      .nav-title {
+        pointer-events: none;
+        i {
+          display: none;
+        }
+      }
+    }
+  }
+}
 .student_class_student-learner-proficiency {
   height: 100%;
   margin: unset;

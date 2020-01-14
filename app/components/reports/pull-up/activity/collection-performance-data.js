@@ -334,14 +334,16 @@ export default Ember.Component.extend({
     const component = this;
     const students = component.get('students');
     let studentCollectionPerformanceData = component.getCollectionDataParams();
-    students.map(student => {
+    let studentPerformanceData = students.map(student => {
       studentCollectionPerformanceData.session_id = generateUUID();
       studentCollectionPerformanceData.student_id = student.get('id');
-      component.saveStudentCollectionPerformanceData(
+      return component.saveStudentCollectionPerformanceData(
         studentCollectionPerformanceData
       );
     });
-    component.sendAction('onClosePullUp');
+    Ember.RSVP.Promise.all(studentPerformanceData).then(() => {
+      component.sendAction('onClosePullUp');
+    });
   },
 
   /**
@@ -350,10 +352,13 @@ export default Ember.Component.extend({
    */
   submitExternalCollectionPerformanceData() {
     const component = this;
-    component.saveStudentCollectionPerformanceData(
-      component.getExternalCollectionDataParams()
-    );
-    component.sendAction('onClosePullUp');
+    component
+      .saveStudentCollectionPerformanceData(
+        component.getExternalCollectionDataParams()
+      )
+      .then(() => {
+        component.sendAction('onClosePullUp');
+      });
   },
 
   /**

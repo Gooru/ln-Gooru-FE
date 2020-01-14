@@ -9,7 +9,6 @@
   right: 0;
   margin: 0 auto;
   display: none;
-
   @media screen and (max-width: $screen-md) {
     width: 70%;
   }
@@ -60,18 +59,18 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     .struggling-competency-domain-level-content {
       height: calc(100vh - 18vh);
       overflow-y: auto;
+
       .grade-domain-name-accordion {
         font-size: 15px;
         display: grid;
         grid-template-columns: 1fr 48px;
         padding: 10px;
         font-weight: bold;
-        border-bottom: 1px solid #ccc;
-        background-color: $navy-blue;
-        color: $white;
+        border-bottom: 1px solid $gray-80;
         cursor: pointer;
 
         span {
@@ -80,11 +79,14 @@
           white-space: nowrap;
         }
       }
+
       .grade-domain-competency-list-container {
         display: none;
+
         &.first-child {
           display: block;
         }
+
         .grade-domain-competency-list-panel {
           display: grid;
           grid-template-columns: 1fr 50px 50px;
@@ -95,21 +97,23 @@
           .grade-domain-competency-heading {
             display: grid;
             grid-template-columns: auto;
+
             span {
               font-size: 15px;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
             }
+
             .grade-domain-competency-sub-heading {
               display: inline-flex;
               list-style: none;
               margin: 0;
               padding: 0;
+              font-size: 12px;
 
               li {
                 padding-right: 10px;
-                border-right: 1px solid $gray-80;
                 line-height: 1;
 
                 &:last-child {
@@ -119,19 +123,39 @@
               }
             }
           }
+
           .grade-domain-competency-icon {
             display: grid;
             align-items: center;
             text-align: center;
             color: $orange-500;
           }
+
           .grade-domain-competency-count {
             text-align: center;
+            position: relative;
+
+            .student-count {
+              position: absolute;
+              width: 15px;
+              height: 15px;
+              top: -6px;
+              background-color: $white;
+              border-radius: 50%;
+              border: 1px solid $gray-80;
+              right: 10px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 10px;
+            }
           }
         }
+
         .domain-show-more-btn {
           text-align: end;
           padding: 10px 20px;
+
           span {
             width: max-content;
             padding: 5px;
