@@ -254,6 +254,7 @@ export default Ember.Component.extend({
       .axis()
       .scale(xScale)
       .orient('bottom')
+      .outerTickSize(0)
       .tickPadding(10);
 
     var yAxis = d3.svg
@@ -264,29 +265,27 @@ export default Ember.Component.extend({
       .outerTickSize(0)
       .tickPadding(10);
 
+    var chartZoomConfig = d3.behavior
+      .zoom()
+      .scaleExtent([1, Infinity])
+      .x(xScale)
+      .y(yScale);
+
+    let svgWidth = width + margin.left + margin.right;
+    let svgHeight = height + margin.top + margin.bottom;
+
     var svg = d3
       .select(component.element)
       .append('svg')
       .attr('class', 'navigator-atc-chart')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
-      .call(
-        d3.behavior
-          .zoom()
-          .scaleExtent([1, 3])
-          .on('zoom', () => {
-            const translatePoints =
-              d3.event.scale > 1
-                ? d3.event.translate
-                : `${margin.left},${margin.top}`;
-            svg.attr(
-              'transform',
-              `translate(${translatePoints}) scale(${d3.event.scale})`
-            );
-          })
-      )
+      .attr('width', svgWidth)
+      .attr('height', svgHeight)
+      .call(chartZoomConfig)
       .append('g')
+      .attr('class', 'chart-area')
       .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    const studentNodes = svg.append('g').attr('class', 'student-nodes');
 
     svg
       .append('g')
@@ -332,7 +331,7 @@ export default Ember.Component.extend({
     let tooltipContainer = component.$('.navigator-atc-tooltip');
     let activeStudentContainer = component.$('.active-student-container');
 
-    let studentNode = svg
+    let studentNode = studentNodes
       .selectAll('.student-nodes')
       .data(dataset)
       .enter()
@@ -412,6 +411,39 @@ export default Ember.Component.extend({
         height: 24
       });
     component.cleanUpChart();
+    /**
+     * @function zoomHandler
+     * Method to handle zoom event and rerender chart points
+     */
+    function zoomHandler() {
+      svg.select('.x.axis').call(xAxis);
+      svg.select('.y.axis').call(yAxis);
+      studentNode
+        // Reposition node point based on current axis level
+        .attr('transform', function(d) {
+          let xPoint = xScale(d.completedCompetencies);
+          let yPoint = yScale(d.percentScore);
+          return `translate(${xPoint}, ${yPoint})`;
+        })
+        // Hide student node points after reach chart edge
+        .attr('class', function(d) {
+          let xPoint = xScale(d.completedCompetencies);
+          let yPoint = yScale(d.percentScore);
+          let className = 'node-point';
+          if (
+            xPoint < 15 ||
+            yPoint <= 0 ||
+            xPoint >= svgWidth - 100 ||
+            yPoint >= svgHeight - 100
+          ) {
+            className += ' hidden';
+          }
+          return className;
+        });
+      component.cleanUpChart();
+    }
+    // Bind zoom handler with zoom event
+    chartZoomConfig.on('zoom', zoomHandler);
   },
 
   /**
@@ -419,13 +451,30 @@ export default Ember.Component.extend({
    * Method to clean up chart views as per requirement
    */
   cleanUpChart() {
-    const axes = ['y'];
+    const axes = ['x', 'y'];
     axes.map(axis => {
       var axisContainer = d3.selectAll(this.$(`.${axis}.axis .tick`));
       axisContainer.attr('style', function() {
         var curAxisElement = d3.select(this);
         var curAxisText = curAxisElement.select('text');
-        curAxisText.text(`${curAxisText.text()}%`);
+        var curAxisTransform = d3.transform(curAxisElement.attr('transform'));
+        var curAxisXpoint = curAxisTransform
+          ? curAxisTransform.translate[0]
+          : 0;
+        var curAxisYpoint = curAxisTransform
+          ? curAxisTransform.translate[1]
+          : 0;
+        var tickClass = 'tick';
+        if (
+          (axis === 'y' && curAxisYpoint > 260) ||
+          (axis === 'x' && curAxisXpoint < 230)
+        ) {
+          tickClass += ' no-label';
+        }
+        curAxisElement.attr('class', tickClass);
+        if (axis === 'y') {
+          curAxisText.text(`${curAxisText.text()}%`);
+        }
       });
     });
   },
