@@ -27,6 +27,11 @@ export default Ember.Component.extend({
     component.loadClassAtcData();
   },
 
+  didDestroyElement() {
+    const component = this;
+    component.set('atcPerformanceSummary', Ember.A([]));
+  },
+
   // -------------------------------------------------------------------------
   // Observers
   observeMonthChange: Ember.observer('month', function() {
@@ -55,6 +60,11 @@ export default Ember.Component.extend({
         .transitionTo(`teacher.class.${redirectTo}`, classId, {
           queryParams
         });
+    },
+
+    onResetZoom() {
+      this.drawAtcChart();
+      this.set('isShowResetButton', false);
     }
   },
 
@@ -107,6 +117,18 @@ export default Ember.Component.extend({
    */
   isShowTooltip: false,
 
+  /**
+   * @property {Array} atcPerformanceSummary
+   * Property to for atc performance summary data set
+   */
+  atcPerformanceSummary: Ember.A([]),
+
+  /**
+   * @property {Boolean} isShowResetButton
+   * Property to show/hide reset chart button
+   */
+  isShowResetButton: false,
+
   // -------------------------------------------------------------------------
   // Functions
 
@@ -118,9 +140,11 @@ export default Ember.Component.extend({
     const component = this;
     component.fetchClassAtcPerforamnceSummary().then(function(atcPerformance) {
       let students = component.get('students');
-      component.drawAtcChart(
+      component.set(
+        'atcPerformanceSummary',
         component.parseClassAtcPerformanceSummary(students, atcPerformance)
       );
+      component.drawAtcChart();
     });
   },
 
@@ -223,8 +247,9 @@ export default Ember.Component.extend({
    * @function drawAtcChart
    * Method to draw atc chart
    */
-  drawAtcChart(dataset) {
+  drawAtcChart() {
     const component = this;
+    const dataset = component.get('atcPerformanceSummary');
     component.$('svg').remove();
     var margin = {
         top: 50,
@@ -441,6 +466,7 @@ export default Ember.Component.extend({
           return className;
         });
       component.cleanUpChart();
+      component.set('isShowResetButton', true);
     }
     // Bind zoom handler with zoom event
     chartZoomConfig.on('zoom', zoomHandler);
