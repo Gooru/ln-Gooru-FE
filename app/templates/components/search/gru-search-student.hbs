@@ -58,17 +58,17 @@
                   {{gru-icon name="done_all" class="tick-icon"}}
                 {{/if}}
               </div>
-              <div class="student-name student-info-column ellipsis"  data-toggle="tooltip" title="{{student.fullName}}" {{action "onSelectStudent" student}}>{{student.fullName}}</div>
+              <div class="student-name student-info-column ellipsis"  data-toggle="tooltip" data-placement="top" title="{{student.fullName}}" {{action "onSelectStudent" student}}>{{student.fullName}}</div>
               <div class="student-username student-info-column">
-                <span class="stu-username ellipsis" data-toggle="tooltip" title="{{student.username}}">
+                <span class="stu-username ellipsis" data-toggle="tooltip" data-placement="top" title="{{student.username}}">
                   {{student.username}}
                 </span>
-                <span class="stu-email ellipsis" data-toggle="tooltip" title="{{student.email}}">
+                <span class="stu-email ellipsis" data-toggle="tooltip" data-placement="top" title="{{student.email}}">
                   {{student.email}}
                 </span>
               </div>
-              <div class="student-id student-info-column ellipsis" data-toggle="tooltip" title="{{student.studentId}}">{{student.studentId}}</div>
-              <div class="student-reference-id student-info-column ellipsis" data-toggle="tooltip" title="{{student.referenceId}}">{{student.referenceId}}</div>
+              <div class="student-id student-info-column ellipsis" data-toggle="tooltip" data-placement="top" title="{{student.studentId}}">{{student.studentId}}</div>
+              <div class="student-reference-id student-info-column ellipsis" data-toggle="tooltip" data-placement="top" title="{{student.referenceId}}">{{student.referenceId}}</div>
             </div>
           {{/each}}
         </div>

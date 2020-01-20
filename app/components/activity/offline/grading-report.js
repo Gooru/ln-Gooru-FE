@@ -799,7 +799,7 @@ export default Ember.Component.extend({
     let component = this;
     component.$().animate(
       {
-        top: '10%'
+        bottom: '0'
       },
       400
     );
@@ -809,7 +809,7 @@ export default Ember.Component.extend({
     let component = this;
     component.$().animate(
       {
-        top: '100%'
+        bottom: '-100%'
       },
       400,
       function() {

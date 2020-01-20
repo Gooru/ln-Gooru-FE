@@ -150,6 +150,12 @@
             border-radius: 5px;
           }
 
+          @media screen and (max-width: $screen-sm) {
+            .tooltip {
+              visibility: visible;
+            }
+          }
+
           .student-info-row {
             display: grid;
             grid-template-columns: 30px repeat(4, 1fr);
