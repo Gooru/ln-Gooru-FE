@@ -166,13 +166,7 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isDaily', false);
       component.set('isMonthly', false);
       component.set('isWeekly', false);
-      if (rangeType === 'daily') {
-        component.set('isDaily', true);
-      } else if (rangeType === 'weekly') {
-        component.set('isWeekly', true);
-      } else {
-        component.set('isMonthly', true);
-      }
+      component.set(`${rangeType}`, true);
     },
 
     //Datepicker selection of a date

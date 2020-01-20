@@ -17,7 +17,7 @@
     {{#unless isShowItemsToGrade}}
       <div class="filters">
         <div class="activity-date-range-selector" {{action "onToggleDatePicker"}}>
-          <span class="schedule-date"><span>{{format-date startDate 'DD MMM YYYY'}}</span><span class="{{unless isShowListCard 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}</span></span>
+          <span class="schedule-date"><span>{{format-date startDate 'DD MMM YYYY'}}</span><span class="{{if isDaily 'hidden'}}"> - {{format-date endDate 'DD MMM YYYY'}}</span></span>
           <span class="dropdown-icon">{{gru-icon name="arrow_drop_down"}}</span>
         </div>
       </div>
@@ -25,10 +25,10 @@
     <div class="date-range-picker-container ">
       <div class="date-range-selector">
         {{#unless isShowUnscheduledActivities}}
-          <span class="{{if isDaily 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'daily'}}>{{t 'common.daily'}}</span>
-          <span class="{{if isWeekly 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'weekly'}}>{{t 'common.weekly'}}</span>
+          <span class="{{if isDaily 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'isDaily'}}>{{t 'common.daily'}}</span>
+          <span class="{{if isWeekly 'active'}} {{if isShowUnscheduledActivities 'disabled'}}" {{action "onSelectRangeType" 'isWeekly'}}>{{t 'common.weekly'}}</span>
         {{/unless}}
-        <span class="{{if isMonthly 'active'}}" {{action "onSelectRangeType" 'monthly'}}>{{t 'common.monthly'}}</span>
+        <span class="{{if isMonthly 'active'}}" {{action "onSelectRangeType" 'isMonthly'}}>{{t 'common.monthly'}}</span>
       </div>
       {{#if isDaily}}
         {{ca-date-picker
@@ -95,7 +95,7 @@
 
       {{#if isShowScheduledActivities}}
         {{#each scheduledActivitiesList as |scheduledActivity|}}
-          {{#if isShowListCard}}
+          {{#if (and isShowListCard (not isDaily))}}
             <div class="added-date">{{format-date scheduledActivity.added_date 'DD MMM YYYY'}}
               <hr />
             </div>
