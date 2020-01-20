@@ -1,12 +1,16 @@
 .reports.dca-student-external-collection-report {
   position: fixed;
-  top: 100%;
+  bottom: -100%;
   z-index: 1031;
   width: 768px;
   left: 0;
   right: 0;
   margin: auto;
   color: #37434d;
+
+  @media screen and (max-width: $screen-sm) {
+    width: 100%;
+  }
 
   .backdrop {
     background-color: #434c5a;
@@ -31,7 +35,7 @@
 
   .report-container {
     background: $white;
-    width: 768px;
+    width: 100%;
     max-height: 90vh;
     height: 90vh;
 
@@ -157,7 +161,7 @@
 
     .report-body {
       height: 60vh;
-      width: 768px;
+      width: 100%;
       overflow-y: auto;
 
       .external-collection-container {

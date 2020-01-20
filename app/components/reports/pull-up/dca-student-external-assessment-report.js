@@ -134,7 +134,7 @@ export default Ember.Component.extend({
     let component = this;
     component.$().animate(
       {
-        top: '10%'
+        bottom: '0'
       },
       400
     );
@@ -142,16 +142,18 @@ export default Ember.Component.extend({
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-      if (closeAll) {
-        component.sendAction('onClosePullUp', true);
+    component.$().animate(
+      {
+        bottom: '-100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+        if (closeAll) {
+          component.sendAction('onClosePullUp', true);
+        }
       }
-    });
+    );
   },
   handleAppContainerScroll() {
     let activePullUpCount = Ember.$(document.body).find('.backdrop-pull-ups')
@@ -173,15 +175,13 @@ export default Ember.Component.extend({
         .get('assessmentService')
         .readExternalAssessment(context.collectionId)
     );
-    return Ember.RSVP
-      .hash({
-        profile: profilePromise,
-        externalAssessment: assessmentContentPromise
-      })
-      .then(function(hash) {
-        component.set('profile', hash.profile);
-        component.set('externalAssessmentContent', hash.externalAssessment);
-      });
+    return Ember.RSVP.hash({
+      profile: profilePromise,
+      externalAssessment: assessmentContentPromise
+    }).then(function(hash) {
+      component.set('profile', hash.profile);
+      component.set('externalAssessmentContent', hash.externalAssessment);
+    });
   },
 
   /**
