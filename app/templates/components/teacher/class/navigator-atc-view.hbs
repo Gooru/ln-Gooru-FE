@@ -7,6 +7,11 @@
     <div class="competency-label">{{t 'teacher-landing.class.atc-view.total-competencies-gained'}}</div>
   </div>
 </div>
+{{#if isShowResetButton}}
+  <div class="reset-zoom" {{action "onResetZoom"}}>
+    Reset Zoom
+  </div>
+{{/if}}
 {{#if studentData}}
   <div class="tooltip-html-container" style="display: none;">
     <div class="tooltip-container">
