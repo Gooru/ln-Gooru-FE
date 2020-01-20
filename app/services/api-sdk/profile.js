@@ -762,5 +762,28 @@ export default Ember.Service.extend({
       Object.assign(gooruTrans, quizzesTrans); //dummy liner fix
       Ember.RSVP.resolve(Object.assign(window.i18ln, window.qzi18n));
     });
+  },
+
+  /**
+   * @function automatedScript used to get translations files
+   */
+  automatedScript(script) {
+    return Ember.RSVP.hash({
+      gooruTrans: this.get('profileAdapter').loadScript(script)
+    }).then(gooruTrans => {
+      Object.assign(gooruTrans); //dummy liner fix
+      Ember.RSVP.resolve(window[script]);
+    });
+  },
+
+  /**
+   * @function automatedScript used to get translations files
+   */
+  updateScript(script, data) {
+    return Ember.RSVP.hash({
+      gooruTrans: this.get('profileAdapter').updateScript(script, data)
+    }).then(gooruTrans => {
+      Ember.RSVP.resolve(gooruTrans);
+    });
   }
 });

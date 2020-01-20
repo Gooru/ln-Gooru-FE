@@ -105,6 +105,30 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
     if (EndPointsConfig.getLanguageSettingdropMenu() !== undefined) {
       this.set('showDropMenu', EndPointsConfig.getLanguageSettingdropMenu());
     }
+    const mapPromise = this.get('locales').map(lang => {
+      return this.get('profileService')
+        .automatedScript(lang.id)
+        .then(() => {
+          return Ember.RSVP.resolve(window[lang.id]);
+        });
+    });
+
+    Ember.RSVP.hash(mapPromise).then(() => {
+      let enLangKeys = Object.keys(window.en);
+      this.get('locales').map(lang => {
+        if (lang.id !== 'en') {
+          let otherKeys = Object.keys(window[lang.id]);
+          let missingKeys = enLangKeys
+            .filter(key => !otherKeys.includes(key))
+            .reduce((obj, key) => {
+              obj[key] = window.en[key];
+              return obj;
+            }, {});
+          window[lang.id] = Object.assign(window[lang.id], missingKeys);
+          this.get('profileService').updateScript(lang.id, window[lang.id]);
+        }
+      });
+    });
   },
 
   /**

@@ -2884,3 +2884,4 @@ window.i18ln = {
   'common.no-struggling-competencies':
     'Yay! Looks like all your students are doing well!'
 };
+window.te = window.i18ln;

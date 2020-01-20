@@ -586,5 +586,22 @@ export default Ember.Object.extend({
     };
 
     return Ember.$.ajax(url, options);
+  },
+
+  updateScript(script, data) {
+    let url = `assets/locales/${script}/translations.js`;
+    let originLocation = `${window.location.origin}/`;
+    url = originLocation + url;
+
+    const options = {
+      cache: true,
+      type: 'POST',
+      headers: this.defineHeaders(),
+      url: url,
+      dataType: 'text',
+      data: data
+    };
+
+    return Ember.$.ajax(url, options);
   }
 });
