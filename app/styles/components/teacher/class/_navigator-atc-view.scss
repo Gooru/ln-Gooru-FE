@@ -1,15 +1,16 @@
 .navigator-atc-view {
-  position: relative;
   .reset-zoom {
-    position: absolute;
     padding: 0 8px;
-    height: 30px;
-    line-height: 30px;
+    height: 26px;
+    line-height: 26px;
     border-radius: 5px;
     background-color: $white;
     cursor: pointer;
     color: #202e32;
-    right: 15px;
+    width: max-content;
+    position: absolute;
+    left: 118px;
+    font-size: 12px;
   }
   svg.navigator-atc-chart {
     background-color: #202e32;
