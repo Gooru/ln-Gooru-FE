@@ -289,6 +289,11 @@ export default Ember.Component.extend({
     }
   }),
 
+  /**
+   * @property {boolean} isShowCompetencyStudentList
+   */
+  isShowCompetencyStudentList: false,
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -321,6 +326,13 @@ export default Ember.Component.extend({
       }
       component.set('selectedCompetency', selectedCompetency);
       component.set('isShowStrugglingCompetencyReport', true);
+      component.set('isShowCompetencyStudentList', false);
+    },
+
+    onShowStudentList(selectedCompetency) {
+      this.set('selectedCompetency', selectedCompetency);
+      this.set('isShowStrugglingCompetencyReport', true);
+      this.set('isShowCompetencyStudentList', true);
     },
 
     //Action triggered when change month
@@ -415,6 +427,7 @@ export default Ember.Component.extend({
       }
       this.set('isShowContentPreview', false);
       this.set('isShowStrugglingCompetencyReport', false);
+      this.set('isShowCompetencyStudentList', false);
     },
 
     // action trigger when click backbutton in other grade pull up

@@ -194,7 +194,7 @@
               overflow: hidden;
               width: 200px;
               @media screen and (min-width: $screen-xs) and (max-width: $screen-md) {
-                width: auto;
+                width: calc(100vw - 150px);
               }
             }
 
@@ -205,7 +205,7 @@
               font-size: 10px;
               width: 200px;
               @media screen and (min-width: $screen-xs) and (max-width: $screen-md) {
-                width: auto;
+                width: calc(100vw - 150px);
               }
 
               li {
@@ -340,7 +340,7 @@
       }
     }
     @media screen and (max-width: 992px) {
-      grid-template-columns: auto;
+      grid-template-columns: 98%;
       row-gap: 15px;
 
       .chart-container {
