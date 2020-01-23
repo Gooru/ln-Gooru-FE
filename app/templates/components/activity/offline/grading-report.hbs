@@ -36,6 +36,7 @@
   <div class="oa-grading-section">
     <div class="left-panel">
       {{#if isTeacher}}
+        <div class="student-response" {{action "onTogglePanel"}}>Student's Response</div>
         <div class="student-info">
           <div class="student-count">
             <sup>{{currentStudentIndex}}</sup>&frasl;<sub>{{users.length}}</sub>
@@ -89,7 +90,7 @@
       {{/unless}}
     </div>
     <div class="right-panel">
-      <div class="oa-grade-right-panel-header" {{action "onTogglePanel"}}>
+      <div class="oa-grade-right-panel-header">
         <div class="oa-grade-info">
           {{#unless isScoring}}
             <span class="oa-grade-info-title">{{t 'grading-player.grading'}}</span>

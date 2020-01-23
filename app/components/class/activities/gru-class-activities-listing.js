@@ -138,6 +138,8 @@ export default Ember.Component.extend(ModalMixin, {
     },
 
     onToggleDatePicker(component = this) {
+      let rangeType = component.get('scheduledActivitiesContext.activeRange');
+      component.send('onSelectRangeType', rangeType);
       component
         .$('.header-container .date-range-picker-container')
         .slideToggle();
