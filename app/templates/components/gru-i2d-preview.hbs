@@ -38,7 +38,7 @@
               <tr class="student-score">
                 <td>{{student.firstName}}</td>
                 {{#each student.questions as |question|}}
-                  <td> {{validation.gru-input model=question valuePath='score' maxLength=question.maxScore}}</td>
+                  <td> {{validation/gru-input model=question valuePath='score' maxLength=question.maxScore}}</td>
                 {{/each}}
               </tr>
             {{/each}}
