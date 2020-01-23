@@ -2900,5 +2900,7 @@ window.i18ln = {
   'common.activate': 'Activate',
   'common.mark-as-completed': 'Mark Closed',
   'common.no-struggling-competencies':
-    'Yay! Looks like all your students are doing well!'
+    'Yay! Looks like all your students are doing well!',
+  'teacher-landing.class.atc-view.learning-gaps': 'Learning Gaps',
+  'teacher-landing.class.atc-view.learning-challenges': 'Learning Challenges'
 };

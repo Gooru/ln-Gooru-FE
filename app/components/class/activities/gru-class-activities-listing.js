@@ -138,6 +138,8 @@ export default Ember.Component.extend(ModalMixin, {
     },
 
     onToggleDatePicker(component = this) {
+      let rangeType = component.get('scheduledActivitiesContext.activeRange');
+      component.send('onSelectRangeType', rangeType);
       component
         .$('.header-container .date-range-picker-container')
         .slideToggle();
@@ -166,31 +168,26 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isDaily', false);
       component.set('isMonthly', false);
       component.set('isWeekly', false);
-      if (rangeType === 'daily') {
-        component.set('isDaily', true);
-      } else if (rangeType === 'weekly') {
-        component.set('isWeekly', true);
-      } else {
-        component.set('isMonthly', true);
-      }
+      component.set(`${rangeType}`, true);
     },
 
     //Datepicker selection of a date
     onSelectDate(date, isDateChange) {
       let component = this;
-      component.set('startDate', date);
-      component.set('endDate', date);
       let forMonth = moment(date).format('MM');
       let forYear = moment(date).format('YYYY');
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
       component.set('selectedDate', date);
-      component.set('isShowListCard', component.get('isMobileView'));
       component.set('selectedFilter', 'day');
       if (isDateChange) {
+        component.set('startDate', date);
+        component.set('endDate', date);
+        component.set('isShowEndDate', false);
+        component.set('isShowListCard', component.get('isMobileView'));
         component.send('closeDatePicker', isDateChange);
         if (component.get('isShowScheduledActivities')) {
-          component.changeScheduledActivitiesContext('daily', date, date);
+          component.changeScheduledActivitiesContext('isDaily', date, date);
         }
       }
     },
@@ -204,15 +201,16 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('selectedWeekDate', startDate);
       component.set('startDateOfWeek', startDate);
       component.set('endDateOfWeek', endDate);
-      component.set('startDate', startDate);
-      component.set('endDate', endDate);
-      component.set('isShowListCard', true);
       component.set('selectedFilter', 'week');
       if (isDateChange) {
+        component.set('startDate', startDate);
+        component.set('endDate', endDate);
+        component.set('isShowEndDate', true);
+        component.set('isShowListCard', true);
         component.send('closeDatePicker', isDateChange);
         if (component.get('isShowScheduledActivities')) {
           component.changeScheduledActivitiesContext(
-            'weekly',
+            'isWeekly',
             startDate,
             endDate
           );
@@ -231,15 +229,16 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('forMonth', forMonth);
       component.set('forYear', forYear);
       component.set('selectedMonth', date);
-      component.set('startDate', startDate);
-      component.set('endDate', endDate);
-      component.set('isShowListCard', true);
       component.set('selectedFilter', 'month');
       if (isDateChange) {
+        component.set('startDate', startDate);
+        component.set('endDate', endDate);
+        component.set('isShowEndDate', true);
+        component.set('isShowListCard', true);
         component.send('closeDatePicker', isDateChange);
         if (component.get('isShowScheduledActivities')) {
           component.changeScheduledActivitiesContext(
-            'monthly',
+            'isMonthly',
             startDate,
             endDate
           );
@@ -250,15 +249,6 @@ export default Ember.Component.extend(ModalMixin, {
     onSelectToday(date) {
       let component = this;
       component.send('onSelectDate', date, true);
-      component.set('startDate', date);
-      component.set('endDate', date);
-      let forMonth = moment(date).format('MM');
-      let forYear = moment(date).format('YYYY');
-      component.set('forMonth', forMonth);
-      component.set('forYear', forYear);
-      if (component.get('isShowScheduledActivities')) {
-        component.changeScheduledActivitiesContext('daily', date, date);
-      }
     },
 
     onRescheduleActivity(classActivity) {
@@ -318,12 +308,14 @@ export default Ember.Component.extend(ModalMixin, {
     onloadScheduledClassActivities() {
       const component = this;
       let contextObj = component.get('scheduledActivitiesContext');
+      let rangeType = contextObj.get('activeRange');
       component.set('startDate', contextObj.get('startDate'));
       component.set('endDate', contextObj.get('endDate'));
-      component.set('isDaily', contextObj.get('isDaily'));
-      component.set('isWeekly', contextObj.get('isWeekly'));
-      component.set('isMonthly', contextObj.get('isMonthly'));
-      component.set('isShowListCard', component.get('isMobileView'));
+      component.send('onSelectRangeType', rangeType);
+      let isMobileView = isCompatibleVW(SCREEN_SIZES.MEDIUM);
+      let isListView = isMobileView ? true : rangeType !== 'isDaily';
+      component.set('isShowListCard', isListView);
+      component.set('isShowEndDate', rangeType !== 'isDaily');
       component.set('isLoading', true);
       component.set('isShowScheduledActivities', true);
       component.set('isShowItemsToGrade', false);
@@ -341,10 +333,10 @@ export default Ember.Component.extend(ModalMixin, {
       let endDate = moment(startDate)
         .endOf('month')
         .format('YYYY-MM-DD');
+      let rangeType = component.get('scheduledActivitiesContext.activeRange');
+      component.send('onSelectRangeType', rangeType);
+      component.set('isShowEndDate', true);
       component.set('isLoading', true);
-      component.set('isDaily', false);
-      component.set('isWeekly', false);
-      component.set('isMonthly', true);
       component.set('selectedMonth', currentMonth);
       component.set('isShowListCard', true);
       component.set('startDate', startDate);
@@ -360,7 +352,6 @@ export default Ember.Component.extend(ModalMixin, {
 
     onShowItemsToGrade() {
       const component = this;
-      // component.groupGradingItems();
       component.set('isShowScheduledActivities', false);
       component.set('isShowItemsToGrade', true);
       component.set('isShowUnscheduledActivities', false);
@@ -438,6 +429,8 @@ export default Ember.Component.extend(ModalMixin, {
   isShowUnscheduledActivities: false,
 
   isShowScheduledActivities: true,
+
+  isShowEndDate: false,
 
   classId: Ember.computed.alias('primaryClass.id'),
 
@@ -555,6 +548,16 @@ export default Ember.Component.extend(ModalMixin, {
 
   groupActivities: Ember.A([]),
 
+  scheduledActivitiesContext: Ember.computed(function() {
+    let currentDate = moment().format('YYYY-MM-DD');
+    let contextObj = Ember.Object.create({
+      activeRange: 'isDaily',
+      startDate: currentDate,
+      endDate: currentDate
+    });
+    return contextObj;
+  }),
+
   isShowListCard: Ember.computed(function() {
     const component = this;
     return isCompatibleVW(SCREEN_SIZES.MEDIUM)
@@ -564,18 +567,6 @@ export default Ember.Component.extend(ModalMixin, {
 
   isMobileView: Ember.computed(function() {
     return isCompatibleVW(SCREEN_SIZES.MEDIUM);
-  }),
-
-  scheduledActivitiesContext: Ember.computed(function() {
-    let currentDate = moment().format('YYYY-MM-DD');
-    let contextObj = Ember.Object.create({
-      isDaily: true,
-      isWeekly: false,
-      isMonthly: false,
-      startDate: currentDate,
-      endDate: currentDate
-    });
-    return contextObj;
   }),
 
   isLoading: false,
@@ -1072,10 +1063,6 @@ export default Ember.Component.extend(ModalMixin, {
     let contextObj = this.get('scheduledActivitiesContext');
     contextObj.set('startDate', startDate);
     contextObj.set('endDate', endDate);
-    contextObj.set('isDaily', false);
-    contextObj.set('isWeekly', false);
-    contextObj.set('isMonthly', false);
-    let range = daterange.capitalize();
-    contextObj.set(`is${range}`, true);
+    contextObj.set('activeRange', daterange);
   }
 });

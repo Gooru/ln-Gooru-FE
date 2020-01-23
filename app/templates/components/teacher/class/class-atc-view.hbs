@@ -24,7 +24,7 @@
       </div>
       <div class="data-analysis-cards-container">
         <div class="competency-card-container">
-          <div class="title-container">{{t 'common.struggling-competencies'}}({{currentGradeName}})</div>
+          <div class="title-container">{{t 'teacher-landing.class.atc-view.learning-challenges'}} ({{currentGradeName}})</div>
           {{#if gradeDomainsList }}
           {{#each gradeDomainsList as |domain domainIndex|}}
           <div class="competency-struggling-container">
@@ -85,7 +85,7 @@
           {{/if}}
         </div>
         <div class="competency-card-container other-grade">
-          <div class="title-container">{{t 'common.struggling-competencies'}}({{t 'profile.proficiency.grade-line'}})</div>
+          <div class="title-container">{{t 'teacher-landing.class.atc-view.learning-gaps'}}</div>
           {{#if otherGradeTopComp.length}}
           {{#each otherGradeTopComp as |competency competencyIndex|}}
           <div class="competency-struggling-container">
@@ -127,7 +127,7 @@
             <div class="competency-icon" {{action "onSelectCompetency" competency}}>
               {{gru-icon name="explore"}}
             </div>
-            <div class="competency-count">
+            <div class="competency-count" {{action "onShowStudentList" competency}}>
               <span class="student-count">
               {{competency.studentsCount}}
               </span>
@@ -181,7 +181,9 @@
      onAddContentToDCA ='onAddCollectionToDCA'
      onScheduleContentToDCA = 'onScheduleContentToDCA'
      selectedCompetency = selectedCompetency
-     closePullUp="onClosePullUp"}}
+     closePullUp="onClosePullUp"
+     isShowCompetencyStudentList = isShowCompetencyStudentList
+   }}
 {{/if}}
 
 <!-- Preview -->

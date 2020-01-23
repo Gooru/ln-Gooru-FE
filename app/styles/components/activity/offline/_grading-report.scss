@@ -247,6 +247,9 @@
         background-color: #fff;
         display: flex;
         flex-direction: column;
+        .student-response {
+          display: none;
+        }
 
         .student-info {
           display: grid;
@@ -401,8 +404,6 @@
           display: grid;
           align-items: center;
           justify-items: center;
-          // Pointer events required only at the mobile view
-          pointer-events: none;
 
           .oa-grade-info {
             .oa-grade-info-title {
@@ -617,16 +618,33 @@
       }
 
       @media screen and (max-width: $screen-sm) {
+        display: flex;
+        flex-direction: column-reverse;
         .left-panel {
-          height: calc(100% - 140px);
+          position: absolute;
+          z-index: 9999;
+          background-color: #35424b !important;
+          .student-response {
+            padding: 10px;
+            font-family: "Open Sans";
+            font-size: 30px;
+            line-height: 1.09;
+            color: #ffffff;
+            display: block;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 2px solid #9aa1a5;
+            border-top: 2px solid #9aa1a5;
+            margin-bottom: 5px;
+          }
+          .tasks-section {
+            height: calc(100vh - 335px);
+          }
         }
         .right-panel {
-          background-color: #35424b;
-          .oa-grade-right-panel-header {
-            pointer-events: all;
-          }
+          height: 100%;
           .oa-grade-right-panel-body {
-            height: calc(100% - 205px);
+            height: calc(100% - 140px);
           }
         }
       }

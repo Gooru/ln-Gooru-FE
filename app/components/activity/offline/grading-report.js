@@ -386,12 +386,12 @@ export default Ember.Component.extend({
     onTogglePanel() {
       // NOTE pixel values are hard coded based on current implementation.
       const component = this;
-      let top = '125px';
+      let top = '135px';
       if (component.get('isRightPanelExpanded')) {
         // 10px padding top
-        top = `${component.$('.oa-grading-section').height() - 80 + 10}px`;
+        top = `${component.$('.oa-grading-section').height() - 10}px`;
       }
-      component.$('.right-panel').animate(
+      component.$('.left-panel').animate(
         {
           top
         },
@@ -413,6 +413,8 @@ export default Ember.Component.extend({
       component.openPullUp();
     }
     component.initialize();
+    let top = `${component.$('.oa-grading-section').height() - 10}px`;
+    component.$('.left-panel').animate({ top }, 400);
   },
 
   willDestroyElement() {

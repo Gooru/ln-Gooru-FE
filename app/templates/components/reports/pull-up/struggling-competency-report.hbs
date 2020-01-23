@@ -55,7 +55,7 @@
   </div>
 </div>
 {{/if}}
-<div class="sc-student-dropdown-list-container {{if (eq studentsPerformanceList.length  1) 'active' ''}}">
+<div class="sc-student-dropdown-list-container {{if (or isShowCompetencyStudentList (eq studentsPerformanceList.length  1)) 'active' ''}}">
   {{#each studentsPerformanceList as |student|}}
     <div class="sc-student-dropdown-list">
       <div class="sc-student-profile-thumbnail-container">
