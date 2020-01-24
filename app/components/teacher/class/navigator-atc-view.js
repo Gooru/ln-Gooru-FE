@@ -90,7 +90,7 @@ export default Ember.Component.extend({
     onCloseTooltip() {
       const component = this;
       component.removeTooltip();
-      component.setupStudentListTooltip(component.get('groupedStudentList'));
+      component.$('.navigator-atc-student-list').addClass('active');
     },
 
     onCloseListCard() {
@@ -454,7 +454,7 @@ export default Ember.Component.extend({
           'group',
           studentData.get('group')
         );
-        if (groupedStudentList.length > 1 && !component.get('isZoomed')) {
+        if (groupedStudentList.length > 1) {
           studentListTooltipInterval = component.setupStudentListTooltip(
             groupedStudentList,
             tooltipPos
@@ -497,7 +497,7 @@ export default Ember.Component.extend({
           'group',
           studentData.get('group')
         );
-        if (groupedStudentList.length > 1 && !component.get('isZoomed')) {
+        if (groupedStudentList.length > 1) {
           studentListTooltipInterval = component.setupStudentListTooltip(
             groupedStudentList
           );
@@ -674,7 +674,6 @@ export default Ember.Component.extend({
     component.set('isShowStudentList', false);
     component.$('.navigator-atc-student-list').removeClass('active');
     Ember.run.cancel(tooltipInterval);
-    component.set('groupedStudentList', Ember.A([]));
   },
 
   groupItemsByPos(dataset = Ember.A([])) {
