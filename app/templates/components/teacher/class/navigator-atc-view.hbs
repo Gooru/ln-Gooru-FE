@@ -7,7 +7,7 @@
     <div class="competency-label">{{t 'teacher-landing.class.atc-view.total-competencies-gained'}}</div>
   </div>
 </div>
-{{#if isShowResetButton}}
+{{#if isZoomed}}
   <div class="reset-zoom" {{action "onResetZoom"}}>
     Reset Zoom
   </div>
@@ -26,7 +26,11 @@
             <span class="grade-level">{{studentData.grade}}</span>
           </div>
         </div>
-
+        {{#if groupedStudentList.length}}
+          <div class="close-tooltip" {{action "onCloseTooltip"}}>
+            {{gru-icon name='clear'}}
+          </div>
+        {{/if}}
       </div>
       <div class="body-container">
         <div class="performance-container info-container" {{action "onShowStudentPerformance" studentData 'report'}}>
@@ -65,6 +69,48 @@
   <div class="active-student-container hidden">
     <div class="student-performance-container grade-range-{{grade-range studentData.percentScore}}">
       <img class="student-thumbnail-container" src="{{studentData.thumbnail}}"/>
+    </div>
+  </div>
+{{/if}}
+
+{{#if groupedStudentList.length}}
+  <div class="student-list-card-html-container" style="display: none;">
+    <div class="student-list-card">
+      <div class="list-card-header">
+        <span class="header-title">
+          Multiple students at this location
+        </span>
+        <span class="header-info">
+          It looks like multiple students at the same point.
+          Please select who you would like to view.
+        </span>
+        <span class="close-card" {{action "onCloseListCard"}}>
+          {{gru-icon name="clear"}}
+        </span>
+      </div>
+      <div class="list-card-body">
+        {{#each groupedStudentList as |student|}}
+          <div class="student-info" {{action "onSelectStudent" student}}>
+            <div class="student-thumbnail">
+              <img src="{{student.thumbnail}}" />
+            </div>
+            <div class="student-name">
+              {{student.fullName}}
+            </div>
+            <div class="mastered-info">
+              <span class="mastered-count">
+                {{student.completedCompetencies}} / {{student.totalCompetencies}}
+              </span>
+              <span class="mastered-label">
+                Competencies Mastered
+              </span>
+            </div>
+            <div class="student-perf grade-range-{{grade-range student.percentScore}}">
+              {{student.percentScore}}%
+            </div>
+          </div>
+        {{/each}}
+      </div>
     </div>
   </div>
 {{/if}}
