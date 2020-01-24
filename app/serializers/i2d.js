@@ -76,7 +76,7 @@ export default DS.JSONAPISerializer.extend({
       questionType: data.question_type,
       questionSequence: data.question_sequence,
       maxScore: data.max_score,
-      score: data.score <= data.max_score ? data.score : null,
+      score: data.score <= data.max_score ? data.score : null
     });
   }
 });

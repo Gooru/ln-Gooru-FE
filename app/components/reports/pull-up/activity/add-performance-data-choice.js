@@ -30,11 +30,11 @@ export default Ember.Component.extend({
     [{
       'name': 'question',
       'icon': 'help_outline',
-      'showMessage': false,
+      'showMessage': false
     }, {
       'name': 'upload-image',
       'icon': 'photo',
-      'showMessage': true,
+      'showMessage': true
     }]
   ),
 
