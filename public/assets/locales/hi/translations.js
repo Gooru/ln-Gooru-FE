@@ -1224,7 +1224,7 @@ window.i18ln = {
   'teacher-landing.class.manage': 'संचालन',
   'teacher-landing.class.reports': 'रिपोर्ट',
   'teacher-landing.class.daily-activites': 'दैनिक गतिविधियां',
-  'teacher-landing.class.courses': 'Course',
+  'teacher-landing.class.courses': 'पाठ्यक्रम',
   'teacher-landing.class.back-to': 'कक्षाओं में वापस जाएं',
   'teacher-landing.class.back-to-archived': 'संग्रहीत कक्षाओं में वापस जाएं',
   'teacher-landing.class.class-management': 'कक्षा प्रबंधन',
@@ -1800,7 +1800,7 @@ window.i18ln = {
     'अपने गंतव्य तक पहुँचने के लिए आपको अपने क्षितिज और इस ग्रेड लाइन के बीच के सभी मानकों का अध्ययन करने की आवश्यकता है।',
   'student-first-experience.assigned-course-title':
     '{{title}} के लिए निर्धारित पाठ्यक्रम',
-  'student-first-experience.start-studying': 'Start Studying',
+  'student-first-experience.start-studying': 'अध्ययन शुरु करें',
   'student-first-experience.show-route': 'मार्ग दिखाएँ',
   'student-first-experience.review-destination': 'गंतव्य की समीक्षा करें',
   'student-first-experience.competency-level.title': 'आपकी प्रवीणता प्रोफ़ाइल',
@@ -1900,7 +1900,7 @@ window.i18ln = {
   'profile.proficiency.show-expanded-chart': 'विस्तारित चार्ट दिखाएं',
   'profile.preference.language-preference': 'भाषा का चयन',
   'profile.preference.choose-language': 'भाषा चुनें',
-  'profile.preference.choose-sec-language': 'Choose',
+  'profile.preference.choose-sec-language': 'चुनें',
   'profile.preference.choose-preferred-language': 'प्रोफ़ाइल भाषा चुनें',
   'profile.preference.choose-preferred-other-languages':
     'अन्य पसंदीदा भाषाओं का चयन करें',
@@ -2784,7 +2784,7 @@ window.i18ln = {
   'common.activate': 'सक्रिय',
   'common.mark-as-completed': 'बंद करे',
   'common.no-struggling-competencies':
-    'Yay! Looks like all your students are doing well!',
-  'teacher-landing.class.atc-view.learning-gaps': 'Learning Gaps',
-  'teacher-landing.class.atc-view.learning-challenges': 'Learning Challenges'
+    'अरे वाह ! लगता है आपके सभी छात्र बहुत अच्छा कर रहे हैं !',
+  'teacher-landing.class.atc-view.learning-gaps': 'सीखने के अंतराल ',
+  'teacher-landing.class.atc-view.learning-challenges': 'सीखने की चुनौतयाँ'
 };
