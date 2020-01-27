@@ -1,6 +1,10 @@
 import Ember from 'ember';
-import { CONTENT_TYPES } from 'gooru-web/config/config';
-import { cleanFilename } from 'gooru-web/utils/utils';
+import {
+  CONTENT_TYPES
+} from 'gooru-web/config/config';
+import {
+  cleanFilename
+} from 'gooru-web/utils/utils';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 export default Ember.Component.extend(ConfigurationMixin, {
@@ -128,7 +132,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
       .then(result => {
         component.set('isLoading', false);
         if (result.length) {
-          component.set('selectedOption', 'upload-image');
+          const errorList = result.filterBy('status', -1);
+          if (errorList.length) {
+            component.set('errorOnConversion', true);
+          } else {
+            component.set('selectedOption', 'upload-image');
+          }
           component.set('showScoreReview', true);
           component.set('showToggle', true);
           component.serializeUploadedFiles(result);
