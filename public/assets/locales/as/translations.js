@@ -71,6 +71,8 @@ window.i18ln = {
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',
   'common.by-question': 'question-by-question',
+  'add-data-by-question': 'Enter scores by question',
+  'add-data-by-upload-image': 'Upload assessment score sheet',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.new-upload-msg':

@@ -17,7 +17,12 @@
       {{#each choiceList as |choice|}}
         <div class="row-option {{choice.name}}" {{action 'selectChoiceOption' choice}}>
           <div class="icon">{{gru-icon name=choice.icon}}</div>
-          <div class="title">{{t (concat 'common.' choice.name)}}</div>
+          <div class="title">
+            {{t (concat 'add-data-by-' choice.name)}}
+            {{#if (and (eq choice.name 'upload-image') errorOnConversion)}}
+              ( {{t 'i2d.conversion-error'}} )
+            {{/if}}
+          </div>
         </div>
         {{#if choice.showMessage}}
           <div class="message">

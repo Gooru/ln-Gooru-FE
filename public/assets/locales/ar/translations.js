@@ -70,6 +70,8 @@ window.i18ln = {
   'tooltip.check-items-to-grade':
     'افحص العناصر لتحديد الصف ادناه لتحديد هذا النشاط',
   'common.by-question': 'سؤال بسؤال',
+  'add-data-by-question': 'Enter scores by question',
+  'add-data-by-upload-image': 'Upload assessment score sheet',
   'i2d.conversion-progress':
     'تتم معالجة الصور/ الصورة المحملة.يرجى التأكيد مرة اخرى فى وقت لاحق',
   'i2d.new-upload-msg':
