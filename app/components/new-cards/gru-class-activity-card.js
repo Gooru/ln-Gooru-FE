@@ -309,8 +309,11 @@ export default Ember.Component.extend({
    */
   isFutureActivity: Ember.computed('activity', function() {
     let activityDate =
-      this.get('activity.end_date') || this.get('activity.added_date');
+      this.get('activity.contentType') === 'offline-activity'
+        ? this.get('activity.added_date')
+        : this.get('activity.end_date') || this.get('activity.added_date');
     let currentDate = moment().format('YYYY-MM-DD');
+
     return moment(activityDate).isAfter(currentDate);
   }),
 
