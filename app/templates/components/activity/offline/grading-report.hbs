@@ -90,6 +90,48 @@
       {{/unless}}
     </div>
     <div class="right-panel">
+      {{#if isTeacher}}
+      <div class="oa-grade-student-mobile-view">
+        <div class="student-info">
+          <div class="student-count">
+            <sup>{{currentStudentIndex}}</sup>&frasl;<sub>{{users.length}}</sub>
+          </div>
+          <div class="oa-grade-students">
+            <div class="oa-grade-students-carousel">
+              <div id="oa-grade-students-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner">
+                  {{#each users as |user index|}}
+                    <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
+                      <div class="user-profile-img">
+                        <img src="{{user.avatarUrl}}" />
+                        <span>{{user.lastName}} {{user.firstName}}</span>
+                      </div>
+                    </div>
+                  {{/each}}
+                </div>
+                <!-- Left and right controls -->
+                <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
+                  {{gru-icon name="keyboard_arrow_left"}}
+                </a>
+                <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
+                  {{gru-icon name="keyboard_arrow_right"}}
+                </a>
+              </div>
+            </div>
+          </div>
+          {{#if studentRubric.isSelfGraded}}
+            <div class="self-grade-section" style={{safe-html (concat "background-color:" (grade-color studentSelfGrade))}}>
+              <div class="label">{{t 'common.self-graded'}}</div>
+              <div class="score">
+                <sup>{{studentRubric.studentScore}}</sup>&frasl;<sub>{{studentRubric.maxScore}}</sub>
+              </div>
+              <div class="label">{{t 'common.rubric-grade'}}</div>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+
+      {{/if}}
       <div class="oa-grade-right-panel-header">
         <div class="oa-grade-info">
           {{#unless isScoring}}
