@@ -62,14 +62,17 @@ window.i18ln = {
   'common.first': 'الأول',
   'common.last': 'الأخير',
   'common.name': 'الأسم',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'كيف تود ادخال البيانات؟',
   'common.take-photo': 'التقط صورة',
   'common.upload-image': 'حمل صورة',
+  'notifications.invalid-score': 'Please correct the score',
   'tooltip.check-items-to-grade':
     'افحص العناصر لتحديد الصف ادناه لتحديد هذا النشاط',
   'common.by-question': 'سؤال بسؤال',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'تتم معالجة الصور/ الصورة المحملة.يرجى التأكيد مرة اخرى فى وقت لاحق',
   'i2d.new-upload-msg':
@@ -88,6 +91,8 @@ window.i18ln = {
   'i2d.upload-failed': 'كان هناك خطأً عند تحميل الصورة.هل تريد الاعادة؟',
   're-upload': 'اعادة التحميل',
   'common.user': 'المستخدم',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'اسم المحتوى',
   'common.lastName': 'الاسم الاول',
   'common.firstName': 'الاسم الاخير',
@@ -308,9 +313,6 @@ window.i18ln = {
   'common.currently-studying': 'دراسة حالية',
   'common.date': 'تاريخ',
   'common.delete': 'احذف',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
-  'notifications.invalid-score': 'Please correct the score',
   'common.delete-instructions.links-inaccessible':
     'لن يتم الوصول لجميع روابط المشاركة',
   'common.delete-instructions.content-inaccessible':
@@ -964,7 +966,7 @@ window.i18ln = {
     'بالنقر على "الانضمام إلى الفصل الدراسي" ، فإنني أوافق على مشاركة بياناتي الخاصة بالتقدم في التقييم والمجموعة؛ الناتجة من دراسة الفصل الدراسي في Gooru مع المعلم (المعلمين) في هذا الفصل الدراسي.',
   'content.collections.edit.assign-to-course': 'عيّن للدورات التعليمية',
   'content.collections.edit.best-practices':
-    '<p> يتفاعل الطلاب مع المحتوى الخاص بك على مستوى المجموعة. عند إنشاء مجموعة تعلم ، تأكد من تضمين أهداف التعلم ، واهتم باستخدام أنواع مختلفة من الموارد لتعريف الطلاب بالمفاهيم بطرق متعددة. </p> <p> استخدم تسلسل الموارد بناء على المفاهيم. يجب أن يتدفق التقدم عبر المجموعة بطريقة منطقية وأن يصطحب الجمهور المستهدف من مستوى عام إلى مستوى أكثر تعقيدًا من الفهم إذا كان ذلك مناسباً، أو يسمح باستطلاع الطالب بشكل كافٍ. </p><p> قم بتضمين اختبارات للفهم على طول الطريق عبر أسئلة Gooru الخاصة بنا أو تفاعلات أخرى. نوصي بالموارد الكافية و / أو ما يكفي من الموارد المتنوعة لتحقيق الأهداف في المجموعة والتأكد من أن لكل مورد دور وغرض. </p>',
+    '<p> يتفاعل الطلاب مع المحتوى الخاص بك على مستوى المجموعة. عند إنشاء مجموعة تعلم ، تأكد من تضمين أهداف التعلم ، واهتم باستخدام أنواع مختلفة من الموارد لتعريف الطلاب بالمفاهيم بطرق متعددة. </p> <p> استخدم تسلسل الموارد بناء على المفاهيم. يجب أن يتدفق التقدم عبر المجموعة بطريقة منطقية وأن يصطحب الجمهور المستهدف من مستوى عام إلى مستوى أكثر تعقيدًا من الفهم إذا كان ذلك مناسباً، أو يسمح باستطلاع الطالب بشكل كافٍ. </p><p> قم بتضمين اختبارات للفهم على طول الطريق عبر أسئلة Gooru الخاصة بنا أو تفاعلات أخرى. نوصي بالموارد الكافية و أو ما يكفي من الموارد المتنوعة لتحقيق الأهداف في المجموعة والتأكد من أن لكل مورد دور وغرض. </p>',
   'content.courses.edit.assign-to-class': 'عيّن للفصول الدراسية',
   'content.courses.edit.best-practices':
     '<p> المقرر عبارة عن مجلد يتيح لك تنظيم محتواك التعليمي في شكل وحدات ودروس. عند إنشاء مقرر ضع في اعتبارك الأسئلة الأساسية التي تتناولها وأهداف التعلم وتنظيم المحتوى الخاص بك. </p> <p> يمكنك تجميع الدروس مع بعضها البعض لخلق تجربة متنوعة لمجتمعك الطلابي (على سبيل المثال ، يمكنك ترتيب وحداتك زمنيا أو حسب الموضوع أو أو حسب المعيار). </p>',
@@ -1618,7 +1620,7 @@ window.i18ln = {
   'sign-up.error-country-message': 'يرجى اختيار بلدك.',
   'sign-up.error-state-message': 'يرجى اختيار الولاية أو الإقليم.',
   'sign-up.error-district-message':
-    'يرجى اختيار منطقتك / ميثاقك من القائمة أو تقديمها في "أخرى ".',
+    'يرجى اختيار منطقتك ميثاقك من القائمة أو تقديمها في "أخرى ".',
   'gru-user-sign-up-cancel.title': 'تريد مغادرة التسجيل؟',
   'gru-user-sign-up-cancel.exit?': 'هل أنت متأكد أنك تريد الخروج؟',
   'gru-user-sign-up-cancel.registration_incomplete': 'تسجيلك لم يكتمل بعد.',
@@ -2092,7 +2094,7 @@ window.i18ln = {
     'يمكن للطلاب القيام  بالتقييم من خريطة الدورة التدريبية الخاصة بهم',
   'gru-icon-popover.settings-visibility-title': 'اجعل المحتوى مرئي',
   'gru-icon-popover.settings-visibility-content':
-    'هذا الإعداد يجعل المحتوى الخاص بك مرئيًا عبر ملف تعريف المستخدم الخاص بك. إذا كنت ترغب في مشاركة الدورات والمجموعات والتقييمات والموارد و / أو الأسئلة التي تنشئها مع الزملاء ، فنحن نقترح عليك تشغيل هذه الميزة.',
+    'هذا الإعداد يجعل المحتوى الخاص بك مرئيًا عبر ملف تعريف المستخدم الخاص بك. إذا كنت ترغب في مشاركة الدورات والمجموعات والتقييمات والموارد و أو الأسئلة التي تنشئها مع الزملاء ، فنحن نقترح عليك تشغيل هذه الميزة.',
   'gru-take-tour.text': 'رحلة',
   'gru-take-tour.teacher-home.stepOne.title': 'خذ جولة',
   'gru-take-tour.teacher-home.stepOne.description':

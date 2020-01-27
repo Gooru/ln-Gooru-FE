@@ -66,7 +66,38 @@ window.i18ln = {
   'common.first': 'पहिले',
   'common.last': 'शेवटचे',
   'common.name': 'नाव',
+  'common.add-data-choice-title': 'How do you want to enter the data?',
+  'common.take-photo': 'take photo',
+  'common.upload-image': 'upload image',
+  'notifications.invalid-score': 'Please correct the score',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
+  'common.by-question': 'question-by-question',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
+  'i2d.conversion-progress':
+    'The uploaded image(s) are being processed. Please check back later',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
+  'i2d.conversion-error':
+    'There was an error when trying to convert the image. Please resubmit the image',
+  'file-picker-placeholder': 'Choose a file or drag it here',
+  'no-preview-available': 'no preview available',
+  'common.success': 'Success',
+  'i2d-successfully-image-upload':
+    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
+  'common.dialog-close': 'Do you want to close ?',
+  'upload-success': 'Uploaded Successfully',
+  'mobile-camera-placeholder': 'Tap for image upload',
+  'i2d.mobile-upload-failed': 'There was a error',
+  'i2d.upload-failed':
+    'There was an error while uploading this image. Re-upload?',
+  're-upload': 'Re-Upload',
   'common.user': 'वापरणारी व्यक्ती',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'आशयाचे नाव',
   'common.lastName': 'आडनाव',
   'common.firstName': 'पहिले नाव',
@@ -75,6 +106,8 @@ window.i18ln = {
   'common.week': 'आठवडा',
   'common.month': 'महिना',
   'common.more': 'अधिक',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'फिल्टर लागू करा',
   'library-search-placeholder': 'लायब्ररीमध्ये कोणत्याही गोष्टीचा शोध घ्या...',
   'search-help-message': 'लागू करण्यासाठी फिल्टर्स निवडा',
@@ -106,6 +139,7 @@ window.i18ln = {
   'common.a-question': 'प्रश्न',
   'common.a-resource': 'स्त्रोत',
   'common.a-rubric': 'निकष',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'सर्व पूर्ण केले',
   'common.a-assessment': 'मूल्यमापन',
   'common.about': 'याबद्दल',
@@ -161,6 +195,8 @@ window.i18ln = {
   'common.anonymous_mode': 'निनावी प्रकार',
   'common.answer': 'तुमचे उत्तर',
   'common.answer-correct': 'आपण बरोबर आहात!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'आपण चुकीचे आहात ...',
   'common.answer-key-was-hidden': 'टीप: आत्ता उत्तरपत्रिका पाहू शकत नाही  .',
   'common.approved': 'मंजूर',
@@ -237,7 +273,7 @@ window.i18ln = {
   'common.contentUnavailabletoday':
     'कोणतीही वर्तमान कार्ये नाहीत. अभ्यासक्रमातून किंवा माझे संग्रह यातून  वर्ग नियोजन जोडा.',
   'common.contentUnavailableyesterday': 'कोणतेही कार्ये जोडलेली नाही.',
-  'common.contributed-by': 'यांनी केलेले / यांच्या द्वारे',
+  'common.contributed-by': 'यांनी केलेले यांच्या द्वारे',
   'common.copy': 'कॉपी करा',
   'common.copy-to': 'मध्ये कॉपी करा',
   'common.correct': 'योग्य',
@@ -263,6 +299,13 @@ window.i18ln = {
   'common.not-answered': 'उत्तर दिले नाही',
   'common.rubric-not-answered': 'निकषाचे उत्तर दिले नाही',
   'common.country': 'देश',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.course-map': 'अभ्यासक्रम',
   'common.course': 'अभ्यासक्रम',
   'common.course-title': 'अभ्यासक्रम शीर्षक',
@@ -294,7 +337,11 @@ window.i18ln = {
   'common.domain': 'अध्ययन क्षेत्र',
   'common.domains': 'अध्ययन क्षेत्रे',
   'common.download': 'डाऊनलोड',
-  'common.download-print': 'डाउनलोड / प्रिंट',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
+  'common.download-print': 'डाउनलोड प्रिंट',
   'common.drag-drop-suggestions': 'किंवा सूचना ड्रॅग आणि ड्रॉप करा ...',
   'common.download-report': 'अहवाल  डाउनलोड करा',
   'common.done': 'पूर्ण',
@@ -318,9 +365,6 @@ window.i18ln = {
   'common.emotions.emotion-5': 'मी समजावून सांगू शकतो',
   'common.enter-url': 'URL(लिंक)',
   'common.enrolled-students': 'नोंदणीकृत विद्यार्थी',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
-  'notifications.invalid-score': 'Please correct the score',
   'common.errors.join-class-code': 'कृपया वर्ग संकेतांक लिहा.',
   'common.errors.answer-has-no-image': 'कृपया उत्तराचा फोटो  अपलोड करा.',
   'common.errors.add-username': 'कृपया युजरनेम लिहा',
@@ -475,7 +519,7 @@ window.i18ln = {
   'common.from-my-resources': 'माझ्या संसाधनांकडून',
   'common.hide-results': 'निकाल लपवा',
   'common.hide-correct-answer': 'योग्य उत्तर लपवा',
-  'common.hints': 'सूचना /',
+  'common.hints': 'सूचना',
   'common.home': 'होम',
   'common.if_questions': 'तुम्हाला जर काही प्रश्न असतील तर,',
   'common.information': 'माहिती',
@@ -514,10 +558,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'लॉग इन करण्यासाठी येथे क्लिक करा.',
   'common.mastery': 'प्रभुत्व',
   'common.menu': 'मेनू',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'अधिक माहिती',
   'common.move': 'दुसरीकडे न्या',
   'common.myContent': 'माझे संग्रह',
   'common.myProfile': 'माझे स्थान',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'लायब्ररी',
   'common.myPerformance': 'माझी कामगिरी',
   'common.edit-narration': 'वर्णन संपादित करा',
@@ -722,11 +768,13 @@ window.i18ln = {
   'common.show-more-results': 'अधिक परिणाम दर्शवा',
   'common.show-results': 'परिणाम दाखवा',
   'common.signUp': 'साइन अप करा',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'वर्णानुक्रमानुसार क्रमवारी लावा',
   'common.sortAverage': 'सरासरीनुसार क्रमवारी लावा',
   'common.sort-most-recently': 'सर्वात नवीनतम अपडेट झाल्यानुसार क्रमवारी लावा',
   'common.state': 'राज्य किंवा प्रदेश',
-  'common.state-territory': 'राज्य / प्रदेश',
+  'common.state-territory': 'राज्य प्रदेश',
   'common.standard': 'क्षमता',
   'common.standards': 'क्षमता',
   'common.study': 'अभ्यास',
@@ -848,6 +896,7 @@ window.i18ln = {
   'class.info.add-students': 'विद्यार्थी जोडा',
   'class.info.class-code': 'वर्ग संकेतांक',
   'class.info.delete': 'वर्ग डिलीट करा',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'नेमून दिलेला अभ्यासक्रम',
   'class.edit.basic-info': 'मुलभूत माहिती',
   'class.edit.class-name': 'वर्गाचे नाव',
@@ -952,7 +1001,7 @@ window.i18ln = {
     'क्लासरूममध्ये सहभागी व्हा या पर्यायावर क्लिक करून, मी या वर्गाच्या ह्या गुरु वर्गामध्ये अभ्यास करण्याने निर्माण झालेले माझे मूल्यमापन आणि संग्रह प्रगती माहिती शिक्षकांबरोबर शेअर करण्यास सहमत आहे.',
   'content.collections.edit.assign-to-course': 'अभ्यासक्रम नेमून द्या',
   'content.collections.edit.best-practices':
-    '<p>विद्यार्थी संग्रह स्तरावर आपल्या संग्रहासह संवाद साधतात. शिक्षणाचे आशय तयार करताना, शिकण्याची उद्दिष्टे समाविष्ट करणे सुनिश्चित करा आणि विद्यार्थ्यांसमोर सिध्दांत विविध संसाधनांद्वारे प्रस्तुत करण्याचा विचार करा.</p><p>संकल्पना तयार करण्यासाठी संसाधनांच्या क्रमवारीचा वापर करा. एका संग्रह माध्यमातून प्रगती तार्किक पद्धतीने प्रवाहित झाली पाहिजे आणि गरज भासल्यास अपेक्षित श्रोत्यांना समजूतीच्या/आत्मसात करण्याच्या एका सर्व सामान्य स्तरावरून आणखी क्लीष्ट स्तरावर घेऊन जा किंवा विद्यार्थ्यांना पुरेसे अन्वेषण करू द्या.</p><p>मार्गावरील शिक्षण समजले आहे का हे जाणण्यासाठी चाचण्या घ्या आणि त्या साठी आमच्या गूरु प्रश्नांचा वा इतर संभाषकांचा वापर करा.  आम्ही संग्रहातील उद्दीष्टे पूर्ण करण्यासाठी आणि प्रत्येक स्रोताची भूमिका आणि उद्देश सुनिश्चित करण्यासाठी पुरेसे स्त्रोत आणि / किंवा पुरेशी विविध संसाधने शिफारस करतो.</p>',
+    '<p>विद्यार्थी संग्रह स्तरावर आपल्या संग्रहासह संवाद साधतात. शिक्षणाचे आशय तयार करताना, शिकण्याची उद्दिष्टे समाविष्ट करणे सुनिश्चित करा आणि विद्यार्थ्यांसमोर सिध्दांत विविध संसाधनांद्वारे प्रस्तुत करण्याचा विचार करा.</p><p>संकल्पना तयार करण्यासाठी संसाधनांच्या क्रमवारीचा वापर करा. एका संग्रह माध्यमातून प्रगती तार्किक पद्धतीने प्रवाहित झाली पाहिजे आणि गरज भासल्यास अपेक्षित श्रोत्यांना समजूतीच्या/आत्मसात करण्याच्या एका सर्व सामान्य स्तरावरून आणखी क्लीष्ट स्तरावर घेऊन जा किंवा विद्यार्थ्यांना पुरेसे अन्वेषण करू द्या.</p><p>मार्गावरील शिक्षण समजले आहे का हे जाणण्यासाठी चाचण्या घ्या आणि त्या साठी आमच्या गूरु प्रश्नांचा वा इतर संभाषकांचा वापर करा.  आम्ही संग्रहातील उद्दीष्टे पूर्ण करण्यासाठी आणि प्रत्येक स्रोताची भूमिका आणि उद्देश सुनिश्चित करण्यासाठी पुरेसे स्त्रोत आणि किंवा पुरेशी विविध संसाधने शिफारस करतो.</p>',
   'content.courses.edit.assign-to-class': 'वर्गाकडे नेमून द्या',
   'content.courses.edit.best-practices':
     '<p>अभ्यासक्रम एक असा फोल्डर आहे जो आपल्याला आपल्या शिकण्याच्या आशयाचे विविध विभागात पाठ रुपात निर्माण करण्यास मदत करते. अभ्यासक्रम तयार करताना आपण संबोधित करत असलेले महत्वाचे प्रश्न, शिकण्याच्या उद्देश आणि आपल्या सामग्रीचे संघटन यावर विचार करा.</p><p>तुमच्या विद्यार्थी जनतेला वेगळा अनुभव देण्यासाठी तुम्ही पाठ एकत्र करू शकता (उदाहरणार्थ, तुम्ही तुमचे घटक कालानुक्रमे किंवा विषयानुसार, किंवा क्षमतेनुसार अनुक्रमित करू शकता).</p>',
@@ -1272,6 +1321,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'विद्यार्थी',
   'teacher-landing.class.class-management-tab.student-name': 'विद्यार्थी नाव',
   'teacher-landing.class.class-management-tab.student-id': 'विद्यार्थी ओळखपत्र',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'शिक्षक',
   'teacher-landing.class.class-management-tab.view-report': 'अहवाल पहा',
   'teacher-landing.class.class-management-tab.course-null':
@@ -1458,6 +1508,11 @@ window.i18ln = {
   'gru-add-to.add-collection-to-lesson': 'माझे संग्रह यामधून भरा',
   'gru-add-to.add-collection-to-lesson-lead':
     'या पाठामध्ये जोडण्यासाठी संग्रह निवडा',
+  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.OA-info':
+    'The activities listed here <b>do not</b> belong to another lesson or course',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'Select a activity to add to this lesson.',
   'gru-add-to.add-to-collection': 'संग्रहामध्ये जोडा',
   'gru-add-to.add-to-collection-lead':
     '{{contentTitle}} मध्ये तुम्हाला संग्रह जोडायचा आहे तो निवडा',
@@ -1730,7 +1785,7 @@ window.i18ln = {
   'search-filter.authors': 'लेखक',
   'search-filter.question-types.MC': 'बहुपर्यायी',
   'search-filter.question-types.FIB': 'रिकाम्या जागा भरा',
-  'search-filter.question-types.T/F': 'खरे / खोटे',
+  'search-filter.question-types.T/F': 'खरे खोटे',
   'search-filter.question-types.TOF': 'चूक किंवा बरोबर',
   'search-filter.question-types.MA': 'एकाधिक उत्तरे',
   'search-filter.question-types.HS_TXT': 'एकापेक्षा अधिक निवड - मजकूर',
@@ -1887,6 +1942,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'प्रभुत्व',
   'profile.gru-navigation.preference.preference': 'प्राधान्यक्रम',
   'profile.edit.select-district': 'एक जिल्हा निवडा ...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'अद्याप कोणतीही माहिती उपलब्ध नाही एकदा तुम्ही अभ्यास करायला सुरूवात केली की आपला माहिती उपलब्ध होईल.',
   'profile.proficiency.expand-chart': 'विस्तृत तक्ता दाखवा',
@@ -2114,7 +2173,7 @@ window.i18ln = {
     'विद्यार्थी त्यांच्या अभ्यासक्रमामध्ये मूल्यमापन सुरु करू शकतात',
   'gru-icon-popover.settings-visibility-title': 'आपला आशय सामग्री दृश्यमान करा',
   'gru-icon-popover.settings-visibility-content':
-    'सेटिंग आपल्या वापरकर्त्याच्या प्रोफाइलद्वारे आशय दृश्यमान बनविते. तुम्ही तयार केलेले अभ्यासक्रम, संग्रह, मूल्यमापन, संसाधने आणि / किंवा प्रश्न आपल्या सहकाऱ्यांसोबत सामायिक करू इच्छित असल्यास, आम्ही सुचवितो की आपण हे वैशिष्ट्य चालू करावे.',
+    'सेटिंग आपल्या वापरकर्त्याच्या प्रोफाइलद्वारे आशय दृश्यमान बनविते. तुम्ही तयार केलेले अभ्यासक्रम, संग्रह, मूल्यमापन, संसाधने आणि किंवा प्रश्न आपल्या सहकाऱ्यांसोबत सामायिक करू इच्छित असल्यास, आम्ही सुचवितो की आपण हे वैशिष्ट्य चालू करावे.',
   'gru-take-tour.text': 'फेरफटका',
   'gru-take-tour.teacher-home.stepOne.title': 'एक फेरफटका मारा',
   'gru-take-tour.teacher-home.stepOne.description':
@@ -2200,7 +2259,7 @@ window.i18ln = {
   'gru-take-tour.student-performance.stepThree.title': 'अहवाल अपडेट करा',
   'gru-take-tour.student-performance.stepThree.description':
     'एकदा आपण आपले फिल्टर निवडल्यास, परिणाम प्रदर्शित करण्यासाठी अपडेट अहवालावर क्लिक करा.',
-  'gru-take-tour.student-performance.stepFour.title': 'डाउनलोड / प्रिंट',
+  'gru-take-tour.student-performance.stepFour.title': 'डाउनलोड प्रिंट',
   'gru-take-tour.student-performance.stepFour.description':
     'आपला अहवाल डाउनलोड करा',
   'gru-take-tour.student-performance.stepFive.title': 'पूर्ण झाले!',
@@ -2444,6 +2503,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'प्रश्न',
   'gru-study-header.question.one': 'प्रश्न',
   'gru-study-header.question.other': 'प्रश्न',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'अधिक जाणून घेण्यासाठी, हि संसाधने तपासा',
   'gru-suggest-test.pre-test-header': 'पूर्व-चाचणी (Optional)',
@@ -2458,8 +2518,8 @@ window.i18ln = {
     'सुचविलेले मूल्यमापन (Optional)',
   'gru-suggest-test.signature_assessment-lead':
     'या अभ्यासक्रमावरील आपल्या कार्यक्षमतेवर आधारित, खालील मूल्यमापनामुळे आपले आकलन वाढेल.',
-  'gru-suggest-test.pre-test-lead':
-    'या पाठातील संकल्पनांची सध्याची समज मोजण्यासाठी पूर्व चाचणीचा सल्ला दिला जातो. पूर्व चाचणी आपल्याला पाठातील आशयासाठी तयार करण्यास मदत करू शकते. पूर्व-चाचणी आपल्या अभ्यासक्रमाच्या कामगिरी गुणांकनावर परिणाम करणार नाही.',
+  'gru-suggest-test.pre-tessignaturet-lead':
+    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'gru-suggest-test.post-test-lead':
     'प्रस्तुत माहितीची आपली समज मोजण्यासाठी पश्चात-चाचणी सुचविण्यात येते. पश्चात-चाचणी आपल्या अभ्यासक्रमाच्या कामगिरी गुणांकनावर परिणाम करणार नाही.',
   'gru-suggest-test.backfill-lead':
@@ -2604,7 +2664,7 @@ window.i18ln = {
   'show-course-map': 'अभ्यासक्रम दाखवा',
   'show-milestones': 'अध्ययन टप्पे दाखवा',
   'warn.class-destination-not-setup':
-    'वर्गेचे ध्येय /लक्ष्य ठरवल्याशिवाय वर्ग सेट-अप पूर्ण होत नाही. वर्ग सेटिंगमध्ये जा अन सेट-अप पूर्ण करा. नाहीतर, विद्यार्थी या वर्गात काय माहिती आहे ते पाहू शकणार नाहीत.',
+    'वर्गेचे ध्येयलक्ष्य ठरवल्याशिवाय वर्ग सेट-अप पूर्ण होत नाही. वर्ग सेटिंगमध्ये जा अन सेट-अप पूर्ण करा. नाहीतर, विद्यार्थी या वर्गात काय माहिती आहे ते पाहू शकणार नाहीत.',
   'milestone-rescoped':
     'तुमच्या शिक्षकाने {{subject}} स्तराची स्थापना केल्याने हे निर्धारित उद्दिष्ट उपलब्ध झाले आहे, पण तुम्ही आधीच सर्व क्षमता आत्मसात केल्याचे दिसते आहे.',
   'student-milestone-not-ready':
@@ -2630,7 +2690,9 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'प्रयोगशाळा अहवाल',
   'common.subtask.oa.explanation_argument': 'स्पष्टीकरण वाद',
   'common.subtask.oa.debate': 'चर्चा विवाद',
+  'common.subtask.oa.others': 'Others',
   project: 'प्रकल्प',
+  'oa.others': 'Others',
   'oa.project.poster': 'भित्तीपत्रिका',
   'oa.project.presentation': 'सादरीकरण',
   'oa.project.video': 'Video',
@@ -2692,12 +2754,16 @@ window.i18ln = {
   'oa.info.duration-hrs': 'पूर्ण होण्यासाठी अपेक्षित वेळ',
   'oa.info.hrs': 'तास',
   'class.add-teachers': 'शिक्षक जोडा',
+  'common.collaborators': 'Collaborators',
+  'common.no-collaborators':
+    'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'class.add-co-teachers': 'सह-शिक्षक जोडा',
   'common.gained': 'मिळवले',
   'badges-earned': 'कमावलेले बॅज',
   'suggestion-taken': 'सूचना घेतल्या',
   'this-week': 'हा आठवडा',
   'previous-week': 'मागचा आठवडा',
+  'custom-range': 'Custom Date Range',
   'beginning-till-now': 'सुरुवातीपासून आतापर्यंत',
   'report.class-proficiency-report': 'मुलनिहाय प्रगती अहवाल',
   'report.domain-proficiency-report': 'क्षेत्रनिहाय प्रगती अहवाल',
@@ -2776,12 +2842,14 @@ window.i18ln = {
     'आपल्याकडे {{selectedItem}} कोणतेही क्रियाकलाप नियोजित नाहीत.आपल्या वेळापत्रकात सामग्री जोडण्यासाठी तळटीपवर टॅप करा',
   'class-activity.no-activity-items-to-grade-message-desktop':
     'आपल्याकडे {{selectedItem}} कोणतेही क्रियाकलाप नियोजित नाहीत. उजवीकडून सामग्री निवडा',
+  'class-activity.scheduled-activities': 'Class Activities',
   'class-activity.unscheduled-activities': 'नियोजित क्रियाकलाप',
+  'class-activity.items-to-grade': 'Items to Grade',
   'common.monthly': 'मासिक',
   'common.daily': 'दैनिक',
   'common.weekly': 'साप्ताहिक',
   'class-activity.no-learning-activities':
-    'लायब्ररीत आपल्या शोध आणि फिल्टर अटींशी संबंधित कोणतेही शिक्षण क्रिया नाहीत. कृपया वरील एखादी लायब्ररी तपासा किंवा दुसरा फिल्टर / शोध संज्ञा वापरण्याचा प्रयत्न करा',
+    'लायब्ररीत आपल्या शोध आणि फिल्टर अटींशी संबंधित कोणतेही शिक्षण क्रिया नाहीत. कृपया वरील एखादी लायब्ररी तपासा किंवा दुसरा फिल्टर शोध संज्ञा वापरण्याचा प्रयत्न करा',
   'common.activate': 'सक्रिय करा',
   'common.mark-as-completed': 'बंद करणे',
   'common.no-struggling-competencies':

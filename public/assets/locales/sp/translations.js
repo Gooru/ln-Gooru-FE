@@ -19,9 +19,6 @@ window.i18ln = {
   'errors.exclusion': '{{description}} está reservado',
   'my-content': 'My Content',
   'common.tasks': 'tasks',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
-  'notifications.invalid-score': 'Please correct the score',
   'common.sub-filter': 'Sub-Filter',
   'featured-libraries': 'featured libraries',
   'errors.invalid': '{{description}} no es válido',
@@ -67,14 +64,17 @@ window.i18ln = {
   'common.first': 'First',
   'common.last': 'Last',
   'common.name': 'Name',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
+  'notifications.invalid-score': 'Please correct the score',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',
   'common.by-question': 'question-by-question',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.new-upload-msg':
@@ -94,6 +94,8 @@ window.i18ln = {
     'There was an error while uploading this image. Re-upload?',
   're-upload': 'Re-Upload',
   'common.user': 'user',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'Content Name',
   'common.lastName': 'Lastname',
   'common.firstName': 'Firstname',
@@ -338,7 +340,7 @@ window.i18ln = {
   'assessment-template-msg':
     'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
   'common.code': 'Code',
-  'common.download-print': 'Descargar / Imprimir',
+  'common.download-print': 'Descargar Imprimir',
   'common.drag-drop-suggestions': 'O Sugerencias de arrastrar y soltar ...',
   'common.download-report': 'Descargar informe',
   'common.done': 'Done',
@@ -619,7 +621,7 @@ window.i18ln = {
   'common.notScored': 'Unscored',
   'common.notStarted': 'No empezado',
   'common.not-added': 'No añadido',
-  'common.not-applicable': 'N / A',
+  'common.not-applicable': 'N A',
   'common.not-following': 'No estás siguiendo a nadie.',
   'common.not-provided': 'No proporcionado',
   'common.not-specified': 'No especificado',
@@ -1005,7 +1007,7 @@ window.i18ln = {
     'Al hacer clic en Unirse al aula, estoy de acuerdo en compartir mis datos de evaluación y recopilación de datos generados a partir del estudio de este salón Gooru con el (los) maestro (s) de este salón.',
   'content.collections.edit.assign-to-course': 'Asignar al curso',
   'content.collections.edit.best-practices':
-    '<p> Los estudiantes interactúan con su contenido en el nivel de colección. Al crear una colección de aprendizaje, asegúrese de incluir los objetivos de aprendizaje y considere el uso de una variedad de tipos de recursos para exponer a los estudiantes a los conceptos de múltiples maneras. </p><p> Utilice la secuenciación de los recursos para desarrollar conceptos. La progresión a través de una colección debe fluir de una manera lógica y llevar a la audiencia prevista de un nivel general a un nivel más complejo de comprensión si es apropiado, o permitir adecuadamente para la exploración del estudiante. </p><p> Incluya chequeos de comprensión a lo largo del camino a través de nuestras preguntas Gooru u otros interactivos. Recomendamos recursos suficientes y / o suficientes recursos para lograr los objetivos de la recolección y asegurar que cada recurso tenga un papel y propósito. </p>',
+    '<p> Los estudiantes interactúan con su contenido en el nivel de colección. Al crear una colección de aprendizaje, asegúrese de incluir los objetivos de aprendizaje y considere el uso de una variedad de tipos de recursos para exponer a los estudiantes a los conceptos de múltiples maneras. </p><p> Utilice la secuenciación de los recursos para desarrollar conceptos. La progresión a través de una colección debe fluir de una manera lógica y llevar a la audiencia prevista de un nivel general a un nivel más complejo de comprensión si es apropiado, o permitir adecuadamente para la exploración del estudiante. </p><p> Incluya chequeos de comprensión a lo largo del camino a través de nuestras preguntas Gooru u otros interactivos. Recomendamos recursos suficientes y o suficientes recursos para lograr los objetivos de la recolección y asegurar que cada recurso tenga un papel y propósito. </p>',
   'content.courses.edit.assign-to-class': 'Asignar al aula',
   'content.courses.edit.best-practices':
     '<p> Un curso es una carpeta que le permite organizar su contenido de aprendizaje en unidades y lecciones. Al crear un curso, considere las preguntas esenciales que está abordando, los objetivos de aprendizaje y la organización de su contenido. </p><p> Puede juntar las lecciones para crear una experiencia diversa para su población estudiantil (por ejemplo, puede ordenar sus unidades cronológicamente, por tema o por estándar). </p>',
@@ -1706,7 +1708,7 @@ window.i18ln = {
   'sign-up.error-country-message': 'Por favor seleccione su país.',
   'sign-up.error-state-message': 'Seleccione su estado o territorio.',
   'sign-up.error-district-message':
-    'Por favor, seleccione su distrito / charter de la lista o proporcionarlo en \'Otro\'.',
+    'Por favor, seleccione su distrito charter de la lista o proporcionarlo en \'Otro\'.',
   'gru-user-sign-up-cancel.title': '¿Dejar el registro?',
   'gru-user-sign-up-cancel.exit?': '¿Seguro que quieres salir?',
   'gru-user-sign-up-cancel.registration_incomplete':
@@ -2015,7 +2017,7 @@ window.i18ln = {
   'gru-performance-summary.resume': 'Currículum',
   'gru-performance-summary.study': 'Estudia ahora',
   'gru-performance-summary.view-report': 'Vista del informe',
-  'gru-performance-summary.not-applicable': 'N / A',
+  'gru-performance-summary.not-applicable': 'N A',
   'gru-performance-summary.not-started': 'No ha comenzado todavía',
   'gru-performance.no-content': 'No hay contenido disponible',
   'gru-performance-metrics.assessment': 'Evaluación',
@@ -2186,7 +2188,7 @@ window.i18ln = {
   'gru-settings-edit.backwards':
     'Los estudiantes pueden navegar hacia atrás y cambiar las respuestas',
   'gru-settings-edit.feedback':
-    'Los estudiantes verán si son correctos / incorrectos',
+    'Los estudiantes verán si son correctos incorrectos',
   'gru-settings-edit.feedback-immediate': 'Por pregunta y al final',
   'gru-settings-edit.feedback-never': 'Nunca',
   'gru-settings-edit.feedback-summary': 'Al final',
@@ -2197,7 +2199,7 @@ window.i18ln = {
     'Los estudiantes pueden jugar la evaluación desde su mapa de cursos',
   'gru-icon-popover.settings-visibility-title': 'Haga visible su contenido',
   'gru-icon-popover.settings-visibility-content':
-    'Esta configuración hace que su contenido sea visible a través de su perfil de usuario. Si desea compartir los cursos, las colecciones, las evaluaciones, los recursos y / o las preguntas que cree con los colegas, le sugerimos que active esta función.',
+    'Esta configuración hace que su contenido sea visible a través de su perfil de usuario. Si desea compartir los cursos, las colecciones, las evaluaciones, los recursos y o las preguntas que cree con los colegas, le sugerimos que active esta función.',
   'gru-take-tour.text': 'Hacer un tour',
   'gru-take-tour.teacher-home.stepOne.title': 'Su Página de Inicio',
   'gru-take-tour.teacher-home.stepOne.description':
@@ -2284,7 +2286,7 @@ window.i18ln = {
   'gru-take-tour.student-performance.stepThree.title': 'Actualizar informe',
   'gru-take-tour.student-performance.stepThree.description':
     'Una vez que haya seleccionado sus filtros, haga clic en el informe de actualización para mostrar los resultados.',
-  'gru-take-tour.student-performance.stepFour.title': 'Descargar / Imprimir',
+  'gru-take-tour.student-performance.stepFour.title': 'Descargar Imprimir',
   'gru-take-tour.student-performance.stepFour.description':
     'Descargue su informe.',
   'gru-take-tour.student-performance.stepFive.title': '¡Terminado!',
@@ -2335,10 +2337,10 @@ window.i18ln = {
   'gru-take-tour.study-player.stepOne.description':
     'Este es tu Jugador de Estudio. Vamos a caminar a través de las funciones disponibles para usted.',
   'gru-take-tour.study-player.stepTwo.title':
-    'Unidad / curso / encabezado de la lección',
+    'Unidad curso encabezado de la lección',
   'gru-take-tour.study-player.stepTwo.description':
     'Indica dónde se encuentra la colección o evaluación en su curso.',
-  'gru-take-tour.study-player.stepThree.title': 'Rendimiento / Finalización',
+  'gru-take-tour.study-player.stepThree.title': 'Rendimiento Finalización',
   'gru-take-tour.study-player.stepThree.description':
     'Indica cómo se está realizando y cuánto del curso ha completado.',
   'gru-take-tour.study-player.stepFour.title': 'Reaccionar al recurso',

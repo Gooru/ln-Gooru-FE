@@ -20,9 +20,6 @@ window.i18ln = {
   'my-content': 'My Content',
   'common.tasks': 'tasks',
   'common.sub-filter': 'Sub-Filter',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
-  'notifications.invalid-score': 'Please correct the score',
   'featured-libraries': 'featured libraries',
   'errors.invalid': '{{description}} செல்லாதது',
   'errors.confirmation': '{{description}} பொருந்தவில்லை {{on}}',
@@ -72,15 +69,18 @@ window.i18ln = {
   'common.first': 'முதல்',
   'common.last': 'கடந்த',
   'common.name': 'பெயர்',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title':
     'நீங்கள் டேட்டாவை எப்படி உள்ளிடப் போகிறீர்கள்?',
   'common.take-photo': 'போட்டோ எடு',
   'common.upload-image': 'படத்தினை அப்லோட் செய்',
+  'notifications.invalid-score': 'Please correct the score',
   'tooltip.check-items-to-grade':
     'இந்தச் செயல்பாட்டை தர வரிசைப்படுத்த கீழ் உள்ள கிரேட் அச்சுப் பலகையோடு வகைகளை ஒப்பிட்டு சோதித்துப் பார்த்திடு',
   'common.by-question': 'கேள்வி மேல் கேள்வியாக',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'அப்லோட் செய்யப்பட்டப்  படங்கள் செயல்பாட்டில் உள்ளன. தயவு செய்து சிறிது நேரம் கழித்து சரி பார்க்கவும்',
   'i2d.new-upload-msg':
@@ -101,6 +101,8 @@ window.i18ln = {
     'படத்தினை அப்லோட் செய்யும் போது ஒரு தவறு ஏற்பட்டுவிட்டது. திரும்பவும் அப்லோட் செய்கிறீர்களா?',
   're-upload': 'திரும்ப அப்லோட் செய்யவும்',
   'common.user': 'பயன்படுத்துபவர்',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'உட்பொருளின் பெயர்',
   'common.lastName': 'கடைசிப் பெயர்',
   'common.firstName': 'முதல் பெயர்',
@@ -815,7 +817,7 @@ window.i18ln = {
   'common.sort-most-recently':
     'சமீபத்தில் புதுப்பித்ததன் வரிசைப்படி வரிசையாக்கு',
   'common.state': 'மாநிலம்  அல்லது  நகராட்சி எல்லை',
-  'common.state-territory': 'மாநிலம்  /  நகராட்சி எல்லை',
+  'common.state-territory': 'மாநிலம்   நகராட்சி எல்லை',
   'common.standard': 'தர நிலை',
   'common.standards': 'தர அளவீடுகள்',
   'common.study': 'படி',
@@ -926,7 +928,7 @@ window.i18ln = {
   'index.shareDescription':
     'குரு வகுப்புகளின் மூலமாக தொகுப்புகளை மாணவர்களிடம் பகிருங்கள்.அணுகலுக்கு உள்நுழைய அவசியமில்லை.',
   'index.monitorDescription':
-    'மாணவர்கள் /ஈடுபாட்டை அளவிடுங்கள் மற்றும் உண்மை நேரத்தில் நுழையும் முன்னேற்றத்தை ஊக்குவியுங்கள்',
+    'மாணவர்கள்ஈடுபாட்டை அளவிடுங்கள் மற்றும் உண்மை நேரத்தில் நுழையும் முன்னேற்றத்தை ஊக்குவியுங்கள்',
   'index.freeAndOpen.title':
     'கட்டுப்பாடற்றதாக வும் திறந்ததாகவும்  .<br/> எப்பொழுதும் இருக்கும்',
   'index.freeAndOpen.description':
@@ -2095,7 +2097,7 @@ window.i18ln = {
   'gru-performance-summary.resume': 'தற்குறிப்பு',
   'gru-performance-summary.study': 'இப்போது படிக்கவும்',
   'gru-performance-summary.view-report': 'அறிக்கை காண்க',
-  'gru-performance-summary.not-applicable': 'பொ / இ',
+  'gru-performance-summary.not-applicable': 'பொ இ',
   'gru-performance-summary.not-started': 'இன்னும் தொடங்கவில்லை',
   'gru-performance.no-content': 'எந்த உள்ளடக்கமும் கிடைக்கவில்லை',
   'gru-performance-metrics.assessment': 'மதிப்பீடு',
@@ -2280,7 +2282,7 @@ window.i18ln = {
   'gru-icon-popover.settings-visibility-title':
     'உங்களின் உள்ளடக்கத்தை காண செய்யுங்கள்',
   'gru-icon-popover.settings-visibility-content':
-    'இந்த அமைப்பு உங்கள் பயனர் சுயவிவரம் வழியாக உங்கள் உள்ளடக்கத்தைக் காணும்படி செய்கிறது. நீங்கள் உருவாக்கும் படிப்புகள், வசூல், மதிப்பீடுகள், வாய்ப்பு வளங்கள் மற்றும் / அல்லது கேள்விகளை சக ஊழியர்களுடன் பகிர்ந்து கொள்ள விரும்பினால், இந்த அம்சத்தை இயக்குமாறு நாங்கள் பரிந்துரைக்கிறோம்.',
+    'இந்த அமைப்பு உங்கள் பயனர் சுயவிவரம் வழியாக உங்கள் உள்ளடக்கத்தைக் காணும்படி செய்கிறது. நீங்கள் உருவாக்கும் படிப்புகள், வசூல், மதிப்பீடுகள், வாய்ப்பு வளங்கள் மற்றும் அல்லது கேள்விகளை சக ஊழியர்களுடன் பகிர்ந்து கொள்ள விரும்பினால், இந்த அம்சத்தை இயக்குமாறு நாங்கள் பரிந்துரைக்கிறோம்.',
   'gru-take-tour.text': 'சுற்றுலா',
   'gru-take-tour.teacher-home.stepOne.title': 'சுற்றுலா செல்லுங்கள்',
   'gru-take-tour.teacher-home.stepOne.description':

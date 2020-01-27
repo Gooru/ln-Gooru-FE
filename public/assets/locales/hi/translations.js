@@ -59,13 +59,41 @@ window.i18ln = {
   'common.efficacy': 'प्रभावोत्पादकता',
   'common.grid': 'ग्रिड',
   'common.list': 'सूची',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
-  'notifications.invalid-score': 'Please correct the score',
   'common.first': 'प्रथम',
   'common.last': 'अंतिम',
   'common.name': 'नाम',
+  'common.add-data-choice-title': 'How do you want to enter the data?',
+  'common.take-photo': 'take photo',
+  'common.upload-image': 'upload image',
+  'notifications.invalid-score': 'Please correct the score',
+  'tooltip.check-items-to-grade':
+    'Check the Items to Grade panel below to grade this activity',
+  'common.by-question': 'question-by-question',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
+  'i2d.conversion-progress':
+    'The uploaded image(s) are being processed. Please check back later',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
+  'i2d.conversion-error':
+    'There was an error when trying to convert the image. Please resubmit the image',
+  'file-picker-placeholder': 'Choose a file or drag it here',
+  'no-preview-available': 'no preview available',
+  'common.success': 'Success',
+  'i2d-successfully-image-upload':
+    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
+  'common.dialog-close': 'Do you want to close ?',
+  'upload-success': 'Uploaded Successfully',
+  'mobile-camera-placeholder': 'Tap for image upload',
+  'i2d.mobile-upload-failed': 'There was a error',
+  'i2d.upload-failed':
+    'There was an error while uploading this image. Re-upload?',
+  're-upload': 'Re-Upload',
   'common.user': 'उपयोगकर्ता',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'विषयवस्तु का नाम',
   'common.lastName': 'अंतिम नाम',
   'common.firstName': 'प्रथम नाम',
@@ -74,6 +102,8 @@ window.i18ln = {
   'common.week': 'सप्ताह',
   'common.month': 'माह',
   'common.more': 'अधिक',
+  'not-covered-in-fw-msg':
+    'Note: This competency is not covered by the {{framework}} framework',
   'common.apply-filter': 'फिल्टर लागू करें',
   'library-search-placeholder': 'पुस्तकालय के भीतर कुछ भी खोजें ...',
   'search-help-message': 'लागू करने के लिए फ़िल्टर चुनें',
@@ -105,6 +135,7 @@ window.i18ln = {
   'common.a-question': 'एक प्रश्न',
   'common.a-resource': 'एक संसाधन',
   'common.a-rubric': 'एक रुब्रिक',
+  'common.a-offline-activity': 'a offline activity',
   'common.all-completed': 'सब पूरा हो गया',
   'common.a-assessment': 'एक मूल्यांकन',
   'common.about': 'के बारे में',
@@ -161,6 +192,8 @@ window.i18ln = {
   'common.anonymous_mode': 'अज्ञात मोड',
   'common.answer': 'आपका उत्तर',
   'common.answer-correct': 'आप सही हैं!',
+  'common.no-suggestion-message':
+    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
   'common.answer-incorrect': 'आप गलत हैं',
   'common.answer-key-was-hidden': 'नोट: आपके शिक्षक ने उत्तर कुंजी ढक दी है।',
   'common.approved': 'मंजूर किया गया',
@@ -262,6 +295,13 @@ window.i18ln = {
   'common.not-answered': 'जवाब नहीं दिया',
   'common.rubric-not-answered': 'रूब्रिक का उत्तर नहीं दिया गया',
   'common.country': 'देश',
+  'reroute.suggestion': 'reroute suggestion',
+  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.take-assessment':
+    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
+  'reroute.suggestion.title': 'Having difficulty with the concepts?',
+  'reroute.suggestion.desc':
+    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
   'common.course-map': 'पाठ्यक्रम मानचित्र',
   'common.course': 'पाठ्यक्रम',
   'common.course-title': 'पाठ्यक्रम का शीर्षक',
@@ -293,7 +333,11 @@ window.i18ln = {
   'common.domain': 'डोमेन',
   'common.domains': 'डोमेन',
   'common.download': 'डाउनलोड',
-  'common.download-print': 'डाउनलोड / प्रिंट',
+  'common.template': 'Template',
+  'assessment-template-msg':
+    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
+  'common.code': 'Code',
+  'common.download-print': 'डाउनलोड प्रिंट',
   'common.drag-drop-suggestions': 'या  ड्रैग और सुझाव छोड़ें ...',
   'common.download-report': 'रिपोर्ट डाउनलोड करें',
   'common.done': 'किया हुआ',
@@ -513,10 +557,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'लॉग इन करने के लिए यहां क्लिक करें।',
   'common.mastery': 'महारत',
   'common.menu': 'मेन्यू',
+  'rubric-details': 'Rubric Details',
   'common.more-details': 'अधिक जानकारी',
   'common.move': 'चाल',
   'common.myContent': 'मेरी विषयवस्तु',
   'common.myProfile': 'मेरी स्थिति',
+  'common.tenantLibrary': 'Tenant Library',
   'common.library': 'पुस्तकालय',
   'common.myPerformance': 'मेरा प्रदर्शन',
   'common.edit-narration': 'विवरण संपादित करें',
@@ -714,6 +760,8 @@ window.i18ln = {
   'common.show-more-results': 'और अधिक परिणाम दिखाएं',
   'common.show-results': 'परिणाम दिखाएं',
   'common.signUp': 'साइन अप करें',
+  'common.signature-assessment': 'Signature Assessment',
+  'common.signature-collection': 'Signature Collection',
   'common.sortAlphabetical': 'वर्णानुक्रम के अनुसार क्रमबद्ध करें',
   'common.sortAverage': 'औसत के अनुसार क्रमबद्ध करें',
   'common.sort-most-recently': 'हाल ही में अद्यतन के अनुसार क्रमबद्ध करें',
@@ -841,6 +889,7 @@ window.i18ln = {
   'class.info.add-students': 'छात्रों को जोड़ें',
   'class.info.class-code': 'कक्षा कोड',
   'class.info.delete': 'कक्षा हटाएं',
+  'class.setting.mastery': 'Enable competency mastery for CA',
   'class.edit.assigned-course': 'पाठ्यक्रम का निरूपण करें',
   'class.edit.basic-info': 'मूलभूत जानकारी',
   'class.edit.class-name': 'कक्षा का नाम',
@@ -1269,6 +1318,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.students': 'छात्र',
   'teacher-landing.class.class-management-tab.student-name': 'छात्र का नाम',
   'teacher-landing.class.class-management-tab.student-id': 'छात्र की आईडी',
+  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
   'teacher-landing.class.class-management-tab.teachers': 'शिक्षक',
   'teacher-landing.class.class-management-tab.view-report': 'रिपोर्ट देखें',
   'teacher-landing.class.class-management-tab.course-null':
@@ -1455,6 +1505,11 @@ window.i18ln = {
   'gru-add-to.add-collection-to-lesson': 'मेरे संकलन से जोड़ें',
   'gru-add-to.add-collection-to-lesson-lead':
     'इस पाठ में जोड़ने के लिए एक संकलन का चयन करें।',
+  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.OA-info':
+    'The activities listed here <b>do not</b> belong to another lesson or course',
+  'gru-add-to.add-oa-to-lesson-lead':
+    'Select a activity to add to this lesson.',
   'gru-add-to.add-to-collection': 'संकलन में जोड़े',
   'gru-add-to.add-to-collection-lead':
     'वह संकलन चुनें जिसमें आप {{contentTitle}} जोड़ना चाहते हैं',
@@ -1887,6 +1942,10 @@ window.i18ln = {
   'profile.gru-navigation.proficiency': 'प्रवीणता',
   'profile.gru-navigation.preference.preference': 'प्राथमिकता',
   'profile.edit.select-district': 'एक जिले का चयन करें...',
+  'counts-based-on-gut':
+    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
+  'show-gut-competencies': 'Show GUT competencies',
+  'competencies-not-in-framework': 'Competencies not covered in framework',
   'profile.proficiency.is-empty':
     'अभी तक कोई डेटा उपलब्ध नहीं है। एक बार अध्ययन शुरू करने के बाद, आपका डेटा उपलब्ध हो जाएगा।',
   'profile.proficiency.expand-chart': 'चार्ट का विस्तार करें',
@@ -2199,7 +2258,7 @@ window.i18ln = {
   'gru-take-tour.student-performance.stepThree.title': 'रिपोर्ट अपडेट करें',
   'gru-take-tour.student-performance.stepThree.description':
     'एक बार जब आप अपने फ़िल्टर चुनते हैं, तो परिणाम प्रदर्शित करने के लिए अद्यतन रिपोर्ट पर क्लिक करें।',
-  'gru-take-tour.student-performance.stepFour.title': 'डाउनलोड / प्रिंट',
+  'gru-take-tour.student-performance.stepFour.title': 'डाउनलोड प्रिंट',
   'gru-take-tour.student-performance.stepFour.description':
     'अपनी रिपोर्ट डाउनलोड करें।',
   'gru-take-tour.student-performance.stepFive.title': 'समाप्त!',
@@ -2440,6 +2499,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'प्रश्न',
   'gru-study-header.question.one': 'प्रश्न',
   'gru-study-header.question.other': 'प्रश्न',
+  'common.suggest-to-student': 'Suggest to student',
   'gru-study-header.suggestions-legend':
     'और जानने के लिए, इन संसाधनों की जांच करें।',
   'gru-suggest-test.pre-test-header': 'पूर्व परीक्षण (Optional)',
@@ -2454,8 +2514,8 @@ window.i18ln = {
     'सुझाए गए मूल्यांकन (Optional)',
   'gru-suggest-test.signature_assessment-lead':
     'इस पाठ्यक्रम पर आपके प्रदर्शन के आधार पर, निम्नलिखित मूल्यांकन आपकी समझबूझ को बढ़ा सकता है।',
-  'gru-suggest-test.pre-test-lead':
-    'इस पाठ में अवधारणाओं की अपनी वर्तमान समझ को मापने के लिए एक पूर्व परीक्षण का सुझाव दिया जाता है। पूर्व परीक्षण आपको पाठ में सामग्री को तैयार करने में मदद कर सकता है। पूर्व परीक्षण आपके पाठ्यक्रम प्रदर्शन स्कोर को प्रभावित नहीं करेगा।',
+  'gru-suggest-test.pre-tessignaturet-lead':
+    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
   'gru-suggest-test.post-test-lead':
     'प्रस्तुत की गई जानकारी की आपकी समझ को मापने के लिए निम्नलिखित उपरांत परीक्षण का सुझाव दिया गया है। उपरांत परीक्षण आपके पाठ्यक्रम प्रदर्शन स्कोर को प्रभावित नहीं करेगा।',
   'gru-suggest-test.backfill-lead':
@@ -2595,7 +2655,7 @@ window.i18ln = {
   'enter-student-score': 'छात्र का स्कोर दर्ज करें',
   'enter-assessment-max-score': 'आकलन का अधिकतम स्कोर  दर्ज करें',
   'student-score': 'छात्र का स्कोर',
-  'search-resource-question': 'खोज संसाधन / प्रश्न',
+  'search-resource-question': 'खोज संसाधन प्रश्न',
   'enter-resource-timespent': 'संसाधन पर व्यतीत समय दर्ज करें',
   'enter-collection-timespent': 'संकलन पर व्यतीत समय दर्ज करें',
   'suggested-lessons': 'सुझाए गये पाठ',
@@ -2631,7 +2691,9 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'प्रयोगशाला की रिपोर्ट',
   'common.subtask.oa.explanation_argument': 'स्पष्टीकरण तर्क',
   'common.subtask.oa.debate': 'परिचर्चा',
+  'common.subtask.oa.others': 'Others',
   project: 'परियोजना',
+  'oa.others': 'Others',
   'oa.project.poster': 'पोस्टर',
   'oa.project.presentation': 'प्रदर्शन',
   'oa.project.video': 'वीडियो',
@@ -2694,12 +2756,16 @@ window.i18ln = {
   'oa.info.duration-hrs': 'पूर्ण करने के लिये अपेक्षित समय',
   'oa.info.hrs': 'hrs',
   'class.add-teachers': 'शिक्षकों को जोड़ें',
+  'common.collaborators': 'Collaborators',
+  'common.no-collaborators':
+    'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
   'class.add-co-teachers': 'सह-शिक्षकों को जोड़ें',
   'common.gained': 'प्राप्त की',
   'badges-earned': 'बैज अर्जित किया',
   'suggestion-taken': 'सुझाव लिया गया',
   'this-week': 'इस सप्ताह',
   'previous-week': 'पिछला सप्ताह',
+  'custom-range': 'Custom Date Range',
   'beginning-till-now': 'शुरुआत से अब तक',
   'report.class-proficiency-report': 'कक्षा की प्रवीणता रिपोर्ट',
   'report.domain-proficiency-report': 'डोमेन आधारित दक्षता रिपोर्ट',
@@ -2778,12 +2844,14 @@ window.i18ln = {
     'आपके पास {{selectedItem}} ग्रेड के लिए कोई गतिविधियाँ नहीं हैं। अपने शेड्यूल में जोड़ने के लिए सामग्री खोजने के लिए पाद पर टैप करें',
   'class-activity.no-activity-items-to-grade-message-desktop':
     'आपके पास {{selectedItem}} ग्रेड के लिए कोई गतिविधियाँ नहीं हैं। शेड्यूल के अधिकार से सामग्री चुनें',
+  'class-activity.scheduled-activities': 'Class Activities',
   'class-activity.unscheduled-activities': 'अनिर्धारित गतिविधियाँ',
+  'class-activity.items-to-grade': 'Items to Grade',
   'common.monthly': 'मासिक',
   'common.daily': 'दैनिक',
   'common.weekly': 'साप्ताहिक',
   'class-activity.no-learning-activities':
-    'लाइब्रेरी में आपकी खोज और फ़िल्टर शर्तों से संबंधित कोई सीखने की गतिविधियाँ नहीं हैं। कृपया उपरोक्त किसी अन्य लाइब्रेरी की जाँच करें या किसी अन्य फ़िल्टर / खोज शब्द का उपयोग करने का प्रयास करें',
+    'लाइब्रेरी में आपकी खोज और फ़िल्टर शर्तों से संबंधित कोई सीखने की गतिविधियाँ नहीं हैं। कृपया उपरोक्त किसी अन्य लाइब्रेरी की जाँच करें या किसी अन्य फ़िल्टर खोज शब्द का उपयोग करने का प्रयास करें',
   'common.activate': 'सक्रिय',
   'common.mark-as-completed': 'बंद करे',
   'common.no-struggling-competencies':
