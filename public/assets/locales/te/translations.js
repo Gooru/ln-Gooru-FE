@@ -64,17 +64,17 @@ window.i18ln = {
   'common.first': 'మొదటి',
   'common.last': 'చివర',
   'common.name': 'నామము',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
-  'notifications.invalid-score': 'Please correct the score',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'మీరు ఏవిధంగా డేటా నమోదు చేస్తారు ?',
   'common.take-photo': 'ఫోటో తీవుకోండి',
   'common.upload-image': 'ప్రతిబింబం అప్లోడ్',
+  'notifications.invalid-score': 'Please correct the score',
   'tooltip.check-items-to-grade':
     'ఈ కార్యాచరణను గ్రేడ్ చేయడానికి దిగువ గ్రేడ్ ప్యానెల్‌కు అంశాలను తనిఖీ చేయండి',
   'common.by-question': 'ప్రశ్న-ద్వారా-ప్రశ్న',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'అప్‌లోడ్ చేసిన ప్రతిబిబం  (లు) ప్రాసెస్ చేయబడుతున్నాయి. దయచేసి తరువాత తనిఖీ చేయండి',
   'i2d.new-upload-msg':
@@ -95,6 +95,8 @@ window.i18ln = {
     'ఈ ప్రతి బిబం ను  అప్‌లోడ్ చేస్తున్నప్పుడు  లోపం ఉంది. తిరిగి అప్లోడ్ చెయ్యండి ?',
   're-upload': 'తిరిగి అప్లోడ్',
   'common.user': 'యూజర్',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'కంటెంట్ పేరు',
   'common.lastName': 'చివరి పేరు',
   'common.firstName': 'మొదటి పేరు',

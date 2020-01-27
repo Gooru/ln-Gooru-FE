@@ -20,9 +20,6 @@ window.i18ln = {
   'my-content': 'My Content',
   'common.tasks': 'tasks',
   'common.sub-filter': 'Sub-Filter',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
-  'notifications.invalid-score': 'Please correct the score',
   'featured-libraries': 'featured libraries',
   'errors.invalid': '{{description}} செல்லாதது',
   'errors.confirmation': '{{description}} பொருந்தவில்லை {{on}}',
@@ -72,15 +69,18 @@ window.i18ln = {
   'common.first': 'முதல்',
   'common.last': 'கடந்த',
   'common.name': 'பெயர்',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title':
     'நீங்கள் டேட்டாவை எப்படி உள்ளிடப் போகிறீர்கள்?',
   'common.take-photo': 'போட்டோ எடு',
   'common.upload-image': 'படத்தினை அப்லோட் செய்',
+  'notifications.invalid-score': 'Please correct the score',
   'tooltip.check-items-to-grade':
     'இந்தச் செயல்பாட்டை தர வரிசைப்படுத்த கீழ் உள்ள கிரேட் அச்சுப் பலகையோடு வகைகளை ஒப்பிட்டு சோதித்துப் பார்த்திடு',
   'common.by-question': 'கேள்வி மேல் கேள்வியாக',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'அப்லோட் செய்யப்பட்டப்  படங்கள் செயல்பாட்டில் உள்ளன. தயவு செய்து சிறிது நேரம் கழித்து சரி பார்க்கவும்',
   'i2d.new-upload-msg':
@@ -101,6 +101,8 @@ window.i18ln = {
     'படத்தினை அப்லோட் செய்யும் போது ஒரு தவறு ஏற்பட்டுவிட்டது. திரும்பவும் அப்லோட் செய்கிறீர்களா?',
   're-upload': 'திரும்ப அப்லோட் செய்யவும்',
   'common.user': 'பயன்படுத்துபவர்',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'உட்பொருளின் பெயர்',
   'common.lastName': 'கடைசிப் பெயர்',
   'common.firstName': 'முதல் பெயர்',

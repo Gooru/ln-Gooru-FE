@@ -37,9 +37,6 @@ window.i18ln = {
   'errors.before': '{{before}}-ന് മുമ്പായിരിക്കണം {{description}}',
   'errors.after': '{{after}}-ന് ശേഷമായിരിക്കണം {{description}}',
   'errors.wrongDateFormat': '{{format}} രൂപത്തിലായിരിക്കണം {{description}}',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
-  'notifications.invalid-score': 'Please correct the score',
   'errors.wrongLength':
     '{{description}}-ന്‍റെ നീളം തെറ്റാണ് ({{is}} പ്രതീകങ്ങളാണ്)',
   'errors.notANumber': '{{description}} സംഖ്യ ആയിരിക്കണം',
@@ -65,8 +62,6 @@ window.i18ln = {
   'common.efficacy': 'കാര്യക്ഷമത',
   'common.grid': 'ഗ്രിഡ്',
   'common.list': 'ലിസ്റ്റ്',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.first': 'ഫസ്റ്റ്',
   'common.last': 'ലാസ്റ്റ്',
   'common.name': 'നെയിം',
@@ -74,9 +69,14 @@ window.i18ln = {
     'നിങ്ങൾക്ക് ഡാറ്റ എങ്ങനെ നൽകാനാണ് താൽപ്പര്യം?',
   'common.take-photo': 'ഫോട്ടോ എടുക്കുക',
   'common.upload-image': 'ചിത്രം അപ്‌ലോഡ് ചെയ്യുക',
+  'notifications.invalid-score': 'Please correct the score',
   'tooltip.check-items-to-grade':
     'ഈ പ്രവർത്തനം ഗ്രേഡ് ചെയ്യാൻ താഴെയുള്ള ഗ്രേഡ് പാനലിലെ ഇനങ്ങൾ പരിശോധിക്കുക',
   'common.by-question': 'ചോദ്യങ്ങൾ ഒന്നൊന്നായി',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'അപ്‌ലോഡ് ചെയ്‍ത ചിത്രം(ങ്ങൾ) പ്രോസസ് ചെയ്യുകയാണ്. പിന്നീട് പരിശോധിക്കുക',
   'i2d.new-upload-msg':
@@ -97,6 +97,8 @@ window.i18ln = {
     'ഈ ചിത്രം അപ്‍ലോഡ് ചെയ്യുന്നതിനിടെ പിശകുണ്ടായി. വീണ്ടും അപ്‌ലോഡ് ചെയ്യണോ?',
   're-upload': 'വീണ്ടും അപ്‌ലോഡ് ചെയ്യണോ?',
   'common.user': 'ഉപയോക്താവ്',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'ഉള്ളടക്കത്തിന്റെ പേര്',
   'common.lastName': 'പേരിന്റെ അവസാന ഭാഗം',
   'common.firstName': 'പേരിന്റെ ആദ്യഭാഗം',

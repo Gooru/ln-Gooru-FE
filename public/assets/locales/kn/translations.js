@@ -62,17 +62,17 @@ window.i18ln = {
   'common.first': 'ಮೊದಲ ',
   'common.last': 'ಕೊನೆಯ',
   'common.name': 'ಹೆಸರು',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
+  'notifications.invalid-score': 'Please correct the score',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',
   'common.by-question': 'question-by-question',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
-  'notifications.invalid-score': 'Please correct the score',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'The uploaded image(s) are being processed. Please check back later',
   'i2d.new-upload-msg':
@@ -92,6 +92,8 @@ window.i18ln = {
     'There was an error while uploading this image. Re-upload?',
   're-upload': 'Re-Upload',
   'common.user': 'ಬಳಕೆದಾರ ',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'ವಿಷಯದ ಹೆಸರು',
   'common.lastName': 'ಕೊನೆಯ ಹೆಸರು',
   'common.firstName': 'ಮೊದಲ ಹೆಸರು',
