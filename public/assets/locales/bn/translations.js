@@ -33,8 +33,6 @@ window.i18ln = {
   'errors.tooShort': '{{description}} খুবই কম ( সর্বোনিম্ন {{min}} অক্ষর দরকার )',
   'add-data-by-question': 'Enter scores by question',
   'add-data-by-upload-image': 'Upload assessment score sheet',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
   'notifications.invalid-score': 'Please correct the score',
   'errors.before': '{{description}} {{before}}-এর আগে হতে হবে',
   'errors.after': '{{description}} {{after}}-এর পরে হতে হবে',

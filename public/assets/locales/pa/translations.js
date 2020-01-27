@@ -36,8 +36,6 @@ window.i18ln = {
   'errors.after': '{{description}} {{after}} ਤੋਂ ਬਾਅਦ \'ਚ ਹੋਣਾ ਚਾਹੀਦਾ',
   'add-data-by-question': 'Enter scores by question',
   'add-data-by-upload-image': 'Upload assessment score sheet',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
   'notifications.invalid-score': 'Please correct the score',
   'errors.wrongDateFormat':
     '{{description}} {{format}} ਦੇ ਫਾੱਰਮੈਟ \'ਚ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ',
@@ -75,10 +73,8 @@ window.i18ln = {
   'tooltip.check-items-to-grade':
     'ਇਸ ਗਤੀਵਿਧੀ ਦੀ ਦਰਜਾਬੰਦੀ ਲਈ ਹੇਠਾਂ ਗਰੇਡ ਪੈਨਲ ਦੀਆਂ ਇਕਾਈਆਂ ਦੀ ਜਾਂਚ ਕਰੋ',
   'common.by-question': 'ਸਵਾਲ ਦਰ ਸਵਾਲ',
-  'i2d-message-1':
-    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2':
-    'You can also use the regular manual input method above to enter the students scores.',
+  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'ਅੱਪਲੋਡ ਕੀਤੀਆਂ ਫੋਟੋਆਂ ਪ੍ਰਕਿਰਿਆ ਵਿੱਚ ਹਨ। ਕੁੱਝ ਸਮੇਂ ਬਾਅਦ ਚੈੱਕ ਕਰੋ',
   'i2d.new-upload-msg':
