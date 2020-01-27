@@ -1808,7 +1808,7 @@ window.i18ln = {
   'search-filter.authors': 'Authors',
   'search-filter.question-types.MC': 'বহু-বৈকল্পিক',
   'search-filter.question-types.FIB': 'খালি ঠাই পূৰ কৰক',
-  'search-filter.question-types.T/F': 'শুদ্ধ ভুল',
+  'search-filter.question-types.T/F': 'শুদ্ধ / ভুল',
   'search-filter.question-types.TOF': 'শুদ্ধ নাইবা অশুদ্ধ',
   'search-filter.question-types.MA': 'বহুধা উত্তৰ',
   'search-filter.question-types.HS_TXT': 'বহু বৈকল্পিক-টেক্স',

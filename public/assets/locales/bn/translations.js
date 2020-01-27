@@ -341,7 +341,7 @@ window.i18ln = {
   'assessment-template-msg':
     'যদি কোনো ক্ষেত্রে আপনার ছাত্ররা মূল্যায়নগুলো অফলাইনে সম্পন্ন করে, এই টেম্পলেটটা ডাউনলোড করুন এবং প্রিন্ট করুন মূল্যায়নগুলোর স্কোর লেখার জন্য',
   'common.code': 'কোড',
-  'common.download-print': ' ডাউনলোড প্রিন্ট ',
+  'common.download-print': ' ডাউনলোড / প্রিন্ট ',
   'common.drag-drop-suggestions': 'অথবা পরামর্শগুলো টেনে এনে ছাড়ুন...',
   'common.download-report': 'রিপোর্ট ডাউনলোড করুন ',
   'common.done': 'সম্পন্ন',
@@ -2013,7 +2013,7 @@ window.i18ln = {
   'gru-performance-summary.resume': 'জীবনবৃত্তান্ত',
   'gru-performance-summary.study': 'গবেষণায় এখন',
   'gru-performance-summary.view-report': 'দেখুন রিপোর্ট',
-  'gru-performance-summary.not-applicable': 'N A',
+  'gru-performance-summary.not-applicable': 'N / A',
   'gru-performance-summary.not-started': 'এখনো শুরু হয়নি',
   'gru-performance.no-content': 'কোন কন্টেন্ট উপলব্ধ',
   'gru-performance-metrics.assessment': 'মূল্যায়ন',
@@ -2186,7 +2186,7 @@ window.i18ln = {
   'gru-settings-edit.backwards':
     'শিক্ষার্থীরা পিছনে নেভিগেট করতে পারে এবং প্রতিক্রিয়া পরিবর্তন করতে পারে ',
   'gru-settings-edit.feedback':
-    'শিক্ষার্থীরা  সঠিক ভুল সে ব্যাপারে তারা নজর রাখে ',
+    'শিক্ষার্থীরা  সঠিক / ভুল সে ব্যাপারে তারা নজর রাখে ',
   'gru-settings-edit.feedback-immediate': 'প্রতিটি প্রশ্ন এবং এর শেষে  ',
   'gru-settings-edit.feedback-never': 'কখনই না ',
   'gru-settings-edit.feedback-summary': 'সব শেষে ',
@@ -2197,7 +2197,7 @@ window.i18ln = {
     'শিক্ষার্থীরা তাদের কোর্সের মানচিত্র থেকে মূল্যায়ন চালিয়ে যেতে পারে ',
   'gru-icon-popover.settings-visibility-title': 'আপনার বিষয়টিকে দৃশ্যমান করুন ',
   'gru-icon-popover.settings-visibility-content':
-    'এই সেটিংটি আপনার বিষয়টি আপনার ব্যবহারকারীর প্রোফাইলের মাধ্যমে দৃশ্যমান করে। আপনি যদি তৈরি কোর্সগুলি, সংগ্রহগুলি, মূল্যায়নগুলি,  বিসয়বস্তুগুলি এবং অথবা প্রশ্নগুলি সহকর্মীদের সাথে ভাগ করতে চান তবে আমরা এই বৈশিষ্ট্যটি শুরু করার পরামর্শ  দিতে পারব।   ',
+    'এই সেটিংটি আপনার বিষয়টি আপনার ব্যবহারকারীর প্রোফাইলের মাধ্যমে দৃশ্যমান করে। আপনি যদি তৈরি কোর্সগুলি, সংগ্রহগুলি, মূল্যায়নগুলি,  বিসয়বস্তুগুলি এবং / অথবা প্রশ্নগুলি সহকর্মীদের সাথে ভাগ করতে চান তবে আমরা এই বৈশিষ্ট্যটি শুরু করার পরামর্শ  দিতে পারব।   ',
   'gru-take-tour.text': 'ভ্রমণ ',
   'gru-take-tour.teacher-home.stepOne.title': 'ঘুরে দেখুন',
   'gru-take-tour.teacher-home.stepOne.description':
@@ -2281,7 +2281,7 @@ window.i18ln = {
   'gru-take-tour.student-performance.stepThree.title': ' আপডেট রিপোর্ট',
   'gru-take-tour.student-performance.stepThree.description':
     'আপনি একবার আপনার ফিল্টারগুলি নির্বাচন করার পরে, ফলাফলগুলি প্রদর্শন করতে আপডেট প্রতিবেদনে ক্লিক করুন। ',
-  'gru-take-tour.student-performance.stepFour.title': ' ডাউনলোড প্রিন্ট ',
+  'gru-take-tour.student-performance.stepFour.title': ' ডাউনলোড / প্রিন্ট ',
   'gru-take-tour.student-performance.stepFour.description':
     'আপনার রিপোর্টটিকে ডাউনলোড করুন। ',
   'gru-take-tour.student-performance.stepFive.title': 'সমাপ্ত!   ',

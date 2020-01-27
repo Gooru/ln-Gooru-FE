@@ -817,7 +817,7 @@ window.i18ln = {
   'common.sort-most-recently':
     'சமீபத்தில் புதுப்பித்ததன் வரிசைப்படி வரிசையாக்கு',
   'common.state': 'மாநிலம்  அல்லது  நகராட்சி எல்லை',
-  'common.state-territory': 'மாநிலம்   நகராட்சி எல்லை',
+  'common.state-territory': 'மாநிலம்  /  நகராட்சி எல்லை',
   'common.standard': 'தர நிலை',
   'common.standards': 'தர அளவீடுகள்',
   'common.study': 'படி',
@@ -928,7 +928,7 @@ window.i18ln = {
   'index.shareDescription':
     'குரு வகுப்புகளின் மூலமாக தொகுப்புகளை மாணவர்களிடம் பகிருங்கள்.அணுகலுக்கு உள்நுழைய அவசியமில்லை.',
   'index.monitorDescription':
-    'மாணவர்கள்ஈடுபாட்டை அளவிடுங்கள் மற்றும் உண்மை நேரத்தில் நுழையும் முன்னேற்றத்தை ஊக்குவியுங்கள்',
+    'மாணவர்கள் /ஈடுபாட்டை அளவிடுங்கள் மற்றும் உண்மை நேரத்தில் நுழையும் முன்னேற்றத்தை ஊக்குவியுங்கள்',
   'index.freeAndOpen.title':
     'கட்டுப்பாடற்றதாக வும் திறந்ததாகவும்  .<br/> எப்பொழுதும் இருக்கும்',
   'index.freeAndOpen.description':
@@ -2097,7 +2097,7 @@ window.i18ln = {
   'gru-performance-summary.resume': 'தற்குறிப்பு',
   'gru-performance-summary.study': 'இப்போது படிக்கவும்',
   'gru-performance-summary.view-report': 'அறிக்கை காண்க',
-  'gru-performance-summary.not-applicable': 'பொ இ',
+  'gru-performance-summary.not-applicable': 'பொ / இ',
   'gru-performance-summary.not-started': 'இன்னும் தொடங்கவில்லை',
   'gru-performance.no-content': 'எந்த உள்ளடக்கமும் கிடைக்கவில்லை',
   'gru-performance-metrics.assessment': 'மதிப்பீடு',
@@ -2282,7 +2282,7 @@ window.i18ln = {
   'gru-icon-popover.settings-visibility-title':
     'உங்களின் உள்ளடக்கத்தை காண செய்யுங்கள்',
   'gru-icon-popover.settings-visibility-content':
-    'இந்த அமைப்பு உங்கள் பயனர் சுயவிவரம் வழியாக உங்கள் உள்ளடக்கத்தைக் காணும்படி செய்கிறது. நீங்கள் உருவாக்கும் படிப்புகள், வசூல், மதிப்பீடுகள், வாய்ப்பு வளங்கள் மற்றும் அல்லது கேள்விகளை சக ஊழியர்களுடன் பகிர்ந்து கொள்ள விரும்பினால், இந்த அம்சத்தை இயக்குமாறு நாங்கள் பரிந்துரைக்கிறோம்.',
+    'இந்த அமைப்பு உங்கள் பயனர் சுயவிவரம் வழியாக உங்கள் உள்ளடக்கத்தைக் காணும்படி செய்கிறது. நீங்கள் உருவாக்கும் படிப்புகள், வசூல், மதிப்பீடுகள், வாய்ப்பு வளங்கள் மற்றும் / அல்லது கேள்விகளை சக ஊழியர்களுடன் பகிர்ந்து கொள்ள விரும்பினால், இந்த அம்சத்தை இயக்குமாறு நாங்கள் பரிந்துரைக்கிறோம்.',
   'gru-take-tour.text': 'சுற்றுலா',
   'gru-take-tour.teacher-home.stepOne.title': 'சுற்றுலா செல்லுங்கள்',
   'gru-take-tour.teacher-home.stepOne.description':

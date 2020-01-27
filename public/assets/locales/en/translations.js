@@ -1767,7 +1767,7 @@ window.i18ln = {
   'search-filter.authors': 'Authors',
   'search-filter.question-types.MC': 'Multiple Choice',
   'search-filter.question-types.FIB': 'Fill in the Blank',
-  'search-filter.question-types.T/F': 'True False',
+  'search-filter.question-types.T/F': 'True / False',
   'search-filter.question-types.TOF': 'True or False',
   'search-filter.question-types.MA': 'Multiple Answer',
   'search-filter.question-types.HS_TXT': 'Multiple Select - Text',

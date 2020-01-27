@@ -337,7 +337,7 @@ window.i18ln = {
   'assessment-template-msg':
     'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
   'common.code': 'Code',
-  'common.download-print': 'डाउनलोड प्रिंट',
+  'common.download-print': 'डाउनलोड / प्रिंट',
   'common.drag-drop-suggestions': 'या  ड्रैग और सुझाव छोड़ें ...',
   'common.download-report': 'रिपोर्ट डाउनलोड करें',
   'common.done': 'किया हुआ',
@@ -2258,7 +2258,7 @@ window.i18ln = {
   'gru-take-tour.student-performance.stepThree.title': 'रिपोर्ट अपडेट करें',
   'gru-take-tour.student-performance.stepThree.description':
     'एक बार जब आप अपने फ़िल्टर चुनते हैं, तो परिणाम प्रदर्शित करने के लिए अद्यतन रिपोर्ट पर क्लिक करें।',
-  'gru-take-tour.student-performance.stepFour.title': 'डाउनलोड प्रिंट',
+  'gru-take-tour.student-performance.stepFour.title': 'डाउनलोड / प्रिंट',
   'gru-take-tour.student-performance.stepFour.description':
     'अपनी रिपोर्ट डाउनलोड करें।',
   'gru-take-tour.student-performance.stepFive.title': 'समाप्त!',
@@ -2655,7 +2655,7 @@ window.i18ln = {
   'enter-student-score': 'छात्र का स्कोर दर्ज करें',
   'enter-assessment-max-score': 'आकलन का अधिकतम स्कोर  दर्ज करें',
   'student-score': 'छात्र का स्कोर',
-  'search-resource-question': 'खोज संसाधन प्रश्न',
+  'search-resource-question': 'खोज संसाधन / प्रश्न',
   'enter-resource-timespent': 'संसाधन पर व्यतीत समय दर्ज करें',
   'enter-collection-timespent': 'संकलन पर व्यतीत समय दर्ज करें',
   'suggested-lessons': 'सुझाए गये पाठ',
@@ -2851,7 +2851,7 @@ window.i18ln = {
   'common.daily': 'दैनिक',
   'common.weekly': 'साप्ताहिक',
   'class-activity.no-learning-activities':
-    'लाइब्रेरी में आपकी खोज और फ़िल्टर शर्तों से संबंधित कोई सीखने की गतिविधियाँ नहीं हैं। कृपया उपरोक्त किसी अन्य लाइब्रेरी की जाँच करें या किसी अन्य फ़िल्टर खोज शब्द का उपयोग करने का प्रयास करें',
+    'लाइब्रेरी में आपकी खोज और फ़िल्टर शर्तों से संबंधित कोई सीखने की गतिविधियाँ नहीं हैं। कृपया उपरोक्त किसी अन्य लाइब्रेरी की जाँच करें या किसी अन्य फ़िल्टर / खोज शब्द का उपयोग करने का प्रयास करें',
   'common.activate': 'सक्रिय',
   'common.mark-as-completed': 'बंद करे',
   'common.no-struggling-competencies':

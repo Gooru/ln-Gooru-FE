@@ -1402,7 +1402,7 @@ window.i18ln = {
   'teacher-landing.class.class-activities.input-timespent':
     'ചെലവഴിച്ച ഇൻപുട്ട് സമയം',
   'teacher-landing.class.class-activities.warning-message':
-    '{{studentName}} എന്ന വിദ്യാർത്ഥിയ്ക്കായുള്ള {{questionCount}} ചോദ്യങ്ങളുടെ ഡാറ്റ നിങ്ങൾ നൽകിയിട്ടില്ല. മറ്റൊരു വിദ്യാർത്ഥിയെ തിരഞ്ഞെടുത്താൽ-ന്‍റെ ഡാറ്റ നഷ്ടമാകും. തുടരണോ?',
+    '{{studentName}} എന്ന വിദ്യാർത്ഥിയ്ക്കായുള്ള {{questionCount}} ചോദ്യങ്ങളുടെ ഡാറ്റ നിങ്ങൾ നൽകിയിട്ടില്ല. മറ്റൊരു വിദ്യാർത്ഥിയെ തിരഞ്ഞെടുത്താൽ /-ന്‍റെ ഡാറ്റ നഷ്ടമാകും. തുടരണോ?',
   'teacher-landing.class.class-activities.info-message':
     '{{studentName}} എന്ന വിദ്യാർത്ഥിയ്ക്കായുള്ള ഡാറ്റ നൽകിയിട്ടുണ്ട്, എന്നാലത് സേവ് ചെയ്തിട്ടില്ല. തുടരുന്നതിന് മുൻപ് അത് സേവ് ചെയ്യണോ?',
   'teacher-landing.class.offline-class-report.class-report':
@@ -2050,7 +2050,7 @@ window.i18ln = {
   'gru-performance-summary.resume': 'പുനരാരംഭിക്കുക',
   'gru-performance-summary.study': 'ഇപ്പോൾ പഠിക്കുക',
   'gru-performance-summary.view-report': 'റിപ്പോർട്ട് കാണുക',
-  'gru-performance-summary.not-applicable': 'n a',
+  'gru-performance-summary.not-applicable': 'n / a',
   'gru-performance-summary.not-started': 'ഇതുവരെ ആരംഭിച്ചിട്ടില്ല',
   'gru-performance.no-content': 'ഉള്ളടക്കമൊന്നും ലഭ്യമല്ല',
   'gru-performance-metrics.assessment': 'മൂല്യനിർണ്ണയം',
