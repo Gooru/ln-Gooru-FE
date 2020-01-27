@@ -77,7 +77,7 @@ window.i18ln = {
   'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress': 'The uploaded image(s) are being processed. Please check back later',
   'i2d.new-upload-msg': 'Please click on Confirm & Continue button to upload your images',
-  'i2d.conversion-error': 'There was an error when trying to convert the image. Please resubmit the image',
+  'i2d.conversion-error': 'Could not process the image to generate the scores. Please submit a clear image',
   'file-picker-placeholder': 'Choose a file or drag it here',
   'no-preview-available': 'no preview available',
   'common.success': 'Success',

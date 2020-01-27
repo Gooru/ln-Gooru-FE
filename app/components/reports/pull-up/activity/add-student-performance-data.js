@@ -132,7 +132,9 @@ export default Ember.Component.extend(ConfigurationMixin, {
       .then(result => {
         component.set('isLoading', false);
         if (result.length) {
-          const errorList = result.filterBy('status', -1);
+          const errorList = result.filter((item) => {
+            return item.status < 4;
+          });
           if (errorList.length) {
             component.set('errorOnConversion', true);
           } else {
