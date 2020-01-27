@@ -37,6 +37,7 @@ export default Ember.Component.extend({
     component.resetStudentScores();
     component.loadStudentsActivityPerformanceData();
     if (component.get('isMobileView')) {
+      component.set('isSwitchStudent', true);
       component.set('rightElementContainer', component.$('.right-container'));
     }
   },

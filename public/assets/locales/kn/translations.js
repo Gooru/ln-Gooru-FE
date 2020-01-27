@@ -62,11 +62,10 @@ window.i18ln = {
   'common.first': 'ಮೊದಲ ',
   'common.last': 'ಕೊನೆಯ',
   'common.name': 'ಹೆಸರು',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'How do you want to enter the data?',
   'common.take-photo': 'take photo',
   'common.upload-image': 'upload image',
+  'notifications.invalid-score': 'Please correct the score',
   'tooltip.check-items-to-grade':
     'Check the Items to Grade panel below to grade this activity',
   'common.by-question': 'question-by-question',
@@ -94,6 +93,8 @@ window.i18ln = {
     'There was an error while uploading this image. Re-upload?',
   're-upload': 'Re-Upload',
   'common.user': 'ಬಳಕೆದಾರ ',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'ವಿಷಯದ ಹೆಸರು',
   'common.lastName': 'ಕೊನೆಯ ಹೆಸರು',
   'common.firstName': 'ಮೊದಲ ಹೆಸರು',

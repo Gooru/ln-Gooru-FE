@@ -87,7 +87,7 @@
                   <span class="rubric-icon" />
                 </div>
               {{else}}
-                <div class="add-data not-started {{unless activity.isActive 'disable-performance'}} {{if activityClass.members.length '' 'no-student'}}" {{action "onOpenPerformanceEntry" activityClass}}>
+                <div class="add-data not-started {{if (or isFutureActivity (not activity.isActive)) 'disable-performance'}} {{if activityClass.members.length '' 'no-student'}}" {{action "onOpenPerformanceEntry" activityClass}}>
                   Add Data
                 </div>
               {{/if}}

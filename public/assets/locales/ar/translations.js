@@ -62,16 +62,19 @@ window.i18ln = {
   'common.first': 'الأول',
   'common.last': 'الأخير',
   'common.name': 'الأسم',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.add-data-choice-title': 'كيف تود ادخال البيانات؟',
   'common.take-photo': 'التقط صورة',
   'common.upload-image': 'حمل صورة',
+  'notifications.invalid-score': 'Please correct the score',
   'tooltip.check-items-to-grade':
     'افحص العناصر لتحديد الصف ادناه لتحديد هذا النشاط',
   'common.by-question': 'سؤال بسؤال',
   'add-data-by-question': 'Enter scores by question',
   'add-data-by-upload-image': 'Upload assessment score sheet',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'تتم معالجة الصور/ الصورة المحملة.يرجى التأكيد مرة اخرى فى وقت لاحق',
   'i2d.new-upload-msg':
@@ -90,6 +93,8 @@ window.i18ln = {
   'i2d.upload-failed': 'كان هناك خطأً عند تحميل الصورة.هل تريد الاعادة؟',
   're-upload': 'اعادة التحميل',
   'common.user': 'المستخدم',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'اسم المحتوى',
   'common.lastName': 'الاسم الاول',
   'common.firstName': 'الاسم الاخير',
@@ -310,9 +315,6 @@ window.i18ln = {
   'common.currently-studying': 'دراسة حالية',
   'common.date': 'تاريخ',
   'common.delete': 'احذف',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
-  'notifications.invalid-score': 'Please correct the score',
   'common.delete-instructions.links-inaccessible':
     'لن يتم الوصول لجميع روابط المشاركة',
   'common.delete-instructions.content-inaccessible':
