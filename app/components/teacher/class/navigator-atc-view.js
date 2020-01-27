@@ -69,7 +69,6 @@ export default Ember.Component.extend({
 
     onSelectStudent(studentData) {
       const component = this;
-      let tooltipContainer = component.$('.navigator-atc-tooltip');
       component.set(
         'tooltipInterval',
         component.studentProficiencyInfoTooltip(
@@ -77,10 +76,9 @@ export default Ember.Component.extend({
           this.$('.navigator-atc-student-list').position()
         )
       );
-      tooltipContainer.addClass('active');
       if (component.get('isMobileView')) {
-        component.set('isShowTooltip', true);
         const nodeElement = component.$(`.node-${studentData.get('seq')}`);
+        component.set('isShowTooltip', true);
         component.$(nodeElement).addClass('active-node');
         let selectedNodePos = component.$(nodeElement).position();
         component.highlightStudentProfile(selectedNodePos);
@@ -96,6 +94,7 @@ export default Ember.Component.extend({
     onCloseListCard() {
       const component = this;
       component.removeStudentListCard();
+      component.set('isShowListCard', false);
     }
   },
 
@@ -160,13 +159,17 @@ export default Ember.Component.extend({
    */
   isZoomed: false,
 
-  isShowStudentList: false,
-
   groupedStudentList: Ember.A([]),
 
   tooltipInterval: null,
 
   studentListTooltipInterval: null,
+
+  /**
+   * @property {Boolean} isShowListCard
+   * Property to check whether the list card is visible or not (only for mobile devices)
+   */
+  isShowListCard: false,
 
   // -------------------------------------------------------------------------
   // Functions
@@ -331,7 +334,6 @@ export default Ember.Component.extend({
     });
 
     dataset = component.groupItemsByPos(dataset);
-
     var yAxis = d3.svg
       .axis()
       .scale(yScale)
@@ -357,7 +359,6 @@ export default Ember.Component.extend({
       .attr('height', svgHeight)
       .call(chartZoomConfig)
       .append('g')
-      .attr('class', 'chart-area')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
     const studentNodes = svg.append('g').attr('class', 'student-nodes');
@@ -423,7 +424,7 @@ export default Ember.Component.extend({
           12}, ${parseFloat(d.yAxis) - 20})`;
       })
       .attr('class', function(d) {
-        return `node-point node-${d.get('seq') + 1}`;
+        return `node-point node-${d.get('seq')}`;
       });
 
     tooltip.on('mouseout', function() {
@@ -482,14 +483,9 @@ export default Ember.Component.extend({
       });
 
       studentNode.on('mouseout', function() {
-        component.set('isShowTooltip', false);
-        tooltipContainer.removeClass('active');
-        component.$('.node-point').removeClass('active-node');
         activeStudentContainer.addClass('hidden');
-        component.set('isShowStudentList', false);
         studentListCardContainer.removeClass('active');
-        Ember.run.cancel(tooltipInterval);
-        Ember.run.cancel(studentListTooltipInterval);
+        component.removeTooltip(tooltipInterval);
       });
     } else {
       studentNode.on('click', function(studentData) {
@@ -510,6 +506,7 @@ export default Ember.Component.extend({
             studentData
           );
           component.set('isShowTooltip', true);
+          component.set('isShowListCard', false);
           component.$(this).addClass('active-node');
           let selectedNodePos = component.$(this).position();
           component.highlightStudentProfile(selectedNodePos);
@@ -642,6 +639,7 @@ export default Ember.Component.extend({
         tooltip.css(tooltipPos);
       }
       component.$('.navigator-atc-student-list').addClass('active');
+      component.set('isShowListCard', true);
     }, 500);
   },
 
@@ -671,9 +669,9 @@ export default Ember.Component.extend({
 
   removeStudentListCard(tooltipInterval) {
     const component = this;
-    component.set('isShowStudentList', false);
     component.$('.navigator-atc-student-list').removeClass('active');
     Ember.run.cancel(tooltipInterval);
+    component.set('studentListTooltipInterval', null);
   },
 
   groupItemsByPos(dataset = Ember.A([])) {
