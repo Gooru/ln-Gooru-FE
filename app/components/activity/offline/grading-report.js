@@ -386,7 +386,7 @@ export default Ember.Component.extend({
     onTogglePanel() {
       // NOTE pixel values are hard coded based on current implementation.
       const component = this;
-      let bottom = '120px';
+      let bottom = '-110px';
       if (component.get('isRightPanelExpanded')) {
         // 10px padding top
         bottom = `-${component.$('.oa-grading-section').height() - 40}px`;
