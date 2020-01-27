@@ -82,6 +82,7 @@
 
     .add-data-body-container {
       height: calc(100% - 56px);
+      overflow: auto;
     }
   }
 }

@@ -86,6 +86,9 @@ window.i18ln = {
   'upload-success': 'Uploaded Successfully',
   'mobile-camera-placeholder': 'Tap for image upload',
   'i2d.mobile-upload-failed': 'There was a error',
+  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
+  'notifications.invalid-score': 'Please correct the score',
   'i2d.upload-failed':
     'There was an error while uploading this image. Re-upload?',
   're-upload': 'Re-Upload',

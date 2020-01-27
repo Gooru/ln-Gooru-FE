@@ -38,7 +38,7 @@
               <tr class="student-score">
                 <td>{{student.firstName}}</td>
                 {{#each student.questions as |question|}}
-                  <td> {{validation/gru-input model=question valuePath='score' maxLength=question.maxScore}}</td>
+                  <td class="{{if question.invalidScore 'invalid-score'}}"> {{validation/gru-input model=question valuePath='score' maxLength=question.maxScore}}</td>
                 {{/each}}
               </tr>
             {{/each}}
@@ -49,7 +49,7 @@
           {{#if (or (eq activeContent.uploadStatus -1) (eq activeContent.uploadStatus 3))}}
             {{t 'i2d.conversion-error'}}
           {{else if (not activeContent.uploadStatus)}}
-              {{t 'i2d.new-upload-msg'}}
+            {{t 'i2d.new-upload-msg'}}
           {{else}}
             {{t 'i2d.conversion-progress'}}
           {{/if}}

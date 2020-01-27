@@ -44,9 +44,8 @@ export default DS.JSONAPISerializer.extend({
   normalizeImageData: function(data) {
     const serializer = this;
     return Ember.Object.create({
-      conversionInfo: data.conversion_info
-        ? serializer.normalizeConversionInfo(data.conversion_info)
-        : null,
+      conversionInfo: data.conversion_info ?
+        serializer.normalizeConversionInfo(data.conversion_info) : null,
       uploadInfo: serializer.normalizeSearchItem(data.upload_info),
       parsedData: data.parsed_data.map(data => {
         return serializer.normalizeParseData(data);
@@ -77,7 +76,7 @@ export default DS.JSONAPISerializer.extend({
       questionType: data.question_type,
       questionSequence: data.question_sequence,
       maxScore: data.max_score,
-      score: data.score
+      score: data.score <= data.max_score ? data.score : null
     });
   }
 });
