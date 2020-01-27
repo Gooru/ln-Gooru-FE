@@ -255,7 +255,7 @@ export default Ember.Component.extend({
     component.set('showPullUp', true);
     component.$().animate(
       {
-        top: '10%'
+        bottom: '0'
       },
       400
     );
