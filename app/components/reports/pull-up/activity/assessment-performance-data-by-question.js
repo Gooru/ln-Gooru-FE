@@ -35,7 +35,6 @@ export default Ember.Component.extend({
       component.loadExternalAssessmentData();
     }
     component.resetStudentScores();
-    component.loadStudentsActivityPerformanceData();
     if (component.get('isMobileView')) {
       component.set('isSwitchStudent', true);
       component.set('rightElementContainer', component.$('.right-container'));
@@ -541,6 +540,7 @@ export default Ember.Component.extend({
           );
           component.set('questions', filteredQuestions);
           component.resetQuestionScores();
+          component.loadStudentsActivityPerformanceData();
         }
       });
   },
