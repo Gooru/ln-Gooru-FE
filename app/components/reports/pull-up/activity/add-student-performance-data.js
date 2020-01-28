@@ -1,10 +1,6 @@
 import Ember from 'ember';
-import {
-  CONTENT_TYPES
-} from 'gooru-web/config/config';
-import {
-  cleanFilename
-} from 'gooru-web/utils/utils';
+import { CONTENT_TYPES } from 'gooru-web/config/config';
+import { cleanFilename } from 'gooru-web/utils/utils';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
 export default Ember.Component.extend(ConfigurationMixin, {
@@ -132,7 +128,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
       .then(result => {
         component.set('isLoading', false);
         if (result.length) {
-          const errorList = result.filter((item) => {
+          const errorList = result.filter(item => {
             return item.status < 4;
           });
           if (errorList.length) {

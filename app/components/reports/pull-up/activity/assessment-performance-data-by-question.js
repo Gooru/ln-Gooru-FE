@@ -29,13 +29,14 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     const component = this;
-    if (component.get('isAssessment')) {
-      component.loadAssessmentData();
-    } else {
-      component.loadExternalAssessmentData();
-    }
-    component.resetStudentScores();
-    component.loadStudentsActivityPerformanceData();
+    Ember.RSVP.hash({
+      assessmentPromise: component.get('isAssessment')
+        ? component.loadAssessmentData()
+        : component.loadExternalAssessmentData()
+    }).then(() => {
+      component.resetStudentScores();
+      component.loadStudentsActivityPerformanceData();
+    });
     if (component.get('isMobileView')) {
       component.set('isSwitchStudent', true);
       component.set('rightElementContainer', component.$('.right-container'));
@@ -541,6 +542,7 @@ export default Ember.Component.extend({
           );
           component.set('questions', filteredQuestions);
           component.resetQuestionScores();
+          return assessmentData;
         }
       });
   },
@@ -558,6 +560,7 @@ export default Ember.Component.extend({
         if (!component.isDestroyed) {
           component.set('assessment', assessmentData);
         }
+        return assessmentData;
       });
   },
 

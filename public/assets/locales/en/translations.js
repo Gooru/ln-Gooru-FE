@@ -73,11 +73,16 @@ window.i18ln = {
   'common.by-question': 'question-by-question',
   'add-data-by-question': 'Enter scores by question',
   'add-data-by-upload-image': 'Upload assessment score sheet',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
-  'i2d.conversion-progress': 'The uploaded image(s) are being processed. Please check back later',
-  'i2d.new-upload-msg': 'Please click on Confirm & Continue button to upload your images',
-  'i2d.conversion-error': 'Could not process the image to generate the scores. Please submit a clear image',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
+  'i2d.conversion-progress':
+    'The uploaded image(s) are being processed. Please check back later',
+  'i2d.new-upload-msg':
+    'Please click on Confirm & Continue button to upload your images',
+  'i2d.conversion-error':
+    'Could not process the image to generate the scores. Please submit a clear image',
   'file-picker-placeholder': 'Choose a file or drag it here',
   'no-preview-available': 'no preview available',
   'common.success': 'Success',
