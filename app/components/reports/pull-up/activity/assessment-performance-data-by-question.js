@@ -29,14 +29,10 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     const component = this;
-    let loadData;
-    if (component.get('isAssessment')) {
-      loadData = component.loadAssessmentData();
-    } else {
-      loadData = component.loadExternalAssessmentData();
-    }
     Ember.RSVP.hash({
-      loadData: loadData
+      assessmentPromise: component.get('isAssessment')
+        ? component.loadAssessmentData()
+        : component.loadExternalAssessmentData()
     }).then(() => {
       component.resetStudentScores();
       component.loadStudentsActivityPerformanceData();
