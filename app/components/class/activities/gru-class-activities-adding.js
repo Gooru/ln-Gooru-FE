@@ -22,6 +22,10 @@ export default Ember.Component.extend({
    */
   classService: Ember.inject.service('api-sdk/class'),
 
+  didInsertElement() {
+    this.scrollHandler();
+  },
+
   actions: {
     goBackToTenantLibraries() {
       this.set('isShowTenantLibraries', true);
@@ -53,6 +57,7 @@ export default Ember.Component.extend({
       component.set('tenantLibraries', tenantLibraries);
       component.set('isShowTenantLibraries', true);
       component.set('isShowCourseMap', false);
+      component.set('isFetchedAllContents', true);
     },
 
     onSelectTenantLibrary(tenantLibrary) {
@@ -60,15 +65,29 @@ export default Ember.Component.extend({
       component.set('activeTenantLibrary', tenantLibrary);
     },
 
-    onShowFilteredContents(filteredContents) {
+    onShowFilteredContents(filteredContents, isRefreshed = true) {
       const component = this;
-      let todaysActivities = component.get('todaysActivities');
-      filteredContents.map(content => {
-        content.isAdded = !!todaysActivities.findBy('contentId', content.id);
-      });
+      let isNewSetOfContents =
+        isRefreshed || component.get('scrollEndHitCount') === 0;
+      component.set('isFetchedAllContents', filteredContents.length < 20);
+      if (filteredContents.length) {
+        let todaysActivities = component.get('todaysActivities');
+        filteredContents.map(content => {
+          content.isAdded = !!todaysActivities.findBy('contentId', content.id);
+        });
+        filteredContents = isNewSetOfContents
+          ? filteredContents
+          : component.get('filteredContents').concat(filteredContents);
+      }
+
+      if (isNewSetOfContents || filteredContents.length <= 0) {
+        component.set('scrollEndHitCount', 0);
+        component.$('.body-container').scrollTop(0);
+      }
       component.set('filteredContents', filteredContents);
       component.set('isShowTenantLibraries', false);
       component.set('isShowCourseMap', false);
+      component.set('isFetchingContents', false);
     },
 
     onAddActivity(
@@ -96,6 +115,7 @@ export default Ember.Component.extend({
       const component = this;
       component.set('isShowCourseMap', true);
       component.set('isShowTenantLibraries', false);
+      component.set('scrollEndHitCount', 0);
     },
 
     onShowDateRangePicker(content) {
@@ -212,6 +232,12 @@ export default Ember.Component.extend({
 
   isMultiClassListExpanded: false,
 
+  scrollEndHitCount: 0,
+
+  isFetchingContents: false,
+
+  isFetchedAllContents: false,
+
   assignActivityToMultipleClass(
     content,
     scheduleDate,
@@ -293,5 +319,27 @@ export default Ember.Component.extend({
     return component
       .get('classService')
       .readClassInfo(classId, fetchCachedData);
+  },
+
+  /**
+   * @func scrollHandler
+   * Method to handle scrolling event of body container
+   */
+  scrollHandler() {
+    const component = this;
+    component.$('.body-container').on('scroll', function() {
+      if (
+        !component.get('isFetchingContents') &&
+        !component.get('isFetchedAllContents')
+      ) {
+        const innerHeight = component.$(this).innerHeight();
+        const scrollTop = component.$(this).scrollTop();
+        const scrollHeight = component.$(this)[0].scrollHeight;
+        if (scrollTop + innerHeight >= scrollHeight - 100) {
+          component.set('isFetchingContents', true);
+          component.incrementProperty('scrollEndHitCount');
+        }
+      }
+    });
   }
 });
