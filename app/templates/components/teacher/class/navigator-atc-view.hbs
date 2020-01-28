@@ -26,11 +26,9 @@
             <span class="grade-level">{{studentData.grade}}</span>
           </div>
         </div>
-        {{#if groupedStudentList.length}}
-          <div class="close-tooltip" {{action "onCloseTooltip"}}>
-            {{gru-icon name='clear'}}
-          </div>
-        {{/if}}
+        <div class="close-tooltip {{unless isShowListCard 'hidden'}}" {{action "onCloseTooltip"}}>
+          {{gru-icon name='clear'}}
+        </div>
       </div>
       <div class="body-container">
         <div class="performance-container info-container" {{action "onShowStudentPerformance" studentData 'report'}}>

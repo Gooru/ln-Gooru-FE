@@ -50,8 +50,8 @@ window.i18ln = {
   'errors.otherThan': '{{description}} ના સિવાય હોવી જોઈએ {{value}}',
   'errors.odd': '{{description}} એકી સંખ્યા હોવી જોઈએ',
   'errors.even': 'બેકી સંખ્યા હોવી જોઈએ',
-  'i2d-message-1': 'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
-  'i2d-message-2': 'You can also use the regular manual input method above to enter the students scores.',
+  'add-data-by-question': 'Enter scores by question',
+  'add-data-by-upload-image': 'Upload assessment score sheet',
   'notifications.invalid-score': 'Please correct the score',
   'errors.positive': 'ઘન સંખ્યા હોવી જોઈએ',
   'errors.date': 'તારીખ વેલીડ હોવી જોઈએ',
@@ -61,8 +61,6 @@ window.i18ln = {
   'common.relevance': 'સબંધિત',
   'common.engagement': 'એંગેજમેન્ટ',
   'common.efficacy': 'અસરકારકતા',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.grid': 'ગ્રીડ',
   'common.list': 'યાદી',
   'common.first': 'પ્રથમ',
@@ -74,6 +72,10 @@ window.i18ln = {
   'tooltip.check-items-to-grade':
     'આ એકટીવીટીને ગ્રેડ કરવા માટે નીચે ગ્રેડ પેનલમાં આપેલી વસ્તુઓ જુઓ.',
   'common.by-question': 'પ્રશ્ન બાદ પ્રશ્ન',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'અપલોડ કરવામાં આવેલી ઇમેજ પ્રોસેસ થઇ રહી છે. કૃપા કરી થોડીવાર પછી ચકાસો.',
   'i2d.new-upload-msg':
@@ -93,6 +95,8 @@ window.i18ln = {
   'i2d.upload-failed': 'આ ઇમેજ અપલોડ કરવામાં એરર આવી રહી છે. ફરી અપલોડ કરીએ ?',
   're-upload': 'ફરી અપલોડ કરો',
   'common.user': 'યુઝર',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'વિગતોનું નામ (કન્ટેન્ટ નામ)',
   'common.lastName': 'લાસ્ટ નામ (છેલ્લું)',
   'common.firstName': 'ફર્સ્ટ નામ (પહેલું )',
