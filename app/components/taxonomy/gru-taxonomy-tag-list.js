@@ -23,24 +23,13 @@ export default Ember.Component.extend({
       if (this.get('onAdd')) {
         this.get('onAdd')(tag);
       }
+    },
+
+    // Action trigger when click on non visible taxonomy count
+    nonVisibleDropdown() {
+      this.$('.all-tags').slideToggle(400);
     }
   },
-
-  // -------------------------------------------------------------------------
-  // Events
-  setup: Ember.on('didInsertElement', function() {
-    if (this.get('nonVisibleTags')) {
-      this.setupTooltip();
-    }
-  }),
-
-  cleanUp: Ember.on('willDestroyElement', function() {
-    const $anchor = this.$('button.non-visible-tags');
-    $anchor.off('click');
-
-    // In case a popover was open, it will need to be destroyed
-    $anchor.popover('destroy');
-  }),
 
   // --------------------------------------------
   // Properties
@@ -120,50 +109,8 @@ export default Ember.Component.extend({
    * Maintains the value popover placement
    * @type {String}
    */
-  placement: null,
+  placement: null
 
   // -------------------------------------------------------------------------
   // Methods
-
-  setupTooltip: function() {
-    var $anchor = this.$('button.non-visible-tags');
-    if ($anchor.length) {
-      let component = this;
-      let placement = this.get('placement')
-        ? this.get('placement')
-        : this.get('isInCard') || this.get('isInSearch')
-          ? 'bottom'
-          : 'auto right';
-      $anchor.addClass('clickable');
-      $anchor.attr('data-html', 'true');
-      $anchor.attr(
-        'data-title',
-        '<button type="button" id="popoverClose" class="close">&times;</button>'
-      );
-      $anchor.popover({
-        placement: placement,
-        content: function() {
-          return component.$('.all-tags').html();
-        },
-        trigger: 'manual'
-      });
-
-      $(document).click(function(e) {
-        if (e.target.id === 'popoverClose') {
-          $('.list-open').popover('hide');
-        }
-      });
-
-      $anchor.click(function() {
-        var $this = $(this);
-        if (!$this.hasClass('list-open')) {
-          // Close all tag-list popovers by simulating a click on them
-          $('.non-visible-tags.list-open').click();
-          $this.addClass('list-open').popover('show');
-        } else {
-          $this.removeClass('list-open').popover('hide');
-        }
-      });
-    }
-  }
 });

@@ -3,25 +3,29 @@
 {{/each}}
 
 {{#if nonVisibleTags}}
-  <button class="non-visible-tags">
-    <span>+ {{nonVisibleTags}}</span>
-  </button>
-  <div class="all-tags">
-    {{#each tags as |taxonomyTag|}}
-      {{taxonomy/gru-taxonomy-tag
-      model=taxonomyTag
-      isEditing=isEditing
-      hasTooltip=false
-      onRemove=(action 'removeTag' taxonomyTag)
-      onAdd=(action 'addTag' taxonomyTag)
-      }}
-      {{#if showDescription}}
-        <div class="panel panel-default description-tag">
-          <div class="panel-body">
-            {{truncate text=taxonomyTag.data.title maxLength=80}}
+  <div class="non-visible-tags-container">
+    <button class="non-visible-tags" {{action 'nonVisibleDropdown'}}>
+      <span>+ {{nonVisibleTags}}</span>
+    </button>
+    <div class="all-tags">
+    <span class="close" {{action 'nonVisibleDropdown'}}>{{gru-icon name="close"}}</span>
+      {{#each tags as |taxonomyTag|}}
+        {{taxonomy/gru-taxonomy-tag
+        model=taxonomyTag
+        isEditing=isEditing
+        hasTooltip=true
+        onRemove=(action 'removeTag' taxonomyTag)
+        onAdd=(action 'addTag' taxonomyTag)
+        }}
+        {{#if showDescription}}
+        <!-- NOTE we used Bootstrap tooptip so no need description support -->
+          <div class="panel panel-default description-tag out-of-scope">
+            <div class="panel-body">
+              {{truncate text=taxonomyTag.data.title maxLength=80}}
+            </div>
           </div>
-        </div>
-      {{/if}}
-    {{/each}}
+        {{/if}}
+      {{/each}}
+    </div>
   </div>
 {{/if}}
