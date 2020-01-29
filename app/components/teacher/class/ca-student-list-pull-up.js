@@ -82,7 +82,10 @@ export default Ember.Component.extend({
       let component = this;
       let studentSearchText = component.get('studentSearchText');
       if (!studentSearchText) {
-        return component.get('students');
+        return component
+          .get('students')
+          .sortBy('isSelected')
+          .reverse();
       }
       let regexp = new RegExp(studentSearchText, 'gi');
       return component.get('students').filter(function(student) {
