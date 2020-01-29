@@ -11,177 +11,141 @@
   </div>
 
   {{#if (and (not studentRubric.scoring) isInlineGrading)}}
-    <div class="self-comment-container {{if isTeacherGradingDone 'teacher-graded'}}">
-      <div class="comment-label">{{t 'oa.self-grading.comment-label'}}</div>
-      <div class="comment-input">
-        {{validation/gru-textarea
-          model=studentRubric
-          valuePath='comment'
-          maxLength=500
-          placeholder=(t 'common.your-thoughts')
-        }}
-      </div>
-      <div class="comment-action">
-        <div class="submit-comment" {{action 'saveGrade'}}>
-          {{#if isStudentGradingDone}}
-            {{t 'goals.manage.update'}}
-          {{else}}
-            {{t 'common.submit'}}
-          {{/if}}
-        </div>
+  <div class="self-comment-container {{if isTeacherGradingDone 'teacher-graded'}}">
+    <div class="comment-label">{{t 'oa.self-grading.comment-label'}}</div>
+    <div class="comment-input">
+      {{validation/gru-textarea
+        model=studentRubric
+        valuePath='comment'
+        maxLength=500
+        placeholder=(t 'common.your-thoughts')
+      }}
+    </div>
+    <div class="comment-action">
+      <div class="submit-comment" {{action 'saveGrade'}}>
+        {{#if isStudentGradingDone}}
+        {{t 'goals.manage.update'}}
+        {{else}}
+        {{t 'common.submit'}}
+        {{/if}}
       </div>
     </div>
+  </div>
   {{/if}}
 
   <div class="oa-grading-section">
-    <div class="left-panel">
-      {{#if isTeacher}}
-        <div class="student-response" {{action "onTogglePanel"}}>Student's Response</div>
-        <div class="student-info">
-          <div class="student-count">
-            <sup>{{currentStudentIndex}}</sup>&frasl;<sub>{{users.length}}</sub>
-          </div>
-          <div class="oa-grade-students">
-            <div class="oa-grade-students-carousel">
-              <div id="oa-grade-students-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
-                <div class="carousel-inner">
-                  {{#each users as |user index|}}
-                    <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
-                      <div class="user-profile-img">
-                        <img src="{{user.avatarUrl}}" />
-                        <span>{{user.lastName}} {{user.firstName}}</span>
-                      </div>
-                    </div>
-                  {{/each}}
-                </div>
-                <!-- Left and right controls -->
-                <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
-                  {{gru-icon name="keyboard_arrow_left"}}
-                </a>
-                <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
-                  {{gru-icon name="keyboard_arrow_right"}}
-                </a>
-              </div>
-            </div>
-          </div>
-          {{#if studentRubric.isSelfGraded}}
-            <div class="self-grade-section" style={{safe-html (concat "background-color:" (grade-color studentSelfGrade))}}>
-              <div class="label">{{t 'common.self-graded'}}</div>
-              <div class="score">
-                <sup>{{studentRubric.studentScore}}</sup>&frasl;<sub>{{studentRubric.maxScore}}</sub>
-              </div>
-              <div class="label">{{t 'common.rubric-grade'}}</div>
-            </div>
-          {{/if}}
+
+    {{#if isTeacher}}
+    <div class="student-carousel-container">
+      <div class="student-info">
+        <div class="student-count">
+          <sup>{{currentStudentIndex}}</sup>&frasl;<sub>{{users.length}}</sub>
         </div>
-      {{/if}}
+        <div class="oa-grade-students">
+          <div class="oa-grade-students-carousel">
+            <div id="oa-grade-students-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
+              <div class="carousel-inner">
+                {{#each users as |user index|}}
+                <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
+                  <div class="user-profile-img">
+                    <img src="{{user.avatarUrl}}" />
+                    <span>{{user.lastName}} {{user.firstName}}</span>
+                  </div>
+                </div>
+                {{/each}}
+              </div>
+              <!-- Left and right controls -->
+              <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
+                {{gru-icon name="keyboard_arrow_left"}}
+              </a>
+              <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
+                {{gru-icon name="keyboard_arrow_right"}}
+              </a>
+            </div>
+          </div>
+        </div>
+        {{#if studentRubric.isSelfGraded}}
+        <div class="self-grade-section" style={{safe-html (concat "background-color:" (grade-color studentSelfGrade))}}>
+          <div class="label">{{t 'common.self-graded'}}</div>
+          <div class="score">
+            <sup>{{studentRubric.studentScore}}</sup>&frasl;<sub>{{studentRubric.maxScore}}</sub>
+          </div>
+          <div class="label">{{t 'common.rubric-grade'}}</div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+    {{/if}}
+
+
+    <div class="left-panel">
+      <div class="student-response" {{action "onTogglePanel"}}><span>{{student.firstName}}</span>'s Response</div>
       {{#unless isInlineGrading}}
         <div class="tasks-section">
           {{#each activityTasks as |task index|}}
-            {{player/offline-activity/gru-offline-activity-task-submission
-              task=task
-              showSubmissions=true
-              isReadOnly=true
-              caContentId=context.dcaContentId
-              classId=context.classId
-            }}
+          {{player/offline-activity/gru-offline-activity-task-submission
+            task=task
+            showSubmissions=true
+            isReadOnly=true
+            caContentId=context.dcaContentId
+            classId=context.classId
+          }}
           {{/each}}
         </div>
       {{/unless}}
     </div>
-    <div class="right-panel">
-      {{#if isTeacher}}
-      <div class="oa-grade-student-mobile-view">
-        <div class="student-info">
-          <div class="student-count">
-            <sup>{{currentStudentIndex}}</sup>&frasl;<sub>{{users.length}}</sub>
-          </div>
-          <div class="oa-grade-students">
-            <div class="oa-grade-students-carousel">
-              <div id="oa-grade-students-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
-                <div class="carousel-inner">
-                  {{#each users as |user index|}}
-                    <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
-                      <div class="user-profile-img">
-                        <img src="{{user.avatarUrl}}" />
-                        <span>{{user.lastName}} {{user.firstName}}</span>
-                      </div>
-                    </div>
-                  {{/each}}
-                </div>
-                <!-- Left and right controls -->
-                <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
-                  {{gru-icon name="keyboard_arrow_left"}}
-                </a>
-                <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
-                  {{gru-icon name="keyboard_arrow_right"}}
-                </a>
-              </div>
-            </div>
-          </div>
-          {{#if studentRubric.isSelfGraded}}
-            <div class="self-grade-section" style={{safe-html (concat "background-color:" (grade-color studentSelfGrade))}}>
-              <div class="label">{{t 'common.self-graded'}}</div>
-              <div class="score">
-                <sup>{{studentRubric.studentScore}}</sup>&frasl;<sub>{{studentRubric.maxScore}}</sub>
-              </div>
-              <div class="label">{{t 'common.rubric-grade'}}</div>
-            </div>
-          {{/if}}
-        </div>
-      </div>
 
-      {{/if}}
+    <div class="right-panel">
       <div class="oa-grade-right-panel-header">
         <div class="oa-grade-info">
           {{#unless isScoring}}
-            <span class="oa-grade-info-title">{{t 'grading-player.grading'}}</span>
+          <span class="oa-grade-info-title">{{t 'grading-player.grading'}}</span>
           {{else}}
-            <span class="oa-grade-info-title">
-              Rubric
-            </span>
-            <span class="oa-grade-info-desc">{{t 'common.answer-this-activity'}}</span>
+          <span class="oa-grade-info-title">
+            Rubric
+          </span>
+          <span class="oa-grade-info-desc">{{t 'common.answer-this-activity'}}</span>
           {{/unless}}
         </div>
         {{#unless isScoring}}
-          {{#if isTeacher}}
-            <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userGradeScore))}}>
-              <div class="score">
-                <sup>{{teacherRubric.studentScore}}</sup>&frasl;<sub>{{content.maxScore}}</sub>
-              </div>
-            </div>
-          {{/if}}
-        {{else if (gt totalRubricPoints 0)}}
-          <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userRubricScore))}}>
-            <div class="score">
-              <sup>{{totalUserRubricPoints}}</sup>&frasl;<sub>{{totalRubricPoints}}</sub>
-            </div>
+        {{#if isTeacher}}
+        <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userGradeScore))}}>
+          <div class="score">
+            <sup>{{teacherRubric.studentScore}}</sup>&frasl;<sub>{{content.maxScore}}</sub>
           </div>
+        </div>
+        {{/if}}
+        {{else if (gt totalRubricPoints 0)}}
+        <div class="oa-grade-score" style={{safe-html (concat "background-color:" (grade-color userRubricScore))}}>
+          <div class="score">
+            <sup>{{totalUserRubricPoints}}</sup>&frasl;<sub>{{totalRubricPoints}}</sub>
+          </div>
+        </div>
         {{/unless}}
       </div>
       <div class="oa-grade-right-panel-body">
         <div class="panel-group" id="rubric-panel">
           {{#if (or studentRubric.scoring isTeacher)}}
-            <div class="panel panel-default student-rubric-section">
-              <div class="student-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#student">
-                <span>
-                  {{t 'common.student'}}
-                  {{#if studentRubric.url}}
-                    <span class="rubric-attachment" data-placement="right" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'student' bubbles=false}}>{{gru-icon name="attachment"}}</span>
-                  {{/if}}
-                </span>
-                <div class="icons">
-                  {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-                  {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
-                </div>
+          <div class="panel panel-default student-rubric-section">
+            <div class="student-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#student">
+              <span>
+                {{t 'common.student'}}
+                {{#if studentRubric.url}}
+                <span class="rubric-attachment" data-placement="right" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'student' bubbles=false}}>{{gru-icon name="attachment"}}</span>
+                {{/if}}
+              </span>
+              <div class="icons">
+                {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
               </div>
-              <div class="student-grading-panel panel-collapse collapse {{if (not isTeacher) 'in'}}" id="student">
-                {{#unless studentRubric.scoring}}
-                  <div class="no-self-grade">{{t 'self-grade.not-required'}}</div>
-                {{else}}
-                  {{rubric/rubric-category-grades
-                    isReadOnly=(if (or isTeacher isTeacherGradingDone) true false)
-                    categories=studentRubricCategories}}
+            </div>
+            <div class="student-grading-panel panel-collapse collapse {{if (not isTeacher) 'in'}}" id="student">
+              {{#unless studentRubric.scoring}}
+              <div class="no-self-grade">{{t 'self-grade.not-required'}}</div>
+              {{else}}
+              {{rubric/rubric-category-grades
+                isReadOnly=(if (or isTeacher isTeacherGradingDone) true false)
+                categories=studentRubricCategories}}
                 {{/unless}}
                 <div class="oa-grade-general-comment-container {{if (or isTeacher isTeacherGradingDone) 'disable-event'}}">
                   {{validation/gru-textarea
@@ -194,82 +158,82 @@
                 </div>
               </div>
             </div>
-          {{/if}}
-          <div class="panel panel-default teacher-rubric-section">
-            <div class="teacher-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#teacher">
-              <span>
-                {{t 'common.teacher'}}
-                {{#if teacherRubric.url}}
+            {{/if}}
+            <div class="panel panel-default teacher-rubric-section">
+              <div class="teacher-grading-header collapsed" data-parent="#rubric-panel" data-toggle="collapse" data-target="#teacher">
+                <span>
+                  {{t 'common.teacher'}}
+                  {{#if teacherRubric.url}}
                   <span class="rubric-attachment" data-placement="right" title="{{t 'rubric-details'}}" data-toggle="tooltip" {{action 'filePreviewOpen' 'teacher'  bubbles=false}}>{{gru-icon name="attachment"}}</span>
-                {{/if}}
-              </span>
-              <div class="icons">
-                {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
-                {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
-              </div>
-            </div>
-            <div class="teacher-grading-panel panel-collapse collapse {{if isTeacher 'in'}}" id="teacher">
-              {{#if (and teacherRubric (not teacherRubric.scoring) content.maxScore)}}
-                <div class="oa-grade-rubric-grading {{if (not isTeacher) 'disable-event'}}">
-                    {{validation/gru-input-number model=teacherRubric  valuePath='studentScore' min=0 max=content.maxScore}}
-                    <span class="score">{{content.maxScore}}</span>
+                  {{/if}}
+                </span>
+                <div class="icons">
+                  {{gru-icon name="arrow_drop_up" class="ca-datepicker-up"}}
+                  {{gru-icon name="arrow_drop_down" class="ca-datepicker-bottom"}}
                 </div>
-              {{else}}
+              </div>
+              <div class="teacher-grading-panel panel-collapse collapse {{if isTeacher 'in'}}" id="teacher">
+                {{#if (and teacherRubric (not teacherRubric.scoring) content.maxScore)}}
+                <div class="oa-grade-rubric-grading {{if (not isTeacher) 'disable-event'}}">
+                  {{validation/gru-input-number model=teacherRubric  valuePath='studentScore' min=0 max=content.maxScore}}
+                  <span class="score">{{content.maxScore}}</span>
+                </div>
+                {{else}}
                 {{rubric/rubric-category-grades isReadOnly=(if isTeacher false true) categories=teacherRubricCategories}}
-              {{/if}}
-              <div class="oa-grade-general-comment-container {{if (not isTeacher) 'disable-event'}}">
-                {{validation/gru-textarea
-                  model=(if teacherRubric.comment teacherRubric teacherRubric)
-                  valuePath='comment'
-                  maxLength=500
-                  rows=1
-                  placeholder='General Comments Only'
-                }}
+                {{/if}}
+                <div class="oa-grade-general-comment-container {{if (not isTeacher) 'disable-event'}}">
+                  {{validation/gru-textarea
+                    model=(if teacherRubric.comment teacherRubric teacherRubric)
+                    valuePath='comment'
+                    maxLength=500
+                    rows=1
+                    placeholder='General Comments Only'
+                  }}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        {{#if (and (not isTeacherGradingDone) (or studentRubric.scoring isTeacher))}}
+          {{#if (and (not isTeacherGradingDone) (or studentRubric.scoring isTeacher))}}
           <div class="oa-grade-action-btns">
             <button type="button" class="btn confirm btn-primary btn-lg" {{action 'saveGrade'}}>
               {{#if (and isStudentGradingDone (not isTeacher))}}
-                {{t 'goals.manage.update'}}
+              {{t 'goals.manage.update'}}
               {{else}}
-                {{t 'common.submit'}}
+              {{t 'common.submit'}}
               {{/if}}
             </button>
           </div>
-        {{/if}}
+          {{/if}}
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-{{#if isLoading}}
+  {{#if isLoading}}
   <div class="loading-spinner">
     {{three-bounce-spinner}}
   </div>
-{{/if}}
+  {{/if}}
 
 
 
-<div class="caught-up-container">
-  <div class="backdrop" {{action 'onPullUpClose' true}}></div>
-  <div class="caught-up">
-    <div class="caught-up-tick-container">
-      <hr />
-      <div class="caught-up-tick">
-        <span>{{gru-icon name="done"}}</span>
+  <div class="caught-up-container">
+    <div class="backdrop" {{action 'onPullUpClose' true}}></div>
+    <div class="caught-up">
+      <div class="caught-up-tick-container">
+        <hr />
+        <div class="caught-up-tick">
+          <span>{{gru-icon name="done"}}</span>
+        </div>
       </div>
-    </div>
-    <h3>{{t 'common.all-caught-up'}}</h3>
-    {{#if isTeacher}}
+      <h3>{{t 'common.all-caught-up'}}</h3>
+      {{#if isTeacher}}
       <p>{{t 'common.no-users-to-grade-oa'}}</p>
-    {{/if}}
+      {{/if}}
+    </div>
   </div>
-</div>
 
-{{#if teacherRubric.url}}
+  {{#if teacherRubric.url}}
   <div class="rubric-file-preview-container teacher">
     <div class="backdrop"></div>
     <div class="rubric-file-preview">
@@ -279,10 +243,10 @@
       <iframe src="{{teacherRubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
-{{/if}}
+  {{/if}}
 
 
-{{#if studentRubric.url}}
+  {{#if studentRubric.url}}
   <div class="rubric-file-preview-container student">
     <div class="backdrop"></div>
     <div class="rubric-file-preview">
@@ -292,4 +256,4 @@
       <iframe src="{{studentRubric.url}}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
-{{/if}}
+  {{/if}}
