@@ -296,10 +296,10 @@ export default Ember.Component.extend({
   ),
 
   /**
-   * @property {Boolean} isRightPanelExpanded
-   * Property to check whether the right panel is in expanded state or not
+   * @property {Boolean} isLeftPanelExpanded
+   * Property to check whether the left panel is in expanded state or not
    */
-  isRightPanelExpanded: false,
+  isLeftPanelExpanded: false,
 
   // -------------------------------------------------------------------------
   // Actions
@@ -384,20 +384,19 @@ export default Ember.Component.extend({
     //Action triggered when clicking on the right panel header
     // It's only enabled for mobile view
     onTogglePanel() {
-      // NOTE pixel values are hard coded based on current implementation.
+      // NOTE hardcoded pixer value represent toggle header.
       const component = this;
-      let bottom = '-110px';
-      if (component.get('isRightPanelExpanded')) {
-        // 10px padding top
-        bottom = `-${component.$('.oa-grading-section').height() - 40}px`;
+      let top = '130px';
+      if (component.get('isLeftPanelExpanded')) {
+        top = `${component.$().height() - 41}px`;
       }
       component.$('.left-panel').animate(
         {
-          bottom
+          top
         },
         400
       );
-      component.toggleProperty('isRightPanelExpanded');
+      component.toggleProperty('isLeftPanelExpanded');
     }
   },
 
@@ -413,8 +412,6 @@ export default Ember.Component.extend({
       component.openPullUp();
     }
     component.initialize();
-    let bottom = `-${component.$('.oa-grading-section').height() - 40}px`;
-    component.$('.left-panel').animate({ bottom }, 400);
   },
 
   willDestroyElement() {
