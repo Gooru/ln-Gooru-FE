@@ -70,7 +70,7 @@
             <div class="competency-icon" {{action "onSelectCompetency" competency domain}}>
               {{gru-icon name="explore"}}
             </div>
-            <div class="competency-count">
+            <div class="competency-count" {{action "onShowStudentList" competency}}>
               <span class="student-count">
               {{competency.studentsCount}}
               </span>
