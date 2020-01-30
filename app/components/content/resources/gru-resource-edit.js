@@ -457,10 +457,10 @@ export default Ember.Component.extend(
 
     isEditResources: Ember.computed('resource', function() {
       let resourceOwner = this.get('resource.owner');
-      let OwnerId = resourceOwner ? resourceOwner.get('id') : null;
+      let ownerId = resourceOwner ? resourceOwner.get('id') : null;
       let userId = this.get('session.userId');
       let originalResourceId = this.get('resource.originalResourceId');
-      return !originalResourceId && userId === OwnerId;
+      return !originalResourceId && userId === ownerId;
     }),
 
     // -------------------------------------------------------------------------
