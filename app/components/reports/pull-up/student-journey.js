@@ -59,8 +59,9 @@ export default Ember.Component.extend({
     let sourceLabel = null;
     if (masterySource) {
       let sourceConfigObj = sourceConfigs.find( sourceConfig => masterySource.includes(sourceConfig.source) );
-      if (sourceConfigObj)
+      if (sourceConfigObj) {
         sourceLabel = i18n.t(`${sourceConfigObj.locale}`);
+      }
     }
     return sourceLabel;
   }),
