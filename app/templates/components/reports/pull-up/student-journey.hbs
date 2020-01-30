@@ -1,4 +1,12 @@
 <div class="portfolio-contents-container competency-portfolio">
+
+  {{#if masterySourceLabel}}
+    <div class="mastery-source-container">
+      {{t (concat 'competency.mastery.source.' (if isStudent 'student' 'teacher') '-label')}}
+      {{t 'competency.mastery.source-message' source=masterySourceLabel}}
+    </div>
+  {{/if}}
+
   {{portfolio/gru-contents-panel
     contentType = 'offline-activity'
     userId = userId

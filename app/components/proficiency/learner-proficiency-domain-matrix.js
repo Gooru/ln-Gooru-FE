@@ -587,7 +587,8 @@ export default Ember.Component.extend({
             framework: competency.get('framework'),
             isMappedWithFramework: competency.get('isMappedWithFramework'),
             competencyStudentDesc: competency.get('competencyStudentDesc'),
-            status: status
+            status: status,
+            source: competency.get('source')
           });
           if (status > 1) {
             mergeDomainData.forEach(data => {

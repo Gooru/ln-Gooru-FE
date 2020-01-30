@@ -2832,6 +2832,12 @@ window.i18ln = {
   'common.no-struggling-competencies':
     'Yay! Looks like all your students are doing well!',
   'teacher-landing.class.atc-view.learning-gaps': 'Learning Gaps',
-  'teacher-landing.class.atc-view.learning-challenges': 'Learning Challenges'
+  'teacher-landing.class.atc-view.learning-challenges': 'Learning Challenges',
+  'competency.mastery.source.student-label': 'You were',
+  'competency.mastery.source.teacher-label': 'Student was',
+  'competency.mastery.source-message': ' granted mastery based on {{source}}',
+  'competency.mastery.source.forcecalculatetrigger': 'level determined by the teacher/instructor',
+  'competench.mastery.source.nwea': 'NWEA MAP scores',
+  'competench.mastery.source.teacher-asserted': 'teacher/instructor\'s assertion'
 };
 export default window.i18ln;

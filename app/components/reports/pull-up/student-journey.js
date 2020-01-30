@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE, COMPETENCY_MASTERY_SOURCE } from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   // Dependencies
 
   session: Ember.inject.service('session'),
+
+  i18n: Ember.inject.service(),
 
   /**
    * @requires {AssessmentService} Service to retrieve an assessment
@@ -44,6 +46,24 @@ export default Ember.Component.extend({
    * @property {DAILY_CLASS}
    */
   DAILY_CLASS: PLAYER_EVENT_SOURCE.DAILY_CLASS,
+
+  /**
+   * @property {String | NULL} masterySourceLabel
+   * Property to get appropriate mastery source label based on value
+   */
+  masterySourceLabel: Ember.computed('competency', function() {
+    const component = this;
+    const masterySource = component.get('competency.source');
+    const sourceConfigs = COMPETENCY_MASTERY_SOURCE;
+    const i18n = component.get('i18n');
+    let sourceLabel = null;
+    if (masterySource) {
+      let sourceConfigObj = sourceConfigs.find( sourceConfig => masterySource.includes(sourceConfig.source) );
+      if (sourceConfigObj)
+        sourceLabel = i18n.t(`${sourceConfigObj.locale}`);
+    }
+    return sourceLabel;
+  }),
 
   /**
    * @function getStundentCollectionReport
