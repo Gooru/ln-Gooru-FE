@@ -26,7 +26,7 @@
       </div>
     {{/if}}
   </div>
-  <div class="body-container {{if isShowTenantLibraries 'grid-view'}}">
+  <div class="body-container {{if isShowTenantLibraries 'grid-view'}} {{if isShowCourseMap 'course-map-view'}}">
     {{#if isShowTenantLibraries}}
       {{#each tenantLibraries as |tenantLibrary|}}
         {{library/gru-partner-library-card onSelectLibrary='onSelectTenantLibrary' content=tenantLibrary}}

@@ -17,10 +17,18 @@
           }
         }
       }
-
       .body-container {
         display: block;
-        height: calc(100vh - 150px);
+        height: calc(100vh - 210px);
+        &.course-map-view {
+          height: calc(100vh - 187px);
+        }
+        &.grid-view {
+          height: calc(100vh - 150px);
+        }
+        &.tenant-view {
+          height: calc(100vh - 255px);
+        }
       }
     }
   }

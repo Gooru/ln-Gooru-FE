@@ -113,10 +113,25 @@ export default Ember.Service.extend({
       service
         .get('resourceAdapter')
         .updateResource(resourceId, serializedData)
-        .then(function() {
-          service.notifyQuizzesCollectionChange(collection);
-          resolve();
-        }, reject);
+        .then(
+          function() {
+            service.notifyQuizzesCollectionChange(collection);
+            resolve();
+          },
+          function(error) {
+            if (error.status === 400) {
+              //when the resource already exists
+              let data = JSON.parse(error.responseText);
+              let alreadyExists =
+                data && data.duplicate_ids && data.duplicate_ids.length;
+              if (alreadyExists) {
+                reject({ status: 400, resourceId: data.duplicate_ids[0] });
+              }
+            } else {
+              reject(error);
+            }
+          }
+        );
     });
   },
 

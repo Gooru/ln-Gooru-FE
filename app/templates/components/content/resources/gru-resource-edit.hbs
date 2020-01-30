@@ -34,15 +34,41 @@
 <section id="resource">
   <div class="header">
     <h2>{{t "common.resource"}}</h2>
+    <div class="actions">
+      {{#if isResourceEditing}}
+        <button class="cancel btn btn-info"  {{action 'cancelEditResources'}}>{{t "common.cancel"}}</button>
+        <button class="save btn btn-success" {{action 'updateResource'}}>{{t "common.save"}}</button>
+      {{else}}
+        {{#if isEditResources}}
+          <button class="edit btn btn-primary" {{action 'editResource'}}>{{t "common.edit"}}</button>
+        {{/if}}
+      {{/if}}
+    </div>
   </div>
   <div class="content">
     <div class="panel panel-default">
       <div class="panel-body">
         <p>{{t "common.resource-url"}}*</p>
-        {{#if (or (eq resource.format 'image') (eq resource.format 'text'))}}
-          <p>{{resource.fileName}}</p>
+        {{#if isResourceEditing}}
+          {{#if (or (eq resource.format 'image') (eq resource.format 'text'))}}
+            {{content/gru-file-picker validMimeType=tempResource.mimeType onSelectFile=(action 'selectFile')}}
+            {{#if emptyFileError}}
+              <div class="validation">
+                <span class="error">{{emptyFileError}}</span>
+              </div>
+            {{/if}}
+          {{else}}
+            {{validation/gru-input model=tempResource valuePath='url' didValidate=didValidate onChange="onURLChange"}}
+            {{#if isResourcesAlreadyExists}}
+              <span class="validation error">{{t 'gru-resource-new.resource-already-exist'}}</span>
+            {{/if}}
+          {{/if}}
         {{else}}
-          <p>{{resource.url}}</p>
+          {{#if (or (eq resource.format 'image') (eq resource.format 'text'))}}
+            <p>{{resource.fileName}}</p>
+          {{else}}
+            <p>{{resource.url}}</p>
+          {{/if}}
         {{/if}}
       </div>
     </div>
