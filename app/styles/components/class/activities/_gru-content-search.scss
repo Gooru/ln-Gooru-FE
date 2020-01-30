@@ -16,7 +16,6 @@
       align-items: center;
       text-align: center;
       border-bottom: 1px solid #666;
-      padding: 0 40px;
       .dropdown {
         position: relative;
         display: inline-block;
@@ -110,6 +109,7 @@
       column-gap: 8px;
       height: 40px;
       align-items: center;
+      padding-right: 8px;
 
       .content-types-container {
         display: grid;
