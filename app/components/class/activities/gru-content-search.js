@@ -91,7 +91,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
       const component = this;
       component.set('activeContentType', contentType.get('value'));
       component.set('page', 0);
-      component.loadContents();
+      component.loadContents(true);
     },
 
     onClickFilterIcon() {
