@@ -13,6 +13,12 @@
   }
 
   .portfolio-contents-container {
+    .mastery-source-container {
+      background-color: $white;
+      padding: 8px 15px;
+      font-size: 14px;
+      line-height: 17px;
+    }
     &.competency-portfolio {
       .gru-contents-panel {
         .portfolio-contents-container {

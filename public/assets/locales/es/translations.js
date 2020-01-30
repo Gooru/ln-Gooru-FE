@@ -2819,5 +2819,11 @@ window.i18ln = {
   'common.class-activities-info-icon':
     'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class',
   'common.no-struggling-competencies':
-    'Yay! Looks like all your students are doing well!'
+    'Yay! Looks like all your students are doing well!',
+  'competency.mastery.source.student-label': 'You were',
+  'competency.mastery.source.teacher-label': 'Student was',
+  'competency.mastery.source-message': ' granted mastery based on {{source}}',
+  'competency.mastery.source.forcecalculatetrigger': 'level determined by the teacher/instructor',
+  'competench.mastery.source.nwea': 'NWEA MAP scores',
+  'competench.mastery.source.teacher-asserted': 'teacher/instructor\'s assertion'
 };

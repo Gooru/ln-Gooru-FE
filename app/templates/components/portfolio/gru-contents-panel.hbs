@@ -1,4 +1,4 @@
-<div class="portfolio-contents-container {{if isShowContentFilters 'filters-active'}}">
+<div class="portfolio-contents-container {{if (eq totalStudiedActivities 0) 'hidden'}} {{if isShowContentFilters 'filters-active'}}">
   <div class="header-container">
     <div class="panel-info-container" {{action "onToggleContainer"}}>
       <div class="icon {{contentType}}"></div>

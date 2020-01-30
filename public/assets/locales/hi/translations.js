@@ -2859,5 +2859,11 @@ window.i18ln = {
   'common.no-struggling-competencies':
     'अरे वाह ! लगता है आपके सभी छात्र बहुत अच्छा कर रहे हैं !',
   'teacher-landing.class.atc-view.learning-gaps': 'सीखने के अंतराल ',
-  'teacher-landing.class.atc-view.learning-challenges': 'सीखने की चुनौतयाँ'
+  'teacher-landing.class.atc-view.learning-challenges': 'सीखने की चुनौतयाँ',
+  'competency.mastery.source.student-label': 'You were',
+  'competency.mastery.source.teacher-label': 'Student was',
+  'competency.mastery.source-message': ' granted mastery based on {{source}}',
+  'competency.mastery.source.forcecalculatetrigger': 'level determined by the teacher/instructor',
+  'competench.mastery.source.nwea': 'NWEA MAP scores',
+  'competench.mastery.source.teacher-asserted': 'teacher/instructor\'s assertion'
 };

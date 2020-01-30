@@ -510,3 +510,18 @@ export const CLASS_ACTIVITIES_SEARCH_TABS = [
     id: 'gooru-catalog'
   }
 ];
+
+export const COMPETENCY_MASTERY_SOURCE = [
+  {
+    source: 'ForceCalculateTrigger',
+    locale: 'competency.mastery.source.forcecalculatetrigger'
+  },
+  {
+    source: 'NWEA',
+    locale: 'competench.mastery.source.nwea'
+  },
+  {
+    source: 'Teacher-Asserted',
+    locale: 'competench.mastery.source.teacher-asserted'
+  }
+];
