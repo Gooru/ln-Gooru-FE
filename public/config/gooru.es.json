@@ -42,7 +42,10 @@
 
   "GRU_FEATURE_FLAG": {
     "searchFilter": true,
-    "i2dFlow": false
+    "i2dFlow": false,
+    "enableCollectionLiveLearning": false,
+    "isLessonPlanShow": true,
+    "isShowSecondaryClass": true
   },
 
   "languageSetting": {
