@@ -14,7 +14,7 @@
       margin-bottom: 30px;
 
       .content-count {
-        width: 95px;
+        width: calc(100% / 8);
         height: 98px;
         text-align: center;
         border: 1px solid $nobel-gray;
