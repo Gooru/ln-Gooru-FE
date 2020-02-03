@@ -105,6 +105,10 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
 
+    @media screen and (max-width: $screen-xs) {
+      width: 90%;
+    }
+
     .header-container {
       display: grid;
       grid-template-columns: 75px auto;
@@ -135,6 +139,10 @@
           font-weight: bold;
           color: #37424b;
           text-transform: capitalize;
+          overflow: hidden;
+          display: grid;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         .grade-info {
