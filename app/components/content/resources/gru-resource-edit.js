@@ -219,6 +219,7 @@ export default Ember.Component.extend(
       editResource: function() {
         var resourceForEditing = this.get('resource').copy();
         this.set('tempResource', resourceForEditing);
+        this.get('tempResource').set('owner', this.get('resource.owner'));
         this.set('isResourceEditing', true);
       },
 
