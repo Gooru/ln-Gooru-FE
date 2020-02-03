@@ -110,7 +110,14 @@
           {{/each}}
         {{else}}
           {{#unless isLoading}}
-            {{cards/no-suggest-result-found isFromSearch=true}}
+            <div class="suggest-panel panel-default">
+              <div class="panel-body">
+                <div class="no-suggest-result-content">
+                  <div class="icon">{{gru-icon name="remove_circle_outline"}}</div>
+                  <p class="suggest-message">{{t "common.search-no-suggest-results-message"}}</p>
+                </div>
+              </div>
+            </div>
           {{/unless}}
         {{/if}}
       {{/unless}}

@@ -272,6 +272,46 @@
 
             &.no-content {
               grid-template-columns: auto;
+              .suggest-panel {
+                margin: auto;
+                width: 230px;
+                display: flex;
+
+                .panel-body {
+                  background: #fff;
+                  border-radius: 4px;
+                  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+
+                  .no-suggest-result-content {
+                    .title {
+                      font-size: 15px;
+                      text-align: center;
+                    }
+
+                    .icon {
+                      text-align: center;
+                      padding: 10px;
+                      cursor: default;
+
+                      i {
+                        color: $gray-base;
+                        font-size: 86px;
+                        text-align: center;
+                      }
+                    }
+
+                    .suggest-message {
+                      text-align: center;
+                      width: 200px;
+                    }
+
+                    .message {
+                      text-align: justify;
+                      width: 200px;
+                    }
+                  }
+                }
+              }
             }
           }
         }
