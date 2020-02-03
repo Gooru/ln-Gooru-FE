@@ -23,7 +23,7 @@
         </div>
       </div>
       <div class="data-analysis-cards-container">
-        <div class="competency-card-container" {{action "onSelectGrade"}}>
+        <div class="competency-card-container {{unless gradeCompetencyDomainList 'disable-event'}}" {{action "onSelectGrade"}}>
           <div class="title-container">{{t 'teacher-landing.class.atc-view.learning-challenges'}} ({{currentGradeName}})</div>
           {{#each gradeCompetencyDomainList as |competency domainIndex|}}
             <div class="competency-struggling-container">
@@ -79,7 +79,7 @@
             <span>{{t 'common.no-struggling-competencies'}}</span>
           {{/each}}
         </div>
-        <div class="competency-card-container other-grade" {{action "onSelectOtherGrade"}}>
+        <div class="competency-card-container other-grade {{unless otherGradeTopComp 'disable-event'}}" {{action "onSelectOtherGrade"}}>
           <div class="title-container">{{t 'teacher-landing.class.atc-view.learning-gaps'}}</div>
           {{#if otherGradeTopComp.length}}
             {{#each otherGradeTopComp as |competency competencyIndex|}}
