@@ -50,7 +50,7 @@
     "i2dFlow": false,
     "enableCollectionLiveLearning": false,
     "isLessonPlanShow": true,
-    "isShowSecondaryClass": false
+    "isShowSecondaryClass": true
   },
 
   "marketingSiteUrl": "/about"
