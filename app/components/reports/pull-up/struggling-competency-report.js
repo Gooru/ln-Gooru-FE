@@ -395,20 +395,21 @@ export default Ember.Component.extend({
       }
     };
     let libraryId = component.get('selectedLibrary.id');
-    let currentUserId = component.get('session.userId');
     let selectedService = Ember.RSVP.resolve([]);
     if (!item || item.label === 'common.suggested') {
       selectedService = component
         .get('searchService')
         .searchCollections('*', params);
     } else if (item.label === 'common.gooru-catalog') {
+      params.filters.scopeKey = 'open-all';
       selectedService = component
         .get('searchService')
         .searchCollections('*', params);
     } else if (item.label === 'common.myContent') {
+      params.filters.scopeKey = 'my-content';
       selectedService = component
-        .get('profileService')
-        .readCollections(currentUserId, params);
+        .get('searchService')
+        .searchCollections('*', params);
     } else if (item.label === 'common.tenantLibrary') {
       if (component.get('showTenantLibraries')) {
         let page = params.page;
