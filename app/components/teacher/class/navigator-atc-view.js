@@ -514,27 +514,32 @@ export default Ember.Component.extend({
         }
       });
     }
-
+    let profileOuterRadius = component.get('isMobileView') ? 35 : 16;
     studentNode
       .append('circle')
       .attr('cx', 5)
       .attr('cy', 5)
-      .attr('r', 16)
+      .attr('r', profileOuterRadius)
       .style('fill', function(d) {
         return getGradeColor(d.percentScore);
       });
 
+    let profileWidth = component.get('isMobileView') ? 60 : 24;
+    let profileHeigth = component.get('isMobileView') ? 60 : 24;
+    let profileX = component.get('isMobileView') ? -25 : -7;
+    let profileY = component.get('isMobileView') ? -25 : -7;
+
     studentNode
       .append('svg:image')
       .attr('class', 'student-profile')
-      .attr('x', -7)
-      .attr('y', -7)
+      .attr('x', profileX)
+      .attr('y', profileY)
       .attr({
         'xlink:href': function(d) {
           return d.thumbnail;
         },
-        width: 24,
-        height: 24
+        width: profileWidth,
+        height: profileHeigth
       });
     component.cleanUpChart();
     /**
@@ -688,7 +693,9 @@ export default Ember.Component.extend({
             let compareYAxis = parseFloat(compareItem.get('yAxis'));
             let xDiff = Math.abs(sourceXaxis - compareXAxis);
             let yDiff = Math.abs(sourceYaxis - compareYAxis);
-            if (xDiff <= 20 && yDiff <= 8) {
+            let xDiffGroup = this.get('isMobileView') ? 30 : 20;
+            let yDiffGroup = this.get('isMobileView') ? 16 : 8;
+            if (xDiff <= xDiffGroup && yDiff <= yDiffGroup) {
               compareItem.set('group', i + 1);
             }
           }
