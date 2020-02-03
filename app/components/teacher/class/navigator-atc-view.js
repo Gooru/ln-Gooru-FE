@@ -525,7 +525,7 @@ export default Ember.Component.extend({
       });
 
     let profileWidth = component.get('isMobileView') ? 60 : 24;
-    let profileHeigth = component.get('isMobileView') ? 60 : 24;
+    let profileHeight = component.get('isMobileView') ? 60 : 24;
     let profileX = component.get('isMobileView') ? -25 : -7;
     let profileY = component.get('isMobileView') ? -25 : -7;
 
@@ -539,7 +539,7 @@ export default Ember.Component.extend({
           return d.thumbnail;
         },
         width: profileWidth,
-        height: profileHeigth
+        height: profileHeight
       });
     component.cleanUpChart();
     /**
