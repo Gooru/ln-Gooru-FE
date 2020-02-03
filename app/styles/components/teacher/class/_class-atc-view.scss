@@ -6,6 +6,7 @@
     z-index: 1000;
     display: none;
   }
+
   .performance-overview-header {
     display: grid;
     grid-template-columns: auto;
@@ -75,6 +76,7 @@
       .backdrop {
         display: none;
       }
+
       .ca-date-nav-container {
         background-color: $white;
         margin: auto;
@@ -166,6 +168,7 @@
       width: 304px;
 
       .competency-card-container {
+        cursor: pointer;
         background-color: $white;
         padding: 10px;
         border: 1px solid $gray-80;
