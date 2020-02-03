@@ -7,6 +7,14 @@
     </div>
   {{/if}}
 
+  <div class="competency-status-msg">
+    {{#if isInferredCompetency}}
+      {{t (concat 'competency.portfolio.status.inferred-' (if isStudent 'student' 'teacher'))}}
+    {{else if isNotStartedCompetency}}
+      {{t (concat 'competency.portfolio.status.notstarted-' (if isStudent 'student' 'teacher'))}}
+    {{/if}}
+  </div>
+
   {{portfolio/gru-contents-panel
     contentType = 'offline-activity'
     userId = userId

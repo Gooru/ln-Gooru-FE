@@ -67,6 +67,20 @@ export default Ember.Component.extend({
   }),
 
   /**
+   * @property {Boolean} isNotStartedCompetency
+   * Property to check whether it's a not started competency
+   */
+  isNotStartedCompetency: Ember.computed.equal('competency.status', 0),
+
+  /**
+   * @property {Boolean} isInferredCompetency
+   * Property to check whether it's a inferred competency
+   */
+  isInferredCompetency: Ember.computed('competency', function() {
+    return this.get('competency.status') > 1 && this.get('competency.status') < 4;
+  }),
+
+  /**
    * @function getStundentCollectionReport
    * Method to get student collection report
    */
