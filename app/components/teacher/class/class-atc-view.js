@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
+import {
+  getObjectsDeepCopy
+} from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['class-atc-view'],
@@ -64,7 +66,9 @@ export default Ember.Component.extend({
 
   didRender() {
     var component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -557,15 +561,18 @@ export default Ember.Component.extend({
     Ember.RSVP.hash({
       classData: component.get('classService').readClassInfo(classId),
       classMembers: component.get('classService').readClassMembers(classId)
-    }).then(({ classData, classMembers }) => {
+    }).then(({
+      classData,
+      classMembers
+    }) => {
       if (!component.get('isDestroyed')) {
         const setting = classData.get('setting');
         const isPremiumClass = setting != null && setting['course.premium'];
-        const competencyCompletionStats = isPremiumClass
-          ? component
+        const competencyCompletionStats = isPremiumClass ?
+          component
             .get('competencyService')
-            .getCompetencyCompletionStats([classId])
-          : Ember.RSVP.resolve(Ember.A());
+            .getCompetencyCompletionStats([classId]) :
+          Ember.RSVP.resolve(Ember.A());
         competencyCompletionStats.then(competencyStats => {
           if (!component.isDestroyed) {
             classData.set(
@@ -630,7 +637,9 @@ export default Ember.Component.extend({
         classActivitiesService.getMonthlyActivitiesCount(classId, month, year)
       )
     })
-      .then(({ activitiesCount }) => {
+      .then(({
+        activitiesCount
+      }) => {
         component.set('activitiesCount', activitiesCount);
         return activitiesCount;
       })
@@ -664,7 +673,9 @@ export default Ember.Component.extend({
       domainsCompletionReport: Ember.RSVP.resolve(
         competencyService.getDomainsCompletionReport(requestBody)
       )
-    }).then(({ domainsCompletionReport }) => {
+    }).then(({
+      domainsCompletionReport
+    }) => {
       return domainsCompletionReport;
     });
   },
@@ -756,30 +767,29 @@ export default Ember.Component.extend({
       };
       otherGradeParams.grade = otherGradeList.toString();
       Ember.RSVP.hash({
-        gradeLevelCompetency: component.get('class.gradeCurrent')
-          ? component
+        gradeLevelCompetency: component.get('class.gradeCurrent') ?
+          component
             .get('strugglingCompetencyService')
-            .fetchStrugglingCompetency(params)
-          : [],
-        otherGradeLevelCompetency: otherGradeList.length
-          ? component
+            .fetchStrugglingCompetency(params) : [],
+        otherGradeLevelCompetency: otherGradeList.length ?
+          component
             .get('strugglingCompetencyService')
-            .fetchStrugglingCompetency(otherGradeParams)
-          : []
-      }).then(({ gradeLevelCompetency, otherGradeLevelCompetency }) => {
+            .fetchStrugglingCompetency(otherGradeParams) : []
+      }).then(({
+        gradeLevelCompetency,
+        otherGradeLevelCompetency
+      }) => {
         if (!component.get('isDestroyed')) {
           component.set('otherGradeCompetency', []);
           component.set('otherGradeTopComp', []);
-          component.set('gradeDomainsList', []);
+          component.set('gradeCompetencyDomainList', []);
           if (gradeLevelCompetency && gradeLevelCompetency.length) {
             component.set(
               'currentGradeName',
               gradeLevelCompetency[0].get('grade')
             );
-            component.set(
-              'gradeDomainsList',
-              gradeLevelCompetency[0].get('domains')
-            );
+            const gradeDomainsList = gradeLevelCompetency[0].get('domains');
+            component.serializeClassGradeContent(gradeDomainsList);
           }
           if (otherGradeLevelCompetency && otherGradeLevelCompetency.length) {
             let otherGradeTopComp = [];
@@ -797,9 +807,9 @@ export default Ember.Component.extend({
                   let gradeLevelTopCompetency = competencyList.reduce(
                     (prevCompetency, currentCompetency) => {
                       return prevCompetency.studentsCount <
-                        currentCompetency.studentsCount
-                        ? currentCompetency
-                        : prevCompetency;
+                        currentCompetency.studentsCount ?
+                        currentCompetency :
+                        prevCompetency;
                     }
                   );
                   if (gradeLevelTopCompetency) {
@@ -808,9 +818,9 @@ export default Ember.Component.extend({
                   }
                 }
               });
-            let sortedOtherCompetency = otherGradeTopComp.length
-              ? otherGradeTopComp.sortBy('studentsCount').reverse()
-              : otherGradeTopComp;
+            let sortedOtherCompetency = otherGradeTopComp.length ?
+              otherGradeTopComp.sortBy('studentsCount').reverse() :
+              otherGradeTopComp;
             component.set('otherGradeTopComp', sortedOtherCompetency);
             component.set('otherGradeCompetency', otherGradeLevelCompetency);
           }
@@ -845,13 +855,13 @@ export default Ember.Component.extend({
         .reverse()
         .find(highestGrade => highestGrade.grade_lower_bound);
       let minGrade =
-        gradeAsc && gradeAsc.grade_lower_bound
-          ? gradeAsc.grade_lower_bound
-          : null;
+        gradeAsc && gradeAsc.grade_lower_bound ?
+          gradeAsc.grade_lower_bound :
+          null;
       let maxGrade =
-        gradeDesc && gradeDesc.grade_upper_bound
-          ? gradeDesc.grade_upper_bound
-          : null;
+        gradeDesc && gradeDesc.grade_upper_bound ?
+          gradeDesc.grade_upper_bound :
+          null;
       if (minGrade && maxGrade) {
         component.set('gradeRange', {
           minGrade,
@@ -860,6 +870,26 @@ export default Ember.Component.extend({
         component.fetchStrugglingCompetency();
       }
     }
+  },
+
+  serializeClassGradeContent(classGradeDomains) {
+    let gradeDomainsList = [];
+    classGradeDomains.forEach((domain) => {
+      const competencies = domain.competencies;
+      const competency = competencies && competencies.length ? competencies.objectAt(0) : null;
+      if (competency) {
+        gradeDomainsList.push(Ember.Object.create({
+          domainCode: domain.domainCode,
+          domainId: domain.domainId,
+          domainName: domain.domainName,
+          domainSeq: domain.domainSeq,
+          competencies: domain.competencies,
+          ...competency
+        }));
+      }
+      const sortedGradeList = gradeDomainsList.sortBy('studentsCount').reverse();
+      this.set('gradeCompetencyDomainList', sortedGradeList);
+    });
   },
 
   saveUsersToCA(newContentId, studentList) {
