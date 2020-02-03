@@ -1,3 +1,6 @@
+{{#if isMobileView}}
+  <div class="backdrop" {{action "onTogglePanel"}}></div>
+{{/if}}
 <div class="class-activities-source-container {{if isMobileView 'mobile-view'}}">
   <div class="header-container">
     {{class/activities/gru-content-search
