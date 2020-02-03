@@ -9,10 +9,16 @@
       .competency-info-pull-up {
         &.open {
           height: 385px;
+          .competency-info-pull-up-container {
+            height: inherit;
+          }
         }
 
         &.expand {
           height: calc(100% - 51px);
+          .competency-info-pull-up-container {
+            height: calc(100% - 51px);
+          }
         }
 
         .body {
