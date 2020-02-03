@@ -524,22 +524,20 @@ export default Ember.Component.extend({
         return getGradeColor(d.percentScore);
       });
 
-    let profileWidth = component.get('isMobileView') ? 60 : 24;
-    let profileHeight = component.get('isMobileView') ? 60 : 24;
-    let profileX = component.get('isMobileView') ? -25 : -7;
-    let profileY = component.get('isMobileView') ? -25 : -7;
+    let profileSize = component.get('isMobileView') ? 60 : 24;
+    let profileXY = component.get('isMobileView') ? -25 : -7;
 
     studentNode
       .append('svg:image')
       .attr('class', 'student-profile')
-      .attr('x', profileX)
-      .attr('y', profileY)
+      .attr('x', profileXY)
+      .attr('y', profileXY)
       .attr({
         'xlink:href': function(d) {
           return d.thumbnail;
         },
-        width: profileWidth,
-        height: profileHeight
+        width: profileSize,
+        height: profileSize
       });
     component.cleanUpChart();
     /**
