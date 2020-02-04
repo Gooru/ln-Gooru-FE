@@ -681,7 +681,7 @@ export default Ember.Controller.extend(ModalMixin, {
     'classController.secondaryClassList'
   ),
   /**
-   * @property {Object} multipleClass
+   * @property {Array} multipleClassList
    * property for list of class in class settigns
    */
   multipleClassList: Ember.computed('secondaryClassList.[]', function() {
@@ -697,7 +697,7 @@ export default Ember.Controller.extend(ModalMixin, {
     }
     return multipleClasses
       ? multipleClasses.sortBy('isChecked').reverse()
-      : null;
+      : Ember.A([]);
   }),
 
   /**
@@ -1002,7 +1002,7 @@ export default Ember.Controller.extend(ModalMixin, {
     let classId = controller.get('class.id');
     let multipleClassList = controller.get('multipleClassList');
     let checkedClassIdList = [];
-    if (multipleClassList) {
+    if (multipleClassList && multipleClassList.length) {
       multipleClassList.map(checkedClass => {
         if (checkedClass.isChecked === true) {
           checkedClassIdList.push(checkedClass.id);
