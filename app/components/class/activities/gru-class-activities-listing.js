@@ -1020,7 +1020,10 @@ export default Ember.Component.extend(ModalMixin, {
                 masteryAccrualState
               )
               .then(() => {
-                activityClass.set('activity.allowMasteryAccrual', masteryAccrualState);
+                activityClass.set(
+                  'activity.allowMasteryAccrual',
+                  masteryAccrualState
+                );
                 resolve();
               }, reject);
           });
@@ -1029,10 +1032,7 @@ export default Ember.Component.extend(ModalMixin, {
       },
       callback: {
         success: function() {
-          classActivity.set(
-            'allowMasteryAccrual',
-            masteryAccrualState
-          );
+          classActivity.set('allowMasteryAccrual', masteryAccrualState);
         }
       }
     };
