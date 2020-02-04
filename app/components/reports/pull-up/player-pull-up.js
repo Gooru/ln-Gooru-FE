@@ -52,7 +52,7 @@ export default Ember.Component.extend({
   actions: {
     closePlayer: function() {
       const component = this;
-      let classId = component.get('playerContent.classId');
+      let classId = component.get('classId');
       if (classId) {
         component
           .get('router')
