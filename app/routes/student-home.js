@@ -426,7 +426,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       .then(route.nextPromiseHandler)
       .then(queryParams => {
         queryParams.isIframeMode = true;
-        route.controller.set('classId', classId);
+        route.controller.set('playerClassId', classId);
         route.controller.set(
           'playerUrl',
           route
