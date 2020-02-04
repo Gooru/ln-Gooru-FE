@@ -359,6 +359,10 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     controller.set('loginCount', model.loginCount);
   },
 
+  resetController(controller) {
+    controller.set('isOpenPlayer', false);
+  },
+
   /**
    * Before leaving the route
    */
@@ -422,6 +426,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       .then(route.nextPromiseHandler)
       .then(queryParams => {
         queryParams.isIframeMode = true;
+        route.controller.set('classId', classId);
         route.controller.set(
           'playerUrl',
           route
