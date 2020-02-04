@@ -426,7 +426,6 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       .then(route.nextPromiseHandler)
       .then(queryParams => {
         queryParams.isIframeMode = true;
-        route.controller.set('playerClassId', classId);
         route.controller.set(
           'playerUrl',
           route
@@ -437,7 +436,10 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           title: currentLocation
             ? currentLocation.get('collectionTitle')
             : null,
-          format: currentLocation ? currentLocation.get('collectionType') : null
+          format: currentLocation
+            ? currentLocation.get('collectionType')
+            : null,
+          classId
         });
         route.controller.set('playerContent', playerContent);
         route.controller.set('isOpenPlayer', true);

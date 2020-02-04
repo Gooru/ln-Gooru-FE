@@ -652,7 +652,7 @@ export default Ember.Component.extend(ModalMixin, {
           );
           const setting = component.get('primaryClass.setting');
           const isMastery = setting['mastery.applicable'];
-          if (newlyAdded && isMastery && component.get('isAdded')) {
+          if (newlyAdded && isMastery === 'true' && component.get('isAdded')) {
             component.onUpdateMasteryAccrual(newlyAdded);
             component.set('isAdded', false);
           }
@@ -1002,6 +1002,7 @@ export default Ember.Component.extend(ModalMixin, {
     let component = this;
     let collection = classActivity.get('collection');
     const activityClasses = classActivity.get('activityClasses');
+    let masteryAccrualState = !classActivity.get('allowMasteryAccrual');
     let model = {
       hasMultipleCompetencies:
         collection.get('masteryAccrualCompetencies.length') > 1,
@@ -1010,18 +1011,19 @@ export default Ember.Component.extend(ModalMixin, {
         const activityClassMap = activityClasses.map(activityClass => {
           const classId = activityClass.get('id');
           const contentId = activityClass.get('activity.id');
-          const allowMasteryAccrual = !activityClass.get(
-            'activity.allowMasteryAccrual'
-          );
           return new Ember.RSVP.Promise((resolve, reject) => {
             component
               .get('classActivityService')
               .updateMasteryAccrualClassActivity(
                 classId,
                 contentId,
-                allowMasteryAccrual
+                masteryAccrualState
               )
               .then(() => {
+                activityClass.set(
+                  'activity.allowMasteryAccrual',
+                  masteryAccrualState
+                );
                 resolve();
               }, reject);
           });
@@ -1030,10 +1032,7 @@ export default Ember.Component.extend(ModalMixin, {
       },
       callback: {
         success: function() {
-          classActivity.set(
-            'allowMasteryAccrual',
-            !classActivity.get('allowMasteryAccrual')
-          );
+          classActivity.set('allowMasteryAccrual', masteryAccrualState);
         }
       }
     };
