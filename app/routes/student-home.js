@@ -439,7 +439,7 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           format: currentLocation
             ? currentLocation.get('collectionType')
             : null,
-          classId
+          contentClassId: classId
         });
         route.controller.set('playerContent', playerContent);
         route.controller.set('isOpenPlayer', true);

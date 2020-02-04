@@ -52,11 +52,11 @@ export default Ember.Component.extend({
   actions: {
     closePlayer: function() {
       const component = this;
-      let classId = component.get('playerContent.classId');
-      if (classId) {
+      let contentClassId = component.get('playerContent.contentClassId');
+      if (contentClassId) {
         component
           .get('router')
-          .transitionTo('student.class.course-map', classId);
+          .transitionTo('student.class.course-map', contentClassId);
       } else {
         component.closePullUp();
       }
