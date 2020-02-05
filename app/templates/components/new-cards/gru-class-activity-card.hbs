@@ -87,7 +87,7 @@
                   <span class="rubric-icon" />
                 </div>
               {{else}}
-                <div class="add-data not-started {{unless activity.isActive 'disable-performance'}} {{if activityClass.members.length '' 'no-student'}}" {{action "onOpenPerformanceEntry" activityClass}}>
+                <div class="add-data not-started {{if (or isFutureActivity (not activity.isActive)) 'disable-performance'}} {{if activityClass.members.length '' 'no-student'}}" {{action "onOpenPerformanceEntry" activityClass}}>
                   Add Data
                 </div>
               {{/if}}
@@ -133,7 +133,7 @@
       {{/if}}
     {{/if}}
     {{#if isOfflineActivity}}
-      <div class="mark-completed {{if activity.isCompleted 'completed'}} {{unless activity.isActive 'in-active'}}" {{action "onMarkOaCompleted"}} title="{{if activity.isCompleted (t 'common.completed') (t 'common.mark-as-completed')}}" data-toggle="tooltip">
+      <div class="mark-completed {{if activity.isCompleted 'completed'}} {{if (or isFutureActivity (not activity.isActive)) 'in-active'}}" {{action "onMarkOaCompleted"}} title="{{if activity.isCompleted (t 'common.completed') (t 'common.mark-as-completed')}}" data-toggle="tooltip">
         {{gru-icon name=(if activity.isCompleted 'check_circle' 'check_circle_outline')}}
         {{#if activity.isCompleted}}
           <label>{{t 'common.completed'}}</label>

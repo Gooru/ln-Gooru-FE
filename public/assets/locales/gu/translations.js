@@ -50,6 +50,9 @@ window.i18ln = {
   'errors.otherThan': '{{description}} ના સિવાય હોવી જોઈએ {{value}}',
   'errors.odd': '{{description}} એકી સંખ્યા હોવી જોઈએ',
   'errors.even': 'બેકી સંખ્યા હોવી જોઈએ',
+  'add-data-by-question': 'Enter scores by question',
+  'add-data-by-upload-image': 'Upload assessment score sheet',
+  'notifications.invalid-score': 'Please correct the score',
   'errors.positive': 'ઘન સંખ્યા હોવી જોઈએ',
   'errors.date': 'તારીખ વેલીડ હોવી જોઈએ',
   'errors.email': 'ઈમેઈલ એડ્રેસ વેલીડ હોવું જોઈએ',
@@ -58,8 +61,6 @@ window.i18ln = {
   'common.relevance': 'સબંધિત',
   'common.engagement': 'એંગેજમેન્ટ',
   'common.efficacy': 'અસરકારકતા',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.grid': 'ગ્રીડ',
   'common.list': 'યાદી',
   'common.first': 'પ્રથમ',
@@ -71,6 +72,10 @@ window.i18ln = {
   'tooltip.check-items-to-grade':
     'આ એકટીવીટીને ગ્રેડ કરવા માટે નીચે ગ્રેડ પેનલમાં આપેલી વસ્તુઓ જુઓ.',
   'common.by-question': 'પ્રશ્ન બાદ પ્રશ્ન',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'અપલોડ કરવામાં આવેલી ઇમેજ પ્રોસેસ થઇ રહી છે. કૃપા કરી થોડીવાર પછી ચકાસો.',
   'i2d.new-upload-msg':
@@ -90,6 +95,8 @@ window.i18ln = {
   'i2d.upload-failed': 'આ ઇમેજ અપલોડ કરવામાં એરર આવી રહી છે. ફરી અપલોડ કરીએ ?',
   're-upload': 'ફરી અપલોડ કરો',
   'common.user': 'યુઝર',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'વિગતોનું નામ (કન્ટેન્ટ નામ)',
   'common.lastName': 'લાસ્ટ નામ (છેલ્લું)',
   'common.firstName': 'ફર્સ્ટ નામ (પહેલું )',
@@ -2835,5 +2842,25 @@ window.i18ln = {
   'common.activate': 'Activate',
   'common.mark-as-completed': 'Mark Closed',
   'common.no-struggling-competencies':
-    'Yay! Looks like all your students are doing well!'
+    'Yay! Looks like all your students are doing well!',
+  'teacher-landing.class.atc-view.learning-gaps': 'Learning Gaps',
+  'teacher-landing.class.atc-view.learning-challenges': 'Learning Challenges',
+  'competency.mastery.source.student-label': 'You were',
+  'competency.mastery.source.teacher-label': 'Student was',
+  'competency.mastery.source-message': ' granted mastery based on {{source}}',
+  'competency.mastery.source.forcecalculatetrigger':
+    'level determined by the teacher/instructor',
+  'competench.mastery.source.nwea': 'NWEA MAP scores',
+  'competench.mastery.source.teacher-asserted':
+    'teacher/instructor\'s assertion',
+  'competency.portfolio.status.notstarted-teacher':
+    'The student/learner has not yet started to study this competency',
+  'competency.portfolio.status.inferred-teacher':
+    'The student/learner has inferred mastery in this competency based on evidence in related competency',
+  'competency.portfolio.status.notstarted-student':
+    'You have not yet started to study this competency',
+  'competency.portfolio.status.inferred-student':
+    'You have inferred mastery in this competency based on evidence in related competency',
+  'common.search-no-suggest-results-message':
+    'We could not find any content for the competency'
 };

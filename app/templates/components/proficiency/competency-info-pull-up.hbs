@@ -1,53 +1,58 @@
-<div class="competency-panel-header" {{action 'expandPullUp' bubbles=false}}>
-  <div class="competency-status status-{{competency.status}}"></div>
-  <div class="competency-title">
-    <div class="competency-domain">
-      {{domain-gut-to-fw-transform
-        fwDomains
-        competency.domainCode
-        competency.domainName
-        'fwDomainName'
-        (not showGutCompetency)
-      }}
+{{#if (and isInspectCompetency isExpand)}}
+  <div class="backdrop" {{action 'closePullUp' bubbles=false}}></div>
+{{/if}}
+<div class="competency-info-pull-up-container">
+  <div class="competency-panel-header" {{action 'expandPullUp' bubbles=false}}>
+    <div class="competency-status status-{{competency.status}}"></div>
+    <div class="competency-title">
+      <div class="competency-domain">
+        {{domain-gut-to-fw-transform
+          fwDomains
+          competency.domainCode
+          competency.domainName
+          'fwDomainName'
+          (not showGutCompetency)
+        }}
+      </div>
+      <div class="competency-name">
+        {{competency-gut-to-fw-transform
+           fwCompetencies
+           competency.competencyCode
+           competency.competencyCode
+           'frameworkCompetencyDisplayCode'
+           showGutCompetency
+           true
+        }}
+        {{competency-lo-transform
+          fwCompetencies
+          competency.competencyCode
+          'loCode'
+          false
+          '|'
+        }}
+      </div>
     </div>
-    <div class="competency-name">
-      {{competency-gut-to-fw-transform
-         fwCompetencies
-         competency.competencyCode
-         competency.competencyCode
-         'frameworkCompetencyDisplayCode'
-         showGutCompetency
-         true
-      }}
-      {{competency-lo-transform
-        fwCompetencies
-        competency.competencyCode
-        'loCode'
-        false
-        '|'
-      }}
+    <div class="status">
+      {{competencyStatus}}
     </div>
+    <span class="close" {{action 'closePullUp' bubbles=false}}>{{gru-icon name="close"}}</span>
   </div>
-  <div class="status">
-    {{competencyStatus}}
+  <div class="body">
+    {{#if isInspectCompetency}}
+      {{reports/pull-up/competency-content-report
+         fwCompetencies=fwCompetencies
+         showGutCompetency=showGutCompetency
+         classFramework=framework
+         class=class
+         domainCompetencyList=domainCompetencyList
+         competency=competency
+         userId=studentId
+         studentListForSuggestion=studentListForSuggestion
+         student=studentProfile
+         isStudent=isStudent
+         isPlayerProficiency=isPlayerProficiency
+         playContent="playContent"
+       }}
+    {{/if}}
   </div>
-  <span class="close" {{action 'closePullUp' bubbles=false}}>{{gru-icon name="close"}}</span>
-</div>
-<div class="body">
-  {{#if isInspectCompetency}}
-    {{reports/pull-up/competency-content-report
-       fwCompetencies=fwCompetencies
-       showGutCompetency=showGutCompetency
-       classFramework=framework
-       class=class
-       domainCompetencyList=domainCompetencyList
-       competency=competency
-       userId=studentId
-       studentListForSuggestion=studentListForSuggestion
-       student=studentProfile
-       isStudent=isStudent
-       isPlayerProficiency=isPlayerProficiency
-       playContent="playContent"
-     }}
-  {{/if}}
 </div>

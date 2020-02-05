@@ -359,6 +359,10 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     controller.set('loginCount', model.loginCount);
   },
 
+  resetController(controller) {
+    controller.set('isOpenPlayer', false);
+  },
+
   /**
    * Before leaving the route
    */
@@ -432,7 +436,10 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
           title: currentLocation
             ? currentLocation.get('collectionTitle')
             : null,
-          format: currentLocation ? currentLocation.get('collectionType') : null
+          format: currentLocation
+            ? currentLocation.get('collectionType')
+            : null,
+          classId
         });
         route.controller.set('playerContent', playerContent);
         route.controller.set('isOpenPlayer', true);

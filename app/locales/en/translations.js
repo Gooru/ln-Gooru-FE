@@ -2830,6 +2830,26 @@ window.i18ln = {
   'common.activate': 'Activate',
   'common.mark-as-completed': 'Mark Closed',
   'common.no-struggling-competencies':
-    'Yay! Looks like all your students are doing well!'
+    'Yay! Looks like all your students are doing well!',
+  'teacher-landing.class.atc-view.learning-gaps': 'Learning Gaps',
+  'teacher-landing.class.atc-view.learning-challenges': 'Learning Challenges',
+  'competency.mastery.source.student-label': 'You were',
+  'competency.mastery.source.teacher-label': 'Student was',
+  'competency.mastery.source-message': ' granted mastery based on {{source}}',
+  'competency.mastery.source.forcecalculatetrigger':
+    'level determined by the teacher/instructor',
+  'competench.mastery.source.nwea': 'NWEA MAP scores',
+  'competench.mastery.source.teacher-asserted':
+    'teacher/instructor\'s assertion',
+  'competency.portfolio.status.notstarted-teacher':
+    'The student/learner has not yet started to study this competency',
+  'competency.portfolio.status.inferred-teacher':
+    'The student/learner has inferred mastery in this competency based on evidence in related competency',
+  'competency.portfolio.status.notstarted-student':
+    'You have not yet started to study this competency',
+  'competency.portfolio.status.inferred-student':
+    'You have inferred mastery in this competency based on evidence in related competency',
+  'common.search-no-suggest-results-message':
+    'We could not find any content for the competency'
 };
 export default window.i18ln;

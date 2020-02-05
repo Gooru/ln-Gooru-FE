@@ -19,7 +19,7 @@ export default Ember.Object.extend({
   getFeedbackCategories(contentType, userCategoryId) {
     const adapter = this;
     const namespace = adapter.get('feedbackCategoryNamespace');
-    const url = `${namespace}/feedback-categories?content_type=${contentType}&&user_category_id=${userCategoryId}`;
+    const url = `${namespace}/feedback-categories?content_type=${contentType}&user_category_id=${userCategoryId}`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -34,7 +34,7 @@ export default Ember.Object.extend({
   fetchActivityFeedback(contentId, userId) {
     const adapter = this;
     const namespace = adapter.get('activityFeedbackNamespace');
-    const url = `${namespace}/feedbacks?content_id=${contentId}&&user_id=${userId}`;
+    const url = `${namespace}/feedbacks?content_id=${contentId}&user_id=${userId}`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),

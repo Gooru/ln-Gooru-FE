@@ -29,10 +29,12 @@ export default Ember.Component.extend({
   choiceList: Ember.A(
     [{
       'name': 'question',
-      'icon': 'help_outline'
+      'icon': 'help_outline',
+      'showMessage': false
     }, {
       'name': 'upload-image',
-      'icon': 'photo'
+      'icon': 'photo',
+      'showMessage': true
     }]
   ),
 

@@ -37,6 +37,9 @@ window.i18ln = {
   'errors.before': '{{before}}-ന് മുമ്പായിരിക്കണം {{description}}',
   'errors.after': '{{after}}-ന് ശേഷമായിരിക്കണം {{description}}',
   'errors.wrongDateFormat': '{{format}} രൂപത്തിലായിരിക്കണം {{description}}',
+  'add-data-by-question': 'Enter scores by question',
+  'add-data-by-upload-image': 'Upload assessment score sheet',
+  'notifications.invalid-score': 'Please correct the score',
   'errors.wrongLength':
     '{{description}}-ന്‍റെ നീളം തെറ്റാണ് ({{is}} പ്രതീകങ്ങളാണ്)',
   'errors.notANumber': '{{description}} സംഖ്യ ആയിരിക്കണം',
@@ -62,8 +65,6 @@ window.i18ln = {
   'common.efficacy': 'കാര്യക്ഷമത',
   'common.grid': 'ഗ്രിഡ്',
   'common.list': 'ലിസ്റ്റ്',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.first': 'ഫസ്റ്റ്',
   'common.last': 'ലാസ്റ്റ്',
   'common.name': 'നെയിം',
@@ -74,6 +75,10 @@ window.i18ln = {
   'tooltip.check-items-to-grade':
     'ഈ പ്രവർത്തനം ഗ്രേഡ് ചെയ്യാൻ താഴെയുള്ള ഗ്രേഡ് പാനലിലെ ഇനങ്ങൾ പരിശോധിക്കുക',
   'common.by-question': 'ചോദ്യങ്ങൾ ഒന്നൊന്നായി',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'അപ്‌ലോഡ് ചെയ്‍ത ചിത്രം(ങ്ങൾ) പ്രോസസ് ചെയ്യുകയാണ്. പിന്നീട് പരിശോധിക്കുക',
   'i2d.new-upload-msg':
@@ -94,6 +99,8 @@ window.i18ln = {
     'ഈ ചിത്രം അപ്‍ലോഡ് ചെയ്യുന്നതിനിടെ പിശകുണ്ടായി. വീണ്ടും അപ്‌ലോഡ് ചെയ്യണോ?',
   're-upload': 'വീണ്ടും അപ്‌ലോഡ് ചെയ്യണോ?',
   'common.user': 'ഉപയോക്താവ്',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'ഉള്ളടക്കത്തിന്റെ പേര്',
   'common.lastName': 'പേരിന്റെ അവസാന ഭാഗം',
   'common.firstName': 'പേരിന്റെ ആദ്യഭാഗം',
@@ -2927,5 +2934,25 @@ window.i18ln = {
   'common.activate': 'Activate',
   'common.mark-as-completed': 'Mark Closed',
   'common.no-struggling-competencies':
-    'Yay! Looks like all your students are doing well!'
+    'Yay! Looks like all your students are doing well!',
+  'teacher-landing.class.atc-view.learning-gaps': 'Learning Gaps',
+  'teacher-landing.class.atc-view.learning-challenges': 'Learning Challenges',
+  'competency.mastery.source.student-label': 'You were',
+  'competency.mastery.source.teacher-label': 'Student was',
+  'competency.mastery.source-message': ' granted mastery based on {{source}}',
+  'competency.mastery.source.forcecalculatetrigger':
+    'level determined by the teacher/instructor',
+  'competench.mastery.source.nwea': 'NWEA MAP scores',
+  'competench.mastery.source.teacher-asserted':
+    'teacher/instructor\'s assertion',
+  'competency.portfolio.status.notstarted-teacher':
+    'The student/learner has not yet started to study this competency',
+  'competency.portfolio.status.inferred-teacher':
+    'The student/learner has inferred mastery in this competency based on evidence in related competency',
+  'competency.portfolio.status.notstarted-student':
+    'You have not yet started to study this competency',
+  'competency.portfolio.status.inferred-student':
+    'You have inferred mastery in this competency based on evidence in related competency',
+  'common.search-no-suggest-results-message':
+    'We could not find any content for the competency'
 };

@@ -27,6 +27,11 @@ export default Ember.Component.extend({
     component.loadClassAtcData();
   },
 
+  didDestroyElement() {
+    const component = this;
+    component.set('atcPerformanceSummary', Ember.A([]));
+  },
+
   // -------------------------------------------------------------------------
   // Observers
   observeMonthChange: Ember.observer('month', function() {
@@ -55,6 +60,41 @@ export default Ember.Component.extend({
         .transitionTo(`teacher.class.${redirectTo}`, classId, {
           queryParams
         });
+    },
+
+    onResetZoom() {
+      this.drawAtcChart();
+      this.set('isZoomed', false);
+    },
+
+    onSelectStudent(studentData) {
+      const component = this;
+      component.set(
+        'tooltipInterval',
+        component.studentProficiencyInfoTooltip(
+          studentData,
+          this.$('.navigator-atc-student-list').position()
+        )
+      );
+      if (component.get('isMobileView')) {
+        const nodeElement = component.$(`.node-${studentData.get('seq')}`);
+        component.set('isShowTooltip', true);
+        component.$(nodeElement).addClass('active-node');
+        let selectedNodePos = component.$(nodeElement).position();
+        component.highlightStudentProfile(selectedNodePos);
+      }
+    },
+
+    onCloseTooltip() {
+      const component = this;
+      component.removeTooltip();
+      component.$('.navigator-atc-student-list').addClass('active');
+    },
+
+    onCloseListCard() {
+      const component = this;
+      component.removeStudentListCard();
+      component.set('isShowListCard', false);
     }
   },
 
@@ -107,6 +147,30 @@ export default Ember.Component.extend({
    */
   isShowTooltip: false,
 
+  /**
+   * @property {Array} atcPerformanceSummary
+   * Property to for atc performance summary data set
+   */
+  atcPerformanceSummary: Ember.A([]),
+
+  /**
+   * @property {Boolean} isZoomed
+   * Property to show/hide reset chart button
+   */
+  isZoomed: false,
+
+  groupedStudentList: Ember.A([]),
+
+  tooltipInterval: null,
+
+  studentListTooltipInterval: null,
+
+  /**
+   * @property {Boolean} isShowListCard
+   * Property to check whether the list card is visible or not (only for mobile devices)
+   */
+  isShowListCard: false,
+
   // -------------------------------------------------------------------------
   // Functions
 
@@ -118,9 +182,11 @@ export default Ember.Component.extend({
     const component = this;
     component.fetchClassAtcPerforamnceSummary().then(function(atcPerformance) {
       let students = component.get('students');
-      component.drawAtcChart(
+      component.set(
+        'atcPerformanceSummary',
         component.parseClassAtcPerformanceSummary(students, atcPerformance)
       );
+      component.drawAtcChart();
     });
   },
 
@@ -133,7 +199,7 @@ export default Ember.Component.extend({
     let parsedPerformanceSummary = Ember.A([]);
     let togalMasteredCompetencies = 0;
     if (students && students.length) {
-      students.map(student => {
+      students.forEach((student, index) => {
         let studentPerformanceData = Ember.Object.create({
           id: student.id,
           thumbnail: student.avatarUrl,
@@ -187,6 +253,7 @@ export default Ember.Component.extend({
             'grade',
             studentPerformanceSummary.grade || '--'
           );
+          studentPerformanceData.set('seq', index + 1);
           parsedPerformanceSummary.push(studentPerformanceData);
         }
       });
@@ -223,8 +290,9 @@ export default Ember.Component.extend({
    * @function drawAtcChart
    * Method to draw atc chart
    */
-  drawAtcChart(dataset) {
+  drawAtcChart() {
     const component = this;
+    let dataset = component.get('atcPerformanceSummary');
     component.$('svg').remove();
     var margin = {
         top: 50,
@@ -254,8 +322,18 @@ export default Ember.Component.extend({
       .axis()
       .scale(xScale)
       .orient('bottom')
+      .outerTickSize(0)
       .tickPadding(10);
 
+    dataset.forEach(studentData => {
+      studentData.set(
+        'xAxis',
+        xScale(studentData.completedCompetencies).toFixed(2)
+      );
+      studentData.set('yAxis', yScale(studentData.percentScore).toFixed(2));
+    });
+
+    dataset = component.groupItemsByPos(dataset);
     var yAxis = d3.svg
       .axis()
       .scale(yScale)
@@ -264,29 +342,26 @@ export default Ember.Component.extend({
       .outerTickSize(0)
       .tickPadding(10);
 
+    var chartZoomConfig = d3.behavior
+      .zoom()
+      .scaleExtent([1, Infinity])
+      .x(xScale)
+      .y(yScale);
+
+    let svgWidth = width + margin.left + margin.right;
+    let svgHeight = height + margin.top + margin.bottom;
+
     var svg = d3
       .select(component.element)
       .append('svg')
       .attr('class', 'navigator-atc-chart')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
-      .call(
-        d3.behavior
-          .zoom()
-          .scaleExtent([1, 3])
-          .on('zoom', () => {
-            const translatePoints =
-              d3.event.scale > 1
-                ? d3.event.translate
-                : `${margin.left},${margin.top}`;
-            svg.attr(
-              'transform',
-              `translate(${translatePoints}) scale(${d3.event.scale})`
-            );
-          })
-      )
+      .attr('width', svgWidth)
+      .attr('height', svgHeight)
+      .call(chartZoomConfig)
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    const studentNodes = svg.append('g').attr('class', 'student-nodes');
 
     svg
       .append('g')
@@ -325,26 +400,39 @@ export default Ember.Component.extend({
       );
 
     let tooltipInterval = null;
+    let studentListTooltipInterval = null;
     let tooltip = d3
       .select(component.element)
       .append('div')
       .attr('class', 'navigator-atc-tooltip');
     let tooltipContainer = component.$('.navigator-atc-tooltip');
     let activeStudentContainer = component.$('.active-student-container');
+    // Student list card tooltip config
+    const studentListTooltip = d3
+      .select(component.element)
+      .append('div')
+      .attr('class', 'navigator-atc-student-list');
+    const studentListCardContainer = component.$('.navigator-atc-student-list');
 
-    let studentNode = svg
+    let studentNode = studentNodes
       .selectAll('.student-nodes')
       .data(dataset)
       .enter()
       .append('g')
       .attr('transform', function(d) {
-        return `translate(${xScale(d.completedCompetencies) +
-          12}, ${yScale(d.percentScore) - 20})`;
+        return `translate(${parseFloat(d.xAxis) +
+          12}, ${parseFloat(d.yAxis) - 20})`;
       })
-      .attr('class', 'node-point');
+      .attr('class', function(d) {
+        return `node-point node-${d.get('seq')}`;
+      });
 
     tooltip.on('mouseout', function() {
       component.removeTooltip(tooltipInterval);
+    });
+
+    studentListTooltip.on('mouseout', () => {
+      component.removeStudentListCard(studentListTooltipInterval);
     });
 
     tooltip.on('click', function() {
@@ -363,55 +451,131 @@ export default Ember.Component.extend({
           top: `${top}px`,
           left: `${left}px`
         };
-        tooltipInterval = component.studentProficiencyInfoTooltip(
-          studentData,
-          tooltipPos
+        const groupedStudentList = dataset.filterBy(
+          'group',
+          studentData.get('group')
         );
+        if (groupedStudentList.length > 1) {
+          studentListTooltipInterval = component.setupStudentListTooltip(
+            groupedStudentList,
+            tooltipPos
+          );
+          component.set(
+            'studentListTooltipInterval',
+            studentListTooltipInterval
+          );
+        } else {
+          tooltipInterval = component.studentProficiencyInfoTooltip(
+            studentData,
+            tooltipPos
+          );
+          component.set('tooltipInterval', tooltipInterval);
+        }
       });
+
       tooltip.on('mouseover', function() {
         component.set('isShowTooltip', true);
         tooltipContainer.addClass('active');
       });
+
+      studentListTooltip.on('mouseover', function() {
+        studentListCardContainer.addClass('active');
+      });
+
       studentNode.on('mouseout', function() {
-        component.set('isShowTooltip', false);
-        tooltipContainer.removeClass('active');
-        component.$('.node-point').removeClass('active-node');
         activeStudentContainer.addClass('hidden');
-        Ember.run.cancel(tooltipInterval);
+        studentListCardContainer.removeClass('active');
+        component.removeTooltip(tooltipInterval);
       });
     } else {
       studentNode.on('click', function(studentData) {
-        component.set('isShowTooltip', true);
-        tooltipInterval = component.studentProficiencyInfoTooltip(studentData);
-        tooltipContainer.addClass('active');
-        component.$(this).addClass('active-node');
-        let selectedNodePos = component.$(this).position();
-        component.highlightStudentProfile(selectedNodePos);
+        const groupedStudentList = dataset.filterBy(
+          'group',
+          studentData.get('group')
+        );
+        if (groupedStudentList.length > 1) {
+          studentListTooltipInterval = component.setupStudentListTooltip(
+            groupedStudentList
+          );
+          component.set(
+            'studentListTooltipInterval',
+            studentListTooltipInterval
+          );
+        } else {
+          tooltipInterval = component.studentProficiencyInfoTooltip(
+            studentData
+          );
+          component.set('isShowTooltip', true);
+          component.set('isShowListCard', false);
+          component.$(this).addClass('active-node');
+          let selectedNodePos = component.$(this).position();
+          component.highlightStudentProfile(selectedNodePos);
+          component.set('tooltipInterval', tooltipInterval);
+        }
       });
     }
-
+    let profileOuterRadius = component.get('isMobileView') ? 35 : 16;
     studentNode
       .append('circle')
       .attr('cx', 5)
       .attr('cy', 5)
-      .attr('r', 16)
+      .attr('r', profileOuterRadius)
       .style('fill', function(d) {
         return getGradeColor(d.percentScore);
       });
 
+    let profileSize = component.get('isMobileView') ? 60 : 24;
+    let profileXY = component.get('isMobileView') ? -25 : -7;
+
     studentNode
       .append('svg:image')
       .attr('class', 'student-profile')
-      .attr('x', -7)
-      .attr('y', -7)
+      .attr('x', profileXY)
+      .attr('y', profileXY)
       .attr({
         'xlink:href': function(d) {
           return d.thumbnail;
         },
-        width: 24,
-        height: 24
+        width: profileSize,
+        height: profileSize
       });
     component.cleanUpChart();
+    /**
+     * @function zoomHandler
+     * Method to handle zoom event and rerender chart points
+     */
+    function zoomHandler() {
+      svg.select('.x.axis').call(xAxis);
+      svg.select('.y.axis').call(yAxis);
+      studentNode
+        // Reposition node point based on current axis level
+        .attr('transform', function(d) {
+          let xPoint = xScale(d.completedCompetencies).toFixed(2);
+          let yPoint = yScale(d.percentScore).toFixed(2);
+          d.set('xAxis', xPoint);
+          d.set('yAxis', yPoint);
+          return `translate(${xPoint}, ${yPoint})`;
+        })
+        // Hide student node points after reach chart edge
+        .attr('class', function(d) {
+          let xPoint = xScale(d.completedCompetencies);
+          let yPoint = yScale(d.percentScore);
+          let className = 'node-point';
+          if (
+            xPoint < 15 ||
+            yPoint <= 0 ||
+            xPoint >= svgWidth - 100 ||
+            yPoint >= svgHeight - 100
+          ) {
+            className += ' hidden';
+          }
+          return className;
+        });
+      component.cleanUpChart();
+      component.set('isZoomed', true);
+    }
+    // Bind zoom handler with zoom event
+    chartZoomConfig.on('zoom', zoomHandler);
   },
 
   /**
@@ -419,13 +583,30 @@ export default Ember.Component.extend({
    * Method to clean up chart views as per requirement
    */
   cleanUpChart() {
-    const axes = ['y'];
+    const axes = ['x', 'y'];
     axes.map(axis => {
       var axisContainer = d3.selectAll(this.$(`.${axis}.axis .tick`));
       axisContainer.attr('style', function() {
         var curAxisElement = d3.select(this);
         var curAxisText = curAxisElement.select('text');
-        curAxisText.text(`${curAxisText.text()}%`);
+        var curAxisTransform = d3.transform(curAxisElement.attr('transform'));
+        var curAxisXpoint = curAxisTransform
+          ? curAxisTransform.translate[0]
+          : 0;
+        var curAxisYpoint = curAxisTransform
+          ? curAxisTransform.translate[1]
+          : 0;
+        var tickClass = 'tick';
+        if (
+          (axis === 'y' && curAxisYpoint > 260) ||
+          (axis === 'x' && curAxisXpoint < 230)
+        ) {
+          tickClass += ' no-label';
+        }
+        curAxisElement.attr('class', tickClass);
+        if (axis === 'y') {
+          curAxisText.text(`${curAxisText.text()}%`);
+        }
       });
     });
   },
@@ -445,6 +626,23 @@ export default Ember.Component.extend({
         tooltip.css(tooltipPos);
       }
       component.$('.navigator-atc-tooltip').addClass('active');
+    }, 500);
+  },
+
+  setupStudentListTooltip(studentList, tooltipPos) {
+    const component = this;
+    let tooltip = component.$('.navigator-atc-student-list');
+    component.set('groupedStudentList', studentList);
+    return Ember.run.later(function() {
+      let cardContainer = component
+        .$('.student-list-card-html-container')
+        .html();
+      tooltip.html(cardContainer);
+      if (tooltipPos) {
+        tooltip.css(tooltipPos);
+      }
+      component.$('.navigator-atc-student-list').addClass('active');
+      component.set('isShowListCard', true);
     }, 500);
   },
 
@@ -470,5 +668,39 @@ export default Ember.Component.extend({
     component.$('.navigator-atc-tooltip').removeClass('active');
     component.$('.node-point').removeClass('active-node');
     Ember.run.cancel(tooltipInterval);
+  },
+
+  removeStudentListCard(tooltipInterval) {
+    const component = this;
+    component.$('.navigator-atc-student-list').removeClass('active');
+    Ember.run.cancel(tooltipInterval);
+    component.set('studentListTooltipInterval', null);
+  },
+
+  groupItemsByPos(dataset = Ember.A([])) {
+    if (dataset.length) {
+      const sortedByScoreDataset = dataset.sortBy('percentScore');
+      for (let i = 0; i < sortedByScoreDataset.length; i++) {
+        let sourceItem = sortedByScoreDataset[i];
+        let sourceXaxis = parseFloat(sourceItem.get('xAxis'));
+        let sourceYaxis = parseFloat(sourceItem.get('yAxis'));
+        if (!sourceItem.get('group')) {
+          for (let j = 0; j < sortedByScoreDataset.length; j++) {
+            let compareItem = sortedByScoreDataset[j];
+            let compareXAxis = parseFloat(compareItem.get('xAxis'));
+            let compareYAxis = parseFloat(compareItem.get('yAxis'));
+            let xDiff = Math.abs(sourceXaxis - compareXAxis);
+            let yDiff = Math.abs(sourceYaxis - compareYAxis);
+            let xDiffGroup = this.get('isMobileView') ? 30 : 20;
+            let yDiffGroup = this.get('isMobileView') ? 16 : 8;
+            if (xDiff <= xDiffGroup && yDiff <= yDiffGroup) {
+              compareItem.set('group', i + 1);
+            }
+          }
+        }
+      }
+      return sortedByScoreDataset;
+    }
+    return dataset;
   }
 });

@@ -33,6 +33,9 @@ window.i18ln = {
     '{{description}} অনেকটা বড় ( সর্বোচ্চ {{max}} অক্ষর দরকার )',
   'errors.tooShort':
     '{{description}} খুবই কম ( সর্বোনিম্ন {{min}} অক্ষর দরকার )',
+  'add-data-by-question': 'Enter scores by question',
+  'add-data-by-upload-image': 'Upload assessment score sheet',
+  'notifications.invalid-score': 'Please correct the score',
   'errors.before': '{{description}} {{before}}-এর আগে হতে হবে',
   'errors.after': '{{description}} {{after}}-এর পরে হতে হবে',
   'errors.wrongDateFormat':
@@ -63,8 +66,6 @@ window.i18ln = {
   'common.list': 'তালিকা',
   'common.first': 'প্রথম',
   'common.last': 'গত',
-  'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
   'common.name': 'নাম',
   'common.add-data-choice-title': 'আপনি ডেটা কিভাবে  লিখতে চান?',
   'common.take-photo': 'ছবি তুলুন',
@@ -72,6 +73,10 @@ window.i18ln = {
   'tooltip.check-items-to-grade':
     'এই ক্রিয়াকলাপ গ্রেড করার জন্য গ্রেদ প্যানেলের নিচে আই আইটেমগুলোকে চেক করুন',
   'common.by-question': 'প্রশ্ন-থেকে-প্রশ্ন',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
   'i2d.conversion-progress':
     'ছবি(গুলো)র আপলোড করা চলছে। দয়া করে আবার পরে চেক করুন',
   'i2d.new-upload-msg':
@@ -91,6 +96,8 @@ window.i18ln = {
     'এই ছবিটা আপলোড করার সময় একটা ত্রুটি দেখা দেয়। আবার আপলোড করবেন?',
   're-upload': 'আবার আপলোড করুন',
   'common.user': 'ব্যবহারকারী',
+  'message-go-live-multigrade':
+    'Go Live is available only for non multi-grade classes',
   'common.content-name': 'কনটেন্টের নাম',
   'common.lastName': 'পদবী',
   'common.firstName': 'নাম',
@@ -2881,5 +2888,25 @@ window.i18ln = {
   'common.activate': 'Activate',
   'common.mark-as-completed': 'Mark Closed',
   'common.no-struggling-competencies':
-    'Yay! Looks like all your students are doing well!'
+    'Yay! Looks like all your students are doing well!',
+  'teacher-landing.class.atc-view.learning-gaps': 'Learning Gaps',
+  'teacher-landing.class.atc-view.learning-challenges': 'Learning Challenges',
+  'competency.mastery.source.student-label': 'You were',
+  'competency.mastery.source.teacher-label': 'Student was',
+  'competency.mastery.source-message': ' granted mastery based on {{source}}',
+  'competency.mastery.source.forcecalculatetrigger':
+    'level determined by the teacher/instructor',
+  'competench.mastery.source.nwea': 'NWEA MAP scores',
+  'competench.mastery.source.teacher-asserted':
+    'teacher/instructor\'s assertion',
+  'competency.portfolio.status.notstarted-teacher':
+    'The student/learner has not yet started to study this competency',
+  'competency.portfolio.status.inferred-teacher':
+    'The student/learner has inferred mastery in this competency based on evidence in related competency',
+  'competency.portfolio.status.notstarted-student':
+    'You have not yet started to study this competency',
+  'competency.portfolio.status.inferred-student':
+    'You have inferred mastery in this competency based on evidence in related competency',
+  'common.search-no-suggest-results-message':
+    'We could not find any content for the competency'
 };

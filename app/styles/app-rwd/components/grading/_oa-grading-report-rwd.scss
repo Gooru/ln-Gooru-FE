@@ -9,21 +9,6 @@
       .oa-grading-section {
         grid-template-columns: unset;
         overflow: auto;
-
-        .left-panel {
-          .tasks-section {
-            max-height: none;
-            height: auto;
-            overflow: inherit;
-          }
-        }
-
-        .right-panel {
-          .oa-grade-right-panel-body {
-            max-height: none;
-            height: auto;
-          }
-        }
       }
     }
   }

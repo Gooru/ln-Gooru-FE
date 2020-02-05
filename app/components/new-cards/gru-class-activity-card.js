@@ -303,6 +303,20 @@ export default Ember.Component.extend({
     return moment(activityDate).isBefore(currentDate);
   }),
 
+  /**
+   * @property {Boolean} isFutureActivity
+   * Property to check whether it's a future data activity or not
+   */
+  isFutureActivity: Ember.computed('activity', function() {
+    let activityDate =
+      this.get('activity.contentType') === 'offline-activity'
+        ? this.get('activity.added_date')
+        : this.get('activity.end_date') || this.get('activity.added_date');
+    let currentDate = moment().format('YYYY-MM-DD');
+
+    return moment(activityDate).isAfter(currentDate);
+  }),
+
   isShowListView: false,
 
   loadClassData() {

@@ -6,6 +6,7 @@
     z-index: 1000;
     display: none;
   }
+
   .performance-overview-header {
     display: grid;
     grid-template-columns: auto;
@@ -75,6 +76,7 @@
       .backdrop {
         display: none;
       }
+
       .ca-date-nav-container {
         background-color: $white;
         margin: auto;
@@ -166,6 +168,7 @@
       width: 304px;
 
       .competency-card-container {
+        cursor: pointer;
         background-color: $white;
         padding: 10px;
         border: 1px solid $gray-80;
@@ -194,7 +197,7 @@
               overflow: hidden;
               width: 200px;
               @media screen and (min-width: $screen-xs) and (max-width: $screen-md) {
-                width: auto;
+                width: calc(100vw - 150px);
               }
             }
 
@@ -205,7 +208,7 @@
               font-size: 10px;
               width: 200px;
               @media screen and (min-width: $screen-xs) and (max-width: $screen-md) {
-                width: auto;
+                width: calc(100vw - 150px);
               }
 
               li {
@@ -340,7 +343,7 @@
       }
     }
     @media screen and (max-width: 992px) {
-      grid-template-columns: auto;
+      grid-template-columns: 98%;
       row-gap: 15px;
 
       .chart-container {

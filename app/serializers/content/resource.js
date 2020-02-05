@@ -78,6 +78,9 @@ export default Ember.Object.extend({
     };
     serializedResource.metadata['21_century_skills'] =
       resourceModel.get('centurySkills') || [];
+    if (resourceModel.get('url')) {
+      serializedResource.url = resourceModel.get('url');
+    }
     return serializedResource;
   },
 
@@ -119,6 +122,7 @@ export default Ember.Object.extend({
         description: resourceData.description,
         narration: resourceData.narration,
         publishStatus: resourceData.publish_status,
+        originalResourceId: resourceData.original_content_id,
         standards: serializer
           .get('taxonomySerializer')
           .normalizeTaxonomyObject(standards),
@@ -160,11 +164,10 @@ export default Ember.Object.extend({
           resourceUrl = cdnUrl + resourceUrl;
         }
         resource.set('url', addProtocolIfNecessary(resourceUrl, true));
-        let url = resourceUrl.split('/');
-        resource.set('fileName', url[url.length - 1]);
       }
+      let url = resource.get('url').split('/');
+      resource.set('fileName', url[url.length - 1]);
     }
-
     return resource;
   },
   checkURLProtocol: function(url) {

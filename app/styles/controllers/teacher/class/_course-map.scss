@@ -102,6 +102,10 @@
         line-height: 67px;
         margin-left: 12px;
         text-transform: capitalize;
+        @media screen and (max-width: $screen-360) {
+          line-height: 15px;
+          align-self: center;
+        }
       }
 
       .performance-container {

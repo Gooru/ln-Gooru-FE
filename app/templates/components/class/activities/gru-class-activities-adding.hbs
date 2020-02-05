@@ -1,3 +1,6 @@
+{{#if isMobileView}}
+  <div class="backdrop" {{action "onTogglePanel"}}></div>
+{{/if}}
 <div class="class-activities-source-container {{if isMobileView 'mobile-view'}}">
   <div class="header-container">
     {{class/activities/gru-content-search
@@ -11,6 +14,7 @@
       onTogglePanel="onTogglePanel"
       defaultContentSource = defaultTab.id
       goBackToTenantLibraries = "goBackToTenantLibraries"
+      scrollEndHitCount = scrollEndHitCount
     }}
     {{#if (and isShowCourseMap isMultiClassEnabled)}}
       <div class="course-map-activities-container">
@@ -25,7 +29,7 @@
       </div>
     {{/if}}
   </div>
-  <div class="body-container {{if isShowTenantLibraries 'grid-view'}}">
+  <div class="body-container {{if isShowTenantLibraries 'grid-view'}} {{if isShowCourseMap 'course-map-view'}}">
     {{#if isShowTenantLibraries}}
       {{#each tenantLibraries as |tenantLibrary|}}
         {{library/gru-partner-library-card onSelectLibrary='onSelectTenantLibrary' content=tenantLibrary}}

@@ -17,12 +17,12 @@
         color: #ffffff;
       }
       .students-proficiency-header {
-        display: grid;
-        grid-template-columns: 1fr;
+        display: flex;
         align-items: center;
         margin: 1px 0;
         padding: 0 50px;
         box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+        justify-content: center;
 
         @media screen and (max-width: $screen-xs) {
           padding: 0;

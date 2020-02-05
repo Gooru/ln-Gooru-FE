@@ -31,6 +31,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   didInsertElement() {
     const component = this;
+    // send API will trigger the action inside the component
     component.send(
       'onSelectContentSource',
       component
@@ -50,7 +51,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
       const component = this;
       component.set('contentSearchTerm', '');
       if (component.get('isSearchTermApplied')) {
-        component.loadCotents();
+        component.set('page', 0);
+        component.loadContents(true);
         component.set('isSearchTermApplied', false);
       }
     },
@@ -64,6 +66,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
       const component = this;
       const contentSourceKey = contentSource.get('id');
       component.set('activeContentSource', contentSourceKey);
+      component.set('page', 0); //Reset get contents offset
       let isShowContentSelector = true;
       let contentSearchTerm = component.get('contentSearchTerm');
       if (contentSourceKey === 'tenant-library') {
@@ -74,7 +77,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
         contentSourceKey === 'my-content' ||
         contentSourceKey === 'gooru-catalog'
       ) {
-        component.loadCotents();
+        component.loadContents(true);
       } else {
         contentSearchTerm = null;
         isShowContentSelector = false;
@@ -87,7 +90,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
     onSelectContentType(contentType) {
       const component = this;
       component.set('activeContentType', contentType.get('value'));
-      component.loadCotents();
+      component.set('page', 0);
+      component.loadContents(true);
     },
 
     onClickFilterIcon() {
@@ -97,7 +101,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
     onApplyFilter() {
       const component = this;
-      component.loadCotents();
+      component.set('page', 0);
+      component.loadContents();
     },
 
     /**
@@ -203,15 +208,31 @@ export default Ember.Component.extend(ConfigurationMixin, {
 
   searchContentLimit: 20,
 
+  /**
+   * @property {Number} scrollEndHitCount
+   * Property for the scroll paginated count
+   */
+  scrollEndHitCount: 0,
+
   observeLibraryChange: Ember.observer('activeTenantLibrary', function() {
     const component = this;
     component.set('isShowContentSelector', true);
+    component.set('page', 0);
     component.fetchLibraryContentByType().then(function(libraryContents) {
       component.sendAction('onShowFilteredContents', libraryContents);
     });
   }),
 
-  loadCotents() {
+  // Observe scroll hit end at parent
+  observeScrollEndHits: Ember.observer('scrollEndHitCount', function() {
+    const component = this;
+    if (component.get('scrollEndHitCount')) {
+      component.incrementProperty('page');
+      component.loadContents();
+    }
+  }),
+
+  loadContents(refreshContents = false) {
     const component = this;
     const activeContentSource = component.get('activeContentSource');
     let filteredContentPromise;
@@ -229,7 +250,11 @@ export default Ember.Component.extend(ConfigurationMixin, {
     Ember.RSVP.hash({
       filteredContentList: filteredContentPromise
     }).then(({ filteredContentList }) => {
-      component.sendAction('onShowFilteredContents', filteredContentList);
+      component.sendAction(
+        'onShowFilteredContents',
+        filteredContentList,
+        refreshContents
+      );
     });
   },
 
@@ -328,7 +353,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.$('#search-content').on('keyup', function(e) {
       const contentSearchTerm = component.get('contentSearchTerm');
       if (e.which === KEY_CODES.ENTER && contentSearchTerm.length >= 3) {
-        component.loadCotents();
+        component.set('page', 0);
+        component.loadContents(true);
         component.set('isSearchTermApplied', true);
       }
     });
@@ -336,7 +362,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
     component.$('.search-icon i.search').click(function() {
       const contentSearchTerm = component.get('contentSearchTerm');
       if (contentSearchTerm.length >= 3) {
-        component.loadCotents();
+        component.set('page', 0);
+        component.loadContents(true);
         component.set('isSearchTermApplied', true);
       }
     });

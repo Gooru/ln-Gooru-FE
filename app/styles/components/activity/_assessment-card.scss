@@ -164,6 +164,10 @@
           i {
             color: #0072bc;
             cursor: pointer;
+
+            &.explore {
+              color: $orange-300;
+            }
           }
         }
       }

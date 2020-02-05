@@ -22,19 +22,26 @@
         </div>
       {{/if}}
     </div>
-    <div class="resource-count">
-      {{#if (gt item.resourceCount 0)}}
-        <i class="resource-icon"></i>
-        <span>{{item.resourceCount}}</span>
-      {{/if}}
-    </div>
+    {{#if isOfflineActivity}}
+      <div class="task-count">
+        <i class="task-icon"></i>
+        <span>{{item.taskCount}}</span>
+      </div>
+    {{else}}
+      <div class="resource-count">
+        {{#if (gt item.resourceCount 0)}}
+          <i class="resource-icon"></i>
+          <span>{{item.resourceCount}}</span>
+        {{/if}}
+      </div>
 
-    <div class="question-count">
-      {{#if (gt item.questionCount 0)}}
-        <i class="question-icon"></i>
-        <span>{{item.questionCount}}</span>
-      {{/if}}
-    </div>
+      <div class="question-count">
+        {{#if (gt item.questionCount 0)}}
+          <i class="question-icon"></i>
+          <span>{{item.questionCount}}</span>
+        {{/if}}
+      </div>
+    {{/if}}
 
     {{#if (or (eq item.collectionType 'assessment-external' ) (eq item.collectionType 'collection-external'))}}
       <i class="external-icon"></i>

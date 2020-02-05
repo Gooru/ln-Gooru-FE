@@ -215,7 +215,8 @@
                   }
 
                   .not-started {
-                    color: $gray-no-started;
+                    color: $dark-600;
+                    opacity: 0.5;
                   }
                 }
               }
@@ -328,7 +329,8 @@
             }
 
             .not-started {
-              color: $gray-no-started;
+              color: $dark-600;
+              opacity: 0.5;
             }
           }
         }

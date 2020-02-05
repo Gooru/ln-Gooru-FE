@@ -55,7 +55,7 @@
   </div>
 </div>
 {{/if}}
-<div class="sc-student-dropdown-list-container {{if (eq studentsPerformanceList.length  1) 'active' ''}}">
+<div class="sc-student-dropdown-list-container {{if (or isShowCompetencyStudentList (eq studentsPerformanceList.length  1)) 'active' ''}}">
   {{#each studentsPerformanceList as |student|}}
     <div class="sc-student-dropdown-list">
       <div class="sc-student-profile-thumbnail-container">
@@ -110,7 +110,14 @@
           {{/each}}
         {{else}}
           {{#unless isLoading}}
-            {{cards/no-suggest-result-found isFromSearch=true}}
+            <div class="suggest-panel panel-default">
+              <div class="panel-body">
+                <div class="no-suggest-result-content">
+                  <div class="icon">{{gru-icon name="remove_circle_outline"}}</div>
+                  <p class="suggest-message">{{t "common.search-no-suggest-results-message"}}</p>
+                </div>
+              </div>
+            </div>
           {{/unless}}
         {{/if}}
       {{/unless}}

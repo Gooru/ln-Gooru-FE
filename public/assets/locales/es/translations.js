@@ -29,6 +29,13 @@ window.i18ln = {
   'errors.present': '{{description}}  debe estar en blanco',
   'errors.collection': '{{description}}   debe ser una colección',
   'errors.singular': '{{description}}   no puede ser una colección',
+  'add-data-by-question': 'Enter scores by question',
+  'add-data-by-upload-image': 'Upload assessment score sheet',
+  'i2d-message-1':
+    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+  'i2d-message-2':
+    'You can also use the regular manual input method above to enter the students scores.',
+  'notifications.invalid-score': 'Please correct the score',
   'errors.tooLong':
     '{{description}}  es demasiado larga (máximo es {{max}}  caracteres)',
   'errors.tooShort':
@@ -2812,5 +2819,15 @@ window.i18ln = {
   'common.class-activities-info-icon':
     'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class',
   'common.no-struggling-competencies':
-    'Yay! Looks like all your students are doing well!'
+    'Yay! Looks like all your students are doing well!',
+  'competency.mastery.source.student-label': 'You were',
+  'competency.mastery.source.teacher-label': 'Student was',
+  'competency.mastery.source-message': ' granted mastery based on {{source}}',
+  'competency.mastery.source.forcecalculatetrigger': 'level determined by the teacher/instructor',
+  'competench.mastery.source.nwea': 'NWEA MAP scores',
+  'competench.mastery.source.teacher-asserted': 'teacher/instructor\'s assertion',
+  'competency.portfolio.status.notstarted-teacher': 'The student/learner has not yet started to study this competency',
+  'competency.portfolio.status.inferred-teacher': 'The student/learner has inferred mastery in this competency based on evidence in related competency',
+  'competency.portfolio.status.notstarted-student': 'You have not yet started to study this competency',
+  'competency.portfolio.status.inferred-student': 'You have inferred mastery in this competency based on evidence in related competency'
 };

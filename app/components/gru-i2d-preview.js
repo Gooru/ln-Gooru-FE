@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { I2D_CONVERSION_STATUS } from 'gooru-web/config/config';
+import {
+  I2D_CONVERSION_STATUS
+} from 'gooru-web/config/config';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -9,6 +11,16 @@ export default Ember.Component.extend({
    * @property {I2dService} Media service API SDK
    */
   i2dService: Ember.inject.service('api-sdk/i2d'),
+
+  /**
+   * @type {i18nService} Service to retrieve translations information
+   */
+  i18n: Ember.inject.service(),
+
+  /**
+   * @requires service:notifications
+   */
+  notifications: Ember.inject.service(),
 
   // -------------------------------------------------------------------------
   // Properties
@@ -181,7 +193,29 @@ export default Ember.Component.extend({
      */
     onConfirmScore() {
       const component = this;
-      component.sendAction('onConfirmScore');
+      let isInvalidScore = false;
+      const students = component.get('studentList');
+      students.forEach((student) => {
+        student.get('questions').forEach((question) => {
+          if (question.get('score') == null) {
+            isInvalidScore = true;
+            question.set('invalidScore', true);
+          } else {
+            question.set('invalidScore', false);
+          }
+        });
+      });
+      if (isInvalidScore) {
+        component.get('notifications').setOptions({
+          positionClass: 'toast-top-full-width',
+          toastClass: 'gooru-toast',
+          timeOut: 10000
+        });
+        const message = component.get('i18n').t('notifications.invalid-score');
+        component.get('notifications').error(`${message}`);
+      } else {
+        component.sendAction('onConfirmScore');
+      }
     },
 
     /**

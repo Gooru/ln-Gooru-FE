@@ -10,6 +10,21 @@ export default buildValidations({
       })
     ]
   },
+  url: {
+    validators: [
+      validator('presence', {
+        presence: true,
+        message: '{{description}}',
+        descriptionKey: 'common.errors.resource-missing-url'
+      }),
+      validator('format', {
+        type: 'url',
+        message: '{{description}}',
+        descriptionKey: 'common.errors.resource-invalid-url'
+      }),
+      validator('host')
+    ]
+  },
   format: {
     validators: [
       validator('presence', {

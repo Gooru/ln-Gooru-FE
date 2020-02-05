@@ -5,12 +5,14 @@ import {
   RESOURCE_COMPONENT_MAP,
   RESOURCE_TYPES,
   CONTENT_TYPES,
-  EDUCATION_CATEGORY
+  EDUCATION_CATEGORY,
+  UPLOADABLE_TYPES,
+  VIDEO_RESOURCE_TYPE
 } from 'gooru-web/config/config';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 import ModalMixin from 'gooru-web/mixins/modal';
-import { isVideoURL } from 'gooru-web/utils/utils';
+import { isVideoURL, inferUploadType } from 'gooru-web/utils/utils';
 import {
   getCategoryCodeFromSubjectId,
   getSubjectId,
@@ -30,6 +32,11 @@ export default Ember.Component.extend(
      * @requires service:notifications
      */
     notifications: Ember.inject.service(),
+
+    /**
+     * @property {MediaService} Media service API SDK
+     */
+    mediaService: Ember.inject.service('api-sdk/media'),
 
     /**
      * @requires service:api-sdk/resource
@@ -206,6 +213,70 @@ export default Ember.Component.extend(
       //Action triggered when click on back
       onClickBack() {
         window.history.back();
+      },
+
+      //Action triggered when click on edit button in resource
+      editResource: function() {
+        var resourceForEditing = this.get('resource').copy();
+        this.set('tempResource', resourceForEditing);
+        this.get('tempResource').set('owner', this.get('resource.owner'));
+        this.set('isResourceEditing', true);
+      },
+
+      //Action triggered when change the resource urlResourceFactory
+      onURLChange: function() {
+        this.detectVimeoYoutubeVideoURL(this.get('tempResource.url'));
+      },
+
+      //Action triggered when click on save button in resource
+      updateResource: function() {
+        const component = this;
+        var editedResource = component.get('tempResource');
+        if (component.get('isUrlChange')) {
+          if (this.get('editedResource.file')) {
+            this.set(
+              'emptyFileError',
+              this.get('i18n').t('common.errors.file-upload-missing', {
+                extensions: this.get('resource.extensions')
+              })
+            );
+          } else {
+            editedResource.validate().then(function({ validations }) {
+              if (validations.get('isValid')) {
+                component
+                  .handleResourceUpload(editedResource)
+                  .then(function(uploadedResource) {
+                    component.set('tempResource', uploadedResource);
+                    component.saveContent();
+                  });
+              }
+              component.set('didValidate', true);
+            });
+          }
+        } else {
+          component.set('isResourceEditing', false);
+        }
+      },
+
+      //Action triggered when click on cancel button in resource
+      cancelEditResources: function() {
+        this.set('isResourceEditing', false);
+      },
+
+      selectFile: function(file) {
+        this.set('tempResource.file', file);
+        if (file) {
+          let uploadType = inferUploadType(file.name, UPLOADABLE_TYPES);
+          this.send('selectUploadType', uploadType);
+        }
+      },
+
+      selectUploadType: function(uploadType) {
+        if (uploadType) {
+          this.set('tempResource.format', uploadType.value);
+          this.set('tempResource.extensions', uploadType.validExtensions);
+          this.set('tempResource.mimeType', uploadType.validType);
+        }
       }
     },
 
@@ -362,6 +433,37 @@ export default Ember.Component.extend(
       return standard ? standard : null;
     }),
 
+    /**
+     * @property {boolean}
+     */
+    isResourceEditing: false,
+
+    /**
+     * @type {String} emptyFileError
+     */
+    emptyFileError: null,
+
+    /**
+     * @property {boolean}
+     */
+    isResourcesAlreadyExists: false,
+
+    /**
+     * @property {boolean}
+     */
+    isUrlChange: Ember.computed('resource', function() {
+      let currentURL = this.get('tempResource.url');
+      return currentURL !== this.get('resource.url');
+    }),
+
+    isEditResources: Ember.computed('resource', function() {
+      let resourceOwner = this.get('resource.owner');
+      let ownerId = resourceOwner ? resourceOwner.get('id') : null;
+      let userId = this.get('session.userId');
+      let originalResourceId = this.get('resource.originalResourceId');
+      return !originalResourceId && userId === ownerId;
+    }),
+
     // -------------------------------------------------------------------------
     // Methods
 
@@ -416,6 +518,9 @@ export default Ember.Component.extend(
       var editedResource = component.get('tempResource');
       editedResource.validate().then(function({ validations }) {
         if (validations.get('isValid')) {
+          if (!component.get('isUrlChange')) {
+            Ember.set(editedResource, 'url', undefined);
+          }
           if (editedResource.description === '') {
             Ember.set(editedResource, 'description', null);
           }
@@ -426,10 +531,27 @@ export default Ember.Component.extend(
               editedResource,
               collection
             )
-            .then(function() {
-              component.set('resource', editedResource);
-              component.set('isEditing', false);
-            })
+            .then(
+              function() {
+                if (!component.get('isUrlChange')) {
+                  Ember.set(
+                    editedResource,
+                    'url',
+                    component.get('resource.url')
+                  );
+                }
+                component.set('resource', editedResource);
+                component.set('isEditing', false);
+                component.set('isResourceEditing', false);
+                component.set('isResourcesAlreadyExists', false);
+              },
+              function(data) {
+                if (data.resourceId) {
+                  //already exists
+                  component.set('isResourcesAlreadyExists', true);
+                }
+              }
+            )
             .catch(function() {
               var message = component
                 .get('i18n')
@@ -499,6 +621,38 @@ export default Ember.Component.extend(
         return true;
       }
       return false;
-    })
+    }),
+
+    detectVimeoYoutubeVideoURL: function(url) {
+      if (isVideoURL(url)) {
+        this.set('isVideo', true);
+        this.set('tempResource.format', VIDEO_RESOURCE_TYPE);
+      } else {
+        this.set('isVideo', false);
+      }
+    },
+
+    /**
+     * Create a resource (url/upload)
+     * @param {Resource}
+     * @return {Promise.<Resource>}
+     */
+    handleResourceUpload: function(resource) {
+      return new Ember.RSVP.Promise(
+        function(resolve) {
+          if (this.get('tempResource.file')) {
+            this.get('mediaService')
+              .uploadContentFile(resource.file)
+              .then(function(filename) {
+                resource.set('url', `https:${filename}`);
+                resolve(resource);
+              });
+          } else {
+            // Nothing to upload ... return resource as is.
+            resolve(resource);
+          }
+        }.bind(this)
+      );
+    }
   }
 );

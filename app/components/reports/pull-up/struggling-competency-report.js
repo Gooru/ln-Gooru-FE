@@ -358,9 +358,7 @@ export default Ember.Component.extend({
     }).then(({ collections }) => {
       if (!component.isDestoryed) {
         let collectionContents = component.get('collectionContents');
-        let collectionList = component.get('showLibraryCollection')
-          ? collections.get('libraryContent.collections')
-          : collections;
+        let collectionList = collections;
         component.set('isShowMoreButton', false);
         if (collectionList.length) {
           let startAt = component.get('startAt');
@@ -394,29 +392,32 @@ export default Ember.Component.extend({
         'flt.relatedGutCode': competencyCode
       }
     };
-    let libraryId = component.get('selectedLibrary.id');
-    let currentUserId = component.get('session.userId');
     let selectedService = Ember.RSVP.resolve([]);
     if (!item || item.label === 'common.suggested') {
       selectedService = component
         .get('searchService')
         .searchCollections('*', params);
     } else if (item.label === 'common.gooru-catalog') {
+      params.filters.scopeKey = 'open-all';
       selectedService = component
         .get('searchService')
         .searchCollections('*', params);
     } else if (item.label === 'common.myContent') {
+      params.filters.scopeKey = 'my-content';
+      params.filters['flt.publishStatus'] = 'published,unpublished';
       selectedService = component
-        .get('profileService')
-        .readCollections(currentUserId, params);
+        .get('searchService')
+        .searchCollections('*', params);
     } else if (item.label === 'common.tenantLibrary') {
       if (component.get('showTenantLibraries')) {
-        let page = params.page;
-        let pageSize = params.pageSize;
-        params.offset = parseInt(page) * parseInt(pageSize);
+        params.filters.scopeKey = 'open-library';
+        params.filters['flt.publishStatus'] = 'published,unpublished';
+        params.filters.scopeTargetNames = component.get(
+          'selectedLibrary.shortName'
+        );
         selectedService = component
-          .get('libraryService')
-          .fetchLibraryContent(libraryId, 'collection', params);
+          .get('searchService')
+          .searchCollections('*', params);
       } else {
         component.loadTenantLibraries();
         component.set('showTenantLibraries', true);

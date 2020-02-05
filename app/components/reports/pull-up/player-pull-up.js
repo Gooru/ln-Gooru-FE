@@ -37,7 +37,7 @@ export default Ember.Component.extend({
      **/
     function receiveMessage(event) {
       if (event.data === PLAYER_EVENT_MESSAGE.GRU_PUllUP_CLOSE) {
-        component.closePullUp();
+        component.send('closePlayer');
       } else if (event.data === PLAYER_EVENT_MESSAGE.GRU_LOADING_COMPLETED) {
         if (!component.get('isDestroyed')) {
           component.set('isLoading', false);
@@ -52,7 +52,14 @@ export default Ember.Component.extend({
   actions: {
     closePlayer: function() {
       const component = this;
-      component.closePullUp();
+      let classId = component.get('classId');
+      if (classId) {
+        component
+          .get('router')
+          .transitionTo('student.class.course-map', classId);
+      } else {
+        component.closePullUp();
+      }
     }
   },
 

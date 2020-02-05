@@ -3,6 +3,7 @@
     {{#if (and (not selectedOption) allowI2D)}}
       {{reports/pull-up/activity/add-performance-data-choice
         assessment=collection
+        errorOnConversion=errorOnConversion
         onSelectOption="onSelectOption"
       }}
     {{else}}

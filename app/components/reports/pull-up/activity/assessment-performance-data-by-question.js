@@ -29,14 +29,16 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     const component = this;
-    if (component.get('isAssessment')) {
-      component.loadAssessmentData();
-    } else {
-      component.loadExternalAssessmentData();
-    }
-    component.resetStudentScores();
-    component.loadStudentsActivityPerformanceData();
+    Ember.RSVP.hash({
+      assessmentPromise: component.get('isAssessment')
+        ? component.loadAssessmentData()
+        : component.loadExternalAssessmentData()
+    }).then(() => {
+      component.resetStudentScores();
+      component.loadStudentsActivityPerformanceData();
+    });
     if (component.get('isMobileView')) {
+      component.set('isSwitchStudent', true);
       component.set('rightElementContainer', component.$('.right-container'));
     }
   },
@@ -53,6 +55,7 @@ export default Ember.Component.extend({
     onSelectStudent(student) {
       const component = this;
       const activeStudent = component.get('activeStudent');
+      component.set('isSwitchStudent', true);
       if (
         component.get('isSessionStarted') &&
         !component.get('isOverwriteScore')
@@ -413,6 +416,8 @@ export default Ember.Component.extend({
    */
   isUpdateData: Ember.computed.alias('activityData.isUpdatePerformance'),
 
+  isSwitchStudent: false,
+
   // -------------------------------------------------------------------------
   // Functions
 
@@ -422,7 +427,8 @@ export default Ember.Component.extend({
    */
   renderMobileView() {
     const component = this;
-    if (component.get('isMobileView')) {
+    if (component.get('isMobileView') && component.get('isSwitchStudent')) {
+      component.set('isSwitchStudent', false);
       component
         .$('.active-student .student-score-details')
         .append(component.get('rightElementContainer'));
@@ -445,6 +451,7 @@ export default Ember.Component.extend({
   activateNextStudent() {
     const component = this;
     let students = component.get('students');
+    component.set('isSwitchStudent', true);
     let activeStudentIndex = students.indexOf(component.get('activeStudent'));
     if (!component.isDestroyed) {
       if (
@@ -535,6 +542,7 @@ export default Ember.Component.extend({
           );
           component.set('questions', filteredQuestions);
           component.resetQuestionScores();
+          return assessmentData;
         }
       });
   },
@@ -552,6 +560,7 @@ export default Ember.Component.extend({
         if (!component.isDestroyed) {
           component.set('assessment', assessmentData);
         }
+        return assessmentData;
       });
   },
 
