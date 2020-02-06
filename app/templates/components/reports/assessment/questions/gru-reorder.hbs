@@ -3,7 +3,7 @@
     <li>
       {{!-- {{#if showCorrect}} 22--}}
       {{#if (eq answer.showCorrect true) }}
-        <span class="answer-text" style='width:15em;'>{{answer.text}}</span>
+        <span class="answer-text" style='width:15em; padding: 0px 15px'>{{safe-html answer.text}}</span>
       {{else}}
         <span class="">{{{gru-math-text text=answer.selectedOrderText}}} </span>
       {{/if}}
