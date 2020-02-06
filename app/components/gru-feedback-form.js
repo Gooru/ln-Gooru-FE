@@ -27,6 +27,10 @@ export default Ember.Component.extend({
     component.fetchLearningActivityFeedback();
   }),
 
+  onExitContentObserver: Ember.observer('isStatusDone', function() {
+    this.sendAction('onExit');
+  }),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
@@ -57,11 +61,6 @@ export default Ember.Component.extend({
     onSkipFeedback: function() {
       const component = this;
       component.sendAction('onSkipFeedback');
-    },
-
-    onExit: function() {
-      const component = this;
-      component.sendAction('onExit');
     }
   },
 
