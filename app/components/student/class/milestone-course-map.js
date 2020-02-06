@@ -975,7 +975,11 @@ export default Ember.Component.extend({
   navigateLocation() {
     const component = this;
     let rawCustomLocation = this.get('location');
-    if (rawCustomLocation !== 'null' && !component.isDestroyed) {
+    if (
+      rawCustomLocation &&
+      rawCustomLocation !== 'null' &&
+      !component.isDestroyed
+    ) {
       let customLocation = component.parserLocation(rawCustomLocation),
         userLocation = component.formatCustomLocationToUserLocation(
           customLocation
