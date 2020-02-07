@@ -197,8 +197,8 @@ export default Ember.Component.extend({
    */
   isValidTimeSpent: Ember.computed('maxHour', 'maxMinute', function() {
     const component = this;
-    const maxHour = component.get('maxHour');
-    const maxMinute = component.get('maxMinute');
+    const maxHour = parseInt(component.get('maxHour'));
+    const maxMinute = parseInt(component.get('maxMinute'));
     return validateTimespent(maxHour, maxMinute);
   }),
 
