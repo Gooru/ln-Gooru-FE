@@ -31,6 +31,8 @@
       display: inline-block;
       word-wrap: break-word;
       overflow: auto;
+      width: 15em;
+      padding: 0px 15px;
       max-width: 10em;
       @media (min-width: $screen-sm-min) {
         max-width: 15em;

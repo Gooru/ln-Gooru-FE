@@ -132,6 +132,11 @@ export default PlayerController.extend(StudyPlayer, {
   isShowSuggestion: false,
 
   /**
+   * @property {Boolean}
+   */
+  isStatusDone: false,
+
+  /**
    * @property {Json}
    * Computed property to store suggestedContent
    */
