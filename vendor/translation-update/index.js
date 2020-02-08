@@ -11,6 +11,42 @@ var translationNameList = [
   },
   {
     sp: 'Español'
+  },
+  {
+    ar: 'عربى'
+  },
+  {
+    mr: 'मराठी'
+  },
+  {
+    kn: 'ಕನ್ನಡ'
+  },
+  {
+    hi: 'हिंदी'
+  },
+  {
+    as: 'অসমীয়া'
+  },
+  {
+    bn: 'বাংলা'
+  },
+  {
+    gu: 'ગુજરાતી'
+  },
+  {
+    ml: 'മല്യാലം'
+  },
+  {
+    or: ' ଓଡ଼ିଆ'
+  },
+  {
+    pa: 'ਪੰਜਾਬੀ'
+  },
+  {
+    ta: 'தமிழ்'
+  },
+  {
+    te: 'తెలుగు'
   }
 ];
 
@@ -32,7 +68,9 @@ var writeFile = function(url, data) {
   let promiseData = objKeys.map((keys, index) => {
     return new Promise(resolve => {
       var separator = index !== objKeys.length - 1 ? ',' : '';
-      streams.write(`'${keys}' : "${data[keys]}"${separator}\n`);
+      streams.write(
+        `'${keys}' : "${data[keys].replace(/[\""]/g, '\\"')}"${separator}\n`
+      );
       return resolve();
     });
   });
@@ -70,16 +108,25 @@ var fileReader = function() {
       if (lang !== 'en') {
         let missingKeys = {};
         let otherLang = Object.keys(translationDatas[lang]);
-        engLang.map(langKey => {
-          if (otherLang.indexOf(langKey) === -1) {
-            missingKeys[langKey] = translationDatas.en[langKey];
+        let keyPromise = engLang.map(langKey => {
+          return new Promise(resolve => {
+            if (otherLang.indexOf(langKey) === -1) {
+              missingKeys[langKey] = translationDatas.en[langKey];
+            }
+            return resolve();
+          });
+        });
+        Promise.all(keyPromise).then(() => {
+          let missingKeysList = Object.keys(missingKeys);
+          console.log(missingKeysList);
+          if (missingKeysList.length) {
+            let updatedList = { ...translationDatas[lang], ...missingKeys };
+            writeFile(
+              `${baseUrl}assets/locales/${lang}/translations.js`,
+              updatedList
+            );
           }
         });
-        let updatedList = { ...translationDatas[lang], ...missingKeys };
-        writeFile(
-          `${baseUrl}assets/locales/${lang}/translations.js`,
-          updatedList
-        );
       }
     });
   });
