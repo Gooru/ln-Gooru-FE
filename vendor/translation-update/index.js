@@ -118,7 +118,6 @@ var fileReader = function() {
         });
         Promise.all(keyPromise).then(() => {
           let missingKeysList = Object.keys(missingKeys);
-          console.log(missingKeysList);
           if (missingKeysList.length) {
             let updatedList = { ...translationDatas[lang], ...missingKeys };
             writeFile(
