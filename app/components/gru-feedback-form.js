@@ -35,18 +35,13 @@ export default Ember.Component.extend({
   // Events
   didInsertElement() {
     const component = this;
-    component.fetchActivityFeedbackCateory();
+    component.fetchLearningActivityFeedback();
   },
 
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
-    showDescription: function() {
-      const component = this;
-      component.$('.description').slideToggle();
-    },
-
     onNext: function() {
       const component = this;
       let learningFeedback = component.getFeedbackObject();
@@ -87,28 +82,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Methods
-
-  /**
-   * @function fetchActivityFeedbackCateory
-   * Method to fetch activity feedback category
-   */
-
-  fetchActivityFeedbackCateory() {
-    const component = this;
-    let role = component.get('session.role');
-    let userCategoryId =
-      FEEDBACK_USER_CATEGORY[`${role}`] || FEEDBACK_USER_CATEGORY.other;
-    component
-      .get('activityFeedbackService')
-      .getFeedbackCategory(userCategoryId)
-      .then(categoryLists => {
-        component.set(
-          'feedbackCategoryLists',
-          categoryLists.get('collections')
-        );
-        component.fetchLearningActivityFeedback();
-      });
-  },
 
   /**
    * @function fetchLearningActivityFeedback
