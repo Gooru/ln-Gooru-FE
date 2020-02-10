@@ -23,18 +23,17 @@ export default Ember.Service.extend({
     );
   },
 
-  getFeedbackCategory: function(contentType, userCategoryId) {
+  getFeedbackCategory: function(userCategoryId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('activityFeedbackAdapter')
-        .getFeedbackCategories(contentType, userCategoryId)
+        .getFeedbackCategories(userCategoryId)
         .then(function(responseData) {
-          resolve(
-            service
-              .get('activityFeedbackSerializer')
-              .getFeedbackCategories(responseData)
-          );
+          let categoryContainer = service
+            .get('activityFeedbackSerializer')
+            .getFeedbackCategories(responseData);
+          resolve(categoryContainer);
         }, reject);
     });
   },

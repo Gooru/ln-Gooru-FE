@@ -6,20 +6,22 @@ import Ember from 'ember';
  */
 export default Ember.Object.extend({
   getFeedbackCategories(payload) {
-    let feedbackCategory = payload ? payload.feedback_categories : [];
-    let categoryList = [];
-    feedbackCategory.map(category => {
-      categoryList.pushObject(
-        Ember.Object.create({
+    let feedbackCategory = payload ? payload.feedback_categories : {};
+    let contentCategory = Ember.Object.create();
+    for (const property in feedbackCategory) {
+      contentCategory[property] = [];
+      feedbackCategory[property].map(category => {
+        const categoryObject = Ember.Object.create({
           categoryId: category.id,
           categoryName: category.category_name,
           feedbackTypeId: category.feedback_type_id,
           maxScale: category.max_scale,
           rating: 0
-        })
-      );
-    });
-    return categoryList;
+        });
+        contentCategory[property].push(categoryObject);
+      });
+    }
+    return contentCategory;
   },
 
   fetchActivityFeedback(payload) {

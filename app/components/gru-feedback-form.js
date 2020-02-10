@@ -95,15 +95,17 @@ export default Ember.Component.extend({
 
   fetchActivityFeedbackCateory() {
     const component = this;
-    let contentType = component.get('contentType');
     let role = component.get('session.role');
     let userCategoryId =
       FEEDBACK_USER_CATEGORY[`${role}`] || FEEDBACK_USER_CATEGORY.other;
     component
       .get('activityFeedbackService')
-      .getFeedbackCategory(contentType, userCategoryId)
+      .getFeedbackCategory(userCategoryId)
       .then(categoryLists => {
-        component.set('feedbackCategoryLists', categoryLists);
+        component.set(
+          'feedbackCategoryLists',
+          categoryLists.get('collections')
+        );
         component.fetchLearningActivityFeedback();
       });
   },
