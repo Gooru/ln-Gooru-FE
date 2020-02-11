@@ -32,7 +32,7 @@ export default Ember.Service.extend({
         .then(function(responseData) {
           let categoryContainer = service
             .get('activityFeedbackSerializer')
-            .getFeedbackCategories(responseData);
+            .normalizeFetchFeedbackCategories(responseData);
           resolve(categoryContainer);
         }, reject);
     });
@@ -48,7 +48,7 @@ export default Ember.Service.extend({
           resolve(
             service
               .get('activityFeedbackSerializer')
-              .fetchActivityFeedback(responseData)
+              .normalizeFetchActivityFeedback(responseData)
           );
         }, reject);
     });

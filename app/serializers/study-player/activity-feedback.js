@@ -5,7 +5,7 @@ import Ember from 'ember';
  * @typedef {Object} ActivityFeedbackSerializer
  */
 export default Ember.Object.extend({
-  getFeedbackCategories(payload) {
+  normalizeFetchFeedbackCategories(payload) {
     let feedbackCategory = payload ? payload.feedback_categories : {};
     let contentCategory = Ember.Object.create();
     for (const property in feedbackCategory) {
@@ -24,7 +24,7 @@ export default Ember.Object.extend({
     return contentCategory;
   },
 
-  fetchActivityFeedback(payload) {
+  normalizeFetchActivityFeedback(payload) {
     let activityFeedback = payload ? payload.userActivityFeedbacks : [];
     let userActivityFeedbacks = [];
     if (activityFeedback.length) {

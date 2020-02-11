@@ -103,11 +103,22 @@ export default Ember.Component.extend({
    */
   description: Ember.computed('resourceInfo', function() {
     let resourceInfo = this.get('resourceInfo');
-    if (resourceInfo) {
-      return (
-        resourceInfo.description || resourceInfo.learningObjectives || null
-      );
-    }
+    return resourceInfo
+      ? resourceInfo.description || resourceInfo.learningObjectives || null
+      : null;
+  }),
+
+  /**
+   * @property {contentFormat} String
+   */
+  contentType: Ember.computed('collection', function() {
+    let component = this;
+    let format = component.get('format');
+    return format
+      ? format
+      : component.get('isCollection')
+        ? 'collection'
+        : 'assessment';
   }),
 
   // -------------------------------------------------------------------------
@@ -128,12 +139,7 @@ export default Ember.Component.extend({
       .getFeedbackCategory(userCategoryId)
       .then(categoryLists => {
         component.set('categoryLists', categoryLists);
-        let format = component.get('format');
-        let contentType = format
-          ? format
-          : component.get('isCollection')
-            ? 'collection'
-            : 'assessment';
+        let contentType = component.get('contentType');
         let contentCategory;
         if (contentType === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
           contentCategory = categoryLists.get('externalAssessments');
