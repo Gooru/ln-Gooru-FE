@@ -16,10 +16,10 @@ export default Ember.Object.extend({
    * Fetch feedback category
    * @returns {Promise.<[]>}
    */
-  getFeedbackCategories(contentType, userCategoryId) {
+  getFeedbackCategories(userCategoryId) {
     const adapter = this;
     const namespace = adapter.get('feedbackCategoryNamespace');
-    const url = `${namespace}/feedback-categories?content_type=${contentType}&user_category_id=${userCategoryId}`;
+    const url = `${namespace}/feedback-categories?user_category_id=${userCategoryId}`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
