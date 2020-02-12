@@ -1,0 +1,139 @@
+import Ember from 'ember';
+import { ROLES } from 'gooru-web/config/config';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
+
+export default Ember.Controller.extend(ConfigurationMixin, {
+  // -------------------------------------------------------------------------
+  // Dependencies
+
+  queryParams: ['sessionEnds', 'nonce'],
+
+  /**
+   * @property {Service} Session
+   */
+  session: Ember.inject.service(),
+
+  /**
+   * @property {Service} Session service
+   */
+  sessionService: Ember.inject.service('api-sdk/session'),
+
+  /**
+   * @property {Service} Notifications service
+   */
+  notifications: Ember.inject.service(),
+
+  /**
+   * @property {Service} I18N service
+   */
+  i18n: Ember.inject.service(),
+
+  // -------------------------------------------------------------------------
+
+  // -------------------------------------------------------------------------
+  // Actions
+
+  actions: {
+    toggleRole: function(role) {
+      if (role === ROLES.STUDENT) {
+        this.set('isGuestTeacher', false);
+        this.set('isGuestStudent', true);
+      } else {
+        this.set('isGuestStudent', false);
+        this.set('isGuestTeacher', true);
+      }
+    },
+
+    authenticate: function(role) {
+      const controller = this;
+      let userAccount;
+      if (role === ROLES.TEACHER) {
+        userAccount = atob(controller.get('teacherAccount'));
+      } else {
+        userAccount = atob(controller.get('studentAccount'));
+      }
+      let userInfo = userAccount.split(':');
+      let credentials = Ember.Object.create({
+        username: userInfo[0],
+        password: userInfo[1]
+      });
+      const errorMessage = controller
+        .get('i18n')
+        .t('common.errors.sign-in-credentials-not-valid').string;
+
+      // TODO needs to be revisited, this is a quick fix
+      controller
+        .get('sessionService')
+        .authorize()
+        .then(function() {
+          controller
+            .get('sessionService')
+            .signInWithUser(credentials, true)
+            .then(
+              function() {
+                controller.send('signIn');
+              },
+              function() {
+                controller.get('notifications').warning(errorMessage);
+                let anonymousSessionData = controller.get(
+                  'anonymousSessionData'
+                );
+                // Authenticate as anonymous if it fails to mantain session
+                controller
+                  .get('session')
+                  .authenticateAsAnonymousWithData(anonymousSessionData);
+              }
+            );
+        });
+    }
+  },
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * init and reset all the properties for the validations
+   */
+
+  resetProperties() {
+    var controller = this;
+    controller.set('didValidate', false);
+    controller.set('isGuestStudent', false);
+    controller.set('isGuestTeacher', false);
+  },
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @type {StudentUser} user
+   */
+  studentAccount: Ember.computed.alias('configuration.GUEST_STUDENT_ACCOUNT'),
+
+  /**
+   * @type {TeacherUser} user
+   */
+  teacherAccount: Ember.computed.alias('configuration.GUEST_TEACHER_ACCOUNT'),
+
+  /**
+   * @property {Boolean} isGuestTeacher
+   */
+  isGuestTeacher: false,
+
+  /**
+   * @property {Boolean} isGuestStudent
+   */
+  isGuestStudent: false,
+
+  /**
+   * Query param
+   * @property {Boolean} sessionEnds
+   */
+  sessionEnds: false,
+
+  /**
+   * Maintains the state of anonymous session data.
+   * @type {Session}
+   */
+  anonymousSessionData: null
+});
