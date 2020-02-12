@@ -2954,5 +2954,13 @@ window.i18ln = {
   'competency.portfolio.status.inferred-student':
     'You have inferred mastery in this competency based on evidence in related competency',
   'common.search-no-suggest-results-message':
-    'We could not find any content for the competency'
+    'We could not find any content for the competency',
+  'guest.title': 'Navigator',
+  'guest.title-description': 'Login as a Guest to experience Navigator',
+  'guest.download-link': 'demo script',
+  'guest.teacher-details': 'You can login as a teacher and understand…… etc',
+  'guest.student-details': 'You can login as a student  and understand…… etc',
+  'guest.login-teacher': 'Login as Teacher',
+  'guest.login-student': 'Login as Student',
+  'common.guest': 'Guest'
 };
