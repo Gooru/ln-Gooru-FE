@@ -6,6 +6,21 @@ export default Ember.Component.extend({
   classNames: ['cards', 'gru-timepicker-card'],
 
   // -------------------------------------------------------------------------
+  // Events
+
+  didRender: function() {
+    this._super(...arguments);
+    const component = this;
+    // only accept numbers
+    component.$('.time-value').keypress(function(event) {
+      // 0 means key without character input, 8 is backspace, 48-57 are numbers
+      let keyCode =
+        typeof event.which === 'number' ? event.which : event.keyCode;
+      return keyCode === 0 || keyCode === 8 || (keyCode >= 48 && keyCode <= 57);
+    });
+  },
+
+  // -------------------------------------------------------------------------
   // Actions
   actions: {
     //Action triggered when increment hour
