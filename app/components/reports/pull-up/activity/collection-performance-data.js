@@ -452,10 +452,11 @@ export default Ember.Component.extend({
     const component = this;
     const collection = component.get('collection');
     let studentIds = component.get('students').mapBy('id');
-    let timeSpentInmIlliSec =
-      (parseInt(component.get('maxHour')) * 60 * 60 +
-        parseInt(component.get('maxMinute')) * 60) *
-      1000;
+    let maxHour = parseInt(component.get('maxHour'));
+    let maxMinute = parseInt(component.get('maxMinute'));
+    maxHour = isNaN(maxHour) ? 0 : maxHour;
+    maxMinute = isNaN(maxMinute) ? 0 : maxMinute;
+    let timeSpentInmIlliSec = (maxHour * 60 * 60 + maxMinute * 60) * 1000;
     let studentPerformanceData = {
       student_id: studentIds,
       unit_id: collection.get('unitId'),
