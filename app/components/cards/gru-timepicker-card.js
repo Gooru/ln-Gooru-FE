@@ -8,16 +8,9 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  didRender: function() {
+  didInsertElement: function() {
     this._super(...arguments);
-    const component = this;
-    // only accept numbers
-    component.$('.time-value').keypress(function(event) {
-      // 0 means key without character input, 8 is backspace, 48-57 are numbers
-      let keyCode =
-        typeof event.which === 'number' ? event.which : event.keyCode;
-      return keyCode === 0 || keyCode === 8 || (keyCode >= 48 && keyCode <= 57);
-    });
+    this.numberValidation();
   },
 
   // -------------------------------------------------------------------------
@@ -80,6 +73,24 @@ export default Ember.Component.extend({
       component.set('minute', minute);
       component.set('hour', hour);
     }
+  },
+
+  // -------------------------------------------------------------------------
+  // Function
+
+  /**
+   * @function numberValidation
+   * Method to only accept number
+   */
+
+  numberValidation() {
+    const component = this;
+    component.$('.time-value').keypress(function(event) {
+      // 0 means key without character input, 8 is backspace, 48-57 are numbers
+      let keyCode =
+        typeof event.which === 'number' ? event.which : event.keyCode;
+      return keyCode === 0 || keyCode === 8 || (keyCode >= 48 && keyCode <= 57);
+    });
   },
 
   // -------------------------------------------------------------------------
