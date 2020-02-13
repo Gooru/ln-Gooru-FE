@@ -205,7 +205,9 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
    * Maintains the value of allow the offline activity to play or not.
    * @type {Boolean}
    */
-  allowPlay: Ember.computed.equal('isTeacher', true),
+  allowPlay: Ember.computed(function() {
+    return this.get('isTeacher') && !this.get('isReportView');
+  }),
 
   /**
    * Maintains the value of show  the remix button or not.
