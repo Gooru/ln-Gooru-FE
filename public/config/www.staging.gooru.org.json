@@ -42,5 +42,8 @@
   "languageSetting": {
     "defaultLang": "en",
     "showDropMenu": true
-  }
+  },
+  
+  "GUEST_TEACHER_ACCOUNT": "TXJGZWVueToxMjM0NQ==",
+  "GUEST_STUDENT_ACCOUNT": "dGxhd3JlbmNlOjEyMzQ1"
 }
