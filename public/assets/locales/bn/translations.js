@@ -2918,5 +2918,6 @@ window.i18ln = {
     'Locate your current knowledge and navigate to the learning destination.',
   'guest.login-teacher': 'Login as Teacher',
   'guest.login-student': 'Login as Student',
-  'common.guest': 'Guest'
+  'common.guest': 'Guest',
+  'guest.download': 'Download the'
 };
