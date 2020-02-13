@@ -89,5 +89,8 @@ export default {
     enableCollectionLiveLearning: true,
     isLessonPlanShow: true,
     isShowSecondaryClass: false
-  }
+  },
+
+  GUEST_TEACHER_ACCOUNT: 'TXJGZWVueToxMjM0NQ==',
+  GUEST_STUDENT_ACCOUNT: 'dGxhd3JlbmNlOjEyMzQ1'
 };

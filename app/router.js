@@ -18,6 +18,7 @@ Router.map(function() {
   this.route('sign-up');
   this.route('sign-up-finish');
   this.route('logout');
+  this.route('guest');
 
   this.route('content', function() {
     this.route('assessments', function() {
