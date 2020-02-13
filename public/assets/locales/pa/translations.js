@@ -2841,9 +2841,11 @@ window.i18ln = {
     'We could not find any content for the competency',
   'guest.title': 'Navigator',
   'guest.title-description': 'Login as a Guest to experience Navigator',
-  'guest.download-link': 'demo script',
-  'guest.teacher-details': 'You can login as a teacher and understand…… etc',
-  'guest.student-details': 'You can login as a student  and understand…… etc',
+  'guest.download-link': 'Navigator Exploration Guide',
+  'guest.teacher-details':
+    'Facilitate learning, engage students and monitor learning outcomes.',
+  'guest.student-details':
+    'Locate your current knowledge and navigate to the learning destination.',
   'guest.login-teacher': 'Login as Teacher',
   'guest.login-student': 'Login as Student',
   'common.guest': 'Guest'
