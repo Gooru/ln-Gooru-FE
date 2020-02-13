@@ -5,23 +5,23 @@
       <div class="title">{{t 'guest.title'}}</div>
       <div class="description">
         <span class="info">{{t 'guest.title-description'}}</span>
-        <span class="link">{{t 'common.download'}} <a href="../../demo-script.pdf" download="demo script.pdf" target="_blank">{{t 'guest.download-link'}}</a></span>
+        <span class="link">{{t 'common.download'}} <a href="../../assets/demo-script.pdf" download="demo script.pdf" target="_blank">{{t 'guest.download-link'}}</a></span>
       </div>
     </div>
     <div class="divider"></div>
     <div class="role-sign-in">
       <div class="teacher-sign-in">
-        <div class="role {{ if isGuestTeacher 'active' ''}}" {{action "toggleRole" 'teacher'}}>{{t 'common.teacher'}}</div>
+        <div class="role">{{t 'common.teacher'}}</div>
         <div class="details">{{t "guest.teacher-details"}}</div>
         <div class="log-in-button form-group text-center">
-          <button class="btn btn-success submit-sign-in {{unless isGuestTeacher 'disable-event'}}" {{action "authenticate" 'teacher'}}>{{t "guest.login-teacher"}} <span>{{gru-icon name='keyboard_arrow_right'}}</span></button>
+          <button class="btn btn-success submit-sign-in" {{action "authenticate" 'teacher'}}>{{t "guest.login-teacher"}} <span>{{gru-icon name='keyboard_arrow_right'}}</span></button>
         </div>
       </div>
       <div class="student-sign-in">
-        <div class="role {{if isGuestStudent 'active' ''}}" {{action "toggleRole" 'student'}}>{{t 'common.student'}}</div>
+        <div class="role">{{t 'common.student'}}</div>
         <div class="details">{{t "guest.student-details"}}</div>
         <div class="log-in-button form-group text-center">
-          <button class="btn btn-success submit-sign-in {{unless isGuestStudent 'disable-event'}}" {{action "authenticate"}}>{{t "guest.login-student"}} <span>{{gru-icon name='keyboard_arrow_right'}}</span></button>
+          <button class="btn btn-success submit-sign-in" {{action "authenticate"}}>{{t "guest.login-student"}} <span>{{gru-icon name='keyboard_arrow_right'}}</span></button>
         </div>
       </div>
     </div>

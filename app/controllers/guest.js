@@ -34,16 +34,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   // Actions
 
   actions: {
-    toggleRole: function(role) {
-      if (role === ROLES.STUDENT) {
-        this.set('isGuestTeacher', false);
-        this.set('isGuestStudent', true);
-      } else {
-        this.set('isGuestStudent', false);
-        this.set('isGuestTeacher', true);
-      }
-    },
-
     authenticate: function(role) {
       const controller = this;
       let userAccount;
@@ -98,8 +88,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   resetProperties() {
     var controller = this;
     controller.set('didValidate', false);
-    controller.set('isGuestStudent', false);
-    controller.set('isGuestTeacher', false);
   },
 
   // -------------------------------------------------------------------------
@@ -114,16 +102,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    * @type {TeacherUser} user
    */
   teacherAccount: Ember.computed.alias('configuration.GUEST_TEACHER_ACCOUNT'),
-
-  /**
-   * @property {Boolean} isGuestTeacher
-   */
-  isGuestTeacher: false,
-
-  /**
-   * @property {Boolean} isGuestStudent
-   */
-  isGuestStudent: false,
 
   /**
    * Query param
