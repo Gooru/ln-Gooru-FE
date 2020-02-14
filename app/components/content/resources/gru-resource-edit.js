@@ -649,8 +649,8 @@ export default Ember.Component.extend(
               .uploadContentFile(resource.file)
               .then(function(filename) {
                 resource.set('url', `https:${filename}`);
-                let url = resource.get('url').split('/');
-                resource.set('fileName', url[url.length - 1]);
+                let fileName = filename.split('/');
+                resource.set('fileName', fileName[fileName.length - 1]);
                 resolve(resource);
               });
           } else {
