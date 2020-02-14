@@ -89,15 +89,21 @@ export default Ember.Controller.extend({
           profile.set('schoolDistrictId', null);
           profile.set('schoolDistrict', otherSchoolDistrict);
         }
-        controller.get('profileService').updateMyProfile(profile).then(
-          () => {
-            let session = controller.get('session');
-            controller.get('applicationController').loadSessionProfile(profile);
-            session.set('userData.isNew', false);
-            controller.send('signUpFinish', role);
-          },
-          () => Ember.Logger.error('Error updating user')
-        );
+        controller
+          .get('profileService')
+          .updateMyProfile(profile)
+          .then(
+            () => {
+              let session = controller.get('session');
+              controller
+                .get('applicationController')
+                .loadSessionProfile(profile);
+              session.set('userData.isNew', false);
+              session.set('role', role);
+              controller.send('signUpFinish', role);
+            },
+            () => Ember.Logger.error('Error updating user')
+          );
       }
     },
 
