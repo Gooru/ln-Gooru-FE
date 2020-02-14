@@ -85,6 +85,7 @@ export default Ember.Component.extend(
        * Save updated content
        */
       updateContent: function() {
+        this.set('isUrlChange', false);
         this.saveContent();
       },
 
@@ -232,35 +233,41 @@ export default Ember.Component.extend(
       updateResource: function() {
         const component = this;
         var editedResource = component.get('tempResource');
-        if (component.get('isUrlChange')) {
-          if (this.get('editedResource.file')) {
-            this.set(
-              'emptyFileError',
-              this.get('i18n').t('common.errors.file-upload-missing', {
-                extensions: this.get('resource.extensions')
-              })
-            );
-          } else {
-            editedResource.validate().then(function({ validations }) {
-              if (validations.get('isValid')) {
-                component
-                  .handleResourceUpload(editedResource)
-                  .then(function(uploadedResource) {
-                    component.set('tempResource', uploadedResource);
-                    component.saveContent();
-                  });
-              }
-              component.set('didValidate', true);
-            });
-          }
+        if (this.get('editedResource.file')) {
+          this.set(
+            'emptyFileError',
+            this.get('i18n').t('common.errors.file-upload-missing', {
+              extensions: this.get('resource.extensions')
+            })
+          );
         } else {
-          component.set('isResourceEditing', false);
+          editedResource.validate().then(function({ validations }) {
+            if (validations.get('isValid')) {
+              component
+                .handleResourceUpload(editedResource)
+                .then(function(uploadedResource) {
+                  component.set('tempResource', uploadedResource);
+                  if (
+                    component.get('tempResource.url') !==
+                    component.get('resource.url')
+                  ) {
+                    component.set('isUrlChange', true);
+                    component.saveContent();
+                  } else {
+                    component.set('isResourcesAlreadyExists', false);
+                    component.set('isResourceEditing', false);
+                  }
+                });
+            }
+            component.set('didValidate', true);
+          });
         }
       },
 
       //Action triggered when click on cancel button in resource
       cancelEditResources: function() {
         this.set('isResourceEditing', false);
+        this.set('isResourcesAlreadyExists', false);
       },
 
       selectFile: function(file) {
@@ -451,10 +458,7 @@ export default Ember.Component.extend(
     /**
      * @property {boolean}
      */
-    isUrlChange: Ember.computed('resource', function() {
-      let currentURL = this.get('tempResource.url');
-      return currentURL !== this.get('resource.url');
-    }),
+    isUrlChange: false,
 
     isEditResources: Ember.computed('resource', function() {
       let resourceOwner = this.get('resource.owner');
@@ -645,6 +649,8 @@ export default Ember.Component.extend(
               .uploadContentFile(resource.file)
               .then(function(filename) {
                 resource.set('url', `https:${filename}`);
+                let url = resource.get('url').split('/');
+                resource.set('fileName', url[url.length - 1]);
                 resolve(resource);
               });
           } else {
