@@ -165,5 +165,6 @@ export default Ember.Controller.extend({
   resetProperties() {
     const controller = this;
     controller.set('defaultTabKey', Ember.Object.create({}));
+    controller.set('todaysActivities', Ember.A([]));
   }
 });
