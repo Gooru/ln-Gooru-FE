@@ -24,6 +24,7 @@
         <div class="label-text">{{t 'common.competencies'}}</div>
         <div class="sub-header">
           <div class="header-data gained-header">{{t 'common.gained'}}</div>
+          <div class="header-data inprogress-header">{{t 'common.inferred'}}</div>
           <div class="header-data inprogress-header">{{t 'profile.proficiency.in-progress'}}</div>
         </div>
       </div>
@@ -53,7 +54,7 @@
       <div class="body-scroll">
         <div class="body-left">
           {{#each studentsSummaryReportData as |reportData|}}
-            <div class="student-info-container {{if (or reportData.weeklyReportData.masteredCompetenciesCount reportData.weeklyReportData.inprogressCompetenciesCount) 'data-available'}} {{if reportData.active 'active-student'}}"
+            <div class="student-info-container {{if (or reportData.weeklyReportData.masteredCompetenciesCount reportData.weeklyReportData.inferredCompetenciesCount reportData.weeklyReportData.inprogressCompetenciesCount) 'data-available'}} {{if reportData.active 'active-student'}}"
               {{action "onSelectStudent" reportData}}>
               <div class="student-thumbnail" style="background-image: url({{reportData.student.thumbnailUrl}});">
                 <div class="active-student-data">
@@ -70,10 +71,17 @@
         <div class="body-right">
           {{#each studentsSummaryReportData as |reportData|}}
             <div class="student-summary-container">
-              <div class="summary-container" {{action "onSelectStudent" reportData}}>
+              <div class="summary-container {{if (or reportData.weeklyReportData.masteredCompetenciesCount reportData.weeklyReportData.inferredCompetenciesCount reportData.weeklyReportData.inprogressCompetenciesCount) 'data-available'}}" {{action "onSelectStudent" reportData}}>
                 <div class="column-data gained-competencies {{if reportData.active 'active-student'}}">
                   {{#if reportData.weeklyReportData.masteredCompetenciesCount}}
                     <span class="competency-status-5 competency-status"></span> <span class="competency-count">{{reportData.weeklyReportData.masteredCompetenciesCount}}</span>
+                  {{else}}
+                    --
+                  {{/if}}
+                </div>
+                <div class="column-data inferred-competencies {{if reportData.active 'active-student'}}">
+                  {{#if reportData.weeklyReportData.inferredCompetenciesCount}}
+                    <span class="competency-status-5 competency-status"></span> <span class="competency-count">{{reportData.weeklyReportData.inferredCompetenciesCount}}</span>
                   {{else}}
                     --
                   {{/if}}
@@ -146,10 +154,11 @@
       {{#if isShowStudentCompetencies}}
         <div class="student-competencies-container">
           {{#each studentDomainCompetencies as |domainCompetencies|}}
-            <div class="domain-name ellipsis">
-              {{domain-gut-to-fw-transform fwDomains domainCompetencies.domainCode domainCompetencies.domainName 'fwDomainName' true}}
-            </div>
-            <div class="competencies">
+            {{#if (and domainCompetencies.domainCode domainCompetencies.domainName)}}
+              <div class="domain-name ellipsis">
+                {{domain-gut-to-fw-transform fwDomains domainCompetencies.domainCode domainCompetencies.domainName 'fwDomainName' true}}
+              </div>
+              <div class="competencies">
               {{#each domainCompetencies.competencies as |competency|}}
                 <div class="student-competency">
                   <div class="code-info">
@@ -181,6 +190,7 @@
                 </div>
               {{/each}}
             </div>
+            {{/if}}
           {{/each}}
         </div>
       {{/if}}

@@ -235,6 +235,9 @@ export default Ember.Component.extend({
         let inprogressCompetencies = weeklySummaryData.get(
           'inprogressCompetencies'
         );
+        let inferredCompetencies = weeklySummaryData.get(
+          'inferredCompetencies'
+        );
         let interactionContents = weeklySummaryData.get('interactionData');
         let masteredCompetencies = weeklySummaryData.get(
           'masteredCompetencies'
@@ -251,6 +254,8 @@ export default Ember.Component.extend({
           ),
           masteredCompetenciesCount:
             masteredCompetencies.length + completedCompetencies.length,
+          inferredCompetencies: inferredCompetencies,
+          inferredCompetenciesCount: inferredCompetencies.length,
           inprogressCompetencies: inprogressCompetencies,
           inprogressCompetenciesCount: inprogressCompetencies.length,
           totalTimespent:

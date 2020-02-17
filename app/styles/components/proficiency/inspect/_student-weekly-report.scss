@@ -85,7 +85,7 @@
 
       .header-right {
         display: grid;
-        grid-template-columns: repeat(8, 1fr);
+        grid-template-columns: repeat(9, 1fr);
         padding-right: 10px;
         .label-text {
           font-size: 14px;
@@ -95,14 +95,14 @@
         .competencies-label {
           display: grid;
           grid-column-start: 1;
-          grid-column-end: 3;
+          grid-column-end: 4;
           .label-text {
             justify-self: center;
             color: #34424b;
           }
           .sub-header {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             justify-content: center;
             div {
               justify-self: center;
@@ -115,8 +115,8 @@
         }
         .timespent-label {
           display: grid;
-          grid-column-start: 3;
-          grid-column-end: 6;
+          grid-column-start: 4;
+          grid-column-end: 7;
           .label-text {
             justify-self: center;
             color: #34424b;
@@ -144,9 +144,9 @@
         }
       }
       &.student-competencies-activate {
-        grid-template-columns: 200px 250px 1fr;
+        grid-template-columns: 200px 300px 1fr;
         .header-right {
-          grid-template-columns: 250px 1fr;
+          grid-template-columns: 231px 1fr;
           .competencies-label {
             grid-column-end: 1;
             .label-text {
@@ -254,9 +254,14 @@
             border-bottom: 1px solid #f2f2f2;
             .summary-container {
               display: grid;
-              grid-template-columns: repeat(8, 1fr);
+              grid-template-columns: repeat(9, 1fr);
               cursor: pointer;
+              pointer-events: none;
+              &.data-available {
+                pointer-events: unset;
+              }
               .gained-competencies,
+              .inferred-competencies,
               .inprogress-competencies {
                 display: grid;
                 grid-template-columns: auto auto;
@@ -423,7 +428,7 @@
       }
 
       &.student-competencies-activate {
-        grid-template-columns: 450px 1fr;
+        grid-template-columns: 500px 1fr;
         overflow: hidden;
         .body-scroll {
           grid-template-columns: 200px 1fr;
@@ -431,8 +436,9 @@
             .student-summary-container {
               grid-template-columns: auto 50px;
               .summary-container {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 .gained-competencies,
+                .inferred-competencies,
                 .inprogress-competencies {
                   justify-content: left;
                 }
