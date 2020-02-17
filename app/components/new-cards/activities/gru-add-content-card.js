@@ -17,16 +17,20 @@ export default Ember.Component.extend({
     onAddActivity() {
       const component = this;
       const content = component.get('content');
-      component.sendAction('onAddActivity', content);
+      if (!component.get('isEmptyContent')) {
+        component.sendAction('onAddActivity', content);
+      }
     },
 
     onShowDaterangePicker() {
       const component = this;
-      component.set(
-        'allowTwoDateRangePicker',
-        component.get('isOfflineActivity')
-      );
-      component.set('isShowDaterangePicker', true);
+      if (!component.get('isEmptyContent')) {
+        component.set(
+          'allowTwoDateRangePicker',
+          component.get('isOfflineActivity')
+        );
+        component.set('isShowDaterangePicker', true);
+      }
     },
 
     onCloseDaterangePicker() {
@@ -74,6 +78,21 @@ export default Ember.Component.extend({
     'contentType',
     CONTENT_TYPES.OFFLINE_ACTIVITY
   ),
+
+  isEmptyContent: Ember.computed('content', function() {
+    const component = this;
+    const content = component.get('content');
+    let contentType = content.get('format');
+    return (
+      (contentType === CONTENT_TYPES.COLLECTION &&
+        content.get('resourceCount') === 0 &&
+        content.get('questionCount') === 0) ||
+      (contentType === CONTENT_TYPES.ASSESSMENT &&
+        content.get('questionCount') === 0) ||
+      (contentType === CONTENT_TYPES.OFFLINE_ACTIVITY &&
+        content.get('taskCount') === 0)
+    );
+  }),
 
   allowTwoDateRangePicker: false,
 
