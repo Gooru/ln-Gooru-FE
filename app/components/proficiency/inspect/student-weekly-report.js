@@ -366,9 +366,11 @@ export default Ember.Component.extend({
     const classId = component.get('classId');
     const startDate = component.get('startDate');
     const endDate = component.get('endDate');
+    const subjectCode = component.get('class.preference.subject');
     const dataParam = {
       fromDate: startDate,
-      toDate: endDate
+      toDate: endDate,
+      subjectCode: subjectCode
     };
     return component
       .get('reportService')
@@ -384,9 +386,11 @@ export default Ember.Component.extend({
     const classId = component.get('classId');
     const startDate = component.get('rangeStartDate');
     const endDate = component.get('rangeEndDate');
+    const subjectCode = component.get('class.preference.subject');
     const dataParam = {
       fromDate: startDate,
-      toDate: endDate
+      toDate: endDate,
+      subjectCode: subjectCode
     };
     const customParam =
       component.get('activeReportPeriod.type') === 'custom' ? dataParam : null;
