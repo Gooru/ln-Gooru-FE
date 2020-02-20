@@ -2972,5 +2972,7 @@ window.i18ln = {
     'This assessment cannot be scheduled or added to today\'s class as there are no questions in the assessment',
   'class-activity.offline-activity-disable-scheduling-message':
     'This offline activity cannot be scheduled as there are no tasks in the offline activity',
-  'common.inferred': 'Inferred'
+  'common.inferred': 'Inferred',
+  'class-report.warning-message':
+    'The report is unavailable for this class as it is associated with multiple subjects'
 };

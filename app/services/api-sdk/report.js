@@ -43,7 +43,12 @@ export default Ember.Service.extend({
           resolve(serializer.normalizeStudentsSummaryReport(reportData));
         },
         function(error) {
-          reject(error);
+          if (error.status === 406) {
+            let data = JSON.parse(error.responseText);
+            reject({ status: 406, message: data.message });
+          } else {
+            reject(error);
+          }
         }
       );
     });
@@ -65,7 +70,12 @@ export default Ember.Service.extend({
           );
         },
         function(error) {
-          reject(error);
+          if (error.status === 406) {
+            let data = JSON.parse(error.responseText);
+            reject({ status: 406, message: data.message });
+          } else {
+            reject(error);
+          }
         }
       );
     });

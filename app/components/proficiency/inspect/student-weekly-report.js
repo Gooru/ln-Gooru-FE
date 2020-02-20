@@ -111,6 +111,11 @@ export default Ember.Component.extend({
   rangeStartDate: null,
 
   /**
+   * @property {Boolean} isNotAcceptable
+   */
+  isNotAcceptable: false,
+
+  /**
    * Set course activated date
    **/
   courseStartDate: Ember.computed('course.createdDate', function() {
@@ -206,9 +211,17 @@ export default Ember.Component.extend({
       summaryReportData: isWeekly
         ? component.fetchStudentsWeeklySummaryReport()
         : component.fetchStudentsClassSummaryReport()
-    }).then(({ summaryReportData }) => {
-      component.parseStudentsWeeklySummaryReportData(summaryReportData);
-    });
+    }).then(
+      ({ summaryReportData }) => {
+        component.parseStudentsWeeklySummaryReportData(summaryReportData);
+      },
+      function(data) {
+        if (data.status === 406) {
+          component.set('isNotAcceptable', true);
+        }
+        component.set('isLoading', false);
+      }
+    );
   },
 
   /**
@@ -351,10 +364,13 @@ export default Ember.Component.extend({
    */
   resetActiveStudentData() {
     const component = this;
-    component
-      .get('studentsSummaryReportData')
-      .map(reportData => reportData.set('active', false));
+    if (component.get('studentsSummaryReportData')) {
+      component
+        .get('studentsSummaryReportData')
+        .map(reportData => reportData.set('active', false));
+    }
     component.set('isShowStudentCompetencies', false);
+    component.set('isNotAcceptable', false);
   },
 
   /**
@@ -393,7 +409,9 @@ export default Ember.Component.extend({
       subjectCode: subjectCode
     };
     const customParam =
-      component.get('activeReportPeriod.type') === 'custom' ? dataParam : null;
+      component.get('activeReportPeriod.type') === 'custom'
+        ? dataParam
+        : { subjectCode: subjectCode };
     return component
       .get('reportService')
       .fetchStudentsSummaryReport(classId, customParam);
