@@ -111,9 +111,9 @@ export default Ember.Component.extend({
   rangeStartDate: null,
 
   /**
-   * @property {Boolean} isNotAcceptable
+   * @property {Boolean} isSubjectMismatch
    */
-  isNotAcceptable: false,
+  isSubjectMismatch: false,
 
   /**
    * Set course activated date
@@ -215,9 +215,9 @@ export default Ember.Component.extend({
       ({ summaryReportData }) => {
         component.parseStudentsWeeklySummaryReportData(summaryReportData);
       },
-      function(data) {
-        if (data.status === 406) {
-          component.set('isNotAcceptable', true);
+      function(response) {
+        if (response.status === 409) {
+          component.set('isSubjectMismatch', true);
         }
         component.set('isLoading', false);
       }
@@ -370,7 +370,7 @@ export default Ember.Component.extend({
         .map(reportData => reportData.set('active', false));
     }
     component.set('isShowStudentCompetencies', false);
-    component.set('isNotAcceptable', false);
+    component.set('isSubjectMismatch', false);
   },
 
   /**
