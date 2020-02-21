@@ -233,11 +233,11 @@ export default Ember.Component.extend(
       updateResource: function() {
         const component = this;
         var editedResource = component.get('tempResource');
-        if (this.get('editedResource.file')) {
+        if (this.get('isResourceUpload') && !this.get('tempResource.file')) {
           this.set(
             'emptyFileError',
             this.get('i18n').t('common.errors.file-upload-missing', {
-              extensions: this.get('resource.extensions')
+              extensions: this.get('tempResource.extensions')
             })
           );
         } else {
@@ -318,6 +318,31 @@ export default Ember.Component.extend(
      */
     resourceComponent: Ember.computed('resource.resourceType', function() {
       return RESOURCE_COMPONENT_MAP[this.get('resource.resourceType')];
+    }),
+
+    /**
+     * @property {boolean}
+     */
+    isResourceUpload: Ember.computed('resource', function() {
+      if (
+        this.get('resource.format') === 'image' ||
+        this.get('resource.format') === 'text'
+      ) {
+        let defaultUploadType = UPLOADABLE_TYPES[0];
+        this.send('selectUploadType', defaultUploadType);
+        return true;
+      } else {
+        return false;
+      }
+    }),
+
+    // -------------------------------------------------------------------------
+    // Observers
+
+    clearEmptyFileError: Ember.observer('tempResource.file', function() {
+      if (this.get('emptyFileError')) {
+        this.set('emptyFileError', null);
+      }
     }),
 
     /**
