@@ -243,21 +243,23 @@ export default Ember.Component.extend(
         } else {
           editedResource.validate().then(function({ validations }) {
             if (validations.get('isValid')) {
-              component
-                .handleResourceUpload(editedResource)
-                .then(function(uploadedResource) {
-                  component.set('tempResource', uploadedResource);
-                  if (
-                    component.get('tempResource.url') !==
-                    component.get('resource.url')
-                  ) {
-                    component.set('isUrlChange', true);
-                    component.saveContent();
-                  } else {
-                    component.set('isResourcesAlreadyExists', false);
-                    component.set('isResourceEditing', false);
-                  }
-                });
+              return Ember.RSVP.hash({
+                resultResource: component.get('tempResource.file')
+                  ? component.handleResourceUpload(editedResource)
+                  : editedResource
+              }).then(({ resultResource }) => {
+                component.set('tempResource', resultResource);
+                if (
+                  component.get('tempResource.url') !==
+                  component.get('resource.url')
+                ) {
+                  component.set('isUrlChange', true);
+                  component.saveContent();
+                } else {
+                  component.set('isResourcesAlreadyExists', false);
+                  component.set('isResourceEditing', false);
+                }
+              });
             }
             component.set('didValidate', true);
           });
@@ -644,19 +646,16 @@ export default Ember.Component.extend(
     handleResourceUpload: function(resource) {
       return new Ember.RSVP.Promise(
         function(resolve) {
-          if (this.get('tempResource.file')) {
-            this.get('mediaService')
-              .uploadContentFile(resource.file)
-              .then(function(filename) {
-                resource.set('url', `https:${filename}`);
-                let fileName = filename.split('/');
-                resource.set('fileName', fileName[fileName.length - 1]);
-                resolve(resource);
-              });
-          } else {
-            // Nothing to upload ... return resource as is.
-            resolve(resource);
-          }
+          this.get('mediaService')
+            .uploadContentFile(resource.file)
+            .then(function(filename) {
+              resource.set('url', `https:${filename}`);
+              resource.set(
+                'fileName',
+                filename.substring(filename.lastIndexOf('/') + 1)
+              );
+              resolve(resource);
+            });
         }.bind(this)
       );
     }
