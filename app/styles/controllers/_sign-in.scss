@@ -102,6 +102,10 @@
         width: 148px;
         background-repeat: no-repeat;
         background-size: contain;
+        &-img {
+          width: inherit;
+          height: inherit;
+        }
       }
     }
 

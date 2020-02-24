@@ -31,6 +31,9 @@
           <div class="gooru-logo">
           </div>
           <div class="tenant-logo">
+            {{#if tenantLogoUrl}}
+              <img src="{{tenantLogoUrl}}" class="tenant-logo-img" alt="Tenant Logo" />
+            {{/if}}
           </div>
         </div>
       {{/if}}

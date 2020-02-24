@@ -143,6 +143,11 @@ export default Ember.Controller.extend({
   isGooruLogin: Ember.computed.alias('session.isGooruClientId'),
 
   /**
+   * Logged in tenant logo URL
+   */
+  tenantLogoUrl: Ember.computed.alias('anonymousSessionData.tenant.imageUrl'),
+
+  /**
    * Maintains the state of anonymous session data.
    * @type {Session}
    */
