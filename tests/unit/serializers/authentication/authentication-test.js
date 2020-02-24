@@ -78,7 +78,7 @@ test('normalizeResponse for normal account', function(assert) {
     tenant: {
       tenant_id: 1,
       settings: null,
-      image_url: null,
+      image_url: null
     },
     partner_id: 2
   };
