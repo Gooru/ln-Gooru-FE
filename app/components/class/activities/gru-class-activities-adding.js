@@ -238,6 +238,20 @@ export default Ember.Component.extend({
 
   isFetchedAllContents: false,
 
+  observeTodaysActivities: Ember.observer('todaysActivities.[]', function() {
+    const component = this;
+    let todaysActivities = component.get('todaysActivities');
+    let filteredContents = component.get('filteredContents');
+    if (filteredContents && filteredContents.length) {
+      filteredContents.map(content => {
+        content.set(
+          'isAdded',
+          !!todaysActivities.findBy('contentId', content.id)
+        );
+      });
+    }
+  }),
+
   assignActivityToMultipleClass(
     content,
     scheduleDate,

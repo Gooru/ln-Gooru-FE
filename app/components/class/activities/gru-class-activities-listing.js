@@ -680,6 +680,9 @@ export default Ember.Component.extend(ModalMixin, {
   removeClassActivity(classActivity) {
     const component = this;
     let addedDate = classActivity.get('added_date');
+    let todaysActivities = component.get('todaysActivities');
+    todaysActivities.removeObject(classActivity);
+    component.set('todaysActivities', todaysActivities);
     let scheduledActivity = component.get('scheduledActivitiesList');
     let activityList = scheduledActivity.findBy('added_date', addedDate);
     activityList.get('scheduledActivities').removeObject(classActivity);
