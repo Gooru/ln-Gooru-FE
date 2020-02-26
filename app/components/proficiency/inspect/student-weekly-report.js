@@ -111,6 +111,11 @@ export default Ember.Component.extend({
   rangeStartDate: null,
 
   /**
+   * @property {Boolean} isAssociatedWithDiffSubs
+   */
+  isAssociatedWithDiffSubs: false,
+
+  /**
    * Set course activated date
    **/
   courseStartDate: Ember.computed('course.createdDate', function() {
@@ -206,9 +211,17 @@ export default Ember.Component.extend({
       summaryReportData: isWeekly
         ? component.fetchStudentsWeeklySummaryReport()
         : component.fetchStudentsClassSummaryReport()
-    }).then(({ summaryReportData }) => {
-      component.parseStudentsWeeklySummaryReportData(summaryReportData);
-    });
+    }).then(
+      ({ summaryReportData }) => {
+        component.parseStudentsWeeklySummaryReportData(summaryReportData);
+      },
+      function(response) {
+        if (response.status === 409) {
+          component.set('isAssociatedWithDiffSubs', true);
+        }
+        component.set('isLoading', false);
+      }
+    );
   },
 
   /**
@@ -235,6 +248,9 @@ export default Ember.Component.extend({
         let inprogressCompetencies = weeklySummaryData.get(
           'inprogressCompetencies'
         );
+        let inferredCompetencies = weeklySummaryData.get(
+          'inferredCompetencies'
+        );
         let interactionContents = weeklySummaryData.get('interactionData');
         let masteredCompetencies = weeklySummaryData.get(
           'masteredCompetencies'
@@ -251,6 +267,8 @@ export default Ember.Component.extend({
           ),
           masteredCompetenciesCount:
             masteredCompetencies.length + completedCompetencies.length,
+          inferredCompetencies: inferredCompetencies,
+          inferredCompetenciesCount: inferredCompetencies.length,
           inprogressCompetencies: inprogressCompetencies,
           inprogressCompetenciesCount: inprogressCompetencies.length,
           totalTimespent:
@@ -346,10 +364,13 @@ export default Ember.Component.extend({
    */
   resetActiveStudentData() {
     const component = this;
-    component
-      .get('studentsSummaryReportData')
-      .map(reportData => reportData.set('active', false));
+    if (component.get('studentsSummaryReportData')) {
+      component
+        .get('studentsSummaryReportData')
+        .map(reportData => reportData.set('active', false));
+    }
     component.set('isShowStudentCompetencies', false);
+    component.set('isAssociatedWithDiffSubs', false);
   },
 
   /**
@@ -361,9 +382,11 @@ export default Ember.Component.extend({
     const classId = component.get('classId');
     const startDate = component.get('startDate');
     const endDate = component.get('endDate');
+    const subjectCode = component.get('class.preference.subject');
     const dataParam = {
       fromDate: startDate,
-      toDate: endDate
+      toDate: endDate,
+      subjectCode: subjectCode
     };
     return component
       .get('reportService')
@@ -379,12 +402,16 @@ export default Ember.Component.extend({
     const classId = component.get('classId');
     const startDate = component.get('rangeStartDate');
     const endDate = component.get('rangeEndDate');
+    const subjectCode = component.get('class.preference.subject');
     const dataParam = {
       fromDate: startDate,
-      toDate: endDate
+      toDate: endDate,
+      subjectCode: subjectCode
     };
     const customParam =
-      component.get('activeReportPeriod.type') === 'custom' ? dataParam : null;
+      component.get('activeReportPeriod.type') === 'custom'
+        ? dataParam
+        : { subjectCode: subjectCode };
     return component
       .get('reportService')
       .fetchStudentsSummaryReport(classId, customParam);
