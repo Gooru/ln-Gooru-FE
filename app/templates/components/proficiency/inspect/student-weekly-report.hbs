@@ -50,7 +50,7 @@
   {{#if isLoading}}
     {{three-bounce-spinner}}
   {{else}}
-    {{#if isSubjectMismatch}}
+    {{#if isAssociatedWithDiffSubs}}
       <div class="warning-message">
         {{gru-icon name='warning'}}
         <span>{{t 'class-report.warning-message'}}</span>
