@@ -178,7 +178,10 @@
                            true
                         }}
                       </div>
-                      <div class="status competency-status-{{competency.status}}"></div>
+                      <div class="competency-status">
+                        <div class="status competency-status-{{competency.status}}"></div>
+                        <div class="status-value">{{t (concat "common.competency-label-" competency.status)}}</div>
+                      </div>
                       <div class="short-desc ellipsis">
                         {{competency.competencyStudentDesc}}
                       </div>
