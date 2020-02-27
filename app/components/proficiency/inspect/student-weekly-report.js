@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import { getDomainCode } from 'gooru-web/utils/taxonomy';
-
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -306,9 +305,12 @@ export default Ember.Component.extend({
     const weeklyReportData = studentReportData.get('weeklyReportData');
     let masteredCompetencies = weeklyReportData.get('masteredCompetencies');
     let inprogressCompetencies = weeklyReportData.get('inprogressCompetencies');
+    let inferredCompetencies = weeklyReportData.get('inferredCompetencies');
     let studentCompetencies = masteredCompetencies.concat(
-      inprogressCompetencies
+      inprogressCompetencies,
+      inferredCompetencies
     );
+
     let domainCompetencies = component.get(
       'domainLevelSummary.domainCompetencies'
     );

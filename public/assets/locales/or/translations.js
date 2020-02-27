@@ -2947,5 +2947,9 @@ window.i18ln = {
     'This offline activity cannot be scheduled as there are no tasks in the offline activity',
   'common.inferred': 'Inferred',
   'class-report.warning-message':
-    'The report is unavailable for this class as it is associated with multiple subjects'
+    'The report is unavailable for this class as it is associated with multiple subjects',
+  'common.competency-label-1': 'In Progress',
+  'common.competency-label-3': 'Inferred',
+  'common.competency-label-4': 'Gained',
+  'common.competency-label-5': 'Gained'
 };
