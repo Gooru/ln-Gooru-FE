@@ -87,6 +87,6 @@ export default {
     isShowSecondaryClass: false
   },
 
-  GUEST_TEACHER_ACCOUNT: 'TXJGZWVueToxMjM0NQ==',
-  GUEST_STUDENT_ACCOUNT: 'dGxhd3JlbmNlOjEyMzQ1'
+  GUEST_TEACHER_ACCOUNT: 'bXJmZWVueTpHb29ydUd1ZXN0MTIz',
+  GUEST_STUDENT_ACCOUNT: 'bWNhaW5lOkdvb3J1R3Vlc3QxMjM='
 };

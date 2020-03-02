@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel {{if isGuestAccount 'guest-account' ''}}">
   <div class="panel-body">
     <div class="image">
       <p>{{t 'content.classes.join.join-a-classroom'}}</p>
@@ -9,6 +9,7 @@
           onTyping="onCodeTyping"
           didValidate=didValidate
           onFocusOut="onCodeFocusOut"
+          disabled = (if isGuestAccount true false)
           onChange="onCodeChange"
           placeholder=(t 'content.classes.join.class-code-input')}}
       </div>
