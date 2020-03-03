@@ -20,6 +20,11 @@ export default Ember.Component.extend({
    */
   notifications: Ember.inject.service(),
 
+  /**
+   * @property {Service} session service
+   */
+  session: Ember.inject.service('session'),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -104,5 +109,10 @@ export default Ember.Component.extend({
   /**
    * Indicate if it's waiting for join class callback
    */
-  isLoading: false
+  isLoading: false,
+
+  /**
+   * Checking is demo account
+   */
+  isGuestAccount: Ember.computed.alias('session.isGuest')
 });

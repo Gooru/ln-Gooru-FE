@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel {{if isGuestAccount 'guest-account' ''}}">
   <div class="panel-body">
     <div class="image">
       <p>{{t 'content.classes.create.title'}}</p>
@@ -7,6 +7,7 @@
              model=newClass
              valuePath='title'
              maxLength=25
+             disabled = (if isGuestAccount true false)
              autofocus=false
              didValidate=didValidate
              class="form-group"

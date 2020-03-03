@@ -44,6 +44,8 @@ export function initialize(application) {
      */
     role: Ember.computed.alias('userData.role'),
 
+    isGuest: Ember.computed.alias('data.authenticated.isGuest'),
+
     /**
      * @property {boolean} Indicates if the session is for an anonymous user
      */

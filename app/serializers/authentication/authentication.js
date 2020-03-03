@@ -20,7 +20,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeResponse: function(payload, isAnonymous, accessToken) {
     const basePath = payload.cdn_urls.user_cdn_url;
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
-
     return {
       token: isAnonymous
         ? Env['API-3.0']['anonymous-token-api-2.0']
@@ -37,6 +36,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
         providedAt: payload.provided_at,
         role: payload.user_category
       },
+      isGuest: payload.permissions
+        ? payload.permissions.indexOf('GUEST') !== -1
+        : false,
       cdnUrls: {
         user: basePath,
         content: payload.cdn_urls.content_cdn_url

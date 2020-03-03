@@ -62,40 +62,40 @@ window.i18ln = {
   'common.first': 'ಮೊದಲ ',
   'common.last': 'ಕೊನೆಯ',
   'common.name': 'ಹೆಸರು',
-  'common.add-data-choice-title': 'How do you want to enter the data?',
-  'common.take-photo': 'take photo',
-  'common.upload-image': 'upload image',
-  'notifications.invalid-score': 'Please correct the score',
+  'common.add-data-choice-title': 'ನೀವು ಡೇಟಾವನ್ನು ಹೇಗೆ ನಮೂದಿಸಲು ಬಯಸುತ್ತೀರಿ?',
+  'common.take-photo': 'ಭಾವಚಿತ್ರವನ್ನು ತೆಗೆಯಿರಿ',
+  'common.upload-image': 'ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ',
+  'notifications.invalid-score': 'ದಯವಿಟ್ಟು ಅಂಕವನ್ನು ಸರಿಪಡಿಸಿ',
   'tooltip.check-items-to-grade':
-    'Check the Items to Grade panel below to grade this activity',
-  'common.by-question': 'question-by-question',
-  'add-data-by-question': 'Enter scores by question',
-  'add-data-by-upload-image': 'Upload assessment score sheet',
+    'ಈ ಚಟುವಟಿಕೆಯನ್ನು ದರ್ಜೆ ಮಾಡಲು ಕೆಳಗಿನ ದರ್ಜೆ ಪಟ್ಟಿಯ ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ',
+  'common.by-question': 'ಪ್ರಶ್ನೆ-ಯಿಂದ-ಪ್ರಶ್ನೆ',
+  'add-data-by-question': 'ಪ್ರಶ್ನೆಯಿಂದ ಅಂಕಗಳನ್ನು ನಮೂದಿಸಿ',
+  'add-data-by-upload-image': 'ಮೌಲ್ಯಮಾಪನ ಅಂಕ ಪಟ್ಟಿಯನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ',
   'i2d-message-1':
-    'When you upload an image of the assessment scores, the scores are extracted by a conversion tool. This tool for capturing students scores from an image is in beta and may not provide  expected results. You can override the converted scores. By using this feature in its current state you are helping improve its conversion accuracy.',
+    'ಮೌಲ್ಯಮಾಪನ ಅಂಕಗಳ ಚಿತ್ರವನ್ನು ನೀವು ಅಪ್‌ಲೋಡ್ ಮಾಡಿದಾಗ, ಅಂಕಗಳನ್ನು ಪರಿವರ್ತನೆ ಸಾಧನದಿಂದ ಹೊರತೆಗೆಯಲಾಗುತ್ತದೆ. ಚಿತ್ರದಿಂದ ವಿದ್ಯಾರ್ಥಿಗಳ ಅಂಕಗಳನ್ನು ಸೆರೆಹಿಡಿಯುವ ಈ ಸಾಧನವು ಬೀಟಾದಲ್ಲಿದೆ ಮತ್ತು ನಿರೀಕ್ಷಿತ ಫಲಿತಾಂಶಗಳನ್ನು ನೀಡದಿರಬಹುದು. ಪರಿವರ್ತಿಸಿದ ಅಂಕಗಳನ್ನು ನೀವು ಓವರೈಡ್ ಮಾಡಬಹುದು. ಈ ವೈಶಿಷ್ಟ್ಯವನ್ನು ಅದರ ಪ್ರಸ್ತುತ ಸ್ಥಿತಿಯಲ್ಲಿ ಬಳಸುವ ಮೂಲಕ ನೀವು ಅದರ ಪರಿವರ್ತನೆ ನಿಖರತೆಯನ್ನು ಸುಧಾರಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತಿದ್ದೀರಿ.',
   'i2d-message-2':
-    'You can also use the regular manual input method above to enter the students scores.',
+    'ವಿದ್ಯಾರ್ಥಿಗಳ ಅಂಕಗಳನ್ನು ನಮೂದಿಸಲು ಮೇಲಿನ ನಿಗದಿತ ಕೈಪಿಡಿ ಇನ್ಪುಟ್ ವಿಧಾನವನ್ನೂ ಸಹ ನೀವು ಬಳಸಬಹುದು.',
   'i2d.conversion-progress':
-    'The uploaded image(s) are being processed. Please check back later',
+    'ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ಚಿತ್ರವನ್ನು(ಗಳನ್ನು) ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತಿದೆ. ದಯವಿಟ್ಟು ನಂತರ ಮತ್ತೆ ಪರಿಶೀಲಿಸಿ',
   'i2d.new-upload-msg':
-    'Please click on Confirm & Continue button to upload your images',
+    'ನಿಮ್ಮ ಚಿತ್ರಗಳನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ದಯವಿಟ್ಟು ದೃಢೀಕರಿಸಿ ಮತ್ತು ಮುಂದುವರಿಸಿ ಬಟನ್ ಕ್ಲಿಕ್ ಮಾಡಿ',
   'i2d.conversion-error':
     'There was an error when trying to convert the image. Please resubmit the image',
-  'file-picker-placeholder': 'Choose a file or drag it here',
-  'no-preview-available': 'no preview available',
-  'common.success': 'Success',
+  'file-picker-placeholder': 'ಫೈಲ್ ಅನ್ನು ಆರಿಸಿ ಅಥವಾ ಅದನ್ನು ಇಲ್ಲಿಗೆ ಎಳೆಯಿರಿ',
+  'no-preview-available': 'ಯಾವುದೇ ಮುನ್ನೋಟ ಲಭ್ಯವಿಲ್ಲ',
+  'common.success': 'ಯಶಸ್ಸು',
   'i2d-successfully-image-upload':
-    'Successfully uploaded images. The data extraction from images will take some time. Please check back later for review',
-  'common.dialog-close': 'Do you want to close ?',
-  'upload-success': 'Uploaded Successfully',
-  'mobile-camera-placeholder': 'Tap for image upload',
-  'i2d.mobile-upload-failed': 'There was a error',
+    'ಚಿತ್ರಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಲಾಗಿದೆ. ಚಿತ್ರಗಳಿಂದ ಮಾಹಿತಿ ಹೊರತೆಗೆಯಲು ಸ್ವಲ್ಪ ಸಮಯ ತೆಗೆದುಕೊಳ್ಳುತ್ತದೆ. ಪರಿಶೀಲನೆಗಾಗಿ ದಯವಿಟ್ಟು ನಂತರ ಮತ್ತೆ ಪರಿಶೀಲಿಸಿ',
+  'common.dialog-close': 'ನೀವು ಮುಚ್ಚಲು ಬಯಸುವಿರಾ?',
+  'upload-success': 'ಯಶಸ್ವಿಯಾಗಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಲಾಗಿದೆ',
+  'mobile-camera-placeholder': 'ಚಿತ್ರ ಅಪ್‌ಲೋಡ್‌ಗಾಗಿ ಟ್ಯಾಪ್ ಮಾಡಿ',
+  'i2d.mobile-upload-failed': 'ದೋಷ ಕಂಡುಬಂದಿದೆ',
   'i2d.upload-failed':
-    'There was an error while uploading this image. Re-upload?',
-  're-upload': 'Re-Upload',
+    'ಈ ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡುವಾಗ ದೋಷ ಕಂಡುಬಂದಿದೆ. ಮರು-ಅಪ್‌ಲೋಡ್ ಮಾಡುವುದೇ?',
+  're-upload': 'ಮರು-ಅಪ್‌ಲೋಡ್ ಮಾಡಿ',
   'common.user': 'ಬಳಕೆದಾರ ',
   'message-go-live-multigrade':
-    'Go Live is available only for non multi-grade classes',
+    'ಗೋ ಲೈವ್, ಬಹುದರ್ಜೆಯ ಅಲ್ಲದ ವರ್ಗಗಳಿಗೆ ಮಾತ್ರ ಲಭ್ಯವಿದೆ',
   'common.content-name': 'ವಿಷಯದ ಹೆಸರು',
   'common.lastName': 'ಕೊನೆಯ ಹೆಸರು',
   'common.firstName': 'ಮೊದಲ ಹೆಸರು',
@@ -105,7 +105,7 @@ window.i18ln = {
   'common.month': 'ತಿಂಗಳು ',
   'common.more': 'ಹೆಚ್ಚು ',
   'not-covered-in-fw-msg':
-    'Note: This competency is not covered by the {{framework}} framework',
+    'ಸೂಚನೆ : ಈ ಸಾಮರ್ಥ್ಯವನ್ನು {{framework}} ಫ್ರೇಮ್‌ವರ್ಕ್ ಒಳಗೊಂಡಿಲ್ಲ',
   'common.apply-filter': 'ಫಿಲ್ಟರ್ ಅನ್ವಯಿಸಿ',
   'library-search-placeholder': 'ಗ್ರಂಥಾಲಯದೊಳಗೆ ಯಾವುದನ್ನಾದರೂ ಹುಡುಕಿ',
   'search-help-message': 'ಅನ್ವಯಿಸಲು ಫಿಲ್ಟರ್‌ಗಳನ್ನು ಆರಿಸಿ',
@@ -138,7 +138,7 @@ window.i18ln = {
   'common.a-question': 'ಒಂದು ಪ್ರಶ್ನೆ',
   'common.a-resource': 'ಒಂದು ಸಂಪನ್ಮೂಲ',
   'common.a-rubric': 'ಒಂದು ರಬ್ರಿಕ್',
-  'common.a-offline-activity': 'a offline activity',
+  'common.a-offline-activity': 'ಒಂದು ಆಫ್‌ಲೈನ್ ಚಟುವಟಿಕೆ',
   'common.all-completed': 'ಎಲ್ಲಾ ಪೂರ್ಣಗೊಂಡಿದೆ',
   'common.a-assessment': 'ಒಂದು ಮೌಲ್ಯಮಾಪನ',
   'common.about': 'ಸುಮಾರು',
@@ -195,7 +195,7 @@ window.i18ln = {
   'common.answer': 'ನಿಮ್ಮ ಉತ್ತರ',
   'common.answer-correct': 'ನೀವು ಸರಿಯಾಗಿದ್ದೀರಿ!',
   'common.no-suggestion-message':
-    'Looks like you are doing very well! There are no suggestions at this time for you to study!',
+    'ನೀವು ಚೆನ್ನಾಗಿ ಮಾಡುತ್ತಿರುವಂತೆ ತೋರುತ್ತಿದೆ! ನೀವು ಅಧ್ಯಯನ ಮಾಡಲು ಈ ಸಮಯದಲ್ಲಿ ಯಾವುದೇ ಸಲಹೆಗಳಿಲ್ಲ!',
   'common.answer-incorrect': 'ನೀವು ತಪ್ಪಾಗಿರುವಿರಿ ...',
   'common.answer-key-was-hidden':
     'ಗಮನಿಸಿ: ನಿಮ್ಮ ಶಿಕ್ಷಕ ಉತ್ತರ ಕೀಲಿಯನ್ನು ಮರೆಮಾಡಿದ್ದಾರೆ.',
@@ -297,13 +297,14 @@ window.i18ln = {
   'common.not-answered': 'ಉತ್ತರಿಸಲಾಗಿಲ್ಲ',
   'common.rubric-not-answered': 'ರಬ್ರಿಕ್   ಉತ್ತರಿಸಲಾಗಿಲ್ಲ',
   'common.country': 'ದೇಶ',
-  'reroute.suggestion': 'reroute suggestion',
-  'reroute.show-mastery': 'Show Your Mastery',
+  'reroute.suggestion': 'ಮರುಹೊಂದಿಸುವ ಸಲಹೆ',
+  'reroute.show-mastery': 'ನಿಮ್ಮ ಪಾಂಡಿತ್ಯವನ್ನು ತೋರಿಸಿ',
   'reroute.take-assessment':
-    'Now that you have successfully understood the concept, why don\'t you take our <span>Signature Assessment</span> and demonstrate your mastery on the concept?',
-  'reroute.suggestion.title': 'Having difficulty with the concepts?',
+    'ಈಗ ನೀವು ಪರಿಕಲ್ಪನೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಅರ್ಥಮಾಡಿಕೊಂಡಿದ್ದೀರಿ, ನೀವು ಏಕೆ ನಮ್ಮ <span> ಪ್ರಮುಖ ಮೌಲ್ಯಮಾಪನ</ span>ವನ್ನು ತೆಗೆದುಕೊಂಡು ಪರಿಕಲ್ಪನೆಯ ಕುರಿತ ನಿಮ್ಮ ಪಾಂಡಿತ್ಯವನ್ನು ಪ್ರದರ್ಶಿಸಬಾರದು?',
+  'reroute.suggestion.title':
+    'ಪರಿಕಲ್ಪನೆಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದರಲ್ಲಿ ತೊಂದರೆ ಇದೆಯೇ?',
   'reroute.suggestion.desc':
-    'Why not go through a <span>{{suggestionType}}</span> to gain a better understanding of the concepts you were tested on ?',
+    'ನಿಮ್ಮನ್ನು ಪರೀಕ್ಷಿಸಿದ ಪರಿಕಲ್ಪನೆಗಳ ಬಗ್ಗೆ ಉತ್ತಮ ತಿಳುವಳಿಕೆಯನ್ನು ಪಡೆಯಲು <span> {{ಸಲಹೆಯ ಪ್ರಕಾರ}} </ span>ವನ್ನು ಏಕೆ ಪರಿಶೀಲಿಸಬಾರದು?',
   'common.course-map': 'ಕೋರ್ಸ್ ಮ್ಯಾಪ್',
   'common.course': 'ಕೋರ್ಸ್',
   'common.course-title': 'ಪಠ್ಯ ಶೀರ್ಷಿಕೆ',
@@ -336,10 +337,10 @@ window.i18ln = {
   'common.domain': 'ಡೊಮೇನ್',
   'common.domains': 'ಡೊಮೇನ್ಗಳು',
   'common.download': 'ಡೌನ್ಲೋಡ್ ಮಾಡಿ',
-  'common.template': 'Template',
+  'common.template': 'ಟೆಂಪ್ಲೇಟ್',
   'assessment-template-msg':
-    'In case your students complete assessments offline, download and print this template to enter the scores for the assessments',
-  'common.code': 'Code',
+    'ನಿಮ್ಮ ವಿದ್ಯಾರ್ಥಿಗಳು ಮೌಲ್ಯಮಾಪನಗಳನ್ನು ಆಫ್‌ಲೈನ್‌ನಲ್ಲಿ ಪೂರ್ಣಗೊಳಿಸಿದರೆ, ಮೌಲ್ಯಮಾಪನಗಳಿಗೆ ಅಂಕಗಳನ್ನು ನಮೂದಿಸಲು ಈ ಮಾದರಿಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ಮುದ್ರಿಸಿ.',
+  'common.code': 'ಸಂಕೇತ',
   'common.download-print': 'ಡೌನ್ಲೋಡ್ / ಮುದ್ರಣ',
   'common.drag-drop-suggestions': 'ಅಥವಾ ಸಲಹೆಗಳನ್ನು ಎಳೆಯಿರಿ ಮತ್ತು ಬಿಡಿ ...',
   'common.download-report': 'ಡೌನ್ಲೋಡ್ ವರದಿ',
@@ -573,12 +574,12 @@ window.i18ln = {
   'common.logout.logout-btn-msg2': 'ಲಾಗಿನ್ ಮಾಡಲು ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ.',
   'common.mastery': 'ಪಾಂಡಿತ್ಯ',
   'common.menu': 'ಮೆನು',
-  'rubric-details': 'Rubric Details',
+  'rubric-details': 'ರುಬ್ರಿಕ್ ವಿವರಗಳು',
   'common.more-details': 'ಹೆಚ್ಚಿನ ವಿವರಗಳಿಗಾಗಿ',
   'common.move': 'ಸರಿಸಲು',
   'common.myContent': 'ನನ್ನ ವಿಷಯ',
   'common.myProfile': 'ನನ್ನ ಸ್ಥಳ',
-  'common.tenantLibrary': 'Tenant Library',
+  'common.tenantLibrary': 'ಬಾಡಿಗೆದಾರರ ಗ್ರಂಥಾಲಯ',
   'common.library': 'ಗ್ರಂಥಾಲಯ',
   'common.myPerformance': 'ನನ್ನ ಅಭಿನಯ',
   'common.edit-narration': 'ಸಂಪಾದನೆ ನಿರೂಪಣೆ',
@@ -781,8 +782,8 @@ window.i18ln = {
   'common.show-more-results': 'ಹೆಚ್ಚಿನ ಫಲಿತಾಂಶಗಳನ್ನು ತೋರಿಸಿ',
   'common.show-results': 'ಫಲಿತಾಂಶಗಳನ್ನು ತೋರಿಸು',
   'common.signUp': 'ಸೈನ್ ಅಪ್ ಮಾಡಿ',
-  'common.signature-assessment': 'Signature Assessment',
-  'common.signature-collection': 'Signature Collection',
+  'common.signature-assessment': 'ಹಸ್ತಾಕ್ಷರ ಮೌಲ್ಯಮಾಪನ',
+  'common.signature-collection': 'ಹಸ್ತಾಕ್ಷರ ಸಂಗ್ರಹ',
   'common.sortAlphabetical': 'ವರ್ಣಮಾಲೆಯ ಪ್ರಕಾರ',
   'common.sortAverage': 'ಸರಾಸರಿ ಪ್ರಕಾರ',
   'common.sort-most-recently': 'ಇತ್ತೀಚೆಗೆ ನವೀಕರಿಸಿದ ಪ್ರಕಾರ',
@@ -910,7 +911,7 @@ window.i18ln = {
   'class.info.add-students': 'ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ಸೇರಿಸಿ',
   'class.info.class-code': 'ತರಗತಿಯ ಕೋಡ್',
   'class.info.delete': 'ತರಗತಿಯನ್ನು ಅಳಿಸಿ',
-  'class.setting.mastery': 'Enable competency mastery for CA',
+  'class.setting.mastery': 'ಸಿಎ ಗಾಗಿ ಸಾಮರ್ಥ್ಯ ಪಾಂಡಿತ್ಯವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ',
   'class.edit.assigned-course': 'ನಿಯೋಜಿಸಲಾದ ಕೋರ್ಸ್',
   'class.edit.basic-info': 'ಮೂಲ ಮಾಹಿತಿ',
   'class.edit.class-name': 'ತರಗತಿಯ ಹೆಸರು',
@@ -1007,7 +1008,7 @@ window.i18ln = {
     'ತರಗತಿ ಕಂಡುಬಂದಿಲ್ಲ. ನೀವು ಸರಿಯಾದ ತರಗತಿಯ ಕೋಡ್ ಅನ್ನು ಪ್ರವೇಶಿಸಿದ್ದೀರಿ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ',
   'content.classes.join.invalid-code': 'ಅಮಾನ್ಯವಾದ ತರಗತಿಯ ಕೋಡ್.',
   'content.classes.join.join-not-allowed':
-    'The class you are trying to join is no longer active. Please contact your teacher for the correct class code.',
+    'ನೀವು ಸೇರಲು ಪ್ರಯತ್ನಿಸುತ್ತಿರುವ ತರಗತಿಯು ಇನ್ನು ಮುಂದೆ ಸಕ್ರಿಯವಾಗಿರುವುದಿಲ್ಲ. ಸರಿಯಾದ ತರಗತಿ ಕೋಡ್‌ಗಾಗಿ ದಯವಿಟ್ಟು ನಿಮ್ಮ ಶಿಕ್ಷಕರನ್ನು ಸಂಪರ್ಕಿಸಿ.',
   'content.classes.join.already-member':
     'ನೀವು ಈಗಾಗಲೇ ಈ ತರಗತಿಯ ಒಂದು ಸದಸ್ಯರಾಗಿದ್ದೀರಿ.',
   'content.classes.join.join-class': 'ತರಗತಿಯ ಸೇರಲು',
@@ -1298,7 +1299,7 @@ window.i18ln = {
   'teacher-landing.class.manage': 'ನಿರ್ವಹಿಸಿ',
   'teacher-landing.class.reports': 'ವರದಿಗಳು',
   'teacher-landing.class.daily-activites': 'ದೈನಂದಿನ ಚಟುವಟಿಕೆಗಳು',
-  'teacher-landing.class.courses': 'Course',
+  'teacher-landing.class.courses': 'ಕೋರ್ಸ್',
   'teacher-landing.class.back-to': 'ಮತ್ತೆ ತರಗತಿ ಕೊಠಡಿಗಳಿಗೆ',
   'teacher-landing.class.back-to-archived':
     'ಆರ್ಕೈವ್ ಮಾಡಲಾದ ಪಾಠದ ಕೊಠಡಿಗಳಿಗೆ ಮರಳಿ',
@@ -1339,7 +1340,7 @@ window.i18ln = {
   'teacher-landing.class.class-management-tab.student-name':
     'ವಿದ್ಯಾರ್ಥಿಯ ಹೆಸರು',
   'teacher-landing.class.class-management-tab.student-id': 'ವಿದ್ಯಾರ್ಥಿಯ ಐಡಿ',
-  'teacher-landing.class.class-management-tab.reference-id': 'Reference ID',
+  'teacher-landing.class.class-management-tab.reference-id': 'ಉಲ್ಲೇಖ ಐಡಿ',
   'teacher-landing.class.class-management-tab.teachers': 'ಶಿಕ್ಷಕರು',
   'teacher-landing.class.class-management-tab.view-report': 'ವೀಕ್ಷಣೆ ವರದಿ',
   'teacher-landing.class.class-management-tab.course-null':
@@ -1373,7 +1374,7 @@ window.i18ln = {
   'teacher-landing.class.atc-view.class-activities-pending':
     'ವರ್ಗ ಚಟುವಟಿಕೆಗಳು ಬಾಕಿ ಉಳಿದಿವೆ',
   'teacher-landing.class.atc-view.show-all': 'ಎಲ್ಲ ತೋರಿಸು',
-  'teacher-landing.class.atc-view.collapse': 'Collapse',
+  'teacher-landing.class.atc-view.collapse': 'ನಾಶಗೊಳಿಸಿ',
   'teacher-landing.class.atc-view.total-competencies-gained':
     'ಒಟ್ಟು ಸಾಮರ್ಥ್ಯಗಳನ್ನು ಗಳಿಸಿದೆ',
   'teacher-landing.class.atc-view.progress-label': 'ಪ್ರಗತಿ (# ಸಾಮರ್ಥ್ಯಗಳು)',
@@ -1442,8 +1443,8 @@ window.i18ln = {
   'teacher-landing.class.class-settings.class-settings-sec.class-settings-sec-desc':
     'ಟ್ರೋಫಿ ಗಳಿಸಲು ಕನಿಷ್ಠ ಸಾಧನೆ',
   'teacher-landing.class.class-settings.class-settings-sec.class-code':
-    'Class Code',
-  'teacher-landing.class.class-settings.class-settings-sec.subject': 'Subject',
+    'ತರಗತಿಯ ಕೋಡ್',
+  'teacher-landing.class.class-settings.class-settings-sec.subject': 'ವಿಷಯ',
   'teacher-landing.class.class-settings.class-settings-sec.framework':
     'ಚೌಕಟ್ಟು',
   'teacher-landing.class.class-settings.class-settings-sec.grade-level':
@@ -1523,11 +1524,11 @@ window.i18ln = {
   'gru-add-to.add-collection-to-lesson': 'ನನ್ನ ಸಂಗ್ರಹಣೆಯಿಂದ ಸೇರಿಸಿ',
   'gru-add-to.add-collection-to-lesson-lead':
     'ಈ ಪಾಠಕ್ಕೆ ಸೇರಿಸಲು ಸಂಗ್ರಹವನ್ನು ಆಯ್ಕೆಮಾಡಿ.',
-  'gru-add-to.add-OA-to-lesson': 'Add from my activities',
+  'gru-add-to.add-OA-to-lesson': 'ನನ್ನ ಚಟುವಟಿಕೆಗಳಿಂದ ಸೇರಿಸಿ',
   'gru-add-to.OA-info':
-    'The activities listed here <b>do not</b> belong to another lesson or course',
+    'ಇಲ್ಲಿ ಪಟ್ಟಿ ಮಾಡಲಾದ ಚಟುವಟಿಕೆಗಳು ಮತ್ತೊಂದು ಪಾಠ ಅಥವಾ ಕೋರ್ಸ್‌ಗೆ <b>ಸೇರಿಲ್ಲ</b>',
   'gru-add-to.add-oa-to-lesson-lead':
-    'Select a activity to add to this lesson.',
+    'ಈ ಪಾಠಕ್ಕೆ ಸೇರಿಸಲು ಚಟುವಟಿಕೆಯೊಂದನ್ನು ಆಯ್ಕೆಮಾಡಿ.',
   'gru-add-to.add-to-collection': 'ಸಂಗ್ರಹಕ್ಕೆ ಸೇರಿಸಿ',
   'gru-add-to.add-to-collection-lead':
     'ನೀವು {{contentTitle}} ಅನ್ನು ಸೇರಿಸಲು ಬಯಸುವ ಸಂಗ್ರಹವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ',
@@ -1788,7 +1789,7 @@ window.i18ln = {
   'grade-dropdown.middle-school': 'ಮಧ್ಯಮ ಶಾಲೆ',
   'grade-dropdown.high-school': 'ಪ್ರೌಢಶಾಲೆ',
   'grade-dropdown.higher-ed': 'ಉನ್ನತ ಆವೃತ್ತಿ',
-  'grade-dropdown.k': 'K',
+  'grade-dropdown.k': 'ಕೆ',
   'grade-dropdown.first': '1',
   'grade-dropdown.second': '2',
   'grade-dropdown.third': '3',
@@ -1801,7 +1802,7 @@ window.i18ln = {
   'grade-dropdown.tenth': '10',
   'grade-dropdown.eleventh': '11',
   'grade-dropdown.twelfth': '12',
-  'grade-selector.placeholder': 'Hi-line',
+  'grade-selector.placeholder': 'ಹೈ-ಲೈನ್',
   'standard-dropdown.placeholder': 'ಪ್ರಮಾಣಿತ ಮೂಲಕ ಬ್ರೌಸ್ ಮಾಡಿ',
   'subject-dropdown.placeholder': 'ವಿಷಯ (ಗಳು) ',
   'subject-dropdown.prompt': 'ವಿಷಯ ಆಯ್ಕೆಮಾಡಿ',
@@ -1835,7 +1836,7 @@ window.i18ln = {
   'resource.image': 'ಚಿತ್ರ',
   'resource.text': 'ಪಠ್ಯ',
   'resource.audio': 'ಆಡಿಯೋ',
-  'resource.oer': 'OER',
+  'resource.oer': 'ಒಇಆರ್',
   'search-result.resource': 'ಸಂಪನ್ಮೂಲ',
   'search-result.resources': 'ಸಂಪನ್ಮೂಲಗಳು',
   'search-result.and': 'ಮತ್ತು',
@@ -1975,9 +1976,9 @@ window.i18ln = {
   'profile.gru-navigation.preference.preference': 'ಆದ್ಯತೆ',
   'profile.edit.select-district': 'ಜಿಲ್ಲೆಯನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ...',
   'counts-based-on-gut':
-    'Note: The competency and mastery counts are based on the system framework and not according to the chosen framework',
-  'show-gut-competencies': 'Show GUT competencies',
-  'competencies-not-in-framework': 'Competencies not covered in framework',
+    'ಗಮನಿಸಿ : ಸಾಮರ್ಥ್ಯ ಮತ್ತು ಪಾಂಡಿತ್ಯದ ಎಣಿಕೆಗಳು ವ್ಯವಸ್ಥೆಯ ಚೌಕಟ್ಟನ್ನು ಆಧರಿಸಿವೆ ಮತ್ತು ಆಯ್ಕೆಮಾಡಿದ ಚೌಕಟ್ಟಿಗೆ ಅನುಸಾರವಾಗಿ ಅಲ್ಲ',
+  'show-gut-competencies': 'ಜಿಯುಟಿ ಸಾಮರ್ಥ್ಯಗಳನ್ನು ತೋರಿಸಿ',
+  'competencies-not-in-framework': 'ಸಾಮರ್ಥ್ಯಗಳು ಚೌಕಟ್ಟಿನಲ್ಲಿ ಒಳಗೊಂಡಿಲ್ಲ',
   'profile.proficiency.is-empty':
     'ಇನ್ನೂ ಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ. ಒಮ್ಮೆ ನೀವು ಅಧ್ಯಯನ ಪ್ರಾರಂಭಿಸಿದಾಗ, ನಿಮ್ಮ ಡೇಟಾ ಲಭ್ಯವಾಗುತ್ತದೆ.',
   'profile.proficiency.expand-chart': 'ಚಾರ್ಟ್ ವಿಸ್ತರಿಸಿ',
@@ -1994,7 +1995,7 @@ window.i18ln = {
   'profile.proficiency.show-expanded-chart': 'ವಿವರವಾದ ಚಾರ್ಟ್ ತೋರಿಸಿ',
   'profile.preference.language-preference': 'ಭಾಷೆಯ ಆದ್ಯತೆ',
   'profile.preference.choose-language': 'ಭಾಷೆಯನ್ನು ಆರಿಸಿ',
-  'profile.preference.choose-sec-language': 'Choose',
+  'profile.preference.choose-sec-language': 'ಆಯ್ಕೆಮಾಡಿ',
   'profile.preference.choose-preferred-language':
     'ಪ್ರಾಥಮಿಕ ಪ್ರೊಫೈಲ್ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ',
   'profile.preference.choose-preferred-other-languages':
@@ -2469,7 +2470,7 @@ window.i18ln = {
   'gru-rubric-edit.upload-rubric': 'ರಬ್ರಿಕ್ ಅನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ',
   'gru-rubric-edit.copy.success-message':
     'ನೀವು ಉಭಯಚರವನ್ನು {{title}} ನಕಲಿಸಿದ್ದೀರಿ. ಆ ರಬ್ರಿಕ್ ಅನ್ನು ನೀವು ಸಂಪಾದಿಸಲು ಬಯಸುವಿರಾ?',
-  'gru-rubric-creation.url': 'URL',
+  'gru-rubric-creation.url': 'ಯುಆರ್‌ಎಲ್',
   'gru-rubric-creation.upload-file': 'ಫೈಲ್ ಅಪ್ಲೋಡ್ ಮಾಡಿ',
   'gru-rubric-creation.add-category': 'ಹೊಸ ವರ್ಗವನ್ನು ಸೇರಿಸಿ',
   'gru-rubric-creation.gru-preview-url.preview':
@@ -2541,7 +2542,7 @@ window.i18ln = {
   'gru-study-header.question.zero': 'ಪ್ರಶ್ನೆ',
   'gru-study-header.question.one': 'ಪ್ರಶ್ನೆ',
   'gru-study-header.question.other': 'ಪ್ರಶ್ನೆಗಳು',
-  'common.suggest-to-student': 'Suggest to student',
+  'common.suggest-to-student': 'ವಿದ್ಯಾರ್ಥಿಗೆ ಸೂಚಿಸಿ',
   'gru-study-header.suggestions-legend':
     'ಇನ್ನಷ್ಟು ತಿಳಿದುಕೊಳ್ಳಲು, ಈ ಸಂಪನ್ಮೂಲಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.',
   'gru-suggest-test.pre-test-header': 'ಪೂರ್ವ ಪರೀಕ್ಷೆ (Optional)',
@@ -2557,7 +2558,7 @@ window.i18ln = {
   'gru-suggest-test.signature_assessment-lead':
     'ಈ ಕೋರ್ಸ್ನಲ್ಲಿನ ನಿಮ್ಮ ಕಾರ್ಯಕ್ಷಮತೆಯನ್ನು ಆಧರಿಸಿ, ಕೆಳಗಿನ ಮೌಲ್ಯಮಾಪನವು ನಿಮ್ಮ ತಿಳುವಳಿಕೆಯನ್ನು ಹೆಚ್ಚಿಸಬಹುದು.',
   'gru-suggest-test.pre-tessignaturet-lead':
-    'A pre-test is suggested to measure your current understanding of the concepts in this lesson. The pre-test can help prepare you for the content in the lesson. The pre-test will not affect your course performance score.',
+    'ಈ ಪಾಠದ ಪರಿಕಲ್ಪನೆಗಳ ಬಗ್ಗೆ ನಿಮ್ಮ ಪ್ರಸ್ತುತ ತಿಳುವಳಿಕೆಯನ್ನು ಅಳೆಯಲು ಪೂರ್ವ-ಪರೀಕ್ಷೆಯನ್ನು ಸೂಚಿಸಲಾಗಿದೆ. ಪೂರ್ವ-ಪರೀಕ್ಷೆಯು ಪಾಠದಲ್ಲಿನ ವಿಷಯಕ್ಕೆ ನಿಮ್ಮನ್ನು ಸಿದ್ಧಗೊಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಪೂರ್ವ ಪರೀಕ್ಷೆಯು ನಿಮ್ಮ ಕೋರ್ಸ್ ಕಾರ್ಯಕ್ಷಮತೆಯ ಅಂಕದ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರುವುದಿಲ್ಲ.',
   'gru-suggest-test.post-test-lead':
     'ಕೆಳಗಿನ ಪೋಸ್ಟ್-ಪರೀಕ್ಷೆಯು ಪ್ರಸ್ತುತಪಡಿಸಿದ ಮಾಹಿತಿಯನ್ನು ನಿಮ್ಮ ತಿಳುವಳಿಕೆಯನ್ನು ಅಳೆಯಲು ಸೂಚಿಸಲಾಗಿದೆ. ಪೋಸ್ಟ್-ಟೆಸ್ಟ್ ನಿಮ್ಮ ಕೋರ್ಸ್ ಕಾರ್ಯಕ್ಷಮತೆ ಸ್ಕೋರ್ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರುವುದಿಲ್ಲ.',
   'gru-suggest-test.backfill-lead':
@@ -2591,7 +2592,7 @@ window.i18ln = {
     'ಈ ಬಾಹ್ಯ ಮೌಲ್ಯಮಾಪನವನ್ನು ಪ್ರವೇಶಿಸಬಹುದು ',
   'report.external-collection-report.note':
     'ಇದು ಸಂಗ್ರಹಕ್ಕಾಗಿ ವಿದ್ಯಾರ್ಥಿ ವರದಿ ಮಾಡಿದ ಸ್ಕೋರ್‌ಗಳೊಂದಿಗೆ ಬಾಹ್ಯ ಸಂಗ್ರಹವಾಗಿದೆ. ವೈಯಕ್ತಿಕ ಪ್ರಶ್ನೆ ಮಟ್ಟದ ಡೇಟಾ ಲಭ್ಯವಿಲ್ಲ.',
-  'report.external-collection-report.wish': 'Congratulations! You scored',
+  'report.external-collection-report.wish': 'ಅಭಿನಂದನೆಗಳು! ನೀವು ಅಂಕ ಗಳಿಸಿದ್ದೀರಿ',
   'report.external-collection-report.reference':
     'ಈ ಬಾಹ್ಯ ಸಂಗ್ರಹವನ್ನು ಪ್ರವೇಶಿಸಬಹುದು',
   'report.competency-report.title': 'ಸ್ಪರ್ಧಾತ್ಮಕ ವರದಿ',
@@ -2730,9 +2731,9 @@ window.i18ln = {
   'common.subtask.oa.lab_report': 'ಲ್ಯಾಬ್ ವರದಿ',
   'common.subtask.oa.explanation_argument': 'ವಿವರಣೆ ವಾದ',
   'common.subtask.oa.debate': 'ಚರ್ಚೆ',
-  'common.subtask.oa.others': 'Others',
+  'common.subtask.oa.others': 'ಇತರರು',
   project: 'ಯೋಜನೆ',
-  'oa.others': 'Others',
+  'oa.others': 'ಇತರರು',
   'oa.project.poster': 'ಪೋಸ್ಟರ್',
   'oa.project.presentation': 'ಪ್ರಸ್ತುತಿ',
   'oa.project.video': 'ವೀಡಿಯೊ',
@@ -2791,13 +2792,13 @@ window.i18ln = {
   'oa.rubrics.student-associate-label': 'ವಿದ್ಯಾರ್ಥಿ ರಬ್ರಿಕ್ ಅನ್ನು ಸಂಯೋಜಿಸಿ',
   'oa.task.submissions.head': 'ಅಗತ್ಯವಿರುವ ಸಲ್ಲಿಕೆಗಳು',
   'common.uploads': 'ಅಪ್‌ಲೋಡ್‌ಗಳು',
-  'common.urls': 'URLs',
+  'common.urls': 'ಯುಆರ್‌ಎಲ್‌ಗಳು',
   'oa.info.duration-hrs': 'ಪೂರ್ಣಗೊಳ್ಳುವ ನಿರೀಕ್ಷಿತ ಸಮಯ',
   'oa.info.hrs': ' ಗಂಟೆಗಳು',
-  'class.add-teachers': 'Enter the email of other teachers',
-  'common.collaborators': 'Collaborators',
+  'class.add-teachers': 'ಇತರ ಶಿಕ್ಷಕರ ಇಮೇಲ್ ನಮೂದಿಸಿ',
+  'common.collaborators': 'ಸಹಯೋಗಿಗಳು',
   'common.no-collaborators':
-    'There are no collaborators for this course. Please click the + button on top-right to add collaborators.',
+    'ಈ ಕೋರ್ಸ್‌ಗೆ ಯಾವುದೇ ಸಹಯೋಗಿಗಳಿಲ್ಲ. ಸಹಯೋಗಿಗಳನ್ನು ಸೇರಿಸಲು ದಯವಿಟ್ಟು ಮೇಲಿನ ಬಲಭಾಗದಲ್ಲಿರುವ + ಬಟನ್ ಕ್ಲಿಕ್ ಮಾಡಿ.',
   'class.add-co-teachers': 'ಸಹ ಶಿಕ್ಷಕರನ್ನು ಸೇರಿಸಿ',
   'common.gained': 'ಗಳಿಸಿದೆ',
   'badges-earned': 'ಬ್ಯಾಡ್ಜ್ ಗಳಿಕೆ',
@@ -2811,120 +2812,134 @@ window.i18ln = {
   'report.class-weekly-report': 'ವರ್ಗ ಸಾಪ್ತಾಹಿಕ ವರದಿ',
   'no-teacher-found': 'ಆ ಇಮೇಲ್ ಐಡಿ ಹೊಂದಿರುವ ಯಾವುದೇ ಶಿಕ್ಷಕರು ಕಂಡುಬಂದಿಲ್ಲ!',
   'oa-player.complete-confirm':
-    'Once you mark it as completed, it\'s no longer available for changes in submission!<br>Do you want to continue?',
-  'oa-player.mark-complete': 'Mark Complete',
-  'no.content.assoc.fw': 'Currently no content associated with this framework.',
+    'ಒಮ್ಮೆ ನೀವು ಅದನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗಿದೆಯೆಂದು ಗುರುತಿಸಿದರೆ, ಸಲ್ಲಿಕೆಯಲ್ಲಿನ ಬದಲಾವಣೆಗಳಿಗೆ ಅದು ಲಭ್ಯವಿರುವುದಿಲ್ಲ! <br>ನೀವು ಮುಂದುವರಿಸಲು ಬಯಸುವಿರಾ?',
+  'oa-player.mark-complete': 'ಪೂರ್ಣಗೊಳಿಸಲಾಗಿದೆಯೆಂದು ಗುರುತಿಸಿ',
+  'no.content.assoc.fw':
+    'ಪ್ರಸ್ತುತ ಈ ಫ್ರೇಮ್‌ವರ್ಕ್‌ನೊಂದಿಗೆ ಯಾವುದೇ ವಿಷಯವು ಸಂಯೋಜಿತವಾಗಿಲ್ಲ.',
   'report.offline-activity-report.note':
-    'This is an offline activity and the students are given an overall score for the activity or are graded based on a rubric. Individual task level data is not available.',
-  'teacher-landing.class.student-locator': 'Student Locator',
-  'teacher-landing.class.learning-journey': 'Learning Journey',
-  'search-by': 'Search By',
-  'common.content-owner': 'Content Owner',
+    'ಇದು ಆಫ್‌ಲೈನ್ ಚಟುವಟಿಕೆಯಾಗಿದೆ ಮತ್ತು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಚಟುವಟಿಕೆಗೆ ಒಟ್ಟಾರೆ ಸ್ಕೋರ್ ನೀಡಲಾಗುತ್ತದೆ ಅಥವಾ ರುಬ್ರಿಕ್ ಆಧರಿಸಿ ಶ್ರೇಣೀಕರಿಸಲಾಗುತ್ತದೆ. ವೈಯಕ್ತಿಕ ಕಾರ್ಯ ಮಟ್ಟದ ಮಾಹಿತಿ ಲಭ್ಯವಿಲ್ಲ.',
+  'teacher-landing.class.student-locator': 'ವಿದ್ಯಾರ್ಥಿ ಪತ್ತೆಕಾರಕ',
+  'teacher-landing.class.learning-journey': 'ಕಲಿಕೆ ಪ್ರಯಾಣ',
+  'search-by': 'ಇದರಿಂದ ಹುಡುಕಿ',
+  'common.content-owner': 'ವಿಷಯ ಮಾಲೀಕರು',
   'oa.self-grading.comment-label':
-    'Please share your thoughts on how you performed in this activity',
-  'common.your-thoughts': 'Your Thoughts',
-  'common.lesson-plan': 'Lesson Plan',
-  'lesson-plan.sessions': 'sessions',
-  'common.session': 'Session',
-  'prior-knowledge': 'Prior Knowledge',
-  'guiding-question': 'Guiding Questions',
-  'anticipated-struggle': 'Aniticipated Struggles',
-  'teacher-resource': 'Teacher Resources',
+    'ಈ ಚಟುವಟಿಕೆಯಲ್ಲಿ ನೀವು ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸಿದ್ದೀರಿ ಎಂಬುದರ ಕುರಿತು ದಯವಿಟ್ಟು ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಹಂಚಿಕೊಳ್ಳಿ',
+  'common.your-thoughts': 'ನಿಮ್ಮ ಆಲೋಚನೆಗಳು',
+  'common.lesson-plan': 'ಪಾಠದ ಯೋಜನೆ',
+  'lesson-plan.sessions': 'ಸೆಶನ್‌ಗಳು',
+  'common.session': 'ಸೆಶನ್',
+  'prior-knowledge': 'ಪೂರ್ವ ಜ್ಞಾನ',
+  'guiding-question': 'ಮಾರ್ಗದರ್ಶಿ ಪ್ರಶ್ನೆಗಳು',
+  'anticipated-struggle': 'ಅನಿಶ್ಚಿತ ತೊಂದರೆಗಳು',
+  'teacher-resource': 'ಶಿಕ್ಷಕರ ಸಂಪನ್ಮೂಲಗಳು',
   'content.anticipated-struggles':
-    'Students most often end up with the following misconceptions (alt-concepts) about this lesson.',
+    'ವಿದ್ಯಾರ್ಥಿಗಳು ಹೆಚ್ಚಾಗಿ ಈ ಪಾಠದ ಬಗ್ಗೆ ಈ ಕೆಳಗಿನ ತಪ್ಪು ಕಲ್ಪನೆಗಳನ್ನು (ಆಲ್ಟ್-ಕಾನ್ಸೆಪ್ಟ್ಸ್) ಹೊಂದುತ್ತಾರೆ.',
   'common.no-lesson-plan-info-message':
-    'This lesson does have any lesson plan.',
-  'common.email.error': 'Duplicate email',
+    'ಈ ಪಾಠವು ಯಾವುದೇ ಪಾಠದ ಯೋಜನೆಯನ್ನು ಹೊಂದಿದೆ.',
+  'common.email.error': 'ನಕಲಿ ಇಮೇಲ್',
   'student-resource': 'Student Resources',
-  'common.choose-lang': 'Choose Language',
-  'common.show': 'Show',
+  'common.choose-lang': 'ಭಾಷೆಯನ್ನು ಆರಿಸಿ',
+  'common.show': 'ತೋರಿಸಿ',
   'oa.teacher-task.tooltip.disable-msg':
-    'At least one task is required for activity activation',
-  'common.class-name': 'Class Name',
-  'common.view-class-course-map': 'Class',
-  'common.multi-grade-class-setting': 'Multi-Grade Class Settings',
+    'ಚಟುವಟಿಕೆ ಸಕ್ರಿಯಗೊಳಿಸುವಿಕೆಗೆ ಕನಿಷ್ಠ ಒಂದು ಕಾರ್ಯದ ಅಗತ್ಯವಿದೆ',
+  'common.class-name': 'ತರಗತಿಯ ಹೆಸರು',
+  'common.view-class-course-map': 'ತರಗತಿ',
+  'common.multi-grade-class-setting': 'ಬಹು-ದರ್ಜೆಯ ತರಗತಿ ಸಂಯೋಜನೆಗಳು',
   'common.select-your-other-classes-from-below':
-    'Select your other classes from below to manage in this class',
-  'common.multi-grade-view': 'Multi-grade view. Viewing class',
-  'common.struggling-competencies': 'Struggling Competencies',
-  'common.suggested': 'Suggested',
-  'common.skip-feedback': 'Skip Feedback',
+    'ಈ ತರಗತಿಯಲ್ಲಿ ನಿರ್ವಹಿಸಲು ಕೆಳಗಿನಿಂದ ನಿಮ್ಮ ಇತರ ತರಗತಿಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ',
+  'common.multi-grade-view': 'ಬಹು-ದರ್ಜೆಯ ನೋಟ. ತರಗತಿಯನ್ನು ನೋಡಲಾಗುತ್ತಿದೆ',
+  'common.struggling-competencies': 'ತೊಂದರೆಯ ಸಾಮರ್ಥ್ಯಗಳು',
+  'common.suggested': 'ಸೂಚಿಸಲಾಗಿದೆ',
+  'common.skip-feedback': 'ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ಬಿಟ್ಟುಬಿಡಿ',
   'common.external-collection.index-message':
-    'You will be redirected to the partner site for studying the resource(s) related to this competency. Once you have completed studying, come back here to enter the time spent and to move forward',
+    'ಈ ಸಾಮರ್ಥ್ಯಕ್ಕೆ ಸಂಬಂಧಿಸಿದ ಸಂಪನ್ಮೂಲವನ್ನು(ಗಳನ್ನು) ಅಧ್ಯಯನ ಮಾಡಲು ನಿಮ್ಮನ್ನು ಪಾಲುದಾರ ಸೈಟ್‌ಗೆ ಮರುನಿರ್ದೇಶಿಸಲಾಗುತ್ತದೆ. ನೀವು ಅಧ್ಯಯನವನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ, ಕಳೆದ ಸಮಯವನ್ನು ನಮೂದಿಸಲು ಮತ್ತು ಮುಂದುವರಿಯಲು ಇಲ್ಲಿಗೆ ಹಿಂತಿರುಗಿ',
   'common.external-assessment.index-message':
-    'You will be redirected to the partner site to take the assessment. Once you have completed studying, enter the score here',
+    'ಮೌಲ್ಯಮಾಪನವನ್ನು ತೆಗೆದುಕೊಳ್ಳಲು ನಿಮ್ಮನ್ನು ಪಾಲುದಾರ ಸೈಟ್‌ಗೆ ಮರುನಿರ್ದೇಶಿಸಲಾಗುತ್ತದೆ. ನೀವು ಅಧ್ಯಯನವನ್ನು ಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ, ಇಲ್ಲಿ ಅಂಕವನ್ನು ನಮೂದಿಸಿ',
   'common.feedback-review-placeholder':
-    'We appreciate your review of the content',
+    'ನಿಮ್ಮ ವಿಷಯದ ಪುನರಾವಲೋಕನವನ್ನು ನಾವು ಪ್ರಶಂಸಿಸುತ್ತೇವೆ',
   'common.feedback-collection-note':
-    'Please take a few seconds to give feedback about the collection you just studied. It helps!',
+    'ನೀವು ಇದೀಗ ಅಧ್ಯಯನ ಮಾಡಿದ ಸಂಗ್ರಹದ ಬಗ್ಗೆ ಪ್ರತಿಕ್ರಿಯೆ ನೀಡಲು ದಯವಿಟ್ಟು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ. ಇದು ಸಹಾಯ ಮಾಡುತ್ತದೆ!',
   'common.feedback-assessment-note':
-    'Please take a few seconds to give feedback about the assessment you just took. It helps!',
+    'ನೀವು ಈಗ ತೆಗೆದುಕೊಂಡ ಮೌಲ್ಯಮಾಪನದ ಬಗ್ಗೆ ಪ್ರತಿಕ್ರಿಯೆ ನೀಡಲು ದಯವಿಟ್ಟು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ. ಇದು ಸಹಾಯ ಮಾಡುತ್ತದೆ!',
   'common.feedback-collection-external-note':
-    'Please take a few seconds to give feedback about the external collection you just studied. It helps!',
+    'ನೀವು ಇದೀಗ ಅಧ್ಯಯನ ಮಾಡಿದ ಬಾಹ್ಯ ಸಂಗ್ರಹದ ಬಗ್ಗೆ ಪ್ರತಿಕ್ರಿಯೆ ನೀಡಲು ದಯವಿಟ್ಟು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ. ಇದು ಸಹಾಯ ಮಾಡುತ್ತದೆ!',
   'common.feedback-assessment-external-note':
-    'Please take a few seconds to give feedback about the external assessment you just took. It helps!',
+    'ನೀವು ಇದೀಗ ತೆಗೆದುಕೊಂಡ ಬಾಹ್ಯ ಮೌಲ್ಯಮಾಪನದ ಕುರಿತು ಪ್ರತಿಕ್ರಿಯೆ ನೀಡಲು ದಯವಿಟ್ಟು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ. ಇದು ಸಹಾಯ ಮಾಡುತ್ತದೆ!',
   'common.feedback-question-note':
-    'Please take a few second to provide feedback on the question. It really helps!',
+    'ಪ್ರಶ್ನೆಗೆ ಪ್ರತಿಕ್ರಿಯೆ ನೀಡಲು ದಯವಿಟ್ಟು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಿ. ಇದು ನಿಜವಾಗಿಯೂ ಸಹಾಯ ಮಾಡುತ್ತದೆ!',
   'common.feedback-resource-note':
-    'Please take a few seconds give your feedback on the resource. It really helps!',
+    'ದಯವಿಟ್ಟು ಕೆಲವು ಸೆಕೆಂಡುಗಳನ್ನು ತೆಗೆದುಕೊಂಡು ಸಂಪನ್ಮೂಲ ಕುರಿತು ನಿಮ್ಮ ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ನೀಡಿ. ಇದು ನಿಜವಾಗಿಯೂ ಸಹಾಯ ಮಾಡುತ್ತದೆ!',
   'common.feedback-offline-activity-note':
     ' Please take a few seconds to give feedback about the offline activity you just completed. It really helps!',
-  'common.no-competency': 'Not aligned to any competency',
+  'common.no-competency': 'ಯಾವುದೇ ಸಾಮರ್ಥ್ಯಕ್ಕೆ ಹೊಂದಿಕೆಯಾಗುವುದಿಲ್ಲ',
   'common.class-activities-info-icon':
-    'In Class Activities, at any time you can add, assign activities to all of the classes in your multi-grade class',
+    'ತರಗತಿಯ ಚಟುವಟಿಕೆಗಳಲ್ಲಿ, ನಿಮ್ಮ ಬಹು-ದರ್ಜೆಯ ತರಗತಿಯ ಎಲ್ಲಾ ತರಗತಿಗಳಿಗೆ ನೀವು ಯಾವುದೇ ಸಮಯದಲ್ಲಿ ಚಟುವಟಿಕೆಗಳನ್ನು ಸೇರಿಸಬಹುದು, ನಿಯೋಜಿಸಬಹುದು',
   'class-activity.no-activity-scheduled-message-mobile':
-    'You have no activities scheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+    '{{selectedItem}} ಗೆ ನೀವು ಯಾವುದೇ ಚಟುವಟಿಕೆಗಳನ್ನು ನಿಗದಿ ಪಡಿಸಿಲ್ಲ. ನಿಮ್ಮ ಶೆಡ್ಯೂಲ್‌ಗೆ ಸೇರಿಸಲು ವಿಷಯವನ್ನು ಹುಡುಕಲು ಫೂಟರ್ ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿ',
   'class-activity.no-activity-scheduled-message-desktop':
-    'You have no activities scheduled for the {{selectedItem}}. Choose content from the right to schedule',
+    '{{selectedItem}} ಗೆ ನೀವು ಯಾವುದೇ ಚಟುವಟಿಕೆಗಳನ್ನು ನಿಗದಿ ಪಡಿಸಿಲ್ಲ. ಶೆಡ್ಯೂಲ್ ಮಾಡುವ ಹಕ್ಕಿನಿಂದ ವಿಷಯವನ್ನು ಆರಿಸಿ',
   'class-activity.no-activity-unscheduled-message-mobile':
-    'You have no activities unscheduled for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+    '{{selectedItem}} ಗೆ ನೀವು ಯಾವುದೇ ಚಟುವಟಿಕೆಗಳನ್ನು ಅನ್‌ಶೆಡ್ಯೂಲ್ ಮಾಡಿಲ್ಲ. ನಿಮ್ಮ ಶೆಡ್ಯೂಲ್‌ಗೆ ಸೇರಿಸಲು ವಿಷಯವನ್ನು ಹುಡುಕಲು ಫೂಟರ್ ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿ',
   'class-activity.no-activity-unscheduled-message-desktop':
-    'You have no activities unscheduled for the {{selectedItem}}. Choose content from the right to schedule',
+    '{{selectedItem}} ಗೆ ನೀವು ಯಾವುದೇ ಚಟುವಟಿಕೆಗಳನ್ನು ಅನ್‌ಶೆಡ್ಯೂಲ್ ಮಾಡಿಲ್ಲ. ಶೆಡ್ಯೂಲ್ ಮಾಡುವ ಹಕ್ಕಿನಿಂದ ವಿಷಯವನ್ನು ಆರಿಸಿ',
   'class-activity.no-activity-items-to-grade-message-mobile':
-    'You have no activities items to grade for the {{selectedItem}}. Tap on the footer to find content to add to your schedule',
+    '{{selectedItem}} ಗೆ ಗ್ರೇಡ್ ಮಾಡಲು ನೀವು ಯಾವುದೇ ಚಟುವಟಿಕೆ ವಸ್ತುಗಳನ್ನು ಹೊಂದಿಲ್ಲ. ನಿಮ್ಮ ಶೆಡ್ಯೂಲ್‌ಗೆ ಸೇರಿಸಲು ವಿಷಯವನ್ನು ಹುಡುಕಲು ಫೂಟರ್ ಮೇಲೆ ಟ್ಯಾಪ್ ಮಾಡಿ',
   'class-activity.no-activity-items-to-grade-message-desktop':
-    'You have no activities items to grade for the {{selectedItem}}. Choose content from the right to schedule',
-  'class-activity.scheduled-activities': 'Class Activities',
-  'class-activity.unscheduled-activities': 'Unscheduled Activities',
-  'class-activity.items-to-grade': 'Items to Grade',
-  'common.monthly': 'Monthly',
-  'common.daily': 'Daily',
-  'common.weekly': 'Weekly',
+    '{{selectedItem}} ಗೆ ಗ್ರೇಡ್ ಮಾಡಲು ನೀವು ಯಾವುದೇ ಚಟುವಟಿಕೆ ಐಟಂಗಳನ್ನು ಹೊಂದಿಲ್ಲ. ಶೆಡ್ಯೂಲ್ ಮಾಡುವ ಹಕ್ಕಿನಿಂದ ವಿಷಯವನ್ನು ಆರಿಸಿ',
+  'class-activity.scheduled-activities': 'ತರಗತಿಯ ಚಟುವಟಿಕೆಗಳು',
+  'class-activity.unscheduled-activities': 'ಅನ್‌ಶೆಡ್ಯೂಲ್ ಮಾಡಿದ ಚಟುವಟಿಕೆಗಳು',
+  'class-activity.items-to-grade': 'ದರ್ಜೆ ಮಾಡಲು ಐಟಂಗಳು',
+  'common.monthly': 'ಮಾಸಿಕ',
+  'common.daily': 'ದೈನಂದಿನ',
+  'common.weekly': 'ಸಾಪ್ತಾಹಿಕ',
   'class-activity.no-learning-activities':
-    'There are no learning activities related to your search and filter terms in the library. Please check another library above or try using another filter/search term',
-  'common.activate': 'Activate',
-  'common.mark-as-completed': 'Mark Closed',
+    'ಗ್ರಂಥಾಲಯದ ನಿಮ್ಮ ಪದಗಳ ಹುಡುಕಾಟ ಮತ್ತು ಶೋಧಕಕ್ಕೆ ಸಂಬಂಧಿಸಿದಂತೆ ಯಾವುದೇ ಕಲಿಕೆಯ ಚಟುವಟಿಕೆಗಳಿಲ್ಲ. ದಯವಿಟ್ಟು ಮೇಲಿನ ಇನ್ನೊಂದು ಗ್ರಂಥಾಲಯವನ್ನು ಪರಿಶೀಲಿಸಿ ಅಥವಾ ಇನ್ನೊಂದು ಪದದ ಶೋಧಕ/ಹುಡುಕಾಟವನ್ನು ಬಳಸಲು ಪ್ರಯತ್ನಿಸಿ',
+  'common.activate': 'ಸಕ್ರಿಯಗೊಳಿಸಿ',
+  'common.mark-as-completed': 'ಗುರುತು ಮುಚ್ಚಲಾಗಿದೆ',
   'common.no-struggling-competencies':
-    'Yay! Looks like all your students are doing well!',
-  'teacher-landing.class.atc-view.learning-gaps': 'Learning Gaps',
-  'teacher-landing.class.atc-view.learning-challenges': 'Learning Challenges',
-  'competency.mastery.source.student-label': 'You were',
-  'competency.mastery.source.teacher-label': 'Student was',
+    'ವಾಹ್! ನಿಮ್ಮ ಎಲ್ಲಾ ವಿದ್ಯಾರ್ಥಿಗಳು ಉತ್ತಮವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿದ್ದಾರೆಂದು ತೋರುತ್ತಿದೆ!',
+  'teacher-landing.class.atc-view.learning-gaps': 'ಕಲಿಕೆಯ ಅಂತರಗಳು',
+  'teacher-landing.class.atc-view.learning-challenges': 'ಕಲಿಕೆಯ ಸವಾಲುಗಳು',
+  'competency.mastery.source.student-label': 'ನೀವು',
+  'competency.mastery.source.teacher-label': 'ವಿದ್ಯಾರ್ಥಿ',
   'competency.mastery.source-message': ' granted mastery based on {{source}}',
   'competency.mastery.source.forcecalculatetrigger':
-    'level determined by the teacher/instructor',
-  'competench.mastery.source.nwea': 'NWEA MAP scores',
-  'competench.mastery.source.teacher-asserted':
-    'teacher/instructor\'s assertion',
+    'ಮಟ್ಟವನ್ನು ಶಿಕ್ಷಕರು/ಬೋಧಕರು ನಿರ್ಧರಿಸುತ್ತಾರೆ',
+  'competench.mastery.source.nwea': 'NWEA MAP ಅಂಕಗಳು',
+  'competench.mastery.source.teacher-asserted': 'ಶಿಕ್ಷಕ/ಬೋಧಕರ ನಿರ್ಧಾರ',
   'competency.portfolio.status.notstarted-teacher':
-    'The student/learner has not yet started to study this competency',
+    'ವಿದ್ಯಾರ್ಥಿ/ಕಲಿಯುವವರು ಈ ಸಾಮರ್ಥ್ಯವನ್ನು ಅಧ್ಯಯನ ಮಾಡಲು ಇನ್ನೂ ಪ್ರಾರಂಭಿಸಿಲ್ಲ',
   'competency.portfolio.status.inferred-teacher':
-    'The student/learner has inferred mastery in this competency based on evidence in related competency',
+    'ಸಂಬಂಧಿತ ಸಾಮರ್ಥ್ಯದಲ್ಲಿನ ಸಾಕ್ಷ್ಯಗಳ ಆಧಾರದ ಮೇಲೆ ವಿದ್ಯಾರ್ಥಿ/ಕಲಿಯುವವರು ಈ ಸಾಮರ್ಥ್ಯದಲ್ಲಿನ ಪಾಂಡಿತ್ಯವನ್ನು ಊಹಿಸಿದ್ದಾರೆ',
   'competency.portfolio.status.notstarted-student':
-    'You have not yet started to study this competency',
+    'ಈ ಸಾಮರ್ಥ್ಯವನ್ನು ನೀವು ಇನ್ನೂ ಅಧ್ಯಯನ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿಲ್ಲ',
   'competency.portfolio.status.inferred-student':
-    'You have inferred mastery in this competency based on evidence in related competency',
+    'ಸಂಬಂಧಿತ ಸಾಮರ್ಥ್ಯದಲ್ಲಿನ ಪುರಾವೆಗಳ ಆಧಾರದ ಮೇಲೆ ನೀವು ಈ ಸಾಮರ್ಥ್ಯದಲ್ಲಿನ ಪಾಂಡಿತ್ಯವನ್ನು ಊಹಿಸಿದ್ದೀರಿ',
   'common.search-no-suggest-results-message':
-    'We could not find any content for the competency',
-  'guest.title': 'Navigator',
-  'guest.title-description': 'Login as a Guest to experience Navigator',
-  'guest.download-link': 'Navigator Exploration Guide',
+    'ಸಾಮರ್ಥ್ಯಕ್ಕಾಗಿ ನಮಗೆ ಯಾವುದೇ ವಿಷಯವನ್ನು ಕಂಡುಹಿಡಿಯಲಾಗಲಿಲ್ಲ',
+  'guest.title': 'ನ್ಯಾವಿಗೇಟರ್',
+  'guest.title-description':
+    'ನ್ಯಾವಿಗೇಟರ್ ಅನ್ನು ಅನುಭವಿಸಲು ಅತಿಥಿಯಾಗಿ ಲಾಗಿನ್ ಮಾಡಿ',
+  'guest.download-link': 'ನ್ಯಾವಿಗೇಟರ್ ಪರಿಶೋಧನೆ ಮಾರ್ಗದರ್ಶಿ',
   'guest.teacher-details':
-    'Facilitate learning, engage students and monitor learning outcomes.',
+    'ಕಲಿಕೆಗೆ ಅನುಕೂಲ ಮಾಡಿಕೊಡಿ, ವಿದ್ಯಾರ್ಥಿಗಳನ್ನು ತೊಡಗಿಸಿಕೊಳ್ಳಿ ಮತ್ತು ಕಲಿಕೆಯ ಫಲಿತಾಂಶಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.',
   'guest.student-details':
-    'Locate your current knowledge and navigate to the learning destination.',
-  'guest.login-teacher': 'Login as Teacher',
-  'guest.login-student': 'Login as Student',
-  'common.guest': 'Guest',
-  'guest.download': 'Download the'
+    'ನಿಮ್ಮ ಪ್ರಸ್ತುತದ ಜ್ಞಾನವನ್ನು ಪತ್ತೆ ಮಾಡಿ ಮತ್ತು ಕಲಿಕೆಯ ತಾಣಕ್ಕೆ ನ್ಯಾವಿಗೇಟ್ ಮಾಡಿ.',
+  'guest.login-teacher': 'ಶಿಕ್ಷಕರಾಗಿ ಲಾಗಿನ್ ಮಾಡಿ',
+  'guest.login-student': 'ವಿದ್ಯಾರ್ಥಿಯಾಗಿ ಲಾಗಿನ್ ಮಾಡಿ',
+  'common.guest': 'ಅತಿಥಿ',
+  'guest.download': 'ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ',
+  'class-activity.collection-disable-scheduling-message':
+    'ಸಂಗ್ರಹಣೆಯಲ್ಲಿ ಯಾವುದೇ ಸಂಪನ್ಮೂಲಗಳಿಲ್ಲದ ಕಾರಣ ಈ ಸಂಗ್ರಹವನ್ನು ಇಂದಿನ ತರಗತಿಗೆ ಶೆಡ್ಯೂಲ್ ಮಾಡಲು ಅಥವಾ ಸೇರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ',
+  'class-activity.assessment-disable-scheduling-message':
+    'ಮೌಲ್ಯಮಾಪನದಲ್ಲಿ ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳಿಲ್ಲದ ಕಾರಣ ಈ ಮೌಲ್ಯಮಾಪನವನ್ನು ಇಂದಿನ ತರಗತಿಗೆ ಶೆಡ್ಯೂಲ್ ಮಾಡಲು ಅಥವಾ ಸೇರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ',
+  'class-activity.offline-activity-disable-scheduling-message':
+    'ಆಫ್‌ಲೈನ್ ಚಟುವಟಿಕೆಯಲ್ಲಿ ಯಾವುದೇ ಕಾರ್ಯಗಳಿಲ್ಲದ ಕಾರಣ ಈ ಆಫ್‌ಲೈನ್ ಚಟುವಟಿಕೆಯನ್ನು ಶೆಡ್ಯೂಲ್ ಮಾಡಲಾಗುವುದಿಲ್ಲ',
+  'common.inferred': 'ಊಹಿಸಲಾಗಿದೆ',
+  'class-report.warning-message':
+    'ಈ ತರಗತಿಯು ಬಹು ವಿಷಯಗಳೊಂದಿಗೆ ಸಂಬಂಧ ಹೊಂದಿರುವುದರಿಂದ ಇದರ ವರದಿ ಲಭ್ಯವಿಲ್ಲ',
+  'common.competency-label-1': 'In Progress',
+  'common.competency-label-3': 'Inferred',
+  'common.competency-label-4': 'Gained',
+  'common.competency-label-5': 'Gained'
 };

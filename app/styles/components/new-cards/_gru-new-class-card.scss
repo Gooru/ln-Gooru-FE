@@ -7,6 +7,24 @@
     @include border-bottom-radius(4px);
     box-shadow: none;
     margin: 0;
+    position: relative;
+    &.guest-account {
+      &::before {
+        display: flex;
+        align-items: flex-end;
+        position: absolute;
+        background-color: #f1f1f1d9;
+        z-index: 100;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        color: #000;
+        top: 0;
+        content: "Creating a class is disabled for the demo account";
+        justify-content: center;
+        padding-bottom: 7px;
+      }
+    }
 
     .panel-body {
       padding: 0;
