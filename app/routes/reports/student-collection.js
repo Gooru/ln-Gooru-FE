@@ -125,5 +125,6 @@ export default QuizzesReport.extend(PublicRouteMixin, ContextMixin, {
       controller.set('collection', collection);
       controller.set('collectionObj', collectionObj);
     }
+    controller.fetchActivityFeedbackCateory();
   }
 });
