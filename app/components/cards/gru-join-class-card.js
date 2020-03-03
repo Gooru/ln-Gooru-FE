@@ -41,6 +41,11 @@ export default Ember.Component.extend(Validations, {
 
   classNames: ['gru-join-class-card'],
 
+  /**
+   * @property {Service} session service
+   */
+  session: Ember.inject.service('session'),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -136,5 +141,10 @@ export default Ember.Component.extend(Validations, {
    * Indicates if the submit button is allowed, false if the user don't type anything
    * @property {boolean}
    */
-  allowedButton: false
+  allowedButton: false,
+
+  /**
+   * Checking is demo account
+   */
+  isGuestAccount: Ember.computed.alias('session.isGuest')
 });

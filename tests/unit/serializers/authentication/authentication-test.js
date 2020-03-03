@@ -33,6 +33,7 @@ test('normalizeResponse for anonymous account', function(assert) {
       settings: null,
       image_url: null
     },
+    isGuest: false,
     partner_id: 2
   };
   const expected = {
@@ -51,6 +52,7 @@ test('normalizeResponse for anonymous account', function(assert) {
       user: 'user-url',
       content: 'content-url'
     },
+    isGuest: false,
     isAnonymous: true,
     tenant: {
       tenantId: 1,
@@ -80,6 +82,7 @@ test('normalizeResponse for normal account', function(assert) {
       settings: null,
       image_url: null
     },
+    isGuest: false,
     partner_id: 2
   };
   const expected = {
@@ -99,6 +102,7 @@ test('normalizeResponse for normal account', function(assert) {
       content: 'content-url/'
     },
     isAnonymous: false,
+    isGuest: false,
     tenant: {
       tenantId: 1,
       settings: null,
@@ -127,6 +131,7 @@ test('normalizeResponse for google account', function(assert) {
       settings: null,
       image_url: null
     },
+    isGuest: false,
     partner_id: 2
   };
   const expected = {
@@ -146,6 +151,7 @@ test('normalizeResponse for google account', function(assert) {
       content: 'content-url'
     },
     isAnonymous: false,
+    isGuest: false,
     tenant: {
       tenantId: 1,
       settings: null,
@@ -179,6 +185,7 @@ test('normalizeResponse for google account containing user category', function(a
       settings: null,
       image_url: null
     },
+    isGuest: false,
     partner_id: 2
   };
   const expected = {
@@ -198,6 +205,7 @@ test('normalizeResponse for google account containing user category', function(a
       content: 'content-url'
     },
     isAnonymous: false,
+    isGuest: false,
     tenant: {
       tenantId: 1,
       settings: null,
