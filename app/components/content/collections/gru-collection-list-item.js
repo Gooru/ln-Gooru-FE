@@ -254,6 +254,7 @@ export default Ember.Component.extend(BuilderMixin, ModalMixin, {
             if (editedModel.narration === '') {
               Ember.set(editedModel, 'narration', null);
             }
+            Ember.set(editedModel, 'url', undefined);
             component
               .get('resourceService')
               .updateResource(editedModel.id, editedModel, collection)
