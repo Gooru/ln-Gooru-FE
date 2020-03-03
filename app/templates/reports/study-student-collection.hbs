@@ -13,7 +13,7 @@
 }}
 
 {{#if isShowActivityFeedback}}
-  {{player/gru-activity-feedback collection=feedbackObj timeSpent=attemptData.totalTimeSpent score=attemptData.averageScore onSkipFeedback="OnShowMasteryOrNext" isStatusDone=isStatusDone onExit="onExit"}}
+  {{player/gru-activity-feedback collection=collectionFeedback timeSpent=attemptData.totalTimeSpent score=attemptData.averageScore onSkipFeedback="OnShowMasteryOrNext" isStatusDone=isStatusDone onExit="onExit"}}
 {{else}}
   <div class="report-container {{if isShowSuggestion 'show-suggestion'}}">
     <div class="summary-reset">

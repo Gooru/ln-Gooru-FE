@@ -1,8 +1,13 @@
 import Ember from 'ember';
 import { CONTENT_TYPES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
-import { generateUUID, validateTimespent } from 'gooru-web/utils/utils';
+import {
+  generateUUID,
+  validateTimespent,
+  getObjectCopy
+} from 'gooru-web/utils/utils';
+import ActivityFeedbackMixin from 'gooru-web/mixins/activity-feedback-mixin';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(ActivityFeedbackMixin, {
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['gru-external-collection-page'],
@@ -32,6 +37,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     let component = this;
     component.$('[data-toggle="tooltip"]').tooltip();
+    component.fetchActivityFeedbackCateory();
   },
 
   // -------------------------------------------------------------------------
@@ -57,7 +63,19 @@ export default Ember.Component.extend({
       let component = this;
       component.set('isTimeEntered', true);
       component.updateSelfReport();
-      component.set('isShowActivityFeedback', true);
+      let categoryLists = component.get('categoryLists');
+      let contentCategory = categoryLists.get('externalCollections');
+      let collectionFeedback = getObjectCopy(component.get('collection'));
+      collectionFeedback.set(
+        'feedbackCategory',
+        contentCategory.sortBy('feedbackTypeId')
+      );
+      if (contentCategory && contentCategory.length) {
+        component.set('collectionFeedback', collectionFeedback);
+        component.set('isShowActivityFeedback', true);
+      } else {
+        component.sendAction('onSkipFeedback');
+      }
     },
 
     /**

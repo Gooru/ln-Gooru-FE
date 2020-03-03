@@ -50,7 +50,7 @@
       <div class="panel-body">
         <p>{{t "common.resource-url"}}*</p>
         {{#if isResourceEditing}}
-          {{#if (or (eq resource.format 'image') (eq resource.format 'text'))}}
+          {{#if isResourceUpload}}
             {{content/gru-file-picker validMimeType=tempResource.mimeType onSelectFile=(action 'selectFile')}}
             {{#if emptyFileError}}
               <div class="validation">

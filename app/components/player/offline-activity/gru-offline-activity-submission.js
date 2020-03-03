@@ -1,14 +1,14 @@
 import Ember from 'ember';
 import {
   getTimeInMillisec,
-  formatTime as formatTimeInMilliSec
+  formatTime as formatTimeInMilliSec,
+  getObjectCopy
 } from 'gooru-web/utils/utils';
 import {
   ROLES,
   PLAYER_EVENT_SOURCE,
   CONTENT_TYPES
 } from 'gooru-web/config/config';
-
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -151,6 +151,13 @@ export default Ember.Component.extend({
   isTimespentExpanded: true,
 
   isShowActivityFeedback: false,
+
+  /**
+   * @property {offlineActivityFeedback{}} object
+   */
+  offlineActivityFeedback: Ember.computed('offlineActivity', function() {
+    return getObjectCopy(this.get('offlineActivity'));
+  }),
 
   /**
    * @property {Number} timespentInMilliSec

@@ -27,22 +27,21 @@ export default Ember.Component.extend({
     component.fetchLearningActivityFeedback();
   }),
 
+  onExitContentObserver: Ember.observer('isStatusDone', function() {
+    this.sendAction('onExit');
+  }),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
     const component = this;
-    component.fetchActivityFeedbackCateory();
+    component.fetchLearningActivityFeedback();
   },
 
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
-    showDescription: function() {
-      const component = this;
-      component.$('.description').slideToggle();
-    },
-
     onNext: function() {
       const component = this;
       let learningFeedback = component.getFeedbackObject();
@@ -57,11 +56,6 @@ export default Ember.Component.extend({
     onSkipFeedback: function() {
       const component = this;
       component.sendAction('onSkipFeedback');
-    },
-
-    onExit: function() {
-      const component = this;
-      component.sendAction('onExit');
     }
   },
 
@@ -88,26 +82,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Methods
-
-  /**
-   * @function fetchActivityFeedbackCateory
-   * Method to fetch activity feedback category
-   */
-
-  fetchActivityFeedbackCateory() {
-    const component = this;
-    let contentType = component.get('contentType');
-    let role = component.get('session.role');
-    let userCategoryId =
-      FEEDBACK_USER_CATEGORY[`${role}`] || FEEDBACK_USER_CATEGORY.other;
-    component
-      .get('activityFeedbackService')
-      .getFeedbackCategory(contentType, userCategoryId)
-      .then(categoryLists => {
-        component.set('feedbackCategoryLists', categoryLists);
-        component.fetchLearningActivityFeedback();
-      });
-  },
 
   /**
    * @function fetchLearningActivityFeedback
@@ -155,8 +129,7 @@ export default Ember.Component.extend({
     const component = this;
     let userId = component.get('session.userId');
     let role = component.get('session.role');
-    let userCategoryId =
-      FEEDBACK_USER_CATEGORY[`${role}`] || FEEDBACK_USER_CATEGORY.other;
+    let userCategoryId = FEEDBACK_USER_CATEGORY[`${role}`];
     let userFeedback = Ember.A([]);
     let categoryLists = component.get('categoryLists');
     categoryLists.map(category => {

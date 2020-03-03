@@ -4,6 +4,19 @@ import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
+  // Service
+
+  /**
+   * @requires service:session
+   */
+  session: Ember.inject.service('session'),
+
+  /**
+   * @property {activityFeedbackService}
+   */
+  activityFeedbackService: Ember.inject.service('api-sdk/activity-feedback'),
+
+  // -------------------------------------------------------------------------
   // Attributes
   classNames: ['gru-activity-feedback'],
 
@@ -32,6 +45,10 @@ export default Ember.Component.extend({
         component.set('isSkipped', nextContent.get('skipped'));
         component.set('contentScore', nextContent.get('score'));
         component.set('timeSpent', nextContent.get('savedTime'));
+        component.set(
+          'feedbackCategoryLists',
+          nextContent.get('feedbackCategory')
+        );
         component.set('contentFormat', content_format);
         component.set('resourceInfo', nextContent);
       } else {
@@ -58,25 +75,34 @@ export default Ember.Component.extend({
    * @type {Boolean}
    */
   isCollection: Ember.computed('collection', function() {
-    let component = this;
-    return component.get('collection.isCollection');
+    return this.get('collection.isCollection');
+  }),
+
+  isPlayNextContent: false,
+
+  currentIndex: 0,
+
+  /**
+   * @property {resourceInfo{}} object
+   */
+  resourceInfo: Ember.computed('collection', function() {
+    return this.get('collection');
   }),
 
   /**
    * @property {ResourceList[]} List of resource list
    */
   resourceList: Ember.computed('collection', function() {
-    let component = this;
-    let resourcesResult = component.get('collection.children');
+    let resourcesResult = this.get('collection.children');
     return resourcesResult || [];
   }),
 
   /**
-   * @property {resourceInfo{}} object
+   * @property {feedbackCategoryLists[]} List of feedback category list
    */
-  resourceInfo: Ember.computed('collection', function() {
-    let component = this;
-    return component.get('collection');
+  feedbackCategoryLists: Ember.computed('collection', function() {
+    let feedbackCategory = this.get('collection.feedbackCategory');
+    return feedbackCategory || [];
   }),
 
   /**
@@ -98,23 +124,20 @@ export default Ember.Component.extend({
    */
   description: Ember.computed('resourceInfo', function() {
     let resourceInfo = this.get('resourceInfo');
-    return resourceInfo.description || resourceInfo.learningObjectives || null;
+    return resourceInfo
+      ? resourceInfo.description || resourceInfo.learningObjectives || null
+      : null;
   }),
 
   /**
    * @property {contentFormat} String
    */
   contentFormat: Ember.computed('collection', function() {
-    let component = this;
-    let format = component.get('format');
+    let format = this.get('format');
     return format
       ? format
-      : component.get('isCollection')
+      : this.get('isCollection')
         ? 'collection'
         : 'assessment';
-  }),
-
-  isPlayNextContent: false,
-
-  currentIndex: 0
+  })
 });

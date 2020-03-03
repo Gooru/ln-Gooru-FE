@@ -85,6 +85,7 @@ export default Ember.Component.extend(
        * Save updated content
        */
       updateContent: function() {
+        this.set('isUrlChange', false);
         this.saveContent();
       },
 
@@ -232,35 +233,43 @@ export default Ember.Component.extend(
       updateResource: function() {
         const component = this;
         var editedResource = component.get('tempResource');
-        if (component.get('isUrlChange')) {
-          if (this.get('editedResource.file')) {
-            this.set(
-              'emptyFileError',
-              this.get('i18n').t('common.errors.file-upload-missing', {
-                extensions: this.get('resource.extensions')
-              })
-            );
-          } else {
-            editedResource.validate().then(function({ validations }) {
-              if (validations.get('isValid')) {
-                component
-                  .handleResourceUpload(editedResource)
-                  .then(function(uploadedResource) {
-                    component.set('tempResource', uploadedResource);
-                    component.saveContent();
-                  });
-              }
-              component.set('didValidate', true);
-            });
-          }
+        if (this.get('isResourceUpload') && !this.get('tempResource.file')) {
+          this.set(
+            'emptyFileError',
+            this.get('i18n').t('common.errors.file-upload-missing', {
+              extensions: this.get('tempResource.extensions')
+            })
+          );
         } else {
-          component.set('isResourceEditing', false);
+          editedResource.validate().then(function({ validations }) {
+            if (validations.get('isValid')) {
+              return Ember.RSVP.hash({
+                resultResource: component.get('tempResource.file')
+                  ? component.handleResourceUpload(editedResource)
+                  : editedResource
+              }).then(({ resultResource }) => {
+                component.set('tempResource', resultResource);
+                if (
+                  component.get('tempResource.url') !==
+                  component.get('resource.url')
+                ) {
+                  component.set('isUrlChange', true);
+                  component.saveContent();
+                } else {
+                  component.set('isResourcesAlreadyExists', false);
+                  component.set('isResourceEditing', false);
+                }
+              });
+            }
+            component.set('didValidate', true);
+          });
         }
       },
 
       //Action triggered when click on cancel button in resource
       cancelEditResources: function() {
         this.set('isResourceEditing', false);
+        this.set('isResourcesAlreadyExists', false);
       },
 
       selectFile: function(file) {
@@ -309,6 +318,31 @@ export default Ember.Component.extend(
      */
     resourceComponent: Ember.computed('resource.resourceType', function() {
       return RESOURCE_COMPONENT_MAP[this.get('resource.resourceType')];
+    }),
+
+    /**
+     * @property {boolean}
+     */
+    isResourceUpload: Ember.computed('resource', function() {
+      if (
+        this.get('resource.format') === 'image' ||
+        this.get('resource.format') === 'text'
+      ) {
+        let defaultUploadType = UPLOADABLE_TYPES[0];
+        this.send('selectUploadType', defaultUploadType);
+        return true;
+      } else {
+        return false;
+      }
+    }),
+
+    // -------------------------------------------------------------------------
+    // Observers
+
+    clearEmptyFileError: Ember.observer('tempResource.file', function() {
+      if (this.get('emptyFileError')) {
+        this.set('emptyFileError', null);
+      }
     }),
 
     /**
@@ -451,10 +485,7 @@ export default Ember.Component.extend(
     /**
      * @property {boolean}
      */
-    isUrlChange: Ember.computed('resource', function() {
-      let currentURL = this.get('tempResource.url');
-      return currentURL !== this.get('resource.url');
-    }),
+    isUrlChange: false,
 
     isEditResources: Ember.computed('resource', function() {
       let resourceOwner = this.get('resource.owner');
@@ -640,17 +671,16 @@ export default Ember.Component.extend(
     handleResourceUpload: function(resource) {
       return new Ember.RSVP.Promise(
         function(resolve) {
-          if (this.get('tempResource.file')) {
-            this.get('mediaService')
-              .uploadContentFile(resource.file)
-              .then(function(filename) {
-                resource.set('url', `https:${filename}`);
-                resolve(resource);
-              });
-          } else {
-            // Nothing to upload ... return resource as is.
-            resolve(resource);
-          }
+          this.get('mediaService')
+            .uploadContentFile(resource.file)
+            .then(function(filename) {
+              resource.set('url', `https:${filename}`);
+              resource.set(
+                'fileName',
+                filename.substring(filename.lastIndexOf('/') + 1)
+              );
+              resolve(resource);
+            });
         }.bind(this)
       );
     }

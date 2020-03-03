@@ -76,7 +76,7 @@
             <div class="content-panel">
               <div class="content-body">
                 {{#if resourceInfo}}
-                  {{gru-feedback-form resourceInfo=resourceInfo format=contentFormat onNext='onNext' onSkipFeedback="onSkipFeedback" isPlayNextContent=isPlayNextContent isStatusDone=isStatusDone onExit="onExit"}}
+                  {{gru-feedback-form resourceInfo=resourceInfo format=contentFormat onNext='onNext' onSkipFeedback="onSkipFeedback" isPlayNextContent=isPlayNextContent isStatusDone=isStatusDone onExit="onExit"  feedbackCategoryLists=feedbackCategoryLists}}
                 {{/if}}
               </div>
             </div>
