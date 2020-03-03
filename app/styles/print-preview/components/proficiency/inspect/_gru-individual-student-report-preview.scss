@@ -1,0 +1,216 @@
+.individual-student-report {
+  .report-period-selector {
+    .report-periods,
+    .active-period {
+      display: none !important;
+    }
+    .report-download {
+      display: block !important;
+      .print-preview {
+        display: none !important;
+      }
+      .individual-student-report-preview {
+        .individual-report-container {
+          .print-preview {
+            display: none !important;
+          }
+          color: #000000 !important;
+          .report-container {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: absolute;
+            left: 0;
+            top: 0;
+            .report-summery {
+              display: flex;
+              flex-direction: column;
+            }
+            .report-overview {
+              .title {
+                padding: 10px 0px;
+                font-weight: bold;
+                font-size: 16px;
+              }
+              .student-report {
+                .header {
+                  display: grid;
+                  grid-template-columns: repeat(9, 1fr);
+                  border: 1px solid;
+                  .label-text {
+                    font-size: 14px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                  }
+                  .competencies-label {
+                    display: grid;
+                    grid-column-start: 1;
+                    grid-column-end: 4;
+                    text-align: center;
+                    .label-text {
+                      justify-self: center;
+                      color: #34424b;
+                      width: 100%;
+                      border-right: 1px solid;
+                    }
+                    .sub-header {
+                      display: grid;
+                      grid-template-columns: repeat(3, 1fr);
+                      justify-content: center;
+                      border-top: 1px solid;
+                      div {
+                        justify-self: center;
+                        font-size: 12px;
+                        color: #34424b;
+                        text-transform: uppercase;
+                        text-align: center;
+                        width: 100%;
+                        border-right: 1px solid;
+                      }
+                    }
+                  }
+                  .timespent-label {
+                    display: grid;
+                    grid-column-start: 4;
+                    grid-column-end: 7;
+                    text-align: center;
+                    .label-text {
+                      justify-self: center;
+                      color: #34424b;
+                      width: 100%;
+                      border-right: 1px solid;
+                    }
+                    .sub-header {
+                      display: grid;
+                      grid-template-columns: repeat(3, 1fr);
+                      justify-content: center;
+                      border-top: 1px solid;
+                      div {
+                        justify-self: center;
+                        font-size: 12px;
+                        color: #34424b;
+                        text-transform: uppercase;
+                        width: 100%;
+                        border-right: 1px solid;
+                      }
+                    }
+                  }
+                  .badge-earned-label,
+                  .average-score-label,
+                  .suggestion-taken-label {
+                    font-size: 13px;
+                    font-weight: bold;
+                    color: #34424b;
+                    text-align: center;
+                    border-right: 1px solid;
+                  }
+                  .suggestion-taken-label {
+                    border: 0px;
+                  }
+                }
+                .body {
+                  .student-summary-container {
+                    display: grid;
+                    grid-template-columns: auto;
+                    line-height: 45px;
+                    border: 1px solid;
+                    border-top: 0px;
+                    .summary-container {
+                      display: grid;
+                      grid-template-columns: repeat(9, 1fr);
+                      .gained-competencies,
+                      .inferred-competencies,
+                      .inprogress-competencies {
+                        display: grid;
+                        justify-content: center;
+                        .competency-count {
+                          font-size: 13px;
+                          color: #000;
+                        }
+                      }
+                      .total-timespent,
+                      .collection-timespent,
+                      .assessment-timespent {
+                        justify-self: center;
+                        .time-spent {
+                          font-size: 13px;
+                          color: #000;
+                        }
+                      }
+                      .badge-earned {
+                        justify-self: center;
+                        .badge {
+                          .badge-count {
+                            font-size: 13px;
+                            color: $white;
+                            padding: 8px;
+                          }
+                        }
+                      }
+                      .average-score {
+                        justify-self: center;
+                        .score {
+                          font-size: 13px;
+                          font-weight: bold;
+                        }
+                      }
+                      .suggestion-taken {
+                        justify-self: center;
+                        .suggestion-count {
+                          font-size: 13px;
+                          font-weight: bold;
+                          color: #f89e1b;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .competencies-report {
+                margin: 30px 20px;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                border: 1px solid;
+                .mastery-competencies,
+                .struggle-competencies,
+                .in-progress-competencies {
+                  padding: 10px;
+                  border-right: 1px solid;
+                  text-align: center;
+                  font-size: 13px;
+                  .header {
+                    font-weight: bold;
+                    font-size: 14px;
+                  }
+                  .body {
+                    margin-top: 15px;
+                  }
+                  .node {
+                    margin-top: 15px;
+                  }
+                }
+                .in-progress-competencies {
+                  border: none;
+                }
+              }
+            }
+            .skyline-report {
+              margin-top: 20px;
+              .skyline-summery {
+                display: flex;
+                flex-direction: column;
+                .date {
+                  font-size: 14px;
+                  font-weight: bold;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .student-competencies-activate {
+    display: none !important;
+  }
+}

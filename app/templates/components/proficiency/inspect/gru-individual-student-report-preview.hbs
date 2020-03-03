@@ -1,0 +1,159 @@
+<div class="individual-report-container">
+  <div class="print-preview" title="{{t 'common.download'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
+    {{gru-icon name="get_app"}}
+  </div>
+  <div class="report-container">
+    <div class="report-summery">
+      <span class="student-name">{{reportData.student.firstName}},  {{reportData.student.lastName}}</span>
+      <span class="class-name">{{class.title}} ({{teacher.firstName}} {{teacher.lastName}})</span>
+      <span class="date">January 2, 2020 - February 25, 2020</span>
+    </div>
+    <div class="report-overview">
+      <div class="title">Overview:</div>
+      <div class="student-report">
+        <div class="header">
+          <div class="competencies-label">
+            <div class="label-text">{{t 'common.competencies'}}</div>
+            <div class="sub-header">
+              <div class="header-data gained-header">{{t 'common.gained'}}</div>
+              <div class="header-data inferred-header">{{t 'common.inferred'}}</div>
+              <div class="header-data inprogress-header">{{t 'profile.proficiency.in-progress'}}</div>
+            </div>
+          </div>
+          <div class="timespent-label">
+            <div class="label-text">{{t 'gru-data-picker.time-spent'}}</div>
+            <div class="sub-header">
+              <div class="header-data collection-header">{{t 'common.collections'}}</div>
+              <div class="header-data assessment-header">{{t 'common.assessments'}}</div>
+              <div class="header-data total-header">{{t 'reports.gru-table-view.totals'}}</div>
+            </div>
+          </div>
+          <div class="header-data badge-earned-label label-text">
+            {{t 'badges-earned'}}
+          </div>
+          <div class="header-data average-score-label label-text">
+            {{t 'common.averageScore'}}
+          </div>
+          <div class="header-data suggestion-taken-label label-text">
+            {{t 'suggestion-taken'}}
+          </div>
+        </div>
+        <div class="body">
+          <div class="student-summary-container">
+            <div class="summary-container">
+              <div class="column-data gained-competencies">
+                {{#if reportData.weeklyReportData.masteredCompetenciesCount}}
+                  <span class="competency-count">{{reportData.weeklyReportData.masteredCompetenciesCount}}</span>
+                {{else}}
+                  --
+                {{/if}}
+              </div>
+              <div class="column-data inferred-competencies">
+                {{#if reportData.weeklyReportData.inferredCompetenciesCount}}
+                  <span class="competency-count">{{reportData.weeklyReportData.inferredCompetenciesCount}}</span>
+                {{else}}
+                  --
+                {{/if}}
+              </div>
+              <div class="column-data inprogress-competencies">
+                {{#if reportData.weeklyReportData.inprogressCompetenciesCount}}
+                  <span class="competency-count">{{reportData.weeklyReportData.inprogressCompetenciesCount}}</span>
+                {{else}}
+                  --
+                {{/if}}
+              </div>
+              <div class="column-data collection-timespent">
+                <span class="time-spent">
+                  {{#if reportData.weeklyReportData.collectionTimespent}}
+                    {{format-time reportData.weeklyReportData.collectionTimespent}}
+                  {{else}}
+                    --
+                  {{/if}}
+                </span>
+              </div>
+              <div class="column-data assessment-timespent">
+                <span class="time-spent">
+                  {{#if reportData.weeklyReportData.assessmentTimespent}}
+                    {{format-time reportData.weeklyReportData.assessmentTimespent}}
+                  {{else}}
+                    --
+                  {{/if}}
+                </span>
+              </div>
+              <div class="column-data total-timespent">
+                <span class="time-spent">
+                  {{#if reportData.weeklyReportData.totalTimespent}}
+                    {{format-time reportData.weeklyReportData.totalTimespent}}
+                  {{else}}
+                    --
+                  {{/if}}
+                </span>
+              </div>
+              <div class="column-data badge-earned">
+                {{#if reportData.weeklyReportData.badgeEarned}}
+                  <span class="badge"><span class="badge-count">{{reportData.weeklyReportData.badgeEarned}}</span></span>
+                {{else}}
+                  --
+                {{/if}}
+              </div>
+              <div class="column-data average-score">
+                {{#unless reportData.weeklyReportData.isNotStarted}}
+                  <span class="score score-range-{{grade-range reportData.weeklyReportData.averageScore}}">{{reportData.weeklyReportData.averageScore}}</span>
+                {{else}}
+                  --
+                {{/unless}}
+              </div>
+              <div class="column-data suggestion-taken">
+              {{#if reportData.weeklyReportData.suggestionTaken}}
+                <span class="suggestion-count">{{reportData.weeklyReportData.suggestionTaken}}</span>
+              {{else}}
+                --
+              {{/if}}
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="competencies-report">
+        <div class="mastery-competencies">
+          <div class="header">
+            Competencies Mastered (score ≥ 80%)
+          </div>
+          <div class="body">
+            {{#each reportData.weeklyReportData.masteredCompetencies as |competency|}}
+              <div>{{competency.code}}</div>
+            {{/each}}
+          </div>
+        </div>
+        <div class="struggle-competencies">
+          <div class="header">
+            Competencies Showing Difficulty* (score <80%)
+          </div>
+          <div class="body"></div>
+          <div class="note">
+            *Note - these competencies will need to be re-attempted
+          </div>
+        </div>
+        <div class="in-progress-competencies">
+          <div class="header">
+            Competencies in Progress (incomplete)
+          </div>
+          <div class="body">
+            {{#each reportData.weeklyReportData.inprogressCompetencies as |competency|}}
+              <div>{{competency.code}}</div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="skyline-report">
+      <div class="skyline-summery">
+        <span class="date">Skyline as of: February 25, 2020</span>
+      </div>
+      <div class="skyline-overview">
+        <div class="chart"></div>
+        <div class="competencies-list"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -16,6 +16,9 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.loadSummaryReportData();
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
   },
 
   didRender() {
@@ -65,6 +68,7 @@ export default Ember.Component.extend({
         component.resetActiveStudentData();
         reportData.set('active', true);
         component.set('isShowStudentCompetencies', true);
+        component.set('individualStudentReport', reportData);
       }
     },
 
@@ -91,6 +95,10 @@ export default Ember.Component.extend({
 
     onCloseDatePicker() {
       this.$('.student-rangepicker-container').hide();
+    },
+
+    onPrintPreview() {
+      window.print();
     }
   },
 
@@ -230,6 +238,8 @@ export default Ember.Component.extend({
   parseStudentsWeeklySummaryReportData(summaryReportData) {
     const component = this;
     let parsedStudentsSummaryReportData = Ember.A([]);
+    component.set('classInfo', summaryReportData.get('class'));
+    component.set('teacherInfo', summaryReportData.get('teacher'));
     let studentsSummaryReportData = summaryReportData.get(
       'studentsSummaryData'
     );

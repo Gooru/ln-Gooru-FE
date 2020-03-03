@@ -66,6 +66,29 @@
           }
         }
       }
+      .report-download {
+        color: #fff;
+        width: 35px;
+        justify-content: center;
+        display: flex;
+        background: #0a0a0a;
+        border-radius: 50pc;
+        height: 35px;
+        cursor: pointer;
+        .individual-student-report-preview {
+          display: flex;
+          .individual-report-container {
+            display: flex;
+          }
+        }
+        .print-preview {
+          display: flex;
+          align-items: center;
+        }
+      }
+      .report-container {
+        display: none;
+      }
     }
     .header-container {
       display: grid;

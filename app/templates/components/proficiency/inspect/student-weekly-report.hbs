@@ -1,4 +1,4 @@
-<div class="weekly-report-container">
+<div class="weekly-report-container {{if isShowStudentCompetencies 'individual-student-report'}}">
   <div class="report-period-selector">
     {{#if (and rangeEndDate rangeStartDate)}}
       <span class="custom-range-shower">{{rangeStartDate}} - {{rangeEndDate}}</span>
@@ -13,6 +13,15 @@
           {{reportPeriod.text}}
         </div>
       {{/each}}
+    </div>
+    <div class="report-download">
+      {{#if isShowStudentCompetencies}}
+        {{proficiency/inspect/gru-individual-student-report-preview reportData=individualStudentReport class=classInfo teacher=teacherInfo}}
+      {{else}}
+        <div class="print-preview" title="{{t 'common.download'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
+          {{gru-icon name="get_app"}}
+        </div>
+      {{/if}}
     </div>
   </div>
   <div class="header-container {{if isShowStudentCompetencies 'student-competencies-activate'}}">

@@ -1,0 +1,158 @@
+.students-proficiency-header {
+  display: none !important;
+}
+.weekly-report-container {
+  .report-period-selector {
+    .report-download {
+      display: none !important;
+    }
+  }
+  .header-container {
+    border: 1px solid !important;
+    grid-template-columns: 100px 1fr !important;
+    .label-text {
+      font-size: 10px !important;
+    }
+    .header-left {
+      display: flex !important;
+      width: 100% !important;
+      justify-content: center !important;
+      align-items: center !important;
+      border-right: 1px solid !important;
+      align-self: unset !important;
+    }
+    .header-right {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      padding: 0px !important;
+
+      .competencies-label {
+        grid-column-start: 1 !important;
+        grid-column-end: 4 !important;
+        .label-text {
+          width: 100% !important;
+          border-right: 1px solid !important;
+          text-align: center !important;
+        }
+        .sub-header {
+          grid-template-columns: 50px 55px 1fr !important;
+          border-top: 1px solid !important;
+          div {
+            font-size: 10px !important;
+            border-right: 1px solid !important;
+            width: 100% !important;
+          }
+        }
+      }
+      .timespent-label {
+        grid-column-start: 4 !important;
+        grid-column-end: 7 !important;
+        .label-text {
+          width: 100%;
+          border-right: 1px solid !important;
+          text-align: center !important;
+        }
+        .sub-header {
+          grid-template-columns: 1fr 1fr 40px !important;
+          border-top: 1px solid !important;
+          text-align: center !important;
+          div {
+            font-size: 10px !important;
+            width: 100% !important;
+            border-right: 1px solid !important;
+          }
+        }
+      }
+      .badge-earned-label,
+      .average-score-label,
+      .suggestion-taken-label {
+        font-size: 10px !important;
+        border-right: 1px solid !important;
+        align-self: unset !important;
+      }
+      .suggestion-taken-label {
+        border: none !important;
+      }
+    }
+  }
+  .body-container {
+    height: max-content !important;
+    border: 1px solid !important;
+    border-top: none !important;
+    &::-webkit-scrollbar {
+      display: none !important;
+    }
+    .body-scroll {
+      grid-template-columns: 100px 1fr !important;
+      height: max-content !important;
+      overflow: visible !important;
+      &::-webkit-scrollbar {
+        display: none !important;
+      }
+      .body-left {
+        .student-info-container {
+          height: 50px !important;
+          border-bottom: 1px solid !important;
+          .student-thumbnail {
+            display: none !important;
+          }
+          .student-name {
+            font-size: 10px !important;
+            line-height: 15px !important;
+          }
+          &:last-child {
+            border: none !important;
+          }
+        }
+      }
+      .body-right {
+        .student-summary-container {
+          border-bottom: 1px solid !important;
+          height: 50px !important;
+          .summary-container {
+            grid-template-columns: repeat(9, 1fr) !important;
+            .gained-competencies,
+            .inprogress-competencies,
+            .inferred-competencies {
+              justify-self: center !important;
+              column-gap: 1px !important;
+              .competency-status {
+                display: none !important;
+              }
+              .competency-count {
+                font-size: 10px !important;
+              }
+            }
+            .total-timespent,
+            .collection-timespent,
+            .assessment-timespent {
+              .time-spent {
+                font-size: 10px !important;
+              }
+            }
+            .badge-earned {
+              .badge {
+                .badge-count {
+                  font-size: 10px !important;
+                }
+              }
+            }
+            .average-score {
+              .score {
+                font-size: 10px !important;
+              }
+            }
+            .suggestion-taken {
+              .suggestion-count {
+                font-size: 10px !important;
+              }
+            }
+          }
+          &:last-child {
+            border: none !important;
+          }
+        }
+      }
+    }
+  }
+}
