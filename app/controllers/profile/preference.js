@@ -21,6 +21,8 @@ export default Ember.Controller.extend({
 
   parentController: Ember.inject.controller('profile'),
 
+  session: Ember.inject.service('session'),
+
   //------------------------------------------------------------------------------
   // Attributes
 
@@ -65,6 +67,8 @@ export default Ember.Controller.extend({
   isEditMode: false,
 
   otherLanguages: null,
+
+  isGuestAccount: Ember.computed.alias('session.isGuest'),
 
   //------------------------------------------------------------------------------
   actions: {

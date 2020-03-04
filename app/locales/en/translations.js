@@ -2874,6 +2874,11 @@ window.i18ln = {
   'common.competency-label-1': 'In Progress',
   'common.competency-label-3': 'Inferred',
   'common.competency-label-4': 'Gained',
-  'common.competency-label-5': 'Gained'
+  'common.competency-label-5': 'Gained',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };
 export default window.i18ln;

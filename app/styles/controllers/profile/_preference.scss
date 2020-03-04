@@ -277,6 +277,12 @@
 
   .edit-head {
     justify-content: flex-end !important;
+    &.guest-account {
+      opacity: 0.5;
+      i {
+        cursor: auto;
+      }
+    }
     > button {
       flex: unset !important;
       width: 100px !important;

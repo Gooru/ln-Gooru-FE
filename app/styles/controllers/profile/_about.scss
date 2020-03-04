@@ -22,6 +22,9 @@
       i {
         color: $gray-darker;
       }
+      &.guest-account {
+        opacity: 0.5;
+      }
     }
   }
 
@@ -167,7 +170,11 @@
       }
     }
 
-    .bio {
+    .bios {
+      &.guest-account {
+        opacity: 0.4;
+        pointer-events: none;
+      }
       p {
         margin-bottom: 11px !important;
         display: -webkit-box;

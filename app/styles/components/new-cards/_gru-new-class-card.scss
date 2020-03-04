@@ -20,7 +20,7 @@
         left: 0;
         color: #000;
         top: 0;
-        content: "Creating a class is disabled for the demo account";
+        content: attr(data-before);
         justify-content: center;
         padding-bottom: 7px;
       }
