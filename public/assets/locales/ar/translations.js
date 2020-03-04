@@ -544,7 +544,7 @@ window.i18ln = {
   'common.logout.head_3': 'تحقيق الجدارة',
   'common.logout.description':
     'صُمم مستكشف التعلم ك "GPS لتتعلم" طريقة لكل طالب لاتباع مساره الخاص به نحو التمكن. وتطلب المدارس من جميع الطلاب ان يحققوا نفس مستوء الكفا،ولكن كل طالب يبدأ بمجموعة مختلفة من المهارات والمجموعات. يلتقى المستكشف كل طالب فى مكانه بالظبط ثم يوجههم لاهدافهم فى التعلم.',
-  'common.logout.logout-btn-msg1': 'لقد قمت بتسجيل الخروج.',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'اضغط هنا لتسجيل الدخول.',
   'common.mastery': 'التمكن',
   'common.menu': 'القائمة',

@@ -563,7 +563,7 @@ window.i18ln = {
   'common.logout.head_3': 'Consigues Maestría',
   'common.logout.description':
     'El Navegador de Aprendizaje está diseñado como un "GPS de aprendizaje"- Una forma para que cada estudiante siga su propio camino hacia la maestría. Las escuelas piden a sus estudiantes que alcancen el mismo nivel de perfeccionamiento, pero cada estudiante comienza con un conjunto de conocimientos y habilidades distinto. El Navegador de Aprendizaje se posiciona en el lugar exacto en el que se encuentra el estudiante y lo guía hacia sus objetivos de aprendizaje.',
-  'common.logout.logout-btn-msg1': 'Se ha cerrado la sesión.',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'Haz click aquí para iniciar sesión.',
   'common.mastery': 'Maestría',
   'common.menu': 'Menú',
@@ -2840,5 +2840,31 @@ window.i18ln = {
   'common.disabled-create-class':
     'Creating a class is disabled for the demo account',
   'common.disabled-join-class':
-    'Joining a class is disabled for the demo account'
+    'Joining a class is disabled for the demo account',
+  'common.search-no-suggest-results-message':
+    'We could not find any content for the competency',
+  'guest.title': 'Navigator',
+  'guest.title-description': 'Login as a Guest to experience Navigator',
+  'guest.download-link': 'Navigator Exploration Guide',
+  'guest.teacher-details':
+    'Facilitate learning, engage students and monitor learning outcomes.',
+  'guest.student-details':
+    'Locate your current knowledge and navigate to the learning destination.',
+  'guest.login-teacher': 'Login as Teacher',
+  'guest.login-student': 'Login as Student',
+  'common.guest': 'Guest',
+  'guest.download': 'Download the',
+  'class-activity.collection-disable-scheduling-message':
+    'This collection cannot be scheduled or added to today\'s class as there are no resources in the collection',
+  'class-activity.assessment-disable-scheduling-message':
+    'This assessment cannot be scheduled or added to today\'s class as there are no questions in the assessment',
+  'class-activity.offline-activity-disable-scheduling-message':
+    'This offline activity cannot be scheduled as there are no tasks in the offline activity',
+  'common.inferred': 'Inferred',
+  'class-report.warning-message':
+    'The report is unavailable for this class as it is associated with multiple subjects',
+  'common.competency-label-1': 'In Progress',
+  'common.competency-label-3': 'Inferred',
+  'common.competency-label-4': 'Gained',
+  'common.competency-label-5': 'Gained'
 };
