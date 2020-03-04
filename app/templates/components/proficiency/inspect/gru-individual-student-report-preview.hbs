@@ -151,7 +151,62 @@
         <span class="date">Skyline as of: February 25, 2020</span>
       </div>
       <div class="skyline-overview">
-        <div class="chart"></div>
+        <div class="chart">
+          <div class="proficiency-chart {{reportData.student.id}} ">
+            {{proficiency/learner-proficiency-domain-matrix
+              subjectBucket=subjectBucket
+              timeLine=timeLine
+              userId=reportData.student.id
+              subject=activeSubject
+              class=class
+              competencyMatrixDomains=competencyMatrixDomains
+              competencyMatrixCoordinates=competencyMatrixCoordinates
+              isSelectBaseLine=isSelectBaseLine
+              userProficiencyBaseLine=userProficiencyBaseLine
+              isShowMatrixChart=isShowMatrixChart
+              selectedDomain=selectedDomain
+              taxonomyGrades=taxonomyGrades
+              showGutCompetency=showGutCompetency
+              hideGutCompetencyButton=hideGutCompetencyButton
+              classGrade=classGrade
+              subjectCode=subjectCode
+              selectedCompetency=selectedCompetency
+              fwCompetencies=fwCompetencies
+              isPlayerProficiency = isPlayerProficiency
+            }}
+          </div>
+          <div class="proficiency-tags">
+            <div class="proficiency-legends">
+              <div class="mastered legend">
+                <span class="box"></span>
+                <span class="title">{{t 'profile.proficiency.mastered'}}</span>
+              </div>
+              <div class="in-progress legend">
+                <span class="box"></span>
+                <span class="title">{{t 'profile.proficiency.in-progress'}}</span>
+              </div>
+              <div class="not-started legend">
+                <span class="box"></span>
+                <span class="title">{{t 'profile.proficiency.not-started'}}</span>
+              </div>
+              <div class="show-gut legend">
+                <span class="box"></span>
+                <span class="title">{{t 'competencies-not-in-framework'}}</span>
+              </div>
+              <div class="skyline legend">
+                <span class="box-skyline"></span>
+                <span class="title">{{t 'profile.proficiency.skyline'}}</span>
+              </div>
+              <div class="class-grade-line legend">
+                <span class="box-class-grade-line"></span>
+                <span class="title">{{t 'grade-selector.placeholder'}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="time-series-container">
+            {{charts/monthly-time-series-chart startDate=timeSeriesStartDate}}
+          </div>
+        </div>
         <div class="competencies-list"></div>
       </div>
     </div>

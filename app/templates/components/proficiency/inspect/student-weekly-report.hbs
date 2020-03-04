@@ -16,7 +16,7 @@
     </div>
     <div class="report-download">
       {{#if isShowStudentCompetencies}}
-        {{proficiency/inspect/gru-individual-student-report-preview reportData=individualStudentReport class=classInfo teacher=teacherInfo}}
+        {{proficiency/inspect/gru-individual-student-report-preview reportData=individualStudentReport class=class teacher=teacherInfo course=course fwCompetencies=fwCompetencies fwDomains=fwDomains taxonomyCategories=taxonomyCategories}}
       {{else}}
         <div class="print-preview" title="{{t 'common.download'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
           {{gru-icon name="get_app"}}

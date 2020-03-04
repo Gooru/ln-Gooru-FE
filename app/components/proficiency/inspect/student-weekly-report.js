@@ -9,6 +9,12 @@ export default Ember.Component.extend({
   // Dependencies
   reportService: Ember.inject.service('api-sdk/report'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
+
   i18n: Ember.inject.service(),
 
   // -------------------------------------------------------------------------
@@ -16,6 +22,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     const component = this;
     component.loadSummaryReportData();
+    component.getTaxonomyCategories();
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });
@@ -232,13 +239,26 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function getTaxonomyCategories
+   * Method to get Taxonomy Categories
+   */
+
+  getTaxonomyCategories() {
+    const component = this;
+    return Ember.RSVP.hash({
+      taxonomyCategories: component.get('taxonomyService').getCategories()
+    }).then(({ taxonomyCategories }) => {
+      component.set('taxonomyCategories', taxonomyCategories);
+    });
+  },
+
+  /**
    * @function parseStudentsWeeklySummaryReportData
    * Method to parse students weekly summary report
    */
   parseStudentsWeeklySummaryReportData(summaryReportData) {
     const component = this;
     let parsedStudentsSummaryReportData = Ember.A([]);
-    component.set('classInfo', summaryReportData.get('class'));
     component.set('teacherInfo', summaryReportData.get('teacher'));
     let studentsSummaryReportData = summaryReportData.get(
       'studentsSummaryData'

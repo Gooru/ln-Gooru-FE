@@ -1,5 +1,6 @@
 import Ember from 'ember';
-export default Ember.Component.extend({
+import StudentLearnerProficiency from 'gooru-web/mixins/student-learner-proficiency';
+export default Ember.Component.extend(StudentLearnerProficiency, {
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['individual-student-report-preview'],
@@ -10,9 +11,23 @@ export default Ember.Component.extend({
   i18n: Ember.inject.service(),
 
   // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Date} timeSeriesStartDate
+   */
+  timeSeriesStartDate: Ember.computed.alias('class.startDate'),
+
+  /**
+   * @property {Object} studentProfile
+   */
+  studentProfile: Ember.computed.alias('reportData.student'),
+
+  // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
     const component = this;
+    component.loadData();
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });
