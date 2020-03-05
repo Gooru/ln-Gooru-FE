@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import { FEEDBACK_USER_CATEGORY, CONTENT_TYPES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -28,7 +27,6 @@ export default Ember.Component.extend({
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });
-    component.fetchActivityFeedbackCateory();
   },
 
   // -------------------------------------------------------------------------
@@ -39,17 +37,18 @@ export default Ember.Component.extend({
       const component = this;
       let resourceList = component.get('resourceList');
       let currentIndex = component.get('currentIndex');
-      let categoryLists = component.get('categoryLists');
       let nextContent = resourceList.objectAt(currentIndex);
       if (nextContent) {
         let content_format = nextContent.get('content_format')
           ? nextContent.get('content_format')
           : 'question';
-        let contentCategory = categoryLists.get(`${content_format}s`);
         component.set('isSkipped', nextContent.get('skipped'));
         component.set('contentScore', nextContent.get('score'));
         component.set('timeSpent', nextContent.get('savedTime'));
-        component.set('feedbackCategoryLists', contentCategory);
+        component.set(
+          'feedbackCategoryLists',
+          nextContent.get('feedbackCategory')
+        );
         component.set('contentFormat', content_format);
         component.set('resourceInfo', nextContent);
       } else {
@@ -76,13 +75,35 @@ export default Ember.Component.extend({
    * @type {Boolean}
    */
   isCollection: Ember.computed('collection', function() {
-    let component = this;
-    return component.get('collection.isCollection');
+    return this.get('collection.isCollection');
   }),
 
   isPlayNextContent: false,
 
   currentIndex: 0,
+
+  /**
+   * @property {resourceInfo{}} object
+   */
+  resourceInfo: Ember.computed('collection', function() {
+    return this.get('collection');
+  }),
+
+  /**
+   * @property {ResourceList[]} List of resource list
+   */
+  resourceList: Ember.computed('collection', function() {
+    let resourcesResult = this.get('collection.children');
+    return resourcesResult || [];
+  }),
+
+  /**
+   * @property {feedbackCategoryLists[]} List of feedback category list
+   */
+  feedbackCategoryLists: Ember.computed('collection', function() {
+    let feedbackCategory = this.get('collection.feedbackCategory');
+    return feedbackCategory || [];
+  }),
 
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
@@ -111,64 +132,12 @@ export default Ember.Component.extend({
   /**
    * @property {contentFormat} String
    */
-  contentType: Ember.computed('collection', function() {
-    let component = this;
-    let format = component.get('format');
+  contentFormat: Ember.computed('collection', function() {
+    let format = this.get('format');
     return format
       ? format
-      : component.get('isCollection')
+      : this.get('isCollection')
         ? 'collection'
         : 'assessment';
-  }),
-
-  // -------------------------------------------------------------------------
-  // Methods
-
-  /**
-   * @function fetchActivityFeedbackCateory
-   * Method to fetch learning activity feedback
-   */
-
-  fetchActivityFeedbackCateory() {
-    const component = this;
-    let role = component.get('session.role');
-    let userCategoryId =
-      FEEDBACK_USER_CATEGORY[`${role}`] || FEEDBACK_USER_CATEGORY.other;
-    component
-      .get('activityFeedbackService')
-      .getFeedbackCategory(userCategoryId)
-      .then(categoryLists => {
-        component.set('categoryLists', categoryLists);
-        let contentType = component.get('contentType');
-        let contentCategory;
-        if (contentType === CONTENT_TYPES.EXTERNAL_ASSESSMENT) {
-          contentCategory = categoryLists.get('externalAssessments');
-        } else if (contentType === CONTENT_TYPES.EXTERNAL_COLLECTION) {
-          contentCategory = categoryLists.get('externalCollections');
-        } else if (contentType === CONTENT_TYPES.OFFLINE_ACTIVITY) {
-          contentCategory = categoryLists.get('offlineActivities');
-        } else {
-          contentCategory = categoryLists.get(`${contentType}s`);
-        }
-        let resources = component.get('collection.children');
-        let listOfResources = [];
-        resources.map(resource => {
-          let type = resource.get('content_format')
-            ? resource.get('content_format')
-            : 'question';
-          let resourceCategory = categoryLists.get(`${type}s`);
-          if (resourceCategory.length) {
-            listOfResources.push(resource);
-          }
-        });
-        component.set('resourceList', listOfResources);
-        if (contentCategory.length) {
-          component.set('resourceInfo', component.get('collection'));
-          component.set('feedbackCategoryLists', contentCategory);
-          component.set('contentFormat', contentType);
-        } else {
-          component.send('onNext');
-        }
-      });
-  }
+  })
 });

@@ -556,7 +556,7 @@ window.i18ln = {
   'common.logout.head_3': 'प्रभुत्व मिळवतो',
   'common.logout.description':
     'अध्ययन पथदर्शी हे एक “शिकण्यासाठी असलेले जीपीएस माध्यम” म्हणून तयार करण्यात आलेले आहे – हा एक असा मार्ग आहे ज्यावर प्रत्येक विद्यार्थ्याने शिक्षणावर प्रभुत्व शिक्षण मिळवण्यासाठी चालावे. प्रत्येक विद्यार्थ्याने एकाच स्तराचे प्रभुत्व मिळवावे अशी शाळेची इच्छा असते, परंतु प्रत्येक विद्यार्थी हा वेगवेगळ्या प्रकारच्या ज्ञानासह आणि कौशल्यासह शिक्षणाच्या मार्गावर प्रारंभ करतो. अध्ययन पथदर्शी अशा विद्यार्थ्यांना ते जेथे आहेत तेथे येऊन भेटते आणि त्यांना त्यांची शैक्षणिक उद्दिष्टे पूर्ण करण्यासाठी मार्गदर्शन करते.',
-  'common.logout.logout-btn-msg1': 'तुम्ही लॉग आऊट झालेले आहात.',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'लॉग इन करण्यासाठी येथे क्लिक करा.',
   'common.mastery': 'प्रभुत्व',
   'common.menu': 'मेनू',
@@ -2905,5 +2905,10 @@ window.i18ln = {
   'class-progress-report.individual-report.competencies-inprogress':
     'Competencies in Progress (incomplete)',
   'class-progress-report.individual-report.skyline-title': 'Skyline as of',
-  'class-progress-report.individual-report.overview': 'Overview'
+  'class-progress-report.individual-report.overview': 'Overview',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

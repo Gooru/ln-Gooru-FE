@@ -1,6 +1,11 @@
 .controller.about {
   padding: 0 20px 10px;
 
+  &.guest-account {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
   h4 {
     margin-top: 10;
     margin-bottom: 0;
@@ -16,6 +21,9 @@
 
       i {
         color: $gray-darker;
+      }
+      &.guest-account {
+        opacity: 0.5;
       }
     }
   }
@@ -45,7 +53,8 @@
         color: $green-400;
 
         .gru-icon {
-          background: url("/assets/gooru/images/icon-verified-green.svg") no-repeat center center;
+          background: url("/assets/gooru/images/icon-verified-green.svg")
+            no-repeat center center;
           display: inline-block;
           height: 24px;
           width: 24px;
@@ -161,7 +170,11 @@
       }
     }
 
-    .bio {
+    .bios {
+      &.guest-account {
+        opacity: 0.4;
+        pointer-events: none;
+      }
       p {
         margin-bottom: 11px !important;
         display: -webkit-box;

@@ -10,7 +10,7 @@ import {
 import { getDomainCode } from 'gooru-web/utils/taxonomy';
 import { getObjectCopy, getObjectsDeepCopy } from 'gooru-web/utils/utils';
 import StudyPlayer from 'gooru-web/mixins/study-player';
-
+import ActivityFeedbackMixin from 'gooru-web/mixins/activity-feedback-mixin';
 /**
  *
  * Controls the access to the analytics data for a
@@ -18,7 +18,7 @@ import StudyPlayer from 'gooru-web/mixins/study-player';
  *
  */
 
-export default StudentCollection.extend(StudyPlayer, {
+export default StudentCollection.extend(StudyPlayer, ActivityFeedbackMixin, {
   /**
    * Confetti Initialize once Component Initialize
    */
@@ -163,23 +163,48 @@ export default StudentCollection.extend(StudyPlayer, {
 
     OnFeedbackCapture: function() {
       const controller = this;
-      let feedbackObj = getObjectCopy(controller.get('collectionObj'));
-      feedbackObj.isCollection = controller.get('collection.isCollection');
-      feedbackObj.children = getObjectsDeepCopy(
+      let collectionFeedback = getObjectCopy(controller.get('collectionObj'));
+      let isCollection = controller.get('collection.isCollection');
+      let categoryLists = controller.get('categoryLists');
+      let listOfResources = getObjectsDeepCopy(
         controller.get('collectionObj.children')
       );
       let resourcesResult = controller.get('attemptData.resourceResults');
-      let resourceList = feedbackObj.get('children');
-      resourceList.map(resource => {
+      let contentCategory = isCollection
+        ? categoryLists.get('collections')
+        : categoryLists.get('assessments');
+      let resourceList = Ember.A([]);
+      listOfResources.map(resource => {
         let result = resourcesResult.findBy('resourceId', resource.id);
+        let type = resource.get('content_format')
+          ? resource.get('content_format')
+          : 'question';
+        let resourceCategory = categoryLists.get(`${type}s`);
         resource.reaction = result.reaction;
         resource.savedTime = result.savedTime;
         resource.score = result.score;
         resource.skipped = result.skipped;
+        resource.feedbackCategory = resourceCategory.sortBy('feedbackTypeId');
+        if (resourceCategory.length) {
+          resourceList.push(resource);
+        }
       });
-      controller.set('feedbackObj', feedbackObj);
-      this.set('isShowActivityFeedback', true);
-      this.set('isStatusDone', false);
+      collectionFeedback.set('isCollection', isCollection);
+      collectionFeedback.set('children', resourceList);
+      collectionFeedback.set(
+        'feedbackCategory',
+        contentCategory.sortBy('feedbackTypeId')
+      );
+      if (
+        (contentCategory && contentCategory.length) ||
+        (resourceList && resourceList.length)
+      ) {
+        controller.set('collectionFeedback', collectionFeedback);
+        this.set('isShowActivityFeedback', true);
+        this.set('isStatusDone', false);
+      } else {
+        controller.send('next');
+      }
     }
   },
 

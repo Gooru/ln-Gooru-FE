@@ -9,6 +9,8 @@ export default Ember.Controller.extend({
 
   profileService: Ember.inject.service('api-sdk/profile'),
 
+  session: Ember.inject.service('session'),
+
   cprofile: function() {
     let Profile = Ember.Object.extend({
         oldPassword: null,
@@ -55,6 +57,9 @@ export default Ember.Controller.extend({
    * @property {isMyProfile}
    */
   isMyProfile: Ember.computed.reads('parentController.isMyProfile'),
+
+  isGuest: Ember.computed.alias('session.isGuest'),
+
   actions: {
     showChangePass: function(show) {
       this.resetController();

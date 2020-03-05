@@ -483,8 +483,7 @@ export const PLAYER_EVENT_MESSAGE = {
 
 export const FEEDBACK_USER_CATEGORY = {
   teacher: 1,
-  student: 2,
-  other: 3
+  student: 2
 };
 export const FEEDBACK_RATING_TYPE = {
   QUANTITATIVE: 1,

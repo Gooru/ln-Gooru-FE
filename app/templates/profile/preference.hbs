@@ -126,8 +126,8 @@
                     </div>
                 </div>
             {{else}}
-                <div class="category-head edit-head">
-                    <div class='edit-preference' {{action 'editCategory' }}> {{gru-icon name='mode_edit'}}</div>
+                <div class="category-head edit-head {{if isGuestAccount 'guest-account'}}">
+                    <div class='edit-preference' {{action (optional (unless isGuestAccount (action 'editCategory') null))}} title="{{if isGuestAccount (t 'common.not-editable-for-demo') ''}}"> {{gru-icon name='mode_edit'}}</div>
                 </div>
                 <div class="category-container-layout">
                     <div class='category-container' style="">
@@ -279,7 +279,7 @@
                                             </div>
                                         {{else}}
                                             <div class="subject-fwk">
-                                                {{!--   
+                                                {{!--
                                                 <div class='sub'>
                                                     New Subject
                                                 </div>

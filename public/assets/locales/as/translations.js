@@ -580,7 +580,7 @@ window.i18ln = {
   'common.logout.head_3': 'Achieves Mastery',
   'common.logout.description':
     'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
-  'common.logout.logout-btn-msg1': 'You have been logout.',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'পাৰদৰ্শিতা',
   'common.menu': 'তালিকা',
@@ -2937,5 +2937,10 @@ window.i18ln = {
   'class-progress-report.individual-report.competencies-inprogress':
     'Competencies in Progress (incomplete)',
   'class-progress-report.individual-report.skyline-title': 'Skyline as of',
-  'class-progress-report.individual-report.overview': 'Overview'
+  'class-progress-report.individual-report.overview': 'Overview',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

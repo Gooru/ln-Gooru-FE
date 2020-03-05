@@ -129,8 +129,7 @@ export default Ember.Component.extend({
     const component = this;
     let userId = component.get('session.userId');
     let role = component.get('session.role');
-    let userCategoryId =
-      FEEDBACK_USER_CATEGORY[`${role}`] || FEEDBACK_USER_CATEGORY.other;
+    let userCategoryId = FEEDBACK_USER_CATEGORY[`${role}`];
     let userFeedback = Ember.A([]);
     let categoryLists = component.get('categoryLists');
     categoryLists.map(category => {

@@ -555,7 +555,7 @@ window.i18ln = {
   'common.logout.head_3': 'महारत हासिल करता है',
   'common.logout.description':
     'लर्निंग नेविगेटर को "सीखने के GPS" के रूप में डिज़ाइन किया गया है – यह प्रत्येक छात्र को महारत हासिल करने के लिए अपने स्वयं के पथ का अनुसरण करने में मददगार है। स्कूल प्रत्येक छात्र से दक्षता के समान स्तर तक पँहुचने की अपेक्षा करते हैं, लेकिन प्रत्येक छात्र ज्ञान और कौशलों के एक अलग सेट से शुरू करता है। लर्निंग नेविगेटर प्रत्येक छात्र को उसकी सटीक स्थिति के अनुसार उसके सीखने के लक्ष्यों के लिए नेविगेट करता है।',
-  'common.logout.logout-btn-msg1': 'आपको लॉगआउट कर दिया गया है।',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'लॉग इन करने के लिए यहां क्लिक करें।',
   'common.mastery': 'महारत',
   'common.menu': 'मेन्यू',
@@ -2907,5 +2907,10 @@ window.i18ln = {
   'class-progress-report.individual-report.competencies-inprogress':
     'Competencies in Progress (incomplete)',
   'class-progress-report.individual-report.skyline-title': 'Skyline as of',
-  'class-progress-report.individual-report.overview': 'Overview'
+  'class-progress-report.individual-report.overview': 'Overview',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

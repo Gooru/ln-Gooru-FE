@@ -544,7 +544,7 @@ window.i18ln = {
   'common.logout.head_3': 'تحقيق الجدارة',
   'common.logout.description':
     'صُمم مستكشف التعلم ك "GPS لتتعلم" طريقة لكل طالب لاتباع مساره الخاص به نحو التمكن. وتطلب المدارس من جميع الطلاب ان يحققوا نفس مستوء الكفا،ولكن كل طالب يبدأ بمجموعة مختلفة من المهارات والمجموعات. يلتقى المستكشف كل طالب فى مكانه بالظبط ثم يوجههم لاهدافهم فى التعلم.',
-  'common.logout.logout-btn-msg1': 'لقد قمت بتسجيل الخروج.',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'اضغط هنا لتسجيل الدخول.',
   'common.mastery': 'التمكن',
   'common.menu': 'القائمة',
@@ -2815,5 +2815,10 @@ window.i18ln = {
   'class-progress-report.individual-report.competencies-inprogress':
     'Competencies in Progress (incomplete)',
   'class-progress-report.individual-report.skyline-title': 'Skyline as of',
-  'class-progress-report.individual-report.overview': 'Overview'
+  'class-progress-report.individual-report.overview': 'Overview',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

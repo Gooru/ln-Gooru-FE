@@ -552,7 +552,7 @@ window.i18ln = {
   'common.logout.head_3': 'ਮੁਹਾਰਤ ਹਾਸਲ ਕਰਦਾ ਹੈ',
   'common.logout.description':
     'ਲਰਨਿੰਗ ਨੈਵੀਗੇਟਰ "ਸਿਖਲਾਈ ਲਈ GPS" ਵਾਂਗ ਡਿਜ਼ਾਈਨ ਕੀਤਾ ਗਿਆ ਹੈ - ਹਰੇਕ ਵਿਦਿਆਰਥੀ ਲਈ ਮੁਹਾਰਤ ਹਾਸਲ ਕਰਨ ਦਾ ਉਨ੍ਹਾਂ ਦਾ  ਖੁਦ ਦਾ ਇੱਕ ਰਸਤਾ। ਸਕੂਲ ਸਾਰੇ ਵਿਦਿਆਰਥੀਆਂ ਨੂੰ ਇੱਕ ਸਮਾਨ ਮੁਹਾਰਤ ਲੈਣ ਲਈ ਕਹਿੰਦੇ ਹਨ, ਪਰ ਹਰ ਵਿਦਿਆਰਥੀ ਦੀ ਸ਼ੁਰੂਆਤ ਵੱਖਰੇ ਗਿਆਨ ਅਤੇ ਹੁਨਰ ਤੋਂ ਹੁੰਦੀ ਹੈ। ਲਰਨਿੰਗ ਨੈਵੀਗੇਟਰ ਹਰੇਕ ਵਿਦਿਆਰਥੀ ਦੀ ਮੌਜੂਦਾ ਸਥਿਤੀ \'ਤੇ ਮਿਲਦਾ ਹੈ ਅਤੇ ਉਨ੍ਹਾਂ ਨੂੰ ਉਨ੍ਹਾਂ ਦੇ ਸਿਖਲਾਈ ਟੀਚਿਆਂ ਲਈ ਰਸਤਾ ਦਿਖਾਉਂਦਾ ਹੈ।',
-  'common.logout.logout-btn-msg1': 'ਤੁਸੀਂ ਲੌਗ-ਆਊਟ ਕਰ ਚੁੱਕੇ ਹੋ।',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'ਲੌਗ ਇਨ ਕਰਨ ਲਈ ਇੱਥੇ ਕਲਿੱਕ ਕਰੋ',
   'common.mastery': 'ਮੁਹਾਰਤ',
   'common.menu': 'ਮੈਨਯੂ',
@@ -2868,5 +2868,10 @@ window.i18ln = {
   'class-progress-report.individual-report.competencies-inprogress':
     'Competencies in Progress (incomplete)',
   'class-progress-report.individual-report.skyline-title': 'Skyline as of',
-  'class-progress-report.individual-report.overview': 'Overview'
+  'class-progress-report.individual-report.overview': 'Overview',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

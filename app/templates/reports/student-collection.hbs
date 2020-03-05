@@ -1,5 +1,5 @@
 {{#if isShowActivityFeedback}}
-  {{player/gru-activity-feedback collection=feedbackObj timeSpent=attemptData.totalTimeSpent score=attemptData.averageScore onSkipFeedback="closePlayer"}}
+  {{player/gru-activity-feedback collection=collectionFeedback timeSpent=attemptData.totalTimeSpent score=attemptData.averageScore onSkipFeedback="closePlayer"}}
 {{else}}
   <div class="student-collection">
     {{#if isIframeMode}}
@@ -14,11 +14,11 @@
             <i class="icon pull-left"></i>
             <p class="title pull-left">{{collection.title}}</p>
           </div>
-          {{#unless isAnonymous}}
+          {{#if (and isFeedbackCapture (not isAnonymous))}}
             <div class="feedback-btn">
               <button class="caputure-feedback" {{action 'captureFeedback'}}>{{t 'common.next'}}</button>
             </div>
-          {{/unless}}
+          {{/if}}
         </div>
       </div>
     {{else}}

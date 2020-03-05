@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ConfigurationMixin from 'gooru-web/mixins/configuration';
 import { getObjectCopy, getObjectsDeepCopy } from 'gooru-web/utils/utils';
+import { FEEDBACK_USER_CATEGORY } from 'gooru-web/config/config';
 
 /**
  *
@@ -35,28 +36,17 @@ export default Ember.Controller.extend(ConfigurationMixin, {
 
   session: Ember.inject.service('session'),
 
+  /**
+   * @property {activityFeedbackService}
+   */
+  activityFeedbackService: Ember.inject.service('api-sdk/activity-feedback'),
+
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
     captureFeedback: function() {
-      const controller = this;
-      let feedbackObj = getObjectCopy(controller.get('collectionObj'));
-      feedbackObj.isCollection = controller.get('collection.isCollection');
-      feedbackObj.children = getObjectsDeepCopy(
-        controller.get('collectionObj.children')
-      );
-      let resourcesResult = controller.get('attemptData.resourceResults');
-      let resourceList = feedbackObj.get('children');
-      resourceList.map(resource => {
-        let result = resourcesResult.findBy('resourceId', resource.id);
-        resource.reaction = result.reaction;
-        resource.savedTime = result.savedTime;
-        resource.score = result.score;
-        resource.skipped = result.skipped;
-      });
-      controller.set('feedbackObj', feedbackObj);
-      controller.set('isShowActivityFeedback', true);
+      this.set('isShowActivityFeedback', true);
     }
   },
 
@@ -91,6 +81,8 @@ export default Ember.Controller.extend(ConfigurationMixin, {
 
   isShowActivityFeedback: false,
 
+  isFeedbackCapture: false,
+
   // -------------------------------------------------------------------------
   // Observers
 
@@ -119,5 +111,66 @@ export default Ember.Controller.extend(ConfigurationMixin, {
           });
         });
     }
-  })
+  }),
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function fetchActivityFeedbackCateory
+   * Method to fetch learning activity feedback
+   */
+
+  fetchActivityFeedbackCateory() {
+    const controller = this;
+    let role = controller.get('session.role');
+    let userCategoryId = FEEDBACK_USER_CATEGORY[`${role}`];
+    controller
+      .get('activityFeedbackService')
+      .getFeedbackCategory(userCategoryId)
+      .then(categoryLists => {
+        controller.set('categoryLists', categoryLists);
+        let collectionFeedback = getObjectCopy(controller.get('collectionObj'));
+        let isCollection = controller.get('collection.isCollection');
+        let listOfResources = getObjectsDeepCopy(
+          controller.get('collectionObj.children')
+        );
+        let resourcesResult = controller.get('attemptData.resourceResults');
+        let contentCategory = isCollection
+          ? categoryLists.get('collections')
+          : categoryLists.get('assessments');
+        let resourceList = Ember.A([]);
+        listOfResources.map(resource => {
+          let result = resourcesResult.findBy('resourceId', resource.id);
+          let type = resource.get('content_format')
+            ? resource.get('content_format')
+            : 'question';
+          let resourceCategory = categoryLists.get(`${type}s`);
+          resource.set('reaction', result.reaction);
+          resource.set('savedTime', result.savedTime);
+          resource.set('score', result.score);
+          resource.set('skipped', result.skipped);
+          resource.set(
+            'feedbackCategory',
+            resourceCategory.sortBy('feedbackTypeId')
+          );
+          if (resourceCategory.length) {
+            resourceList.push(resource);
+          }
+        });
+        collectionFeedback.set('isCollection', isCollection);
+        collectionFeedback.set('children', resourceList);
+        collectionFeedback.set(
+          'feedbackCategory',
+          contentCategory.sortBy('feedbackTypeId')
+        );
+        if (
+          (contentCategory && contentCategory.length) ||
+          (resourceList && resourceList.length)
+        ) {
+          controller.set('collectionFeedback', collectionFeedback);
+          this.set('isFeedbackCapture', true);
+        }
+      });
+  }
 });
