@@ -421,6 +421,12 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
       nextPromise = route.nextPromiseHandler(
         currentLocationToMapContext(currentLocation)
       );
+      // Remove next item from localstorage when playing different item from stored next
+      if (!route.isResumeSameActivity(currentLocation)) {
+        navigateMapService
+          .getLocalStorage()
+          .removeItem(navigateMapService.generateKey());
+      }
     }
     nextPromise
       .then(route.nextPromiseHandler)
@@ -492,5 +498,24 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     let setting = aClass.get('setting');
     let isPremiumCourse = setting ? setting['course.premium'] : false;
     return isPremiumCourse;
+  },
+
+  /**
+   * @function isResumeSameActivity
+   * @param {Object} currentLocation
+   * Method to check whether playing same activity which is stored next
+   */
+  isResumeSameActivity(currentLocation) {
+    const navigateMapService = this.get('navigateMapService');
+    const storedNext = JSON.parse(
+      navigateMapService
+        .getLocalStorage()
+        .getItem(navigateMapService.generateKey())
+    );
+    return (
+      storedNext &&
+      storedNext.context.course_id === currentLocation.courseId &&
+      storedNext.context.collection_id === currentLocation.collectionId
+    );
   }
 });
