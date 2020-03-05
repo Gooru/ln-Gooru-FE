@@ -23,11 +23,17 @@ export default Ember.Component.extend(StudentLearnerProficiency, {
    */
   studentProfile: Ember.computed.alias('reportData.student'),
 
+  onSelectStudent: Ember.observer('reportData', function() {
+    this.loadData();
+  }),
+
+  currentDate: moment().format('MMMM DD, YYYY'),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
     const component = this;
-    component.loadData();
+    this.loadData();
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });

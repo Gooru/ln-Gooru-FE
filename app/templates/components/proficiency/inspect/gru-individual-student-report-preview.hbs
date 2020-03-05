@@ -6,10 +6,14 @@
     <div class="report-summery">
       <span class="student-name">{{reportData.student.firstName}},  {{reportData.student.lastName}}</span>
       <span class="class-name">{{class.title}} ({{teacher.firstName}} {{teacher.lastName}})</span>
-      <span class="date">January 2, 2020 - February 25, 2020</span>
+      {{#if reportStartDate}}
+        <span class="date">{{reportStartDate}} - {{reportEndDate}}</span>
+      {{else}}
+        <span class="date">{{t 'beginning-till-now'}}</span>
+      {{/if}}
     </div>
     <div class="report-overview">
-      <div class="title">Overview:</div>
+      <div class="title">{{t 'class-progress-report.individual-report.overview'}}:</div>
       <div class="student-report">
         <div class="header">
           <div class="competencies-label">
@@ -117,7 +121,7 @@
       <div class="competencies-report">
         <div class="mastery-competencies">
           <div class="header">
-            Competencies Mastered (score ≥ 80%)
+            {{t 'class-progress-report.individual-report.competencies-mastery'}}
           </div>
           <div class="body">
             {{#each reportData.weeklyReportData.masteredCompetencies as |competency|}}
@@ -125,18 +129,9 @@
             {{/each}}
           </div>
         </div>
-        <div class="struggle-competencies">
-          <div class="header">
-            Competencies Showing Difficulty* (score <80%)
-          </div>
-          <div class="body"></div>
-          <div class="note">
-            *Note - these competencies will need to be re-attempted
-          </div>
-        </div>
         <div class="in-progress-competencies">
           <div class="header">
-            Competencies in Progress (incomplete)
+            {{t 'class-progress-report.individual-report.competencies-inprogress'}}
           </div>
           <div class="body">
             {{#each reportData.weeklyReportData.inprogressCompetencies as |competency|}}
@@ -148,11 +143,11 @@
     </div>
     <div class="skyline-report">
       <div class="skyline-summery">
-        <span class="date">Skyline as of: February 25, 2020</span>
+        <span class="date">{{t 'class-progress-report.individual-report.skyline-title'}}: {{currentDate}}</span>
       </div>
       <div class="skyline-overview">
         <div class="chart">
-          <div class="proficiency-chart {{reportData.student.id}} ">
+          <div class="proficiency-chart">
             {{proficiency/learner-proficiency-domain-matrix
               subjectBucket=subjectBucket
               timeLine=timeLine
@@ -207,7 +202,15 @@
             {{charts/monthly-time-series-chart startDate=timeSeriesStartDate}}
           </div>
         </div>
-        <div class="competencies-list"></div>
+        <div class="competencies-list">
+          <div class="subject-name">{{activeSubject.title}} {{t 'common.domains'}}</div>
+          {{#each competencyMatrixCoordinates.domains as |domain index|}}
+            <div class="domain-name">
+              <span>{{plus-one index}}.</span>
+              <span>{{domain.domainName}}</span>
+            </div>
+          {{/each}}
+        </div>
       </div>
     </div>
   </div>

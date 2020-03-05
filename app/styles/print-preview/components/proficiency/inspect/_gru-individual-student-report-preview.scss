@@ -1,7 +1,8 @@
 .individual-student-report {
   .report-period-selector {
     .report-periods,
-    .active-period {
+    .active-period,
+    .custom-range-shower {
       display: none !important;
     }
     .report-download {
@@ -169,10 +170,9 @@
               .competencies-report {
                 margin: 30px 20px;
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
                 border: 1px solid;
                 .mastery-competencies,
-                .struggle-competencies,
                 .in-progress-competencies {
                   padding: 10px;
                   border-right: 1px solid;
@@ -205,7 +205,47 @@
                 }
               }
               .skyline-overview {
+                column-gap: 10px;
                 .chart {
+                  page-break-before: always;
+                  page-break-after: always;
+                  page-break-inside: avoid;
+                  .proficiency-chart {
+                    margin: 15px 0px;
+                    .learner-proficiency-domain-matrix {
+                      .actions {
+                        .grade-selector {
+                          .active-grade-list {
+                            .active-grade {
+                              span {
+                                .close {
+                                  display: none;
+                                }
+                              }
+                            }
+                          }
+                        }
+                        .fwc-panel,
+                        .toggle-chart {
+                          display: none;
+                        }
+                      }
+                      .chart-area {
+                        .matrix-chart {
+                          .chart-container {
+                            .domain-chart-container {
+                              .scrollable-chart {
+                                height: max-content !important;
+                                #render-proficiency-matrix {
+                                  height: max-content !important;
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                   .proficiency-tags {
                     .last-updated {
                       text-align: right;
@@ -282,6 +322,22 @@
                           }
                         }
                       }
+                    }
+                  }
+                }
+                .competencies-list {
+                  page-break-before: always;
+                  page-break-after: always;
+                  page-break-inside: avoid;
+                  margin-top: 15px;
+                  .subject-name {
+                    font-weight: bold;
+                  }
+                  .domain-name {
+                    display: flex;
+                    padding-left: 15px;
+                    span {
+                      padding: 3px;
                     }
                   }
                 }
