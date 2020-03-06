@@ -10,7 +10,30 @@
         {{#if (eq category.feedbackTypeId 1)}}
           <div class="category-panel">
               <div class="category">{{category.categoryName}}</div>
-              <div class="category-rating">{{rating-stars rating = category.rating}}</div>
+              <div class="category-rating">{{rating-stars rating = category.rating maxRating = category.maxScale}}</div>
+          </div>
+        {{/if}}
+        {{#if (eq category.feedbackTypeId 2 )}}
+          <div class="category-panel">
+            <div class="category">{{category.categoryName}}</div>
+            <div class="category-quality">
+              {{
+              validation/gru-radio
+              model=category
+              valuePath='yes'
+              groupValue=category.quality
+              name="role-radio"
+              translationPath="common.yes"
+              }}
+              {{
+              validation/gru-radio
+              model=category
+              valuePath='no'
+              groupValue=category.quality
+              name="role-radio"
+              translationPath="common.no"
+              }}
+            </div>
           </div>
         {{/if}}
         {{#if (eq category.feedbackTypeId 3 )}}

@@ -110,8 +110,12 @@ export default Ember.Component.extend({
           if (category) {
             if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.QUANTITATIVE) {
               category.set('rating', feedback.rating);
+            } else if (
+              category.feedbackTypeId === FEEDBACK_RATING_TYPE.QUALITATIVE
+            ) {
+              category.set('quality', feedback.qualitative);
             } else {
-              category.set('comments', feedback.comments);
+              category.set('comments', feedback.qualitative);
             }
           }
         });
@@ -140,6 +144,8 @@ export default Ember.Component.extend({
         feedbackObj.user_feedback_quantitative = category.rating;
       } else if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.BOTH) {
         feedbackObj.user_feedback_qualitative = category.comments;
+      } else if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.QUALITATIVE) {
+        feedbackObj.user_feedback_qualitative = category.quality;
       }
       userFeedback.pushObject(feedbackObj);
     });
