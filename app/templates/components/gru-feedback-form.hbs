@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="feedback-body-panel">
-      {{#each categoryLists as |category|}}
+      {{#each categoryLists as |category index|}}
         {{#if (eq category.feedbackTypeId 1)}}
           <div class="category-panel">
               <div class="category">{{category.categoryName}}</div>
@@ -22,7 +22,7 @@
               model=category
               valuePath='yes'
               groupValue=category.quality
-              name="role-radio"
+              name=(concat "category-radio-"index)
               translationPath="common.yes"
               }}
               {{
@@ -30,7 +30,7 @@
               model=category
               valuePath='no'
               groupValue=category.quality
-              name="role-radio"
+              name=(concat "category-radio-"index)
               translationPath="common.no"
               }}
             </div>
