@@ -78,7 +78,7 @@
     </div>
   </div>
 </div>
-{{#if isFilterEnabled}}
+{{#if (and isFilterEnabled isFilterLoaded)}}
   {{search/search-by-filter
   isShow=isShowFilter
   onFilterApply="onApplyFilter"
