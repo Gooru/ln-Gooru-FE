@@ -1,4 +1,4 @@
-<div class="milestone-course-map-container">
+<div class="milestone-course-map-container {{if isClassActivity 'class-activity-milestone'}}">
   {{#each milestones as | milestone milestoneIndex | }}
     <div class="milestone-course-map {{if milestone.isActive 'active'}} {{if milestone.isClassGrade 'class-grade'}}">
       <div class="milestone-course-map-panel  {{if milestone.isActive 'active'}}">
@@ -90,12 +90,22 @@
                             <div class="collection-title-container" {{action 'openCollectionPreview' lesson.unit_id lesson.lesson_id collection}}>
                               <p>{{collection.title}}</p>
                             </div>
-                            <div class="colllection-go-live" {{action 'goLive' collection}}>
-                              {{#unless (or collection.isExternalAssessment collection.isExternalCollection collection.isOfflineActivity) }}
-                                <i class="go-live-icon"></i>
-                              {{/unless}}
-                            </div>
-
+                            {{#if isClassActivity}}
+                              <div class="collection-actions-btn">
+                                <div class="add-dca-content {{if collection.isAdded 'added'}}" data-toggle="tooltip" data-html="true" data-placement="bottom" title="{{t 'add.to.todays.class'}}" data-trigger="hover" {{action "onAddActivity" collection}}>
+                                  {{gru-icon name="add"}} {{gru-icon name="done"}}
+                                </div>
+                                <div class="schedule-dca-content ca-datepicker-popover {{if collection.isScheduled 'has-scheduled'}}" title="{{t 'teacher-landing.schedule-for-later'}}" data-toggle="tooltip" data-html="true" data-placement="bottom" data-trigger="hover" {{action "onScheduleActivity" collection}}>
+                                  {{gru-icon name="update"}}
+                                </div>
+                              </div>
+                            {{else}}
+                              <div class="collection-go-live" {{action 'goLive' collection}}>
+                                {{#unless (or collection.isExternalAssessment collection.isExternalCollection collection.isOfflineActivity) }}
+                                  <i class="go-live-icon"></i>
+                                {{/unless}}
+                              </div>
+                            {{/if}}
                             <div class="collection-content-counts">
                               <div class="resource-count" title="{{t 'common.resource'}}" data-toggle="tooltip" data-placement="bottom" data-trigger="hover">
                                 {{#if (gt collection.resourceCount 0)}}

@@ -18,12 +18,21 @@ export default Ember.Component.extend({
   courseService: Ember.inject.service('api-sdk/course'),
 
   /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
+
+  /**
    * @type {ClassService} Service to retrieve class information
    */
   classService: Ember.inject.service('api-sdk/class'),
 
   didInsertElement() {
     this.scrollHandler();
+    if (this.get('isPremiumClass')) {
+      this.fetchTeacherMilestones();
+    }
   },
 
   actions: {
@@ -199,8 +208,15 @@ export default Ember.Component.extend({
       component.set('activeCmClass', classInfo);
       component.getClassInfo(classInfo.get('id')).then(classData => {
         component.set('activeCmClass', classData);
+        if (component.get('isPremiumClass')) {
+          component.fetchTeacherMilestones();
+        }
       });
       component.actions.onToggleMultiClassPanel(component);
+    },
+
+    onPreviewContent(unitId, lessonId, content) {
+      this.send('onShowContentPreview', content);
     }
   },
 
@@ -354,6 +370,30 @@ export default Ember.Component.extend({
           component.incrementProperty('scrollEndHitCount');
         }
       }
+    });
+  },
+
+  /**
+   * @func fetchTeacherMilestones
+   * Method to fetch teacher milestone data
+   */
+  fetchTeacherMilestones() {
+    const component = this;
+    const currentClass = component.get('activeCmClass');
+    const fwCode = currentClass.get('preference.framework') || 'GUT';
+    const courseId = currentClass.get('courseId');
+    const subject = currentClass.get('preference.subject');
+    const milestonePromise = currentClass.get('milestoneViewApplicable')
+      ? component.get('courseService').getCourseMilestones(courseId, fwCode)
+      : Ember.RSVP.resolve([]);
+    return Ember.RSVP.hash({
+      milestones: milestonePromise,
+      gradeSubject: subject
+        ? component.get('taxonomyService').fetchSubject(subject)
+        : {}
+    }).then(function(hash) {
+      component.set('milestones', hash.milestones);
+      component.set('gradeSubject', hash.gradeSubject);
     });
   }
 });
