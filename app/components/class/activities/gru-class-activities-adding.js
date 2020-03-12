@@ -18,12 +18,21 @@ export default Ember.Component.extend({
   courseService: Ember.inject.service('api-sdk/course'),
 
   /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
+
+  /**
    * @type {ClassService} Service to retrieve class information
    */
   classService: Ember.inject.service('api-sdk/class'),
 
   didInsertElement() {
     this.scrollHandler();
+    if (this.get('isPremiumClass')) {
+      this.fetchMilestones();
+    }
   },
 
   actions: {
@@ -71,9 +80,9 @@ export default Ember.Component.extend({
         isRefreshed || component.get('scrollEndHitCount') === 0;
       component.set('isFetchedAllContents', filteredContents.length < 20);
       if (filteredContents.length) {
-        let todaysActivities = component.get('todaysActivities');
+        let todayActivities = component.get('todayActivities');
         filteredContents.map(content => {
-          content.isAdded = !!todaysActivities.findBy('contentId', content.id);
+          content.isAdded = !!todayActivities.findBy('contentId', content.id);
         });
         filteredContents = isNewSetOfContents
           ? filteredContents
@@ -199,8 +208,16 @@ export default Ember.Component.extend({
       component.set('activeCmClass', classInfo);
       component.getClassInfo(classInfo.get('id')).then(classData => {
         component.set('activeCmClass', classData);
+        if (component.get('isPremiumClass')) {
+          component.fetchMilestones();
+        }
       });
       component.actions.onToggleMultiClassPanel(component);
+    },
+
+    //Action triggered click on content title in milestone view
+    onPreviewContent(unitId, lessonId, content) {
+      this.send('onShowContentPreview', content);
     }
   },
 
@@ -238,15 +255,31 @@ export default Ember.Component.extend({
 
   isFetchedAllContents: false,
 
-  observeTodaysActivities: Ember.observer('todaysActivities.[]', function() {
+  /**
+   * Maintains the list of added collection ids from today's class activities
+   * @type {Object}
+   */
+  todayActivitiesContentIds: Ember.computed('todayActivities.[]', function() {
+    let classActivities = this.get('todayActivities')
+      ? this.get('todayActivities')
+      : Ember.A([]);
+    let collectionIds = classActivities.map(classActivity => {
+      return (
+        classActivity.get('collection.id') || classActivity.get('contentId')
+      );
+    });
+    return collectionIds;
+  }),
+
+  observeTodayActivities: Ember.observer('todayActivities.[]', function() {
     const component = this;
-    let todaysActivities = component.get('todaysActivities');
+    let todayActivities = component.get('todayActivities');
     let filteredContents = component.get('filteredContents');
     if (filteredContents && filteredContents.length) {
       filteredContents.map(content => {
         content.set(
           'isAdded',
-          !!todaysActivities.findBy('contentId', content.id)
+          !!todayActivities.findBy('contentId', content.id)
         );
       });
     }
@@ -354,6 +387,30 @@ export default Ember.Component.extend({
           component.incrementProperty('scrollEndHitCount');
         }
       }
+    });
+  },
+
+  /**
+   * @func fetchMilestones
+   * Method to fetch milestone data
+   */
+  fetchMilestones() {
+    const component = this;
+    const currentClass = component.get('activeCmClass');
+    const fwCode = currentClass.get('preference.framework') || 'GUT';
+    const courseId = currentClass.get('courseId');
+    const subject = currentClass.get('preference.subject');
+    const milestonePromise = currentClass.get('milestoneViewApplicable')
+      ? component.get('courseService').getCourseMilestones(courseId, fwCode)
+      : Ember.RSVP.resolve([]);
+    return Ember.RSVP.hash({
+      milestones: milestonePromise,
+      gradeSubject: subject
+        ? component.get('taxonomyService').fetchSubject(subject)
+        : {}
+    }).then(function(hash) {
+      component.set('milestones', hash.milestones);
+      component.set('gradeSubject', hash.gradeSubject);
     });
   }
 });

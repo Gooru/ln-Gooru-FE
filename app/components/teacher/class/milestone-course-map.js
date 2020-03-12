@@ -278,6 +278,13 @@ export default Ember.Component.extend({
         'studentCollectionReportContext',
         studentCollectionReportContext
       );
+    },
+
+    onAddActivity(content) {
+      this.sendAction('onAddActivity', content);
+    },
+    onScheduleActivity(content) {
+      this.sendAction('onScheduleActivity', content);
     }
   },
 
@@ -668,6 +675,7 @@ export default Ember.Component.extend({
     let prevLesson = lessons.objectAt(selectedLessonIndex + 1);
     let nextLesson = lessons.objectAt(selectedLessonIndex - 1);
     let componentEle = component.$(element);
+    let collectionIds = this.get('todayActivitiesContentIds');
     if (selectedLesson.get('isActive')) {
       if (componentEle) {
         componentEle.slideUp(400, function() {
@@ -705,6 +713,12 @@ export default Ember.Component.extend({
               selectedLesson,
               collections
             );
+            collections.map(collection => {
+              let id = collection.get('id');
+              if (collectionIds.includes(id)) {
+                collection.set('isAdded', true);
+              }
+            });
             selectedLesson.set('collections', collections);
             selectedLesson.set('hasCollectionFetched', true);
 

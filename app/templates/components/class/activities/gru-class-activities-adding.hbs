@@ -39,6 +39,21 @@
         </div>
       {{/each}}
     {{else if isShowCourseMap}}
+      {{#if isPremiumClass}}
+        <div class="milestone-container">
+          {{teacher/class/milestone-course-map
+            class=activeCmClass
+            gradeSubject=gradeSubject
+            milestones=milestones
+            showPerformance = false
+            isClassActivity = true
+            todayActivitiesContentIds = todayActivitiesContentIds
+            onAddActivity="onAddActivity"
+            onScheduleActivity="onShowDateRangePicker"
+            onPreviewContent = "onPreviewContent"
+          }}
+        </div>
+      {{else}}
         <div class="course-map-container">
           {{#if isCourseAttached}}
             {{teacher/class/ca-course-map
@@ -49,13 +64,14 @@
               classId=activeCmClass.id
               courseId=activeCmClass.courseId
               isShowLessonPlan = false
-              todaysClassActivities = todaysActivities
+              todayActivitiesContentIds = todayActivitiesContentIds
               onShowContentPreview = "onShowContentPreview"
             }}
           {{else}}
             <span class="no-course-map">No Course Map Attached</span>
           {{/if}}
         </div>
+      {{/if}}
     {{else}}
       {{#each filteredContents as |filteredContent|}}
         {{new-cards/activities/gru-add-content-card

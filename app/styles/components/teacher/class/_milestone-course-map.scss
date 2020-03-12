@@ -620,7 +620,7 @@
                   }
                 }
 
-                .colllection-go-live {
+                .collection-go-live {
                   color: #4a8cdb;
                   cursor: pointer;
                   align-self: center;
@@ -754,6 +754,63 @@
                     background-repeat: no-repeat;
                     background-size: 20px 20px;
                     background-image: url("../assets/gooru/share.png");
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.class-activity-milestone {
+      .milestone-course-map {
+        .milestone-course-map-panel {
+          grid-template-columns: 1fr;
+        }
+        .milestone-course-map-lesson-container {
+          .milestone-course-map-lesson {
+            .milestone-course-map-collection-container {
+              .milestone-course-map-collection {
+                .milestone-course-map-collection-panel {
+                  grid-template-columns: 70px 1fr 120px 50px 60px;
+                  @media screen and (max-width: $screen-sm) {
+                    grid-template-columns: 70px 1fr 50px 60px;
+                  }
+                  .collection-actions-btn {
+                    display: flex;
+                    grid-column-start: 4;
+                    grid-column-end: 5;
+                    grid-row-start: 1;
+                    @media screen and (max-width: $screen-sm) {
+                      grid-column-start: 3;
+                      grid-column-end: 4;
+                    }
+                    cursor: pointer;
+                    .add-dca-content {
+                      display: flex;
+                      .done {
+                        display: none;
+                        color: #4d9840;
+                        font-size: 22px;
+                      }
+                      &.added {
+                        pointer-events: none;
+                        .add {
+                          display: none;
+                        }
+                        .done {
+                          display: block;
+                        }
+                      }
+                    }
+                  }
+                  .collection-content-counts {
+                    grid-column-end: 4;
+                    grid-column-start: 3;
+                    @media screen and (max-width: $screen-sm) {
+                      display: none;
+                    }
                   }
                 }
               }
