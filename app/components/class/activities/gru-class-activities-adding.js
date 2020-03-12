@@ -255,6 +255,22 @@ export default Ember.Component.extend({
 
   isFetchedAllContents: false,
 
+  /**
+   * Maintains the list of added collection ids from today's class activities
+   * @type {Object}
+   */
+  todayActivitiesContentIds: Ember.computed('todayActivities.[]', function() {
+    let classActivities = this.get('todayActivities')
+      ? this.get('todayActivities')
+      : Ember.A([]);
+    let collectionIds = classActivities.map(classActivity => {
+      return (
+        classActivity.get('collection.id') || classActivity.get('contentId')
+      );
+    });
+    return collectionIds;
+  }),
+
   observeTodayActivities: Ember.observer('todayActivities.[]', function() {
     const component = this;
     let todayActivities = component.get('todayActivities');

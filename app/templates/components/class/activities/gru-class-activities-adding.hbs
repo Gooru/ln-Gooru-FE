@@ -42,12 +42,12 @@
       {{#if isPremiumClass}}
         <div class="milestone-container">
           {{teacher/class/milestone-course-map
-            class=primaryClass
+            class=activeCmClass
             gradeSubject=gradeSubject
             milestones=milestones
             showPerformance = false
             isClassActivity = true
-            todayClassActivities = todayActivities
+            todayActivitiesContentIds = todayActivitiesContentIds
             onAddActivity="onAddActivity"
             onScheduleActivity="onShowDateRangePicker"
             onPreviewContent = "onPreviewContent"
@@ -64,7 +64,7 @@
               classId=activeCmClass.id
               courseId=activeCmClass.courseId
               isShowLessonPlan = false
-              todayClassActivities = todayActivities
+              todayActivitiesContentIds = todayActivitiesContentIds
               onShowContentPreview = "onShowContentPreview"
             }}
           {{else}}
