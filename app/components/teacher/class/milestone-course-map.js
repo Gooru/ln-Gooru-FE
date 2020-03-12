@@ -715,7 +715,7 @@ export default Ember.Component.extend({
             );
             collections.map(collection => {
               let id = collection.get('id');
-              if (collectionIds.includes(id)) {
+              if (collectionIds && collectionIds.includes(id)) {
                 collection.set('isAdded', true);
               }
             });
