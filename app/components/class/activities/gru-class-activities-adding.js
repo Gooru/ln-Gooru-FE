@@ -31,7 +31,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     this.scrollHandler();
     if (this.get('isPremiumClass')) {
-      this.fetchTeacherMilestones();
+      this.fetchMilestones();
     }
   },
 
@@ -80,9 +80,9 @@ export default Ember.Component.extend({
         isRefreshed || component.get('scrollEndHitCount') === 0;
       component.set('isFetchedAllContents', filteredContents.length < 20);
       if (filteredContents.length) {
-        let todaysActivities = component.get('todaysActivities');
+        let todayActivities = component.get('todayActivities');
         filteredContents.map(content => {
-          content.isAdded = !!todaysActivities.findBy('contentId', content.id);
+          content.isAdded = !!todayActivities.findBy('contentId', content.id);
         });
         filteredContents = isNewSetOfContents
           ? filteredContents
@@ -209,12 +209,13 @@ export default Ember.Component.extend({
       component.getClassInfo(classInfo.get('id')).then(classData => {
         component.set('activeCmClass', classData);
         if (component.get('isPremiumClass')) {
-          component.fetchTeacherMilestones();
+          component.fetchMilestones();
         }
       });
       component.actions.onToggleMultiClassPanel(component);
     },
 
+    //Action triggered click on content title in milestone view
     onPreviewContent(unitId, lessonId, content) {
       this.send('onShowContentPreview', content);
     }
@@ -254,15 +255,15 @@ export default Ember.Component.extend({
 
   isFetchedAllContents: false,
 
-  observeTodaysActivities: Ember.observer('todaysActivities.[]', function() {
+  observeTodayActivities: Ember.observer('todayActivities.[]', function() {
     const component = this;
-    let todaysActivities = component.get('todaysActivities');
+    let todayActivities = component.get('todayActivities');
     let filteredContents = component.get('filteredContents');
     if (filteredContents && filteredContents.length) {
       filteredContents.map(content => {
         content.set(
           'isAdded',
-          !!todaysActivities.findBy('contentId', content.id)
+          !!todayActivities.findBy('contentId', content.id)
         );
       });
     }
@@ -374,10 +375,10 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @func fetchTeacherMilestones
-   * Method to fetch teacher milestone data
+   * @func fetchMilestones
+   * Method to fetch milestone data
    */
-  fetchTeacherMilestones() {
+  fetchMilestones() {
     const component = this;
     const currentClass = component.get('activeCmClass');
     const fwCode = currentClass.get('preference.framework') || 'GUT';

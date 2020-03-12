@@ -664,7 +664,7 @@ export default Ember.Component.extend(ModalMixin, {
         let todayActivityList = activitiesList.findBy('added_date', todayDate);
         if (todayActivityList) {
           component.set(
-            'todaysActivities',
+            'todayActivities',
             todayActivityList.get('scheduledActivities')
           );
         }
@@ -680,9 +680,9 @@ export default Ember.Component.extend(ModalMixin, {
   removeClassActivity(classActivity) {
     const component = this;
     let addedDate = classActivity.get('added_date');
-    let todaysActivities = component.get('todaysActivities');
-    todaysActivities.removeObject(classActivity);
-    component.set('todaysActivities', todaysActivities);
+    let todayActivities = component.get('todayActivities');
+    todayActivities.removeObject(classActivity);
+    component.set('todayActivities', todayActivities);
     let scheduledActivity = component.get('scheduledActivitiesList');
     let activityList = scheduledActivity.findBy('added_date', addedDate);
     activityList.get('scheduledActivities').removeObject(classActivity);

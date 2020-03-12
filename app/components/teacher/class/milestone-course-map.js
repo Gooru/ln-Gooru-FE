@@ -159,15 +159,14 @@ export default Ember.Component.extend({
   addedCollectionIdsInTodayClassActivities: Ember.computed(
     'todaysClassActivities',
     function() {
-      let classActivities = this.get('todaysClassActivities');
-      let collectionIds = Ember.A([]);
-      if (classActivities) {
-        collectionIds = classActivities.map(classActivity => {
-          return (
-            classActivity.get('collection.id') || classActivity.get('contentId')
-          );
-        });
-      }
+      let classActivities = this.get('todaysClassActivities')
+        ? this.get('todaysClassActivities')
+        : Ember.A([]);
+      let collectionIds = classActivities.map(classActivity => {
+        return (
+          classActivity.get('collection.id') || classActivity.get('contentId')
+        );
+      });
       return collectionIds;
     }
   ),
