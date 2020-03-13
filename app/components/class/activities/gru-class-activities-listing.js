@@ -899,15 +899,16 @@ export default Ember.Component.extend(ModalMixin, {
     const classesToSchedule = Ember.A([
       component.get('primaryClass.id')
     ]).concat(secondaryClasses.mapBy('id'));
-    classesToSchedule.map(classId => {
+    let promiseList = classesToSchedule.map(classId => {
       const addedActivity = activityClasses.findBy('id', classId);
+      let scheduleContentPromise;
       if (addedActivity) {
         const activityId = addedActivity.get('activity.id');
-        component
+        scheduleContentPromise = component
           .get('classActivityService')
           .scheduleClassActivity(classId, activityId, scheduleDate, endDate);
       } else {
-        component
+        scheduleContentPromise = component
           .get('classActivityService')
           .addActivityToClass(
             classId,
@@ -919,13 +920,19 @@ export default Ember.Component.extend(ModalMixin, {
             endDate
           );
       }
+      return new Ember.RSVP.Promise((resolve, reject) => {
+        scheduleContentPromise.then(() => {
+          return resolve();
+        }, reject);
+      });
     });
-
-    if (component.get('isShowUnscheduledActivities')) {
-      component.loadUnScheduledActivities();
-    } else {
-      component.loadScheduledClassActivities();
-    }
+    Ember.RSVP.all(promiseList).then(() => {
+      if (component.get('isShowUnscheduledActivities')) {
+        component.loadUnScheduledActivities();
+      } else {
+        component.loadScheduledClassActivities();
+      }
+    });
   },
 
   addActivityToClass(
@@ -944,9 +951,9 @@ export default Ember.Component.extend(ModalMixin, {
     const classesToSchedule = Ember.A([
       component.get('primaryClass.id')
     ]).concat(secondaryClasses.mapBy('id'));
-    classesToSchedule.map(classId => {
-      Ember.RSVP.hash({
-        addedActivity: component
+    let promiseList = classesToSchedule.map(classId => {
+      return new Ember.RSVP.Promise((resolve, reject) => {
+        component
           .get('classActivityService')
           .addActivityToClass(
             classId,
@@ -957,15 +964,18 @@ export default Ember.Component.extend(ModalMixin, {
             year,
             endDate
           )
-      }).then(({ addedActivity }) => {
-        return addedActivity;
+          .then(() => {
+            return resolve();
+          }, reject);
       });
     });
-    if (component.get('isShowUnscheduledActivities')) {
-      component.loadUnScheduledActivities();
-    } else {
-      component.loadScheduledClassActivities();
-    }
+    Ember.RSVP.all(promiseList).then(() => {
+      if (component.get('isShowUnscheduledActivities')) {
+        component.loadUnScheduledActivities();
+      } else {
+        component.loadScheduledClassActivities();
+      }
+    });
   },
 
   fetchMasteryAccrualContents(classActivities = Ember.A([])) {
