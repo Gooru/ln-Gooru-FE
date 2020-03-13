@@ -329,7 +329,7 @@ export default Ember.Component.extend({
       });
     });
     Ember.RSVP.all(promiseList).then(() => {
-      if (scheduleDate) {
+      if (moment().isSame(scheduleDate, 'day')) {
         content.set('isAdded', true);
       } else {
         content.set('isScheduled', true);
