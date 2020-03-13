@@ -900,30 +900,32 @@ export default Ember.Component.extend(ModalMixin, {
       component.get('primaryClass.id')
     ]).concat(secondaryClasses.mapBy('id'));
     let promiseList = classesToSchedule.map(classId => {
-      const addedActivity = activityClasses.findBy('id', classId);
-      let scheduleContentPromise;
-      if (addedActivity) {
-        const activityId = addedActivity.get('activity.id');
-        scheduleContentPromise = component
-          .get('classActivityService')
-          .scheduleClassActivity(classId, activityId, scheduleDate, endDate);
-      } else {
-        scheduleContentPromise = component
-          .get('classActivityService')
-          .addActivityToClass(
-            classId,
-            contentId,
-            contentType,
-            scheduleDate,
-            month,
-            year,
-            endDate
-          );
-      }
       return new Ember.RSVP.Promise((resolve, reject) => {
-        scheduleContentPromise.then(() => {
-          return resolve();
-        }, reject);
+        const addedActivity = activityClasses.findBy('id', classId);
+        if (addedActivity) {
+          const activityId = addedActivity.get('activity.id');
+          component
+            .get('classActivityService')
+            .scheduleClassActivity(classId, activityId, scheduleDate, endDate)
+            .then(() => {
+              return resolve();
+            }, reject);
+        } else {
+          component
+            .get('classActivityService')
+            .addActivityToClass(
+              classId,
+              contentId,
+              contentType,
+              scheduleDate,
+              month,
+              year,
+              endDate
+            )
+            .then(() => {
+              return resolve();
+            }, reject);
+        }
       });
     });
     Ember.RSVP.all(promiseList).then(() => {
