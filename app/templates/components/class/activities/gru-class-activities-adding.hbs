@@ -41,17 +41,19 @@
     {{else if isShowCourseMap}}
       {{#if isPremiumClass}}
         <div class="milestone-container">
-          {{teacher/class/milestone-course-map
-            class=activeCmClass
-            gradeSubject=gradeSubject
-            milestones=milestones
-            showPerformance = false
-            isClassActivity = true
-            todayActivitiesContentIds = todayActivitiesContentIds
-            onAddActivity="onAddActivity"
-            onScheduleActivity="onShowDateRangePicker"
-            onPreviewContent = "onPreviewContent"
-          }}
+          {{#if milestones}}
+            {{teacher/class/milestone-course-map
+              class=activeCmClass
+              gradeSubject=gradeSubject
+              milestones=milestones
+              showPerformance = false
+              isClassActivity = true
+              todayActivitiesContentIds = todayActivitiesContentIds
+              onAddActivity="onAddActivity"
+              onScheduleActivity="onShowDateRangePicker"
+              onPreviewContent = "onPreviewContent"
+            }}
+          {{/if}}
         </div>
       {{else}}
         <div class="course-map-container">

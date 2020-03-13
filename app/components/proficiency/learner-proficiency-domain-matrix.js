@@ -1225,8 +1225,14 @@ export default Ember.Component.extend({
         competency.set('study-infered', true);
         competency.set('status', 2);
       });
-      masteredCompetency.set('status', 4);
-      masteredCompetency.set('study-mastered', true);
+      if (masteredCompetency) {
+        masteredCompetency.set('status', 4);
+        masteredCompetency.set('study-mastered', true);
+      } else {
+        Ember.Logger.warn(
+          'The mastered taxonomy is not available in the domain competency matrix!'
+        );
+      }
     });
   },
 
