@@ -1230,7 +1230,7 @@ export default Ember.Component.extend({
         masteredCompetency.set('study-mastered', true);
       } else {
         Ember.Logger.warn(
-          'This competencies code does not exist in the mastered competency'
+          'The mastered taxonomy is not available in the domain competency matrix!'
         );
       }
     });
