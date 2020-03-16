@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import {
   FEEDBACK_USER_CATEGORY,
-  FEEDBACK_RATING_TYPE
+  FEEDBACK_RATING_TYPE,
+  ROLES
 } from 'gooru-web/config/config';
 import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
@@ -132,7 +133,9 @@ export default Ember.Component.extend({
   getFeedbackObject() {
     const component = this;
     let userId = component.get('session.userId');
-    let role = component.get('session.role');
+    let role = component.get('session.role')
+      ? component.get('session.role')
+      : ROLES.STUDENT;
     let userCategoryId = FEEDBACK_USER_CATEGORY[`${role}`];
     let userFeedback = Ember.A([]);
     let categoryLists = component.get('categoryLists');

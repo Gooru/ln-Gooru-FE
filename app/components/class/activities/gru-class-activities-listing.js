@@ -137,8 +137,10 @@ export default Ember.Component.extend(ModalMixin, {
     },
 
     onToggleDatePicker(component = this) {
-      let rangeType = component.get('scheduledActivitiesContext.activeRange');
-      component.send('onSelectRangeType', rangeType);
+      if (component.get('isShowScheduledActivities')) {
+        let rangeType = component.get('scheduledActivitiesContext.activeRange');
+        component.send('onSelectRangeType', rangeType);
+      }
       component
         .$('.header-container .date-range-picker-container')
         .slideToggle();
@@ -332,7 +334,7 @@ export default Ember.Component.extend(ModalMixin, {
       let endDate = moment(startDate)
         .endOf('month')
         .format('YYYY-MM-DD');
-      let rangeType = component.get('scheduledActivitiesContext.activeRange');
+      let rangeType = 'isMonthly';
       component.send('onSelectRangeType', rangeType);
       component.set('isShowEndDate', true);
       component.set('isLoading', true);
@@ -340,6 +342,8 @@ export default Ember.Component.extend(ModalMixin, {
       component.set('isShowListCard', true);
       component.set('startDate', startDate);
       component.set('endDate', endDate);
+      component.set('forMonth', moment().format('MM'));
+      component.set('forYear', moment().format('YYYY'));
       component.set('isShowScheduledActivities', false);
       component.set('isShowItemsToGrade', false);
       component.set('isShowUnscheduledActivities', true);
@@ -622,7 +626,7 @@ export default Ember.Component.extend(ModalMixin, {
         let todayActivityList = activitiesList.findBy('added_date', todayDate);
         if (todayActivityList) {
           component.set(
-            'todaysActivities',
+            'todayActivities',
             todayActivityList.get('scheduledActivities')
           );
         }
@@ -664,9 +668,9 @@ export default Ember.Component.extend(ModalMixin, {
   removeClassActivity(classActivity) {
     const component = this;
     let addedDate = classActivity.get('added_date');
-    let todaysActivities = component.get('todaysActivities');
-    todaysActivities.removeObject(classActivity);
-    component.set('todaysActivities', todaysActivities);
+    let todayActivities = component.get('todayActivities');
+    todayActivities.removeObject(classActivity);
+    component.set('todayActivities', todayActivities);
     let scheduledActivity = component.get('scheduledActivitiesList');
     let activityList = scheduledActivity.findBy('added_date', addedDate);
     activityList.get('scheduledActivities').removeObject(classActivity);
@@ -895,32 +899,42 @@ export default Ember.Component.extend(ModalMixin, {
     const classesToSchedule = Ember.A([
       component.get('primaryClass.id')
     ]).concat(secondaryClasses.mapBy('id'));
-    classesToSchedule.map(classId => {
-      const addedActivity = activityClasses.findBy('id', classId);
-      if (addedActivity) {
-        const activityId = addedActivity.get('activity.id');
-        component
-          .get('classActivityService')
-          .scheduleClassActivity(classId, activityId, scheduleDate, endDate);
+    let promiseList = classesToSchedule.map(classId => {
+      return new Ember.RSVP.Promise((resolve, reject) => {
+        const addedActivity = activityClasses.findBy('id', classId);
+        if (addedActivity) {
+          const activityId = addedActivity.get('activity.id');
+          component
+            .get('classActivityService')
+            .scheduleClassActivity(classId, activityId, scheduleDate, endDate)
+            .then(() => {
+              return resolve();
+            }, reject);
+        } else {
+          component
+            .get('classActivityService')
+            .addActivityToClass(
+              classId,
+              contentId,
+              contentType,
+              scheduleDate,
+              month,
+              year,
+              endDate
+            )
+            .then(() => {
+              return resolve();
+            }, reject);
+        }
+      });
+    });
+    Ember.RSVP.all(promiseList).then(() => {
+      if (component.get('isShowUnscheduledActivities')) {
+        component.loadUnScheduledActivities();
       } else {
-        component
-          .get('classActivityService')
-          .addActivityToClass(
-            classId,
-            contentId,
-            contentType,
-            scheduleDate,
-            month,
-            year,
-            endDate
-          );
+        component.loadScheduledClassActivities();
       }
     });
-    if (component.get('isShowUnscheduledActivities')) {
-      component.loadUnScheduledActivities();
-    } else {
-      component.loadScheduledClassActivities();
-    }
   },
 
   addActivityToClass(
@@ -939,9 +953,9 @@ export default Ember.Component.extend(ModalMixin, {
     const classesToSchedule = Ember.A([
       component.get('primaryClass.id')
     ]).concat(secondaryClasses.mapBy('id'));
-    classesToSchedule.map(classId => {
-      Ember.RSVP.hash({
-        addedActivity: component
+    let promiseList = classesToSchedule.map(classId => {
+      return new Ember.RSVP.Promise((resolve, reject) => {
+        component
           .get('classActivityService')
           .addActivityToClass(
             classId,
@@ -952,15 +966,18 @@ export default Ember.Component.extend(ModalMixin, {
             year,
             endDate
           )
-      }).then(({ addedActivity }) => {
-        return addedActivity;
+          .then(() => {
+            return resolve();
+          }, reject);
       });
     });
-    if (component.get('isShowUnscheduledActivities')) {
-      component.loadUnScheduledActivities();
-    } else {
-      component.loadScheduledClassActivities();
-    }
+    Ember.RSVP.all(promiseList).then(() => {
+      if (component.get('isShowUnscheduledActivities')) {
+        component.loadUnScheduledActivities();
+      } else {
+        component.loadScheduledClassActivities();
+      }
+    });
   },
 
   fetchMasteryAccrualContents(classActivities = Ember.A([])) {

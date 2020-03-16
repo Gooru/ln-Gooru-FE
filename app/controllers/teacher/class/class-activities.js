@@ -139,7 +139,7 @@ export default Ember.Controller.extend({
     'classController.isMultiClassEnabled'
   ),
 
-  todaysActivities: Ember.A([]),
+  todayActivities: Ember.A([]),
 
   /**
    * @property {String} classActivitiesDefaultTabKey
@@ -165,6 +165,6 @@ export default Ember.Controller.extend({
   resetProperties() {
     const controller = this;
     controller.set('defaultTabKey', Ember.Object.create({}));
-    controller.set('todaysActivities', Ember.A([]));
+    controller.set('todayActivities', Ember.A([]));
   }
 });
