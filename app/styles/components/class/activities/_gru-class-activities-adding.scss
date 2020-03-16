@@ -23,7 +23,7 @@
         display: block;
         height: calc(100vh - 210px);
         &.course-map-view {
-          height: calc(100vh - 186px);
+          height: calc(100vh - 153px);
         }
         &.grid-view {
           height: calc(100vh - 150px);
@@ -46,6 +46,16 @@
       cursor: pointer;
       opacity: 0.8;
       background-color: #000;
+    }
+  }
+
+  &.cm-view {
+    .class-activities-source-container.mobile-view {
+      .body-container {
+        &.course-map-view {
+          height: calc(100vh - 186px);
+        }
+      }
     }
   }
 
