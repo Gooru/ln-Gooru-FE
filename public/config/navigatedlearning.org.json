@@ -1,65 +1,65 @@
 {
   "endpoint": {
-    "url": "",
-    "secureUrl": "https://beta.gooru.org",
+    "url": "http://navigatedlearning.org",
+    "secureUrl": "https://navigatedlearning.org",
     "tenantUrl": "https://s3-us-west-1.amazonaws.com/nile-tenants/prod"
   },
-  "realTime": {
-    "webServiceUrl": "",
-    "webServiceUri": "/nucleus/realtime",
-    "webSocketUrl": "http://rt.navigatedlearning.org",
-    "webSocketUri": "/ws/realtime"
-  },
-  "teams": {
-    "url": "http://teams.gooru.org"
-  },
-  "quizzes-addon": {
-    "endpoint": {
-      "url": "",
-      "secureUrl": "",
-      "providerUrl": ""
-    },
+ "realTime": {
+   "webServiceUrl": "",
+   "webServiceUri": "/nucleus/realtime",
+   "webSocketUrl": "https://rt.navigatedlearning.org",
+   "webSocketUri": "/ws/realtime"
+ },
+ "teams": {
+   "url": "http://teams.gooru.org"
+ },
+ "quizzes-addon": {
+   "endpoint": {
+     "url": "",
+     "secureUrl": "",
+     "providerUrl": ""
+   },
 
-    "realTime": {
-      "webServiceUrl": "",
-      "webServiceUri": "/",
-      "webSocketUrl": "http://rt.navigatedlearning.org",
-      "webSocketUri": "/ws/quizzes-realtime"
-    }
-  },
+   "realTime": {
+     "webServiceUrl": "",
+     "webServiceUri": "/",
+     "webSocketUrl": "https://rt.navigatedlearning.org",
+     "webSocketUri": "/ws/quizzes-realtime"
+   }
+ },
 
-  "exploreFeaturedCourses": {
-    "firstCourseId": "1d91657f-694b-43dc-9306-bca17b107c7d",
-    "secondCourseId": "3def51be-bd91-48fd-b747-9c86339b571a",
-    "thirdCourseId": "d9b7c359-adff-486d-a2cf-bbbbc66c2ba5",
-    "fourthCourseId": "781c3e76-a382-4652-86ae-079b92f57a9d"
-  },
+ "exploreFeaturedCourses": {
+   "firstCourseId": "1d91657f-694b-43dc-9306-bca17b107c7d",
+   "secondCourseId": "3def51be-bd91-48fd-b747-9c86339b571a",
+   "thirdCourseId": "d9b7c359-adff-486d-a2cf-bbbbc66c2ba5",
+   "fourthCourseId": "781c3e76-a382-4652-86ae-079b92f57a9d"
+ },
 
-  "languageSetting": {
-    "defaultLang": "en",
-    "showDropMenu": true
-  },
+ "languageSetting": {
+   "defaultLang": "en",
+   "showDropMenu": true
+ },
 
-  "researcher": {
-    "redirectURL": "http://research.gooru.org",
-    "userIds": []
-  },
+ "researcher": {
+   "redirectURL": "http://research.gooru.org",
+   "userIds": []
+ },
 
-  "demoClass": {
-    "code": "DGNTIKN",
-    "id": "71bfbc07-1b87-4e8e-a98a-1839e834cd20"
-  },
+ "demoClass": {
+   "code": "DGNTIKN",
+   "id": "71bfbc07-1b87-4e8e-a98a-1839e834cd20"
+ },
 
-  "GRU_FEATURE_FLAG": {
-    "searchFilter": true,
-    "i2dFlow": true,
-    "enableCollectionLiveLearning": false,
-    "isLessonPlanShow": true,
-    "isShowSecondaryClass": true
-  },
+ "GRU_FEATURE_FLAG": {
+   "searchFilter": true,
+   "i2dFlow": true,
+   "enableCollectionLiveLearning": false,
+   "isLessonPlanShow": true,
+   "isShowSecondaryClass": true
+ },
 
-  "marketingSiteUrl": "/about",
+ "marketingSiteUrl": "/about",
 
-  "GUEST_TEACHER_ACCOUNT": "TXJGZWVueToxMjM0NQ==",
-  "GUEST_STUDENT_ACCOUNT": "dGxhd3JlbmNlOjEyMzQ1"
+ "GUEST_TEACHER_ACCOUNT": "bXJmZWVueTpHb29ydUd1ZXN0MTIz",
+ "GUEST_STUDENT_ACCOUNT": "bWNhaW5lOkdvb3J1R3Vlc3QxMjM="
 }
