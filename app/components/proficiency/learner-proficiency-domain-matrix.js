@@ -198,7 +198,9 @@ export default Ember.Component.extend({
         selectedCompetency.get('competencyCode')
       );
     }
-    component.blockChartContainer(selectedCompetency);
+    if (selectedCompetency) {
+      component.blockChartContainer(selectedCompetency);
+    }
   },
 
   // Action triggered when competency is un-clicked or hover out
@@ -1225,8 +1227,14 @@ export default Ember.Component.extend({
         competency.set('study-infered', true);
         competency.set('status', 2);
       });
-      masteredCompetency.set('status', 4);
-      masteredCompetency.set('study-mastered', true);
+      if (masteredCompetency) {
+        masteredCompetency.set('status', 4);
+        masteredCompetency.set('study-mastered', true);
+      } else {
+        Ember.Logger.warn(
+          'The mastered taxonomy is not available in the domain competency matrix!'
+        );
+      }
     });
   },
 
@@ -1249,7 +1257,7 @@ export default Ember.Component.extend({
         masteredCompetency.competencyCode
       );
       //Select competency which is recently mastered
-      if (!component.isDestroyed) {
+      if (!component.isDestroyed && masteredCompetencyChartElement) {
         component.set('selectedCompetency', masteredCompetencyChartElement);
         component.blockChartContainer(masteredCompetencyChartElement);
         component.selectCompetency(masteredCompetencyChartElement);

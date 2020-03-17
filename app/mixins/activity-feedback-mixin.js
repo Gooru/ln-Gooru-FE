@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { FEEDBACK_USER_CATEGORY } from 'gooru-web/config/config';
+import { FEEDBACK_USER_CATEGORY, ROLES } from 'gooru-web/config/config';
 export default Ember.Mixin.create({
   // -------------------------------------------------------------------------
   // Dependencies
@@ -19,7 +19,9 @@ export default Ember.Mixin.create({
 
   fetchActivityFeedbackCateory() {
     const component = this;
-    let role = component.get('session.role');
+    let role = component.get('session.role')
+      ? component.get('session.role')
+      : ROLES.STUDENT;
     let userCategoryId = FEEDBACK_USER_CATEGORY[`${role}`];
     component
       .get('activityFeedbackService')

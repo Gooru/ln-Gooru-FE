@@ -59,161 +59,154 @@
   {{#if isLoading}}
     {{three-bounce-spinner}}
   {{else}}
-    {{#if isAssociatedWithDiffSubs}}
-      <div class="warning-message">
-        {{gru-icon name='warning'}}
-        <span>{{t 'class-report.warning-message'}}</span>
-      </div>
-    {{else}}
-      <div class="body-container {{if isShowStudentCompetencies 'student-competencies-activate'}}">
-        <div class="body-scroll">
-          <div class="body-left">
-            {{#each studentsSummaryReportData as |reportData|}}
-              <div class="student-info-container {{if (or reportData.weeklyReportData.masteredCompetenciesCount reportData.weeklyReportData.inferredCompetenciesCount reportData.weeklyReportData.inprogressCompetenciesCount) 'data-available'}} {{if reportData.active 'active-student'}}"
-                {{action "onSelectStudent" reportData}}>
-                <div class="student-thumbnail" style="background-image: url({{reportData.student.thumbnailUrl}});">
-                  <div class="active-student-data">
-                    {{gru-icon name="clear"}}
-                  </div>
-                </div>
-                <div class="student-name">
-                  <span class="ellipsis">{{reportData.student.lastName}}</span>
-                  <span class="ellipsis">{{reportData.student.firstName}}</span>
+    <div class="body-container {{if isShowStudentCompetencies 'student-competencies-activate'}}">
+      <div class="body-scroll">
+        <div class="body-left">
+          {{#each studentsSummaryReportData as |reportData|}}
+            <div class="student-info-container {{if (or reportData.weeklyReportData.masteredCompetenciesCount reportData.weeklyReportData.inferredCompetenciesCount reportData.weeklyReportData.inprogressCompetenciesCount) 'data-available'}} {{if reportData.active 'active-student'}}"
+              {{action "onSelectStudent" reportData}}>
+              <div class="student-thumbnail" style="background-image: url({{reportData.student.thumbnailUrl}});">
+                <div class="active-student-data">
+                  {{gru-icon name="clear"}}
                 </div>
               </div>
-            {{/each}}
-          </div>
-          <div class="body-right">
-            {{#each studentsSummaryReportData as |reportData|}}
-              <div class="student-summary-container">
-                <div class="summary-container {{if (or reportData.weeklyReportData.masteredCompetenciesCount reportData.weeklyReportData.inferredCompetenciesCount reportData.weeklyReportData.inprogressCompetenciesCount) 'data-available'}}" {{action "onSelectStudent" reportData}}>
-                  <div class="column-data gained-competencies {{if reportData.active 'active-student'}}">
-                    {{#if reportData.weeklyReportData.masteredCompetenciesCount}}
-                      <span class="competency-status-5 competency-status"></span> <span class="competency-count">{{reportData.weeklyReportData.masteredCompetenciesCount}}</span>
-                    {{else}}
-                      --
-                    {{/if}}
-                  </div>
-                  <div class="column-data inferred-competencies {{if reportData.active 'active-student'}}">
-                    {{#if reportData.weeklyReportData.inferredCompetenciesCount}}
-                      <span class="competency-status-5 competency-status"></span> <span class="competency-count">{{reportData.weeklyReportData.inferredCompetenciesCount}}</span>
-                    {{else}}
-                      --
-                    {{/if}}
-                  </div>
-                  <div class="column-data inprogress-competencies {{if reportData.active 'active-student'}}">
-                    {{#if reportData.weeklyReportData.inprogressCompetenciesCount}}
-                      <span class="competency-status-1 competency-status"></span> <span class="competency-count">{{reportData.weeklyReportData.inprogressCompetenciesCount}}</span>
-                    {{else}}
-                      --
-                    {{/if}}
-                  </div>
-                  <div class="column-data collection-timespent">
-                    <span class="time-spent">
-                      {{#if reportData.weeklyReportData.collectionTimespent}}
-                        {{format-time reportData.weeklyReportData.collectionTimespent}}
-                      {{else}}
-                        --
-                      {{/if}}
-                    </span>
-                  </div>
-                  <div class="column-data assessment-timespent">
-                    <span class="time-spent">
-                      {{#if reportData.weeklyReportData.assessmentTimespent}}
-                        {{format-time reportData.weeklyReportData.assessmentTimespent}}
-                      {{else}}
-                        --
-                      {{/if}}
-                    </span>
-                  </div>
-                  <div class="column-data total-timespent">
-                    <span class="time-spent">
-                      {{#if reportData.weeklyReportData.totalTimespent}}
-                        {{format-time reportData.weeklyReportData.totalTimespent}}
-                      {{else}}
-                        --
-                      {{/if}}
-                    </span>
-                  </div>
-                  <div class="column-data badge-earned">
-                    {{#if reportData.weeklyReportData.badgeEarned}}
-                      <span class="badge"><span class="badge-count">{{reportData.weeklyReportData.badgeEarned}}</span></span>
-                    {{else}}
-                      --
-                    {{/if}}
-                  </div>
-                  <div class="column-data average-score">
-                    {{#unless reportData.weeklyReportData.isNotStarted}}
-                      <span class="score score-range-{{grade-range reportData.weeklyReportData.averageScore}}">{{reportData.weeklyReportData.averageScore}}</span>
-                    {{else}}
-                      --
-                    {{/unless}}
-                  </div>
-                  <div class="column-data suggestion-taken">
-                  {{#if reportData.weeklyReportData.suggestionTaken}}
-                    <span class="suggestion-count">{{reportData.weeklyReportData.suggestionTaken}}</span>
+              <div class="student-name">
+                <span class="ellipsis">{{reportData.student.lastName}}</span>
+                <span class="ellipsis">{{reportData.student.firstName}}</span>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+        <div class="body-right">
+          {{#each studentsSummaryReportData as |reportData|}}
+            <div class="student-summary-container">
+              <div class="summary-container {{if (or reportData.weeklyReportData.masteredCompetenciesCount reportData.weeklyReportData.inferredCompetenciesCount reportData.weeklyReportData.inprogressCompetenciesCount) 'data-available'}}" {{action "onSelectStudent" reportData}}>
+                <div class="column-data gained-competencies {{if reportData.active 'active-student'}}">
+                  {{#if reportData.weeklyReportData.masteredCompetenciesCount}}
+                    <span class="competency-status-5 competency-status"></span> <span class="competency-count">{{reportData.weeklyReportData.masteredCompetenciesCount}}</span>
                   {{else}}
                     --
                   {{/if}}
                 </div>
+                <div class="column-data inferred-competencies {{if reportData.active 'active-student'}}">
+                  {{#if reportData.weeklyReportData.inferredCompetenciesCount}}
+                    <span class="competency-status-5 competency-status"></span> <span class="competency-count">{{reportData.weeklyReportData.inferredCompetenciesCount}}</span>
+                  {{else}}
+                    --
+                  {{/if}}
                 </div>
-                {{#if reportData.active}}
-                  <div class="active-student-data hidden-xs" {{action "onRemoveActiveStudentData"}}>
-                    {{gru-icon name="clear"}}
-                  </div>
+                <div class="column-data inprogress-competencies {{if reportData.active 'active-student'}}">
+                  {{#if reportData.weeklyReportData.inprogressCompetenciesCount}}
+                    <span class="competency-status-1 competency-status"></span> <span class="competency-count">{{reportData.weeklyReportData.inprogressCompetenciesCount}}</span>
+                  {{else}}
+                    --
+                  {{/if}}
+                </div>
+                <div class="column-data collection-timespent">
+                  <span class="time-spent">
+                    {{#if reportData.weeklyReportData.collectionTimespent}}
+                      {{format-time reportData.weeklyReportData.collectionTimespent}}
+                    {{else}}
+                      --
+                    {{/if}}
+                  </span>
+                </div>
+                <div class="column-data assessment-timespent">
+                  <span class="time-spent">
+                    {{#if reportData.weeklyReportData.assessmentTimespent}}
+                      {{format-time reportData.weeklyReportData.assessmentTimespent}}
+                    {{else}}
+                      --
+                    {{/if}}
+                  </span>
+                </div>
+                <div class="column-data total-timespent">
+                  <span class="time-spent">
+                    {{#if reportData.weeklyReportData.totalTimespent}}
+                      {{format-time reportData.weeklyReportData.totalTimespent}}
+                    {{else}}
+                      --
+                    {{/if}}
+                  </span>
+                </div>
+                <div class="column-data badge-earned">
+                  {{#if reportData.weeklyReportData.badgeEarned}}
+                    <span class="badge"><span class="badge-count">{{reportData.weeklyReportData.badgeEarned}}</span></span>
+                  {{else}}
+                    --
+                  {{/if}}
+                </div>
+                <div class="column-data average-score">
+                  {{#unless reportData.weeklyReportData.isNotStarted}}
+                    <span class="score score-range-{{grade-range reportData.weeklyReportData.averageScore}}">{{reportData.weeklyReportData.averageScore}}</span>
+                  {{else}}
+                    --
+                  {{/unless}}
+                </div>
+                <div class="column-data suggestion-taken">
+                {{#if reportData.weeklyReportData.suggestionTaken}}
+                  <span class="suggestion-count">{{reportData.weeklyReportData.suggestionTaken}}</span>
+                {{else}}
+                  --
                 {{/if}}
               </div>
-            {{/each}}
-          </div>
-        </div>
-        {{#if isShowStudentCompetencies}}
-          <div class="student-competencies-container">
-            {{#each studentDomainCompetencies as |domainCompetencies|}}
-              {{#if (and domainCompetencies.domainCode domainCompetencies.domainName)}}
-                <div class="domain-name ellipsis">
-                  {{domain-gut-to-fw-transform fwDomains domainCompetencies.domainCode domainCompetencies.domainName 'fwDomainName' true}}
+              </div>
+              {{#if reportData.active}}
+                <div class="active-student-data hidden-xs" {{action "onRemoveActiveStudentData"}}>
+                  {{gru-icon name="clear"}}
                 </div>
-                <div class="competencies">
-                {{#each domainCompetencies.competencies as |competency|}}
-                  <div class="student-competency">
-                    <div class="code-info">
-                      <div class="display-code">
-                        {{competency-gut-to-fw-transform
-                           fwCompetencies
-                           competency.competencyCode
-                           competency.displayCode
-                           'frameworkCompetencyDisplayCode'
-                           false
-                           true
-                        }}
-                      </div>
-                      <div class="competency-status">
-                        <div class="status competency-status-{{competency.status}}"></div>
-                        <div class="status-value">{{t (concat "common.competency-label-" competency.status)}}</div>
-                      </div>
-                      <div class="short-desc ellipsis">
-                        {{competency.competencyStudentDesc}}
-                      </div>
-                    </div>
-                    <div class="competency-name">
+              {{/if}}
+            </div>
+          {{/each}}
+        </div>
+      </div>
+      {{#if isShowStudentCompetencies}}
+        <div class="student-competencies-container">
+          {{#each studentDomainCompetencies as |domainCompetencies|}}
+            {{#if (and domainCompetencies.domainCode domainCompetencies.domainName)}}
+              <div class="domain-name ellipsis">
+                {{domain-gut-to-fw-transform fwDomains domainCompetencies.domainCode domainCompetencies.domainName 'fwDomainName' true}}
+              </div>
+              <div class="competencies">
+              {{#each domainCompetencies.competencies as |competency|}}
+                <div class="student-competency">
+                  <div class="code-info">
+                    <div class="display-code">
                       {{competency-gut-to-fw-transform
                          fwCompetencies
                          competency.competencyCode
-                         competency.competencyName
-                         'frameworkCompetencyName'
+                         competency.displayCode
+                         'frameworkCompetencyDisplayCode'
                          false
                          true
                       }}
                     </div>
+                    <div class="competency-status">
+                      <div class="status competency-status-{{competency.status}}"></div>
+                      <div class="status-value">{{t (concat "common.competency-label-" competency.status)}}</div>
+                    </div>
+                    <div class="short-desc ellipsis">
+                      {{competency.competencyStudentDesc}}
+                    </div>
                   </div>
-                {{/each}}
-              </div>
-              {{/if}}
-            {{/each}}
-          </div>
-        {{/if}}
-      </div>
-    {{/if}}
+                  <div class="competency-name">
+                    {{competency-gut-to-fw-transform
+                       fwCompetencies
+                       competency.competencyCode
+                       competency.competencyName
+                       'frameworkCompetencyName'
+                       false
+                       true
+                    }}
+                  </div>
+                </div>
+              {{/each}}
+            </div>
+            {{/if}}
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
   {{/if}}
   <div class="student-rangepicker-container">
 

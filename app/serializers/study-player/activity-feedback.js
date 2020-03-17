@@ -33,7 +33,7 @@ export default Ember.Object.extend({
           Ember.Object.create({
             categoryId: feedback.feedbackCategoryId,
             rating: feedback.userFeedbackQuantitative,
-            comments: feedback.userFeedbackQualitative
+            qualitative: feedback.userFeedbackQualitative
           })
         );
       });

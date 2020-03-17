@@ -27,6 +27,7 @@ export default Ember.Component.extend({
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });
+    component.loadFeedbackData();
   },
 
   // -------------------------------------------------------------------------
@@ -83,13 +84,6 @@ export default Ember.Component.extend({
   currentIndex: 0,
 
   /**
-   * @property {resourceInfo{}} object
-   */
-  resourceInfo: Ember.computed('collection', function() {
-    return this.get('collection');
-  }),
-
-  /**
    * @property {ResourceList[]} List of resource list
    */
   resourceList: Ember.computed('collection', function() {
@@ -130,14 +124,28 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * @property {contentFormat} String
+   * @property {contentType} String
    */
-  contentFormat: Ember.computed('collection', function() {
+  contentType: Ember.computed('collection', function() {
     let format = this.get('format');
     return format
       ? format
       : this.get('isCollection')
         ? 'collection'
         : 'assessment';
-  })
+  }),
+
+  // -------------------------------------------------------------------------
+  //  Methods
+
+  loadFeedbackData() {
+    const component = this;
+    let feedbackContent = component.get('collection');
+    if (feedbackContent.get('feedbackCategory').length) {
+      component.set('resourceInfo', feedbackContent);
+      component.set('contentFormat', component.get('contentType'));
+    } else {
+      component.send('onNext');
+    }
+  }
 });

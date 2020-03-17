@@ -138,11 +138,6 @@ export default Ember.Component.extend({
   rangeStartDate: null,
 
   /**
-   * @property {Boolean} isAssociatedWithDiffSubs
-   */
-  isAssociatedWithDiffSubs: false,
-
-  /**
    * Set course activated date
    **/
   courseStartDate: Ember.computed('course.createdDate', function() {
@@ -238,17 +233,9 @@ export default Ember.Component.extend({
       summaryReportData: isWeekly
         ? component.fetchStudentsWeeklySummaryReport()
         : component.fetchStudentsClassSummaryReport()
-    }).then(
-      ({ summaryReportData }) => {
-        component.parseStudentsWeeklySummaryReportData(summaryReportData);
-      },
-      function(response) {
-        if (response.status === 409) {
-          component.set('isAssociatedWithDiffSubs', true);
-        }
-        component.set('isLoading', false);
-      }
-    );
+    }).then(({ summaryReportData }) => {
+      component.parseStudentsWeeklySummaryReportData(summaryReportData);
+    });
   },
 
   /**
@@ -415,7 +402,6 @@ export default Ember.Component.extend({
         .map(reportData => reportData.set('active', false));
     }
     component.set('isShowStudentCompetencies', false);
-    component.set('isAssociatedWithDiffSubs', false);
   },
 
   /**

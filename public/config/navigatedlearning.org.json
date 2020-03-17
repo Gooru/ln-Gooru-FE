@@ -7,7 +7,7 @@
   "realTime": {
     "webServiceUrl": "",
     "webServiceUri": "/nucleus/realtime",
-    "webSocketUrl": "https://rt-beta.gooru.org",
+    "webSocketUrl": "http://rt.navigatedlearning.org",
     "webSocketUri": "/ws/realtime"
   },
   "teams": {
@@ -23,7 +23,7 @@
     "realTime": {
       "webServiceUrl": "",
       "webServiceUri": "/",
-      "webSocketUrl": "https://rt-beta.gooru.org",
+      "webSocketUrl": "http://rt.navigatedlearning.org",
       "webSocketUri": "/ws/quizzes-realtime"
     }
   },

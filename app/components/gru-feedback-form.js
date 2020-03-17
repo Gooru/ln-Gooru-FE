@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import {
   FEEDBACK_USER_CATEGORY,
-  FEEDBACK_RATING_TYPE
+  FEEDBACK_RATING_TYPE,
+  ROLES
 } from 'gooru-web/config/config';
 import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
@@ -110,8 +111,12 @@ export default Ember.Component.extend({
           if (category) {
             if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.QUANTITATIVE) {
               category.set('rating', feedback.rating);
+            } else if (
+              category.feedbackTypeId === FEEDBACK_RATING_TYPE.QUALITATIVE
+            ) {
+              category.set('quality', feedback.qualitative);
             } else {
-              category.set('comments', feedback.comments);
+              category.set('comments', feedback.qualitative);
             }
           }
         });
@@ -128,7 +133,9 @@ export default Ember.Component.extend({
   getFeedbackObject() {
     const component = this;
     let userId = component.get('session.userId');
-    let role = component.get('session.role');
+    let role = component.get('session.role')
+      ? component.get('session.role')
+      : ROLES.STUDENT;
     let userCategoryId = FEEDBACK_USER_CATEGORY[`${role}`];
     let userFeedback = Ember.A([]);
     let categoryLists = component.get('categoryLists');
@@ -140,6 +147,8 @@ export default Ember.Component.extend({
         feedbackObj.user_feedback_quantitative = category.rating;
       } else if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.BOTH) {
         feedbackObj.user_feedback_qualitative = category.comments;
+      } else if (category.feedbackTypeId === FEEDBACK_RATING_TYPE.QUALITATIVE) {
+        feedbackObj.user_feedback_qualitative = category.quality;
       }
       userFeedback.pushObject(feedbackObj);
     });

@@ -85,12 +85,12 @@ export default Ember.Component.extend({
     let contentType = content.get('format');
     return (
       (contentType === CONTENT_TYPES.COLLECTION &&
-        content.get('resourceCount') === 0 &&
-        content.get('questionCount') === 0) ||
+        parseInt(content.get('resourceCount')) === 0 &&
+        parseInt(content.get('questionCount')) === 0) ||
       (contentType === CONTENT_TYPES.ASSESSMENT &&
-        content.get('questionCount') === 0) ||
+        parseInt(content.get('questionCount')) === 0) ||
       (contentType === CONTENT_TYPES.OFFLINE_ACTIVITY &&
-        content.get('taskCount') === 0)
+        parseInt(content.get('taskCount')) === 0)
     );
   }),
 

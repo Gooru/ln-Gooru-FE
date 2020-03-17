@@ -1,11 +1,11 @@
 import Ember from 'ember';
-/**
- * Max rating
- * @property
- */
-const maxRating = 5;
 
 export default Ember.Component.extend({
+  /**
+   * Max rating
+   * @property
+   */
+  maxRating: 5,
   /**
    * Selected rating
    * @property {int between 0-5}
@@ -39,6 +39,7 @@ export default Ember.Component.extend({
    */
   stars: Ember.computed('rating', function() {
     var rating = Math.round(this.get('rating'));
+    var maxRating = Math.round(this.get('maxRating'));
     var fullStars = this.starRange(1, rating, 'full');
     var emptyStars = this.starRange(rating + 1, maxRating, 'empty');
     return fullStars.concat(emptyStars);
