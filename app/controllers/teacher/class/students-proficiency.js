@@ -1,5 +1,9 @@
 import Ember from 'ember';
 import { getSubjectIdFromSubjectBucket } from 'gooru-web/utils/utils';
+import {
+  flattenGutToFwCompetency,
+  flattenGutToFwDomain
+} from 'gooru-web/utils/taxonomy';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
@@ -365,6 +369,111 @@ export default Ember.Controller.extend({
     controller.set('isShowClassWeeklyReport', false);
     controller.set('studentDomainPerformance', Ember.A([]));
     controller.set('activeReport', controller.get('reportTypes').objectAt(0));
+    controller.set('class', controller.get('classController.class'));
+    controller.set('course', controller.get('classController.course'));
+  },
+
+  /**
+   * @function loadClassData
+   * @param {UUID} classId
+   * Method to fetch all the class dependencies for a given class id
+   */
+  loadClassData(classId) {
+    const controller = this;
+    const classPromise = controller.get('classService').readClassInfo(classId);
+    const membersPromise = controller
+      .get('classService')
+      .readClassMembers(classId);
+    return classPromise.then(classData => {
+      let classCourseId = null;
+      if (classData.courseId) {
+        classCourseId = Ember.A([
+          {
+            classId,
+            courseId: classData.courseId
+          }
+        ]);
+      }
+      const performanceSummaryPromise = classCourseId
+        ? controller
+          .get('performanceService')
+          .findClassPerformanceSummaryByClassIds(classCourseId)
+        : null;
+      return Ember.RSVP.hash({
+        class: classPromise,
+        members: membersPromise,
+        classPerformanceSummaryItems: performanceSummaryPromise
+      }).then(function(hash) {
+        const aClass = hash.class;
+        const members = hash.members;
+        const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
+        let classPerformanceSummary = classPerformanceSummaryItems
+          ? classPerformanceSummaryItems.findBy('classId', classId)
+          : null;
+        aClass.set('performanceSummary', classPerformanceSummary);
+        const setting = aClass.get('setting');
+        const isPremiumClass = setting != null && setting['course.premium'];
+        const courseId = aClass.get('courseId');
+        let visibilityPromise = Ember.RSVP.resolve([]);
+        let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
+        const competencyCompletionStats = isPremiumClass
+          ? controller
+            .get('competencyService')
+            .getCompetencyCompletionStats([classId])
+          : Ember.RSVP.resolve(Ember.A());
+
+        if (courseId) {
+          visibilityPromise = controller
+            .get('classService')
+            .readClassContentVisibility(classId);
+          coursePromise = controller.get('courseService').fetchById(courseId);
+        }
+        const frameworkId = aClass.get('preference.framework');
+        const subjectId = aClass.get('preference.subject');
+
+        let crossWalkFWCPromise = null;
+        if (frameworkId && subjectId) {
+          crossWalkFWCPromise = controller
+            .get('taxonomyService')
+            .fetchCrossWalkFWC(frameworkId, subjectId);
+        }
+        return Ember.RSVP.hash({
+          contentVisibility: visibilityPromise,
+          course: coursePromise,
+          crossWalkFWC: crossWalkFWCPromise,
+          competencyStats: competencyCompletionStats
+        }).then(function(hash) {
+          const contentVisibility = hash.contentVisibility;
+          const course = hash.course;
+          const crossWalkFWC = hash.crossWalkFWC || [];
+          aClass.set('owner', members.get('owner'));
+          aClass.set('collaborators', members.get('collaborators'));
+          aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
+          aClass.set('members', members.get('members'));
+          aClass.set(
+            'competencyStats',
+            hash.competencyStats.findBy('classId', classId)
+          );
+          if (classId !== controller.get('primaryClassId')) {
+            aClass.set('isSecondaryClass', true);
+          }
+
+          controller.set('class', aClass);
+          controller.set('course', course);
+          controller.set('members', members);
+          controller.set(
+            'fwCompetencies',
+            flattenGutToFwCompetency(crossWalkFWC)
+          );
+          controller.set('contentVisibility', contentVisibility);
+          controller.set('fwDomains', flattenGutToFwDomain(crossWalkFWC));
+          controller.loadStudentsProficiencyData();
+          controller
+            .get('classController')
+            .send('onSelectSecondaryClass', aClass);
+        });
+      });
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -372,17 +481,21 @@ export default Ember.Controller.extend({
   /**
    * @property {Class}
    */
-  class: null,
+  class: Ember.computed('classController.class', function() {
+    return this.get('classController.class') || {};
+  }),
 
   /**
    * @property {Course}
    */
-  course: null,
+  course: Ember.computed('classController.class', function() {
+    return this.get('classController.course') || {};
+  }),
 
   /**
    * @property {classMembers}
    */
-  classMembers: Ember.computed.alias('members.members'),
+  classMembers: Ember.computed.alias('class.members'),
 
   /**
    * @property {classId}
@@ -391,6 +504,12 @@ export default Ember.Controller.extend({
     let controller = this;
     return controller.get('class.id');
   }),
+
+  /**
+   * @property {UUUID} primaryClassId
+   * Property for primary class id
+   */
+  primaryClassId: Ember.computed.alias('classController.class.id'),
 
   /**
    * @property {courseId}
@@ -550,20 +669,19 @@ export default Ember.Controller.extend({
   /**
    * @property {Array} fwCompetencies
    */
-  fwCompetencies: null,
+  fwCompetencies: Ember.computed('classController.class', function() {
+    return this.get('classController.fwCompetencies');
+  }),
 
   /**
    * @property {Array} fwDomains
    */
-  fwDomains: null,
+  fwDomains: Ember.computed('classController.class', function() {
+    return this.get('classController.fwDomains');
+  }),
 
   /**
    * Maintain secondary class list
    */
-  selectedClassList: null,
-
-  watchSeletectClassList: Ember.observer('selectedClassList', function() {
-    let selectedClass = this.get('selectedClassList');
-    this.send('onSelectSecondaryClass', selectedClass.get('id'));
-  })
+  selectedClassList: null
 });
