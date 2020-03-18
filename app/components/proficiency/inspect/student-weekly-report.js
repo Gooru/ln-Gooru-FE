@@ -21,10 +21,11 @@ export default Ember.Component.extend({
   // Events
   didInsertElement() {
     const component = this;
-    component.loadSummaryReportData();
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
     });
+    component.loadSummaryReportData();
+    component.getTaxonomyCategories();
   },
 
   didRender() {
@@ -53,14 +54,8 @@ export default Ember.Component.extend({
           'activeWeek',
           reportPeriod.get('value') === 'current-week' ? 0 : 1
         );
-        component.set(
-          'reportStartDate',
-          moment(component.get('startDate')).format('MMMM DD, YYYY')
-        );
-        component.set(
-          'reportEndDate',
-          moment(component.get('endDate')).format('MMMM DD, YYYY')
-        );
+        component.set('reportStartDate', component.get('startDate'));
+        component.set('reportEndDate', component.get('endDate'));
       }
       if (reportPeriod.get('type') === 'custom') {
         component.onRangePickerReport();
@@ -68,7 +63,6 @@ export default Ember.Component.extend({
         component.loadSummaryReportData(isWeeklyReport);
         component.resetActiveStudentData();
       }
-      component.getTaxonomyCategories();
       component.set('activeReportPeriod', reportPeriod);
       component.actions.onToggleReportPeriod(component);
     },
@@ -100,11 +94,8 @@ export default Ember.Component.extend({
       let components = this;
       components.set('rangeStartDate', moment(startDate).format('YYYY-MM-DD'));
       components.set('rangeEndDate', moment(endDate).format('YYYY-MM-DD'));
-      components.set(
-        'reportStartDate',
-        moment(startDate).format('MMMM DD,YYYY')
-      );
-      components.set('reportEndDate', moment(endDate).format('MMMM DD,YYYY'));
+      components.set('reportStartDate', startDate);
+      components.set('reportEndDate', endDate);
       components.loadSummaryReportData(false);
       components.resetActiveStudentData();
     },

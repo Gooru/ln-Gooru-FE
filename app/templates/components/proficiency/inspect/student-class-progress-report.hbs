@@ -7,7 +7,7 @@
       <span class="student-name">{{reportData.student.firstName}},  {{reportData.student.lastName}}</span>
       <span class="class-name">{{class.title}} ({{teacher.firstName}} {{teacher.lastName}})</span>
       {{#if reportStartDate}}
-        <span class="date">{{reportStartDate}} - {{reportEndDate}}</span>
+        <span class="date">{{format-date reportStartDate 'MMMM DD,YYYY'}} - {{format-date reportEndDate 'MMMM DD, YYYY'}}</span>
       {{else}}
         <span class="date">{{t 'beginning-till-now'}}</span>
       {{/if}}
