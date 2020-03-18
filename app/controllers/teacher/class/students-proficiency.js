@@ -505,7 +505,11 @@ export default Ember.Controller.extend({
     return controller.get('class.id');
   }),
 
-  // primaryClassId: Ember.computed.alias('classController.class.id'),
+  /**
+   * @property {UUUID} primaryClassId
+   * Property for primary class id
+   */
+  primaryClassId: Ember.computed.alias('classController.class.id'),
 
   /**
    * @property {courseId}

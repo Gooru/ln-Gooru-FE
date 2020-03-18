@@ -165,6 +165,7 @@ export default Ember.Controller.extend({
       menuItem === 'course-map' && isPremiumClass
         ? this.set('coruseMapController.selectedClassList', secondaryClass)
         : '';
+      // NOTE update selected class data at students proficiency
       if (menuItem === 'students' && isPremiumClass) {
         this.set(
           'studentsProficencyController.selectedClassList',
