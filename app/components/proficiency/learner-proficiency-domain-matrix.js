@@ -1221,13 +1221,13 @@ export default Ember.Component.extend({
         'competencyCode',
         competencyCode
       );
-      let masteredCompetencyPos = competencies.indexOf(masteredCompetency);
-      let masteredCompetencies = competencies.slice(0, masteredCompetencyPos);
-      masteredCompetencies.map(competency => {
-        competency.set('study-infered', true);
-        competency.set('status', 2);
-      });
       if (masteredCompetency) {
+        let masteredCompetencyPos = competencies.indexOf(masteredCompetency);
+        let masteredCompetencies = competencies.slice(0, masteredCompetencyPos);
+        masteredCompetencies.map(competency => {
+          competency.set('study-infered', true);
+          competency.set('status', 2);
+        });
         masteredCompetency.set('status', 4);
         masteredCompetency.set('study-mastered', true);
       } else {
