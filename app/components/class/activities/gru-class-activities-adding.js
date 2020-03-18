@@ -30,7 +30,11 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this.scrollHandler();
-    if (this.get('isPremiumClass')) {
+    if (
+      this.get('isPremiumClass') &&
+      this.get('activeCmClass.milestoneViewApplicable') &&
+      this.get('isShowCourseMap')
+    ) {
       this.fetchMilestones();
     }
   },
@@ -125,6 +129,13 @@ export default Ember.Component.extend({
       component.set('isShowCourseMap', true);
       component.set('isShowTenantLibraries', false);
       component.set('scrollEndHitCount', 0);
+      component.set('isFetchedAllContents', true);
+      if (
+        this.get('isPremiumClass') &&
+        this.get('activeCmClass.milestoneViewApplicable')
+      ) {
+        this.fetchMilestones();
+      }
     },
 
     onShowDateRangePicker(content) {
