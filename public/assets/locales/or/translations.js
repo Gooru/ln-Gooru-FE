@@ -575,7 +575,7 @@ window.i18ln = {
   'common.logout.head_3': 'Achieves Mastery',
   'common.logout.description':
     'Learning Navigator is designed as “GPS for Learning” — a way for each student to follow their own path to mastery. Schools ask every student to achieve the same level of proficiency, but each student begins with a different set of knowledge and skills. The Learning Navigator meets each student exactly where they are and navigates them to their learning goals. ',
-  'common.logout.logout-btn-msg1': 'You have been logout.',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'Click here to login.',
   'common.mastery': 'ମାଷ୍ଟ୍ରି',
   'common.menu': 'ମେନୁ',
@@ -2938,5 +2938,23 @@ window.i18ln = {
   'guest.login-teacher': 'Login as Teacher',
   'guest.login-student': 'Login as Student',
   'common.guest': 'Guest',
-  'guest.download': 'Download the'
+  'guest.download': 'Download the',
+  'class-activity.collection-disable-scheduling-message':
+    'This collection cannot be scheduled or added to today\'s class as there are no resources in the collection',
+  'class-activity.assessment-disable-scheduling-message':
+    'This assessment cannot be scheduled or added to today\'s class as there are no questions in the assessment',
+  'class-activity.offline-activity-disable-scheduling-message':
+    'This offline activity cannot be scheduled as there are no tasks in the offline activity',
+  'common.inferred': 'Inferred',
+  'class-report.warning-message':
+    'The report is unavailable for this class as it is associated with multiple subjects',
+  'common.competency-label-1': 'In Progress',
+  'common.competency-label-3': 'Inferred',
+  'common.competency-label-4': 'Gained',
+  'common.competency-label-5': 'Gained',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

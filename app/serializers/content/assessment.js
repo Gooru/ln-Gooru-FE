@@ -142,9 +142,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
             ? assessmentData.visible_on_profile
             : true,
         children: serializer.normalizeQuestions(assessmentData.question),
-        questionCount: assessmentData.question
+        questionCount: assessmentData.question_count || (assessmentData.question
           ? assessmentData.question.length
-          : 0,
+          : 0),
         sequence: assessmentData.sequence_id,
         thumbnailUrl: thumbnailUrl,
         classroom_play_enabled:

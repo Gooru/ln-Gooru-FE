@@ -555,7 +555,7 @@ window.i18ln = {
   'common.logout.head_3': 'महारत हासिल करता है',
   'common.logout.description':
     'लर्निंग नेविगेटर को "सीखने के GPS" के रूप में डिज़ाइन किया गया है – यह प्रत्येक छात्र को महारत हासिल करने के लिए अपने स्वयं के पथ का अनुसरण करने में मददगार है। स्कूल प्रत्येक छात्र से दक्षता के समान स्तर तक पँहुचने की अपेक्षा करते हैं, लेकिन प्रत्येक छात्र ज्ञान और कौशलों के एक अलग सेट से शुरू करता है। लर्निंग नेविगेटर प्रत्येक छात्र को उसकी सटीक स्थिति के अनुसार उसके सीखने के लक्ष्यों के लिए नेविगेट करता है।',
-  'common.logout.logout-btn-msg1': 'आपको लॉगआउट कर दिया गया है।',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'लॉग इन करने के लिए यहां क्लिक करें।',
   'common.mastery': 'महारत',
   'common.menu': 'मेन्यू',
@@ -2888,5 +2888,23 @@ window.i18ln = {
   'guest.login-teacher': 'Login as Teacher',
   'guest.login-student': 'Login as Student',
   'common.guest': 'Guest',
-  'guest.download': 'Download the'
+  'guest.download': 'Download the',
+  'class-activity.collection-disable-scheduling-message':
+    'This collection cannot be scheduled or added to today\'s class as there are no resources in the collection',
+  'class-activity.assessment-disable-scheduling-message':
+    'This assessment cannot be scheduled or added to today\'s class as there are no questions in the assessment',
+  'class-activity.offline-activity-disable-scheduling-message':
+    'This offline activity cannot be scheduled as there are no tasks in the offline activity',
+  'common.inferred': 'Inferred',
+  'class-report.warning-message':
+    'The report is unavailable for this class as it is associated with multiple subjects',
+  'common.competency-label-1': 'In Progress',
+  'common.competency-label-3': 'Inferred',
+  'common.competency-label-4': 'Gained',
+  'common.competency-label-5': 'Gained',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

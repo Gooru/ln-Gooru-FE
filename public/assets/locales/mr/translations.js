@@ -556,7 +556,7 @@ window.i18ln = {
   'common.logout.head_3': 'प्रभुत्व मिळवतो',
   'common.logout.description':
     'अध्ययन पथदर्शी हे एक “शिकण्यासाठी असलेले जीपीएस माध्यम” म्हणून तयार करण्यात आलेले आहे – हा एक असा मार्ग आहे ज्यावर प्रत्येक विद्यार्थ्याने शिक्षणावर प्रभुत्व शिक्षण मिळवण्यासाठी चालावे. प्रत्येक विद्यार्थ्याने एकाच स्तराचे प्रभुत्व मिळवावे अशी शाळेची इच्छा असते, परंतु प्रत्येक विद्यार्थी हा वेगवेगळ्या प्रकारच्या ज्ञानासह आणि कौशल्यासह शिक्षणाच्या मार्गावर प्रारंभ करतो. अध्ययन पथदर्शी अशा विद्यार्थ्यांना ते जेथे आहेत तेथे येऊन भेटते आणि त्यांना त्यांची शैक्षणिक उद्दिष्टे पूर्ण करण्यासाठी मार्गदर्शन करते.',
-  'common.logout.logout-btn-msg1': 'तुम्ही लॉग आऊट झालेले आहात.',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'लॉग इन करण्यासाठी येथे क्लिक करा.',
   'common.mastery': 'प्रभुत्व',
   'common.menu': 'मेनू',
@@ -2886,5 +2886,23 @@ window.i18ln = {
   'guest.login-teacher': 'Login as Teacher',
   'guest.login-student': 'Login as Student',
   'common.guest': 'Guest',
-  'guest.download': 'Download the'
+  'guest.download': 'Download the',
+  'class-activity.collection-disable-scheduling-message':
+    'This collection cannot be scheduled or added to today\'s class as there are no resources in the collection',
+  'class-activity.assessment-disable-scheduling-message':
+    'This assessment cannot be scheduled or added to today\'s class as there are no questions in the assessment',
+  'class-activity.offline-activity-disable-scheduling-message':
+    'This offline activity cannot be scheduled as there are no tasks in the offline activity',
+  'common.inferred': 'Inferred',
+  'class-report.warning-message':
+    'The report is unavailable for this class as it is associated with multiple subjects',
+  'common.competency-label-1': 'In Progress',
+  'common.competency-label-3': 'Inferred',
+  'common.competency-label-4': 'Gained',
+  'common.competency-label-5': 'Gained',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

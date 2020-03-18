@@ -254,10 +254,12 @@ export default Ember.Component.extend(BuilderMixin, ModalMixin, {
             if (editedModel.narration === '') {
               Ember.set(editedModel, 'narration', null);
             }
+            Ember.set(editedModel, 'url', undefined);
             component
               .get('resourceService')
               .updateResource(editedModel.id, editedModel, collection)
               .then(function() {
+                editedModel.set('url', component.get('model.url'));
                 component.set('model', editedModel);
                 model.merge(editedModel, ['title', 'narration']);
                 component.setProperties({

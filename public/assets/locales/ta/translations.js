@@ -593,7 +593,7 @@ window.i18ln = {
   'common.logout.head_3': 'ஆவண காப்பகத்தின் தேர்ச்சி',
   'common.logout.description':
     'கற்றல் வழிகாட்டுபவர்  “கற்றலுக்கான ஜி.பி.எஸ்” என வடிவமைக்கப்பட்டுள்ளது - ஒவ்வொரு மாணவரும் தேர்ச்சிக்கு தங்கள் சொந்த வழியைப் பின்பற்றுவதற்கான ஒரு வழி. பள்ளிகள் ஒவ்வொரு மாணவரிடமும் ஒரே அளவிலான தேர்ச்சியை அடையச் சொல்கின்றன, ஆனால் ஒவ்வொரு மாணவரும் வெவ்வேறு அறிவு மற்றும் திறன்களுடன் தொடங்குகிறார்கள். கற்றல் வழிகாட்டுபவர்  ஒவ்வொரு மாணவரையும் அவர்கள் இருக்கும் இடத்திலேயே சந்தித்து அவர்களின் கற்றல் குறிக்கோள்களுக்கு செல்ல வழி காட்டுகிறார்கள்.',
-  'common.logout.logout-btn-msg1': 'நீங்கள் வெளியே வந்து விட்டீர்கள்.',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'உள்நுழைய இங்கே  கிளிக் செய்யவும்.',
   'common.mastery': 'தேர்ச்சி',
   'common.menu': 'பட்டியல்',
@@ -3019,5 +3019,23 @@ window.i18ln = {
   'guest.login-teacher': 'Login as Teacher',
   'guest.login-student': 'Login as Student',
   'common.guest': 'Guest',
-  'guest.download': 'Download the'
+  'guest.download': 'Download the',
+  'class-activity.collection-disable-scheduling-message':
+    'This collection cannot be scheduled or added to today\'s class as there are no resources in the collection',
+  'class-activity.assessment-disable-scheduling-message':
+    'This assessment cannot be scheduled or added to today\'s class as there are no questions in the assessment',
+  'class-activity.offline-activity-disable-scheduling-message':
+    'This offline activity cannot be scheduled as there are no tasks in the offline activity',
+  'common.inferred': 'Inferred',
+  'class-report.warning-message':
+    'The report is unavailable for this class as it is associated with multiple subjects',
+  'common.competency-label-1': 'In Progress',
+  'common.competency-label-3': 'Inferred',
+  'common.competency-label-4': 'Gained',
+  'common.competency-label-5': 'Gained',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

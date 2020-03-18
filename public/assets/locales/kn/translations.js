@@ -570,7 +570,7 @@ window.i18ln = {
   'common.logout.head_3': 'ಪಾಂಡಿತ್ಯವನ್ನು ಸಾಧಿಸುತ್ತದೆ',
   'common.logout.description':
     'ಲರ್ನಿಂಗ್ ನ್ಯಾವಿಗೇಟರ್ ಅನ್ನು "ಕಲಿಕೆಗಾಗಿ ಜಿಪಿಎಸ್" ಎಂದು ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ - ಪ್ರತಿ ವಿದ್ಯಾರ್ಥಿಯು ಪಾಂಡಿತ್ಯಕ್ಕೆ ತಮ್ಮದೇ ಆದ ಮಾರ್ಗವನ್ನು ಅನುಸರಿಸಲು ಒಂದು ಮಾರ್ಗವಾಗಿದೆ. ಶಾಲೆಗಳು ಪ್ರತಿ ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಒಂದೇ ಮಟ್ಟದ ಪ್ರಾವೀಣ್ಯತೆಯನ್ನು ಸಾಧಿಸಲು ಕೇಳುತ್ತವೆ, ಆದರೆ ಪ್ರತಿ ವಿದ್ಯಾರ್ಥಿಯು ವಿಭಿನ್ನ ಜ್ಞಾನ ಮತ್ತು ಕೌಶಲ್ಯಗಳಿಂದ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ. ಕಲಿಕೆಯ ನ್ಯಾವಿಗೇಟರ್ ಪ್ರತಿ ವಿದ್ಯಾರ್ಥಿಯನ್ನು ಅವರು ಇರುವ ಸ್ಥಳದಲ್ಲಿಯೇ ನಿಖರವಾಗಿ ಭೇಟಿಯಾಗುತ್ತಾರೆ ಮತ್ತು ಅವರ ಕಲಿಕೆಯ ಗುರಿಗಳಿಗೆ ನ್ಯಾವಿಗೇಟ್ ಮಾಡುತ್ತಾರೆ.',
-  'common.logout.logout-btn-msg1': 'ನೀವು ಲಾಗ್ ಔಟ್ ಆಗಿದ್ದೀರಿ',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'ಲಾಗಿನ್ ಮಾಡಲು ಇಲ್ಲಿ ಕ್ಲಿಕ್ ಮಾಡಿ.',
   'common.mastery': 'ಪಾಂಡಿತ್ಯ',
   'common.menu': 'ಮೆನು',
@@ -2941,5 +2941,10 @@ window.i18ln = {
   'common.competency-label-1': 'In Progress',
   'common.competency-label-3': 'Inferred',
   'common.competency-label-4': 'Gained',
-  'common.competency-label-5': 'Gained'
+  'common.competency-label-5': 'Gained',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

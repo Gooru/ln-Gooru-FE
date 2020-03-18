@@ -33,17 +33,20 @@
     .feedback-body-panel {
       text-transform: capitalize;
       padding: 10px;
+      font-size: 14px;
       .category-panel {
-        grid-template-columns: 100px auto;
+        grid-template-columns: repeat(2, 1fr);
         display: grid;
         .category {
-          padding: 5px;
+          padding: 7px 5px;
           justify-content: center;
+          line-height: 1.5;
         }
         .category-rating {
-          padding: 5px;
+          padding: 7px 5px;
           justify-content: flex-end;
           display: flex;
+          align-items: center;
           .row {
             margin: 0px;
             ul {
@@ -51,7 +54,7 @@
               li {
                 border-bottom: 0px;
                 line-height: 1;
-                padding: 5px;
+                padding: 3px;
               }
             }
           }
@@ -59,9 +62,24 @@
             display: none;
           }
         }
+        .category-quality {
+          padding: 7px 5px;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          .gru-radio {
+            padding: 5px;
+            .form-group {
+              margin: 0px;
+              label {
+                text-transform: uppercase;
+              }
+            }
+          }
+        }
       }
       .feedback-comments {
-        padding: 5px;
+        padding: 7px 5px;
         label {
           width: 100%;
           font-weight: bold;

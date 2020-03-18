@@ -48,7 +48,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
         tenantId: payload.tenant ? payload.tenant.tenant_id : undefined,
         settings: payload.tenant.settings
           ? this.normalizeTenantSettings(payload.tenant.settings)
-          : null
+          : null,
+        imageUrl: payload.tenant ? payload.tenant.image_url : null
       },
       partnerId: payload.partner_id
     };

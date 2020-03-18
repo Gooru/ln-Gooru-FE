@@ -101,9 +101,7 @@ export default Ember.Controller.extend({
     controller.set('user', user);
     const homeURL = `${window.location.protocol}//${window.location.host}`;
     let redirectURL = controller.get('redirectURL') || homeURL;
-    const url = `${homeURL}${
-      Env['google-sign-in'].url
-    }?redirectURL=${redirectURL}`;
+    const url = `${homeURL}${Env['google-sign-in'].url}?redirectURL=${redirectURL}`;
     controller.set('googleSignInUrl', url);
     controller.set('didValidate', false);
   },
@@ -141,6 +139,11 @@ export default Ember.Controller.extend({
    * Computed property to identify gooru or tenant login.
    */
   isGooruLogin: Ember.computed.alias('session.isGooruClientId'),
+
+  /**
+   * Logged in tenant logo URL
+   */
+  tenantLogoUrl: Ember.computed.alias('anonymousSessionData.tenant.imageUrl'),
 
   /**
    * Maintains the state of anonymous session data.

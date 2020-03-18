@@ -2,7 +2,8 @@ import Ember from 'ember';
 import RubricGrade from 'gooru-web/models/rubric/rubric-grade';
 import RubricCategoryScore from 'gooru-web/models/rubric/grade-category-score';
 import { PLAYER_EVENT_SOURCE, CONTENT_TYPES } from 'gooru-web/config/config';
-export default Ember.Component.extend({
+import ActivityFeedbackMixin from 'gooru-web/mixins/activity-feedback-mixin';
+export default Ember.Component.extend(ActivityFeedbackMixin, {
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -412,6 +413,7 @@ export default Ember.Component.extend({
       component.openPullUp();
     }
     component.initialize();
+    component.fetchActivityFeedbackCateory();
   },
 
   willDestroyElement() {
@@ -696,7 +698,18 @@ export default Ember.Component.extend({
       .submitOAGrade(userGrade)
       .then(function() {
         currentStudent.set('isGraded', true);
-        component.set('isShowActivityFeedback', !isTeacher);
+        let categoryLists = component.get('categoryLists');
+        let contentCategory = categoryLists.get('offlineActivities');
+        let offlineActivityFeedback = component.get('offlineActivityFeedback');
+        offlineActivityFeedback.set(
+          'feedbackCategory',
+          contentCategory.sortBy('feedbackTypeId')
+        );
+        if (contentCategory && contentCategory.length) {
+          component.set('isShowActivityFeedback', !isTeacher);
+        } else {
+          component.sendAction('onSkipFeedback');
+        }
         component.slideToNextUser();
       });
   },

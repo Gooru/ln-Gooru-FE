@@ -560,7 +560,7 @@ window.i18ln = {
   'common.logout.head_3': 'નિષ્ણાંત બનો.',
   'common.logout.description':
     'લર્નિંગ નેવિગેટરને  "શીખવા માટેના GPS " જેવુ બનાવવામાં આવ્યું છે. જે દરેક વિદ્યાર્થીને તેના વિષયમાં નિપુણતા મેળવવા તરફ લઈ જાય છે. સ્કૂલો દ્વારા પણ દરેક વિદ્યાર્થીને સમાન લેવલ હાંસિલ કરવા કહે છે પણ દરેક વિદ્યાર્થી પોતાનું જ્ઞાન અને આવડતના એક સેટ સાથે શરૂઆત કરતો હોય છે. લર્નિંગ નેવીગેટર દરેક વિદ્યાર્થીને ત્યાંથી શીખવાડે છે જ્યાંથી તે શરૂ કરે છે અને તેમને તે તરફ દોરી જાય છે જ્યાં તેમના શીખવાના ઉદ્દેશો રહેલા છે.',
-  'common.logout.logout-btn-msg1': 'તમે લૉગ આઉટ થઈ ગયા છો.',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'લૉગઇન કરવા માટે અંહી ક્લિક કરો.',
   'common.mastery': 'નિપુણતા',
   'common.menu': 'મેનૂ',
@@ -2873,5 +2873,23 @@ window.i18ln = {
   'guest.login-teacher': 'Login as Teacher',
   'guest.login-student': 'Login as Student',
   'common.guest': 'Guest',
-  'guest.download': 'Download the'
+  'guest.download': 'Download the',
+  'class-activity.collection-disable-scheduling-message':
+    'This collection cannot be scheduled or added to today\'s class as there are no resources in the collection',
+  'class-activity.assessment-disable-scheduling-message':
+    'This assessment cannot be scheduled or added to today\'s class as there are no questions in the assessment',
+  'class-activity.offline-activity-disable-scheduling-message':
+    'This offline activity cannot be scheduled as there are no tasks in the offline activity',
+  'common.inferred': 'Inferred',
+  'class-report.warning-message':
+    'The report is unavailable for this class as it is associated with multiple subjects',
+  'common.competency-label-1': 'In Progress',
+  'common.competency-label-3': 'Inferred',
+  'common.competency-label-4': 'Gained',
+  'common.competency-label-5': 'Gained',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

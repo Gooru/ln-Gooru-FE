@@ -567,7 +567,7 @@ window.i18ln = {
   'common.logout.head_3': 'വിദഗ്ദ്ധ പദവി നേടീ',
   'common.logout.description':
     'പഠനത്തിനായുള്ള ജിപിഎസ് ആയിട്ടാണ് പഠന നാവിഗേറ്റർ ഡിസൈൻ ചെയ്തിരിക്കുന്നത് - വൈദഗ്ദ്ധ്യത്തിലേക്കുള്ള വഴി സ്വയം തിരഞ്ഞെടുക്കാൻ വിദ്യാർത്ഥികൾക്കായുള്ള മാർഗ്ഗമാണിത്. സ്കൂളുകൾ എല്ലാ വിദ്യാർത്ഥികളോടും ആവശ്യപ്പെടുന്നത് ഒരേ തരത്തിലുള്ള നിലവാരം നേടിയെടുക്കാനാണ്, പക്ഷെ ഓരോ വിദ്യാർത്ഥികളുടെയും അറിവിന്‍റെ അളവും കഴിവുകളും വ്യത്യസ്തമായിരിക്കും. പഠന നാവിഗേറ്റർ കുട്ടികളുടെ നിലവാരം തിരിച്ചറിഞ്ഞ്, എവിടെ നിന്ന് തുടങ്ങണോ അവിടെനിന്ന് തുടങ്ങി പഠന ലക്ഷ്യങ്ങൾ കൈവരിക്കാൻ സഹായിക്കുന്നു.',
-  'common.logout.logout-btn-msg1': 'നിങ്ങൾ ലോഗ് ഔട്ട് ചെയ്തു.',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'ലോഗ് ഇൻ ചെയ്യാൻ ഇവിടെ ക്ലിക്ക് ചെയ്യുക.',
   'common.mastery': 'വൈദഗ്ദ്ധ്യം',
   'common.menu': 'മെനു',
@@ -2965,5 +2965,23 @@ window.i18ln = {
   'guest.login-teacher': 'Login as Teacher',
   'guest.login-student': 'Login as Student',
   'common.guest': 'Guest',
-  'guest.download': 'Download the'
+  'guest.download': 'Download the',
+  'class-activity.collection-disable-scheduling-message':
+    'This collection cannot be scheduled or added to today\'s class as there are no resources in the collection',
+  'class-activity.assessment-disable-scheduling-message':
+    'This assessment cannot be scheduled or added to today\'s class as there are no questions in the assessment',
+  'class-activity.offline-activity-disable-scheduling-message':
+    'This offline activity cannot be scheduled as there are no tasks in the offline activity',
+  'common.inferred': 'Inferred',
+  'class-report.warning-message':
+    'The report is unavailable for this class as it is associated with multiple subjects',
+  'common.competency-label-1': 'In Progress',
+  'common.competency-label-3': 'Inferred',
+  'common.competency-label-4': 'Gained',
+  'common.competency-label-5': 'Gained',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

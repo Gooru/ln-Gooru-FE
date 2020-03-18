@@ -62,26 +62,6 @@ export default Ember.Component.extend({
    */
   selectedContentForSchedule: null,
 
-  /**
-   * Maintains the list of added collection ids from today's class activities
-   * @type {Object}
-   */
-  addedCollectionIdsInTodayClassActivities: Ember.computed(
-    'todaysClassActivities',
-    function() {
-      let classActivities = this.get('todaysClassActivities');
-      let collectionIds = Ember.A([]);
-      if (classActivities) {
-        collectionIds = classActivities.map(classActivity => {
-          return (
-            classActivity.get('collection.id') || classActivity.get('contentId')
-          );
-        });
-      }
-      return collectionIds;
-    }
-  ),
-
   // -------------------------------------------------------------------------
   // Actions
 
@@ -127,7 +107,7 @@ export default Ember.Component.extend({
       let lessonId = selectedLesson.get('id');
       let element = `#dca-lesson-${lessonId}`;
       let courseId = component.get('courseId');
-      let collectionIds = this.get('addedCollectionIdsInTodayClassActivities');
+      let collectionIds = this.get('todayActivitiesContentIds');
       if (selectedLesson.get('isActive')) {
         component.$(element).slideUp(400, function() {
           selectedLesson.set('isActive', false);

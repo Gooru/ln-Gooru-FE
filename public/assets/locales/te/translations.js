@@ -568,7 +568,7 @@ window.i18ln = {
   'common.logout.head_3': 'పాండిత్యం సాధిస్తుంది',
   'common.logout.description':
     'లెర్నింగ్ నావిగేటర్ “నేర్చుకోవడం కోసం జిపిఎస్” గా రూపొందించబడింది - ప్రతి విద్యార్థి పాండిత్యానికి వారి స్వంత మార్గాన్ని అనుసరించే మార్గం. పాఠశాలలు ప్రతి విద్యార్థిని ఒకే స్థాయి నైపుణ్యాన్ని సాధించమని అడుగుతాయి, కాని ప్రతి విద్యార్థి భిన్నమైన జ్ఞానం మరియు నైపుణ్యాలతో ప్రారంభమవుతుంది. లెర్నింగ్ నావిగేటర్ ప్రతి విద్యార్థిని వారు ఉన్న చోట కలుస్తుంది మరియు వారి అభ్యాస లక్ష్యాలకు నావిగేట్ చేస్తుంది.',
-  'common.logout.logout-btn-msg1': 'మీరు లాగ్ అవుట్ అయ్యారు.',
+  'common.logout.logout-btn-msg1': 'You have been logged out.',
   'common.logout.logout-btn-msg2': 'లాగిన్ అవ్వడానికి ఇక్కడ క్లిక్ చేయండి.',
   'common.mastery': 'పాండిత్యం',
   'common.menu': 'మెను',
@@ -2920,5 +2920,23 @@ window.i18ln = {
   'guest.login-teacher': 'Login as Teacher',
   'guest.login-student': 'Login as Student',
   'common.guest': 'Guest',
-  'guest.download': 'Download the'
+  'guest.download': 'Download the',
+  'class-activity.collection-disable-scheduling-message':
+    'This collection cannot be scheduled or added to today\'s class as there are no resources in the collection',
+  'class-activity.assessment-disable-scheduling-message':
+    'This assessment cannot be scheduled or added to today\'s class as there are no questions in the assessment',
+  'class-activity.offline-activity-disable-scheduling-message':
+    'This offline activity cannot be scheduled as there are no tasks in the offline activity',
+  'common.inferred': 'Inferred',
+  'class-report.warning-message':
+    'The report is unavailable for this class as it is associated with multiple subjects',
+  'common.competency-label-1': 'In Progress',
+  'common.competency-label-3': 'Inferred',
+  'common.competency-label-4': 'Gained',
+  'common.competency-label-5': 'Gained',
+  'common.not-editable-for-demo': 'Cannot edit in demo account',
+  'common.disabled-create-class':
+    'Creating a class is disabled for the demo account',
+  'common.disabled-join-class':
+    'Joining a class is disabled for the demo account'
 };

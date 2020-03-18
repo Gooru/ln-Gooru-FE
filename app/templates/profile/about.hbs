@@ -1,10 +1,17 @@
-<div class="controller about view view-profile {{if isGuest 'guest-account' ''}}">
+<div class="controller about view view-profile">
   <h4>
     {{#if isMyProfile}}
       <!-- <span class="edit-text">{{t "common.edit"}} </span> -->
-      <div class="about-edit" title="Edit" data-toggle="tooltip">
-        {{#link-to "profile.edit" tagName="a" class='hidden-xs'}}{{gru-icon name="mode_edit"}}{{/link-to}}
-      </div>
+        {{#if isGuest }}
+          <div class="about-edit guest-account" title="{{t 'common.not-editable-for-demo'}}" data-toggle="tooltip">
+            {{gru-icon name="mode_edit"}}
+          </div>
+        {{else}}
+          <div class="about-edit" title="Edit" data-toggle="tooltip">
+            {{#link-to "profile.edit" tagName="a" class='hidden-xs'}}{{gru-icon name="mode_edit"}}{{/link-to}}
+          </div>
+        {{/if}}
+
     {{/if}}
   </h4>
   <div class="about-container row">
@@ -92,7 +99,7 @@
             {{#if (and isMyProfile (eq profile.loginType 'credential')) }}
               <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                  <div class="bios">
+                  <div class="bios {{if isGuest 'guest-account'}}">
                     <p>
                       <a {{action 'showChangePass' true}}>{{t "change-password.title"}}</a>
                     </p>

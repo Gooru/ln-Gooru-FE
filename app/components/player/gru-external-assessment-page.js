@@ -1,10 +1,15 @@
 import Ember from 'ember';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
+import ActivityFeedbackMixin from 'gooru-web/mixins/activity-feedback-mixin';
 import { CONTENT_TYPES, PLAYER_EVENT_SOURCE } from 'gooru-web/config/config';
-import { validatePercentage, generateUUID } from 'gooru-web/utils/utils';
+import {
+  validatePercentage,
+  generateUUID,
+  getObjectCopy
+} from 'gooru-web/utils/utils';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(ActivityFeedbackMixin, {
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['gru-external-assessment-page'],
@@ -20,6 +25,11 @@ export default Ember.Component.extend({
   didRender() {
     let component = this;
     component.scoreValidator();
+  },
+
+  didInsertElement() {
+    let component = this;
+    component.fetchActivityFeedbackCateory();
   },
 
   /**
@@ -55,7 +65,19 @@ export default Ember.Component.extend({
       component.set('isScoreEntered', true);
       component.set('stopTime', new Date().getTime());
       component.updateSelfReport();
-      component.set('isShowActivityFeedback', true);
+      let categoryLists = component.get('categoryLists');
+      let contentCategory = categoryLists.get('externalAssessments');
+      let assessmentFeedback = getObjectCopy(component.get('assessment'));
+      assessmentFeedback.set(
+        'feedbackCategory',
+        contentCategory.sortBy('feedbackTypeId')
+      );
+      if (contentCategory && contentCategory.length) {
+        component.set('assessmentFeedback', assessmentFeedback);
+        component.set('isShowActivityFeedback', true);
+      } else {
+        component.sendAction('onSkipFeedback');
+      }
     },
 
     /**
