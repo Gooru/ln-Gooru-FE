@@ -732,89 +732,82 @@ export default Ember.Component.extend({
       let endGrade = grades.findBy('id', gradeRange.maxGrade);
       let endGradeIndex = grades.indexOf(endGrade);
       let studentGrades = grades.slice(startGradeIndex, endGradeIndex + 1);
-      let otherGradeList = [];
-      if (studentGrades) {
-        studentGrades.map(grade => {
-          otherGradeList.push(grade.get('id'));
-        });
+      let gradeIds = Ember.A([]);
+      if (studentGrades && studentGrades.length) {
+        gradeIds = studentGrades.mapBy('id');
       }
-      var currentGradeIndex = otherGradeList.indexOf(
-        component.get('class.gradeCurrent')
-      );
-      if (currentGradeIndex !== -1) {
-        otherGradeList.splice(currentGradeIndex, 1);
-      }
-      let params = {
-        grade: component.get('class.gradeCurrent'),
+
+      const queryParams = {
+        grade: gradeIds.toString(),
         classId: component.get('class.id'),
         month: component.get('activeMonth'),
         year: component.get('activeYear')
       };
-      let otherGradeParams = {
-        grade: otherGradeList.toString(),
-        classId: component.get('class.id'),
-        month: component.get('activeMonth'),
-        year: component.get('activeYear')
-      };
-      otherGradeParams.grade = otherGradeList.toString();
-      // TODO should call single API with all possibble grade ids and extract response based on respective groups
-      // that way we may reduce an additional API call
       Ember.RSVP.hash({
-        gradeLevelCompetency: component.get('class.gradeCurrent')
+        gradeLevelCompetencies: gradeIds.length
           ? component
             .get('strugglingCompetencyService')
-            .fetchStrugglingCompetency(params)
-          : [],
-        otherGradeLevelCompetency: otherGradeList.length
-          ? component
-            .get('strugglingCompetencyService')
-            .fetchStrugglingCompetency(otherGradeParams)
-          : []
-      }).then(({ gradeLevelCompetency, otherGradeLevelCompetency }) => {
+            .fetchStrugglingCompetency(queryParams)
+          : Ember.A([])
+      }).then(({ gradeLevelCompetencies }) => {
         if (!component.get('isDestroyed')) {
           component.set('otherGradeCompetency', []);
           component.set('otherGradeTopComp', []);
           component.set('gradeCompetencyDomainList', []);
-          if (gradeLevelCompetency && gradeLevelCompetency.length) {
-            component.set(
-              'currentGradeName',
-              gradeLevelCompetency[0].get('grade')
+          if (gradeLevelCompetencies && gradeLevelCompetencies.length) {
+            const classGradeId = component.get('class.gradeCurrent');
+            const classGradeCompetencies = gradeLevelCompetencies.findBy(
+              'gradeId',
+              classGradeId
             );
-            const gradeDomainsList = gradeLevelCompetency[0].get('domains');
-            component.serializeClassGradeContent(gradeDomainsList);
-          }
-          if (otherGradeLevelCompetency && otherGradeLevelCompetency.length) {
-            let otherGradeTopComp = [];
-            let cloneOtherGrade = getObjectsDeepCopy(otherGradeLevelCompetency);
-            cloneOtherGrade
-              .map(grade => grade.domains)
-              .map((domains, gradeIndex) => {
-                let competencyList = [];
-                domains.forEach((domain, domainIndex) => {
-                  domain.competencies[0].domainIndex = domainIndex;
-                  domain.competencies[0].domainName = domain.domainName;
-                  competencyList.pushObject(domain.competencies[0]);
-                });
-                if (competencyList && competencyList.length) {
-                  let gradeLevelTopCompetency = competencyList.reduce(
-                    (prevCompetency, currentCompetency) => {
-                      return prevCompetency.studentsCount <
-                        currentCompetency.studentsCount
-                        ? currentCompetency
-                        : prevCompetency;
+            // NOTE removed class grade competencies from the list
+            gradeLevelCompetencies.splice(
+              gradeLevelCompetencies.indexOf(classGradeCompetencies),
+              1
+            );
+            if (classGradeCompetencies) {
+              component.set(
+                'currentGradeName',
+                classGradeCompetencies.get('grade')
+              );
+              component.serializeClassGradeContent(
+                classGradeCompetencies.get('domains')
+              );
+            }
+
+            if (gradeLevelCompetencies && gradeLevelCompetencies.length) {
+              let otherGradeTopComp = [];
+              let cloneOtherGrade = getObjectsDeepCopy(gradeLevelCompetencies);
+              cloneOtherGrade
+                .map(grade => grade.domains)
+                .map((domains, gradeIndex) => {
+                  let competencyList = [];
+                  domains.forEach((domain, domainIndex) => {
+                    domain.competencies[0].domainIndex = domainIndex;
+                    domain.competencies[0].domainName = domain.domainName;
+                    competencyList.pushObject(domain.competencies[0]);
+                  });
+                  if (competencyList && competencyList.length) {
+                    let gradeLevelTopCompetency = competencyList.reduce(
+                      (prevCompetency, currentCompetency) => {
+                        return prevCompetency.studentsCount <
+                          currentCompetency.studentsCount
+                          ? currentCompetency
+                          : prevCompetency;
+                      }
+                    );
+                    if (gradeLevelTopCompetency) {
+                      gradeLevelTopCompetency.gradeIndex = gradeIndex;
+                      otherGradeTopComp.pushObject(gradeLevelTopCompetency);
                     }
-                  );
-                  if (gradeLevelTopCompetency) {
-                    gradeLevelTopCompetency.gradeIndex = gradeIndex;
-                    otherGradeTopComp.pushObject(gradeLevelTopCompetency);
                   }
-                }
-              });
-            let sortedOtherCompetency = otherGradeTopComp.length
-              ? otherGradeTopComp.sortBy('studentsCount').reverse()
-              : otherGradeTopComp;
-            component.set('otherGradeTopComp', sortedOtherCompetency);
-            component.set('otherGradeCompetency', otherGradeLevelCompetency);
+                });
+              let sortedOtherCompetency = otherGradeTopComp.length
+                ? otherGradeTopComp.sortBy('studentsCount').reverse()
+                : otherGradeTopComp;
+              component.set('otherGradeTopComp', sortedOtherCompetency);
+              component.set('otherGradeCompetency', gradeLevelCompetencies);
+            }
           }
         }
       });
