@@ -39,7 +39,7 @@
         </div>
       {{/each}}
     {{else if isShowCourseMap}}
-      {{#if isPremiumClass}}
+      {{#if (and isPremiumClass activeCmClass.milestoneViewApplicable)}}
         <div class="milestone-container">
           {{#if milestones}}
             {{teacher/class/milestone-course-map
@@ -53,6 +53,10 @@
               onScheduleActivity="onShowDateRangePicker"
               onPreviewContent = "onPreviewContent"
             }}
+          {{else}}
+            <div class="plan-activities-msg">
+              {{t 'class-activity.no-milestone-content'}}
+            </div>
           {{/if}}
         </div>
       {{else}}
@@ -70,7 +74,9 @@
               onShowContentPreview = "onShowContentPreview"
             }}
           {{else}}
-            <span class="no-course-map">No Course Map Attached</span>
+            <div class="plan-activities-msg">
+              {{t 'class-activity.no-course-map-content'}}
+            </div>
           {{/if}}
         </div>
       {{/if}}

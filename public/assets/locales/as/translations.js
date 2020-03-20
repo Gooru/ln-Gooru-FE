@@ -2936,5 +2936,8 @@ window.i18ln = {
   'common.disabled-create-class':
     'Creating a class is disabled for the demo account',
   'common.disabled-join-class':
-    'Joining a class is disabled for the demo account'
+    'Joining a class is disabled for the demo account',
+  'class-activity.no-milestone-content':
+    'There are no lessons in this milestone',
+  'class-activity.no-course-map-content': 'No Course Map Attached'
 };
