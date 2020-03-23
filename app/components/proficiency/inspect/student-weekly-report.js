@@ -327,11 +327,10 @@ export default Ember.Component.extend({
     let masteredCompetencies = weeklyReportData.get('masteredCompetencies');
     let inprogressCompetencies = weeklyReportData.get('inprogressCompetencies');
     let inferredCompetencies = weeklyReportData.get('inferredCompetencies');
-    let studentCompetencies = masteredCompetencies.concat(
-      inprogressCompetencies,
-      inferredCompetencies
+    let studentCompetencies = inprogressCompetencies.concat(
+      inferredCompetencies,
+      masteredCompetencies
     );
-
     let domainCompetencies = component.get(
       'domainLevelSummary.domainCompetencies'
     );
