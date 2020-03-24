@@ -17,6 +17,8 @@ export default Ember.Component.extend({
 
   i18n: Ember.inject.service(),
 
+  session: Ember.inject.service('session'),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
@@ -54,8 +56,6 @@ export default Ember.Component.extend({
           'activeWeek',
           reportPeriod.get('value') === 'current-week' ? 0 : 1
         );
-        component.set('reportStartDate', component.get('startDate'));
-        component.set('reportEndDate', component.get('endDate'));
       }
       if (reportPeriod.get('type') === 'custom') {
         component.onRangePickerReport();
@@ -106,10 +106,6 @@ export default Ember.Component.extend({
 
     onCloseDatePicker() {
       this.$('.student-rangepicker-container').hide();
-    },
-
-    onPrintPreview() {
-      window.print();
     }
   },
 
@@ -208,6 +204,28 @@ export default Ember.Component.extend({
         type: 'custom'
       })
     ]);
+  }),
+
+  /**
+   * @property {string} session tenant image url
+   */
+  tenantLogoUrl: Ember.computed.alias('session.tenantLogoUrl'),
+
+  /**
+   * @property {string} session tenant name
+   */
+  tenantName: Ember.computed.alias('session.tenantName'),
+
+  reportStartDate: Ember.computed('activeReportPeriod', function() {
+    return this.get('activeReportPeriod.value') === 'till-now'
+      ? null
+      : this.get('startDate');
+  }),
+
+  reportEndtDate: Ember.computed('activeReportPeriod', function() {
+    return this.get('activeReportPeriod.value') === 'till-now'
+      ? null
+      : this.get('endDate');
   }),
 
   // -------------------------------------------------------------------------

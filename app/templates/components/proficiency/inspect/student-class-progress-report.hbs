@@ -4,13 +4,24 @@
   </div>
   <div class="report-container">
     <div class="report-summery">
-      <span class="student-name">{{reportData.student.firstName}},  {{reportData.student.lastName}}</span>
-      <span class="class-name">{{class.title}} ({{teacher.firstName}} {{teacher.lastName}})</span>
-      {{#if reportStartDate}}
-        <span class="date">{{format-date reportStartDate 'MMMM DD,YYYY'}} - {{format-date reportEndDate 'MMMM DD, YYYY'}}</span>
-      {{else}}
-        <span class="date">{{t 'beginning-till-now'}}</span>
-      {{/if}}
+      <div class="left-panel">
+        <div class="student-info">
+          <span class="student-thumbnail" style="background-image: url({{studentProfile.thumbnailUrl}}) !important"></span>
+          <span class="student-name">{{studentProfile.firstName}},  {{studentProfile.lastName}}</span>
+        </div>
+        <span class="class-name">{{class.title}} ({{teacher.firstName}} {{teacher.lastName}})</span>
+      </div>
+      <div class="right-panel">
+        <div class="tenan-info">
+          <span class="tenant-logo" style="background-image: url({{tenantLogoUrl}}) !important"></span>
+          <span class="tenant-name">{{tenantName}}</span>
+        </div>
+        {{#if reportStartDate}}
+          <span class="date">{{format-date reportStartDate 'MMMM DD,YYYY'}} - {{format-date reportEndDate 'MMMM DD, YYYY'}}</span>
+        {{else}}
+          <span class="date">{{t 'beginning-till-now'}}</span>
+        {{/if}}
+      </div>
     </div>
     <div class="report-overview">
       <div class="title">{{t 'class-progress-report.individual-report.overview'}}:</div>
@@ -151,7 +162,7 @@
             {{proficiency/learner-proficiency-domain-matrix
               subjectBucket=subjectBucket
               timeLine=timeLine
-              userId=reportData.student.id
+              userId=studentProfile.id
               subject=activeSubject
               class=class
               competencyMatrixDomains=competencyMatrixDomains

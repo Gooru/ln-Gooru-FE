@@ -16,11 +16,9 @@
     </div>
     <div class="report-download">
       {{#if isShowStudentCompetencies}}
-        {{proficiency/inspect/student-class-progress-report reportData=individualStudentReport class=class teacher=teacherInfo course=course fwCompetencies=fwCompetencies fwDomains=fwDomains taxonomyCategories=taxonomyCategories reportStartDate=reportStartDate reportEndDate=reportEndDate}}
+        {{proficiency/inspect/student-class-progress-report reportData=individualStudentReport class=class teacher=teacherInfo course=course fwCompetencies=fwCompetencies fwDomains=fwDomains taxonomyCategories=taxonomyCategories reportStartDate=reportStartDate reportEndDate=reportEndDate tenantLogoUrl=tenantLogoUrl tenantName=tenantName}}
       {{else}}
-        <div class="print-preview" title="{{t 'common.download'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
-          {{gru-icon name="get_app"}}
-        </div>
+        {{proficiency/inspect/gru-class-progress-report studentsSummaryReportData=studentsSummaryReportData reportStartDate=reportStartDate reportEndDate=reportEndDate tenantLogoUrl=tenantLogoUrl tenantName=tenantName}}
       {{/if}}
     </div>
   </div>
@@ -209,7 +207,6 @@
     </div>
   {{/if}}
   <div class="student-rangepicker-container">
-
     {{ca-daterange-datepicker
       closeDatePicker='onCloseDatePicker'
       onScheduleForDate='onChangeDateForStudent'
@@ -221,6 +218,5 @@
       endDate=rangeEndDate
       forChangeStartDateNavMonth=true
       allowTwoDateRangePicker=true}}
-
   </div>
 </div>

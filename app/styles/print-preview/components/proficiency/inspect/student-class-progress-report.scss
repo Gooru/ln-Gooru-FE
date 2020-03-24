@@ -24,8 +24,38 @@
             left: 0;
             top: 0;
             .report-summery {
-              display: flex;
-              flex-direction: column;
+              display: grid !important;
+              grid-template-columns: auto auto !important;
+              .right-panel {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-self: end !important;
+              }
+              .student-info,
+              .tenan-info {
+                display: grid !important;
+                grid-template-columns: 55px auto !important;
+                column-gap: 5px !important;
+                .student-thumbnail,
+                .tenant-logo {
+                  display: block !important;
+                  width: 50px;
+                  height: 50px;
+                  background-repeat: no-repeat !important;
+                  background-size: 50px !important;
+                  background-position: center !important;
+                  border-radius: 25px !important;
+                }
+                .student-name,
+                .tenant-name {
+                  display: flex !important;
+                  align-items: center !important;
+                  text-transform: capitalize !important;
+                }
+                .tenant-name {
+                  justify-content: flex-end !important;
+                }
+              }
             }
             .report-overview {
               .title {
