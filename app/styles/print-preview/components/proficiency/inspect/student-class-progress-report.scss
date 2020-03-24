@@ -1,0 +1,384 @@
+.individual-student-report {
+  .report-period-selector {
+    .report-periods,
+    .active-period,
+    .custom-range-shower {
+      display: none !important;
+    }
+    .report-download {
+      display: block !important;
+      .print-preview {
+        display: none !important;
+      }
+      .individual-student-report-preview {
+        .individual-report-container {
+          .print-preview {
+            display: none !important;
+          }
+          color: #000000 !important;
+          .report-container {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            position: absolute;
+            left: 0;
+            top: 0;
+            .report-summery {
+              display: grid !important;
+              grid-template-columns: auto auto !important;
+              .right-panel {
+                display: flex !important;
+                flex-direction: column !important;
+                justify-self: end !important;
+              }
+              .student-info,
+              .tenan-info {
+                display: grid !important;
+                grid-template-columns: 55px auto !important;
+                column-gap: 5px !important;
+                .student-thumbnail,
+                .tenant-logo {
+                  display: block !important;
+                  width: 50px;
+                  height: 50px;
+                  background-repeat: no-repeat !important;
+                  background-size: 50px !important;
+                  background-position: center !important;
+                  border-radius: 25px !important;
+                }
+                .student-name,
+                .tenant-name {
+                  display: flex !important;
+                  align-items: center !important;
+                  text-transform: capitalize !important;
+                }
+                .tenant-name {
+                  justify-content: flex-end !important;
+                }
+              }
+            }
+            .report-overview {
+              .title {
+                padding: 10px 0px;
+                font-weight: bold;
+                font-size: 16px;
+              }
+              .student-report {
+                .header {
+                  display: grid;
+                  grid-template-columns: repeat(9, 1fr);
+                  border: 1px solid;
+                  .label-text {
+                    font-size: 14px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                  }
+                  .competencies-label {
+                    display: grid;
+                    grid-column-start: 1;
+                    grid-column-end: 4;
+                    text-align: center;
+                    .label-text {
+                      justify-self: center;
+                      color: #34424b;
+                      width: 100%;
+                      border-right: 1px solid;
+                    }
+                    .sub-header {
+                      display: grid;
+                      grid-template-columns: repeat(3, 1fr);
+                      justify-content: center;
+                      border-top: 1px solid;
+                      div {
+                        justify-self: center;
+                        font-size: 12px;
+                        color: #34424b;
+                        text-transform: uppercase;
+                        text-align: center;
+                        width: 100%;
+                        border-right: 1px solid;
+                      }
+                    }
+                  }
+                  .timespent-label {
+                    display: grid;
+                    grid-column-start: 4;
+                    grid-column-end: 7;
+                    text-align: center;
+                    .label-text {
+                      justify-self: center;
+                      color: #34424b;
+                      width: 100%;
+                      border-right: 1px solid;
+                    }
+                    .sub-header {
+                      display: grid;
+                      grid-template-columns: repeat(3, 1fr);
+                      justify-content: center;
+                      border-top: 1px solid;
+                      div {
+                        justify-self: center;
+                        font-size: 12px;
+                        color: #34424b;
+                        text-transform: uppercase;
+                        width: 100%;
+                        border-right: 1px solid;
+                      }
+                    }
+                  }
+                  .badge-earned-label,
+                  .average-score-label,
+                  .suggestion-taken-label {
+                    font-size: 13px;
+                    font-weight: bold;
+                    color: #34424b;
+                    text-align: center;
+                    border-right: 1px solid;
+                  }
+                  .suggestion-taken-label {
+                    border: 0px;
+                  }
+                }
+                .body {
+                  .student-summary-container {
+                    display: grid;
+                    grid-template-columns: auto;
+                    line-height: 45px;
+                    border: 1px solid;
+                    border-top: 0px;
+                    .summary-container {
+                      display: grid;
+                      grid-template-columns: repeat(9, 1fr);
+                      .gained-competencies,
+                      .inferred-competencies,
+                      .inprogress-competencies {
+                        display: grid;
+                        justify-content: center;
+                        .competency-count {
+                          font-size: 13px;
+                          color: #000;
+                        }
+                      }
+                      .total-timespent,
+                      .collection-timespent,
+                      .assessment-timespent {
+                        justify-self: center;
+                        .time-spent {
+                          font-size: 13px;
+                          color: #000;
+                        }
+                      }
+                      .badge-earned {
+                        justify-self: center;
+                        .badge {
+                          .badge-count {
+                            font-size: 13px;
+                            color: $white;
+                            padding: 8px;
+                          }
+                        }
+                      }
+                      .average-score {
+                        justify-self: center;
+                        .score {
+                          font-size: 13px;
+                          font-weight: bold;
+                        }
+                      }
+                      .suggestion-taken {
+                        justify-self: center;
+                        .suggestion-count {
+                          font-size: 13px;
+                          font-weight: bold;
+                          color: #f89e1b;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              .competencies-report {
+                margin: 30px 20px;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                border: 1px solid;
+                .mastery-competencies,
+                .in-progress-competencies {
+                  padding: 10px;
+                  border-right: 1px solid;
+                  text-align: center;
+                  font-size: 13px;
+                  .header {
+                    font-weight: bold;
+                    font-size: 14px;
+                  }
+                  .body {
+                    margin-top: 15px;
+                  }
+                  .node {
+                    margin-top: 15px;
+                  }
+                }
+                .in-progress-competencies {
+                  border: none;
+                }
+              }
+            }
+            .skyline-report {
+              margin-top: 20px;
+              .skyline-summery {
+                display: flex;
+                flex-direction: column;
+                .date {
+                  font-size: 14px;
+                  font-weight: bold;
+                }
+              }
+              .skyline-overview {
+                column-gap: 10px;
+                .chart {
+                  page-break-before: always;
+                  page-break-after: always;
+                  page-break-inside: avoid;
+                  .proficiency-chart {
+                    margin: 15px 0px;
+                    .learner-proficiency-domain-matrix {
+                      .actions {
+                        .grade-selector {
+                          .active-grade-list {
+                            .active-grade {
+                              span {
+                                .close {
+                                  display: none;
+                                }
+                              }
+                            }
+                          }
+                        }
+                        .fwc-panel,
+                        .toggle-chart {
+                          display: none;
+                        }
+                      }
+                      .chart-area {
+                        .matrix-chart {
+                          .chart-container {
+                            .domain-chart-container {
+                              .scrollable-chart {
+                                height: max-content !important;
+                                #render-proficiency-matrix {
+                                  height: max-content !important;
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                  .proficiency-tags {
+                    .last-updated {
+                      text-align: right;
+                      margin-top: 15px;
+                      margin-right: 30px;
+                      font-size: 12px;
+                    }
+                    .proficiency-legends {
+                      margin: 15px auto auto;
+                      width: 100%;
+                      display: grid;
+                      grid-template-columns: repeat(6, 1fr);
+                      justify-content: space-around;
+                      .legend {
+                        display: flex;
+                        justify-content: center;
+                        .box {
+                          display: block;
+                          width: 15.6px;
+                          height: 15.6px;
+                          transform: rotate(90deg);
+                          margin-right: 8.4px;
+                        }
+                        .box-class-grade-line {
+                          width: 18px;
+                          height: 5px;
+                          margin-top: 4px;
+                          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5) !important;
+                          margin-right: 8.4px;
+                        }
+                        .box-skyline {
+                          width: 18px;
+                          height: 10px;
+                          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5) !important;
+                          margin-right: 8.4px;
+                        }
+                        .title {
+                          line-height: 13px;
+                          font-size: 12px;
+                          color: $elephant-dark !important;
+                        }
+                        &.mastered {
+                          .box {
+                            background-color: $blue-mastery !important;
+                          }
+                        }
+                        &.in-progress {
+                          .box {
+                            background-color: $blue-in-progress !important;
+                          }
+                        }
+                        &.not-started {
+                          .box {
+                            background-color: $not-started !important;
+                          }
+                        }
+                        &.show-gut {
+                          .box {
+                            background-image: linear-gradient(
+                              to bottom,
+                              #687782,
+                              #37424b
+                            ) !important;
+                          }
+                        }
+                        &.skyline {
+                          .box-skyline {
+                            background-color: $white !important;
+                          }
+                        }
+                        &.class-grade-line {
+                          .box-class-grade-line {
+                            background-color: #8fd383 !important;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                .competencies-list {
+                  page-break-before: always;
+                  page-break-after: always;
+                  page-break-inside: avoid;
+                  margin-top: 15px;
+                  .subject-name {
+                    font-weight: bold;
+                  }
+                  .domain-name {
+                    display: flex;
+                    padding-left: 15px;
+                    span {
+                      padding: 3px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .student-competencies-activate {
+    display: none !important;
+  }
+}

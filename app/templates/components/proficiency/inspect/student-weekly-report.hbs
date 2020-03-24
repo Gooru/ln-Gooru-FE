@@ -1,4 +1,4 @@
-<div class="weekly-report-container">
+<div class="weekly-report-container {{if isShowStudentCompetencies 'individual-student-report'}}">
   <div class="report-period-selector">
     {{#if (and rangeEndDate rangeStartDate)}}
       <span class="custom-range-shower">{{rangeStartDate}} - {{rangeEndDate}}</span>
@@ -13,6 +13,13 @@
           {{reportPeriod.text}}
         </div>
       {{/each}}
+    </div>
+    <div class="report-download">
+      {{#if isShowStudentCompetencies}}
+        {{proficiency/inspect/student-class-progress-report reportData=individualStudentReport class=class teacher=teacherInfo course=course fwCompetencies=fwCompetencies fwDomains=fwDomains taxonomyCategories=taxonomyCategories reportStartDate=reportStartDate reportEndDate=reportEndDate tenantLogoUrl=tenantLogoUrl tenantName=tenantName}}
+      {{else}}
+        {{proficiency/inspect/gru-class-progress-report studentsSummaryReportData=studentsSummaryReportData reportStartDate=reportStartDate reportEndDate=reportEndDate tenantLogoUrl=tenantLogoUrl tenantName=tenantName}}
+      {{/if}}
     </div>
   </div>
   <div class="header-container {{if isShowStudentCompetencies 'student-competencies-activate'}}">
@@ -200,7 +207,6 @@
     </div>
   {{/if}}
   <div class="student-rangepicker-container">
-
     {{ca-daterange-datepicker
       closeDatePicker='onCloseDatePicker'
       onScheduleForDate='onChangeDateForStudent'
@@ -212,6 +218,5 @@
       endDate=rangeEndDate
       forChangeStartDateNavMonth=true
       allowTwoDateRangePicker=true}}
-
   </div>
 </div>

@@ -2900,6 +2900,12 @@ window.i18ln = {
   'common.competency-label-3': 'Inferred',
   'common.competency-label-4': 'Gained',
   'common.competency-label-5': 'Gained',
+  'class-progress-report.individual-report.competencies-mastery':
+    'Competencies Mastered (score ≥ 80%)',
+  'class-progress-report.individual-report.competencies-inprogress':
+    'Competencies in Progress (incomplete)',
+  'class-progress-report.individual-report.skyline-title': 'Skyline as of',
+  'class-progress-report.individual-report.overview': 'Overview',
   'common.not-editable-for-demo': 'Cannot edit in demo account',
   'common.disabled-create-class':
     'Creating a class is disabled for the demo account',
