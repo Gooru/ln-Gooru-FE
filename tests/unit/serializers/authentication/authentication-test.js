@@ -31,7 +31,8 @@ test('normalizeResponse for anonymous account', function(assert) {
     tenant: {
       tenant_id: 1,
       settings: null,
-      image_url: null
+      image_url: null,
+      name: null
     },
     isGuest: false,
     partner_id: 2
@@ -57,7 +58,8 @@ test('normalizeResponse for anonymous account', function(assert) {
     tenant: {
       tenantId: 1,
       settings: null,
-      imageUrl: null
+      imageUrl: null,
+      tenantName: null
     },
     partnerId: 2
   };
@@ -80,7 +82,8 @@ test('normalizeResponse for normal account', function(assert) {
     tenant: {
       tenant_id: 1,
       settings: null,
-      image_url: null
+      image_url: null,
+      name: null
     },
     isGuest: false,
     partner_id: 2
@@ -106,7 +109,8 @@ test('normalizeResponse for normal account', function(assert) {
     tenant: {
       tenantId: 1,
       settings: null,
-      imageUrl: null
+      imageUrl: null,
+      tenantName: null
     },
     partnerId: 2
   };
@@ -129,7 +133,8 @@ test('normalizeResponse for google account', function(assert) {
     tenant: {
       tenant_id: 1,
       settings: null,
-      image_url: null
+      image_url: null,
+      name: null
     },
     isGuest: false,
     partner_id: 2
@@ -155,7 +160,8 @@ test('normalizeResponse for google account', function(assert) {
     tenant: {
       tenantId: 1,
       settings: null,
-      imageUrl: null
+      imageUrl: null,
+      tenantName: null
     },
     partnerId: 2
   };
@@ -183,7 +189,8 @@ test('normalizeResponse for google account containing user category', function(a
     tenant: {
       tenant_id: 1,
       settings: null,
-      image_url: null
+      image_url: null,
+      name: null
     },
     isGuest: false,
     partner_id: 2
@@ -209,7 +216,8 @@ test('normalizeResponse for google account containing user category', function(a
     tenant: {
       tenantId: 1,
       settings: null,
-      imageUrl: null
+      imageUrl: null,
+      tenantName: null
     },
     partnerId: 2
   };
