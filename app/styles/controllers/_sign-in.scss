@@ -97,11 +97,11 @@
       }
 
       .tenant-logo {
-        height: 62px;
+        height: 110px;
         padding: 0;
-        width: 148px;
         background-repeat: no-repeat;
         background-size: contain;
+        justify-self: center;
         &-img {
           width: inherit;
           height: inherit;
