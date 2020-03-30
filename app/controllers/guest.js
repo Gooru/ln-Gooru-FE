@@ -34,7 +34,7 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   // Actions
 
   actions: {
-    authenticate: function(role) {
+    authenticate: function(role, redirection = null) {
       const controller = this;
       let userAccount;
       if (role === ROLES.TEACHER) {
@@ -61,7 +61,11 @@ export default Ember.Controller.extend(ConfigurationMixin, {
             .signInWithUser(credentials, true)
             .then(
               function() {
-                controller.send('signIn');
+                if (redirection) {
+                  window.location.href = window.location.origin + redirection;
+                } else {
+                  controller.send('signIn');
+                }
               },
               function() {
                 controller.get('notifications').warning(errorMessage);
