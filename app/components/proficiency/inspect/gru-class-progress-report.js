@@ -4,6 +4,16 @@ export default Ember.Component.extend({
   // Attributes
   classNames: ['class-progress-report-preview'],
 
+  /**
+   * @property {Number} chartHeight
+   */
+  chartHeight: 350,
+
+  /**
+   * @property {Number} cellWidth
+   */
+  cellWidth: 35,
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {

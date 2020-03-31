@@ -16,9 +16,9 @@
     </div>
     <div class="report-download">
       {{#if isShowStudentCompetencies}}
-        {{proficiency/inspect/student-class-progress-report reportData=individualStudentReport class=class teacher=teacherInfo course=course fwCompetencies=fwCompetencies fwDomains=fwDomains taxonomyCategories=taxonomyCategories reportStartDate=reportStartDate reportEndDate=reportEndDate tenantLogoUrl=tenantLogoUrl tenantName=tenantName}}
+        {{proficiency/inspect/student-class-progress-report reportData=individualStudentReport studentDomainCompetencies=studentDomainCompetencies class=class teacher=teacherInfo course=course fwCompetencies=fwCompetencies fwDomains=fwDomains taxonomyCategories=taxonomyCategories reportStartDate=reportStartDate reportEndDate=reportEndDate tenantLogoUrl=tenantLogoUrl tenantName=tenantName}}
       {{else}}
-        {{proficiency/inspect/gru-class-progress-report studentsSummaryReportData=studentsSummaryReportData reportStartDate=reportStartDate reportEndDate=reportEndDate tenantLogoUrl=tenantLogoUrl tenantName=tenantName}}
+        {{proficiency/inspect/gru-class-progress-report class=class teacher=teacherInfo studentsSummaryReportData=studentsSummaryReportData reportStartDate=reportStartDate reportEndDate=reportEndDate tenantLogoUrl=tenantLogoUrl tenantName=tenantName studentsDomainPerformance=studentsDomainPerformance maxNumberOfCompetencies=maxNumberOfCompetencies}}
       {{/if}}
     </div>
   </div>
