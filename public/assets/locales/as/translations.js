@@ -2945,5 +2945,6 @@ window.i18ln = {
     'Joining a class is disabled for the demo account',
   'class-activity.no-milestone-content':
     'There are no lessons in this milestone',
-  'class-activity.no-course-map-content': 'No Course Map Attached'
+  'class-activity.no-course-map-content': 'No Course Map Attached',
+  'common.teacher-name': 'Teacher Name'
 };
