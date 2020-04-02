@@ -43,6 +43,12 @@ export default Ember.Controller.extend({
    */
   courseService: Ember.inject.service('api-sdk/course'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyProvider: Ember.inject.service('api-sdk/taxonomy'),
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -149,6 +155,7 @@ export default Ember.Controller.extend({
     }).then(({ domainLevelSummary }) => {
       controller.set('domainLevelSummary', domainLevelSummary);
       controller.parseStudentsDomainProficiencyData();
+      controller.fetchDomainGradeBoundary();
     });
   },
 
@@ -371,6 +378,7 @@ export default Ember.Controller.extend({
     controller.set('activeReport', controller.get('reportTypes').objectAt(0));
     controller.set('class', controller.get('classController.class'));
     controller.set('course', controller.get('classController.course'));
+    controller.set('domainBoundariesContainer', Ember.A([]));
   },
 
   /**
@@ -473,6 +481,25 @@ export default Ember.Controller.extend({
             .send('onSelectSecondaryClass', aClass);
         });
       });
+    });
+  },
+
+  /**
+   * @function fetchDomainGradeBoundary
+   * Method to fetch domain grade boundary
+   */
+  fetchDomainGradeBoundary() {
+    let component = this;
+    let taxonomyService = component.get('taxonomyProvider');
+    let gradeId = component.get('class.gradeCurrent');
+    return Ember.RSVP.hash({
+      domainBoundary: gradeId
+        ? Ember.RSVP.resolve(
+          taxonomyService.fetchDomainGradeBoundaryBySubjectId(gradeId)
+        )
+        : Ember.RSVP.resolve(null)
+    }).then(({ domainBoundary }) => {
+      component.set('domainBoundariesContainer', domainBoundary);
     });
   },
 
@@ -683,5 +710,10 @@ export default Ember.Controller.extend({
   /**
    * Maintain secondary class list
    */
-  selectedClassList: null
+  selectedClassList: null,
+
+  /**
+   * @property {Array} domainBoundariesContainer
+   */
+  domainBoundariesContainer: Ember.A([])
 });

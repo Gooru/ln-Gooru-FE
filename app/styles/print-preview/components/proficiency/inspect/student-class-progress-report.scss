@@ -23,255 +23,186 @@
             position: absolute;
             left: 0;
             top: 0;
-            .report-summery {
-              display: grid !important;
-              grid-template-columns: auto auto !important;
-              .right-panel {
-                display: flex !important;
-                flex-direction: column !important;
-                justify-self: end !important;
-              }
-              .student-info,
-              .tenan-info {
-                display: grid !important;
-                grid-template-columns: 55px auto !important;
-                column-gap: 5px !important;
-                .student-thumbnail,
-                .tenant-logo {
-                  display: block !important;
-                  width: 50px;
-                  height: 50px;
-                  background-repeat: no-repeat !important;
-                  background-size: 50px !important;
-                  background-position: center !important;
-                  border-radius: 25px !important;
-                }
-                .student-name,
-                .tenant-name {
-                  display: flex !important;
-                  align-items: center !important;
-                  text-transform: capitalize !important;
-                }
-                .tenant-name {
-                  justify-content: flex-end !important;
-                }
-              }
-            }
-            .report-overview {
-              .title {
-                padding: 10px 0px;
-                font-weight: bold;
-                font-size: 16px;
-              }
-              .student-report {
-                .header {
-                  display: grid;
-                  grid-template-columns: repeat(9, 1fr);
-                  border: 1px solid;
-                  .label-text {
-                    font-size: 14px;
-                    font-weight: bold;
-                    text-transform: uppercase;
-                  }
-                  .competencies-label {
-                    display: grid;
-                    grid-column-start: 1;
-                    grid-column-end: 4;
-                    text-align: center;
-                    .label-text {
-                      justify-self: center;
-                      color: #34424b;
-                      width: 100%;
-                      border-right: 1px solid;
-                    }
-                    .sub-header {
-                      display: grid;
-                      grid-template-columns: repeat(3, 1fr);
-                      justify-content: center;
-                      border-top: 1px solid;
-                      div {
-                        justify-self: center;
-                        font-size: 12px;
-                        color: #34424b;
-                        text-transform: uppercase;
-                        text-align: center;
-                        width: 100%;
-                        border-right: 1px solid;
-                      }
-                    }
-                  }
-                  .timespent-label {
-                    display: grid;
-                    grid-column-start: 4;
-                    grid-column-end: 7;
-                    text-align: center;
-                    .label-text {
-                      justify-self: center;
-                      color: #34424b;
-                      width: 100%;
-                      border-right: 1px solid;
-                    }
-                    .sub-header {
-                      display: grid;
-                      grid-template-columns: repeat(3, 1fr);
-                      justify-content: center;
-                      border-top: 1px solid;
-                      div {
-                        justify-self: center;
-                        font-size: 12px;
-                        color: #34424b;
-                        text-transform: uppercase;
-                        width: 100%;
-                        border-right: 1px solid;
-                      }
-                    }
-                  }
-                  .badge-earned-label,
-                  .average-score-label,
-                  .suggestion-taken-label {
-                    font-size: 13px;
-                    font-weight: bold;
-                    color: #34424b;
-                    text-align: center;
-                    border-right: 1px solid;
-                  }
-                  .suggestion-taken-label {
-                    border: 0px;
-                  }
-                }
-                .body {
-                  .student-summary-container {
-                    display: grid;
-                    grid-template-columns: auto;
-                    line-height: 45px;
-                    border: 1px solid;
-                    border-top: 0px;
-                    .summary-container {
-                      display: grid;
-                      grid-template-columns: repeat(9, 1fr);
-                      .gained-competencies,
-                      .inferred-competencies,
-                      .inprogress-competencies {
-                        display: grid;
-                        justify-content: center;
-                        .competency-count {
-                          font-size: 13px;
-                          color: #000;
-                        }
-                      }
-                      .total-timespent,
-                      .collection-timespent,
-                      .assessment-timespent {
-                        justify-self: center;
-                        .time-spent {
-                          font-size: 13px;
-                          color: #000;
-                        }
-                      }
-                      .badge-earned {
-                        justify-self: center;
-                        .badge {
-                          .badge-count {
-                            font-size: 13px;
-                            color: $white;
-                            padding: 8px;
-                          }
-                        }
-                      }
-                      .average-score {
-                        justify-self: center;
-                        .score {
-                          font-size: 13px;
-                          font-weight: bold;
-                        }
-                      }
-                      .suggestion-taken {
-                        justify-self: center;
-                        .suggestion-count {
-                          font-size: 13px;
-                          font-weight: bold;
-                          color: #f89e1b;
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-              .competencies-report {
-                margin: 30px 20px;
+            .header-penal {
+              .header-info {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                border: 1px solid;
-                .mastery-competencies,
-                .in-progress-competencies {
-                  padding: 10px;
-                  border-right: 1px solid;
-                  text-align: center;
-                  font-size: 13px;
-                  .header {
-                    font-weight: bold;
-                    font-size: 14px;
+                grid-template-columns: auto auto;
+                gap: 10px;
+                margin-bottom: 30px;
+                border-bottom: 2px solid;
+                .tenan-info {
+                  display: grid !important;
+                  grid-template-columns: 150px auto !important;
+                  column-gap: 5px !important;
+                  .tenant-logo {
+                    display: block;
+                    width: inherit;
+                    height: inherit;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                    border-radius: 25px;
                   }
-                  .body {
-                    margin-top: 15px;
-                  }
-                  .node {
-                    margin-top: 15px;
+                  .tenant-name {
+                    display: flex !important;
+                    align-items: center !important;
+                    text-transform: capitalize !important;
                   }
                 }
-                .in-progress-competencies {
-                  border: none;
+
+                .report-info {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: flex-end;
+                  align-items: flex-end;
                 }
               }
             }
-            .skyline-report {
-              margin-top: 20px;
-              .skyline-summery {
-                display: flex;
-                flex-direction: column;
-                .date {
-                  font-size: 14px;
-                  font-weight: bold;
+            .body-penal {
+              .report-summery {
+                .student-details {
+                  display: grid;
+                  grid-template-columns: 50px auto;
+                  column-gap: 5px;
+                  padding-bottom: 20px;
+                  .thumbnail-container {
+                    width: 47px;
+                    height: 47px;
+                    background-size: 47px 47px !important;
+                    display: block;
+                    border-radius: 50%;
+                    border: none;
+                  }
+                  .student-name {
+                    .first-name,
+                    .last-name {
+                      text-transform: capitalize;
+                      opacity: 0.9;
+                      font-size: 13px;
+                      color: #000000;
+                    }
+                  }
                 }
               }
-              .skyline-overview {
-                column-gap: 10px;
-                .chart {
-                  page-break-before: always;
-                  page-break-after: always;
-                  page-break-inside: avoid;
-                  .proficiency-chart {
-                    margin: 15px 0px;
-                    .learner-proficiency-domain-matrix {
-                      .actions {
-                        .grade-selector {
-                          .active-grade-list {
-                            .active-grade {
-                              span {
-                                .close {
-                                  display: none;
+              .report-overview {
+                .title {
+                  padding: 10px 0px;
+                  font-weight: bold;
+                  font-size: 16px;
+                }
+                .student-report {
+                  .class-progress-report-table {
+                    width: 100%;
+                    tr {
+                      td,
+                      th {
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        padding: 5px;
+                        text-align: center;
+                        height: 55px;
+                        font-size: 15px;
+                      }
+                    }
+                  }
+                }
+                .competencies-report {
+                  margin: 30px 20px;
+                  display: grid;
+                  grid-template-columns: repeat(2, 1fr);
+                  border: 1px solid;
+                  .mastery-competencies,
+                  .in-progress-competencies {
+                    padding: 10px;
+                    border-right: 1px solid;
+                    text-align: center;
+                    font-size: 13px;
+                    .header {
+                      font-weight: bold;
+                      font-size: 14px;
+                    }
+                    .body {
+                      margin-top: 15px;
+                      text-align: left;
+                    }
+                    .node {
+                      margin-top: 15px;
+                    }
+                  }
+                  .in-progress-competencies {
+                    border: none;
+                  }
+                }
+              }
+              .skyline-report {
+                margin-top: 20px;
+                page-break-inside: avoid;
+                .skyline-summery {
+                  display: flex;
+                  flex-direction: column;
+                  .date {
+                    font-size: 14px;
+                    font-weight: bold;
+                  }
+                }
+                .skyline-overview {
+                  column-gap: 10px;
+                  .chart {
+                    page-break-inside: avoid;
+                    display: grid;
+                    grid-template-columns: auto auto;
+                    .proficiency-chart {
+                      margin: 15px 0px;
+                      .learner-proficiency-domain-matrix {
+                        .actions {
+                          .grade-selector {
+                            .active-grade-list {
+                              .active-grade {
+                                span {
+                                  .close {
+                                    display: none;
+                                  }
                                 }
                               }
                             }
                           }
+                          .fwc-panel,
+                          .toggle-chart {
+                            display: none;
+                          }
                         }
-                        .fwc-panel,
-                        .toggle-chart {
-                          display: none;
+                        .chart-area {
+                          .matrix-chart {
+                            .chart-container {
+                              .domain-chart-container {
+                                .scrollable-chart {
+                                  height: max-content !important;
+                                  #render-proficiency-matrix {
+                                    height: max-content !important;
+                                  }
+                                }
+                              }
+                            }
+                          }
                         }
                       }
-                      .chart-area {
-                        .matrix-chart {
-                          .chart-container {
-                            .domain-chart-container {
-                              .scrollable-chart {
-                                height: max-content !important;
-                                #render-proficiency-matrix {
-                                  height: max-content !important;
-                                }
-                              }
-                            }
-                          }
+                    }
+                    .competencies-list {
+                      page-break-before: always;
+                      page-break-after: always;
+                      page-break-inside: avoid;
+                      margin-top: 15px;
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      .subject-name {
+                        font-weight: bold;
+                      }
+                      .domain-name {
+                        display: flex;
+                        padding-left: 15px;
+                        span {
+                          padding: 3px;
                         }
                       }
                     }
@@ -352,22 +283,6 @@
                           }
                         }
                       }
-                    }
-                  }
-                }
-                .competencies-list {
-                  page-break-before: always;
-                  page-break-after: always;
-                  page-break-inside: avoid;
-                  margin-top: 15px;
-                  .subject-name {
-                    font-weight: bold;
-                  }
-                  .domain-name {
-                    display: flex;
-                    padding-left: 15px;
-                    span {
-                      padding: 3px;
                     }
                   }
                 }

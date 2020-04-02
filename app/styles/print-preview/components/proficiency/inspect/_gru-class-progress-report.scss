@@ -22,45 +22,216 @@
             height: 100% !important;
             position: absolute !important;
             left: 0 !important;
-            .right-panel {
-              display: flex !important;
-              flex-direction: column !important;
-              justify-self: end !important;
-              text-align: right;
-              margin-bottom: 10px;
-              .tenan-info {
-                display: grid !important;
-                grid-template-columns: 55px auto !important;
-                column-gap: 5px !important;
-                justify-content: end;
-                .tenant-logo {
-                  display: block !important;
-                  width: 50px;
-                  height: 50px;
-                  background-repeat: no-repeat !important;
-                  background-size: 50px !important;
-                  background-position: center !important;
-                  border-radius: 25px !important;
-                }
-                .tenant-name {
-                  display: flex !important;
-                  align-items: center !important;
-                  text-transform: capitalize !important;
+            .report-header {
+              .header-penal {
+                .header-info {
+                  display: grid;
+                  grid-template-columns: auto auto;
+                  gap: 10px;
+                  margin-bottom: 30px;
+                  border-bottom: 2px solid;
+                  .tenan-info {
+                    display: grid !important;
+                    grid-template-columns: 150px auto !important;
+                    column-gap: 5px !important;
+                    .tenant-logo {
+                      display: block;
+                      width: inherit;
+                      height: inherit;
+                      background-repeat: no-repeat;
+                      background-size: contain;
+                      background-position: center;
+                      border-radius: 25px;
+                    }
+                    .tenant-name {
+                      display: flex !important;
+                      align-items: center !important;
+                      text-transform: capitalize !important;
+                    }
+                  }
+
+                  .report-info {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    align-items: flex-end;
+                  }
                 }
               }
-            }
-            .class-progress-report-table {
-              position: absolute !important;
-              width: 100% !important;
-              tr {
-                td,
-                th {
-                  border: 1px solid black;
-                  border-collapse: collapse;
-                  padding: 5px;
-                  text-align: center;
-                  height: 55px;
-                  font-size: 15px;
+              .body-penal {
+                .class-progress-report-table {
+                  tr {
+                    td,
+                    th {
+                      border: 1px solid black;
+                      border-collapse: collapse;
+                      padding: 5px;
+                      text-align: center;
+                      height: 55px;
+                      font-size: 15px;
+
+                      .name {
+                        text-transform: capitalize;
+                      }
+                    }
+                  }
+                }
+                .student-info-container {
+                  margin-top: 20px;
+                  float: none;
+                  .student-report {
+                    padding: 15px;
+                    display: block;
+                    page-break-before: always;
+                    page-break-inside: avoid;
+                    position: relative;
+                    .student-details {
+                      display: grid;
+                      grid-template-columns: 50px auto;
+                      column-gap: 5px;
+                      padding-bottom: 20px;
+                      .thumbnail-container {
+                        width: 47px;
+                        height: 47px;
+                        background-size: 47px 47px !important;
+                        display: block;
+                        border-radius: 50%;
+                        border: none;
+                      }
+                      .student-name {
+                        .first-name,
+                        .last-name {
+                          text-transform: capitalize;
+                          opacity: 0.9;
+                          font-size: 13px;
+                          color: #000000;
+                        }
+                      }
+                    }
+                    .competencies-details {
+                      page-break-inside: avoid;
+                      margin: 30px 20px;
+                      display: grid;
+                      grid-template-columns: repeat(2, 1fr);
+                      border: 1px solid;
+                      .mastery-competencies,
+                      .in-progress-competencies {
+                        padding: 10px;
+                        border-right: 1px solid;
+                        text-align: center;
+                        font-size: 13px;
+                        .header {
+                          font-weight: bold;
+                          font-size: 14px;
+                        }
+                        .body {
+                          margin-top: 15px;
+                          text-align: left;
+                        }
+                        .node {
+                          margin-top: 15px;
+                        }
+                      }
+                      .in-progress-competencies {
+                        border: none;
+                      }
+                    }
+                    .student-chat {
+                      page-break-inside: avoid;
+                      display: grid;
+                      grid-template-columns: auto auto;
+                      column-gap: 10px;
+                      .domain-list {
+                        justify-content: center;
+                        display: flex;
+                        flex-direction: column;
+                        .domain-name {
+                          display: grid;
+                          grid-template-columns: 20px auto;
+                          column-gap: 5px;
+                        }
+                      }
+                    }
+                    .proficiency-tags {
+                      margin: 10px;
+                      .last-updated {
+                        text-align: right;
+                        margin-top: 15px;
+                        margin-right: 30px;
+                        font-size: 12px;
+                      }
+                      .proficiency-legends {
+                        margin: 15px auto auto;
+                        width: 100%;
+                        display: grid;
+                        grid-template-columns: repeat(6, 1fr);
+                        justify-content: space-around;
+                        .legend {
+                          display: flex;
+                          justify-content: center;
+                          .box {
+                            display: block;
+                            width: 15.6px;
+                            height: 15.6px;
+                            transform: rotate(90deg);
+                            margin-right: 8.4px;
+                          }
+                          .box-class-grade-line {
+                            width: 18px;
+                            height: 5px;
+                            margin-top: 4px;
+                            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5) !important;
+                            margin-right: 8.4px;
+                          }
+                          .box-skyline {
+                            width: 18px;
+                            height: 10px;
+                            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5) !important;
+                            margin-right: 8.4px;
+                          }
+                          .title {
+                            line-height: 13px;
+                            font-size: 12px;
+                            color: $elephant-dark !important;
+                          }
+                          &.mastered {
+                            .box {
+                              background-color: $blue-mastery !important;
+                            }
+                          }
+                          &.in-progress {
+                            .box {
+                              background-color: $blue-in-progress !important;
+                            }
+                          }
+                          &.not-started {
+                            .box {
+                              background-color: $not-started !important;
+                            }
+                          }
+                          &.show-gut {
+                            .box {
+                              background-image: linear-gradient(
+                                to bottom,
+                                #687782,
+                                #37424b
+                              ) !important;
+                            }
+                          }
+                          &.skyline {
+                            .box-skyline {
+                              background-color: $white !important;
+                            }
+                          }
+                          &.class-grade-line {
+                            .box-class-grade-line {
+                              background-color: #8fd383 !important;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
