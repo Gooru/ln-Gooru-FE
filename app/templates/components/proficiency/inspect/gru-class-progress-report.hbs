@@ -127,13 +127,102 @@
               <div class="student-details">
                 <div class="thumbnail-container" style="background-image: url({{studentDomainPerformance.thumbnail}}) !important;"></div>
                 <div class="student-name">
-                  <div class="last-name ellipsis">
-                    {{studentDomainPerformance.lastName}}
-                  </div>
-                  <div class="first-name ellipsis">
-                    {{studentDomainPerformance.firstName}}
-                  </div>
+                  {{studentDomainPerformance.firstName}} {{studentDomainPerformance.lastName}}
                 </div>
+              </div>
+              <div class="report-overview">
+                <table class="class-progress-report-table">
+                  <thead>
+                    <tr>
+                      <th colspan="3">{{t 'common.competencies'}}</th>
+                      <th colspan="3">{{t 'gru-data-picker.time-spent'}}</th>
+                      <th rowspan="2">{{t 'badges-earned'}}</th>
+                      <th rowspan="2">{{t 'common.averageScore'}}</th>
+                      <th rowspan="2">{{t 'suggestion-taken'}}</th>
+                    </tr>
+                    <tr>
+                      <th>{{t 'common.gained'}}</th>
+                      <th>{{t 'common.inferred'}}</th>
+                      <th>{{t 'profile.proficiency.in-progress'}}</th>
+                      <th>{{t 'common.collections'}}</th>
+                      <th>{{t 'common.assessments'}}</th>
+                      <th>{{t 'reports.gru-table-view.totals'}}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        {{#if studentDomainPerformance.weeklyReportData.masteredCompetenciesCount}}
+                          <span class="competency-count">{{studentDomainPerformance.weeklyReportData.masteredCompetenciesCount}}</span>
+                        {{else}}
+                          --
+                        {{/if}}
+                      </td>
+                      <td>
+                        {{#if studentDomainPerformance.weeklyReportData.inferredCompetenciesCount}}
+                          <span class="competency-count">{{studentDomainPerformance.weeklyReportData.inferredCompetenciesCount}}</span>
+                        {{else}}
+                          --
+                        {{/if}}
+                      </td>
+                      <td>
+                        {{#if studentDomainPerformance.weeklyReportData.inprogressCompetenciesCount}}
+                          <span class="competency-count">{{studentDomainPerformance.weeklyReportData.inprogressCompetenciesCount}}</span>
+                        {{else}}
+                          --
+                        {{/if}}
+                      </td>
+                      <td>
+                        <span class="time-spent">
+                          {{#if studentDomainPerformance.weeklyReportData.collectionTimespent}}
+                            {{format-time studentDomainPerformance.weeklyReportData.collectionTimespent}}
+                          {{else}}
+                            --
+                          {{/if}}
+                        </span>
+                      </td>
+                      <td>
+                        <span class="time-spent">
+                          {{#if studentDomainPerformance.weeklyReportData.assessmentTimespent}}
+                            {{format-time studentDomainPerformance.weeklyReportData.assessmentTimespent}}
+                          {{else}}
+                            --
+                          {{/if}}
+                        </span>
+                      </td>
+                      <td>
+                        <span class="time-spent">
+                          {{#if studentDomainPerformance.weeklyReportData.totalTimespent}}
+                            {{format-time studentDomainPerformance.weeklyReportData.totalTimespent}}
+                          {{else}}
+                            --
+                          {{/if}}
+                        </span>
+                      </td>
+                      <td>
+                        {{#if studentDomainPerformance.weeklyReportData.badgeEarned}}
+                          <span class="badge-count">{{studentDomainPerformance.weeklyReportData.badgeEarned}}</span>
+                        {{else}}
+                          --
+                        {{/if}}
+                      </td>
+                      <td>
+                        {{#unless studentDomainPerformance.weeklyReportData.isNotStarted}}
+                          <span class="score score-range-{{grade-range studentDomainPerformance.weeklyReportData.averageScore}}">{{reportData.weeklyReportData.averageScore}}</span>
+                        {{else}}
+                          --
+                        {{/unless}}
+                      </td>
+                      <td>
+                        {{#if studentDomainPerformance.weeklyReportData.suggestionTaken}}
+                          <span class="suggestion-count">{{studentDomainPerformance.weeklyReportData.suggestionTaken}}</span>
+                        {{else}}
+                          --
+                        {{/if}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
               <div class="competencies-details">
                 <div class="mastery-competencies">
