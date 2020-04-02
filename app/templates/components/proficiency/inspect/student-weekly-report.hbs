@@ -18,7 +18,9 @@
       {{#if isShowStudentCompetencies}}
         {{proficiency/inspect/student-class-progress-report reportData=individualStudentReport studentDomainCompetencies=studentDomainCompetencies class=class teacher=teacherInfo course=course fwCompetencies=fwCompetencies fwDomains=fwDomains taxonomyCategories=taxonomyCategories reportStartDate=reportStartDate reportEndDate=reportEndDate tenantLogoUrl=tenantLogoUrl tenantName=tenantName}}
       {{else}}
-        {{proficiency/inspect/gru-class-progress-report class=class teacher=teacherInfo studentsSummaryReportData=studentsSummaryReportData reportStartDate=reportStartDate reportEndDate=reportEndDate tenantLogoUrl=tenantLogoUrl tenantName=tenantName studentsDomainPerformance=studentsDomainPerformance maxNumberOfCompetencies=maxNumberOfCompetencies}}
+        {{#if studentsSummaryReportData}}
+          {{proficiency/inspect/gru-class-progress-report class=class teacher=teacherInfo studentsSummaryReportData=studentsSummaryReportData reportStartDate=reportStartDate reportEndDate=reportEndDate tenantLogoUrl=tenantLogoUrl tenantName=tenantName studentsDomainPerformance=studentsDomainPerformance maxNumberOfCompetencies=maxNumberOfCompetencies domainBoundariesContainer=domainBoundariesContainer}}
+        {{/if}}
       {{/if}}
     </div>
   </div>

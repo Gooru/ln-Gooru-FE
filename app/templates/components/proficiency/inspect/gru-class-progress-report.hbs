@@ -45,8 +45,8 @@
             {{#each studentsSummaryReportData as |reportData|}}
               <tr>
                 <td>
-                  <span class="ellipsis">{{reportData.student.lastName}}</span>
-                  <span class="ellipsis">{{reportData.student.firstName}}</span>
+                  <span class="ellipsis name">{{reportData.student.lastName}}</span>
+                  <span class="ellipsis name">{{reportData.student.firstName}}</span>
                 </td>
                 <td>
                   {{#if reportData.weeklyReportData.masteredCompetenciesCount}}
@@ -135,9 +135,39 @@
                   </div>
                 </div>
               </div>
+              <div class="competencies-details">
+                <div class="mastery-competencies">
+                  <div class="header">
+                    {{t 'class-progress-report.individual-report.competencies-mastery'}}
+                  </div>
+                  <div class="body">
+                    {{#each studentDomainPerformance.studentCompetencies  as | competency|}}
+                      {{#if (gt competency.status 3)}}
+                        <div>{{competency.code}} - {{competency.competencyStudentDesc}}</div>
+                      {{/if}}
+                    {{else}}
+                      --
+                    {{/each}}
+                  </div>
+                </div>
+                <div class="in-progress-competencies">
+                  <div class="header">
+                    {{t 'class-progress-report.individual-report.competencies-inprogress'}}
+                  </div>
+                  <div class="body">
+                    {{#each studentDomainPerformance.studentCompetencies as |competency|}}
+                      {{#if (eq competency.status  1)}}
+                        <div>{{competency.code}} - {{competency.competencyStudentDesc}}</div>
+                      {{/if}}
+                    {{else}}
+                        --
+                    {{/each}}
+                  </div>
+                </div>
+              </div>
               <div class="student-chat">
                 <div class="card-body">
-                  {{charts/proficiency-view domainDataSet=studentDomainPerformance.domainCompetencies studentSeq=studentSeq maxNumberOfCompetencies=maxNumberOfCompetencies chartHeight=chartHeight cellWidth=cellWidth}}
+                    {{charts/proficiency-view domainDataSet=studentDomainPerformance.domainCompetencies studentSeq=studentSeq maxNumberOfCompetencies=maxNumberOfCompetencies chartHeight=chartHeight cellWidth=cellWidth domainBoundariesContainer=domainBoundariesContainer}}
                 </div>
                 <div class="domain-list">
                   {{#each studentDomainPerformance.domainCompetencies as |domain index|}}

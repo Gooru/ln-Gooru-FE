@@ -91,135 +91,17 @@
                   font-size: 16px;
                 }
                 .student-report {
-                  .header {
-                    display: grid;
-                    grid-template-columns: repeat(9, 1fr);
-                    border: 1px solid;
-                    .label-text {
-                      font-size: 14px;
-                      font-weight: bold;
-                      text-transform: uppercase;
-                    }
-                    .competencies-label {
-                      display: grid;
-                      grid-column-start: 1;
-                      grid-column-end: 4;
-                      text-align: center;
-                      .label-text {
-                        justify-self: center;
-                        color: #34424b;
-                        width: 100%;
-                        border-right: 1px solid;
-                      }
-                      .sub-header {
-                        display: grid;
-                        grid-template-columns: repeat(3, 1fr);
-                        justify-content: center;
-                        border-top: 1px solid;
-                        div {
-                          justify-self: center;
-                          font-size: 12px;
-                          color: #34424b;
-                          text-transform: uppercase;
-                          text-align: center;
-                          width: 100%;
-                          border-right: 1px solid;
-                        }
-                      }
-                    }
-                    .timespent-label {
-                      display: grid;
-                      grid-column-start: 4;
-                      grid-column-end: 7;
-                      text-align: center;
-                      .label-text {
-                        justify-self: center;
-                        color: #34424b;
-                        width: 100%;
-                        border-right: 1px solid;
-                      }
-                      .sub-header {
-                        display: grid;
-                        grid-template-columns: repeat(3, 1fr);
-                        justify-content: center;
-                        border-top: 1px solid;
-                        div {
-                          justify-self: center;
-                          font-size: 12px;
-                          color: #34424b;
-                          text-transform: uppercase;
-                          width: 100%;
-                          border-right: 1px solid;
-                        }
-                      }
-                    }
-                    .badge-earned-label,
-                    .average-score-label,
-                    .suggestion-taken-label {
-                      font-size: 13px;
-                      font-weight: bold;
-                      color: #34424b;
-                      text-align: center;
-                      border-right: 1px solid;
-                    }
-                    .suggestion-taken-label {
-                      border: 0px;
-                    }
-                  }
-                  .body {
-                    .student-summary-container {
-                      display: grid;
-                      grid-template-columns: auto;
-                      line-height: 45px;
-                      border: 1px solid;
-                      border-top: 0px;
-                      .summary-container {
-                        display: grid;
-                        grid-template-columns: repeat(9, 1fr);
-                        .gained-competencies,
-                        .inferred-competencies,
-                        .inprogress-competencies {
-                          display: grid;
-                          justify-content: center;
-                          .competency-count {
-                            font-size: 13px;
-                            color: #000;
-                          }
-                        }
-                        .total-timespent,
-                        .collection-timespent,
-                        .assessment-timespent {
-                          justify-self: center;
-                          .time-spent {
-                            font-size: 13px;
-                            color: #000;
-                          }
-                        }
-                        .badge-earned {
-                          justify-self: center;
-                          .badge {
-                            .badge-count {
-                              font-size: 13px;
-                              color: $white;
-                              padding: 8px;
-                            }
-                          }
-                        }
-                        .average-score {
-                          justify-self: center;
-                          .score {
-                            font-size: 13px;
-                            font-weight: bold;
-                          }
-                        }
-                        .suggestion-taken {
-                          justify-self: center;
-                          .suggestion-count {
-                            font-size: 13px;
-                            font-weight: bold;
-                            color: #f89e1b;
-                          }
-                        }
+                  .class-progress-report-table {
+                    width: 100%;
+                    tr {
+                      td,
+                      th {
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        padding: 5px;
+                        text-align: center;
+                        height: 55px;
+                        font-size: 15px;
                       }
                     }
                   }

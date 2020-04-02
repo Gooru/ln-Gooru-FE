@@ -38,108 +38,98 @@
         <div class="report-overview">
           <div class="title">{{t 'class-progress-report.individual-report.overview'}}:</div>
           <div class="student-report">
-            <div class="header">
-              <div class="competencies-label">
-                <div class="label-text">{{t 'common.competencies'}}</div>
-                <div class="sub-header">
-                  <div class="header-data gained-header">{{t 'common.gained'}}</div>
-                  <div class="header-data inferred-header">{{t 'common.inferred'}}</div>
-                  <div class="header-data inprogress-header">{{t 'profile.proficiency.in-progress'}}</div>
-                </div>
-              </div>
-              <div class="timespent-label">
-                <div class="label-text">{{t 'gru-data-picker.time-spent'}}</div>
-                <div class="sub-header">
-                  <div class="header-data collection-header">{{t 'common.collections'}}</div>
-                  <div class="header-data assessment-header">{{t 'common.assessments'}}</div>
-                  <div class="header-data total-header">{{t 'reports.gru-table-view.totals'}}</div>
-                </div>
-              </div>
-              <div class="header-data badge-earned-label label-text">
-                {{t 'badges-earned'}}
-              </div>
-              <div class="header-data average-score-label label-text">
-                {{t 'common.averageScore'}}
-              </div>
-              <div class="header-data suggestion-taken-label label-text">
-                {{t 'suggestion-taken'}}
-              </div>
-            </div>
-            <div class="body">
-              <div class="student-summary-container">
-                <div class="summary-container">
-                  <div class="column-data gained-competencies">
-                    {{#if reportData.weeklyReportData.masteredCompetenciesCount}}
-                      <span class="competency-count">{{reportData.weeklyReportData.masteredCompetenciesCount}}</span>
-                    {{else}}
-                      --
-                    {{/if}}
-                  </div>
-                  <div class="column-data inferred-competencies">
-                    {{#if reportData.weeklyReportData.inferredCompetenciesCount}}
-                      <span class="competency-count">{{reportData.weeklyReportData.inferredCompetenciesCount}}</span>
-                    {{else}}
-                      --
-                    {{/if}}
-                  </div>
-                  <div class="column-data inprogress-competencies">
-                    {{#if reportData.weeklyReportData.inprogressCompetenciesCount}}
-                      <span class="competency-count">{{reportData.weeklyReportData.inprogressCompetenciesCount}}</span>
-                    {{else}}
-                      --
-                    {{/if}}
-                  </div>
-                  <div class="column-data collection-timespent">
-                    <span class="time-spent">
-                      {{#if reportData.weeklyReportData.collectionTimespent}}
-                        {{format-time reportData.weeklyReportData.collectionTimespent}}
+            <table class="class-progress-report-table">
+              <thead>
+                <tr>
+                  <th colspan="3">{{t 'common.competencies'}}</th>
+                  <th colspan="3">{{t 'gru-data-picker.time-spent'}}</th>
+                  <th rowspan="2">{{t 'badges-earned'}}</th>
+                  <th rowspan="2">{{t 'common.averageScore'}}</th>
+                  <th rowspan="2">{{t 'suggestion-taken'}}</th>
+                </tr>
+                <tr>
+                  <th>{{t 'common.gained'}}</th>
+                  <th>{{t 'common.inferred'}}</th>
+                  <th>{{t 'profile.proficiency.in-progress'}}</th>
+                  <th>{{t 'common.collections'}}</th>
+                  <th>{{t 'common.assessments'}}</th>
+                  <th>{{t 'reports.gru-table-view.totals'}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td>
+                      {{#if reportData.weeklyReportData.masteredCompetenciesCount}}
+                        <span class="competency-count">{{reportData.weeklyReportData.masteredCompetenciesCount}}</span>
                       {{else}}
                         --
                       {{/if}}
-                    </span>
-                  </div>
-                  <div class="column-data assessment-timespent">
-                    <span class="time-spent">
-                      {{#if reportData.weeklyReportData.assessmentTimespent}}
-                        {{format-time reportData.weeklyReportData.assessmentTimespent}}
+                    </td>
+                    <td>
+                      {{#if reportData.weeklyReportData.inferredCompetenciesCount}}
+                        <span class="competency-count">{{reportData.weeklyReportData.inferredCompetenciesCount}}</span>
                       {{else}}
                         --
                       {{/if}}
-                    </span>
-                  </div>
-                  <div class="column-data total-timespent">
-                    <span class="time-spent">
-                      {{#if reportData.weeklyReportData.totalTimespent}}
-                        {{format-time reportData.weeklyReportData.totalTimespent}}
+                    </td>
+                    <td>
+                      {{#if reportData.weeklyReportData.inprogressCompetenciesCount}}
+                        <span class="competency-count">{{reportData.weeklyReportData.inprogressCompetenciesCount}}</span>
                       {{else}}
                         --
                       {{/if}}
-                    </span>
-                  </div>
-                  <div class="column-data badge-earned">
-                    {{#if reportData.weeklyReportData.badgeEarned}}
-                      <span class="badge"><span class="badge-count">{{reportData.weeklyReportData.badgeEarned}}</span></span>
-                    {{else}}
-                      --
-                    {{/if}}
-                  </div>
-                  <div class="column-data average-score">
-                    {{#unless reportData.weeklyReportData.isNotStarted}}
-                      <span class="score score-range-{{grade-range reportData.weeklyReportData.averageScore}}">{{reportData.weeklyReportData.averageScore}}</span>
-                    {{else}}
-                      --
-                    {{/unless}}
-                  </div>
-                  <div class="column-data suggestion-taken">
-                  {{#if reportData.weeklyReportData.suggestionTaken}}
-                    <span class="suggestion-count">{{reportData.weeklyReportData.suggestionTaken}}</span>
-                  {{else}}
-                    --
-                  {{/if}}
-                </div>
-                </div>
-              </div>
-            </div>
+                    </td>
+                    <td>
+                      <span class="time-spent">
+                        {{#if reportData.weeklyReportData.collectionTimespent}}
+                          {{format-time reportData.weeklyReportData.collectionTimespent}}
+                        {{else}}
+                          --
+                        {{/if}}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="time-spent">
+                        {{#if reportData.weeklyReportData.assessmentTimespent}}
+                          {{format-time reportData.weeklyReportData.assessmentTimespent}}
+                        {{else}}
+                          --
+                        {{/if}}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="time-spent">
+                        {{#if reportData.weeklyReportData.totalTimespent}}
+                          {{format-time reportData.weeklyReportData.totalTimespent}}
+                        {{else}}
+                          --
+                        {{/if}}
+                      </span>
+                    </td>
+                    <td>
+                      {{#if reportData.weeklyReportData.badgeEarned}}
+                        <span class="badge-count">{{reportData.weeklyReportData.badgeEarned}}</span>
+                      {{else}}
+                        --
+                      {{/if}}
+                    </td>
+                    <td>
+                      {{#unless reportData.weeklyReportData.isNotStarted}}
+                        <span class="score score-range-{{grade-range reportData.weeklyReportData.averageScore}}">{{reportData.weeklyReportData.averageScore}}</span>
+                      {{else}}
+                        --
+                      {{/unless}}
+                    </td>
+                    <td>
+                      {{#if reportData.weeklyReportData.suggestionTaken}}
+                        <span class="suggestion-count">{{reportData.weeklyReportData.suggestionTaken}}</span>
+                      {{else}}
+                        --
+                      {{/if}}
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
           </div>
           <div class="competencies-report">
             <div class="mastery-competencies">

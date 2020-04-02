@@ -23,10 +23,7 @@
             position: absolute !important;
             left: 0 !important;
             .report-header {
-              // position: absolute !important;
-              // width: 100% !important;
               .header-penal {
-                // border-bottom: 2px solid;
                 .header-info {
                   display: grid;
                   grid-template-columns: auto auto;
@@ -62,13 +59,7 @@
                 }
               }
               .body-penal {
-                // margin-top: 25px;
-                // position: relative !important;
-                // width: 100%;
-                // height: auto;
                 .class-progress-report-table {
-                  // position: relative !important;
-                  // width: 100% !important;
                   tr {
                     td,
                     th {
@@ -78,14 +69,22 @@
                       text-align: center;
                       height: 55px;
                       font-size: 15px;
+
+                      .name {
+                        text-transform: capitalize;
+                      }
                     }
                   }
                 }
                 .student-info-container {
                   margin-top: 20px;
+                  float: none;
                   .student-report {
                     padding: 15px;
+                    display: block;
+                    page-break-before: always;
                     page-break-inside: avoid;
+                    position: relative;
                     .student-details {
                       display: grid;
                       grid-template-columns: 50px auto;
@@ -109,10 +108,43 @@
                         }
                       }
                     }
+                    .competencies-details {
+                      page-break-inside: avoid;
+                      margin: 30px 20px;
+                      display: grid;
+                      grid-template-columns: repeat(2, 1fr);
+                      border: 1px solid;
+                      .mastery-competencies,
+                      .in-progress-competencies {
+                        padding: 10px;
+                        border-right: 1px solid;
+                        text-align: center;
+                        font-size: 13px;
+                        .header {
+                          font-weight: bold;
+                          font-size: 14px;
+                        }
+                        .body {
+                          margin-top: 15px;
+                          text-align: left;
+                        }
+                        .node {
+                          margin-top: 15px;
+                        }
+                      }
+                      .in-progress-competencies {
+                        border: none;
+                      }
+                    }
                     .student-chat {
+                      page-break-inside: avoid;
                       display: grid;
                       grid-template-columns: auto auto;
+                      column-gap: 10px;
                       .domain-list {
+                        justify-content: center;
+                        display: flex;
+                        flex-direction: column;
                         .domain-name {
                           display: grid;
                           grid-template-columns: 20px auto;

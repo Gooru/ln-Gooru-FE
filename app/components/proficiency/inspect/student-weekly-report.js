@@ -330,6 +330,45 @@ export default Ember.Component.extend({
         'studentsSummaryReportData',
         parsedStudentsSummaryReportData.sortBy('student.lastName')
       );
+
+      let studentsSummaryReportData = component.get(
+        'studentsSummaryReportData'
+      );
+      let studentsDomainPerformance = component.get(
+        'studentsDomainPerformance'
+      );
+      studentsDomainPerformance.map(studentsDomain => {
+        let studentSummary = studentsSummaryReportData.find(studentsSummary => {
+          return studentsDomain.id === studentsSummary.student.id;
+        });
+        let masteredCompetencies =
+          studentSummary.weeklyReportData.masteredCompetencies;
+        let inprogressCompetencies =
+          studentSummary.weeklyReportData.inprogressCompetencies;
+        let studentCompetencies = inprogressCompetencies.concat(
+          masteredCompetencies
+        );
+        let domainCompetencies = component.get(
+          'domainLevelSummary.domainCompetencies'
+        );
+        studentCompetencies.map(competency => {
+          let domainCode = getDomainCode(competency.id);
+          let domainCompetencyData = domainCompetencies.findBy(
+            'domainCode',
+            domainCode
+          );
+          if (domainCompetencyData) {
+            let competencyData = domainCompetencyData.competencies.findBy(
+              'competencyCode',
+              competency.id
+            );
+            competency.competencyStudentDesc =
+              competencyData.competencyStudentDesc;
+          }
+        });
+        studentsDomain.set('studentCompetencies', studentCompetencies);
+      });
+
       component.set('isLoading', false);
     }
   },

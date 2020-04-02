@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   /**
    * @property {Number} chartHeight
    */
-  chartHeight: 350,
+  chartHeight: 450,
 
   /**
    * @property {Number} cellWidth
