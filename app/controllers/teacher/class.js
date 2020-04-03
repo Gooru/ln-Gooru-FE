@@ -165,12 +165,16 @@ export default Ember.Controller.extend({
       menuItem === 'course-map' && isPremiumClass
         ? this.set('coruseMapController.selectedClassList', secondaryClass)
         : '';
-      menuItem === 'students' && isPremiumClass
-        ? this.set(
+      // NOTE update selected class data at students proficiency
+      if (menuItem === 'students' && isPremiumClass) {
+        this.set(
           'studentsProficencyController.selectedClassList',
           secondaryClass
-        )
-        : '';
+        );
+        this.get('studentsProficencyController').loadClassData(
+          secondaryClass.get('id')
+        );
+      }
     }
   },
 

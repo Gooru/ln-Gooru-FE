@@ -9,13 +9,25 @@ export default Ember.Component.extend({
   // Dependencies
   reportService: Ember.inject.service('api-sdk/report'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
+
   i18n: Ember.inject.service(),
+
+  session: Ember.inject.service('session'),
 
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
     const component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
     component.loadSummaryReportData();
+    component.getTaxonomyCategories();
   },
 
   didRender() {
@@ -65,6 +77,7 @@ export default Ember.Component.extend({
         component.resetActiveStudentData();
         reportData.set('active', true);
         component.set('isShowStudentCompetencies', true);
+        component.set('individualStudentReport', reportData);
       }
     },
 
@@ -81,6 +94,8 @@ export default Ember.Component.extend({
       let components = this;
       components.set('rangeStartDate', moment(startDate).format('YYYY-MM-DD'));
       components.set('rangeEndDate', moment(endDate).format('YYYY-MM-DD'));
+      components.set('reportStartDate', startDate);
+      components.set('reportEndDate', endDate);
       components.loadSummaryReportData(false);
       components.resetActiveStudentData();
     },
@@ -191,6 +206,28 @@ export default Ember.Component.extend({
     ]);
   }),
 
+  /**
+   * @property {string} session tenant image url
+   */
+  tenantLogoUrl: Ember.computed.alias('session.tenantLogoUrl'),
+
+  /**
+   * @property {string} session tenant name
+   */
+  tenantName: Ember.computed.alias('session.tenantName'),
+
+  reportStartDate: Ember.computed('activeReportPeriod', function() {
+    return this.get('activeReportPeriod.value') === 'till-now'
+      ? null
+      : this.get('startDate');
+  }),
+
+  reportEndtDate: Ember.computed('activeReportPeriod', function() {
+    return this.get('activeReportPeriod.value') === 'till-now'
+      ? null
+      : this.get('endDate');
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -211,12 +248,27 @@ export default Ember.Component.extend({
   },
 
   /**
+   * @function getTaxonomyCategories
+   * Method to get Taxonomy Categories
+   */
+
+  getTaxonomyCategories() {
+    const component = this;
+    return Ember.RSVP.hash({
+      taxonomyCategories: component.get('taxonomyService').getCategories()
+    }).then(({ taxonomyCategories }) => {
+      component.set('taxonomyCategories', taxonomyCategories);
+    });
+  },
+
+  /**
    * @function parseStudentsWeeklySummaryReportData
    * Method to parse students weekly summary report
    */
   parseStudentsWeeklySummaryReportData(summaryReportData) {
     const component = this;
     let parsedStudentsSummaryReportData = Ember.A([]);
+    component.set('teacherInfo', summaryReportData.get('teacher'));
     let studentsSummaryReportData = summaryReportData.get(
       'studentsSummaryData'
     );
@@ -278,6 +330,51 @@ export default Ember.Component.extend({
         'studentsSummaryReportData',
         parsedStudentsSummaryReportData.sortBy('student.lastName')
       );
+
+      let studentsSummaryReportData = component.get(
+        'studentsSummaryReportData'
+      );
+      let studentsDomainPerformance = component.get(
+        'studentsDomainPerformance'
+      );
+      studentsDomainPerformance.map(studentsDomain => {
+        let studentSummary = studentsSummaryReportData.find(studentsSummary => {
+          return studentsDomain.id === studentsSummary.student.id;
+        });
+        if (studentSummary) {
+          let masteredCompetencies =
+            studentSummary.weeklyReportData.masteredCompetencies;
+          let inprogressCompetencies =
+            studentSummary.weeklyReportData.inprogressCompetencies;
+          let studentCompetencies = inprogressCompetencies.concat(
+            masteredCompetencies
+          );
+          let domainCompetencies = component.get(
+            'domainLevelSummary.domainCompetencies'
+          );
+          studentCompetencies.map(competency => {
+            let domainCode = getDomainCode(competency.id);
+            let domainCompetencyData = domainCompetencies.findBy(
+              'domainCode',
+              domainCode
+            );
+            if (domainCompetencyData) {
+              let competencyData = domainCompetencyData.competencies.findBy(
+                'competencyCode',
+                competency.id
+              );
+              competency.competencyStudentDesc =
+                competencyData.competencyStudentDesc;
+            }
+          });
+          studentsDomain.set('studentCompetencies', studentCompetencies);
+          studentsDomain.set(
+            'weeklyReportData',
+            studentSummary.weeklyReportData
+          );
+        }
+      });
+
       component.set('isLoading', false);
     }
   },
@@ -293,11 +390,10 @@ export default Ember.Component.extend({
     let masteredCompetencies = weeklyReportData.get('masteredCompetencies');
     let inprogressCompetencies = weeklyReportData.get('inprogressCompetencies');
     let inferredCompetencies = weeklyReportData.get('inferredCompetencies');
-    let studentCompetencies = masteredCompetencies.concat(
-      inprogressCompetencies,
-      inferredCompetencies
+    let studentCompetencies = inprogressCompetencies.concat(
+      inferredCompetencies,
+      masteredCompetencies
     );
-
     let domainCompetencies = component.get(
       'domainLevelSummary.domainCompetencies'
     );

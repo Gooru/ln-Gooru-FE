@@ -79,6 +79,16 @@ export function initialize(application) {
     tenantSetting: Ember.computed.alias('data.authenticated.tenant.settings'),
 
     /**
+     * @property {string} session tenant image url
+     */
+    tenantLogoUrl: Ember.computed.alias('data.authenticated.tenant.imageUrl'),
+
+    /**
+     * @property {string} session tenant name
+     */
+    tenantName: Ember.computed.alias('data.authenticated.tenant.tenantName'),
+
+    /**
      * This method authenticates using the default authenticator for an anonymous user
      * @returns {*|Ember.RSVP.Promise}
      */

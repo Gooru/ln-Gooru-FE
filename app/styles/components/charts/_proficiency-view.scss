@@ -20,8 +20,15 @@
     }
 
     #skyline-container {
-      line {
+      polyline {
         stroke: $white;
+        stroke-width: 2px;
+        fill: none;
+      }
+    }
+    #domain-boundary-line-container {
+      line {
+        stroke: #8fd383;
         stroke-width: 2px;
       }
     }

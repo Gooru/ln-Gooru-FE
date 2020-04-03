@@ -19,7 +19,7 @@ Router.map(function() {
   this.route('sign-up-finish');
   this.route('logout');
   this.route('guest');
-
+  this.route('guest-user', { path: '/guest/:userType' });
   this.route('content', function() {
     this.route('assessments', function() {
       this.route('edit', {

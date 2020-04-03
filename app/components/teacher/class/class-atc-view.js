@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import {
-  getObjectsDeepCopy
-} from 'gooru-web/utils/utils';
+import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['class-atc-view'],
@@ -561,18 +559,15 @@ export default Ember.Component.extend({
     Ember.RSVP.hash({
       classData: component.get('classService').readClassInfo(classId),
       classMembers: component.get('classService').readClassMembers(classId)
-    }).then(({
-      classData,
-      classMembers
-    }) => {
+    }).then(({ classData, classMembers }) => {
       if (!component.get('isDestroyed')) {
         const setting = classData.get('setting');
         const isPremiumClass = setting != null && setting['course.premium'];
-        const competencyCompletionStats = isPremiumClass ?
-          component
+        const competencyCompletionStats = isPremiumClass
+          ? component
             .get('competencyService')
-            .getCompetencyCompletionStats([classId]) :
-          Ember.RSVP.resolve(Ember.A());
+            .getCompetencyCompletionStats([classId])
+          : Ember.RSVP.resolve(Ember.A());
         competencyCompletionStats.then(competencyStats => {
           if (!component.isDestroyed) {
             classData.set(
@@ -637,9 +632,7 @@ export default Ember.Component.extend({
         classActivitiesService.getMonthlyActivitiesCount(classId, month, year)
       )
     })
-      .then(({
-        activitiesCount
-      }) => {
+      .then(({ activitiesCount }) => {
         component.set('activitiesCount', activitiesCount);
         return activitiesCount;
       })
@@ -673,9 +666,7 @@ export default Ember.Component.extend({
       domainsCompletionReport: Ember.RSVP.resolve(
         competencyService.getDomainsCompletionReport(requestBody)
       )
-    }).then(({
-      domainsCompletionReport
-    }) => {
+    }).then(({ domainsCompletionReport }) => {
       return domainsCompletionReport;
     });
   },
@@ -741,88 +732,82 @@ export default Ember.Component.extend({
       let endGrade = grades.findBy('id', gradeRange.maxGrade);
       let endGradeIndex = grades.indexOf(endGrade);
       let studentGrades = grades.slice(startGradeIndex, endGradeIndex + 1);
-      let otherGradeList = [];
-      if (studentGrades) {
-        studentGrades.map(grade => {
-          otherGradeList.push(grade.get('id'));
-        });
+      let gradeIds = Ember.A([]);
+      if (studentGrades && studentGrades.length) {
+        gradeIds = studentGrades.mapBy('id');
       }
-      var currentGradeIndex = otherGradeList.indexOf(
-        component.get('class.gradeCurrent')
-      );
-      if (currentGradeIndex !== -1) {
-        otherGradeList.splice(currentGradeIndex, 1);
-      }
-      let params = {
-        grade: component.get('class.gradeCurrent'),
+
+      const queryParams = {
+        grade: gradeIds.toString(),
         classId: component.get('class.id'),
         month: component.get('activeMonth'),
         year: component.get('activeYear')
       };
-      let otherGradeParams = {
-        grade: otherGradeList.toString(),
-        classId: component.get('class.id'),
-        month: component.get('activeMonth'),
-        year: component.get('activeYear')
-      };
-      otherGradeParams.grade = otherGradeList.toString();
       Ember.RSVP.hash({
-        gradeLevelCompetency: component.get('class.gradeCurrent') ?
-          component
+        gradeLevelCompetencies: gradeIds.length
+          ? component
             .get('strugglingCompetencyService')
-            .fetchStrugglingCompetency(params) : [],
-        otherGradeLevelCompetency: otherGradeList.length ?
-          component
-            .get('strugglingCompetencyService')
-            .fetchStrugglingCompetency(otherGradeParams) : []
-      }).then(({
-        gradeLevelCompetency,
-        otherGradeLevelCompetency
-      }) => {
+            .fetchStrugglingCompetency(queryParams)
+          : Ember.A([])
+      }).then(({ gradeLevelCompetencies }) => {
         if (!component.get('isDestroyed')) {
           component.set('otherGradeCompetency', []);
           component.set('otherGradeTopComp', []);
           component.set('gradeCompetencyDomainList', []);
-          if (gradeLevelCompetency && gradeLevelCompetency.length) {
-            component.set(
-              'currentGradeName',
-              gradeLevelCompetency[0].get('grade')
+          if (gradeLevelCompetencies && gradeLevelCompetencies.length) {
+            const classGradeId = component.get('class.gradeCurrent');
+            const classGradeCompetencies = gradeLevelCompetencies.findBy(
+              'gradeId',
+              classGradeId
             );
-            const gradeDomainsList = gradeLevelCompetency[0].get('domains');
-            component.serializeClassGradeContent(gradeDomainsList);
-          }
-          if (otherGradeLevelCompetency && otherGradeLevelCompetency.length) {
-            let otherGradeTopComp = [];
-            let cloneOtherGrade = getObjectsDeepCopy(otherGradeLevelCompetency);
-            cloneOtherGrade
-              .map(grade => grade.domains)
-              .map((domains, gradeIndex) => {
-                let competencyList = [];
-                domains.forEach((domain, domainIndex) => {
-                  domain.competencies[0].domainIndex = domainIndex;
-                  domain.competencies[0].domainName = domain.domainName;
-                  competencyList.pushObject(domain.competencies[0]);
-                });
-                if (competencyList && competencyList.length) {
-                  let gradeLevelTopCompetency = competencyList.reduce(
-                    (prevCompetency, currentCompetency) => {
-                      return prevCompetency.studentsCount <
-                        currentCompetency.studentsCount ?
-                        currentCompetency :
-                        prevCompetency;
+            // NOTE removed class grade competencies from the list
+            gradeLevelCompetencies.splice(
+              gradeLevelCompetencies.indexOf(classGradeCompetencies),
+              1
+            );
+            if (classGradeCompetencies) {
+              component.set(
+                'currentGradeName',
+                classGradeCompetencies.get('grade')
+              );
+              component.serializeClassGradeContent(
+                classGradeCompetencies.get('domains')
+              );
+            }
+
+            if (gradeLevelCompetencies && gradeLevelCompetencies.length) {
+              let otherGradeTopComp = [];
+              let cloneOtherGrade = getObjectsDeepCopy(gradeLevelCompetencies);
+              cloneOtherGrade
+                .map(grade => grade.domains)
+                .map((domains, gradeIndex) => {
+                  let competencyList = [];
+                  domains.forEach((domain, domainIndex) => {
+                    domain.competencies[0].domainIndex = domainIndex;
+                    domain.competencies[0].domainName = domain.domainName;
+                    competencyList.pushObject(domain.competencies[0]);
+                  });
+                  if (competencyList && competencyList.length) {
+                    let gradeLevelTopCompetency = competencyList.reduce(
+                      (prevCompetency, currentCompetency) => {
+                        return prevCompetency.studentsCount <
+                          currentCompetency.studentsCount
+                          ? currentCompetency
+                          : prevCompetency;
+                      }
+                    );
+                    if (gradeLevelTopCompetency) {
+                      gradeLevelTopCompetency.gradeIndex = gradeIndex;
+                      otherGradeTopComp.pushObject(gradeLevelTopCompetency);
                     }
-                  );
-                  if (gradeLevelTopCompetency) {
-                    gradeLevelTopCompetency.gradeIndex = gradeIndex;
-                    otherGradeTopComp.pushObject(gradeLevelTopCompetency);
                   }
-                }
-              });
-            let sortedOtherCompetency = otherGradeTopComp.length ?
-              otherGradeTopComp.sortBy('studentsCount').reverse() :
-              otherGradeTopComp;
-            component.set('otherGradeTopComp', sortedOtherCompetency);
-            component.set('otherGradeCompetency', otherGradeLevelCompetency);
+                });
+              let sortedOtherCompetency = otherGradeTopComp.length
+                ? otherGradeTopComp.sortBy('studentsCount').reverse()
+                : otherGradeTopComp;
+              component.set('otherGradeTopComp', sortedOtherCompetency);
+              component.set('otherGradeCompetency', gradeLevelCompetencies);
+            }
           }
         }
       });
@@ -855,13 +840,13 @@ export default Ember.Component.extend({
         .reverse()
         .find(highestGrade => highestGrade.grade_lower_bound);
       let minGrade =
-        gradeAsc && gradeAsc.grade_lower_bound ?
-          gradeAsc.grade_lower_bound :
-          null;
+        gradeAsc && gradeAsc.grade_lower_bound
+          ? gradeAsc.grade_lower_bound
+          : null;
       let maxGrade =
-        gradeDesc && gradeDesc.grade_upper_bound ?
-          gradeDesc.grade_upper_bound :
-          null;
+        gradeDesc && gradeDesc.grade_upper_bound
+          ? gradeDesc.grade_upper_bound
+          : null;
       if (minGrade && maxGrade) {
         component.set('gradeRange', {
           minGrade,
@@ -874,20 +859,25 @@ export default Ember.Component.extend({
 
   serializeClassGradeContent(classGradeDomains) {
     let gradeDomainsList = [];
-    classGradeDomains.forEach((domain) => {
+    classGradeDomains.forEach(domain => {
       const competencies = domain.competencies;
-      const competency = competencies && competencies.length ? competencies.objectAt(0) : null;
+      const competency =
+        competencies && competencies.length ? competencies.objectAt(0) : null;
       if (competency) {
-        gradeDomainsList.push(Ember.Object.create({
-          domainCode: domain.domainCode,
-          domainId: domain.domainId,
-          domainName: domain.domainName,
-          domainSeq: domain.domainSeq,
-          competencies: domain.competencies,
-          ...competency
-        }));
+        gradeDomainsList.push(
+          Ember.Object.create({
+            domainCode: domain.domainCode,
+            domainId: domain.domainId,
+            domainName: domain.domainName,
+            domainSeq: domain.domainSeq,
+            competencies: domain.competencies,
+            ...competency
+          })
+        );
       }
-      const sortedGradeList = gradeDomainsList.sortBy('studentsCount').reverse();
+      const sortedGradeList = gradeDomainsList
+        .sortBy('studentsCount')
+        .reverse();
       this.set('gradeCompetencyDomainList', sortedGradeList);
     });
   },
