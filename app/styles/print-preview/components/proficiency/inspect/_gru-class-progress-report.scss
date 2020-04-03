@@ -79,14 +79,15 @@
                 }
                 .student-info-container {
                   margin-top: 20px;
-                  float: none;
                   .student-report {
                     padding: 15px;
                     display: block;
                     break-before: page;
                     page-break-before: always;
                     page-break-inside: avoid;
-                    height: 100vh;
+                    width: 100%;
+                    min-height: 1300px;
+                    max-height: max-content;
                     .student-details {
                       display: grid;
                       grid-template-columns: 50px auto;

@@ -11,7 +11,7 @@
             <span class="tenant-name">{{tenantName}}</span>
           </div>
           <div class="report-info">
-            <span>{{t 'common.class-name'}} {{class.title}}</span>
+            <span>{{t 'common.class-name'}}: {{class.title}}</span>
             <span>{{t 'common.teacher-name'}}: {{teacher.firstName}} {{teacher.lastName}}</span>
             {{#if reportStartDate}}
               <span class="date">{{format-date reportStartDate 'MMMM DD,YYYY'}} - {{format-date reportEndDate 'MMMM DD, YYYY'}}</span>
