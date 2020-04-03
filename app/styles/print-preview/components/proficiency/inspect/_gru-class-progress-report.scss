@@ -60,6 +60,7 @@
               }
               .body-penal {
                 .class-progress-report-table {
+                  width: 100%;
                   tr {
                     td,
                     th {
@@ -82,9 +83,10 @@
                   .student-report {
                     padding: 15px;
                     display: block;
+                    break-before: page;
                     page-break-before: always;
                     page-break-inside: avoid;
-                    position: relative;
+                    height: 100vh;
                     .student-details {
                       display: grid;
                       grid-template-columns: 50px auto;
@@ -99,14 +101,16 @@
                         border: none;
                       }
                       .student-name {
-                        .first-name,
-                        .last-name {
-                          text-transform: capitalize;
-                          opacity: 0.9;
-                          font-size: 13px;
-                          color: #000000;
-                        }
+                        text-transform: capitalize;
+                        opacity: 0.9;
+                        font-size: 13px;
+                        color: #000000;
+                        display: flex;
+                        align-items: center;
                       }
+                    }
+                    .report-overview {
+                      margin: 20px;
                     }
                     .competencies-details {
                       page-break-inside: avoid;

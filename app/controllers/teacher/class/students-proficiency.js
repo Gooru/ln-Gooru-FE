@@ -376,8 +376,6 @@ export default Ember.Controller.extend({
     controller.set('isShowClassWeeklyReport', false);
     controller.set('studentDomainPerformance', Ember.A([]));
     controller.set('activeReport', controller.get('reportTypes').objectAt(0));
-    controller.set('class', controller.get('classController.class'));
-    controller.set('course', controller.get('classController.course'));
     controller.set('domainBoundariesContainer', Ember.A([]));
   },
 

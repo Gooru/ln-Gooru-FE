@@ -341,32 +341,38 @@ export default Ember.Component.extend({
         let studentSummary = studentsSummaryReportData.find(studentsSummary => {
           return studentsDomain.id === studentsSummary.student.id;
         });
-        let masteredCompetencies =
-          studentSummary.weeklyReportData.masteredCompetencies;
-        let inprogressCompetencies =
-          studentSummary.weeklyReportData.inprogressCompetencies;
-        let studentCompetencies = inprogressCompetencies.concat(
-          masteredCompetencies
-        );
-        let domainCompetencies = component.get(
-          'domainLevelSummary.domainCompetencies'
-        );
-        studentCompetencies.map(competency => {
-          let domainCode = getDomainCode(competency.id);
-          let domainCompetencyData = domainCompetencies.findBy(
-            'domainCode',
-            domainCode
+        if (studentSummary) {
+          let masteredCompetencies =
+            studentSummary.weeklyReportData.masteredCompetencies;
+          let inprogressCompetencies =
+            studentSummary.weeklyReportData.inprogressCompetencies;
+          let studentCompetencies = inprogressCompetencies.concat(
+            masteredCompetencies
           );
-          if (domainCompetencyData) {
-            let competencyData = domainCompetencyData.competencies.findBy(
-              'competencyCode',
-              competency.id
+          let domainCompetencies = component.get(
+            'domainLevelSummary.domainCompetencies'
+          );
+          studentCompetencies.map(competency => {
+            let domainCode = getDomainCode(competency.id);
+            let domainCompetencyData = domainCompetencies.findBy(
+              'domainCode',
+              domainCode
             );
-            competency.competencyStudentDesc =
-              competencyData.competencyStudentDesc;
-          }
-        });
-        studentsDomain.set('studentCompetencies', studentCompetencies);
+            if (domainCompetencyData) {
+              let competencyData = domainCompetencyData.competencies.findBy(
+                'competencyCode',
+                competency.id
+              );
+              competency.competencyStudentDesc =
+                competencyData.competencyStudentDesc;
+            }
+          });
+          studentsDomain.set('studentCompetencies', studentCompetencies);
+          studentsDomain.set(
+            'weeklyReportData',
+            studentSummary.weeklyReportData
+          );
+        }
       });
 
       component.set('isLoading', false);
