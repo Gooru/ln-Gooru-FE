@@ -19,6 +19,8 @@ export default Ember.Component.extend({
   // Attributes
   classNames: ['new-cards gru-teacher-class-cards'],
 
+  classNameBindings: ['isPendingSetup:pending-setup'],
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -30,7 +32,9 @@ export default Ember.Component.extend({
     selectItem: function(item) {
       const classData = this.get('class');
       const classId = classData.id;
-      if (this.get('onItemSelected')) {
+      if (this.get('isPendingSetup')) {
+        this.sendAction('onShowCompleteSetup', classData);
+      } else if (this.get('onItemSelected')) {
         this.sendAction('onItemSelected', item, classId);
       }
     },
@@ -102,5 +106,14 @@ export default Ember.Component.extend({
     let currentClass = controller.get('class');
     let classSetting = currentClass.get('setting');
     return classSetting ? classSetting['course.premium'] : false;
+  }),
+
+  /**
+   * @property {Boolean} isPendingSetup
+   * Property for to determine the class setup is completed or not
+   */
+  isPendingSetup: Ember.computed('class', function() {
+    const classSetting = this.get('class.setting');
+    return classSetting ? classSetting.class_setup_complete === false : false;
   })
 });

@@ -647,5 +647,21 @@ export default Ember.Service.extend({
         .addStudentsToClass(classId, dataParam)
         .then(resolve, reject);
     });
+  },
+
+  /**
+   * @function updateClassSetupFlag
+   * @param {UUID} classId
+   * @param {Object} dataParam
+   * Method to update class complete setup setting
+   */
+  updateClassSetupFlag(classId, dataParam) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .updateClassSetupFlag(classId, dataParam)
+        .then(resolve, reject);
+    });
   }
 });

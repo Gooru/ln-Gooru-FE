@@ -2866,5 +2866,17 @@ window.i18ln = {
   'common.competency-label-1': 'In Progress',
   'common.competency-label-3': 'Inferred',
   'common.competency-label-4': 'Gained',
-  'common.competency-label-5': 'Gained'
+  'common.competency-label-5': 'Gained',
+  'class.setup.verify-setting': 'Verify your class settings',
+  'class.setup.grade-set-to': 'Your class grade has been set to',
+  'class.setup.roster': 'You can also see your class roster on the right.',
+  'class.math-level': 'Math Level',
+  'class.setup.math-level.info':
+    'Pleasae provid an indication for each student\'s current Math Level. This helps Navigator suggest better, personalized content.',
+  'class.setup.destination-info':
+    'By default all your students will be guided to {{grade}}. You can change this by adjusting the Class Grade above.<br />If you feel a student is capable of more, you can change their individual destination, too.',
+  'class.setup.confirm':
+    'Once you satisfied with all settings, go ahead and hit "Confirm" below.',
+  'class.setup.click-here-to': 'Click here to',
+  'class.setup.start': 'Start your <br/> Math Navigator class'
 };
