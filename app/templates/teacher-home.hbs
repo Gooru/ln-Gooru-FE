@@ -63,7 +63,8 @@
             course=class.course
             classStudentCount=myClasses.memberCount
             onPlayCollection='studyPlayer'
-            onItemSelected='selectMenuItem'}}
+            onItemSelected='selectMenuItem'
+            onShowCompleteSetup="onShowCompleteSetup"}}
           {{/each}}
         {{/if}}
       </div>
@@ -98,4 +99,8 @@
 
 {{#if isShowCollectionReportPullUp}}
   {{reports/pull-up/collection-report onClosePullUp="onClosePullUp" context=teacherCollectionReportData showPullUp=isShowCollectionReportPullUp isArchivedClass=true}}
+{{/if}}
+
+{{#if isShowClassSetup}}
+  {{teacher/gru-class-setup showPullUp=isShowClassSetup classData=classSetupData classSetupDone="classSetupDone"}}
 {{/if}}

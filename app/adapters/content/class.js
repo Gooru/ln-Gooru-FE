@@ -495,5 +495,26 @@ export default Ember.Object.extend({
       data: JSON.stringify(dataParam)
     };
     return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * @function updateClassSetupFlag
+   * @param {UUID} classId
+   * @param {Object} setting
+   * Method to update class complete setup setting
+   */
+  updateClassSetupFlag(classId, setting) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/${classId}`;
+    const options = {
+      type: 'PUT',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify(setting)
+    };
+    return Ember.$.ajax(url, options);
   }
 });

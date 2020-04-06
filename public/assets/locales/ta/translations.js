@@ -3047,7 +3047,20 @@ window.i18ln = {
   'class-activity.no-milestone-content':
     'There are no lessons in this milestone',
   'class-activity.no-course-map-content': 'No Course Map Attached',
-   'common.teacher-name': 'Teacher Name',
+  'common.teacher-name': 'Teacher Name',
+  'class.setup.verify-setting': 'Verify your class settings',
+  'class.setup.grade-set-to': 'Your class grade has been set to',
+  'class.setup.roster': 'You can also see your class roster on the right.',
+  'class.math-level': 'Math Level',
+  'class.setup.math-level.info':
+    'The Math level of the student identifies the current grade level of the student in Math. Please adjust if required.',
+  'class.setup.destination-info':
+    'By default, all students will be studying towards completing {{grade}}. If required, you can change the destination to a higher grade level if you think a student is ahead and needs more challenging content.',
+  'class.setup.confirm':
+    'Once you satisfied with all settings, go ahead and hit "Confirm" below.',
+  'class.setup.click-here-to': 'Click here to',
+  'class.setup.start': 'Start your <br/> Math Navigator class',
+  'class.setup.done': 'Your class is all set up!',
   'common.allow': 'ALLOW',
   'common.deny': 'DENY',
   'conference.footer':

@@ -11,14 +11,17 @@
   <div class="panel-body">
     <div class="information {{if course 'has-course' 'has-no-course'}}" {{action 'lanuchAddCourseOrATCView'}} style="background-image: url({{course.thumbnailUrl}})">
       <div class="current-activity">
-        {{#if course}}
+        {{#if isPendingSetup}}
+          <span>{{t 'class.setup.click-here-to'}}</span>
+          {{t 'class.setup.start'}}
+        {{else if course}}
           <span>{{t "student-landing.class.assigned-course"}}</span>
         {{else}}
           <p>{{t "student-landing.class.no-course-assigned"}}</p>
           <p>{{t "goahead.add.something"}}</p>
         {{/if}}
       </div>
-      {{#if course}}
+      {{#if (and (not isPendingSetup) course)}}
         <div class="title-section">
           <div  class="title pointer" alt="{{course.title}}">
             {{truncate text=course.title maxLength=90}}
@@ -26,18 +29,18 @@
         </div>
       {{/if}}
     </div>
-    <div class="card-action-container {{if isPremiumClass 'premium-class'}}">
+    <div class="card-action-container {{if (or isPendingSetup isPremiumClass) 'premium-class'}}">
       <div class="atc-view" {{action 'selectItem' 'atc'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.performance-overview'}}" data-trigger="hover">
         <i class="icon" />
       </div>
       <div class="student-proficiency" {{action 'selectItem' 'students'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.student-locator'}}" data-trigger="hover">
         {{gru-icon name="school"}}
       </div>
-      <div class="class-activities  {{if (not isPremiumClass) (concat 'grade-range-' (grade-range class.performanceSummaryForDCA.scoreInPercentage))}}">
+      <div class="class-activities  {{if (and (not isPremiumClass) (not isPendingSetup)) (concat 'grade-range-' (grade-range class.performanceSummaryForDCA.scoreInPercentage))}}">
         <div class="class-activities-icon" {{action 'selectItem' 'class-activities'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'student-landing.class.class-activities'}}" data-trigger="hover">
           <i class="icon" />
         </div>
-        {{#if (not isPremiumClass)}}
+        {{#if (and (not isPremiumClass) (not isPendingSetup))}}
           <div class="class-activities-score {{if (not hasCAStarted) 'not-started'}}" {{action 'selectItem' 'ca-report'}}>
             {{if hasCAStarted (concat class.performanceSummaryForDCA.scoreInPercentage '%') '--' }}
           </div>
@@ -47,14 +50,14 @@
         <div class="course-map-icon" {{action 'selectItem' 'course-map'}} data-placement="bottom" data-toggle="tooltip" title="{{t 'teacher-landing.class.learning-journey'}}" data-trigger="hover">
           {{gru-icon name="sort"}}
         </div>
-        {{#if (not isPremiumClass)}}
+        {{#if (and (not isPremiumClass) (not isPendingSetup))}}
           <div class="course-map-score {{if (not hasCMStarted) 'not-started'}}" {{action 'selectItem' 'cm-report'}}>
             {{if hasCMStarted (concat class.performanceSummary.score '%') '--' }}
           </div>
         {{/if}}
       </div>
 
-      {{#if isPremiumClass}}
+      {{#if (or isPremiumClass isPendingSetup)}}
         <div class="completion-score {{if class.competencyStats 'has-competency-stats'}}" {{action 'selectItem' 'students'}}>
           {{#if class.competencyStats}}
             <span>{{class.competencyStats.completedCompetencies}}/{{class.competencyStats.totalCompetencies}}</span>

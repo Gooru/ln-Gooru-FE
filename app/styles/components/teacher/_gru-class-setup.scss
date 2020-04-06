@@ -1,0 +1,342 @@
+.gru-class-setup {
+  position: fixed;
+  top: 100%;
+  z-index: 1031;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: $white;
+  height: auto;
+  width: 824px;
+  border-radius: 12px 12px 0 0;
+
+  .backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    cursor: pointer;
+    opacity: 0.8;
+    background-color: #000;
+  }
+
+  .class-setup-container {
+    background-color: $white;
+    border-radius: 12px 12px 0 0;
+    .panel-header {
+      height: 64px;
+      background-color: #f8f6fe;
+      font-size: 24px;
+      text-align: center;
+      color: #37424b;
+      line-height: 64px;
+    }
+    .panel-body-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 15px;
+      padding: 0 15px 15px;
+      background-color: rgba(151, 222, 236, 0.1);
+      height: 100%;
+      height: calc(100vh - 200px);
+      overflow-y: auto;
+      .label-text {
+        font-size: 16px;
+        color: #37424b;
+      }
+      .class-info-container {
+        background-color: $white;
+        padding: 8px;
+        .class-grade-label,
+        .class-roster-label {
+          @extend .label-text;
+        }
+        .class-title {
+          padding: 4px 0;
+          @extend .label-text;
+          font-weight: bold;
+        }
+        .class-grade-selector {
+          width: 352px;
+          height: 48px;
+          box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+          background-color: #ffffff;
+          div {
+            width: inherit;
+            height: inherit;
+            button,
+            .selected-item-label {
+              width: inherit;
+              height: inherit;
+              color: #37424b;
+              font-size: 24px;
+              text-align: left;
+              padding: 0 8px;
+            }
+            ul.dropdown-menu {
+              width: inherit;
+              min-width: unset;
+              li {
+                height: 30px;
+                line-height: 30px;
+                a.item {
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+        }
+        .description-container {
+          padding: 8px 0;
+          .description-label {
+            @extend .label-text;
+            font-weight: bold;
+          }
+          .description-info {
+            @extend .label-text;
+            line-height: 1.4;
+          }
+        }
+        .confirmation-label {
+          @extend .label-text;
+        }
+      }
+      .students-container {
+        border-radius: 4px;
+        background-color: $white;
+        color: $dark-300;
+        width: inherit;
+        table {
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+          width: 100%;
+          word-break: break-all;
+
+          tbody.students-table-body {
+          }
+
+          th {
+            border-bottom: 1px solid #d7d7d7;
+            overflow: hidden;
+            font-size: 10px;
+            text-transform: uppercase;
+            border-right: 2px dashed #d7d7d7;
+            padding: 10px;
+            max-width: 100px;
+
+            &:last-child {
+              border-right: none;
+              max-width: 80px;
+            }
+          }
+
+          tr {
+            td.student-info {
+              .student-name {
+                text-transform: capitalize;
+                @include ellipsis(
+                  $font-size: 15px,
+                  $line-height: 1,
+                  $lines-to-show: 2
+                );
+              }
+            }
+            &.end-no-boundary-sec {
+              border-bottom: 2px solid #323232;
+            }
+          }
+
+          td {
+            height: 40px;
+            border-bottom: 1px solid #d7d7d7;
+            border-right: 2px dashed #d7d7d7;
+
+            &.updated {
+              background-color: rgb(189, 220, 255);
+
+              button {
+                background-color: rgb(189, 220, 255);
+              }
+            }
+
+            &:last-child {
+              border-right: none;
+              max-width: 80px;
+            }
+
+            .gru-dropdown {
+              .selected-item-label {
+                line-height: 1;
+                display: block;
+                padding-left: 16px;
+                padding-right: 5px;
+              }
+              ul.dropdown-menu {
+                width: inherit;
+                min-width: unset;
+                li {
+                  height: 30px;
+                  line-height: 30px;
+                  a.item {
+                    padding: 3px 7px;
+                  }
+                }
+              }
+            }
+
+            &.student-grade-boundary {
+              max-width: 110px;
+            }
+          }
+
+          .btn-panel {
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-end;
+            padding: 20px;
+
+            .class-btn {
+              background-color: #543c3c;
+              width: 211px;
+              height: 53px;
+              border-radius: 4px;
+              padding: 15px;
+              color: $white;
+              border-color: #f36463;
+              text-transform: uppercase;
+              cursor: pointer;
+
+              > i {
+                vertical-align: bottom;
+                margin-left: 16px;
+              }
+            }
+
+            .disabled {
+              cursor: none;
+              opacity: 0.5;
+              pointer-events: none;
+            }
+
+            .btn-txt {
+              color: whitesmoke;
+              background: transparent;
+            }
+          }
+
+          .student-info-container {
+            display: grid;
+            grid-template-columns: 50px 1fr;
+            align-items: center;
+
+            .student-icon {
+              background-size: contain;
+              border-radius: 50%;
+              width: 30px;
+              height: 30px;
+              margin: auto;
+            }
+
+            .student-name {
+              @include ellipsis(
+                $font-size: 13px,
+                $line-height: 1.2,
+                $lines-to-show: 1
+              );
+            }
+          }
+
+          .origin {
+            font-size: 13px;
+            color: $gray-dove;
+            width: inherit;
+            .grade-info {
+              width: inherit;
+              div {
+                width: inherit;
+              }
+            }
+          }
+
+          .destination {
+            @extend .origin;
+          }
+        }
+      }
+    }
+
+    .panel-footer-container {
+      border-top: 1px solid;
+      .verified-msg {
+        font-size: 20px;
+        padding: 8px;
+        text-align: center;
+      }
+      .actions-container {
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        justify-content: center;
+        column-gap: 15px;
+        padding: 8px 0;
+
+        .action-btn {
+          width: 96px;
+          height: 40px;
+          line-height: 40px;
+          font-size: 14px;
+          font-weight: bold;
+          text-transform: uppercase;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+          border-radius: 2px;
+          text-align: center;
+          cursor: pointer;
+          border-radius: 4px;
+          &.cancel-btn {
+            opacity: 0.5;
+            border: solid 1px #979797;
+            color: #37424b;
+            &:hover {
+              opacity: 1;
+            }
+          }
+          &.confirm-btn {
+            color: $white;
+            background-color: #0076ba;
+            opacity: 0.9;
+            &:hover {
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $screen-sm) {
+    width: 100%;
+    .class-setup-container {
+      .panel-body-container {
+        grid-template-columns: 1fr;
+        padding: 0;
+        .students-container {
+          table {
+            tr {
+              td.student-info {
+                .student-info-container {
+                  grid-template-columns: 1fr;
+                  padding-left: 4px;
+                  .student-name {
+                    font-size: 12px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
