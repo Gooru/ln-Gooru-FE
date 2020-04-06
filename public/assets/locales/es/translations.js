@@ -2872,9 +2872,9 @@ window.i18ln = {
   'class.setup.roster': 'You can also see your class roster on the right.',
   'class.math-level': 'Math Level',
   'class.setup.math-level.info':
-    'Pleasae provid an indication for each student\'s current Math Level. This helps Navigator suggest better, personalized content.',
+    'The Math level of the student identifies the current grade level of the student in Math. Please adjust if required.',
   'class.setup.destination-info':
-    'By default all your students will be guided to {{grade}}. You can change this by adjusting the Class Grade above.<br />If you feel a student is capable of more, you can change their individual destination, too.',
+    'By default, all students will be studying towards completing {{grade}}. If required, you can change the destination to a higher grade level if you think a student is ahead and needs more challenging content.',
   'class.setup.confirm':
     'Once you satisfied with all settings, go ahead and hit "Confirm" below.',
   'class.setup.click-here-to': 'Click here to',

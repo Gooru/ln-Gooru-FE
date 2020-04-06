@@ -293,6 +293,7 @@
           border-radius: 2px;
           text-align: center;
           cursor: pointer;
+          border-radius: 4px;
           &.cancel-btn {
             opacity: 0.5;
             border: solid 1px #979797;
@@ -303,7 +304,7 @@
           }
           &.confirm-btn {
             color: $white;
-            background-image: linear-gradient(to right, #00abdf, #0072bc);
+            background-color: #0076ba;
             opacity: 0.9;
             &:hover {
               opacity: 1;
