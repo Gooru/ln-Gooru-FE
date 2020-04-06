@@ -68,7 +68,8 @@
           div {
             width: inherit;
             height: inherit;
-            button {
+            button,
+            .selected-item-label {
               width: inherit;
               height: inherit;
               color: #37424b;
@@ -78,6 +79,7 @@
             }
             ul.dropdown-menu {
               width: inherit;
+              min-width: unset;
               li {
                 height: 30px;
                 line-height: 30px;
@@ -101,40 +103,6 @@
         }
         .confirmation-label {
           @extend .label-text;
-        }
-        .actions-container {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          justify-items: center;
-          margin: 8px 0;
-          .action-btn {
-            width: 96px;
-            height: 40px;
-            line-height: 40px;
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
-            border-radius: 2px;
-            text-align: center;
-            cursor: pointer;
-            &.cancel-btn {
-              opacity: 0.5;
-              border: solid 1px #979797;
-              color: #37424b;
-              &:hover {
-                opacity: 1;
-              }
-            }
-            &.confirm-btn {
-              color: $white;
-              background-image: linear-gradient(to right, #00abdf, #0072bc);
-              opacity: 0.9;
-              &:hover {
-                opacity: 1;
-              }
-            }
-          }
         }
       }
       .students-container {
@@ -205,6 +173,17 @@
                 display: block;
                 padding-left: 16px;
                 padding-right: 5px;
+              }
+              ul.dropdown-menu {
+                width: inherit;
+                min-width: unset;
+                li {
+                  height: 30px;
+                  line-height: 30px;
+                  a.item {
+                    padding: 3px 7px;
+                  }
+                }
               }
             }
 
@@ -284,6 +263,51 @@
 
           .destination {
             @extend .origin;
+          }
+        }
+      }
+    }
+
+    .panel-footer-container {
+      border-top: 1px solid;
+      .verified-msg {
+        font-size: 20px;
+        padding: 8px;
+        text-align: center;
+      }
+      .actions-container {
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        justify-content: center;
+        column-gap: 15px;
+        padding: 8px 0;
+
+        .action-btn {
+          width: 96px;
+          height: 40px;
+          line-height: 40px;
+          font-size: 14px;
+          font-weight: bold;
+          text-transform: uppercase;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+          border-radius: 2px;
+          text-align: center;
+          cursor: pointer;
+          &.cancel-btn {
+            opacity: 0.5;
+            border: solid 1px #979797;
+            color: #37424b;
+            &:hover {
+              opacity: 1;
+            }
+          }
+          &.confirm-btn {
+            color: $white;
+            background-image: linear-gradient(to right, #00abdf, #0072bc);
+            opacity: 0.9;
+            &:hover {
+              opacity: 1;
+            }
           }
         }
       }

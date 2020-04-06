@@ -112,8 +112,14 @@ export default Ember.Component.extend({
    * @property {Boolean} isPendingSetup
    * Property for to determine the class setup is completed or not
    */
-  isPendingSetup: Ember.computed('class', function() {
-    const classSetting = this.get('class.setting');
-    return classSetting ? classSetting.class_setup_complete === false : false;
-  })
+  isPendingSetup: Ember.computed(
+    'class.setting',
+    'class.isPendingSetup',
+    function() {
+      const classSetting = this.get('class.setting');
+      return classSetting
+        ? classSetting['class.setup.complete'] === false
+        : false;
+    }
+  )
 });

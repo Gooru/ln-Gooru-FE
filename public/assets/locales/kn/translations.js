@@ -2968,5 +2968,6 @@ window.i18ln = {
   'class.setup.confirm':
     'Once you satisfied with all settings, go ahead and hit "Confirm" below.',
   'class.setup.click-here-to': 'Click here to',
-  'class.setup.start': 'Start your <br/> Math Navigator class'
+  'class.setup.start': 'Start your <br/> Math Navigator class',
+  'class.setup.done': 'Your class is all set up!'
 };

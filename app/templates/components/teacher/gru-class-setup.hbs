@@ -13,13 +13,14 @@
         {{gru-dropdown
         selectedItemId=activeClassGrade.id
         rangeStartItemId=classData.gradeLowerBound
+        rangeEndItemId=classData.gradeUpperBound
         allowItemsRangeSelection=true
         rangeBound='upper'
         placeholder=(t "teacher-landing.class.class-settings.class-settings-sec.option-choose-one")
         items=taxonomyGrades
         displayLabelFieldKey="grade"
         onChangeAction="onChangeClassGrade"
-        allowEdit=true
+        allowEdit=(not isClassSetupDone)
         btn-group-size=btn-group-size}}
       </div>
       <div class="class-roster-label">{{t 'class.setup.roster'}}</div>
@@ -35,10 +36,6 @@
       </div>
       <div class="confirmation-label">
         {{t 'class.setup.confirm'}}
-      </div>
-      <div class="actions-container">
-        <div class="action-btn cancel-btn">{{t 'common.cancel'}}</div>
-        <div class="action-btn confirm-btn" {{action "onCompleteClassSetup"}}>{{t 'common.confirm'}}</div>
       </div>
     </div>
     <div class="students-container">
@@ -79,7 +76,7 @@
                       onChangeAction="updateStudentLowerBound"
                       selectedItemAssocId=student.id
                       btn-group-size=btn-group-size
-                      allowEdit= (if (eq student.diagAsmtState 2) false true)
+                      allowEdit= (if (or (eq student.diagAsmtState 2) isClassSetupDone) false true)
                     }}
                   </div>
                 </div>
@@ -98,7 +95,7 @@
                       onChangeAction="updateStudentUpperBound"
                       selectedItemAssocId=student.id
                       btn-group-size=btn-group-size
-                      allowEdit= (if (eq student.diagAsmtState 2) false true)
+                      allowEdit= (if (or (eq student.diagAsmtState 2) isClassSetupDone) false true)
                    }}
                   </div>
                 </div>
@@ -109,5 +106,15 @@
         </table>
       </div>
     </div>
+  </div>
+  <div class="panel-footer-container">
+    {{#if isClassSetupDone}}
+    <div class="verified-msg">{{t 'class.setup.done'}}</div>
+    {{else}}
+    <div class="actions-container">
+      <div class="action-btn cancel-btn">{{t 'common.cancel'}}</div>
+      <div class="action-btn confirm-btn" {{action "onCompleteClassSetup"}}>{{t 'common.confirm'}}</div>
+    </div>
+    {{/if}}
   </div>
 </div>

@@ -390,6 +390,19 @@ export default Ember.Controller.extend(ModalMixin, {
     onShowCompleteSetup(classData) {
       this.set('isShowClassSetup', true);
       this.set('classSetupData', classData);
+    },
+
+    //Action triggered when class setup is done
+    classSetupDone(classData) {
+      const classRoomData = this.get('sortedActiveClasses').findBy(
+        'id',
+        classData.get('id')
+      );
+      const classRoomDataSetting = classRoomData.get('setting') || {};
+      classRoomDataSetting['class.setup.complete'] = true;
+      classRoomData.set('setting', classRoomDataSetting);
+      classRoomData.set('isPendingSetup', false);
+      this.set('isShowClassSetup', false);
     }
   },
 

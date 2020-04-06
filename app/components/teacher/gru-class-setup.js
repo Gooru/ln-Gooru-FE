@@ -67,14 +67,26 @@ export default Ember.Component.extend(PullUpMixin, {
 
     //Action trigger when click confirm class setup
     onCompleteClassSetup() {
+      let classGradePromise = Ember.RSVP.resolve();
+      let classStudentsGradePromise = Ember.RSVP.resolve();
       if (
         this.get('activeClassGrade.id') !== this.get('classData.gradeCurrent')
       ) {
-        this.updateClassSettings();
+        classGradePromise = this.updateClassSettings();
       }
       if (this.get('updatedStudentsGradeBounds.length')) {
-        this.updateStudentGradeBoundaries();
+        classStudentsGradePromise = this.updateStudentGradeBoundaries();
       }
+      Promise.all([
+        classGradePromise,
+        classStudentsGradePromise,
+        this.updateClassSetupFlag()
+      ]).then(() => {
+        this.set('isClassSetupDone', true);
+        Ember.run.later(() => {
+          this.sendAction('classSetupDone', this.get('classData'));
+        }, 1500);
+      });
     }
   },
 
@@ -128,6 +140,12 @@ export default Ember.Component.extend(PullUpMixin, {
    */
   classId: Ember.computed.alias('classData.id'),
 
+  /**
+   * @property {Boolean} isClassSetupDone
+   * Property to determine that the class setup is done or not
+   */
+  isClassSetupDone: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -144,7 +162,7 @@ export default Ember.Component.extend(PullUpMixin, {
         'studentGradeBounds',
         classMembers.get('memberGradeBounds')
       );
-      component.mapStudentBoundValues();
+      component.mapStudentGradeBoundValues();
     });
   },
 
@@ -196,6 +214,7 @@ export default Ember.Component.extend(PullUpMixin, {
   updateClassSettings() {
     const settings = {
       grade_lower_bound: this.get('classData.gradeLowerBound'),
+      grade_upper_bound: this.get('classData.gradeUpperBound'),
       grade_current: this.get('classData.gradeCurrent'),
       route0: this.get('classData.route0Applicable'),
       force_calculate_ilp: this.get('classData.forceCalculateILP'),
@@ -212,17 +231,18 @@ export default Ember.Component.extend(PullUpMixin, {
    * Method to update class setup complete flag to true
    */
   updateClassSetupFlag() {
-    const setting = {
-      class_setup_complete: true
+    this.classData.setting['class.setup.complete'] = true;
+    const classSetting = {
+      setting: this.get('classData.setting')
     };
     return this.get('classService').updateClassSetupFlag(
       this.get('classId'),
-      setting
+      classSetting
     );
   },
 
   /**
-   * @function mapStudentBoundValues
+   * @function mapStudentGradeBoundValues
    * Method to map all student's grade boundaries
    */
   mapStudentGradeBoundValues(classGradeLevel = null) {

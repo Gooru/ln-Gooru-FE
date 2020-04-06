@@ -500,18 +500,20 @@ export default Ember.Object.extend({
   /**
    * @function updateClassSetupFlag
    * @param {UUID} classId
-   * @param {Object} dataParam
+   * @param {Object} setting
    * Method to update class complete setup setting
    */
-  updateClassSetupFlag(classId, dataParam) {
+  updateClassSetupFlag(classId, setting) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/${classId}/settings/setup`;
+    const url = `${namespace}/${classId}`;
     const options = {
-      type: 'POST',
+      type: 'PUT',
       contentType: 'application/json; charset=utf-8',
+      dataType: 'text',
+      processData: false,
       headers: adapter.defineHeaders(),
-      data: JSON.stringify(dataParam)
+      data: JSON.stringify(setting)
     };
     return Ember.$.ajax(url, options);
   }

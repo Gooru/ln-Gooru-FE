@@ -652,15 +652,15 @@ export default Ember.Service.extend({
   /**
    * @function updateClassSetupFlag
    * @param {UUID} classId
-   * @param {Object} dataParam
+   * @param {Object} setting
    * Method to update class complete setup setting
    */
-  updateClassSetupFlag(classId, dataParam) {
+  updateClassSetupFlag(classId, setting) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('classAdapter')
-        .updateClassSetupFlag(classId, dataParam)
+        .updateClassSetupFlag(classId, setting)
         .then(resolve, reject);
     });
   }
