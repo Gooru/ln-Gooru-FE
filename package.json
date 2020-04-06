@@ -33,10 +33,9 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.6",
     "broccoli-merge-trees": "^1.1.4",
+    "detect-indent": "5.0.0",
     "ember-ajax": "^2.5.2",
     "ember-cli": "2.12.2",
-    "ember-source": "~2.12.0",
-    "ember-cli-shims": "^1.0.2",
     "ember-cli-app-version": "^2.0.0",
     "ember-cli-babel": "^5.2.8",
     "ember-cli-bootstrap-datepicker": "0.5.6",
@@ -53,6 +52,7 @@
     "ember-cli-jwt-decode": "0.0.3",
     "ember-cli-pretender": "1.0.1",
     "ember-cli-qunit": "^3.1.0",
+    "ember-cli-shims": "^1.0.2",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-uglify": "^2.0.0-beta.1",
     "ember-composable-helpers": "1.1.2",
@@ -63,6 +63,8 @@
     "ember-i18n-cp-validations": "2.8.0",
     "ember-responsive": "2.0.5",
     "ember-simple-auth": "1.4.0",
+    "ember-source": "~2.12.0",
+    "ember-timepicker": "^0.3.0",
     "ember-truth-helpers": "1.2.0",
     "emberfire": "2.0.5",
     "grunt": "^0.4.5",
@@ -72,7 +74,6 @@
     "husky": "^0.14.3",
     "lint-staged": "^4.0.1",
     "prettier": "^1.5.3",
-    "detect-indent": "5.0.0",
     "sort-package-json": "1.22.1"
   },
   "dependencies": {

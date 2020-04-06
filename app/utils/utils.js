@@ -1239,3 +1239,21 @@ export var colorsBasedOnStatus = Ember.Object.create({
   '4': '#1d7dc2',
   '5': '#1d7dc2'
 });
+
+/**
+ *  formatimeToDateTime
+ * @type {String}
+ */
+export function formatimeToDateTime(time) {
+  return moment(time, 'hh:mm a').format('YYYY-MM-DD[T]HH:mm:ss');
+}
+
+/**
+ *  formaDatetime
+ * @type {String}
+ */
+export function formaDatetime(date, time) {
+  return moment(`${date} ${time}`, 'YYYY-MM-DD hh:mm a').format(
+    'YYYY-MM-DD[T]HH:mm:ss'
+  );
+}

@@ -159,6 +159,14 @@ export default Ember.Component.extend({
             );
           });
       }
+    },
+
+    onConference(meetingUrl) {
+      window.open(
+        meetingUrl,
+        '_blank',
+        'toolbar=yes,scrollbars=yes,resizable=yes,top=10,left=10,width=1000,height=700'
+      );
     }
   },
 

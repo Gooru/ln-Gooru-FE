@@ -7,6 +7,7 @@ export default Ember.Component.extend({
 
   classNameBindings: ['isMultiClassCourseMap:cm-view', 'isShowFullView:open'],
 
+  session: Ember.inject.service(),
   /**
    * @requires service:api-sdk/class-activity
    */
@@ -27,6 +28,11 @@ export default Ember.Component.extend({
    * @type {ClassService} Service to retrieve class information
    */
   classService: Ember.inject.service('api-sdk/class'),
+
+  /**
+   * @return videConferenceService
+   */
+  videConferenceService: Ember.inject.service('api-sdk/video-conference'),
 
   didInsertElement() {
     this.scrollHandler();
@@ -102,7 +108,10 @@ export default Ember.Component.extend({
       component.set('isShowCourseMap', false);
       component.set('isFetchingContents', false);
     },
-
+    onAddActivityPop(content) {
+      this.set('isAddActivity', true);
+      this.set('activeActivityContent', content);
+    },
     onAddActivity(
       content,
       scheduleDate = null,
@@ -153,9 +162,10 @@ export default Ember.Component.extend({
       this.set('isShowDateRangePicker', false);
     },
 
-    scheduleContentForDate(scheduleDate, endDate) {
+    scheduleContentForDate(scheduleDate, endDate, conferenceContent = {}) {
       const component = this;
-      const content = component.get('contentToSchedule');
+      let content = component.get('contentToSchedule');
+      content = Object.assign(content, conferenceContent);
       component.assignActivityToMultipleClass(content, scheduleDate, endDate);
       component.set('isShowDateRangePicker', false);
     },
@@ -274,6 +284,18 @@ export default Ember.Component.extend({
 
   isFetchedAllContents: false,
 
+  enableVideoConference: Ember.computed.alias('session.enabledVideoConference'),
+
+  /**
+   * @property {Boolean} isAddActivity used to toggle activity popup
+   */
+  isAddActivity: false,
+
+  /**
+   * @property {Object} activeActivityContent help to maintain active content
+   */
+  activeActivityContent: null,
+
   /**
    * Maintains the list of added collection ids from today's class activities
    * @type {Object}
@@ -315,14 +337,14 @@ export default Ember.Component.extend({
     content.set('isScheduledActivity', !!scheduleDate);
     content.set('isUnscheduledActivity', month && year);
     const secondaryClasses = component.get('secondaryClasses');
-    const classesToBeAdded = Ember.A([component.get('primaryClass.id')]).concat(
-      secondaryClasses.mapBy('id')
+    const classesToBeAdded = Ember.A([component.get('primaryClass')]).concat(
+      secondaryClasses
     );
-    let promiseList = classesToBeAdded.map(classId => {
+    let promiseList = classesToBeAdded.map(classes => {
       return new Ember.RSVP.Promise((resolve, reject) => {
         component
           .addActivityToClass(
-            classId,
+            classes.get('id'),
             content,
             scheduleDate,
             month,
@@ -333,7 +355,7 @@ export default Ember.Component.extend({
             const activityClasses =
               content.get('activityClasses') || Ember.A([]);
             let activityClass = Ember.Object.create({
-              id: classId,
+              id: classes.get('id'),
               activity: Ember.Object.create({
                 id: activityId,
                 date: scheduleDate,
@@ -343,7 +365,16 @@ export default Ember.Component.extend({
             });
             activityClasses.pushObject(activityClass);
             content.set('activityClasses', activityClasses);
-            resolve();
+            if (content.get('hasVideoConference')) {
+              return component.fetchActivityUsers(
+                activityClass,
+                content,
+                classes,
+                resolve
+              );
+            } else {
+              resolve();
+            }
           }, reject);
       });
     });
@@ -430,6 +461,54 @@ export default Ember.Component.extend({
     }).then(function(hash) {
       component.set('milestones', hash.milestones);
       component.set('gradeSubject', hash.gradeSubject);
+    });
+  },
+
+  fetchActivityUsers(activities, content, classes, resolve) {
+    let component = this;
+
+    return Ember.RSVP.hash({
+      activityMembers: component
+        .get('classActivityService')
+        .fetchUsersForClassActivity(
+          classes.get('id'),
+          activities.get('activity.id')
+        )
+    }).then(({ activityMembers }) => {
+      let emailIDs = activityMembers.mapBy('email') || [];
+      let params = {
+        summary: `${classes.title} : ${content.title}`,
+        startDateTime: content.meetingStartTime,
+        endDateTime: content.meetingEndTime,
+        attendees: emailIDs
+      };
+      return component
+        .get('videConferenceService')
+        .createConferenceEvent(params)
+        .then(eventDetails => {
+          let updateParams = {
+            classId: classes.get('id'),
+            contentId: activities.get('activity.id'),
+            data: {
+              meeting_id: eventDetails.meetingEventId,
+              meeting_url: eventDetails.meetingHangoutUrl,
+              meeting_endtime: content.meetingEndTime,
+              meeting_starttime: content.meetingStartTime,
+              meeting_timezone: moment.tz.guess()
+            }
+          };
+          let activity = activities.get('activity');
+          activities.set(
+            'activity',
+            Object.assign(activity, updateParams.data)
+          );
+          component
+            .get('videConferenceService')
+            .updateConferenceEvent(updateParams)
+            .then(() => {
+              resolve();
+            });
+        });
     });
   }
 });

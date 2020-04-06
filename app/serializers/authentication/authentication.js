@@ -97,7 +97,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return {
       allowMultiGradeClass: payload.allow_multi_grade_class
         ? payload.allow_multi_grade_class.toLowerCase()
-        : 'off'
+        : 'off',
+      enabledVideoConference: payload.enable_cls_video_conf_setup
+        ? payload.enable_cls_video_conf_setup
+        : false
     };
   }
 });

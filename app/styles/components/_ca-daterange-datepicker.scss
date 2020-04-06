@@ -78,6 +78,10 @@
       display: flex;
       padding: 0 10px 10px;
 
+      &.enabled-conference {
+        justify-content: center;
+      }
+
       .backdrop {
         display: none;
       }

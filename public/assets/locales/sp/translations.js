@@ -2948,5 +2948,19 @@ window.i18ln = {
   'class-activity.no-milestone-content':
     'There are no lessons in this milestone',
   'class-activity.no-course-map-content': 'No Course Map Attached',
-  'common.teacher-name': 'Teacher Name'
+   'common.teacher-name': 'Teacher Name',
+  'common.allow': 'ALLOW',
+  'common.deny': 'DENY',
+  'conference.footer':
+    'If you choose to deny permission, no video conference will be created',
+  'conference.body':
+    'You can revoke this permission at any time from your Preferences page.',
+  'conference.header':
+    'Navigator needs permission to access your Calendar to create a video conference on Hangouts Meet.',
+  'conferenc.include': 'Include Video Conference',
+  'conference.start-time': 'Start Time',
+  'conference.end-time': 'End Time',
+  'conference.add-to-ca': 'Add to Class Activities',
+  'ca.add-card-description':
+    'You are about to add this activity to you classroom. Do you want to include vide conference?'
 };

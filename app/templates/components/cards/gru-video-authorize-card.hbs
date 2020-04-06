@@ -1,0 +1,15 @@
+<div class="backdrop1"></div>
+<div class="gru-video-authorize-card-container">
+    {{{gru-icon name="calendar_today"}}}
+    <div class="gru-video-authorize-content">
+        <div class="auth-header">
+          {{t 'conference.header'}}
+        </div>
+        <span>{{t 'conference.body'}}</span>
+        <div class="auth-btn">
+              <span class="auth-deny" {{action 'onDeny'}}>{{t 'common.deny'}}</span>
+              <span class="auth-allow" {{action 'onAllow'}}>{{t 'common.allow'}}</span>
+        </div>
+        <span class="no-auth-btn">{{t 'conference.footer'}}</span>
+    </div>
+</div>

@@ -26,7 +26,7 @@
       </div>
     </div>
   </div>
-  <div class="calendar">
+  <div class="calendar {{if enableVideoConference 'enabled-conference'}}">
     <div class="start-date-picker {{if (eq selectedTabIndex 0) 'selected'}}">
       {{ca-date-picker
      userStartDateAsToday=userStartDateAsToday
@@ -56,7 +56,19 @@
     {{ca-month-picker onSelectMonth='onScheduleForMonth' currentMonth=forFirstDateOfMonth}}
   </div>
   {{/if}}
+  {{#if enableVideoConference}}
+  <div class="video-time-card">
+    {{cards/gru-video-conference-card isScheduled=true hasVideoConference=hasVideoConference onToggleCheckbox="onToggleCheckbox" onAddActivity="onAddSheduledActivity"}}
+  </div>
+  {{else}}
   <div class="submit-btn {{unless allowTwoDateRangePicker 'hidden'}} {{unless isValid 'disable'}}" {{action 'submitDate'}}>
     <span>{{t 'common.submit'}}</span>
   </div>
+  {{/if}}
+
 </div>
+
+
+{{#if isConferenceAllow}}
+    {{cards/gru-video-authorize-card onDeny="onDeny" onAllow="onAllow"}}
+{{/if}}
