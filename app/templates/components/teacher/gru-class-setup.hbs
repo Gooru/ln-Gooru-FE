@@ -112,7 +112,7 @@
     <div class="verified-msg">{{t 'class.setup.done'}}</div>
     {{else}}
     <div class="actions-container">
-      <div class="action-btn cancel-btn">{{t 'common.cancel'}}</div>
+      <div class="action-btn cancel-btn" {{action "onClosePullUp"}}>{{t 'common.cancel'}}</div>
       <div class="action-btn confirm-btn" {{action "onCompleteClassSetup"}}>{{t 'common.confirm'}}</div>
     </div>
     {{/if}}
