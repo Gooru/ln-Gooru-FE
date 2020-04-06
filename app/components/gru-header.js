@@ -19,6 +19,7 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
   i18n: Ember.inject.service(),
   //themeChanger: Ember.inject.service(),
 
+  session: Ember.inject.service(),
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -57,6 +58,9 @@ export default Ember.Component.extend(SessionMixin, ModalMixin, {
 
   actions: {
     logout: function() {
+      window.localStorage.removeItem(
+        `user_vid_config_${this.get('session.userId')}`
+      );
       this.sendAction('onLogout');
     },
 

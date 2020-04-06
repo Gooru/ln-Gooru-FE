@@ -49,7 +49,7 @@
               showPerformance = false
               isClassActivity = true
               todayActivitiesContentIds = todayActivitiesContentIds
-              onAddActivity="onAddActivity"
+              onAddActivity=(action (optional (if enableVideoConference (action "onAddActivityPop") (action "onAddActivity"))))
               onScheduleActivity="onShowDateRangePicker"
               onPreviewContent = "onPreviewContent"
             }}
@@ -63,8 +63,8 @@
         <div class="course-map-container">
           {{#if isCourseAttached}}
             {{teacher/class/ca-course-map
-              onAddActivity="onAddActivity"
-              onAddContentToDCA="onAddActivity"
+              onAddActivity=(action (optional (if enableVideoConference (action "onAddActivityPop") (action "onAddActivity"))))
+              onAddContentToDCA=(action (optional (if enableVideoConference (action "onAddActivityPop") (action "onAddActivity"))))
               onScheduleActivity="onShowDateRangePicker"
               onScheduleContentToDCA="onShowDateRangePicker"
               classId=activeCmClass.id
@@ -84,6 +84,7 @@
       {{#each filteredContents as |filteredContent|}}
         {{new-cards/activities/gru-add-content-card
           content=filteredContent
+          onAddActivityPop="onAddActivityPop"
           onAddActivity="onAddActivity"
           onShowContentPreview = "onShowContentPreview"
         }}
@@ -111,6 +112,7 @@
         onScheduleForDate='scheduleContentForDate'
         onScheduleForMonth='scheduleContentForMonth'
         endDate=endDate
+        enableVideoConference=enableVideoConference
         allowTwoDateRangePicker=isShowStartEndDatePicker}}
   </div>
 {{/if}}
@@ -129,4 +131,11 @@
     oaId=previewContent.id
     isReportView=false
   }}
+{{/if}}
+
+{{#if isAddActivity}}
+    {{new-cards/activities/gru-add-content-popup-card
+      isAddActivity=isAddActivity
+      onAddActivity="onAddActivity"
+      activeActivityContent=activeActivityContent}}
 {{/if}}

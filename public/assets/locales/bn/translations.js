@@ -2960,5 +2960,19 @@ window.i18ln = {
     'Once you satisfied with all settings, go ahead and hit "Confirm" below.',
   'class.setup.click-here-to': 'Click here to',
   'class.setup.start': 'Start your <br/> Math Navigator class',
-  'class.setup.done': 'Your class is all set up!'
+  'class.setup.done': 'Your class is all set up!',
+  'common.allow': 'ALLOW',
+  'common.deny': 'DENY',
+  'conference.footer':
+    'If you choose to deny permission, no video conference will be created',
+  'conference.body':
+    'You can revoke this permission at any time from your Preferences page.',
+  'conference.header':
+    'Navigator needs permission to access your Calendar to create a video conference on Hangouts Meet.',
+  'conferenc.include': 'Include Video Conference',
+  'conference.start-time': 'Start Time',
+  'conference.end-time': 'End Time',
+  'conference.add-to-ca': 'Add to Class Activities',
+  'ca.add-card-description':
+    'You are about to add this activity to you classroom. Do you want to include vide conference?'
 };

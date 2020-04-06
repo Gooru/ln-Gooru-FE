@@ -1,0 +1,101 @@
+.ui-timepicker-container {
+  z-index: 1001 !important;
+}
+.gru-video-conference-card {
+  .gru-video-conference-card-container {
+    .conference-header {
+      display: grid;
+      grid-template-columns: 25px 1fr 50px;
+      grid-column-gap: 10px;
+      align-items: center;
+      padding: 15px 10px;
+      box-shadow: 0 1px 1px $light-300;
+      span {
+        display: grid;
+        align-items: center;
+        .videocam {
+          color: $white;
+          background-color: $dark-500;
+          border-radius: 3px;
+          width: fit-content;
+          padding: 0 2px;
+          font-size: 16px;
+        }
+        &.conference_icon {
+          .gru-switch {
+            padding: 0;
+            .toggle.btn {
+              width: 40px !important;
+              height: 20px !important;
+              border-radius: 20px;
+
+              .toggle-group {
+                .toggle-handle,
+                .toggle-off,
+                .toggle-on {
+                  border-radius: 20px;
+                }
+
+                .toggle-off,
+                .toggle-on {
+                  font-style: italic;
+                  font-size: $font-size-xxsmall;
+                  line-height: 4px !important;
+                }
+
+                .toggle-on {
+                  left: -13px;
+                }
+
+                .toggle-off {
+                  left: 33px;
+                }
+
+                .toggle-handle {
+                  left: -1px;
+                }
+              }
+
+              &.off {
+                .toggle-group {
+                  .toggle-handle {
+                    left: 2px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .conferenc-time-input {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      grid-column-gap: 20px;
+      padding: 10px;
+      margin-bottom: 10px;
+
+      .start-time,
+      .end-time {
+        display: grid;
+        grid-template-columns: 1fr;
+
+        input {
+          width: 100%;
+          outline: none;
+        }
+      }
+    }
+    .add-activity {
+      text-transform: uppercase;
+      font-size: 14px;
+      color: #1aa9eb;
+      font-weight: bold;
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+      padding: 15px 10px;
+    }
+  }
+}

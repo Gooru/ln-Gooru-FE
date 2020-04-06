@@ -97,9 +97,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
     onClickFilterIcon() {
       const component = this;
       component.toggleProperty('isShowFilter');
-      if (!component.get('isFilterLoaded')) {
-        component.set('isFilterLoaded', true);
-      }
     },
 
     onApplyFilter() {
@@ -128,13 +125,6 @@ export default Ember.Component.extend(ConfigurationMixin, {
   isFilterEnabled: Ember.computed.alias(
     'configuration.GRU_FEATURE_FLAG.searchFilter'
   ),
-
-  /**
-   * @property {Boolean} isFilterLoaded
-   * Property to check whether the filter component is loaded or not
-   * Initially it will be loaded conditionally
-   */
-  isFilterLoaded: false,
 
   removedFilterItem: null,
 

@@ -1,8 +1,5 @@
 import Ember from 'ember';
-import {
-  PLAYER_EVENT_SOURCE,
-  SUGGESTION_TYPE
-} from 'gooru-web/config/config';
+import { PLAYER_EVENT_SOURCE, SUGGESTION_TYPE } from 'gooru-web/config/config';
 
 /**
  * Student Class Activity Panel
@@ -100,11 +97,9 @@ export default Ember.Component.extend({
         collectionType === 'assessment-external' ||
         collectionType === 'collection-external'
       ) {
-        playerUrl = component
-          .get('router')
-          .generate('player-external', {
-            queryParams
-          });
+        playerUrl = component.get('router').generate('player-external', {
+          queryParams
+        });
       } else if (collectionType === 'offlineactivity') {
         queryParams.offlineActivityId = contentId;
         playerUrl = component
@@ -113,18 +108,20 @@ export default Ember.Component.extend({
             queryParams
           });
       } else {
-        playerUrl = component
-          .get('router')
-          .generate('player', contentId, {
-            queryParams
-          });
+        playerUrl = component.get('router').generate('player', contentId, {
+          queryParams
+        });
       }
-      component.sendAction('playContent', playerUrl, Ember.Object.create({
-        format: collectionType,
-        title: suggestionContent.get('title'),
-        thumbnailUrl: suggestionContent.get('url'),
-        isSuggestedContentPlay: true
-      }));
+      component.sendAction(
+        'playContent',
+        playerUrl,
+        Ember.Object.create({
+          format: collectionType,
+          title: suggestionContent.get('title'),
+          thumbnailUrl: suggestionContent.get('url'),
+          isSuggestedContentPlay: true
+        })
+      );
     },
     /**
      * Action triggred when dca report action invoke
@@ -178,11 +175,9 @@ export default Ember.Component.extend({
         collectionType === 'assessment-external' ||
         collectionType === 'collection-external'
       ) {
-        let playerUrl = component
-          .get('router')
-          .generate('player-external', {
-            queryParams
-          });
+        let playerUrl = component.get('router').generate('player-external', {
+          queryParams
+        });
         component.sendAction('playContent', playerUrl, content);
       } else if (collectionType === 'offline-activity') {
         queryParams.offlineActivityId = contentId;
@@ -193,13 +188,19 @@ export default Ember.Component.extend({
           });
         component.sendAction('playContent', playerUrl, content);
       } else {
-        let playerUrl = component
-          .get('router')
-          .generate('player', contentId, {
-            queryParams
-          });
+        let playerUrl = component.get('router').generate('player', contentId, {
+          queryParams
+        });
         component.sendAction('playContent', playerUrl, content);
       }
+    },
+
+    onConference(meetingUrl) {
+      window.open(
+        meetingUrl,
+        '_blank',
+        'toolbar=yes,scrollbars=yes,resizable=yes,top=10,left=10,width=1000,height=700'
+      );
     }
   },
 

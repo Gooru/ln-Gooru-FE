@@ -1,0 +1,26 @@
+<div class="backdrop" {{action "onClose"}}></div>
+<div class="gru-add-content-popup-card-container">
+    <div class="content-popup-body-section">
+          <div class="content-popup-header">
+              <div class="content-popup-title">
+                {{t 'conference.add-to-ca'}}
+               <span {{action "onClose"}}>{{gru-icon name="clear"}}</span>
+              </div>
+              <div class="description">
+                {{t 'ca.add-card-description'}}
+              </div>
+          </div>
+          <div class="content-popup-images-section" style="background-image: url('{{activeActivityContent.thumbnailUrl}}')">
+            <div class="image-title">
+            </div>
+              <span class="content-title">{{activeActivityContent.title}}</span>
+          </div>
+          <div class="video-time-card">
+            {{cards/gru-video-conference-card  hasVideoConference=hasVideoConference activeActivityContent=activeActivityContent onToggleCheckbox="onToggleCheckbox" onAddActivity="onAddActivity"}}
+          </div>
+    </div>
+</div>
+
+{{#if isConferenceAllow}}
+    {{cards/gru-video-authorize-card onDeny="onDeny" onAllow="onAllow"}}
+{{/if}}

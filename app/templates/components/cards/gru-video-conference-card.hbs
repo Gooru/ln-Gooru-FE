@@ -1,0 +1,20 @@
+<div class="gru-video-conference-card-container">
+    <div class="conference-header">
+      <span>{{gru-icon name="videocam"}}</span>
+      <span>{{t 'conferenc.include'}}</span>
+      <span class="conference_icon">{{gru-switch switchOptions=switchOptions onOptionSwitch='onToggleCheckbox' isChecked=hasVideoConference}}</span>
+    </div>
+    <div class="conferenc-time-input">
+        <div class="start-time">
+          <span class="time-label">{{t 'conference.start-time'}}</span>
+          {{input type="text" value=startTime class="startTime"}}
+        </div>
+        <div class="end-time">
+          <span class="time-label">{{t 'conference.end-time'}}</span>
+          {{input type="text" value=endTime class="endTime"}}
+        </div>
+    </div>
+    <div class="add-activity" {{action "onAddActivity"}}>
+        {{t 'oa.add_activity'}}
+    </div>
+</div>
