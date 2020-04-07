@@ -90,6 +90,17 @@ export default Ember.Object.extend({
     return data;
   },
 
+  normalizeReadBulkClassDetails(classes) {
+    const normalizedClassDetails = Ember.A([]);
+    classes = classes ? classes.class_details : null;
+    if (classes && classes.length) {
+      classes.map( (classData) => {
+        normalizedClassDetails.push(this.normalizeReadClassInfo(classData));
+      })
+    }
+    return normalizedClassDetails;
+  },
+
   /**
    * Normalize the Read Class info endpoint response
    *

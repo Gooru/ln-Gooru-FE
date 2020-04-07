@@ -667,13 +667,13 @@ export default Ember.Service.extend({
 
   readBulkClassDetails(classIds) {
     const service = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
+    return new Ember.RSVP.Promise((resolve, reject) => {
       service
         .get('classAdapter')
         .readBulkClassDetails(classIds)
         .then(classDetails => {
-          console.log('classDetails', classDetails);
-        });
+          resolve(service.get('classSerializer').normalizeReadBulkClassDetails(classDetails));
+        }, reject);
     });
   }
 });

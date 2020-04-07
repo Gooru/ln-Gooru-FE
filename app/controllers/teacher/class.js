@@ -181,14 +181,6 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  /**
-   * DidInsertElement ember event
-   */
-  didInsertElement: function() {
-    var item = this.get('menuItem');
-    this.selectItem(item);
-  },
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -248,6 +240,16 @@ export default Ember.Controller.extend({
   isShowOCASummaryReportPullUp: false,
 
   isShowMilestoneReport: false,
+
+  mappedSecondaryClasses: Ember.computed('class.setting', function() {
+    const classSetting = controller.get('class.setting');
+    const secondaryClassList = controller.get('secondaryClassList');
+    let attachedSecondaryClassList =
+      classSetting && classSetting['secondary.classes']
+        ? classSetting['secondary.classes'].list
+        : Ember.A([]);
+    return attachedSecondaryClassList;
+  }),
 
   /**
    * @property {Array} secondaryClasses
