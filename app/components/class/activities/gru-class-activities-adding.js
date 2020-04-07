@@ -482,33 +482,41 @@ export default Ember.Component.extend({
         endDateTime: content.meetingEndTime,
         attendees: emailIDs
       };
-      return component
-        .get('videConferenceService')
-        .createConferenceEvent(params)
-        .then(eventDetails => {
-          let updateParams = {
-            classId: classes.get('id'),
-            contentId: activities.get('activity.id'),
-            data: {
-              meeting_id: eventDetails.meetingEventId,
-              meeting_url: eventDetails.meetingHangoutUrl,
-              meeting_endtime: content.meetingEndTime,
-              meeting_starttime: content.meetingStartTime,
-              meeting_timezone: moment.tz.guess()
+      if (emailIDs.length) {
+        return component
+          .get('videConferenceService')
+          .createConferenceEvent(params)
+          .then(eventDetails => {
+            if (eventDetails.meetingHangoutUrl) {
+              let updateParams = {
+                classId: classes.get('id'),
+                contentId: activities.get('activity.id'),
+                data: {
+                  meeting_id: eventDetails.meetingEventId,
+                  meeting_url: eventDetails.meetingHangoutUrl,
+                  meeting_endtime: content.meetingEndTime,
+                  meeting_starttime: content.meetingStartTime,
+                  meeting_timezone: moment.tz.guess()
+                }
+              };
+              let activity = activities.get('activity');
+              activities.set(
+                'activity',
+                Object.assign(activity, updateParams.data)
+              );
+              component
+                .get('videConferenceService')
+                .updateConferenceEvent(updateParams)
+                .then(() => {
+                  resolve();
+                });
+            } else {
+              return resolve();
             }
-          };
-          let activity = activities.get('activity');
-          activities.set(
-            'activity',
-            Object.assign(activity, updateParams.data)
-          );
-          component
-            .get('videConferenceService')
-            .updateConferenceEvent(updateParams)
-            .then(() => {
-              resolve();
-            });
-        });
+          });
+      } else {
+        return resolve();
+      }
     });
   }
 });
