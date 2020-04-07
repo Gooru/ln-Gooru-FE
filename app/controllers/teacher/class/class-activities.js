@@ -43,7 +43,6 @@ export default Ember.Controller.extend({
    */
   rubricService: Ember.inject.service('api-sdk/rubric'),
 
-
   /**
    * @requires ClassService
    */
@@ -176,10 +175,12 @@ export default Ember.Controller.extend({
     const controller = this;
     const secondaryClasses = this.get('secondaryClasses') || Ember.A([]);
     const classIds = secondaryClasses.mapBy('id');
-    this.get('classService').readBulkClassDetails(classIds).then((secondaryClassesData) => {
-      console.log('secondaryClassesData', secondaryClassesData)
-      controller.set('secondaryClassesData', secondaryClassesData);
-    })
+    this.get('classService')
+      .readBulkClassDetails(classIds)
+      .then(secondaryClassesData => {
+        console.log('secondaryClassesData', secondaryClassesData);
+        controller.set('secondaryClassesData', secondaryClassesData);
+      });
   },
 
   resetProperties() {

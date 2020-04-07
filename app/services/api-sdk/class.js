@@ -672,7 +672,11 @@ export default Ember.Service.extend({
         .get('classAdapter')
         .readBulkClassDetails(classIds)
         .then(classDetails => {
-          resolve(service.get('classSerializer').normalizeReadBulkClassDetails(classDetails));
+          resolve(
+            service
+              .get('classSerializer')
+              .normalizeReadBulkClassDetails(classDetails)
+          );
         }, reject);
     });
   }

@@ -94,9 +94,9 @@ export default Ember.Object.extend({
     const normalizedClassDetails = Ember.A([]);
     classes = classes ? classes.class_details : null;
     if (classes && classes.length) {
-      classes.map( (classData) => {
+      classes.map(classData => {
         normalizedClassDetails.push(this.normalizeReadClassInfo(classData));
-      })
+      });
     }
     return normalizedClassDetails;
   },
