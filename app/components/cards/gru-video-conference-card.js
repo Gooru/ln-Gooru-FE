@@ -65,6 +65,7 @@ export default Ember.Component.extend({
     this.$('.startTime').timepicker({
       timeFormat: 'hh:mm p',
       interval: 15,
+      defaultTime: this.roundTimeQuarterHour(),
       change: function() {
         const endTime = moment(component.$(this).val(), 'hh:mm A')
           .add(1, 'hours')
@@ -115,5 +116,19 @@ export default Ember.Component.extend({
       content.set('hasVideoConference', this.get('hasVideoConference'));
       this.sendAction('onAddActivity', content);
     }
+  },
+
+  roundTimeQuarterHour() {
+    let timeToReturn = new Date(
+      moment()
+        .add(5, 'm')
+        .toDate()
+    );
+    timeToReturn.setMilliseconds(
+      Math.round(timeToReturn.getMilliseconds() / 1000) * 1000
+    );
+    timeToReturn.setSeconds(Math.round(timeToReturn.getSeconds() / 60) * 60);
+    timeToReturn.setMinutes(Math.round(timeToReturn.getMinutes() / 15) * 15);
+    return moment(timeToReturn).format('hh:mm A');
   }
 });
