@@ -663,5 +663,17 @@ export default Ember.Service.extend({
         .updateClassSetupFlag(classId, setting)
         .then(resolve, reject);
     });
+  },
+
+  readBulkClassDetails(classIds) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .readBulkClassDetails(classIds)
+        .then(classDetails => {
+          console.log('classDetails', classDetails);
+        });
+    });
   }
 });

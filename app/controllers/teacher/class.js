@@ -463,5 +463,10 @@ export default Ember.Controller.extend({
       });
     }
     return result;
+  },
+
+  getBulkClassDetails(classIds) {
+    console.log('classIds', classIds);
+    this.get('classService').readBulkClassDetails(classIds.mapBy('id'));
   }
 });
