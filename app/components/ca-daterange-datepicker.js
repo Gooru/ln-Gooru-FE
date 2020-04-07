@@ -13,7 +13,7 @@ export default Ember.Component.extend({
    * Maintains the value which of activity startDate
    * @type {Integer}
    */
-  startDate: moment(),
+  startDate: moment().format('YYYY-MM-DD'),
 
   /**
    * Maintains the value which of activity endDate
