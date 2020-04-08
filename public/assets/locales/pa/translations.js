@@ -408,7 +408,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'ਤੁਸੀਂ ਉੱਤਰ ਚੋਣਾਂ ਦੀ ਸੀਮਾ \'ਤੇ ਪਹੁੰਚ ਗਏ ਹੋ।',
   'common.errors.file-max-size':
-    'Only files of size smaller than 12MB are supported',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'ਕਿਰਪਾ ਕਰਕੇ ਹੇਠਾਂ ਦਿੱਤੀਆਂ ਐੱਕਸਟੈਂਸ਼ਨਾਂ ਵਾਲੀ ਕੋਈ ਫਾਈਲ ਚੁਣੋ:  {{extensions}}',
   'common.errors.getting-next-resource':

@@ -433,7 +433,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'பதில் தெரிந்தெடுப்பின் உச்ச எல்லையை அடைந்து விட்டீர்கள்.',
   'common.errors.file-max-size':
-    'Only files of size smaller than 12MB are supported',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'கீழ்க்காணும் எக்ஸ்டன்சன்களில் ஏதேனும்  உள்ள  ஃபைலினை தெரிந்தெடுக்கவும்: {{extensions}}',
   'common.errors.getting-next-resource':

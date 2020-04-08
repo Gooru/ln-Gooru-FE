@@ -417,7 +417,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'మీరు జవాబు ఎంపికల పరిమితిని చేరుకున్నారు.',
   'common.errors.file-max-size':
-    'Only files of size smaller than 12MB are supported',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'దయచేసి కింది ఏదైనా పొడిగింపులతో ఫైల్‌ను ఎంచుకోండి:{{extensions}}',
   'common.errors.getting-next-resource':

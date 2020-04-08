@@ -410,7 +410,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'आप उत्तर विकल्पों की सीमा तक पहुंच गए हैं।',
   'common.errors.file-max-size':
-    'Only files of size smaller than 12MB are supported',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'कृपया निम्न में से किसी भी एक्सटेंशन के साथ एक फ़ाइल का चयन करें: {{extension}}',
   'common.errors.getting-next-resource':

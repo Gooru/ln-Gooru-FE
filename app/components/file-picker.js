@@ -1,15 +1,13 @@
 import Ember from 'ember';
 import FilePicker from 'ember-cli-file-picker/components/file-picker';
 import { inferUploadType } from 'gooru-web/utils/utils';
-import { OA_TASK_SUBMISSION_TYPES } from 'gooru-web/config/config';
+import {
+  OA_TASK_SUBMISSION_TYPES,
+  FILE_MAX_SIZE_IN_MB
+} from 'gooru-web/config/config';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
-/**
- * @constant {Number}
- * File max size: 12 MB (12 * 1024 * 1024)
- */
-const FILE_MAX_SIZE = 12582912;
-
-export default FilePicker.extend({
+export default FilePicker.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -40,10 +38,14 @@ export default FilePicker.extend({
 
     // Clear any previous error messages
     this.get('errors').clear();
-
-    if (file.size > FILE_MAX_SIZE) {
-      let errorMessage = this.get('i18n').t('common.errors.file-max-size')
-        .string;
+    const fileMaxSize =
+      this.get('configuration.FILE_UPLOAD.MAX_SIZE_IN_MB') ||
+      FILE_MAX_SIZE_IN_MB;
+    const fileMaxSizeInBytes = parseInt(fileMaxSize) * 1024 * 1024;
+    if (file.size > fileMaxSizeInBytes) {
+      let errorMessage = this.get('i18n').t('common.errors.file-max-size', {
+        fileMaxSize
+      }).string;
       this.get('errors').addObject(errorMessage);
       valid = false;
     }

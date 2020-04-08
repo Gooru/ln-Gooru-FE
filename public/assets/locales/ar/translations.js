@@ -401,7 +401,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'لقد وصلت الى الحد المسموح من خيارات الاجابة.',
   'common.errors.file-max-size':
-    'Only files of size smaller than 12MB are supported',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'يرجى اختيار ملف باختصار من الاختصارات التالية:{{extensions}}',
   'common.errors.getting-next-resource':
