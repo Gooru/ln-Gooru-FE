@@ -417,7 +417,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'Ha alcanzado el límite de opciones de respuesta.',
   'common.errors.file-max-size':
-    'Sólo se admiten archivos de tamaño inferior a 5 MB',
+    'Only files of size smaller than 12MB are supported',
   'common.errors.file-upload-missing':
     'Selecciona un archivo con cualquiera de las siguientes extensiones: {{extensions}}',
   'common.errors.getting-next-resource':
