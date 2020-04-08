@@ -424,7 +424,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'আপুনি উত্তৰ নিৰ্বাচনৰ শেষ সীমাত উপস্থিত হল ।',
   'common.errors.file-max-size':
-    'Only files of size smaller than 12MB are supported',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'অনুগ্ৰহ কৰি তলত দিয়া সম্প্ৰসাৰণৰ লগত ফাইল এটা নিৰ্বাচন কৰক:{{extensions}}',
   'common.errors.getting-next-resource':

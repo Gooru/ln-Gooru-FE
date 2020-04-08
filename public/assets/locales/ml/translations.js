@@ -421,7 +421,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'ഉത്തര തിരഞ്ഞെടുപ്പുകളുടെ പരിധിയിലെത്തി.',
   'common.errors.file-max-size':
-    'Only files of size smaller than 12MB are supported',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'ഇനിപ്പറയുന്ന വിപുലീകരണങ്ങളിൽ ഏതെങ്കിലുമുള്ള ഒരു ഫയൽ തിരഞ്ഞെടുക്കുക: {{extensions}}',
   'common.errors.getting-next-resource':

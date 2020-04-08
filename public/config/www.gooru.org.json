@@ -55,6 +55,10 @@
 
   "marketingSiteUrl": "/about",
 
+  "FILE_UPLOAD": {
+    "MAX_SIZE_IN_MB": 12
+  },
+
   "GUEST_TEACHER_ACCOUNT": "bXJmZWVueTpHb29ydUd1ZXN0MTIz",
   "GUEST_STUDENT_ACCOUNT": "bWNhaW5lOkdvb3J1R3Vlc3QxMjM="
 }
