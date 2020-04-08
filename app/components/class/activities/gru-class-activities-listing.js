@@ -7,6 +7,11 @@ export default Ember.Component.extend(ModalMixin, {
   classNames: ['class-activities', 'gru-class-activities-listing'],
 
   /**
+   * @type {ClassService} Service to retrieve class information
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
+  /**
    * @requires service:api-sdk/class-activity
    */
   classActivityService: Ember.inject.service('api-sdk/class-activity'),
@@ -28,6 +33,11 @@ export default Ember.Component.extend(ModalMixin, {
   rubricService: Ember.inject.service('api-sdk/rubric'),
 
   assessmentService: Ember.inject.service('api-sdk/assessment'),
+
+  /**
+   * @requires service:api-sdk/course
+   */
+  courseService: Ember.inject.service('api-sdk/course'),
 
   didInsertElement() {
     const component = this;
@@ -85,33 +95,39 @@ export default Ember.Component.extend(ModalMixin, {
       const activityContent = activityClass.get('content');
       const classId = activityClass.get('id');
       const activityId = activityClass.get('activity.id');
-      component
-        .fetchActivityUsers(classId, activityId)
-        .then(function(activityMembers) {
-          let classMembers = activityClass.get('members');
-          let classActivityStudents = Ember.A([]);
-          activityMembers.map(member => {
-            let isActivityMember = classMembers.findBy('id', member.id);
-            let isActiveMember = member.isActive;
-            if (isActivityMember && isActiveMember) {
-              classActivityStudents.push(isActivityMember);
-            }
-          });
-          component.set(
-            'selectedClassActivityMembers',
-            classActivityStudents.sortBy('firstName')
-          );
-          let selectedClassActivity = activityClass.get('activity');
-          // NOTE collection object required at Add Data flow
-          selectedClassActivity.collection = activityContent;
-          selectedClassActivity.isUpdatePerformance = !!activityContent.get(
-            'performance'
-          );
-          component.set('selectedClassActivity', selectedClassActivity);
-          component.set('selectedClassData', activityClass);
-          component.set('selectedActivityContent', activityContent);
-          component.set('isShowAddData', true);
+      return Ember.RSVP.hash({
+        classMembers: component.get('classService').readClassMembers(classId),
+        activityMembers: component.fetchActivityUsers(classId, activityId),
+        course: component
+          .get('courseService')
+          .fetchById(activityClass.get('courseId'))
+      }).then(({ classMembers, activityMembers, course }) => {
+        activityClass.set('course', course);
+        activityClass.set('members', classMembers.get('members'));
+        const classStudents = activityClass.get('members');
+        let classActivityStudents = Ember.A([]);
+        activityMembers.map(member => {
+          let isActivityMember = classStudents.findBy('id', member.id);
+          let isActiveMember = member.isActive;
+          if (isActivityMember && isActiveMember) {
+            classActivityStudents.push(isActivityMember);
+          }
         });
+        component.set(
+          'selectedClassActivityMembers',
+          classActivityStudents.sortBy('firstName')
+        );
+        let selectedClassActivity = activityClass.get('activity');
+        // NOTE collection object required at Add Data flow
+        selectedClassActivity.collection = activityContent;
+        selectedClassActivity.isUpdatePerformance = !!activityContent.get(
+          'performance'
+        );
+        component.set('selectedClassActivity', selectedClassActivity);
+        component.set('selectedClassData', activityClass);
+        component.set('selectedActivityContent', activityContent);
+        component.set('isShowAddData', true);
+      });
     },
 
     onClosePerformanceEntry() {
@@ -751,9 +767,11 @@ export default Ember.Component.extend(ModalMixin, {
     const groupedActivities = Ember.A([]);
     const primaryClass = component.get('primaryClass');
     const secondaryClasses = component.get('secondaryClasses');
+    const secondaryClassesData = component.get('secondaryClassesData');
+    console.log('secondaryClassesData', secondaryClassesData);
     classActivities.map(classActivity => {
       let activityClassData =
-        secondaryClasses.findBy('id', classActivity.get('classId')) ||
+        secondaryClassesData.findBy('id', classActivity.get('classId')) ||
         primaryClass;
       let existingActivity = groupedActivities.find(groupedActivity => {
         return (
@@ -783,6 +801,7 @@ export default Ember.Component.extend(ModalMixin, {
     return Ember.Object.create({
       id: classActivity.get('classId'),
       title: activityClassData.get('title'),
+      courseId: activityClassData.get('courseId') || null,
       members: activityClassData.get('members') || null,
       course: activityClassData.get('course') || null,
       content: classActivity.get('collection'),
@@ -1028,6 +1047,10 @@ export default Ember.Component.extend(ModalMixin, {
       'content.modals.ca-mastery-accrual-confirmation',
       model
     );
+  },
+
+  readCourseById(courseId) {
+    return this.get('courseService').fetchById(courseId);
   },
 
   markOfflineActivityStatus(classActivity) {

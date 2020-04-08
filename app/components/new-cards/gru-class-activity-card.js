@@ -333,28 +333,32 @@ export default Ember.Component.extend({
     const allowCachedData = true;
     activityClasses.map(activityClass => {
       const classId = activityClass.get('id');
-      return Ember.RSVP.hash({
-        classData: component
-          .get('classService')
-          .readClassInfo(classId, allowCachedData),
-        classMembers:
-          activityClass.get('members') ||
-          component
-            .get('classService')
-            .readClassMembers(classId, allowCachedData)
-      }).then(({ classData, classMembers }) => {
-        if (classData.get('courseId')) {
-          component
-            .get('courseService')
-            .fetchById(classData.get('courseId'), allowCachedData)
-            .then(function(courseData) {
-              activityClass.setProperties({
-                course: courseData,
-                members: classMembers.get('members') || classMembers
-              });
-            });
-        }
+      activityClass.setProperties({
+        course: {},
+        members: Ember.A([])
       });
+      // return Ember.RSVP.hash({
+      //   classData: component
+      //     .get('classService')
+      //     .readClassInfo(classId, allowCachedData),
+      //   classMembers:
+      //     activityClass.get('members') ||
+      //     component
+      //       .get('classService')
+      //       .readClassMembers(classId, allowCachedData)
+      // }).then(({ classData, classMembers }) => {
+      //   if (classData.get('courseId')) {
+      //     component
+      //       .get('courseService')
+      //       .fetchById(classData.get('courseId'), allowCachedData)
+      //       .then(function(courseData) {
+      //         activityClass.setProperties({
+      //           course: {},
+      //           members: {}
+      //         });
+      //       });
+      //   }
+      // });
     });
   },
 
