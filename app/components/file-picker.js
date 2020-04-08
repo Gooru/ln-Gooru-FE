@@ -5,9 +5,9 @@ import { OA_TASK_SUBMISSION_TYPES } from 'gooru-web/config/config';
 
 /**
  * @constant {Number}
- * File max size: 5 MB (5 * 1024 * 1024)
+ * File max size: 12 MB (12 * 1024 * 1024)
  */
-const FILE_MAX_SIZE = 5242880;
+const FILE_MAX_SIZE = 12582912;
 
 export default FilePicker.extend({
   // -------------------------------------------------------------------------
