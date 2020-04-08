@@ -412,7 +412,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'તમે જવાબો માટે આપવાના વિકલ્પોની લીમીટ સુધી પહોછી ગયા છો.',
   'common.errors.file-max-size':
-    'માત્ર 5MB  કરાતા ઓછી સાઈઝની ફાઈલ જ અપલોડ થઈ શકશે.',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'મહેરબાની કરી નીચેના કોઈપણ એક્સટેન્શન સાથે ફાઈલ સિલેક્ટ કરો:',
   'common.errors.getting-next-resource':

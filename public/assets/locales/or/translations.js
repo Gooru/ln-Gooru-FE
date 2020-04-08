@@ -424,7 +424,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'ଆପଣ ଉତ୍ତର ପସନ୍ଦଗୁଡ଼ିକର ସୀମାରେ ପହଞ୍ଚିଛନ୍ତି ।',
   'common.errors.file-max-size':
-    'କେବଳ 5ଏମବିରୁ କମ୍ ସାଇଜ୍ ବିଶିଷ୍ଟ ଫାଇଲଗୁଡ଼ିକ ସମର୍ଥିତ',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'ଦୟାକରି ନିମ୍ନଲିଖିତ ଏକ୍ସଟେନସନ୍ ଗୁଡ଼ିକ ମଧ୍ୟରୁ କୌଣସି ଗୋଟିଏର ଫାଇଲ୍ ଚୟନ କରନ୍ତୁ: {{extensions}}',
   'common.errors.getting-next-resource':

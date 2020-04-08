@@ -410,7 +410,8 @@ window.i18ln = {
     'Formato de pregunta incorrecto.',
   'common.errors.hotspot-text-max-choices':
     'Has alcanzado el límite de opciones de respuesta.',
-  'common.errors.file-max-size': 'Solo admite archivos menores a 5MB',
+  'common.errors.file-max-size':
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'Por favor selecciona un archivo con cualquiera de las siguientes extensiones {{extensions}}',
   'common.errors.getting-next-resource':

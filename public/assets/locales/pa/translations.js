@@ -407,7 +407,8 @@ window.i18ln = {
   'common.errors.highlight-text-wrong-format': 'ਸਵਾਲ ਦਾ ਗ਼ਲਤ ਫਾਰਮੈਟ',
   'common.errors.hotspot-text-max-choices':
     'ਤੁਸੀਂ ਉੱਤਰ ਚੋਣਾਂ ਦੀ ਸੀਮਾ \'ਤੇ ਪਹੁੰਚ ਗਏ ਹੋ।',
-  'common.errors.file-max-size': 'ਕੇਵਲ 5MB ਤੋਂ ਛੋਟਾ ਸਾਈਜ਼ ਹੀ ਸਪੋਰਟ ਕਰਦਾ ਹੈ',
+  'common.errors.file-max-size':
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'ਕਿਰਪਾ ਕਰਕੇ ਹੇਠਾਂ ਦਿੱਤੀਆਂ ਐੱਕਸਟੈਂਸ਼ਨਾਂ ਵਾਲੀ ਕੋਈ ਫਾਈਲ ਚੁਣੋ:  {{extensions}}',
   'common.errors.getting-next-resource':

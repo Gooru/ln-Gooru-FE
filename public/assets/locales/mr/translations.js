@@ -411,7 +411,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'आपण उत्तर निवडींची मर्यादा गाठली आहे.',
   'common.errors.file-max-size':
-    'फक्त ५ MB पेक्षा लहान आकाराच्या फाईल्स सपोर्टेड आहेत',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'खालीलपैकी कोणत्याही  एका एक्सटेन्शनची फाईल निवडा: {{extensions}}',
   'common.errors.getting-next-resource':

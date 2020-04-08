@@ -423,7 +423,8 @@ window.i18ln = {
   'common.errors.highlight-text-wrong-format': 'অশুদ্ধ প্ৰশ্ন আৰ্হি ।',
   'common.errors.hotspot-text-max-choices':
     'আপুনি উত্তৰ নিৰ্বাচনৰ শেষ সীমাত উপস্থিত হল ।',
-  'common.errors.file-max-size': 'কেৱল 5MB ত কৈ সৰু ফাইল হে চাপৰ্ত কৰিব',
+  'common.errors.file-max-size':
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'অনুগ্ৰহ কৰি তলত দিয়া সম্প্ৰসাৰণৰ লগত ফাইল এটা নিৰ্বাচন কৰক:{{extensions}}',
   'common.errors.getting-next-resource':
