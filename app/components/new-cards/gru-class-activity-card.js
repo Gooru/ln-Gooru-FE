@@ -6,6 +6,8 @@ export default Ember.Component.extend({
 
   classNameBindings: ['isShowListView:list-view:card-view'],
 
+  session: Ember.inject.service('session'),
+
   /**
    * @requires service:api-sdk/class-activity
    */
@@ -167,6 +169,10 @@ export default Ember.Component.extend({
         '_blank',
         'toolbar=yes,scrollbars=yes,resizable=yes,top=10,left=10,width=1000,height=700'
       );
+    },
+
+    onUpdateVideConference(activity) {
+      this.sendAction('onUpdateVideConference', activity);
     }
   },
 
@@ -281,6 +287,13 @@ export default Ember.Component.extend({
   ]),
 
   enableCollectionLiveLearning: true,
+
+  /**
+   * @return {Boolean} isEnabledVideoConferenece
+   */
+  isEnabledVideoConferenece: Ember.computed.alias(
+    'session.tenantSetting.enabledVideoConference'
+  ),
 
   /**
    * It is used to find activity is today or not

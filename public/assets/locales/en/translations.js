@@ -2925,5 +2925,7 @@ window.i18ln = {
   'conference.end-time': 'End Time',
   'conference.add-to-ca': 'Add to Class Activities',
   'ca.add-card-description':
-    'You are about to add this activity to you classroom. Do you want to include vide conference?'
+    'You are about to add this activity to you classroom. Do you want to include vide conference?',
+  'ca.video-conference': 'Video Conference',
+  'ca.add-video-conference': 'Add video conference for this activity'
 };

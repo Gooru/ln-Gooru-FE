@@ -60,6 +60,14 @@ export default Ember.Component.extend({
     .add(1, 'hours')
     .format('hh:mm A'),
 
+  updateStartDate: Ember.computed('activeActivityContent', function() {
+    return this.get('activeActivityContent.added_date') || null;
+  }),
+
+  updateEndDate: Ember.computed('activeActivityContent', function() {
+    return this.get('activeActivityContent.end_date') || null;
+  }),
+
   didInsertElement() {
     const component = this;
     this.$('.startTime').timepicker({
@@ -100,15 +108,16 @@ export default Ember.Component.extend({
      */
     onAddActivity() {
       let isScheduled = this.get('isScheduled');
+      let updateStartDate = this.get('updateStartDate');
+      let updateEndDate = this.get('updateEndDate');
       let content =
         this.get('activeActivityContent') || Ember.Object.create({});
-
       const startTime = !isScheduled
-        ? formatimeToDateTime(this.$('.startTime').val())
+        ? formatimeToDateTime(updateStartDate, this.$('.startTime').val())
         : this.$('.startTime').val();
 
       const endTime = !isScheduled
-        ? formatimeToDateTime(this.$('.endTime').val())
+        ? formatimeToDateTime(updateEndDate, this.$('.endTime').val())
         : this.$('.endTime').val();
 
       content.set('meetingStartTime', startTime);
