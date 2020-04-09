@@ -348,6 +348,8 @@ export default Ember.Controller.extend(ConfigurationMixin, {
     let secondaryClass = this.get('selectedClassList');
     this.loadSecondaryClassInfo(secondaryClass.get('id'));
   }),
+
+  classesData: Ember.computed.alias('classController.classesData'),
   // -------------------------------------------------------------------------
   // Actions
 
@@ -1266,10 +1268,18 @@ export default Ember.Controller.extend(ConfigurationMixin, {
 
   loadSecondaryClassInfo(classId) {
     const controller = this;
-    const classPromise = controller.get('classService').readClassInfo(classId);
-    const membersPromise = controller
-      .get('classService')
-      .readClassMembers(classId);
+    const existingClassData =
+      controller.get('classesData').findBy('id', classId) ||
+      controller.get('class.id') === classId
+        ? controller.get('class')
+        : null;
+    const classPromise = existingClassData
+      ? Ember.RSVP.resolve(existingClassData)
+      : controller.get('classService').readClassInfo(classId);
+    const membersPromise =
+      existingClassData && existingClassData.get('members')
+        ? Ember.RSVP.resolve(existingClassData)
+        : controller.get('classService').readClassMembers(classId);
     return classPromise.then(function(classData) {
       let classCourseId = null;
       if (classData.courseId) {
@@ -1312,7 +1322,9 @@ export default Ember.Controller.extend(ConfigurationMixin, {
           visibilityPromise = controller
             .get('classService')
             .readClassContentVisibility(classId);
-          coursePromise = controller.get('courseService').fetchById(courseId);
+          coursePromise = classData.get('course')
+            ? Ember.RSVP.resolve(classData.get('course'))
+            : controller.get('courseService').fetchById(courseId);
         }
         const frameworkId = aClass.get('preference.framework');
         const subjectId = aClass.get('preference.subject');
@@ -1341,6 +1353,9 @@ export default Ember.Controller.extend(ConfigurationMixin, {
             'competencyStats',
             hash.competencyStats.findBy('classId', classId)
           );
+          if (!existingClassData) {
+            controller.get('classesData').pushObject(classData);
+          }
           if (!controller.isDestroyed) {
             controller
               .get('classController')

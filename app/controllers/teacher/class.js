@@ -242,8 +242,8 @@ export default Ember.Controller.extend({
   isShowMilestoneReport: false,
 
   mappedSecondaryClasses: Ember.computed('class.setting', function() {
+    const controller = this;
     const classSetting = controller.get('class.setting');
-    const secondaryClassList = controller.get('secondaryClassList');
     let attachedSecondaryClassList =
       classSetting && classSetting['secondary.classes']
         ? classSetting['secondary.classes'].list
@@ -306,6 +306,8 @@ export default Ember.Controller.extend({
       : null;
     return caDefaultView || 'gooru-catalog';
   }),
+
+  classesData: Ember.A([]),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -468,7 +470,6 @@ export default Ember.Controller.extend({
   },
 
   getBulkClassDetails(classIds) {
-    console.log('classIds', classIds);
     this.get('classService').readBulkClassDetails(classIds.mapBy('id'));
   }
 });

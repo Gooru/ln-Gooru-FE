@@ -79,7 +79,7 @@ export default Ember.Controller.extend({
   },
 
   init() {
-    this.loadSecondaryClassesData();
+    this.loadClassData();
   },
 
   // -------------------------------------------------------------------------
@@ -171,15 +171,16 @@ export default Ember.Controller.extend({
     return classActivitiesTabs.findBy('id', defaultTabKey);
   }),
 
-  loadSecondaryClassesData() {
+  classesData: Ember.computed.alias('classController.classesData'),
+
+  loadClassData() {
     const controller = this;
     const secondaryClasses = this.get('secondaryClasses') || Ember.A([]);
     const classIds = secondaryClasses.mapBy('id');
     this.get('classService')
       .readBulkClassDetails(classIds)
-      .then(secondaryClassesData => {
-        console.log('secondaryClassesData', secondaryClassesData);
-        controller.set('secondaryClassesData', secondaryClassesData);
+      .then(classesData => {
+        controller.set('classController.classesData', classesData);
       });
   },
 

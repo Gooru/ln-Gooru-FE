@@ -412,10 +412,7 @@ export default Ember.Component.extend({
    */
   getClassInfo(classId) {
     const component = this;
-    const fetchCachedData = true;
-    return component
-      .get('classService')
-      .readClassInfo(classId, fetchCachedData);
+    return component.get('classService').readClassInfo(classId);
   },
 
   /**

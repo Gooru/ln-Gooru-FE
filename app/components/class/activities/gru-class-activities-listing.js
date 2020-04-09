@@ -86,8 +86,13 @@ export default Ember.Component.extend(ModalMixin, {
 
     onShowStudentsList(activityClass) {
       const component = this;
-      component.set('selectedActivityClass', activityClass);
-      component.set('isShowStudentsList', true);
+      return Ember.RSVP.hash({
+        classStudents: component.getClassMembers(activityClass.get('id'))
+      }).then(({ classStudents }) => {
+        activityClass.set('members', classStudents);
+        component.set('selectedActivityClass', activityClass);
+        component.set('isShowStudentsList', true);
+      });
     },
 
     onOpenPerformanceEntry(activityClass) {
@@ -96,15 +101,12 @@ export default Ember.Component.extend(ModalMixin, {
       const classId = activityClass.get('id');
       const activityId = activityClass.get('activity.id');
       return Ember.RSVP.hash({
-        classMembers: component.get('classService').readClassMembers(classId),
+        classStudents: component.getClassMembers(classId),
         activityMembers: component.fetchActivityUsers(classId, activityId),
-        course: component
-          .get('courseService')
-          .fetchById(activityClass.get('courseId'))
-      }).then(({ classMembers, activityMembers, course }) => {
+        course: component.getClassCourse(classId)
+      }).then(({ classStudents, activityMembers, course }) => {
         activityClass.set('course', course);
-        activityClass.set('members', classMembers.get('members'));
-        const classStudents = activityClass.get('members');
+        activityClass.set('members', classStudents);
         let classActivityStudents = Ember.A([]);
         activityMembers.map(member => {
           let isActivityMember = classStudents.findBy('id', member.id);
@@ -766,13 +768,10 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     const groupedActivities = Ember.A([]);
     const primaryClass = component.get('primaryClass');
-    const secondaryClasses = component.get('secondaryClasses');
-    const secondaryClassesData = component.get('secondaryClassesData');
-    console.log('secondaryClassesData', secondaryClassesData);
+    const classesData = component.get('classesData');
     classActivities.map(classActivity => {
       let activityClassData =
-        secondaryClassesData.findBy('id', classActivity.get('classId')) ||
-        primaryClass;
+        classesData.findBy('id', classActivity.get('classId')) || primaryClass;
       let existingActivity = groupedActivities.find(groupedActivity => {
         return (
           groupedActivity.get('contentId') === classActivity.get('contentId') &&
@@ -1049,8 +1048,40 @@ export default Ember.Component.extend(ModalMixin, {
     );
   },
 
-  readCourseById(courseId) {
-    return this.get('courseService').fetchById(courseId);
+  getClassCourse(classId) {
+    const classData =
+      this.get('classesData').findBy('id', classId) || this.get('primaryClass');
+    return Ember.RSVP.hash({
+      course: classData.get('course')
+        ? Ember.RSVP.resolve(classData.get('course'))
+        : this.get('courseService').fetchById(classData.get('courseId'))
+    }).then(({ course }) => {
+      classData.set('course', course);
+      return course;
+    });
+  },
+
+  getClassMembers(classId) {
+    const classData =
+      this.get('classesData').findBy('id', classId) || this.get('primaryClass');
+    const isMembersExists =
+      classData.get('members') && classData.get('members.length');
+    return Ember.RSVP.hash({
+      classMembers: !isMembersExists
+        ? this.get('classService').readClassMembers(classId)
+        : Ember.RSVP.resolve({})
+    }).then(({ classMembers }) => {
+      if (!isMembersExists) {
+        classData.set('owner', classMembers.get('owner'));
+        classData.set('collaborators', classMembers.get('collaborators'));
+        classData.set(
+          'memberGradeBounds',
+          classMembers.get('memberGradeBounds')
+        );
+        classData.set('members', classMembers.get('members'));
+      }
+      return classData.get('members');
+    });
   },
 
   markOfflineActivityStatus(classActivity) {
