@@ -186,6 +186,10 @@
 
       .video-call {
         cursor: pointer;
+
+        &.disabled-meeting {
+          opacity: 0.5;
+        }
         .videocam {
           color: $white;
           background-color: #0079c0;

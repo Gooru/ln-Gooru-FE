@@ -15,6 +15,8 @@ export default Ember.Component.extend(ModalMixin, {
 
   analyticsService: Ember.inject.service('api-sdk/analytics'),
 
+  videConferenceService: Ember.inject.service('api-sdk/video-conference'),
+
   /**
    * @requires service:api-sdk/offline-activity-analytics
    */
@@ -419,6 +421,23 @@ export default Ember.Component.extend(ModalMixin, {
     // Action triggered when clicking OA mark completed from the class activity card
     onMarkOACompleted() {
       this.loadItemsToGrade();
+    },
+
+    // Action trigger when we click video icon
+    onUpdateVideConference(activityContent) {
+      this.set('updateVideoConferenceContent', activityContent);
+      this.set('isUpdateVideConference', true);
+    },
+
+    // Action trigger when we click add activity from the update conference popup
+    onUpdateConference(content) {
+      if (content.get('hasVideoConference')) {
+        content.activityClasses.map(activity => {
+          activity.set('meetingStartTime', content.get('meetingStartTime'));
+          activity.set('meetingEndTime', content.get('meetingEndTime'));
+          this.updateVideoConferenceList(content, activity);
+        });
+      }
     }
   },
 
@@ -600,6 +619,16 @@ export default Ember.Component.extend(ModalMixin, {
       component.groupGradingItems();
     }
   }),
+
+  /**
+   * @return {Boolean} isUpdateVideConference
+   */
+  isUpdateVideConference: false,
+
+  /**
+   * @return {Object} isUpdateVideConference
+   */
+  updateVideoConferenceContent: null,
 
   loadActivitiesByActiveContentType(isInitialLoad) {
     const component = this;
@@ -1083,5 +1112,40 @@ export default Ember.Component.extend(ModalMixin, {
     contextObj.set('startDate', startDate);
     contextObj.set('endDate', endDate);
     contextObj.set('activeRange', daterange);
+  },
+
+  updateVideoConferenceList(content, activity) {
+    let component = this;
+    let emailIDs = activity.get('members').mapBy('email') || [];
+    let params = {
+      summary: `${activity.get('title')} : ${activity.get('content.title')}`,
+      startDateTime: activity.meetingStartTime,
+      endDateTime: activity.meetingEndTime,
+      attendees: emailIDs
+    };
+    if (emailIDs.length) {
+      component
+        .get('videConferenceService')
+        .createConferenceEvent(params)
+        .then(eventDetails => {
+          if (eventDetails.meetingHangoutUrl) {
+            let updateParams = {
+              classId: activity.get('id'),
+              contentId: activity.get('activity.id'),
+              data: {
+                meeting_id: eventDetails.meetingEventId,
+                meeting_url: eventDetails.meetingHangoutUrl,
+                meeting_endtime: activity.meetingEndTime,
+                meeting_starttime: activity.meetingStartTime,
+                meeting_timezone: moment.tz.guess()
+              }
+            };
+            content.setProperties(updateParams.data);
+            component
+              .get('videConferenceService')
+              .updateConferenceEvent(updateParams);
+          }
+        });
+    }
   }
 });
