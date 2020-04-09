@@ -2977,5 +2977,6 @@ window.i18ln = {
   'ca.add-card-description':
     'You are about to add this activity to you classroom. Do you want to include vide conference?',
   'ca.video-conference': 'Video Conference',
-  'ca.add-video-conference': 'Add video conference for this activity'
+  'ca.add-video-conference': 'Add video conference for this activity',
+  'oa.enable-conference': 'Enable Video Conference'
 };

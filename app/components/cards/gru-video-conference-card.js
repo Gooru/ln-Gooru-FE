@@ -25,6 +25,11 @@ export default Ember.Component.extend({
   isScheduled: false,
 
   /**
+   * @property {Boolean} isUpdateCard hold activity data
+   */
+  isUpdateCard: false,
+
+  /**
    * @property {Boolean} conferenceToken
    */
   conferenceToken: Ember.computed('window', function() {
@@ -70,6 +75,12 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     const component = this;
+    if (
+      !component.get('conferenceToken') &&
+      component.get('hasVideoConference')
+    ) {
+      this.sendAction('onToggleCheckbox', component.get('hasVideoConference'));
+    }
     this.$('.startTime').timepicker({
       timeFormat: 'hh:mm p',
       interval: 15,
