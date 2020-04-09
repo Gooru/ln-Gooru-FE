@@ -29,7 +29,9 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} hasVideoConference used to toggle activity popup
    */
-  hasVideoConference: false,
+  hasVideoConference: Ember.computed('isUpdateCard', function() {
+    return !!this.get('isUpdateCard');
+  }),
 
   /**
    * @property {String} updateThumbanil

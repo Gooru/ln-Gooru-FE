@@ -96,6 +96,11 @@
       text-align: center;
       cursor: pointer;
       padding: 15px 10px;
+
+      &.disabled-btn {
+        pointer-events: none;
+        opacity: 0.5;
+      }
     }
   }
 }

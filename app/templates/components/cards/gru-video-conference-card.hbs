@@ -14,7 +14,7 @@
           {{input type="text" value=endTime class="endTime"}}
         </div>
     </div>
-    <div class="add-activity" {{action "onAddActivity"}}>
-        {{t 'oa.add_activity'}}
+    <div class="add-activity {{if (and (not hasVideoConference) isUpdateCard) 'disabled-btn'}}" {{action "onAddActivity"}}>
+        {{if isUpdateCard (t 'oa.enable-conference') (t 'oa.add_activity')}}
     </div>
 </div>
