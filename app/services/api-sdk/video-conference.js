@@ -87,5 +87,17 @@ export default Ember.Service.extend({
           resolve();
         }, reject);
     });
+  },
+
+  deleteConferenceEvent(params) {
+    const service = this;
+    return new Ember.RSVP.Promise((resolve, reject) => {
+      return service
+        .get('videoConferenceAdapter')
+        .deleteConferenceEvent(params)
+        .then(() => {
+          resolve();
+        }, reject);
+    });
   }
 });

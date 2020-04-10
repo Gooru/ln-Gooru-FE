@@ -2935,8 +2935,8 @@ window.i18ln = {
   'oa.update-description':
     'Start or update your video conference for the activity',
   'oa.update-meeting': 'Update',
-  'oa.launch-meeting': 'Launch',
+  'oa.launch-meeting': 'Start',
   'vc.remove-tooltip': 'Remove video conference for the activity',
   'vc.update-tooltip': 'Update video conference',
-  'vc.launch-tooltip': 'Launch video conference'
+  'vc.launch-tooltip': 'Start video conference'
 };

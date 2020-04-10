@@ -60,13 +60,17 @@ export default Ember.Component.extend({
   options: {
     dropdown: false
   },
-
+  /**
+   * @return {String} hold the start time
+   */
   startTime: Ember.computed('activeActivityContent', function() {
     return this.get('activeActivityContent.meeting_url')
       ? dateTimeToTime(this.get('activeActivityContent.meeting_starttime'))
       : moment().format('hh:mm A');
   }),
-
+  /**
+   * @return {String} hold the end time
+   */
   endTime: Ember.computed('activeActivityContent', function() {
     return this.get('activeActivityContent.meeting_url')
       ? dateTimeToTime(this.get('activeActivityContent.meeting_endtime'))
@@ -86,6 +90,8 @@ export default Ember.Component.extend({
   updateEndDate: Ember.computed('activeActivityContent', function() {
     return this.get('activeActivityContent.end_date') || null;
   }),
+
+  isChangedTime: false,
 
   didInsertElement() {
     const component = this;
@@ -116,7 +122,14 @@ export default Ember.Component.extend({
     });
     this.$('.endTime').timepicker({
       timeFormat: 'hh:mm p',
-      interval: 15
+      interval: 15,
+      change: function() {
+        if (
+          this.get('activeActivityContent.meeting_endtime') !== $(this).val()
+        ) {
+          component.set('isChangedTime', true);
+        }
+      }
     });
   },
 
@@ -157,7 +170,32 @@ export default Ember.Component.extend({
     },
 
     onRemoveConference() {
-      this.set('isAddActivity', false);
+      let content = this.get('activeActivityContent');
+      let activityPromise = content.activityClasses.map(activity => {
+        return new Ember.RSVP.Promise((resolve, reject) => {
+          let params = {
+            classId: activity.get('id'),
+            contentId: activity.get('activity.id')
+          };
+          return Ember.RSVP.hash({
+            updateConference: this.get(
+              'videConferenceService'
+            ).deleteConferenceEvent(params)
+          }).then(() => {
+            resolve();
+          }, reject);
+        });
+      });
+      Ember.RSVP.all(activityPromise).then(() => {
+        content.setProperties({
+          meeting_id: null,
+          meeting_url: null,
+          meeting_endtime: null,
+          meeting_starttime: null,
+          meeting_timezone: null
+        });
+        this.set('isAddActivity', false);
+      });
     },
 
     updateMeeting() {
