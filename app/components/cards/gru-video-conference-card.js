@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { formatimeToDateTime } from 'gooru-web/utils/utils';
+import { formatimeToDateTime, dateTimeToTime } from 'gooru-web/utils/utils';
 
 export default Ember.Component.extend({
   /**
@@ -8,6 +8,8 @@ export default Ember.Component.extend({
   classNames: ['gru-video-conference-card'],
 
   session: Ember.inject.service('session'),
+
+  videConferenceService: Ember.inject.service('api-sdk/video-conference'),
 
   /**
    * @property {Boolean} hasVideoConference hold toggle checkbox activity
@@ -59,11 +61,23 @@ export default Ember.Component.extend({
     dropdown: false
   },
 
-  startTime: moment().format('hh:mm A'),
+  startTime: Ember.computed('activeActivityContent', function() {
+    return this.get('activeActivityContent.meeting_url')
+      ? dateTimeToTime(this.get('activeActivityContent.meeting_starttime'))
+      : moment().format('hh:mm A');
+  }),
 
-  endTime: moment()
-    .add(1, 'hours')
-    .format('hh:mm A'),
+  endTime: Ember.computed('activeActivityContent', function() {
+    return this.get('activeActivityContent.meeting_url')
+      ? dateTimeToTime(this.get('activeActivityContent.meeting_endtime'))
+      : moment()
+        .add(1, 'hours')
+        .format('hh:mm A');
+  }),
+
+  isUpdateVideoConference: Ember.computed('activeActivityContent', function() {
+    return !!this.get('activeActivityContent.meeting_url');
+  }),
 
   updateStartDate: Ember.computed('activeActivityContent', function() {
     return this.get('activeActivityContent.added_date') || null;
@@ -81,10 +95,15 @@ export default Ember.Component.extend({
     ) {
       this.sendAction('onToggleCheckbox', component.get('hasVideoConference'));
     }
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
     this.$('.startTime').timepicker({
       timeFormat: 'hh:mm p',
       interval: 15,
-      defaultTime: this.roundTimeQuarterHour(),
+      defaultTime: this.get('isUpdateVideoConference')
+        ? this.get('startTime')
+        : this.roundTimeQuarterHour(),
       change: function() {
         const endTime = moment(component.$(this).val(), 'hh:mm A')
           .add(1, 'hours')
@@ -135,6 +154,59 @@ export default Ember.Component.extend({
       content.set('meetingEndTime', endTime);
       content.set('hasVideoConference', this.get('hasVideoConference'));
       this.sendAction('onAddActivity', content);
+    },
+
+    onRemoveConference() {
+      this.set('isAddActivity', false);
+    },
+
+    updateMeeting() {
+      let content = this.get('activeActivityContent');
+      let updateStartDate = this.get('updateStartDate');
+      let updateEndDate = this.get('updateEndDate');
+      let params = {
+        data: {
+          meeting_id: content.get('meeting_id'),
+          meeting_url: content.get('meeting_url'),
+          meeting_endtime: formatimeToDateTime(
+            updateEndDate,
+            this.$('.endTime').val()
+          ),
+          meeting_starttime: formatimeToDateTime(
+            updateStartDate,
+            this.$('.startTime').val()
+          ),
+          meeting_timezone: content.get('meeting_timezone')
+        }
+      };
+      let activityPromise = content.activityClasses.map(activity => {
+        return new Ember.RSVP.Promise((resolve, reject) => {
+          params.classId = activity.get('id');
+          params.contentId = activity.get('activity.id');
+          return Ember.RSVP.hash({
+            updateConference: this.get(
+              'videConferenceService'
+            ).updateConferenceEvent(params)
+          }).then(() => {
+            resolve();
+          }, reject);
+        });
+      });
+      Ember.RSVP.all(activityPromise).then(() => {
+        content.setProperties(params.data);
+        this.set('isAddActivity', false);
+      });
+    },
+
+    launchMeeting(meetingUrl) {
+      if (meetingUrl) {
+        window.open(
+          meetingUrl,
+          '_blank',
+          'toolbar=yes,scrollbars=yes,resizable=yes,top=10,left=10,width=1000,height=700'
+        );
+        this.set('isAddActivity', false);
+      }
     }
   },
 

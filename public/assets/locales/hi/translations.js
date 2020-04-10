@@ -2947,5 +2947,12 @@ window.i18ln = {
     'You are about to add this activity to you classroom. Do you want to include vide conference?',
   'ca.video-conference': 'Video Conference',
   'ca.add-video-conference': 'Add video conference for this activity',
-  'oa.enable-conference': 'Enable Video Conference'
+  'oa.enable-conference': 'Enable Video Conference',
+  'oa.update-description':
+    'Start or update your video conference for the activity',
+  'oa.update-meeting': 'Update',
+  'oa.launch-meeting': 'Launch',
+  'vc.remove-tooltip': 'Remove video conference for the activity',
+  'vc.update-tooltip': 'Update video conference',
+  'vc.launch-tooltip': 'Launch video conference'
 };
