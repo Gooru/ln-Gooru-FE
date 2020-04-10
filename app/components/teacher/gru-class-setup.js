@@ -83,10 +83,7 @@ export default Ember.Component.extend(PullUpMixin, {
       if (this.get('updatedStudentsGradeBounds.length')) {
         classStudentsGradePromise = this.updateStudentGradeBoundaries();
       }
-      if (
-        this.get('updatedStudentsGradeBounds.length') &&
-        this.get('class.forceCalculateILP')
-      ) {
+      if (this.get('class.forceCalculateILP')) {
         skylineCalculatePromise = this.calculateSkyline();
       }
       Promise.all([
