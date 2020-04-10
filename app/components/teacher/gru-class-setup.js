@@ -72,9 +72,9 @@ export default Ember.Component.extend(PullUpMixin, {
 
     //Action trigger when click confirm class setup
     onCompleteClassSetup() {
-      let classGradePromise = Ember.RSVP.resolve();
-      let classStudentsGradePromise = Ember.RSVP.resolve();
-      let skylineCalculatePromise = Ember.RSVP.resolve();
+      let classGradePromise = Ember.RSVP.resolve({});
+      let classStudentsGradePromise = Ember.RSVP.resolve({});
+      let skylineCalculatePromise = Ember.RSVP.resolve({});
       if (
         this.get('activeClassGrade.id') !== this.get('classData.gradeCurrent')
       ) {
@@ -83,7 +83,7 @@ export default Ember.Component.extend(PullUpMixin, {
       if (this.get('updatedStudentsGradeBounds.length')) {
         classStudentsGradePromise = this.updateStudentGradeBoundaries();
       }
-      if (this.get('class.forceCalculateILP')) {
+      if (this.get('classData.forceCalculateILP')) {
         skylineCalculatePromise = this.calculateSkyline();
       }
       Promise.all([
@@ -224,9 +224,7 @@ export default Ember.Component.extend(PullUpMixin, {
   calculateSkyline() {
     return this.get('skylineInitialService').calculateSkyline(
       this.get('classId'),
-      this.get('updatedStudentsGradeBounds')
-        .filter(student => !!student.grade_lower_bound)
-        .mapBy('user_id')
+      this.get('students').mapBy('id')
     );
   },
 
