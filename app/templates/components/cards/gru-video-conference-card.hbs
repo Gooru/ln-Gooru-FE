@@ -17,7 +17,7 @@
     {{#if activeActivityContent.meeting_url}}
     <div class="update-activity">
         <span {{action "onRemoveConference"}} data-toggle="tooltip" title="{{t 'vc.remove-tooltip'}}">{{t 'common.remove'}}</span>
-        <span {{action "updateMeeting"}} data-toggle="tooltip" title="{{t 'vc.update-tooltip'}}">{{t 'oa.update-meeting'}}</span>
+        <span {{action "updateMeeting"}} class="{{if isChangedTime 'on-update' 'off-update'}}" data-toggle="tooltip" title="{{t 'vc.update-tooltip'}}">{{t 'oa.update-meeting'}}</span>
         <span {{action "launchMeeting" activeActivityContent.meeting_url}} data-toggle="tooltip" title="{{t 'vc.launch-tooltip'}}">{{t 'oa.launch-meeting'}}</span>
     </div>
     {{else}}

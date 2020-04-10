@@ -117,7 +117,14 @@
       font-weight: bold;
       width: 100%;
       text-align: center;
-      cursor: pointer;
+      span {
+        cursor: pointer;
+
+        &.off-update {
+          opacity: 0.5;
+          pointer-events: none;
+        }
+      }
     }
   }
 }
