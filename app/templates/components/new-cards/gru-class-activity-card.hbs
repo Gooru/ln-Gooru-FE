@@ -104,7 +104,7 @@
   </div>
   <div class="activity-actions">
     {{#if (and isEnabledVideoConferenece (not isActivityPast))}}
-        <div class="video-call {{unless activity.meeting_url 'disabled-meeting'}}" data-toggle="tooltip" title="{{if activity.meeting_url (format-time-readable activity)}}" {{action (optional (if activity.meeting_url (action "onConference" activity.meeting_url) (action "onUpdateVideConference" activity)))}}>
+        <div class="video-call {{unless activity.meeting_url 'disabled-meeting'}}" data-toggle="tooltip" title="{{if activity.meeting_url (format-time-readable activity)}}" {{action (optional (if activity.meeting_url (action "onConference" activity) (action "onUpdateVideConference" activity)))}}>
           {{gru-icon name="videocam"}}
           <label>{{t 'common.resource-format.video'}}</label>
         </div>

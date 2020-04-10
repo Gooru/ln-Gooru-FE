@@ -1252,3 +1252,12 @@ export function formatimeToDateTime(date = null, time) {
   }
   return moment(time, 'hh:mm a').format('YYYY-MM-DD[T]HH:mm:ss');
 }
+
+/**
+ *  formatimeToDateTime
+ * @type {String}
+ */
+export function dateTimeToTime(value) {
+  const endTime = moment.utc(value).format('hh:mm A');
+  return endTime;
+}

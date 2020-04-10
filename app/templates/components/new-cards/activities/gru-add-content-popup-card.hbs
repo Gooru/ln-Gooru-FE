@@ -7,7 +7,12 @@
                <span {{action "onClose"}}>{{gru-icon name="clear"}}</span>
               </div>
               <div class="description">
+                {{#if activeActivityContent.meeting_url}}
+                    {{t 'oa.update-description'}}
+                {{else}}
                 {{if isUpdateCard (t 'ca.add-video-conference') (t 'ca.add-card-description')}}
+                {{/if}}
+
               </div>
           </div>
           <div class="content-popup-images-section" style="background-image: url('{{if isUpdateCard updateThumbnailUrl activeActivityContent.thumbnailUrl}}')">
@@ -16,7 +21,13 @@
               <span class="content-title">{{activeActivityContent.title}}</span>
           </div>
           <div class="video-time-card">
-            {{cards/gru-video-conference-card  isUpdateCard=isUpdateCard hasVideoConference=hasVideoConference activeActivityContent=activeActivityContent onToggleCheckbox="onToggleCheckbox" onAddActivity="onAddActivity"}}
+            {{cards/gru-video-conference-card
+              isUpdateCard=isUpdateCard
+              hasVideoConference=hasVideoConference
+              activeActivityContent=activeActivityContent
+              onToggleCheckbox="onToggleCheckbox"
+              isAddActivity=isAddActivity
+              onAddActivity="onAddActivity"}}
           </div>
     </div>
 </div>
