@@ -28,8 +28,12 @@ export default Ember.Component.extend({
      * @function onAllow action trigger when click on deny
      */
     onAllow() {
+      let currentPath = window.location.href;
       let params = {
-        redirectUrl: `${window.location.href}?videoConference=true`
+        redirectUrl:
+          currentPath.indexOf('?') !== -1
+            ? `${currentPath}&videoConference=true`
+            : `${currentPath}?videoConference=true`
       };
       this.get('videConferenceService')
         .authorizeConference(params)
