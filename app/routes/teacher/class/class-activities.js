@@ -12,8 +12,11 @@ export default Ember.Route.extend({
   // -------------------------------------------------------------------------
   // Dependencies
 
-  model(params) {
+  beforeModel() {
     this.get('videConferenceService').fetchConferenceToken();
+  },
+
+  model(params) {
     if (params.videoConference) {
       window.close();
     }
