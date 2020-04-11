@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
-
+import { formatTimeReadable } from 'gooru-web/helpers/format-time-readable';
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-class-activity-card'],
 
@@ -29,6 +29,11 @@ export default Ember.Component.extend({
   offlineActivityService: Ember.inject.service(
     'api-sdk/offline-activity/offline-activity'
   ),
+
+  /**
+   * @property {Service} I18N service
+   */
+  i18n: Ember.inject.service(),
 
   didInsertElement() {
     const component = this;
@@ -335,6 +340,18 @@ export default Ember.Component.extend({
   }),
 
   isShowListView: false,
+
+  tooltipContent: Ember.computed(
+    'activity.meeting_starttime',
+    'activity',
+    function() {
+      let component = this;
+      let tooltipContent = component.get('activity.meeting_url')
+        ? formatTimeReadable([this.get('activity')])
+        : component.get('i18n').t('vc.click-setup').string;
+      return tooltipContent;
+    }
+  ),
 
   loadClassData() {
     const component = this;
