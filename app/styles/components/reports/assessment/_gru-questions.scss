@@ -818,6 +818,10 @@
             grid-template-rows: 1fr;
             align-items: center;
 
+            span {
+              padding-left: 7px;
+            }
+
             .correct {
               justify-self: center;
               visibility: hidden;
