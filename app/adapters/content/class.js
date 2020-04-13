@@ -10,6 +10,8 @@ export default Ember.Object.extend({
 
   namespace: '/api/nucleus/v1/classes',
 
+  namespaceV2: '/api/nucleus/v2/classes',
+
   reportNamespace: '/api/nucleus-download-reports/v1',
 
   demoNamespace: '/api/demo/v1',
@@ -514,6 +516,21 @@ export default Ember.Object.extend({
       processData: false,
       headers: adapter.defineHeaders(),
       data: JSON.stringify(setting)
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  readBulkClassDetails(classIds = []) {
+    const adapter = this;
+    const namespace = this.get('namespaceV2');
+    const url = `${namespace}/details`;
+    const options = {
+      type: 'POST',
+      contentType: 'application/json',
+      headers: adapter.defineHeaders(),
+      data: JSON.stringify({
+        classIds: classIds
+      })
     };
     return Ember.$.ajax(url, options);
   }

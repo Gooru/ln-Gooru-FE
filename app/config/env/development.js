@@ -88,7 +88,7 @@ export default {
     i2dFlow: false,
     enableCollectionLiveLearning: true,
     isLessonPlanShow: true,
-    isShowSecondaryClass: false
+    isShowSecondaryClass: true
   },
 
   FILE_UPLOAD: {
