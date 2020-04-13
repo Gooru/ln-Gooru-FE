@@ -141,5 +141,13 @@ export default Ember.Controller.extend(ModalMixin, ConfigurationMixin, {
   /**
    * Indicate if it's waiting for join class callback
    */
-  isLoading: false
+  isLoading: false,
+
+  /**
+   * help to handled featured course
+   * @property {boolean}
+   */
+  isShowFeaturedCourses: Ember.computed.alias(
+    'configuration.GRU_FEATURE_FLAG.isShowFeaturedCourses'
+  )
 });

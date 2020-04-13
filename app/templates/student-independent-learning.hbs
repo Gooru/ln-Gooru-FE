@@ -4,12 +4,15 @@
       <div class="title">
         <span>{{t 'user.hello' name=profile.firstName}}</span>
       </div>
+      {{#if isShowFeaturedCourses}}
       {{#unless (gt loginCount 5)}}
         <div class="featured-courses pull-right">
           <span>{{t 'student-landing.browse-our'}} {{#link-to 'library'}}{{t 'student-landing.featured-courses'}}{{/link-to}}</span>
         </div>
       {{/unless}}
+      {{/if}}
     </div>
+    {{#if isShowFeaturedCourses}}
     {{#unless (gt loginCount 5)}}
       {{gru-student-featured-courses
         courses=featuredCourses
@@ -17,6 +20,7 @@
         loginCount=loginCount
       }}
     {{/unless}}
+    {{/if}}
     <div class="student-navigator">
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active-classes tab">
