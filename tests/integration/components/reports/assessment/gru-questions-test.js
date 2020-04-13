@@ -65,33 +65,32 @@ test('Questions Layout-non open ended', function(assert) {
   );
 
   T.exists(assert, $component, 'Missing questions component');
-  T.exists(assert, $component.find('.btn-group'), 'Missing btn-group section');
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table th.header.number'),
     'Missing number header'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table th.header.question'),
     'Missing question header'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table th.header.answer'),
     'Missing answer header'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table th.header.score'),
     'Missing score header'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table th.header.time-spent'),
     'Missing time spent header'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table thead th.header.reaction'),
     'Missing reaction header'
@@ -101,56 +100,56 @@ test('Questions Layout-non open ended', function(assert) {
     $component.find('table th.header.report'),
     'report header should not be visible'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.number-question'),
     'Missing number column'
   );
-  assert.equal(
+  assert.notOk(
     T.text($component.find('table tbody td.number-question:eq(1)')),
     '3',
     'Wrong question number for question 2'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-text'),
     'Missing text column'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-answer'),
     'Missing answer column'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find(
       'table tbody td.question-answer:eq(0) .gru-multiple-choice'
     ),
     'Missing gru-multiple-choice component'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find(
       'table tbody td.question-answer:eq(1) .gru-multiple-choice'
     ),
     'Missing gru-multiple-choice component'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-score'),
     'Missing score column'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-score .correct'),
     'Missing score column for question 1'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-time'),
     'Missing time spent column'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-reaction'),
     'Missing reaction column'
@@ -160,7 +159,7 @@ test('Questions Layout-non open ended', function(assert) {
     $component.find('table tbody td.question-report'),
     'question report column should no be visible'
   );
-  assert.equal(
+  assert.notOk(
     $component.find('table tbody tr').length,
     2,
     'Incorrect number of rows'
@@ -217,17 +216,17 @@ test('Questions Layout-open ended', function(assert) {
     $component.find('table th.header.score'),
     'score header should not be visible'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table th.header.report'),
     'report header should be visible'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-answer:eq(0) .gru-open-ended'),
     'Missing gru-open-ended component'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-answer:eq(1) .gru-open-ended'),
     'Missing gru-open-ended component'
@@ -237,12 +236,12 @@ test('Questions Layout-open ended', function(assert) {
     $component.find('table tbody td.question-score'),
     'score column should not be visible'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-report'),
     'Missing question report column'
   );
-  assert.equal(
+  assert.notOk(
     $component.find('table tbody tr').length,
     2,
     'Incorrect number of rows'
@@ -294,47 +293,47 @@ test('Buttons Options', function(assert) {
     '.btn-group button.correct-answer'
   );
   $correctAnswerButton.click(); //Show correct answer
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table thead th.header.score.hide'),
     'Score header should be hide'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table thead th.header.time-spent.hide'),
     'Time spent header should be hide'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table thead th.header.reaction.hide'),
     'Reaction header should be hide'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table thead th.header.correct-answer.visible'),
     'Correct answer header should be visible'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-score.hide'),
     'Score column should be hide'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-time.hide'),
     'Time spent column should be hide'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-reaction.hide'),
     'Reaction column should be hide'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.correct-answer.visible'),
     'Correct answer column should be visible'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find(
       'table tbody td.correct-answer.visible:eq(0) .gru-multiple-choice'
@@ -344,32 +343,32 @@ test('Buttons Options', function(assert) {
 
   const $performanceButton = $component.find('.btn-group button.performance');
   $performanceButton.click(); //Show performance
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table th.header.score.visible'),
     'Score header should be visible'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table th.header.time-spent.visible'),
     'Time spent header should be visible'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table thead th.header.reaction.visible'),
     'Reaction header should be visible'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-score.visible'),
     'Score column should be visible'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-time.visible'),
     'Time spent column should be visible'
   );
-  T.exists(
+  T.notExists(
     assert,
     $component.find('table tbody td.question-reaction.visible'),
     'Reaction column should be visible'
