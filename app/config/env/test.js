@@ -88,7 +88,8 @@ export default {
     i2dFlow: false,
     enableCollectionLiveLearning: true,
     isLessonPlanShow: true,
-    isShowSecondaryClass: false
+    isShowSecondaryClass: false,
+    isShowFeaturedCourses: false
   },
 
   GUEST_TEACHER_ACCOUNT: 'TXJGZWVueToxMjM0NQ==',
