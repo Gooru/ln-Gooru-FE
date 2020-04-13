@@ -418,7 +418,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'ನೀವು ಉತ್ತರ ಆಯ್ಕೆಗಳ ಮಿತಿಯನ್ನು ತಲುಪಿದ್ದೀರಿ.',
   'common.errors.file-max-size':
-    '5MB ಕ್ಕಿಂತ ಕಡಿಮೆ ಗಾತ್ರದ ಫೈಲ್‍ಗಳನ್ನು  ಮಾತ್ರ ಬೆಂಬಲಿಸಲಾಗುತ್ತದೆ',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಯಾವುದೇ ವಿಸ್ತರಣೆಗಳೊಂದಿಗೆ ಫೈಲ್ ಅನ್ನು ಆಯ್ಕೆ ಮಾಡಿ: {{extensions}}',
   'common.errors.getting-next-resource':
@@ -2983,5 +2983,16 @@ window.i18ln = {
   'conference.end-time': 'End Time',
   'conference.add-to-ca': 'Add to Class Activities',
   'ca.add-card-description':
-    'You are about to add this activity to you classroom. Do you want to include vide conference?'
+    'You are about to add this activity to you classroom. Do you want to include vide conference?',
+  'ca.video-conference': 'Video Conference',
+  'ca.add-video-conference': 'Add video conference for this activity',
+  'oa.enable-conference': 'Enable Video Conference',
+  'oa.update-description':
+    'Start or update your video conference for the activity',
+  'oa.update-meeting': 'Update',
+  'oa.launch-meeting': 'Start',
+  'vc.remove-tooltip': 'Remove video conference for the activity',
+  'vc.update-tooltip': 'Update video conference',
+  'vc.launch-tooltip': 'Start video conference',
+  'vc.click-setup': 'Click to set up'
 };

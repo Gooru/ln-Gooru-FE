@@ -12,6 +12,11 @@ export default Ember.Component.extend({
   activeActivityContent: null,
 
   /**
+   * @property {Object} isUpdateCard used to check update
+   */
+  isUpdateCard: false,
+
+  /**
    * @property {Boolean} isAddActivity used to toggle activity popup
    */
   isAddActivity: false,
@@ -24,7 +29,17 @@ export default Ember.Component.extend({
   /**
    * @property {Boolean} hasVideoConference used to toggle activity popup
    */
-  hasVideoConference: false,
+  hasVideoConference: Ember.computed('isUpdateCard', function() {
+    return !!this.get('isUpdateCard');
+  }),
+
+  /**
+   * @property {String} updateThumbanil
+   */
+  updateThumbnailUrl: Ember.computed('isUpdateCard', function() {
+    let content = this.get('activeActivityContent');
+    return content.get('collection.thumbnailUrl');
+  }),
 
   actions: {
     /**

@@ -17,6 +17,11 @@ export default Ember.Component.extend(PullUpMixin, {
    */
   classService: Ember.inject.service('api-sdk/class'),
 
+  /**
+   * @type {SkylineInitialService} Service to retrieve skyline initial service
+   */
+  skylineInitialService: Ember.inject.service('api-sdk/skyline-initial'),
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement() {
@@ -67,8 +72,9 @@ export default Ember.Component.extend(PullUpMixin, {
 
     //Action trigger when click confirm class setup
     onCompleteClassSetup() {
-      let classGradePromise = Ember.RSVP.resolve();
-      let classStudentsGradePromise = Ember.RSVP.resolve();
+      let classGradePromise = Ember.RSVP.resolve({});
+      let classStudentsGradePromise = Ember.RSVP.resolve({});
+      let skylineCalculatePromise = Ember.RSVP.resolve({});
       if (
         this.get('activeClassGrade.id') !== this.get('classData.gradeCurrent')
       ) {
@@ -77,10 +83,14 @@ export default Ember.Component.extend(PullUpMixin, {
       if (this.get('updatedStudentsGradeBounds.length')) {
         classStudentsGradePromise = this.updateStudentGradeBoundaries();
       }
+      if (this.get('classData.forceCalculateILP')) {
+        skylineCalculatePromise = this.calculateSkyline();
+      }
       Promise.all([
         classGradePromise,
         classStudentsGradePromise,
-        this.updateClassSetupFlag()
+        this.updateClassSetupFlag(),
+        skylineCalculatePromise
       ]).then(() => {
         this.set('isClassSetupDone', true);
         Ember.run.later(() => {
@@ -204,6 +214,17 @@ export default Ember.Component.extend(PullUpMixin, {
     return this.get('classService').classMembersSettings(
       this.get('classId'),
       studentGradeBoundaries
+    );
+  },
+
+  /**
+   * @function calculateSkyline
+   * Method to calculate initial skyline for lower bound updated students
+   */
+  calculateSkyline() {
+    return this.get('skylineInitialService').calculateSkyline(
+      this.get('classId'),
+      this.get('students').mapBy('id')
     );
   },
 

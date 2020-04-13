@@ -58,6 +58,17 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  deleteConferenceEvent(params) {
+    const namespace = this.get('classNamespace');
+    const url = `${namespace}/${params.classId}/contents/${params.contentId}/meeting`;
+    const options = {
+      type: 'DELETE',
+      contentType: 'application/json; charset=utf-8',
+      headers: this.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.token-api3')}`

@@ -409,7 +409,8 @@ window.i18ln = {
   'common.errors.highlight-text-wrong-format': 'गलत प्रश्न प्रारूप।',
   'common.errors.hotspot-text-max-choices':
     'आप उत्तर विकल्पों की सीमा तक पहुंच गए हैं।',
-  'common.errors.file-max-size': 'केवल 5MB से छोटे आकार की फाइलें समर्थित हैं',
+  'common.errors.file-max-size':
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'कृपया निम्न में से किसी भी एक्सटेंशन के साथ एक फ़ाइल का चयन करें: {{extension}}',
   'common.errors.getting-next-resource':
@@ -2943,5 +2944,16 @@ window.i18ln = {
   'conference.end-time': 'End Time',
   'conference.add-to-ca': 'Add to Class Activities',
   'ca.add-card-description':
-    'You are about to add this activity to you classroom. Do you want to include vide conference?'
+    'You are about to add this activity to you classroom. Do you want to include vide conference?',
+  'ca.video-conference': 'Video Conference',
+  'ca.add-video-conference': 'Add video conference for this activity',
+  'oa.enable-conference': 'Enable Video Conference',
+  'oa.update-description':
+    'Start or update your video conference for the activity',
+  'oa.update-meeting': 'Update',
+  'oa.launch-meeting': 'Start',
+  'vc.remove-tooltip': 'Remove video conference for the activity',
+  'vc.update-tooltip': 'Update video conference',
+  'vc.launch-tooltip': 'Start video conference',
+  'vc.click-setup': 'Click to set up'
 };

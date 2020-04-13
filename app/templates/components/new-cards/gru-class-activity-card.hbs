@@ -103,8 +103,8 @@
     {{/each}}
   </div>
   <div class="activity-actions">
-    {{#if activity.meeting_url}}
-        <div class="video-call" data-toggle="tooltip" title="{{format-time-readable activity}}" {{action "onConference" activity.meeting_url}}>
+    {{#if (and isEnabledVideoConferenece (not isActivityPast))}}
+        <div class="video-call {{unless activity.meeting_url 'disabled-meeting'}}" data-toggle="tooltip" title data-original-title="{{tooltipContent}}" {{action (optional (if activity.meeting_url (action "onConference" activity) (action "onUpdateVideConference" activity)))}}>
           {{gru-icon name="videocam"}}
           <label>{{t 'common.resource-format.video'}}</label>
         </div>

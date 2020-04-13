@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { SCREEN_SIZES } from 'gooru-web/config/config';
-import { isCompatibleVW, formaDatetime } from 'gooru-web/utils/utils';
+import { isCompatibleVW, formatimeToDateTime } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -13,7 +13,7 @@ export default Ember.Component.extend({
    * Maintains the value which of activity startDate
    * @type {Integer}
    */
-  startDate: moment(),
+  startDate: moment().format('YYYY-MM-DD'),
 
   /**
    * Maintains the value which of activity endDate
@@ -168,12 +168,12 @@ export default Ember.Component.extend({
         : this.get('endDate');
       content.set(
         'meetingStartTime',
-        formaDatetime(startDate, content.get('meetingStartTime'))
+        formatimeToDateTime(startDate, content.get('meetingStartTime'))
       );
 
       content.set(
         'meetingEndTime',
-        formaDatetime(endDate, content.get('meetingEndTime'))
+        formatimeToDateTime(endDate, content.get('meetingEndTime'))
       );
       if (this.get('allowTwoDateRangePicker')) {
         this.sendAction('onScheduleForDate', startDate, endDate, content);

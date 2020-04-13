@@ -135,7 +135,6 @@ export default Ember.Component.extend({
       $fileInput.unwrap();
 
       this.set('selectedFile', null);
-      this.get('onSelectFile')(null);
     },
 
     /**
@@ -247,12 +246,10 @@ export default Ember.Component.extend({
     } else {
       didValidate = new Ember.RSVP.Promise(function(resolve) {
         if (model) {
-          model
-            .validate()
-            .then(
-              ({ validations }) => resolve(validations.get('isValid')),
-              () => resolve(false)
-            );
+          model.validate().then(
+            ({ validations }) => resolve(validations.get('isValid')),
+            () => resolve(false)
+          );
         }
       });
     }

@@ -91,6 +91,10 @@ export default {
     isShowSecondaryClass: true
   },
 
+  FILE_UPLOAD: {
+    MAX_SIZE_IN_MB: 12
+  },
+
   GUEST_TEACHER_ACCOUNT: 'TXJGZWVueToxMjM0NQ==',
   GUEST_STUDENT_ACCOUNT: 'dGxhd3JlbmNlOjEyMzQ1'
 };

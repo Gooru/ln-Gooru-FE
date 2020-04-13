@@ -1,5 +1,5 @@
 <div class="gru-video-conference-card-container">
-    <div class="conference-header">
+    <div class="conference-header {{if activeActivityContent.meeting_url 'no-switch'}}">
       <span>{{gru-icon name="videocam"}}</span>
       <span>{{t 'conferenc.include'}}</span>
       <span class="conference_icon">{{gru-switch switchOptions=switchOptions onOptionSwitch='onToggleCheckbox' isChecked=hasVideoConference}}</span>
@@ -14,7 +14,15 @@
           {{input type="text" value=endTime class="endTime"}}
         </div>
     </div>
-    <div class="add-activity" {{action "onAddActivity"}}>
-        {{t 'oa.add_activity'}}
+    {{#if activeActivityContent.meeting_url}}
+    <div class="update-activity">
+        <span {{action "onRemoveConference"}} data-toggle="tooltip" title="{{t 'vc.remove-tooltip'}}">{{t 'common.remove'}}</span>
+        <span {{action "updateMeeting"}} class="{{if isChangedTime 'on-update' 'off-update'}}" data-toggle="tooltip" title="{{t 'vc.update-tooltip'}}">{{t 'oa.update-meeting'}}</span>
+        <span {{action "launchMeeting" activeActivityContent.meeting_url}} data-toggle="tooltip" title="{{t 'vc.launch-tooltip'}}">{{t 'oa.launch-meeting'}}</span>
     </div>
+    {{else}}
+    <div class="add-activity {{if (and (not hasVideoConference) isUpdateCard) 'disabled-btn'}}" {{action "onAddActivity"}}>
+        {{if isUpdateCard (t 'oa.enable-conference') (t 'oa.add_activity')}}
+    </div>
+    {{/if}}
 </div>

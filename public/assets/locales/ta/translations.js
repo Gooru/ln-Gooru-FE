@@ -433,7 +433,7 @@ window.i18ln = {
   'common.errors.hotspot-text-max-choices':
     'பதில் தெரிந்தெடுப்பின் உச்ச எல்லையை அடைந்து விட்டீர்கள்.',
   'common.errors.file-max-size':
-    '5MB க்கும் குறைவாக உள்ள ஃபைல்  சைஸ் ஏற்றுக்கொள்ளப்படும்',
+    'Only files of size smaller than {{fileMaxSize}}MB are supported',
   'common.errors.file-upload-missing':
     'கீழ்க்காணும் எக்ஸ்டன்சன்களில் ஏதேனும்  உள்ள  ஃபைலினை தெரிந்தெடுக்கவும்: {{extensions}}',
   'common.errors.getting-next-resource':
@@ -3074,5 +3074,16 @@ window.i18ln = {
   'conference.end-time': 'End Time',
   'conference.add-to-ca': 'Add to Class Activities',
   'ca.add-card-description':
-    'You are about to add this activity to you classroom. Do you want to include vide conference?'
+    'You are about to add this activity to you classroom. Do you want to include vide conference?',
+  'ca.video-conference': 'Video Conference',
+  'ca.add-video-conference': 'Add video conference for this activity',
+  'oa.enable-conference': 'Enable Video Conference',
+  'oa.update-description':
+    'Start or update your video conference for the activity',
+  'oa.update-meeting': 'Update',
+  'oa.launch-meeting': 'Start',
+  'vc.remove-tooltip': 'Remove video conference for the activity',
+  'vc.update-tooltip': 'Update video conference',
+  'vc.launch-tooltip': 'Start video conference',
+  'vc.click-setup': 'Click to set up'
 };
