@@ -162,7 +162,8 @@ export default Ember.Object.extend({
       preference: payload.preference
         ? Ember.Object.create(payload.preference)
         : null,
-      milestoneViewApplicable: payload.milestone_view_applicable
+      milestoneViewApplicable: payload.milestone_view_applicable,
+      memberCount: payload.member_count || 0
     });
   },
 
