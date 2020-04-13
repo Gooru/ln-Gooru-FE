@@ -3,7 +3,7 @@
     <div class="title">
       <h4>{{if isOpenEnded (t "common.questions-OE") (t "common.questions")}}</h4>
     </div>
-    {{#unless isOpenEnded}}
+    <!-- {{#unless isOpenEnded}}
       {{#if (and (not isTeacher) isAnswerKeyHidden)}}
         <em>{{t "common.answer-key-was-hidden"}}</em>
       {{else}}
@@ -12,9 +12,9 @@
           <button type="button" {{action 'selectPerformanceOption' false}} class="correct-answer btn {{unless showPerformance 'btn-primary' 'btn-info' }}">{{t "common.show-correct-answer"}}</button>
         </div>
       {{/if}}
-    {{/unless}}
+    {{/unless}} -->
   </div>
-  {{#if (and (not isOpenEnded) isTeacher hasAnsweredQuestions showChangeScore isAssessment showPerformance)}}
+  <!-- {{#if (and (not isOpenEnded) isTeacher hasAnsweredQuestions showChangeScore isAssessment showPerformance)}}
     <div class="score-change-container">
       {{#if isChangeScoreEnabled}}
         <button type="button" class="btn btn-info cancel" {{action 'onChangeScoreNotConfirm'}}>{{t 'common.cancel'}}</button>
@@ -23,7 +23,7 @@
         <button type="button" class="btn btn-primary change-score" {{action 'onChangeScore'}}>{{t 'common.change-score'}}</button>
       {{/if}}
     </div>
-  {{/if}}
+  {{/if}} -->
   <table>
     <thead>
       <tr>
@@ -138,4 +138,104 @@
       {{/each}}
     </tbody>
   </table>
+
+  <div class="question-container">
+    <div class="question-header-container">
+      <div class="question-title-container">
+        <div class="question-order">{{contentSeq}}.</div>
+        <div class="question-icon"></div>
+        <div class="title ellipsis">{{safe-html content.resource.title}}</div>
+      </div>
+      <div class="question-performance-container">
+          <div class="question-reaction">
+            {{qz-reaction-icon content.reaction }}
+          </div>
+          {{#unless content.resource.isOpenEnded}}
+            {{#if (and content.started content.skipped)}}
+              <div class="question-status" data-toggle="tooltip" title="Skipped">
+                {{gru-icon name="block"}}
+              </div>
+            {{else}}
+              <div class="question-score">
+                <span class="{{if content.started (if content.correct 'correct' 'incorrect') 'not-started'}}">
+                    {{#if content.started}}
+                        {{#if (and isTeacher isChangeScoreEnabled showChangeScore isAssessment showPerformance)}}
+                            {{gru-status-switch  onOptionSwitch='changeQuestionScore' isChecked=content.correct item=content}}
+                          {{else}}
+                            <i class="icon"> </i>
+                        {{/if}}
+                     {{else}}
+                          {{gru-icon name='radio_button_checked'}}
+                   {{/if}}
+                </span>
+              </div>
+            {{/if}}
+          {{/unless}}
+          {{#if content.resource.isOpenEnded}}
+            <div class="question-report">
+              {{#if content.isGraded}}
+                <a {{action 'viewOEReport' content.resource.id}}>
+                  <span class="report-icon">{{gru-icon name='library_books'}}</span>
+                </a>
+              {{/if}}
+            </div>
+          {{/if}}
+          <div class="question-timespent">
+            {{format-time content.savedTime}}
+          </div>
+        </div>
+    </div>
+    <div class="taxonomies-conatiner">
+      {{#if taxonomyTags.length}}
+        {{taxonomy/gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=1 isInCard=true}}
+      {{/if}}
+    </div>
+    <div class="question-description">
+      {{gru-math-text text=(if content.resource.isFIB content.resource.fibText content.resource.text)}}
+    </div>
+    {{#if (or content.resource.hasMedia content.resource.thumbnail)}}
+      <div class="question-thumbnail">
+        {{#if content.resource.hasMedia}}
+          <img class="img-responsive" src="{{content.resource.mediaUrl}}" />
+        {{else}}
+          {{#if content.resource.thumbnail}}
+            <img class="img-responsive" src="{{content.resource.thumbnail}}" />
+          {{/if}}
+        {{/if}}
+      </div>
+    {{/if}}
+    <div class="answer-container">
+      {{#if  content.answered }}
+        <div class="user-answer answer-section">
+          <div class="answer-type-label type-label">
+            {{#if (not content.resource.userAnswer)}}
+              {{t 'gru-question-viewer.answer'}}
+            {{else}}
+              {{#if isStudent}}
+                {{t 'common.answer'}}
+              {{else}}
+                {{t 'common.student'}} {{t 'gru-question-viewer.answer'}}
+              {{/if}}
+            {{/if}}
+          </div>
+          <div class="answer-value-container">
+            {{#if content.answered}}
+              {{{component (question-config content.resource.type  'component.answer') question=content.resource userAnswer=content.userAnswer}}}
+            {{/if}}
+          </div>
+        </div>
+      {{/if}}
+      {{#unless (and (not isTeacher) isAnswerKeyHidden)}}
+        {{#if ( and (not showPerformance) (not isOpenEnded) (not content.skipped))}}
+          <div class="correct-answer answer-section">
+            <div class="answer-type-label type-label">{{t 'common.correct-answer'}}</div>
+            <div class="answer-value-container">
+              {{{component (question-config content.resource.type 'component.answer') question=content.resource showCorrect=true}}}
+            </div>
+          </div>
+        {{/if}}
+      {{/unless}}
+    </div>
+  </div>
+
 </div>

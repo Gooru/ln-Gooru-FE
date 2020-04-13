@@ -60,6 +60,7 @@
     text-align: center;
     cursor: pointer;
     height: 56px;
+    display: none;
 
     i {
       font-size: 35px;
@@ -71,60 +72,305 @@
     }
   }
 
-  .teacher-suggestion {
-    position: absolute;
-    top: 5%;
-    right: 70px;
-    width: 63px;
-    height: 56px;
+  .user-course-info {
+    width: 100%;
+    background: #ffffff;
 
-    .suggestion-count-container {
-      cursor: pointer;
+    .content-info-container {
+      box-shadow: 0 0 4px 0 rgba(102, 102, 102, 0.3);
 
-      .suggestion-explore {
-        position: relative;
-        width: 35px;
-        height: 31px;
-        margin-left: 15px;
-        color: #f88c49;
+      .title-info-container {
+        display: grid;
+        grid-template-columns: 80px 24px 1fr auto;
+        align-items: center;
+        column-gap: 16px;
 
-        .explore {
-          font-size: 35px;
-          transform: rotate(90deg);
+        .thumbnail-container {
+          width: 80px;
+          height: 60px;
+          background-size: 80px 60px;
+          display: block;
+          background-repeat: no-repeat;
         }
 
-        .suggestion-count {
-          position: absolute;
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          color: #37424a;
-          top: 0;
-          right: 0;
-          border: 1px solid #37424a;
-          background: #fff;
-          font-size: 10px;
-          line-height: 13px;
+        .content-title {
+          font-size: 16px;
+          color: #545e66;
+        }
+
+        .content-icon {
+          background-size: 24px 18px;
+          width: 24px;
+          height: 18px;
+          background-repeat: no-repeat;
+          display: block;
+
+          &.assessment,
+          &.assessment-external {
+            background-image: url("gooru/images/add_assessment.svg");
+          }
+
+          &.collection,
+          &.collection-external {
+            background-image: url("gooru/images/add_collection.svg");
+          }
+        }
+
+        .teacher-suggestion {
+          padding: 5px;
+
+          .suggestion-count-container {
+            cursor: pointer;
+
+            .suggestion-explore {
+              position: relative;
+              width: 35px;
+              height: 31px;
+              margin-left: 15px;
+              color: #f88c49;
+
+              .explore {
+                font-size: 35px;
+                transform: rotate(90deg);
+              }
+
+              .suggestion-count {
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                color: #37424a;
+                top: 0;
+                right: 0;
+                border: 1px solid #37424a;
+                background: #fff;
+                font-size: 10px;
+                line-height: 13px;
+                text-align: center;
+              }
+            }
+
+            span {
+              color: #f88c49;
+            }
+          }
+        }
+      }
+    }
+
+    .content-details-container {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      height: 50px;
+      align-items: center;
+      &.single-container {
+        grid-template-columns: 1fr;
+      }
+      .taxonomy-container {
+        height: 50px;
+        display: grid;
+        align-items: center;
+        padding-left: 15px;
+
+        .gru-taxonomy-tag-list {
+          .gru-taxonomy-tag {
+            min-width: 90px;
+            max-width: 100px;
+            height: 23px;
+            border-radius: 12px;
+            background-color: #2d2d2d;
+
+            .standard-tag {
+              text-align: center;
+              padding: 0;
+
+              .tag-label {
+                font-size: 14px;
+                font-weight: bold;
+                color: $white;
+                line-height: 21px;
+              }
+
+              .tag-caption {
+                display: none;
+              }
+            }
+          }
+
+          .non-visible-tags {
+            width: 81px;
+            height: 23px;
+            border-radius: 12px;
+            background-color: #2d2d2d;
+            color: $white;
+            padding: 0;
+
+            span {
+              font-weight: bold;
+              font-size: 14px;
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+      .activity-performance-container {
+        display: grid;
+        grid-template-columns: 1fr 70px;
+        justify-items: right;
+        column-gap: 15px;
+        height: inherit;
+
+        &.collection-performance {
+          grid-template-columns: 1fr;
+          .timespent-container {
+            padding-right: 15px;
+          }
+        }
+        .timespent-container {
+          display: grid;
+          grid-template-columns: auto auto;
+          align-items: center;
+          column-gap: 5px;
+          .timespent-icon {
+            i.query_builder {
+              height: 50px;
+              line-height: 50px;
+              font-size: 30px;
+            }
+          }
+          .timespent-data {
+            .timespent-label {
+              font-size: 13px;
+            }
+            .timespent-value {
+              font-weight: bold;
+              font-size: 14px;
+            }
+          }
+        }
+        .activity-score-container {
+          color: $white;
+          font-size: 17px;
+          font-weight: bold;
+          width: 70px;
+          height: 50px;
+          line-height: 50px;
           text-align: center;
         }
       }
+    }
 
-      span {
-        color: #f88c49;
+    .content-attems {
+      padding: 10px;
+      box-shadow: 0 2px 4px 0 rgba(102, 102, 102, 0.3);
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      .information {
+        margin: 0;
+        height: 30px;
+        font-size: $font-size-h6;
+        display: table;
+
+        i {
+          vertical-align: middle;
+          margin: 0 5px 0 0;
+        }
+
+        span {
+          font-size: 13px;
+        }
+
+        .attempt {
+          margin: 0 3px 0 0;
+
+          .attempt-selector {
+            display: inline-block;
+
+            .current-attempt {
+              display: inline-block;
+
+              button {
+                line-height: 1;
+                font-size: 13px;
+
+                .caret {
+                  margin-left: 10px;
+                }
+                color: $gray;
+
+                &:hover {
+                  background-color: #ccc;
+                }
+              }
+
+              .dropdown-menu {
+                li a {
+                  &.active {
+                    background-color: #ccc;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .date {
+          margin: 0 2px 0 0;
+        }
+
+        .attempt,
+        .date,
+        .reaction {
+          @media (max-width: $screen-xs) {
+            display: block;
+            margin: 0 0 10px;
+          }
+          @media (max-width: $screen-md) {
+            margin: 0 10px 0 0;
+          }
+        }
+      }
+      .content-answer {
+        text-align: end;
+        .btn-group {
+          button {
+            margin: 0 2px 0 0;
+            border-radius: 10px;
+            @media (max-width: $screen-xs) {
+              padding: 6px 10px;
+            }
+          }
+        }
+        .summary-report-btn {
+          border: 1px solid #b8bfc4;
+          border-radius: 16px;
+          background: #b8bfc4;
+          z-index: 0;
+
+          .content-performance {
+            color: black;
+            height: 20px;
+            line-height: 9px;
+            background-color: #b8bfc4;
+          }
+
+          .correct-answer {
+            color: black;
+            height: 20px;
+            line-height: 9px;
+            background-color: #b8bfc4;
+          }
+
+          .btn-primary {
+            background: #ffffff;
+          }
+        }
       }
     }
-  }
-
-  .user-course-info {
-    width: 100%;
-    display: inline-block;
-    height: 130px;
-    border-bottom: 1px solid #dfe3e6;
-    background: #ffffff;
 
     .user-profile-info {
       margin: 0 auto;
-
+      display: none;
       .profile {
         padding: 8px;
 
@@ -142,82 +388,12 @@
     .assessment-name {
       display: block;
       font-size: 16px;
-    }
-
-    .information {
-      margin: 0;
-      height: 30px;
-      font-size: $font-size-h6;
-      display: table;
-
-      i {
-        vertical-align: middle;
-        margin: 0 5px 0 0;
-      }
-
-      span {
-        font-size: 13px;
-      }
-
-      .attempt {
-        margin: 0 3px 0 0;
-
-        .attempt-selector {
-          display: inline-block;
-
-          .current-attempt {
-            display: inline-block;
-
-            button {
-              line-height: 1;
-              font-size: 13px;
-
-              .caret {
-                margin-left: 10px;
-              }
-              color: $gray;
-
-              &:hover {
-                background-color: #ccc;
-              }
-            }
-
-            .dropdown-menu {
-              li a {
-                &.active {
-                  background-color: #ccc;
-                }
-              }
-            }
-          }
-        }
-      }
-
-      .date {
-        margin: 0 2px 0 0;
-      }
-
-      .time {
-        margin: 0 5px 0 0;
-      }
-
-      .attempt,
-      .date,
-      .reaction,
-      .time {
-        @media (max-width: $screen-xs) {
-          display: block;
-          margin: 0 0 10px;
-        }
-        @media (max-width: $screen-md) {
-          margin: 0 10px 0 0;
-        }
-      }
+      display: none;
     }
 
     .class-performance {
       width: 85%;
-
+      display: none;
       .trophy {
         text-transform: capitalize;
         font-size: 16px;
@@ -236,7 +412,7 @@
     .close {
       display: grid;
       width: 10%;
-
+      display: none;
       .clear-button {
         font-size: 30px;
         color: #cbd2d7;
@@ -262,7 +438,7 @@
     .performance {
       width: 65%;
       display: inherit;
-
+      display: none;
       .progress {
         height: 12px;
 
@@ -358,10 +534,10 @@
   }
 
   .reports.gru-assessment-report {
-    max-height: calc(90vh - 130px);
-    height: calc(90vh - 130px);
+    max-height: calc(90vh - 220px);
+    height: calc(90vh - 220px);
     overflow-y: auto;
-
+    margin-top: 5px;
     .desc-align {
       position: relative !important;
     }
@@ -372,6 +548,41 @@
     width: 768px;
     max-height: 90vh;
     height: 90vh;
+
+    .header-container {
+      height: 48px;
+      background-color: #425e67;
+      display: flex;
+      padding-left: 16px;
+      position: relative;
+
+      .close-pullup {
+        width: 32px;
+        height: 32px;
+        background-color: rgba(216, 216, 216, 0.1);
+        border-radius: 50%;
+        text-align: center;
+        cursor: pointer;
+        margin: 8px 0;
+
+        i {
+          color: $white;
+          line-height: 32px;
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      .preview-title {
+        font-size: 15px;
+        font-weight: bold;
+        line-height: 48px;
+        color: $white;
+        text-transform: capitalize;
+        padding: 0 16px;
+        width: 100%;
+      }
+    }
 
     .reports.assessment.gru-questions
       .summary-report-questions

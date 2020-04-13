@@ -52,6 +52,36 @@
     {{/each}}
     </tbody>
 </table>
+<div class="resource-container">
+  <div class="resource-header-container">
+    <div class="resource-title-container">
+      <div class="resource-order">{{contentSeq}}.</div>
+      <div class="resource-type {{content.resource.format}}"></div>
+      <div class="title ellipsis">{{safe-html content.resource.title}}</div>
+    </div>
+    <div class="resource-performance-container">
+      <div class="resource-reaction">
+        {{qz-reaction-icon content.reaction }}
+      </div>
+      <div class="resource-timespent">
+        {{format-time content.timeSpent}}
+      </div>
+    </div>
+  </div>
+  {{#if taxonomyTags.length}}
+    <div class="resource-taxonomies-container">
+      {{taxonomy/gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=1 isInCard=true}}
+    </div>
+  {{/if}}
+  <div class="resource-description-container">
+    {{safe-html content.resource.description}}
+  </div>
+  {{#if content.resource.url}}
+    <div class="resource-url-container">
+      <span class="url-label">{{t 'gru-rubric-creation.url'}}: </span><span class="url-content"><a href="{{content.resource.url}}" target="_blank">{{content.resource.url}}</a></span>
+    </div>
+  {{/if}}
+</div>
 <div class="resource-cards cards visible-xs">
     <div class="header">
         <span class="resource-number">{{t "common.number"}}</span>
@@ -65,4 +95,3 @@
       {{/each}}
     </ul>
 </div>
-

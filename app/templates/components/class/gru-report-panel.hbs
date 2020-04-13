@@ -1,21 +1,110 @@
 <div class="backdrop" {{action 'onPullUpClose' true}}></div>
 <div class="report-panel-container">
-  <div class="pullup-close pull-right" {{action 'onPullUpClose'}}>
-    {{gru-icon name='ic_close'}}
-    <div>Close</div>
+  <div class="header-container">
+    <div class="close-pullup" {{action "onPullUpClose"}}>
+      {{gru-icon name="arrow_downward"}}
+    </div>
+    <div class="preview-title {{reportData.type}}-preview">
+      {{t (concat 'common.' reportData.type)}} {{t 'common.report' }}
+    </div>
   </div>
-  {{#if (and (not isStudent) showSuggestion (not isArchivedClass))}}
-    <div class="teacher-suggestion">
-      <div class="suggestion-count-container" {{action 'onOpenSuggestionPullup'}}>
-        <div class="suggestion-explore">
-          {{gru-icon name="explore"}}
-          <div class="suggestion-count">{{suggestResultCount}}</div>
-        </div>
-        <span>{{t 'common.suggestion'}}</span>
+  <div class="user-course-info">
+    <div class="content-info-container">
+      <div class="title-info-container">
+        <div class="thumbnail-container" style="background-image: url({{if courseView course.thumbnailUrl assessmentResult.collection.thumbnailUrl}}) !important;"></div>
+        <div class="content-icon {{reportData.type}}"></div>
+        <div class="content-title ellipsis">{{assessmentResult.collection.title}}</div>
+        {{#if (and (not isStudent) showSuggestion (not isArchivedClass))}}
+          <div class="teacher-suggestion">
+            <div class="suggestion-count-container" {{action 'onOpenSuggestionPullup'}}>
+              <div class="suggestion-explore">
+                {{gru-icon name="explore"}}
+                <div class="suggestion-count">{{suggestResultCount}}</div>
+              </div>
+              <span>{{t 'common.suggestion'}}</span>
+            </div>
+          </div>
+        {{/if}}
       </div>
     </div>
-  {{/if}}
-  <div class="user-course-info">
+    <div class="content-details-container {{if (lt tags.length 1) 'single-container'}}">
+      {{#if tags.length}}
+        <div class="taxonomy-container">
+          {{taxonomy/gru-taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true}}
+        </div>
+      {{/if}}
+      <div class="activity-performance-container {{if isCollection 'collection-performance'}}">
+        <div class="timespent-container">
+          <div class="timespent-icon">
+            {{gru-icon name="query_builder"}}
+          </div>
+          <div class="timespent-data">
+            <div class="timespent-label">Timespent</div>
+            <div class="timespent-value">
+              {{#if assessmentResult.totalTimeSpent}}
+                {{format-time assessmentResult.totalTimeSpent}}
+              {{else}}
+                --
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        {{#if isAssessment}}
+          <div class="activity-score-container grade-range-{{grade-range assessmentResult.score}}">
+            {{assessmentResult.score}}%
+          </div>
+        {{/if}}
+      </div>
+    </div>
+    <div class="content-attems">
+      <div class="information">
+        {{#if isShowAttempts}}
+          <span class="attempt">
+            <span class="title">{{t "locateme.attempt"}}</span>
+            <span class="attempt-selector">
+              <span class="dropdown current-attempt">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">{{if visibleAttempt visibleAttempt.sequence}}<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  {{#each attempts as |attempt|}}
+                    <li><a {{action 'onSelectAttempt' attempt}} class="{{if (eq visibleAttempt.sequence attempt.sequence) 'active'}}">{{attempt.sequence}}</a></li>
+                  {{/each}}
+                </ul>
+              </span>
+              <span>{{t "common.of"}}</span>
+              <span class="total-attempts">{{assessmentResult.totalAttempts}}</span>
+            </span>
+          </span>
+        {{/if}}
+        {{#if assessmentResult.submittedAt}}
+          <span class="date">
+            {{gru-icon name='event'}}<span>{{format-date assessmentResult.submittedAt 'h:mm a MMM. Do, YYYY'}}</span>
+          </span>
+        {{/if}}
+      </div>
+      <div class="content-answer">
+      {{#if (gt orderedQuestions.length 0)}}
+        {{#if (and (not isTeacher) isAnswerKeyHidden)}}
+          <em>{{t "common.answer-key-was-hidden"}}</em>
+        {{else}}
+          <div class="btn-group summary-report-btn" role="group">
+            <button type="button" {{action 'selectPerformanceOption' true}} class="content-performance btn {{if showPerformance 'btn-primary' 'btn-info'}}">{{t "common.performance"}}</button>
+            <button type="button" {{action 'selectPerformanceOption' false}} class="correct-answer btn {{unless showPerformance 'btn-primary' 'btn-info' }}">{{t "common.show-correct-answer"}}</button>
+          </div>
+        {{/if}}
+      {{/if}}
+      {{#if (and (not isOpenEnded) isTeacher hasAnsweredQuestions showChangeScore isAssessment showPerformance)}}
+        <div class="score-change-container">
+          {{#if isChangeScoreEnabled}}
+            <button type="button" class="btn btn-info cancel" {{action 'onChangeScoreNotConfirm'}}>{{t 'common.cancel'}}</button>
+            <button type="button" class="btn btn-primary confirm" {{action 'onChangeScoreConfirm'}}>{{t 'common.confirm'}}</button>
+          {{else}}
+            <button type="button" class="btn btn-primary change-score" {{action 'onChangeScore'}}>{{t 'common.change-score'}}</button>
+          {{/if}}
+        </div>
+      {{/if}}
+      </div>
+    </div>
+
     <div class="user-profile-info">
       <div class="profile">
         <div class="img-container pull-left">
@@ -24,7 +113,7 @@
       </div>
     </div>
     <span class="assessment-name ellipsis"> {{assessmentResult.collection.title}} </span>
-    <div class="information">
+    <div class="information" style="display:none">
       {{#if isShowAttempts}}
         <span class="attempt">
           <span class="title">{{t "locateme.attempt"}}</span>
@@ -58,9 +147,7 @@
       <a class="material-icons clear-button">clear</a>
       <span class="text"> Close </span>
     </div>
-
     <div class="performance">
-
       <div class="class">
         <div class="class-performance">
           <div class="progress">
@@ -72,14 +159,13 @@
       </div>
 
     </div>
-
   </div>
   <div>
 
     {{#if assessmentResult}}
       {{reports/gru-assessment-report
      areAnswersHidden=areAnswersHidden
-     isAnswerKeyHidden=isAnswerKeyHidden
+     showPerformance=showPerformance
      assessmentResult=assessmentResult
      onSelectAttempt='selectAttempt'
      onViewOEReport='viewOEReport'
@@ -112,7 +198,6 @@
     class=class
   }}
 {{/if}}
-
 
 {{#if showOpenEndedPullup}}
   {{reports/pull-up/open-ended-report-pull-up collectionTitle=assessmentResult.collection.title onClosePullUp="onClosePullUp" showPullUp=showOpenEndedPullup context=freeResponseContextParams}}

@@ -1,15 +1,9 @@
 import Ember from 'ember';
-import {
-  getBarGradeColor,
-  toLocal
-} from 'gooru-web/utils/utils';
+import { getBarGradeColor, toLocal } from 'gooru-web/utils/utils';
 import Context from 'gooru-web/models/result/context';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
-import {
-  CONTENT_TYPES,
-  ASSESSMENT_SHOW_VALUES
-} from 'gooru-web/config/config';
+import { CONTENT_TYPES, ASSESSMENT_SHOW_VALUES } from 'gooru-web/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -346,6 +340,43 @@ export default Ember.Component.extend({
     return visibleAttempt;
   }),
 
+  /**
+   * Return ordered non open ended questions array
+   * @return {Ember.Array}
+   */
+  orderedQuestions: Ember.computed('assessmentResult', function() {
+    if (this.get('assessmentResult')) {
+      let resourceResultsOrdered = this.get(
+        'assessmentResult.nonOpenEndedQuestionResults'
+      );
+      resourceResultsOrdered.sort(function(a, b) {
+        return Ember.get(a, 'question.order') - Ember.get(b, 'question.order');
+      });
+
+      return resourceResultsOrdered;
+    }
+  }),
+
+  /**
+   * check question list  has answered items
+   * @type {Boolean}
+   */
+  hasAnsweredQuestions: Ember.computed('orderedQuestions', function() {
+    if (this.get('orderedQuestions')) {
+      let resourceResultsOrdered = this.get('orderedQuestions');
+      let correctAnswers = resourceResultsOrdered.findBy('correct', true);
+      let inCorrectAnswers = resourceResultsOrdered.findBy('correct', false);
+      return !!(correctAnswers || inCorrectAnswers);
+    }
+  }),
+
+  /**
+   * Indicate if the table show the performance columns
+   *
+   * @property {Boolean}
+   */
+  showPerformance: true,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -427,6 +458,16 @@ export default Ember.Component.extend({
       if (!Ember.isEqual(attemptData, component.get('visibleAttempt'))) {
         component.loadSession(attemptData);
       }
+    },
+
+    /**
+     * Selects Performance Option or not
+     * @function actions:selectPerformanceOption
+     */
+    selectPerformanceOption: function(showPerformance) {
+      if (this.get('isTeacher') || !this.get('isAnswerKeyHidden')) {
+        this.set('showPerformance', showPerformance);
+      }
     }
   },
 
@@ -453,25 +494,27 @@ export default Ember.Component.extend({
    */
   openPullUp() {
     let component = this;
-    component.$().animate({
-      top: '10%'
-    },
-    400
+    component.$().animate(
+      {
+        top: '10%'
+      },
+      400
     );
   },
 
   closePullUp(closeAll) {
     let component = this;
-    component.$().animate({
-      top: '100%'
-    },
-    400,
-    function() {
-      component.set('showPullUp', false);
-      if (closeAll) {
-        component.sendAction('onClosePullUp');
+    component.$().animate(
+      {
+        top: '100%'
+      },
+      400,
+      function() {
+        component.set('showPullUp', false);
+        if (closeAll) {
+          component.sendAction('onClosePullUp');
+        }
       }
-    }
     );
   },
 
@@ -509,32 +552,35 @@ export default Ember.Component.extend({
     component.set('isReportLoading', true);
     const context = component.getContext(params);
     const type = params.type || 'collection';
-    const lessonPromise = context.get('courseId') ?
-      component
+    const lessonPromise = context.get('courseId')
+      ? component
         .get('lessonService')
         .fetchById(
           context.get('courseId'),
           context.get('unitId'),
           context.get('lessonId')
-        ) :
-      null;
+        )
+      : null;
     const isCollection = type === 'collection';
-    const collectionPromise = isCollection ?
-      component.get('collectionService').readCollection(params.collectionId) :
-      component.get('assessmentService').readAssessment(params.collectionId);
+    const collectionPromise = isCollection
+      ? component.get('collectionService').readCollection(params.collectionId)
+      : component.get('assessmentService').readAssessment(params.collectionId);
     let completedSessionsPromise = [];
     if (!params.sessionId) {
-      completedSessionsPromise = isCollection ? [] :
-        context.get('classId') ?
-          component.get('userSessionService').getCompletedSessions(context) :
-          component.get('learnerService').fetchLearnerSessions(context);
+      completedSessionsPromise = isCollection
+        ? []
+        : context.get('classId')
+          ? component.get('userSessionService').getCompletedSessions(context)
+          : component.get('learnerService').fetchLearnerSessions(context);
     }
     return Ember.RSVP.hashSettled({
       collection: collectionPromise,
       completedSessions: completedSessionsPromise,
       lesson: lessonPromise,
-      profile: context.userId !== 'anonymous' ?
-        component.get('profileService').readUserProfile(context.userId) : {}
+      profile:
+        context.userId !== 'anonymous'
+          ? component.get('profileService').readUserProfile(context.userId)
+          : {}
     }).then(function(hash) {
       component.set(
         'profile',
@@ -546,19 +592,19 @@ export default Ember.Component.extend({
       );
       component.set(
         'completedSessions',
-        hash.completedSessions.state === 'fulfilled' ?
-          hash.completedSessions.value :
-          null
+        hash.completedSessions.state === 'fulfilled'
+          ? hash.completedSessions.value
+          : null
       );
       if (!params.sessionId) {
         var completedSessions =
-          hash.completedSessions.state === 'fulfilled' ?
-            hash.completedSessions.value :
-            null;
+          hash.completedSessions.state === 'fulfilled'
+            ? hash.completedSessions.value
+            : null;
         const totalSessions = completedSessions.length;
-        const session = totalSessions ?
-          completedSessions[totalSessions - 1] :
-          null;
+        const session = totalSessions
+          ? completedSessions[totalSessions - 1]
+          : null;
         if (session) {
           //collections has no session
           context.set('sessionId', session.sessionId);
@@ -588,8 +634,10 @@ export default Ember.Component.extend({
                     context.get('collectionId')
                   );
                   // TODO: BE doesn't support suggestion for collection content type
-                  if (!collection.get('isSuggestedContent') &&
-                    (collection.get('format') !== CONTENT_TYPES.COLLECTION)) {
+                  if (
+                    !collection.get('isSuggestedContent') &&
+                    collection.get('format') !== CONTENT_TYPES.COLLECTION
+                  ) {
                     component.set('showSuggestion', true);
                     component
                       .get('classService')
@@ -764,9 +812,9 @@ export default Ember.Component.extend({
     }
 
     let term =
-      taxonomies != null && taxonomies.length > 0 ?
-        '*' :
-        collection.get('title');
+      taxonomies != null && taxonomies.length > 0
+        ? '*'
+        : collection.get('title');
     component
       .get('searchService')
       .searchCollections(term, params)
@@ -795,9 +843,9 @@ export default Ember.Component.extend({
                   component.set('isSuggestionLoading', false);
                   component.set(
                     'suggestResultCount',
-                    suggestCount >= maxSearchResult ?
-                      maxSearchResult :
-                      suggestCount
+                    suggestCount >= maxSearchResult
+                      ? maxSearchResult
+                      : suggestCount
                   );
                 }
               });
