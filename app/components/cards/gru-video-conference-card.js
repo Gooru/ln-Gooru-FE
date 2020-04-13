@@ -166,6 +166,9 @@ export default Ember.Component.extend({
       content.set('meetingStartTime', startTime);
       content.set('meetingEndTime', endTime);
       content.set('hasVideoConference', this.get('hasVideoConference'));
+      if (!this.get('conferenceToken') && this.get('hasVideoConference')) {
+        this.get('videConferenceService').fetchConferenceToken();
+      }
       this.sendAction('onAddActivity', content);
     },
 
