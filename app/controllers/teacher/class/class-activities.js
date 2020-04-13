@@ -179,9 +179,14 @@ export default Ember.Controller.extend({
     const classIds = secondaryClasses.mapBy('id');
     this.get('classService')
       .readBulkClassDetails(classIds)
-      .then(classesData => {
-        controller.set('classController.classesData', classesData);
-      });
+      .then(
+        classesData => {
+          controller.set('classController.classesData', classesData);
+        },
+        () => {
+          controller.set('classController.classesData', Ember.A([]));
+        }
+      );
   },
 
   resetProperties() {
