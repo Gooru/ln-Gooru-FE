@@ -834,6 +834,7 @@ export default Ember.Component.extend(ModalMixin, {
       course: activityClassData.get('course') || null,
       content: classActivity.get('collection'),
       code: activityClassData.get('code') || null,
+      memberCount: activityClassData.get('memberCount') || 0,
       activity: Ember.Object.create({
         id: classActivity.get('id'),
         usersCount: classActivity.get('usersCount'),
