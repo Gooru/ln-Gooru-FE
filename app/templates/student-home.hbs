@@ -1,5 +1,6 @@
 <div class="controller student-landing container-fluid">
   <div class="student-left-panel">
+    {{#if isShowFeaturedCourses}}
     {{#unless (gt loginCount 5)}}
       <div class="greetings hidden-xs">
         <div class="featured-courses pull-right">
@@ -14,6 +15,7 @@
       }}
       </div>
     {{/unless}}
+    {{/if}}
 
     <div class="student-navigator">
       <ul class="nav nav-tabs hidden-xs" role="tablist">
