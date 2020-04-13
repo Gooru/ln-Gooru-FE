@@ -377,6 +377,12 @@ export default Ember.Component.extend({
    */
   showPerformance: true,
 
+  /**
+   * Update question score list
+   * @return {Array} list of question scores need to be update.
+   */
+  listOfQuestions: Ember.A(),
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -467,6 +473,34 @@ export default Ember.Component.extend({
     selectPerformanceOption: function(showPerformance) {
       if (this.get('isTeacher') || !this.get('isAnswerKeyHidden')) {
         this.set('showPerformance', showPerformance);
+      }
+    },
+
+    /**
+     * Action get triggered when change score button  clicked
+     */
+    onChangeScore: function() {
+      this.get('listOfQuestions').clear();
+      this.set('isChangeScoreEnabled', true);
+    },
+
+    /**
+     * Action get triggered when change score was cancelled
+     */
+    onChangeScoreNotConfirm: function() {
+      this.get('listOfQuestions').clear();
+      this.set('isChangeScoreEnabled', false);
+    },
+
+    /**
+     * Action get triggered when change score confirm button clicked
+     */
+    onChangeScoreConfirm: function() {
+      let questionScoreUpdateData = this.get('listOfQuestions');
+      if (questionScoreUpdateData.length > 0) {
+        this.send('onUpdateQuestionScore', questionScoreUpdateData);
+      } else {
+        this.set('isChangeScoreEnabled', false);
       }
     }
   },
