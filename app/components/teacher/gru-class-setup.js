@@ -35,14 +35,15 @@ export default Ember.Component.extend(PullUpMixin, {
     //Action trigger when select a class grade
     onChangeClassGrade(grade) {
       this.set('activeClassGrade', grade);
-      this.mapStudentGradeBoundValues(grade.get('id'));
-      this.set('classGrade', grade);
-      this.get('students').map(student => {
-        this.setStudentGradeBoundary(
-          student.get('id'),
-          grade.get('id'),
-          'grade_upper_bound'
-        );
+      this.mapStudentGradeBoundValues(grade.get('id')).then(students => {
+        this.set('classGrade', grade);
+        students.map(student => {
+          this.setStudentGradeBoundary(
+            student.get('id'),
+            grade.get('id'),
+            'grade_upper_bound'
+          );
+        });
       });
     },
 
@@ -156,6 +157,8 @@ export default Ember.Component.extend(PullUpMixin, {
    */
   isClassSetupDone: false,
 
+  isLoading: false,
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -165,14 +168,21 @@ export default Ember.Component.extend(PullUpMixin, {
    */
   loadData() {
     const component = this;
-    this.loadTaxonomyGrades();
-    this.loadClassMembers().then(classMembers => {
+    component.set('isLoading', true);
+    Ember.RSVP.hash({
+      taxonomyGrades: this.loadTaxonomyGrades(),
+      classMembers: this.loadClassMembers()
+    }).then(({ taxonomyGrades, classMembers }) => {
+      component.set('taxonomyGrades', taxonomyGrades);
       component.set('students', classMembers.get('members'));
       component.set(
         'studentGradeBounds',
         classMembers.get('memberGradeBounds')
       );
-      component.mapStudentGradeBoundValues();
+      component.mapStudentGradeBoundValues().then(() => {
+        // component.set('students', students);
+        component.set('isLoading', false);
+      });
     });
   },
 
@@ -194,13 +204,14 @@ export default Ember.Component.extend(PullUpMixin, {
       subject: this.get('classData.preference.subject'),
       fw_code: this.get('classData.preference.framework') || undefined
     };
-    return Ember.RSVP.hash({
-      taxonomyGrades: component
-        .get('taxonomyService')
-        .fetchGradesBySubject(filters)
-    }).then(({ taxonomyGrades }) => {
-      component.set('taxonomyGrades', taxonomyGrades);
-    });
+    return component.get('taxonomyService').fetchGradesBySubject(filters);
+    // return Ember.RSVP.hash({
+    //   taxonomyGrades: component
+    //     .get('taxonomyService')
+    //     .fetchGradesBySubject(filters)
+    // }).then(({ taxonomyGrades }) => {
+    //   component.set('taxonomyGrades', taxonomyGrades);
+    // });
   },
 
   /**
@@ -269,7 +280,7 @@ export default Ember.Component.extend(PullUpMixin, {
   mapStudentGradeBoundValues(classGradeLevel = null) {
     const students = this.get('students');
     const studentGradeBounds = this.get('studentGradeBounds');
-    students.map(student => {
+    const studentPromises = students.map(student => {
       let studentId = student.get('id');
       let grade = studentGradeBounds.findBy(studentId);
       if (grade) {
@@ -282,7 +293,9 @@ export default Ember.Component.extend(PullUpMixin, {
             : gradeBounds.grade_upper_bound
         );
       }
+      return Ember.RSVP.resolve(student);
     });
+    return Ember.RSVP.Promise.all(studentPromises);
   },
 
   /**
