@@ -180,7 +180,6 @@ export default Ember.Component.extend(PullUpMixin, {
         classMembers.get('memberGradeBounds')
       );
       component.mapStudentGradeBoundValues().then(() => {
-        // component.set('students', students);
         component.set('isLoading', false);
       });
     });
@@ -205,13 +204,6 @@ export default Ember.Component.extend(PullUpMixin, {
       fw_code: this.get('classData.preference.framework') || undefined
     };
     return component.get('taxonomyService').fetchGradesBySubject(filters);
-    // return Ember.RSVP.hash({
-    //   taxonomyGrades: component
-    //     .get('taxonomyService')
-    //     .fetchGradesBySubject(filters)
-    // }).then(({ taxonomyGrades }) => {
-    //   component.set('taxonomyGrades', taxonomyGrades);
-    // });
   },
 
   /**
