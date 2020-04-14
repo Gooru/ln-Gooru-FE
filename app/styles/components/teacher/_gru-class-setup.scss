@@ -33,7 +33,15 @@
       font-size: 24px;
       text-align: center;
       color: #37424b;
-      line-height: 64px;
+      display: grid;
+      align-items: center;
+      grid-template-rows: 1fr auto;
+      .verify-label {
+        line-height: 1;
+      }
+      .class-title {
+        font-size: 16px;
+      }
     }
     .panel-body-container {
       display: grid;
@@ -95,6 +103,9 @@
           .description-label {
             @extend .label-text;
             font-weight: bold;
+            &--lg {
+              font-size: 18px;
+            }
           }
           .description-info {
             @extend .label-text;

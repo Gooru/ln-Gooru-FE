@@ -35,16 +35,7 @@ export default Ember.Component.extend(PullUpMixin, {
     //Action trigger when select a class grade
     onChangeClassGrade(grade) {
       this.set('activeClassGrade', grade);
-      this.mapStudentGradeBoundValues(grade.get('id')).then(students => {
-        this.set('classGrade', grade);
-        students.map(student => {
-          this.setStudentGradeBoundary(
-            student.get('id'),
-            grade.get('id'),
-            'grade_upper_bound'
-          );
-        });
-      });
+      this.mapStudentGradeBoundValues(grade.get('id'));
     },
 
     //Action trigger when select a student's lower boundary
