@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import { getCurrentPage } from 'gooru-web/utils/utils';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -89,6 +90,14 @@ export default Ember.Controller.extend({
     }
     return currentPage;
   }),
+
+  /**
+   * help to handled featured course
+   * @property {boolean}
+   */
+  isShowFeaturedCourses: Ember.computed.alias(
+    'configuration.GRU_FEATURE_FLAG.isShowFeaturedCourses'
+  ),
 
   // -------------------------------------------------------------------------
   // Methods
