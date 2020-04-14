@@ -90,8 +90,8 @@ export default Ember.Component.extend(PullUpMixin, {
       Promise.all([
         classGradePromise,
         classStudentsGradePromise,
-        this.updateClassSetupFlag(),
-        skylineCalculatePromise
+        skylineCalculatePromise,
+        this.updateClassSetupFlag()
       ]).then(() => {
         this.set('isClassSetupDone', true);
         Ember.run.later(() => {
