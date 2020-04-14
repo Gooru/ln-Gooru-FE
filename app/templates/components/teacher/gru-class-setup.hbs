@@ -1,14 +1,15 @@
 <div class="backdrop" {{action "onClosePullUp"}}></div>
 <div class="class-setup-container">
   <div class="panel-header">
-    {{t 'class.setup.verify-setting'}}
+    <span class="verify-label">{{t 'class.setup.verify-setting'}}</span>
+    <span class="class-title">{{classData.title}}</span>
   </div>
   <div class="panel-body-container">
     <div class="class-info-container">
-      <div class="class-title">
-        {{classData.title}}
+      <div class="description-container">
+        <div class="description-label description-label--lg">Class Grade</div>
+        <div class="description-info">{{t 'class.setup.grade-set-to'}}:</div>
       </div>
-      <div class="class-grade-label">{{t 'class.setup.grade-set-to'}}:</div>
       {{#if isLoading}}
         {{three-bounce-spinner}}
       {{else}}
@@ -27,7 +28,10 @@
           btn-group-size=btn-group-size}}
         </div>
       {{/if}}
-      <div class="class-roster-label">{{t 'class.setup.roster'}}</div>
+      <div class="description-container">
+        <div class="description-label description-label--lg">Class Roster</div>
+        <div class="description-info class-roster-label">{{t 'class.setup.roster'}}</div>
+      </div>
       <div class="description-container">
         <div class="description-label">{{t 'class.math-level'}}:</div>
         <div class="description-info">{{t 'class.setup.math-level.info'}}</div>
