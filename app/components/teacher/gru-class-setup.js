@@ -238,8 +238,8 @@ export default Ember.Component.extend(PullUpMixin, {
   updateClassSettings() {
     const settings = {
       grade_lower_bound: this.get('classData.gradeLowerBound'),
-      grade_upper_bound: this.get('classData.gradeUpperBound'),
-      grade_current: this.get('classData.gradeCurrent'),
+      grade_upper_bound: this.get('activeClassGrade.id'),
+      grade_current: this.get('activeClassGrade.id'),
       route0: this.get('classData.route0Applicable'),
       force_calculate_ilp: this.get('classData.forceCalculateILP'),
       preference: this.get('classData.preference')
