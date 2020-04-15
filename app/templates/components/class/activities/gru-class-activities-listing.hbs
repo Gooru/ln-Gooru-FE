@@ -116,6 +116,7 @@
                 isShowListView=isShowListCard
                 onShowContentReport='onShowContentReport'
                 markOACompleted = 'onMarkOACompleted'
+                onUpdateVideConference="onUpdateVideConference"
               }}
           {{/each}}
         {{else}}
@@ -242,4 +243,12 @@
     classId=previewContent.classId
     isReportView=isReportView
   }}
+{{/if}}
+
+{{#if isUpdateVideConference}}
+    {{new-cards/activities/gru-add-content-popup-card
+      isAddActivity=isUpdateVideConference
+      isUpdateCard=true
+      onAddActivity="onUpdateConference"
+      activeActivityContent=updateVideoConferenceContent}}
 {{/if}}

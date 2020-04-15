@@ -6,6 +6,8 @@ import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 export default Ember.Component.extend({
   classNames: ['new-cards', 'gru-add-content-card'],
 
+  session: Ember.inject.service('session'),
+
   didRender() {
     var component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
@@ -18,7 +20,12 @@ export default Ember.Component.extend({
       const component = this;
       const content = component.get('content');
       if (!component.get('isEmptyContent')) {
-        component.sendAction('onAddActivity', content);
+        // based on token we trigger action
+        if (component.get('enableVideoConference')) {
+          component.sendAction('onAddActivityPop', content);
+        } else {
+          component.sendAction('onAddActivity', content);
+        }
       }
     },
 
@@ -38,13 +45,14 @@ export default Ember.Component.extend({
       component.set('isShowDaterangePicker', false);
     },
 
-    onScheduleByDate(startDate, endDate) {
+    onScheduleByDate(startDate, endDate, conferenceContent = null) {
       const component = this;
-      const content = component.get('content');
+      const content = conferenceContent
+        ? Object.assign(component.get('content'), conferenceContent)
+        : component.get('content');
       component.set('isShowDaterangePicker', false);
       component.sendAction('onAddActivity', content, startDate, endDate);
     },
-
     onScheduleByMonth(month, year) {
       const component = this;
       const content = component.get('content');
@@ -95,6 +103,8 @@ export default Ember.Component.extend({
   }),
 
   allowTwoDateRangePicker: false,
+
+  enableVideoConference: Ember.computed.alias('session.enabledVideoConference'),
 
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags

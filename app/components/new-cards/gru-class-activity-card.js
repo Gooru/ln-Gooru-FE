@@ -1,10 +1,12 @@
 import Ember from 'ember';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
-
+import { formatTimeReadable } from 'gooru-web/helpers/format-time-readable';
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-class-activity-card'],
 
   classNameBindings: ['isShowListView:list-view:card-view'],
+
+  session: Ember.inject.service('session'),
 
   /**
    * @requires service:api-sdk/class-activity
@@ -27,6 +29,11 @@ export default Ember.Component.extend({
   offlineActivityService: Ember.inject.service(
     'api-sdk/offline-activity/offline-activity'
   ),
+
+  /**
+   * @property {Service} I18N service
+   */
+  i18n: Ember.inject.service(),
 
   didInsertElement() {
     const component = this;
@@ -159,6 +166,14 @@ export default Ember.Component.extend({
             );
           });
       }
+    },
+
+    onConference(activity) {
+      this.sendAction('onUpdateVideConference', activity);
+    },
+
+    onUpdateVideConference(activity) {
+      this.sendAction('onUpdateVideConference', activity);
     }
   },
 
@@ -275,6 +290,13 @@ export default Ember.Component.extend({
   enableCollectionLiveLearning: true,
 
   /**
+   * @return {Boolean} isEnabledVideoConferenece
+   */
+  isEnabledVideoConferenece: Ember.computed.alias(
+    'session.tenantSetting.enabledVideoConference'
+  ),
+
+  /**
    * It is used to find activity is today or not
    * @return {Boolean}
    */
@@ -319,33 +341,25 @@ export default Ember.Component.extend({
 
   isShowListView: false,
 
+  tooltipContent: Ember.computed(
+    'activity.meeting_starttime',
+    'activity',
+    function() {
+      let component = this;
+      let tooltipContent = component.get('activity.meeting_url')
+        ? formatTimeReadable([this.get('activity')])
+        : component.get('i18n').t('vc.click-setup').string;
+      return tooltipContent;
+    }
+  ),
+
   loadClassData() {
     const component = this;
     const activityClasses = component.get('activityClasses');
-    const allowCachedData = true;
     activityClasses.map(activityClass => {
-      const classId = activityClass.get('id');
-      return Ember.RSVP.hash({
-        classData: component
-          .get('classService')
-          .readClassInfo(classId, allowCachedData),
-        classMembers:
-          activityClass.get('members') ||
-          component
-            .get('classService')
-            .readClassMembers(classId, allowCachedData)
-      }).then(({ classData, classMembers }) => {
-        if (classData.get('courseId')) {
-          component
-            .get('courseService')
-            .fetchById(classData.get('courseId'), allowCachedData)
-            .then(function(courseData) {
-              activityClass.setProperties({
-                course: courseData,
-                members: classMembers.get('members') || classMembers
-              });
-            });
-        }
+      activityClass.setProperties({
+        course: {},
+        members: Ember.A([])
       });
     });
   },

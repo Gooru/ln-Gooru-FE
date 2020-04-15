@@ -73,21 +73,19 @@ export default Ember.Controller.extend(ModalMixin, {
         ? lastAccessedClassData.courseId
         : null;
       if (courseId) {
-        Ember.RSVP
-          .hash({
-            courseData: controller
-              .get('courseService')
-              .fetchByIdWithOutProfile(courseId)
-          })
-          .then(({ courseData }) => {
-            lastAccessedClassData.course = courseData;
-            if (lastAccessedClassData) {
-              lastAccessedClassData = controller.updateLastAccessedClass(
-                lastAccessedClassData
-              );
-              controller.set('lastAccessedClassData', lastAccessedClassData);
-            }
-          });
+        Ember.RSVP.hash({
+          courseData: controller
+            .get('courseService')
+            .fetchByIdWithOutProfile(courseId)
+        }).then(({ courseData }) => {
+          lastAccessedClassData.course = courseData;
+          if (lastAccessedClassData) {
+            lastAccessedClassData = controller.updateLastAccessedClass(
+              lastAccessedClassData
+            );
+            controller.set('lastAccessedClassData', lastAccessedClassData);
+          }
+        });
       }
     }
     controller.set('lastAccessedClassData', lastAccessedClassData);
@@ -147,40 +145,38 @@ export default Ember.Controller.extend(ModalMixin, {
           .getCAPerformanceData(nonPremiumClassIds)
         : Ember.RSVP.resolve([]);
 
-    Ember.RSVP
-      .hash({
-        courseCards: courseCardsPromise,
-        perfSummary: perfSummaryPromise,
-        caClassPerfSummary: caClassPerfSummaryPromise,
-        classes: classes,
-        competencyStats: competencyCompletionStats
-      })
-      .then(function(hash) {
-        hash.classes.forEach(function(activeclass) {
-          let classId = activeclass.get('id');
-          let courseId = activeclass.get('courseId');
+    Ember.RSVP.hash({
+      courseCards: courseCardsPromise,
+      perfSummary: perfSummaryPromise,
+      caClassPerfSummary: caClassPerfSummaryPromise,
+      classes: classes,
+      competencyStats: competencyCompletionStats
+    }).then(function(hash) {
+      hash.classes.forEach(function(activeclass) {
+        let classId = activeclass.get('id');
+        let courseId = activeclass.get('courseId');
 
-          if (courseId) {
-            let course = hash.courseCards.findBy(
-              'id',
-              activeclass.get('courseId')
-            );
-            activeclass.set('course', course);
-          }
-          activeclass.set(
-            'performanceSummaryForDCA',
-            hash.caClassPerfSummary.findBy('classId', classId)
+        if (courseId) {
+          let course = hash.courseCards.findBy(
+            'id',
+            activeclass.get('courseId')
           );
-          activeclass.set(
-            'performanceSummary',
-            hash.perfSummary.findBy('classId', classId)
-          );
-          activeclass.set(
-            'competencyStats',
-            hash.competencyStats.findBy('classId', classId)
-          );
-        });
+          activeclass.set('course', course);
+        }
+        activeclass.set(
+          'performanceSummaryForDCA',
+          hash.caClassPerfSummary.findBy('classId', classId)
+        );
+        activeclass.set(
+          'performanceSummary',
+          hash.perfSummary.findBy('classId', classId)
+        );
+        activeclass.set(
+          'competencyStats',
+          hash.competencyStats.findBy('classId', classId)
+        );
       });
+    });
   },
 
   /**
@@ -388,6 +384,25 @@ export default Ember.Controller.extend(ModalMixin, {
         'lastAccessedClassData',
         controller.getSequencedActiveClass(classSeq)
       );
+    },
+
+    //Action trigger when proceeding class setup process
+    onShowCompleteSetup(classData) {
+      this.set('isShowClassSetup', true);
+      this.set('classSetupData', classData);
+    },
+
+    //Action triggered when class setup is done
+    classSetupDone(classData) {
+      const classRoomData = this.get('sortedActiveClasses').findBy(
+        'id',
+        classData.get('id')
+      );
+      const classRoomDataSetting = classRoomData.get('setting') || {};
+      classRoomDataSetting['class.setup.complete'] = true;
+      classRoomData.set('setting', classRoomDataSetting);
+      classRoomData.set('isPendingSetup', false);
+      this.set('isShowClassSetup', false);
     }
   },
 
@@ -535,5 +550,17 @@ export default Ember.Controller.extend(ModalMixin, {
     let controller = this;
     let activeClasses = controller.get('activeClasses');
     return !controller.checkIsPartOfPremiumClass(activeClasses);
-  })
+  }),
+
+  /**
+   * @property {Boolean} isShowClassSetup
+   * Property to show/hide class setup pullup
+   */
+  isShowClassSetup: false,
+
+  /**
+   * @property {Object} classSetupData
+   * Property for class object which needs to be verified
+   */
+  classSetupData: Ember.Object.create({})
 });

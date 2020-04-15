@@ -386,10 +386,18 @@ export default Ember.Controller.extend({
    */
   loadClassData(classId) {
     const controller = this;
-    const classPromise = controller.get('classService').readClassInfo(classId);
-    const membersPromise = controller
-      .get('classService')
-      .readClassMembers(classId);
+    const existingClassData =
+      controller.get('classesData').findBy('id', classId) ||
+      controller.get('class.id') === classId
+        ? controller.get('class')
+        : null;
+    const classPromise = existingClassData
+      ? Ember.RSVP.resolve(existingClassData)
+      : controller.get('classService').readClassInfo(classId);
+    const membersPromise =
+      existingClassData && existingClassData.get('members')
+        ? Ember.RSVP.resolve(existingClassData)
+        : controller.get('classService').readClassMembers(classId);
     return classPromise.then(classData => {
       let classCourseId = null;
       if (classData.courseId) {
@@ -713,5 +721,7 @@ export default Ember.Controller.extend({
   /**
    * @property {Array} domainBoundariesContainer
    */
-  domainBoundariesContainer: Ember.A([])
+  domainBoundariesContainer: Ember.A([]),
+
+  classesData: Ember.computed.alias('classController.classesData')
 });

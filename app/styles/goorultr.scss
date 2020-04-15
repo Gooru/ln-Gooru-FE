@@ -131,6 +131,7 @@
 @import "components/cards/question-preview-card";
 @import "components/cards/resource-preview-card";
 @import "components/cards/gru-timepicker-card";
+@import "components/cards/gru-video-authorize-card";
 @import "components/charts/gru-bubble-chart";
 @import "components/charts/competency-progress-bar";
 @import "components/charts/gru-completion-chart";
@@ -399,6 +400,8 @@
 @import "components/player/chrono-view/chrono-header";
 @import "components/player/chrono-view/chrono-header-xs";
 @import "components/player/chrono-view/student-card";
+@import "components/new-cards/activities/gru-add-content-popup-card";
+@import "components/cards/gru-video-conference-card";
 
 // Performance Manual Entry
 @import "components/reports/pull-up/activity/add-performance-data";
@@ -504,6 +507,7 @@
 @import "components/class/activities/gru-class-activities-listing";
 @import "components/new-cards/gru-class-activity-card";
 @import "components/new-cards/gru-activity-grading-card";
+@import "components/new-cards/activities/gru-add-content-popup-card";
 @import "components/class/activities/gru-class-activities-adding";
 @import "components/class/activities/gru-content-search";
 
@@ -515,3 +519,6 @@
 //guest-login
 
 @import "controllers/guest";
+
+// Class Setup
+@import "components/teacher/gru-class-setup";

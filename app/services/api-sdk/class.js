@@ -647,5 +647,37 @@ export default Ember.Service.extend({
         .addStudentsToClass(classId, dataParam)
         .then(resolve, reject);
     });
+  },
+
+  /**
+   * @function updateClassSetupFlag
+   * @param {UUID} classId
+   * @param {Object} setting
+   * Method to update class complete setup setting
+   */
+  updateClassSetupFlag(classId, setting) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('classAdapter')
+        .updateClassSetupFlag(classId, setting)
+        .then(resolve, reject);
+    });
+  },
+
+  readBulkClassDetails(classIds) {
+    const service = this;
+    return new Ember.RSVP.Promise((resolve, reject) => {
+      service
+        .get('classAdapter')
+        .readBulkClassDetails(classIds)
+        .then(classDetails => {
+          resolve(
+            service
+              .get('classSerializer')
+              .normalizeReadBulkClassDetails(classDetails)
+          );
+        }, reject);
+    });
   }
 });

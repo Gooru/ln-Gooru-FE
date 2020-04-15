@@ -181,14 +181,6 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  /**
-   * DidInsertElement ember event
-   */
-  didInsertElement: function() {
-    var item = this.get('menuItem');
-    this.selectItem(item);
-  },
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -249,6 +241,16 @@ export default Ember.Controller.extend({
 
   isShowMilestoneReport: false,
 
+  mappedSecondaryClasses: Ember.computed('class.setting', function() {
+    const controller = this;
+    const classSetting = controller.get('class.setting');
+    let attachedSecondaryClassList =
+      classSetting && classSetting['secondary.classes']
+        ? classSetting['secondary.classes'].list
+        : Ember.A([]);
+    return attachedSecondaryClassList;
+  }),
+
   /**
    * @property {Array} secondaryClasses
    * Property for list of secondary classess attached with the class
@@ -304,6 +306,8 @@ export default Ember.Controller.extend({
       : null;
     return caDefaultView || 'gooru-catalog';
   }),
+
+  classesData: Ember.A([]),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -463,5 +467,9 @@ export default Ember.Controller.extend({
       });
     }
     return result;
+  },
+
+  getBulkClassDetails(classIds) {
+    this.get('classService').readBulkClassDetails(classIds.mapBy('id'));
   }
 });

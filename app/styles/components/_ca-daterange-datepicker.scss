@@ -78,6 +78,23 @@
       display: flex;
       padding: 0 10px 10px;
 
+      &.enabled-conference {
+        justify-content: center;
+
+        .start-date-picker {
+          width: 100%;
+          table {
+            thead {
+              tr {
+                .dow {
+                  justify-self: center;
+                }
+              }
+            }
+          }
+        }
+      }
+
       .backdrop {
         display: none;
       }

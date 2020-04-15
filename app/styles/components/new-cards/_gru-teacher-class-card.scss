@@ -345,6 +345,36 @@
       }
     }
   }
+
+  &.pending-setup {
+    .panel {
+      .panel-body {
+        .information {
+          background-image: linear-gradient(45deg, #e58b00, #f4bf00) !important;
+          padding: 0;
+          opacity: 1;
+          &:after {
+            display: none;
+          }
+          .current-activity {
+            color: #37424b;
+            font-size: 26px;
+            position: relative;
+            font-weight: normal;
+            height: inherit;
+            line-height: 1.5;
+            display: grid;
+            text-align: center;
+            grid-template-rows: 60px;
+            span {
+              font-size: 16px;
+              line-height: 50px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .gru-new-class-card {

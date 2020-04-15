@@ -175,13 +175,30 @@
     .activity-actions {
       align-items: center;
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       padding: 0 5px;
 
       > div {
         display: grid;
         align-items: center;
         text-align: center;
+      }
+
+      .video-call {
+        cursor: pointer;
+
+        &.disabled-meeting {
+          opacity: 0.5;
+        }
+        .videocam {
+          color: $white;
+          background-color: #0079c0;
+          width: fit-content;
+          margin: 0 auto;
+          padding: 0 3px;
+          font-size: 20px;
+          border-radius: 3px;
+        }
       }
 
       .go-live {
@@ -213,6 +230,10 @@
 
       .mark-completed {
         cursor: pointer;
+
+        label {
+          white-space: nowrap;
+        }
 
         &.completed {
           cursor: default;
@@ -262,7 +283,7 @@
           }
 
           .toggle.btn {
-            width: 40px !important;
+            width: 37px !important;
             height: 20px !important;
             border-radius: 20px;
 
@@ -281,11 +302,11 @@
               }
 
               .toggle-on {
-                left: -13px;
+                left: -15px;
               }
 
               .toggle-off {
-                left: 33px;
+                left: 30px;
               }
 
               .toggle-handle {

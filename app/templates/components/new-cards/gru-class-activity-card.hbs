@@ -87,7 +87,7 @@
                   <span class="rubric-icon" />
                 </div>
               {{else}}
-                <div class="add-data not-started {{if (or isFutureActivity (not activity.isActive)) 'disable-performance'}} {{if activityClass.members.length '' 'no-student'}}" {{action "onOpenPerformanceEntry" activityClass}}>
+                <div class="add-data not-started {{if (or isFutureActivity (not activity.isActive)) 'disable-performance'}} {{if activityClass.memberCount '' 'no-student'}}" {{action "onOpenPerformanceEntry" activityClass}}>
                   Add Data
                 </div>
               {{/if}}
@@ -103,6 +103,12 @@
     {{/each}}
   </div>
   <div class="activity-actions">
+    {{#if (and isEnabledVideoConferenece (not isActivityPast))}}
+        <div class="video-call {{unless activity.meeting_url 'disabled-meeting'}}" data-toggle="tooltip" title data-original-title="{{tooltipContent}}" {{action (optional (if activity.meeting_url (action "onConference" activity) (action "onUpdateVideConference" activity)))}}>
+          {{gru-icon name="videocam"}}
+          <label>{{t 'common.resource-format.video'}}</label>
+        </div>
+    {{/if}}
     {{#unless isUnscheduledActivity}}
       <div class="activate-activity {{if activity.isActive 'disable-event'}}" title="{{t 'common.activate'}}" data-toggle="tooltip">
         {{gru-switch

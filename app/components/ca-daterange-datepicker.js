@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { SCREEN_SIZES } from 'gooru-web/config/config';
-import { isCompatibleVW } from 'gooru-web/utils/utils';
+import { isCompatibleVW, formatimeToDateTime } from 'gooru-web/utils/utils';
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
@@ -13,7 +13,7 @@ export default Ember.Component.extend({
    * Maintains the value which of activity startDate
    * @type {Integer}
    */
-  startDate: moment(),
+  startDate: moment().format('YYYY-MM-DD'),
 
   /**
    * Maintains the value which of activity endDate
@@ -95,6 +95,21 @@ export default Ember.Component.extend({
 
   forChangeStartDateNavMonth: false,
 
+  /**
+   * @property {Boolean} hasVideoConference used to toggle activity popup
+   */
+  hasVideoConference: false,
+
+  /**
+   * @property {Boolean} isAddActivity used to toggle activity popup
+   */
+  isConferenceAllow: false,
+
+  /**
+   * @property {Boolean} enableVideoConference used to enable conference card
+   */
+  enableVideoConference: false,
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -125,7 +140,11 @@ export default Ember.Component.extend({
     onScheduleStartDate(startDate) {
       let component = this;
       component.set('startDate', startDate);
-      if (!component.get('allowTwoDateRangePicker')) {
+      if (
+        !this.get(
+          'enableVideoConference' && !component.get('allowTwoDateRangePicker')
+        )
+      ) {
         component.sendAction('onScheduleForDate', startDate, startDate);
       }
     },
@@ -134,7 +153,55 @@ export default Ember.Component.extend({
       let component = this;
       let forMonth = month.get('monthNumber');
       let forYear = month.get('monthYear');
-      component.sendAction('onScheduleForMonth', forMonth, forYear);
+      if (!this.get('enableVideoConference')) {
+        component.sendAction('onScheduleForMonth', forMonth, forYear);
+      }
+    },
+
+    /**
+     * @function onAddActivity  add class activity
+     */
+    onAddSheduledActivity(content) {
+      let startDate = this.get('startDate');
+      let endDate = !this.get('allowTwoDateRangePicker')
+        ? startDate
+        : this.get('endDate');
+      content.set(
+        'meetingStartTime',
+        formatimeToDateTime(startDate, content.get('meetingStartTime'))
+      );
+
+      content.set(
+        'meetingEndTime',
+        formatimeToDateTime(endDate, content.get('meetingEndTime'))
+      );
+      if (this.get('allowTwoDateRangePicker')) {
+        this.sendAction('onScheduleForDate', startDate, endDate, content);
+      } else {
+        this.sendAction('onScheduleForDate', startDate, startDate, content);
+      }
+    },
+
+    /**
+     * @function onToggleCheckbox  action trigger when click toggle checkbox
+     */
+    onToggleCheckbox() {
+      this.set('isConferenceAllow', true);
+    },
+
+    /**
+     * @function onDeny  action trigger when click deny
+     */
+    onDeny() {
+      this.set('isConferenceAllow', false);
+      this.set('hasVideoConference', false);
+    },
+    /**
+     * @function onDeny  action trigger when click deny
+     */
+    onAllow() {
+      this.set('isConferenceAllow', false);
+      this.set('hasVideoConference', true);
     }
   }
 });

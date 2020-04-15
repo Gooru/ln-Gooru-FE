@@ -47,6 +47,13 @@ export function initialize(application) {
     isGuest: Ember.computed.alias('data.authenticated.isGuest'),
 
     /**
+     * @property {string} Session user id
+     */
+    enabledVideoConference: Ember.computed.alias(
+      'data.authenticated.tenant.settings.enabledVideoConference'
+    ),
+
+    /**
      * @property {boolean} Indicates if the session is for an anonymous user
      */
     isAnonymous: Ember.computed('data.authenticated', function() {

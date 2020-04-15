@@ -43,6 +43,11 @@ export default Ember.Controller.extend({
    */
   rubricService: Ember.inject.service('api-sdk/rubric'),
 
+  /**
+   * @requires ClassService
+   */
+  classService: Ember.inject.service('api-sdk/class'),
+
   actions: {
     /**
      * Launch an assessment on-air
@@ -71,6 +76,10 @@ export default Ember.Controller.extend({
       const controller = this;
       controller.set('newlyAddedActivity', newlyAddedActivity);
     }
+  },
+
+  init() {
+    this.loadClassData();
   },
 
   // -------------------------------------------------------------------------
@@ -161,6 +170,24 @@ export default Ember.Controller.extend({
     const defaultTabKey = controller.get('classActivitiesDefaultTabKey');
     return classActivitiesTabs.findBy('id', defaultTabKey);
   }),
+
+  classesData: Ember.computed.alias('classController.classesData'),
+
+  loadClassData() {
+    const controller = this;
+    const secondaryClasses = this.get('secondaryClasses') || Ember.A([]);
+    const classIds = secondaryClasses.mapBy('id');
+    this.get('classService')
+      .readBulkClassDetails(classIds)
+      .then(
+        classesData => {
+          controller.set('classController.classesData', classesData);
+        },
+        () => {
+          controller.set('classController.classesData', Ember.A([]));
+        }
+      );
+  },
 
   resetProperties() {
     const controller = this;

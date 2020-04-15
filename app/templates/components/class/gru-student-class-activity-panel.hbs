@@ -14,6 +14,11 @@
     </div>
   </div>
   <div class="dca-content-counts">
+    {{#if classActivity.meeting_url}}
+    <div class="video-call" title="{{format-time-readable classActivity}}" data-toggle="tooltip" {{action 'onConference' classActivity.meeting_url}}>
+        {{gru-icon name="videocam"}}
+    </div>
+    {{/if}}
     <div class="suggestion">
       {{#if (gt suggestionCount 0)}}
         <div class="suggestion-explore" {{action 'showSuggestions'}}>
