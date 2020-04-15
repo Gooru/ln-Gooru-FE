@@ -43,7 +43,7 @@
             {{gru-icon name="query_builder"}}
           </div>
           <div class="timespent-data">
-            <div class="timespent-label">Timespent</div>
+            <div class="timespent-label">{{t 'common.timeSpent'}}</div>
             <div class="timespent-value">
               {{#if assessmentResult.totalTimeSpent}}
                 {{format-time assessmentResult.totalTimeSpent}}
@@ -117,42 +117,6 @@
       </div>
     </div>
     <span class="assessment-name"> {{assessmentResult.collection.title}} </span>
-    <div class="information" style="display:none">
-      {{#if collections.isAssessment}}
-        <span class="attempt">
-          {{#if showAttempts}}
-              <span class="title">{{t "common.attempt"}}</span>
-        <span class="attempt-selector">
-                <span class="dropdown current-attempt">
-                <button class="btn btn-default dropdown-toggle" type="button"
-                    data-toggle="dropdown">{{selectedAttempt}}<span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          {{#each attempts as |attempt|}}
-            <li><a {{action 'selectAttempt' attempt.value}}>{{attempt.label}}</a></li>
-          {{/each}}
-        </ul>
-        </span>
-        <span>{{t "common.of"}}</span>
-        <span class="total-attempts">{{assessmentResult.totalAttempts}}</span>
-        </span>
-      {{else}}
-        {{#if isRealTime}}
-          <span class="title current">{{t "common.current-attempt"}}</span>
-        {{else}}
-          <span class="title latest">{{t "common.latest-attempt"}}</span>
-        {{/if}}
-      {{/if}}
-      </span>
-      {{/if}}
-      {{#if assessmentResult.submittedAt}}
-        <span class="date">
-        {{gru-icon name='event'}}<span>{{format-date assessmentResult.submittedAt 'h:mm a MMM. Do, YYYY'}}</span>
-        </span>
-      {{/if}}
-      <span class="time">
-        {{gru-icon name='av_timer'}}<span>{{format-time assessmentResult.totalTimeSpent}}</span>
-      </span>
-    </div>
     <div class="class-performance">
       <span class="student-name"> {{profile.firstName}} {{profile.lastName}} </span>
     </div>

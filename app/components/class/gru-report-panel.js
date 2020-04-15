@@ -349,10 +349,7 @@ export default Ember.Component.extend({
       let resourceResultsOrdered = this.get(
         'assessmentResult.nonOpenEndedQuestionResults'
       );
-      resourceResultsOrdered.sort(function(a, b) {
-        return Ember.get(a, 'question.order') - Ember.get(b, 'question.order');
-      });
-
+      resourceResultsOrdered.sortBy('resource.order');
       return resourceResultsOrdered;
     }
   }),
@@ -367,6 +364,8 @@ export default Ember.Component.extend({
       let correctAnswers = resourceResultsOrdered.findBy('correct', true);
       let inCorrectAnswers = resourceResultsOrdered.findBy('correct', false);
       return !!(correctAnswers || inCorrectAnswers);
+    } else {
+      return false;
     }
   }),
 

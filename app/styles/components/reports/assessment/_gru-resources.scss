@@ -1,5 +1,4 @@
 .reports.assessment.gru-resources {
-  // margin-top: 20px;
   .resources-header {
     margin: 30px 0;
     display: none;
@@ -142,28 +141,28 @@
           background-repeat: no-repeat;
           display: block;
           &.video {
-            background-image: url("gooru/images/video-resource-dark.svg") !important;
+            background-image: url("gooru/images/video-resource-dark.svg");
           }
           &.webpage {
-            background-image: url("gooru/images/website-resource-dark.svg") !important;
+            background-image: url("gooru/images/website-resource-dark.svg");
           }
           &.interactive {
-            background-image: url("gooru/images/interactive-resource-dark.svg") !important;
+            background-image: url("gooru/images/interactive-resource-dark.svg");
           }
           &.question {
-            background-image: url("gooru/images/question-resource-dark.svg") !important;
+            background-image: url("gooru/images/question-resource-dark.svg");
           }
           &.rubric {
-            background-image: url("gooru/images/rubric-dark.svg") !important;
+            background-image: url("gooru/images/rubric-dark.svg");
           }
           &.image {
-            background-image: url("gooru/images/image-resource-dark.svg") !important;
+            background-image: url("gooru/images/image-resource-dark.svg");
           }
           &.text {
-            background-image: url("gooru/images/text-resource-dark.svg") !important;
+            background-image: url("gooru/images/text-resource-dark.svg");
           }
           &.audio {
-            background-image: url("gooru/images/audio-resource-dark.svg") !important;
+            background-image: url("gooru/images/audio-resource-dark.svg");
           }
         }
         .title {
