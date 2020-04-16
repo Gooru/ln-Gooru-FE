@@ -750,7 +750,7 @@ export default Ember.Component.extend({
         }
         component.$().fadeOut(5000, function() {
           component.set('showPullUp', false);
-          component.sendAction('refreshItem');
+          component.sendAction('refreshItem', component.get('context'));
         });
       });
     }
