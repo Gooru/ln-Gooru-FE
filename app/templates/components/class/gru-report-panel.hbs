@@ -92,45 +92,17 @@
           </div>
         {{/if}}
       {{/if}}
-      {{#if (and (not isOpenEnded) isTeacher hasAnsweredQuestions showChangeScore isAssessment showPerformance)}}
+      {{#if (and (gt orderedQuestions.length 0) isTeacher hasAnsweredQuestions showChangeScore isAssessment showPerformance)}}
         <div class="score-change-container">
           {{#if isChangeScoreEnabled}}
-            <button type="button" class="btn btn-info cancel" {{action 'onChangeScoreNotConfirm'}}>{{t 'common.cancel'}}</button>
+            <button type="button" class="btn btn-info cancel" {{action 'onChangeScore' isChangeScoreEnabled}}>{{t 'common.cancel'}}</button>
             <button type="button" class="btn btn-primary confirm" {{action 'onChangeScoreConfirm'}}>{{t 'common.confirm'}}</button>
           {{else}}
-            <button type="button" class="btn btn-primary change-score" {{action 'onChangeScore'}}>{{t 'common.change-score'}}</button>
+            <button type="button" class="btn btn-primary change-score" {{action 'onChangeScore' isChangeScoreEnabled}}>{{t 'common.change-score'}}</button>
           {{/if}}
         </div>
       {{/if}}
       </div>
-    </div>
-
-    <div class="user-profile-info">
-      <div class="profile">
-        <div class="img-container pull-left">
-          <img class="img-responsive" src="{{if courseView course.thumbnailUrl assessmentResult.collection.thumbnailUrl}}">
-        </div>
-      </div>
-    </div>
-    <span class="assessment-name ellipsis"> {{assessmentResult.collection.title}} </span>
-    <div class="class-performance">
-      <span class="student-name"> {{profile.firstName}} {{profile.lastName}} </span>
-    </div>
-    <div {{action 'closeReport'}} class="close report">
-      <a class="material-icons clear-button">clear</a>
-      <span class="text"> Close </span>
-    </div>
-    <div class="performance">
-      <div class="class">
-        <div class="class-performance">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="{{collectionColorStyle}} {{collectionAverage}}">
-            </div>
-            <span class="score-text" style="color: {{classColor}}"> {{assessmentResult.score}} % </span>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
   <div>
@@ -138,6 +110,7 @@
     {{#if assessmentResult}}
       {{reports/gru-assessment-report
      areAnswersHidden=areAnswersHidden
+     isAnswerKeyHidden=isAnswerKeyHidden
      showPerformance=showPerformance
      assessmentResult=assessmentResult
      onSelectAttempt='selectAttempt'

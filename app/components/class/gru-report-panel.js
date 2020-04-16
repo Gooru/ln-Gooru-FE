@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { getBarGradeColor, toLocal } from 'gooru-web/utils/utils';
+import { toLocal } from 'gooru-web/utils/utils';
 import Context from 'gooru-web/models/result/context';
 import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
@@ -162,50 +162,6 @@ export default Ember.Component.extend({
    * @property {[]}
    */
   attempts: Ember.computed.alias('completedSessions'),
-
-  /**
-   * calculate  the class average by student performance score as a width
-   * @property {string}
-   */
-  studentAverage: Ember.computed('studentPerformance', function() {
-    let component = this;
-    let score = component.get('studentPerformance.score');
-    return Ember.String.htmlSafe(`width: ${score}%;`);
-  }),
-
-  /**
-   * @property {String} barColor
-   * Computed property to know the color of the small bar
-   */
-  studentColorStyle: Ember.computed('studentPerformance', function() {
-    let score = this.get('studentPerformance.score');
-    this.set('studentColor', getBarGradeColor(score));
-    return Ember.String.htmlSafe(
-      `background-color: ${getBarGradeColor(score)};`
-    );
-  }),
-
-  /**
-   * calculate  the class average score as a width
-   * @property {string}
-   */
-  collectionAverage: Ember.computed('assessmentResult', function() {
-    let component = this;
-    let score = component.get('assessmentResult.score');
-    return Ember.String.htmlSafe(`width: ${score}%;`);
-  }),
-
-  /**
-   * @property {String} barColor
-   * Computed property to know the color of the small bar
-   */
-  collectionColorStyle: Ember.computed('assessmentResult', function() {
-    let score = this.get('assessmentResult.score');
-    this.set('classColor', getBarGradeColor(score));
-    return Ember.String.htmlSafe(
-      `background-color: ${getBarGradeColor(score)};`
-    );
-  }),
 
   showPullUp: false,
 
@@ -476,19 +432,11 @@ export default Ember.Component.extend({
     },
 
     /**
-     * Action get triggered when change score button  clicked
+     * Action get triggered when change score button clicked and change score was cancelled
      */
-    onChangeScore: function() {
+    onChangeScore: function(flag) {
       this.get('listOfQuestions').clear();
-      this.set('isChangeScoreEnabled', true);
-    },
-
-    /**
-     * Action get triggered when change score was cancelled
-     */
-    onChangeScoreNotConfirm: function() {
-      this.get('listOfQuestions').clear();
-      this.set('isChangeScoreEnabled', false);
+      this.set('isChangeScoreEnabled', !flag);
     },
 
     /**

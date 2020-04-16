@@ -1,9 +1,5 @@
 <div class="backdrop" {{action 'onPullUpClose' true}}></div>
 <div class="dca-report-panel-container">
-  <div class="pullup-close pull-right" {{action 'onPullUpClose'}}>
-    {{gru-icon name='ic_close'}}
-    <div>Close</div>
-  </div>
   <div class="header-container">
     <div class="close-pullup" {{action "onPullUpClose"}}>
       {{gru-icon name="arrow_downward"}}
@@ -108,41 +104,13 @@
       {{/if}}
       </div>
     </div>
-
-    <div class="user-profile-info">
-      <div class="profile">
-        <div class="img-container pull-left">
-          <img class="img-responsive" src="{{assessmentResult.collection.thumbnailUrl}}">
-        </div>
-      </div>
-    </div>
-    <span class="assessment-name"> {{assessmentResult.collection.title}} </span>
-    <div class="class-performance">
-      <span class="student-name"> {{profile.firstName}} {{profile.lastName}} </span>
-    </div>
-    <div {{action 'closeReport'}} class="close report">
-      <a class="material-icons clear-button">clear</a>
-      <span class="text"> Close </span>
-    </div>
-    <div class="performance">
-      <div class="class">
-        <div class="class-performance">
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="{{collectionColorStyle}} {{collectionAverage}}">
-            </div>
-            {{#if (and (gte assessmentResult.score 0) isAssessment ) }}
-              <span class="score-text" style="color: {{classColor}}"> {{assessmentResult.score}} % </span>
-            {{/if}}
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
   <div>
 
     {{#if assessmentResult}}
       {{reports/gru-assessment-report
      areAnswersHidden=areAnswersHidden
+     isAnswerKeyHidden=isAnswerKeyHidden
      showPerformance=showPerformance
      assessmentResult=assessmentResult
      onSelectAttempt='selectAttempt'
