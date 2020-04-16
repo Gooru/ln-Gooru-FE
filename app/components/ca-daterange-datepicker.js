@@ -141,9 +141,8 @@ export default Ember.Component.extend({
       let component = this;
       component.set('startDate', startDate);
       if (
-        !this.get(
-          'enableVideoConference' && !component.get('allowTwoDateRangePicker')
-        )
+        !this.get('enableVideoConference') &&
+        !component.get('allowTwoDateRangePicker')
       ) {
         component.sendAction('onScheduleForDate', startDate, startDate);
       }
@@ -153,9 +152,7 @@ export default Ember.Component.extend({
       let component = this;
       let forMonth = month.get('monthNumber');
       let forYear = month.get('monthYear');
-      if (!this.get('enableVideoConference')) {
-        component.sendAction('onScheduleForMonth', forMonth, forYear);
-      }
+      component.sendAction('onScheduleForMonth', forMonth, forYear);
     },
 
     /**
