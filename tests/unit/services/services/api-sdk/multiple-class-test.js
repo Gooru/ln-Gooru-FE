@@ -1,8 +1,9 @@
-import { moduleFor, test } from 'ember-qunit';
+import { test } from 'ember-qunit';
+import moduleForService from 'gooru-web/tests/helpers/module-for-service';
 
-moduleFor(
-  'service:services/api-sdk/multiple-class',
-  'Unit | Service | services/api sdk/multiple class',
+moduleForService(
+  'service:api-sdk/multiple-class',
+  'Unit | Service | api-sdk/multiple-class',
   {
     // Specify the other units that are required for this test.
     // needs: ['service:foo']
