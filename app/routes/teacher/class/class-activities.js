@@ -9,6 +9,14 @@ export default Ember.Route.extend({
     }
   },
 
+  actions: {
+    didTransition() {
+      this.get('controller')
+        .get('classController')
+        .fetchDcaSummaryPerformance();
+    }
+  },
+
   // -------------------------------------------------------------------------
   // Dependencies
 

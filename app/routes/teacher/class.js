@@ -1,11 +1,6 @@
 import Ember from 'ember';
 import PrivateRouteMixin from 'gooru-web/mixins/private-route-mixin';
-import {
-  flattenGutToFwCompetency,
-  flattenGutToFwDomain
-} from 'gooru-web/utils/taxonomy';
-import ConfigurationMixin from 'gooru-web/mixins/configuration';
-export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
+export default Ember.Route.extend(PrivateRouteMixin, {
   queryParams: {
     refresh: {
       refreshModel: true
@@ -121,99 +116,43 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
   model: function(params) {
     const route = this;
     const classId = params.classId;
-    const isEnableSecondaryClass = route.get(
-      'configuration.GRU_FEATURE_FLAG.isShowSecondaryClass'
-    );
-    const isAllowMultiGradeClass =
-      route.get('session.tenantSetting.allowMultiGradeClass') === 'on';
     const classPromise = route.get('classService').readClassInfo(classId);
     const membersPromise = route.get('classService').readClassMembers(classId);
-    return classPromise.then(function(classData) {
-      let classCourseId = null;
-      if (classData.courseId) {
-        classCourseId = Ember.A([
-          {
-            classId: params.classId,
-            courseId: classData.courseId
-          }
-        ]);
+    return Ember.RSVP.hash({
+      class: classPromise,
+      members: membersPromise
+    }).then(function(hash) {
+      const aClass = hash.class;
+      const members = hash.members;
+      const courseId = aClass.get('courseId');
+      // let visibilityPromise = Ember.RSVP.resolve([]);
+      let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
+      if (courseId) {
+        // visibilityPromise = route
+        //   .get('classService')
+        //   .readClassContentVisibility(classId);
+        coursePromise = route.get('courseService').fetchById(courseId);
       }
-      const performanceSummaryPromise = classCourseId
-        ? route
-          .get('performanceService')
-          .findClassPerformanceSummaryByClassIds(classCourseId)
-        : null;
       return Ember.RSVP.hash({
-        class: classPromise,
-        members: membersPromise,
-        classPerformanceSummaryItems: performanceSummaryPromise
+        // contentVisibility: visibilityPromise,
+        course: coursePromise,
+        secondaryClassesData: route.loadClassesData(aClass.get('setting'))
       }).then(function(hash) {
-        const aClass = hash.class;
-        const members = hash.members;
-        const classPerformanceSummaryItems = hash.classPerformanceSummaryItems;
-        let classPerformanceSummary = classPerformanceSummaryItems
-          ? classPerformanceSummaryItems.findBy('classId', classId)
-          : null;
-        aClass.set('performanceSummary', classPerformanceSummary);
-        const setting = aClass.get('setting');
-        const isPremiumClass = setting != null && setting['course.premium'];
-        const courseId = aClass.get('courseId');
-        let visibilityPromise = Ember.RSVP.resolve([]);
-        let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
-        const competencyCompletionStats = isPremiumClass
-          ? route
-            .get('competencyService')
-            .getCompetencyCompletionStats([classId])
-          : Ember.RSVP.resolve(Ember.A());
-
-        if (courseId) {
-          visibilityPromise = route
-            .get('classService')
-            .readClassContentVisibility(classId);
-          coursePromise = route.get('courseService').fetchById(courseId);
-        }
-        const frameworkId = aClass.get('preference.framework');
-        const subjectId = aClass.get('preference.subject');
-        let secondaryClassListPromise = null;
-        if (isEnableSecondaryClass && isAllowMultiGradeClass) {
-          secondaryClassListPromise = subjectId
-            ? route.get('multipleClassService').fetchMultipleClassList(classId)
-            : Ember.RSVP.resolve(null);
-        }
-        let crossWalkFWCPromise = null;
-        if (frameworkId && subjectId) {
-          crossWalkFWCPromise = route
-            .get('taxonomyService')
-            .fetchCrossWalkFWC(frameworkId, subjectId);
-        }
-        return Ember.RSVP.hash({
-          contentVisibility: visibilityPromise,
-          course: coursePromise,
-          crossWalkFWC: crossWalkFWCPromise,
-          competencyStats: competencyCompletionStats,
-          secondaryClassList: secondaryClassListPromise
-        }).then(function(hash) {
-          const contentVisibility = hash.contentVisibility;
-          const course = hash.course;
-          const crossWalkFWC = hash.crossWalkFWC || [];
-          const secondaryClassList = hash.secondaryClassList;
-          aClass.set('owner', members.get('owner'));
-          aClass.set('collaborators', members.get('collaborators'));
-          aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
-          aClass.set('members', members.get('members'));
-          aClass.set(
-            'competencyStats',
-            hash.competencyStats.findBy('classId', classId)
-          );
-          return {
-            class: aClass,
-            course,
-            members,
-            contentVisibility,
-            crossWalkFWC,
-            secondaryClassList
-          };
-        });
+        const contentVisibility = hash.contentVisibility;
+        const course = hash.course;
+        const crossWalkFWC = hash.crossWalkFWC || [];
+        aClass.set('owner', members.get('owner'));
+        aClass.set('collaborators', members.get('collaborators'));
+        aClass.set('memberGradeBounds', members.get('memberGradeBounds'));
+        aClass.set('members', members.get('members'));
+        return {
+          class: aClass,
+          course,
+          members,
+          contentVisibility,
+          crossWalkFWC,
+          secondaryClassesData: hash.secondaryClassesData
+        };
       });
     });
   },
@@ -227,20 +166,25 @@ export default Ember.Route.extend(PrivateRouteMixin, ConfigurationMixin, {
     controller.set('class', model.class);
     controller.set('course', model.course);
     controller.set('members', model.members);
-    controller.set('contentVisibility', model.contentVisibility);
-    controller.set('secondaryClassList', model.secondaryClassList);
-    // controller.loadSecondaryClasses();
-    controller.set('router', this.get('router'));
-    let classData = model.class;
-    classData.course = model.course;
-    controller.fetchDcaSummaryPerformance();
-    if (model.crossWalkFWC) {
-      controller.set(
-        'fwCompetencies',
-        flattenGutToFwCompetency(model.crossWalkFWC)
-      );
-      controller.set('fwDomains', flattenGutToFwDomain(model.crossWalkFWC));
+    controller.set('secondaryClassesData', model.secondaryClassesData);
+    // controller.set('contentVisibility', model.contentVisibility);
+    controller.set('class.course', model.course);
+    controller.loadCompetencyCompletionStat();
+  },
+
+  /**
+   * @function loadClassesData
+   * Method to load class details for given classIds
+   */
+  loadClassesData(classSetting) {
+    const secondaryClassIds =
+      classSetting && classSetting['secondary.classes']
+        ? classSetting['secondary.classes'].list
+        : Ember.A([]);
+    if (secondaryClassIds && secondaryClassIds.length) {
+      return this.get('classService').readBulkClassDetails(secondaryClassIds);
     }
+    return Ember.RSVP.resolve(Ember.A([]));
   },
 
   resetController(controller) {

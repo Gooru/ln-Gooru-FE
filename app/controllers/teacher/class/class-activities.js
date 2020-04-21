@@ -79,7 +79,7 @@ export default Ember.Controller.extend({
   },
 
   init() {
-    this.loadClassData();
+    // this.loadClassData();
   },
 
   // -------------------------------------------------------------------------
@@ -130,7 +130,7 @@ export default Ember.Controller.extend({
   secondaryClasses: Ember.computed.alias('classController.secondaryClasses'),
 
   secondaryClassDropdown: Ember.computed.alias(
-    'classController.secondaryClassDropdown'
+    'classController.multiGradeList'
   ),
 
   secondaryClassList: Ember.computed.alias(
@@ -171,8 +171,11 @@ export default Ember.Controller.extend({
     return classActivitiesTabs.findBy('id', defaultTabKey);
   }),
 
-  classesData: Ember.computed.alias('classController.classesData'),
+  secondaryClassesData: Ember.computed.alias(
+    'classController.secondaryClassesData'
+  ),
 
+  // NOTE should be loaded in teacher/class
   loadClassData() {
     const controller = this;
     const secondaryClasses = this.get('secondaryClasses') || Ember.A([]);
@@ -180,11 +183,14 @@ export default Ember.Controller.extend({
     this.get('classService')
       .readBulkClassDetails(classIds)
       .then(
-        classesData => {
-          controller.set('classController.classesData', classesData);
+        secondaryClassesData => {
+          controller.set(
+            'classController.secondaryClassesData',
+            secondaryClassesData
+          );
         },
         () => {
-          controller.set('classController.classesData', Ember.A([]));
+          controller.set('classController.secondaryClassesData', Ember.A([]));
         }
       );
   },

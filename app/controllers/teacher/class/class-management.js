@@ -2,13 +2,14 @@ import Ember from 'ember';
 import ModalMixin from 'gooru-web/mixins/modal';
 import { CLASS_ACTIVITIES_SEARCH_TABS } from 'gooru-web/config/config';
 import { getObjectsDeepCopy } from 'gooru-web/utils/utils';
+import ConfigurationMixin from 'gooru-web/mixins/configuration';
 /**
  * Class management controller
  *
  * Controller responsible of the logic for the teacher class management tab
  */
 
-export default Ember.Controller.extend(ModalMixin, {
+export default Ember.Controller.extend(ModalMixin, ConfigurationMixin, {
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -38,6 +39,8 @@ export default Ember.Controller.extend(ModalMixin, {
   profileService: Ember.inject.service('api-sdk/profile'),
 
   session: Ember.inject.service('session'),
+
+  multipleClassService: Ember.inject.service('api-sdk/multiple-class'),
 
   // -------------------------------------------------------------------------
   // Properties
@@ -497,6 +500,10 @@ export default Ember.Controller.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Events
 
+  init() {
+    this.loadSecondaryClassList();
+  },
+
   // -------------------------------------------------------------------------
   // Properties
   /**
@@ -677,9 +684,8 @@ export default Ember.Controller.extend(ModalMixin, {
   /**
    * @property {Object} secondaryclassList
    */
-  secondaryClassList: Ember.computed.alias(
-    'classController.secondaryClassList'
-  ),
+  secondaryClassList: Ember.A([]),
+
   /**
    * @property {Array} multipleClassList
    * property for list of class in class settigns
@@ -1026,5 +1032,20 @@ export default Ember.Controller.extend(ModalMixin, {
         primaryClass.set('setting', classSetting.setting);
         controller.set('isEnableSave', false);
       });
+  },
+
+  loadSecondaryClassList() {
+    const isSecondaryClassEnabled = this.get(
+      'configuration.GRU_FEATURE_FLAG.isShowSecondaryClass'
+    );
+    const isAllowMultiGradeClass =
+      this.get('session.tenantSetting.allowMultiGradeClass') === 'on';
+    if (isSecondaryClassEnabled && isAllowMultiGradeClass) {
+      this.get('multipleClassService')
+        .fetchMultipleClassList(this.get('class.id'))
+        .then(secondaryClassList => {
+          this.set('secondaryClassList', secondaryClassList);
+        });
+    }
   }
 });

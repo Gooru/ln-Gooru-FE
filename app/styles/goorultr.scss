@@ -148,7 +148,6 @@
 @import "components/charts/score-fill-gauge-chart";
 @import "components/charts/competencies-progress-graph";
 @import "components/class/gru-class-navbar";
-@import "components/class/gru-class-activity-panel";
 @import "components/class/gru-student-class-activity-panel";
 @import "components/class/analytics/performance/gru-actions-bar";
 @import "components/class/analytics/performance/gru-data-picker";
@@ -503,7 +502,6 @@
 @import "components/ca-student-list-suggestion";
 
 // Class Activities
-@import "controllers/teacher/class/class-activities-old";
 @import "components/class/activities/gru-class-activities-listing";
 @import "components/new-cards/gru-class-activity-card";
 @import "components/new-cards/gru-activity-grading-card";

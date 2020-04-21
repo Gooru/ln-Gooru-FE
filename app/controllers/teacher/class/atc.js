@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { isCompatibleVW } from 'gooru-web/utils/utils';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
@@ -199,15 +198,6 @@ export default Ember.Controller.extend({
 
   // -------------------------------------------------------------------------
   // Events
-  initializeController() {
-    const controller = this;
-    if (controller.get('isPremiumClass') && controller.get('isShowAtcView')) {
-      if (isCompatibleVW('medium')) {
-        controller.set('userAgent', 'mobile');
-      }
-      controller.loadData();
-    }
-  },
 
   // -------------------------------------------------------------------------
   // Actions
