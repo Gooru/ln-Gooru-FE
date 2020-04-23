@@ -313,9 +313,8 @@ export default QuizzesPlayer.extend(
       const route = this;
       const isCollection = type === 'collection';
       const isAssessment = type === 'assessment';
-      const loadAssessment = !type || isAssessment;
-      const loadCollection = !type || isCollection;
-
+      const loadAssessment = isAssessment || !type;
+      const loadCollection = isCollection || !type;
       return Ember.RSVP.hashSettled({
         assessment: loadAssessment
           ? route.get('assessmentService').readAssessment(collectionId)
