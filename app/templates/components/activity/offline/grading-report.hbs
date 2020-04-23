@@ -34,67 +34,65 @@
   {{/if}}
 
   <div class="oa-grading-section">
-
-    {{#if isTeacher}}
-    <div class="student-carousel-container">
-      <div class="student-info">
-        <div class="student-count">
-          <sup>{{currentStudentIndex}}</sup>&frasl;<sub>{{users.length}}</sub>
-        </div>
-        <div class="oa-grade-students">
-          <div class="oa-grade-students-carousel">
-            <div id="oa-grade-students-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
-              <div class="carousel-inner">
-                {{#each users as |user index|}}
-                <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
-                  <div class="user-profile-img">
-                    <img src="{{user.avatarUrl}}" />
-                    <span>{{user.lastName}} {{user.firstName}}</span>
+    <div class="oa-task-details {{if isTeacher 'teacher-grading'}}">
+      {{#if isTeacher}}
+      <div class="student-carousel-container">
+        <div class="student-info">
+          <div class="student-count">
+            <sup>{{currentStudentIndex}}</sup>&frasl;<sub>{{users.length}}</sub>
+          </div>
+          <div class="oa-grade-students">
+            <div class="oa-grade-students-carousel">
+              <div id="oa-grade-students-carousel-wrapper" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner">
+                  {{#each users as |user index|}}
+                  <div data-item-index="{{index}}" class="item {{if (eq index 0) 'active'}}">
+                    <div class="user-profile-img">
+                      <img src="{{user.avatarUrl}}" />
+                      <span>{{user.lastName}} {{user.firstName}}</span>
+                    </div>
                   </div>
+                  {{/each}}
                 </div>
-                {{/each}}
+                <!-- Left and right controls -->
+                <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
+                  {{gru-icon name="keyboard_arrow_left"}}
+                </a>
+                <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
+                  {{gru-icon name="keyboard_arrow_right"}}
+                </a>
               </div>
-              <!-- Left and right controls -->
-              <a class="left carousel-control" data-slide="prev" {{action 'onClickPrev'}}>
-                {{gru-icon name="keyboard_arrow_left"}}
-              </a>
-              <a class="right carousel-control" data-slide="next" {{action 'onClickNext'}}>
-                {{gru-icon name="keyboard_arrow_right"}}
-              </a>
             </div>
           </div>
-        </div>
-        {{#if studentRubric.isSelfGraded}}
-        <div class="self-grade-section" style={{safe-html (concat "background-color:" (grade-color studentSelfGrade))}}>
-          <div class="label">{{t 'common.self-graded'}}</div>
-          <div class="score">
-            <sup>{{studentRubric.studentScore}}</sup>&frasl;<sub>{{studentRubric.maxScore}}</sub>
+          {{#if studentRubric.isSelfGraded}}
+          <div class="self-grade-section" style={{safe-html (concat "background-color:" (grade-color studentSelfGrade))}}>
+            <div class="label">{{t 'common.self-graded'}}</div>
+            <div class="score">
+              <sup>{{studentRubric.studentScore}}</sup>&frasl;<sub>{{studentRubric.maxScore}}</sub>
+            </div>
+            <div class="label">{{t 'common.rubric-grade'}}</div>
           </div>
-          <div class="label">{{t 'common.rubric-grade'}}</div>
+          {{/if}}
         </div>
-        {{/if}}
+      </div>
+      {{/if}}
+      <div class="left-panel">
+        <div class="student-response" {{action "onTogglePanel"}}><span>{{student.firstName}}</span>'s Response</div>
+        {{#unless isInlineGrading}}
+          <div class="tasks-section">
+            {{#each activityTasks as |task index|}}
+            {{player/offline-activity/gru-offline-activity-task-submission
+              task=task
+              showSubmissions=true
+              isReadOnly=true
+              caContentId=context.dcaContentId
+              classId=context.classId
+            }}
+            {{/each}}
+          </div>
+        {{/unless}}
       </div>
     </div>
-    {{/if}}
-
-
-    <div class="left-panel">
-      <div class="student-response" {{action "onTogglePanel"}}><span>{{student.firstName}}</span>'s Response</div>
-      {{#unless isInlineGrading}}
-        <div class="tasks-section">
-          {{#each activityTasks as |task index|}}
-          {{player/offline-activity/gru-offline-activity-task-submission
-            task=task
-            showSubmissions=true
-            isReadOnly=true
-            caContentId=context.dcaContentId
-            classId=context.classId
-          }}
-          {{/each}}
-        </div>
-      {{/unless}}
-    </div>
-
     <div class="right-panel">
       <div class="oa-grade-right-panel-header">
         <div class="oa-grade-info">
