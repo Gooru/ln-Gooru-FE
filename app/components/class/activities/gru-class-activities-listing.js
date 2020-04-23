@@ -600,9 +600,7 @@ export default Ember.Component.extend(ModalMixin, {
 
   gradingObserver: Ember.observer('gradingItemsList.[]', function() {
     const component = this;
-    if (component.get('gradingItemsList').length) {
-      component.groupGradingItems();
-    }
+    component.groupGradingItems();
   }),
 
   /*
