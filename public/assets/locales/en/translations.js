@@ -2936,5 +2936,6 @@ window.i18ln = {
   'vc.remove-tooltip': 'Remove video conference for the activity',
   'vc.update-tooltip': 'Update video conference',
   'vc.launch-tooltip': 'Start video conference',
-  'vc.click-setup': 'Click to set up'
+  'vc.click-setup': 'Click to set up',
+  'locateme.lastAttempted': 'Last Attempted'
 };

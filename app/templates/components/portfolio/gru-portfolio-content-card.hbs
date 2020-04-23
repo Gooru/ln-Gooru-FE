@@ -20,7 +20,11 @@
     </div>
     <div class="activity-metadata">
       <div class="last-accessed">
-        <span>{{t 'locateme.lastAcessesed'}} on</span>
+        {{#if isAssessment}}
+          <span>{{t 'locateme.lastAttempted'}} on</span>
+        {{else}}
+          <span>{{t 'locateme.lastAcessesed'}} on</span>
+        {{/if}}
         <span>{{format-date content.activityTimestamp 'DD MMM YYYY'}}</span>
       </div>
       <div class="content-count">
