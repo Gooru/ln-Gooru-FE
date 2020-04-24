@@ -698,17 +698,19 @@ export default Ember.Component.extend(ActivityFeedbackMixin, {
       .submitOAGrade(userGrade)
       .then(function() {
         currentStudent.set('isGraded', true);
-        let categoryLists = component.get('categoryLists');
-        let contentCategory = categoryLists.get('offlineActivities');
         let offlineActivityFeedback = component.get('offlineActivityFeedback');
-        offlineActivityFeedback.set(
-          'feedbackCategory',
-          contentCategory.sortBy('feedbackTypeId')
-        );
-        if (contentCategory && contentCategory.length) {
-          component.set('isShowActivityFeedback', !isTeacher);
-        } else {
-          component.sendAction('onSkipFeedback');
+        if (offlineActivityFeedback) {
+          let categoryLists = component.get('categoryLists');
+          let contentCategory = categoryLists.get('offlineActivities');
+          offlineActivityFeedback.set(
+            'feedbackCategory',
+            contentCategory.sortBy('feedbackTypeId')
+          );
+          if (contentCategory && contentCategory.length) {
+            component.set('isShowActivityFeedback', !isTeacher);
+          } else {
+            component.sendAction('onSkipFeedback');
+          }
         }
         component.slideToNextUser();
       });

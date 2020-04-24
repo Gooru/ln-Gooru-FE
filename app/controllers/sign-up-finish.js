@@ -99,7 +99,10 @@ export default Ember.Controller.extend({
                 .get('applicationController')
                 .loadSessionProfile(profile);
               session.set('userData.isNew', false);
-              session.set('role', role);
+              session.set('userData.role', role);
+              controller
+                .get('sessionService')
+                .updateUserData(session.get('userData'));
               controller.send('signUpFinish', role);
             },
             () => Ember.Logger.error('Error updating user')

@@ -63,7 +63,7 @@ export default Ember.Component.extend(ModalMixin, PullUpMixin, PortfolioMixin, {
         let lessonId = playerContext.get('lessonId');
         playerURL += `/class/${classId}/course/${courseId}/unit/${unitId}/lesson/${lessonId}/collection/${contentId}?role=teacher&type=${contentType}&source=${PLAYER_EVENT_SOURCE.RGO}&isIframeMode=true`;
       } else {
-        playerURL += `/${contentId}?isIframeMode=true&source=${PLAYER_EVENT_SOURCE.RGO}`;
+        playerURL += `/${contentId}?isIframeMode=true&source=${PLAYER_EVENT_SOURCE.RGO}&type=${contentType}`;
       }
       component.set('playerContent', component.get('previewContent'));
       let content = component.get('playerContent');
