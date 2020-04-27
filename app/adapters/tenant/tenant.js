@@ -11,6 +11,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * Find a tenant by id
    * @param {string} id
    * @returns {Promise.<Tenant>}
+   * Deprecated
    */
   findTenantById: function(id) {
     const adapter = this;

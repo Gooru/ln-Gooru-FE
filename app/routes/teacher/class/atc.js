@@ -16,6 +16,10 @@ export default Ember.Route.extend({
         'content',
         'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
       );
+      // Load crosswalk framework for given class subject and framework
+      this.get('controller')
+        .get('classController')
+        .loadCrosswalkFramework();
     }
   },
 

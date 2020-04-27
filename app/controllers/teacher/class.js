@@ -1,4 +1,8 @@
 import Ember from 'ember';
+import {
+  flattenGutToFwCompetency,
+  flattenGutToFwDomain
+} from 'gooru-web/utils/taxonomy';
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Dependencies
@@ -18,6 +22,11 @@ export default Ember.Controller.extend({
    * @type {AnalyticsService} Service to retrieve class performance summary
    */
   analyticsService: Ember.inject.service('api-sdk/analytics'),
+
+  /**
+   * @type {PerformanceService} Service to retrieve class performance summary
+   */
+  performanceService: Ember.inject.service('api-sdk/performance'),
 
   /**
    * taxonomy service dependency injection
@@ -50,6 +59,11 @@ export default Ember.Controller.extend({
   studentsProficencyController: Ember.inject.controller(
     'teacher.class.students-proficiency'
   ),
+
+  /**
+   * @requires service:api-sdk/competency
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -258,11 +272,11 @@ export default Ember.Controller.extend({
 
   secondaryClasses: Ember.computed(
     'class.setting',
-    'secondaryClassList',
+    'secondaryClassesData',
     function() {
       const controller = this;
       const classSetting = controller.get('class.setting');
-      const secondaryClassList = controller.get('secondaryClassList');
+      const secondaryClassList = controller.get('secondaryClassesData');
       let attachedSecondaryClassList =
         classSetting && classSetting['secondary.classes']
           ? classSetting['secondary.classes'].list
@@ -287,11 +301,14 @@ export default Ember.Controller.extend({
 
   pullUpSecondaryClass: null,
 
-  secondaryClassDropdown: Ember.computed('secondaryClasses', function() {
-    let secondaryClass = this.get('secondaryClasses');
-    return secondaryClass.length
-      ? this.serializeSecondaryClass(secondaryClass)
-      : [];
+  multiGradeList: Ember.computed('secondaryClassesData', function() {
+    let secondaryClassesData = this.get('secondaryClassesData');
+    const multiGradeList = Ember.A([]);
+    const primaryClass = this.get('class');
+    primaryClass.set('isPrimaryClass', true);
+    return secondaryClassesData && secondaryClassesData.length
+      ? multiGradeList.concat([primaryClass], secondaryClassesData)
+      : Ember.A([]);
   }),
 
   /**
@@ -307,7 +324,13 @@ export default Ember.Controller.extend({
     return caDefaultView || 'gooru-catalog';
   }),
 
-  classesData: Ember.A([]),
+  classSetting: Ember.computed.alias('class.setting'),
+
+  /**
+   * @property {Array} secondaryClassesData
+   * Property for list of class data that were attached as secondary claases
+   */
+  secondaryClassesData: Ember.A([]),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -426,15 +449,42 @@ export default Ember.Controller.extend({
   fetchDcaSummaryPerformance() {
     let controller = this;
     let classId = controller.get('class.id');
-    const performanceSummaryForDCAPromise = controller
-      .get('analyticsService')
-      .getDCASummaryPerformance(classId);
-    return Ember.RSVP.hash({
-      performanceSummaryForDCA: performanceSummaryForDCAPromise
-    }).then(function(hash) {
-      const performanceSummaryForDCA = hash.performanceSummaryForDCA;
-      controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
-    });
+    if (
+      !(
+        controller.get('performanceSummaryForDCA') &&
+        controller.get('performanceSummaryForDCA.performance')
+      )
+    ) {
+      return Ember.RSVP.hash({
+        performanceSummaryForDCA: controller
+          .get('analyticsService')
+          .getDCASummaryPerformance(classId)
+      }).then(function(hash) {
+        const performanceSummaryForDCA = hash.performanceSummaryForDCA;
+        controller.set('performanceSummaryForDCA', performanceSummaryForDCA);
+      });
+    }
+  },
+
+  /**
+   * @function loadCoursePerformanceSummary
+   * Method to load class/course performance for given courseId
+   */
+  loadCoursePerformanceSummary() {
+    if (this.get('class.courseId') && !this.get('class.performanceSummary')) {
+      const requestParam = {
+        classId: this.get('class.id'),
+        courseId: this.get('class.courseId')
+      };
+      this.get('performanceService')
+        .findClassPerformanceSummaryByClassIds(Ember.A([requestParam]))
+        .then(performanceSummary => {
+          this.set(
+            'class.performanceSummary',
+            performanceSummary.findBy('classId', this.get('class.id'))
+          );
+        });
+    }
   },
 
   createSecondaryClassList(attachedSecondaryClassList, secondaryClassList) {
@@ -450,26 +500,71 @@ export default Ember.Controller.extend({
     return secondaryClasses;
   },
 
-  serializeSecondaryClass(secondaryClass) {
-    let classList = JSON.parse(JSON.stringify(secondaryClass));
-    let result = Ember.A([]);
-    result.pushObject(
-      Ember.Object.create({
-        id: this.get('class.id'),
-        code: this.get('class.code'),
-        title: this.get('class.title'),
-        isPrimaryClass: true
-      })
-    );
-    if (classList && classList.length) {
-      classList.map(activeClass => {
-        result.pushObject(Ember.Object.create(activeClass));
-      });
-    }
-    return result;
+  fetchClassDetailsByIds(classIds) {
+    return classIds && classIds.length
+      ? this.get('classService').readBulkClassDetails(classIds)
+      : Ember.RSVP.resolve(Ember.A([]));
   },
 
-  getBulkClassDetails(classIds) {
-    this.get('classService').readBulkClassDetails(classIds.mapBy('id'));
+  /**
+   * @function loadCrosswalkFramework
+   * Method to load crosswalk framework data for given subject and framework
+   */
+  loadCrosswalkFramework() {
+    const classData = this.get('class');
+    if (
+      classData.get('preference.subject') &&
+      classData.get('preference.framework')
+    ) {
+      return Ember.RSVP.hash({
+        crosswalkFramework: this.get('taxonomyService').fetchCrossWalkFWC(
+          classData.get('preference.framework'),
+          classData.get('preference.subject')
+        )
+      }).then(({ crosswalkFramework }) => {
+        this.set(
+          'fwCompetencies',
+          flattenGutToFwCompetency(crosswalkFramework)
+        );
+        this.set('fwDomains', flattenGutToFwDomain(crosswalkFramework));
+      });
+    }
+  },
+
+  /**
+   * @function loadCompetencyCompletionStat
+   * Method to load competency completion statistics for given class
+   */
+  loadCompetencyCompletionStat() {
+    const setting = this.get('class.setting');
+    const isPremiumClass = setting != null && setting['course.premium'];
+    return Ember.RSVP.hash({
+      competencyCompletionStat: isPremiumClass
+        ? this.get('competencyService').getCompetencyCompletionStats([
+          this.get('class.id')
+        ])
+        : Ember.RSVP.resolve(Ember.A())
+    }).then(({ competencyCompletionStat }) => {
+      this.set(
+        'class.competencyStats',
+        competencyCompletionStat.findBy('classId', this.get('class.id'))
+      );
+    });
+  },
+
+  /**
+   * @function loadCourseContentVisibility
+   * Method to load course content visibility
+   */
+  loadCourseContentVisibility() {
+    return Ember.RSVP.hash({
+      contentVisibility: this.get('class.courseId')
+        ? this.get('classService').readClassContentVisibility(
+          this.get('class.id')
+        )
+        : Ember.RSVP.resolve([])
+    }).then(({ contentVisibility }) => {
+      this.set('contentVisibility', contentVisibility);
+    });
   }
 });

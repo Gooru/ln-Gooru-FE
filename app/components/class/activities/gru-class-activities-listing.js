@@ -614,6 +614,12 @@ export default Ember.Component.extend(ModalMixin, {
   updateVideoConferenceContent: null,
 
   /**
+   * @property {Array} secondaryClassesData
+   * Property for list of class data that were attached as secondary claases
+   */
+  secondaryClassesData: Ember.A([]),
+
+  /**
    * @function loadScheduledClassActivities
    * @param {Boolean} isInitialLoad
    * Method to get scheduled class activities for given start and end date
@@ -795,10 +801,11 @@ export default Ember.Component.extend(ModalMixin, {
     const component = this;
     const groupedActivities = Ember.A([]);
     const primaryClass = component.get('primaryClass');
-    const classesData = component.get('classesData');
+    const secondaryClassesData = component.get('secondaryClassesData');
     classActivities.map(classActivity => {
       let activityClassData =
-        classesData.findBy('id', classActivity.get('classId')) || primaryClass;
+        secondaryClassesData.findBy('id', classActivity.get('classId')) ||
+        primaryClass;
       let existingActivity = groupedActivities.find(groupedActivity => {
         return (
           groupedActivity.get('contentId') === classActivity.get('contentId') &&
@@ -1078,7 +1085,8 @@ export default Ember.Component.extend(ModalMixin, {
 
   getClassCourse(classId) {
     const classData =
-      this.get('classesData').findBy('id', classId) || this.get('primaryClass');
+      this.get('secondaryClassesData').findBy('id', classId) ||
+      this.get('primaryClass');
     return Ember.RSVP.hash({
       course: classData.get('course')
         ? Ember.RSVP.resolve(classData.get('course'))
@@ -1091,7 +1099,8 @@ export default Ember.Component.extend(ModalMixin, {
 
   getClassMembers(classId) {
     const classData =
-      this.get('classesData').findBy('id', classId) || this.get('primaryClass');
+      this.get('secondaryClassesData').findBy('id', classId) ||
+      this.get('primaryClass');
     const isMembersExists =
       classData.get('members') && classData.get('members.length');
     return Ember.RSVP.hash({

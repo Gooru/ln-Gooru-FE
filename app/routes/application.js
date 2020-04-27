@@ -116,8 +116,9 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
       details = this.get('sessionService')
         .signInWithToken(accessToken)
         .then(function() {
-          const applicationController = route.controllerFor('application');
-          return Ember.RSVP.all([applicationController.setupTenant()]);
+          // const applicationController = route.controllerFor('application');
+          // return Ember.RSVP.all([applicationController.setupTenant()]);
+          return details;
         });
       return details;
     }
@@ -161,11 +162,11 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
 
     route.setupTheme(themeId);
 
-    let accessToken = params.access_token;
-    if (!accessToken) {
-      let applicationController = route.controllerFor('application');
-      applicationController.setupTenant();
-    }
+    // let accessToken = params.access_token;
+    // if (!accessToken) {
+    //   let applicationController = route.controllerFor('application');
+    //   applicationController.setupTenant();
+    // }
     return Ember.RSVP.hash({
       currentSession: currentSession,
       myClasses: myClasses,

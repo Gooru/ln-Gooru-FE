@@ -6,7 +6,7 @@ export default {
   endpoint: {
     url: 'http://staging.gooru.org',
     secureUrl: 'https://staging.gooru.org',
-    tenantUrl: 'http://s3-us-west-1.amazonaws.com/nile-tenants/dev'
+    tenantUrl: 'http://s3-us-west-1.amazonaws.com/nile-tenants/dev' //Deprecated
   },
 
   realTime: {
