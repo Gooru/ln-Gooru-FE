@@ -326,6 +326,10 @@ export default Ember.Controller.extend({
 
   classSetting: Ember.computed.alias('class.setting'),
 
+  /**
+   * @property {Array} secondaryClassesData
+   * Property for list of class data that were attached as secondary claases
+   */
   secondaryClassesData: Ember.A([]),
 
   // -------------------------------------------------------------------------
@@ -462,6 +466,10 @@ export default Ember.Controller.extend({
     }
   },
 
+  /**
+   * @function loadCoursePerformanceSummary
+   * Method to load class/course performance for given courseId
+   */
   loadCoursePerformanceSummary() {
     if (this.get('class.courseId') && !this.get('class.performanceSummary')) {
       const requestParam = {
@@ -498,6 +506,10 @@ export default Ember.Controller.extend({
       : Ember.RSVP.resolve(Ember.A([]));
   },
 
+  /**
+   * @function loadCrosswalkFramework
+   * Method to load crosswalk framework data for given subject and framework
+   */
   loadCrosswalkFramework() {
     const classData = this.get('class');
     if (
@@ -519,6 +531,10 @@ export default Ember.Controller.extend({
     }
   },
 
+  /**
+   * @function loadCompetencyCompletionStat
+   * Method to load competency completion statistics for given class
+   */
   loadCompetencyCompletionStat() {
     const setting = this.get('class.setting');
     const isPremiumClass = setting != null && setting['course.premium'];
@@ -536,6 +552,10 @@ export default Ember.Controller.extend({
     });
   },
 
+  /**
+   * @function loadCourseContentVisibility
+   * Method to load course content visibility
+   */
   loadCourseContentVisibility() {
     return Ember.RSVP.hash({
       contentVisibility: this.get('class.courseId')

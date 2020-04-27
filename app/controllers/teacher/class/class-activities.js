@@ -78,10 +78,6 @@ export default Ember.Controller.extend({
     }
   },
 
-  init() {
-    // this.loadClassData();
-  },
-
   // -------------------------------------------------------------------------
   // Properties
   /**
@@ -174,26 +170,6 @@ export default Ember.Controller.extend({
   secondaryClassesData: Ember.computed.alias(
     'classController.secondaryClassesData'
   ),
-
-  // NOTE should be loaded in teacher/class
-  loadClassData() {
-    const controller = this;
-    const secondaryClasses = this.get('secondaryClasses') || Ember.A([]);
-    const classIds = secondaryClasses.mapBy('id');
-    this.get('classService')
-      .readBulkClassDetails(classIds)
-      .then(
-        secondaryClassesData => {
-          controller.set(
-            'classController.secondaryClassesData',
-            secondaryClassesData
-          );
-        },
-        () => {
-          controller.set('classController.secondaryClassesData', Ember.A([]));
-        }
-      );
-  },
 
   resetProperties() {
     const controller = this;

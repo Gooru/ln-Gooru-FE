@@ -125,16 +125,11 @@ export default Ember.Route.extend(PrivateRouteMixin, {
       const aClass = hash.class;
       const members = hash.members;
       const courseId = aClass.get('courseId');
-      // let visibilityPromise = Ember.RSVP.resolve([]);
       let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
       if (courseId) {
-        // visibilityPromise = route
-        //   .get('classService')
-        //   .readClassContentVisibility(classId);
         coursePromise = route.get('courseService').fetchById(courseId);
       }
       return Ember.RSVP.hash({
-        // contentVisibility: visibilityPromise,
         course: coursePromise,
         secondaryClassesData: route.loadClassesData(aClass.get('setting'))
       }).then(function(hash) {
@@ -167,7 +162,6 @@ export default Ember.Route.extend(PrivateRouteMixin, {
     controller.set('course', model.course);
     controller.set('members', model.members);
     controller.set('secondaryClassesData', model.secondaryClassesData);
-    // controller.set('contentVisibility', model.contentVisibility);
     controller.set('class.course', model.course);
     controller.loadCompetencyCompletionStat();
   },

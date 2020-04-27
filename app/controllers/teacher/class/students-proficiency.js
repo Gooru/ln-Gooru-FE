@@ -398,25 +398,9 @@ export default Ember.Controller.extend({
       existingClassData && existingClassData.get('members')
         ? Ember.RSVP.resolve(existingClassData)
         : controller.get('classService').readClassMembers(classId);
-    // return classPromise.then(classData => {
-    // let classCourseId = null;
-    // if (classData.courseId) {
-    //   classCourseId = Ember.A([
-    //     {
-    //       classId,
-    //       courseId: classData.courseId
-    //     }
-    //   ]);
-    // }
-    // const performanceSummaryPromise = classCourseId
-    //   ? controller
-    //     .get('performanceService')
-    //     .findClassPerformanceSummaryByClassIds(classCourseId)
-    //   : null;
     return Ember.RSVP.hash({
       class: classPromise,
       members: membersPromise
-      // classPerformanceSummaryItems: performanceSummaryPromise
     }).then(function(hash) {
       const aClass = hash.class;
       const members = hash.members;
@@ -428,7 +412,6 @@ export default Ember.Controller.extend({
       const setting = aClass.get('setting');
       const isPremiumClass = setting != null && setting['course.premium'];
       const courseId = aClass.get('courseId');
-      // let visibilityPromise = Ember.RSVP.resolve([]);
       let coursePromise = Ember.RSVP.resolve(Ember.Object.create({}));
       const competencyCompletionStats = isPremiumClass
         ? controller
@@ -437,9 +420,6 @@ export default Ember.Controller.extend({
         : Ember.RSVP.resolve(Ember.A());
 
       if (courseId) {
-        // visibilityPromise = controller
-        //   .get('classService')
-        //   .readClassContentVisibility(classId);
         coursePromise = controller.get('courseService').fetchById(courseId);
       }
       const frameworkId = aClass.get('preference.framework');
@@ -452,12 +432,10 @@ export default Ember.Controller.extend({
           .fetchCrossWalkFWC(frameworkId, subjectId);
       }
       return Ember.RSVP.hash({
-        // contentVisibility: visibilityPromise,
         course: coursePromise,
         crossWalkFWC: crossWalkFWCPromise,
         competencyStats: competencyCompletionStats
       }).then(function(hash) {
-        // const contentVisibility = hash.contentVisibility;
         const course = hash.course;
         const crossWalkFWC = hash.crossWalkFWC || [];
         aClass.set('owner', members.get('owner'));
@@ -479,7 +457,6 @@ export default Ember.Controller.extend({
           'fwCompetencies',
           flattenGutToFwCompetency(crossWalkFWC)
         );
-        // controller.set('contentVisibility', contentVisibility);
         controller.set('fwDomains', flattenGutToFwDomain(crossWalkFWC));
         controller.loadStudentsProficiencyData();
         controller
@@ -487,7 +464,6 @@ export default Ember.Controller.extend({
           .send('onSelectSecondaryClass', aClass);
       });
     });
-    // });
   },
 
   /**

@@ -615,6 +615,10 @@ export default Ember.Component.extend(ModalMixin, {
    */
   updateVideoConferenceContent: null,
 
+  /**
+   * @property {Array} secondaryClassesData
+   * Property for list of class data that were attached as secondary claases
+   */
   secondaryClassesData: Ember.A([]),
 
   /**

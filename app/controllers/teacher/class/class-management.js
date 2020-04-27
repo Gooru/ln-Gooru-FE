@@ -1034,6 +1034,10 @@ export default Ember.Controller.extend(ModalMixin, ConfigurationMixin, {
       });
   },
 
+  /**
+   * @function loadSecondaryClassList
+   * Method to load all classes which can be attached as secondary class
+   */
   loadSecondaryClassList() {
     const isSecondaryClassEnabled = this.get(
       'configuration.GRU_FEATURE_FLAG.isShowSecondaryClass'
