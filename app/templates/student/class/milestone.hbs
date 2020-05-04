@@ -9,7 +9,22 @@
       <div class="destination-point">{{gru-icon name="place"}}</div>
     </div>
   </div>
-  <h5 class="learning-path-label">{{t 'course-map.your-learning-path'}} <span class="toggle-course-info" {{action "onToggleCourseInfo"}}>{{gru-icon name="info" style='material-icons-outlined'}}</span></h5>
+  <div class="title-container">
+    <div>
+      <h5 class="learning-path-label">{{t 'course-map.your-learning-path'}} <span class="toggle-course-info" {{action "onToggleCourseInfo"}}>{{gru-icon name="info" style='material-icons-outlined'}}</span></h5>
+    </div>
+    <div class="active-period"  {{action "onToggleReportPeriod"}}>
+      <span class="report-period-text">{{activeReportPeriod.text}}</span>
+      <span class="toggle-icon">{{gru-icon name="arrow_drop_down"}}</span>
+    </div>
+    <div class="report-periods">
+      {{#each reportPeriods as |reportPeriod|}}
+        <div class="report-period {{if (eq activeReportPeriod.value reportPeriod.value) 'active-report-period'}}" {{action "onSelectReportPeriod" reportPeriod}}>
+          {{reportPeriod.text}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
   <div class="rescope-content-preview course-info-toggle-container">
     <div class="rescope-content-preview-msg">
       {{t 'class.overview.course-map.learning-path'}}
@@ -62,6 +77,31 @@
       {{/if}}
     </div>
   </div>
+  <div class="student-rangepicker-container">
+    {{ca-daterange-datepicker
+      closeDatePicker='onCloseDatePicker'
+      onScheduleForDate='onChangeDateForStudent'
+      userStartDateAsToday=false
+      disableFutureDate=false
+      enableScheduleMonth=false
+      courseStartDate=courseStartDate
+      startDate=courseStartDate
+      endDate=rangeEndDate
+      forChangeStartDateNavMonth=true
+      allowTwoDateRangePicker=true}}
+  </div>
 {{else}}
   <div class="student-milestone-not-ready">{{t 'student-milestone-not-ready'}}</div>
+{{/if}}
+
+{{#if isShowStudentProgressReport}}
+  {{student/class/gru-student-class-progress-report
+    isShowReport = isShowStudentProgressReport
+    reportPeriod = activeReportPeriod
+    userId = userId
+    class = class
+    course = course
+    rangeStartDate = rangeStartDate
+    rangeEndDate = rangeEndDate
+  }}
 {{/if}}

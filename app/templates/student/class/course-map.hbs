@@ -46,7 +46,22 @@
     </div>
     <div class="student-coursemap-container">
       <div class="course-map-accordion-container">
-        <h5 class="assigned-course-title">{{t 'class.overview.assigned-course'}}</h5>
+        <div class="title-container">
+          <div>
+            <h5 class="assigned-course-title">{{t 'class.overview.assigned-course'}}</h5>
+          </div>
+          <div class="active-period"  {{action "onToggleReportPeriod"}}>
+            <span class="report-period-text">{{activeReportPeriod.text}}</span>
+            <span class="toggle-icon">{{gru-icon name="arrow_drop_down"}}</span>
+          </div>
+          <div class="report-periods">
+            {{#each reportPeriods as |reportPeriod|}}
+              <div class="report-period {{if (eq activeReportPeriod.value reportPeriod.value) 'active-report-period'}}" {{action "onSelectReportPeriod" reportPeriod}}>
+                {{reportPeriod.text}}
+              </div>
+            {{/each}}
+          </div>
+        </div>
         {{class/overview/gru-accordion-course
             currentClass=class
             classMembers=classMembers
@@ -81,6 +96,19 @@
       {{/if}}
     </div>
   </div>
+  <div class="student-rangepicker-container">
+    {{ca-daterange-datepicker
+      closeDatePicker='onCloseDatePicker'
+      onScheduleForDate='onChangeDateForStudent'
+      userStartDateAsToday=false
+      disableFutureDate=false
+      enableScheduleMonth=false
+      courseStartDate=courseStartDate
+      startDate=courseStartDate
+      endDate=rangeEndDate
+      forChangeStartDateNavMonth=true
+      allowTwoDateRangePicker=true}}
+  </div>
 {{else}}
   <div class="no-course-content">{{t 'student-landing.no-course-assigned'}}</div>
 {{/if}}
@@ -94,4 +122,16 @@
 {{/if}}
 {{#if showCourseReport}}
   {{reports/pull-up/student-course-report onClosePullUp="onClosePullUp" context=studentCourseReportContext showPullUp=showCourseReport}}
+{{/if}}
+
+{{#if isShowStudentProgressReport}}
+  {{student/class/gru-student-class-progress-report
+    isShowReport = isShowStudentProgressReport
+    reportPeriod = activeReportPeriod
+    userId = userId
+    class = class
+    course = course
+    rangeStartDate = rangeStartDate
+    rangeEndDate = rangeEndDate
+  }}
 {{/if}}

@@ -80,6 +80,54 @@ body.student_class_course-map {
     margin: 10px;
   }
 
+  .title-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 10px 15px;
+    .active-period {
+      display: grid;
+      grid-template-columns: auto auto;
+      justify-content: right;
+      align-items: center;
+      cursor: pointer;
+      color: #fff;
+      column-gap: 8px;
+      .report-period-text {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .toggle-icon {
+        display: flex;
+        align-items: center;
+      }
+    }
+    .report-periods {
+      display: none;
+      position: absolute;
+      top: 140px;
+      background-color: $white;
+      z-index: 9;
+      right: 200px;
+      box-shadow: -1px 0 10px 1px rgba(0, 0, 0, 0.4);
+      width: 150px;
+      .report-period {
+        cursor: pointer;
+        height: 35px;
+        line-height: 35px;
+        font-size: 14px;
+        font-weight: bold;
+        color: #35424a;
+        padding-left: 15px;
+        border-bottom: 1px solid $white;
+        &.active-report-period,
+        &:hover {
+          background-color: #36424b;
+          color: $white;
+        }
+      }
+    }
+  }
+
   .student-coursemap-container {
     .gru-accordion.gru-accordion-course {
       .gru-accordion-unit {
@@ -374,6 +422,32 @@ body.student_class_course-map {
   @media only screen and (max-width: $screen-xs) {
     .app-container {
       padding-top: 152px;
+    }
+  }
+}
+
+.student-rangepicker-container {
+  position: absolute;
+  z-index: 10;
+  box-shadow: 0 13px 16px 0 rgba(0, 0, 0, 0.13);
+  top: 50px;
+  width: 100%;
+  display: none;
+  .ca-daterange-picker {
+    background-color: transparent;
+    .ca-datepicker-body {
+      right: 3%;
+      left: auto;
+      top: 25%;
+      transform: none;
+    }
+    @media screen and (max-width: $screen-sm) {
+      .ca-datepicker-body {
+        right: auto;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 }

@@ -222,7 +222,7 @@ export default Ember.Component.extend({
       : this.get('startDate');
   }),
 
-  reportEndtDate: Ember.computed('activeReportPeriod', function() {
+  reportEndDate: Ember.computed('activeReportPeriod', function() {
     return this.get('activeReportPeriod.value') === 'till-now'
       ? null
       : this.get('endDate');

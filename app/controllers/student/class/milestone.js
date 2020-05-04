@@ -91,6 +91,47 @@ export default Ember.Controller.extend({
   showAllRescopedContent: false,
 
   /**
+   * @property {Array} reportPeriods
+   */
+  reportPeriods: Ember.computed(function() {
+    const component = this;
+    return Ember.A([
+      Ember.Object.create({
+        text: component.get('i18n').t('this-week'),
+        value: 'current-week',
+        type: 'weekly'
+      }),
+      Ember.Object.create({
+        text: component.get('i18n').t('previous-week'),
+        value: 'previous-week',
+        type: 'weekly'
+      }),
+      Ember.Object.create({
+        text: component.get('i18n').t('beginning-till-now'),
+        value: 'till-now',
+        type: 'complete'
+      }),
+      Ember.Object.create({
+        text: component.get('i18n').t('custom-range'),
+        value: 'custom-range',
+        type: 'custom'
+      })
+    ]);
+  }),
+
+  /**
+   * @property {Object} activeReportPeriod
+   */
+  activeReportPeriod: Ember.computed(function() {
+    const component = this;
+    return Ember.Object.create({
+      text: component.get('i18n').t('common.progress-report'),
+      value: 'progress-report',
+      type: 'default'
+    });
+  }),
+
+  /**
    * @property {UUID} userId
    * Current logged in user Id
    */
@@ -105,6 +146,32 @@ export default Ember.Controller.extend({
    * @property {UUID} courseId
    */
   courseId: Ember.computed.alias('studentClassController.course.id'),
+
+  /**
+   * Set custom range start date
+   */
+  rangeStartDate: null,
+
+  /**
+   * Set course activated date
+   **/
+  courseStartDate: Ember.computed('course.createdDate', function() {
+    if (this.get('course.createdDate')) {
+      return moment(this.get('course.createdDate')).format('YYYY-MM-DD');
+    }
+    return moment()
+      .subtract(1, 'M')
+      .format('YYYY-MM-DD');
+  }),
+
+  /**
+   * Set custom range end date
+   */
+  rangeEndDate: Ember.computed(function() {
+    return moment()
+      .endOf('day')
+      .format('YYYY-MM-DD');
+  }),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -135,6 +202,42 @@ export default Ember.Controller.extend({
     //Action triggered when toggle course info
     onToggleCourseInfo() {
       $('.rescope-content-preview.course-info-toggle-container').slideToggle();
+    },
+
+    //Action triggered when toggle report period
+    onToggleReportPeriod() {
+      $('.title-container .report-periods').slideToggle();
+    },
+
+    //Action triggered when select a reprot period
+    onSelectReportPeriod(reportPeriod) {
+      const controller = this;
+      controller.set('activeReportPeriod', reportPeriod);
+      controller.send('onToggleReportPeriod');
+      if (reportPeriod.get('type') === 'custom') {
+        controller.onRangePickerReport();
+      } else {
+        controller.set('isShowStudentProgressReport', true);
+      }
+    },
+
+    /**
+     * Close range date picker
+     */
+
+    onCloseDatePicker() {
+      $('.student-rangepicker-container').hide();
+    },
+
+    /**
+     * Select from date and to date while submit
+     */
+
+    onChangeDateForStudent(startDate, endDate) {
+      const controller = this;
+      controller.set('rangeStartDate', moment(startDate).format('YYYY-MM-DD'));
+      controller.set('rangeEndDate', moment(endDate).format('YYYY-MM-DD'));
+      controller.set('isShowStudentProgressReport', true);
     }
   },
 
@@ -168,5 +271,13 @@ export default Ember.Controller.extend({
       userId: controller.get('userId')
     };
     return controller.get('rubricService').getOaItemsToGrade(requestParam);
+  },
+
+  /**
+   * Show range date picker while click dropdown custom option
+   */
+  onRangePickerReport() {
+    let datepickerEle = $('.student-rangepicker-container');
+    datepickerEle.show();
   }
 });
