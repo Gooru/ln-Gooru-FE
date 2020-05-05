@@ -2,9 +2,9 @@ import Ember from 'ember';
 import { toLocal } from 'gooru-web/utils/utils';
 import Context from 'gooru-web/models/result/context';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
-import PlayerReport from 'gooru-web/mixins/reports/player-report-mixin';
+import ReportMixin from 'gooru-web/mixins/reports/player-report-mixin';
 
-export default Ember.Component.extend(PlayerReport, {
+export default Ember.Component.extend(ReportMixin, {
   // -------------------------------------------------------------------------
   // Attributes
 
