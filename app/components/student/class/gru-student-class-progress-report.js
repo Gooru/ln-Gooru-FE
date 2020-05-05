@@ -38,6 +38,10 @@ export default Ember.Component.extend(StudentLearnerProficiency, {
      */
     onClose() {
       this.set('isShowReport', false);
+    },
+
+    onPrintPreview() {
+      window.print();
     }
   },
 
@@ -258,112 +262,5 @@ export default Ember.Component.extend(StudentLearnerProficiency, {
       });
       component.set('weeklyReportData', weeklyReportData);
     }
-    // let parsedStudentsSummaryReportData = Ember.A([]);
-    // studentsSummaryReportData.map(studentSummaryReportData => {
-    //   let parsedStudentSummaryData = Ember.Object.create({
-    //     student: studentSummaryReportData.get('student'),
-    //     weeklyReportData: Ember.Object.create({})
-    //   });
-    //   let summaryData = studentSummaryReportData.get('summaryData');
-    //   let weeklySummaryData = summaryData || null;
-    //   if (weeklySummaryData) {
-    //     let completedCompetencies = weeklySummaryData.get(
-    //       'completedCompetencies'
-    //     );
-    //     let inprogressCompetencies = weeklySummaryData.get(
-    //       'inprogressCompetencies'
-    //     );
-    //     let inferredCompetencies = weeklySummaryData.get(
-    //       'inferredCompetencies'
-    //     );
-    //     let interactionContents = weeklySummaryData.get('interactionData');
-    //     let masteredCompetencies = weeklySummaryData.get(
-    //       'masteredCompetencies'
-    //     );
-    //     let suggestionContents = weeklySummaryData.get('suggestionData');
-    //     //parse low level data
-    //     let assessmentInteration = interactionContents.get('assessmentData');
-    //     let collectionInteraction = interactionContents.get('collectionData');
-    //     let assessmentSuggestion = suggestionContents.get('assessmentData');
-    //     let collectionSuggestion = suggestionContents.get('collectionData');
-    //     let weeklyReportData = Ember.Object.create({
-    //       masteredCompetencies: masteredCompetencies.concat(
-    //         completedCompetencies
-    //       ),
-    //       masteredCompetenciesCount:
-    //         masteredCompetencies.length + completedCompetencies.length,
-    //       inferredCompetencies: inferredCompetencies,
-    //       inferredCompetenciesCount: inferredCompetencies.length,
-    //       inprogressCompetencies: inprogressCompetencies,
-    //       inprogressCompetenciesCount: inprogressCompetencies.length,
-    //       totalTimespent:
-    //         collectionInteraction.get('totalTimespent') +
-    //         assessmentInteration.get('totalTimespent'),
-    //       collectionTimespent: collectionInteraction.get('totalTimespent'),
-    //       assessmentTimespent: assessmentInteration.get('totalTimespent'),
-    //       isNotStarted: assessmentInteration.get('isNotStarted'),
-    //       badgeEarned: masteredCompetencies.length,
-    //       averageScore: assessmentInteration.get('averageScore'),
-    //       suggestionTaken:
-    //         assessmentSuggestion.get('count') +
-    //         collectionSuggestion.get('count')
-    //     });
-    //     parsedStudentSummaryData.set('weeklyReportData', weeklyReportData);
-    //   }
-    //   parsedStudentsSummaryReportData.pushObject(parsedStudentSummaryData);
-    // });
-    // if (!component.isDestroyed) {
-    //   component.set(
-    //     'studentsSummaryReportData',
-    //     parsedStudentsSummaryReportData.sortBy('student.lastName')
-    //   );
-
-    // let studentsSummaryReportData = component.get(
-    //   'studentsSummaryReportData'
-    // );
-    // let studentsDomainPerformance = component.get(
-    //   'studentsDomainPerformance'
-    // );
-    // console.log(studentsDomainPerformance,"studentsDomainPerformance");
-    // studentsDomainPerformance.map(studentsDomain => {
-    //   let studentSummary = studentsSummaryReportData.find(studentsSummary => {
-    //     return studentsDomain.id === studentsSummary.student.id;
-    //   });
-    //   if (studentSummary) {
-    //     let masteredCompetencies =
-    //       studentSummary.weeklyReportData.masteredCompetencies;
-    //     let inprogressCompetencies =
-    //       studentSummary.weeklyReportData.inprogressCompetencies;
-    //     let studentCompetencies = inprogressCompetencies.concat(
-    //       masteredCompetencies
-    //     );
-    //     let domainCompetencies = component.get(
-    //       'domainLevelSummary.domainCompetencies'
-    //     );
-    //     studentCompetencies.map(competency => {
-    //       let domainCode = getDomainCode(competency.id);
-    //       let domainCompetencyData = domainCompetencies.findBy(
-    //         'domainCode',
-    //         domainCode
-    //       );
-    //       if (domainCompetencyData) {
-    //         let competencyData = domainCompetencyData.competencies.findBy(
-    //           'competencyCode',
-    //           competency.id
-    //         );
-    //         competency.competencyStudentDesc =
-    //           competencyData.competencyStudentDesc;
-    //       }
-    //     });
-    //     studentsDomain.set('studentCompetencies', studentCompetencies);
-    //     studentsDomain.set(
-    //       'weeklyReportData',
-    //       studentSummary.weeklyReportData
-    //     );
-    // }
-    // });
-
-    //   component.set('isLoading', false);
-    // }
   }
 });

@@ -1,0 +1,29 @@
+.student_class {
+  .gru-study-navbar {
+    display: none;
+  }
+  .content {
+    .bar-charts {
+      display: none !important;
+    }
+    .title-container {
+      display: none;
+    }
+    .rescope-content-preview {
+      display: none;
+    }
+    .milestone-course-map-view {
+      display: none;
+    }
+    .gru-student-class-progress-report-popup {
+      .class-progress-report-container {
+        margin: 0px !important;
+        width: 100% !important;
+        height: max-content !important;
+        .print-preview {
+          display: none;
+        }
+      }
+    }
+  }
+}

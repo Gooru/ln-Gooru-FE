@@ -18,7 +18,7 @@
     cursor: pointer;
   }
   .class-progress-report-container {
-    width: 1000px;
+    width: 95%;
     margin: 5em auto;
     padding: 2em;
     background-color: $white;
@@ -28,6 +28,24 @@
     position: relative;
     height: calc(100vh - 130px);
     overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $gray-light;
+      border: 1px solid $gray-light;
+      border-radius: 5px;
+    }
+
+    .print-preview {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+      z-index: 9999;
+    }
 
     table {
       width: 100%;

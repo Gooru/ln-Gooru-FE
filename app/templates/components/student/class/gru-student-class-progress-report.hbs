@@ -1,5 +1,8 @@
 <div class="backdrop" {{action "onClose"}}></div>
 <div class="class-progress-report-container">
+  <div class="print-preview" title="{{t 'common.download'}}" data-toggle="tooltip" {{action "onPrintPreview"}}>
+    {{gru-icon name="get_app"}}
+  </div>
   <table>
     <thead class="header-penal">
       <div class="report-summery">
