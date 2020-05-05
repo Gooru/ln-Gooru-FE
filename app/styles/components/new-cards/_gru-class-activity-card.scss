@@ -42,6 +42,52 @@
           }
         }
       }
+
+      .taxonomy-container {
+        height: 35px;
+        display: grid;
+        align-items: center;
+        text-align: end;
+
+        .gru-taxonomy-tag-list {
+          .gru-taxonomy-tag {
+            min-width: 90px;
+            max-width: 100px;
+            height: 23px;
+            border-radius: 12px;
+            background-color: rgba(45, 45, 45, 0.7);
+
+            .standard-tag {
+              text-align: center;
+              padding: 0;
+
+              .tag-label {
+                font-size: 12px;
+                font-weight: bold;
+                color: $white;
+                line-height: 21px;
+              }
+
+              .tag-caption {
+                display: none;
+              }
+            }
+          }
+
+          .non-visible-tags {
+            color: #6f6666;
+            padding: 0;
+
+            span {
+              font-weight: 700;
+              font-size: 14px;
+              padding-left: 5px;
+              padding-right: 5px;
+              height: 26px;
+            }
+          }
+        }
+      }
     }
 
     .class-info {
@@ -389,7 +435,7 @@
       }
 
       .activity-info {
-        grid-template-columns: auto 1fr;
+        grid-template-columns: auto 1fr auto;
         height: 40px;
         border-bottom: 1px solid rgba(151, 151, 151, 0.4);
         padding: 0 5px;
@@ -470,7 +516,7 @@
     .class-activity-card {
       height: auto;
       width: 100%;
-      grid-template-columns: auto 175px;
+      grid-template-columns: auto 300px;
       box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.3);
       border: 1px solid gray;
       .activity-actions,
@@ -535,7 +581,7 @@
       }
 
       .activity-info {
-        grid-template-columns: auto 35px 50px;
+        grid-template-columns: auto 135px 35px 50px;
 
         .content-counts {
           grid-template-columns: auto auto;

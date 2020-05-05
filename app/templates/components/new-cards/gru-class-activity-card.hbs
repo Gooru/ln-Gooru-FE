@@ -30,6 +30,11 @@
         {{format-date activity.added_date 'DD MMM'}} - {{format-date activity.end_date 'DD MMM'}}
       </div>
     {{/if}}
+    <div class="taxonomy-container">
+      {{#if taxonomyTags.length}}
+        {{taxonomy/gru-taxonomy-tag-list tags=taxonomyTags tagsVisible=1 isInCard=true}}
+      {{/if}}
+    </div>
     <div class="more">
       <span {{action "onToggleContent" 'activity-actions'}}>
         {{gru-icon name="more_vert"}}

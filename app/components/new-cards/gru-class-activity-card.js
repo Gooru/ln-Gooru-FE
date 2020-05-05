@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import { CONTENT_TYPES } from 'gooru-web/config/config';
 import { formatTimeReadable } from 'gooru-web/helpers/format-time-readable';
+import TaxonomyTag from 'gooru-web/models/taxonomy/taxonomy-tag';
+import TaxonomyTagData from 'gooru-web/models/taxonomy/taxonomy-tag-data';
 export default Ember.Component.extend({
   classNames: ['class-activities', 'gru-class-activity-card'],
 
@@ -352,6 +354,20 @@ export default Ember.Component.extend({
       return tooltipContent;
     }
   ),
+
+  /**
+   * @property {TaxonomyTag[]} List of taxonomy tags
+   */
+  taxonomyTags: Ember.computed('activityContent.standards.[]', function() {
+    var standards = this.get('activityContent.standards');
+    if (standards) {
+      standards = standards.filter(function(standard) {
+        // Filter out learning targets (they're too long for the card)
+        return !TaxonomyTagData.isMicroStandardId(standard.get('id'));
+      });
+    }
+    return TaxonomyTag.getTaxonomyTags(standards);
+  }),
 
   loadClassData() {
     const component = this;
