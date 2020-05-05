@@ -122,6 +122,13 @@ export default Ember.Route.extend({
     onSelectedClass(secondaryClass) {
       this.set('secondaryClass', secondaryClass);
       this.refresh();
+    },
+
+    didTransition() {
+      // Load Course performance summary only loading CM tab
+      this.get('controller')
+        .get('classController')
+        .loadCoursePerformanceSummary();
     }
   },
 
@@ -170,55 +177,6 @@ export default Ember.Route.extend({
   },
 
   /**
-   **   Method to get unit level performance
-   **/
-  getUnitLevelPerformance(units, classMembers) {
-    let component = this;
-    let secondaryClass = component.get('secondaryClass');
-    let currentClass = secondaryClass
-      ? secondaryClass.class
-      : component.modelFor('teacher.class');
-    let classId = currentClass.class.id;
-    let courseId = currentClass.course.id;
-    let unitPerformancePromise = new Ember.RSVP.resolve(
-      this.get('performanceService').findClassPerformance(
-        classId,
-        courseId,
-        classMembers
-      )
-    );
-    return Ember.RSVP.hash({
-      unitPerformances: unitPerformancePromise
-    }).then(function(hash) {
-      let classPerformance = hash.unitPerformances;
-      units.map(unit => {
-        let unitId = unit.id;
-        let score = classPerformance.calculateAverageScoreByItem(unitId);
-        let timeSpent = classPerformance.calculateAverageTimeSpentByItem(
-          unitId
-        );
-        let completionDone = classPerformance.calculateSumCompletionDoneByItem(
-          unitId
-        );
-        let completionTotal = classPerformance.calculateSumCompletionTotalByItem(
-          unitId
-        );
-        let numberOfStudents = classPerformance.findNumberOfStudentsByItem(
-          unitId
-        );
-        let performance = {
-          score,
-          timeSpent,
-          completionDone,
-          completionTotal,
-          numberOfStudents
-        };
-        unit.set('performance', performance);
-      });
-      return units;
-    });
-  },
-  /**
    * Set all controller properties from the model
    * @param controller
    * @param model
@@ -237,7 +195,14 @@ export default Ember.Route.extend({
     controller.set('milestones', model.milestones);
     controller.loadItemsToGrade();
     controller.init();
-    controller.getUnitLevelPerformance();
+    if (!model.milestones.length) {
+      // Load CUL performance only if default view is not Milestone
+      controller.getUnitLevelPerformance();
+      // Load course content visibility on loading CM tab
+      this.get('controller')
+        .get('classController')
+        .loadCourseContentVisibility();
+    }
   },
 
   resetController(controller) {

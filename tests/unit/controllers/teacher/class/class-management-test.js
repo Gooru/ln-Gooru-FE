@@ -10,7 +10,9 @@ moduleForComponent(
     beforeEach: function() {
       this.register('controller:teacher.class', Ember.Service.extend({}));
       this.register('service:api-sdk/taxonomy', Ember.Service.extend({}));
+      this.register('service:api-sdk/multiple-class', Ember.Service.extend({}));
       this.inject.service('api-sdk/taxonomy');
+      this.inject.service('api-sdk/multiple-class');
     }
   }
 );

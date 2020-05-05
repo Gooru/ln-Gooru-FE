@@ -108,7 +108,7 @@
           }
         }
 
-        .class-activities {
+        .course-map {
           order: 6;
           border-top: 1px solid #ccc;
 
@@ -117,7 +117,7 @@
           }
         }
 
-        .course-map {
+        .class-activities {
           order: 7;
           border-top: 1px solid #ccc;
 
@@ -197,20 +197,20 @@
         &.premium-class {
           grid-template-columns: 59px 50px 50px 50px 50px 1fr 59px 59px 59px;
 
-          &.nav-menu-class-activities {
+          &.nav-menu-course-map {
             grid-template-columns: 59px 50px 75px 75px 50px 1fr 59px 59px 59px;
           }
 
-          &.nav-menu-course-map {
+          &.nav-menu-class-activities {
             grid-template-columns: 59px 50px 50px 75px 50px 1fr 59px 59px 59px;
           }
         }
 
-        &.nav-menu-class-activities {
+        &.nav-menu-course-map {
           grid-template-columns: 59px 50px 75px 75px 50px 1fr 59px 59px;
         }
 
-        &.nav-menu-course-map {
+        &.nav-menu-class-activities {
           grid-template-columns: 59px 50px 50px 75px 50px 1fr 59px 59px;
         }
 
@@ -244,20 +244,20 @@
         &.premium-class {
           grid-template-columns: 59px 145px 145px 145px 145px 1fr 59px 59px 59px;
 
-          &.nav-menu-class-activities {
+          &.nav-menu-course-map {
             grid-template-columns: 59px 145px 145px 170px 145px 1fr 59px 59px 59px;
           }
 
-          &.nav-menu-course-map {
+          &.nav-menu-class-activities {
             grid-template-columns: 59px 145px 145px 145px 170px 1fr 59px 59px 59px;
           }
         }
 
-        &.nav-menu-class-activities {
+        &.nav-menu-course-map {
           grid-template-columns: 59px 145px 145px 170px 145px 1fr 59px 59px;
         }
 
-        &.nav-menu-course-map {
+        &.nav-menu-class-activities {
           grid-template-columns: 59px 145px 145px 145px 170px 1fr 59px 59px;
         }
 

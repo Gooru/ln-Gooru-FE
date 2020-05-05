@@ -349,7 +349,9 @@ export default Ember.Controller.extend(ConfigurationMixin, {
     this.loadSecondaryClassInfo(secondaryClass.get('id'));
   }),
 
-  classesData: Ember.computed.alias('classController.classesData'),
+  secondaryClassesData: Ember.computed.alias(
+    'classController.secondaryClassesData'
+  ),
   // -------------------------------------------------------------------------
   // Actions
 
@@ -661,6 +663,12 @@ export default Ember.Controller.extend(ConfigurationMixin, {
      */
     viewSwitcher(switchOptions) {
       if (switchOptions === 'milestone-course') {
+        if (this.get('isMilestoneView')) {
+          // Load CUL performance when switching to CM tab
+          this.getUnitLevelPerformance();
+          // Load course content visibility on loading CM tab
+          this.get('classController').loadCourseContentVisibility();
+        }
         this.toggleProperty('isMilestoneView');
       } else {
         this.toggleProperty('isLessonPlanView');
@@ -1269,17 +1277,14 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   loadSecondaryClassInfo(classId) {
     const controller = this;
     const existingClassData =
-      controller.get('classesData').findBy('id', classId) ||
-      controller.get('class.id') === classId
-        ? controller.get('class')
-        : null;
+      controller.get('secondaryClassesData').findBy('id', classId) ||
+      (controller.get('class.id') === classId ? controller.get('class') : null);
     const classPromise = existingClassData
       ? Ember.RSVP.resolve(existingClassData)
       : controller.get('classService').readClassInfo(classId);
-    const membersPromise =
-      existingClassData && existingClassData.get('members')
-        ? Ember.RSVP.resolve(existingClassData)
-        : controller.get('classService').readClassMembers(classId);
+    const membersPromise = controller
+      .get('classService')
+      .readClassMembers(classId);
     return classPromise.then(function(classData) {
       let classCourseId = null;
       if (classData.courseId) {
@@ -1354,7 +1359,7 @@ export default Ember.Controller.extend(ConfigurationMixin, {
             hash.competencyStats.findBy('classId', classId)
           );
           if (!existingClassData) {
-            controller.get('classesData').pushObject(classData);
+            controller.get('secondaryClassesData').pushObject(classData);
           }
           if (!controller.isDestroyed) {
             controller
