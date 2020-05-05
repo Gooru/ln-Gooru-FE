@@ -106,21 +106,13 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
       .getLocalStorage()
       .removeItem(navigateMapService.getMasteredCompetenciesKey());
 
-    let details = null;
     let accessToken = transition.queryParams.access_token;
     if (Env.embedded) {
       return this.beforeModelEmbeddedApplication();
     }
     if (accessToken) {
       // this is for google sign in
-      details = this.get('sessionService')
-        .signInWithToken(accessToken)
-        .then(function() {
-          // const applicationController = route.controllerFor('application');
-          // return Ember.RSVP.all([applicationController.setupTenant()]);
-          return details;
-        });
-      return details;
+      return this.get('sessionService').signInWithToken(accessToken);
     }
   },
 
