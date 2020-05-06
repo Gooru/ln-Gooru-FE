@@ -2937,5 +2937,10 @@ window.i18ln = {
   'vc.update-tooltip': 'Update video conference',
   'vc.launch-tooltip': 'Start video conference',
   'vc.click-setup': 'Click to set up',
-  'common.progress-report': 'Progress Report'
+  'locateme.lastAttempted': 'Last Attempted',
+  'common.progress-report': 'Progress Report',
+  'common.total-time-spent': 'Total Time Spent',
+  'class-progress-report.performance-score': 'Performance Score',
+  'class-progress-report-competencies-inprogress': 'Competencies In progress',
+  'class-progress-report-competencies-mastered': 'Competencies Mastered'
 };

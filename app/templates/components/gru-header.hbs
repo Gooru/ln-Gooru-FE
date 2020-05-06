@@ -29,11 +29,13 @@
             {{/if}}
             <ul class="nav navbar-nav menu-navbar">
               {{#if session.isAnonymous}}
-                <li class="navbar-nav-list visible-md visible-lg library-link">
-                  {{#link-to 'library'}}
-                    <span>{{t "common.library"}}</span>
-                  {{/link-to}}
-                </li>
+                {{#unless isTenantUrl}}
+                  <li class="navbar-nav-list visible-md visible-lg library-link">
+                    {{#link-to 'library'}}
+                      <span>{{t "common.library"}}</span>
+                    {{/link-to}}
+                  </li>
+                {{/unless}}
                 <li class="navbar-nav-list visible-md visible-lg">
                   {{#link-to 'sign-in' class="btn btn-info sign-in-button" tagName='button' }} {{t "common.login"}} {{/link-to}}
                 </li>
@@ -48,9 +50,11 @@
                     <li class="navbar-nav-list close-menu">
                       <button class="btn dropdown-toggle" data-toggle="dropdown">{{gru-icon name='close'}}</button>
                     </li>
-                    <li class="navbar-nav-list">
-                      {{#link-to 'library'}} {{t "common.library"}} {{/link-to}}
-                    </li>
+                    {{#unless isTenantUrl}}
+                      <li class="navbar-nav-list">
+                        {{#link-to 'library'}} {{t "common.library"}} {{/link-to}}
+                      </li>
+                    {{/unless}}
                     <li class="navbar-nav-list">
                       {{#link-to 'sign-in' class="navbar-link sign-in-link" }} {{t "common.login"}} {{/link-to}}
                     </li>

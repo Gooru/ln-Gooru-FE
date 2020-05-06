@@ -2985,5 +2985,11 @@ window.i18ln = {
   'vc.remove-tooltip': 'Remove video conference for the activity',
   'vc.update-tooltip': 'Update video conference',
   'vc.launch-tooltip': 'Start video conference',
-  'vc.click-setup': 'Click to set up'
+  'vc.click-setup': 'Click to set up',
+  'locateme.lastAttempted': 'Last Attempted',
+  'common.progress-report': 'Progress Report',
+  'common.total-time-spent': 'Total Time Spent',
+  'class-progress-report.performance-score': 'Performance Score',
+  'class-progress-report-competencies-inprogress': 'Competencies In progress',
+  'class-progress-report-competencies-mastered': 'Competencies Mastered'
 };

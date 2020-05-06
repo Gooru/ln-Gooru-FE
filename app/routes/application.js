@@ -106,20 +106,13 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
       .getLocalStorage()
       .removeItem(navigateMapService.getMasteredCompetenciesKey());
 
-    let details = null;
     let accessToken = transition.queryParams.access_token;
     if (Env.embedded) {
       return this.beforeModelEmbeddedApplication();
     }
     if (accessToken) {
       // this is for google sign in
-      details = this.get('sessionService')
-        .signInWithToken(accessToken)
-        .then(function() {
-          const applicationController = route.controllerFor('application');
-          return Ember.RSVP.all([applicationController.setupTenant()]);
-        });
-      return details;
+      return this.get('sessionService').signInWithToken(accessToken);
     }
   },
 
@@ -161,11 +154,11 @@ export default Ember.Route.extend(PublicRouteMixin, ConfigurationMixin, {
 
     route.setupTheme(themeId);
 
-    let accessToken = params.access_token;
-    if (!accessToken) {
-      let applicationController = route.controllerFor('application');
-      applicationController.setupTenant();
-    }
+    // let accessToken = params.access_token;
+    // if (!accessToken) {
+    //   let applicationController = route.controllerFor('application');
+    //   applicationController.setupTenant();
+    // }
     return Ember.RSVP.hash({
       currentSession: currentSession,
       myClasses: myClasses,

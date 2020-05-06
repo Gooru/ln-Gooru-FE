@@ -175,7 +175,6 @@ Router.map(function() {
         this.route('student-learner-proficiency');
         this.route('add-course');
         this.route('atc');
-        this.route('class-activities-old');
       }
     );
   });

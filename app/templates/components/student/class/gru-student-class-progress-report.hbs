@@ -12,7 +12,7 @@
             {{studentInfo.firstName}}  {{studentInfo.lastName}}
           </div>
         </div>
-        <div class="class-name"> Progress Report for {{class.title}} </div>
+        <div class="class-name"> {{t 'common.progress-report'}} {{t 'common.for'}} {{class.title}} </div>
         <div class="date-range">
           {{#if reportStartDate}}
             <span class="date">{{format-date reportStartDate 'Do MMMM'}} to  {{format-date reportEndDate ' Do MMMM YYYY'}}</span>
@@ -27,11 +27,11 @@
         <table class="report">
           <thead>
             <tr>
-              <th>Competencies Mastered</th>
-              <th>Competencies In progress</th>
-              <th>Badges Earned</th>
-              <th>Total Time spent</th>
-              <th>Performance Score</th>
+              <th>{{t 'class-progress-report-competencies-mastered'}}</th>
+              <th>{{t 'class-progress-report-competencies-inprogress'}}</th>
+              <th>{{t 'badges-earned'}}</th>
+              <th>{{t 'common.total-time-spent'}}</th>
+              <th>{{t 'class-progress-report.performance-score'}}</th>
             </tr>
           </thead>
           <tbody>

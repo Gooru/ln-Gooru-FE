@@ -239,28 +239,22 @@ export default Ember.Service.extend({
    * @param classId the class id to read
    * @returns {Promise}
    */
-  readClassInfo: function(classId, allowCachedClass = false) {
+  readClassInfo: function(classId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      const classContainer = service.get('classContainer');
-      if (allowCachedClass && classContainer[classId]) {
-        resolve(classContainer[classId]);
-      } else {
-        service
-          .get('classAdapter')
-          .readClassInfo(classId)
-          .then(
-            function(response) {
-              classContainer[classId] = service
-                .get('classSerializer')
-                .normalizeReadClassInfo(response);
-              resolve(classContainer[classId]);
-            },
-            function(error) {
-              reject(error);
-            }
-          );
-      }
+      service
+        .get('classAdapter')
+        .readClassInfo(classId)
+        .then(
+          function(response) {
+            resolve(
+              service.get('classSerializer').normalizeReadClassInfo(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   },
 
@@ -269,28 +263,22 @@ export default Ember.Service.extend({
    * @param classId the class id to read
    * @returns {Promise}
    */
-  readClassMembers: function(classId, allowCachedMembers = false) {
+  readClassMembers: function(classId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      const classMembersContainer = service.get('classMembersContainer');
-      if (allowCachedMembers && classMembersContainer[classId]) {
-        resolve(classMembersContainer[classId]);
-      } else {
-        service
-          .get('classAdapter')
-          .readClassMembers(classId)
-          .then(
-            function(response) {
-              classMembersContainer[classId] = service
-                .get('classSerializer')
-                .normalizeReadClassMembers(response);
-              resolve(classMembersContainer[classId]);
-            },
-            function(error) {
-              reject(error);
-            }
-          );
-      }
+      service
+        .get('classAdapter')
+        .readClassMembers(classId)
+        .then(
+          function(response) {
+            resolve(
+              service.get('classSerializer').normalizeReadClassMembers(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   },
 
